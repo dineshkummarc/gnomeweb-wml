@@ -45,7 +45,7 @@
       }
       if (! $gfmember) {
         $bad_elements[] = "gfmember";
-        $errors[] = "You must be a GNOME Foundation member to register.";
+        $errors[] = "You must be a <a href=\"http://foundation.gnome.org/membership-form.html\">GNOME Foundation member</a> to register.";
       }
 
 
