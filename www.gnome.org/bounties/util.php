@@ -24,7 +24,7 @@ function taskrow ($title, $category, $amount, $id, $solution = "")
 <?php
 if ($category != "hidden") { ?>
     <td bgcolor="#d0d0ff"><?php print $category; ?></td>
-    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<font color=\"#007f00\"><b>Solved:</b> </font>"; ?><a href="<?php print $category; ?>.php3#<?php print $id; ?>"><?php if ($solution) {print "<strike><font color=\"#ff0000\">" . $title . "</font></strike></font>";} else {print $title;} ?></a></td>
+    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<font color=\"#007f00\"><b>Solved:</b> </font>"; ?><a href="<?php print $category; ?>.html#<?php print $id; ?>"><?php if ($solution) {print "<strike><font color=\"#ff0000\">" . $title . "</font></strike></font>";} else {print $title;} ?></a></td>
 <?php } else { ?>
     <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<font color=\"#007f00\"><b>Solved:</b> </font>"; ?><a href="#<?php print $id; ?>"><?php if ($solution) {print "<strike><font color=\"#ff0000\">" . $title . "</font></strike></font>";} else {print $title;} ?></a></td>
 <?php } ?>
@@ -75,7 +75,7 @@ function box_start ($title, $category = "unset", $bounty = "unset", $id = "UNKNO
 			    </td> 
                             <?php if ($bug != "0") { ?>
                             <td align="right">
-			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print $bug ?>" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="<?php print $title_fg; ?>">(Bug #<?php print $bug ?>)</font></a> <?php if (!$solved) { ?><font color="#ffffff">|</font> <a href="discuss.php" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="<?php print $title_fg; ?>">Discuss</font></a> <font color="#ffffff">|</font> <a href="claim.php3?bounty=<?php print $bug ?>" title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="<?php print $title_fg; ?>">Claim Bounty</font></a><?php } ?>
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print $bug ?>" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="<?php print $title_fg; ?>">(Bug #<?php print $bug ?>)</font></a> <?php if (!$solved) { ?><font color="#ffffff">|</font> <a href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="<?php print $title_fg; ?>">Discuss</font></a> <font color="#ffffff">|</font> <a href="mailto:bounty@lists.ximian.com?subject=submission for Bounty #<?php print $bug ?>&body=Bounty: <?php print $bug ?>%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="<?php print $title_fg; ?>">Claim Bounty</font></a><?php } ?>
 			    </td>
 			    <?php } ?>
 		          </tr>
@@ -197,7 +197,7 @@ function write_page_header ($name, $style = "style.css")
 <body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()">
 <center>
 <b><font size="+2"><?php print $name; ?></font></b><br>
-<a href="index.php3#categories">[Main Page]</a><br><br>
+<a href="index.html#categories">[Main Page]</a><br><br>
 </center>
 <?php 
 }

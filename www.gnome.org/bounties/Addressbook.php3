@@ -10,7 +10,7 @@ include ("./util.php");
 <?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515", ""); ?>
 <?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
-<?php taskrow ("Contact search applet", "hidden", "750", "127522", ""); ?>
+<?php taskrow ("Contact search applet", "hidden", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
@@ -180,7 +180,7 @@ this challenge.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Contact search applet", "Addressbook", "750", "127522", "127522", ""); ?>
+<?php box_start ("Contact search applet", "Addressbook", "750", "127522", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 
 
 <p>
