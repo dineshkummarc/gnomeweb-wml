@@ -34,8 +34,6 @@ page_DATA =			\
 	screenshots14.shtml \
 	screenshots15.shtml \
 	screenshots.shtml \
-	stable.shtml \
-	unstable.shtml \
 	jhbuildrc
 
 include $(top_srcdir)/rules.common
