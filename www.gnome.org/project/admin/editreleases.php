@@ -47,21 +47,24 @@ if ($step1) {
 		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $announce,
 			$status_id, htmlspecialchars ($changes), $group_id, $release_id)) {
 
-			if ($result = session_getdata ($GLOBALS['session_hash']))
+			if ($announce == 1)
 			{
-				$from = "From: ".db_result($result,0,'realname')." <"
-					. db_result($result,0,'email').">";
+				if ($result = session_getdata ($GLOBALS['session_hash']))
+				{
+					$from = "From: ".db_result($result,0,'realname')." <"
+						. db_result($result,0,'email').">";
+				}
+				else
+				{
+					$from = "From: GNOME Software Map <webmaster@gnome.org>";
+				}
+	
+				// Announce the release to gnome-announce
+				mail ("gnome-announce-list@gnome.org",
+					"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
+					wordwrap (stripslashes ($changes)),
+					$from);
 			}
-			else
-			{
-				$from = "From: GNOME Software Map <webmaster@gnome.org>";
-			}
-
-			// Announce the release to gnome-announce
-			mail ("gnome-announce-list@gnome.org",
-				"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
-				wordwrap (stripslashes ($changes)),
-				$from);
 			
 			$feedback .= " Data Saved ";
 		} else {
