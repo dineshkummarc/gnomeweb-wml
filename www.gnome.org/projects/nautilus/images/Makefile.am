@@ -2,8 +2,8 @@ SUBDIRS=
 
 urlpath=/projects/nautilus/images
 
-page_SCRIPTS=nautilus-logo.png /
-		nntp.1.s.jpg /
+page_SCRIPTS=nautilus-logo.png	/
+		nntp.1.s.jpg	/
 		nntp.1.jpg /
 		nntp.2.s.jpg /
 		nntp.2.jpg /
