@@ -3,6 +3,7 @@ SUBDIRS=screenshots
 urlpath=/start/2.0
 
 page_SCRIPTS=index.html\
+	accessibility.html\
 	beyond.html \
 	errors.html \
 	gettinginvolved.html \
