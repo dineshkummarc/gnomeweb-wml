@@ -11,16 +11,20 @@ border=0></a></define-tag>
 <define-tag correct-bigdot>
 <:{
 	my $tmpurl = '$(URL)';
+	my $bd;
 	if($tmpurl =~ m|/start/|) {
-		print "yellow";
+		$bd= "yellow";
 	} elsif($tmpurl =~ m|/news/|) {
-		print "red";
+		$bd= "red";
 	} elsif($tmpurl =~ m|/help/|) {
-		print "green";
+		$bd= "green";
 	} elsif($tmpurl =~ m|/devel|) {
-		print "blue";
+		$bd= "blue";
 	} else {
-		print "none";
+		$bd= "none";
+	}
+	if($bd ne "none") {
+		print "<img src=\"/images/bigdot-$bd.gif\" hspace=20 align=bottom>";
 	}
 }:>
 </define-tag>
@@ -29,15 +33,13 @@ border=0></a></define-tag>
 <td align=right width=20%>
 <a href="http://www.gnome.org/"><img
 src="/images/foot-outline-small.gif" align=left border=0></a></td><td>
-<h1 align=left><when <not <eq "$(URLDIR)" "">>>
-<img src="/images/bigdot-<correct-bigdot>.gif" hspace=20 align=bottom>
-</when><document-title></h1>
+<h1 align=left><correct-bigdot><document-title></h1>
 </td>
 </define-tag>
 
 <define-tag home-title>
 <td align=left width=40% colspan=2>
-<img src="/images/foot-outline-small.gif" align=center border=0> <img src="/images/gnome5.gif" alt="Gnome" align=center>
+<img src="/images/foot-outline-small.gif" align=center border=0> <img src="/images/gnome5.gif" hspace=10 alt="Gnome" align=center>
 </td>
 </define-tag>
 
