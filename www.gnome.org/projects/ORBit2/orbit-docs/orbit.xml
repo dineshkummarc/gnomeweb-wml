@@ -3,7 +3,7 @@
 "docbook/xml-dtd-4.1.2-1.0-17/docbookx.dtd" [
 <!--"docbook/xml-dtd-4.2-1.0-17/docbookx.dtd" [ --> 
 <!-- "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [ -->
-   <!ENTITY manrevision "1.4">
+   <!ENTITY manrevision "1.5">
 ]> 
 
 <book>
@@ -150,6 +150,15 @@ You can get :
 </listitem>
 </itemizedlist>
 </para>
+
+<sect2> 
+<title>Change Notes between 1.5 and 1.4</title>
+<para>
+<itemizedlist>
+   <listitem><para>New sample "threaded-calculator" uses POA-setup THREAD_PER_REQUEST now, demonstrating usage of policies for child POAs. Furtheron Makefile has changed: Linker merges  debug symbols of shared libraries correctly now into executable.</para></listitem>
+</itemizedlist>
+</para>
+</sect2>
 
 <sect2> 
 <title>Change Notes between 1.4 and 1.3</title>
@@ -5952,8 +5961,8 @@ interface Calculator
 
 #include "examples-toolkit.h"
 
-static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
-static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+static CORBA_ORB          global_orb  = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA default_poa = CORBA_OBJECT_NIL; /* default POA */
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -5967,10 +5976,64 @@ server_shutdown (int sig)
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
+
+/**
+
+ */
+PortableServer_POA
+server_create_multi_threaded_poa (CORBA_ORB                  orb, 
+				  PortableServer_POA         poa,
+				  PortableServer_POAManager  poa_mgr,
+				  CORBA_Environment         *ev)
+{
+	const static        MAX_POLICIES  = 1;
+	PortableServer_POA  child_poa     = CORBA_OBJECT_NIL;
+	CORBA_PolicyList   *poa_policies;
+
+	<command>poa_policies           = CORBA_PolicyList__alloc ();
+        poa_policies-&gt;_maximum = MAX_POLICIES;
+        poa_policies-&gt;_length  = MAX_POLICIES;
+        poa_policies-&gt;_buffer  = CORBA_PolicyList_allocbuf (MAX_POLICIES);
+        CORBA_sequence_set_release (poa_policies, CORBA_TRUE);</command>
+                                                                                
+        <command>poa_policies-&gt;_buffer[0] = (CORBA_Policy)
+		PortableServer_POA_create_thread_policy (
+			poa,
+			PortableServer_ORB_CTRL_MODEL,
+			ev);</command>
+
+	<command>child_poa = PortableServer_POA_create_POA (poa,
+                                                   "Thread Per Request POA",
+                                                   poa_mgr,
+                                                   poa_policies,
+                                                   ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_create_poa;
+
+	<command>ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) child_poa, 
+					     ORBIT_THREAD_HINT_PER_REQUEST);</command>
+
+	
+        <command>CORBA_Policy_destroy (poa_policies-&gt;_buffer[0], ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed;
+        <command>CORBA_free (poa_policies);	</command>
+	
+	return child_poa;
+	
+ failed_create_poa:
+	/* FIXME, in case of error, ev is set, but destructor should not
+	 * return except anyway */
+        <command>CORBA_Policy_destroy (poa_policies-&gt;_buffer[0], ev); </command>
+        <command>CORBA_free (poa_policies);</command>	
+ failed:
+	return CORBA_OBJECT_NIL;
+}
+
 
 /* Inits ORB @orb using @argv arguments for configuration. For each
  * ORBit options consumed from vector @argv the counter of @argc_ptr
@@ -5986,7 +6049,8 @@ server_init (int                 *argc_ptr,
 	     PortableServer_POA  *poa,
 	     CORBA_Environment   *ev)
 {
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+	PortableServer_POA         rootpoa     = CORBA_OBJECT_NIL;
+	PortableServer_POAManager  rootpoa_mgr = CORBA_OBJECT_NIL; 
 
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -5996,31 +6060,41 @@ server_init (int                 *argc_ptr,
 	
 	/* create Object Request Broker (ORB) */
 	
-        (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);</command>
 	if (etk_raised_exception(ev)) 
 		goto failed_orb;
 
-        (*poa) = (PortableServer_POA) 
-		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);
+        <command>rootpoa = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);</command>
 	if (etk_raised_exception(ev)) 
 		goto failed_poa;
-
-        poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);
+	
+        <command>rootpoa_mgr = PortableServer_POA__get_the_POAManager(rootpoa, ev);</command>
 	if (etk_raised_exception(ev)) 
 		goto failed_poamanager;
 
-	PortableServer_POAManager_activate(poa_manager, ev);
+	/* create default POA with specific policies */
+
+	<command>(*poa) = server_create_multi_threaded_poa (*orb, 
+						   rootpoa, 
+						   rootpoa_mgr, 
+						   ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_child_poa;
+
+	<command>PortableServer_POAManager_activate(rootpoa_mgr, ev);</command>
 	if (etk_raised_exception(ev)) 
 		goto failed_activation;
 
-        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
+        CORBA_Object_release ((CORBA_Object) rootpoa_mgr, ev);
 	return;
 
  failed_activation:
+ failed_child_poa:
  failed_poamanager:
-        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+        <command>CORBA_Object_release ((CORBA_Object) rootpoa_mgr, local_ev);</command>
  failed_poa:
-	CORBA_ORB_destroy(*orb, local_ev);		
+	<command>CORBA_ORB_destroy(*orb, local_ev);</command>		
  failed_orb:
 	return;
 }
@@ -6035,7 +6109,7 @@ server_run (CORBA_ORB          orb,
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
-        CORBA_ORB_run(orb, ev);
+        <command>CORBA_ORB_run(orb, ev);</command>
 	if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
@@ -6053,29 +6127,29 @@ server_cleanup (CORBA_ORB           orb,
 {
 	PortableServer_ObjectId   *objid       = NULL;
 
-	objid = PortableServer_POA_reference_to_id (poa, ref, ev);
+	<command>objid = PortableServer_POA_reference_to_id (poa, ref, ev);</command>
 	if (etk_raised_exception(ev)) return;
 		
 	/* Servant: deactivatoin - will invoke  __fini destructor */
-	PortableServer_POA_deactivate_object (poa, objid, ev);
+	<command>PortableServer_POA_deactivate_object (poa, objid, ev);</command>
 	if (etk_raised_exception(ev)) return;
 
-	PortableServer_POA_destroy (poa, TRUE, FALSE, ev);
+	<command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev);</command>
 	if (etk_raised_exception(ev)) return;
 
-	CORBA_free (objid);
+	<command>CORBA_free (objid);</command>
 
-        CORBA_Object_release ((CORBA_Object) poa, ev);
+        <command>CORBA_Object_release ((CORBA_Object) poa, ev);</command>
 	if (etk_raised_exception(ev)) return;
 	
-        CORBA_Object_release (ref, ev);
+        <command>CORBA_Object_release (ref, ev);</command>
 	if (etk_raised_exception(ev)) return;
 
         /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                CORBA_ORB_destroy(orb, ev);
+                <command>CORBA_ORB_destroy(orb, ev);</command>
 		if (etk_raised_exception(ev)) return;
         }
 }
@@ -6092,7 +6166,7 @@ server_activate_service (CORBA_ORB           orb,
 {
 	Calculator  ref = CORBA_OBJECT_NIL; 
 
-	ref = impl_Calculator__create (poa, ev);
+	<command>ref = impl_Calculator__create (poa, ev);</command>
 	if (etk_raised_exception(ev)) 
 		return CORBA_OBJECT_NIL;
 	
@@ -6110,8 +6184,8 @@ typedef struct {
 static gpointer
 server_in_background (BackgroundData *data)
 {
-	int    argc = data->argc;
-	char **argv = data->argv;
+	int    argc = data-&gt;argc;
+	char **argv = data-&gt;argv;
 
 	CORBA_Object servant = CORBA_OBJECT_NIL;
 	
@@ -6120,24 +6194,24 @@ server_in_background (BackgroundData *data)
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev);
+	<command>server_init (&amp;argc, argv, &amp;global_orb, &amp;default_poa, ev);</command>
 	etk_abort_if_exception(ev, "failed ORB init");
 
-	servant = server_activate_service (global_orb, root_poa, ev);
+	<command>servant = server_activate_service (global_orb, default_poa, ev);</command>
 	etk_abort_if_exception(ev, "failed activating service");
 
 	g_print ("Writing service reference to: %s\n\n", filename);
 
-	etk_export_object_to_file (global_orb, 
+	<command>etk_export_object_to_file (global_orb, 
 				   servant, 
 				   filename, 
-				   ev);
+				   ev);</command>
 	etk_abort_if_exception(ev, "failed exporting IOR");
 	
-	server_run (global_orb, ev);
+	<command>server_run (global_orb, ev);</command>
 	etk_abort_if_exception(ev, "failed entering main loop");
 
-	server_cleanup (global_orb, root_poa, servant, ev);
+	<command>server_cleanup (global_orb, default_poa, servant, ev);</command>
 	etk_abort_if_exception(ev, "failed cleanup");
 
 	g_thread_exit (NULL);
@@ -6147,11 +6221,11 @@ static
 void
 main_shutdown (int sig)
 {
-	/* progate SIGTERM  to every process/thread in
-	 * process group */ 
+	/* progate SIGTERM signal to every process/thread in process
+	 * group */ 
 	kill (0, 15);
-
-        /* terminate main thread */
+	
+	/* terminate main thread */ 
 	exit (0);
 }
 
@@ -6168,20 +6242,20 @@ main (int argc, char *argv[])
 
 	g_thread_init (NULL);
 
-	data->argc = argc;
-	data->argv = argv;
+	data-&gt;argc = argc;
+	data-&gt;argv = argv;
 
-	thread = g_thread_create ((GThreadFunc) server_in_background, 
+	<command>thread = g_thread_create ((GThreadFunc) server_in_background, 
 				  data, 
 				  TRUE,   /*joinable */
-				  &amp;err);
+				  &amp;err);</command>
 
 	/* init signal handling */
 	signal(SIGINT,  main_shutdown);
 	signal(SIGHUP,  main_shutdown);
-
+	
 	/* concurrent main task */ 
-	while (i++ < 1000) {
+	while (i++ &lt; 1000) {
 		g_print ("main thread active\n");
 		sleep (1);
 	}

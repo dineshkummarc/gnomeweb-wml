@@ -109,6 +109,7 @@ impl_Calculator_add(impl_POA_Calculator * servant,
    /* ------   insert method code here   ------ */
    g_print ("%f + %f\n", number1, number2);
    retval = number1 + number2;
+   sleep (10);
    /* ------ ---------- end ------------ ------ */
 
    return retval;
