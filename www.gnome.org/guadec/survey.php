@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GUADEC IV Pre-Registration Survey</title>
+    <title>GUADEC 4 Pre-Registration Survey</title>
   </head>
 
   <body bgcolor="#ffffff" text="#000000">
@@ -9,15 +9,14 @@
 
       <!-- Table for the black border. -->
       <table border="0" cellspacing="0" cellpadding="0" width="790">
-
-        <tr><td bgcolor="#000000" colspan=3>
+        <tr><td bgcolor="#000000"3>
             <!-- Table for the content image. -->
 
-            <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="10" width="100%">
-              <tr><!-- The text -->
+            <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="2" width="100%">
+              <tr><!-- The text --><td>
                   <table border=0 bgcolor="#ffffff" cellpadding=50>
                     <tr><td>
-                        <h1>GUADEC IV Pre-Registration Survey:</h1>
+                        <h1>GUADEC 4 Pre-Registration Survey:</h1>
 
 <?
   $bad_elements = array();
@@ -67,8 +66,15 @@
         $formmail .= "Developer: " . $developer . "\n\n";
         $formmail .= "Committment: " . $committment . "\n\n";
 
-        $formmail .= "GUADEC: " . $guadec . "\n\n";
-        $formmail .= "Attended Previously: " . $attend . "\n\n";
+        $formmail .= "Interested in attending GUADEC 4: " . $guadec . "\n\n";
+
+	$no_guadecs=count($assigned_to);
+
+	for ($i=0; $i<$no_guadecs; $i++) {
+    		$guadecs_attended .= $assigned_to[$i];
+	}
+	
+	$formmail .= "GUADECs Attended: " . $guadecs_attended . "\n\n";
         $formmail .= "Needs Sponsorship: " . $sponsor . "\n\n";
         $formmail .= "Tutorials: " . $tutorial . "\n\n";
 
@@ -179,13 +185,13 @@
 	  <td colspan=2>&nbsp;</td>
 	</tr>
         <tr>
-          <td colspan=2>
-             <input type="checkbox" name="guadec"> * I am interested in attending GUADEC in 2003.
+          <td valign="top" colspan="2">
+	    *Previous GUADEC attendance:
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <select name="attend" multiple>
+             <select name="attend[]" multiple>
 	     <option value="none" selected> I have not attended a past GUADEC</option>
 	     <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
              <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
@@ -193,6 +199,17 @@
 	     </select>
           </td>
         </tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
+        <tr>
+          <td colspan=2>
+             <input type="checkbox" name="guadec"> * I am interested in attending GUADEC in 2003.
+          </td>
+        </tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
         <tr>
           <td colspan=2>
              <input type="checkbox" name="sponsor"> I will need sponsorship if I am to attend GUADEC in 2003.
