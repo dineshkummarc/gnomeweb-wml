@@ -18,6 +18,6 @@ page_SCRIPTS=index.shtml		\
 		screenshots.shtml	\
 		technology.shtml	\
 		function-info.shtml	\
-		functions.shtml	\
+		functions.shtml
 
 include $(top_srcdir)/rules.common
