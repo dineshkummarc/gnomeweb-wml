@@ -1,5 +1,6 @@
-SUBDIRS=			\
+SUBDIRS = \
 	application-framework	\
+	beagle \
 	desktop			\
 	devtools		\
 	dia			\
@@ -22,8 +23,8 @@ SUBDIRS=			\
 	epiphany		\
 	libgsf
 
-urlpath=/projects
+urlpath = /projects
 
-page_SCRIPTS=index.html
+page_SCRIPTS = index.html
 
 include $(top_srcdir)/rules.common
