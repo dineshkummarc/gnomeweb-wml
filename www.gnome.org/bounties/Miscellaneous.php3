@@ -56,8 +56,7 @@ to the user.</p>
 
 <?php box_sec ("Affected Modules"); ?>
 
-<? bonsai ("nautilus"); ?>, <? bonsai ("evolution"); ?>, <? bonsai ("gaim"); ?> and <? bonsai ("file-roller"); ?>.  See our general note about <a STYLE="text-decoration:none" href="gaim.php">gaim extension</a>.
-
+<? bonsai ("nautilus"); ?>, <? bonsai ("evolution"); ?>, <? bonsai ("gaim"); ?> and <? bonsai ("file-roller"); ?>.  
 <?php box_sec ("Pointers"); ?>
 
 Check the <a STYLE="text-decoration:none" 

@@ -167,7 +167,7 @@ feature in Evolution, which will probably be available in the Evolution 2.2 time
 <?php box_sec ("Modules Affected"); ?>
  
 
-Both <? bonsai ("evolution"); ?> and  <? bonsai ("mrproject"); ?>.
+Both <? bonsai ("evolution"); ?> and  <? bonsai ("planner"); ?>.
 
 <?php box_sec ("Pointers"); ?>
  

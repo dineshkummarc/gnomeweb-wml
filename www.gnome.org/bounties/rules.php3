@@ -23,8 +23,7 @@ href="">evolution-patches</a>), accepted and checked into the 2.0
 development branch before you qualify to receive a bounty.</li><br>
 
 <li>Eligible entries must be submitted and accepted by all the
-applicable module maintainers before the end of round two, scheduled
-for April 19th, 2004.</li><br>
+applicable module maintainers.</li><br>
 
 <li>Your patch has to work, and it has to work <i>nicely</i>. <p> "I
 just got it working," or "it works most of the time," or "it works but
