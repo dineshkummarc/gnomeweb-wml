@@ -2,7 +2,10 @@ SUBDIRS =
 
 urlpath =/projects/mc/images
 
-page_SCRIPTS = mc-shot1.png \
-		mc-shot2.png
+page_SCRIPTS = \
+	mc-edit-perl.png \
+	mc-panelize-info.png \
+	mc-panels.png \
+	mc-view-vfs.png
 
 include $(top_srcdir)/rules.common
