@@ -1,183 +1,316 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>Echo client &amp; server</title>
-  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
-  <link rel="HOME" title="ORBit Beginners Documentation V1.5" href="book1.html" />
-  <link rel="UP" title="First CORBA Programs" href="c264.html" />
-  <link rel="PREVIOUS" title="Files at a glance" href="x271.html" />
-  <link rel="NEXT" title="Calculator client &amp; server" href="x478.html" />
-</head>
-
-<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
-  <div class="NAVHEADER">
-    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <th colspan="3" align="center">ORBit Beginners Documentation V1.5</th>
-      </tr>
-
-      <tr>
-        <td width="10%" align="left" valign="bottom"><a href="x271.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
-
-        <td width="80%" align="center" valign="bottom">First CORBA Programs</td>
-
-        <td width="10%" align="right" valign="bottom"><a href="x478.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <hr align="left" width="100%" />
-  </div>
-
-  <div class="sect1">
-    <h1 class="sect1"><a name="AEN316" id="AEN316"></a>Echo client &amp; server</h1>
-
-    <p>The aim for this example is to run a client which accepts typed input and this is printed out on the server on stdout</p>
-
-    <p>The echo functionality is represented in the following very short IDL.</p>
-
-    <div class="example">
-      <a name="AEN320" id="AEN320"></a>
-
-      <p><b>Example 1. Echo IDL file</b></p>
-
-      <table border="0" bgcolor="#E0E0E0" width="100%">
-        <tr>
-          <td>
-            <pre class="programlisting">
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Echo client &#38; server</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.6"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="First CORBA Programs"
+HREF="c264.html"><LINK
+REL="PREVIOUS"
+TITLE="Files at a glance"
+HREF="x271.html"><LINK
+REL="NEXT"
+TITLE="Calculator client & server"
+HREF="x478.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.6</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x271.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. First CORBA Programs</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x478.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN316"
+>5.3. Echo client &#38; server</A
+></H1
+><P
+>&#13;The aim for this example is to run a client which accepts typed
+input and this is printed out on the server on stdout
+</P
+><P
+>&#13;The echo functionality is represented in the following very
+short IDL.
+<DIV
+CLASS="example"
+><A
+NAME="AEN320"
+></A
+><P
+><B
+>Example 5-1. Echo IDL file</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;
 // MyFirstOrbit program - The Echo object
 //
 // All this does is pass a string from the
 // client to the server.
 
 interface Echo {
-  void echoString(in string input);
+	void echoString(in string input);
 };
-</pre>
-          </td>
-        </tr>
-      </table>
-    </div><br />
-    <br />
+</PRE
+></DIV
+>
+</P
+><P
+>&#13;The <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>interface</I
+></SPAN
+> definition is the key part of the 
+definition. Each interface defines an object which can have methods
+on it. In this case there is one method, which takes a string
+argument and returns nothing. The <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>in</I
+></SPAN
+> declaration before
+the argument indicates that this arguments is only passed into the
+method. Generally all arguments are in arguments, for the first
+case.
+</P
+><P
+>&#13;This idl is found in the file <TT
+CLASS="filename"
+>echo.idl</TT
+>. 
+To compile the idl one does the following step:
+<SAMP
+CLASS="computeroutput"
+>&#13;$ <B
+CLASS="command"
+>orbit-idl-2 --skeleton-impl echo.idl</B
+>
+</SAMP
+>
+which will produce most of the needed files to start writing the <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>echo</I
+></SPAN
+> application (you can see it as a framework).
+They are listed in the following table:
 
-    <p>The <i class="emphasis">interface</i> definition is the key part of the definition. Each interface defines an object which can have methods on it. In this case there is one method, which takes a string argument and returns nothing. The <i class="emphasis">in</i> declaration before the argument indicates that this arguments is only passed into the method. Generally all arguments are in arguments, for the first case.</p>
+<DIV
+CLASS="informaltable"
+><P
+></P
+><A
+NAME="AEN331"
+></A
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL
+WIDTH="1*"
+ALIGN="left"><COL
+WIDTH="1*"
+ALIGN="center"><COL
+WIDTH="1*"
+ALIGN="center"><THEAD
+><TR
+><TH
+>File</TH
+><TH
+>Usage for Client</TH
+><TH
+>Usage for Server</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>echo.h</TD
+><TD
+>readonly</TD
+><TD
+>readonly</TD
+></TR
+><TR
+><TD
+>echo-common.c</TD
+><TD
+>readonly</TD
+><TD
+>readonly</TD
+></TR
+><TR
+><TD
+>echo-stubs.c</TD
+><TD
+>readonly</TD
+><TD
+>-</TD
+></TR
+><TR
+><TD
+>echo-skels.c</TD
+><TD
+>-</TD
+><TD
+>readonly</TD
+></TR
+><TR
+><TD
+>echo-skelimpl.c</TD
+><TD
+>-</TD
+><TD
+>template for user code</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+>
 
-    <p>This idl is found in the file <tt class="filename">echo.idl</tt>. To compile the idl one does the following step: <tt class="computeroutput">$ <b class="command">orbit-idl-2 --skeleton-impl echo.idl</b></tt> which will produce most of the needed files to start writing the <i class="emphasis">echo</i> application (you can see it as a framework). They are listed in the following table:</p>
+Files remaining to write are listed in following table, starting with 
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>echo-client.c</I
+></SPAN
+> in following chapter.
+<DIV
+CLASS="informaltable"
+><P
+></P
+><A
+NAME="AEN363"
+></A
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><TBODY
+><TR
+><TD
+>echo-client.c</TD
+><TD
+>write the client code</TD
+></TR
+><TR
+><TD
+>echo-server.c</TD
+><TD
+>write the generic code for servant creation</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+>
 
-    <div class="informaltable">
-      <a name="AEN331" id="AEN331"></a>
-
-      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
-        <thead>
-          <tr>
-            <th width="33%" align="left" valign="middle">File</th>
-
-            <th width="33%" align="center" valign="middle">Usage for Client</th>
-
-            <th width="33%" align="center" valign="middle">Usage for Server</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td width="33%" align="left" valign="middle">echo.h</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-          </tr>
-
-          <tr>
-            <td width="33%" align="left" valign="middle">echo-common.c</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-          </tr>
-
-          <tr>
-            <td width="33%" align="left" valign="middle">echo-stubs.c</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-
-            <td width="33%" align="center" valign="middle">-</td>
-          </tr>
-
-          <tr>
-            <td width="33%" align="left" valign="middle">echo-skels.c</td>
-
-            <td width="33%" align="center" valign="middle">-</td>
-
-            <td width="33%" align="center" valign="middle">readonly</td>
-          </tr>
-
-          <tr>
-            <td width="33%" align="left" valign="middle">echo-skelimpl.c</td>
-
-            <td width="33%" align="center" valign="middle">-</td>
-
-            <td width="33%" align="center" valign="middle">template for user code</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>Files remaining to write are listed in following table, starting with <i class="emphasis">echo-client.c</i> in following chapter.
-
-    <div class="informaltable">
-      <a name="AEN363" id="AEN363"></a>
-
-      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
-        <tbody>
-          <tr>
-            <td align="left" valign="middle">echo-client.c</td>
-
-            <td align="left" valign="middle">write the client code</td>
-          </tr>
-
-          <tr>
-            <td align="left" valign="middle">echo-server.c</td>
-
-            <td align="left" valign="middle">write the generic code for servant creation</td>
-          </tr>
-        </tbody>
-      </table>
-    </div><br />
-    <br />
-
-    <div class="sect2">
-      <h2 class="sect2"><a name="AEN372" id="AEN372"></a>Echo client</h2>
-
-      <p>The client code is shown here</p>
-
-      <div class="example">
-        <a name="AEN375" id="AEN375"></a>
-
-        <p><b>Example 2. echo-client.c</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="programlisting">
-/*
- * Echo client program.. Hacked by Ewan Birney &lt;birney@sanger.ac.uk&gt;
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN372"
+>5.3.1. Echo client</A
+></H2
+><P
+>	
+The client code is shown here
+<DIV
+CLASS="example"
+><A
+NAME="AEN375"
+></A
+><P
+><B
+>Example 5-2. echo-client.c</B
+></P
+><PRE
+CLASS="programlisting"
+>/*
+ * Echo client program.. Hacked by Ewan Birney &#60;birney@sanger.ac.uk&#62;
  * from echo test suite, update for ORBit2 by Frank Rehberger
- * &lt;F.Rehberger@xtradyne.de&gt;
+ * &#60;F.Rehberger@xtradyne.de&#62;
  *
  * Client reads object reference (IOR) from local file 'echo.ref' and
  * forwards console input to echo-server. A dot . as single character
  * in input terminates the client.
  */
 
-#include &lt;stdio.h&gt;
-#include &lt;signal.h&gt;
-<b class="command">#include &lt;orbit/orbit.h&gt;</b>
+#include &#60;stdio.h&#62;
+#include &#60;signal.h&#62;
+<B
+CLASS="command"
+>#include &#60;orbit/orbit.h&#62;</B
+>
 
 /*
  * This header file was generated from the idl
  */
 
-<b class="command">#include "echo.h"</b>
+<B
+CLASS="command"
+>#include "echo.h"</B
+>
 
 /** 
  * test for exception 
@@ -186,7 +319,7 @@ static
 gboolean 
 raised_exception(CORBA_Environment *ev) 
 {
-  return ((ev)-&gt;_major != CORBA_NO_EXCEPTION);
+	return ((ev)-&#62;_major != CORBA_NO_EXCEPTION);
 }
 
 /**
@@ -196,11 +329,11 @@ static
 void 
 abort_if_exception(CORBA_Environment *ev, const char* mesg) 
 {
-  if (raised_exception (ev)) {
-    g_error ("%s %s", mesg, CORBA_exception_id (ev));
-    CORBA_exception_free (ev); 
-    abort(); 
-  }
+	if (raised_exception (ev)) {
+		g_error ("%s %s", mesg, CORBA_exception_id (ev));
+		CORBA_exception_free (ev); 
+		abort(); 
+	}
 }
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
@@ -217,7 +350,10 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</b>
+                <B
+CLASS="command"
+>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</B
+>
                 abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -233,7 +369,7 @@ client_shutdown (int sig)
 static
 void
 client_init (int               *argc_ptr,
-       char              *argv[],
+	     char              *argv[],
              CORBA_ORB         *orb,
              CORBA_Environment *ev)
 {
@@ -244,7 +380,10 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-        <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);</b>
+        <B
+CLASS="command"
+>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);</B
+>
         if (raised_exception(ev)) return;
 }
 
@@ -258,14 +397,20 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        <b class="command">CORBA_Object_release(service, ev);</b>
+        <B
+CLASS="command"
+>CORBA_Object_release(service, ev);</B
+>
         if (raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <b class="command">CORBA_ORB_destroy(orb, ev);</b>
+                <B
+CLASS="command"
+>CORBA_ORB_destroy(orb, ev);</B
+>
                 if (raised_exception(ev)) return;
         }
 }
@@ -276,20 +421,20 @@ client_cleanup (CORBA_ORB                 orb,
 static
 CORBA_Object
 client_import_service_from_stream (CORBA_ORB          orb,
-           FILE              *stream,
-           CORBA_Environment *ev)
+				   FILE              *stream,
+				   CORBA_Environment *ev)
 {
-  CORBA_Object obj = CORBA_OBJECT_NIL;
-  gchar *objref=NULL;
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
     
-  fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
-  
-  obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-               objref, 
-               ev);
-  free (objref);
-  
-  return obj;
+	fscanf (stream, "%as", &#38;objref);  /* FIXME, handle input error */ 
+	
+	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);
+	free (objref);
+	
+	return obj;
 }
 
 /**
@@ -298,8 +443,8 @@ client_import_service_from_stream (CORBA_ORB          orb,
 static
 CORBA_Object
 client_import_service_from_file (CORBA_ORB          orb,
-         char              *filename,
-         CORBA_Environment *ev)
+				 char              *filename,
+				 CORBA_Environment *ev)
 {
         CORBA_Object  obj    = NULL;
         FILE         *file   = NULL;
@@ -309,11 +454,11 @@ client_import_service_from_file (CORBA_ORB          orb,
         if ((file=fopen(filename, "r"))==NULL)
                 g_error ("could not open %s\n", filename);
     
-  obj=client_import_service_from_stream (orb, file, ev);
-  
-  fclose (file);
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
 
-  return obj;
+	return obj;
 }
 
 
@@ -323,27 +468,30 @@ client_import_service_from_file (CORBA_ORB          orb,
 static
 void
 client_run (Echo  echo_service,
-      CORBA_Environment        *ev)
+	    CORBA_Environment        *ev)
 {
-  char filebuffer[1024+1];
+	char filebuffer[1024+1];
 
-  g_print("Type messages to the server\n"
-    "a single dot in line will terminate input\n");
-  
-  while( fgets(filebuffer,1024,stdin) ) {
-    if( filebuffer[0] == '.' &amp;&amp; filebuffer[1] == '\n' ) 
-      break;
-    
-    /* chop the newline off */
-    filebuffer[strlen(filebuffer)-1] = '\0';
+	g_print("Type messages to the server\n"
+		"a single dot in line will terminate input\n");
+	
+	while( fgets(filebuffer,1024,stdin) ) {
+		if( filebuffer[0] == '.' &#38;&#38; filebuffer[1] == '\n' ) 
+			break;
+		
+		/* chop the newline off */
+		filebuffer[strlen(filebuffer)-1] = '\0';
       
-    /* using the echoString method in the Echo object 
-     * this is defined in the echo.h header, compiled from
-     * echo.idl */
+		/* using the echoString method in the Echo object 
+		 * this is defined in the echo.h header, compiled from
+		 * echo.idl */
 
-    <b class="command">Echo_echoString(echo_service,filebuffer,ev);</b>
-    if (raised_exception (ev)) return;
-  }
+		<B
+CLASS="command"
+>Echo_echoString(echo_service,filebuffer,ev);</B
+>
+		if (raised_exception (ev)) return;
+	}
 }
 
 /*
@@ -352,124 +500,156 @@ client_run (Echo  echo_service,
 int
 main(int argc, char* argv[])
 {
-  CORBA_char filename[] = "echo.ref";
+	CORBA_char filename[] = "echo.ref";
         
-  Echo echo_service = CORBA_OBJECT_NIL;
+	Echo echo_service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
-        <b class="command">CORBA_exception_init(ev);</b>
+        <B
+CLASS="command"
+>CORBA_exception_init(ev);</B
+>
 
-  <b class="command">client_init (&amp;argc, argv, &amp;global_orb, ev);</b>
-  abort_if_exception(ev, "init failed");
+	<B
+CLASS="command"
+>client_init (&#38;argc, argv, &#38;global_orb, ev);</B
+>
+	abort_if_exception(ev, "init failed");
 
-  g_print ("Reading service reference from file \"%s\"\n", filename);
+	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-  <b class="command">echo_service = (Echo) client_import_service_from_file (global_orb,
-                     "echo.ref",
-                     ev);</b>
+	<B
+CLASS="command"
+>echo_service = (Echo) client_import_service_from_file (global_orb,
+							       "echo.ref",
+							       ev);</B
+>
         abort_if_exception(ev, "import service failed");
 
-  <b class="command">client_run (echo_service, ev);</b>
+	<B
+CLASS="command"
+>client_run (echo_service, ev);</B
+>
         abort_if_exception(ev, "service not reachable");
  
-  <b class="command">client_cleanup (global_orb, echo_service, ev);</b>
+	<B
+CLASS="command"
+>client_cleanup (global_orb, echo_service, ev);</B
+>
         abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>The client can be broken down into three distinct sections.
+</PRE
+></DIV
+>
 
-      <ul>
-        <li>
-          <p>Initialising the ORB</p>
-        </li>
 
-        <li>
-          <p>Getting the Object</p>
-        </li>
-
-        <li>
-          <p>Using the Object</p>
-        </li>
-      </ul>The key part of the client is when it calls the echoString method on the server. The idl definition
-
-      <table border="0" bgcolor="#E0E0E0" width="100%">
-        <tr>
-          <td>
-            <pre class="programlisting">
-
-     void echoString(in string input);
-</pre>
-          </td>
-        </tr>
-      </table>Ends up becoming the following definition in the echo.h header file generated from the idl
-
-      <table border="0" bgcolor="#E0E0E0" width="100%">
-        <tr>
-          <td>
-            <pre class="programlisting">
-
-extern void Echo_echoString(Echo               obj, 
+The client can be broken down into three distinct sections.
+<P
+></P
+><UL
+><LI
+><P
+>Initialising the ORB </P
+></LI
+><LI
+><P
+> Getting the Object </P
+></LI
+><LI
+><P
+>Using the Object </P
+></LI
+></UL
+>
+The key part of the client is when it calls the echoString method on
+the server. The idl definition
+<PRE
+CLASS="programlisting"
+>&#13;     void echoString(in string input);
+</PRE
+>
+Ends up becoming the following definition in the echo.h header
+file generated from the idl
+<PRE
+CLASS="programlisting"
+>&#13;extern void Echo_echoString(Echo               obj, 
                             CORBA_char        *astring, 
                             CORBA_Environment *ev);
-</pre>
-          </td>
-        </tr>
-      </table>This follows the accepted rules for Object based programming in C, that is
-
-      <ul>
-        <li>
-          <p>The Object is passed in as the first argument to the function</p>
-        </li>
-
-        <li>
-          <p>The method name is qualified by the object name beforehand</p>
-        </li>
-
-        <li>
-          <p>Exceptions are handled by a structure that is passed in as the last argument to the function</p>
-        </li>
-      </ul>Of course, you don't have to follow this in your own code, but this is how the CORBA C mapping works, and it is not a bad solution.
-    </div><br />
-
-    <div class="sect2">
-      <h2 class="sect2"><a name="AEN406" id="AEN406"></a>Echo Server</h2>
-
-      <p>The server is basically more complicated than the client, but has some commonality with the client. The server has to at the end of the day go into a main loop where it listens to connections. Before that it has to create the ORB and bind its own implementations of the objects to the ORB.</p>
-
-      <p>In real life servers, this gets much more complicated, but as this is an example, it is pretty simple once you get through the ORB initialisation process.</p>
-
-      <div class="example">
-        <a name="AEN410" id="AEN410"></a>
-
-        <p><b>Example 3. echo-server.c source code</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="programlisting">
-/*
+</PRE
+>
+This follows the accepted rules for Object based programming in C, that is
+<P
+></P
+><UL
+><LI
+><P
+>&#13;   The Object is passed in as the first argument to the function </P
+></LI
+><LI
+><P
+>&#13;   The method name is qualified by the object name beforehand</P
+></LI
+><LI
+><P
+>Exceptions are handled by a structure that is passed in as the last argument to the function</P
+></LI
+></UL
+>
+Of course, you don't have to follow this in your own code, but this is how
+the CORBA C mapping works, and it is not a bad solution.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN406"
+>5.3.2. Echo Server</A
+></H2
+><P
+>&#13;The server is basically more complicated than the client, but has some
+commonality with the client. The server has to at the end of the day 
+go into a main loop where it listens to connections. Before that it has
+to create the ORB and bind its own implementations of the objects to 
+the ORB.
+</P
+><P
+>&#13;In real life servers, this gets much more complicated, but as this is
+an example, it is pretty simple once you get through the ORB initialisation
+process.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="AEN410"
+></A
+><P
+><B
+>Example 5-3. echo-server.c source code</B
+></P
+><PRE
+CLASS="programlisting"
+>/*
  * echo-server program. Hacked from Echo test suite by
- * &lt;birney@sanger.ac.uk&gt;, ORBit2 udpate by Frank Rehberger
- * &lt;F.Rehberger@xtradyne.de&gt;
+ * &#60;birney@sanger.ac.uk&#62;, ORBit2 udpate by Frank Rehberger
+ * &#60;F.Rehberger@xtradyne.de&#62;
  */
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;signal.h&gt;
-#include &lt;orbit/orbit.h&gt;
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+#include &#60;signal.h&#62;
+#include &#60;orbit/orbit.h&#62;
 
 #include "echo-skelimpl.c"
 #include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
 
 static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
 static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
-  
+	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
  */
@@ -477,12 +657,15 @@ static
 void
 server_shutdown (int sig)
 {
-  CORBA_Environment  local_ev[1];
-  CORBA_exception_init(local_ev);
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</b>
+                <B
+CLASS="command"
+>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</B
+>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -496,49 +679,64 @@ server_shutdown (int sig)
  */static 
 void 
 server_init (int                 *argc_ptr, 
-       char                *argv[],
-       CORBA_ORB           *orb,
-       PortableServer_POA  *poa,
-       CORBA_Environment   *ev)
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
 {
-  PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
-  CORBA_Environment  local_ev[1];
-  CORBA_exception_init(local_ev);
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
 
-  /* init signal handling */
-  signal(SIGINT,  server_shutdown);
-  signal(SIGTERM, server_shutdown);
-  
-  /* create Object Request Broker (ORB) */
-  
-         <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </b>
-  if (etk_raised_exception(ev)) 
-    goto failed_orb;
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+         <B
+CLASS="command"
+>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
 
-         <b class="command">(*poa) = (PortableServer_POA) 
-    CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </b>
-  if (etk_raised_exception(ev)) 
-    goto failed_poa;
+         <B
+CLASS="command"
+>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
 
-         <b class="command">poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </b>
-  if (etk_raised_exception(ev)) 
-    goto failed_poamanager;
+         <B
+CLASS="command"
+>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
 
-   <b class="command">PortableServer_POAManager_activate(poa_manager, ev); </b>
-  if (etk_raised_exception(ev)) 
-    goto failed_activation;
+	 <B
+CLASS="command"
+>PortableServer_POAManager_activate(poa_manager, ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
 
-         <b class="command">CORBA_Object_release ((CORBA_Object) poa_manager, ev); </b>
-  return;
+         <B
+CLASS="command"
+>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </B
+>
+	return;
 
  failed_activation:
  failed_poamanager:
         CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
  failed_poa:
-  CORBA_ORB_destroy(*orb, local_ev);    
+	CORBA_ORB_destroy(*orb, local_ev);		
  failed_orb:
-  return;
+	return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
@@ -547,15 +745,18 @@ server_init (int                 *argc_ptr,
  */
 static void 
 server_run (CORBA_ORB          orb,
-      CORBA_Environment *ev)
+	    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
-  
-         <b class="command">CORBA_ORB_run(orb, ev); </b>
-  if (etk_raised_exception(ev)) return;
+	
+         <B
+CLASS="command"
+>CORBA_ORB_run(orb, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
-   * CORBA_ORB_shutdown(.) has been called */
+	 * CORBA_ORB_shutdown(.) has been called */
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -563,36 +764,54 @@ server_run (CORBA_ORB          orb,
  */
 static void 
 server_cleanup (CORBA_ORB           orb,
-    PortableServer_POA  poa,
-    CORBA_Object        ref,
-    CORBA_Environment  *ev)
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
 {
-  PortableServer_ObjectId   *objid       = NULL;
+	PortableServer_ObjectId   *objid       = NULL;
 
-   <b class="command">objid = PortableServer_POA_reference_to_id (poa, ref, ev); </b>
-  if (etk_raised_exception(ev)) return;
-    
-  /* Servant: deactivatoin - will invoke  __fini destructor */
-   <b class="command">PortableServer_POA_deactivate_object (poa, objid, ev); </b>
-  if (etk_raised_exception(ev)) return;
+	 <B
+CLASS="command"
+>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <B
+CLASS="command"
+>PortableServer_POA_deactivate_object (poa, objid, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
 
-   <b class="command">PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </b>
-  if (etk_raised_exception(ev)) return;
+	 <B
+CLASS="command"
+>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
 
-  CORBA_free (objid);
+	CORBA_free (objid);
 
-         <b class="command">CORBA_Object_release ((CORBA_Object) poa, ev); </b>
-  if (etk_raised_exception(ev)) return;
-  
-         <b class="command">CORBA_Object_release (ref, ev); </b>
-  if (etk_raised_exception(ev)) return;
+         <B
+CLASS="command"
+>CORBA_Object_release ((CORBA_Object) poa, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+	
+         <B
+CLASS="command"
+>CORBA_Object_release (ref, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
 
         /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                 <b class="command">CORBA_ORB_destroy(orb, ev); </b>
-    if (etk_raised_exception(ev)) return;
+                 <B
+CLASS="command"
+>CORBA_ORB_destroy(orb, ev); </B
+>
+		if (etk_raised_exception(ev)) return;
         }
 }
 
@@ -603,16 +822,19 @@ server_cleanup (CORBA_ORB           orb,
  */
 static CORBA_Object
 server_activate_service (CORBA_ORB           orb,
-       PortableServer_POA  poa,
-       CORBA_Environment  *ev)
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
 {
-  Echo  ref = CORBA_OBJECT_NIL; 
+	Echo  ref = CORBA_OBJECT_NIL; 
 
-   <b class="command">ref = impl_Echo__create (poa, ev); </b>
-  if (etk_raised_exception(ev)) 
-    return CORBA_OBJECT_NIL;
-  
-  return ref;
+	 <B
+CLASS="command"
+>ref = impl_Echo__create (poa, ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
 }
 
 /* 
@@ -622,67 +844,137 @@ server_activate_service (CORBA_ORB           orb,
 int
 main (int argc, char *argv[])
 {
-  CORBA_Object servant = CORBA_OBJECT_NIL;
-  
-  CORBA_char filename[] = "echo.ref";
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "echo.ref";
 
-  CORBA_Environment  ev[1];
-  CORBA_exception_init(ev);
-  
-   <b class="command">server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </b>
-  etk_abort_if_exception(ev, "failed ORB init");
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	 <B
+CLASS="command"
+>server_init (&#38;argc, argv, &#38;global_orb, &#38;root_poa, ev); </B
+>
+	etk_abort_if_exception(ev, "failed ORB init");
 
-   <b class="command">servant = server_activate_service (global_orb, root_poa, ev); </b>
-  etk_abort_if_exception(ev, "failed activating service");
+	 <B
+CLASS="command"
+>servant = server_activate_service (global_orb, root_poa, ev); </B
+>
+	etk_abort_if_exception(ev, "failed activating service");
 
-  g_print ("Writing service reference to: %s\n\n", filename);
+	g_print ("Writing service reference to: %s\n\n", filename);
 
-   <b class="command">etk_export_object_to_file (global_orb, 
-           servant, 
-           filename, 
-           ev); </b>
-  etk_abort_if_exception(ev, "failed exporting IOR");
-  
-   <b class="command">server_run (global_orb, ev); </b>
-  etk_abort_if_exception(ev, "failed entering main loop");
+	 <B
+CLASS="command"
+>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev); </B
+>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	 <B
+CLASS="command"
+>server_run (global_orb, ev); </B
+>
+	etk_abort_if_exception(ev, "failed entering main loop");
 
-   <b class="command">server_cleanup (global_orb, root_poa, servant, ev); </b>
-  etk_abort_if_exception(ev, "failed cleanup");
+	 <B
+CLASS="command"
+>server_cleanup (global_orb, root_poa, servant, ev); </B
+>
+	etk_abort_if_exception(ev, "failed cleanup");
 
-  exit (0);
+	exit (0);
 }
-  
+	
 
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <p>The key part of the server is when it calls <b class="command">servant = impl_Echo__create (poa, ev);</b>. This is a function defined in file <tt class="filename">echo-skelimpl.c</tt> being included at top of echo-server.c. For each object method of echo object interface file <tt class="filename">echo-skelimpl.c</tt> contains a predefined implementation that must be extended by user (specific regions are marked by comments); incoming requests are delegated by object manager to specific method implementation. - For echo server application only a single line for method <b class="command">echoString(..)</b> must be inserted, this line will print the echo-string to console. Let's have a look at <tt class="filename">echo-skelimpl.c</tt> that has been generated by <b class="command">orbit-idl-2</b> tool as template for user. Therefor only a single line has been added by user <b class="command">g_print ("%s\n", input);</b> at very end of file in function body <i class="emphasis">impl_Echo_echoString(..)</i>.</p>
-
-      <div class="note">
-        <table class="note" width="100%" border="0">
-          <tr>
-            <td width="25" align="center" valign="top"><img src="./stylesheet-images/note.gif" hspace="5" alt="Note" /></td>
-
-            <td align="left" valign="top">
-              <p>Constructor (__create) and Destructor (__fini) are defined, too. How to extend those functions defining lifecycle of objects will be subject to next chapters.</p>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="example">
-        <a name="AEN443" id="AEN443"></a>
-
-        <p><b>Example 4. echo-skelimpl.c</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="programlisting">
-#include "echo.h"
+</PRE
+></DIV
+><P
+>&#13;The key part of the server is when it calls <B
+CLASS="command"
+>servant =
+impl_Echo__create (poa, ev);</B
+>. This is a function defined in
+file <TT
+CLASS="filename"
+>echo-skelimpl.c</TT
+> being included at top of
+echo-server.c. For each object method of echo object interface file
+<TT
+CLASS="filename"
+>echo-skelimpl.c</TT
+> contains a predefined
+implementation that must be extended by user (specific regions are
+marked by comments); incoming requests are delegated by object manager
+to specific method implementation. - For echo server application only
+a single line for method <B
+CLASS="command"
+>echoString(..)</B
+> must be
+inserted, this line will print the echo-string to console. Let's have
+a look at <TT
+CLASS="filename"
+>echo-skelimpl.c</TT
+> that has been generated
+by <B
+CLASS="command"
+>orbit-idl-2</B
+> tool as template for user. Therefor
+only a single line has been added by user <B
+CLASS="command"
+>g_print ("%s\n",
+input);</B
+> at very end of file in function body
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>impl_Echo_echoString(..)</I
+></SPAN
+>.</P
+><DIV
+CLASS="note"
+><P
+></P
+><TABLE
+CLASS="note"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="/usr/share/sgml/docbook/stylesheet/dsssl/modular/images/note.gif"
+HSPACE="5"
+ALT="Note"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>Constructor (__create) and Destructor (__fini) are defined,
+too. How to extend those functions defining lifecycle of objects will
+be subject to next chapters.</P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN443"
+></A
+><P
+><B
+>Example 5-4. echo-skelimpl.c</B
+></P
+><PRE
+CLASS="programlisting"
+>#include "echo.h"
 
 /*** App-specific servant structures ***/
 
@@ -699,29 +991,29 @@ impl_POA_Echo;
 /*** Implementation stub prototypes ***/
 
 static void impl_Echo__fini(impl_POA_Echo * servant,
-             CORBA_Environment * ev);
+			       CORBA_Environment * ev);
 static void
 impl_Echo_echoString(impl_POA_Echo * servant,
-         const CORBA_char * input, CORBA_Environment * ev);
+		     const CORBA_char * input, CORBA_Environment * ev);
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Echo_base_epv = {
-   NULL,      /* _private data */
-   (gpointer) &amp;amp; impl_Echo__fini,  /* finalize routine */
-   NULL,      /* default_POA routine */
+   NULL,			/* _private data */
+   (gpointer) &#38;amp; impl_Echo__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
 };
 static POA_Echo__epv impl_Echo_epv = {
-   NULL,      /* _private */
-   (gpointer) &amp; impl_Echo_echoString,
+   NULL,			/* _private */
+   (gpointer) &#38; impl_Echo_echoString,
 
 };
 
 /*** vepv structures ***/
 
 static POA_Echo__vepv impl_Echo_vepv = {
-   &amp;impl_Echo_base_epv,
-   &amp;impl_Echo_epv,
+   &#38;impl_Echo_base_epv,
+   &#38;impl_Echo_epv,
 };
 
 /*** Stub implementations ***/
@@ -734,8 +1026,8 @@ impl_Echo__create(PortableServer_POA poa, CORBA_Environment * ev)
    PortableServer_ObjectId *objid;
 
    newservant = g_new0(impl_POA_Echo, 1);
-   newservant-&gt;servant.vepv = &amp;impl_Echo_vepv;
-   newservant-&gt;poa =     
+   newservant-&#62;servant.vepv = &#38;impl_Echo_vepv;
+   newservant-&#62;poa =     
       (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
    POA_Echo__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
@@ -754,7 +1046,10 @@ impl_Echo__create(PortableServer_POA poa, CORBA_Environment * ev)
 static void
 impl_Echo__fini(impl_POA_Echo * servant, CORBA_Environment * ev)
 {
-    <b class="command">CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev); </b>
+    <B
+CLASS="command"
+>CORBA_Object_release((CORBA_Object) servant-&#62;poa, ev); </B
+>
  
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
@@ -768,35 +1063,46 @@ impl_Echo__fini(impl_POA_Echo * servant, CORBA_Environment * ev)
 
 static void
 impl_Echo_echoString(impl_POA_Echo * servant,
-         const CORBA_char * input, CORBA_Environment * ev)
+		     const CORBA_char * input, CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-   <b class="command">g_print ("%s\n", input); </b>
+   <B
+CLASS="command"
+>g_print ("%s\n", input); </B
+>
    /* ------ ---------- end ------------ ------ */
-}
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
+}</PRE
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="echo-compilation"
+>5.3.3. Compiling  server &#38; client</A
+></H2
+><P
+> The following
+makefile can be used to compile both, the client and the server. Be
+aware of the location of ORBit : on my system it has been installed
+under /usr but it could be /usr/local if you have built it from the
+sources, and hence the path for ORBIT variables below may vary. If
+using ORBit binary packages shipped with your Linux or BSD/Unix
+distribution the makefile below will do.
 
-    <div class="sect2">
-      <h2 class="sect2"><a name="echo-compilation" id="echo-compilation"></a>Compiling server &amp; client</h2>
-
-      <p>The following makefile can be used to compile both, the client and the server. Be aware of the location of ORBit : on my system it has been installed under /usr but it could be /usr/local if you have built it from the sources, and hence the path for ORBIT variables below may vary. If using ORBit binary packages shipped with your Linux or BSD/Unix distribution the makefile below will do.</p>
-
-      <div class="example">
-        <a name="AEN451" id="AEN451"></a>
-
-        <p><b>Example 5. Makefile</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="programlisting">
-
-PREFIX ?= /usr
+<DIV
+CLASS="example"
+><A
+NAME="AEN451"
+></A
+><P
+><B
+>Example 5-5. Makefile</B
+></P
+><PRE
+CLASS="programlisting"
+>&#13;PREFIX ?= /usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2
@@ -821,25 +1127,28 @@ clean:
         rm -rf *.o *~ $(IDLOUT)
  
 distclean: clean
-        rm -rf echo-client echo-server
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div><br />
-      <br />
-
-      <div class="example">
-        <a name="AEN454" id="AEN454"></a>
-
-        <p><b>Example 6. Invoking make</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="screen">
-
-<tt class="prompt">[frehberg@papaya echo]$ </tt><tt class="userinput"><b>make</b></tt>
+        rm -rf echo-client echo-server</PRE
+></DIV
+> 
+</P
+><DIV
+CLASS="example"
+><A
+NAME="AEN454"
+></A
+><P
+><B
+>Example 5-6. Invoking make</B
+></P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>[frehberg@papaya echo]$ </SAMP
+><KBD
+CLASS="userinput"
+>make</KBD
+>
 orbit-idl-2 echo.idl
 orbit-idl-2 2.4.1 compiling
  small mode, show preprocessor errors, passes: stubs skels common headers 
@@ -865,43 +1174,76 @@ gcc -DORBIT2=1 -D_REENTRANT -I/usr/include/orbit-2.0 -I/usr/include/linc-1.0
 echo-skels.c
 gcc -Wl,--export-dynamic -lORBit-2 -llinc -lgmodule-2.0 -ldl -lgobject-2.0  
 -lgthread-2.0 -lpthread -lglib-2.0 -lm  echo-server.o echo-common.o          
-echo-skels.o   -o echo-server
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <p>After calling <b class="command">make</b> in terminal window all sources have been compiled and you should open a second terminal window. In the first window we will start the server with the command: <b class="command">./echo-server</b>. The server should print a very long string into the file <tt class="filename">echo.ref</tt>, starting with the 4 character sequence <tt class="computeroutput">IOR:</tt> In the second window we will print content of <tt class="filename">echo.ref</tt> to console and start the client with the command <b class="command">./echo-client</b>. You should not try to type the IOR string, instead use the cut and paste functionality of your terminal.</p>
-
-      <div class="example">
-        <a name="AEN466" id="AEN466"></a>
-
-        <p><b>Example 7. Terminal 1 - Starting Echo Server</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="screen">
-
-<tt class="prompt">[frehberg@papaya echo]$ </tt><tt class="userinput"><b>./echo-server</b></tt>
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="example">
-        <a name="AEN471" id="AEN471"></a>
-
-        <p><b>Example 8. Terminal 2 - Starting Echo Client</b></p>
-
-        <table border="0" bgcolor="#E0E0E0" width="100%">
-          <tr>
-            <td>
-              <pre class="screen">
-
-<tt class="prompt">[frehberg@papaya echo]$ </tt><tt class="userinput"><b>cat echo.ref</b></tt>
+echo-skels.o   -o echo-server</PRE
+></DIV
+><P
+>&#13;After calling <B
+CLASS="command"
+>make</B
+> in terminal window all sources
+have been compiled and you should open a second terminal window. In
+the first window we will start the server with the command:
+<B
+CLASS="command"
+>./echo-server</B
+>. The server should print a very long
+string into the file <TT
+CLASS="filename"
+>echo.ref</TT
+>, starting with the
+4 character sequence <SAMP
+CLASS="computeroutput"
+>IOR:</SAMP
+> In the
+second window we will print content of <TT
+CLASS="filename"
+>echo.ref</TT
+>
+to console and start the client with the command
+<B
+CLASS="command"
+>./echo-client</B
+>. You should not try to type the IOR
+string, instead use the cut and paste functionality of your terminal.
+</P
+><DIV
+CLASS="example"
+><A
+NAME="AEN466"
+></A
+><P
+><B
+>Example 5-7. Terminal 1 - Starting Echo Server</B
+></P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>[frehberg@papaya echo]$ </SAMP
+><KBD
+CLASS="userinput"
+>./echo-server</KBD
+>
+</PRE
+></DIV
+><DIV
+CLASS="example"
+><A
+NAME="AEN471"
+></A
+><P
+><B
+>Example 5-8. Terminal 2 - Starting Echo Client</B
+></P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>[frehberg@papaya echo]$ </SAMP
+><KBD
+CLASS="userinput"
+>cat echo.ref</KBD
+>
 IOR:010000000d00000049444c3a4563686f3a312e3000000000030000000054424f540000000101
 020005000000554e4958000000000700000070617061796100002e0000002f746d702f6f72626974
 2d66726568626572672f6c696e632d323230662d302d323532356663323537306430340000000000
@@ -910,37 +1252,81 @@ IOR:010000000d00000049444c3a4563686f3a312e3000000000030000000054424f540000000101
 e8a8dc29282828282828010000008af91bdf01000000480000000100000002000000050000001c00
 000000000000a6361450d7eae8a8dc29282828282828010000008af91bdf01000000140000000100
 000001000105000000000901010000000000
-<tt class="prompt">[frehberg@papaya echo]$ </tt><tt class="userinput"><b>./echo-client</b></tt>
+<SAMP
+CLASS="prompt"
+>[frehberg@papaya echo]$ </SAMP
+><KBD
+CLASS="userinput"
+>./echo-client</KBD
+>
 Type messages to the server
 a single dot in line will terminate input:
-</pre>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="NAVFOOTER">
-    <hr align="left" width="100%" />
-
-    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="33%" align="left" valign="top"><a href="x271.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
-
-        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
-
-        <td width="33%" align="right" valign="top"><a href="x478.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
-      </tr>
-
-      <tr>
-        <td width="33%" align="left" valign="top">Files at a glance</td>
-
-        <td width="34%" align="center" valign="top"><a href="c264.html" accesskey="U">Up</a></td>
-
-        <td width="33%" align="right" valign="top">Calculator client &amp; server</td>
-      </tr>
-    </table>
-  </div>
-</body>
-</html>
+</PRE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x271.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x478.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Files at a glance</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c264.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Calculator client &#38; server</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

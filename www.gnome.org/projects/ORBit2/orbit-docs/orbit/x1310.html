@@ -1,77 +1,118 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>Server-side deactivation</title>
-  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
-  <link rel="HOME" title="ORBit Beginners Documentation V1.5" href="book1.html" />
-  <link rel="UP" title="How to do garbage collection under CORBA" href="c1275.html" />
-  <link rel="PREVIOUS" title="Difference between the client and the server" href="x1284.html" />
-  <link rel="NEXT" title="Why is this an issue?" href="x1318.html" />
-</head>
-
-<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
-  <div class="NAVHEADER">
-    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <th colspan="3" align="center">ORBit Beginners Documentation V1.5</th>
-      </tr>
-
-      <tr>
-        <td width="10%" align="left" valign="bottom"><a href="x1284.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
-
-        <td width="80%" align="center" valign="bottom">How to do garbage collection under CORBA</td>
-
-        <td width="10%" align="right" valign="bottom"><a href="x1318.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <hr align="left" width="100%" />
-  </div>
-
-  <div class="sect1">
-    <h1 class="sect1"><a name="AEN1310" id="AEN1310"></a>Server-side deactivation</h1>
-
-    <p>Ok, so CORBA_Object_release takes care of the client side. This isn't enough, because, as Elliot Lee pointed out, to state the point slightly differently:</p>
-
-    <table border="0" bgcolor="#E0E0E0" width="100%">
-      <tr>
-        <td>
-          <pre class="programlisting">
-
-On Tue, 20 Apr 1999, Svanberg Liss wrote:
-&gt; Btw, what does CORBA_Object_duplicate &amp; CORBA_Object_release do
-&gt; server?
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Server-side deactivation</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.6"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="How to do garbage collection under CORBA"
+HREF="c1275.html"><LINK
+REL="PREVIOUS"
+TITLE="Difference between the client and the server"
+HREF="x1284.html"><LINK
+REL="NEXT"
+TITLE="Why is this an issue?"
+HREF="x1318.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.6</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1284.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 6. How to do garbage collection under CORBA</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1318.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1310"
+>6.3. Server-side deactivation</A
+></H1
+><P
+>&#13;Ok, so CORBA_Object_release takes care of the client side. This isn't enough,
+ because, as Elliot Lee pointed out, to state the point slightly differently:
+<PRE
+CLASS="programlisting"
+>&#13;On Tue, 20 Apr 1999, Svanberg Liss wrote:
+&#62; Btw, what does CORBA_Object_duplicate &#38; CORBA_Object_release do
+&#62; server?
 
 Nothing..
-</pre>
-        </td>
-      </tr>
-    </table>So, what do you do on the server side? Elliot answered this, too:
+</PRE
+>
 
-    <table border="0" bgcolor="#E0E0E0" width="100%">
-      <tr>
-        <td>
-          <pre class="programlisting">
-
-&gt; and... hmm, what kind of call does destroy the object in the server
+So, what do you do on the server side? Elliot answered this, too:
+<PRE
+CLASS="programlisting"
+>&#13;&#62; and... hmm, what kind of call does destroy the object in the server
  when 
-&gt; release doesn't?
+&#62; release doesn't?
 
 You PortableServer_POA_deactivate_object(poa, objid) to tell the POA not
 to take any more requests for the specified objid.
-</pre>
-        </td>
-      </tr>
-    </table>Let's take a look at what this means in terms of actual code. If you run <tt class="userinput"><b>orbit-idl --skeleton_impl foo.idl</b></tt> on your idl file, you will get a file foo-impl.c. Inside of that file, you will see functions like the following:
+</PRE
+>
 
-    <table border="0" bgcolor="#E0E0E0" width="100%">
-      <tr>
-        <td>
-          <pre class="programlisting">
+Let's take a look at what this means in terms of actual code. If you run
+<KBD
+CLASS="userinput"
+>&#13;orbit-idl --skeleton_impl foo.idl
+</KBD
+>
 
-/* You shouldn't call this routine directly without first deactivating
+on your idl file, you will get a file foo-impl.c. Inside of that file,
+ you will see functions like the following:
+<PRE
+CLASS="programlisting"
+>&#13;/* You shouldn't call this routine directly without first deactivating
  the servant... */
 
 static void
@@ -90,35 +131,82 @@ impl_CosTransactions_Control__destroy(
    g_free(servant);
 
 }
-</pre>
-        </td>
-      </tr>
-    </table>Where it says "You shouldn't call this routine directly without first deactivating the servant...", it means that you should call PortableServer_POA_deactivate_object() on the servant first.<br />
-    <br />
+</PRE
+>
 
-    <p>FIXME: I don't understand what POA_CosTransactions_Control__fini does here; how is it different from PortableServer_POA_deactivate_object? Anyway, this is the final step you take after your object is deactivated; you can then free the POA servant struct which you created in your factory (or wherever.)</p>
-  </div>
-
-  <div class="NAVFOOTER">
-    <hr align="left" width="100%" />
-
-    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="33%" align="left" valign="top"><a href="x1284.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
-
-        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
-
-        <td width="33%" align="right" valign="top"><a href="x1318.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
-      </tr>
-
-      <tr>
-        <td width="33%" align="left" valign="top">Difference between the client and the server</td>
-
-        <td width="34%" align="center" valign="top"><a href="c1275.html" accesskey="U">Up</a></td>
-
-        <td width="33%" align="right" valign="top">Why is this an issue?</td>
-      </tr>
-    </table>
-  </div>
-</body>
-</html>
+Where it says "You shouldn't call this routine directly without first
+ deactivating the servant...", it means that you should call PortableServer_POA_deactivate_object()
+ on the servant first.
+</P
+><P
+>&#13;FIXME: I don't understand what POA_CosTransactions_Control__fini does here;
+ how is it different from PortableServer_POA_deactivate_object? Anyway, this
+ is the final step you take after your object is deactivated; you can then free
+ the POA servant struct which you created in your factory (or wherever.)
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1284.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1318.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Difference between the client and the server</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1275.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Why is this an issue?</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
