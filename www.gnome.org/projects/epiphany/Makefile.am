@@ -14,6 +14,7 @@ page_SCRIPTS=			\
 	plan.html			\
 	resources.html		\
 	screenshots.html	\
-	extensions.html
+	extensions.html		\
+	smartbookmarks.html
 
 include $(top_srcdir)/rules.common

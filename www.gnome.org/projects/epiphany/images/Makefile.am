@@ -44,6 +44,7 @@ page_SCRIPTS=		\
 	toolbareditor-tn.png	\
 	weibull.png	\
 	weibull-tn.png	\
-	wheat.png
+	wheat.png	\
+	smartbookmarks.png
 
 include $(top_srcdir)/rules.common
