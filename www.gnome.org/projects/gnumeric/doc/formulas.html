@@ -1,0 +1,378 @@
+<HTML
+><HEAD
+><TITLE
+>Formulas</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.71
+"><LINK
+REL="HOME"
+TITLE="Gnumeric's user manual"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Entering data."
+HREF="editing.html"><LINK
+REL="PREVIOUS"
+TITLE="Entering data."
+HREF="editing.html"><LINK
+REL="NEXT"
+TITLE="Cell Referencing"
+HREF="cell-referencing.html"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Gnumeric's user manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="editing.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Entering data.</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cell-referencing.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="FORMULAS"
+>Formulas</A
+></H1
+><P
+>Formulas are the key to the whole ball of wax when it comes to
+    spreadsheets. A formula can take almost anything as its arguments
+    including single numbers, cell references, ranges of cells, arrays
+    of cells, etc. </P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN613"
+>Syntax</A
+></H2
+><P
+> Formulas are distinguished from regular data by a '=' as
+      the first character. Everything following a '=' is evaluated as
+      a formula, not a string. </P
+><P
+> The simplest fomula's just use the standard math operator
+     and symbols. +,-,*,/ are intrepreted just as you would expect
+     them to.  +,- can be used as unary operators and indicate sign,
+     just as can be expected.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="STANDARDOPERATORS"
+></A
+><P
+><B
+>Example 2-1. Examples of standard operators</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	=5+5            returns 10.
+	
+	=5-4            returns 1.
+	
+	=-5             returns -5.
+	
+	=5*5            returns 25.
+	
+	=(5*5)+11       returns 36.
+	
+	=(5*)+(49/7)    returns 32.
+      </PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN620"
+>Using Functions</A
+></H2
+><P
+>Most of the standard math, business, statistical, and
+      scientific calculations are implemented in terms of
+      functions. Functions are in the form of:</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="BASICFUNCTIONSYNTAX"
+></A
+><P
+><B
+>Example 2-2. Basic Function syntax</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	=FUNCTION(ARGUMENTS)
+      </PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+> While the documentation generally refers to functions in all caps,
+      their use is not actually case sensitive.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="FUNCTIONSYNTAX"
+></A
+><P
+><B
+>Example 2-3. Some examples of function syntax</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	    =SUM(A1,A2,A4,B5)
+	    
+            =AVERAGE(A1:A16)
+	    
+            =EXP(1)
+	    
+	    =PI()
+	    
+            =MIN(A1,A2,B6)
+	  </PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>Where a function takes multiple arguments such as the
+	SUM example, the number of arguments effectively unlimited.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN631"
+>Names</A
+></H2
+><P
+>Names help to simplify complex formulae. A name is assinged to
+  a formula which will be evaluated when it is referred to in another
+  formula. Names are particularly useful for labeling cell ranges.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="NAMESYNTAX"
+></A
+><P
+><B
+>Example 2-4. Examples of name usage</B
+></P
+><P
+>If DataBase is defined as '$A$1:$B$500' and
+	E_Constant is defined as 2.71828182845 then we can have:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	    =VLOOKUP (C1, "gnu", DataBase, 2, 0)
+
+	    =LN(E_Constant)
+
+	    =SUM(DataBase, E_Constant)
+	  </PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>Names are defined using the <SPAN
+CLASS="GUIMENU"
+>Insert</SPAN
+>
+  <SPAN
+CLASS="GUIMENUITEM"
+>Name</SPAN
+> dialog. This allows manipulation of
+  all the names in the related workbook. A name is restrained from taking
+  that of a function, since this would cause confusion.</P
+><P
+>In addition to the names you define there are built in names:</P
+><P
+></P
+><UL
+><LI
+><P
+>"Sheet_Title:" this returns the name of the current sheet</P
+></LI
+></UL
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN645"
+>Array Formulas</A
+></H2
+><P
+>It is periodically useful or necessary to have an expression return
+    a matrix rather than a single value.  The first example most people think
+    of are matrix operations such as multiplication, transpose, and inverse.
+    A less obvious usage is for data retrieval routines (databases, realtime
+    data-feeds) or functions with vector results (yield curve calculations).
+    </P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="ARRAYFORMULACREATE"
+></A
+><P
+><B
+>Example 2-5. Entering an Array Formula</B
+></P
+><P
+>An array formula is currently entered by selecting the single
+	range in which to store the result, entering the array formula,
+	and hitting the magic combination, Ctrl-Shift-Enter.
+	</P
+><P
+>The result is displayed as :</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	={FUNCTION(ARGUMENTS)}(num_rows, num_cols)[row number][col number]
+      </PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="editing.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cell-referencing.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Entering data.</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="editing.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Cell Referencing</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,402 @@
+<HTML
+><HEAD
+><TITLE
+>Cell Referencing</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.71
+"><LINK
+REL="HOME"
+TITLE="Gnumeric's user manual"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Entering data."
+HREF="editing.html"><LINK
+REL="PREVIOUS"
+TITLE="Formulas"
+HREF="formulas.html"><LINK
+REL="NEXT"
+TITLE="Selecting Cells While Entering Formulas."
+HREF="selecting-cells-entering-formulas.html"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Gnumeric's user manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="formulas.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Entering data.</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="selecting-cells-entering-formulas.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="CELL-REFERENCING"
+>Cell Referencing</A
+></H1
+><P
+>To reference the value stored in a single cell, B1 for example, just 
+        enter "B1"
+     as the function argument.</P
+><P
+>Cells are referenced in a format like C4, where C is the column label
+    and 4 is the row label.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="SIMPLECELLREFER"
+></A
+><P
+><B
+>Example 2-6. Some examples of function syntax</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>      =EXP(B1)
+      
+      =COS(A2)
+      
+    </PRE
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN660"
+>Absolute cell referencing</A
+></H2
+><P
+>Cells can be referenced in the default way (relative referencing),
+      or by using absolute referening. Absolute referencing means that when the cell
+      is copied, the cell reference does not change. Normally, autofilling a 
+cell
+      range or moving cell will change its cell reference to so that it maintains
+      a relation to the original cell. With absolute cell referencing this, behaviour is
+      overridden. </P
+><P
+>The format for absolute cell refencing is to use a '$' in front of the
+      cell coordinate that the user wants to stay constant. The column, row, sheet, or
+      any combination of these can be held constant.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="CELL-REFER-ABSOLUTE-REFERENCE"
+></A
+><P
+><B
+>Example 2-7. Absolute cell referencing examples</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	A1          Normal cell reference
+	$A2         Hold the column value constant
+	A$2         Hold the row value constant
+	$A$2        Hold row and columns constant.
+      </PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN667"
+>Referencing multiple cells</A
+></H2
+><P
+>Many functions can take multiple cells as arguments. This can either
+      be a comma separated list, an array, or any combination thereof.</P
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN670"
+>Multiple individual cells</A
+></H3
+><P
+>A comma separated list of cell references can be used to
+	indicate cells that are discontinuous.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="CELLREFERMUTIPLECELLS"
+></A
+><P
+><B
+>Example 2-8. Some examples of function syntax</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	  =SUM(A1,B2,C4)
+	  
+	  =MIN(A1,B2, C4,C5,D6)
+	  
+	</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+><IMG
+SRC="images/cells-1.png"></P
+></DIV
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN678"
+>Referencing a continuous region of cells</A
+></H3
+><P
+>For functions that take more than one argument, it is often
+	easier to reference the cells as a group. This can include
+	cells in sets horizontally, vertically, or in arrays.</P
+><P
+>The ':' operator is used to indicate a range of cells. The basic
+	syntax is upper left corner:bottom right corner. </P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="CELLREFERCONTIN"
+></A
+><P
+><B
+>Example 2-9. Referencing blocks of cells</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	  =SUM(A1:E1)
+	  
+	  =AVERAGE(B4:E7)
+	  
+	  =MIN(A1:A5)            
+	</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+><IMG
+SRC="images/cells-2.png"></P
+></DIV
+><DIV
+CLASS="SECT3"
+><H3
+CLASS="SECT3"
+><A
+NAME="AEN687"
+>Referencing non-continuous regions</A
+></H3
+><P
+>For referencing cells that are in non-continuous regions,
+	    you can use any combination of the above methods to get
+	the needed cells.</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="CELLREFERDISCONTIN"
+></A
+><P
+><B
+>Example 2-10. Referencing blocks of cells</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	  =SUM(A1:E1, B19, L14:L17)
+	  
+	  =AVERAGE(A1,A3, A5:C5)
+	  
+	</PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN693"
+>Referencing cells on other sheets</A
+></H2
+><P
+>It is possible to reference cells which are not part of the
+    current sheet.  This is done using the NAME!CELL syntax,
+    where NAME is an identifier (usually a sheet name) and CELL is a
+    regular cell reference as described in the previous
+    sections.</P
+><P
+>Note that if NAME contains spaces, you need to quote the
+    whole name to allow Gnumeric to group the separate words in NAME
+    as single name.  For example, you should use "Sheet 0" when
+    referencing the default created "Sheet 0".</P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="SIMPLE-SHEET-REF"
+></A
+><P
+><B
+>Example 2-11. Referencing values in other sheets</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>	='Sheet 0'!A1+'Sheet 3'!A5
+
+	=SUM('Sheet 1'!A1:'Sheet 1'!A5)
+      </PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="formulas.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="selecting-cells-entering-formulas.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Formulas</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="editing.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Selecting Cells While Entering Formulas.</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
