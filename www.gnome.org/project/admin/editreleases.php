@@ -1,0 +1,161 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id$
+
+/* Updated rewrite of the File Release System to clean up the UI 
+ * a little and incorporate FRS.class.		-Darrell
+ */
+
+require ('pre.php');    
+require ('frs.class');
+require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
+session_require(array('group'=>$group_id));
+$project=&group_get_object($group_id);
+if (!$project->userIsReleaseTechnician()) exit_permission_denied();
+
+project_admin_header(array('title'=>'Release New Application Version','group'=>$group_id));
+
+// Create a new FRS object
+$frs = new FRS($group_id);
+
+/*
+ * Here's where we do the dirty work based on the step the user has chosen
+ */
+
+// Edit release info
+if ($step1) {	
+	$exec_changes = true;
+
+	// Check for uplaoded change logs
+	if ($uploaded_changes != "none") {
+		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'), filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
+		if ((strlen($changes) < 20) || (strlen($changes) > 256000)) {
+			$feedback .= " Change Log Is Either Too Small Or Too Large ";
+			$exec_changes = false;
+		}
+	} else {
+		$changes = $release_changes;
+	}
+
+	// If we haven't encountered any problems so far then save the changes
+	if ($exec_changes == true) {
+		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $changes, $group_id, $release_id)) {
+			$feedback .= " Data Saved ";
+		} else {
+			$feedback .= $frs->getErrorMessage();
+		}
+	}
+} 
+
+if( !$release_id ) {
+	$res=$frs->frsGetReleaseList($pkg_str);
+	$rows=db_numrows($res);
+	if (!$res || $rows < 1) {
+		echo '<h4>You Have No Releases Defined</h4>';
+		echo db_error();
+	} else {
+		/*
+			Show a list of releases
+			For this project
+		*/
+		$title_arr=array();
+		$title_arr[]='Release Name';
+		$title_arr[]='Status';
+	
+		echo html_build_list_table_top ($title_arr);
+
+		for ($i=0; $i<$rows; $i++) {
+?>
+
+<tr bgcolor="<?php echo html_get_alt_row_color($i); ?>">
+	<td>
+		<font size="-1">
+			<?php echo db_result($res,$i,'release_name'); ?>
+			<a href="editreleases.php?release_id=<?php echo db_result($res,$i,'release_id'); ?>&group_id=<?php echo $group_id; ?>">[Edit This Release]</a>
+		</font>
+	</td>
+	<td>
+		<font size="-1"><?php echo db_result($res,$i,'status_name'); ?></font>
+	</td>
+</tr>
+</form>
+
+<?php
+	}
+}
+	echo "</table>\n";
+}
+
+/*
+ * Show the forms for each step
+ */
+if( $release_id ) {
+?>
+
+<h3>
+Step 1:&nbsp;&nbsp;
+Edit Existing Release
+</h3>
+
+<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF; ?>">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
+<input type="hidden" name="step1" value="1">
+<table border="0" cellpadding="1" cellspacing="1">
+<?php
+	if(!($result = $frs->frsGetRelease($release_id))) {
+		$feedback .= $frs->getErrorMessage();
+	}
+?>
+<tr>
+	<td width="10%"><b>Release Date:<b></td>
+	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',db_result($result,0,'release_date')) ?>" size="10" maxlength="10"></td>
+</tr>
+<tr>
+	<td><b>Release Name:<b></td>
+	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars(db_result($result,0,'release_name')); ?>"></td>
+</tr>
+<tr>
+	<td><b>Status:</b></td>
+	<td>
+		<?php 
+			echo frs_show_status_popup('status_id',db_result($result,0,'status_id')); 
+		?>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br>
+		Edit the Change Log for this release. These changes will apply to all files attached to this release.<br>
+		You can either upload the change log individually, or paste it in below.<br><br>
+	</td>
+</tr>
+<tr>
+	<td nowrap><b>Upload Change Log:</b></td>
+	<td><input type="file" name="uploaded_changes" size="30"></td>
+</tr>
+<TR>
+	<td COLSPAN=2>
+		<b>Paste The Change Log In:</b><br>
+		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'changes')); ?></textarea>
+	</td>
+</tr>
+<TR>
+	<TD nowrap>
+		<br>
+		<input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text.
+		<p>
+		<input type="submit" name="submit" value="Submit/Refresh">
+	</td>
+</tr>
+</table>
+</form>
+
+<?php
+}
+	project_admin_footer(array());
+?>

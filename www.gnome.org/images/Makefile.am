@@ -32,7 +32,15 @@ misc_images=\
 	arrow.gif\
 	button-helixgnome.png\
 	button-helixgnome.gif\
-	gnome-16.png
+	gnome-16.png\
+	mail16d.png\
+	manual16c.png\
+	save16.png\
+	trash.png\
+	trash-x.png\
+	nophoto.png\
+	ofolder15.png\
+	cfolder15.png
 
 banner_images=\
 	banner-gnomeis.png\

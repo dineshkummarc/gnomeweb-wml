@@ -1,4 +1,4 @@
-SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn todo i18n press faqs account
+SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn todo i18n press faqs account export include people register admin my projects softwaremap
 include $(top_srcdir)/rules.common
 
 urlpath=
@@ -21,7 +21,10 @@ page_SCRIPTS=index.php3		\
   pr-redflagjoins.html \
   pr-redhat.html \
   pr-sunjoins.html \
-  pr-accessible.html
+  pr-accessible.html \
+  .htaccess \
+  users
+
 page_DATA=menucontrol.js
 
 
