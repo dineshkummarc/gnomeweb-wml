@@ -1,4 +1,4 @@
-SUBDIRS= new-pics doc images func-tests
+SUBDIRS= new-pics doc images func-tests new-design-testing announcements changelogs
 
 urlpath=/projects/gnumeric
 
