@@ -33,6 +33,7 @@
 	 <h2>I want to help, any suggestions ?</h2>
 	 <p>If you want to help out, but don't have a great new idea of your own, then we have plenty for you. The two major sources are the the <a href="http://cvs.gnome.org/viewcvs/gnome-games/TODO?view=markup">TODO</a> file in the top of the Gnome Games distribution and the list of <a href="http://bugzilla.gnome.org/buglist.cgi?short_desc_type=allwordssubstr&amp;short_desc=&amp;product=gnome-games&amp;long_desc_type=allwordssubstr&amp;long_desc=&amp;status_whiteboard_type=allwordssubstr&amp;status_whiteboard=&amp;keywords_type=anywords&amp;keywords=&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;bug_status=NEEDINFO&amp;emailtype1=substring&amp;email1=&amp;emailtype2=substring&amp;email2=&amp;bugidtype=include&amp;bug_id=&amp;changedin=&amp;chfieldfrom=&amp;chfieldto=Now&amp;chfieldvalue=&amp;cmdtype=doit&amp;namedcmd=gnome-games&amp;newqueryname=&amp;order=Bug+Number&amp;field0-0-0=noop&amp;type0-0-0=noop&amp;value0-0-0=">open bugs</a> in bugzilla. To avoid conflicts with two people working on the same thing, if it looks like it will take more than a small amount of effort then <a href="mailto:games-list@gnome.org">drop a line</a> to the mailing list describing your intentions.</p>
 	 <p>Once you have your idea, you can proceed as above. If you are fixing a bug or implementing a feature requested in a bug report then the best place to send your code is as a patch at the end of the relevant bug report.</p>
+	 <p>Most contact should be through the mailing list or bugzilla. If, for some reason, you need to contact the maintainer directly the <tt>MAINTAINERS</tt> file in the <tt>gnome-games</tt> distribution has the name and email address of the current maintainer.</p>
 
         <h2>Getting the code</h2>
 	<p>Obviously you need some code to work with. You can work with the latest tarballs from the <a href="http://ftp.gnome.org/pub/GNOME/sources/gnome-games/">FTP site</a> but this is not recommended since they get out of date quickly. The best option is to use CVS. There are two options for using CVS: either update your entire GNOME system from CVS using something like <a href="http://www.daa.com.au/~james/software/jhbuild/">jhbuild</a> or only download Gnome Games from CVS. jhbuild is comprehensive and guaranteed to keep you up to date. Unfortunately it takes a lot of time and disk space and often keeps you too close to the bleeding edge. If you only download the gnome-games module you will have to take care of dependencies yourself.</p>
@@ -103,6 +104,59 @@ CVS password:<br/>
 
 <p>Once he has received it, the maintainer will have to have a look at your patch and decide whether he wants to apply it. Usually he does, but sometimes changes need to be made. The time it takes to apply the patch depends on both how busy the maintainer is and what code freezes are in place. Code freezes are used to stabilize the code before a major release and mean that only bugs are fixed, new features are not added. In that case the patch will be deferred until the next development cycle. The best time for large pieces of code is at the beginning of a development cycle, usually a week or so after a major GNOME release (e.g. 2.6.0).</p> <p>People who consistently post good quality patches are given direct access to the GNOME CVS server so they can do it themselves.</p>
 
+<h2>Translating Documents</h2>
+
+<p>The help files that accompany the games also need translating. If your language isn't supported, and you would like to help, here are some hints:</p>
+
+<h3>What you must do</h3>
+
+<ul>
+<li> Get the sources as explained above.
+<li> From the <tt>gnome-games</tt> source directory, go to <tt>your_game/help</tt>. if
+a <tt>your_language_code</tt> directory exists, go to it (you language code is
+generally a two letters code, like "fr" for French). Otherwise copy the <tt>C</tt>
+directory to <tt>your_language_code</tt>. Inside are all the xml files you must
+translate.
+<li> Edit them with your favorite text or XML editor.
+<li> Open them with the command <tt>yelp <i>&lt;filename&gt;</i></tt> to check what you've
+done.
+<li> When everything is done, submit it as a patch on bugzilla as explained
+on this page.
+<li> Warning : Some terms in the English rules aren't accurate. Please fix
+them in the English rules when you find some. Post these fixes to bugzilla too. If in doubt about the meaning of a phrase, feel free to ask the maintainer for an explanation.
+</ul>
+
+<h3>What you should do</h3>
+
+<p>It is best that you do these things, but if you get confused the maintainer can help you.</p>
+
+<ul>
+<li> Rename <tt>your_game-C.omf</tt> to <tt>your_game-your_language_code.omf</tt> and translate it.
+<li> In "your_game/help/you_language_code", edit the file "Makefile.am",
+and change,
+"lang = C
+omffile = your_game-C.omf", replacing C on each of these lines with your
+language code. 
+<li> From the <tt>gnome-games</tt> source directory, edit the file <tt>configure.in</tt>, find
+the <tt>AC_CONFIG_FILES</tt> variable (near the end of the file) and add the line
+<tt>your_game/help/you_language_code/Makefile</tt>.
+</ul>
+
+<h3>Suggestions</h3>
+
+<ul>
+<li> Edit the files use a good XML editor. Features such as color syntax highlighting help you avoid making mistakes. One suitable editor is bluefish, most popular code editors also have XML modes.  
+<li> Keep in mind that uniformity helps users quickly learn new games. Keep
+the everthing consistent.
+<li> For <tt>aisleriot</tt>, start with <tt>aisleriot.xml</tt>, then <tt>definitions.xml</tt> (glossary), to set up
+the appropriate main terms in your language, so you can use them
+everywhere after that. This will bring speed and uniformity to your translation.
+<li> Try to always translate the same concepts with the same sentences in
+your language.
+<li> Copy and paste as much as you can to avoid mispelling and to enhance
+uniformity, but take care of slight differences. Also make sure the first version is error free, you don't want to be correcting a mistake you have pasted into ten different places.
+<li>The <a href="http://developer.gnome.org/projects/gtp/">translation</a> and <a href="http://developer.gnome.org/projects/gdp/">documentation</a> projects have more resources.
+</ul>
 
      </div>
 
