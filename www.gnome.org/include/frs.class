@@ -112,6 +112,14 @@ class FRS extends Error {
 	 */
 	function frsAddRelease($release_name, $group_id, $changes="")
 	{
+		// Check for an existing release of this name
+		$res = db_query("SELECT release_id FROM frs_release WHERE group_id=".$group_id
+			. " AND name='".$release_name."'");
+		if (db_numrows ($res) > 0) {
+			$this->setError(' FRS Release Name Exists  ');
+			return false;
+		}
+		
 		$res=db_query("INSERT INTO frs_release (group_id,name,changes,status_id,release_date,released_by) ".
 					  "VALUES ('$group_id','$release_name','$changes','1','". time() ."','". user_getid() ."')");
 		
