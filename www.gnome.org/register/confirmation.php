@@ -128,8 +128,8 @@ if ($show_confirm) {
 	$message = "A new project, ".$form_full_name.", was added to the Software Map.\n\n"
 		. "An admin will need to approve the registration at:\n\n"
 		. "http://".$sys_default_domain."/admin/\n\n";
-	mail ("webmaster@".$GLOBALS['sys_default_domain'], "New project added to Software Map",
-		$message, "From: webmaster@".$GLOBALS['sys_default_domain']);
+	mail ("GNOME Web Team &lt;webmaster@".$GLOBALS['sys_default_domain']."&gt;", "New project added to Software Map",
+		$message, "From: GNOME Software Map &lt;webmaster@".$GLOBALS['sys_default_domain']."&gt;");
 
 	$HTML->header(array('title'=>'Registration Complete'));
 	
