@@ -2,6 +2,9 @@ SUBDIRS = doc developer-doc images
 
 urlpath=/projects/evolution
 
+page_DATA= 			\
+	jhbuildrc
+
 page_SCRIPTS=			\
 	go.css			\
 	arch.shtml   		\
