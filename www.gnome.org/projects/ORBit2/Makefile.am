@@ -1,4 +1,4 @@
-urlpath = /projects/gconf/
+urlpath = /projects/ORBit2/
 
 page_SCRIPTS = index.html
 
