@@ -27,6 +27,6 @@ page_SCRIPTS= \
     ch04s09.html \
     ch04s10.html \
     ch04s11.html \
-    index.html \
+    index.html
 
 include $(top_srcdir)/rules.common
