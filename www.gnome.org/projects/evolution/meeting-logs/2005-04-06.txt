@@ -1,0 +1,229 @@
+**** BEGIN LOGGING AT Wed Apr  6 15:58:30 2005
+
+Apr 06 15:58:43 <haip>	rodrigo, last meeting's minutes on gnome.org is missing.
+Apr 06 15:58:44 -->	seb128 (~seb128@ANancy-151-1-41-22.w83-196.abo.wanadoo.fr) has joined #evolution-meet
+Apr 06 15:58:58 <rodrigo>	haip: oh, looking
+Apr 06 15:59:29 <haip>	03-23's minutes link is wrong, too.
+Apr 06 16:00:24 -->	harish_meet (~harish@202.144.86.147) has joined #evolution-meet
+Apr 06 16:00:28 <rodrigo>	oh, last week there was no meeting
+Apr 06 16:00:39 <rodrigo>	but 03-23 is wrong yeah
+Apr 06 16:01:29 -->	christine (~christine@130.57.22.69) has joined #evolution-meet
+Apr 06 16:01:46 <jpr>	almost ready to roll
+Apr 06 16:01:47 <rodrigo>	right, I didn't cvs add'ed it
+Apr 06 16:01:49 *	jpr finds agenda
+Apr 06 16:02:06 <jpr>	lets begin
+Apr 06 16:02:16 -->	sui1 (~Suresh@219.64.141.47) has joined #evolution-meet
+Apr 06 16:02:19 <jpr>	2.2.x development status
+Apr 06 16:02:19 -->	chen (~chen@202.144.86.147) has joined #evolution-meet
+Apr 06 16:02:25 <jpr>	2.2.x development status
+Apr 06 16:02:42 <jpr>	gnome pushed back the 2.10.1 release a week to monday
+Apr 06 16:02:54 <jpr>	so i slid a little on the 2.2.2 release
+Apr 06 16:03:01 <jpr>	i'm going to work on pushing that out today
+Apr 06 16:03:16 <jpr>	we need to look at taking rodrigo's 70035 fix
+Apr 06 16:03:25 <jpr>	the fix for "busy" calendars from chen
+Apr 06 16:03:47 <jpr>	and the scalix patch on memory leaks
+Apr 06 16:03:56 <jpr>	for calendar attachments
+Apr 06 16:04:19 <jpr>	plus we need to look at potential memory leak in gtkhtml
+Apr 06 16:04:28 <jpr>	any other bugs i should be aware of?
+Apr 06 16:04:36 <jpr>	that we would class as "critical"
+Apr 06 16:04:37 <jpr>	?
+Apr 06 16:04:50 <jpr>	ok
+Apr 06 16:04:59 <jpr>	2.2.3
+Apr 06 16:05:28 <jpr>	because 2.2.2 is pushed back a bit, i haven't determined a time for 2.2.3, but
+Apr 06 16:05:38 <jpr>	it will almost certainly go out
+Apr 06 16:05:42 <jpr>	before the end of april
+Apr 06 16:05:59 <seb128>	jpr: dunno how you would consider http://bugzilla.ximian.com/show_bug.cgi?id=74087
+Apr 06 16:06:32 <jpr>	thats a dupe
+Apr 06 16:06:33 <christine>	ew
+Apr 06 16:06:46 <jpr>	seb128: the release notes contained a pointer to a patch for that
+Apr 06 16:06:50 <christine>	oh good
+Apr 06 16:06:52 <jpr>	and described the bug
+Apr 06 16:06:54 <seb128>	oh ?
+Apr 06 16:06:59 <seb128>	doh, I've not noticed
+Apr 06 16:07:02 <seb128>	but I want to fix it for hoary
+Apr 06 16:07:04 <seb128>	ie: today
+Apr 06 16:07:06 <jpr>	the patch is already in cvs
+Apr 06 16:07:09 <seb128>	thanks
+Apr 06 16:07:09 <harish_meet>	jpr: i guess you mean the scalix patch on e-cal.c for cal-attachments..was there anything on the memory leaks ?
+Apr 06 16:07:12 *	harish_meet checks
+Apr 06 16:07:21 <jpr>	harish_meet: i believe it fixed leaks as well
+Apr 06 16:07:33 <jpr>	christine: that was patched in 9.3 before release btw
+Apr 06 16:07:36 <jpr>	iirc
+Apr 06 16:07:40 <christine>	ah that one
+Apr 06 16:07:50 <christine>	i should check
+Apr 06 16:08:24 <jpr>	moving on
+Apr 06 16:08:38 <jpr>	usual warning about string and ui freeze still in effect for 2.2.x
+Apr 06 16:08:45 <jpr>	also
+Apr 06 16:09:04 <jpr>	bugzilla is going to be moving from bugzilla.ximian.com to bugzilla.gnome.org
+Apr 06 16:09:08 <jpr>	this saturday
+Apr 06 16:09:26 <jpr>	basically all bug numbers in changelogs, news, etc
+Apr 06 16:09:34 <rodrigo>	harish_meet: it had the g_free (mangled_uri) addition, which fixes a leak
+Apr 06 16:09:40 <rodrigo>	I guess that's what jpr means
+Apr 06 16:09:47 <jpr>	will have the constant 200000 added to them
+Apr 06 16:10:07 <jpr>	and b.x.c will be closed down
+Apr 06 16:10:14 <harish_meet>	rodrigo, yeah.. i was wondering if i had missed a different patch post :-)
+Apr 06 16:10:19 <jpr>	these are public bugs only
+Apr 06 16:10:26 <dhm_home>	jpr: will there be any kind of URL redirection?
+Apr 06 16:10:36 <jpr>	private bugs will stay in b.x.c until we can get them moved to internal bugzilla
+Apr 06 16:10:48 <jpr>	dhm_home: the products file will get updated for bugzilla
+Apr 06 16:11:11 <jpr>	and we are looking at what to do about email submissions
+Apr 06 16:11:21 <jpr>	probably redirect them somehow
+Apr 06 16:11:56 <jpr>	2.3/2.4
+Apr 06 16:12:26 <jpr>	notzed added an architecture section to the wiki
+Apr 06 16:12:33 <jpr>	for architectural improvements
+Apr 06 16:12:46 <jpr>	he'll be working on in the 2.4 timeframe
+Apr 06 16:13:15 <jpr>	still a bit slow getting head open
+Apr 06 16:13:20 <jpr>	because of e-d-s versioning
+Apr 06 16:13:30 <jpr>	bascially we are looking to preserve compat with 1.2
+Apr 06 16:13:39 <jpr>	and its annoying to do this correctly
+Apr 06 16:14:06 <jpr>	harish would be interested in any potential api breakages in the 2.4 time frame in e-d-s
+Apr 06 16:14:14 -->	bowes (~bowes@blk-137-127-26.eastlink.ca) has joined #evolution-meet
+Apr 06 16:14:15 <jpr>	that anyone might have
+Apr 06 16:14:32 <jpr>	thats breakages in the api/abi compat sense
+Apr 06 16:14:43 <jpr>	not adding new api's
+Apr 06 16:14:47 <rodrigo>	harish_meet, jpr : if we clean up the libecal API to not use libical externally, that breaks it
+Apr 06 16:14:55 <jpr>	yes
+Apr 06 16:15:02 <harish_meet>	rodrigo, yes
+Apr 06 16:15:49 <jpr>	the alternate is just to bump everything to 1.4 again
+Apr 06 16:15:51 <jpr>	but this is a pain
+Apr 06 16:16:03 <jpr>	for snapshots, OO, planner, clock applet, etc
+Apr 06 16:16:29 <rodrigo>	yeah
+Apr 06 16:16:46 <jpr>	but also, its only useful if we can maintain bin compat
+Apr 06 16:17:15 <jpr>	ok
+Apr 06 16:17:17 <jpr>	status reports
+Apr 06 16:17:47 <jpr>	andre: anything for us? you've been looking at the test dump of b.x.c i know
+Apr 06 16:18:15 <andre>	no, nothing. hmm... there are about 170 reports open which targets <2.2 in b.x.c
+Apr 06 16:18:20 <harish_meet>	rodrigo, we might not be looking at libecal changes in the 2.4 timeframe
+Apr 06 16:18:26 <jpr>	ah, yes
+Apr 06 16:18:29 <rodrigo>	harish_meet: ah, ok
+Apr 06 16:18:29 <jpr>	i wanted to mention that
+Apr 06 16:18:43 <jpr>	we need to clean up the remaining bugs in the 2.0.4 and 2.1 milestones
+Apr 06 16:18:52 <jpr>	and either mark them 2.2.x or 2.3
+Apr 06 16:19:31 <jpr>	also, hopefully everyone saw andre's keyword proposal on e-h
+Apr 06 16:19:41 <jpr>	i had never even heard of some of these keywords
+Apr 06 16:20:02 <jpr>	effective keyword usage will be great going forward
+Apr 06 16:20:42 <jpr>	andre: the cleanup will happen after the b.g.o move, right?
+Apr 06 16:21:01 <andre>	yes, that's what the discussion led us to
+Apr 06 16:21:07 -->	pnayak (~pnayak_te@202.144.86.147) has joined #evolution-meet
+Apr 06 16:21:23 <jpr>	ok, cool
+Apr 06 16:21:42 <jpr>	pnayak: we just discussed the move to bugzilla.gnome.org and andre's proposed keyword cleanup
+Apr 06 16:21:47 <jpr>	bowes: anything for us?
+Apr 06 16:22:05 <bowes>	jpr: not this week
+Apr 06 16:22:09 <jpr>	ok
+Apr 06 16:22:17 <jpr>	chen: status?
+Apr 06 16:22:44 <chen>	jpr, bug fixing, sent three patches, and wating for approval
+Apr 06 16:22:56 <jpr>	ok
+Apr 06 16:23:00 <jpr>	dhm_home: anything for us?
+Apr 06 16:23:18 <dhm_home>	nothing extra
+Apr 06 16:23:24 <jpr>	ok
+Apr 06 16:23:26 <jpr>	dobey: status?
+Apr 06 16:23:47 <dobey>	working on menus stuff
+Apr 06 16:24:00 <dobey>	should be able to lay out a full plan later today and send mail about it
+Apr 06 16:24:05 <jpr>	ok
+Apr 06 16:24:18 <jpr>	the alarm dialog stuff?
+Apr 06 16:24:49 <jpr>	fejj: status?
+Apr 06 16:25:00 <--	sui1 has quit (Download Gaim: http://gaim.sourceforge.net/)
+Apr 06 16:25:15 <dobey>	should talk to pvanhoof about that today too, i told him to ping me on irc
+Apr 06 16:25:18 <fejj>	bug fixing, reviewed patches
+Apr 06 16:25:33 <fejj>	started going thru unconfirmed bugs in bugzilla
+Apr 06 16:25:35 <jpr>	dobey: ok, great
+Apr 06 16:25:38 <jpr>	fejj: ok
+Apr 06 16:26:16 <jpr>	haip: anything for us?
+Apr 06 16:26:20 <haip>	nothing special, just bug fixing
+Apr 06 16:26:25 <jpr>	ok
+Apr 06 16:26:29 <jpr>	harish_meet: status?
+Apr 06 16:26:30 <harish_meet>	patch reviews, getting the gw recurrence patch better and getting to know auto tools better :-)
+Apr 06 16:26:37 <jpr>	hehe
+Apr 06 16:26:44 <jpr>	auto* isn't always the most fun
+Apr 06 16:26:50 <jpr>	which reminds me
+Apr 06 16:27:02 <jpr>	dobey: could you look at ERDI's patch for configure.in?
+Apr 06 16:27:07 <jpr>	if you have time
+Apr 06 16:27:38 <jpr>	hpj: status?
+Apr 06 16:28:04 <hpj>	fixed the name selector part of the "auth dialog snowstorm" issue, and convinced myself the other part of the problem is GW code
+Apr 06 16:28:10 <hpj>	still pending approval
+Apr 06 16:28:25 <hpj>	readied OSX build, added spell checking
+Apr 06 16:28:33 <dobey>	jpr: yeah
+Apr 06 16:28:42 <christine>	thank you hpj - the snowstorm is driving me nuts :)
+Apr 06 16:28:42 <hpj>	i should be able to make an OSX release when you're ready
+Apr 06 16:29:07 <hpj>	christine: :)
+Apr 06 16:29:27 <hpj>	i've started looking at bugs to move to more recent milestones
+Apr 06 16:29:27 <jpr>	myself
+Apr 06 16:29:31 <jpr>	not much hacking
+Apr 06 16:29:45 <jpr>	mostly preparing release and a snowstorm of meetings
+Apr 06 16:30:13 <jpr>	pnayak: status?
+Apr 06 16:30:36 <pnayak>	traiging bugs and non-functional testing
+Apr 06 16:30:57 <jpr>	ok
+Apr 06 16:31:01 <jpr>	rodo: status
+Apr 06 16:31:02 <jpr>	?
+Apr 06 16:31:02 <pnayak>	closing bugs for which theres is no reply from reporter ( christine :))
+Apr 06 16:31:23 <rodo>	finished review of 2.0.4 bugs
+Apr 06 16:31:30 <christine>	pnayak: ping me later, i could have lost the request
+Apr 06 16:31:36 <rodo>	reviewed patches from sun guys
+Apr 06 16:31:44 <rodo>	some bugfixing
+Apr 06 16:32:06 <rodo>	I have one fix with gtkhtml api addition which I think is worth for 2.2.x
+Apr 06 16:32:12 <jpr>	pnayak: how long are you waiting before closing?
+Apr 06 16:32:36 <rodo>	it just adds new gtkhtml command to block setting of primary selection
+Apr 06 16:32:46 <pnayak>	i have sent mails for few, my plan is to wait for 1 week
+Apr 06 16:33:04 <jpr>	pnayak: ok
+Apr 06 16:33:07 <rodo>	which means that gtk_html_command accepts two new commands, so it's not abi addition
+Apr 06 16:33:23 <jpr>	rodo: ok, harish and i need to talk to you about a possible memory leak as well
+Apr 06 16:33:25 <jpr>	after this
+Apr 06 16:33:28 <rodrigo>	rodo: I approved your patch, although was not sure about the API addition
+Apr 06 16:33:29 <jpr>	rodrigo: status?
+Apr 06 16:33:49 <rodo>	rodrigo: thanks
+Apr 06 16:33:56 <rodrigo>	jpr: 2.2.x bug fixing/triaging and patch review
+Apr 06 16:34:22 <rodrigo>	jpr: btw, there are many 2.2.x bugs related to the task list flickering
+Apr 06 16:34:30 <jpr>	rodrigo: ok
+Apr 06 16:34:40 <jpr>	rodrigo: are we really going to be able to fix that in 2.2.x?
+Apr 06 16:34:47 <jpr>	other than preventing some crashes
+Apr 06 16:35:00 <jpr>	fix it right that is
+Apr 06 16:35:11 <rodrigo>	not sure, I've been looking at possible small fixes
+Apr 06 16:35:19 <rodrigo>	but as you say, the correct fix should go in
+Apr 06 16:35:33 <jpr>	rodrigo: also 2.1 still has a bunch of calendar bugs on it still
+Apr 06 16:35:34 <rodrigo>	which is to compare the old query and the new one and remove/add/etc
+Apr 06 16:35:43 <rodrigo>	jpr: yes, will look at them later
+Apr 06 16:36:04 <jpr>	seb128: anything for us?
+Apr 06 16:37:04 <seb128>	nop
+Apr 06 16:37:08 <jpr>	tml: status?
+Apr 06 16:37:29 <tml>	hacking on libgnomeui, gnome-vfs, gtkhtml. some glib & gtk+patching
+Apr 06 16:37:48 <jpr>	ah, cool
+Apr 06 16:38:00 <jpr>	so bonobo controls are taken care of now?
+Apr 06 16:38:00 <rodo>	tml: how's gtkhtml on win32?
+Apr 06 16:38:06 <rodo>	tml: are there any issues?
+Apr 06 16:38:25 <tml>	can't say yet... nothing major so far
+Apr 06 16:38:46 <tml>	bonobo controls should be ok
+Apr 06 16:39:16 <jpr>	ok, great
+Apr 06 16:39:41 <jpr>	cmeadors: anything for us?
+Apr 06 16:40:07 <jpr>	christine: anything for us?
+Apr 06 16:40:30 <jpr>	tml: have you done libsoup or e-d-s yet?
+Apr 06 16:40:37 <tml>	nope
+Apr 06 16:40:45 <christine>	will be going thru connnector bugs this week and need to get the 2.4 feature section started for the wiki as we discussed
+Apr 06 16:40:46 <tml>	would they be easy?
+Apr 06 16:40:55 <jpr>	tml: dunno :-)
+Apr 06 16:41:03 <tml>	i'll have a look...
+Apr 06 16:41:05 <jpr>	tml: libsoup uses giochannel stuff
+Apr 06 16:41:45 <jpr>	if you can build gtkhtml you should be able to build those
+Apr 06 16:41:59 <jpr>	ok
+Apr 06 16:41:59 <tml>	ok
+Apr 06 16:42:10 <jpr>	ie you are high enough in the stack
+Apr 06 16:42:20 <jpr>	anyone have anything else they want to cover?
+Apr 06 16:44:00 <jpr>	ok then
+Apr 06 16:44:02 <jpr>	:-)
+Apr 06 16:44:05 <jpr>	thanks everyone
+Apr 06 16:44:08 <christine>	thx jpr
+Apr 06 16:44:10 <jpr>	talk to you all next week
+Apr 06 16:44:18 <harish_meet>	thanks all
+Apr 06 16:44:25 <tml>	bye all!
+Apr 06 16:44:34 <hpj>	later
+Apr 06 16:44:35 <--	hpj (~hpj@201.129.49.207) has left #evolution-meet
+Apr 06 16:44:39 ---	chen is now known as chen_home
+Apr 06 16:44:42 <--	cmeadors (~cmeadors@pool-141-154-114-19.bos.east.verizon.net) has left #evolution-meet
+Apr 06 16:44:50 <--	tml has quit (Leaving)
+Apr 06 16:44:57 <--	dhm_home (~david@c-66-30-211-145.hsd1.ma.comcast.net) has left #evolution-meet
+Apr 06 16:44:59 <--	christine (~christine@130.57.22.69) has left #evolution-meet
+Apr 06 16:45:03 <--	andre (~y0020796@rzlx0008.rz.tu-bs.de) has left #evolution-meet
+Apr 06 16:45:16 <--	seb128 (~seb128@ANancy-151-1-41-22.w83-196.abo.wanadoo.fr) has left #evolution-meet
+Apr 06 16:46:01 <--	haip has quit ()
+Apr 06 16:46:09 <--	jpr (~jpr@24.102.136.159) has left #evolution-meet
+**** ENDING LOGGING AT Wed Apr  6 16:46:13 2005
+
