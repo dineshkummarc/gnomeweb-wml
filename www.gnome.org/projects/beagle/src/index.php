@@ -20,7 +20,7 @@ search in many different domains:
 
 	</p>
 	<p>
-	<div class="split-tosize img-box"><a href="img/screenshot-mockup.png"><img src="img/screenshot-mockup-thumb.png" border=0"><br><string>Find everything fast</strong> (mockup)</a>
+	<div class="split-tosize img-box"><a href="http://www.beaglewiki.org/index.php/BeagleScreenshots"><img src="img/best-shot-thumb.png" border=0"><br><string>Find everything fast</strong></a>
 	</div>
 
 	<p>
