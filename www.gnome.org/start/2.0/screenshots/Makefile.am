@@ -19,7 +19,8 @@ page_DATA=csm-desktop.png \
 	micampe-desktop.png \
 	ross-desktop.png \
 	tomas-solaris.png \
-	snorp-rhythmbox.png
+	snorp-rhythmbox.png\
+	crux-shot.png \
 	thumb-csm-desktop.png \
 	thumb-drc-desktop.png \
 	thumb-gconf-editor-hindi.png \
@@ -33,4 +34,5 @@ page_DATA=csm-desktop.png \
 	thumb-micampe-desktop.png \
 	thumb-ross-desktop.png \
 	thumb-tomas-solaris.png \
-	thumb-snorp-rhythmbox.png
+	thumb-snorp-rhythmbox.png\
+	thumb-crux-shot.png
