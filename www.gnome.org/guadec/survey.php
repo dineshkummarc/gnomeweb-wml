@@ -160,12 +160,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="user">  I am a GNOME user.
+             <input type="checkbox" name="user" value="<? echo $user ?>">  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="developer">  I am a GNOME developer.
+             <input type="checkbox" name="developer" value="<? echo $developer ?>">  I am a GNOME developer.
           </td>
         </tr>
 	<tr>
@@ -178,7 +178,9 @@
         </tr>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="contributions" cols="70" rows="5"></TEXTAREA>
+	    <textarea name="contributions" cols="70" rows="5">
+	    <? echo $contributions ?>
+	    </textarea>
 	  </td>
 	</tr>
 	<tr>
@@ -204,7 +206,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="guadec">  I am interested in attending GUADEC in 2003.
+             <input type="checkbox" name="guadec" value="<? echo $guadec ?>">  I am interested in attending GUADEC in 2003.
           </td>
         </tr>
 	<tr>
@@ -212,12 +214,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="sponsor">  I will need sponsorship if I am to attend GUADEC in 2003.
+             <input type="checkbox" name="sponsor" value="<? echo $sponsor ?>">  I will need sponsorship if I am to attend GUADEC in 2003.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="tutorial">  I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
+             <input type="checkbox" name="tutorial" value="<? echo $tutorial ?>">  I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
@@ -225,7 +227,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="gfmember">  I am a GNOME Foundation member.
+             <input type="checkbox" name="gfmember" value="<? echo $gfmember ?>">  I am a GNOME Foundation member.
           </td>
         </tr>
 	</tr>
@@ -238,7 +240,9 @@
 	  </td>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="comments" cols="70" rows="5"></TEXTAREA>
+	    <textarea name="comments" cols="70" rows="5">
+	    <? echo $comments ?>
+	    </textarea>
 	  </td>
 	</tr>
 	<tr>
