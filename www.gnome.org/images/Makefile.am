@@ -7,12 +7,14 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
-  background.png\
-  background.gif\
-  dot.gif\
+	background.png\
+	background.gif\
+	dot.gif\
 	logo-large.png\
+	logo-large.png.old\
 	logo-large.gif\
 	logo-small.png\
+	logo-small.png.old\
 	logo-small.gif\
 	projects-separator.png\
 	projects-separator.gif\
@@ -22,17 +24,21 @@ misc_images=\
 	screenshot-example.gif\
 	subpage-side.png\
 	subpage-side.gif\
-  news-bullet.png\
+	news-bullet.png\
+	news-bullet.png.old\
 	news-bullet.gif\
 	news-header.png\
 	news-header.gif\
-  news-software.png\
+	news-software.png\
 	news-software.gif\
-  arrow.png\
+	friends.png\
+	summit.png\
+	arrow.png\
 	arrow.gif\
 	button-helixgnome.png\
 	button-helixgnome.gif\
 	gnome-16.png\
+	gnome-16.png.old\
 	mail16d.png\
 	manual16c.png\
 	save16.png\
