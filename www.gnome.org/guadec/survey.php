@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GUADEC 4 Pre-Registration Survey</title>
+    <title>GUADEC 4 Preregistration Survey</title>
   </head>
 
   <body bgcolor="#ffffff" text="#000000">
@@ -17,7 +17,7 @@
 
                   <table border=0 bgcolor="#ffffff" cellpadding=50 width="100%"> <!-- start content -->
                     <tr><td>
-                        <h1>GUADEC 4 Pre-Registration Survey:</h1>
+                        <h1>GUADEC 4 Preregistration Survey:</h1>
 
 <?
   $bad_elements = array();
@@ -64,6 +64,7 @@
 
         $formmail .= "User:\t" . $user . "\n";
         $formmail .= "Developer:\t" . $developer . "\n";
+
         $formmail .= "Contributions:\n" . $contributions . "\n\n";
 
         $formmail .= "Interested in attending GUADEC 4:\t" . $guadec . "\n\n";
@@ -88,7 +89,7 @@
 
         // send the mail
 
-        mail("glynn.foster@sun.com", "GUADEC Pre-Registration Formality Form", $formmail, $headers);
+        mail("glynn.foster@sun.com", "GUADEC Preregistration Survey :: reply", $formmail, $headers);
 
         // print the thank you page
 
@@ -214,12 +215,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="sponsor" value="<? echo $sponsor ?>">  I will need sponsorship if I am to attend GUADEC in 2003.
+             <input type="checkbox" name="sponsor" value="<? echo $sponsor ?>">  I will need sponsorship to attend GUADEC in 2003.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="tutorial" value="<? echo $tutorial ?>">  I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
+             <input type="checkbox" name="tutorial" value="<? echo $tutorial ?>">  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
