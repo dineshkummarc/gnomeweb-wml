@@ -1,17 +1,18 @@
-SUBDIRS= new-pics screenshots doc images
+SUBDIRS= images
 
 urlpath=/projects/guppi/
 
 page_SCRIPTS=index.shtml		\
-		credits.shtml		\
-		download.shtml		\
-		faq.shtml		\
+		news.shtml		\
 		features.shtml		\
-		foot.shtml		\
+		history.shtml		\
+		gettingguppi.shtml	\
+		developers.shtml	\
 		go.css			\
 		head.shtml		\
-		technology.shtml	\
-    	    mailing-list.html		\
-	    thumb.gif			\
+		otherprogs.shtml	\
+		links.html		\
+		thumb.gif		\
+		guppies.shtml
 
 include $(top_srcdir)/rules.common
