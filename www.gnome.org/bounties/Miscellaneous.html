@@ -40,6 +40,26 @@
     <td bgcolor="#d0d0ff" >$500</td>
 </tr>
 
+<tr class="taskrow">
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><a STYLE="text-decoration:none" href="#169344">Add image data to the icon cache</a></td>
+    <td bgcolor="#d0d0ff" >$100</td>
+</tr>
+
+<tr class="taskrow">
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><a STYLE="text-decoration:none" href="#169345">Use a mmap'able cache for fontconfig</a></td>
+    <td bgcolor="#d0d0ff" >$200</td>
+</tr>
+
+<tr class="taskrow">
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><a STYLE="text-decoration:none" href="#169346">Create a test suite for browsing in Nautilus</a></td>
+    <td bgcolor="#d0d0ff" >$200</td>
+</tr>
+
+<tr class="taskrow">
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><a STYLE="text-decoration:none" href="#169347">Remove duplication of desktop backgrounds</a></td>
+    <td bgcolor="#d0d0ff" >$200</td>
+</tr>
+
 </table>
 <p>
   
@@ -290,6 +310,145 @@ particulary the <a STYLE="text-decoration:none"
 href="http://freedesktop.org/Standards/icon-theme-spec/0.7/ar01s05.html">icon
 lookup section</a> may be handy.</p>
 
+      </div>
+    </div>
+  
+    <a STYLE="text-decoration:none" name="169344"></a><a STYLE="text-decoration:none" name="box5"></a>
+    <div class="content-box">
+      <div class="content-box-header">
+	            	      <span class="table-header">Add image data to the icon cache</span>
+              <span class="bug-number">             
+			      <a STYLE="text-decoration:none" href="http://bugzilla.gnome.org/show_bug.cgi?id=169344" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #169344)</a> | | <a STYLE="text-decoration:none" href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a STYLE="text-decoration:none" href="mailto:bounty@lists.ximian.com?Subject=Submission for Bounty #169344&body=Bounty: 169344%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: %0AAddress to post the cheque: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
+	    </span>
+                      </div>
+           <div class="content-box-second-header">
+	     Miscellaneous	     <span>
+	     Bounty: <span class="bounty">$100		      </span>
+	     </span>
+	   </div>
+	                 	    	<div class="content-box-body">
+	    
+<p>For the GTK 2.6 release, a memory mappable icon cache was developed.
+This allows us to avoid scanning lots of directories on the startup
+of every application. However, one thing it does not do is to store
+the actual icon data in a shared file. This means that common images
+(consider the "x" on a close button) are duplicated many times.</p>
+
+<p>The image cache should be modified to store the actual bytes of images
+inside the cache. There is already a field for this offset; all that
+needs to happen is for the generation program to be modified. A few
+challenges present themselves:</p>
+
+	<ul><li>Various byte ordering (ARGB, RBGA) are used in various
+	  places. Which format should be used in the file. This
+	  should be chosen as so to minimize the amount of modification
+	  needed to render.</li></ul>
+<p>
+A solution to this problem will:
+</p>
+<ul>
+	<li>Modify gtk-update-icon-cache to include the image data</li>
+	<li>Modify the theme loading code to get the image data from
+	    the file</li>
+	<li>Document extensions to the icon specification to freedesktop.org.</li>
+</ul>
+      </div>
+    </div>
+  
+    <a STYLE="text-decoration:none" name="169345"></a><a STYLE="text-decoration:none" name="box6"></a>
+    <div class="content-box">
+      <div class="content-box-header">
+	            	      <span class="table-header">Use a mmap'able cache for fontconfig</span>
+              <span class="bug-number">             
+			      <a STYLE="text-decoration:none" href="http://bugzilla.gnome.org/show_bug.cgi?id=169345" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #169345)</a> | | <a STYLE="text-decoration:none" href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a STYLE="text-decoration:none" href="mailto:bounty@lists.ximian.com?Subject=Submission for Bounty #169345&body=Bounty: 169345%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: %0AAddress to post the cheque: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
+	    </span>
+                      </div>
+           <div class="content-box-second-header">
+	     Miscellaneous	     <span>
+	     Bounty: <span class="bounty">$200		      </span>
+	     </span>
+	   </div>
+	                 	    	<div class="content-box-body">
+	    
+<p>On the startup of every program, fontconfig allocates about 100 kb of data.
+This data should be read from a memory mappable cache on disk. This way,
+the data is shared between processes. Also, it allows more expensive
+techniques to optimize the data storage.</p>
+
+<p>A solution to this bounty will:</p>
+
+	<ul>
+		<li>Create a program that generates an on-disk cache.</li>
+		<li>Modify fontconfig to read from this file, allowing
+		  a fallback path with the existing code.</li>
+
+	</ul>
+      </div>
+    </div>
+  
+    <a STYLE="text-decoration:none" name="169346"></a><a STYLE="text-decoration:none" name="box7"></a>
+    <div class="content-box">
+      <div class="content-box-header">
+	            	      <span class="table-header">Create a test suite for browsing in Nautilus</span>
+              <span class="bug-number">             
+			      <a STYLE="text-decoration:none" href="http://bugzilla.gnome.org/show_bug.cgi?id=169346" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #169346)</a> | | <a STYLE="text-decoration:none" href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a STYLE="text-decoration:none" href="mailto:bounty@lists.ximian.com?Subject=Submission for Bounty #169346&body=Bounty: 169346%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: %0AAddress to post the cheque: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
+	    </span>
+                      </div>
+           <div class="content-box-second-header">
+	     Miscellaneous	     <span>
+	     Bounty: <span class="bounty">$200		      </span>
+	     </span>
+	   </div>
+	                 	    	<div class="content-box-body">
+	    
+<p>A test case is needed for Nautilus doing a long session of browsing. This
+test case can be used to detect leaks, using tools such as valgrind. The
+test case should use the LDTP project. It should do the following:</p>
+<ul>
+	<li>Put Nautilus in the root directory (/)</li>
+	<li>Spider around across different folders</li>
+	<li>Use various views (browser, spatial, as icons, as a list)</li>
+	<li>Be able to account for the fact that under valgrind, things
+	  will not happen fast (so it must wait)</li>
+</ul>
+      </div>
+    </div>
+  
+    <a STYLE="text-decoration:none" name="169347"></a><a STYLE="text-decoration:none" name="box8"></a>
+    <div class="content-box">
+      <div class="content-box-header">
+	            	      <span class="table-header">Remove duplication of desktop backgrounds</span>
+              <span class="bug-number">             
+			      <a STYLE="text-decoration:none" href="http://bugzilla.gnome.org/show_bug.cgi?id=169347" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #169347)</a> | | <a STYLE="text-decoration:none" href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a STYLE="text-decoration:none" href="mailto:bounty@lists.ximian.com?Subject=Submission for Bounty #169347&body=Bounty: 169347%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: %0AAddress to post the cheque: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
+	    </span>
+                      </div>
+           <div class="content-box-second-header">
+	     Miscellaneous	     <span>
+	     Bounty: <span class="bounty">$200		      </span>
+	     </span>
+	   </div>
+	                 	    	<div class="content-box-body">
+	    
+<p>
+Right now, the background image is stored in three places:
+</p>
+<ul>
+	<li>In gnome-settings-daemon</li>
+	<li>In nautilus</li>
+	<li>In the X server (stored there by nautilus)</li>
+</ul>
+<p>
+The background must be stored in one and only one location.
+</p>
+<p>
+A solution to this bounty will:
+</p>
+<ul>
+	<li>Use only (screen height) * (screen width) * sizeof (int) bytes
+	  of memory for a background image.</li>
+	<li>Still keep reasonable performance for icons on the desktop,
+	  rubberbanding, etc.</li>
+</ul>
       </div>
     </div>
 </div>
