@@ -27,7 +27,7 @@ class PrintHeadline(saxlib.HandlerBase):
     def startElement(self, name, attrs):
 	if (self.headlineCount >= self.headlineLimit): return
 	if name == 'item':
-	    print "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet.png' alt=''></td><td><img src='/images/dot.gif' width='1' height='3' alt=''><br clear='all'>"
+	    print "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td><img src='/images/dot.gif' width='1' height='3' alt=''><br clear='all'>"
 	    self.inItem = 1
 	if name == 'title':
 	    self.inTitle = 1
@@ -60,7 +60,7 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.itemLink = self.itemLink + ch[start:start+length]
 
 
-print "<p><a href='http://news.gnome.org/gnome-news/'><img src='/images/news-header.png' width='173' height='22' alt='GNOME news:' border='0'></a>\n<table border='0' cellspacing='0' cellpadding='0' width='40%'>"
+print "<p><a href='http://news.gnome.org/gnome-news/'><img src='/images/news-header' width='173' height='22' alt='GNOME news:' border='0'></a><br><table border='0' cellspacing='0' cellpadding='0'><tr><td>"
 
 
 feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf")

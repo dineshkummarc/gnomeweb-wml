@@ -4,7 +4,7 @@ include $(top_srcdir)/rules.common
 
 urlpath=
 
-page_SCRIPTS=index.shtml		\
+page_SCRIPTS=index.php3		\
 	seegnome.html   		\
 	commsupp.html       \
 	speakingabout.html
