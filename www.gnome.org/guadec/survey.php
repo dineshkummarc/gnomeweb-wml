@@ -25,10 +25,6 @@
 
   if ($submit) {
 
-#--------------------------------------
-# Error Checking
-#--------------------------------------
-
       if (! $contactname){
         $bad_elements[] = "contactname";
         $errors[] = "Please enter your name.";
@@ -41,16 +37,11 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if ($developer && ! $contributions){
+      if ($developer && ! trim($contributions)){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
 
-
-
-      #-----------------
-      # Do we submit?
-      #-----------------
 
       if (count($bad_elements) == 0)
       {
@@ -101,10 +92,6 @@
   }
 
 
-#----------------------------------
-#  End error-checking/collecting and submittal
-#----------------------------------
-
   if (! $submit || count($bad_elements) != 0) {  ?>
 
   <p>
@@ -118,8 +105,9 @@
       <?  if (count($bad_elements) != 0)
             {
              print("<font color=\"red\">");
-             foreach ($errors as $error)
-               { print("<li>$error</li>");}
+             foreach ($errors as $error) { 
+		print("<li>$error</li>");
+	     }
              print("</font>");
             }
       ?>
@@ -132,28 +120,28 @@
 	  <td>*Name:</td>
 	  <td>
 	    <input type="text" name="contactname" 
-		   size="30" value="<? echo trim($contactname) ?>">
+		   size="30" value="<? if ($contactname) { echo $contactname; } ?>">
 	  </td>
 	</tr>
 	<tr>
 	  <td> Age:</td>
 	  <td>
 	    <input type="text" name="contactage" 
-		   size="3" value="<? echo trim($contactage) ?>">
+		   size="3" value="<? if ($contactage) { echo $contactage; } ?>">
 	  </td>
 	</tr>
 	<tr>
 	  <td>*Country of residence:</td>
 	  <td>
 	    <input type="text" name="contactaddress" 
-		   size="30" value="<? echo trim($contactaddress) ?>">
+		   size="30" value="<? if ($contactaddress) { echo $contactaddress; } ?>"> 
 	  </td>
 	</tr>
 	<tr>
 	  <td>*Email:</td>
 	  <td>
 	    <input type="text" name="email" 
-		   size="30" value="<? echo trim($email) ?>">
+		   size="30" value="<? if ($email) { echo $email; } ?>">
 	  </td>
 	</tr>
 	<tr>
@@ -161,20 +149,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-	     <? if (!$user) { ?>
-                <input type="checkbox" name="user">  I am a GNOME user.
-	     <? } else { ?>
-                <input type="checkbox" name="user" checked>  I am a GNOME user.
-	     <? } ?>
+              <input type="checkbox" name="user" <? if ($user) { ?> checked <? } ?> >  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-	     <? if (!$user) { ?>
-                 <input type="checkbox" name="developer">  I am a GNOME developer.
-	     <? } else { ?>
-                 <input type="checkbox" name="developer" checked>  I am a GNOME developer.
-	     <? } ?>
+               <input type="checkbox" name="developer" <? if ($developer) { ?> checked <? } ?> >  I am a GNOME developer.
           </td>
         </tr>
 	<tr>
@@ -187,9 +167,7 @@
         </tr>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="contributions" cols="70" rows="5">
-	    <? echo trim($contributions) ?>
-	    </textarea>
+	    <textarea name="contributions" cols="70" rows="5" wrap=virtual><? if (trim($contributions)) { echo trim($contributions); } ?></textarea>
 	  </td>
 	</tr>
 	<tr>
@@ -203,29 +181,28 @@
         <tr>
           <td colspan=2>
              <select name="attend[]" multiple>
-	     <? if ($attend[0]) { ?>
-	            <option value="none" selected> I have not attended a past GUADEC</option>
-	        <? } else { ?>
-	            <option value="none"> I have not attended a past GUADEC</option>
-		<? } ?>
+	     <? if (count($attend) != 0) {
+		foreach ($attend as $location) {
+		  if ($location == "none") { 
+			$none = "true";
+		  }
+		  if ($location == "paris") {
+			$paris = "true";
+		  }
+		  if ($location == "copenhagen") {
+			$copenhagen = "true";
+		  }
+		  if ($location == "seville") {
+			$seville = "true";
+	  	  }
+              }} ?>
+             <option value="none" <? if ($none) { ?> selected <? } ?> > I have not attended a past GUADEC</option>
 
-	     <? if ($attend[1]) { ?>
-	     	    <option value="paris" selected> I attended GUADEC 1 (Paris, France)</option>
-	        <? } else { ?>
-	     	    <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
-		<? } ?>
+	     <option value="paris" <? if ($paris) { ?> selected <? } ?> > I attended GUADEC 1 (Paris, France)</option>
 
-	     <? if ($attend[2]) { ?>
-                     <option value="copenhagen" selected> I attended GUADEC 2 (Copenhagen, Denmark)</option>
-	        <? } else { ?>
-             	     <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
-		<? } ?>
+             <option value="copenhagen" <? if ($copenhagen) { ?> selected <? } ?> > I attended GUADEC 2 (Copenhagen, Denmark)</option>
 
-	     <? if ($attend[3]) { ?>
-                     <option value="seville" selected> I attended GUADEC 3 (Seville, Spain)</option>
-	        <? } else { ?>
-                     <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
-		<? } ?>
+             <option value="seville" <? if ($seville) { ?> selected <? } ?> > I attended GUADEC 3 (Seville, Spain)</option>
 
 	     </select>
           </td>
@@ -235,11 +212,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-	     <? if (!$guadec) {?>
-                <input type="checkbox" name="guadec">  I am interested in attending GUADEC in 2003.
-     	     <? } else { ?>
-                <input type="checkbox" name="guadec" checked>  I am interested in attending GUADEC in 2003.
- 	     <? } ?>
+             <input type="checkbox" name="guadec" <? if ($guadec) { ?> checked <? } ?> >  I am interested in attending GUADEC in 2003.
           </td>
         </tr>
 	<tr>
@@ -247,20 +220,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-	     <? if (!$sponsor) {?>
-                  <input type="checkbox" name="sponsor">  I will need sponsorship to attend GUADEC in 2003.
-     	     <? } else { ?>
-                  <input type="checkbox" name="sponsor" checked>  I will need sponsorship to attend GUADEC in 2003.
- 	     <? } ?>
+                 <input type="checkbox" name="sponsor" <? if ($sponsor) { ?> checked <? } ?> >  I will need sponsorship to attend GUADEC in 2003.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-	     <? if (!$tutorial) {?>
-             <input type="checkbox" name="tutorial">  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
-     	     <? } else { ?>
-             <input type="checkbox" name="tutorial" checked>  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
- 	     <? } ?>
+            <input type="checkbox" name="tutorial" <? if ($tutorial) { ?> checked <? } ?> >  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
@@ -268,11 +233,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-	     <? if (!$gfmember) {?>
-                 <input type="checkbox" name="gfmember">  I am a GNOME Foundation member.
-     	     <? } else { ?>
-                 <input type="checkbox" name="gfmember" checked>  I am a GNOME Foundation member.
-	     <? } ?>
+             <input type="checkbox" name="gfmember" <? if ($gfmember) { ?> checked <? } ?> >  I am a GNOME Foundation member.
           </td>
         </tr>
 	</tr>
@@ -285,9 +246,7 @@
 	  </td>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="comments" cols="70" rows="5">
-	    <? echo trim($comments) ?>
-	    </textarea>
+	    <textarea name="comments" cols="70" rows="5" wrap=virtual><? if (trim($comments)) { echo trim($comments); } ?></textarea>
 	  </td>
 	</tr>
 	<tr>
