@@ -56,21 +56,21 @@ $res = db_query ($query);
 $outputtotal = 0;
 while ($row = db_fetch_array ($res)) {
 	if (!$G_RELEASE["$row[group_id]"]) {
-		$output .= "  <app>\n";
-		$output .= "   <name>".htmlspecialchars ($row['group_name'])."</name>\n";
+		$output .= "<app>\n";
+		$output .= "<name>".htmlspecialchars ($row['group_name'])."</name>\n";
 	
 		if ($row['mini_description'] != "")
 		{
-			$output .= "   <desc>".rss_description (str_replace ("\n", "", 
+			$output .= "<desc>".rss_description (str_replace ("\n", "", 
 				trim ($row['mini_description'])))."</desc>\n";
 		}
 		else
 		{
-			$output .= "   <desc>".rss_description (str_replace ("\n", "", 
+			$output .= "<desc>".rss_description (str_replace ("\n", "", 
 				trim ($row['short_description'])))."</desc>\n";
 		}
 		
-		$output .= "  </app>\n";
+		$output .= "</app>\n";
 		$outputtotal++;
 	}
 	// ## eliminate dupes, only do $limit of these
