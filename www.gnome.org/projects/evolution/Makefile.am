@@ -2,7 +2,7 @@ SUBDIRS = doc developer-doc images
 
 urlpath=/projects/evolution
 
-page_SCRIPTS=			\
+page_DATA =			\
 	go.css			\
 	arch.shtml   		\
 	bugs.shtml   		\
@@ -21,9 +21,7 @@ page_SCRIPTS=			\
 	head.shtml  		\
 	map.shtml 	 	\
 	screenshots15.shtml	\
-	unstable.shtml
-
-page_DATA =			\
+	unstable.shtml		\
 	roadmap.ics		\
 	jhbuildrc
 
