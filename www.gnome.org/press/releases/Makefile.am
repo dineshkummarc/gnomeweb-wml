@@ -32,6 +32,6 @@ page_SCRIPTS = \
 	guadec5-speakers.html	\
 	rockandroll.html \
 	gnome28.html \
-	simultaneous_conferences.wml
+	simultaneous_conferences.html
 
 include $(top_srcdir)/rules.common
