@@ -1,4 +1,4 @@
-SUBDIRS=images start projects resources foundation
+SUBDIRS=images start projects resources
 
 urlpath=
 
