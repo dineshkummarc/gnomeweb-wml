@@ -25,7 +25,7 @@ banner_images=\
 	banner-getmore.png\
 	banner-latestnews.png\
 	banner-learn.png\
-	banner-mailinlists.png\
+	banner-mailinglists.png\
 	banner-maintainers.png\
 	banner-meetthedevelopers.png\
 	banner-presscontacts.png\
