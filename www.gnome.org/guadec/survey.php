@@ -41,7 +41,7 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if (trim($developer) == "on" && ! $contributions){
+      if ($developer && ! $contributions){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
@@ -161,12 +161,20 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="user" value="<? echo trim($user) ?>">  I am a GNOME user.
+	     <? if (!$user) { ?>
+                <input type="checkbox" name="user">  I am a GNOME user.
+	     <? } else { ?>
+                <input type="checkbox" name="user" checked>  I am a GNOME user.
+	     <? } ?>
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="developer" value="<? echo trim($developer) ?>">  I am a GNOME developer.
+	     <? if (!$user) { ?>
+                 <input type="checkbox" name="developer">  I am a GNOME developer.
+	     <? } else { ?>
+                 <input type="checkbox" name="developer" checked>  I am a GNOME developer.
+	     <? } ?>
           </td>
         </tr>
 	<tr>
@@ -195,25 +203,25 @@
         <tr>
           <td colspan=2>
              <select name="attend[]" multiple>
-	     <? if (trim($attend[0]) == "none") { ?>
+	     <? if ($attend[0]) { ?>
 	            <option value="none" selected> I have not attended a past GUADEC</option>
 	        <? } else { ?>
 	            <option value="none"> I have not attended a past GUADEC</option>
 		<? } ?>
 
-	     <? if (trim($attend[1]) == "paris") { ?>
+	     <? if ($attend[1]) { ?>
 	     	    <option value="paris" selected> I attended GUADEC 1 (Paris, France)</option>
 	        <? } else { ?>
 	     	    <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
 		<? } ?>
 
-	     <? if (trim($attend[2]) == "copenhagen") { ?>
+	     <? if ($attend[2]) { ?>
                      <option value="copenhagen" selected> I attended GUADEC 2 (Copenhagen, Denmark)</option>
 	        <? } else { ?>
              	     <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
 		<? } ?>
 
-	     <? if (trim($attend[3]) == "seville") { ?>
+	     <? if ($attend[3]) { ?>
                      <option value="seville" selected> I attended GUADEC 3 (Seville, Spain)</option>
 	        <? } else { ?>
                      <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
@@ -227,7 +235,11 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="guadec" value="<? echo trim($guadec) ?>">  I am interested in attending GUADEC in 2003.
+	     <? if (!$guadec) {?>
+                <input type="checkbox" name="guadec">  I am interested in attending GUADEC in 2003.
+     	     <? } else { ?>
+                <input type="checkbox" name="guadec" checked>  I am interested in attending GUADEC in 2003.
+ 	     <? } ?>
           </td>
         </tr>
 	<tr>
@@ -235,12 +247,20 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="sponsor" value="<? echo trim($sponsor) ?>">  I will need sponsorship to attend GUADEC in 2003.
+	     <? if (!$sponsor) {?>
+                  <input type="checkbox" name="sponsor">  I will need sponsorship to attend GUADEC in 2003.
+     	     <? } else { ?>
+                  <input type="checkbox" name="sponsor" checked>  I will need sponsorship to attend GUADEC in 2003.
+ 	     <? } ?>
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="tutorial" value="<? echo trim($tutorial) ?>">  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
+	     <? if (!$tutorial) {?>
+             <input type="checkbox" name="tutorial">  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
+     	     <? } else { ?>
+             <input type="checkbox" name="tutorial" checked>  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
+ 	     <? } ?>
           </td>
         </tr>
 	<tr>
@@ -248,7 +268,11 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="gfmember" value="<? echo trim($gfmember) ?>">  I am a GNOME Foundation member.
+	     <? if (!$gfmember) {?>
+                 <input type="checkbox" name="gfmember">  I am a GNOME Foundation member.
+     	     <? } else { ?>
+                 <input type="checkbox" name="gfmember" checked>  I am a GNOME Foundation member.
+	     <? } ?>
           </td>
         </tr>
 	</tr>
@@ -262,7 +286,7 @@
 	<tr>
 	  <td valign="top" colspan="2">
 	    <textarea name="comments" cols="70" rows="5">
-	    <? echo (trim($comments) ?>
+	    <? echo trim($comments) ?>
 	    </textarea>
 	  </td>
 	</tr>
