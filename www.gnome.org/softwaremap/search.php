@@ -262,14 +262,9 @@ if ($type_of_search == "soft") {
 		echo "\n";
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			if (db_result($result, $i, 'type') == 2) {
-				$what = 'foundry';
-			} else {
-				$what = 'projects';
-			}
-			
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/$what/"
-				. db_result($result, $i, 'unix_group_name')."/\">"
+
+			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/softwaremap/"
+				. "projects/".db_result($result, $i, 'unix_group_name')."/\">"
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
 		}
