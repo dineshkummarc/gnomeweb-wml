@@ -11,6 +11,8 @@ page_DATA = \
 	text-48.png \
 	text-64.gif \
 	text-64.png \
+	button-64.gif \
+	button-64.png \
 	text-194.png
 
 include $(top_srcdir)/rules.common
