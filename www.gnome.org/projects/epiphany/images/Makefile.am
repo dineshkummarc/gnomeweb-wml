@@ -45,7 +45,8 @@ page_SCRIPTS=		\
 	weibull.png	\
 	weibull-tn.png	\
 	wheat.png	\
-	smartbookmarks.png	\
+	sbm-addressentry.png	\
+	sbm-toolbar.png	\
 	extensions-small.png	\
 	extensions.png	\
 	ext-errorviewer-180.png	\
