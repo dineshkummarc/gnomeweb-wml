@@ -40,7 +40,7 @@ Trove root categories. If the project does not require any or all of these
 locations, simply select "None Selected".
 
 <P>IMPORTANT: Projects should be categorized in the most specific locations
-available in the map. Simulteneous categorization in a specific category
+available in the map. Simultaneous categorization in a specific category
 AND a parent category will result in only the more specific categorization
 being accepted.
 ';
