@@ -39,7 +39,7 @@ function template_header($option="") {
 				&ldquo;Tagline here!&rdquo;
 			</div>
 		</div>
-		<hr class="clear spacing-2">
+		<hr class="clear spacing">
 
 		<? print $topnav->returnNav(); ?>
 

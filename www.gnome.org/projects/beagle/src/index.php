@@ -14,8 +14,7 @@ Quickly find the files you care about
   Forgot what that important file was called?  Don't remember where you saved it?  <em>Beagle to the rescue!</em>
 	</p>
 	<p>
-	It slices, it dices, and it might even find your files.  Beagle is your one stop search spot when it
-	comes to quickly locating the information you need.
+	It slices, it dices, and it may even find your files.  Beagle is your one stop searching utility when it comes to quickly locating the information you need.
 	</p>
 	<p>
 	<div class="split-tosize img-box"><a href="img/screenshot-mockup.png"><img src="img/screenshot-mockup-thumb.png" border=0"><br><string>Find files fast</strong> (mockup)</a>
