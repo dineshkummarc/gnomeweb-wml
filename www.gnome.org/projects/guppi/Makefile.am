@@ -2,6 +2,6 @@ SUBDIRS=
 
 urlpath=/projects/guppi/
 
-page_SCRIPTS = 	index.html 
+page_SCRIPTS = 	 
 
 include $(top_srcdir)/rules.common
