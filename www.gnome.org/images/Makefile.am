@@ -39,8 +39,8 @@ banner_images=\
   banner-projectindex.png\
   banner-tipsandtutorials.png\
 	banner-developerinterviews.png\
-	banner-developersbyregion.png
-
+	banner-developersbyregion.png\
+  banner-speakingabout.png
 
 popdown_images=\
 	popdown-endcap-blue.png\
@@ -82,7 +82,8 @@ sidebar_items=\
   sidebar-resourceindex.png\
 	sidebar-seegnome.png\
 	sidebar-tipsandtutorials.png\
-  sidebar-reportbugs.png
+  sidebar-reportbugs.png\
+	sidebar-speakingabout.png
 
 topbar_headers=\
   topbar-contact.png\
