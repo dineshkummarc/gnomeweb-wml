@@ -2,23 +2,23 @@
 <HTML
 ><HEAD
 ><TITLE
->Known platforms where ORBit works</TITLE
+>Getting the examples to run</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
 REL="HOME"
-TITLE="ORBit Beginners Documentation V1.2"
+TITLE="ORBit Beginners Documentation V1.3"
 HREF="book1.html"><LINK
 REL="UP"
 TITLE="Installing ORBit"
-HREF="c114.html"><LINK
+HREF="c138.html"><LINK
 REL="PREVIOUS"
-TITLE="Getting the examples to run"
-HREF="x144.html"><LINK
+TITLE="Installing from Source"
+HREF="x152.html"><LINK
 REL="NEXT"
-TITLE="CORBA concepts"
-HREF="c188.html"></HEAD
+TITLE="Known platforms where ORBit works"
+HREF="x192.html"></HEAD
 ><BODY
 CLASS="sect1"
 BGCOLOR="#FFFFFF"
@@ -38,7 +38,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->ORBit Beginners Documentation V1.2</TH
+>ORBit Beginners Documentation V1.3</TH
 ></TR
 ><TR
 ><TD
@@ -46,7 +46,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="x144.html"
+HREF="x152.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -60,7 +60,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="c188.html"
+HREF="x192.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -76,51 +76,165 @@ CLASS="sect1"
 ><A
 NAME="AEN168"
 ></A
->Known platforms where ORBit works</H1
+>Getting the examples to run</H1
 ><P
->&#13;ORBit in theory is portable to any UNIX system (using the
-GNU configure system to define the system). Try it out - it
-will probably work. However, you may want to see if your
-platform has definitely been used before
+>Once you have successfully installed orbit, getting the examples to
+run should be fine. 
+The examples are available by http from 
+<A
+HREF="http//www.gnome.org/projects/ORBit2/orbit-docs.tar.gz"
+TARGET="_top"
+>&#13;http//www.gnome.org/projects/ORBit2/orbit-docs.tar.gz
+</A
+>.
+Gunzip and untar the package, perhaps like:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;<TT
+CLASS="prompt"
+>bash $</TT
+><TT
+CLASS="userinput"
+><B
+>gunzip -c orbit-docs.tar.gz | tar -xvf -</B
+></TT
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+This should build a documentation directory that contains this
+documentation in both sgml (docbook) and html, and an examples
+directory. Move to the examples directory, and go
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;<TT
+CLASS="prompt"
+>bash $</TT
+><TT
+CLASS="userinput"
+><B
+>./configure</B
+></TT
+>
+<TT
+CLASS="prompt"
+>bash $</TT
+><TT
+CLASS="userinput"
+><B
+>cd echo</B
+></TT
+>
+<TT
+CLASS="prompt"
+>bash $</TT
+><TT
+CLASS="userinput"
+><B
+>make</B
+></TT
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+Proceed similarly for the calculator example.
 </P
 ><P
+>&#13;To actually run the echo example, open two windows up. 
+Run <TT
+CLASS="filename"
+>echo-server</TT
+> in one and 
+<TT
+CLASS="filename"
+>echo-client</TT
+> in the other 
+(echo-server writes out the file <TT
+CLASS="filename"
+>echo.ref</TT
+> which echo-client reads).
+
+If you want to have fun now, compile
+orbit on a different machine, make echo-client on the different machine,
+move <TT
+CLASS="filename"
+> echo.ref </TT
+> from the first machine to the second and run echo-client:
+eh voila - client/server over tcp/ip with the same code that ran using
+unix sockets on a single machine.
+</P
+><DIV
+CLASS="note"
+><P
 ></P
-><UL
-><LI
+><TABLE
+CLASS="note"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="./stylesheet-images/note.gif"
+HSPACE="5"
+ALT="Note"></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
 ><P
->GNU/Linux, i386 Redhat/SuSE/Debian distributions</P
-></LI
-><LI
-><P
->GNU/Linux, alpha</P
-></LI
-><LI
-><P
->GNU/Linux, sparc</P
-></LI
-><LI
-><P
->Solaris 2.6 (UltraSparc) </P
-></LI
-><LI
-><P
->Digital UNIX 4.0</P
-></LI
-><LI
-><P
->FreeBSD 2.2.7-RELEASE (Intel)</P
-></LI
-><LI
-><P
->IRIX 6.2 (you can get it from <A
-HREF="http://freeware.sgi.com"
-TARGET="_top"
->http://freeware.sgi.com</A
->)</P
-></LI
-></UL
-><P
->If you manage to compile it on any other platforms, let me know.</P
+>&#13;From ORBit 0.5.3, IIOP communications over IP sockets are disabled by default for security
+reasons. You should create
+an <TT
+CLASS="filename"
+> /etc/orbitrc </TT
+> (for a system-wide settings), 
+or an <TT
+CLASS="filename"
+> ~/.orbitrc </TT
+> (for one user's setting) containing something like :
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;ORBIIOPUSock=1
+ORBIIOPIPv4=1
+ORBIIOPIPv6=0
+</PRE
+></TD
+></TR
+></TABLE
+>
+Alternatively, you can also use command line parameters.
+</P
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -138,7 +252,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="x144.html"
+HREF="x152.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -156,7 +270,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="c188.html"
+HREF="x192.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -166,13 +280,13 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Getting the examples to run</TD
+>Installing from Source</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="c114.html"
+HREF="c138.html"
 ACCESSKEY="U"
 >Up</A
 ></TD
@@ -180,7 +294,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->CORBA concepts</TD
+>Known platforms where ORBit works</TD
 ></TR
 ></TABLE
 ></DIV

@@ -3,9 +3,9 @@ SUBDIRS=stylesheet-images
 urlpath=/projects/ORBit2/orbit-docs/orbit
 
 page_SCRIPTS= \
-book1.html  c246.html   x1214.html  x148.html  x298.html  x876.html \
-c1205.html  c24.html    x122.html   x164.html  x460.html  x980.html \
-c134.html   c67.html    x1240.html  x188.html  x638.html \
-c208.html   x1097.html  x1248.html  x253.html  x768.html
+book1.html  c250.html   x1218.html  x152.html  x302.html  x880.html \
+c1209.html  c25.html    x1244.html  x168.html  x464.html  x984.html \
+c138.html   c71.html    x1252.html  x192.html  x642.html \
+c212.html   x1101.html  x126.html   x257.html  x772.html
 
 include $(top_srcdir)/rules.common
