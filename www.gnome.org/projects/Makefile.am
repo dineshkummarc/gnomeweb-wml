@@ -23,7 +23,8 @@ SUBDIRS = \
 	gnome-network		\
 	epiphany		\
 	libgsf			\
-	evince
+	evince			\
+	sabayon
 
 urlpath = /projects
 
