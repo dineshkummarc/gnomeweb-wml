@@ -21,6 +21,7 @@ page_SCRIPTS=index.php3		\
   pr-gnome14.html \
   pr-gnome20.html \
   pr-gnome22.html \
+  pr-extremadura.html \
   pr-mandrakesoftjoins.html \
   pr-redflagjoins.html \
   pr-redhat.html \
