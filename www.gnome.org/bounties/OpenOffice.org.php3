@@ -8,7 +8,7 @@ include ("./util.php");
 <?php write_table_header ("no"); ?>
 <?php taskrow ("OO.o slide view performance", "hidden", "500", "127554", ""); ?>
 <?php taskrow ("OO.o Image Save", "hidden", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
-<?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771", ""); ?>
+<?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("OO.o slide view performance", "OpenOffice.org", "500", "127554", "127554", ""); ?>
 
@@ -39,7 +39,7 @@ improvement in this area wins</p>
   documents or presentations. The menu item should open up a dialog
   allowing the image to be saved to disk as an individual file.
 </p> <?php box_end (); ?>
-<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "127771", ""); ?>
+<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 
 <p>oocalc's numeric precision is pretty awful for a load of common
 functions. This should be substantially improved, in-line with

@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("Gaim/Evolution presence integration", "hidden", "2000", "127546", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "hidden", "400", "127547", ""); ?>
 <?php taskrow ("Gaim drag and drop of links", "hidden", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
-<?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "hidden", "100", "127549", ""); ?>
+<?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "hidden", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Gaim/Evolution presence integration", "IM", "2000", "127546", "127546", ""); ?>
 
@@ -186,7 +186,7 @@ from the browser or the desktop onto a Gaim conversation window copies
 the URL into the text of the conversation.</p>
 
 <?php box_end (); ?>
-<?php box_start ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "127549", ""); ?>
+<?php box_start ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 
 
 The <a STYLE="text-decoration:none" 

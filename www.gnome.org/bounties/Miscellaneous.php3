@@ -6,12 +6,12 @@ include ("./util.php");
 
 <?php write_page_header ("Miscellaneous Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", ""); ?>
+<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 <?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", ""); ?>
+<?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 
 
 <p> The Nautilus file manager has a context menu item for "Send

@@ -123,7 +123,7 @@ bounty.
 <?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
-<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", ""); ?>
+<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 <?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", ""); ?>
 <?php taskrow ("&quot;Me&quot;", "Addressbook", "300", "127517", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
@@ -147,7 +147,7 @@ bounty.
 <?php taskrow ("Drag-n-drop task creation", "Tasks", "300", "127559", ""); ?>
 <?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
-<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", ""); ?>
+<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
 <?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
@@ -159,7 +159,7 @@ bounty.
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
-<?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", ""); ?>
+<?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
