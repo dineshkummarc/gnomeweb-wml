@@ -1,4 +1,4 @@
-SUBDIRS = hdr logo mast flash
+SUBDIRS = hdr logo mast flash 24x24
 
 urlpath = /img
 
