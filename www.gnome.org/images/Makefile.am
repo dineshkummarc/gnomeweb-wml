@@ -37,6 +37,7 @@ misc_images=\
 	arrow.gif\
 	button-helixgnome.png\
 	button-helixgnome.gif\
+	gnome2.png\
 	gnome-16.png\
 	gnome-16.png.old\
 	mail16d.png\
