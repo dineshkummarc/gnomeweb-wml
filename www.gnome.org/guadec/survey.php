@@ -68,7 +68,7 @@
 
         $formmail .= "User: " . $user . "\n\n";
         $formmail .= "Developer: " . $developer . "\n\n";
-        $formmail .= "Committment: " . $gnomecommittment . "\n\n";
+        $formmail .= "Committment: " . $committment . "\n\n";
 
         $formmail .= "GUADEC: " . $guadec . "\n\n";
         $formmail .= "Attended Previously: " . $attend . "\n\n";
@@ -169,7 +169,7 @@
 	<tr>
 	  <td valign="top">&nbsp;</td>
 	  <td valign="top" colspan="2">
-	    <textarea name="gnomecommittment" cols="70" rows="5"></TEXTAREA>
+	    <textarea name="committment" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
         <tr>
