@@ -48,7 +48,8 @@ if ($step1) {
 			$status_id, htmlspecialchars ($changes), $group_id, $release_id)) {
 
 			// Announce the release to gnome-announce
-			mail ("gnome-announce-list@gnome.org",
+			//mail ("gnome-announce-list@gnome.org",
+			mail ("drfickle@us.ibm.com",
 				"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
 				wordwrap (stripslashes ($changes)),
 				"From: GNOME Software Map <webmaster@gnome.org>");
@@ -151,7 +152,25 @@ Edit Existing Release
 <TR>
 	<td COLSPAN=2>
 		<b>Paste The Change Log In:</b><br>
-		<textarea name="release_changes" rows="15" cols="80" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'changes')); ?></textarea>
+		<textarea name="release_changes" rows="15" cols="80" wrap="soft"><?php 
+		
+		$changes = db_result($result,0,'changes');
+
+		if ($changes != "")
+		{
+			print htmlspecialchars($changes);
+		}
+		else
+		{
+			print "Application\n===========\n\n".$project->getPublicName()." "
+				. db_result($result,0,'release_name')."\n\n"
+				. "Description\n===========\n\n".$project->getDescription()."\n\n"
+				. "Enhancements\n============\n\n-\n-\n\n"
+				. "Fixes\n=====\n\n-\n-\n\n"
+				. "Download\n========\n\nftp://ftp.gnome.org/pub/GNOME/";
+		}
+			
+		?></textarea>
 	</td>
 </tr>
 <TR>
