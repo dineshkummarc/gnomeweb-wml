@@ -51,6 +51,8 @@ misc_images=\
 	guadec.png
 
 banner_images=\
+	banner-no-text.png\
+	banner-no-text.gif\
 	banner-gnomeis.png\
 	banner-gnomeis.gif\
 	banner-seegnome.png\
