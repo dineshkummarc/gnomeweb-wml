@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GUADEC Survey - 2002</title>
+    <title>GUADEC IV Pre-Registration Survey</title>
   </head>
 
   <body bgcolor="#ffffff" text="#000000">
@@ -14,13 +14,10 @@
             <!-- Table for the content image. -->
 
             <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="10" width="100%">
-              <tr><td bgcolor="#ffffff" align="center"><img src="gnome-foot-large.png" border=0>
-                  <img src="plus.png" border=0><img src="guinness.png" border=0>
-                  <img src="equals.png" border=0><img src="question.png" border=0>
-                  <!-- The text -->
+              <tr><!-- The text -->
                   <table border=0 bgcolor="#ffffff" cellpadding=50>
                     <tr><td>
-                        <h1>GUADEC 4 Pre-Registration Formalities:</h1>
+                        <h1>GUADEC IV Pre-Registration Survey:</h1>
 
 <?
   $bad_elements = array();
@@ -188,7 +185,12 @@
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="attend"> I have attended a past GUADEC.
+             <select name="attend" multiple>
+	     <option value="none" selected> I have not attended a past GUADEC</option>
+	     <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
+             <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
+             <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
+	     </select>
           </td>
         </tr>
         <tr>
@@ -198,7 +200,7 @@
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="tutorial"> I am interested in paying for professional tutorials about GTK+/GNOME technology.
+             <input type="checkbox" name="tutorial"> I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
