@@ -53,7 +53,7 @@ GNOME user to talk to, share with, and work with their friends.
 Below you will find a set of concrete tasks all of which are designed
 to improve collaboration in the open source desktop.  Each task has a
 bounty associated with it.  Your job is simple: choose a task, do the
-work, fill out the <a href="claim.php">claim form</a>, and collect the
+work, fill out the <a href="claim.php3">claim form</a>, and collect the
 bounty.
 
 <p>
