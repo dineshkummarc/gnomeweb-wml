@@ -22,6 +22,7 @@ page_SCRIPTS= \
     ch04s03.html \
     ch04s04.html \
     ch04s05.html \
+    ch04s06.html \
     ch04s07.html \
     ch04s08.html \
     ch04s09.html \
