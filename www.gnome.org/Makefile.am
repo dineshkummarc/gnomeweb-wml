@@ -2,7 +2,7 @@ SUBDIRS=images start projects resources
 
 urlpath=
 
-page_SCRIPTS=index.html		\
+page_SCRIPTS=index.shtml		\
 	findout.html 		\
 	seegnome.html   \
 	menucontrol.js
