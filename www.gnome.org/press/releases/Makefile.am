@@ -30,6 +30,7 @@ page_SCRIPTS = \
 	summit2003.html \
 	gnome2book.html \
 	guadec5-speakers.html	\
-	rockandroll.html
+	rockandroll.html \
+	gnome28.html
 
 include $(top_srcdir)/rules.common
