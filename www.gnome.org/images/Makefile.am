@@ -108,7 +108,9 @@ title_texts=\
 	title-newsgroups.png\
 	title-mailinglists.png\
 	title-nationalwebsite.png\
-	title-relatedprojects.png
+	title-relatedprojects.png\
+	title-gnome-distributors.png\
+	title-support-providers.png
 
 icons=\
   icon-new.png\
