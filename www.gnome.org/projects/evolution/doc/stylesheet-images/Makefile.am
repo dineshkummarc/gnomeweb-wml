@@ -1,6 +1,6 @@
-urlpath=/projects/evolution/doc/figures
+urlpath=/projects/evolution/doc/stylesheet-images
 
-page_SCRIPTS=			\
+page_DATA			\
 	caution.gif \
 	home.gif \
 	important.gif \
