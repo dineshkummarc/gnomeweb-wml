@@ -41,7 +41,7 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if ($developer == "on" && ! $contributions){
+      if (trim($developer) == "on" && ! $contributions){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
@@ -132,28 +132,28 @@
 	  <td>*Name:</td>
 	  <td>
 	    <input type="text" name="contactname" 
-		   size="30" value="<? echo $contactname ?>">
+		   size="30" value="<? echo trim($contactname) ?>">
 	  </td>
 	</tr>
 	<tr>
 	  <td> Age:</td>
 	  <td>
 	    <input type="text" name="contactage" 
-		   size="3" value="<? echo $contactage ?>">
+		   size="3" value="<? echo trim($contactage) ?>">
 	  </td>
 	</tr>
 	<tr>
 	  <td>*Country of residence:</td>
 	  <td>
 	    <input type="text" name="contactaddress" 
-		   size="30" value="<? echo $contactaddress ?>">
+		   size="30" value="<? echo trim($contactaddress) ?>">
 	  </td>
 	</tr>
 	<tr>
 	  <td>*Email:</td>
 	  <td>
 	    <input type="text" name="email" 
-		   size="30" value="<? echo $email ?>">
+		   size="30" value="<? echo trim($email) ?>">
 	  </td>
 	</tr>
 	<tr>
@@ -161,12 +161,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="user" value="<? echo $user ?>">  I am a GNOME user.
+             <input type="checkbox" name="user" value="<? echo trim($user) ?>">  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="developer" value="<? echo $developer ?>">  I am a GNOME developer.
+             <input type="checkbox" name="developer" value="<? echo trim($developer) ?>">  I am a GNOME developer.
           </td>
         </tr>
 	<tr>
@@ -180,7 +180,7 @@
 	<tr>
 	  <td valign="top" colspan="2">
 	    <textarea name="contributions" cols="70" rows="5">
-	    <? echo $contributions ?>
+	    <? echo trim($contributions) ?>
 	    </textarea>
 	  </td>
 	</tr>
@@ -195,10 +195,30 @@
         <tr>
           <td colspan=2>
              <select name="attend[]" multiple>
-	     <option value="none" selected> I have not attended a past GUADEC</option>
-	     <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
-             <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
-             <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
+	     <? if (trim(attend[0]) == "none")) { ?>
+	            <option value="none" selected> I have not attended a past GUADEC</option>
+	        <? } else { ?>
+	            <option value="none"> I have not attended a past GUADEC</option>
+		<? } ?>
+
+	     <? if (trim(attend[1]) == "paris")) { ?>
+	     	    <option value="paris" selected> I attended GUADEC 1 (Paris, France)</option>
+	        <? } else { ?>
+	     	    <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
+		<? } ?>
+
+	     <? if (trim(attend[2]) == "copenhagen")) { ?>
+                     <option value="copenhagen" selected> I attended GUADEC 2 (Copenhagen, Denmark)</option>
+	        <? } else { ?>
+             	     <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
+		<? } ?>
+
+	     <? if (trim(attend[2]) == "seville")) { ?>
+                     <option value="seville" selected> I attended GUADEC 3 (Seville, Spain)</option>
+	        <? } else { ?>
+                     <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
+		<? } ?>
+
 	     </select>
           </td>
         </tr>
