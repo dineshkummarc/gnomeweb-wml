@@ -3,55 +3,56 @@ SUBDIRS=
 urlpath=/projects/epiphany/images
 
 page_SCRIPTS=		\
-    1.1.0-bookmarks-import-180.png	\
-    1.1.0-bookmarks-import.png	\
-    1.1.0-encoding-dialog-180.png	\
-    1.1.0-encoding-dialog.png	\
-    1.1.0-encoding-menu-180.png	\
-    1.1.0-encoding-menu.png	\
-    1.1.0-preferences-fonts-and-colours-180.png	\
-    1.1.0-preferences-fonts-and-colours.png	\
-    1.1.0-preferences-general-180.png	\
-    1.1.0-preferences-general.png	\
-    1.1.0-preferences-language-180.png	\
-    1.1.0-preferences-language.png	\
-    1.1.0-preferences-language-add.png	\
-    1.1.0-preferences-language-add-180.png	\
-    1.1.0-preferences-privacy-180.png	\
-    1.1.0-preferences-privacy.png	\
-    1.1.0-print-180.png	\
-	1.1.0-print.png	\
-	1.1.0-print-setup-180.png	\
-	1.1.0-print-setup.png	\
-	aboutbox.png	\
-	bookmarks.png	\
-	bookmarks-tn.png	\
-	browsing.png	\
-	browsing-tn.png	\
+	1.0-bookmarks-180.png	\
+	1.0-bookmarks.png	\
+	1.0-browsing-180.png	\
+	1.0-browsing.png	\
+	1.0-history-180.png	\
+	1.0-history.png	\
+	1.0-preferences-180.png	\
+	1.0-preferences.png	\
+	1.0-toolbareditor-180.png	\
+	1.0-toolbareditor.png	\
+	1.2-bookmarks-import-180.png	\
+	1.2-bookmarks-import.png	\
+	1.2-browsing-180.png	\
+	1.2-browsing.png	\
+	1.2-encoding-dialog-180.png	\
+	1.2-encoding-dialog.png	\
+	1.2-encoding-menu-180.png	\
+	1.2-encoding-menu.png	\
+	1.2-preferences-add-language-180.png	\
+	1.2-preferences-add-language.png	\
+	1.2-preferences-fonts-180.png	\
+	1.2-preferences-fonts.png	\
+	1.2-preferences-general-180.png	\
+	1.2-preferences-general.png	\
+	1.2-preferences-language-180.png	\
+	1.2-preferences-language.png	\
+	1.2-preferences-privacy-180.png	\
+	1.2-preferences-privacy.png	\
+	1.2-print-180.png	\
+	1.2-print.png	\
+	1.2-print-setup-180.png	\
+	1.2-print-setup.png	\
+	contrib-magallon-180.png	\
+	contrib-magallon.png	\
+	contrib-weibull-180.png	\
+	contrib-weibull.png	\
 	ephy-big.png	\
 	ephy.png	\
 	epiphany-16.png	\
 	epiphany-64.png	\
-	history.png	\
-	history-tn.png	\
-	magallon.png	\
-	magallon-tn.png	\
-	preferences.png	\
-	preferences-tn.png	\
-	screenshot.png	\
-	spacer.png	\
-	toolbareditor.png	\
-	toolbareditor-tn.png	\
-	weibull.png	\
-	weibull-tn.png	\
-	wheat.png	\
-	sbm-addressentry.png	\
-	sbm-toolbar.png	\
-	extensions-small.png	\
+	ext-certificateviewer-180.png	\
+	ext-certificateviewer.png	\
 	extensions.png	\
+	extensions-small.png	\
 	ext-errorviewer-180.png	\
 	ext-errorviewer.png	\
-	ext-certificateviewer-180.png	\
-	ext-certificateviewer.png
+	sbm-addressentry.png	\
+	sbm-toolbar.png	\
+	screenshot.png	\
+	spacer.png	\
+	wheat.png
 
 include $(top_srcdir)/rules.common
