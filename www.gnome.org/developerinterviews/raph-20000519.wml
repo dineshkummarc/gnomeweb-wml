@@ -1,0 +1,302 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Developer interviews - Raph Levien 2000-05-19"
+imgid="developerinterviews">
+<content>
+
+<table width="428" border="0" cellpadding="0" cellspacing="0">
+<tr valign="top"><td width="118"><img src="images/raph-1.png" width="118" height="246"
+hspace="0" vspace="0"></td>
+<td width="310"><img src="images/title-raph.png" width="310" height="46"
+hspace="0" vspace="0"><br>
+In this section, we'll be conducting short interviews with GNOME developers
+to put some faces to the names. Up first is Raph Levien, a Benicia,
+California hacker who's been central in the development of the GNOME
+graphics infrastructure, including libart, the GNOME canvas,
+GNOME Print and Gill. He's reachable at <a
+href="mailto:raph@acm.org">raph@acm.org</a>.         
+
+</td>
+</table>
+<p>
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>You started working on the GNOME project in 1997. What's your background, and
+what did you work on before GNOME?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+My background in computing goes waaaay back. My dad got me an
+<ahref="http://incolor.inetnebr.com/bill_r/rca_cosmac_vip_brochure.htm">RCA
+Cosmac VIP</a> computer when I was six, and my love affair withcomputers has
+continued unabated since that day. I learned to program           fairly
+early on, and was hacking on editors and assemblers by the time          I
+was nine. During my teenage years (after dropping out of college),
+my dad and I went into business selling various pieces of softwarethat I
+hacked on, including a simple programming language designed for
+children, a LISP interpreter and compiler, a typesetting plugin
+forWordPerfect, and finally an integrated system for photo production in
+newspapers. All this was in DOS (mostly assembler), and none totalfailures or
+spectacular successes. More than anything, I enjoyed it             when
+people <i>used</i> my code. My dad and I would have frequent
+arguments where he accused me of wanting to give my stuff away, whichof
+course was opposed to making money. I wish he were alive today to
+see that the two can be quite compatible!
+<p>
+The photo system was very advanced in some ways, while being
+extremelyprimitive in others. It added up to about 80k lines of x86 assembly
+language, was cooperatively multitasking, and handled a fairly widevariety of
+devices, including printers, scanners, analog telephone fax
+interfaces, and imagesetters. The user interface was completelyasynchronous.
+For example, color photos were sent over the fax as three separations, each
+taking about 10 minutes to transmit. As soon as the third
+separation started coming in, you could combine them and start
+editing the image: cropping, color adjustment, sharpening,
+etc. Then, when you clicked the "Print" button, it would process allthe data
+that had come in, and incrementally process the rest as it
+arrived. As soon as the image hit the bottom crop line, the printerwould
+start moving. You'd often have a print in your hand before the
+transmission was totally complete. I did a lot of work to make ithighly
+responsive - which was no small feat, considering that an 8MB
+80486 was state of the art at the time.                                   
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>How did you get started with free software?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left"> In
+1992, I decided to go back to school (graduate school at UCBerkeley this
+time). At that time, I was in turmoil about the state of software. The stuff
+being put out by the proprietary software establishment was crap. My
+experience with the photo system showedthat it was possible to do a lot
+better. I was also very attracted to certain currents in academic computer
+science to create software systematically, for example Dijkstra's work on
+weakest preconditions and Hoare's Communicating Sequential Processes. CSP was
+interesting because it formalized a lot of the stuff you have to do to
+get asynchronous software right.
+<p>
+Yet, at the same time, I saw the software coming from academia as being
+totally ineffective, in most ways even worse than the proprietary stuff. So,
+I was pretty negative and cynical.
+<p>
+In 1994 I started getting really interested in cryptography and the
+cypherpunks, and released premail and the <a
+href="http://www.publius.net/rlist.html">Remailer List</a> thatfall. A lot of
+us were releasing code as free software, because we were motivated that
+people actually <i>use</i> the stuff, although the GPL was considered kinda
+fringe. Nonetheless, there was a thrivingcommunity, and some projects like
+PGP had a real free software spirit (which vanished totally once PGP became a
+company, thanks in large part to the bad, non-<a
+href="http://www.debian.org/social_contract">DFSG</a>, license).
+<p>
+Then, when Gimp came out around 1996, it was like a light turned on. Unix
+didn't have to be hard to use. Code with a good ui didn't have to be limited
+to awful "toy" operating systems. In short, software didn't have to suck, and
+free software is the path out of the crisis I felt going into grad school.
+I've been hooked ever since.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Why GNOME? Are there particular reasons why you chose to work on this
+project instead of other free software hacking? What do you feel sets GNOME
+apart?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+I pretty much "fell into" GNOME development. The success of the Gimp project
+inspired me (as well as a number of other early GNOME hackers) in terms of
+what was possible on the desktop. I think what really made the difference was
+the GNOME community, which overlapped quite a bit with the Gimp community
+(and still does). The support that you get back from a community like this is
+incredible, and really motivates you to give back.
+<p>
+I think the main thing that differentiates GNOME from many other projects is
+the serious commitment to improve the infrastructure, as opposed to simply
+getting the best results from the tools at hand.  This focus doesn't always
+lead to slick, polished products early on, but I think over a longer term it
+pays off.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>So, what's the focus of your GNOME work at the moment?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+Right now, I'm mostly working on Libart and an SVG renderer to get vector
+icons in Nautilus. Another major focus now is high quality inkjet drivers,
+which I am of course plan to integrate with GNOME Print.
+<p>
+I keep my toe in the water for a fairly large number of GNOME
+things. There's a lot going on.
+<p>
+I also devote a fair amount of time to <a
+href="http://www.advogato.org">Advogato</a>, which is not a GNOME-specific
+project.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Any new and exciting projects on the horizon?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+Yes, there are always new and exciting projects. Too many, infact. Free
+software sometimes feels like a huge playland where there            all
+kinds of really fun things to work on. Then the fact that the day
+only has 24 hours in it hits you in the head and you're forced to actually
+<i>choose.</i>
+<p>
+Probably the most exciting projects for me are ones I've been working on for
+a while: <a href="http://www.levien.com/svg/">Gill</a>, which will be a
+vector graphics editor comparable to Adobe Illustrator when it grows up, and
+<a href="http://www.levien.com/gfonted/">gfonted</a>, a font editor. I've
+been diverted from the apps themselves by the need to build infrastructure,
+and now that a lot of that is in place, it feels like a good time to put some
+time into the apps again.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Where do you see GNOME going in the coming year, and what part are you
+going to play in it? What areas are going to be emphasized?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left"> One of
+the more exciting directions is <a href="http://www.pango.org">Pango</a>,
+which will bring high quality text rendering in a variety of scripts to
+GNOME. GNOME is already pretty strong on internationalization, and I expect
+things to get even better. Owen and I discussed the Pango design a lot in the
+early days, but all the recent work has been his. I'd like to get back to it
+and make it do really fine typography (one of the original goals), but it's
+hard to find time to do all the things I'd like.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>What do you think are the most significant stumbling blocks for further
+GNOME development?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+I have a few areas of concern. I think there needs to be much more focuson
+making things Just Work (TM), which implies spending more effort to integrate
+well with other things. This is really visible in the KDE/Gnome split. Both
+sides seem to have the attitude of "well, of course our side will win, then
+any work put into integrating the two is wasted." I'm looking forward to the
+day when it becomes clear to both sides that neither side is just going to go
+away.
+<p>
+Then, we'll start to see some deep integration start to happen, so much so
+that the average user won't <i>care</i> much whether a specific app is KDE or
+Gnome. I think it's a reasonable goal - consider how easy it is to use Linux
+to network Mac's and PC's together using Netatalk and Samba. In the
+proprietary world, you have strong incentives against compatibility, so
+you've never been able to just stick a Mac disk in a PC and have things work.
+<p>
+Getting this kind of integration right is really hard, but then again the
+free software community has a well-earned reputation for being able to tackle
+hard problems.
+<p>
+Another area that bothers me is complexity. One of the focusses ofGNOME has
+been simplicity. However, as the platform matures and there is pressure to
+add new features, it's growing more complex. Bonobo, for example, is now
+about 100k lines of code. For something that'ssupposed to be a simple
+component framework, that's quite a lot of code. That's going to make it much
+harder for people to grok the entire system, especially new people coming on
+board. It's a personal obsession of mine to always try to engineer things to
+be simpler, but this doesn't always make me friends.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Your background is very much related to the print and typography areas,
+which have traditionally been Macintosh bastions. Do you see GNOME gaining a
+foothold in that segment any time soon?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+Not soon. Free software is <i>really</i> far behind in this area, andit takes
+a lot of time to build up the tools. Even Gimp is lacking the basic features
+needed to be useful in prepress, such as support for CMYK images.
+<p>
+It's a bit frustrating for me, because free software had a dramatic early
+lead, especially with TeX. The line-breaking algorithm in TeX 15 years ago
+was much more sophisticated than anything in proprietary software until last
+year, when Adobe released InDesign (which actually uses some of the TeX
+algorithms). But whatever initial momentum free software had then has been
+lost, for reasons that still aren't clear to me.
+<p>
+Nowadays, of course, there's quite a lot of interest in making free software
+tools for prepress. GNOME is a focal point for much of the work, partly
+because Gimp rocks so hard.
+<p>
+Probably the biggest challenge to free software tools is the existenceof
+"good enough" proprietary packages that run on Linux, notably Corel
+Draw and Deneba Canvas. With luck, these packages will draw attentionto the
+platform and not scare away free software developers from
+working in the same area. 
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Recently, there's been a lot of movement towards developing GNOME
+commercially, we've seen the formation of new companies dedicated to that,
+for instance. What are your thoughts about how that influences the
+development process and the direction GNOME takes?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+What I've seen so far has been all good. Having funding is certainly making
+the pace of development faster, and we're seeing a few ambitious projects
+that would have struggled as purely volunteer efforts.
+<p>
+Of course, the point of business is to make a profit, not to support a
+charity. A recent <ahref="http://www.advogato.org/article/93.html">thread</a>
+on Advogato did an excellent job reviewing some of the issues and concerns. I
+don't have much to add beyond that.
+
+<p>
+
+<img src="images/q.png" alt="Q:" width="24" height="26" align="left">
+<b>Any closing thoughts?</b>
+
+<p>
+
+<img src="images/a.png" alt="A:" width="24" height="26" align="left">
+
+I think the most important thing about the GNOME project is the community.
+"Community" is a word that gets bandied about fairly carelessly these days,
+but in the case of GNOME it is vital and thriving in every sense of the word.
+I believe this dense network of deep personal relationships is what makes us
+able to take on the difficult problems of making a great desktop. Every day,
+I feel privileged and honored to be a part of this community.
+
+<p>
+
+<b>Thank you for your time.</b>
+
+<p>
+<font size="-1">Interviewed by Joakim Ziegler &lt;<a
+href="mailto:joakim@helixcode.com">joakim@helixcode.com</a>&gt; May 18-19
+2000.</font>
+
+</content>
+</document>
