@@ -131,7 +131,7 @@ class HTML
 
 <style type="text/css">#menutasks {position: absolute; left: 129px; top: 21px; z-index: 101;visibility: hidden; width: 181px;} #menusections {position: absolute; left: 192px; top: 21px; z-index: 101;visibility: hidden; width: 181px;} #menucontact {position: absolute; left: 268px; top: 21px; z-index: 101;visibility: hidden; width: 181px;}</style>
 
-<script language="javascript" src="<?php print $GLOBALS['sys_http_domain']; ?>/include/menucontrol.js" type="text/javascript" defer>
+<script language="javascript" src="<?php print $GLOBALS['sys_http_domain']; ?>/menucontrol.js" type="text/javascript" defer>
 </script>
 
 </head>

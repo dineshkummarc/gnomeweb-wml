@@ -7,7 +7,6 @@ page_SCRIPTS=account.php\
 	timezones.php\
 	BaseLanguage.class\
 	frs.class\
-	menucontrol.js\
 	trove.php\
 	browser.php\
 	Group.class\
