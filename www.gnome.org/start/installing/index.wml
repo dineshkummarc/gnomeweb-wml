@@ -38,17 +38,17 @@ $linkstring;
 
 /* Check for ftp or http at start of string and strip */
 
-if (reg_match("^ftp://",$strUrl)) {
-	$linkstring = reg_replace("^ftp://","",$strUrl);
+if (preg_match("@^ftp://@",$strUrl)) {
+	$linkstring = preg_replace("@^ftp://@","",$strUrl);
 }
-if (reg_match("^http://",$strUrl)) {
-	$linkstring = reg_replace("^http://","",$strUrl);
+if (preg_match("@^http://@",$strUrl)) {
+	$linkstring = preg_replace("@^http://@","",$strUrl);
 }
 
 /* Check for path at end of string and strip */
 
-$rstring = reg_search("/",$linkstring);
-$strMir = reg_replace("$rstring$","",$linkstring);
+$rstring = preg_replace("@^[^/]*@","",$linkstring);
+$strMir = preg_replace("@$rstring$@","",$linkstring);
 
 ?>
 <table border="0" cellpadding="4" cellspacing="0" width="90%">
@@ -60,7 +60,7 @@ $strMir = reg_replace("$rstring$","",$linkstring);
     <td valign="top" align="left">
     <small><strong>GNOME Download Links point to:</strong><br>
 	<? echo $strMir ?></small>
-    <form method="POST" action="index.phtml" name="mirrors">
+    <form method="POST" action="index.php3" name="mirrors">
       <input type="hidden" name="mirror" value="change"><p><select name="D1" size="1">
 		<option selected value="<? echo $strUrl ?>"><? echo $strMir ?></option>
         <option value="ftp://ftp.gnome.org/pub/GNOME/">ftp.gnome.org(US)(Default)</option>
@@ -135,30 +135,29 @@ $strMir = reg_replace("$rstring$","",$linkstring);
     </p>
 <?
 $dirname = "/ftp/pub/GNOME/stable/latest/sources/";
-opendir($dirname);
-$dir[] = readdir();
-while($dir[]) ;
-	$dir[] = readdir();
-endwhile;
-rewinddir();
-closedir();
+$handle = opendir($dirname);
+$file = readdir($handle);
+while($file) {
+	$dir[] = $file;
+        $file = readdir($handle);
+}
+closedir($handle);
 reset($dir);
 sort($dir);
 $j = 0;
-while($j < count($dir));
-	if (eregi("^\.",$dir[$j]));
-	else ;
+while($j < count($dir)) {
+	if (!eregi("^\.",$dir[$j])) {
 		$i = strrchr($dir[$j], "-");
-		if ($i) ;
+		if ($i) {
 			$tmp = substr($dir[$j], 0, strlen($dir[$j]) - strlen($i));
 			echo "<!-- adding ", $tmp, " -->\n";
 			$sources[$tmp] = $dir[$j];
-		endif;
-	endif;
+		}
+	}
 	$j++;
-endwhile;
+}
 unset($dir);
->
+?>
 
     <p><a name="Required"><strong>Required Downloads</strong></a><br>
     <strong>Base library downloads:<br>
@@ -269,7 +268,7 @@ echo $sources["gdm"], ">", $sources["gdm"], "</a></br>";
 
 echo "<a href=", $strUrl, "stable/latest/sources/";
 echo $sources["xchat"], ">", $sources["xchat"], "</a></br>";
->
+?>
 
 	</small>
 	</td>

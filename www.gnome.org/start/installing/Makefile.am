@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/start/installing
 
-page_SCRIPTS=index.phtml
+page_SCRIPTS=index.php3
 
 page_DATA=.htaccess
 
