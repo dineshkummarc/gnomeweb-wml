@@ -28,7 +28,7 @@
 #Question:
 What version of the FAQ is this?
 #Answer:
-This is version 1.11, modified 10 Mar 2004.
+This is version 1.12, modified 25 Aug 2004.
 
 #Name: WhoMaintainsFAQ
 #Question:
@@ -67,7 +67,8 @@ Hubert Figuiere <a href="mailto:hfiguiere@teaser.fr"><code>&lt;hfiguiere@teaser.
 #Question:
 What's new in this version of the FAQ?
 #Answer:
-Adjusted for moving to gnome.org
+Updated for version 0.94, with explanations of problems in rotation,
+autorouting, and X-less conversion.
 
 #Group: The Dia interface
 
@@ -153,9 +154,17 @@ poly lines and bezier lines, that menu allows you to add and remove bends.
 #Question:
 How do I make a zig-zag line go horizontally?
 #Answer:
-In the future, the zig-zag line will figure this out itself.  Until that
-gets implemented, here's a workaround:
-<br>
+As of version 0.93, zig-zag lines support a primitive form of
+autorouting that is intended to solve this problem and make it easier
+to make the diagrams look good.  The autorouting algorithm does not
+attempt to avoid objects, but should at least make the lines go the
+right direction out from connection points.  If it doesn't appear to
+work, double-click the zig-zag line and check that autorouting is on
+for it.  This setting can also be accessed from the object menu.
+<p>
+For previous versions, here is a workaround for how to make zigzags
+change direction:
+<p>
 Using the object-specific menu on the middle mouse button, create an extra
 segment at each end of the line, then delete the middle segment:
 <ol>
@@ -164,7 +173,7 @@ segment at each end of the line, then delete the middle segment:
 <li><img src="images/zig3.png">
 <li><img src="images/zig4.png">
 <li><img src="images/zig5.png">
-</ol
+</ol>
 
 #Name: ResizeClasses
 #Question:
@@ -192,6 +201,10 @@ Neither X nor GTK has built-in support for rotating arbitrary shapes (text,
 ellipses etc).  Work is being done on a Display Postscript interface that
 will allow arbitrary rotation.  Work is also in progress on <a
 href="http://www.freetype.org" target="_top">FreeType</a> support, which would allow for rotation.
+<p>
+Having rotated text is only part of the problem.  We also need
+infrastructure so that handles, connection points, bounding boxes etc
+are rotated along with the object.  Help on this would be appreciated.
 
 #Name: AddingConnectionPoints
 #Question:
@@ -337,9 +350,15 @@ instead of printing, and then print the resulting file.
 #Question:
 How can I use Dia to convert files without running X?
 #Answer:
-Currently, Dia depends on X for various things, but it is planned to allow
-conversions without running X.  In the meanwhile, you can use Xvbf to
-simulate an X server with the command:
+
+Version 0.94 of Dia should be able to convert files without running
+X.  However, a working installation of GTK is required to link the
+program, and Pango must be available for text conversion.
+
+<p>
+Earlier versions of Dia depend on X for various things, but it is
+planned to allow conversions without running X.  In the meanwhile, you
+can use Xvbf to simulate an X server with the command:
 
 <pre>
 startx "/usr/bin/env DISPLAY=:1 /usr/bin/dia -e $HOME/tmp/foo.png $HOME/tmp/foo.dia" -- /usr/X11R6/bin/Xvfb :1 -once -nolisten tcp
@@ -357,12 +376,12 @@ but doesn't allow PostScript tools to operate on the fonts.  If you want to
 get output using PostScript fonts, use the EPS export filter marked as
 "using PostScript Latin-1 fonts".  To use this from the command line for
 conversions, add --export-to-format=eps-builtin to the command line.  
-<p>Note
-that this export doesn't support other encodings than Latin-1, and the text
-size may be somewhat off.
-Please don't ask us to add other encodings to this.  We will not do it.
-It's an interim solution while we try to get embedded fonts out of Pango
-(maybe using PangoPDF).
+<p>
+Note that this export doesn't support other encodings than Latin-1,
+and the text size may be somewhat off.  Please don't ask us to add
+other encodings to this.  We will not do it.  It's an interim solution
+while we try to get embedded fonts out of Pango (maybe using
+PangoPDF).
 
 #Group: Compiling
 
