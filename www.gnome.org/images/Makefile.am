@@ -1,3 +1,5 @@
+SUBDIRS= screenshots
+
 urlpath=/images
 
 page_SCRIPTS=
