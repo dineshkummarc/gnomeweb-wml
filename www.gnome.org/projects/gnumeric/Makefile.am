@@ -17,11 +17,9 @@ page_SCRIPTS=index.shtml		\
 	    v8.xsd			\
     	    gnumeric-0.3		\
 	    gnumeric-0.4		\
-	    gnumeric-0.4.txt		\
 	    gnumeric-0.5		\
 	    gnumeric-0.7		\
 	    gnumeric-0.8		\
-	    gnumeric-7-11.txt		\
 	    gnumeric-0.10		\
 	    gnumeric-0.11		\
 	    gnumeric-0.12		\
@@ -83,6 +81,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-0.99.0		\
 	    gnumeric-0.99.1		\
 	    gnumeric-0.x.html		\
-	    gnumeric-1.0.0
+	    gnumeric-1.0.0		\
+	    gnumeric-1.0.1
 
 include $(top_srcdir)/rules.common
