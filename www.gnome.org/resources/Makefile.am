@@ -1,4 +1,4 @@
-SUBDIRS=
+SUBDIRS=calendar
 
 urlpath=/resources
 
