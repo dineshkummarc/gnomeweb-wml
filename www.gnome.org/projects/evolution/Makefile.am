@@ -1,4 +1,4 @@
-SUBDIRS = doc images
+SUBDIRS = doc developer-doc images
 
 urlpath=/projects/evolution
 
