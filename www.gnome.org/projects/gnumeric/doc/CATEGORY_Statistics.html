@@ -1,0 +1,647 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+    div[class~="admonition"] {
+      margin-left: 24px;
+      margin-right: 24px;
+      clear: left;
+    }
+    img[class~="admonition"] { float: left; }
+  
+    div[class~="autotoc"] { margin-left: 24px; padding: 0px; }
+    div[class~="autotoc"] ul { margin-left: 0px; padding-left: 0px; }
+    div[class~="autotoc"] ul li {
+      margin-right: 0px;
+      padding: 0px;
+      list-style-type: none;
+    }
+    div[class~="autotoc"] ul li span[class~="label"] {
+      margin-right: 0.8em;
+    }
+  
+    div[class~="figure"] { margin-left: 24px; margin-right: 12px; }
+    div[class~="figure"] div[class~="title"] span[class~="label"] {
+      margin-right: 0.8em;
+      font-style: italic;
+    }
+    pre[class~="programlisting"] {
+      margin-left: 24px;
+      margin-right: 12px;
+      overflow: auto;
+    }
+    pre[class~="screen"] {
+      margin-left: 24px;
+      margin-right: 12px;
+      overflow: auto;
+    }
+    pre[class~="synopsis"] {
+      margin-left: 24px;
+      margin-right: 12px;
+      overflow: auto;
+    }
+    pre[class~="linenumbering"] {
+      
+      margin-top: 0px;
+      margin-left: 18px;
+      background-color: black;
+      color: white;
+      -moz-opacity: .3;
+      padding-right: 0.4em;
+      padding-left: 0.4em;
+    }
+    blockquote[class~="blockquote"] { margin-left: 24px; margin-right: 12px; }
+    dt[class~="glossterm"] { margin-left: 8px; }
+    dt[class~="glossterm"] + dd { margin-top: -8px; }
+    dd[class~="glossdef"]     { margin-left: 24px; margin-right: 12px; }
+    dd[class~="glosssee"]     { margin-left: 24px; margin-right: 12px; }
+    dd[class~="glossseealso"] { margin-left: 24px; margin-right: 12px; }
+  
+    span[class~="co"] {
+      font-size: 8px;
+      padding-left:  0.4em;
+      padding-right: 0.4em;
+      margin-left:   0.2em;
+      margin-right:  0.2em;
+      border: solid 1px;
+      -moz-border-radius: 8px;
+      color: #FFFFFF;
+      background-color: #000000;
+      border-color: #000000;
+    }
+    span[class~="co"]:hover {
+      color: #FFFFFF;
+      background-color: #333333;
+      border-color: #333333;
+    }
+    span[class~="co"] a { text-decoration: none; }
+    span[class~="co"] a:hover { text-decoration: none; }
+  
+    div[class~="cmdsynopsis"] { font-family: monospace; }
+  
+    div[class~="list"] { margin-left: 24px; padding: 0px; }
+    div[class~="list"] dl dt { margin-left: 0px; }
+    div[class~="list"] dl dt + dd { margin-top: -8px; }
+    div[class~="list"] dl dd {
+      margin-left: 24px;
+      margin-right: 12px;
+    }
+    div[class~="list"] ul { margin-left: 0px; padding-left: 0px; }
+    div[class~="list"] ol { margin-left: 0px; padding-left: 0px; }
+    div[class~="list"] ul li { margin-right: 12px; padding: 0px; }
+    div[class~="list"] ol li { margin-right: 12px; padding: 0px; }
+  
+    dl[class~="qandaset"] dt + dd { margin-top: -8px; }
+    dt[class~="question"] { margin-left: 0px; }
+    dt[class~="question"] div[class~="label"] {
+      float: right;
+      margin-right: 1em;
+    }
+    dd[class~="answer"] { margin-left: 12px; }
+    dt[class~="answer"] div[class~="label"] {
+      float: right;
+      margin-right: 1em;
+    }
+  
+    div[class~="refentry"] h2[class~="refentry"] {
+      border: none;
+      margin-top: 1em;
+    }
+    div[class~="refentry"] + div[class~="refentry"] {
+      border-top: dashed black 1px;
+    }
+  
+    div[class~="table"] { margin-left: 24px; }
+    div[class~="table"] div[class~="title"] { margin-bottom: 0.2em; }
+    div[class~="table"] div[class~="title"] span[class~="label"] {
+      margin-right: 0.8em;
+      font-style: italic;
+    }
+    table {
+      border-collapse: collapse;
+      border: solid 1px;
+      -moz-border-radius: 5px;
+    }
+  tr[class~="odd"] { background-color: #F0F0F0 }
+    td { padding-left: 0.8em; padding-right: 0.8em; }
+    th { padding-left: 0.8em; padding-right: 0.8em; }
+    thead tr th {
+      border-bottom: solid 1px;
+    }
+    td + td {
+      border-left: solid 1px;
+    }
+    tbody {
+      border: solid 1px;
+      -moz-border-radius: 5px;
+    }
+  
+    h1 { font-size: 1.6em; margin-top: 0em; }
+    h2 { font-size: 1.4em; }
+    h2[class~="title"] {
+      margin-top: 1.8em;
+      border-bottom: solid 1px;
+    }
+    h3 { font-size: 1.2em; margin-top: 1.8em; }
+    h3 span[class~="title"] { border-bottom: solid 1px; }
+    h4 { font-size: 1.0em; margin-top: 1.8em; }
+    h4 span[class~="title"] { border-bottom: solid 1px; }
+    h5 { font-size: 1.0em; margin-top: 1.2em; }
+    h1 span[class~="label"] { padding-right: 0.8em; }
+    h2 span[class~="label"] { padding-right: 0.8em; }
+    h3 span[class~="label"] { padding-right: 0.8em; }
+    h4 span[class~="label"] { padding-right: 0.8em; }
+    h5 span[class~="label"] { padding-right: 0.8em; }
+  
+    body {
+      padding-top: 8px;
+      padding-left: 8px;
+      padding-right: 12px;
+    }
+    div + div { margin-top: 1em; }
+    p {
+      text-align: justify;
+    }
+  </style>
+</head>
+<body><div class="sect1">
+<a name="CATEGORY_Statistics"></a><h1 class="sect1 title"><span class="title"><span class="label">A.15</span>Statistics</span></h1>
+<div class="autotoc"><ul>
+<li>
+<span class="label"></span><a href="gnumeric-AVEDEV.html" title="AVEDEV">
+          <span class="function" style="font-family: monospace; ">AVEDEV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-AVERAGE.html" title="AVERAGE">
+          <span class="function" style="font-family: monospace; ">AVERAGE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-AVERAGEA.html" title="AVERAGEA">
+          <span class="function" style="font-family: monospace; ">AVERAGEA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-BERNOULLI.html" title="BERNOULLI">
+          <span class="function" style="font-family: monospace; ">BERNOULLI</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-BETADIST.html" title="BETADIST">
+          <span class="function" style="font-family: monospace; ">BETADIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-BETAINV.html" title="BETAINV">
+          <span class="function" style="font-family: monospace; ">BETAINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-BINOMDIST.html" title="BINOMDIST">
+          <span class="function" style="font-family: monospace; ">BINOMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CAUCHY.html" title="CAUCHY">
+          <span class="function" style="font-family: monospace; ">CAUCHY</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CHIDIST.html" title="CHIDIST">
+          <span class="function" style="font-family: monospace; ">CHIDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CHIINV.html" title="CHIINV">
+          <span class="function" style="font-family: monospace; ">CHIINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CHITEST.html" title="CHITEST">
+          <span class="function" style="font-family: monospace; ">CHITEST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CONFIDENCE.html" title="CONFIDENCE">
+          <span class="function" style="font-family: monospace; ">CONFIDENCE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CORREL.html" title="CORREL">
+          <span class="function" style="font-family: monospace; ">CORREL</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-COUNT.html" title="COUNT">
+          <span class="function" style="font-family: monospace; ">COUNT</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-COUNTA.html" title="COUNTA">
+          <span class="function" style="font-family: monospace; ">COUNTA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-COVAR.html" title="COVAR">
+          <span class="function" style="font-family: monospace; ">COVAR</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CRITBINOM.html" title="CRITBINOM">
+          <span class="function" style="font-family: monospace; ">CRITBINOM</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-CRONBACH.html" title="CRONBACH">
+          <span class="function" style="font-family: monospace; ">CRONBACH</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-DEVSQ.html" title="DEVSQ">
+          <span class="function" style="font-family: monospace; ">DEVSQ</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-EXPONDIST.html" title="EXPONDIST">
+          <span class="function" style="font-family: monospace; ">EXPONDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-EXPPOWDIST.html" title="EXPPOWDIST">
+          <span class="function" style="font-family: monospace; ">EXPPOWDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FDIST.html" title="FDIST">
+          <span class="function" style="font-family: monospace; ">FDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FINV.html" title="FINV">
+          <span class="function" style="font-family: monospace; ">FINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FISHER.html" title="FISHER">
+          <span class="function" style="font-family: monospace; ">FISHER</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FISHERINV.html" title="FISHERINV">
+          <span class="function" style="font-family: monospace; ">FISHERINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FORECAST.html" title="FORECAST">
+          <span class="function" style="font-family: monospace; ">FORECAST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FREQUENCY.html" title="FREQUENCY">
+          <span class="function" style="font-family: monospace; ">FREQUENCY</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-FTEST.html" title="FTEST">
+          <span class="function" style="font-family: monospace; ">FTEST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GAMMADIST.html" title="GAMMADIST">
+          <span class="function" style="font-family: monospace; ">GAMMADIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GAMMAINV.html" title="GAMMAINV">
+          <span class="function" style="font-family: monospace; ">GAMMAINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GAMMALN.html" title="GAMMALN">
+          <span class="function" style="font-family: monospace; ">GAMMALN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GEOMDIST.html" title="GEOMDIST">
+          <span class="function" style="font-family: monospace; ">GEOMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GEOMEAN.html" title="GEOMEAN">
+          <span class="function" style="font-family: monospace; ">GEOMEAN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-GROWTH.html" title="GROWTH">
+          <span class="function" style="font-family: monospace; ">GROWTH</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-HARMEAN.html" title="HARMEAN">
+          <span class="function" style="font-family: monospace; ">HARMEAN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-HYPGEOMDIST.html" title="HYPGEOMDIST">
+          <span class="function" style="font-family: monospace; ">HYPGEOMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-INTERCEPT.html" title="INTERCEPT">
+          <span class="function" style="font-family: monospace; ">INTERCEPT</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-KURT.html" title="KURT">
+          <span class="function" style="font-family: monospace; ">KURT</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-KURTP.html" title="KURTP">
+          <span class="function" style="font-family: monospace; ">KURTP</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LANDAU.html" title="LANDAU">
+          <span class="function" style="font-family: monospace; ">LANDAU</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LAPLACE.html" title="LAPLACE">
+          <span class="function" style="font-family: monospace; ">LAPLACE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LARGE.html" title="LARGE">
+          <span class="function" style="font-family: monospace; ">LARGE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LINEST.html" title="LINEST">
+          <span class="function" style="font-family: monospace; ">LINEST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGEST.html" title="LOGEST">
+          <span class="function" style="font-family: monospace; ">LOGEST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGFIT.html" title="LOGFIT">
+          <span class="function" style="font-family: monospace; ">LOGFIT</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGINV.html" title="LOGINV">
+          <span class="function" style="font-family: monospace; ">LOGINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGISTIC.html" title="LOGISTIC">
+          <span class="function" style="font-family: monospace; ">LOGISTIC</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGNORMDIST.html" title="LOGNORMDIST">
+          <span class="function" style="font-family: monospace; ">LOGNORMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-LOGREG.html" title="LOGREG">
+          <span class="function" style="font-family: monospace; ">LOGREG</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MAX.html" title="MAX">
+          <span class="function" style="font-family: monospace; ">MAX</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MAXA.html" title="MAXA">
+          <span class="function" style="font-family: monospace; ">MAXA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MEDIAN.html" title="MEDIAN">
+          <span class="function" style="font-family: monospace; ">MEDIAN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MIN.html" title="MIN">
+          <span class="function" style="font-family: monospace; ">MIN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MINA.html" title="MINA">
+          <span class="function" style="font-family: monospace; ">MINA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-MODE.html" title="MODE">
+          <span class="function" style="font-family: monospace; ">MODE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-NEGBINOMDIST.html" title="NEGBINOMDIST">
+          <span class="function" style="font-family: monospace; ">NEGBINOMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-NORMDIST.html" title="NORMDIST">
+          <span class="function" style="font-family: monospace; ">NORMDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-NORMINV.html" title="NORMINV">
+          <span class="function" style="font-family: monospace; ">NORMINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-NORMSDIST.html" title="NORMSDIST">
+          <span class="function" style="font-family: monospace; ">NORMSDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-NORMSINV.html" title="NORMSINV">
+          <span class="function" style="font-family: monospace; ">NORMSINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PARETO.html" title="PARETO">
+          <span class="function" style="font-family: monospace; ">PARETO</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PEARSON.html" title="PEARSON">
+          <span class="function" style="font-family: monospace; ">PEARSON</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PERCENTILE.html" title="PERCENTILE">
+          <span class="function" style="font-family: monospace; ">PERCENTILE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PERCENTRANK.html" title="PERCENTRANK">
+          <span class="function" style="font-family: monospace; ">PERCENTRANK</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PERMUT.html" title="PERMUT">
+          <span class="function" style="font-family: monospace; ">PERMUT</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-POISSON.html" title="POISSON">
+          <span class="function" style="font-family: monospace; ">POISSON</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-PROB.html" title="PROB">
+          <span class="function" style="font-family: monospace; ">PROB</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-QUARTILE.html" title="QUARTILE">
+          <span class="function" style="font-family: monospace; ">QUARTILE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-RANK.html" title="RANK">
+          <span class="function" style="font-family: monospace; ">RANK</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-RAYLEIGH.html" title="RAYLEIGH">
+          <span class="function" style="font-family: monospace; ">RAYLEIGH</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-RAYLEIGHTAIL.html" title="RAYLEIGHTAIL">
+          <span class="function" style="font-family: monospace; ">RAYLEIGHTAIL</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-RSQ.html" title="RSQ">
+          <span class="function" style="font-family: monospace; ">RSQ</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SKEW.html" title="SKEW">
+          <span class="function" style="font-family: monospace; ">SKEW</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SKEWP.html" title="SKEWP">
+          <span class="function" style="font-family: monospace; ">SKEWP</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SLOPE.html" title="SLOPE">
+          <span class="function" style="font-family: monospace; ">SLOPE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SMALL.html" title="SMALL">
+          <span class="function" style="font-family: monospace; ">SMALL</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SSMEDIAN.html" title="SSMEDIAN">
+          <span class="function" style="font-family: monospace; ">SSMEDIAN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STANDARDIZE.html" title="STANDARDIZE">
+          <span class="function" style="font-family: monospace; ">STANDARDIZE</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STDEV.html" title="STDEV">
+          <span class="function" style="font-family: monospace; ">STDEV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STDEVA.html" title="STDEVA">
+          <span class="function" style="font-family: monospace; ">STDEVA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STDEVP.html" title="STDEVP">
+          <span class="function" style="font-family: monospace; ">STDEVP</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STDEVPA.html" title="STDEVPA">
+          <span class="function" style="font-family: monospace; ">STDEVPA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-STEYX.html" title="STEYX">
+          <span class="function" style="font-family: monospace; ">STEYX</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-SUBTOTAL.html" title="SUBTOTAL">
+          <span class="function" style="font-family: monospace; ">SUBTOTAL</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-TDIST.html" title="TDIST">
+          <span class="function" style="font-family: monospace; ">TDIST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-TINV.html" title="TINV">
+          <span class="function" style="font-family: monospace; ">TINV</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-TREND.html" title="TREND">
+          <span class="function" style="font-family: monospace; ">TREND</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-TRIMMEAN.html" title="TRIMMEAN">
+          <span class="function" style="font-family: monospace; ">TRIMMEAN</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-TTEST.html" title="TTEST">
+          <span class="function" style="font-family: monospace; ">TTEST</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-VAR.html" title="VAR">
+          <span class="function" style="font-family: monospace; ">VAR</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-VARA.html" title="VARA">
+          <span class="function" style="font-family: monospace; ">VARA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-VARP.html" title="VARP">
+          <span class="function" style="font-family: monospace; ">VARP</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-VARPA.html" title="VARPA">
+          <span class="function" style="font-family: monospace; ">VARPA</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-WEIBULL.html" title="WEIBULL">
+          <span class="function" style="font-family: monospace; ">WEIBULL</span>
+        </a>
+</li>
+<li>
+<span class="label"></span><a href="gnumeric-ZTEST.html" title="ZTEST">
+          <span class="function" style="font-family: monospace; ">ZTEST</span>
+        </a>
+</li>
+</ul></div>
+</div></body>
+</html>
