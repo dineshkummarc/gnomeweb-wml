@@ -12,7 +12,6 @@ page_SCRIPTS=			\
 	epiphany.css		\
 	index.html			\
 	news.html			\
-	plan.html			\
 	resources.html		\
 	extensions.html		\
 	smartbookmarks.html
