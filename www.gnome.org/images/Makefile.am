@@ -169,7 +169,9 @@ sidebar_items=\
 	sidebar-faq.png\
 	sidebar-faq.gif\
 	sidebar-translations.png\
-	sidebar-translations.gif
+	sidebar-translations.gif\
+  sidebar-gnomefoundation.png\
+  sidebar-gnomefoundation.gif
 
 
 topbar_headers=\
