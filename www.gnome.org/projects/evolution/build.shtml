@@ -34,7 +34,8 @@ process)
 
 <li>Do 'jhbuild bootstrap' and update to the latest modules - make
 sure you install pkg-config even if you have the same version that is
-required.
+required.  Do not install automake 1.8 since it will cause build
+failures.
 
 <li>Do 'jhbuild build evolution'
 </ul>
@@ -48,6 +49,16 @@ common problems are listed below:
 Solution: You probably have a distro that maps 'python' to a version
 less than 2.  Just change the installed jhbuild script (usually
 ~/bin/jhbuild) to use 'python2' instead of 'python'.<br><br>
+
+<li><b>Build fails in libxml</b><br><br>
+
+<blockquote>
+./autogen.sh --prefix /g/home/sig/src/gnome-install --enable-maintainer-mode --disable-static --disable-gtk-doc<br>
+You should add the contents of`/g/home/sig/src/gnome-install/share/aclocal/libtool.m4' to`aclocal.m4'.<br>
+acinclude.m4:4: warning: underquoted definition of AC_TRY_EVAL2  run info '(automake)Extending aclocal'<br>
+</blockquote>
+
+Solution: Don't install automake 1.8 or do "jhbuild shell" and uninstall automake 1.8 from the jhbuild environment.
 
 <li><b>Build fails in fontconfig</b><br><br>
 
