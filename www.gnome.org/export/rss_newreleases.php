@@ -20,9 +20,9 @@ $query = "SELECT groups.group_name AS group_name,"
 	. "frs_release.group_id=groups.group_id "
 	. "ORDER BY frs_release.release_date DESC LIMIT ".$limit;
 
-//print $query."\n";
+print $query."\n";
 
-$res = db_query ($query,($limit * 3));
+$res = db_query ($query);
 
 // ## one time output
 print " <channel>\n";
