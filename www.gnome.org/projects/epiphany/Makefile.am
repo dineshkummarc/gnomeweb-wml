@@ -13,6 +13,7 @@ page_SCRIPTS=			\
 	news.html			\
 	resources.html		\
 	extensions.html		\
-	smartbookmarks.html
+	smartbookmarks.html \
+	epiphany.php
 
 include $(top_srcdir)/rules.common
