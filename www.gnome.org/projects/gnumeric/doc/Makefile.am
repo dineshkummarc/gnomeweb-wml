@@ -1,4 +1,4 @@
-SUBDIRS= figures
+SUBDIRS=figures
 
 urlpath=/projects/gnumeric/doc
 
