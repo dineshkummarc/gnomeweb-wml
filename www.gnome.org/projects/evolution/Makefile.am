@@ -3,29 +3,38 @@ SUBDIRS = developer-doc doc images release_notes
 urlpath=/projects/evolution
 
 page_DATA =			\
-	go.css			\
+	go.css \
 	pngbehavior.htc \
-	arch.shtml   		\
-	bugs.shtml   		\
-	bugday.shtml   		\
-	credits.shtml  		\
-	copyright.shtml		\
-	devdoc.shtml  		\
-	faq.shtml       	\
-	foot.shtml  		\
-	hackfest-eplugin.shtml	\
-	index.shtml  		\
-	patch.shtml		\
-	screenshots14.shtml	\
-	stable.shtml		\
-	build.shtml		\
-	cvs.shtml		\
-	features.shtml  	\
-	head.shtml  		\
-	map.shtml 	 	\
-	screenshots15.shtml	\
-	unstable.shtml		\
-	releasenotes.shtml	\
+	head.shtml \
+	foot.shtml \
+	index.shtml \
+	about.shtml \
+	arch.shtml \
+	bugday.shtml \
+	bugs.shtml \
+	build.shtml \
+	copyright.shtml \
+	credits.shtml \
+	cvs.shtml \
+	devdoc.shtml \
+	developer.shtml \
+	documentation.shtml \
+	download.shtml \
+	eplugin.shtml \
+	eplugins.shtml \
+	faq.shtml \
+	features.shtml \
+	hackfest-eplugin.shtml \
+	information.shtml \
+	keys.shtml \
+	map.shtml \
+	patch.shtml \
+	releasenotes.shtml \
+	screenshots14.shtml \
+	screenshots15.shtml \
+	screenshots.shtml \
+	stable.shtml \
+	unstable.shtml \
 	jhbuildrc
 
 include $(top_srcdir)/rules.common
