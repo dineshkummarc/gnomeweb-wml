@@ -1,0 +1,138 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Get more software" imgid="getmore">
+<content>
+
+<table bgcolor=#fefefe width=95% CELLSPACING=1 CELLPADDING=4 BORDER=1>
+<tr><TD BGCOLOR="#ffffff" ALIGN=center>
+    <BIG><B>
+    GNOME Software Map
+    </B></BIG>
+</TD></TR> 
+<tr>
+<td>
+
+<!-- start of page contents -->
+
+<?
+
+function qmeta ($str) {
+   return ereg_replace("'", "``", $str);
+};
+
+mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
+$qry = "SELECT * FROM applist WHERE name = '"+qmeta($name)+"'";	
+$res = mysql("gnomeapps", $qry);
+if(!$res) {
+	echo "Query failed</tr></td></table>";
+	mysql_close();
+	exit;
+}
+
+	$i = 0;
+	$n = mysql_numrows($res);
+
+	if($n < 1) {
+		echo "Query failed</tr></td></table>";
+		mysql_close();
+		exit;
+	}
+
+
+	if($n > 1) {
+		echo "Got more than one package by that name!";
+		echo "</td></tr></table>";
+		mysql_close();
+		exit;
+	}
+
+$name = mysql_result($res, $i, "name");
+$version = mysql_result($res, $i, "version");
+$mname = mysql_result($res, $i, "maintainer_name");
+$memail = mysql_result($res, $i, "maintainer_email");
+$desc = mysql_result($res, $i, "description");
+$keywords = mysql_result($res, $i, "keywords");
+$requires = mysql_result($res, $i, "requires");
+$url_homepage = mysql_result($res, $i, "url_homepage");
+$url_screenshot = mysql_result($res, $i, "url_screenshot");
+$url_download = mysql_result($res, $i, "url_download");
+$in_cvs =  mysql_result($res, $i, "in_cvs");
+$category = mysql_result($res, $i, "category");
+$added = mysql_result($res, $i, "added");
+$touched = mysql_result($res, $i, "touched");
+
+# dont ask I couldnt get mysql time/date functions to work with mysql_result()
+$time = strchr($added, " ");
+$date = substr($added, 0, 10);
+$hour = substr($time, 1, 2);
+$min  = substr($time, 4, 2);
+$sec  = substr($time, 7, 2);
+$year = substr($date, 0, 4);
+$mon  = substr($date, 5, 2);
+$day  = substr($date, 8, 2);
+$addedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
+
+$hour = substr($touched, 8, 2);
+$min  = substr($touched, 10, 2);
+$sec  = substr($touched, 12, 2);
+$year = substr($touched, 0, 4);
+$mon  = substr($touched, 4, 2);
+$day  = substr($touched, 6, 2);
+$touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
+
+# now addedts and touchedts are unix timestamps
+>
+
+<table>
+<tr><td>Package name:</td>
+<td><?echo $name></td></tr>
+<tr><td>Current version:</td>
+<td><?echo $version></td></tr>
+<tr><td>Description:</td>
+<td><?echo $desc></td></tr>
+<tr><td>Search keywords:</td>
+<td><?echo $keywords></td></tr>
+<tr><td>Requirements (besides gnome-libs):</td>
+<td><?echo $requires></td></tr>
+<tr><td>Homepage URL:</td>
+<td><a href=<?echo $url_homepage>><?echo $url_homepage></a></td></tr>
+<?
+if ($url_screenshot) {
+   echo "<tr><td>Screenshot URL:</td>";
+   echo "<td><a href=",$url_screenshot,">",$url_screenshot,"</a></td></tr>";
+}
+if ($url_download) {
+   echo "<tr><td>Download URL for stable source:</td>";
+   echo "<td><a href=",$url_download,">",$url_download,"</a></td></tr>";
+}
+
+if ($prevpage == "") {
+   $prevpage = "list.phtml";
+}
+?>
+<tr><td>Is development code in CVS?</td>
+ <td><?echo $in_cvs></td></tr>
+<tr><td>Category:</td>
+<td><?echo $category></td></tr>
+
+<tr><td>Entry Created:</td>
+<td><?echo Date("Y-m-d H:i:s",$addedts)?></td></tr>
+
+<tr><td>Last Updated:</td>
+<td><?echo Date("Y-m-d H:i:s",$touchedts)?></td></tr>
+
+</table>
+
+<p>
+<a href="<? echo $prevpage?>">Return to Software Listing</a>
+
+<!-- end of page content -->
+</td>
+</tr>
+</table>
+
+
+</content>
+</document>
