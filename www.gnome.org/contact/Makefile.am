@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/learn
+urlpath=/contact
 
 page_SCRIPTS=index.html
 
