@@ -5,7 +5,7 @@ urlpath=/projects/gnumeric/new-design-testing/announcements
 page_SCRIPTS= \
     index.shtml
 
-install-exec-hook:
-	mkdir $(urlpath)/1.3 $(urlpath)/1.4
-
 include $(top_srcdir)/rules.common
+
+install-exec-hook:
+	mkdir $(pagedir)/1.3 $(pagedir)/1.4
