@@ -4,6 +4,7 @@ urlpath=/friends
 
 page_SCRIPTS=index.php\
 	thanks.php\
+	donors.php\
 	check.html
 
 include $(top_srcdir)/rules.common
