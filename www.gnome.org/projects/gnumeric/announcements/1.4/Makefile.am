@@ -1,7 +1,7 @@
 urlpath=/projects/gnumeric/announcements/1.4
 
 page_SCRIPTS= \
-    gnumeric-1.4.html \
+    gnumeric-1.4.shtml \
     gnumeric-1.4.0.html \
     gnumeric-1.4.1.html \
     index.shtml
