@@ -375,8 +375,6 @@ gnumeric-RANDEXP.html 	\
 gnumeric-RANDEXPPOW.html 	\
 gnumeric-RANDFDIST.html 	\
 gnumeric-RANDGAMMA.html 	\
-gnumeric-RANDGAUSSIAN.html 	\
-gnumeric-RANDGAUSSIANTAIL.html 	\
 gnumeric-RANDGEOM.html 	\
 gnumeric-RANDGUMBEL.html 	\
 gnumeric-RANDHYPERG.html 	\
@@ -387,6 +385,8 @@ gnumeric-RANDLOG.html 	\
 gnumeric-RANDLOGISTIC.html 	\
 gnumeric-RANDLOGNORM.html 	\
 gnumeric-RANDNEGBINOM.html 	\
+gnumeric-RANDNORM.html 		\
+gnumeric-RANDNORMTAIL.html 	\
 gnumeric-RANDPARETO.html 	\
 gnumeric-RANDPOISSON.html 	\
 gnumeric-RANDRAYLEIGH.html 	\
