@@ -7,7 +7,7 @@ page_SCRIPTS=\
 	anjuta.shtml\
 	bindings.shtml\
 	contribute.shtml\
-	devhelp.shtml\	
+	devhelp.shtml\
 	faq.shtml\
 	foot.shtml\
 	gide.shtml\
@@ -15,7 +15,7 @@ page_SCRIPTS=\
 	glimmer.shtml\
 	gnomebuild.shtml\
 	gnomedebug.shtml\
-	gpf.shtml\	
+	gpf.shtml\
 	head.shtml\
 	links.shtml\
 	overview.shtml\
