@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/doc/figures
+urlpath=/projects/gnumeric/new-design-testing/doc/figures
  
 page_SCRIPTS= \
 add-decimals.png  \

@@ -1,6 +1,6 @@
 SUBDIRS= figures stylesheet
 
-urlpath=/projects/gnumeric/doc
+urlpath=/projects/gnumeric/new-design-testing/doc
 
 page_SCRIPTS=
 

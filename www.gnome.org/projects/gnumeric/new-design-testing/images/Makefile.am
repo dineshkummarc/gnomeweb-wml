@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/images
+urlpath=/projects/gnumeric/new-design-testing/images
 
 page_SCRIPTS= 				\
     down-2.png				\

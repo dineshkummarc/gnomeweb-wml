@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gnumeric/announcements/ancient
+urlpath=/projects/gnumeric/new-design-testing/announcements/ancient
 
 page_SCRIPTS= 		\
     gnumeric-0.3	\
