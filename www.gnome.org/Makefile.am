@@ -10,7 +10,7 @@ page_SCRIPTS=index.php3		\
 	pressreleases.html  \
 	pressresources.html \
   pr-assistivetech.html	\
-  pr-bitstreamfonts.wml \
+  pr-bitstreamfonts.html \
   pr-gnome12.html     \
   pr-gnomeenelsur.html \
   pr-foundation.html  \
