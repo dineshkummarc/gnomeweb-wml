@@ -10,6 +10,8 @@ page_SCRIPTS =  3h.gif  		\
 		thumb-agnubis-may2002.jpg	\
 		thumb-agnubis-screenshot-june02.png	\
 		agnubis-may2002.jpg	\
-		small-gnome-foot.png
+		small-gnome-foot.png	\
+		thumb-agnubis-july2002.png	\
+		agnubis-july2002.png	
 
 include $(top_srcdir)/rules.common
