@@ -8,6 +8,7 @@ page_SCRIPTS= 				\
     down-deactivated.png		\
     gnumeric-sample-thumb.png		\
     gnumeric-sample.png			\
+    gnumeric-sample.gnumeric		\
     gnumeric-top-background-2.png	\
     gnumeric-top-background.png		\
     gnumeric.png			\
