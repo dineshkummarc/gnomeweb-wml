@@ -12,7 +12,8 @@ SUBDIRS=			\
 	nautilus		\
 	gnome-pilot		\
 	gnome-print		\
-	agnubis
+	agnubis			\
+	gst
 
 urlpath=/projects
 
