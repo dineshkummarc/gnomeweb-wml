@@ -15,6 +15,9 @@ CLEANFILES = $(BUILT_SOURCES)
 %.html %.shtml %.php3 %.phtml: %.wml $(top_srcdir)/include/evilsedhack
 	@$(top_srcdir)/include/evilsedhack $< $(HTTP_PREFIX)/$(SITE) > $@
 
+.htaccess: htaccess
+	@sed -e "s,@SITE@,$(HTTP_PREFIX)/$(SITE)," $< > $@
+
 #@basepagename=$(basename $(notdir $<)); \
 #wml $(WML_FLAGS) \
 #	-DURLDIR=$(urlpath) \
