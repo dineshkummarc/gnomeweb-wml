@@ -1,4 +1,4 @@
-SUBDIRS=ui-review modules
+SUBDIRS=ui-review modules bindings
 
 urlpath=/start/2.5
 
