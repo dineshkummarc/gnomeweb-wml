@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Second UML design</title>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<META name="description" content="Tutorial on using UML">
+<META name="keywords" content="UML,tutorial,Altima">
+  </head>
+
+  <body BGCOLOR=white>
+    <h1>Second UML design</h1>
+
+<p>To improve on that design I wanted to add the following functionnalities: 
+<UL>
+<LI> Introduce the general concept of an attribute. An attribute is something that describes the entity. It can be the length, width, the name or any other kind of information. This has to be expandable since at this early stage of development, I don't know what is (and will) be needed.
+<LI> Add 'lazy evaluation' such that an entity derived from another only needs to store the difference between its attributes and its parent's attributes.
+<LI> Add 'states' information.
+</UL>
+</p>
+
+<P>And here is what I came up with.</P>
+
+
+<DIV align=center><IMG src="second.gif"></DIV>
+
+
+<P>Instead of using a map with only strings, I think that using
+different maps for the different kinds of variables will optimize the
+queries. I sitll don't know if I'd rather use an id for the name or an
+actual string. My feeling is that an int would be faster for query
+searches and that a mapping between ints and strings would be easy to
+do in case someone needs the actual name. However I am not sure, so
+I'm leaving it blank for now.</p>
+
+<P><code>EntityLocation</code> is now renamed to
+<code>AltimaEntity</code>. The only difference between an
+<code>Entity</code> and an <code>AltimaEntity</code> is that the later
+exists somewhere in the world, it is an instantiation of an
+<code>Entity</code>. For example, an oak entity exist, but the oak
+tree that a player can interact with (cut, burn, etc.) is an
+<code>AltimaEntity</code>. </P>
+
+
+<P>
+For viewing the world in 2D, a <code>EntityGfx</code> exists for every
+<code>AltimaEntity</code>. A graphic is not a simple sprite because
+graphics can be layered to represent an entity. The
+<code>EntityGfx</code> class doesn't have any pixmaps. It selects the
+appropriate pixmaps from the graphic database.</p>
+
+<P>The use of arrows in the association between classes indicates that
+the association is one sided, i.e. <code>EntityGfx</code> knows about
+the altima entity but the altima entity doesn't know anything about
+the other.</P>
+
+    <hr>
+    <address><a href="mailto:lavoie@zeus.genie.uottawa.ca">Lavoie Philippe</a></address>
+<!-- Created: Sat Jan 16 18:05:12 EST 1999 -->
+<!-- hhmts start -->
+Last modified: Sat Jan 16 18:29:45 EST 1999
+<!-- hhmts end -->
+  </body>
+</html>

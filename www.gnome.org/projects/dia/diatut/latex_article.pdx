@@ -1,0 +1,51 @@
+#===================
+=cfg
+top_left=(top_left here)
+top_center=@title@ \\ @desc@
+top_right=(top_right here)
+bot_left=@author@
+bot_center=Page \thepage
+bot_right=@date@
+docclass=article
+=end cfg
+#
+=preamble_begin_for latex
+\documentclass[11pt,fleqn]{@docclass@}
+\usepackage{makeidx,verbatim,graphicx,fancyhdr,longtable,rotating}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1.5ex}
+\setlength{\mathindent}{5ex}
+\setlength{\topmargin}{0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+%%%\setlength{\textheight}{8.5in}
+\setlength{\textwidth}{6.5in}
+%%%\setlength{\footskip}{0in}
+
+\pagestyle{fancy}
+\lhead{@top_left@}
+\chead{@top_center@}
+\rhead{@top_right@}
+\lfoot{@bot_left@}
+\cfoot{@bot_center@}
+\rfoot{@bot_right@}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%\makeindex 
+=end preamble_begin_for latex
+#
+=preamble_end_for latex
+\begin{document}
+\title{@title@}
+\author{@author@ \\ @author_email@}
+\maketitle
+=end preamble_end_for latex
+#
+=postamble_for latex
+%\printindex
+\end{document}
+=end postamble_for latex
+
+
+

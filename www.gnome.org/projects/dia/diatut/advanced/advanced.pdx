@@ -1,0 +1,223 @@
+=head2 Layers
+
+=head3 Simple case
+
+Suppose we have four UML "class" objects, and want to draw a box around
+two of them.  Doing so leaves the box on top and obstructs view of the
+two boxed classes.  Putting the box in the background solves the
+problem.  
+
+Putting an object in the background is done by first selecting it, and then:
+
+=list a
+=item Long way: Right-click for menu...Objects...Send to back
+=item Shortcut: Ctl-B
+=end list
+
+=for html <IMG SRC="../advanced/layers1.png" ALT="../advanced/layers1.png">
+
+=head3 Full layering
+
+Now suppose we have a common background (e.g., project logo) and want
+to build our diagram on top of that.  It is no longer convenient to do
+this object by object.  Instead we want to establish the layers in
+advance and use them over time.  
+
+If you are familiar with Gimp layers, you are in business -- it is the
+same mechanism. Otherwise, listen carefully.
+
+When you start a new diagram, after doing page setup, select
+right-click...Objects...layers.  This gives:
+
+=for html <IMG SRC="../advanced/layer_dialog.png" ALT="../advanced/layer_dialog.png">
+
+Click on the "new layer" icon (page with corner turned down), and you
+will get a "New layer".  It is automatically placed above the
+Background layer.  Click on the layer's name to select it.  Once
+selected, you can move it relative to the other layers using the up
+and down arrows.  Of course you should leave the Background layer at
+the bottom of the stack.
+
+Clicking on the eyeball next to a layer toggles whether or not it is
+visible in the diagram.  Generally, you build each layer separately,
+with just it visible, but turn on all layers occasionally to check
+alignment.
+
+For our example, we put a text object which says "DRAFT" on the
+background layer.  We make this text object grey using the color
+selector.  Then we go to the new layer and make a diagram.  Making
+both layers visible gives:
+
+=for html <IMG SRC="../advanced/layers2.png" ALT="../advanced/layers2.png">
+
+
+=head2 Alignment
+
+Suppose we have several objects roughly aligned:
+
+=for html <IMG SRC="../advanced/align1.png" ALT="../advanced/align1.png">
+
+We could very carefully drag them around to get them aligned.  But a
+better approach is to use the alignment functions.  Select the
+almost-vertically-aligned circles.  Right-click to get the menu,
+then...Objects...Horizontal...center.  This moves the objects
+horizontally until their centers are aligned vertically.  
+
+Yes, it is a bit confusing: To align on a vertical axis, you have to
+select horizontal, because that is the axis on which the movement
+takes place.  
+
+Similarly, to align objects along a single horizontal axis, you select
+Objects...Vertical...center.  After aligning groups vertically and
+horizontally, we get:
+
+=for html <IMG SRC="../advanced/align2.png" ALT="../advanced/align2.png">
+
+
+=head2 Selection
+
+The obvious ways to select are:
+
+=list a
+=item With pointer, click on an item
+=item With pointer, and shift-button down, click on 1 or more items
+=item With pointer, drag dashed-line box around the items to be selected
+=end list
+
+But you might want something fancier.  In that case, Right-click to
+get the menu and then Select....  This gives the dialog:
+
+
+=for html <IMG SRC="../advanced/select_dialog.png" ALT="../advanced/select_dialog.png">
+
+
+For example, applied to this diagram, after selecting the "A" object:
+
+=for html <IMG SRC="../advanced/select1.png" ALT="../advanced/select1.png">
+
+=list *
+
+=item All: All boxes and lines are selected.
+
+=item None: No boxes or lines are selected (e.g., A is also unselected)
+
+=item Invert: Everything is selected I<except> A
+
+=item Connected: A and L1 and L3 are selected, because L1 and L2 are
+directly connected to A.
+
+=item Transitive: A,B,C,D, and L1,L2,L3 are selected, because by
+following connections, you can reach each of these.  E is left out
+because it cannot be reached.
+
+=item Same Type: A,B,C,D,E are selected, because they are the same
+type of Dia object (i.e., all UML class objects).
+
+=end list
+
+NOTE: If I ever figure out what the check boxes do, I'll let you know.
+
+=head2 Shape Libraries
+
+Dia comes with several shape libraries.  It is also designed to allow
+you to add your own.  
+
+These libraries are of course domain-specific, so their use should be
+described in other contexts (e.g., UML should be discussed in a
+tutorial on software engineering).  Here we will concentrate on the
+mechanics of using the shape libraries.
+
+The libraries are saved in the share dir for wherever dia is
+installed.  For example if C<which dia> gives C</usr/bin/dia>, then we
+want to look at C</usr/share.dia>:
+
+=verbatim
+/usr/share/dia/
+  dia_logo.png         Dia's logo
+  shapes/
+    Flowchart/         objects, in paired files (icon and shape)
+      magdisk.xpm      icon
+      magdisk.shape    shape description
+      ...
+  sheets/      object descriptions in various languages (XML)
+    ER.sheet
+    Flowchart.sheet
+    UML.sheet
+    ...
+=end end verbatim
+
+For example, if we are interested in the Flowchart library, and
+specifically in the magnetic disk object, we find the magdisk.shape
+file:
+
+=verbatim
+<?xml version="1.0"?>
+
+<shape xmlns="http://www.daa.com.au/~james/dia-shape-ns"
+       xmlns:svg="http://www.w3.org/TR/2000/03/WD-SVG-20000303/DTD/svg-20000303-stylable.dtd">
+  <name>Flowchart - Magnetic Disk</name>
+  <description>Magnetic Disk</description>
+  <icon>magdisk.xpm</icon>
+  <connections>
+    <point x="0"   y="2"/>
+    <point x="2.5" y="0.4375"/>
+    <point x="5"   y="0"/>
+    <point x="7.5" y="0.4375"/>
+    <point x="10"  y="0"/>
+    <point x="0"   y="2.5"/>
+    <point x="0"   y="7.5"/>
+    <point x="0"   y="5"/>
+    <point x="0"   y="10"/>
+    <point x="10"  y="2.5"/>
+    <point x="10"  y="5"/>
+    <point x="10"  y="7.5"/>
+    <point x="10"  y="10"/>
+    <point x="2.5" y="11.5625"/>
+    <point x="5"   y="12"/>
+    <point x="7.5" y="11.5625"/>
+  </connections>
+  <textbox x1="0" y1="4" x2="10" y2="10"/>
+  <svg:svg width="10" height="12">
+    <svg:path d="M 0,2 c 2,-1.5 3,-2 5,-2 s 3,0.5 5,2 v 8
+                 c -2,1.5 -3,2 -5,2 s -3,-0.5 -5,-2 v -8 z
+                 M 0,2 c 2,1.5 3,2 5,2 s 3,-0.5 5,-2" style="fill: default"/>
+  </svg:svg>
+</shape>
+=end verbatim
+
+Notice:
+=list a
+=item The name value maps to the description lines in the Flowchart.sheet file
+=verbatim
+    <object name="Flowchart - Magnetic Disk">
+      <description xml:lang="no">Magnetdisk</description>
+      <description xml:lang="fr">Disque Magnétique</description>
+      <description xml:lang="de">Magnetdisk</description>
+      <description>Magnetic Disk</description>
+    </object>
+=end verbatim
+
+Thus, we get language-specific tooltips.
+
+=item The icon value is the file name of the icon shown on the main
+window.
+
+=item The shape is described by a Scalable Vector Graphics (svg)
+width/height and path.  
+
+=item The location of connection points is given in the context of the
+width and height.  You can add other connection points if you wish.
+
+=item The associated text field is also defined in the context of the
+width and height.  Originally, it is under the magdisk object. You
+could move that to the middle of the magdisk object if you wished.
+
+=end list
+
+You can make your own sheets/shapes by following the above patterns.
+
+Some shape libraries (e.g., UML) have associated processing and
+therefore are not just .shape files.  To make your own
+library-with-processing requires going into the C code, and that is
+beyond the scope of this tutorial.  (Perhaps embedded python will be
+supported in the future, simplifying even this adventure.)

@@ -1,0 +1,124 @@
+<HTML>
+<HEAD>
+<META NAME="Author" CONTENT="f.toussaint">
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE>Fonts in X Dia</TITLE>
+<link rel="StyleSheet" href="dia.css" type="text/css">
+<LINK rel="shortcut icon" href="images/dia_gnome_icon.png">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+
+<table width="100%" cellpadding="0" border="0">
+<tr>
+ <td>
+  <h1>Fonts in X Dia</h1>
+ </td>
+ <td>
+  <P ALIGN="right">
+  <IMG SRC="images/documentation.jpg" alt="Documentation: Fonts">
+  </P>
+ </td>
+</tr>
+</table>
+Note for Windows users:  These considerations have very little effect on
+the font handling under Windows, as totally different systems operate
+there. 
+<p>
+Fonts have long been a problematic area for Dia under Unix, mostly due to
+the way they are handled by X.  The main problem is that X doesn't give
+access to the font info itself, only to the bitmap representations.  This
+means we can't do PostScript output with all fonts, only those that we can
+depend on being known by the printers.  The other big problem stems from
+the fact that we use the width of text to determine the size of text
+containers, but text width has turned out to be quite elusive.
+<p>
+Dia version 0.88.1 and earlier restricted font usage to the 'standard 13'
+postscript fonts.  These were hardcoded into Dia, and there was no check
+whether they were available as X fonts.  Rendering was done with Gdk font
+handling, while PostScript output was done with standard Postscript font
+handling.  This led to the very unfortunate effect that strings had
+sometimes vastly different sizes on the screen and on paper.  Not good.
+<p>
+In version 0.90, there was experimental support for FreeType2 fonts,
+including dumping the entire font file into PostScript documents.  While
+this allowed for more fonts, there were several problems:  
+<ul>
+<li>The code was a mess, as we had to support two very different font
+systems.
+<li>FreeType rendering and Gdk rendering didn't agree on the size of fonts,
+making documents change depending on which font system was in use.
+<li>Dumping the font file into PostScript document made the document way
+larger than it needed to be, and could also be a copyright problem.
+<li>FreeType and Gdk didn't agree on the fonts available, making diagrams
+even more different depending on the font system in use.
+<li>FreeType had no way to find fonts on a remote X server, so some systems
+didn't allow the FreeType version at all.
+</ul>
+
+At the same time, we were starting more serious internationalization,
+including adding more fonts to the 'standard 13' list.  This was done
+ad-hoc based on what people thought were commonly available fonts.
+<p>
+Between versions 0.90 and 0.91, we changed to Gtk 2.0.  One important
+change there was the introduction of Pango, a generalized font system with
+strong internationalization support.  Pango sports several backends,
+including normal Gdk rendering using X, Xft (FreeType rendering with the
+XRender interface), and FreeType2.  
+<p>
+This change led us to recode the entire font handling, making fonts
+encapsulated within Dia.  Instead of having a fixed list of fonts, we
+decided to have three standard fonts that should always be available (sans,
+serif and monospace), and then allow the user to add fonts to the font list
+via standard font requesters.  This made the font list more manageable
+while ensuring that objects and plugins had some standard fonts to refer to.
+<p>
+At the same time, we looked into a related problem: text width does not
+scale linearly.  This is not an implementation bug, but is a side effect of
+the way modern font renderers make fonts readable at small sizes.  What
+this meant for Dia was that the width of text boxes would vary with the
+zoom setting, a highly undesirable effect.  To avoid this, we now use the
+100% zoom setting for fonts to determine the width, and tweak the size of
+fonts for other zoom settings to be closer to a linear scale.  This system
+works fairly well for all but the most extreme zoom settings.
+<p>
+Our first thought was to use PangoX for screen rendering and PangoFT2 for
+PostScript rendering, but it turned out that the two differ on font names
+even for the very same font files.  This is due partly to X's XLFD system,
+which makes things like dashes in font names impractical at best, and
+partly to seemingly random renamings by font packagers.  This continued the
+diagram incompatibility from 0.90, but made it happen even within the same
+program.  Very bad.  Additionally, the two didn't agree on the width of
+texts, either, even at the supposed same size.
+<p>
+In the end (version 0.91), we decided to rid ourselves entirely of the X
+font support.  All font handling is now done by FreeType2 through PangoFT2,
+both screen rendering and PostScript output.  This means that fonts should
+appear exactly the same on screen and on paper, and that the font
+availability issue is more transparent.  The downsides are that rendering
+takes longer (but that can be cached), and that remote X font servers
+cannot be used by Dia.  To ensure that all systems have at least the three
+standard fonts, we are distributing those with Dia now.
+<p>
+To avoid bloating PostScript files with font files, and to avoid copyright
+problems, we took a font rendering system from PAPS, a simple Pango
+PostScript renderer.  Instead of actually defining fonts, we just output
+the shape of the characters.  This is reasonably small and further ensures
+that fonts are the same on screen and on paper.  PostScript files with
+large amount of texts may become somewhat large with this approach, as we
+don't cache the character definition code.  If this becomes a problem, it
+is easy to cache.  The main problem with this approach is that other
+PostScript tools won't be able to recognize our text as text, it just looks
+like funny curves.  We consider this a small price to pay for a unified
+font system with consistent font sizes.
+
+<h2>Windows Fonts</h2>
+
+Windows uses a very different font system than X.  The problems with font
+naming are unknown in Windows, but unfortunately we cannot currently use
+FreeType2 in Windows.  This doesn't break printing, as Windows has a
+separate printing system, but we cannot export to EPS except with the
+standard 13 PostScript fonts.
+
+
+</body>
+</html>

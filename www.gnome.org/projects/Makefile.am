@@ -2,6 +2,7 @@ SUBDIRS=			\
 	application-framework	\
 	desktop			\
 	devtools		\
+	dia			\
 	evolution		\
 	gconf			\
 	gnome-core		\

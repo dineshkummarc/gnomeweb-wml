@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <title>Third design</title>
+<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<META name="description" content="Tutorial on using UML">
+<META name="keywords" content="UML,tutorial,Altima">
+  </head>
+
+  <body BGCOLOR=white>
+    <h1>Third design</h1>
+
+<P>It occurred to me that an <CODE>Entity</code> needs two things to define it: attributes and behavior. Also, to understand the Entity diagram, one doesn't need the references to the graphic database.</P>
+
+<P><em>Attributes</em> contain the information that defines the
+entity. <em>Behaviors</em> define how the entity performs certain
+actions. Every entities will be hierarchyzed such that the attributes
+of an entity is propagated to its children and this as long as they
+don't redefine it. The same applies to the behaviors. It should be
+noted that not every part of the Altima project will need the
+information inside the attribute's map. Therefore, everyone is
+entitled to optimize the definition of the attributes it needs for
+his/her part of the project. In my case (the world editor), I need to
+provide and receive every possible bit of information.</p>
+
+<P>The new definition of <code>Entity</code> becomes</p>
+
+<DIV align=center><IMG src="third.gif"></DIV>
+
+<P>This design doesn't fully define some of the classes. In particular, BehaviorMap and AttributeMap need to be defined in another diagram. The idea is to capture the essence of <code>Entity</code>, without getting lost in the details. The details can be defined later on.</P>
+
+<P>The use of <code>id</code> and <code>parent_id</code> allows us to create a tree that defines on what the Entity is based on. For input/output an int is needed to represent this hierarchy. The coder is free to use a pointer to speed up searches.</p>
+
+<P>The other role of the tree structure is 'lazy evaluation'. Lazy
+evaluation allows us to only specify the differences between an Entity
+and it's parent. The pseudo code for that looks like:
+<CODE><PRE>
+get_attribute {
+  if(attributes not defined)
+     return parent.get_attribute()
+  else
+     return (attribute value)
+}
+</PRE></CODE>
+
+<P>This as the advantage that changing a parent's value changes every child's value, unless a child redefines it. In which case, it is not touched. </P>
+
+<P>The above is recursive and should be fast enough as long as the hierarchy of items is not too big. If this ever becomes the case, other methods will be used.</P>
+
+<P>But what about the <CODE>world_id</CODE>?  This variable's purpose
+is very similar to the <CODE>parent_id</CODE> variable. It is used to
+propagate some attributes that are outside the entity's hierarchy
+but that can still affect it's behavior. A good example of world_id
+would be for the local weather entity. That entity would set
+attributes such as temperature, humidity, wind, the season, etc. The
+<code>world_id</code> will usually be set to the container's id. </P>
+
+<P>The previous example demonstrates that some attributes are outside
+the entity's domain. The <code>world_id</code> variable solves that
+problem but a method will be needed to make sure the entity doesn't
+try to refine an attribute that is under a world control. I use the
+term world, but the world for the object can be limited to a room. For
+instance, a library might be dry and cold, and the kitchen next to it
+warm and humid. If you have a better term, let me know.</p>
+
+<P><code>AltimaEntity</code> is used to represent that an entity has
+been instantiated: it exists somewhere inside a container. The client
+will only interface with AltimaEntity. Note that an AltimaEntity can
+be a container too (parent_id == some_container_id). And note that the
+<code>parent_id</code> can <em>not</em> be the <code>id</code> of an
+AltimaEntity. Allowing this would mean that an entity could get the
+behavior of an instance of entity, i.e. if the table in someone's shop
+is a parent_id, it means that when someone put it on fire, every child
+of that table will be set on fire. This is not the expected behavior.</p>
+
+<P>A <code>Container</code> has a list of AltimaEntity. This list is
+used to represent the content of the container. For example, a room
+container might have a bed, a table and a chair. Each need to have an
+offset location from the origin of the room container. If the room
+moves, every object inside it moves with it.</P>
+
+<P>When an <code>AltimaEntity</code> is defined as a container. It
+should be noted that every elements inside it need to be copied,
+i.e. a general room like above is a template for every room but once
+you put that room inside a house. A unique id needs to be given to the
+chair, the table and the bed. And the container's list of entities
+must be updated in consequence. I hope the composition operator in the
+UML diagram shows that constraint.</P>
+
+    <hr>
+    <address><a href="mailto:lavoie@zeus.genie.uottawa.ca">Lavoie Philippe</a></address>
+<!-- Created: Sat Jan 16 18:23:34 EST 1999 -->
+<!-- hhmts start -->
+Last modified: Sat Jan 16 20:05:57 EST 1999
+<!-- hhmts end -->
+  </body>
+</html>

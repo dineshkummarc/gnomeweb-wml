@@ -1,0 +1,64 @@
+#===================
+# Latex
+#===================
+=def docclass=article
+=def numbered_heads_p=1
+#
+=preamble_begin_for latex
+%===preamble================
+\documentclass[%
+%slidesonly,% for slides only
+%notes,%      for notes and slides
+%semcolor,%   for PSTricks
+semrot,%      for dvips
+%semhelv,%     for postscript printer
+%article,%    
+%portrait,%
+semlayer,%    must be included, but need semcolor to get overlays
+]{seminar}
+
+\usepackage{graphicx,verbatim,fancybox}
+
+\pagestyle{headings}
+\newpagestyle{mypagestyle}%
+  {{\sl @top_left@} \hfil @title@ \qquad}%
+  {@author@ \hfil \today \hfil \theslide \qquad}%
+\slidepagestyle{mypagestyle}
+
+\slideframe{none}
+\def\printlandscape{\special{landscape}} %for dvips
+\sliderotation{left}
+\slidesmag{4}
+\articlemag{1}
+
+@twoup@
+%\portraitonly
+%\landscapeonly
+
+\title{@title@}
+\author{@author@}
+\author{@author@ \\ @author_email@}
+\date{@date@}
+
+\newcommand{\heading}[1]{\begin{center}\large\bf #1 \end{center}}
+\renewcommand{\subsection}[1]{\end{slide} \begin{slide} \heading{#1}}
+
+=end preamble_begin_for latex
+#
+=preamble_end_for latex
+\begin{document}
+\begin{slide}
+\maketitle
+=end preamble_end_for latex
+#
+=postamble_for latex
+\end{slide}
+\end{document}
+=end postamble_for latex
+
+
+
+
+
+
+
