@@ -1,6 +1,6 @@
 urlpath=/projects/evolution/doc/stylesheet-images
 
-page_DATA			\
+page_DATA=			\
 	caution.gif \
 	home.gif \
 	important.gif \
