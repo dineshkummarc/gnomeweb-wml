@@ -49,7 +49,9 @@ else
 {
 	print "/images/nophoto.jpg";
 }
-?>"><BR><A href="change_photo.php">[Change Photograph]</A></TD>
+?>">
+<!--<BR><A href="change_photo.php">[Change Photograph]</A>-->
+</TD> 
 </TR>
 
 <TR>
