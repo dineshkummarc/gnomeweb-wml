@@ -196,15 +196,15 @@ td.bold {
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>11:00 AM</td>
     <td rowspan=2> Hacking, etc.</td> <!-- 33-419 -->
-    <td></td> <!-- 33-418 -->
+    <td>&quot;Type and Toolkits - the road from Gutenburg and MacPaint,&quot; Owen Taylor</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
-    <td></td> <!--  1-135 -->
+    <td>&quot;Demo of the X.Org Media Application Server,&quot; Leon Shiman</td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>12:00 PM</td>
     <td>&quot;ABI Compatibility and ABICheck,&quot; Karl Runge</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
-    <td>&quot;Demo of the X.Org Media Application Server,&quot; Leon Shiman</td> <!--  1-135 -->
+    <td></td> <!--  1-135 -->
     <td>&quot;Bug tracking in GNOME,&quot; Luis Villa</td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>1:00 PM</td>
