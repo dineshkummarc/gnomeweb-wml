@@ -23,6 +23,24 @@
   $bad_elements = array();
   $errors = array();
 
+  if (count($attend) != 0) {
+    $none = $paris = $copenhagen = $seville = 0;
+    foreach ($attend as $location) {
+      if ($location == "none") { 
+        $none = 1;
+      } 
+      if ($location == "paris") {
+	$paris = 1;
+      } 
+      if ($location == "copenhagen") {
+	$copenhagen = 1;
+      } 
+      if ($location == "seville") {
+	$seville = 1;
+      } 
+    }
+  }
+
   if ($submit) {
 
       if (!$contactname){
@@ -37,12 +55,12 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if (trim($developer) == "on" && !$contributions){
+      if ($user_developer == "developer" && !$contributions){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
  
-     if ($paris == "null" && $copenhagen == "null" && $none == "null" && $seville != "null") {
+     if (!$none && !$paris && !$copenhagen && !$seville) {
 	$bad_elements[] = "attend";
 	$errors[] = "Please specify if you have previously attended GUADEC.";
      }
@@ -59,8 +77,9 @@
 	$formmail .= "Affiliation [if any]:\t". $affiliation . "\n";
         $formmail .= "Email:\t" . $email . "\n\n";
 
-        $formmail .= "User:\t" . $user . "\n";
-        $formmail .= "Developer:\t" . $developer . "\n";
+	$formmail .= "User/Developer:\t" . $user_developer . "\n";
+//        $formmail .= "User:\t" . $user . "\n";
+//        $formmail .= "Developer:\t" . $developer . "\n";
 
         $formmail .= "Contributions:\n" . $contributions . "\n\n";
 
@@ -87,7 +106,8 @@
 
         // send the mail
 
-        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
+//        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
+        mail("micke@codefactory.se", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
 
         // print the thank you page
 
@@ -95,7 +115,7 @@
           <h2>Thank you for giving your responses. Your information will
 	      help us to target the needs of our users and contributors more
 	      effectively and plan better for future GNOME events.</h2> ");
-       } 
+       }
 
   }
 
@@ -163,12 +183,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-              <input type="checkbox" name="user" <? if ($user) { ?> checked <? } ?> >  I am a GNOME user.
+              <input type="radio" name="user_developer" value="user" <? if ($user_developer == "user") { ?> checked <? } ?> >  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-               <input type="checkbox" name="developer" <? if ($developer) { ?> checked <? } ?> >  I am a GNOME contributor.
+               <input type="radio" name="user_developer" value="developer" <? if ($user_developer == "developer") { ?> checked <? } ?> >  I am a GNOME contributor.
           </td>
         </tr>
 	<tr>
@@ -195,29 +215,6 @@
         <tr>
           <td colspan=2>
              <select name="attend[]" multiple>
-	     <? if (count($attend) != 0) {
-		foreach ($attend as $location) {
-		  if ($location == "none") { 
-			$none = "true";
-		  } else {
-			$none = "null";
-		  }
-		  if ($location == "paris") {
-			$paris = "true";
-		  } else {
-			$paris = "null";
-		  }
-		  if ($location == "copenhagen") {
-			$copenhagen = "true";
-		  } else {
-			$copenhagen = "null";
-		  }
-		  if ($location == "seville") {
-			$seville = "true";
-	  	  } else {
-			$seville = "null";
-		  }
-              }} ?>
              <option value="none" <? if ($none) { ?> selected <? } ?> > I have not attended a past GUADEC</option>
 
 	     <option value="paris" <? if ($paris) { ?> selected <? } ?> > I attended GUADEC 1 (Paris, France)</option>
