@@ -208,6 +208,12 @@ page_DATA =	\
   re96.html	\
   re97.html	\
   re98.html	\
-  re99.html
+  re99.html \
+	images/e-config-build-1.png \
+	images/e-config-build-2.png \
+	images/e-config-build-3.png \
+	images/e-config-flow.png \
+	images/e-popup-merge-1.png \
+	images/e-popup-merge-2.png
 
 include $(top_srcdir)/rules.common
