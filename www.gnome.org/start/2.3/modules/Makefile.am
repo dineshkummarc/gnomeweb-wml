@@ -1,6 +1,6 @@
-SUBDIRS=ui-review modules
+SUBDIRS=
 
-urlpath=/start/2.3
+urlpath=/start/2.3/modules
 
 page_SCRIPTS=index.html helping.html
 
