@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gnumeric/
+urlpath=/projects/gnumeric/images
 
 page_SCRIPTS=bg.jpg			\
 		abacus.png		\
