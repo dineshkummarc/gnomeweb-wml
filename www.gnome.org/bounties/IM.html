@@ -1,0 +1,377 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="dhtml-table.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>IM Bounties</title>
+    <LINK REL="stylesheet" HREF="style.css" TYPE="text/css">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()">
+<center>
+<b><font size="+2">IM Bounties</font></b><br>
+<a href="index.php3#categories">[Main Page]</a><br><br>
+</center>
+<center>
+<table id="table-tasks" cellspacing=2 border=0 width="750">
+<thead><tr>
+    <th style="background: #303030;"><b><font color="#ffffff">Task Name</font></b></th>
+    <th style="background: #303030; cursor: n-resize;" onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Money')"><b><font color="#ffffff"><u>Bounty</u></font></b></th>
+</tr></thead>
+<tr>
+    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><a href="#127546">Gaim/Evolution presence integration</a></td>
+    <td bgcolor="#d0d0ff">$2000</td>
+</tr>
+
+<tr>
+    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><a href="#127547">Gaim drag and drop file transfer</a></td>
+    <td bgcolor="#d0d0ff">$400</td>
+</tr>
+
+<tr>
+    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><font color="#007f00"><b>Solved:</b> </font><a href="#127548"><strike><font color="#ff0000">Gaim drag and drop of links</font></strike></font></a></td>
+    <td bgcolor="#d0d0ff">$250</td>
+</tr>
+
+<tr>
+    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><a href="#127549">Handle <tt>aim:</tt> links in Epiphany</a></td>
+    <td bgcolor="#d0d0ff">$100</td>
+</tr>
+
+</table>
+</center>
+<p>
+    <a name="127546"></a><a name="box1"></a>
+    <table border="0" cellpadding="0" cellspacing="0" align="center" width="750">
+	      <tr bgcolor="#ffffff"> <td align="left">
+		  <table border="0" cellspacing="1" cellpadding="0" width="100%">
+		    <tr bgcolor="#d0d0ff"> <td align="left">
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#303030"> <td align="left">
+			      <font color="#ffffff">
+				<b>Gaim/Evolution presence integration</b>
+			      </font>
+			    </td> 
+                                                        <td align="right">
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=127546" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="#ffffff">(Bug #127546)</font></a> <font color="#ffffff">|</font> <a href="discuss.php" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="#ffffff">Discuss</font></a> <font color="#ffffff">|</font> <a href="claim.php3?bounty=127546" title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="#ffffff">Claim Bounty</font></a>			    </td>
+			    		          </tr>
+			</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#808080">
+			    <td align="left">
+			      <font color="#ffffff">
+				IM			      </font>
+			    </td>
+			    <td align="right">
+			      <font color="#ffffff">
+				Bounty: <font color="#00ff00">$2000</font>
+			      </font>
+			    </td>
+			  </tr>
+						<table cellpadding="2" cellspacing="18" border="0"> <tr> <td>
+
+
+
+<p>We want the notion of &quot;presence&quot; to be integrated into
+the entire desktop, wherever the user encounters a person or a
+reference to a person.</p>
+
+<p>Providing a simple integrated presence concept in the mailer and
+addressbook user interfaces is a step in this direction.</p>
+
+<p>Post-2.0, Evolution will begin to integrate presence functionality
+into the backend addressbook APIs.  That means that given a contact,
+you'll be able to programmatically ask the addressbook questions like:
+&quot;Is this user online?&quot; and &quot;How can I send him a
+file?&quot;</p>
+
+<p>That is our eventual goal.  This task is focused on more surface,
+frontend integration.</p>
+
+<p>This item has several subtasks, all of which involve displaying an
+icon somewhere in Evolution to indicate whether a person is online or
+not, and to allow the user to click on this icon to open an IM
+conversation window with the person concerned.</p>
+
+<p>And so, the first challenge is to have a simple, general mechanism
+for displaying <b>presence icons</b>.</p>
+
+<table border=1 align=right>
+<tr>
+<td width="33%"><center><img border=0 src="buddy-online.png" alt="Online icon"><br><tt>online</tt></center></td>
+<td width="33%"><center><img border=0 src="buddy-offline.png" alt="Offline icon"><br><tt>offline</tt></center></td>
+<td width="33%"><center><img border=0 src="buddy-away.png" alt="Away icon"><br><tt>away</tt></center></td>
+</tr>
+<tr>
+<td colspan=3><i><font size=-4>You don't have to use exactly these icons or exactly these meanings. This is just to give a general idea, and an example of what to use in case the user doesn't have a buddy icon set. We can design better suitable icons if needed.</font></i></td>
+</tr>
+</table>
+
+<p>The presence icon could be the "Buddy Icon" from Gaim. It
+represents the other person well since everyone can control and update
+their own buddy-icon.  We can show online/offline/away status with a
+text label below the icon, plus for "away" we can desaturate the icon
+and make it 50% transparent.  Examples are below.</p>
+
+<p align=center><img src="online-offline-evo.png" alt=""></p>
+
+<p>The Presence Icon can be used to invoke the appropriate gaim-remote
+mechanisms to pop up an IM window with the user.</p>
+
+<p>Evolution 2.0's addressbook allows the user to set a custom picture
+for an addressbook entry.  This custom image should override the buddy
+icon if it is set.</p>
+
+Here are the places where a presence icon should be added to
+Evolution:
+
+<ol>
+
+<li>In the message view (the window or pane displaying the contents of
+a single mail message), display a full-size presence icon next to the
+sender's name.<br>
+
+<p align="center"><img src="imstatus-mailmessage.png" alt=""></p></li>
+
+<li>Put a small presence icon next to names in the To:, Cc: and Bcc:
+fields in the message composer window.  Buddy icons should also appear
+for the relevant names in the recipient picker dialog, message
+summaries, and preview panes.  Anywhere that currently displays "Foo
+Bar &lt;foo@bar.com&gt;" could be extended to display "[ ] Foo Bar
+&lt;foo@bar.com&gt;".  And again, clicking on these icons should pop
+up a small floating dialog (like you get when right clicking an email
+address in evolution) - and it lists you actions for sending IM messages
+and such.<br>
+
+<p align="center"><img src="imstatus-mailcomposer.gif" alt=""></p></li>
+
+<li> Add a presence status field to the address book, so that the user
+knows when a contact is online via IM, and can click to send an
+instant message.  This field should be viewable in the minicard view
+as the contact's buddy icon, in the list view as a separate column,
+and in the contact editor dialog.</li>
+
+</ol>
+
+</td></tr>
+<tr><td bgcolor="#a0a0a0" align="left"><font color="#ffffff">Affected Modules</font></td></tr>
+<tr><td>
+
+Both <a href="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=evolution">evolution</a> and <a href="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=gaim">gaim</a> are affected.
+
+</td></tr>
+<tr><td bgcolor="#a0a0a0" align="left"><font color="#ffffff">How</font></td></tr>
+<tr><td>
+
+<p> 
+
+First you will need to allow Evolution to determine if someone is
+online. You may wish to work with <a
+href="http://cvs.sourceforge.net/viewcvs.py/gaim/gaim/src/gaim-remote.c?view=markup"><tt>gaim-remote</tt></a>,
+a command-line tool which communicates with a running gaim process
+over a local Unix domain socket.  </p>
+
+<p>You will want to extend the <tt>gaim-remote</tt> protocol to
+support the &quot;<tt>ison</tt>&quot; mechanism.  You may also want to
+separate <tt>gaim-remote</tt> into a library, maybe called
+<tt>libgaimremote</tt> and a front-end command line tool.  Evolution
+and <tt>gaim-remote</tt> will both use <tt>libgaimremote</tt>, which
+should expose a non-blocking API.</p>
+
+<p>On top of this library, you will want to build a widget which
+handles all the rendering and interaction associated with a presence
+icon.  This widget could probably exist inside Evolution at first,
+though eventually it would be ideal if it were available to the entire
+desktop.</p>
+
+<p>Then you need to use this API to add the icons to various places where
+addresses are displayed and formatted, including:
+<p>
+<dl>
+
+<dt><a href="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=evolution/addressbook/gui/component/select-names">evolution/addressbook/gui/component/select-names</a></dt>
+
+<dd>This is used by the mail composer for the to/cc/bcc entry
+widgets.  This will need to be extended to include the presence widget
+for each name entered.
+</dd>
+
+<dt><a href="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=evolution/mail/e-format-html-display.c">evolution/mail/e-format-html-display.c</a></dt>
+<dd>This formats messages for display.  You will have to output a tag
+for a custom object, and in the object return handler, setup the
+presence widget.
+<b>NOTE:</b> All formatting operations are
+done from a separate thread so no non-formatting logic can be
+performed there.
+</dd>
+</dl>
+
+</td></tr>
+<tr><td bgcolor="#a0a0a0" align="left"><font color="#ffffff">Pointers</font></td></tr>
+<tr><td>
+
+For Evolution information, join the <a
+href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
+Hackers</a> mailing list.  You'll find Gaim resources at <a
+href="http://gaim.sf.net">the Gaim home page</a>.
+
+Some fun presence-related links, for your amusement:
+
+<ul>
+<li><a href="http://www.nwfusion.com/links/Encyclopedia/P/802.html">general information</a> </li>
+<li><a href="http://www.aiai.ed.ac.uk/project/akt/coakting/documents/2002/wace02-figs/presence-radar.jpg">presence radar</a></li>
+<li><a href="http://research.sun.com/research/netcomm/rhythmAwareness.html">rhythm awareness</a></li>
+</ul>
+
+			      </td></tr></table>
+		      </td> </tr>
+		  </table>
+		</td> </tr>
+	    </table> <br>
+    <a name="127547"></a><a name="box2"></a>
+    <table border="0" cellpadding="0" cellspacing="0" align="center" width="750">
+	      <tr bgcolor="#ffffff"> <td align="left">
+		  <table border="0" cellspacing="1" cellpadding="0" width="100%">
+		    <tr bgcolor="#d0d0ff"> <td align="left">
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#303030"> <td align="left">
+			      <font color="#ffffff">
+				<b>Gaim drag and drop file transfer</b>
+			      </font>
+			    </td> 
+                                                        <td align="right">
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=127547" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="#ffffff">(Bug #127547)</font></a> <font color="#ffffff">|</font> <a href="discuss.php" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="#ffffff">Discuss</font></a> <font color="#ffffff">|</font> <a href="claim.php3?bounty=127547" title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="#ffffff">Claim Bounty</font></a>			    </td>
+			    		          </tr>
+			</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#808080">
+			    <td align="left">
+			      <font color="#ffffff">
+				IM			      </font>
+			    </td>
+			    <td align="right">
+			      <font color="#ffffff">
+				Bounty: <font color="#00ff00">$400</font>
+			      </font>
+			    </td>
+			  </tr>
+						<table cellpadding="2" cellspacing="18" border="0"> <tr> <td>
+
+
+
+<p>For those protocols that support it, Gaim allows you to send and
+receive files with other IM users.  Currently, you have to right click
+on the user in the Gaim buddy list and select the &quot;Send
+file&quot; popup menu entry to send the user a file.</p>
+
+<p>This task is to modify Gaim to support drag-and-drop as a means of
+initiating a file transfer to a user.  Dragging a file from the file
+manager or desktop and dropping it onto a Gaim conversation window
+should initiate a transfer of that file to the user.</p>
+
+<p>One subtlety is how <tt>.desktop</tt> files are handled.  The
+contents of the <tt>.desktop</tt> file are probably not what the user
+wants to send, so you'll have to figure out how to handle these.</p>
+
+			      </td></tr></table>
+		      </td> </tr>
+		  </table>
+		</td> </tr>
+	    </table> <br>
+    <a name="127548"></a><a name="box3"></a>
+    <table border="0" cellpadding="0" cellspacing="0" align="center" width="750">
+	      <tr bgcolor="#ffffff"> <td align="left">
+		  <table border="0" cellspacing="1" cellpadding="0" width="100%">
+		    <tr bgcolor="#d0d0ff"> <td align="left">
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#303030"> <td align="left">
+			      <font color="#ffffff">
+				<b><font color="#70ff70"><b>Solved:</b> </font>Gaim drag and drop of links</b>
+			      </font>
+			    </td> 
+                                                        <td align="right">
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=127548" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="#ffffff">(Bug #127548)</font></a> 			    </td>
+			    		          </tr>
+			</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#808080">
+			    <td align="left">
+			      <font color="#ffffff">
+				IM			      </font>
+			    </td>
+			    <td align="right">
+			      <font color="#ffffff">
+				Bounty: <font color="#00ff00">$<strike>250</strike></font>
+			      </font>
+			    </td>
+			  </tr>
+						</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#ff0000">
+			    <td align="left">
+			      <font color="#000000">
+				This bounty has been solved.  The solution is: <a href="http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"><u><font color="#0000ff">http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279</font></u></a>			      </font>
+			    </td>
+			  </tr>
+			</table>			
+			<table cellpadding="2" cellspacing="18" border="0"> <tr> <td>
+
+<font color="#707070">
+
+<p>This one is pretty straightforward: Make it so that dragging a URL
+from the browser or the desktop onto a Gaim conversation window copies
+the URL into the text of the conversation.</p>
+
+</font>			      </td></tr></table>
+		      </td> </tr>
+		  </table>
+		</td> </tr>
+	    </table> <br>
+    <a name="127549"></a><a name="box4"></a>
+    <table border="0" cellpadding="0" cellspacing="0" align="center" width="750">
+	      <tr bgcolor="#ffffff"> <td align="left">
+		  <table border="0" cellspacing="1" cellpadding="0" width="100%">
+		    <tr bgcolor="#d0d0ff"> <td align="left">
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#303030"> <td align="left">
+			      <font color="#ffffff">
+				<b>Handle <tt>aim:</tt> links in Epiphany</b>
+			      </font>
+			    </td> 
+                                                        <td align="right">
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=127549" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="#ffffff">(Bug #127549)</font></a> <font color="#ffffff">|</font> <a href="discuss.php" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="#ffffff">Discuss</font></a> <font color="#ffffff">|</font> <a href="claim.php3?bounty=127549" title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="#ffffff">Claim Bounty</font></a>			    </td>
+			    		          </tr>
+			</table>
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			  <tr bgcolor="#808080">
+			    <td align="left">
+			      <font color="#ffffff">
+				IM			      </font>
+			    </td>
+			    <td align="right">
+			      <font color="#ffffff">
+				Bounty: <font color="#00ff00">$100</font>
+			      </font>
+			    </td>
+			  </tr>
+						<table cellpadding="2" cellspacing="18" border="0"> <tr> <td>
+
+
+
+The <a
+href="http://cvs.sourceforge.net/viewcvs.py/gaim/gaim/src/gaim-remote.c?view=markup"><tt>gaim-remote</tt></a>
+command-line tool makes it easy to remotely open a conversation with a
+buddy.  Your job is pretty easy: set the default protocol handler for
+<tt>aim:</tt> to be <tt>gaim-remote</tt>.
+
+			      </td></tr></table>
+		      </td> </tr>
+		  </table>
+		</td> </tr>
+	    </table> <br>
+
+
+</center>
+</body>
+</html>

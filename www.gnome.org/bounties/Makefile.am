@@ -19,14 +19,10 @@ page_DATA=address-applet-anim.gif\
 	cal-weather.png\
 	cat-footer.php\
 	cat-header.php\
-	claim.php3\
-	claim-post.php3\
 	composer-attachments.gif\
 	composer-lang.gif\
 	contact-bday.png\
 	contact-bday-thumb.png\
-	Developer.php3\
-	Devices.php3\
 	discuss.php\
 	documentation-icon.png\
 	Documentation.php3\
@@ -43,7 +39,6 @@ page_DATA=address-applet-anim.gif\
 	IM.php3\
 	imstatus-mailcomposer.gif\
 	imstatus-mailmessage.png\
-	index-old.php3\
 	index.php3\
 	ipod.png\
 	mail-custom-header.png\
@@ -52,7 +47,6 @@ page_DATA=address-applet-anim.gif\
 	miscellaneous-icon.png\
 	Miscellaneous.php3\
 	ml-headers.gif\
-	Nautilus.php3\
 	online-offline-evo.png\
 	openoffice-icon.png\
 	OpenOffice.org.php3\
@@ -71,8 +65,32 @@ page_DATA=address-applet-anim.gif\
 	util.php\
 	dhtml-table.js
 
-page_SCRIPTS=
+PHP3FILES := $(patsubst %.php3, %.html, $(wildcard ./*.php3))
+                                                                                                                  
+page_SCRIPTS = index.php3 index.html $(PHP3FILES) discuss.html
 
 include $(top_srcdir)/rules.common
 
 EXTRA_DIST=$(page_DATA)
+
+index.php3: build.exe header.php footer.php bounties.xml cat-header.php cat-footer.php util.php Makefile
+	mono --debug build.exe
+	chmod 644 *.php3
+                                                                                                                  
+build.exe: build.cs
+	mcs -g build.cs -o build.exe
+                                                                                                                  
+xml2csv.exe: xml2csv.cs
+	mcs -g xml2csv.cs -o xml2csv.exe
+                                                                                                                  
+index.csv: bounties.xml xml2csv.exe Makefile xml2csv.cs
+	mono --debug xml2csv.exe
+                                                                                                                  
+%.html: %.php3 util.php
+	@echo Converting $< to $@
+	@php -q $< > $@
+                                                                                                                  
+%.html: %.php util.php
+	@echo Converting $< to $@
+	@php -q $< > $@
+
