@@ -107,9 +107,6 @@ these tasks as a team, appoint one person you trust to be the official
 submitter, and he or she can divide the bounty up after it is
 awarded.</li><br>
 
-<li>Novell employees in the Ximian division are not eligible to
-participate.</li><br>
-
 <li>And, sorry to have to do it, but the catch-all: The awarding of
 bounties is at the sole discretion of the judging panel, and we may
 refuse to award a bounty to anyone for any reason at any time.  <p>
