@@ -6,7 +6,7 @@ include ("./util.php");
 
 <?php write_page_header ("Addressbook Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", ""); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515", ""); ?>
 <?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
@@ -14,7 +14,7 @@ include ("./util.php");
 <?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", ""); ?>
+<?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", "http://www.chipx86.com/gevolution/"); ?>
 
 
 

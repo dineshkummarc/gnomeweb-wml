@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Calendar Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("National, religious, event calendars", "hidden", "15", "127528", ""); ?>
-<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", ""); ?>
+<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 <?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Weather calendar backend", "hidden", "750", "127537", ""); ?>
 <?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
@@ -76,7 +76,7 @@ The bounty for this task is per-calendar.  We will pay bounties for up
 to 30 calendars.</p>
 
 <?php box_end (); ?>
-<?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", ""); ?>
+<?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 
 <p>When you click on the clock on the GNOME panel, a little calendar
 descends.  A proper integration patch for this calendar would do the

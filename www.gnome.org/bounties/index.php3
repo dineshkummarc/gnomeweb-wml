@@ -217,9 +217,9 @@ channels.</p>
 <?php box_end (); ?><a name="table">
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528", ""); ?>
-<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", ""); ?>
+<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 <?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", ""); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", ""); ?>
 <?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", ""); ?>
