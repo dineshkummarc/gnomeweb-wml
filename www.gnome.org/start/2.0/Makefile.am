@@ -11,7 +11,8 @@ page_SCRIPTS=index.html\
 	quirks.html \
 	releasenotes.html \
 	themes.html \
-	whatsnew.html
+	whatsnew.html \
+	fixed.html
 
 include $(top_srcdir)/rules.common
 
