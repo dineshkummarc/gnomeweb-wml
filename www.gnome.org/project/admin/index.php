@@ -73,6 +73,11 @@ Homepage Link: <B><A HREF="http://'. $homepage .'">http://' . $homepage .'</A></
 </P>';
 }
 
+if ($group_id == 1)
+{
+	print "<p><a href=\"/admin/\">Site Admin</a></p>\n";
+}
+
 $HTML->box1_bottom(); 
 
 echo '
