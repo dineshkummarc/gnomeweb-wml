@@ -2,17 +2,20 @@
 
 	/*** All tools and their supported distro/version combos go here ***/
 	$tool = array(
-		"Runlevel"	=> array(
+		"Services"	=> array(
 			"metadata"		=> array(
 					"icon" => "tool_runlevel.png", 
 					"description" => "This tool is used to select which services should be run at each runlevel."
 				),
 			"Debian GNU/Linux"	=> array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.1" ),
-			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "8.0", "9.0" ),
+			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.0", "9.1" ),
+			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
+			"Slackware Linux"	=> array ( "9.1" ),
 			"SuSE Linux"	=> array ( "7.0" ),
 			"Turbolinux"	=> array( "7.0" ),
-			"PLD Linux"    => array( "1.0" )
+			"PLD Linux"    => array( "1.0" ),
+			"OpenNA"		=> array ( "1.0" ),
+			"Fedora Core"	=> array ( "1" )
 		),
 		"Network"	=> array(
 			"metadata"		=> array(
@@ -20,11 +23,13 @@
 					"description" => "This tool is used to setup network cards, Internet connections and file shares."
 				),
 			"Debian GNU/Linux"	=> array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-			"Mandrake Linux"	=> array ( "7.1", "7.2" ),
+			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.0", "9.1" ),
 			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "8.0", "9.0" ),
 			"SuSE Linux"	=> array ( "7.0" ),
-			"Turbolinux"	=> array( "7.0" ),
-			"PLD Linux"    => array( "1.0" )
+			"Turbolinux"	=> array ( "7.0" ),
+			"PLD Linux"    => array ( "1.0" ),
+			"OpenNA"		=> array ( "1.0" ),
+			"Fedora Core"	=> array ( "1" )
 		),
 		"Time"	=> array(
 			"metadata"		=> array(
@@ -33,11 +38,14 @@
 				),
 			"Debian GNU/Linux"	=> array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
 			"Gentoo Linux"	=> array ( "gentoo" ),
-			"Mandrake Linux"	=> array ( "7.1", "7.2" ),
-			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0" ),
-			"Slackware Linux"	=> array ( "8.0", "9.0" ),
+			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.0", "9.1" ),
+			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
+			"Slackware Linux"	=> array ( "8.0", "9.0", "9.1" ),
 			"SuSE Linux"	=> array ( "7.0" ),
-			"Turbolinux"	=> array( "7.0" )
+			"Turbolinux"	=> array( "7.0" ),
+			"PLD Linux"	=> array ( "1.0" ),
+			"OpenNA"		=> array ( "1.0" ),
+			"Fedora Core"  => array ( "1.0" )
 		),
 		"Users"	=> array(
 			"metadata"		=> array(
@@ -46,20 +54,22 @@
 				),
 			"Debian GNU/Linux"	=> array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
 			"FreeBSD"	=> array ( "4", "5" ),
-			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.1" ),
+			"Mandrake Linux"	=> array ( "7.1", "7.2", "9.0", "9.1" ),
 			"Red Hat Linux"	=> array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
-			"Slackware Linux"	=> array ( "8.0", "8.1", "9.0" ),
+			"Slackware Linux"	=> array ( "8.0", "8.1", "9.0", "9.1" ),
 			"SuSE Linux"	=> array ( "7.0" ),
 			"Turbolinux"	=> array( "7.0" ),
 			"Gentoo"       => array( "1.4" ),
-			"PLD Linux"    => array( "1.0" )
+			"PLD Linux"    => array( "1.0" ),
+			"OpenNA"		=> array ( "1.0" ),
+			"Fedora Core"	=> array ( "1" )
 		),
 		"Boot"	=> array(
 			"metadata"		=> array(
 					"icon" => "tool_boot.png",
 					"description" => "This tool is used to select boot-method and administrate different Linux-kernels."
 				),
-			"Linux"		=> array ( "Lilo and Grub is supported for all Linux distributions." )
+			"Linux"		=> array ( "Lilo, Grub and Yaboot is supported for all Linux distributions." )
 		)
 	);
 ?>
