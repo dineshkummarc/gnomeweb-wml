@@ -1,4 +1,4 @@
-SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn todo i18n press faqs
+SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn todo i18n press faqs account
 include $(top_srcdir)/rules.common
 
 urlpath=
