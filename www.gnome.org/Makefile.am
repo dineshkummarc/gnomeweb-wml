@@ -4,7 +4,8 @@ urlpath=
 
 page_SCRIPTS=index.html		\
 	findout.html 		\
-	seegnome.html
+	seegnome.html   \
+	menucontrol.js
 
 include $(top_srcdir)/rules.common
 
