@@ -1,0 +1,297 @@
+**** BEGIN LOGGING AT Wed Mar  2 15:55:10 2005
+
+Mar 02 15:56:04 -->	tml (user@CCXXXV.tun.saunalahti.fi) has joined #evolution-meet
+Mar 02 15:56:14 -->	gekker (~gekker@137.65.45.31) has joined #evolution-meet
+Mar 02 15:57:03 -->	gicmo (~gicmo@www.deep-sorrow.de) has joined #evolution-meet
+Mar 02 15:58:55 -->	hpj (~hpj@201.129.49.194) has joined #evolution-meet
+Mar 02 15:59:27 -->	fejj (~fejj@h000c413e3057.ne.client2.attbi.com) has joined #evolution-meet
+Mar 02 16:00:23 <jpr>	ok, one more minute and then we'll get going
+Mar 02 16:00:34 -->	siva (~siva@202.88.171.168) has joined #evolution-meet
+Mar 02 16:01:39 <jpr>	ok
+Mar 02 16:01:45 <jpr>	2.1 development status
+Mar 02 16:01:54 <jpr>	i rolled 2.1.6 on monday
+Mar 02 16:02:03 <jpr>	next stop 2.2.0 this coming monday
+Mar 02 16:02:12 <fejj>	whooo
+Mar 02 16:02:17 <jpr>	we are only taking shipstoppers
+Mar 02 16:02:21 <jpr>	for 2.2.0
+Mar 02 16:02:44 <jpr>	if you have a potential shipstopper, please mark it 2.1 and critical/blocker
+Mar 02 16:02:55 <jpr>	so its visible to me
+Mar 02 16:03:02 <jpr>	remember
+Mar 02 16:03:21 <jpr>	you must get release team permission to commit for 2.2.0
+Mar 02 16:03:49 <jpr>	so please, consider carefully if its a showstopper or not
+Mar 02 16:04:03 <jpr>	if you have any questions, ask the other module maintainer
+Mar 02 16:04:06 <jpr>	or myself
+Mar 02 16:04:25 <jpr>	in the mean time 2.2.1 bugs can be committed to HEAD
+Mar 02 16:04:34 -->	harish_away (~kharish@202.144.86.147) has joined #evolution-meet
+Mar 02 16:04:35 <jpr>	does everyone understand the branching policy?
+Mar 02 16:04:43 <jpr>	any questions on it?
+Mar 02 16:04:47 -->	seb128 (~seb128@ANancy-151-1-35-140.w83-196.abo.wanadoo.fr) has joined #evolution-meet
+Mar 02 16:04:52 ---	harish_away is now known as harish_food
+Mar 02 16:04:57 <jpr>	essentially gnome-2-10 branch is for 2.2.0 and HEAD is for 2.2.1
+Mar 02 16:05:14 <jpr>	until 2.2.0 is released and 2.2.1 is merged back down to gnome-2-10
+Mar 02 16:05:20 <jpr>	any questions?
+Mar 02 16:05:32 <haip>	jpr: 2.2.1 is still string freeze, right?
+Mar 02 16:05:35 <jpr>	yes
+Mar 02 16:05:47 <jpr>	string and UI freezes apply to 2.2.x 
+Mar 02 16:05:53 <jpr>	ad infinitum
+Mar 02 16:05:54 <jpr>	now
+Mar 02 16:06:47 <haip>	ok
+Mar 02 16:07:01 <jpr>	so 2.2.0 is monday and 2.2.1 is currently slated for release early march 14th, so patches for 2.2.1 should be in by march 13th
+Mar 02 16:07:13 <jpr>	preferably earlier
+Mar 02 16:07:30 <jpr>	to give poornima and naggapan time to test
+Mar 02 16:07:59 <jpr>	just a reminder
+Mar 02 16:08:05 <jpr>	we are in patch review mode
+Mar 02 16:08:15 <jpr>	and be *extra* careful of string freeze breaks
+Mar 02 16:08:33 <jpr>	we've inadvertently broken it a couple of times in the last week
+Mar 02 16:08:44 <jpr>	which makes life extremely difficult for translators
+Mar 02 16:09:09 <jpr>	finally 2.2.0 shipstopper bugs
+Mar 02 16:09:19 <jpr>	i currently see 3 listed
+Mar 02 16:09:27 <jpr>	are there any that are not there that should be?
+Mar 02 16:09:48 <jpr>	siva: please assign 73152 to yourself
+Mar 02 16:10:00 <jpr>	all these bugs should have actual people assigned
+Mar 02 16:10:07 -->	christine (~christine@130.57.22.69) has joined #evolution-meet
+Mar 02 16:10:11 <rodrigo>	jpr: 71679 and other broken recurrence bugs might be
+Mar 02 16:10:27 <jpr>	rodrigo: ok, if so, bump them up
+Mar 02 16:10:30 <jpr>	hpj, siva: one of you needs to look at 73206
+Mar 02 16:10:30 <rodrigo>	ok
+Mar 02 16:10:41 <jpr>	hpj, siva: and assign it to yourself
+Mar 02 16:10:42 -->	chen (~chen@202.144.86.147) has joined #evolution-meet
+Mar 02 16:10:45 <gicmo>	what about 73134?
+Mar 02 16:11:02 <jpr>	gicmo: that is related to 71679
+Mar 02 16:11:11 *	gicmo looks
+Mar 02 16:11:13 <siva>	jpr, i have a patch for that
+Mar 02 16:11:24 <siva>	will assing it to myself
+Mar 02 16:11:36 <jpr>	siva: ok, do you consider it 2.2.0 material?
+Mar 02 16:11:42 ---	chen is now known as chen_oof
+Mar 02 16:11:47 <haip>	jpr: please take a look at 73207. It is a "divide by zero" error. MengJie has sent a patch for it.
+Mar 02 16:12:42 <siva>	jpr, i don't think so it just happens when you click on cancel when you come back from offline to online mode
+Mar 02 16:12:47 <siva>	not always
+Mar 02 16:12:57 <jpr>	haip: we can talk after this, but at first glance i think it is ok to leave for 2.2.1
+Mar 02 16:13:14 <jpr>	siva: then reduce it to major 
+Mar 02 16:13:16 <haip>	jpr: ok, your call.
+Mar 02 16:13:23 <siva>	ok
+Mar 02 16:13:45 <jpr>	any other bugs people want to raise for 2.2.0?
+Mar 02 16:14:03 <jpr>	dhm_home, seb128: any worrying bug reports?
+Mar 02 16:14:24 <seb128>	nop, 2.1.6 works pretty fine
+Mar 02 16:14:37 <christine>	jpr: have the connector bugs been triaged for 2.2? i haven't been connecting exchange w/ 2.1 myself 
+Mar 02 16:14:38 <seb128>	oh
+Mar 02 16:15:07 <jpr>	christine: i have looked, most of them seem to be related to offline in the major phase
+Mar 02 16:15:16 <seb128>	jpr: yep, the copy which doesn't work in the To, Cc fields
+Mar 02 16:15:23 <seb128>	ctrl-X
+Mar 02 16:15:29 <seb128>	ctrl-V
+Mar 02 16:15:32 <jpr>	christine: err showstopper
+Mar 02 16:15:33 <gicmo>	btw, scalix wanna get more invovled into evoltion development so if you need any help fixing/testing I will be happy to help (especially bugs that affect us too)
+Mar 02 16:15:57 <jpr>	gicmo: great, lets talk afterwards
+Mar 02 16:16:06 <jpr>	seb128: yes, known 
+Mar 02 16:16:14 <jpr>	seb128: not a shipstopper though
+Mar 02 16:16:20 <jpr>	ok
+Mar 02 16:16:23 <seb128>	hum
+Mar 02 16:16:23 <jpr>	moving on
+Mar 02 16:16:32 <jpr>	status reports
+Mar 02 16:16:39 <jpr>	oh
+Mar 02 16:16:42 <jpr>	before i do that
+Mar 02 16:17:12 <jpr>	i'd like to mention that i will be sending out a first cut at a feature list later today for 2.4
+Mar 02 16:17:21 <rodrigo>	whoohoo!
+Mar 02 16:17:45 <jpr>	it will also include dobey's first pass at UI revisions for 2.2
+Mar 02 16:17:52 <jpr>	err 2.4
+Mar 02 16:17:57 <gicmo>	rocks!
+Mar 02 16:19:16 <jpr>	i'll be looking for input from all you guys on what else we should be doing and reasons we should or should not be doing the features and ui changes listed
+Mar 02 16:19:41 <jpr>	i'd especially like to see input clean of existing features
+Mar 02 16:20:05 <jpr>	hpj's cleanup of the select names stuff was very nice because it managed to kill off 15-20 bugs at the same time
+Mar 02 16:20:14 <jpr>	"input on cleanup"
+Mar 02 16:20:38 <jpr>	so stuff like that would be great
+Mar 02 16:20:43 <jpr>	ok
+Mar 02 16:20:45 <jpr>	status reports
+Mar 02 16:21:14 <jpr>	dobey: ?
+Mar 02 16:21:44 <dobey>	working on the 2.4 UI items, need to look through the workload for christine's must-have list, and reply to that
+Mar 02 16:22:08 <dobey>	and need to look at implementation details for a few things for 2.4
+Mar 02 16:22:21 <jpr>	when you say "working" do you mean working on mockups?
+Mar 02 16:22:21 <dobey>	but that's all for right now
+Mar 02 16:22:45 <dobey>	not yet, cleaning up the list to get it final
+Mar 02 16:23:01 <jpr>	ok
+Mar 02 16:23:08 <jpr>	dobey: any user testing plans yet?
+Mar 02 16:23:29 <dobey>	no specific plans, no
+Mar 02 16:23:34 <jpr>	ok
+Mar 02 16:24:00 <jpr>	dobey: oh, there is one build fix i should get you to look at for 2.2.1 thats in bugzilla with a patch
+Mar 02 16:24:06 <jpr>	fejj: status?
+Mar 02 16:24:09 <dobey>	ok
+Mar 02 16:24:41 <fejj>	bug fixing, triaging bugzilla bugs
+Mar 02 16:24:45 <fejj>	reviewing patches
+Mar 02 16:25:00 <fejj>	implemented that workaround for broken rfc2047 encoded stuff
+Mar 02 16:25:22 <fejj>	notzed found an example that breaks with the workaround
+Mar 02 16:25:28 <jpr>	fejj: can you strace evolution on the nsscki module opening thing for me on a platform you think its working on?
+Mar 02 16:25:41 <fejj>	sure
+Mar 02 16:26:01 <jpr>	fejj: we need to narrow the problem a bit
+Mar 02 16:26:10 -->	mmoulderlt_ (~mmoulderl@192.94.118.227) has joined #evolution-meet
+Mar 02 16:26:20 <jpr>	gekker: anything on the build front?
+Mar 02 16:26:33 <gekker>	no, looking good from here
+Mar 02 16:26:39 <jpr>	cool
+Mar 02 16:26:50 <jpr>	gicmo: anything besides the bug mentioned earlier?
+Mar 02 16:27:03 <gicmo>	jpr, nope .
+Mar 02 16:27:14 <jpr>	haip: anything for us?
+Mar 02 16:27:33 <haip>	no
+Mar 02 16:27:40 <jpr>	harish_food: ?
+Mar 02 16:27:47 <haip>	just found some bugs to fix
+Mar 02 16:28:02 <jpr>	haip: there are outstanding a11y patches?
+Mar 02 16:28:11 <harish_food>	jpr: mailer timestamp patch, posCursorReq changes for mail/cal/ab , some minor bug fixes/patch reviews,  working on gw recurrence this week
+Mar 02 16:28:19 <haip>	jpr: currently no I think
+Mar 02 16:28:39 <jpr>	harish_food: so the gw recurrences will target 2.2.1 then?
+Mar 02 16:28:43 <jpr>	those changes
+Mar 02 16:28:58 <jpr>	hpj: status?
+Mar 02 16:29:02 <harish_food>	jpr: yes.. i am working towards that deadline
+Mar 02 16:29:24 <haip>	we work well with rodo, notzed, rodrigo, hpj, you and others :)
+Mar 02 16:29:35 <rodrigo>	harish_food: working myself on some recently reported recurrences broken bugs
+Mar 02 16:29:37 <harish_food>	jpr: though the scalability issue still needs to be tackled
+Mar 02 16:29:44 <jpr>	right
+Mar 02 16:29:49 <hpj>	Last week: Spent too much time fixing my workstation, which had decided to break. Implemented limits API for the name selector - the patch is still on the list, not approved, and might not go in for 2.2.0 since nothing will be using it anyway. Added a trivial fix for evolution-exchange to work with e-passwords in EDS. Worked on OS X build that a) links against Apple's X11 instead of a third party one I was using at first and b) is trivially easy to insta
+Mar 02 16:29:49 <hpj>	ll (i.e. a .pkg file).
+Mar 02 16:29:50 <jpr>	that can be post 2.2.1 though
+Mar 02 16:29:52 <rodrigo>	harish_food: so please have a look at the patches I've sent/will be sending
+Mar 02 16:30:08 <jpr>	hpj: yah, limits patch for 2.2.1 is fine
+Mar 02 16:30:10 <hpj>	Coming week: Fixing string breakage caused by moving e-passwords to EDS, need to know how we did this for Camel (couldn't find it on the lists, the patch we used for that would be nice). More bug fixing and testing. More OS X work.
+Mar 02 16:30:24 <hpj>	Long overdue bonus: http://hp.cl.no/osx/
+Mar 02 16:30:25 <harish_food>	rodrigo, yes
+Mar 02 16:30:43 <hpj>	So you know I haven't just been making things up :)
+Mar 02 16:31:01 <hpj>	If you just view one image, see the composer one, I guess.
+Mar 02 16:31:16 <siva>	hpj, cool !!
+Mar 02 16:31:26 <jpr>	hpj: sweet
+Mar 02 16:31:27 <dobey>	hpj: i think notzed did it manually
+Mar 02 16:31:31 <jpr>	hpj: blog that
+Mar 02 16:31:40 <gicmo>	hpj, very cool!
+Mar 02 16:31:41 <hpj>	jpr: will do today
+Mar 02 16:31:43 <christine>	hpj: rock!
+Mar 02 16:31:54 <hpj>	thanks everyone :)
+Mar 02 16:32:23 <--	mmoulderlt has quit (Ping timeout: 600 seconds)
+Mar 02 16:32:25 <jpr>	hpj: is that a build from cvs?
+Mar 02 16:32:30 <jpr>	or is that 2.1.6?
+Mar 02 16:32:35 <hpj>	dobey: how do I generate the changes reliably?
+Mar 02 16:32:37 <hpj>	jpr: from cvs
+Mar 02 16:32:40 <hpj>	jpr: i'm tracking it
+Mar 02 16:32:54 <hpj>	jpr: i'll keep tracking the 2.10 branch for a bit, i guess
+Mar 02 16:33:02 <dobey>	hpj: i don't know exactly, you will have to ask notzed
+Mar 02 16:33:06 <jpr>	hpj: eta on the packages?
+Mar 02 16:33:18 <harish_food>	hpr: very cool !
+Mar 02 16:33:25 <harish_food>	hpj: very cool !
+Mar 02 16:33:41 <hpj>	jpr: this week, i need to rebuild mozilla, but it's mostly CPU time not brain time :)
+Mar 02 16:33:48 <rodo>	nice!
+Mar 02 16:33:59 <jpr>	hpj: ok, in the mean time you'll be looking at 32978 right?
+Mar 02 16:34:06 <jpr>	mmoulderlt_: anything for us?
+Mar 02 16:34:17 <hpj>	jpr: yep
+Mar 02 16:34:19 <jpr>	mmoulderlt_: the latest snapshot should have the first run wizard again
+Mar 02 16:34:26 <hpj>	dobey: ok, i'll ask him
+Mar 02 16:34:28 <mmoulderlt_>	I was wondering what date I had to get the doc to you by?
+Mar 02 16:34:42 <jpr>	mmoulderlt_: well, for 2.2.0, friday would be good
+Mar 02 16:34:48 <mmoulderlt_>	I am a little worried about monday since a lot of the changes are in the GroupWise section
+Mar 02 16:34:55 <jpr>	ok
+Mar 02 16:35:05 <jpr>	mmoulderlt_: i would worry more about groupwise for 2.2.1
+Mar 02 16:35:13 <jpr>	there is no doc freeze
+Mar 02 16:35:13 <mmoulderlt_>	If I can fix these last bugs today, I should be okay
+Mar 02 16:35:17 <mmoulderlt_>	k
+Mar 02 16:35:31 <mmoulderlt_>	Also, I need some volunteers for technical edits on the doc
+Mar 02 16:35:35 <jpr>	mmoulderlt_: so we'll take what ever updates you have by friday morning
+Mar 02 16:35:39 <jpr>	hmm
+Mar 02 16:35:58 <jpr>	mmoulderlt_: for groupwise or all?
+Mar 02 16:36:05 <mmoulderlt_>	I won't have time for technical edits by 2.2 but afterwards
+Mar 02 16:36:56 <jpr>	ok
+Mar 02 16:37:01 <jpr>	rodo: status?
+Mar 02 16:37:58 <rodo>	bugfixing, rtl enhancements - better direction handling (using keymap direction) and better saving
+Mar 02 16:38:09 <rodo>	made release
+Mar 02 16:38:21 <jpr>	rodo: any luck with the occasional typing goes to rtl bug?
+Mar 02 16:38:34 <rodo>	now I am looking into that reversed typing bug, but I am unable to reproduce it
+Mar 02 16:38:45 <rodo>	tried haip's way from 1.4, but it didn't work in 2.1
+Mar 02 16:38:50 <jpr>	if anyone has steps to reproduce it, let rodo know
+Mar 02 16:38:58 <dhm_home>	is that when replying to a message?
+Mar 02 16:39:07 <jpr>	dhm_home: yes, for me it has been
+Mar 02 16:39:21 <jpr>	but not every time and i'm not sure how to replicate
+Mar 02 16:39:33 <rodo>	wrote stress test, but it doesn't happen there
+Mar 02 16:39:43 <rodo>	I will try to add more actions to the stress test
+Mar 02 16:39:54 <jpr>	dhm_home: have you seen it?
+Mar 02 16:39:55 <dhm_home>	in reply to specific messages?  my guess is that a unicode control character is getting into the replystuff generated from the original message
+Mar 02 16:39:55 <gicmo>	rodo, I had that bug about 10 times .. 
+Mar 02 16:40:25 <dhm_home>	I've seen it, I think it was with 2.0.*
+Mar 02 16:40:35 <gicmo>	I saw it with 2.1.5
+Mar 02 16:40:43 <rodo>	gicmo: please try to find a reproducible way
+Mar 02 16:40:44 <jpr>	dhm_home: unlikely, if so, different bug
+Mar 02 16:40:54 <dhm_home>	aha
+Mar 02 16:41:09 <gicmo>	rodo, if I find one I'll let you know!
+Mar 02 16:41:20 <jpr>	dhm_home: it might be haip's from 1.4 then
+Mar 02 16:41:42 <rodo>	well, it's probably the same problem, but the ways to get gtkhtml to that state is probably different
+Mar 02 16:41:43 <jpr>	dhm_home: also, i've only heard of that one in 2.0 on rh
+Mar 02 16:41:51 <jpr>	ok
+Mar 02 16:41:54 <jpr>	rodrigo: status?
+Mar 02 16:42:14 <rodrigo>	finished the backend sync patch
+Mar 02 16:42:20 <rodrigo>	fixed some alarm daemon bugs
+Mar 02 16:42:28 <rodrigo>	categories dialog
+Mar 02 16:42:34 <rodrigo>	recurrence bugs
+Mar 02 16:42:39 <rodrigo>	and some other fixes
+Mar 02 16:42:47 <jpr>	ok
+Mar 02 16:42:57 <rodrigo>	now, testing all recurrence stuff
+Mar 02 16:43:42 <jpr>	dhm_home: oh, i missed you earlier, anything for us? i scheduled the printing stuff for 2.3, so you should be able to stick it in 7-10 days from now after the branching resolves itself
+Mar 02 16:44:03 <jpr>	seb128: anything else for us?
+Mar 02 16:44:11 <seb128>	nop
+Mar 02 16:44:22 <dhm_home>	I built new 2.1.6 etc tarballs (and old libsoup) with GCC4; a couple of minor patches were needed to get it to build.   I haven't actually _run_ the built code yet; realised at 4am last night I needed sleep :-)
+Mar 02 16:44:31 <dhm_home>	I didn't commit my printing i18n fixes as it was so close to the "showstopper" freeze; I'm applying them to Fedora's development tree (as of last night) to increase the test coverage.
+Mar 02 16:44:58 <jpr>	ok
+Mar 02 16:44:59 <jpr>	siva: status?
+Mar 02 16:45:10 <siva>	jpr, bug fixing
+Mar 02 16:45:42 <jpr>	dhm_home: sounds good, also, you might want to search on the "printing" keyword in bugzilla
+Mar 02 16:46:04 <jpr>	andre klapper has been collecting up various printing issues and feature requests
+Mar 02 16:46:10 <dhm_home>	cool
+Mar 02 16:46:28 <jpr>	tml: status?
+Mar 02 16:47:11 <tml>	gconf shoud be mostly done. (or did I say that already last time?). 
+Mar 02 16:47:16 <tml>	Started hacking on gnome-vfs, but it is rather convoluted, and I decided to try to skip it at this point.
+Mar 02 16:47:25 <tml>	libgnome done, just bypassing some of the stuff at this stage. It's use of gnome-vfs was rather minimal and didn't seem essential.
+Mar 02 16:47:31 <tml>	Looking at libbonoboui now, which otherwise isn't problematic, except that it uses gtkplug/socket which aren't cross-platform (see #58541). OTOH, I don't know how essential that is to the users of libbonoboui, should just stub it out on Win32 for now and see what happens.
+Mar 02 16:47:41 <jpr>	tml: you're going to just use the file backend in win32 for now right?
+Mar 02 16:47:54 <tml>	yes
+Mar 02 16:48:20 <jpr>	tml: well its used all the time for bonobo controls
+Mar 02 16:48:27 <jpr>	even inproc afaik
+Mar 02 16:48:56 <tml>	ok, i guess i will have to test the suggested patch in #58541 then. Hans (Breuer) says that it almost works.
+Mar 02 16:49:34 <jpr>	tml: i guess it should be obvious when you stub it out and run the test apps :-)
+Mar 02 16:49:46 <tml>	OTOH, Owen seems to be strongly of the opinion that gtkplug/socket is and should remain X11-specific
+Mar 02 16:49:54 <jpr>	hmm
+Mar 02 16:50:07 <jpr>	tml: whats his suggestion on win32 then?
+Mar 02 16:50:46 <tml>	or wait, i misread his comments, he isn't objecting to it as such
+Mar 02 16:51:15 <tml>	he just didn't like the implementation details in that patch
+Mar 02 16:51:21 <jpr>	ok
+Mar 02 16:52:00 <jpr>	tml: libbonoboui has long been seen as the evo on windows stumbling block i think
+Mar 02 16:52:12 <jpr>	tml: so hopefully you can sort this out :-)
+Mar 02 16:52:23 <tml>	so i guess i'll take a look at doing gtkplug/socket next, possibly in cooperation with Hans if he has new ideas
+Mar 02 16:52:34 <jpr>	chen_oof: oops, missed you, status?
+Mar 02 16:52:37 <jpr>	tml: sounds good
+Mar 02 16:52:39 <dobey>	or you can start by patching the toolbar bits of evolution at least, to not use bonoboui ;)
+Mar 02 16:52:49 *	dobey would be greatly appreciative of that
+Mar 02 16:52:51 <jpr>	dobey: the components all use controls
+Mar 02 16:52:55 <jpr>	as well
+Mar 02 16:53:00 <dobey>	yeah
+Mar 02 16:53:20 *	dhm_home believes the main window will look awfully empty if you don't get this working
+Mar 02 16:53:35 <dobey>	but the New button is giving me all kinds of talkback because of the bonoboui vs. normal gtk+ widgetry mathematics
+Mar 02 16:54:12 <jpr>	cmeadors: anything for us?
+Mar 02 16:55:16 <jpr>	christine: ?
+Mar 02 16:55:26 <jpr>	anyone i missed?
+Mar 02 16:55:27 <christine>	working w/ jpr on the 2.4 stuff. dobey, if you want to talk about the ui stuff, i am around all day... context might help if you are overwhelmed. and oh yeah, i will be on holiday from march 7 thru march 23
+Mar 02 16:55:58 <jpr>	any other business to cover?
+Mar 02 16:56:31 <jpr>	ok
+Mar 02 16:56:34 <jpr>	thanks everyone
+Mar 02 16:56:35 <rodo>	jpr: what about that inclusion of gtkhtml# in gtkhtml mike is proposing?
+Mar 02 16:56:39 <christine>	thx jp
+Mar 02 16:56:39 <jpr>	oops
+Mar 02 16:56:43 <dobey>	christine: i'll be in in a bit, but i need to look over the mail and the items in it more closely
+Mar 02 16:56:52 <christine>	dobey: ok, cool. i'll be around 
+Mar 02 16:58:08 <dobey>	rodo: we can probably do it for the 2.3 cycle, no?
+Mar 02 16:58:12 <gicmo>	ok thanks ... I go and get breakfast for .. be back later ..
+Mar 02 16:58:37 <jpr>	rodo: let's talk after
+Mar 02 16:58:41 <--	mmoulderlt_ has quit (Leaving)
+Mar 02 16:58:44 <dobey>	hehe, breakfast... at 5 pm :P
+Mar 02 16:58:46 <jpr>	thanks all
+Mar 02 16:58:51 <dobey>	later
+Mar 02 16:58:53 <rodo>	ok
+Mar 02 16:58:54 <jpr>	dobey: he's in cali
+Mar 02 16:58:58 <rodo>	dobey: probably
+Mar 02 16:59:04 <--	jpr (~jpr@CPE00a0c56bef4b-CM014410117597.cpe.net.cable.rogers.com) has left #evolution-meet
+Mar 02 16:59:06 <--	christine (~christine@130.57.22.69) has left #evolution-meet
+Mar 02 16:59:07 <--	dobey (~dobey@h000625e6119c.ne.client2.attbi.com) has left #evolution-meet
+Mar 02 16:59:07 <--	gekker (~gekker@137.65.45.31) has left #evolution-meet
+Mar 02 16:59:09 <haip>	bye all
+**** ENDING LOGGING AT Wed Mar  2 16:59:09 2005
+
