@@ -150,13 +150,12 @@ bounty.
 <?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
-<?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
-<?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
+<?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>

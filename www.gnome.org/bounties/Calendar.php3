@@ -13,7 +13,6 @@ include ("./util.php");
 <?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
 <?php taskrow ("Publish free/busy information", "hidden", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "hidden", "300", "127541", ""); ?>
-<?php taskrow ("Calendar attachments", "hidden", "750", "127543", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("National, religious, event calendars", "Calendar", "15", "127528", "127528", ""); ?>
 
@@ -341,72 +340,6 @@ evolution-hackers mailing list, and discuss any technical issues
 there.  JP Rosevear <jpr@ximian.com> and Hans Petter Jansson 
 <hpj@ximian.com>
 will be the primary contacts on the list for the Calendar.
-<?php box_end (); ?>
-<?php box_start ("Calendar attachments", "Calendar", "750", "127543", "127543", ""); ?>
-
-<p>Add support in evolution for attaching files to events.</p>
-
-<p>The iCalendar specification, <?php rfc(2445); ?>, describes a
-property ATTACH (4.8.1.1) for attaching data to an iCalendar object
-(event or task).  The event and task editor should allow the user to
-add and remove documents and files.  It should also allow the user to
-open the attached using an appropriate mime handler (similar to
-Nautilus or the mail portion of evolution)</p>
-
-<p>The following picture illustrates the point:</p>
-
-<img src="calendar-attachments.gif">
-
-<p>To attach file, drag it on the event. The event should draw a two
-pixel black outline to give visual feedback to "drag accept". You should
-also be able to attach documents with a right-click menu.  There should
-be a contextual menu item to open the editor and get the list of files
-and documents</p>
-
-<?php box_sec ("Affected Modules"); ?>
-<?php bonsai ("evolution-data-server"); ?><br>
-<?php bonsai ("evolution"); ?>
-
-<?php box_sec ("How"); ?> 
-
-<p>The first step is to confirm that <?php bonsai
-("evolution-data-server/calendar/libical/src/libical"); ?> supports
-the ATTACH property properly.  You will want to check that icalrecur.h
-and icalrecur.c are adequate and that icalparser.c correctly reads in
-the ATTACH property.  If it does not, you will need to correct
-that.<p/>
-
-<p>The second step is to to allow drag and drop of files on the day
-view, week view and list view calendar items and the task list item
-(see e-day-view.c, e-week-view.c and e-cal-list-view. in <?php bonsai
-("evolution/calendar/gui"); ?>). It can accept the file uri drop, look
-up the event and then attach the item.</p>
-
-<p>The third step is to create a page containing the attachment
-information for the editor, and add it to the event editor and task
-editors, and example of this is recurrence-page.c in <?php bonsai
-("evolution/calendar/gui/dialogs"); ?>.  There should also be an
-"Attach" button that pops up a file dialog.  The page should not be
-visible unless there are attachments or the user clicks the "Attach"
-button.  Double clicking and attachment should allow the user to open
-the item with an appropriate handler.  You might design this page
-similar to the mail composer's attachment area.</p>
-
-<p>The fourth step is to add contextual menu item, "Edit
-Attachments..." that should open the editor and display the attachments page.
-a similar thing is done by the "Schedule Meeting..." context item.</p>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-You should subscribe to the <a STYLE="text-decoration:none" 
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Rodrigo Moya &lt;<a STYLE="text-decoration:none" href="mailto:rodrigo@ximian.com">rodrigo@ximian.com</a>&gt; and Hans Petter Jansson 
-&lt;<a STYLE="text-decoration:none" href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
-will be the primary contacts on the list for the Calendar.
-</p>
-
 <?php box_end (); ?>
 <?php write_page_footer (); ?>
 

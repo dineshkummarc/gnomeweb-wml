@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 <?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "300", "127553", ""); ?>
-<?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", ""); ?>
+<?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 
@@ -157,7 +157,7 @@ What we'd like to see:
   The <a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/desktop-devel-list/">desktop-devel-list</a> and 
 <a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a STYLE="text-decoration:none" href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a STYLE="text-decoration:none" href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Firefox can be found at <a STYLE="text-decoration:none" href="http://mozilla.org/products/firefox">www.mozilla.org/products/firefox.</a>
 <?php box_end (); ?>
-<?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812", ""); ?>
+<?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
 
 
 <p>Currently Evolution's icons are not themeable and are a mixture

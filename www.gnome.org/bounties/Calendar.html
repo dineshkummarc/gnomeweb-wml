@@ -55,11 +55,6 @@
     <td bgcolor="#d0d0ff" >$300</td>
 </tr>
 
-<tr class="taskrow">
-    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><a STYLE="text-decoration:none" href="#127543">Calendar attachments</a></td>
-    <td bgcolor="#d0d0ff" >$750</td>
-</tr>
-
 </table>
 <p>
   
@@ -529,90 +524,6 @@ evolution-hackers mailing list, and discuss any technical issues
 there.  JP Rosevear <jpr@ximian.com> and Hans Petter Jansson 
 <hpj@ximian.com>
 will be the primary contacts on the list for the Calendar.
-      </div>
-    </div>
-  
-    <a STYLE="text-decoration:none" name="127543"></a><a STYLE="text-decoration:none" name="box8"></a>
-    <div class="content-box">
-      <div class="content-box-header">
-	            	      <span class="table-header">Calendar attachments</span>
-              <span class="bug-number">             
-			      <a STYLE="text-decoration:none" href="http://bugzilla.gnome.org/show_bug.cgi?id=127543" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #127543)</a> | | <a STYLE="text-decoration:none" href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a STYLE="text-decoration:none" href="mailto:bounty@lists.ximian.com?Subject=Submission for Bounty #127543&body=Bounty: 127543%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: %0AAddress to post the cheque: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
-	    </span>
-                      </div>
-           <div class="content-box-second-header">
-	     Calendar	     <span>
-	     Bounty: <span class="bounty">$750		      </span>
-	     </span>
-	   </div>
-	                 	    	<div class="content-box-body">
-	    
-<p>Add support in evolution for attaching files to events.</p>
-
-<p>The iCalendar specification, <a STYLE="text-decoration:none" href="http://www.faqs.org/rfcs/rfc2445.html">RFC 2445</a>, describes a
-property ATTACH (4.8.1.1) for attaching data to an iCalendar object
-(event or task).  The event and task editor should allow the user to
-add and remove documents and files.  It should also allow the user to
-open the attached using an appropriate mime handler (similar to
-Nautilus or the mail portion of evolution)</p>
-
-<p>The following picture illustrates the point:</p>
-
-<img src="calendar-attachments.gif">
-
-<p>To attach file, drag it on the event. The event should draw a two
-pixel black outline to give visual feedback to "drag accept". You should
-also be able to attach documents with a right-click menu.  There should
-be a contextual menu item to open the editor and get the list of files
-and documents</p>
-
-
-<div class="headlinebar"> Affected Modules</div>
-
-<a STYLE="text-decoration:none" href="http://cvs.gnome.org/viewcvs/evolution-data-server">evolution-data-server</a><br>
-<a STYLE="text-decoration:none" href="http://cvs.gnome.org/viewcvs/evolution">evolution</a>
-
-<div class="headlinebar"> How</div>
-
- 
-
-<p>The first step is to confirm that <a STYLE="text-decoration:none" href="http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/libical/src/libical">evolution-data-server/calendar/libical/src/libical</a> supports
-the ATTACH property properly.  You will want to check that icalrecur.h
-and icalrecur.c are adequate and that icalparser.c correctly reads in
-the ATTACH property.  If it does not, you will need to correct
-that.<p/>
-
-<p>The second step is to to allow drag and drop of files on the day
-view, week view and list view calendar items and the task list item
-(see e-day-view.c, e-week-view.c and e-cal-list-view. in <a STYLE="text-decoration:none" href="http://cvs.gnome.org/viewcvs/evolution/calendar/gui">evolution/calendar/gui</a>). It can accept the file uri drop, look
-up the event and then attach the item.</p>
-
-<p>The third step is to create a page containing the attachment
-information for the editor, and add it to the event editor and task
-editors, and example of this is recurrence-page.c in <a STYLE="text-decoration:none" href="http://cvs.gnome.org/viewcvs/evolution/calendar/gui/dialogs">evolution/calendar/gui/dialogs</a>.  There should also be an
-"Attach" button that pops up a file dialog.  The page should not be
-visible unless there are attachments or the user clicks the "Attach"
-button.  Double clicking and attachment should allow the user to open
-the item with an appropriate handler.  You might design this page
-similar to the mail composer's attachment area.</p>
-
-<p>The fourth step is to add contextual menu item, "Edit
-Attachments..." that should open the editor and display the attachments page.
-a similar thing is done by the "Schedule Meeting..." context item.</p>
-
-
-<div class="headlinebar"> Pointers</div>
-
-
-<p>
-You should subscribe to the <a STYLE="text-decoration:none" 
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Rodrigo Moya &lt;<a STYLE="text-decoration:none" href="mailto:rodrigo@ximian.com">rodrigo@ximian.com</a>&gt; and Hans Petter Jansson 
-&lt;<a STYLE="text-decoration:none" href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
-will be the primary contacts on the list for the Calendar.
-</p>
-
       </div>
     </div>
 </div>
