@@ -22,7 +22,8 @@ page_SCRIPTS= index.html	\
 		theme-select-nautilus.png \
 		throbber-nautilus.png \
 		toolbar-nautilus.png \
-		zoom-nautilus.png
+		zoom-nautilus.png \
+		emblems-default-nautilus.png
 
 
 include $(top_srcdir)/rules.common
