@@ -7,6 +7,7 @@ SUBDIRS=			\
 	gnumeric		\
 	gb			\
 	mc			\
+	gnome-pilot		\
 	gnome-print
 urlpath=/projects
 
