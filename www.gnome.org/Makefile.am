@@ -1,10 +1,9 @@
-SUBDIRS=images start
+SUBDIRS=images start resources
 
 urlpath=
 
 page_SCRIPTS=index.html		\
 	findout.html 		\
-	mailinglists.html 	\
 	seegnome.html		\
 	calendar.html
 
