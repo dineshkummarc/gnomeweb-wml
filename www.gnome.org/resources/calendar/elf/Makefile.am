@@ -8,7 +8,7 @@ page_SCRIPTS=\
 include $(top_srcdir)/rules.common
 
 misc_images=\
-	elf4c03.png\
+	elf4c03.png
 
 page_DATA=$(misc_images)
 
