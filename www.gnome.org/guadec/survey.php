@@ -9,12 +9,13 @@
 
       <!-- Table for the black border. -->
       <table border="0" cellspacing="0" cellpadding="0" width="790">
-        <tr><td bgcolor="#000000"3>
+        <tr><td bgcolor="#000000">
             <!-- Table for the content image. -->
 
-            <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="2" width="100%">
+            <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="2" width="100%"> 
               <tr><!-- The text --><td>
-                  <table border=0 bgcolor="#ffffff" cellpadding=50>
+
+                  <table border=0 bgcolor="#ffffff" cellpadding=50> <!-- start content -->
                     <tr><td>
                         <h1>GUADEC 4 Pre-Registration Survey:</h1>
 
@@ -68,10 +69,11 @@
 
         $formmail .= "Interested in attending GUADEC 4: " . $guadec . "\n\n";
 
-	$no_guadecs=count($assigned_to);
+	$no_guadecs=count($attend);
 
+    	$guadecs_attended = "";
 	for ($i=0; $i<$no_guadecs; $i++) {
-    		$guadecs_attended .= $assigned_to[$i];
+    		$guadecs_attended .= $attend[$i] . "\n";
 	}
 	
 	$formmail .= "GUADECs Attended: " . $guadecs_attended . "\n\n";
@@ -229,8 +231,6 @@
           </td>
         </tr>
 	</tr>
-      </table>
-      <table>
 	<tr>
 	  <td valign="top" colspan="3">&nbsp;</td>
 	</tr>
@@ -259,9 +259,11 @@
 <? } ?>
 
 	  </td></tr>
-      </table>
+      </table>  <!-- end content-->
+
 	  </td></tr>
       </table>
+
 	  </td></tr>
       </table>
     </center>
