@@ -34,10 +34,10 @@ $query = "SELECT name, description FROM applist WHERE touched >= ".$date."000000
 
 //print $query."\n";
 
-$res = db_query ($query);
+$res = mysql ("gnomeapps",$query);
 
 $outputtotal = 0;
-while ($row = db_fetch_array ($res)) {
+while ($row = mysql_fetch_array ($res)) {
 	print "  <app>\n";
 	print "   <name>".htmlspecialchars ($row['name'])."</name>\n";
 	print "   <desc>".rss_description (str_replace ("\n", "", trim ($row['description'])))
