@@ -34,6 +34,7 @@ screen_images=\
 	20000520-n0mada-thumb.png\
 	20000520-n0mada-thumb.jpg
 
-page_DATA=$(screen_images)
+page_DATA=$(screen_images)\
+          .htaccess
 
 EXTRA_DIST=$(page_DATA)

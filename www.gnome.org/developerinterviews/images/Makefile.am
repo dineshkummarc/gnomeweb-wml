@@ -11,6 +11,7 @@ page_DATA=q.png \
           raph-1.png \
 					raph-1.jpg \
           title-raph.png\
-					title-raph.gif
+					title-raph.gif\
+					.htaccess
 
 EXTRA_DIST=$(page_DATA)

@@ -155,7 +155,9 @@ sidebar_items=\
 	sidebar-speakingabout.png\
 	sidebar-speakingabout.gif\
   sidebar-contribute.png\
-	sidebar-contribute.gif
+	sidebar-contribute.gif\
+  sidebar-gnomeoffice.png\
+	sidebar-gnomeoffice.gif
 
 topbar_headers=\
   topbar-contact.png\
@@ -257,6 +259,7 @@ page_DATA=$(misc_images)	\
 	$(sidebar_items)	\
 	$(topbar_headers) \
   $(title_texts) \
-	$(icons)
+	$(icons)\
+	.htaccess
 
 EXTRA_DIST=$(page_DATA)
