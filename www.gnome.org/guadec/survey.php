@@ -159,7 +159,7 @@
         </tr>
         <tr>
           <td colspan=2>
-               <input type="checkbox" name="developer" <? if ($developer) { ?> checked <? } ?> >  I am a GNOME developer.
+               <input type="checkbox" name="developer" <? if ($developer) { ?> checked <? } ?> >  I am a GNOME contributor.
           </td>
         </tr>
 	<tr>
