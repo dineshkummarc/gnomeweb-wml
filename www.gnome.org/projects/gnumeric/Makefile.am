@@ -80,6 +80,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-0.73		\
 	    gnumeric-0.74		\
 	    gnumeric-0.75		\
-	    gnumeric-0.76
+	    gnumeric-0.76		\
+	    gnumeric-0.99.0
 
 include $(top_srcdir)/rules.common
