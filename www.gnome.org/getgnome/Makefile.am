@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/contact
+urlpath=/getgnome
 
 page_SCRIPTS=index.html
 
