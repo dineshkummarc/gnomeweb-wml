@@ -3,8 +3,8 @@ SUBDIRS =
 urlpath = /friends
 
 page_SCRIPTS = \
-	index.php \
-	thanks.php \
+	index.html \
+	thanks.html \
 	donors.php \
 	donors_2002.php \
 	donors_2003.php \
