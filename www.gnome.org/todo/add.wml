@@ -33,7 +33,11 @@ mysql_query ($query_string);
 print ("<p>Item added. Thank you.</p>\n");
 print ("<p>The item \"<i>$short_desc</i>\" will not show up until someone with administrator access approves it. Mail has been sent to the administrators to alert them that they should review the item you added.</p>");
 
-mail("joakim@ximian.com", "New Todo Item needs review", "There's been a new todo item added to the database, the\nshort description is:\n$short_desc\n\nPlease go to http://www.gnome.org/todo/admin/modify.php3 and review it.\n\n-- \n-The friendly todo system.\n");
+$result = mysql_query("SELECT id FROM todo_items WHERE (short_desc='$short_desc' and approved='0') ORDER BY id DESC");
+$res_object = mysql_fetch_object($result);
+$id = $res_object->id;
+
+mail("joakim@ximian.com", "New Todo Item needs review", "There's been a new todo item added to the database, the\nshort description is:\n$short_desc\n\nPlease go to http://www.gnome.org/todo/admin/modify.php3?id=$id and review it.\n\n-- \n-The friendly todo system.\n");
 
 } else { # A required field was blank
 echo "You left out a required field.";
