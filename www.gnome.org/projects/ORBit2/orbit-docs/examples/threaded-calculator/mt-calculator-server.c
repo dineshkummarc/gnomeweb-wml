@@ -14,8 +14,8 @@
 
 #include "examples-toolkit.h"
 
-static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
-static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+static CORBA_ORB          global_orb  = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA default_poa = CORBA_OBJECT_NIL; /* default POA */
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -34,6 +34,60 @@ server_shutdown (int sig)
         }
 }
 
+/**
+
+ */
+PortableServer_POA
+server_create_multi_threaded_poa (CORBA_ORB                  orb, 
+				  PortableServer_POA         poa,
+				  PortableServer_POAManager  poa_mgr,
+				  CORBA_Environment         *ev)
+{
+	const static        MAX_POLICIES  = 1;
+	PortableServer_POA  child_poa     = CORBA_OBJECT_NIL;
+	CORBA_PolicyList   *poa_policies;
+
+	poa_policies           = CORBA_PolicyList__alloc ();
+        poa_policies->_maximum = MAX_POLICIES;
+        poa_policies->_length  = MAX_POLICIES;
+        poa_policies->_buffer  = CORBA_PolicyList_allocbuf (MAX_POLICIES);
+        CORBA_sequence_set_release (poa_policies, CORBA_TRUE);
+                                                                                
+        poa_policies->_buffer[0] = (CORBA_Policy)
+		PortableServer_POA_create_thread_policy (
+			poa,
+			PortableServer_ORB_CTRL_MODEL,
+			ev);
+
+	child_poa = PortableServer_POA_create_POA (poa,
+                                                   "Thread Per Request POA",
+                                                   poa_mgr,
+                                                   poa_policies,
+                                                   ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_create_poa;
+
+	ORBit_ObjectAdaptor_set_thread_hint ((ORBit_ObjectAdaptor) child_poa, 
+					     ORBIT_THREAD_HINT_PER_REQUEST);
+
+	
+        CORBA_Policy_destroy (poa_policies->_buffer[0], ev); 
+	if (etk_raised_exception(ev)) 
+		goto failed;
+        CORBA_free (poa_policies);	
+	
+	return child_poa;
+	
+ failed_create_poa:
+	/* FIXME, in case of error, ev is set, but destructor should not
+	 * return except anyway */
+        CORBA_Policy_destroy (poa_policies->_buffer[0], ev); 
+        CORBA_free (poa_policies);	
+ failed:
+	return CORBA_OBJECT_NIL;
+}
+
+
 /* Inits ORB @orb using @argv arguments for configuration. For each
  * ORBit options consumed from vector @argv the counter of @argc_ptr
  * will be decremented. Signal handler is set to call
@@ -48,7 +102,8 @@ server_init (int                 *argc_ptr,
 	     PortableServer_POA  *poa,
 	     CORBA_Environment   *ev)
 {
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+	PortableServer_POA         rootpoa     = CORBA_OBJECT_NIL;
+	PortableServer_POAManager  rootpoa_mgr = CORBA_OBJECT_NIL; 
 
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -62,25 +117,35 @@ server_init (int                 *argc_ptr,
 	if (etk_raised_exception(ev)) 
 		goto failed_orb;
 
-        (*poa) = (PortableServer_POA) 
+        rootpoa = (PortableServer_POA) 
 		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);
 	if (etk_raised_exception(ev)) 
 		goto failed_poa;
-
-        poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);
+	
+        rootpoa_mgr = PortableServer_POA__get_the_POAManager(rootpoa, ev);
 	if (etk_raised_exception(ev)) 
 		goto failed_poamanager;
 
-	PortableServer_POAManager_activate(poa_manager, ev);
+	/* create default POA with specific policies */
+
+	(*poa) = server_create_multi_threaded_poa (*orb, 
+						   rootpoa, 
+						   rootpoa_mgr, 
+						   ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_child_poa;
+
+	PortableServer_POAManager_activate(rootpoa_mgr, ev);
 	if (etk_raised_exception(ev)) 
 		goto failed_activation;
 
-        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
+        CORBA_Object_release ((CORBA_Object) rootpoa_mgr, ev);
 	return;
 
  failed_activation:
+ failed_child_poa:
  failed_poamanager:
-        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+        CORBA_Object_release ((CORBA_Object) rootpoa_mgr, local_ev);
  failed_poa:
 	CORBA_ORB_destroy(*orb, local_ev);		
  failed_orb:
@@ -182,10 +247,10 @@ server_in_background (BackgroundData *data)
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	server_init (&argc, argv, &global_orb, &root_poa, ev);
+	server_init (&argc, argv, &global_orb, &default_poa, ev);
 	etk_abort_if_exception(ev, "failed ORB init");
 
-	servant = server_activate_service (global_orb, root_poa, ev);
+	servant = server_activate_service (global_orb, default_poa, ev);
 	etk_abort_if_exception(ev, "failed activating service");
 
 	g_print ("Writing service reference to: %s\n\n", filename);
@@ -199,7 +264,7 @@ server_in_background (BackgroundData *data)
 	server_run (global_orb, ev);
 	etk_abort_if_exception(ev, "failed entering main loop");
 
-	server_cleanup (global_orb, root_poa, servant, ev);
+	server_cleanup (global_orb, default_poa, servant, ev);
 	etk_abort_if_exception(ev, "failed cleanup");
 
 	g_thread_exit (NULL);
