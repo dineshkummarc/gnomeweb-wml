@@ -39,10 +39,8 @@ links.html: links.xml
 
 faq.html: faq.src
 	-mv faq.html faq.html.old
-	if ./make-faq.pl <faq.src >faq.html; then \
+	-if ./make-faq.pl <faq.src >faq.html; then \
 	  rm -f faq.html.old; \
 	else \
 	  -mv faq.html.old faq.html; \
 	fi
-
-
