@@ -14,11 +14,11 @@ page_SCRIPTS=index.shtml		\
 		technology.shtml	\
 		function-info.shtml	\
 		functions.shtml	\
-    	    mailing-list.html		\
+	    mailing-list.html		\
 	    thumb.gif			\
 	    v8.xsd			\
 	    v10.xsd			\
-    	    gnumeric-0.3		\
+	    gnumeric-0.3		\
 	    gnumeric-0.4		\
 	    gnumeric-0.5		\
 	    gnumeric-0.7		\
@@ -53,7 +53,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-0.45		\
 	    gnumeric-0.46		\
 	    gnumeric-0.47		\
-    	    gnumeric-0.48		\
+	    gnumeric-0.48		\
 	    gnumeric-0.49		\
 	    gnumeric-0.51		\
 	    gnumeric-0.52		\
@@ -115,6 +115,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.1.18		\
 	    gnumeric-1.1.19		\
 	    gnumeric-1.1.20		\
-	    gnumeric-1.1.90
+	    gnumeric-1.1.90		\
+	    gnumeric-1.2.0
 
 include $(top_srcdir)/rules.common
