@@ -1,9 +1,14 @@
-all: faq.ps faq.tar.gz
+all: faq.ps 
+
+FILES=faq/CVS \
+      faq/Makefile* \
+      faq/stylesheet-images/CVS \
+      faq/stylesheet-images/Makefile*
 
 faq.ps: faq.xml
 	db2ps faq.xml
-
-faq.tar.gz: faq.xml
+	tar czvf cvs.tar.gz $(FILES)	
 	db2html -u faq.xml
-	tar czf faq.tar.gz faq
+	tar xzvf cvs.tar.gz
+
 

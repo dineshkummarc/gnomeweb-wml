@@ -1258,7 +1258,8 @@ impl_Echo__create(PortableServer_POA poa, CORBA_Environment * ev)
 
    newservant = g_new0(impl_POA_Echo, 1);
    newservant->servant.vepv = &amp;impl_Echo_vepv;
-   newservant->poa = poa;
+   newservant->poa =     
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
    POA_Echo__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
@@ -1276,6 +1277,8 @@ impl_Echo__create(PortableServer_POA poa, CORBA_Environment * ev)
 static void
 impl_Echo__destroy(impl_POA_Echo * servant, CORBA_Environment * ev)
 {
+   CORBA_Object_release((CORBA_Object) servant->poa, ev);
+ 
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
    /* ------ free private attributes here ------ */
@@ -1309,27 +1312,30 @@ distribution the makefile below will do.
 <example> 
 <title>Makefile</title>
 <programlisting role="make">
+PREFIX=/usr/local
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS= -DORBIT2=1 -D_REENTRANT -I/usr/include/orbit-2.0 \
-         -I/usr/include/linc-1.0 -I/usr/include/glib-2.0 \
-         -I/usr/lib/glib-2.0/include
-LDFLAGS= -Wl,--export-dynamic -lORBit-2 -llinc -lgmodule-2.0 \
+CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+       -I$(PREFIX)/lib/glib-2.0/include
+LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
              -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
 IDLOUT=echo-common.c echo-stubs.c echo-skels.c echo.h
-
-all: $(IDLOUT) $(TARGETS)
-
-echo-client : echo-client.o echo-common.o echo-stubs.o 
-echo-server : echo-server.o echo-common.o echo-skels.o 
-
+ 
+all: $(IDLOUT) echo-client echo-server
+ 
+echo-client : echo-client.o echo-common.o echo-stubs.o
+echo-server : echo-server.o echo-common.o echo-skels.o
+ 
 $(IDLOUT): echo.idl
-	$(ORBIT_IDL) echo.idl
-
+        $(ORBIT_IDL) echo.idl
+ 
 clean:
-	rm -rf *.o *~ $(IDLOUT) $(TARGETS)
-</programlisting>
+        rm -rf *.o *~ $(IDLOUT)
+ 
+distclean: clean
+        rm -rf echo-client echo-server</programlisting>
 </example> 
 </para>
 
@@ -1741,6 +1747,8 @@ static void
 impl_Calculator__destroy(impl_POA_Calculator * servant,
 			 CORBA_Environment * ev)
 {
+   CORBA_Object_release((CORBA_Object) servant->poa, ev);
+ 
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
    /* ------ free private attributes here ------ */
@@ -2094,28 +2102,30 @@ sources, and hence the path for ORBIT variables below may
 vary. If using ORBit binary packages shipped with Linux or BSD/Unix the simple makefile below will do.
 <example> 
 <title>makefile</title>
-<programlisting role="make">
+<programlisting role="make">PREFIX=/usr/local
 CC = gcc
-TARGETS=echo-client echo-server
+TARGETS=calculator-client calculator-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS= -DORBIT2=1 -D_REENTRANT -I/usr/include/orbit-2.0 \
-         -I/usr/include/linc-1.0 -I/usr/include/glib-2.0 \
-         -I/usr/lib/glib-2.0/include
-LDFLAGS= -Wl,--export-dynamic -lORBit-2 -llinc -lgmodule-2.0 \
+CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+       -I$(PREFIX)/lib/glib-2.0/include
+LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
              -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
-IDLOUT=echo-common.c echo-stubs.c echo-skels.c echo.h
-
-all: $(IDLOUT) $(TARGETS)
-
-echo-client : echo-client.o echo-common.o echo-stubs.o 
-echo-server : echo-server.o echo-common.o echo-skels.o 
-
-$(IDLOUT): echo.idl
-	$(ORBIT_IDL) echo.idl
-
+IDLOUT=calculator-common.c calculator-stubs.c calculator-skels.c calculator.h
+ 
+all: $(IDLOUT) calculator-client calculator-server
+ 
+calculator-client : calculator-client.o calculator-common.o calculator-stubs.o
+calculator-server : calculator-server.o calculator-common.o calculator-skels.o
+ 
+$(IDLOUT): calculator.idl
+        $(ORBIT_IDL) calculator.idl
+ 
 clean:
-	rm -rf *.o *~ $(IDLOUT) $(TARGETS)
-</programlisting>
+        rm -rf *.o *~ $(IDLOUT)
+ 
+distclean: clean
+        rm -rf calculator-client calculator-server</programlisting>
 </example> 
 </para>
 
@@ -2455,7 +2465,8 @@ impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
 
    newservant = g_new0(impl_POA_Account, 1);
    newservant->servant.vepv = &amp;impl_Account_vepv;
-   newservant->poa = poa;
+   newservant->poa =       
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
    POA_Account__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
@@ -2725,28 +2736,30 @@ reuse this Makefile for numerous small projects.
 <example>
 <title>Makefile for the Account example</title>
 
-<programlisting>CC = gcc
+<programlisting>PREFIX=/usr/local
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS= -DORBIT2=1 -D_REENTRANT -I/usr/include/orbit-2.0 \
-         -I/usr/include/linc-1.0 -I/usr/include/glib-2.0 \
-         -I/usr/lib/glib-2.0/include
-LDFLAGS= -Wl,--export-dynamic -lORBit-2 -llinc -lgmodule-2.0 \
+CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+       -I$(PREFIX)/lib/glib-2.0/include
+LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
              -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
 IDLOUT=account-common.c account-stubs.c account-skels.c account.h
-
+ 
 all: $(IDLOUT) account-client account-server
-
-account-client : account-client.o account-common.o account-stubs.o 
-account-server : account-server.o account-common.o account-skels.o 
-
+ 
+account-client : account-client.o account-common.o account-stubs.o
+account-server : account-server.o account-common.o account-skels.o
+ 
 $(IDLOUT): account.idl
-	$(ORBIT_IDL) account.idl
-
+        $(ORBIT_IDL) account.idl
+ 
 clean:
-	rm -rf *.o *~ $(IDLOUT)
-</programlisting>
+        rm -rf *.o *~ $(IDLOUT)
+ 
+distclean: clean
+        rm -rf account-client account-server</programlisting>
 </example>
 </para>
 </sect2>

@@ -1,9 +1,12 @@
-all: orbit.ps orbit.tar.gz
+all: orbit.ps 
+
+FILES=orbit/CVS \
+      orbit/Makefile* \
+      orbit/stylesheet-images/CVS \
+      orbit/stylesheet-images/Makefile*
 
 orbit.ps: orbit.xml
 	db2ps orbit.xml
-
-orbit.tar.gz: orbit.xml
-	db2html orbit.xml
-	tar czf orbit.tar.gz orbit
-	
+	tar czvf cvs.tar.gz $(FILES)
+	db2html orbit.xml 
+	tar xzvf cvs.tar.gz

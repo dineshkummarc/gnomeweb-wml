@@ -65,7 +65,8 @@ impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
 
    newservant = g_new0(impl_POA_Account, 1);
    newservant->servant.vepv = &impl_Account_vepv;
-   newservant->poa = poa;
+   newservant->poa =       
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
    POA_Account__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
@@ -84,6 +85,8 @@ impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
 static void
 impl_Account__destroy(impl_POA_Account * servant, CORBA_Environment * ev)
 {
+   CORBA_Object_release((CORBA_Object) servant->poa, ev);
+ 
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
    /* ------ free private attributes here ------ */
