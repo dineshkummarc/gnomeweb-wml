@@ -7,8 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Addressbook Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
-<?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515", ""); ?>
-<?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517", ""); ?>
+<?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "500", "127515", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
 <?php taskrow ("Contact search applet", "hidden", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
@@ -82,7 +81,7 @@ Hackers</a> mailing list.  You'll find Gaim resources at <a STYLE="text-decorati
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
-<?php box_start ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", "127515", ""); ?>
+<?php box_start ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", "127515", ""); ?>
 
 
 The desktop environment's central addressbook should be able to store
@@ -123,30 +122,6 @@ list <a STYLE="text-decoration:none"
 href="http://lists.gnome.org/mailman/listinfo/gnomemeeting-devel-list">gnomemeeting-devel-list@gnome.org</a>.
 You'll also want to subscribe to the <a STYLE="text-decoration:none" href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">evolution-hackers</a>
 mailing list.
-
-<?php box_end (); ?>
-<?php box_start ("&quot;Me&quot;", "Addressbook", "300", "127517", "127517", ""); ?>
-
-
-<p>The Evolution 2.0 addressbook will have a "me" concept that will
-allow programs to get the contact entry that corresponds to the user.
-This should be integrated across the desktop, wherever extensive user
-information (name, email address, etc) is needed or entered.</p>
-
-<p>A couple of places where other applications could use this data:</p>
-<ul>
-<li>Web forms, via Firefox's form autofill feature.</li>
-<li>Document author fields in OpenOffice.</li>
-</ul>
-
-<?php box_sec ("How"); ?>
-<p>
-<? bonsai ("evolution-data-server/addressbook/libebook"); ?> contains
-the function <tt>e_book_get_self</tt>, which can be used to retrieve
-the contact associated with the user.  From there you can use the
-methods on <tt>EContact</tt> to retrieve the bits of information you
-need.
-</p>
 
 <?php box_end (); ?>
 <?php box_start ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", "127520", ""); ?>

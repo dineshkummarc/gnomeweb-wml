@@ -1,0 +1,203 @@
+
+<bounty> <title><![CDATA[National, religious, event calendars]]></title>  <amount>15</amount> <category>Calendar</category>
+<bug>127528</bug>
+<html><![CDATA[
+
+<p>In Evolution 2.0, users can aggregate multiple simultaneous
+calendar sources into a single view.  This means that you can overlay
+group calendars and other people's calendars into your own calendar
+view, which helps you keep others in mind while you schedule your
+life.  The various backend calendars can even be color-coded in the
+calendar view.</p>
+
+<a STYLE="text-decoration:none" href="evo-webcal-1.png"><img align=right border=0 src="evo-webcal-1-small.png" alt=""></a>
+
+<p>We would like Evolution to ship with a large number of calendars
+containing the schedules for national holidays, religious holidays,
+and other events of general interest.  For example, calendars of
+sporting events or a Linux conference schedule would be neat.</p>
+
+<p>Because Evolution 2.0 allows you to specify a URL to a calendar, it
+is even possible for these to be hosted online and cached locally.
+This might be useful for things like the GNOME release schedule.</p>
+
+<?php box_sec ("Affected Modules"); ?>
+
+This task probably won't involve patching any existing modules, though
+we will include any accepted calendars in the <? bonsai ("evolution"); ?> module.
+
+<?php box_sec ("How"); ?>
+
+<p>Find and check the schedules for various types of events, and create a
+calendar in the standard iCal format.  Submit the calendar file or
+files, along with a short description, to <a STYLE="text-decoration:none" 
+href="mailto:evolution-patches@ximian.com">evolution-patches@ximian.com</a>.</p>
+
+<p>Until Evolution provides an 'Export' mechanism, the files should be
+copied (if created in Evolution) from the Evolution2.0 tree, that is
+<code>~/.evolution/calendar/local/OnThisComputer/"name"</code>, where
+"name" is the name of the calendar you created.  If created in
+Evolution 1.4, the file to copy is
+<code>~/evolution/local/Calendar/subfolders/"name"</code>.</p>
+
+<?php box_sec ("Pointers"); ?>
+
+The following links might be helpful:
+
+<ul>
+<li><a STYLE="text-decoration:none" href="http://lists.ximian.com/mailman/listinfo/evolution">Evolution users list</a></li>
+<li><a STYLE="text-decoration:none" href="http://www.icalshare.com/">Apple's iCalShare site</a></li>
+<li><?php rfc(2445); ?>, the iCalendar specification</li>
+<li>The <a STYLE="text-decoration:none" href="#28528410">calendar publication</a> task is obviously somewhat related.</li>
+</ul>
+
+Please note that downloading proprietary <tt>.ical</tt> files and
+submitting them is <i>not acceptable</i>.  To collect this bounty, you
+must provide an unencumbered, freely-licensed (X11) iCalendar file.
+
+<?php box_sec ("Special Note"); ?>
+
+The bounty for this task is per-calendar.  We will pay bounties for up
+to 30 calendars.</p>
+
+]]>
+</html>
+</bounty>
+
+<bounty> <title><![CDATA[&quot;Me&quot;]]></title>  <amount>300</amount> <category>Addressbook</category>
+<bug>127517</bug> <eliminated>Yes</eliminated>
+<html><![CDATA[
+
+<p>The Evolution 2.0 addressbook will have a "me" concept that will
+allow programs to get the contact entry that corresponds to the user.
+This should be integrated across the desktop, wherever extensive user
+information (name, email address, etc) is needed or entered.</p>
+
+<p>A couple of places where other applications could use this data:</p>
+<ul>
+<li>Web forms, via Firefox's form autofill feature.</li>
+<li>Document author fields in OpenOffice.</li>
+</ul>
+
+<?php box_sec ("How"); ?>
+<p>
+<? bonsai ("evolution-data-server/addressbook/libebook"); ?> contains
+the function <tt>e_book_get_self</tt>, which can be used to retrieve
+the contact associated with the user.  From there you can use the
+methods on <tt>EContact</tt> to retrieve the bits of information you
+need.
+</p>
+
+]]>
+</html>
+</bounty>
+
+
+<bounty> <title><![CDATA[Drag-n-drop task creation]]></title>  <amount>300</amount> <category>Tasks</category>
+<bug>127559</bug> <eliminated>yes</eliminated>
+<html><![CDATA[
+
+It would be handy to be able to create tasks in Evolution by dragging
+a mail, file or link into the tasks folder.  See <?php bug(4006); ?>.
+
+]]>
+</html>
+</bounty>
+
+<bounty> <title><![CDATA[OO.o slides side-pane]]></title>  <amount>1500</amount> <category>OpenOffice.org</category>
+<bug>127555</bug> <eliminated>yes</eliminated>
+<html><![CDATA[
+<p>
+  When editing a slide in the drawing view, it is often helpful
+  to have some context. We need to add a side-pane that provides
+  a scrollable vertical 'slide view' of the presentation.
+</p>
+
+<center>
+<img src="OpenOffice-slidepane.gif" border=0 alt="">
+</center>
+
+<?php box_sec ("How"); ?>
+<p>It is assumed that the existing 'slide view' widget can be
+re-used here, in a scroll pane.</p>
+
+<?php box_sec ("Acceptance Criteria"); ?> 
+<p>
+  As the user edits a slide, its appearance in the side view should
+  change at a reasonable rate.  The side view should be sensibly sized
+  &amp; aesthetically pleasing. The user should be able to navigate among
+  slides by selecting them in the side view.
+</p> 
+]]> </html> </bounty>
+
+<bounty> <title><![CDATA[Calendar attachments]]></title>  <amount>750</amount> <category>Calendar</category>
+<bug>127543</bug> <eliminated>yes</eliminated>
+<html><![CDATA[
+<p>Add support in evolution for attaching files to events.</p>
+
+<p>The iCalendar specification, <?php rfc(2445); ?>, describes a
+property ATTACH (4.8.1.1) for attaching data to an iCalendar object
+(event or task).  The event and task editor should allow the user to
+add and remove documents and files.  It should also allow the user to
+open the attached using an appropriate mime handler (similar to
+Nautilus or the mail portion of evolution)</p>
+
+<p>The following picture illustrates the point:</p>
+
+<img src="calendar-attachments.gif">
+
+<p>To attach file, drag it on the event. The event should draw a two
+pixel black outline to give visual feedback to "drag accept". You should
+also be able to attach documents with a right-click menu.  There should
+be a contextual menu item to open the editor and get the list of files
+and documents</p>
+
+<?php box_sec ("Affected Modules"); ?>
+<?php bonsai ("evolution-data-server"); ?><br>
+<?php bonsai ("evolution"); ?>
+
+<?php box_sec ("How"); ?> 
+
+<p>The first step is to confirm that <?php bonsai
+("evolution-data-server/calendar/libical/src/libical"); ?> supports
+the ATTACH property properly.  You will want to check that icalrecur.h
+and icalrecur.c are adequate and that icalparser.c correctly reads in
+the ATTACH property.  If it does not, you will need to correct
+that.<p/>
+
+<p>The second step is to to allow drag and drop of files on the day
+view, week view and list view calendar items and the task list item
+(see e-day-view.c, e-week-view.c and e-cal-list-view. in <?php bonsai
+("evolution/calendar/gui"); ?>). It can accept the file uri drop, look
+up the event and then attach the item.</p>
+
+<p>The third step is to create a page containing the attachment
+information for the editor, and add it to the event editor and task
+editors, and example of this is recurrence-page.c in <?php bonsai
+("evolution/calendar/gui/dialogs"); ?>.  There should also be an
+"Attach" button that pops up a file dialog.  The page should not be
+visible unless there are attachments or the user clicks the "Attach"
+button.  Double clicking and attachment should allow the user to open
+the item with an appropriate handler.  You might design this page
+similar to the mail composer's attachment area.</p>
+
+<p>The fourth step is to add contextual menu item, "Edit
+Attachments..." that should open the editor and display the attachments page.
+a similar thing is done by the "Schedule Meeting..." context item.</p>
+
+<?php box_sec ("Pointers"); ?>
+
+<p>
+You should subscribe to the <a STYLE="text-decoration:none" 
+href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
+evolution-hackers</a> mailing list, and discuss any technical issues
+there.  Rodrigo Moya &lt;<a STYLE="text-decoration:none" href="mailto:rodrigo@ximian.com">rodrigo@ximian.com</a>&gt; and Hans Petter Jansson 
+&lt;<a STYLE="text-decoration:none" href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
+will be the primary contacts on the list for the Calendar.
+</p>
+
+]]>
+</html>
+</bounty>
+
+

@@ -106,6 +106,18 @@ class DoIt {
 		return cats;
 	}
 
+	static ArrayList GetSolved (ArrayList bounties)
+	{
+		ArrayList solved = new ArrayList ();
+
+		foreach (Bounty b in bounties) {
+			if (b.solved != null && b.solved.Length > 0)
+				solved.Add (b);
+		}
+
+		return solved;
+	}
+
 	static void PasteFile (string path, StreamWriter sw)
 	{
 		FileStream header;
@@ -125,7 +137,7 @@ class DoIt {
 		sr.Close ();
 	}
 
-	static void OutputTable (ArrayList bounties, StreamWriter sw, bool show_category)
+	static void OutputTable (ArrayList bounties, StreamWriter sw, bool show_category, bool show_solved)
 	{
 		if (show_category)
 			sw.WriteLine ("<?php write_table_header (\"yes\"); ?>");
@@ -140,6 +152,9 @@ class DoIt {
 
 			if (! show_category)
 				cat = "hidden";
+
+			if (! show_solved && (b.solved != null && b.solved.Length > 0))
+				continue;
 
 			sw.WriteLine ("<?php taskrow (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"); ?>",
 					   b.title, cat, b.amount, b.id, b.solved);
@@ -178,7 +193,7 @@ class DoIt {
 
 		c.sw.WriteLine ("<?php write_page_header (\"{0}\"); ?>", c.name + " Bounties");
 
-		OutputTable (c.bounties, c.sw, false);
+		OutputTable (c.bounties, c.sw, false, true);
 		OutputBounties (c.bounties, c.sw);
 		
 		PasteFile ("cat-footer.php", c.sw);
@@ -205,7 +220,12 @@ class DoIt {
 
 		sw.WriteLine ("<a STYLE=\"text-decoration:none\" name=\"table\">");
 
-		OutputTable (bounties, sw, true);
+		sw.WriteLine ("<h2>Unclaimed Bounties</h2>");
+		OutputTable (bounties, sw, true, false);
+
+		sw.WriteLine ("<h2>Already Claimed Bounties</h2>");
+		ArrayList solved = GetSolved (bounties);
+		OutputTable (solved, sw, true, true);
 		
 		PasteFile ("footer.php", sw);
 
@@ -216,13 +236,38 @@ class DoIt {
 	static void PrintTotalBountyExposure (ArrayList bounties)
 	{
 		int total = 0;
+		int n = 0;
 
 		foreach (Bounty b in bounties) {
-			if (b.category != "Ignore")
+			if (b.category != "Ignore") {
 				total += Int32.Parse (b.amount);
+				n++;
+			}
 		}
 
-		Console.WriteLine ("Total bounties: {0}", total);
+		Console.WriteLine ("Total bounties: ${0} ({1})", total, n);
+
+		total = 0;
+		n = 0;
+		foreach (Bounty b in bounties) {
+			if (b.category != "Ignore" && b.solved.Length == 0) {
+				total += Int32.Parse (b.amount);
+				n ++;
+			}
+		}
+
+		Console.WriteLine ("Total unclaimed bounties: ${0} ({1})", total, n);
+
+		total = 0;
+		n = 0;
+		foreach (Bounty b in bounties) {
+			if (b.category != "Ignore" && b.solved.Length > 0) {
+				total += Int32.Parse (b.amount);
+				n ++;
+			}
+		}
+
+		Console.WriteLine ("Total claimed bounties: ${0} ({1})", total, n);
 	}
 
 	static void Main (string [] args)

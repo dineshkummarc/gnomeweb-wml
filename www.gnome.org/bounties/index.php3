@@ -117,49 +117,51 @@ bounty.
 </center>
 <?php box_end (); ?>
 <a STYLE="text-decoration:none" name="table">
+<h2>Unclaimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
-<?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528", ""); ?>
-<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
-<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
-<?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", ""); ?>
-<?php taskrow ("&quot;Me&quot;", "Addressbook", "300", "127517", ""); ?>
+<?php taskrow ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
-<?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
-<?php taskrow ("Mailing list actions", "Mailer", "500", "127518", ""); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
-<?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
-<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", ""); ?>
+<?php taskrow ("Support export of tasks to CSV spreadsheet
+files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
-<?php taskrow ("Weather calendar backend", "Calendar", "750", "127537", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
 <?php taskrow ("Publish your calendar", "Calendar", "1000", "127538", ""); ?>
-<?php taskrow ("Quick reference card", "Documentation", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", ""); ?>
-<?php taskrow ("Drag-n-drop task creation", "Tasks", "300", "127559", ""); ?>
 <?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
+<?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
+<?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
+<?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
+<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
+<?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
+<?php write_table_footer (); ?>
+<h2>Already Claimed Bounties</h2>
+<?php write_table_header ("yes"); ?>
+<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
+<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
+<?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
+<?php taskrow ("Mailing list actions", "Mailer", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
+<?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
+<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
+<?php taskrow ("Weather calendar backend", "Calendar", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
+<?php taskrow ("Quick reference card", "Documentation", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
 <?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
-<?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
+<?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", "http://bugzilla.gnome.org/attachment.cgi?id=34969&action=view"); ?>
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
-<?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
-<?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
-<?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
-<?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
+<?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", "http://bugzilla.gnome.org/attachment.cgi?id=21716&action=view"); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
-<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
-<?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
 </div>

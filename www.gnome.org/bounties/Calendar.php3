@@ -6,75 +6,13 @@ include ("./util.php");
 
 <?php write_page_header ("Calendar Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("National, religious, event calendars", "hidden", "15", "127528", ""); ?>
 <?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 <?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-<?php taskrow ("Weather calendar backend", "hidden", "750", "127537", ""); ?>
+<?php taskrow ("Weather calendar backend", "hidden", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
 <?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
 <?php taskrow ("Publish free/busy information", "hidden", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
-<?php taskrow ("Default free/busy URI", "hidden", "300", "127541", ""); ?>
+<?php taskrow ("Default free/busy URI", "hidden", "300", "127541", "http://bugzilla.gnome.org/attachment.cgi?id=34969&action=view"); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("National, religious, event calendars", "Calendar", "15", "127528", "127528", ""); ?>
-
-
-<p>In Evolution 2.0, users can aggregate multiple simultaneous
-calendar sources into a single view.  This means that you can overlay
-group calendars and other people's calendars into your own calendar
-view, which helps you keep others in mind while you schedule your
-life.  The various backend calendars can even be color-coded in the
-calendar view.</p>
-
-<a STYLE="text-decoration:none" href="evo-webcal-1.png"><img align=right border=0 src="evo-webcal-1-small.png" alt=""></a>
-
-<p>We would like Evolution to ship with a large number of calendars
-containing the schedules for national holidays, religious holidays,
-and other events of general interest.  For example, calendars of
-sporting events or a Linux conference schedule would be neat.</p>
-
-<p>Because Evolution 2.0 allows you to specify a URL to a calendar, it
-is even possible for these to be hosted online and cached locally.
-This might be useful for things like the GNOME release schedule.</p>
-
-<?php box_sec ("Affected Modules"); ?>
-
-This task probably won't involve patching any existing modules, though
-we will include any accepted calendars in the <? bonsai ("evolution"); ?> module.
-
-<?php box_sec ("How"); ?>
-
-<p>Find and check the schedules for various types of events, and create a
-calendar in the standard iCal format.  Submit the calendar file or
-files, along with a short description, to <a STYLE="text-decoration:none" 
-href="mailto:evolution-patches@ximian.com">evolution-patches@ximian.com</a>.</p>
-
-<p>Until Evolution provides an 'Export' mechanism, the files should be
-copied (if created in Evolution) from the Evolution2.0 tree, that is
-<code>~/.evolution/calendar/local/OnThisComputer/"name"</code>, where
-"name" is the name of the calendar you created.  If created in
-Evolution 1.4, the file to copy is
-<code>~/evolution/local/Calendar/subfolders/"name"</code>.</p>
-
-<?php box_sec ("Pointers"); ?>
-
-The following links might be helpful:
-
-<ul>
-<li><a STYLE="text-decoration:none" href="http://lists.ximian.com/mailman/listinfo/evolution">Evolution users list</a></li>
-<li><a STYLE="text-decoration:none" href="http://www.icalshare.com/">Apple's iCalShare site</a></li>
-<li><?php rfc(2445); ?>, the iCalendar specification</li>
-<li>The <a STYLE="text-decoration:none" href="#28528410">calendar publication</a> task is obviously somewhat related.</li>
-</ul>
-
-Please note that downloading proprietary <tt>.ical</tt> files and
-submitting them is <i>not acceptable</i>.  To collect this bounty, you
-must provide an unencumbered, freely-licensed (X11) iCalendar file.
-
-<?php box_sec ("Special Note"); ?>
-
-The bounty for this task is per-calendar.  We will pay bounties for up
-to 30 calendars.</p>
-
-<?php box_end (); ?>
 <?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 
 <p>When you click on the clock on the GNOME panel, a little calendar
@@ -143,7 +81,7 @@ href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("Weather calendar backend", "Calendar", "750", "127537", "127537", ""); ?>
+<?php box_start ("Weather calendar backend", "Calendar", "750", "127537", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
 
 
 <img border=0 src="suncloud.png" align=right alt="">
@@ -303,7 +241,7 @@ will be the primary contacts on the list for the Calendar.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Default free/busy URI", "Calendar", "300", "127541", "127541", ""); ?>
+<?php box_start ("Default free/busy URI", "Calendar", "300", "127541", "127541", "http://bugzilla.gnome.org/attachment.cgi?id=34969&action=view"); ?>
 
 
 <p><?php rfc(2445); ?> describes a method of describing free/busy

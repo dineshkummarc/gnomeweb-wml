@@ -6,20 +6,20 @@ include ("./util.php");
 
 <?php write_page_header ("Tasks Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "hidden", "300", "127557", ""); ?>
+<?php taskrow ("Support export of tasks to CSV spreadsheet
+files", "hidden", "300", "127557", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "hidden", "500", "127558", ""); ?>
-<?php taskrow ("Drag-n-drop task creation", "hidden", "300", "127559", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", "127557", ""); ?>
+<?php box_start ("Support export of tasks to CSV spreadsheet
+files", "Tasks", "300", "127557", "127557", ""); ?>
 
 
 
 
 <p>
-Currently, Evolution does not have any data export features, because
-it uses standard file formats which other applications can
-import. However, task list data is not easy to import into
-spreadsheets or project management tools, and it should be.
+Currently, Evolution does not have data export features for tasks.
+Task list data is not easy to import into spreadsheets or project
+management tools, and it should be.
 </p>
 
 <?php box_sec ("How"); ?>
@@ -29,7 +29,7 @@ spreadsheets or project management tools, and it should be.
 The difficult part of this task will be altering the task storage
 format to include a task ID field, which will match the WBS or "work
 breakdown structure" code in a project management program. Once you
-have that, the export to a CSV export should be relatively simple.
+have that, the export to a CSV file should be relatively simple.
 </p>
 
 <?php box_sec ("Modules Affected"); ?>
@@ -85,13 +85,6 @@ its Glade file need to add a way for the user to specify the
 username, server and saved query.  Multiple queries should be
 supported.
 </ul>
-
-<?php box_end (); ?>
-<?php box_start ("Drag-n-drop task creation", "Tasks", "300", "127559", "127559", ""); ?>
-
-
-It would be handy to be able to create tasks in Evolution by dragging
-a mail, file or link into the tasks folder.  See <?php bug(4006); ?>.
 
 <?php box_end (); ?>
 <?php write_page_footer (); ?>
