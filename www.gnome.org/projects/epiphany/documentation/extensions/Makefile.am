@@ -10,6 +10,8 @@ page_SCRIPTS= \
     ch01.html \
     ch01s01.html \
     ch01s02.html \
+    ch01s03.html \
+    ch01s04.html \
     ch02.html \
     ch02s01.html \
     ch02s02.html \
