@@ -1,4 +1,4 @@
-SUBDIRS= new-pics doc images
+SUBDIRS= new-pics doc images func-tests
 
 urlpath=/projects/gnumeric
 
