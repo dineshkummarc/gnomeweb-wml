@@ -25,7 +25,6 @@ page_DATA =			\
 	screenshots15.shtml	\
 	unstable.shtml		\
 	releasenotes.shtml	\
-	roadmap.ics		\
 	jhbuildrc
 
 include $(top_srcdir)/rules.common
