@@ -6,7 +6,6 @@ page_SCRIPTS=add_language.php \
 	lastlogins.php \
 	search.php \
 	admin_utils.php \
-	Makefile.am \
 	approve-pending.php \
 	massmail_execute.php \
 	user_changepw.php \

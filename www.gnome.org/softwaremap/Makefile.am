@@ -6,7 +6,6 @@ page_SCRIPTS=index.php \
 	latest.php \
 	list \
 	.htaccess \
-	Makefile.am \
 	projects \
 	test.php \
 	trove_help.php
