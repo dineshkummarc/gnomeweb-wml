@@ -247,7 +247,6 @@ page_SCRIPTS= \
 	gnumeric-HEX2OCT.html		\
 	gnumeric-HLOOKUP.html		\
 	gnumeric-HOUR.html		\
-	gnumeric.html		\
 	gnumeric-HYPERLINK.html		\
 	gnumeric-HYPGEOMDIST.html		\
 	gnumeric-HYPOT.html		\
@@ -570,6 +569,7 @@ page_SCRIPTS= \
 	histogram-tool-intro.html		\
 	histogram-tool-optionstab.html		\
 	histogram-tool-outputtab.html		\
+	index.html		\
 	info-area.html		\
 	Insert-Menu.html		\
 	keybinding.html		\
