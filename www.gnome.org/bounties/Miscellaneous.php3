@@ -176,7 +176,7 @@ gnome-icon-theme. Most of the icons are already in place
 <?php box_sec ("Pointers"); ?>
 
 <p>The icon theme spec is available at <a
-href="http://freedesktop.org/Standards/icon-theme-spec"></a>,
+href="http://freedesktop.org/Standards/icon-theme-spec">freedesktop.org</a>,
 particulary the <a
 href="http://freedesktop.org/Standards/icon-theme-spec/0.7/ar01s05.html">icon
 lookup section</a> may be handy.</p>

@@ -239,7 +239,7 @@ channels.</p>
 <?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554"); ?>
 <?php taskrow ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555"); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556"); ?>
-<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "1200031317"); ?>
+<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771"); ?>
 <?php taskrow ("Publish free/busy information", "Calendar", "500", "127539"); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541"); ?>
 <?php taskrow ("Calendar attachments", "Calendar", "750", "127543"); ?>

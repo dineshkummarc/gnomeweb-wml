@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("OO.o slide view performance", "hidden", "500", "127554"); ?>
 <?php taskrow ("OO.o slides side-pane", "hidden", "1500", "127555"); ?>
 <?php taskrow ("OO.o Image Save", "hidden", "300", "127556"); ?>
-<?php taskrow ("OO.o Calc - function precision", "hidden", "500", "1200031317"); ?>
+<?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("OO.o slide view performance", "OpenOffice.org", "500", "127554", "127554"); ?>
 
@@ -64,9 +64,9 @@ re-used here, in a scroll pane.</p>
   documents or presentations. The menu item should open up a dialog
   allowing the image to be saved to disk as an individual file.
 </p> <?php box_end (); ?>
-<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "1200031317", "0"); ?>
+<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "127771"); ?>
 
-<p>oocalc's numeric precision is pretty aweful for a load of common
+<p>oocalc's numeric precision is pretty awful for a load of common
 functions. This should be substantially improved, in-line with
 gnumeric. Functions VAR, LINEST, SKEW, PRODUCT, GEOMEAN, POWER\
 at a minumum should be improved.</p>
@@ -75,7 +75,7 @@ at a minumum should be improved.</p>
 <p>For example, check out the VAR algorithm; <a
 href="http://ooo.ximian.com/lxr/source/cvsup/sc/sc/source/core/tool/interpr1.cxx#2387">
 here</a> and in fn. (ScVar). It should not discard precision in big handfulls.
-To see an example of it's bad behavior enter A1: 30000 B1: 0.001 C1: =VAR(A1;B1)
+To see an example of it's bad behavior enter A1: 30000 B1: 0.001 C1: =VAR(A1;A1+B1)
 (format the cells with scientific notation).
 </p>
 
