@@ -7,8 +7,7 @@ page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
 
-page_DATA=csm-desktop.png \
-    emblems-sidebar.png \
+page_DATA=emblems-sidebar.png \
     file-roller.png \
     fonts-capplet.png \
     gedit-mru.png \
