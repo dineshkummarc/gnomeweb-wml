@@ -98,19 +98,62 @@ etk_export_object_to_file (CORBA_ORB          orb,
 /**
  *
  */
+static gchar*
+etk_read_string_from_stream (FILE *stream)
+{
+        gulong length = 4*1024; /* should suffice ordinary IOR string */
+        gchar *objref = g_malloc0 (length*sizeof(gchar)); /* empty string */
+        int c = 0;
+        int i = 0;
+
+        /* skip leading white space */
+        while((c=fgetc(stream))!=EOF && g_ascii_isspace(c));
+        /* POST: c==EOF or c=first character */
+
+        if (c!=EOF)
+          /* PRE: c=first character */
+          /* append c to string while more c exist and c not white space */
+          do {
+            /* check size */
+            if (i>=(length-1)) {
+              length*=2;
+              objref=g_realloc (objref, length);
+            }
+            objref[i++] = c;
+          } while ((c=fgetc(stream))!=EOF && !g_ascii_isspace(c));
+          /* POST: first string read */
+
+        /* terminate string with \0 */
+        objref[i] = '\0';
+
+        /* INV: objref valid string, #objref>=0 */
+
+        return objref;
+}
+
+/**
+ *
+ */
 CORBA_Object
 etk_import_object_from_stream (CORBA_ORB          orb,
 			       FILE              *stream,
 			       CORBA_Environment *ev)
 {
 	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar objref[(32*1024)+1];
-    
-	fscanf (stream, "%32768s", objref);  /* FIXME, handle input error */ 
-	
+	gchar *objref=etk_read_string_from_stream (stream);
+
+	if (!objref || strlen (objref)==0) {
+		g_warning ("empty object reference");
+		if (objref) 
+			g_free (objref);
+		return CORBA_OBJECT_NIL;		
+	}
+
 	obj = (CORBA_Object) CORBA_ORB_string_to_object (orb,
 							 objref, 
 							 ev);
+	free (objref);
+	
 	return obj;
 }
 
@@ -132,6 +175,9 @@ etk_import_object_from_file (CORBA_ORB          orb,
      
         obj= etk_import_object_from_stream (orb, file, ev);
          
+	if (obj==CORBA_OBJECT_NIL) 
+		g_warning ("object is NIL");
+
         fclose (file);
  
         return obj;
