@@ -1,6 +1,6 @@
 SUBDIRS=ui-review modules
 
-urlpath=/start/2.5
+urlpath=/start/2.7
 
 page_SCRIPTS=index.html helping.html
 
