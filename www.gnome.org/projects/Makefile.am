@@ -3,7 +3,8 @@ SUBDIRS=			\
 	desktop			\
 	gnome-core		\
 	gnome-libs		\
-	gnumeric
+	gnumeric			\
+	gnome-print
 urlpath=/projects
 
 page_SCRIPTS=
