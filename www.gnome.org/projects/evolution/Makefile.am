@@ -1,4 +1,4 @@
-SUBDIRS = developer-doc doc images release_notes
+SUBDIRS = developer-doc doc images meeting-logs release_notes
 
 urlpath=/projects/evolution
 
