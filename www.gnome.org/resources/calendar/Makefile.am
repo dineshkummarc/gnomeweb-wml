@@ -1,4 +1,4 @@
-SUBDIRS=roadshow
+SUBDIRS=roadshow elf
 
 urlpath=/resources/calendar
 
