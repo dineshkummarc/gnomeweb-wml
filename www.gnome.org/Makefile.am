@@ -9,6 +9,7 @@ page_SCRIPTS=index.php3		\
 	speakingabout.html  \
 	pressreleases.html  \
 	pressresources.html \
+  pr-assistivetech.html	\
   pr-gnome12.html     \
   pr-foundation.html  \
   pr-ney_execdir.html \
