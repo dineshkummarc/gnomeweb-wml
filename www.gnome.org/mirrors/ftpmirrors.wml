@@ -11,7 +11,7 @@ $connection = mysql_pconnect("www.gnome.org",$mysql_user,$mysql_password);
 
 mysql_select_db("mirrors");
 
-$complete_query = "SELECT location FROM ftpmirrors GROUP BY location ORDER BY location WHERE active";
+$complete_query = "SELECT location FROM ftpmirrors WHERE active GROUP BY location ORDER BY location";
 
 $res = mysql_query($complete_query);
 ?>
@@ -25,7 +25,7 @@ while ($res_object = mysql_fetch_object($res)) {
 <tr><th bgcolor="#cce6ff" colspan="3"><?print $res_object->location ?></th></tr>
 
 <?
-$location_query = "SELECT name,url,description FROM ftpmirrors WHERE location = '$res_object->location'";
+$location_query = "SELECT name,url,description FROM ftpmirrors WHERE active AND location = '$res_object->location'";
 $location_res = mysql_query($location_query);
 
 while ($location_res_object = mysql_fetch_object($location_res)) {
