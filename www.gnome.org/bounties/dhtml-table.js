@@ -204,12 +204,12 @@ function tableSort (cell, sortType) {
 
 	for (var c = 0; c < row.length; c ++) {
 	    if (c != cell.cellIndex) {
-		row[c].style.color = "#000000";
+		row[c].style.color = "#ffffff";
 	    }
 	}
     }
 
-    cell.style.color="#2000d0";
+    cell.style.color="#bbbbff";
 
     if (sortType == "Number") {
 	cell.direction =

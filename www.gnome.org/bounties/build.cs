@@ -220,10 +220,10 @@ class DoIt {
 
 		sw.WriteLine ("<a STYLE=\"text-decoration:none\" name=\"table\">");
 
-		sw.WriteLine ("<h2>Unclaimed Bounties</h2>");
+		sw.WriteLine ("<a name=\"unclaimed\"><h2>Unclaimed Bounties</h2>");
 		OutputTable (bounties, sw, true, false);
 
-		sw.WriteLine ("<h2>Already Claimed Bounties</h2>");
+		sw.WriteLine ("<a name=\"claimed\"><h2>Already Claimed Bounties</h2>");
 		ArrayList solved = GetSolved (bounties);
 		OutputTable (solved, sw, true, true);
 		

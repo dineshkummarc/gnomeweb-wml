@@ -117,7 +117,7 @@ bounty.
 </center>
 <?php box_end (); ?>
 <a STYLE="text-decoration:none" name="table">
-<h2>Unclaimed Bounties</h2>
+<a name="unclaimed"><h2>Unclaimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", ""); ?>
@@ -126,12 +126,11 @@ bounty.
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
 <?php taskrow ("Support export of tasks to CSV spreadsheet
 files", "Tasks", "300", "127557", ""); ?>
-<?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
-<?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
+<?php taskrow ("Bugzilla tasks backend", "Tasks", "1000", "127558", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
-<?php taskrow ("Publish your calendar", "Calendar", "1000", "127538", ""); ?>
+<?php taskrow ("Publish your calendar", "Calendar", "2000", "127538", ""); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", ""); ?>
 <?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
@@ -140,7 +139,7 @@ files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php write_table_footer (); ?>
-<h2>Already Claimed Bounties</h2>
+<a name="claimed"><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 <?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>

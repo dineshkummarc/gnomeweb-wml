@@ -10,7 +10,6 @@ include ("./util.php");
 <?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "500", "127515", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
 <?php taskrow ("Contact search applet", "hidden", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
-<?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", "http://www.chipx86.com/gevolution/"); ?>
@@ -181,43 +180,6 @@ If the user is not online, one should just display the label as <b>"GFlash is no
 Most of this task revolves around writing a panel applet and GUI. The rest involves contacting
 <? bonsai ("evolution-data-server"); ?>, and getting contact information from that. A useful starting point
 is <? bonsai ("evolution-data-server/addressbook/libebook"); ?>, and the interfaces you'll find there.
-
-<?php box_end (); ?>
-<?php box_start ("Choice of database for contacts back-end", "Addressbook", "250", "127524", "127524", ""); ?>
-
-
-<p>
-  Some people or system administrators want to use a local address
-  back-end that is not the default (db3). The most popular request is
-  SQLite, but a generalized SQL interface would be best.
-</p>
-
-<?php box_sec ("How"); ?>
- 
-
-<p>
-  You will need to choose or design a database schema to match the
-  Evolution addressbook, and then write wrappers to translate the
-  Evolution addressbook manipulation functions to your choice of
-  database. It is acceptable to leave database selection as an option
-  'hidden' in gconf-editor. For the implementation,
-  <a STYLE="text-decoration:none" href="http://www.gnome-db.org">libgda</a> seems the best choice
-  for the database access part, since it allows access to many different
-  database backends (PostgreSQL, MySQL, SQLite, SQL Server, Oracle, etc)
-  and offers a rich data management API.
-</p>
-
-<?php box_sec ("Modules Affected"); ?>
-
-You'll be working on <? bonsai ("evolution-data-server"); ?>, writing a new
-addressbook backend.
-
-<?php box_sec ("Pointers"); ?>
-
-<ul>
-<li><a STYLE="text-decoration:none" href="http://www.gnome-db.org/docs/libgda/index.html">libgda API reference</a></li>
-<li><? bonsai ("evolution-data-server"); ?></li>
-</ul>
 
 <?php box_end (); ?>
 <?php box_start ("Advanced LDAP Configuration", "Addressbook", "250", "127525", "127525", ""); ?>
