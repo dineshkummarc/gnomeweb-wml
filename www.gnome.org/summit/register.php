@@ -88,7 +88,7 @@
         // print the thank you page
 
         print ("
-          <h2>Thank you for registering for the GNOME Summit.  You can now go back to the <a href=\"http://www.gnome.org/summit\">GNOME Summit web page</a>.</h2>
+          <h2>Thank you for registering for the Boston GNOME Summit.  You can now go back to the <a href=\"http://www.gnome.org/summit\">Boston GNOME Summit web page</a>.</h2>
 
              ");
        } 
@@ -103,7 +103,10 @@
   if (! $submit || count($bad_elements) != 0) {  ?>
 
   <p>
-    Please fill in the following to register for the GNOME Summit.
+
+    Please fill in the following to register for the Boston GNOME
+    Summit.  The deadline for registration is July 1st, 2002.
+
   </p>
     <ul>
 
@@ -195,7 +198,7 @@
 	</tr>
         <tr>
           <td>
-             <input type="checkbox" name="placetostay"> I need a place to stay.
+             <input type="checkbox" name="placetostay"> Help!  I need a place to crash while I'm in town.
           </td>
         </tr>
         <tr>
