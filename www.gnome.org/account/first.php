@@ -17,7 +17,7 @@ site_user_header(array(title=>"Welcome to Gnome.org"));
 <P>Enjoy the site, and please provide us with feedback on ways
 that we can improve Gnome.org.
 
-<P>--the Gnome.org web monkies 
+<P>--the Gnome.org web monkeys 
 
 <?php
 site_user_footer(array());

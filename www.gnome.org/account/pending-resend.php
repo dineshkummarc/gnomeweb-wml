@@ -16,7 +16,7 @@ $message = "Thank you for registering on the GNOME web site. In order\n"
 	. "to complete your registration, visit the following url: \n\n"
 	. "http://$GLOBALS[sys_default_domain]/account/verify.php?confirm_hash=$row_user[confirm_hash]\n\n"
 	. "Enjoy the site.\n\n"
-	. " -- the Gnome.org web monkies\n";
+	. " -- the Gnome.org web monkeys\n";
 
 
 // only mail if pending

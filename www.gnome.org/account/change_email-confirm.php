@@ -20,7 +20,7 @@ db_query("UPDATE users SET confirm_hash='$confirm_hash',email_new='$form_newemai
 $message = "You have requested a change of email address on Gnome.org.\n"
 	. "Please visit the following URL to complete the email change:\n\n"
 	. "http://$GLOBALS[HTTP_HOST]/account/change_email-complete.php?confirm_hash=$confirm_hash\n\n"
-	. " -- the Gnome.org web monkies\n";
+	. " -- the Gnome.org web monkeys\n";
 
 mail ($form_newemail,"Gnome.org Verification",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 

@@ -27,50 +27,74 @@ to view your developer/consultant profiles and ratings.
 </UL>
 <?php $HTML->box1_bottom(); ?>
 
-&nbsp;<BR>
-<TABLE width=100% border=0>
+<TABLE width="100%" border="0">
 
-<TR valign=top>
-<TD>Login Name: </TD>
-<TD><B><?php print strtolower($row_user['user_name']); ?></B>
-<BR><A href="change_pw.php">[Change Password]</A></TD>
-</TR>
-
-<TR valign=top>
-<TD>Timezone/Language: </TD>
-<TD><B><?php print $row_user['timezone']; ?></B> / <B><?php echo $Language->getLanguageName($row_user['language']); ?></B>
-<BR><A href="change_timezone.php">[Change]</A></TD>
-</TR>
-
-<TD>Real Name: </TD>
-<TD><B><?php print $row_user['realname']; ?></B>
-<BR><A href="change_realname.php">[Change Real Name]</A></TD>
-</TR>
-
-<TR valign=top>
-<TD>Email Addr: </TD>
-<TD><B><?php print $row_user['email']; ?></B>
-<BR><A href="change_email.php">[Change Email Addr]</A>
-</TD>
+<TR>
+<TD colspan="4">&nbsp;</TD>
+<TD align="center">Photograph:</TD>
 </TR>
 
 <TR>
-<TD COLSPAN=2>
+<TD style="padding-right: 5px;">Login Name:</TD>
+<TD style="padding-right: 5px;"><B><?php print strtolower($row_user['user_name']); ?></B></TD>
+<TD nowrap><A href="change_pw.php">[Change Password]</A></TD>
+<TD width="100%" rowspan="4">&nbsp;</TD>
+<TD nowrap align="center" rowspan="5"><IMG SRC="<?php
+if ($row_user['photo'] != NULL)
+{
+	$GLOBALS['user_photo'] = $row_user['photo'];
+	print "/images/user_photo.png";
+}
+else
+{
+	print "/images/nophoto.jpg";
+}
+?>"><BR><A href="change_photo.php">[Change Photograph]</A></TD>
+</TR>
+
+<TR>
+<TD style="padding-right: 5px;">Timezone/Language:</TD>
+<TD style="padding-right: 5px;"><B><?php print $row_user['timezone']; ?></B> / <B><?php echo $Language->getLanguageName($row_user['language']); ?></B></TD>
+<TD nowrap><A href="change_timezone.php">[Change]</A></TD>
+</TR>
+
+<TR>
+<TD style="padding-right: 5px;">Real Name:</TD>
+<TD style="padding-right: 5px;"><B><?php print $row_user['realname']; ?></B></TD>
+<TD nowrap><A href="change_realname.php">[Change Real Name]</A></TD>
+</TR>
+
+<TR>
+<TD style="padding-right: 5px;">Email Address:</TD>
+<TD style="padding-right: 5px;"><B><?php print $row_user['email']; ?></B></TD>
+<TD nowrap><A href="change_email.php">[Change Email]</A></TD>
+</TR>
+
+<TR>
+<TD colspan="4"><BR><BR></TD>
+</TR>
+
+</TABLE>
+
+<BR>
+
+<TABLE width="100%" border="0">
+
+<TR>
+<TD>
 <?php 
 // ############################# Preferences
-/*
 $HTML->box1_top("Preferences"); ?>
 <FORM action="updateprefs.php" method="post">
 
-<P><INPUT type="checkbox"  name="form_remember_user" value="1"<?php
-	if ($sf_user_hash) print " checked"; ?>> "Remember me".
-<I>(Allows to access your <a href="/my/">personal page</a> without being logged
-in. You will still need to login explicitly before making any changes.)</I>
+<P><INPUT type="checkbox"  name="form_show_email" value="1"<?php
+	if ($sf_user_hash) print " checked"; ?>> Show "spam-proofed" email address.
+
 
 <P align=center><CENTER><INPUT type="submit" name="Update" value="Update"></CENTER>
 </FORM>
+<?
 $HTML->box1_bottom();
-*/
 ?>
 
 </TD>

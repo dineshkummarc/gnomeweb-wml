@@ -22,7 +22,7 @@ $message = "Someone (presumably you) on the Gnome.org site requested a\n"
 	. "If you requested this verification, visit the following URL\n"
 	. "to change your password:\n\n"
 	. "<http://$GLOBALS[HTTP_HOST]/account/lostlogin.php?confirm_hash=$confirm_hash>\n\n"
-	. " -- the Gnome.org web monkies\n";
+	. " -- the Gnome.org web monkeys\n";
 
 mail ($row_user['email'],"Gnome.org Verification",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
