@@ -40,7 +40,8 @@ banner_images=\
   banner-tipsandtutorials.png\
 	banner-developerinterviews.png\
 	banner-developersbyregion.png\
-  banner-speakingabout.png
+  banner-speakingabout.png\
+	banner-downloadingsource.png
 
 popdown_images=\
 	popdown-endcap-blue.png\
