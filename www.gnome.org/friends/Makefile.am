@@ -1,17 +1,18 @@
-SUBDIRS=
+SUBDIRS =
 
-urlpath=/friends
+urlpath = /friends
 
-page_SCRIPTS=index.php\
-	thanks.php\
-	donors.php\
-	donors_2002.php\
+page_SCRIPTS = \
+	index.php \
+	thanks.php \
+	donors.php \
+	donors_2002.php \
 	check.html
 
 include $(top_srcdir)/rules.common
 
-misc_images=\
-	donate.png\
+misc_images = \
+	donate.png \
 	swag.png
 	
 page_DATA=$(misc_images)
