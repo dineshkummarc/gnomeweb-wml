@@ -99,7 +99,9 @@ title_texts=\
 	title-september.png\
 	title-october.png\
 	title-november.png\
-	title-december.png
+	title-december.png\
+	title-binary-packages.png\
+	title-source-code.png
 
 icons=\
   icon-new.png\
