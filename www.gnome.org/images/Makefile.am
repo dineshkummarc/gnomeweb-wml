@@ -10,7 +10,6 @@ include $(top_srcdir)/rules.common
 misc_images=\
 	background.png\
 	background.gif\
-	computer.png\
 	dot.gif\
 	logo-large.png\
 	logo-large.gif\
