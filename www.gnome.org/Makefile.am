@@ -28,6 +28,7 @@ page_SCRIPTS=index.php3		\
   pr-accessible.html \
   pr-guadec.html \
   pr-guadec4.html \
+  pr-linuxatwork.html \
   .htaccess \
   users
 
