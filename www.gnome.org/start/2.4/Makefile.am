@@ -1,6 +1,6 @@
-SUBDIRS = 2.0 2.1 2.2 2.3 2.4
+SUBDIRS = notes
 
-urlpath = /start
+urlpath = /start/2.4
 
 page_SCRIPTS= \
 	index.html
