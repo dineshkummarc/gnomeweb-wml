@@ -5,7 +5,8 @@ urlpath=/summit
 page_DATA=index.html		\
 	attendance.png		\
 	boston-summit.jpg	\
-	map.png
+	map.png			\
+	register.php
 
 page_SCRIPTS=
 
