@@ -5,12 +5,7 @@
 <document title="Get more software" imgid="getmore">
 <content>
 
-<table bgcolor=#fefefe width=95% CELLSPACING=1 CELLPADDING=4 BORDER=1>
-<tr><TD BGCOLOR="#ffffff" ALIGN=center>
-    <BIG><B>
-    GNOME Software Map
-    </B></BIG>
-</TD></TR> 
+<table bgcolor=#ffffff width=95% CELLSPACING=1 CELLPADDING=4 BORDER=1>
 <tr>
 <td>
 
@@ -23,7 +18,7 @@ function qmeta ($str) {
 };
 
 mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
-$qry = "SELECT * FROM applist WHERE name = '"+qmeta($name)+"'";	
+$qry = "SELECT * FROM applist WHERE name = '" . qmeta($name) . "'";	
 $res = mysql("gnomeapps", $qry);
 if(!$res) {
 	echo "Query failed</tr></td></table>";
@@ -83,25 +78,25 @@ $day  = substr($touched, 6, 2);
 $touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
 
 # now addedts and touchedts are unix timestamps
->
+?>
 
 <table>
-<tr><td>Package name:</td>
-<td><?echo $name></td></tr>
-<tr><td>Current version:</td>
-<td><?echo $version></td></tr>
-<tr><td>Description:</td>
-<td><?echo $desc></td></tr>
-<tr><td>Search keywords:</td>
-<td><?echo $keywords></td></tr>
-<tr><td>Requirements (besides gnome-libs):</td>
-<td><?echo $requires></td></tr>
-<tr><td>Homepage URL:</td>
-<td><a href=<?echo $url_homepage>><?echo $url_homepage></a></td></tr>
+<tr valign="top"><td>Package name:</td>
+<td><?echo $name?></td></tr>
+<tr valign="top"><td>Current version:</td>
+<td><?echo $version?></td></tr>
+<tr valign="top"><td>Description:</td>
+<td><?echo $desc?></td></tr>
+<tr valign="top"><td>Search keywords:</td>
+<td><?echo $keywords?></td></tr>
+<tr valign="top"><td>Requirements (besides gnome-libs):</td>
+<td><?echo $requires?></td></tr>
+<tr valign="top"><td>Homepage URL:</td>
+<td><a href="<?echo $url_homepage;?>"><?echo $url_homepage;?></a></td></tr>
 <?
 if ($url_screenshot) {
    echo "<tr><td>Screenshot URL:</td>";
-   echo "<td><a href=",$url_screenshot,">",$url_screenshot,"</a></td></tr>";
+   echo "<td><a href=\"" . $url_screenshot . "\">" . $url_screenshot . "</a></td></tr>";
 }
 if ($url_download) {
    echo "<tr><td>Download URL for stable source:</td>";
@@ -109,18 +104,18 @@ if ($url_download) {
 }
 
 if ($prevpage == "") {
-   $prevpage = "list.phtml";
+   $prevpage = "list.php3";
 }
 ?>
-<tr><td>Is development code in CVS?</td>
- <td><?echo $in_cvs></td></tr>
-<tr><td>Category:</td>
-<td><?echo $category></td></tr>
+<tr valign="top"><td>Is development code in CVS?</td>
+ <td><?echo $in_cvs?></td></tr>
+<tr valign="top"><td>Category:</td>
+<td><?echo $category?></td></tr>
 
-<tr><td>Entry Created:</td>
+<tr valign="top"><td>Entry Created:</td>
 <td><?echo Date("Y-m-d H:i:s",$addedts)?></td></tr>
 
-<tr><td>Last Updated:</td>
+<tr valign="top"><td>Last Updated:</td>
 <td><?echo Date("Y-m-d H:i:s",$touchedts)?></td></tr>
 
 </table>
