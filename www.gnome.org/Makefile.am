@@ -1,11 +1,10 @@
-SUBDIRS=images start projects resources
+SUBDIRS=images intro start projects resources
 
 include $(top_srcdir)/rules.common
 
 urlpath=
 
 page_SCRIPTS=index.shtml		\
-	findout.html 			\
 	seegnome.html   		\
 	getgnome.html   		\
 	recentsoftware.php3
