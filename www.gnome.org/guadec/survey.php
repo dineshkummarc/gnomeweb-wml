@@ -15,7 +15,7 @@
             <table border="0" bgcolor="#000000" cellspacing="3" cellpadding="2" width="100%"> 
               <tr><!-- The text --><td>
 
-                  <table border=0 bgcolor="#ffffff" cellpadding=50> <!-- start content -->
+                  <table border=0 bgcolor="#ffffff" cellpadding=50 width="100%"> <!-- start content -->
                     <tr><td>
                         <h1>GUADEC 4 Pre-Registration Survey:</h1>
 
@@ -41,9 +41,9 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if (! $committment){
-        $bad_elements[] = "committment";
-        $errors[] = "Please enter your committment to GNOME.";
+      if ($developer == "on" && ! $contributions){
+        $bad_elements[] = "contributions";
+        $errors[] = "Please enter your contributions to GNOME.";
       }
 
 
