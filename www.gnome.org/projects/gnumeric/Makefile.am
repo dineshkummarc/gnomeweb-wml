@@ -1,0 +1,53 @@
+SUBDIRS= new-pics
+
+urlpath=/projects/gnumeric/
+
+page_SCRIPTS=bg.jpg			\
+	    foot-transparent.gif	\
+	    gnumeric-0.10		\
+	    gnumeric-0.11		\
+	    gnumeric-0.12		\
+	    gnumeric-0.13		\
+	    gnumeric-0.14		\
+	    gnumeric-0.16		\
+	    gnumeric-0.17		\
+	    gnumeric-0.18		\
+	    gnumeric-0.19		\
+	    gnumeric-0.21		\
+	    gnumeric-0.23		\
+	    gnumeric-0.24		\
+	    gnumeric-0.25		\
+	    gnumeric-0.26		\
+	    gnumeric-0.27		\
+	    gnumeric-0.28		\
+    	    gnumeric-0.3		\
+	    gnumeric-0.31		\
+	    gnumeric-0.32		\
+	    gnumeric-0.33		\
+	    gnumeric-0.34		\
+	    gnumeric-0.35		\
+	    gnumeric-0.36		\
+	    gnumeric-0.38		\
+	    gnumeric-0.39		\
+	    gnumeric-0.4		\
+	    gnumeric-0.4.txt		\
+	    gnumeric-0.41		\
+	    gnumeric-0.42		\
+	    gnumeric-0.44		\
+	    gnumeric-0.45		\
+	    gnumeric-0.46		\
+	    gnumeric-0.47		\
+    	    gnumeric-0.48		\
+	    gnumeric-0.49		\
+	    gnumeric-0.5		\
+	    gnumeric-0.51		\
+	    gnumeric-0.52		\
+	    gnumeric-0.53		\
+	    gnumeric-0.54		\
+	    gnumeric-0.7		\
+	    gnumeric-0.8		\
+	    gnumeric-7-11.txt		\
+	    index.html			\
+    	    mailing-list.html		\
+	    palaeolithic.html		\
+	    thumb.gif
