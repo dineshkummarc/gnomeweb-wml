@@ -24,7 +24,7 @@
 
   </ul>
 
-  <h2>List of changes to make vs. current GConf, as of July 3 2004:</h2>
+  <h2>List of important changes to make vs. current GConf, as of March 2005:</h2>
 
   <ol>
   <li>Implement the API primarily as a D-BUS interface. The client
@@ -45,6 +45,10 @@
     <li>we probably want to do an mmap cache as has been discussed
       for icon themes, etc.</li>
    </ul>
+   <p>
+   One approach would be a DTD-like system where schema files are
+   identified by a URI the app provides.
+   </p>
    </li>
    
    <li>
@@ -74,6 +78,10 @@
         versioning, without any app programmer intervention.
         </p>
    </li>
+   </ol>
+
+  <h2>List of "would be nice" changes to make vs. current GConf, as of March 2005:</h2>
+   <ol>
 
 <li>Introduce transactions; for notifications, include a
    transaction ID and a "notifications remaining count"
@@ -119,13 +127,32 @@
     it probably doesn't matter too much if it gets lost. 
     Could just have a separate "GConfClient" instance for this data.</li>
 
-<li>Consider adding real namespacing to the gconf hierarchy.
+<li>
+<p>Consider adding real namespacing to the gconf hierarchy.
     For example "/org/gnome/apps/gnome-panel" or something.
     (Please don't do this with current gconf; if we make this
     the normal thing we'd probably move current gconf stuff to 
     a namespace in automated fashion, so if you already have 
     a namespace it will get all hosed. Also, you will be inconsistent
-    and weird in current gconf if you do this.)</li>
+    and weird in current gconf if you do this.)
+</p>
+<p>
+One approach is that the schema creates a namespace. You specify a schema by URI
+or something, and then the keys are just "foo/bar" (no need for /apps/panel
+even). This also allows for schema versioning where a new schema automatically 
+means a new copy of all the keys it defines.
+</p>
+    </li>
+
+<li>
+
+With schemas on the client side, it's feasible to make the schema check things
+like ranges of integers, a list of allowed string values for enums, etc. and
+otherwise be more complex than a schema on the server could be. This almost
+certainly is not worth it unless it leads to smart handling of schema
+versioning, though.
+
+</li>
 
 </ol>
 
