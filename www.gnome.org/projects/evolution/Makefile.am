@@ -6,6 +6,7 @@ page_SCRIPTS=			\
 	go.css			\
 	arch.shtml   		\
 	bugs.shtml   		\
+	bugday.shtml   		\
 	credits.shtml  		\
 	devdoc.shtml  		\
 	faq.shtml       	\
