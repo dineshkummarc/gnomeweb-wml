@@ -1,0 +1,119 @@
+#use wml::www.gnome.org::devtools-page menu=overview
+
+set-last-changed "$Date$">
+
+<document title="overview">
+<content>
+
+<head1>What we're working toward</head1>
+
+Our end goal is to create an easy to use and powerful environment for
+developing applications.  This means having an environment that the
+user can tailor to his or her needs, and that fits in with the
+developer's way of working.
+<p>
+Our basic strategy is to build small, well defined components that
+will work together to form a complete environment.  We'll be using the
+bonobo component model to help achieve these goals.  Having these
+seperate components should keep development manageable.  Most
+implementation details can be left to the maintainers of the various
+components, and only the interaction of the public interfaces will
+need to be coordinated across components.
+
+<head1>What pieces are needed</head1>
+
+A basic development environment consists of a few different pieces.
+Some fundamental pieces of a development environment are (in no
+particular order):
+<ul>
+<li> A project management/build system
+<li> An editor
+<li> A debugger
+<li> Code analysis tools (class browsers, etc)
+<li> A documentation system.
+<li> GUI builders.
+<li> Code generators.
+<li> Revision control.
+<li> Process tools (things like UML integration, bug tracking, etc).
+</ul>
+Some pieces of the environment need to communicate with other parts to
+be effective.  For example, integration of revision control and
+project management is obviously beneficial, and code generators can
+often benefit from services provided by the code analysis tools.
+Other pieces, like the debugger and documentation systems, don't
+really need as much interaction with the other pieces.
+<p>
+These are the tools that we need to work on.  Most pieces have a
+significant codebase we can reuse. 
+
+<head1>What we're working on</head1>
+
+We're starting with some of the more fundamental pieces.  Our current
+projects include:
+<ul>
+<head2>Project Management </head2>
+
+gnome-build is our project management and build system component.  It
+is based on automake/autoconf, but we're trying to keep it generic
+enough so it'll hopefully be easily adaptable to other build systems
+This project is in the embryonic stages.  The contact for this
+gnome-build is Martijn van Beers <martijn@earthling.net>.
+
+<head2>Editors</head2>
+
+The choice of editors is a religious one.  So rather than trying to
+force an editor on someone, we're working on integrating many
+different editors into the framework.  Some editors we plan on working
+with include (x)emacs, some sort of vi, glimmer (formerly
+codecommander), and GtkEditor.
+
+<head2>Debugger</head2>
+
+gnome-debug is our debugging component.  It is backend independent,
+but currently only a gdb backend exists (except for a half-formed
+python backend sitting on my hard drive).  This component is basically
+useable, see http://internet.oit.edu/~campd/gdf/.  The contact for
+gnome-debug is Dave Camp <campd@oit.edu>.
+
+<head2>Code Analysis</head2>
+
+gpf is a framework for incremental program analysis and fine-grained
+document versioning.  It will form the basis of the code analysis and
+generation tools.  Ideally, most tools modifying source code will use
+gpf to do it in a clean, structured manner. gpf is basically embryonic
+at the moment.  The contact for gpf is Mark Slicker
+<jamess1@wwnet.com>.
+
+<head2>Shell</head2>
+
+For the short term at least, gIDE will provide the shell for the
+components.  See http://gide.pn.org/.  The contact for gIDE is 
+JP Rosevear <jpr@helixcode.com>
+<p>
+Mark Slicker has done a Dia diagram showing the interaction of the
+components we have.  It is available at
+<a href="http://www.gnome.org/~campd/devtools-overview.dia">http://www.gnome.org/~campd/devtools-overview.dia</a>.
+</ul>
+<head1>Notes for future development</head1>
+
+Here are some random thoughts about the various projects that need to
+be done:
+<p>
+Documentation system: Whatever system gnome has.  The tough part is
+actually getting the documentation - gnome is pretty bad on this
+front.
+<p>
+GUI builder: There are a few gtk-based gui builders out there, the
+most prominent being glade.  We will be able adapt any of those to
+work with the devel-environment through the interfaces we'll define
+for gui builders.
+<p>
+Code generators: Kinda like MSVC's classwizards and appwizards and
+stuff.  These will most likely be based at least partially on
+gpf.
+<p>
+Revision control: Should be backend independent, with CVS being the
+most important backend.  Will need to work with gnome-build.
+
+</content>
+</document>
