@@ -83,7 +83,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-0.76		\
 	    gnumeric-0.99.0		\
 	    gnumeric-0.99.1		\
-	    gnumeric-0.x.html		\
+	    gnumeric-0.x.shtml		\
 	    gnumeric-1.0.0		\
 	    gnumeric-1.0.1		\
 	    gnumeric-1.0.2		\
@@ -98,6 +98,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.0.11		\
 	    gnumeric-1.0.12		\
 	    gnumeric-1.0.13		\
+	    gnumeric-1.0.x.shtml	\
 	    gnumeric-1.1.1		\
 	    gnumeric-1.1.2		\
 	    gnumeric-1.1.3		\
@@ -116,6 +117,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.1.19		\
 	    gnumeric-1.1.20		\
 	    gnumeric-1.1.90		\
+	    gnumeric-1.1.x.shtml	\
 	    new-features-1.2.html 	\
 	    gnumeric-1.2.0		\
 	    gnumeric-1.2.0.html
