@@ -93,12 +93,14 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.0.7		\
 	    gnumeric-1.0.8		\
 	    gnumeric-1.0.9		\
+	    gnumeric-1.0.10		\
 	    gnumeric-1.1.1		\
 	    gnumeric-1.1.2		\
 	    gnumeric-1.1.3		\
 	    gnumeric-1.1.5		\
 	    gnumeric-1.1.6		\
 	    gnumeric-1.1.7		\
-	    gnumeric-1.1.8
+	    gnumeric-1.1.8		\
+	    gnumeric-1.1.9
 
 include $(top_srcdir)/rules.common

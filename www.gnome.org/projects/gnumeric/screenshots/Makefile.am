@@ -9,7 +9,6 @@ page_SCRIPTS=index.html			\
 	    gnumeric5.gif		\
 	    gnumeric7.gif		\
 	    gnumeric8.gif		\
-	    left-align.gif		\
 	    zoom.jpeg	    		\
 	    graph-sample.gif
 	    	    
