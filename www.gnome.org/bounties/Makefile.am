@@ -1,8 +1,9 @@
-SUBDIRS=
+SUBDIRS =
 
-urlpath=/bounties
+urlpath = /bounties
 
-page_DATA=address-applet-anim.gif\
+page_DATA = \
+	address-applet-anim.gif\
 	address-applet-popup.png\
 	addressbook-icon.png\
 	Addressbook.php3\
@@ -65,19 +66,18 @@ page_DATA=address-applet-anim.gif\
 	util.php\
 	dhtml-table.js\
 	clock-calendar.tar.bz2\
-	styles.css \
-	*.html
+	styles.css
 	
 
-PHP3FILES := $(patsubst %.php3, %.html, $(wildcard ./*.php3))
-                                                                                                                  
+#PHP3FILES := $(patsubst %.php3, %.html, $(wildcard ./*.php3))
+
 page_SCRIPTS = 
 
 #index.php3 index.html $(PHP3FILES) discuss.html
 
 include $(top_srcdir)/rules.common
 
-EXTRA_DIST=$(page_DATA)
+#EXTRA_DIST=$(page_DATA)
 
 #index.php3: build.exe header.php footer.php bounties.xml cat-header.php cat-footer.php util.php Makefile
 #	mono --debug build.exe
