@@ -22,4 +22,7 @@ page_SCRIPTS=			\
 	screenshots15.shtml	\
 	unstable.shtml
 
+page_DATA =			\
+	roadmap.ics
+
 include $(top_srcdir)/rules.common
