@@ -1,3 +1,5 @@
 include $(top_srcdir)/rules.common
 
-noinst_SCRIPTS=index.html
+pagedir=$(prefix)/src
+
+page_SCRIPTS=index.html
