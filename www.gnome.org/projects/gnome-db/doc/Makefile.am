@@ -2,7 +2,6 @@ SUBDIRS=
 
 urlpath=/projects/gnome-db/doc/
 
-page_SCRIPTS=\
-	index.php3
+page_SCRIPTS=
 
 include $(top_srcdir)/rules.common

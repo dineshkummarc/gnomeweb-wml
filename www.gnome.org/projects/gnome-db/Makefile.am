@@ -1,12 +1,16 @@
-SUBDIRS=images include doc
+SUBDIRS=images doc
 
-urlpath=/projects/gnome-db/
+urlpath=/projects/gnome-db
 
-page_SCRIPTS=\
-	index.php3 \
-	TODO.php3 \
-	apps.php3 \
-	news.php3 \
-	download.php3
+page_SCRIPTS = \
+	index.html \
+	TODO.html \
+	apps.html \
+	download.html \
+	mailing_lists.html \
+	news.html \
+	people.html \
+	providers.html \
+	screenshots.html
 
 include $(top_srcdir)/rules.common
