@@ -123,6 +123,7 @@ page_SCRIPTS= \
 	gnumeric-CHITEST.html		\
 	gnumeric-CHOOSE.html		\
 	gnumeric-CLEAN.html		\
+	gnumeric-CLEAN.shtml		\
 	gnumeric-CODE.html		\
 	gnumeric-COLUMN.html		\
 	gnumeric-COLUMNNUMBER.html		\
