@@ -3,6 +3,7 @@ SUBDIRS = notes
 urlpath = /start/2.4
 
 page_SCRIPTS= \
-	index.html
+	index.html \
+	screenshots.html
 
 include $(top_srcdir)/rules.common
