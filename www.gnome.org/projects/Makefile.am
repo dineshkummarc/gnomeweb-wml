@@ -10,6 +10,7 @@ SUBDIRS=			\
 	guppi			\
 	gb			\
 	nautilus		\
+	ooo			\
 	ORBit2			\
 	gnome-print		\
 	agnubis			\
