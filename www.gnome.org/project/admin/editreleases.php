@@ -48,7 +48,7 @@ if ($step1) {
 			$status_id, htmlspecialchars ($changes), $group_id, $release_id)) {
 
 			// Announce the release to gnome-announce
-			mail ("gnome-announce@gnome.org",
+			mail ("gnome-announce-list@gnome.org",
 				"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
 				wordwrap (stripslashes ($changes)),
 				"From: GNOME Software Map <webmaster@gnome.org>");
