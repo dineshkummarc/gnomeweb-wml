@@ -63,7 +63,7 @@
         // make the mail 
 
         $formmail = "";
-        $formmail .= "Primary contact name: " . $contactname . "\n";
+        $formmail .= "Name: " . $contactname . "\n";
         $formmail .= "Title: " . $contacttitle . "\n";
         $formmail .= "Email: " . $email . "\n\n";
 
@@ -75,8 +75,6 @@
         $formmail .= "Country: " . $country . "\n";
         $formmail .= "Phone: " . $contactphone . "\n\n";
 
-        $formmail .= "Company Size: " . $orgsize . "\n\n";
-
         $formmail .= "GNOME Foundation Member: " . $gfmember ."\n\n";
 
 
@@ -87,12 +85,12 @@
 
         // send the mail
 
-        mail("mrproper@ximian.com", "GNOME Summit Registration form", $formmail, $headers);
+        mail("summit-registration@ximian.com", "GNOME Summit Registration form", $formmail, $headers);
 
         // print the thank you page
 
         print ("
-          <h2>Thank you for registering for the GNOME Summit</h2>
+          <h2>Thank you for registering for the GNOME Summit.  You can now go back to the <a href=\"http://www.gnome.org/summit\">GNOME Summit web page</a>.</h2>
 
              ");
        } 
