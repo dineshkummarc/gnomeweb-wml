@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/start/2.0/screenshots
 
-page_SCRIPTS=
+page_SCRIPTS=index.html
 
 EXTRA_DIST=csm-desktop.png \
 	drc-desktop.png \
