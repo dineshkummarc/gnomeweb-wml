@@ -1,50 +1,22 @@
-<html><head><title>Package Listing</title></head>
-<!-- <body bgcolor=#ffffff> -->
+#use wml::www.gnome.org::page
 
+<set-last-changed "$Date$">
 
-<BODY bgcolor="#ffffff" background="/pics/bg.jpg" TEXT="#330000" LINK="#770000" VLINK="600000">
-
-<center>
-<FONT FACE="lucida, helvetica">
-<table border=0 cellspacing=1 cellpadding=0>
-   <tr>
-      <td>
-        <a href="/"><IMG SRC="/pics/foot-transparent.gif" ALT="[ GNOME Logo by Tigert ]" border=0></a><BR>
-      </td>
-      <td>
-        <?virtual ("/include/menu.html")>
-      </td>
-</table>
-</center>
-
-<!-- make page a table -->
-<!-- <center> -->
-<!-- <table bgcolor=#ffffff width=95% CELLSPACING=1 CELLPADDING=4 BORDER=1> -->
-<!-- <tr><TD BGCOLOR="#ccccc0" ALIGN=center> -->
-<!--    <BIG><B> -->
-<!--    GNOME Software Map -->
-<!--    </B></BIG> -->
-<!-- </TD></TR> -->
-<!-- <tr> -->
-<!-- <td BGCOLOR="#eeeee0"> -->
+<document title="Get more software" imgid="getmore">
+<content>
 
 <!-- start of page contents -->
 
 <?
 
-function qmeta $a (
+function qmeta ($a) {
    return ereg_replace("`", "``", $a);
-);
+};
 
-mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
+mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
 
 # get time since last change 
-$res = mysql("gnomeapps", "SELECT touched FROM applist ORDER BY touched DESC");
-if(!$res) {
-	echo "Query failed</td></tr></table>";
-	mysql_close();
-	exit;
-}
+$res = mysql("gnomeapps", "SELECT touched FROM applist ORDER BY touched DESC LIMIT 1");
 
 # get latest entry
 $touched = mysql_result($res, 0, "touched");
@@ -59,19 +31,17 @@ $touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
 # free first query results
 mysql_freeresult($res);
 
->
+?>
 
 <!-- start of the software map -->
 <center>
-<table bgcolor = #eeeee0 border=3 cellspacing=1 cellpadding=4 width="95%">
-<tr bgcolor="#ccccc0"><th colspan=3><BIG><BIG><B>Gnome Software Map</B></BIG></BIG><br><SMALL>Last updated: <?echo Date("Y-m-d H:i:s",$touchedts)></SMALL></th></tr>
-<tr bgcolor="#eeeee0">
+<table bgcolor = #ffffff border=0 cellspacing=0 cellpadding=4 width="95%">
+<tr bgcolor="#cce6ff"><th colspan=3><BIG><BIG><B>Gnome Software Map</B></BIG></BIG><br><SMALL>Last updated: <?echo Date("Y-m-d H:i:s",$touchedts)?></SMALL></th></tr>
+<tr bgcolor="#ffffff">
   <td colspan=3>
     <table border=0 cellspacing=1 cellpadding=4 width="100%">
     <tr>
 <?
-    if ($catno != "") {
-    } else {
 	echo "      <td><B>Categories:</B></td>\n";
 	echo "    </tr>\n";
 	echo "    <tr>\n";
@@ -79,28 +49,17 @@ mysql_freeresult($res);
 	echo "        <blockquote>\n";
 
 	# get list of all categories, sorted
-	$cats = mysql("gnomeapps", "SELECT category FROM applist GROUP BY category ORDER BY category");
+	$cats = mysql("gnomeapps", "SELECT DISTINCT category FROM applist ORDER BY category");
 
-	if(!$cats) {
-	    echo "No categories exist!</td></tr></table>";
-	    mysql_close();
-	    exit;
-	}
-	$icats = 0;
-	$ncats = mysql_numrows($cats);
+	while($cat_object = mysql_fetch_object($cats)) {
+	    $category = $cat_object->category;
 
-	while($icats < $ncats) {
-	    $category = mysql_result($cats, $icats, "category");
+	    $qry = "SELECT count(*) as rowcount from applist WHERE (category = '" . qmeta($category) ."')";
+      $res = mysql("gnomeapps", $qry);
 
-	    $qry = "SELECT * FROM applist WHERE category = '"+qmeta($category)+"' ORDER BY name";	
-	    $res = mysql("gnomeapps", $qry);
+	    $count_obj = mysql_fetch_object($res);
 
-	    $n = mysql_numrows($res);
-	    $icats++;
-
-	    if ($n > 0) {
-		echo "          <a href=\"list-martin.phtml?catno=$icats\">$category</a> ($n)<br>\n";
-	    }
+      echo "<a href=\"listrecent.php3?category_query=" . ereg_replace(" ", "%20", $category)  . "\">$category</a> (" . $count_obj->rowcount . ")<br>\n";
 	}
 
 	echo "        </blockquote>\n";
@@ -110,186 +69,9 @@ mysql_freeresult($res);
 	echo "  </td>\n";
 	echo "</tr>\n";
 	echo "</table>\n";
-	echo "</center>\n</body>\n</html>\n";
-	exit;
-    }
+	echo "</center>";
+
 ?>
-      <td><B>Legend:</B></td>
-      <td align=top><img align="top" src="home.gif">&nbsp;-&nbsp;Homepage</td>
-      <td align=top><img align="top" src="shot.gif">&nbsp;-&nbsp;Screenshot</td>
-      <td align=top><img align="top" src="pack.gif">&nbsp;-&nbsp;Stable Source&nbsp;Code</td>
-      <td align=top><font color="#ff0000"><BIG>*</BIG></font>&nbsp;-&nbsp;has&nbsp;development&nbsp;code&nbsp;in&nbsp;CVS</td>
-    </tr>
-    </table>
-  </td>
-</tr>
-</table>
 
-<?
-	# get list of all categories, sorted
-	$cats = mysql("gnomeapps", "SELECT category FROM applist GROUP BY category ORDER BY category");
-
-	if(!$cats) {
-	    echo "No categories exist!</td></tr></table>";
-	    mysql_close();
-	    exit;
-	}
-
-	# get current category name and grab all entries in that category
-	$category = mysql_result($cats, $catno-1, "category");
-	#echo $category;
-
-	$qry = "SELECT * FROM applist WHERE category = '"+qmeta($category)+"' ORDER BY name";	
-
-#echo $qry;
-	$res = mysql("gnomeapps", $qry);
-
-	$i = 0;
-	$n = mysql_numrows($res);
-#echo $n;
-	if ($n > 0) {
-	        echo "<table bgcolor = #eeeee0 border=3 cellspacing=1 cellpadding=4 width=\"95%\">\n";
-		echo "<tr bgcolor=\"#ccccc0\" cellpadding=40>\n";
-		echo "  <td colspan=3><BIG><B>",$category,"</B></BIG></td>\n";
-        	echo "</tr>\n";
-		echo "<tr bgcolor=\"#eeeee0\">\n";
-   		echo "<th align=center width=\"0\">Name</th>\n";
-		echo "<th align=center width=\"100%\">Description</th>\n";
-		echo "   <th align=center width=\"0\">Version</th>\n";
-		echo "</tr>\n";
-	}
-
-	while($i < $n) {
-		$name = mysql_result($res, $i, "name");
-		$version = mysql_result($res, $i, "version");
-		$mname = mysql_result($res, $i, "maintainer_name");
-		$memail = mysql_result($res, $i, "maintainer_email");
-		$desc = mysql_result($res, $i, "description");
-# truncate to reasonable length
-         	$desclen = strlen($desc);
-	        if ($desclen > 400) {
-        	   $desc = substr($desc, 0, 400) + "...";
-	        }
-
-		$requires = mysql_result($res, $i, "requires");
-		$url_homepage = mysql_result($res, $i, "url_homepage");
-		$url_screenshot = mysql_result($res, $i, "url_screenshot");
-		$url_download = mysql_result($res, $i, "url_download");
-		$in_cvs =  mysql_result($res, $i, "in_cvs");
-		$category = mysql_result($res, $i, "category");
-		$added = mysql_result($res, $i, "added");
-		$touched = mysql_result($res, $i, "touched");
-
-		$oneweek = 60*60*24*7;
-
-# dont ask I couldnt get mysql time/date functions to work with mysql_result()
-		$time = strchr($added, " ");
-		$date = substr($added, 0, 10);
-		$hour = substr($time, 1, 2);
-		$min  = substr($time, 4, 2);
-		$sec  = substr($time, 7, 2);
-		$year = substr($date, 0, 4);
-		$mon  = substr($date, 5, 2);
-		$day  = substr($date, 8, 2);
-		$addedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
-
-		$hour = substr($touched, 8, 2);
-		$min  = substr($touched, 10, 2);
-		$sec  = substr($touched, 12, 2);
-		$year = substr($touched, 0, 4);
-		$mon  = substr($touched, 4, 2);
-		$day  = substr($touched, 6, 2);
-		$touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
-
-# now addedts and touchedts are unix timestamps
-		$sinceadd = Time() - $addedts;
-		$sincetouch = Time() - $touchedts;
-
-# start of a row 
-		echo "\n<tr><td>\n";
-	        echo "   <table border=0 width=\"100%\" cellspacing=0 cellpadding=0>\n";
-		echo "   <tr bgcolor=\"#eeeee0\">\n";
-# first do package name + updated
-		echo "      <td align=left><a href=view.phtml?name=",ereg_replace(" ", "%20",$name),">",$name,"</a>\n";
-
-# new or updated?
-		if ( $sinceadd < $oneweek ) {
-			if ( $sinceadd <= $sincetouch ) {
-				echo "<img alt=\"NEW\" src=\"new.gif\">";
-			} else {
-				echo "<img alt=\"UPDATED\" src=\"updated.gif\">";
-			}
-		} else {
-			if ( $sincetouch < $oneweek) {
-				echo "<img alt=\"UPDATED\" src=\"updated.gif\">";
-			}
-		}
-
-
-		echo "</td></tr><tr><td align=right><table width=\"100\" border=0 cellspacing=0 cellpadding=0><tr>\n";
-
-# next comes home page
-		if ($url_homepage) {
-			echo "      <td width=\"24\" align=center><a href=",$url_homepage,"><img alt=\"WWW\" border=0 src=\"home.gif\"></a></td>\n";
-		} else {
-			echo "      <td width=\"24\">&nbsp;\n</td>";
-		}	
-
-# next comes screeshot url
-		if($url_screenshot) {
-			echo "      <td width=\"30\" align=center><a href=",$url_screenshot,"><img alt=\"PIC\" border=0 src=\"shot.gif\"></a></td>\n";
-		} else {
-			echo "      <td width=\"30\">&nbsp;\n</td>";
-		}
-
-# source url
-		if($url_download) {
-			echo "      <td width=\"30\" align=center>";
-			echo "<a href=",$url_download,"><img alt=\"Stable Sources\" border=0 src=\"pack.gif\"></a>\n";
-                        echo "</td>\n";
-		} else {
-			echo "<td width=\"30\">&nbsp;\n</td>";
-		}
-# in cvs?
-		if($in_cvs == "Y") {
-		  echo "      <td width=\"0\" align=center>";
-  		  echo "<font color=#ff0000><BIG>*</BIG></font>";
-                  echo "</td>\n";
-                } else {
- 		  echo "<td width=\"0\">&nbsp;\n</td>";
-                }
-
-
-		echo "   </tr></table></tr></table></td>\n";
-
-# description
-		echo "   <td align=left>",$desc,"   </td>\n";
-
-# version	
-		echo "   <td align=center>",$version,"</td>\n";
-
-# maintainer
-#	echo "   <td><a href=\"mailto:", $memail, "\">", $mname, "</a></td>";
-
-#		echo "</td></tr>\n";
-		$i++;
-	}
-	echo "</table>\n";
->
-</table>
-<? mysql_freeresult($res); >
-<? mysql_close(); >
-</center>
-
-
-<!-- end of page content -->
-<!-- </td> -->
-<!-- </tr> -->
-<!-- </table> -->
-<!-- </center> -->
-
-
-</body>
-</html>
-
-
+</content>
+</document>

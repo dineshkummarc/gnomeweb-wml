@@ -2,7 +2,9 @@ SUBDIRS=
 
 urlpath=/applist
 
-page_SCRIPTS=listrecent.php3 \
+page_SCRIPTS=index.html\
+             listrecent.php3 \
+             list.php3\
              view.php3\
 						 editwhich.html\
 						 add.php3\

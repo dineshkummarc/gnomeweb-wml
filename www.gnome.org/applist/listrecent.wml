@@ -15,13 +15,15 @@ function qmeta ($a) {
 
 mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
 
-# get time since last change 
-$res = mysql("gnomeapps", "SELECT touched FROM applist ORDER BY touched DESC LIMIT 1");
-if(!$res) {
-	echo "Query failed</td></tr></table>";
-	mysql_close();
-	exit;
+if (!$category_query) {
+  $qry = "SELECT touched FROM applist ORDER BY touched DESC LIMIT 1";
+} else {
+  $qry = "SELECT touched FROM applist WHERE (category='" . $category_query . "') ORDER BY touched DESC LIMIT 1";
 }
+
+
+# get time since last change 
+$res = mysql("gnomeapps", $qry);
 
 # get latest entry
 $touched = mysql_result($res, 0, "touched");
@@ -51,11 +53,18 @@ if ($entrylimit) {
 } else {
    echo "";
 }
-echo "Most Recently Updated Software Entries";
+
+if ($category_query) {
+  echo "Entries in category " . $category_query . ".";  
+} else {
+  echo "Most Recently Updated Software Entries";
+}
+
 echo "</B></BIG></BIG>";
+
 if ($entrylimit != "") {
    echo "<br><a href=\"http://www.gnome.org/applist/listrecent.php3\">(click for complete list)</a>";
-} else {
+} else if (!$category_query) {
    echo " [Last month of activity]";
 }
 
@@ -90,6 +99,8 @@ echo "</th></tr>";
 
 if ($entrylimit) {
   $new = mysql("gnomeapps", "SELECT * FROM applist ORDER BY touched desc LIMIT " . $entrylimit);
+} else if ($category_query) {
+  $new = mysql("gnomeapps", "SELECT * FROM applist WHERE (category='" . $category_query . "') ORDER BY touched desc");
 } else {
   $new = mysql("gnomeapps", "SELECT * FROM applist ORDER BY touched desc");
 }
@@ -105,7 +116,6 @@ $nnew = mysql_numrows($new);
 
 
 while($inew < $nnew) {
-#	get current category name and grab all entries in that category
 	$name = mysql_result($new, $inew, "name");
 	$descr = mysql_result($new, $inew, "description");
 
@@ -148,7 +158,7 @@ while($inew < $nnew) {
 	$sincetouch = Time() - $touchedts;
 
 # only show changes for last month to reduce list length
-        if ( $sincetouch < $onemonth ) {
+        if ( ($sincetouch < $onemonth) || ($category_query) ) {
 
 # first do package name + updated
 	echo "  <tr valign=\"top\"><td>\n";
