@@ -33,6 +33,147 @@ print "<a href=\"../index.php3\">Return to the todo page.</a>";
 
 }
 
+if ($modify) {
+
+$connection = mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
+
+mysql_select_db("todo");
+
+if ($perform_modification) {
+
+$short_desc = addslashes($short_desc);
+$long_desc  = addslashes($long_desc);
+$project_name = addslashes($project_name);
+$contact_name = addslashes($contact_name);
+
+$query_string = "UPDATE todo_items SET ";
+$query_string = $query_string . "update_time='" . date("YmdHis", time()) . "', ";
+$query_string = $query_string . "short_desc='$short_desc', long_desc='$long_desc', project_name='$project_name', project_url='$project_url', ";
+$query_string = $query_string . "contact_name='$contact_name', contact_mail='$contact_mail', ";
+$query_string = $query_string . "required_skill='$required_skill', required_familiarity='$required_familiarity', category='$category', ";
+$query_string = $query_string . "importance='$importance', status='$status' WHERE (id='$id')";
+
+mysql_query ($query_string);
+#print $query_string;
+print ("Item modified. Thank you.<p>");
+
+print ("<a href=\"../index.php3\">Return to the todo page.</a>");
+
+} else {
+
+$res = mysql_query("select * from todo_items where (id='" . $id . "')");
+$res_obj =  mysql_fetch_object($res);
+
+
+?>
+
+<form action="modify.php3" method="get">
+
+<table width="95%" border="0" cellspacing="0" cellpadding="3">
+
+<tr valign="top"><th colspan="2" bgcolor="#cce6ff">Modify a todo item.</th></tr>
+
+<tr valign="top"><td align="right">Short description:</td>
+<td><input type="text" size="40" name="short_desc"<?
+
+print "value=\"" . $res_obj->short_desc . "\"";
+
+?>></td></tr>
+
+<tr valign="top"><td align="right">Long description:</td>
+<td><textarea name="long_desc" rows="10" cols="40" wrap="virtual">
+<? print $res_obj->long_desc; ?>
+</textarea></td></tr>
+
+<tr valign="top"><td align="right">Name of the project this belongs to:</td>
+<td><input type="text" size="40" name="project_name"<?
+print "value=\"" . $res_obj->project_name . "\"";
+?>></td></tr>
+
+<tr valign="top"><td align="right">URL for the project this belongs to:</td>
+<td><input type="text" size="40" name="project_url"<?
+print "value=\"" . $res_obj->project_url . "\"";
+?>></td></tr>
+
+<tr valign="top"><td align="right">Contact person name:</td>
+<td><input type="text" size="40" name="contact_name"<?
+print "value=\"" . $res_obj->contact_name . "\"";
+?>></td></tr>
+
+<tr valign="top"><td align="right">Contact person email:</td>
+<td><input type="text" size="40" name="contact_mail"<?
+print "value=\"" . $res_obj->contact_mail . "\"";
+?>></td></tr>
+
+<tr valign="top"><td align="right">Category:</td><td>
+<select name="category">
+<option value="application"<? if ($res_obj->category == "application") print " selected ";?>>Applications</option>
+<option value="core"<? if ($res_obj->category == "core") print " selected ";?>>Core</option>
+<option value="libraries"<? if ($res_obj->category == "libraries") print " selected ";?>>Libraries</option>
+<option value="desktop"<? if ($res_obj->category == "desktop") print " selected ";?>>Desktop</option>
+<option value="ui"<? if ($res_obj->category == "ui") print " selected ";?>>UI</option>
+<option value="docs"<? if ($res_obj->category == "docs") print " selected ";?>>Documentation</option>
+<option value="translation"<? if ($res_obj->category == "translation") print " selected ";?>>Translation</option>
+<option value="graphics"<? if ($res_obj->category == "graphics") print " selected ";?>>Graphics</option>
+<option value="web"<? if ($res_obj->category == "web") print " selected ";?>>Web</option>
+<option value="other"<? if ($res_obj->category == "other") print " selected ";?>>Other</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Difficulty:</td><td>
+<select name="required_skill">
+<option value="1"<? if ($res_obj->required_skill == "1") print " selected ";?>>Easy</option>
+<option value="2"<? if ($res_obj->required_skill == "2") print " selected ";?>>Simple</option>
+<option value="3"<? if ($res_obj->required_skill == "3") print " selected ";?>>Medium</option>
+<option value="4"<? if ($res_obj->required_skill == "4") print " selected ";?>>Complex</option>
+<option value="5"<? if ($res_obj->required_skill == "5") print " selected ";?>>Hard</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Required experience:</td><td>
+<select name="required_familiarity">
+<option value="1"<? if ($res_obj->required_familiarity == "1") print " selected ";?>>None</option>
+<option value="2"<? if ($res_obj->required_familiarity == "2") print " selected ";?>>Some</option>
+<option value="3"<? if ($res_obj->required_familiarity == "3") print " selected ";?>>Medium</option>
+<option value="4"<? if ($res_obj->required_familiarity == "4") print " selected ";?>>Extensive</option>
+<option value="5"<? if ($res_obj->required_familiarity == "5") print " selected ";?>>Very extensive</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Status:</td><td>
+<select name="status">
+<option value="new"<? if ($res_obj->status == "new") print " selected ";?>>New</option>
+<option value="interest"<? if ($res_obj->status == "interest") print " selected ";?>>Have interested people</option>
+<option value="work"<? if ($res_obj->status == "work") print " selected ";?>>Have people working</option>
+<option value="closed"<? if ($res_obj->status == "closed") print " selected ";?>>Finished</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Importance of this task:</td><td>
+<select name="importance">
+<option value="casual"<? if ($res_obj->importance == "casual") print " selected ";?>>Casual</option>
+<option value="medium"<? if ($res_obj->importance == "medium") print " selected ";?>>Medium</option>
+<option value="high"<? if ($res_obj->importance == "high") print " selected ";?>>High</option>
+<option value="severe"<? if ($res_obj->importance == "severe") print " selected ";?>>Severe</option>
+</select>
+</td></tr>
+
+<tr><td><input type="submit" name="perform_modification" value="Modify"> <input type="reset"
+value="Reset"><input type="hidden" name="modify" value="Modify"><input
+type="hidden" name="id" value="<?print $id;?>"></td><td></td></tr>
+
+</table>
+<p>
+
+<b><a href="index.php3">Go back to the todo page.</a></b>
+
+</form>
+
+<?
+}
+
+}
+
 
 ?>
 
