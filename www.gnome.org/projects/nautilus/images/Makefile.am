@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/guppi/images
+urlpath=/projects/nautilus/images
 
 page_SCRIPTS =  nntp.1.jpg  		\
 		nntp.2.jpg 		\
