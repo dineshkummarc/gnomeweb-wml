@@ -20,18 +20,18 @@ $query = "SELECT groups.group_name AS group_name,"
 	. "frs_release.group_id=groups.group_id "
 	. "ORDER BY frs_release.release_date DESC LIMIT ".$limit;
 
-print $query."\n";
+//print $query."\n";
 
 $res = db_query ($query);
 
 // ## one time output
 print " <channel>\n";
-print "  <copyright>Copyright 2001 Free Software Foundation</copyright>\n";
+print "  <copyright>Copyright 2002 Free Software Foundation</copyright>\n";
 print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
 print "  <description>GNOME New Releases</description>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
 print "  <title>GNOME New Releases</title>\n";
-print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
+print "  <webMaster>webmaster@gnome.org</webMaster>\n";
 print "  <language>en-us</language>\n";
 // ## item outputs
 $outputtotal = 0;
