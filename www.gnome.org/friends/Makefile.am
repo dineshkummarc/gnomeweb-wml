@@ -8,6 +8,7 @@ page_SCRIPTS = \
 	donors.html \
 	donors_2002.html \
 	donors_2003.html \
+	donors_2004.html \
 	check.html
 
 include $(top_srcdir)/rules.common
