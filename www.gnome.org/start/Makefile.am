@@ -7,4 +7,7 @@ page_SCRIPTS= \
         getstable.html \
 	helping.html
 
+page_DATA = \
+	schedule.ics
+
 include $(top_srcdir)/rules.common
