@@ -1,4 +1,4 @@
-SUBDIRS= new-pics screenshots doc images
+SUBDIRS= new-pics doc images
 
 urlpath=/projects/gnumeric/
 

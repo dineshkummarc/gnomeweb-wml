@@ -2,24 +2,22 @@ SUBDIRS=
 
 urlpath=/projects/gnumeric/new-pics
 
-page_SCRIPTS=analysis-tools.gif		\
-	    bonobo-embedded.gif		\
-	    editing.gif			\
-	    format-background.gif	\
-	    format-border.gif		\
-	    format-font.gif		\
-	    format-number.gif		\
-	    goal-seek.gif		\
-	    patterns.gif		\
-	    print-header-footer.gif	\
-	    print-margins.gif		\
-	    print-page.gif		\
-	    print-preview.gif		\
-	    print-setup.gif		\
-	    print-zoom.gif		\
-	    regression.gif		\
-	    sample-thumb.gif		\
-	    sample.gif			\
-	    startup.gif
-	    
+page_SCRIPTS=\
+	    startup.png			\
+	    format-background.png	\
+	    format-border.png		\
+	    format-font.png		\
+	    format-number.png		\
+	    analysis-tools.png		\
+	    regression.png		\
+	    goal-seek.png		\
+	    patterns.png		\
+	    print-setup.png		\
+	    print-header-footer.png	\
+	    print-margins.png		\
+	    print-page.png		\
+	    print-preview.png		\
+	    print-zoom.png		\
+	    editing.png
+
 include $(top_srcdir)/rules.common
