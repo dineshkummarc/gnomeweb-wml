@@ -2,12 +2,11 @@ SUBDIRS=
 
 urlpath=/summit
 
-page_HTML = index.html
-
-page_DATA = attendance.png	\
-	    boston-summit.jpeg	\
+page_DATA = index.html		\
+	    attendance.png	\
+	    boston-summit.jpg	\
 	    map.png
 
 include $(top_srcdir)/rules.common
 
-EXTRA_DIST=$(page_DATA) $(page_HTML)
+EXTRA_DIST=$(page_DATA)
