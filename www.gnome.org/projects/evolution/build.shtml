@@ -5,24 +5,46 @@
 
 <p><h2>Building against packaged GNOME</h2>
 
-Build the relevant modules and install.  If you use a prefix different
-from where the rest of GNOME is installed (recommended), you will need
-to update the bonobo-activation configuration file, which will be:<br><br>
+<p>Build the relevant modules listed on the <a
+href="http://www.gnome.org/projects/evolution/cvs.shtml">CVS</a> page and
+them.  If you use a prefix different from where the rest of GNOME is
+installed (recommended), you will need to update the bonobo-activation
+configuration file, which will be:<br><br>
 
+<blockquote>
 &lt;gnome prefix&gt/etc/bonobo-activation/bonobo-activation-config.xml<br>
-or<br>
+<b>or</b><br>
 /etc/bonobo-activation/bonobo-activation-config.xml<br><br>
+</blockquote>
 
 usually.  Between the <searchpath></searchpath> markers add:<br><br>
 
 &lt;item&gt*evolution prefix*/lib/bonobo/servers&lt/item&gt
 
-<p><h2>Build with jhbuild</h2>
+<p><h2>Building with jhbuild</h2>
 
-If you set your moduleset to 26 and do jhbuild evolution it should
-build.  Some common problems are:
+<p>You can get jhbuild information at <a href="http://www.daa.com.au/~james/software/jhbuild/">http://www.daa.com.au/~james/software/jhbuild/</a>
 
 <ul>
+<li>Set your moduleset to 26 in ~/.jhbuildrc
+
+<li>Do 'jhbuild bootstrap' and update to the latest modules - make
+sure you install pkg-config even if you have the same version that is
+required.
+
+<li>Do 'jhbuild evolution'
+</ul>
+
+<p>It should now build 35 modules.  If something fails for you, some
+common problems are listed below:
+
+<ul>
+<li><b>Jhbuild throws a python exception</b><br><br>
+
+Solution: You probably have a distro that maps 'python' to a version
+less than 2.  Just change the installed jhbuild script (usually
+~/bin/jhbuild) to use 'python2' instead of 'python'.<br><br>
+
 <li><b>Build fails in fontconfig</b><br><br>
 
 <blockquote>
