@@ -4,17 +4,28 @@ urlpath=/projects/gnumeric/doc
 
 page_SCRIPTS= \
 analysis-tools.html  \
+anova.html  \
 authors.html  \
+autocorrect.html  \
 autofill.html  \
+autosave.html  \
 cell-elements.html  \
 cell-referencing.html  \
 copying-moving.html  \
+correlation-tool.html  \
+covariance-tool.html  \
 data-and-time-formatting.html  \
+descriptive-statistics-tool.html  \
 editing-selections.html  \
 editing.html  \
+exp-smoothing-tool.html  \
+file-format.html  \
 files.html  \
+filter.html  \
 formatting.html  \
 formulas.html  \
+fourier-analysis-tool.html  \
+ftest-two-sample-for-variances-tool.html  \
 function-reference.html  \
 gnumeric-abs.html  \
 gnumeric-accrint.html  \
@@ -357,19 +368,27 @@ gnumeric-yield.html  \
 gnumeric-yielddisc.html  \
 gnumeric-yieldmat.html  \
 gnumeric-ztest.html  \
+goal-seek.html  \
+histogram-tool.html  \
 index.html  \
 introduction.html  \
 license.html  \
 ln8.html  \
 menu-bar.html  \
+moving-average-tool.html  \
 number-formatting-overview.html  \
 print-preview.html  \
 print-setup.html  \
 printing.html  \
+random-number-generation-tool.html  \
+rank-and-percentile-tool.html  \
+regression-tool.html  \
 rest.html  \
+sampling-tool.html  \
 selecting-cells-entering-formulas.html  \
 solver.html  \
-toolbar-buttons.html \
-tutorials.html 
+t-test.html  \
+toolbar-buttons.html  \
+tutorials.html
 
 include $(top_srcdir)/rules.common
