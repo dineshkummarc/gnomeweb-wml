@@ -10,6 +10,7 @@ include $(top_srcdir)/rules.common
 misc_images=\
 	peru.png\
 	brazil.png\
+	br-flag.png\
 	uruguay.png
 
 page_DATA=$(misc_images)
