@@ -1,0 +1,43 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="GNOME FTP Mirrors" imgid="getgnome">
+<content>
+
+<?
+Include("/home/admin/mirrors/read-only.php3");
+$connection = mysql_pconnect("www.gnome.org",$mysql_user,$mysql_password);
+
+mysql_select_db("mirrors");
+
+$complete_query = "SELECT location FROM webmirrors GROUP BY location ORDER BY location";
+
+$res = mysql_query($complete_query);
+?>
+
+<table width="95%" border="1" cellspacing="0" cellpadding="4">
+
+<?
+while ($res_object = mysql_fetch_object($res)) {
+?>
+
+<tr><th bgcolor="#cce6ff" colspan="3"><?print $res_object->location ?></th></tr>
+
+<?
+$location_query = "SELECT name,url,description FROM webmirrors WHERE location = '$res_object->location'";
+$location_res = mysql_query($location_query);
+
+while ($location_res_object = mysql_fetch_object($location_res)) {
+
+?>
+<tr><td><?print $location_res_object->name ?></td><td><a href="<?print $location_res_object->url ?>"><?print $location_res_object->url ?></a></td><td><?print $location_res_object->description ?></tr>
+<?
+}
+}
+?>
+
+</table>
+
+</content>
+</document>
