@@ -35,10 +35,6 @@
         $bad_elements[] = "contactname";
         $errors[] = "Please enter your name.";
       }
-      if (! $contacttitle) {
-        $bad_elements[] = "contacttitle";
-        $errors[] = "Please enter your title or role in your organization.";
-      }
       if (! $email) {
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
@@ -133,7 +129,7 @@
 	  </td>
 	</tr>
 	<tr>
-	  <td>*Title:</td>
+	  <td>Title:</td>
 	  <td>
 	    <input type="text" name="contacttitle" 
 		   size="30" value="<? echo $contacttitle ?>">
