@@ -163,7 +163,7 @@ td.bold {
     <td rowspan=2></td> <!-- 33-418 -->
     <td rowspan=2>&quot;GNOME Development and Release Process,&quot; Michael Meeks.</td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
-    <td>&quot;GPhoto2: The Foundation for a GNOME Photo Management Application,&quot; Christophe Barbé</td> <!--  1-136 -->
+    <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>5:00 PM</td>
     <td></td> <!--  1-135 -->
