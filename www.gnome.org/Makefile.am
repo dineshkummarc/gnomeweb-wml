@@ -8,7 +8,10 @@ page_SCRIPTS=index.php3		\
 	commsupp.html       \
 	speakingabout.html  \
 	pressreleases.html  \
-	pressresources.html
+	pressresources.html \
+  pr-gnome12.html     \
+  pr-foundation.html  \
+  pr-newcommitments.html
 
 page_DATA=menucontrol.js
 
