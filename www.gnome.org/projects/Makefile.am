@@ -2,6 +2,7 @@ SUBDIRS=			\
 	application-framework	\
 	desktop			\
 	devtools		\
+	gconf			\
 	gnome-core		\
 	gnome-libs		\
 	gnumeric		\
