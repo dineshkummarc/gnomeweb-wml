@@ -11,6 +11,7 @@ page_DATA = \
 	frontpage.css \
 	WGO-FOOTER.html \
 	WGO-HEADER.html \
-	robots.txt
+	robots.txt \
+	favicon.ico
 
 include $(top_srcdir)/rules.common
