@@ -27,7 +27,7 @@ class PrintHeadline(saxlib.HandlerBase):
     def startElement(self, name, attrs):
 	if (self.headlineCount >= self.headlineLimit): return
 	if name == 'item':
-	    print "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td><img src='/images/dot.gif' width='1' height='3' alt=''><br clear='all'>"
+	    print "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td>"
 	    self.inItem = 1
 	if name == 'title':
 	    self.inTitle = 1
@@ -43,7 +43,7 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.timestamp = re.split("/", self.itemLink)[-2]
 	    self.timetuple = time.gmtime(string.atoi(self.timestamp))
 	    self.timestring = time.strftime("%a, %b %d %Y", self.timetuple)
-	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b> <font size='-2'><nobreak>[" + self.timestring + "]</nobreak></font></td></tr>"
+	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b><font size='-2'><br>[" + self.timestring + "]</font></td></tr>"
 	    self.inItem = 0
 	    self.headlineCount = self.headlineCount + 1
 	if name == 'title':
