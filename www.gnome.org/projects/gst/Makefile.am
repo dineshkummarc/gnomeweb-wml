@@ -10,7 +10,8 @@ page_SCRIPTS =  bugs.html	\
 		index.html	\
 		news.html	\
 		screenshots.html\
-		structure.html	
+		structure.html  \
+		team.html
 
 include $(top_srcdir)/rules.common
 

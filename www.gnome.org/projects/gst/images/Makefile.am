@@ -10,7 +10,9 @@ page_SCRIPTS = logo.png		\
 	       border3.png	\
 	       border4.png	\
 	       side1.png	\
-	       side2.png
+	       side2.png        \
+	       irc.png          \
+	       mailinglists.png 
 
 include $(top_srcdir)/rules.common
 
