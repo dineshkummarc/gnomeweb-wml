@@ -14,7 +14,8 @@ misc_images=\
 	screenshot-example.png\
 	subpage-side.png\
   news-bullet.png\
-	news-header.png
+	news-header.png\
+	arrow.png
 
 banner_images=\
 	banner-gnomeis.png\
