@@ -21,6 +21,7 @@ page_SCRIPTS=change_email-complete.php \
 	lostpw-confirm.php \
 	verify.php \
 	deleted.php \
+	updateprefs.php \
 	lostpw.php
 
 include $(top_srcdir)/rules.common
