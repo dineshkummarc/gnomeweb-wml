@@ -1,5 +1,5 @@
 <?
 print "<html><body>";
-print "This is PHP3 page";
+print "Gnome print website will be soon here";
 print "</body><html>";
 ?>
