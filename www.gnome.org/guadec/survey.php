@@ -57,30 +57,29 @@
         // make the mail 
 
         $formmail = "";
-        $formmail .= "Name: " . $contactname . "\n";
-        $formmail .= "Age: " . $contactage . "\n";
-        $formmail .= "Residence: " . $contactaddress . "\n";
-        $formmail .= "Email: " . $email . "\n\n";
+        $formmail .= "Name:\t" . $contactname . "\n";
+        $formmail .= "Age:\t" . $contactage . "\n";
+        $formmail .= "Residence:\t" . $contactaddress . "\n";
+        $formmail .= "Email:\t" . $email . "\n\n";
 
+        $formmail .= "User:\t" . $user . "\n";
+        $formmail .= "Developer:\t" . $developer . "\n";
+        $formmail .= "Contributions:\n" . $contributions . "\n\n";
 
-        $formmail .= "User: " . $user . "\n\n";
-        $formmail .= "Developer: " . $developer . "\n\n";
-        $formmail .= "Committment: " . $committment . "\n\n";
-
-        $formmail .= "Interested in attending GUADEC 4: " . $guadec . "\n\n";
+        $formmail .= "Interested in attending GUADEC 4:\t" . $guadec . "\n\n";
 
 	$no_guadecs=count($attend);
 
     	$guadecs_attended = "";
 	for ($i=0; $i<$no_guadecs; $i++) {
-    		$guadecs_attended .= $attend[$i] . "\n";
+    		$guadecs_attended .= $attend[$i] . " ";
 	}
 	
-	$formmail .= "GUADECs Attended: " . $guadecs_attended . "\n\n";
-        $formmail .= "Needs Sponsorship: " . $sponsor . "\n\n";
-        $formmail .= "Tutorials: " . $tutorial . "\n\n";
+	$formmail .= "GUADECs Attended:\t" . $guadecs_attended . "\n\n";
+        $formmail .= "Needs Sponsorship:\t" . $sponsor . "\n\n";
+        $formmail .= "Paid Tutorials:\t" . $tutorial . "\n\n";
 
-        $formmail .= "GNOME Foundation Member: " . $gfmember ."\n\n";
+        $formmail .= "GNOME Foundation Member:\t" . $gfmember ."\n\n";
 
         $formmail .= "\nComments:\n";
         $formmail .= "$comments\n\n";
@@ -108,7 +107,6 @@
   if (! $submit || count($bad_elements) != 0) {  ?>
 
   <p>
-
     Please fill in the following to details to give us better information
     while organizing GUADEC 4. 
   </p>
@@ -175,12 +173,12 @@
 	</tr>
         <tr>
 	  <td valign="top" colspan="2">
-	    *Committments to GNOME:
+	    *Contributions to GNOME:
 	  </td>
         </tr>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="committment" cols="70" rows="5"></TEXTAREA>
+	    <textarea name="contributions" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
 	<tr>
@@ -232,25 +230,22 @@
         </tr>
 	</tr>
 	<tr>
-	  <td valign="top" colspan="3">&nbsp;</td>
+	  <td valign="top" colspan="2">&nbsp;</td>
 	</tr>
         <tr>
-	  <td valign="top" colspan="3">
+	  <td valign="top" colspan="2">
 	    Comments:
 	  </td>
 	<tr>
-	  <td valign="top">&nbsp;</td>
 	  <td valign="top" colspan="2">
 	    <textarea name="comments" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
 	<tr>
-	  <td>&nbsp;</td>
-	  <td valign="top">
+	  <td colspan=2 valign="top">
 	    <input type="submit" name="submit" value="Submit">
 	      <input type="reset" name="reset" value="Clear">
 	  </td>
-	  <td>&nbsp;</td>
 	</tr>
       </table>
     </form>
