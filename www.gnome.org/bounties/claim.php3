@@ -40,6 +40,8 @@ $_GET['bounty']; ?>">relevant bug</a>.
 
 <?php box_end (); ?>
 
+<?php write_page_footer (); ?>
+
 </body>
 </html>
 

@@ -11,7 +11,7 @@ include ("./util.php");
 <?php taskrow ("OO.o Image Save", "hidden", "300", "127556", ""); ?>
 <?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("OO.o slide view performance", "OpenOffice.org", "500", "127554", "127554", ""); ?>
+<?php box_start ("OO.o slide view performance", "OpenOffice.org", "500", "127554", "127554"); ?>
 
 <p>The slides view in impress suffers some from seriously slow,
 un-cached slide thumbnailing, this makes scrolling the slide
@@ -26,7 +26,7 @@ rendered more quickly subsequently.</p>
 <p>The solution providing the greatest speedup, and ergonomic 
 improvement in this area wins</p>
 <?php box_end (); ?>
-<?php box_start ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555", "127555", ""); ?>
+<?php box_start ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555", "127555"); ?>
 
 <p>
   When editing a slide in the drawing view, it is often helpful
@@ -50,7 +50,7 @@ re-used here, in a scroll pane.</p>
   slides by selecting them in the side view.
 </p> 
 <?php box_end (); ?>
-<?php box_start ("OO.o Image Save", "OpenOffice.org", "300", "127556", "127556", ""); ?>
+<?php box_start ("OO.o Image Save", "OpenOffice.org", "300", "127556", "127556"); ?>
  
 <p> 
  After inserting an image into a document or presentation, you may
@@ -64,7 +64,7 @@ re-used here, in a scroll pane.</p>
   documents or presentations. The menu item should open up a dialog
   allowing the image to be saved to disk as an individual file.
 </p> <?php box_end (); ?>
-<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "127771", ""); ?>
+<?php box_start ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", "127771"); ?>
 
 <p>oocalc's numeric precision is pretty awful for a load of common
 functions. This should be substantially improved, in-line with
@@ -84,7 +84,7 @@ The functions should behave more correctly, preferably as well as
 gnumeric. There should also be a spreadsheet containing these corner
 cases for future smoke regression testing.
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

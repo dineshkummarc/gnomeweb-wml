@@ -6,66 +6,16 @@ include ("./util.php");
 
 <?php write_page_header ("Mailer Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", ""); ?>
 <?php taskrow ("Mailing list actions", "hidden", "500", "127518", ""); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
-<?php taskrow ("Custom mail headers display", "hidden", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526", ""); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "hidden", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533", ""); ?>
 <?php taskrow ("Message receipts", "hidden", "500", "127534", ""); ?>
-<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
-
-
-<p>
-It would be handy to be able to set the desktop background picture
-directly from images displayed in Evolution.
-</p>
-
-<p align="center"><img src="set-as-wallpaper.png" alt="" /></p>
-
-<?php box_sec ("How"); ?>
-
-<p>
-In em-popup.c there is already a hook for this, but unimplemented (see
-emp_part_popup_set_background).  The menu item will automatically be
-added to any image or image attachment referenced from a context menu.
-The guts merely needs to be implemented.
-</p>
-<ul>
-<li>You have access to the message part in the EMPopupTarget of type EM_POPUP_TARGET_PART of the popup target.
-<li>There are message saving routines in em-utils.[ch], although you may need to add a new api
-to save to a specific file, if GNOME wont copy a temporary file
-<li>You then need to notify the GNOME Desktop of the new backdrop file (how?)
-</ul>
-
-<?php box_sec ("Affected Modules"); ?>
-
-<? bonsai ("evolution/mail") ?>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-You should subscribe to the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
-href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
-will be the primary contacts on the list.
-<p>
-GNOME Desktop programming and mailing list information is available on
-<a href="http://developer.gnome.org/">developer.gnome.org</a>
-</p>
-
-<?php box_end (); ?>
-<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516", ""); ?>
+<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516"); ?>
 
 
 <p>
@@ -127,7 +77,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Mailing list actions", "Mailer", "500", "127518", "127518", ""); ?>
+<?php box_start ("Mailing list actions", "Mailer", "500", "127518", "127518"); ?>
 
 
 <p>Many mailing lists follow <?php rfc(2369); ?> and provide mailing list
@@ -172,76 +122,7 @@ href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
-
-
-<p>
-Evolution has some initial NNTP (NEWS, or NNRP) support, but it is incomplete.
-This task is to fill out the NNTP implementation and provide a
-suitable user-interface for managing NNTP sessions.
-<p>
-This would help us get more adoption of Evolution inside the
-OpenOffice team, since they use news for all their internal
-discussions.
-</p>
-
-<?php box_sec ("Affected Modules"); ?>
-
-<ul>
-<li><? bonsai ("evolution/camel/providers/nntp"); ?>, is the existing
-NNTP implementation, which should be extended/completed, rather than
-being rewritten.
-<li><? bonsai ("evolution/mail"); ?>, may need work for handling NNTP addressing.
-<li><? bonsai ("evolution/composer"); ?>, similarly.
-</ul>
-
-<?php box_sec ("How"); ?>
-
-<p>
-The first aim should be to complete the CamelStore and CamelFolder
-implementation of the NNTP provider.
-<p>
-For CamelNNTPStore, the folder list should be stored in a
-CamelStoreSummary, which will require writing a CamelNNTPStoreSummary in
-the same vein as CamelImapStoresummary.  It should support two modes,
-one for a flat '.' separated list of folders, and another implementing
-a hierarchy of folders canonicalized into '/' separated paths.
-Once complete, offline operation, and the subscription interface can be implemented.
-<tt>get_folder_info</tt> must also be finished, currently it doesn't
-honor the path or mode arguments.
-<p>
-CamelNNTPFolder needs to have the append() method
-implemented, which will be used to POST messages to the NNTP store.
-<p>
-The composer already has support for posting to folders, but it may
-need additional support for NNTP addressing and cross-posting to NNTP
-folders and email addresses.
-</p>
-
-<?php box_sec ("Extended functionality"); ?>
-
-<p>CamelNNTPStoreSummary could also interact and cache standard NNTP
-folder information into ~/.newsrc, to work with legacy news readers.
-</p>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-The NNTP protocol is described in <?php rfc(977); ?>.  An
-additional information RFC, <?php rfc(2980); ?> provides an
-overview of commonly implemented NNTP extensions.
-<p>
-You should subscribe to the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
-href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
-will be the primary contacts on the list.
-</p>
-
-<?php box_end (); ?>
-<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521", ""); ?>
+<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521"); ?>
 
 
 <p>
@@ -314,70 +195,7 @@ is not relevant.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Custom mail headers display", "Mailer", "200", "127523", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-
-
-<p>As in <?php bug(1186); ?>, it would be nice to configure the header
-display to show different default headers, merely as a convenience to
-users.</p>
-
-<p align="center">
-<img border=0 src="mail-custom-header.png" alt="">
-</p>
-
-<?php box_sec ("Affected Modules"); ?>
-
-<p>
-Various files in <? bonsai ("evolution/mail"); ?>.
-</p>
-
-<?php box_sec ("How"); ?>
-
-<p>
-EMFormat already has api for setting which headers are displayed
-by default, so most of the backend work is already done.  What is
-required is a GUI for configuring the options, and glue to store the
-options.
-<p>
-The configuration GUI should be a new tab on the Mailer Settings page.
-A new tab should be created in the glade file
-<? bonsai ("evolution/mail/mail-config.glade"); ?>, and hooked into
-<? bonsai ("evolution/mail/em-mailer-prefs.c"); ?>, and it should store
-the options in a gconf key under &quot;/apps/evolution/mail/display&quot;, for
-example <b>&quot;headers&quot;</b>.  The key should be a simple string
-array.
-<p>
-<? bonsai ("evolution/mail/em-folder-view.c"); ?> is used to listen to
-configuration changes used by EMFormat, <tt>emfv_setting_notify</tt> needs to
-be extended to include the new gconf key to manage the header list.
-<p>
-A FIXME in
-<? bonsai ("evolution/mail/em-format.c"); ?><tt>:emf_format_clone</tt>
-needs to be finished to complete the task so the headers displayed are
-properly honored for printing and redisplays.
-</p>
-
-<?php box_sec ("Extended functionality"); ?>
-
-<p>EMFormat (and EMFormatHTML) also defines properties for each
-header (e.g. <b>BOLD LABEL</b>).  These could be added to the
-configuration page and configuration key, and even extended.
-</p>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-You should subscribe to the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
-href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
-will be the primary contacts on the list.
-</p>
-
-<?php box_end (); ?>
-<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526", ""); ?>
+<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526"); ?>
 
 <p>It would be nice if Evolution would prompt the user if he or she would like to set
 Evolution as the default "mailto:" handler for GNOME if:</p>
@@ -417,68 +235,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
-
-<p>
-Currently, to drag and drop a file into an Evolution message, you
-must drop it outside the message body. To make it easier to
-attach files via drag and drop, we would like to make the attachments
-bar more visible.
-</p>
-
-<?php box_sec ("How"); ?>
-
-<p>
-<img alt="attachments bar mockup" src="composer-attachments.gif" />
-</p>
-
-<p>
-First you will need to add an arrow widget with a label saying
-&quot;Show/Hide Attachments Bar (drop attachments here)&quot;. When
-the arrow is pressed it should show/hide the attachment bar as shown
-in the animation.
-</p>
-
-<p>
-When you drag a file over that arrow or label, the attachment bar
-should be shown. Note that an <u>A</u> accelerator (M-a) should toggle
-the attachment bar visibility. The direction of the arrow widget
-should change depending on the attachment bar visibility.
-</p>
-
-<p>
-Once there are files attached, it will be indicated on the right side
-by an attachment icon and a label saying: &quot;%d File(s)
-Attached&quot;, where %d will be substituted by the number of attached
-files to that message (as shown in the animation).
-</p>
-
-<?php box_sec ("Affected Modules"); ?>
-<p>
-This will require work in Evolution's composer (<?php
-bonsai("evolution/composer");?>), which is part of the Mailer
-component. You will need an understanding of Gtk+ and especially of
-Gtk's drag-and-drop API.
-</p>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-You should subscribe to the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
-href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
-will be the primary contacts on the list for the Mailer. Larry Ewing
-&lt;<a href="mailto:lewing@ximian.com">lewing@ximian.com</a>&gt; and
-Radek Doulik &lt;<a
-href="mailto:rodo@ximian.com">rodo@ximian.com</a>&gt; might help you
-with composer knowledge as well.
-</p>
-
-<?php box_end (); ?>
-<?php box_start ("Templates for new messages and replies", "Mailer", "500", "127529", "127529", ""); ?>
+<?php box_start ("Templates for new messages and replies", "Mailer", "500", "127529", "127529"); ?>
 
 <p>
 We would like to allow people to prepare their own message
@@ -545,7 +302,7 @@ with GtkHTML knowledge.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Language selection in composer", "Mailer", "400", "127530", "127530", ""); ?>
+<?php box_start ("Language selection in composer", "Mailer", "400", "127530", "127530"); ?>
 
 
 <p>Add a pop-up menu to the composer toolbar for selecting the
@@ -590,7 +347,7 @@ href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
 Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list for the Mailer.
 <?php box_end (); ?>
-<?php box_start ("Better smiley substitution in the composer", "Mailer", "200", "127533", "127533", ""); ?>
+<?php box_start ("Better smiley substitution in the composer", "Mailer", "200", "127533", "127533"); ?>
 
 
 <p>Make automatic smiley substitution easier to work around when enabled</p>
@@ -602,7 +359,7 @@ is no easy way to reverse the substitution.  Modify the behavior such
 that if the user hits backspace while the cursor is on a smiley the 
 first time the substitution is undone, but the smiley text remains.</p>
 <?php box_end (); ?>
-<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534", ""); ?>
+<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534"); ?>
 
 
 <p><?php rfc(2298); ?> describes a standard method for clients to
@@ -646,41 +403,7 @@ Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 
 <?php box_end (); ?>
-<?php box_start ("Link URLs in the status bar", "Mailer", "200", "127536", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
-
-
-<p>Evolution should make URLs embedded in emails visible to the user.
-When the user tabs to, or hovers the mouse over a link in an email,
-Evolution should show the selected URL in the status bar.
-
-<p>The URLs should be displayed in a friendly way to the user.  For
-example, "mailto:foo@bar.com" should display: "Click to send mail to
-foo@bar.com".  Other URLs, like "http://www.foobar.com/", should
-display the message: "Click to open http://www.foobar.com/".
-
-<p>The URL could be shown in the status bar.  However, the message
-window does not yet have an associated status bar.  The message window
-would need a status bar in order to work correctly.
-
-<p align="center">
-
-<img alt="" src="evo-tooltip.png" />
-
-</p>
-
-<?php box_sec ("Affected Modules"); ?>
-
-<p>This bounty requires changes to the mailer and shell.</p>
-
-<?php box_sec ("Pointers"); ?>
-
-<p>The GtkHTML widget emits an <tt>on_url</tt> signal when the user
-mouses over a URL. <?php bug(3383); ?> has some more discussion of
-this bug (though some of it may be specific to APIs that are changing
-in 2.0).</p>
-
-<?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>
