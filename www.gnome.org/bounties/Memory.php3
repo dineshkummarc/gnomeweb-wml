@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("Add image data to the icon cache", "hidden", "100", "169344", ""); ?>
 <?php taskrow ("Use a mmap'able cache for fontconfig", "hidden", "200", "169345", ""); ?>
 <?php taskrow ("Create a test suite for browsing in Nautilus", "hidden", "200", "169346", ""); ?>
-<?php taskrow ("Remove duplication of desktop backgrounds", "hidden", "200", "169347", ""); ?>
+<?php taskrow ("Remove duplication of desktop backgrounds", "hidden", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Add image data to the icon cache", "Memory", "100", "169344", "169344", ""); ?>
 
@@ -67,7 +67,7 @@ test case should use the LDTP project. It should do the following:</p>
 	  will not happen fast (so it must wait)</li>
 </ul>
 <?php box_end (); ?>
-<?php box_start ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", "169347", ""); ?>
+<?php box_start ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 
 <p>
 Right now, the background image is stored in three places:

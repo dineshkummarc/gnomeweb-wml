@@ -136,7 +136,6 @@ collect the bounty.
 <?php taskrow ("Add image data to the icon cache", "Memory", "100", "169344", ""); ?>
 <?php taskrow ("Use a mmap'able cache for fontconfig", "Memory", "200", "169345", ""); ?>
 <?php taskrow ("Create a test suite for browsing in Nautilus", "Memory", "200", "169346", ""); ?>
-<?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
@@ -164,6 +163,7 @@ files", "Tasks", "300", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=3
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
+<?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 <?php write_table_footer (); ?>
 </div>
 
