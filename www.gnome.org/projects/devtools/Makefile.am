@@ -2,7 +2,7 @@ SUBDIRS=images
 
 urlpath=/projects/devtools
 
-page_SCRIPTS=			\
+page_SCRIPTS=			
 	index.shtml 		\
 	anjuta.shtml		\
 	bindings.shtml		\
@@ -19,5 +19,6 @@ page_SCRIPTS=			\
 	head.shtml		\
 	links.shtml		\
 	overview.shtml		\
-	go.css			
+	go.css		
+	
 include $(top_srcdir)/rules.common
