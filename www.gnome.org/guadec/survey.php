@@ -75,6 +75,7 @@
 	$formmail .= "GUADECs Attended:\t" . $guadecs_attended . "\n\n";
         $formmail .= "Needs Sponsorship:\t" . $sponsor . "\n\n";
         $formmail .= "Paid Tutorials:\t" . $tutorial . "\n\n";
+        $formmail .= "Not interested in paid tutorials:\t" . $notutorial . "\n\n";
 
         $formmail .= "GNOME Foundation Member:\t" . $gfmember ."\n\n";
 
@@ -231,6 +232,11 @@
         <tr>
           <td colspan=2>
             <input type="checkbox" name="tutorial" <? if ($tutorial) { ?> checked <? } ?> >  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
+          </td>
+        </tr>
+        <tr>
+          <td colspan=2>
+            <input type="checkbox" name="notutorial" <? if ($notutorial) { ?> checked <? } ?> >  I am <B>not</B> interested in attending any professional tutorials about GTK+ and GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
