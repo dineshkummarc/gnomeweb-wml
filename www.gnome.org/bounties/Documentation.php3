@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Documentation Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "hidden", "300", "127544", ""); ?>
-<?php taskrow ("Quick reference card", "hidden", "300", "127545", ""); ?>
+<?php taskrow ("Quick reference card", "hidden", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544", ""); ?>
 
@@ -61,7 +61,7 @@ DocBook manual</a>.  The primary contact for this task will be <a STYLE="text-de
 
 
 <?php box_end (); ?>
-<?php box_start ("Quick reference card", "Documentation", "300", "127545", "127545", ""); ?>
+<?php box_start ("Quick reference card", "Documentation", "300", "127545", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 
 
 <p>

@@ -142,7 +142,7 @@ bounty.
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
 <?php taskrow ("Publish your calendar", "Calendar", "1000", "127538", ""); ?>
-<?php taskrow ("Quick reference card", "Documentation", "300", "127545", ""); ?>
+<?php taskrow ("Quick reference card", "Documentation", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", ""); ?>
 <?php taskrow ("Drag-n-drop task creation", "Tasks", "300", "127559", ""); ?>
 <?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
