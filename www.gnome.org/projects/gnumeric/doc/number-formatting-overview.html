@@ -1,0 +1,272 @@
+<HTML
+><HEAD
+><TITLE
+>Number formatting overview</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.57"><LINK
+REL="HOME"
+TITLE="Gnumeric's user manual"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Cell Formatting"
+HREF="formatting.html"><LINK
+REL="PREVIOUS"
+TITLE="Cell Formatting"
+HREF="formatting.html"><LINK
+REL="NEXT"
+TITLE="Date and Time formatting"
+HREF="data-and-time-formatting.html"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Gnumeric's user manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="formatting.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. Cell Formatting</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="data-and-time-formatting.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="NUMBER-FORMATTING-OVERVIEW"
+>Number formatting overview</A
+></H1
+><P
+>    The number formatting engine in Gnumeric is very powerful: it
+    can be used to display numbers in various formats as well as
+    providing the user with the ability to specify colors based on
+    various simple conditions.
+  </P
+><P
+> <A
+HREF="number-formatting-overview.html#NUMBER-FORMAT-LIST"
+>Example 5-1</A
+> The available catagories of
+  pre-defined formats are :
+  <DIV
+CLASS="EXAMPLE"
+><A
+NAME="NUMBER-FORMAT-LIST"
+></A
+><P
+><B
+>Example 5-1. Number Format Categories</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>  General		A swiss army knife of a format.  It will attempt
+                        to display a value it the 'best' way possible.
+			The choice of format depends on the size of the cell
+			and gnumeric's estimate of what 'type' of value is
+			being displayed (number, date, time ...).
+
+  Number		Displays numbers with 0-30 digits after the decimal
+			place.  Negatives can be displayed normally, within
+			parenthises, or turning Red.  Optionally a delimiter
+			can be added every third order of magnitude (thousand,
+			million, ...).  Both the decimal point and the
+			thousands seperator have internationalization support.
+
+  Currency		Is very similar to Number, with the addition of a
+			currency symbol.  Currently known symbols include '$'
+			and the three letter abreviations of a ll major
+			currencies.
+
+  Accounting		A specialization of Currency which pays more attention
+			to the alignment of negative numbers.  It ensures that
+			A small amount of space is prepended to positive
+			numbers so that that align with negatives.
+			ie
+			    ' 600.123 ' : Note the spaces for the positive number
+			    '-500.456 ' : in 1 format for negatives.
+			    '(500.456)' : in another.
+
+  Date			The various permutations and combinations of
+			predefined date representations big to expose the
+			underlying format specification language
+			<A
+HREF="data-and-time-formatting.html#NUMBER-FORMAT-DATE-TIME-EXAMPLES"
+>Example 5-3</A
+>
+			The short version is that years can be 2 or 4 digit
+			(yy or yyyy).  Months can be as many digits as needed
+			(m), always 2 digits (mm), or as the short form (mmm).
+			Days can be as many digits as needed (d) or two digits
+			(dd).  The various other characters offer a choice of
+			seperators.
+
+  Time			As with dates predefined time formats are selected
+			using their specification.  Hours (h), minutes (mm),
+			seconds (ss).  Sometimes it is necessary to display
+			more than 24 hours, or more that 60 minutes/seconds
+			without the values incrementing the display unit of
+			the next larger measure (ie 25 hours instead of 1day +
+			1hour).  For that instance you can use '[h]', '[m]' or
+			'[s]'.
+
+  Percentage		Multiplies a value by 100 and appends a percent.
+			Can be used with 0-30 digits after the decimal place.
+
+  Scientific		Formats the value using scientific notation
+			and 0-30 digits after the decimal place.  No provision
+			for controling the exponent are provided at this time.
+
+  Text			Treats numeric values as text.  This will show a
+			number with as much precision as available and will
+			lose knowledge of whether it represented a date, or
+			time.
+
+  Custom		This provides a list of the format specifications for
+			all predefined formats and allows a user to enter
+			create new specialized types.
+	</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+  </P
+><P
+> <A
+HREF="number-formatting-overview.html#FORMULA-EXAMPLE-1"
+>Example 5-2</A
+> is an example of some of 
+      the many variations of formatting one can apply to a number with 
+      the preset formats. </P
+><DIV
+CLASS="EXAMPLE"
+><A
+NAME="FORMULA-EXAMPLE-1"
+></A
+><P
+><B
+>Example 5-2. Some examples of number formatting</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="PROGRAMLISTING"
+>      
+      For the number 600.123
+      
+      Numbers
+         General:                                           '600.123'
+             0.0:                                           '600.1'
+      Accounting
+          _($*#,##0_);_($*(#,##0);_($*"-"_);_(@_)           ' $600 '
+          _($*#,##0.00_);_($*(#,##0.00);_($*"-"??_);_(@_)   ' $600.12 '
+      Scientific
+           0.000E+00                                        '600.123'
+      
+	</PRE
+></TD
+></TR
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="formatting.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="data-and-time-formatting.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Cell Formatting</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="formatting.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Date and Time formatting</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
