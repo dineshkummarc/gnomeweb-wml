@@ -10,7 +10,7 @@ page_SCRIPTS=\
 	gidelogo.png\
 	gladelogo.png\
 	glimmerlogo.png\
- 	devtools-header4.png\
+	devtools-header4.png\
 	anjutalogo.png
 
 include $(top_srcdir)/rules.common
