@@ -81,12 +81,20 @@ topbar_headers=\
 	topbar-sections.png\
 	topbar-tasks.png
 
+title_texts=\
+  title-free.png\
+	title-userfriendly.png\
+	title-cuttingedge.png\
+	title-developerfriendly.png\
+	title-international.png
+
 page_DATA=$(misc_images)	\
 	$(banner_images)	\
 	$(popdown_images)	\
 	$(sidebar_headers)	\
 	$(sidebar_images)	\
 	$(sidebar_items)	\
-	$(topbar_headers)
+	$(topbar_headers) \
+  $(title_texts)
 
 EXTRA_DIST=$(page_DATA)
