@@ -5,7 +5,8 @@ urlpath=
 page_SCRIPTS=index.html		\
 	findout.html 		\
 	mailinglists.html 	\
-	seegnome.html
+	seegnome.html		\
+	calendar.html
 
 include $(top_srcdir)/rules.common
 
