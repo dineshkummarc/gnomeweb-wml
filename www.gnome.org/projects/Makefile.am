@@ -7,6 +7,7 @@ SUBDIRS=			\
 	f-spot			\
 	gconf			\
 	gnome-core		\
+	gnome-games		\
 	gnome-libs		\
 	gnumeric		\
 	guppi			\
