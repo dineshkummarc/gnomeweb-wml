@@ -19,6 +19,7 @@ page_SCRIPTS= \
 	documentation.meta \
 	contacts.html \
 	contacts.meta \
+	links.html \
 	readme.html
 
 include $(top_srcdir)/rules.common
