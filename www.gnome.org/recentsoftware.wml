@@ -1,0 +1,51 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Get more software" imgid="getmore">
+<content>
+
+<table border="0" cellspacing="0" cellpadding="6">
+<tr>
+  <td colspan="4">
+    <img src="/images/icon-home.png" width="24" height="20">: Homepage
+    <img src="/images/icon-shot.png" width="30" height="20">: Screenshot
+    <img src="/images/icon-package.png" width="30" height="20">: Download stable source code
+  </td>
+</tr>
+
+<tr valign="top" bgcolor="#cce6ff">
+  <th>Name</th>
+	<th>Updated</th>
+	<th>Description</th>
+	<th>Version</th>
+</tr>
+
+<?
+
+mysql_pconnect("www.gnome.org", "gnomeweb", "saHrl@nd");
+mysql_select_db("gnomeapps");
+
+$result = mysql_query("SELECT * FROM applist ORDER BY touched DESC");
+
+if (!$result) {
+  echo "Database query failed";
+}
+
+while ($row = mysql_fetch_object($result)) {
+?>
+
+<tr valign='top'>
+  <td><b><?print $row->name?></b><br>
+	<nobreak>
+
+<?
+}
+?>
+
+</table>
+
+
+
+</content>
+</document>
