@@ -166,7 +166,9 @@
                         <xsd:element name="Selections"      type="gmr:Selections"/>
                         <xsd:element name="Objects"         type="gmr:Objects" minOccurs="0" maxOccurs="1"/>
                         <xsd:element name="Cells"           type="gmr:Cells"/>
+                        <xsd:element name="MergedRegions"   type="gmr:MergedRegions"/>
                         <xsd:element name="Solver"          type="gmr:Solver"/>
+                        <xsd:element name="SheetLayout"     type="gmr:SheetLayout"/>
                     </xsd:sequence>
                         <!-- note: xsd:boolean values can be true, false, 1, 0;
                              gnumeric, in this element, always generates 'true' or
@@ -720,6 +722,12 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:complexType name="MergedRegions">
+       <xsd:sequence>
+           <xsd:element name="Merge" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+       </xsd:sequence>
+    </xsd:complexType>
+
     <xsd:complexType name="Solver">
         <xsd:sequence>
             <xsd:element name="Constr" minOccurs="0" maxOccurs="unbounded">
@@ -751,4 +759,12 @@
         </xsd:restriction>
     </xsd:simpleType>
     
+    <xsd:complexType name="SheetLayout">
+        <xsd:attribute name="TopLeft"   type="xsd:string" use="required"/>
+           <xsd:element name="FreezePanes" use="optional">
+		<xsd:attribute name="FrozenTopLeft"   type="xsd:string" use="required"/>
+		<xsd:attribute name="UnfrozenTopLeft" type="xsd:string" use="required"/>
+           </xsd:element>
+    </xsd:complexType>
+
 </xsd:schema>
