@@ -12,7 +12,6 @@ page_SCRIPTS=index.shtml		\
 		mailing-list.shtml	\
 		to-do.shtml		\
 		credits.shtml		\
-		download.shtml		\
 		faq.shtml		\
 		features.shtml		\
 		screenshots.shtml	\
