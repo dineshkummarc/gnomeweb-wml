@@ -9,7 +9,7 @@ page_SCRIPTS= 		\
     gnumeric-1.2.6.html \
     gnumeric-1.2.8.html \
     gnumeric-1.2.12.html \
-    gnumeric-1.2.13.html 
+    gnumeric-1.2.13.html \
     index.shtml
 
 include $(top_srcdir)/rules.common
