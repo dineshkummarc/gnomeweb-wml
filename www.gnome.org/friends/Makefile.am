@@ -3,7 +3,8 @@ SUBDIRS=
 urlpath=/friends
 
 page_SCRIPTS=index.php\
-	thanks.php
+	thanks.php\
+	check.php
 
 include $(top_srcdir)/rules.common
 
