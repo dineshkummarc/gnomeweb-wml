@@ -63,6 +63,49 @@ $strMir = preg_replace("@$rstring$@","",$linkstring);
     <form method="POST" action="index.php3" name="mirrors">
       <input type="hidden" name="mirror" value="change"><p><select name="D1" size="1">
 		<option selected value="<? echo $strUrl ?>"><? echo $strMir ?></option>
+
+<?
+
+/* OK, generate this list from the database now */
+
+// Insert default mirror
+print "<option value=\"ftp://ftp.gnome.org/pub/GNOME/\">ftp.gnome.org (US; Default)</option>\n";
+	
+// Now get a mirrors listing from the mirrors database
+
+include("/home/admin/mirrors/read-only.php3");
+
+$connection = mysql_pconnect("canvas.gnome.org",$mysql_user,$mysql_password);
+mysql_select_db("mirrors");
+
+$query = "SELECT url,location FROM ftpmirrors WHERE active ORDER BY location";
+$res = mysql_query($query);
+	
+while ($res_object = mysql_fetch_object($res)) {
+
+	print "<option value=\"".$res_object->url."\">";
+
+	// Get just hostname
+	if (preg_match("@^ftp://@",$res_object->url)) {
+        $linkstring = preg_replace("@^ftp://@","",$res_object->url);
+	}
+	$rstring = preg_replace("@^[^/]*@","",$linkstring);
+	$strMir = preg_replace("@$rstring$@","",$linkstring);
+		
+	print $strMir." (";
+	
+	if ($res_object->location == "United States and Canada") {
+		print "US or Canada";
+	}
+	else {
+		print $res_object->location;
+	}
+		
+	print ")</option>\n";
+}
+
+/* OLD MIRRORS
+
         <option value="ftp://ftp.gnome.org/pub/GNOME/">ftp.gnome.org(US)(Default)</option>
  	<option value="ftp://gnomeftp.wgn.net/pub/gnome/">gnomeftp.wgn.net(US)</option>
         <option value="ftp://epoch.res.cmu.edu/mirrors/ftp.gnome.org/">epoch.res.cmu.edu(US)</option>
@@ -102,6 +145,9 @@ $strMir = preg_replace("@$rstring$@","",$linkstring);
         <option STYLE="color: red;" value="http://gd.tuwien.ac.at/hci/GNOME/">gd.tuwien.ac.at(Europe)(HTTP)</option>
         <option value="ftp://ftp.uni-trier.de/pub/unix/X11/tooolkits/gnome/">ftp.uni-trier.de(Europe)</option>
         <option value="ftp://ftp.dit.upm.es/linux/gnome/">ftp.dit.upm.es(Europe)</option>
+*/
+
+?>
        </select><br>
       <input type="submit" value="Change Download Links" name="B1"> </p>
     </form>
