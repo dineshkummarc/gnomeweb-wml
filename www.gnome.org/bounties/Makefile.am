@@ -64,6 +64,7 @@ page_DATA=address-applet-anim.gif\
 	send_file_single.gif\
 	set-as-wallpaper.png\
 	smiley.gif\
+	styles.css\
 	suncloud.png\
 	tasks-icon.png\
 	Tasks.php3\
