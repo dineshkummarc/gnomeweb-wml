@@ -126,6 +126,8 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.2.4.html		\
 	    gnumeric-1.2.5.html		\
 	    gnumeric-1.2.6.html		\
-	    gnumeric-1.2.8.html
+	    gnumeric-1.2.8.html		\
+	    gnumeric-1.2.12.html	\
+	    gnumeric-1.3.0.html
 
 include $(top_srcdir)/rules.common
