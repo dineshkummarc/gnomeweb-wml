@@ -1,0 +1,43 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2. 
+	  Loaders
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch01.html" title="Chapter 1. 
+	Introduction
+      "><link rel="previous" href="ch01s01.html" title="1. 
+	  Plugin System
+	"><link rel="next" href="ch01s03.html" title="3. 
+	  Hooks
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2. 
+	  Loaders
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01s01.html">Prev</a> </td><th width="60%" align="center">Chapter 1. 
+	Introduction
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch01s03.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2445274"></a>2. 
+	  Loaders
+	</h2></div></div><div></div></div><p>
+	  The core of EPlugin is a light-weight object loader and callback
+	  invocation system. Because of the varied calling conventions of
+	  different languages, and to reduce the overhead of the plugin system
+	  itself, all callbacks only receive and return a single argument. By
+	  using structures to pass complex arguments, native C plugins require
+	  no extra overhead, and marshalling details are moved into the plugin
+	  implementation itself where required. It also simplifies memory
+	  management issues significantly. For example, the C plugin handler
+	  merely loads a shared library using GModule, and resolves a symbol by
+	  name; and is so all of 50 lines of code, total. The loaders are the
+	  only modules which need to interace with non-native code or
+	  conventions.
+	</p><p>
+	  The other task of the plugin core is to load XML definitions of the
+	  plugins. Extension hooks are registered with the plugin core before
+	  the plugins are scanned, and are automatically instantiated to load
+	  each definition appropriately as they are encountered.
+	</p><p>
+	  At each layer, a level of indirection is used so that new loaders and
+	  new hooks can be added transparently, and extend the plugin
+	  definition freely with any information they require.
+	</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch01.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch01s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">1. 
+	  Plugin System
+	 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3. 
+	  Hooks
+	</td></tr></table></div></body></html>

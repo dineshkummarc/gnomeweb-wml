@@ -1,0 +1,143 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1. 
+	  Popup Menus
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="previous" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="next" href="ch03s02.html" title="2. 
+	  Main menus
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">1. 
+	  Popup Menus
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
+	Plugin Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-hooks-popup"></a>1. 
+	  Popup Menus
+	</h2></div></div><div></div></div><p>
+	  The popup menu hook lets you hook into any of the context menus in
+	  <span class="application">Evolution</span>, by name and context. Complex, dynamic, and multi-level
+	  menus are created on the fly by merging the items for a given menu as
+	  it is being shown. Each component provides its own context targets to
+	  self-describe the situation under which the menu is invoked. Plugins
+	  and core code alike are then invoked at the user's direction. The
+	  popup manager and all context data lives as long as the menu and
+	  until a choice is made, simplifying memory management.
+	</p><p>
+	  The menu is merged from multiple plugins and core application code by
+	  using a simple lexiographical sort of an absolute path to the menu
+	  item. This merged list is then scanned and expanded into a tree of
+	  menus. Individual items can be hidden or inactive based on the target
+	  and a simple mask which is defined by the component itself. A rich
+	  collection of menu item types are possible, from simple, to
+	  checkboxes or images. The popup code is simple, and easy to use, and
+	  simplifies the use of popup menu's in the core application anyway,
+	  that they are pluggable is a free-bonus.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2502222"></a>1.1. Defining a popup hook</h3></div></div><div></div></div><p>
+	    Not sure if this fits here as such.  Probably temporary placeholder.
+	  </p><pre class="programlisting">
+	    
+&lt;hook class="com.ximian.evolution.mail.popup:1.0"&gt;
+ &lt;menu id="menuid" target="targettype"&gt;
+  &lt;item
+   type="item | toggle | radio | image | submenu | bar"
+   active ?
+   path="foo/bar"
+   label="menu text"
+   icon="icon name" ?
+   visible="target mask" ?
+   enable="target mask" ?
+   activate="function spec"/&gt; *
+ &lt;/menu&gt; *
+&lt;/hook&gt;</pre><p>
+	    <span class="emphasis"><em>Need to define menu tag</em></span>
+	  </p><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>type</tt></i></span></dt><dd>
+		  The menu item type.  The type maps directly to the
+		  corresponding EPopupItem types.
+		</dd><dt><span class="term"><i class="parameter"><tt>active</tt></i></span></dt><dd>
+		  If present, then radio or toggle menu items are active when
+		  first shown.  After the first instantiation, they will
+		  remember their active state.
+		</dd><dt><span class="term"><i class="parameter"><tt>path</tt></i></span></dt><dd>
+		  A '/' separated path used to position the item within menu
+		  and in the right submenu.  Each menu and plugin should
+		  define how its menu's are layed out so other plugins can
+		  determine what value to use here.
+		</dd><dt><span class="term"><i class="parameter"><tt>label</tt></i></span></dt><dd>
+		  The text to be displayed on the menu item.  This will be
+		  translated based on the plugin translation domain.
+		</dd><dt><span class="term"><i class="parameter"><tt>icon</tt></i></span></dt><dd>
+		  The name of a gnome-icon-theme standard icon, or the full
+		  path-name of an icon image to use as menu item icon.  This
+		  will be blank if not supplied.
+		</dd><dt><span class="term"><i class="parameter"><tt>visible</tt></i></span></dt><dd>
+		  A comma separated list of mask enumeration values used to
+		  define when this item is shown.  What values are valid
+		  depend on the menu hook class of the menu being hooked
+		  onto.
+		</dd><dt><span class="term"><i class="parameter"><tt>enable</tt></i></span></dt><dd>
+		  A comma separated list of mask enumeration values used to
+		  define when this item is enabled.  What values are valid
+		  depend on the menu hook class of the menu being hooked
+		  onto.  This is currently unimplemented.
+		</dd><dt><span class="term"><i class="parameter"><tt>activate</tt></i></span></dt><dd>
+		  A plugin-type specific function specification.  This
+		  function will be resolved and called when the menu item is
+		  activated.
+		</dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2502418"></a>1.2. Merging Plugin Items</h3></div></div><div></div></div><p>
+	    A very simple algorithm is used to form the menu by merging the
+	    plugin's menu items with the system menu items for a given menu.
+	    What follows is a simple example of how this is done.  It will be
+	    demonstrated using a simplified menu from the message-list, as used
+	    in the <span class="application">Evolution</span> Mail component, and a simple plugin which adds a
+	    single menu item and menu separator into the middle of the menu,
+	    when appropriate.
+	  </p><p>
+	    When the application wishes to show a specific popup menu, it
+	    creates a new EPopup object with a unique menu id to manage it.  It
+	    adds all of the items it wishes to add to the menu (see "Builtin
+	    Items" in the following diagrams).  The application then asks for
+	    the menu to be created.  The menu building
+	    process adds all of the menu items from all plugins that target
+	    this specific menu into a flat list, discarding those which don't
+	    match the current Target qualifications.  The result is then
+	    sorted using a simple ASCII sort, and then a menu built from the
+	    remaining items.  This is probably best described by some diagrams.
+	  </p><p>
+	    The following two diagrams show how a popup menu is automatically
+	    customised depending on the context.  On the left of each diagram
+	    are all of the menu items which apply to the example menu.  The
+	    menu label, with the qualifiers listed underneath, with the menu
+	    item path along-side.  On the right-hand side of each diagram is
+	    the result of:
+	  </p><div class="itemizedlist"><ul type="disc"><li>Selecting items based on the target
+		qualifiers</li><li>Sorting the remaining items based on their
+		path.</li><li>Building this sorted list into a
+		menu.</li></ul></div><p>
+	    The actual list of target qualifiers are defined by the application
+	    itself.  Generally a specific menu will have only one possible
+	    target, and a list of matching target qualifiers.  The example
+	    shows how a plugin can insert a menu item anwhere it wishes in the
+	    menu system.  Submenus are also supported, and they work in exactly
+	    the same manner, with / characters used to separate submenu paths.
+	    A submenu must sort into the position immediately before the
+	    definition of its items.
+	  </p><div class="figure"><a name="e-popup-merge-1"></a><p class="title"><b>Figure 3.1. Merging a menu with many items selected.</b></p><div class="mediaobject"><img src="images/e-popup-merge-1.png" alt="Showing how a display list of menu items is selected
+		  and then sorted for display."></div></div><p>
+	    The first diagram shows when the target qualifiers are
+	    <i class="parameter"><tt>many</tt></i>, and
+	    <i class="parameter"><tt>mark_unread</tt></i>.  The menu items which operate
+	    on only one selected message are not shown.  Similarly for those
+	    able to be marked as unread (i.e. they are currently read).
+	  </p><div class="figure"><a name="e-popup-merge-2"></a><p class="title"><b>Figure 3.2. Merging a menu with one item selected.</b></p><div class="mediaobject"><img src="images/e-popup-merge-2.png" alt="Showing how a display list of menu items is selected
+		  and then sorted for display with different qualifiers."></div></div><p>
+	    This diagram shows when the target qualifiers are
+	    <i class="parameter"><tt>one</tt></i>, and
+	    <i class="parameter"><tt>mark_read</tt></i>.  The menu items which operate
+	    on only many selected messages are not shown.  Similarly for those
+	    able to be marked as read.
+	  </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. 
+	Plugin Hooks
+       </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 2. 
+	  Main menus
+	</td></tr></table></div></body></html>

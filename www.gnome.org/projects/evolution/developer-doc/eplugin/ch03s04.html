@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4. 
+	  Events
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="previous" href="ch03s03.html" title="3. 
+	  Configuration Pages and Wizards
+	"><link rel="next" href="ch03s05.html" title="5. 
+	  Mail Formatter
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4. 
+	  Events
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
+	Plugin Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-hooks-event"></a>4. 
+	  Events
+	</h2></div></div><div></div></div><p>
+	  No extensibility framework would be complete without an event
+	  system. Events are used to reflect changes in internal state of the
+	  application, and track actions by the user. They can contain any
+	  information and additionally can be filtered based on the information
+	  itself. Special targets are used, as in the other plugin hooks, to
+	  hold this information.
+	</p><p>
+	  Event managers are defined to contain the different event types that
+	  a given component can export. Only one event manager object is
+	  instantiated for each component, and each plugin listening to events
+	  from that component are registered on that event manager directly.
+	</p><p>
+	  Events handlers have priorities, and can swallow events, allowing
+	  some level of complexity of event routing. This feature might not
+	  prove useful and may be removed in the future if it isn't.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2503762"></a>4.1. Defining an event hook</h3></div></div><div></div></div><p>
+	    Not sure if this fits here as such.  Probably temporary placeholder.
+	  </p><pre class="programlisting">
+	    
+&lt;hook class="com.ximian.evolution.mail.events:1.0"&gt;
+ &lt;event
+   target="target name"
+   id="event name"
+   type="pass | sink" ?
+   priority="signed integer" ?
+   enable="target mask" ?
+   handle="function spec"/&gt; *
+&lt;/hook&gt;</pre><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>target</tt></i></span></dt><dd>
+		  The target type of the event listener.  This will normally
+		  match in a 1:1 relationship to the event
+		  <i class="parameter"><tt>id</tt></i> itself.
+		</dd><dt><span class="term"><i class="parameter"><tt>id</tt></i></span></dt><dd>
+		  The name of the event to listen to.  By convention the names
+		  will be of the form
+		  <tt class="constant">target.event</tt>.
+		  e.g. <tt class="constant">folder.changed</tt>, or
+		  <tt class="constant">message.read</tt>, etc.  Although they are
+		  just simple case-sensitive strings.
+		</dd><dt><span class="term"><i class="parameter"><tt>type</tt></i></span></dt><dd>
+		  The event listener type.  The type maps directly to the corresponding
+		  corresponding EEventItem types.
+		</dd><dt><span class="term"><i class="parameter"><tt>priority</tt></i></span></dt><dd>
+		  A signed integer specifying the priority of this event
+		  listener.  0 (zero) should be used normally, although positive
+		  and negative integers in the range -128 to 127 may aslo be
+		  used.
+		</dd><dt><span class="term"><i class="parameter"><tt>enable</tt></i></span></dt><dd>
+		  A comma separated list of mask enumeration values used to
+		  qualify when this event listener is invoked.  What values are valid
+		  depend on the event hook class.
+		</dd><dt><span class="term"><i class="parameter"><tt>handle</tt></i></span></dt><dd>
+		  A plugin-type specific function specification.  This
+		  function will be resolved and called when an event is routed to
+		  this listener.
+		</dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3. 
+	  Configuration Pages and Wizards
+	 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 5. 
+	  Mail Formatter
+	</td></tr></table></div></body></html>

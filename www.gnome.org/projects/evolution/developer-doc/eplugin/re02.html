@@ -1,0 +1,46 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>struct _EPluginClass</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch08.html" title="Chapter 8. 
+	EPlugin
+      "><link rel="previous" href="re01.html" title="struct _EPlugin"><link rel="next" href="re03.html" title="struct _EPluginLib"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">struct _EPluginClass</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><th width="60%" align="center">Chapter 8. 
+	EPlugin
+      </th><td width="20%" align="right"> <a accesskey="n" href="re03.html">Next</a></td></tr></table><hr></div><div class="refentry" lang="en"><a name="id2511320"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2>Name</h2><p>struct _EPluginClass &#8212; 
+      
+ </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="programlisting">
+struct _EPluginClass {
+  GObjectClass class;
+  const char * type;
+  int (* construct (EPlugin *, xmlNodePtr root);
+  void *(* invoke (EPlugin *, const char *name, void *data);
+};  </pre></div><div class="refsect1" lang="en"><a name="id2511360"></a><h2>Members</h2><div class="variablelist"><dl><dt><span class="term">class</span></dt><dd><p>
+    Superclass.
+      </p></dd><dt><span class="term">type</span></dt><dd><p>
+    The plugin type.  This is used by the plugin loader to
+   determine which plugin object to instantiate to handle the plugin.
+   This must be overriden by each subclass to provide a unique name.
+      </p></dd><dt><span class="term">construct</span></dt><dd><p>
+    The construct virtual method scans the XML tree to
+   initialise itself.
+      </p></dd><dt><span class="term">invoke</span></dt><dd><p>
+    The invoke virtual method loads the plugin code, resolves
+   the function name, and marshals a simple pointer to execute the
+   plugin.
+      </p></dd></dl></div></div><div class="refsect1" lang="en"><a name="id2511422"></a><h2>Description</h2><p>
+   The EPluginClass represents each plugin type.  The type of each class is
+   registered in a global table and is used to instantiate a
+   container for each plugin.
+   </p><p>
+
+   It provides two main functions, to load the plugin definition, and
+   to invoke a function.  Each plugin class is used to handle mappings
+   to different languages.
+ </p></div><div class="refsect1" lang="en"><a name="id2511440"></a><h2>Description</h2><p>
+   The EPluginClass represents each plugin type.  The type of each class is
+   registered in a global table and is used to instantiate a
+   container for each plugin.
+   </p><p>
+
+   It provides two main functions, to load the plugin definition, and
+   to invoke a function.  Each plugin class is used to handle mappings
+   to different languages.
+ </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch08.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="re03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">struct _EPlugin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> struct _EPluginLib</td></tr></table></div></body></html>

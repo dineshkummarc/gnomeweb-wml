@@ -1,0 +1,57 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>struct _EMFormatHTMLJob</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch13.html" title="Chapter 13. 
+	EMFormat
+      "><link rel="previous" href="re156.html" title="em_format_describe_part"><link rel="next" href="re158.html" title="struct _EMFormatHTMLPObject"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">struct _EMFormatHTMLJob</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re156.html">Prev</a> </td><th width="60%" align="center">Chapter 13. 
+	EMFormat
+      </th><td width="20%" align="right"> <a accesskey="n" href="re158.html">Next</a></td></tr></table><hr></div><div class="refentry" lang="en"><a name="id2552150"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2>Name</h2><p>struct _EMFormatHTMLJob &#8212; 
+      A formatting job.
+ </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="programlisting">
+struct _EMFormatHTMLJob {
+  struct _EMFormatHTMLJob * next;
+  struct _EMFormatHTMLJob * prev;
+  EMFormatHTML * format;
+  struct _CamelStream * stream;
+  /* We need to track the state of the visibility tree atthe point this uri was generated */struct _EMFormatPURITree * puri_level;
+  struct _CamelURL * base;
+  void (* callback (struct _EMFormatHTMLJob *job, int cancelled);
+  union u;
+};  </pre></div><div class="refsect1" lang="en"><a name="id2552194"></a><h2>Members</h2><div class="variablelist"><dl><dt><span class="term">next</span></dt><dd><p>
+    Double linked list header.
+      </p></dd><dt><span class="term">prev</span></dt><dd><p>
+    Double linked list header.
+      </p></dd><dt><span class="term">format</span></dt><dd><p>
+    Set by allocation function.
+      </p></dd><dt><span class="term">stream</span></dt><dd><p>
+    Free for use by caller.
+      </p></dd><dt><span class="term">puri_level</span></dt><dd><p>
+    Set by allocation function.
+      </p></dd><dt><span class="term">base</span></dt><dd><p>
+    Set by allocation function, used to save state.
+      </p></dd><dt><span class="term">callback</span></dt><dd><p>
+    This callback will always be invoked, only once, even if the user
+   cancelled the display.  So the callback should free any extra data
+   it allocated every time it is called.
+      </p></dd><dt><span class="term">u</span></dt><dd><p>
+    Union data, free for caller to use.
+      </p></dd></dl></div></div><div class="refsect1" lang="en"><a name="id2552300"></a><h2>Description</h2><p>
+   This object is used to queue a long-running-task which cannot be
+   processed in the primary thread.  When its turn comes, the job will
+   be de-queued and the <i class="parameter"><tt>callback</tt></i> invoked to perform its processing,
+   restoring various state to match the original state.  This is used
+   for image loading and other internal tasks.
+   </p><p>
+
+   This object is struct-subclassable.  Only <tt class="function">em_format_html_job_new</tt>
+   may be used to allocate these.
+ </p></div><div class="refsect1" lang="en"><a name="id2552332"></a><h2>Description</h2><p>
+   This object is used to queue a long-running-task which cannot be
+   processed in the primary thread.  When its turn comes, the job will
+   be de-queued and the <i class="parameter"><tt>callback</tt></i> invoked to perform its processing,
+   restoring various state to match the original state.  This is used
+   for image loading and other internal tasks.
+   </p><p>
+
+   This object is struct-subclassable.  Only <tt class="function">em_format_html_job_new</tt>
+   may be used to allocate these.
+ </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re156.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch13.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="re158.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">em_format_describe_part </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> struct _EMFormatHTMLPObject</td></tr></table></div></body></html>

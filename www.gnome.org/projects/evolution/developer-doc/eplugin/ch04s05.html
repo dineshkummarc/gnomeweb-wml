@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5. Formatters</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch04.html" title="Chapter 4. 
+	Mail Hooks
+      "><link rel="previous" href="ch04s04.html" title="4. Events"><link rel="next" href="ch05.html" title="Chapter 5. 
+	Contacts Hooks
+      "></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5. Formatters</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s04.html">Prev</a> </td><th width="60%" align="center">Chapter 4. 
+	Mail Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mail-hooks-format"></a>5. Formatters</h2></div></div><div></div></div><p>
+	  The mail formatter hook class is
+	  <tt class="interfacename">com.novell.evolution.mail.format:1.0</tt>.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2508358"></a>5.1. Base Formatter</h3></div></div><div></div></div><p>
+	    The EMFormat class is the base class for all formatting types.
+	    It should only be used to define compound and complex types which
+	    do not rely on outputting any textual information, or rely on any
+	    screen or print output differences.
+	  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Name</td><td><tt class="constant">EMFormat</tt></td></tr><tr><td>Target</td><td><a href="ch04s05.html#mail-hooks-format-EMFormatHookTarget" title="5.6. Mail Formatter Targets">EMFormatHookTarget</a></td></tr></tbody></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2508432"></a>5.2. HTML Formatter</h3></div></div><div></div></div><p>
+	    The EMFormatHTML class is the base class for most formatting types
+	    which generate HTML output.  It renders output to a GtkHTML
+	    object.  It uses a fairly complex multi-thread approach to the
+	    formatting to ensure the user-interface is not blocked for
+	    processing.  GtkHTML is used in a limited way by this class for
+	    HTML parsing and resolution of embedded objects.  Embedded objects
+	    and Widgets may not be used from formatters which hook onto this
+	    entry point.
+	  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Name</td><td><tt class="constant">EMFormatHTML</tt></td></tr><tr><td>Target</td><td><a href="ch04s05.html#mail-hooks-format-EMFormatHookTarget" title="5.6. Mail Formatter Targets">EMFormatHookTarget</a></td></tr></tbody></table></div><p>
+	    <span class="emphasis"><em>This section needs a huge amount of
+	      explanation, and/or more detail needs to be added to another
+	      section about the formatter class</em></span>
+	  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2508519"></a>5.3. HTML Display Formatter</h3></div></div><div></div></div><p>
+	    The EMFormatHTMLDisplay class is a subclass of EMFormatHTML, and is
+	    used as a mail display widget.  As such, it has access to all of
+	    the facilities of GtkHTML, such as embedded widgets.  Like the
+	    EMFormatHTML class, this uses a complex multi-thread architecture.
+	  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Name</td><td><tt class="constant">EMFormatHTMLDisplay</tt></td></tr><tr><td>Target</td><td><a href="ch04s05.html#mail-hooks-format-EMFormatHookTarget" title="5.6. Mail Formatter Targets">EMFormatHookTarget</a></td></tr></tbody></table></div><p>
+	    <span class="emphasis"><em>This section needs a huge amount of
+	      explanation, and/or more detail needs to be added to another
+	      section about the formatter class</em></span>
+	  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2508603"></a>5.4. HTML Print Formatter</h3></div></div><div></div></div><p>
+	    The EMFormatHTMLPrint class is a subclass of EMFormatHTML, and is
+	    used as a mail printing widget.  It cannot access embedded
+	    widgets.  For most purposes you would normally only connect to the
+	    EMFormatHTML hook, and generate generic HTML output which could be
+	    printed or shown on-screen if it isn't overriden by the display
+	    formatter.
+	  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Name</td><td><tt class="constant">EMFormatHTMLPrint</tt></td></tr><tr><td>Target</td><td><a href="ch04s05.html#mail-hooks-format-EMFormatHookTarget" title="5.6. Mail Formatter Targets">EMFormatHookTarget</a></td></tr></tbody></table></div><p>
+	    <span class="emphasis"><em>This section needs a huge amount of
+	      explanation, and/or more detail needs to be added to another
+	      section about the formatter class</em></span>
+	  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2508947"></a>5.5. Mail Quote Formatter</h3></div></div><div></div></div><p>
+	    The EMFormatQuote class is a subclass of EMFormat, and is
+	    used as generator for quoted mail content and for
+	    inline-forwarding.  This formatter converts message objects into
+	    a pure HTML stream, which is not parsed directly, but normally fed
+	    to the message composer.
+	  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Name</td><td><tt class="constant">EMFormatQuote</tt></td></tr><tr><td>Target</td><td><a href="">EMFormatHookTarget</a></td></tr></tbody></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mail-hooks-format-EMFormatHookTarget"></a>5.6. Mail Formatter Targets</h3></div></div><div></div></div><p>There is only one target for all mail formatters, and it is
+	    implied automatically for all formatter hooks.</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody valign="top"><tr><td>Structure</td><td><a href="">EMFormatHookTarget</a></td></tr><tr><td>Flags</td><td><table class="simplelist" border="0" summary="Simple list"><tr><td><tt class="constant">inline</tt> = <tt class="constant">EM_FORMAT_HANDLER_INLINE</tt></td></tr><tr><td><tt class="constant">inline_disposition</tt> =
+			<tt class="constant">EM_FORMAT_HANDLER_INLINE_DISPOSITION</tt></td></tr></table></td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4. Events </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 5. 
+	Contacts Hooks
+      </td></tr></table></div></body></html>

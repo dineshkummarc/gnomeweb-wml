@@ -1,0 +1,184 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3. 
+	  Configuration Pages and Wizards
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="previous" href="ch03s02.html" title="2. 
+	  Main menus
+	"><link rel="next" href="ch03s04.html" title="4. 
+	  Events
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3. 
+	  Configuration Pages and Wizards
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
+	Plugin Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-hooks-config"></a>3. 
+	  Configuration Pages and Wizards
+	</h2></div></div><div></div></div><p>
+	  Configuration pages are somewhat more complex than any of the other
+	  types of hookable object. This is reflected in the complexity of the
+	  items and callbacks involved.
+	</p><p>
+	  Essentially, the EConfig object is used in combination to both
+	  instrument existing windows and building new content.  Each
+	  configuration window comprises of several basic elements with some
+	  minor variations allowed.  It consists of a number of pages in a
+	  specific order, each containing a number of titled sections in a specific
+	  order, each containing a number of items.  The variations are that
+	  the top-level widget may be a GtkNotebook or a GnomeDruid; and each
+	  section may instrument a GtkBox, or a GtkTable.  The definition of
+	  the available hooks will define what form they take.
+	</p><p>
+	  The EConfig manager uses the description of all the items supplied to
+	  it to build the complete window.  It can also drive various aspects
+	  of the UI, such as navigating through a druid or handling
+	  instant-apply vs. modify-and-save dialogues.
+	</p><div class="figure"><a name="e-config-flow"></a><p class="title"><b>Figure 3.3. Event and Data Flow in EMConfig</b></p><div class="mediaobject"><img src="images/e-config-flow.png" alt="The flow of information and control signals in the
+		configuration management object."></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2443135"></a>3.1. Defining a configuration page hook</h3></div></div><div></div></div><p>
+	    Not sure if this fits here as such.  Probably temporary placeholder.
+	  </p><pre class="programlisting">
+	    
+&lt;hook class="com.ximian.evolution.mail.config:1.0"&gt;
+ &lt;group
+  id="window id"
+  target="targettype"
+  check="function spec"?
+  commit="function spec"?
+  abort="function spec"?&gt;
+  &lt;item
+   type="book | druid | page | page_start | page_finish | section | section_table | item"
+   path="/absolute/path"
+   label="name" | factory="function  spec"
+  /&gt; *
+ &lt;/menu&gt; *
+&lt;/hook&gt;</pre><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2443151"></a>3.1.1. Group Element Properties</h4></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>id</tt></i></span></dt><dd>
+		    The name of the configuration window to which this hook
+		    applies.
+		  </dd><dt><span class="term"><i class="parameter"><tt>target</tt></i></span></dt><dd>
+		    The type of target this configuration window applies too.
+		    This will normally be tied directly to the specific
+		    configuration window itself.
+		  </dd><dt><span class="term"><i class="parameter"><tt>check</tt></i></span></dt><dd><p>
+		    A callback which will be invoked to validate the
+		    configuration or a specific page of the configuration.  It
+		    will be invoked with a
+		    <a href="re89.html#API-struct--EConfigHookPageCheckData">EConfigHookPageCheckData</a>
+		    structure, and is expected to return a non-NULL value if
+		    the page validates.
+		  </p><p>
+		    The callback will be expected to handle all
+		    <i class="parameter"><tt>pageid</tt></i>'s present in the
+		    configuration window, and should return
+		    <tt class="constant">TRUE</tt> for pages it does not recognise.
+		    If <i class="parameter"><tt>pageid=""</tt></i> (an empty
+		    string), then the <i class="parameter"><tt>check</tt></i> function
+		    should validate all settings.  See also <a href="re96.html#API-e-config-add-page-check">???</a>.
+		  </p></dd><dt><span class="term"><i class="parameter"><tt>commit</tt></i></span></dt><dd>
+		    A callback which will be invoked to commit the
+		    configuration data, if the configuration page isn't an
+		    instant-apply one.  This callback can write any
+		    configuration changes to permanent storage.  It is not used
+		    for instant-apply windows.
+		  </dd><dt><span class="term"><i class="parameter"><tt>abort</tt></i></span></dt><dd>
+		    A callback which will be invoked to abort the configuration
+		    process.  This callback is called when the
+		    <span class="guibutton">Cancel</span> button is pressed on stateful
+		    configuration windows.
+		  </dd></dl></div></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2503362"></a>3.1.2. Item Element Properties</h4></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>type</tt></i></span></dt><dd>
+		    The menu item type.  The type maps directly to the
+		    corresponding EConfigItem types.  Only one of
+		    <i class="parameter"><tt>book</tt></i> and <i class="parameter"><tt>druid</tt></i>
+		    may be supplied for the entire configuration page, and this
+		    will usually already be defined by the application.
+		  </dd><dt><span class="term"><i class="parameter"><tt>path</tt></i></span></dt><dd>
+		    The path to the configuration item in question.  This is a
+		    simple string that when sorted using an ASCII sort will place
+		    the items in the right order.  That is, sections before items
+		    before pages before the root object.
+		  </dd><dt><span class="term"><i class="parameter"><tt>label</tt></i></span></dt><dd>
+		    The textual label of this item.  This may only be supplied
+		    for the section and page types.  For sections it will be the
+		    section frame text.  For pages this will be the druid page
+		    title or the notebook tab text.  If a
+		    <i class="parameter"><tt>factory</tt></i>is supplied then this value is
+		    not used.  This will be translated based on the plugin
+		    translation domain.
+		  </dd><dt><span class="term"><i class="parameter"><tt>factory</tt></i></span></dt><dd>
+		    If supplied, the factory method used to create the GtkWidget
+		    elements for this configuration item.  Factories may be
+		    supplied for any of the item types.  If no
+		    <i class="parameter"><tt>label</tt></i> is set then the
+		    <i class="parameter"><tt>factory</tt></i> must be set.
+		  </dd></dl></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2503487"></a>3.2. Generating Configuration Pages</h3></div></div><div></div></div><p>
+	    Configuration items essentially spam 3 dimensions, but are
+	    merged in a similar fashion to the way Popup items are merged.  The
+	    main difference is that there are no target qualifiers used to
+	    select which items are shown, it is up to the item factory to
+	    either create or not create the item as it sees fit.  The EConfig
+	    manager takes care of the rest, including removing un-used sections
+	    or pages.
+	  </p><p>
+	    All items for a given configuration screen are converted into a
+	    list and sorted based on the <i class="parameter"><tt>path</tt></i>.  The
+	    configuration builder then goes through each item, creating
+	    container widgets or calling factories as required.  If a given
+	    page or section is empty, then it is removed automatically.  This
+	    process isn't only a one-off process.  For certain complex
+	    configuration screens, items or even pages and sections need to be
+	    dynamic based on a previous setting.  EConfig supports this mode of
+	    operation too, in which case it re-builds the configuration screen
+	    the same way, and automatically destroys the old widgets
+	    <sup>[<a name="id2503522" href="#ftn.id2503522">5</a>]</sup> and even re-orders pages and
+	    sections where appropriate to make the user-interface consistent.
+	  </p><p>
+	    The following few examples some of the flexibility of the EConfig
+	    system.
+	  </p><div class="figure"><a name="e-config-build-1"></a><p class="title"><b>Figure 3.4. The application defined, unaltered configuration page.</b></p><div class="mediaobject"><img src="images/e-config-build-1.png" alt="Shows the original HTML Mail settings page."></div></div><p>
+	    First we have the original configuration window.  This is defined
+	    by the application, the application uses EConfig to build this
+	    window, and in the process EConfig instruments the sections that
+	    the application defines.  This allows plugins to add new
+	    pages/sections/items anywhere on the page - to a granularity as
+	    defined by the application.  For example the application may at
+	    minimum merely define the top-level notebook or druid object and a
+	    number of pages.  When the pages are created the application could
+	    add as much content as it wants, which would still allow plugins to
+	    extend the user interface, but only by adding options to the end of
+	    each page.  At the other end of the scale the application could
+	    enumerate every single item (i.e. row) in every section on every
+	    page, allowing plugins to put new items anywhere in the display.
+	  </p><div class="figure"><a name="e-config-build-2"></a><p class="title"><b>Figure 3.5. A plugin adding a new section to an existing page.</b></p><div class="mediaobject"><img src="images/e-config-build-2.png" alt="Shows the HTML Mail settings page with a new section
+		  and item added by a plugin."></div></div><p>
+	    In this case the plugin has merely added a new section on the
+	    bottom of the HTML Mail settings page.  When the factory is called
+	    the plugin has a parent GtkTable (in this case, it could be a VBox)
+	    and borderless frame already defined, and it just has to
+	    instantiate its own control widgets, add them to the table, and
+	    return one of the widgets.  The returned widget is used later if
+	    the window needs to be reconfigured, although this particular configuration
+	    page is static so it isn't needed.
+	  </p><div class="figure"><a name="e-config-build-3"></a><p class="title"><b>Figure 3.6. A plugin inserting a new page for its settings.</b></p><div class="mediaobject"><img src="images/e-config-build-3.png" alt="Shows the plugin adding a new page for its setting as
+		  an alternative."></div></div><p>
+	    And finally we have exactly the same plugin, which has exactly the
+	    same code.  But a small change to the plugin definition allows the
+	    plugin to add an arbitrary new page (in an arbitrary position) into
+	    the whole window.  If this was a druid, then new druid pages can
+	    also be inserted at arbitrary locations, and page navigation (in a
+	    strictly linear manner) is automatically controlled by EConfig as
+	    per <a href="ch03s03.html#e-config-flow" title="Figure 3.3. Event and Data Flow in EMConfig">Figure 3.3, &#8220;Event and Data Flow in EMConfig&#8221;</a>.
+	  </p><p>
+	    In practice, EConfig provides more than it takes the application to
+	    use - generally little or no extra application code is required to
+	    use it.  It also
+	    <sup>[<a name="id2503717" href="#ftn.id2503717">6</a>]</sup> enforces and simplifies HIG
+	    compliance.  And as a side-benefit to the application it
+	    transparently provides extension hooks for
+	    external code to provide a seamlessly integrated user experience.
+	  </p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a name="ftn.id2503522" href="#id2503522">5</a>] </sup>In most cases, in some cases additional manual
+		processing is required in the factory
+		callback.</p></div><div class="footnote"><p><sup>[<a name="ftn.id2503717" href="#id2503717">6</a>] </sup>Or it will - the code needs some
+		tweaking.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2. 
+	  Main menus
+	 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4. 
+	  Events
+	</td></tr></table></div></body></html>

@@ -1,0 +1,98 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>1. 
+	  Base Plugin
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch02.html" title="Chapter 2. 
+	Plugin Loaders
+      "><link rel="previous" href="ch02.html" title="Chapter 2. 
+	Plugin Loaders
+      "><link rel="next" href="ch02s02.html" title="2. 
+	  Shared Library Loader
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">1. 
+	  Base Plugin
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center">Chapter 2. 
+	Plugin Loaders
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-loaders-base"></a>1. 
+	  Base Plugin
+	</h2></div></div><div></div></div><p>
+	  The <a href="re01.html#API-struct--EPlugin">EPlugin base class</a>
+	  is an abstract class which provides the basic services for plugin
+	  implementations. The main services are:
+	  </p><div class="itemizedlist"><ul type="disc"><li>Resolve plugin type and instantiate an EPlugin
+		object to represent and manage it.</li><li>Load the base structure of the XML plugin
+		definition files.</li><li>Resolve plugin hook types and instantiate a
+		EPluginHook to represent and manage it.</li><li>Provide a simple, language-independent api for
+		invoking plugin callbacks</li><li>Provide I18N context for plugins.</li><li>Some simple static helper methods to simplify each
+		implementing class.</li></ul></div><p>
+	  See the <a href="ch08.html" title="Chapter 8. 
+	EPlugin
+      ">Chapter 8, <i>
+	EPlugin
+      </i></a> for
+	  these details.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="plugin-loaders-definition"></a>1.1. Definition of a Plugin</h3></div></div><div></div></div><p>
+	    The base plugin XML definition.  Subclasses of EPlugin extend this
+	    basic structure with additional parameters or elements as they
+	    require.
+	  </p><p>
+	    Note that there may be any number of <tt class="sgmltag-element">e-plugin</tt>
+	    elements in a given plugin file, this may be used to simplify
+	    distribution of plugin packages.
+	  </p><pre class="programlisting">
+	    
+&lt;?xml version="1.0"&gt;
+&lt;e-plugin-list&gt;
+  &lt;e-plugin
+    id="unique id"
+    type="loader type"
+    domain="translation domain" ?
+    name="plugin name"
+    ...&gt;
+    &lt;description&gt;long description&lt;/description&gt; ?
+    &lt;hook
+      class="hook class"
+      ...&gt;
+    ...
+    &lt;/hook&gt; +
+  &lt;/e-plugin&gt; +
+&lt;/e-plugin-list&gt;</pre><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>id</tt></i></span></dt><dd>
+		  A unique string identifying this plugin.  By convention this
+		  will follow the java-like class namespace system.
+		  e.g. <tt class="constant">com.ximian.evolution.test-plugin</tt>
+		</dd><dt><span class="term"><i class="parameter"><tt>type</tt></i></span></dt><dd>
+		  The type name of the plugin loader.  Currently <a href="ch02s02.html" title="2. 
+	  Shared Library Loader
+	">shlib</a> and <a href="ch02s03.html" title="3. 
+	  Mono Assembly Loader
+	">mono</a> are the only
+		  supported values.  If no known handler is registered for this
+		  type, the plugin definition is silently ignored.
+		</dd><dt><span class="term"><i class="parameter"><tt>domain</tt></i></span></dt><dd>
+		  The translation domain for this plugin, as passed to the
+		  <tt class="function">dcgettext</tt> call of the gettext package.
+		  If not supplied then the default application domain is used
+		  (i.e. "evolution").  This is used to translate
+		  translatable strings for display.
+		</dd><dt><span class="term"><i class="parameter"><tt>name</tt></i></span></dt><dd>
+		  A short name for the plugin.  "Bob's Wonder
+		  Extender" might be suitable.  This value will be
+		  translated.
+		</dd><dt><span class="term"><i class="parameter"><tt>description</tt></i></span></dt><dd>
+		  A longer description of the plugin's purpose. This value will be
+		  translated.
+		</dd><dt><span class="term"><i class="parameter"><tt>hook</tt></i></span></dt><dd><p>
+		  This is a list of all of the hooks that this plugin wishes to
+		  hook into.  See the <a href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      ">Plugin
+		    Hooks</a> section for the details of the basic hook
+		  types defined.
+		</p><p>
+		  The hook <i class="parameter"><tt>class</tt></i> is resolved using the
+		  registered hook types, and if none can be found, or a version
+		  mismatch occurs, then the hook is silently ignored.
+		</p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. 
+	Plugin Loaders
+       </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 2. 
+	  Shared Library Loader
+	</td></tr></table></div></body></html>

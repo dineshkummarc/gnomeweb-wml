@@ -1,0 +1,124 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>5. 
+	  Mail Formatter
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="previous" href="ch03s04.html" title="4. 
+	  Events
+	"><link rel="next" href="pt02.html" title="Part II. 
+      Evolution Hook Points.
+    "></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5. 
+	  Mail Formatter
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
+	Plugin Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-hooks-format"></a>5. 
+	  Mail Formatter
+	</h2></div></div><div></div></div><p>
+	  The mail formatter plugin will invoke plugin code to format any part
+	  of an email based on mime-type. There are several formatters used
+	  internally by the mailer for different contexts, and each can be
+	  hooked into separately, providing extensible mail formatting for
+	  everything from the primary mail display, to printing, to reply
+	  quoting and more. If you are implementing a handler for a given
+	  mime-type, each formatter appropriate for the data-type should be
+	  hooked into, so that it displays properly in all contexts.
+	</p><p>
+	  Since the management object in this case is the same formatting
+	  object as used by the core mail display engine, a plugin may override
+	  or reimplement complete new functionality seamlessly.
+	</p><p>
+	  This plugin hook isn't strictly part of the core functionality as it
+	  is provided only by the mail component. It however demonstrates that the
+	  plugin system is extensible itself.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2503959"></a>5.1. Defining a formatter hook</h3></div></div><div></div></div><p>
+	    Not sure if this fits here as such.  Probably temporary placeholder.
+	  </p><pre class="programlisting">
+	    
+&lt;hook class="com.novell.evolution.mail.format:1.0"&gt;
+ &lt;group id="formatter type"&gt;
+  &lt;item
+    flags="handler flags"
+    mime_type="major/minor"
+    format="function spec"/&gt; +
+ &lt;/group&gt; +
+&lt;/hook&gt;</pre><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>id</tt></i></span></dt><dd>
+		  The actual formatter this applies to.  e.g. EMFormat for the
+		  base formatter class, EMFormatHTML for HTML output to a
+		  GtkHTML object, etc.
+		</dd><dt><span class="term"><i class="parameter"><tt>flags</tt></i></span></dt><dd>
+		  Flags to define whether this is an attachment or inline
+		  content.
+		</dd><dt><span class="term"><i class="parameter"><tt>id</tt></i></span></dt><dd>
+		  The name of the event to listen to.
+		</dd><dt><span class="term"><i class="parameter"><tt>mime_type</tt></i></span></dt><dd>
+		  The type of object this handler formats.
+		</dd><dt><span class="term"><i class="parameter"><tt>format</tt></i></span></dt><dd>
+		  A plugin-type specific function specification.  This
+		  function will be invoked to format objects of the specified
+		  <i class="parameter"><tt>mime_type</tt></i>.
+		</dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2504081"></a>5.2. The formatting process</h3></div></div><div></div></div><p>
+	    The formatting process is driven by the <a href="re134.html#API-struct--EMFormat">EMFormat</a> object, although
+	    there are different subclasses of this object used for different
+	    purposes.  These behave quite differently so each must be explained
+	    separately.  There is the basic formatter type which converts a
+	    CamelMimeMessage into a stream of data, and there is a HTML
+	    <a href="re159.html#API-struct--EMFormatHTML">formatter type</a>
+	    which uses a GtkHTML object to parse the content
+	    and may request further information required to complete the
+	    formatting.
+	  </p><p>
+	    A basic formatter goes through the following steps:
+	  </p><div class="orderedlist"><ol type="1"><li>Outputs pre-amble information.  e.g. Flag-For-Followup
+		status.</li><li>Invokes <tt class="methodname">format_message</tt> to begin the message
+		formatting. <tt class="methodname">format_message</tt> displays the message header, then
+		looks up the content object.</li><li>Using the mime-type of the content object (whether
+		supplied or calculated), a handler is looked up from a
+		per-class table to process the type.</li><li>If no handler exists, then the data is formatted as an
+		attachment.</li><li>If a handler exists, then it is invoked to display that
+		type.  Depending on whether the data is to be displayed
+		'inline' or not, the data may also get an attachment expander
+		and button.</li><li>The handler transforms the part's data, if need be, and
+		writes the appropriate format output to a stream.</li></ol></div><p>
+	    For conglomerate types, the formatting process is continued
+	    recursively, until all parts have been displayed, as appropriate.
+	  </p><p>
+	    A HTML formatter goes through the same basic steps, but has
+	    additional features and requirements.  It uses multiple
+	    threads.  At least one other thread is used for all of the
+	    Camel message content operations since some of them may block on
+	    remote I/O.  This also simplifies cancellation processing.  Also,
+	    because it has access to a full HTML rendering object, references
+	    to embedded content (images, buttons, etc.) are also processed.
+	  </p><p>
+	    Most format handlers don't need to know about all the fiddly
+	    details however.  If they are just outputting HTML content with no
+	    out of band references, they work identical to the basic format
+	    handlers with the exception they cannot call any Gtk GUI code
+	    because of threading issues.  This can still be done by using an
+	    IFRAME.  If they want to embed an icon or other image,
+	    they simply need to insert the HTML IMG tag reference in their
+	    format handler, and setup a callback to handle it when GtkHTML
+	    requests it.  EMFormat has some helper classes to make this
+	    only a few lines of code, including generation of the IMG SRC URL.
+	    IFRAMEs work identically to IMG tags, and  similar process is
+	    involved with embedding custom widgets using the OBJECT tag.
+	    EMFormatHTML takes care of calling the right callbacks for the
+	    right embedded reference from the right thread.
+	  </p><p>
+	    Since format handlers are chained off a given type, then a plugin
+	    can also inherit formatting behaviour as well as override it.  This
+	    gives much greater flexibility since the plugin need only implement
+	    its behaviour in specific situations.  e.g. an OpenPGP message
+	    handler could fall-back to the normal text-formatter if it doesn't
+	    detect the ASCII armour in a text/plain part.  Or another handler
+	    may disable itself based on configuration or state.
+	  </p><p>
+	    All format handlers for all types must also be fully re-entrant
+	    code (more or less write-once global and static variables) if
+	    they call any other formatting functions.
+	  </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4. 
+	  Events
+	 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Part II. 
+      Evolution Hook Points.
+    </td></tr></table></div></body></html>

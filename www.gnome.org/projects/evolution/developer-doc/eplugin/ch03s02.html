@@ -1,0 +1,97 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2. 
+	  Main menus
+	</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="
+      Evolution Plugin Development Manual
+    "><link rel="up" href="ch03.html" title="Chapter 3. 
+	Plugin Hooks
+      "><link rel="previous" href="ch03s01.html" title="1. 
+	  Popup Menus
+	"><link rel="next" href="ch03s03.html" title="3. 
+	  Configuration Pages and Wizards
+	"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2. 
+	  Main menus
+	</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s01.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
+	Plugin Hooks
+      </th><td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-hooks-menu"></a>2. 
+	  Main menus
+	</h2></div></div><div></div></div><p>
+	  The main menu hook lets you hook into various main menus in
+	  <span class="application">Evolution</span>, based on the current active view (component). The system
+	  works by piggy-backing on the existing use of the BonoboUI menu
+	  system used by all of the <span class="application">Evolution</span> components. Bonobo handles the
+	  menu merging and user input, and the hook resolves the verb being
+	  invoked and redirects it to the plugin. Each view defines a single
+	  target which describes the appropriate context. For the Mail view,
+	  this is the current folder and currently selected message(s).
+	</p><p>
+	  Each view keeps track of its own manager object. When it is
+	  (de)activated, it also (de)activates the management object which
+	  dynamically adds and removes the menu items from the
+	  BonoboUIContainer via a supplied BonoboUI XML definition file
+	  &lt;perhaps it should embed the bonobouixml&gt;. If the target
+	  changes, the view lets the manager know, and it updates the
+	  visibility and sensitivity of objects appropriately, allowing
+	  reasonably dynamic user-interfaces to be managed automatically. The
+	  plugin itself isn't loaded until the menu item in question is invoked
+	</p><p>
+	  Simple menu items and toggle menu items are supported currently.
+	  Also, because actual menu display is driven by BonoboUI, then toolbar
+	  items can also be added using this mechanism.
+	</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2502715"></a>2.1. Defining a menu hook</h3></div></div><div></div></div><p>
+	    Not sure if this fits here as such.  Probably temporary placeholder.
+	  </p><pre class="programlisting">
+	    
+&lt;hook class="com.ximian.evolution.mail.bonoboMenu:1.0"&gt;
+ &lt;menu id="menuid" target="targettype"
+  &lt;ui file="/path/to/bonobo-ui-menu-definition.xml"&gt; +
+  &lt;item
+   type="item | toggle | radio"
+   active ?
+   path="/commands/FooBar"
+   verb="FooBar"
+   visible="target mask" ?
+   enable="target mask" ?
+   activate="function spec"/&gt; *
+ &lt;/menu&gt; *
+&lt;/hook&gt;</pre><p>
+	    <span class="emphasis"><em>Need to define menu tag</em></span>
+	  </p><div class="variablelist"><dl><dt><span class="term"><i class="parameter"><tt>ui</tt></i></span></dt><dd>
+		  The <i class="parameter"><tt>ui</tt></i> element contains a filename of the
+		  BonoboUI XML menu definition to load when the view is activated.  Any number of
+		  <i class="parameter"><tt>ui</tt></i> elements may be defined, and they
+		  are all loaded.
+		</dd><dt><span class="term"><i class="parameter"><tt>type</tt></i></span></dt><dd>
+		  The menu item type.  The type maps directly to the
+		  corresponding EMenuItem types.
+		  <i class="parameter"><tt>radio</tt></i> is currently not implemented.
+		</dd><dt><span class="term"><i class="parameter"><tt>active</tt></i></span></dt><dd>
+		  If present, then radio or toggle menu items are active when
+		  first shown.  After the first instantiation, they will
+		  remember their active state.
+		</dd><dt><span class="term"><i class="parameter"><tt>path</tt></i></span></dt><dd>
+		  The BonoboUI element path corresponding to this menu item.
+		</dd><dt><span class="term"><i class="parameter"><tt>verb</tt></i></span></dt><dd>
+		  The BonoboUI verb corresponding to the item to be listened to.
+		</dd><dt><span class="term"><i class="parameter"><tt>visible</tt></i></span></dt><dd>
+		  A comma separated list of mask enumeration values used to
+		  define when this item is shown.  What values are valid
+		  depend on the menu hook class of the menu being hooked
+		  onto.
+		</dd><dt><span class="term"><i class="parameter"><tt>enable</tt></i></span></dt><dd>
+		  A comma separated list of mask enumeration values used to
+		  define when this item is sensitive.  What values are valid
+		  depend on the menu hook class of the menu being hooked
+		  onto.
+		</dd><dt><span class="term"><i class="parameter"><tt>activate</tt></i></span></dt><dd>
+		  A plugin-type specific function specification.  This
+		  function will be resolved and called when the menu item is
+		  activated.  The funciton's parameters will depend on the type
+		  of menu item being invoked.
+		</dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2502924"></a>2.2. Merging Plugin Items</h3></div></div><div></div></div><p>
+	    Merging is performed by BonoboUI, and the source of the menu data
+	    is defined by the <i class="parameter"><tt>ui</tt></i> file.
+	  </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">1. 
+	  Popup Menus
+	 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3. 
+	  Configuration Pages and Wizards
+	</td></tr></table></div></body></html>
