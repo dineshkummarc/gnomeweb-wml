@@ -13,6 +13,7 @@ page_DATA = \
 	gimp2.png \
 	two-six.png \
 	official-gnome-2-developers-guide.png \
-	guadec-2004.png
+	guadec-2004.png \
+	guadec-2004-end.png
 
 include $(top_srcdir)/rules.common
