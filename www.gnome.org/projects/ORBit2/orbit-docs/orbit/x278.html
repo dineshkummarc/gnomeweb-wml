@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Echo client and server</TITLE
+>Echo client &#38; server</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -17,8 +17,8 @@ REL="PREVIOUS"
 TITLE="Files at a glance"
 HREF="x233.html"><LINK
 REL="NEXT"
-TITLE="Calculator Client Server"
-HREF="x430.html"></HEAD
+TITLE="Calculator client & server"
+HREF="x437.html"></HEAD
 ><BODY
 CLASS="sect1"
 BGCOLOR="#FFFFFF"
@@ -60,7 +60,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="x430.html"
+HREF="x437.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -76,7 +76,7 @@ CLASS="sect1"
 ><A
 NAME="AEN278"
 ></A
->Echo client and server</H1
+>Echo client &#38; server</H1
 ><P
 >&#13;The aim for this example is to run a client which accepts typed
 input and this is printed out on the server on stdout
@@ -363,13 +363,20 @@ CLASS="programlisting"
  */
 
 #include &#60;stdio.h&#62;
-#include &#60;orbit/orbit.h&#62;
+#include &#60;signal.h&#62;
+<B
+CLASS="command"
+>#include &#60;orbit/orbit.h&#62;</B
+>
 
 /*
  * This header file was generated from the idl
  */
 
-#include "echo.h"
+<B
+CLASS="command"
+>#include "echo.h"</B
+>
 
 /** 
  * test for exception 
@@ -395,71 +402,149 @@ abort_if_exception(CORBA_Environment *ev, const char* mesg)
 	}
 }
 
-/*
- * main 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
  */
-int
-main (int argc, char *argv[])
+static
+void
+client_shutdown (int sig)
 {
-	FILE * ifp;
-	char * ior;
-	char filebuffer[1024];
-
-	CORBA_Environment ev[1];
-	CORBA_ORB orb;            /* ORB */
-	Echo echo_client;         /* the service */
-
-	/*
-	 * Standard initalisation of the orb. Notice that
-	 * ORB_init 'eats' stuff off the command line
-	 */
-
-	CORBA_exception_init(ev);
-	<B
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <B
 CLASS="command"
->orb = CORBA_ORB_init(&#38;argc, argv, "orbit-local-orb", ev);</B
+>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</B
 >
-	abort_if_exception(ev, "init ORB failed");
-
-	/*
-	 * Get the IOR (object reference). It should be written out
-	 * by the echo-server into the file echo.ior. So - if you
-	 * are running the server in the same place as the client,
-	 * this should be fine!
-	 */
-
-	ifp = fopen("echo.ior","r");
-	if( ifp == NULL ) {
-		g_error("can not open \"echo.ior\"");
-		abort ();
-	}
-
-	fgets(filebuffer,1023,ifp);
-	ior = g_strdup(filebuffer);
-
-	fclose(ifp);
-
-	/*
-	 * Actually get the object. So easy!
-	 */
-
-	<B
+                abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <B
 CLASS="command"
->echo_client = CORBA_ORB_string_to_object(orb, ior, ev);</B
+>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</B
 >
-	abort_if_exception(ev, "bind failed");
+        if (raised_exception(ev)) return;
+}
 
-	/*
-	 * Ok. Now we use the echo object...
-	 */
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <B
+CLASS="command"
+>CORBA_Object_release(service, ev);</B
+>
+        if (raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <B
+CLASS="command"
+>CORBA_ORB_destroy(orb, ev);</B
+>
+                if (raised_exception(ev)) return;
+        }
+}
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
+    
+	fscanf (stream, "%as", &#38;objref);  /* FIXME, handle input error */ 
+	
+	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);
+	free (objref);
+	
+	return obj;
+}
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+				 char              *filename,
+				 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+ 
+        /* write objref to file */
+         
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+    
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
+
+	return obj;
+}
+
+
+/**
+ *
+ */
+static
+void
+client_run (Echo  echo_service,
+	    CORBA_Environment        *ev)
+{
+	char filebuffer[1024+1];
 
 	g_print("Type messages to the server\n"
 		"a single dot in line will terminate input\n");
-
+	
 	while( fgets(filebuffer,1024,stdin) ) {
 		if( filebuffer[0] == '.' &#38;&#38; filebuffer[1] == '\n' ) 
 			break;
-
+		
 		/* chop the newline off */
 		filebuffer[strlen(filebuffer)-1] = '\0';
       
@@ -469,28 +554,58 @@ CLASS="command"
 
 		<B
 CLASS="command"
->Echo_echoString(echo_client,filebuffer,ev);</B
+>Echo_echoString(echo_service,filebuffer,ev);</B
 >
-		abort_if_exception(ev, "service not reachable");
+		if (raised_exception (ev)) return;
 	}
-      
-	/* Clean up */
-	<B
-CLASS="command"
->CORBA_Object_release(echo_client, ev);</B
->
-	abort_if_exception(ev, "releasing service failed");
-
-	<B
-CLASS="command"
->CORBA_ORB_destroy (orb, ev);</B
->
-	abort_if_exception(ev, "cleanup failed");
-    
-	/* successfull termination */
-	exit (0);
 }
 
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char filename[] = "echo.ior";
+        
+	Echo echo_service = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        <B
+CLASS="command"
+>CORBA_exception_init(ev);</B
+>
+
+	<B
+CLASS="command"
+>client_init (&#38;argc, argv, &#38;global_orb, ev);</B
+>
+	abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", filename);
+
+	<B
+CLASS="command"
+>echo_service = (Echo) client_import_service_from_file (global_orb,
+							       "echo.ior",
+							       ev);</B
+>
+        abort_if_exception(ev, "import service failed");
+
+	<B
+CLASS="command"
+>client_run (echo_service, ev);</B
+>
+        abort_if_exception(ev, "service not reachable");
+ 
+	<B
+CLASS="command"
+>client_cleanup (global_orb, echo_service, ev);</B
+>
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}
 </PRE
 ></TD
 ></TR
@@ -578,7 +693,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="AEN361"
+NAME="AEN368"
 ></A
 >Echo Server</H2
 ><P
@@ -596,7 +711,7 @@ process.
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN365"
+NAME="AEN372"
 ></A
 ><P
 ><B
@@ -659,7 +774,7 @@ static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  */
 static
 void
-echo_server_shutdown (int sig)
+server_shutdown (int sig)
 {
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -682,15 +797,15 @@ CLASS="command"
  * return.
  */static 
 void 
-echo_server_init (int               *argc_ptr, 
-		  char              *argv[],
-		  CORBA_ORB         *orb,
-		  CORBA_Environment *ev)
+server_init (int               *argc_ptr, 
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
 {
 	/* init signal handling */
 
-	signal(SIGINT,  echo_server_shutdown);
-	signal(SIGTERM, echo_server_shutdown);
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
@@ -708,8 +823,8 @@ CLASS="command"
  */
 static 
 Echo
-echo_server_activate_service (CORBA_ORB         orb,
-			      CORBA_Environment *ev)
+server_activate_service (CORBA_ORB         orb,
+			 CORBA_Environment *ev)
 {
 	Echo                       servant     = CORBA_OBJECT_NIL; 
 	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
@@ -757,10 +872,10 @@ CLASS="command"
  */
 static 
 void 
-echo_server_export_service_to_file (CORBA_ORB          orb,
-				    Echo               servant,
-				    char              *filename, 
-				    CORBA_Environment *ev)
+server_export_service_to_file (CORBA_ORB          orb,
+			       CORBA_Object       servant,
+			       char              *filename, 
+			       CORBA_Environment *ev)
 {
         CORBA_char *objref = NULL;
 	FILE       *file   = NULL;
@@ -790,8 +905,8 @@ CLASS="command"
  */
 static 
 void 
-echo_server_run (CORBA_ORB          orb,
-		 CORBA_Environment *ev)
+server_run (CORBA_ORB          orb,
+            CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
@@ -809,9 +924,9 @@ CLASS="command"
  * occures @ev points to exception object on return.
  */
 static 
-void echo_server_cleanup (CORBA_ORB          orb,
-			   Echo               servant,
-			   CORBA_Environment *ev)
+void server_cleanup (CORBA_ORB          orb,
+		     Echo               servant,
+	             CORBA_Environment *ev)
 {
 	/* releasing managed object */
         <B
@@ -846,34 +961,34 @@ main (int argc, char *argv[])
 	
 	<B
 CLASS="command"
->echo_server_init (&#38;argc, argv, &#38;global_orb, ev);</B
+>server_init (&#38;argc, argv, &#38;global_orb, ev);</B
 >
 	abort_if_exception(ev, "init failed");
 
 	<B
 CLASS="command"
->servant = echo_server_activate_service (global_orb, ev);</B
+>servant = server_activate_service (global_orb, ev);</B
 >
 	abort_if_exception(ev, "activating service failed");
 
 	<B
 CLASS="command"
->echo_server_export_service_to_file (global_orb, 
-					    servant, 
-					    "echo.ior", 
-					    ev);</B
+>server_export_service_to_file (global_orb, 
+				       servant, 
+				       "echo.ior", 
+				       ev);</B
 >
 	abort_if_exception(ev, "exporting IOR failed");
 	
 	<B
 CLASS="command"
->echo_server_run (global_orb, ev);</B
+>server_run (global_orb, ev);</B
 >
 	abort_if_exception(ev, "entering main loop failed");
 
 	<B
 CLASS="command"
->echo_server_cleanup (global_orb, servant, ev);</B
+>server_cleanup (global_orb, servant, ev);</B
 >
 	abort_if_exception(ev, "cleanup failed");
 
@@ -954,7 +1069,7 @@ be subject to next chapters.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN396"
+NAME="AEN403"
 ></A
 ><P
 ><B
@@ -1073,8 +1188,7 @@ CLASS="sect2"
 ><A
 NAME="echo-compilation"
 ></A
->Compiling and
-Running the Server and the Client</H2
+>Compiling  server &#38; client</H2
 ><P
 > The following
 makefile can be used to compile both, the client and the server. Be
@@ -1087,7 +1201,7 @@ distribution the makefile below will do.
 <DIV
 CLASS="example"
 ><A
-NAME="AEN403"
+NAME="AEN410"
 ></A
 ><P
 ><B
@@ -1101,11 +1215,11 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="programlisting"
->&#13;PREFIX=/usr/local
+>&#13;PREFIX=/usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
        -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
        -I$(PREFIX)/lib/glib-2.0/include
 LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
@@ -1134,7 +1248,7 @@ distclean: clean
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN406"
+NAME="AEN413"
 ></A
 ><P
 ><B
@@ -1220,7 +1334,7 @@ string, instead use the cut and paste functionality of your terminal.
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN418"
+NAME="AEN425"
 ></A
 ><P
 ><B
@@ -1251,7 +1365,7 @@ CLASS="userinput"
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN423"
+NAME="AEN430"
 ></A
 ><P
 ><B
@@ -1334,7 +1448,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="x430.html"
+HREF="x437.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -1358,7 +1472,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Calculator Client Server</TD
+>Calculator client &#38; server</TD
 ></TR
 ></TABLE
 ></DIV
