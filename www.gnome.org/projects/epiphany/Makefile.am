@@ -13,6 +13,7 @@ page_SCRIPTS=		\
 	news.html		\
 	plan.html		\
 	resources.html	\
-	screenshots.html
+	screenshots.html \
+    extensions.html
 
 include $(top_srcdir)/rules.common
