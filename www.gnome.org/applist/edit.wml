@@ -1,0 +1,179 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Get more software" imgid="getmore">
+<content>
+
+<table bgcolor=#ffffff width=95% CELLSPACING=1 CELLPADDING=4 BORDER=0>
+<tr><TD BGCOLOR="#cde6ff" ALIGN=center>
+    <BIG><B>
+    GNOME Software Map
+    </B></BIG>
+</TD></TR> 
+<tr>
+<td>
+
+<!-- start of page contents -->
+
+
+
+<?
+
+function qmeta ($str) {
+   return ereg_replace("<[^>]*>", "", ereg_replace("'", "``", $str));
+};
+
+function is_it_yes ($str) {
+   switch($str) {
+     case "Y";
+       echo "checked";
+       break;
+     default;
+       break;
+   }
+};
+
+function is_it_no ($str) {
+   switch($str) {
+     case "N";
+       echo "checked";
+       break;
+     default;
+       break;
+   }
+};
+
+# see if we matched or not 
+function Match ($a, $b) {
+	if ($a == $b) {
+	   echo "selected";
+	}
+};
+
+function MakeOption ($a, $b) {
+        echo "<option ";
+	echo Match($a, $b);
+	echo ">$b\n";
+};
+
+mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
+if($oldname) {
+	if(($version != "" && $mname != "") && $memail != "")  {
+	} else {
+		echo "<h3>Error</h3>\n";
+		echo "You did not fill in a required field.";
+		echo "<p>Please go back and enter all required fields.\n";
+		echo "</td></tr></table></body></html>\n";
+		exit;
+	}
+	$qry = "UPDATE applist SET name = '" . qmeta($name) . "', version = '" . qmeta($version) . "', maintainer_name = '" . qmeta($mname) . "', maintainer_email = '" . qmeta($memail) . "', description = '" . qmeta($description) . "', keywords = '" . qmeta($keywords) . "', requires = '" . qmeta($requires) . "', url_homepage = '" . qmeta($url_homepage) . "', url_screenshot = '" . qmeta($url_screenshot) . "', url_download = '" . qmeta($url_download) . "', in_cvs = '" . qmeta($in_cvs) . "', category = '" . qmeta($category) . "' WHERE name = '" . qmeta($oldname) . "'";
+	$result = mysql("gnomeapps", $qry);
+	mysql_close();
+	if ($result != -1) {
+		echo "Listing updated.\n";
+	} else {
+		echo "\nError adding entry - perhaps an entry with that name exists\n";
+	}
+
+	echo "<p><a href=\"/applist\">Return to main page...</a>\n";
+} else {
+	$qry = "SELECT * FROM applist WHERE name = '" . qmeta($name) . "'";	
+	$res = mysql("gnomeapps", $qry);
+
+	$i = 0;
+	$n = mysql_numrows($res);
+
+	if($n < 1) {
+		echo "Query failed</tr></td></table>";
+		mysql_close();
+		exit;
+	}
+	if($n > 1) {
+		echo "Got more than one package by that name!";
+		echo "</td></tr></table>";
+		mysql_close();
+		exit;
+	}
+	$name = mysql_result($res, $i, "name");
+	$version = mysql_result($res, $i, "version");
+	$mname = mysql_result($res, $i, "maintainer_name");
+	$memail = mysql_result($res, $i, "maintainer_email");
+	$desc = mysql_result($res, $i, "description");
+	$keywords = mysql_result($res, $i, "keywords");
+	$requires = mysql_result($res, $i, "requires");
+	$url_homepage = mysql_result($res, $i, "url_homepage");
+	$url_screenshot = mysql_result($res, $i, "url_screenshot");
+	$url_download = mysql_result($res, $i, "url_download");
+	$category = mysql_result($res, $i, "category");
+	$in_cvs =  mysql_result($res, $i, "in_cvs");
+	
+?>
+<em>*'d fields are required</em>
+
+<form method=post>
+<input type=hidden name=oldname value="<?echo $name?>">
+<table>
+<tr><td>Package name:</td>
+<td><input type=text name=name maxlength=100 size=40 value="<?echo $name?>"><font color=#ff0000>*</font></td></tr>
+<tr><td>Current version:</td>
+<td><input type=text name=version maxlength=100 size=40 value="<?echo $version?>"><font color=#ff0000>*</font></td></tr>
+<tr><td>Maintainer's name:</td>
+<td><input type=text name=mname maxlength=100 size=40 value="<?echo $mname?>"><font color=#ff0000>*</font></td></tr>
+<tr><td>Maintainer's E-mail address:</td>
+<td><input type=text name=memail maxlength=100 size=40 value="<?echo $memail?>"><font color=#ff0000>*</font></td></tr>
+<tr><td colspan=2>Description:</td>
+<tr><td colspan=2>
+<textarea name=description rows=5 cols=60 wrap=hard>
+<?echo $desc?>
+</textarea></td></tr>
+<tr><td>Search keywords:</td>
+<td><input type=text name=keywords maxlength=100 size=40 value="<?echo $keywords?>"></td></tr>
+<tr><td>Requirements (besides gnome-libs):</td>
+<td><input type=text name=requires maxlength=100 size=40 value="<?echo $requires?>"></td></tr>
+<tr><td>Homepage URL:</td>
+<td><input type=text name="url_homepage" maxlength=100 size=40 value="<?echo $url_homepage?>"</td></tr>
+<tr><td>Screenshot URL:</td>
+<td><input type=text name="url_screenshot" maxlength=100 size=40 value="<?echo $url_screenshot?>"></td></tr>
+<tr><td>Download URL (for stable releases):</td>
+<td><input type=text name="url_download" maxlength=100 size=40 value="<?echo $url_download?>"></td></tr>
+<tr><td>Is development code in CVS?</td>
+ <td><table><tr><td><input type=radio name=in_cvs value="Y" <? is_it_yes($in_cvs)?>>Yes</td>
+    <td><input type=radio name=in_cvs value="N" <? is_it_no($in_cvs)?>>No</td>
+ </tr></td></table>
+<tr><td>Category:</td>
+<td>
+<select name="category" size=1>
+<?echo MakeOption($category, "Core")?>
+<?echo MakeOption($category, "Development Tools")?>
+<?echo MakeOption($category, "Entertainment")?>
+<?echo MakeOption($category, "Internet Tools")?>
+<?echo MakeOption($category, "Mail Clients")?>
+<?echo MakeOption($category, "Math and Science Tools")?>
+<?echo MakeOption($category, "Miscellaneous")?>
+<?echo MakeOption($category, "Network Talk Clients (IRC/ICQ/etc)")?>
+<?echo MakeOption($category, "Productivity")?>
+<?echo MakeOption($category, "Sound Tools")?>
+<?echo MakeOption($category, "System Utilities")?>
+<?echo MakeOption($category, "Window/Session/Desktop Managers")?>
+<?echo MakeOption($category, "Electrical Design/Programmers")?>
+</select>
+</td></tr>
+</table>
+<input type=submit value="Save changes">
+</form>
+<?
+}
+?>
+
+<? mysql_freeresult($res); ?>
+<? mysql_close(); ?>
+
+
+</td>
+</tr>
+</table>
+
+
+</content>
+</document>
