@@ -1,7 +1,8 @@
 # Site-structural variables
 
 SITE = $(notdir $(subst $(shell echo $(urlpath) | sed "s,/$$,,"),,$(CURDIR)))
-pagedir = $(prefix)/$(SITE)/$(urlpath)
+HTTPDIR = $(SITE)$(urlpath)
+pagedir = $(prefix)/$(SITE)$(urlpath)
 
 
 # Boring make stuff
@@ -16,4 +17,4 @@ CLEANFILES = $(BUILT_SOURCES)
 	@$(top_srcdir)/include/evilsedhack $< $(HTTP_PREFIX)/$(SITE) > $@
 
 .htaccess: htaccess
-	@sed -e "s,@SITE@,$(HTTP_PREFIX)/$(SITE)," $< > $@
+	@sed -e "s,@SITE@,$(HTTP_PREFIX)/$(SITE),g;s,@pagedir@,$(pagedir),g" $< > $@
