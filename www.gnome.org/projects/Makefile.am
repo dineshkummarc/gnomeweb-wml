@@ -24,7 +24,8 @@ SUBDIRS = \
 	epiphany		\
 	libgsf			\
 	evince			\
-	sabayon
+	sabayon			\
+	gwget
 
 urlpath = /projects
 
