@@ -155,11 +155,11 @@ bounty.
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
-<?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", ""); ?>
+<?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
-<?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", ""); ?>
+<?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>

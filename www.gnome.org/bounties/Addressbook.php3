@@ -135,7 +135,7 @@ information (name, email address, etc) is needed or entered.</p>
 
 <p>A couple of places where other applications could use this data:</p>
 <ul>
-<li>Web forms, via Epiphany's form autofill feature.</li>
+<li>Web forms, via Firefox's form autofill feature.</li>
 <li>Document author fields in OpenOffice.</li>
 </ul>
 

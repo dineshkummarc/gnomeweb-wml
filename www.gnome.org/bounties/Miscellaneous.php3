@@ -8,7 +8,7 @@ include ("./util.php");
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", ""); ?>
-<?php taskrow ("Drag and Drop between Gnome and Mozilla", "hidden", "300", "127553", ""); ?>
+<?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", ""); ?>
@@ -113,13 +113,13 @@ links:
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", "127553", ""); ?>
+<?php box_start ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", "127553", ""); ?>
 
 
 <p></p>
 
 <p>Currently dragging and dropping back and forth between nautilus and
-mozilla is very problematic.  Bookmarks and copying actions are easily
+firefox is very problematic.  Bookmarks and copying actions are easily
 confused with surprising results.</p>
 
 What happens now:
@@ -134,11 +134,11 @@ What happens now:
 What we'd like to see:
 </ul>
 <li>
-  Dragging a bookmark .desktop file to Mozilla should open the url the
+  Dragging a bookmark .desktop file to Firefox should open the url the
   bookmark file contains, not the bookmark file itself.
 </li>
 <li>
-  Dragging an http: uri from mozilla to the desktop should ask you if you
+  Dragging an http: uri from firefox to the desktop should ask you if you
   prefer to download the file or make a bookmark point to the location.  If a
   desktop bookmark is created the resulting .desktop file should specify a
   hyperlink icon (or possibly use the shortcut icon if the link points to an
@@ -147,16 +147,16 @@ What we'd like to see:
 </ul>
 <?php box_sec ("How"); ?>
   Add the behavior dialog and download options to Nautilus upon
-  receipt drops containing http: uris.  Add code to mozilla to recognize
+  receipt drops containing http: uris.  Add code to firefox to recognize
   the difference between the various .desktop filetypes and take the
   appropriate action.
 <?php box_sec ("Affected Modules"); ?>
   <? bonsai ("nautilus"); ?> is where the changes related to dropping
-  on the desktop will live.  Mozilla will also probably need changes to
+  on the desktop will live.  Firefox will also probably need changes to
   recognize .desktop files and take the appropriate action.
 <?php box_sec ("Pointers"); ?>
   The <a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/desktop-devel-list/">desktop-devel-list</a> and 
-<a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a STYLE="text-decoration:none" href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a STYLE="text-decoration:none" href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Mozilla can be found at <a STYLE="text-decoration:none" href="http://mozilla.org/">mozilla.org.</a>
+<a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a STYLE="text-decoration:none" href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a STYLE="text-decoration:none" href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Firefox can be found at <a STYLE="text-decoration:none" href="http://mozilla.org/products/firefox">www.mozilla.org/products/firefox.</a>
 <?php box_end (); ?>
 <?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812", ""); ?>
 
