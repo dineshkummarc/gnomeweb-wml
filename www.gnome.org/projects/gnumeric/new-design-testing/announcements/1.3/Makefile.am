@@ -1,4 +1,4 @@
-SUBDIRS= ancient 1.0 1.1 1.2
+SUBDIRS=
 
 urlpath=/projects/gnumeric/new-design-testing/announcements
 
