@@ -7,6 +7,7 @@ page_DATA=news.gif		\
 	download.gif		\
 	developer.gif		\
 	search.gif		\
+	clickstart.gif		\
 	smallfootonly.gif	\
 	foot-outline-small.gif	\
 	foot-outline-tiny.gif	\
@@ -22,6 +23,6 @@ page_DATA=news.gif		\
 	solid-dot-yellow.gif	\
 	solid-dot-ob1.gif	\
 	solid-dot-brown.gif	\
-	clickstart.gif
+	blank.gif
 
 EXTRA_DIST=$(page_DATA)
