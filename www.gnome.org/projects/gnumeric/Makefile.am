@@ -15,6 +15,7 @@ page_SCRIPTS=index.shtml		\
     	    mailing-list.html		\
 	    palaeolithic.html		\
 	    thumb.gif			\
+	    v8.xsd			\
     	    gnumeric-0.3		\
 	    gnumeric-0.4		\
 	    gnumeric-0.4.txt		\
