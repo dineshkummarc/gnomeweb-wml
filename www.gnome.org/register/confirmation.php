@@ -124,6 +124,12 @@ if ($show_confirm) {
 //		exit_error('Error','SETTING YOU AS OWNER FAILED. <B>PLEASE</B> report to admin@'.$GLOBALS['sys_default_domain'].' '.db_error());
 	}
 
+	$message = "A new project, ".$form_full_name.", was added to the Software Map.\n\n"
+		. "An admin will need to approve the registration at:\n\n"
+		. "http://".$sys_default_domain."/admin/\n\n";
+	mail ("webmaster@gnome.org", "New project added to Software Map",
+		$message, "From: webmaster@gnome.org");
+
 	$HTML->header(array('title'=>'Registration Complete'));
 	
 	?>
