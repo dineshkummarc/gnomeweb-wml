@@ -11,7 +11,9 @@ SUBDIRS=			\
 	mc			\
 	nautilus		\
 	gnome-pilot		\
-	gnome-print
+	gnome-print		\
+	agnubis
+
 urlpath=/projects
 
 page_SCRIPTS=index.html

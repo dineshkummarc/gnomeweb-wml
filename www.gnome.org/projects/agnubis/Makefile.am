@@ -1,10 +1,10 @@
-SUBDIRS= images
+SUBDIRS=images
 
 urlpath=/projects/agnubis/
 
-page_SCRIPTS=index.shtml		\
+page_SCRIPTS=				\
 		foot.shtml		\
 		go.css			\
-		head.shtml		
+		head.shtml
 
 include $(top_srcdir)/rules.common
