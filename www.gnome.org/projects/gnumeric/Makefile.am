@@ -16,6 +16,7 @@ page_SCRIPTS=index.shtml		\
 		features.shtml		\
 		screenshots.shtml	\
 		technology.shtml	\
+		past-news.shtml		\
 		function-info.shtml	\
 		functions.shtml
 
