@@ -40,10 +40,7 @@ class PrintHeadline(saxlib.HandlerBase):
     def endElement(self, name):
 	if (self.headlineCount >= self.headlineLimit): return
 	if name == 'item':
-	    self.timestamp = re.split("/", self.itemLink)[-2]
-	    self.timetuple = time.gmtime(string.atoi(self.timestamp))
-	    self.timestring = time.strftime("%a, %b %d %Y", self.timetuple)
-	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b><font size='-2'><br>[" + self.timestring + "]</font></td></tr>"
+	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b><font size='-2'></font></td></tr>"
 	    self.inItem = 0
 	    self.headlineCount = self.headlineCount + 1
 	if name == 'title':
@@ -60,11 +57,11 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.itemLink = self.itemLink + ch[start:start+length]
 
 
-print "<p><a href='http://news.gnome.org/'><font size=\"+2\" color=\"#400000\"><b>GNOME News:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'>"
+print "<p><a href='http://www.gnomedesktop.org/'><font size=\"+2\" color=\"#400000\"><b>From gnomedesktop.org:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'>"
 
 
 try:
-	feedfile = urllib.urlopen("http://news.gnome.org/rdf/")
+	feedfile = urllib.urlopen("http://gnomedesktop.org/backend.php")
 
 	#feedfile.readline();
 
