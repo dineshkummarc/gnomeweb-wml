@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnumeric/new-design-testing/func-tests
+urlpath=/projects/gnumeric/func-tests
 
 page_SCRIPTS=		\
     address.xls 	\

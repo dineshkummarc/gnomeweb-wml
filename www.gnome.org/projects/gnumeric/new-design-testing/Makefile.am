@@ -1,6 +1,6 @@
 SUBDIRS= announcements changelogs doc func-tests images new-pics screenshots style web-docs
 
-urlpath=/projects/gnumeric/new-design-testing
+urlpath=/projects/gnumeric
 
 page_SCRIPTS= 		\
     credits.shtml	\

@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/new-design-testing/doc/stylesheet
+urlpath=/projects/gnumeric/doc/stylesheet
  
 page_SCRIPTS=		\
 blank.png 		\

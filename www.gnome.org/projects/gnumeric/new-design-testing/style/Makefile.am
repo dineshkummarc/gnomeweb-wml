@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /projects/gnumeric/new-design-testing/style
+urlpath = /projects/gnumeric/style
 
 page_SCRIPTS = \
     default.css \

@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /projects/gnumeric/new-design-testing/web-docs
+urlpath = /projects/gnumeric/web-docs
 
 page_SCRIPTS =
 

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnumeric/new-design-testing/screenshots
+urlpath=/projects/gnumeric/screenshots
 
 page_SCRIPTS=index.html			\
 	    gnumeric2.jpeg		\
