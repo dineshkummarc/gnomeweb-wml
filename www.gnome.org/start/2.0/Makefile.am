@@ -2,7 +2,8 @@ SUBDIRS=
 
 urlpath=/start/2.0
 
-page_SCRIPTS=beyond.html \
+page_SCRIPTS=index.html
+	beyond.html \
 	errors.html \
 	gettinginvolved.html \
 	installation.html \
@@ -11,5 +12,7 @@ page_SCRIPTS=beyond.html \
 	releasenotes.html \
 	themes.html \
 	whatsnew.html
-	
+
+EXTRA_DIST=foot.png
+
 include $(top_srcdir)/rules.common
