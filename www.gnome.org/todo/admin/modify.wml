@@ -7,7 +7,7 @@
 
 <? 
 
-Include("/home/admin/applist/private.php3")
+include("/home/admin/applist/private.php3");
 
 mysql_select_db("todo");
 
@@ -51,7 +51,7 @@ $query_string = $query_string . "update_time='" . date("YmdHis", time()) . "', "
 $query_string = $query_string . "short_desc='$short_desc', long_desc='$long_desc', project_name='$project_name', project_url='$project_url', ";
 $query_string = $query_string . "contact_name='$contact_name', contact_mail='$contact_mail', ";
 $query_string = $query_string . "required_skill='$required_skill', required_familiarity='$required_familiarity', category='$category', ";
-$query_string = $query_string . "importance='$importance', status='$status' WHERE (id='$id')";
+$query_string = $query_string . "importance='$importance', status='$status', approved='$approved' WHERE (id='$id')";
 
 mysql_query ($query_string);
 #print $query_string;
@@ -158,6 +158,10 @@ print "value=\"" . $res_obj->contact_mail . "\"";
 </select>
 </td></tr>
 
+<tr valign="top"><td align="right">Task approved:</td><td>
+<input type="checkbox" name="approved" value="1"<? if ($res_obj->approved == "1") print " selected ";?>>
+</td></tr>
+
 <tr><td><input type="submit" name="perform_modification" value="Modify"> <input type="reset"
 value="Reset"><input type="hidden" name="modify" value="Modify"><input
 type="hidden" name="id" value="<?print $id;?>"></td><td></td></tr>
@@ -165,7 +169,7 @@ type="hidden" name="id" value="<?print $id;?>"></td><td></td></tr>
 </table>
 <p>
 
-<b><a href="index.php3">Go back to the todo page.</a></b>
+<b><a href="../index.php3">Go back to the todo page.</a></b>
 
 </form>
 

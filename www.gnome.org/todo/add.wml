@@ -7,7 +7,7 @@
 
 <? 
 
-Include("/home/admin/applist/private.php3")
+include("/home/admin/applist/private.php3");
 
 mysql_select_db("todo");
 
@@ -21,15 +21,19 @@ $long_desc  = addslashes($long_desc);
 $project_name = addslashes($project_name);
 $contact_name = addslashes($contact_name);
 
-$query_string = "INSERT INTO todo_items (creation_time, update_time, short_desc, long_desc, project_name, project_url, contact_name, contact_mail, required_skill, required_familiarity, category, importance, status) VALUES (";
+$query_string = "INSERT INTO todo_items (creation_time, update_time, short_desc, long_desc, project_name, project_url, contact_name, contact_mail, required_skill, required_familiarity, category, importance, status, approved) VALUES (";
 $query_string = $query_string . "'" . date("YmdHis", time()) . "', '" . date("YmdHis", time()) . "', ";
 $query_string = $query_string . "'$short_desc', '$long_desc', '$project_name', '$project_url', ";
 $query_string = $query_string . "'$contact_name', '$contact_mail', ";
 $query_string = $query_string . "'$required_skill', '$required_familiarity', '$category', ";
-$query_string = $query_string . "'$importance', '$status')";
+$query_string = $query_string . "'$importance', '$status', ";
+$query_string = $query_string . "'0')";
 
 mysql_query ($query_string);
-print ("Item added. Thank you.<p>");
+print ("<p>Item added. Thank you.</p>\n");
+print ("<p>The item \"<i>$short_desc</i>\" will not show up until someone with administrator access approves it. Mail has been sent to the administrators to alert them that they should review the item you added.</p>");
+
+mail("joakim@ximian.com", "New Todo Item needs review", "There's been a new todo item added to the database, the\nshort description is:\n$short_desc\n\nPlease go to http://www.gnome.org/todo/admin/modify.php3 and review it.\n\n-- \n-The friendly todo system.\n");
 
 } else { # A required field was blank
 echo "You left out a required field.";
