@@ -9,6 +9,7 @@ page_SCRIPTS=go.css                \
                download.html       \
                faq.html            \
                contact.html        \
+               appletstutorial.html \
                orbit-python.pdf    \
                legal.xml           \
                orbit-docs.tar.gz 

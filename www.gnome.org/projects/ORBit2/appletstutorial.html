@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Writing Gnome Applets in Gnome2</title><meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.7"></head>
+<body class="ARTICLE" bgcolor="#ffffff" text="#000000" link="#0000ff" vlink="#840084" alink="#0000ff"><div class="ARTICLE"><div class="TITLEPAGE"><h1 class="TITLE"><a name="AEN2">Writing Gnome Applets in Gnome2</a></h1><h3 class="AUTHOR"><a name="AEN4">Andrew Burton</a></h3><div class="AFFILIATION"><div class="ADDRESS"><p class="ADDRESS"><code class="EMAIL">&lt;<a href="mailto:adb@iinet.net.au">adb@iinet.net.au</a>&gt;</code></p></div></div><div class="REVHISTORY"><table width="100%" border="0"><tbody><tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr><tr><td align="left">Revision 0.02</td><td align="left">15 April 2004</td><td align="left">Revised by: ADB</td></tr><tr><td align="left" colspan="3">Revisions
+based upon feedback from gnome-doc-list mailing list. Use Docbook 4.2,
+improve section on compilation, use appropriate markup for Q and A
+section, amend code.</td></tr><tr><td align="left">Revision 0.01</td><td align="left">13 April 2004</td><td align="left">Revised by: ADB</td></tr><tr><td align="left" colspan="3">Initial development</td></tr></tbody></table></div><div><div class="ABSTRACT"><p></p><a name="AEN21"></a><p>Gnome
+panel applets are cool little apps which sit in the Gnome panel and
+provide simple yet useful functionality to the user. There are a few
+little differences from writing regular Gnome applications; this
+tutorial aims to explain how to create a small panel applet.</p><p></p></div></div><hr></div><div class="TOC"><dl><dt><b>Table of Contents</b></dt><dt>1. <a href="#AEN23">What's An Applet?</a></dt><dt>2. <a href="#AEN30">Building The Infrastructure</a></dt><dt>3. <a href="#AEN72">Making It Interesting</a></dt><dt>4. <a href="#AEN87">Creating A Context Menu</a></dt><dt>5. <a href="#AEN102">Common Questions</a></dt><dt>6. <a href="#AEN123">Conclusion</a></dt><dt>7. <a href="#AEN127">More Information</a></dt></dl></div><div class="SECT1"><h2 class="SECT1"><a name="AEN23">1. What's An Applet?</a></h2><p>In
+Gnome, an applet is a small application, designed to sit in the Gnome
+panel, providing quick and easy access to a control, such as a volume
+control, a network status display, or even a weather gauge.</p><p>Applets
+require the libpanel-applet library to run and if you want to develop
+them, you'll need to install the development package (usually marked as
+-dev or -devel, depending on the distribution). Due to their small
+nature, they're often less complex, and so easier to master for the
+developer new to the Gnome environment.</p><p>A fresh install of a
+Gnome desktop will have the date and a volume applet in the top right
+corner. Laptop users find it useful to have an applet displaying the
+battery life:
+</p><p><img src="appletstutorial_files/applets_in_panel.png"></p><p></p></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN30">2. Building The Infrastructure</a></h2><p>Technically,
+applets are Bonobo controls embedded in the Gnome panel. This means
+that there are a few slight differences to stand-alone Gnome programs.
+The first difference is that each applet requires a 'server' file,
+which contains a description of the Bonobo capabilities. If this
+doesn't make much sense, don't worry. The only thing most developers
+need to do is edit a file, replacing some fields with the specifics of
+their applet.</p><p>Let's have a look at a sample .server file.</p><div class="FIGURE"><a name="AEN34"></a><p><b>Figure 1. Sample .server File</b></p><pre class="PROGRAMLISTING">&lt;oaf_info&gt;
+&lt;oaf_server iid="OAFIID:ExampleApplet_Factory" type="exe"
+            location="/usr/lib/gnome-panel/myexample"&gt;
+
+        &lt;oaf_attribute name="repo_ids" type="stringv"&gt;
+                &lt;item value="IDL:Bonobo/GenericFactory:1.0"/&gt;
+                &lt;item value="IDL:Bonobo/Unknown:1.0"/&gt;
+        &lt;/oaf_attribute&gt;
+        &lt;oaf_attribute name="name" type="string" value="Example Applet Factory"/&gt;
+        &lt;oaf_attribute name="description" type="string" value="Factory to create the example applet"/&gt;
+&lt;/oaf_server&gt;
+
+&lt;oaf_server iid="OAFIID:ExampleApplet" type="factory"
+            location="OAFIID:ExampleApplet_Factory"&gt;
+
+        &lt;oaf_attribute name="repo_ids" type="stringv"&gt;
+                &lt;item value="IDL:GNOME/Vertigo/PanelAppletShell:1.0"/&gt;
+                &lt;item value="IDL:Bonobo/Control:1.0"/&gt;
+                &lt;item value="IDL:Bonobo/Unknown:1.0"/&gt;
+        &lt;/oaf_attribute&gt;
+        &lt;oaf_attribute name="name" type="string" value="Example Applet"/&gt;
+        &lt;oaf_attribute name="description" type="string" value="An example applet"/&gt;
+        &lt;oaf_attribute name="panel:category" type="string" value="Amusements"/&gt;
+        &lt;oaf_attribute name="panel:icon" type="string" value="myicon.png"/&gt;
+&lt;/oaf_server&gt;
+&lt;/oaf_info&gt;</pre></div><p>A
+few things to note. One is the location of our executable file, defined
+by the oaf_server tag in the location value, where the type is "exe".
+In this example, our executable file is called myexample and is placed
+in <tt class="FILENAME">/usr/lib/gnome-panel/</tt>. Secondly, we
+define the name of our applet 'factory', ExampleApplet_Factory. This is
+the name of the .server file, and is usually placed in <tt class="FILENAME">/usr/lib/bonobo/servers/</tt>.</p><p>Once
+we have the .server file written, we can start writing the code for our
+applet. Let's start with a simple example: a "Hello World" applet.</p><div class="FIGURE"><a name="AEN41"></a><p><b>Figure 2. Hello World example</b></p><pre class="PROGRAMLISTING">#include &lt;string.h&gt;
+
+#include &lt;panel-applet.h&gt;
+#include &lt;gtk/gtklabel.h&gt;
+
+static gboolean
+myexample_applet_fill (PanelApplet *applet,
+   const gchar *iid,
+   gpointer data)
+{
+	GtkWidget *label;
+
+	if (strcmp (iid, "OAFIID:ExampleApplet") != 0)
+		return FALSE;
+
+	label = gtk_label_new ("Hello World");
+	gtk_container_add (GTK_CONTAINER (applet), label);
+
+	gtk_widget_show_all (GTK_WIDGET (applet));
+
+	return TRUE;
+}</pre><pre class="PROGRAMLISTING">PANEL_APPLET_BONOBO_FACTORY ("OAFIID:ExampleApplet_Factory",
+                             PANEL_TYPE_APPLET,
+                             "The Hello World Applet",
+                             "0",
+                             myexample_applet_fill,
+                             NULL);</pre></div><p>Compile this code with the following:</p><pre class="SCREEN"><samp class="PROMPT">bash$</samp> <kbd class="USERINPUT">gcc $(pkg-config --cflags --libs libpanelapplet-2.0) -o my_applet my_applet.c</kbd></pre><p>Note that the PKG_CONFIG_PATH environment variable must contain the path to <tt class="FILENAME">libpanelapplet-2.0.pc</tt>. If you get the following error:</p><pre class="SCREEN">Package libpanelapplet-2.0 was not found in the pkg-config search path.
+Perhaps you should add the directory containing `libpanelapplet-2.0.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'libpanelapplet-2.0' found</pre><p>you need to run the following:
+</p><pre class="SCREEN"><samp class="PROMPT">bash$</samp> <kbd class="USERINPUT">PKG_CONFIG_PATH=/usr/lib/pkgconfig</kbd>
+<samp class="PROMPT">bash$</samp> <kbd class="USERINPUT">export $PKG_CONFIG_PATH</kbd></pre>
+<p></p><p>Place the executable in the directory <tt class="FILENAME">/usr/lib/gnome-panel/</tt> (remember this is what we defined in our .server file). Our applet will be represented by the icon <tt class="FILENAME">myicon.png</tt>, which needs to be placed in <tt class="FILENAME">/usr/share/pixmaps/</tt>.</p><p>We add our applet to the panel by right-clicking on the Gnome panel, and choose Add to Panel-&gt;Amusements-&gt;Example Applet.</p><p>How
+does Gnome find the link between our C code and the .server file?
+That's resolved by the call to PANEL_APPLET_BONOBO_FACTORY. This call
+takes a number of important parameters, and the function definition is:
+</p><pre class="PROGRAMLISTING">PANEL_APPLET_BONOBO_FACTORY (iid, type, name, version, callback, data)</pre><p></p><p>The
+first parameter specifies the OAFIID, which is a Bonobo identifier, and
+should be the name of the factory we define in the .server file,
+ExampleApplet_Factory. The second parameter specifies that this is a
+PANEL_TYPE_APPLET, and is required for all panel applets. The third
+parameter is a name which shows up when we query Bonobo for running
+interfaces. The fourth is the version. We also specify the callback,
+the entry method in our source, which is <code class="FUNCTION">myexample_applet_fill()</code>. Lastly, we specify any data to pass to the callback. In our example, we don't pass any, and so use the keyword NULL.</p><p>In our code, the function definition for myexample_applet_fill () is:
+</p><pre class="PROGRAMLISTING">myexample_applet_fill (applet, iid, data)</pre>
+Note that the name of this function must match what we have defined in the factory.<p></p><p>We
+firstly check to make sure that the iid used in the factory matches
+what we have been passed. If not, we abort, otherwise we continue with
+the rest of the method.
+</p><pre class="PROGRAMLISTING">	if (strcmp (iid, "OAFIID:ExampleApplet") != 0)
+		return FALSE;</pre><p></p><p>Currently,
+our main function doesn't have a lot of functionality. We make sure
+that the OAFIID matches what the Bonobo factory is expecting, embed a
+label in the applet widget, and show the widget. Simple, but not very
+useful. All we can really do with our applet as it currently exists is
+what is provided by the Gnome libraries when we right-click on any
+panel applet - we can remove it from the panel, lock it in place, or
+move it. Not exactly rivetting.</p></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN72">3. Making It Interesting</a></h2><p>Let's
+change the widget somewhat by using a small picture instead of the text
+"Hello World". All we need to do is stick a GtkImage into the applet as
+follows:</p><pre class="PROGRAMLISTING">image = gtk_image_new_from_file ("/usr/share/pixmaps/mypicture.png");</pre><p>Then,
+because the GtkImage widget doesn't receive events (it's true!) and so
+won't respond to any mouseclicks, we need to place the GtkImage into a
+GtkEventBox:</p><pre class="PROGRAMLISTING">event_box = gtk_event_box_new ();
+gtk_container_add (GTK_CONTAINER (event_box), image);
+
+g_signal_connect (G_OBJECT (event_box), 
+                  "button_press_event",
+                  G_CALLBACK (on_button_press),
+                  image);</pre><p>Don't forget to delete the existing code that creates the Hello World label.</p><p>Now,
+we need to have the applet do something when we click on the icon in
+the panel. So we need to create a function that handles the mouseclick:</p><div class="FIGURE"><a name="AEN80"></a><p><b>Figure 3. Handling a Mouseclick on our Applet</b></p><pre class="PROGRAMLISTING">static gboolean
+  on_button_press (GtkWidget      *event_box, 
+                         GdkEventButton *event,
+                         gpointer        data)
+  {
+	static int window_shown;
+	static GtkWidget *window, *box, *image, *label;
+	/* Don't react to anything other than the left mouse button;
+	   return FALSE so the event is passed to the default handler */
+	if (event-&gt;button != 1)
+		return FALSE;
+
+	if (!window_shown) {
+		window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+		box = GTK_BOX (gtk_vbox_new (TRUE, 12));
+		gtk_container_add (GTK_CONTAINER (window), box);
+
+		image = GTK_IMAGE (gtk_image_new_from_file ("/usr/share/pixmaps/mypicture.png"));
+		gtk_box_pack_start (GTK_BOX (box), image, TRUE, TRUE, 12);
+
+		label = gtk_label_new ("Hello World");
+		gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 12);
+		
+		gtk_widget_show_all (window);
+	}
+	else
+		gtk_widget_hide (GTK_WIDGET (window));
+
+	window_shown = !window_shown;
+	return TRUE;
+  }</pre></div><p>In
+the above function on_button_press(), we create a new window, and some
+text. When we click the button, the window is shown; when clicked
+again, the window is hidden.</p><p>Here is the screenshot of the window displayed when we click on the applet with the left mouse button:</p><p><img src="appletstutorial_files/applet_window.png"></p></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN87">4. Creating A Context Menu</a></h2><p>When
+we right-click the applet icon on the panel, we get the default menu -
+with the choice of Remove from Panel, Move or Lock. Let's add a few
+more options - a Help button, an About window, and a Preferences option.</p><p>To create the pop-up menu, we need firstly to define the menu. This can be done in the code, as follows:</p><pre class="PROGRAMLISTING">static const char Context_menu_xml [] =
+   "&lt;popup name=\"button3\"&gt;\n"
+   "   &lt;menuitem name=\"Properties Item\" "
+   "             verb=\"ExampleProperties\" "
+   "           _label=\"_Preferences...\"\n"
+   "          pixtype=\"stock\" "
+   "          pixname=\"gtk-properties\"/&gt;\n"
+   "   &lt;menuitem name=\"About Item\" "
+   "             verb=\"ExampleAbout\" "
+   "           _label=\"_About...\"\n"
+   "          pixtype=\"stock\" "
+   "          pixname=\"gnome-stock-about\"/&gt;\n"
+   "&lt;/popup&gt;\n";</pre><p>or in an XML file, loaded at runtime with the method call <code class="FUNCTION">panel_applet_setup_menu_from_file ()</code>.
+The values used here should be simple to understand; we are adding two
+menu items, giving them a name that appears in the menu when the right
+mouse button is clicked, and using stock icons, defined in GtkStockItem.</p><p>Secondly, we need to define Bonobo UI verbs:</p><pre class="PROGRAMLISTING">static const BonoboUIVerb myexample_menu_verbs [] = {
+        BONOBO_UI_VERB ("ExampleProperties", display_properties_dialog),
+        BONOBO_UI_VERB ("ExampleAbout", display_about_dialog),
+        BONOBO_UI_VERB_END
+};</pre><p>This
+links the verbs, specified when we define the menu above, to the
+callbacks we will use. In other words, when the user chooses
+Preferences... from the pop-up menu, our applet will enter the
+display_properties_dialog () function.</p><p>Lastly, we need to construct the menu, tying the above two steps together:</p><pre class="PROGRAMLISTING">panel_applet_setup_menu (PANEL_APPLET (myexample-&gt;applet),
+                         Context_menu_xml,
+                         myexample_menu_verbs,
+                         myexample);</pre><p>Note that the last parameter is the user_data, which we can then use within the callbacks.</p><p>Our callbacks will have the method signature:</p><pre class="PROGRAMLISTING">static void
+myexample_applet_properties_dialog (BonoboUIComponent *uic,
+                                 struct MultiRes *applet) {
+	/* Construct the properties dialog and show it here */
+	...
+}</pre></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN102">5. Common Questions</a></h2><div class="QANDASET"><dl><dt>5.1. <a href="#AEN106">How do I debug my applet? I often use <b class="COMMAND">printf ()</b> calls to see what my code is doing, and I can't do this with an applet!</a></dt><dt>5.2. <a href="#AEN112">I
+don't have an icon for my applet, so I didn't include it in the .server
+file. I can't find my applet in the list of available applets when
+trying to add it to the panel.</a></dt><dt>5.3. <a href="#AEN117">My applet isn't available in the menu Add To Panel.</a></dt></dl><div class="QANDAENTRY"><div class="QUESTION"><p><a name="AEN106"></a><b>5.1. </b>How do I debug my applet? I often use <b class="COMMAND">printf ()</b> calls to see what my code is doing, and I can't do this with an applet!</p></div><div class="ANSWER"><p><b> </b>Start
+your applet from the command line. If you then Add it to the panel,
+you'll notice that all output goes to the console (a tip from Glynn
+Foster).</p></div></div><div class="QANDAENTRY"><div class="QUESTION"><p><a name="AEN112"></a><b>5.2. </b>I
+don't have an icon for my applet, so I didn't include it in the .server
+file. I can't find my applet in the list of available applets when
+trying to add it to the panel.</p></div><div class="ANSWER"><p><b> </b>Applets require an icon to be specified before they can be included in the list of available applets.</p></div></div><div class="QANDAENTRY"><div class="QUESTION"><p><a name="AEN117"></a><b>5.3. </b>My applet isn't available in the menu Add To Panel.</p></div><div class="ANSWER"><p><b> </b>When you compile and install and applet by hand, the applet is installed into <tt class="FILENAME">/usr/local/</tt> by default. Gnome looks for its panel applets in /usr. You can run <b class="COMMAND">./configure --prefix=/usr</b>
+to install your applet to the preferred location. You will also need to
+logout and log back in to Gnome for the applet to become available.</p></div></div></div></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN123">6. Conclusion</a></h2><p>Creating
+a panel applet is not difficult. However, it can be as complex as you
+wish. At some stage, though, you should consider whether the complexity
+of your applet justifies making it a full-blown application. As you add
+more widgets, you may find that using Glade combined with libxml is an
+easier way to build the GUI.</p><p>One important caveat with regard to
+the example used above. I've compiled the applet from the command line
+for simplicity; a real applet would likely use a Makefile; this allows
+for details currently hardcoded (like the location of the icon) to be
+moved to the Makefile, improving maintainability.</p></div><div class="SECT1"><hr><h2 class="SECT1"><a name="AEN127">7. More Information</a></h2><p></p><p></p><ul><li><p>Download
+the example applet created in this tutorial. The tarball also includes
+the appropriate Makefiles required to completely configure and install
+your applets.</p></li><li><p>Gnome applets are available for download in Gnome CVS under the gnome-applets directory.</p></li><li><p>Installing the documentation for libpanel-applet2 gives a great (but incomplete) guide to writing applets.</p></li><li><p>Details on panel applets, including an old tutorial for GTK1.x applets, can be found at <a href="http://developer.gnome.org/arch/gnome/corecomponents/panel/applets.html" target="_top">the Gnome Developer web site</a>.</p></li></ul><p></p></div></div></body></html>
