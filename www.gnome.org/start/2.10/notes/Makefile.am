@@ -57,7 +57,6 @@ nobase_page_DATA = \
 	es/rncredits.html \
 	es/rndocs.html \
 	es/rni18.html \
-
 	id/rnlookingahead.html \
 	id/index.html \
 	id/rnknownissues.html \
