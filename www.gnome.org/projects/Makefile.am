@@ -6,6 +6,7 @@ SUBDIRS = \
 	dia			\
 	evolution		\
 	f-spot			\
+	gedit			\
 	gconf			\
 	gnome-core		\
 	gnome-games		\
