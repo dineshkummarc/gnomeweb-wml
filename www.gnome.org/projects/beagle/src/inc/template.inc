@@ -36,7 +36,7 @@ function template_header($option="") {
 				&ldquo;Unearthing the porn you thought was gone... In front of your boss.&rdquo;
 				*/
 				?>
-				&ldquo;Tagline here!&rdquo;
+				<!-- &ldquo;Tagline here!&rdquo; -->
 			</div>
 		</div>
 		<hr class="clear spacing">
