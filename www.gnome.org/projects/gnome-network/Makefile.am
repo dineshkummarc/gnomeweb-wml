@@ -10,7 +10,7 @@ page_SCRIPTS=index.shtml	\
 		features.shtml	\
 		foot.shtml	\
 		head.shtml	\
-		menu.shtml	\
+		menu.html	\
 		news.shtml	\
 		release.html	\
 		screenshots.shtml
