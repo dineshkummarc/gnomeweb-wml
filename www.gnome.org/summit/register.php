@@ -156,13 +156,6 @@
 	  </td>
 	</tr>
 	<tr>
-	  <td>*Organization Name:</td>
-	  <td>
-	    <input type="text" name="orgname" 
-		   size="30" value="<? echo $orgname ?>">
-	  </td>
-	</tr>
-	<tr>
 	  <td>Address:</td>
 	  <td>
 	    <input type="text" name="addr1" 
