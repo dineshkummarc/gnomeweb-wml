@@ -8,6 +8,7 @@ page_SCRIPTS=index.php \
 	.htaccess \
 	projects \
 	test.php \
+	search.php \
 	trove_help.php
 
 include $(top_srcdir)/rules.common
