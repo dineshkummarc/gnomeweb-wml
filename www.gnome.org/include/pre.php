@@ -72,7 +72,7 @@ if (!$conn) {
 session_set();
 
 //insert this page view into the database
-require('logger.php');
+//require('logger.php');
 
 /*
 

@@ -44,6 +44,7 @@ if ($group_id) {
 	$log_group=0;
 }
 
+/*
 $sql =	"INSERT INTO activity_log "
 	. "(day,hour,group_id,browser,ver,platform,time,page,type) "
 	. "VALUES (" . date('Ymd', mktime()) . ",'" . date('H', mktime())
@@ -51,16 +52,19 @@ $sql =	"INSERT INTO activity_log "
 	. "','" . browser_get_platform() . "','" . time() . "','$PHP_SELF','0');";
 
 $res_logger = db_query ( $sql );
+*/
 
 //
 //	temp hack
 //
 $sys_db_is_dirty=false;
 
+/*
 if (!$res_logger) {
 	echo "An error occured in the logger.\n";
 	echo db_error();
 	exit;
 }
+*/
 
 ?>
