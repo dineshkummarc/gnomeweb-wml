@@ -5,9 +5,9 @@ urlpath = /friends
 page_SCRIPTS = \
 	index.html \
 	thanks.html \
-	donors.php \
-	donors_2002.php \
-	donors_2003.php \
+	donors.html \
+	donors_2002.html \
+	donors_2003.html \
 	check.html
 
 include $(top_srcdir)/rules.common
