@@ -15,6 +15,7 @@ page_SCRIPTS=index.shtml		\
     	    mailing-list.html		\
 	    thumb.gif			\
 	    v8.xsd			\
+	    v10.xsd			\
     	    gnumeric-0.3		\
 	    gnumeric-0.4		\
 	    gnumeric-0.5		\
