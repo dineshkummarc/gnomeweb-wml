@@ -116,7 +116,12 @@ title_texts=\
 	title-nationalwebsite.png\
 	title-relatedprojects.png\
 	title-gnome-distributors.png\
-	title-support-providers.png
+	title-support-providers.png\
+	title-europe.png\
+	title-asia.png\
+	title-americas.png\
+  title-africa.png\
+	title-oceania.png
 
 icons=\
   icon-new.png\
