@@ -19,6 +19,7 @@ page_SCRIPTS=\
 	    print-preview.png		\
 	    print-zoom.png		\
 	    editing.png			\
-	    sample-chart.png
+	    sample-chart.png		\
+	    power-example.png
 
 include $(top_srcdir)/rules.common
