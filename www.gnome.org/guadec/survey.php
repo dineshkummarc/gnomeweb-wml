@@ -38,15 +38,15 @@
       }
       if (! $contactaddress){
         $bad_elements[] = "contactaddress";
-        $errors[] = "Please enter your address.";
-      }
-      if (! $committment){
-        $bad_elements[] = "committment";
-        $errors[] = "Please enter your committment to GNOME.";
+        $errors[] = "Please enter your country of residence.";
       }
       if (! $email) {
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
+      }
+      if (! $committment){
+        $bad_elements[] = "committment";
+        $errors[] = "Please enter your committment to GNOME.";
       }
 
 
@@ -183,7 +183,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="guadec"> I am interested in attending GUADEC in 2003.
+             <input type="checkbox" name="guadec"> * I am interested in attending GUADEC in 2003.
           </td>
         </tr>
         <tr>
