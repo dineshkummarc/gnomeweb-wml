@@ -60,7 +60,7 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.itemLink = self.itemLink + ch[start:start+length]
 
 
-print "<p><img src='/images/news-header.png' width='173' height='22' alt='GNOME news:'>\n<table border='0' cellspacing='0' cellpadding='0' width='40%'>"
+print "<p><a href='http://news.gnome.org/gnome-news/'><img src='/images/news-header.png' width='173' height='22' alt='GNOME news:' border='0'></a>\n<table border='0' cellspacing='0' cellpadding='0' width='40%'>"
 
 
 feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf")
