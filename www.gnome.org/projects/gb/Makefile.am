@@ -13,6 +13,7 @@ page_SCRIPTS=bg.jpg			\
 	    gb-0.0.17			\
 	    gb-0.0.18			\
 	    gb-0.0.19			\
+	    gb-0.0.20			\
 	    gb-tc-vbp.jpeg		\
 	    gnomebasic.png		\
 	    gnomebasic2.png		\
