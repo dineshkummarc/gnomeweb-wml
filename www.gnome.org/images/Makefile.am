@@ -49,7 +49,6 @@ page_DATA=$(menudot_images)	\
 	solid-dot-yellow.gif	\
 	solid-dot-ob1.gif	\
 	solid-dot-brown.gif	\
-	blank.gif		\
-	header1.png
+	blank.gif
 
 EXTRA_DIST=$(page_DATA)

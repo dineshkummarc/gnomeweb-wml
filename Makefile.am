@@ -1,4 +1,4 @@
-SUBDIRS=src
+SUBDIRS=www.gnome.org
 
 install-data-local:
 	$(INSTALL) -d $(prefix)/scripts/php

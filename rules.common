@@ -1,5 +1,5 @@
 SITE=www.gnome.org
-pagedir=$(prefix)/src/$(urlpath)
+pagedir=$(prefix)/$(SITE)/$(urlpath)
 
 %.html: %.wml $(wildcard $(top_srcdir)/include/$(SITE)/*.wml)
 	basepagename=$(basename $(notdir $<)); \
@@ -7,12 +7,3 @@ pagedir=$(prefix)/src/$(urlpath)
 		-DURLDIR=$(urlpath) \
 		-DURL=$(urlpath)/`if [ "$$basepagename" != "index" ]; then echo $$basepagename.html; fi` \
 		-I$(top_srcdir)/include -I$(srcdir) $< > $@
-
-#install-data-local:
-#	mkdir -p $(pagedir)
-#	@[ -n "$(page_DATA)" ] && for i in $(page_DATA); do \
-#		echo "Installing $(pagedir)/$$i"; \
-#		[ -f "$$i" ] && install -m644 $$i $(pagedir)/$$i; \
-#		[ -f "$(srcdir)/$$i" ] && install -m644 $(srcdir)/$$i
-#$(pagedir)/$$i; \
-#	done || :
