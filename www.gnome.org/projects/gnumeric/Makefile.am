@@ -1,8 +1,17 @@
-SUBDIRS= new-pics doc images func-tests new-design-testing announcements changelogs
+SUBDIRS= new-pics doc images func-tests announcements changelogs style
 
 urlpath=/projects/gnumeric
 
 page_SCRIPTS=index.shtml		\
+		accuracy.shtml		\
+		contact-info.shtml	\
+		downloads.shtml		\
+		footer.shtml		\
+		header-begin.shtml	\
+		header-end.shtml	\
+		how-to-help.shtml	\
+		mailing-list.shtml	\
+		to-do.shtml		\
 		credits.shtml		\
 		download.shtml		\
 		faq.shtml		\
