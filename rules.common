@@ -2,9 +2,10 @@ SITE=www.gnome.org
 pagedir=$(prefix)/src/$(urlpath)
 
 %.html: %.wml $(wildcard $(top_srcdir)/include/$(SITE)/*.wml)
+	basepagename=$(basename $(notdir $<)); \
 	wml $(WML_FLAGS) \
 		-DURLDIR=$(urlpath) \
-		-DURL=$(urlpath)/$(basename $<) \
+		-DURL=$(urlpath)/`if [ "$$basepagename" != "index" ]; then echo $$basepagename.html; fi` \
 		-I$(top_srcdir)/include -I$(srcdir) $< > $@
 
 #install-data-local:

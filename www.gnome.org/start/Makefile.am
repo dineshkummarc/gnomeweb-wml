@@ -1,6 +1,6 @@
-SUBDIRS=images start
+SUBDIRS=
 
-urlpath=
+urlpath=/start
 
 page_SCRIPTS=index.html
 
