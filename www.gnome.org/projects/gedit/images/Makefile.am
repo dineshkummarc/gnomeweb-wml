@@ -4,6 +4,7 @@ urlpath=/projects/gedit/images
 
 page_SCRIPTS= \
 	gedit-logo.png \
+	favicon.png \
 	sshot1.png \
 	sshot2.png
 
