@@ -26,7 +26,9 @@ misc_images=\
 	news-bullet.gif\
 	news-header.png\
 	news-header.gif\
-	arrow.png\
+  news-software.png\
+	news-software.gif\
+  arrow.png\
 	arrow.gif
 
 banner_images=\
