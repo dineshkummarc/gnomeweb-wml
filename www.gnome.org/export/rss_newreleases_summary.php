@@ -13,15 +13,13 @@ if ($HTTP_GET_VARS['date'])
 {
 	$date = $HTTP_GET_VARS['date'];
 
-	if (strlen ($date) != 8)
-		bad ();
+	if (strlen ($date) != 8) bad ();
 
 	$y = intval (substr ($date, 0, 4));
 	$m = intval (substr ($date, 4, 2));
 	$d = intval (substr ($date, 6, 2));
 
-	if (!checkdate ($m, $d, $y))
-		bad ();
+	if (!checkdate ($m, $d, $y)) bad ();
 }
 else bad ();
 
@@ -36,6 +34,7 @@ $query = "SELECT groups.group_name AS group_name,"
 	. "frs_release.release_date AS release_date "
 	. "FROM frs_release,groups WHERE "
 	. "frs_release.group_id=groups.group_id "
+	. "AND frs_release.release_date >= '".mktime (0,0,0,$m,$d,$y)."' "
 	. "ORDER BY frs_release.release_date DESC";
 
 //print $query."\n";
