@@ -10,6 +10,7 @@ page_SCRIPTS=go.css              \
                contact.html        \
                faq.html            \
                orbit-python.pdf    \
-               legal.xml           
+               legal.xml           \
+               orbit-docs.tar.gz
 
 include $(top_srcdir)/rules.common
