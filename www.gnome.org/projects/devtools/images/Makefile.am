@@ -11,6 +11,7 @@ page_SCRIPTS=\
 	gladelogo.png\
 	glimmerlogo.png\
 	devtools-header4.png\
-	anjutalogo.png
+	anjutalogo.png\
+	foot.png
 
 include $(top_srcdir)/rules.common
