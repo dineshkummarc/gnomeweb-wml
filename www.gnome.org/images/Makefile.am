@@ -86,7 +86,19 @@ title_texts=\
 	title-userfriendly.png\
 	title-cuttingedge.png\
 	title-developerfriendly.png\
-	title-international.png
+	title-international.png\
+	title-january.png\
+	title-february.png\
+	title-march.png\
+	title-april.png\
+	title-may.png\
+	title-june.png\
+	title-july.png\
+	title-august.png\
+	title-september.png\
+	title-october.png\
+	title-november.png\
+	title-december.png
 
 page_DATA=$(misc_images)	\
 	$(banner_images)	\
