@@ -100,6 +100,13 @@ title_texts=\
 	title-november.png\
 	title-december.png
 
+icons=\
+  icon-new.png\
+	icon-updated.png\
+	icon-shot.png\
+	icon-package.png\
+	icon-home.png
+
 page_DATA=$(misc_images)	\
 	$(banner_images)	\
 	$(popdown_images)	\
@@ -107,6 +114,7 @@ page_DATA=$(misc_images)	\
 	$(sidebar_images)	\
 	$(sidebar_items)	\
 	$(topbar_headers) \
-  $(title_texts)
+  $(title_texts) \
+	$(icons)
 
 EXTRA_DIST=$(page_DATA)
