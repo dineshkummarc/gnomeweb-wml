@@ -34,7 +34,7 @@ if test "$DIE" -eq 1; then
 	exit 1
 fi
 
-(test -f www.gnome.org/index.wml) || {
+(test -d www.gnome.org && test -d www.guadec.org) || {
 	echo "You must run this script in the top-level gnomeweb-wml  directory"
 	exit 1
 }
