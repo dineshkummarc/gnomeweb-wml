@@ -3,373 +3,373 @@ SUBDIRS= images
 urlpath=/projects/gnumeric/doc
 
 page_SCRIPTS= \
-    analysis-tools.html  \
-    authors.html  \
-    autofill.html  \
-    cell-elements.html  \
-    cell-referencing.html  \
-    copying-moving.html  \
-    data-and-time-formatting.html  \
-    editing-selections.html  \
-    editing.html  \
-    files.html  \
-    formatting.html  \
-    formulas.html  \
-    function-reference.html  \
-    index.html  \
-    introduction.html  \
-    license.html  \
-    ln8.html  \
-    menu-bar.html  \
-    number-formatting-overview.html  \
-    print-preview.html  \
-    print-setup.html  \
-    printing.html  \
-    r10014.html  \
-    r10038.html  \
-    r10066.html  \
-    r10086.html  \
-    r10109.html  \
-    r10133.html  \
-    r10161.html  \
-    r10182.html  \
-    r10202.html  \
-    r10229.html  \
-    r10269.html  \
-    r10294.html  \
-    r10323.html  \
-    r10345.html  \
-    r10368.html  \
-    r10395.html  \
-    r10421.html  \
-    r10449.html  \
-    r10469.html  \
-    r10494.html  \
-    r10517.html  \
-    r10541.html  \
-    r10567.html  \
-    r10589.html  \
-    r10613.html  \
-    r10639.html  \
-    r10661.html  \
-    r10686.html  \
-    r10709.html  \
-    r10731.html  \
-    r10760.html  \
-    r10781.html  \
-    r10804.html  \
-    r10826.html  \
-    r10853.html  \
-    r10873.html  \
-    r10899.html  \
-    r10922.html  \
-    r10947.html  \
-    r10970.html  \
-    r10991.html  \
-    r11016.html  \
-    r11040.html  \
-    r11062.html  \
-    r11082.html  \
-    r11102.html  \
-    r11126.html  \
-    r2690.html  \
-    r2714.html  \
-    r2743.html  \
-    r2764.html  \
-    r2788.html  \
-    r2818.html  \
-    r2838.html  \
-    r2860.html  \
-    r2883.html  \
-    r2911.html  \
-    r2932.html  \
-    r2962.html  \
-    r2982.html  \
-    r3006.html  \
-    r3028.html  \
-    r3067.html  \
-    r3090.html  \
-    r3111.html  \
-    r3141.html  \
-    r3181.html  \
-    r3204.html  \
-    r3228.html  \
-    r3252.html  \
-    r3277.html  \
-    r3301.html  \
-    r3324.html  \
-    r3346.html  \
-    r3369.html  \
-    r3398.html  \
-    r3422.html  \
-    r3449.html  \
-    r3473.html  \
-    r3498.html  \
-    r3520.html  \
-    r3547.html  \
-    r3571.html  \
-    r3591.html  \
-    r3613.html  \
-    r3637.html  \
-    r3662.html  \
-    r3685.html  \
-    r3713.html  \
-    r3736.html  \
-    r3756.html  \
-    r3778.html  \
-    r3805.html  \
-    r3828.html  \
-    r3848.html  \
-    r3959.html  \
-    r3984.html  \
-    r4008.html  \
-    r4031.html  \
-    r4060.html  \
-    r4083.html  \
-    r4106.html  \
-    r4133.html  \
-    r4154.html  \
-    r4178.html  \
-    r4207.html  \
-    r4228.html  \
-    r4251.html  \
-    r4273.html  \
-    r4294.html  \
-    r4317.html  \
-    r4337.html  \
-    r4362.html  \
-    r4385.html  \
-    r4409.html  \
-    r4432.html  \
-    r4452.html  \
-    r4475.html  \
-    r4503.html  \
-    r4527.html  \
-    r4547.html  \
-    r4570.html  \
-    r4596.html  \
-    r4621.html  \
-    r4650.html  \
-    r4673.html  \
-    r4700.html  \
-    r4727.html  \
-    r4749.html  \
-    r4771.html  \
-    r4795.html  \
-    r4820.html  \
-    r4843.html  \
-    r4866.html  \
-    r4888.html  \
-    r4913.html  \
-    r4937.html  \
-    r4961.html  \
-    r5002.html  \
-    r5024.html  \
-    r5045.html  \
-    r5066.html  \
-    r5090.html  \
-    r5116.html  \
-    r5136.html  \
-    r5160.html  \
-    r5182.html  \
-    r5204.html  \
-    r5227.html  \
-    r5252.html  \
-    r5279.html  \
-    r5300.html  \
-    r5322.html  \
-    r5345.html  \
-    r5369.html  \
-    r5410.html  \
-    r5430.html  \
-    r5458.html  \
-    r5482.html  \
-    r5506.html  \
-    r5533.html  \
-    r5558.html  \
-    r5578.html  \
-    r5598.html  \
-    r5622.html  \
-    r5647.html  \
-    r5671.html  \
-    r5696.html  \
-    r5720.html  \
-    r5748.html  \
-    r5771.html  \
-    r5798.html  \
-    r5822.html  \
-    r5842.html  \
-    r5865.html  \
-    r5889.html  \
-    r5929.html  \
-    r5952.html  \
-    r5975.html  \
-    r6000.html  \
-    r6025.html  \
-    r6048.html  \
-    r6071.html  \
-    r6094.html  \
-    r6122.html  \
-    r6142.html  \
-    r6165.html  \
-    r6187.html  \
-    r6227.html  \
-    r6252.html  \
-    r6274.html  \
-    r6295.html  \
-    r6320.html  \
-    r6342.html  \
-    r6371.html  \
-    r6395.html  \
-    r6420.html  \
-    r6444.html  \
-    r6471.html  \
-    r6493.html  \
-    r6515.html  \
-    r6541.html  \
-    r6565.html  \
-    r6585.html  \
-    r6612.html  \
-    r6637.html  \
-    r6661.html  \
-    r6684.html  \
-    r6709.html  \
-    r6731.html  \
-    r6754.html  \
-    r6776.html  \
-    r6818.html  \
-    r6841.html  \
-    r6864.html  \
-    r6885.html  \
-    r6917.html  \
-    r6942.html  \
-    r6967.html  \
-    r6987.html  \
-    r7010.html  \
-    r7035.html  \
-    r7059.html  \
-    r7080.html  \
-    r7103.html  \
-    r7128.html  \
-    r7151.html  \
-    r7180.html  \
-    r7204.html  \
-    r7226.html  \
-    r7253.html  \
-    r7275.html  \
-    r7302.html  \
-    r7322.html  \
-    r7348.html  \
-    r7373.html  \
-    r7398.html  \
-    r7422.html  \
-    r7449.html  \
-    r7489.html  \
-    r7515.html  \
-    r7538.html  \
-    r7560.html  \
-    r7583.html  \
-    r7605.html  \
-    r7625.html  \
-    r7650.html  \
-    r7672.html  \
-    r7698.html  \
-    r7721.html  \
-    r7746.html  \
-    r7774.html  \
-    r7804.html  \
-    r7828.html  \
-    r7854.html  \
-    r7874.html  \
-    r7910.html  \
-    r7927.html  \
-    r7949.html  \
-    r7974.html  \
-    r7999.html  \
-    r8023.html  \
-    r8046.html  \
-    r8069.html  \
-    r8092.html  \
-    r8125.html  \
-    r8147.html  \
-    r8174.html  \
-    r8194.html  \
-    r8234.html  \
-    r8257.html  \
-    r8280.html  \
-    r8303.html  \
-    r8327.html  \
-    r8351.html  \
-    r8377.html  \
-    r8399.html  \
-    r8423.html  \
-    r8451.html  \
-    r8474.html  \
-    r8494.html  \
-    r8516.html  \
-    r8543.html  \
-    r8566.html  \
-    r8588.html  \
-    r8612.html  \
-    r8645.html  \
-    r8673.html  \
-    r8697.html  \
-    r8719.html  \
-    r8747.html  \
-    r8773.html  \
-    r8796.html  \
-    r8819.html  \
-    r8847.html  \
-    r8871.html  \
-    r8896.html  \
-    r8924.html  \
-    r8951.html  \
-    r8969.html  \
-    r8993.html  \
-    r9021.html  \
-    r9049.html  \
-    r9072.html  \
-    r9094.html  \
-    r9117.html  \
-    r9137.html  \
-    r9165.html  \
-    r9186.html  \
-    r9209.html  \
-    r9233.html  \
-    r9257.html  \
-    r9285.html  \
-    r9308.html  \
-    r9337.html  \
-    r9359.html  \
-    r9383.html  \
-    r9404.html  \
-    r9428.html  \
-    r9451.html  \
-    r9476.html  \
-    r9499.html  \
-    r9519.html  \
-    r9540.html  \
-    r9565.html  \
-    r9594.html  \
-    r9619.html  \
-    r9639.html  \
-    r9659.html  \
-    r9681.html  \
-    r9703.html  \
-    r9727.html  \
-    r9753.html  \
-    r9774.html  \
-    r9815.html  \
-    r9843.html  \
-    r9863.html  \
-    r9903.html  \
-    r9924.html  \
-    r9947.html  \
-    r9988.html  \
-    rest.html  \
-    selecting-cells-entering-formulas.html  \
-    solver.html  \
-    toolbar-buttons.html  \
-    tutorials.html 
+analysis-tools.html 	\
+authors.html 	\
+autofill.html 	\
+cell-elements.html 	\
+cell-referencing.html 	\
+copying-moving.html 	\
+data-and-time-formatting.html 	\
+editing-selections.html 	\
+editing.html 	\
+files.html 	\
+formatting.html 	\
+formulas.html 	\
+function-reference.html 	\
+index.html 	\
+introduction.html 	\
+license.html 	\
+ln8.html 	\
+menu-bar.html 	\
+number-formatting-overview.html 	\
+print-preview.html 	\
+print-setup.html 	\
+printing.html 	\
+r10002.html 	\
+r10028.html 	\
+r10052.html 	\
+r10080.html 	\
+r10100.html 	\
+r10123.html 	\
+r10147.html 	\
+r10175.html 	\
+r10196.html 	\
+r10216.html 	\
+r10243.html 	\
+r10283.html 	\
+r10308.html 	\
+r10337.html 	\
+r10359.html 	\
+r10382.html 	\
+r10409.html 	\
+r10435.html 	\
+r10463.html 	\
+r10483.html 	\
+r10508.html 	\
+r10531.html 	\
+r10555.html 	\
+r10581.html 	\
+r10603.html 	\
+r10627.html 	\
+r10653.html 	\
+r10675.html 	\
+r10700.html 	\
+r10723.html 	\
+r10745.html 	\
+r10774.html 	\
+r10795.html 	\
+r10818.html 	\
+r10840.html 	\
+r10867.html 	\
+r10887.html 	\
+r10913.html 	\
+r10936.html 	\
+r10961.html 	\
+r10984.html 	\
+r11005.html 	\
+r11030.html 	\
+r11054.html 	\
+r11076.html 	\
+r11096.html 	\
+r11116.html 	\
+r11141.html 	\
+r2697.html 	\
+r2721.html 	\
+r2750.html 	\
+r2771.html 	\
+r2795.html 	\
+r2825.html 	\
+r2845.html 	\
+r2867.html 	\
+r2890.html 	\
+r2918.html 	\
+r2939.html 	\
+r2969.html 	\
+r2989.html 	\
+r3013.html 	\
+r3035.html 	\
+r3074.html 	\
+r3097.html 	\
+r3118.html 	\
+r3148.html 	\
+r3188.html 	\
+r3211.html 	\
+r3235.html 	\
+r3259.html 	\
+r3289.html 	\
+r3313.html 	\
+r3336.html 	\
+r3358.html 	\
+r3381.html 	\
+r3410.html 	\
+r3434.html 	\
+r3461.html 	\
+r3485.html 	\
+r3510.html 	\
+r3532.html 	\
+r3559.html 	\
+r3583.html 	\
+r3603.html 	\
+r3625.html 	\
+r3649.html 	\
+r3674.html 	\
+r3697.html 	\
+r3725.html 	\
+r3748.html 	\
+r3768.html 	\
+r3790.html 	\
+r3817.html 	\
+r3840.html 	\
+r3860.html 	\
+r3971.html 	\
+r3996.html 	\
+r4020.html 	\
+r4043.html 	\
+r4072.html 	\
+r4095.html 	\
+r4118.html 	\
+r4145.html 	\
+r4166.html 	\
+r4190.html 	\
+r4219.html 	\
+r4240.html 	\
+r4263.html 	\
+r4285.html 	\
+r4306.html 	\
+r4329.html 	\
+r4349.html 	\
+r4374.html 	\
+r4397.html 	\
+r4421.html 	\
+r4444.html 	\
+r4464.html 	\
+r4487.html 	\
+r4515.html 	\
+r4539.html 	\
+r4559.html 	\
+r4582.html 	\
+r4608.html 	\
+r4633.html 	\
+r4662.html 	\
+r4685.html 	\
+r4712.html 	\
+r4739.html 	\
+r4761.html 	\
+r4783.html 	\
+r4807.html 	\
+r4832.html 	\
+r4855.html 	\
+r4878.html 	\
+r4900.html 	\
+r4925.html 	\
+r4949.html 	\
+r4973.html 	\
+r5014.html 	\
+r5036.html 	\
+r5057.html 	\
+r5078.html 	\
+r5102.html 	\
+r5128.html 	\
+r5148.html 	\
+r5172.html 	\
+r5194.html 	\
+r5216.html 	\
+r5239.html 	\
+r5265.html 	\
+r5292.html 	\
+r5313.html 	\
+r5335.html 	\
+r5358.html 	\
+r5382.html 	\
+r5423.html 	\
+r5443.html 	\
+r5471.html 	\
+r5495.html 	\
+r5519.html 	\
+r5546.html 	\
+r5571.html 	\
+r5591.html 	\
+r5611.html 	\
+r5635.html 	\
+r5660.html 	\
+r5684.html 	\
+r5709.html 	\
+r5733.html 	\
+r5761.html 	\
+r5784.html 	\
+r5811.html 	\
+r5835.html 	\
+r5855.html 	\
+r5878.html 	\
+r5902.html 	\
+r5942.html 	\
+r5965.html 	\
+r5988.html 	\
+r6013.html 	\
+r6038.html 	\
+r6061.html 	\
+r6084.html 	\
+r6107.html 	\
+r6135.html 	\
+r6155.html 	\
+r6178.html 	\
+r6200.html 	\
+r6240.html 	\
+r6265.html 	\
+r6287.html 	\
+r6308.html 	\
+r6333.html 	\
+r6355.html 	\
+r6384.html 	\
+r6408.html 	\
+r6433.html 	\
+r6457.html 	\
+r6484.html 	\
+r6506.html 	\
+r6529.html 	\
+r6555.html 	\
+r6579.html 	\
+r6599.html 	\
+r6626.html 	\
+r6651.html 	\
+r6675.html 	\
+r6698.html 	\
+r6723.html 	\
+r6745.html 	\
+r6768.html 	\
+r6790.html 	\
+r6832.html 	\
+r6855.html 	\
+r6878.html 	\
+r6899.html 	\
+r6931.html 	\
+r6956.html 	\
+r6981.html 	\
+r7001.html 	\
+r7024.html 	\
+r7049.html 	\
+r7073.html 	\
+r7094.html 	\
+r7117.html 	\
+r7142.html 	\
+r7165.html 	\
+r7194.html 	\
+r7218.html 	\
+r7240.html 	\
+r7267.html 	\
+r7289.html 	\
+r7316.html 	\
+r7336.html 	\
+r7362.html 	\
+r7387.html 	\
+r7412.html 	\
+r7436.html 	\
+r7463.html 	\
+r7503.html 	\
+r7529.html 	\
+r7552.html 	\
+r7574.html 	\
+r7597.html 	\
+r7619.html 	\
+r7639.html 	\
+r7664.html 	\
+r7686.html 	\
+r7712.html 	\
+r7735.html 	\
+r7760.html 	\
+r7788.html 	\
+r7818.html 	\
+r7842.html 	\
+r7868.html 	\
+r7888.html 	\
+r7924.html 	\
+r7941.html 	\
+r7963.html 	\
+r7988.html 	\
+r8013.html 	\
+r8037.html 	\
+r8060.html 	\
+r8083.html 	\
+r8106.html 	\
+r8139.html 	\
+r8161.html 	\
+r8188.html 	\
+r8208.html 	\
+r8248.html 	\
+r8271.html 	\
+r8294.html 	\
+r8317.html 	\
+r8341.html 	\
+r8365.html 	\
+r8391.html 	\
+r8413.html 	\
+r8437.html 	\
+r8465.html 	\
+r8488.html 	\
+r8508.html 	\
+r8530.html 	\
+r8557.html 	\
+r8580.html 	\
+r8602.html 	\
+r8626.html 	\
+r8659.html 	\
+r8687.html 	\
+r8711.html 	\
+r8733.html 	\
+r8761.html 	\
+r8787.html 	\
+r8810.html 	\
+r8833.html 	\
+r8861.html 	\
+r8885.html 	\
+r8910.html 	\
+r8938.html 	\
+r8965.html 	\
+r8983.html 	\
+r9007.html 	\
+r9035.html 	\
+r9063.html 	\
+r9086.html 	\
+r9108.html 	\
+r9131.html 	\
+r9151.html 	\
+r9179.html 	\
+r9200.html 	\
+r9223.html 	\
+r9247.html 	\
+r9271.html 	\
+r9299.html 	\
+r9322.html 	\
+r9351.html 	\
+r9373.html 	\
+r9397.html 	\
+r9418.html 	\
+r9442.html 	\
+r9465.html 	\
+r9490.html 	\
+r9513.html 	\
+r9533.html 	\
+r9554.html 	\
+r9579.html 	\
+r9608.html 	\
+r9633.html 	\
+r9653.html 	\
+r9673.html 	\
+r9695.html 	\
+r9717.html 	\
+r9741.html 	\
+r9767.html 	\
+r9788.html 	\
+r9829.html 	\
+r9857.html 	\
+r9877.html 	\
+r9917.html 	\
+r9938.html 	\
+r9961.html 	\
+rest.html 	\
+selecting-cells-entering-formulas.html 	\
+solver.html 	\
+toolbar-buttons.html 	\
+tutorials.html
 
 include $(top_srcdir)/rules.common
