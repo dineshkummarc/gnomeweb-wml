@@ -39,6 +39,7 @@ $output = '<?xml version="1.0"?>
 ';
 
 $query = "SELECT groups.group_name AS group_name,"
+	. "groups.unix_group_name AS unix_group_name,"
 	. "groups.group_id AS group_id,"
 	. "groups.short_description AS short_description,"
 	. "groups.mini_description AS mini_description,"
