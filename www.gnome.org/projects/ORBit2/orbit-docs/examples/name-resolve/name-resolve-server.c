@@ -8,11 +8,12 @@
 #include <string.h>
 #include <signal.h>
 #include <orbit/orbit.h>
+#include <ORBitservices/CosNaming.h>
 
-#include "badcall.h"
-#include "badcall-skelimpl.c" 
+#include "name-resolve.h"
+#include "name-resolve-skelimpl.c" 
 
-#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+#include "examples-toolkit.h" /* etk_ functions */ 
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
 	
@@ -39,7 +40,8 @@ server_shutdown (int sig)
  * echo_server_shutdown function in case of SIGINT and SIGTERM
  * signals.  If error occures @ev points to exception object on
  * return.
- */static 
+ */
+static 
 void 
 server_init (int               *argc_ptr, 
 	     char              *argv[],
@@ -63,11 +65,11 @@ server_init (int               *argc_ptr,
  * on return.
  */
 static 
-Examples_BadCall
+Examples_NameResolve_Factory
 server_activate_service (CORBA_ORB         orb,
 			 CORBA_Environment *ev)
 {
-	Examples_BadCall           servant     = CORBA_OBJECT_NIL; 
+	Examples_NameResolve_Factory servant     = CORBA_OBJECT_NIL; 
 	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
 	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
@@ -81,7 +83,7 @@ server_activate_service (CORBA_ORB         orb,
 
        /* create servant in context of poa container */
 
-	servant = impl_Examples_BadCall__create (poa, ev);
+	servant = impl_Examples_NameResolve_Factory__create (poa, ev);
 	if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
 	
         /* activate POA Manager */
@@ -94,6 +96,7 @@ server_activate_service (CORBA_ORB         orb,
 
 	return servant;
 }
+
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
@@ -142,9 +145,10 @@ server_cleanup (CORBA_ORB                 orb,
 int
 main (int argc, char *argv[])
 {
-	CORBA_char filename[] = "badcall.ior";
-
-	Examples_BadCall servant = CORBA_OBJECT_NIL;
+	gchar *id_vec[] = {"Examples", "NameResolve", "Factory", NULL};
+ 
+	CosNaming_NamingContext name_service = CORBA_OBJECT_NIL;
+        CORBA_Object            servant      = CORBA_OBJECT_NIL;
 
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
@@ -155,13 +159,21 @@ main (int argc, char *argv[])
 	servant = server_activate_service (global_orb, ev);
 	etk_abort_if_exception(ev, "activating service failed");
 
-	g_print ("Writing service reference to: %s\n\n", filename);
+	/* ******************************************** */ 
 
-	etk_export_object_to_file (global_orb, 
-				   servant, 
-				   filename, 
-				   ev);
-	etk_abort_if_exception(ev, "exporting IOR failed");
+ 	g_print ("Binding service to name: /%s/%s/%s\n\n", 
+		 id_vec[0], id_vec[1], id_vec[2]);
+
+	name_service = etk_get_name_service (global_orb, ev);
+	etk_abort_if_exception(ev, "boostrapping name-service failed");
+
+	etk_name_service_bind (name_service, 
+			       servant,
+			       id_vec, 
+			       ev);
+	etk_abort_if_exception(ev, "binding service failed");
+
+	/* ******************************************** */ 
 	
 	server_run (global_orb, ev);
 	etk_abort_if_exception(ev, "entering main loop failed");

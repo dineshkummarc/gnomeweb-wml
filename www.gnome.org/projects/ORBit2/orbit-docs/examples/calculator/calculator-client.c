@@ -8,29 +8,7 @@
 
 #include "calculator.h"
 
-/** 
- * test for exception 
- */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) 
-{
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  
- */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
+#include "examples-toolkit.h"
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -47,7 +25,7 @@ client_shutdown (int sig)
         if (global_orb != CORBA_OBJECT_NIL)
         {
                 CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
-                abort_if_exception (local_ev, "caught exception");
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
  
@@ -74,7 +52,7 @@ client_init (int               *argc_ptr,
         /* create Object Request Broker (ORB) */
          
         (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -88,64 +66,16 @@ client_cleanup (CORBA_ORB                 orb,
 {
         /* releasing managed object */
         CORBA_Object_release(service, ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
-                if (raised_exception(ev)) return;
+                if (etk_raised_exception(ev)) return;
         }
 }
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
-{
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
-    
-	fscanf (stream, "%as", &objref);  /* FIXME, handle input error */ 
-	
-	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);
-	free (objref);
-	
-	return obj;
-}
-
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_file (CORBA_ORB          orb,
-				 char              *filename,
-				 CORBA_Environment *ev)
-{
-        CORBA_Object  obj    = NULL;
-        FILE         *file   = NULL;
- 
-        /* write objref to file */
-         
-        if ((file=fopen(filename, "r"))==NULL)
-                g_error ("could not open %s\n", filename);
-    
-	obj=client_import_service_from_stream (orb, file, ev);
-	
-	fclose (file);
-
-	return obj;
-}
-
 
 /**
  *
@@ -162,7 +92,7 @@ client_run (Calculator         service,
          */
 	
         result = Calculator_add(service, 1.0, 2.0, ev);
-        if (raised_exception (ev)) return;
+        if (etk_raised_exception (ev)) return;
 	
         /* prints results to console */
         g_print("Result: 1.0 + 2.0 = %2.0f\n", result);
@@ -183,20 +113,20 @@ main(int argc, char* argv[])
         CORBA_exception_init(ev);
 
 	client_init (&argc, argv, &global_orb, ev);
-	abort_if_exception(ev, "init failed");
+	etk_abort_if_exception(ev, "init failed");
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	service = (Calculator) client_import_service_from_file (global_orb,
-								filename,
-								ev);
-        abort_if_exception(ev, "import service failed");
+	service = (Calculator) etk_import_object_from_file (global_orb,
+							       filename,
+							       ev);
+        etk_abort_if_exception(ev, "import service failed");
 
 	client_run (service, ev);
-        abort_if_exception(ev, "service not reachable");
+        etk_abort_if_exception(ev, "service not reachable");
  
 	client_cleanup (global_orb, service, ev);
-        abort_if_exception(ev, "cleanup failed");
+        etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }

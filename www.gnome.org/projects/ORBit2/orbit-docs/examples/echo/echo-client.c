@@ -18,29 +18,6 @@
 
 #include "echo.h"
 
-/** 
- * test for exception 
- */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) 
-{
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  
- */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -57,7 +34,7 @@ client_shutdown (int sig)
         if (global_orb != CORBA_OBJECT_NIL)
         {
                 CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
-                abort_if_exception (local_ev, "caught exception");
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
  
@@ -84,7 +61,7 @@ client_init (int               *argc_ptr,
         /* create Object Request Broker (ORB) */
          
         (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -98,14 +75,14 @@ client_cleanup (CORBA_ORB                 orb,
 {
         /* releasing managed object */
         CORBA_Object_release(service, ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
-                if (raised_exception(ev)) return;
+                if (etk_raised_exception(ev)) return;
         }
 }
 
@@ -181,7 +158,7 @@ client_run (Echo  echo_service,
 		 * echo.idl */
 
 		Echo_echoString(echo_service,filebuffer,ev);
-		if (raised_exception (ev)) return;
+		if (etk_raised_exception (ev)) return;
 	}
 }
 
@@ -199,20 +176,20 @@ main(int argc, char* argv[])
         CORBA_exception_init(ev);
 
 	client_init (&argc, argv, &global_orb, ev);
-	abort_if_exception(ev, "init failed");
+	etk_abort_if_exception(ev, "init failed");
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
 	echo_service = (Echo) client_import_service_from_file (global_orb,
 							       "echo.ior",
 							       ev);
-        abort_if_exception(ev, "import service failed");
+        etk_abort_if_exception(ev, "import service failed");
 
 	client_run (echo_service, ev);
-        abort_if_exception(ev, "service not reachable");
+        etk_abort_if_exception(ev, "service not reachable");
  
 	client_cleanup (global_orb, echo_service, ev);
-        abort_if_exception(ev, "cleanup failed");
+        etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }

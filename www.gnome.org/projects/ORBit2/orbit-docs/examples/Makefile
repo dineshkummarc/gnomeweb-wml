@@ -1,21 +1,27 @@
 
 all:
-	$(MAKE) -C echo       all 
-	$(MAKE) -C calculator all
-	$(MAKE) -C account    all
-	$(MAKE) -C byteseq    all
-	$(MAKE) -C badcall    all
+	$(MAKE) -C echo         all 
+	$(MAKE) -C calculator   all
+	$(MAKE) -C account      all
+	$(MAKE) -C byteseq      all
+	$(MAKE) -C badcall      all
+	$(MAKE) -C name-resolve all
 
 clean:
-	$(MAKE) -C echo       clean
-	$(MAKE) -C calculator clean
-	$(MAKE) -C account    clean
-	$(MAKE) -C byteseq    clean
-	$(MAKE) -C badcall    clean
+	rm -rf *~
+	$(MAKE) -C echo         clean
+	$(MAKE) -C calculator   clean
+	$(MAKE) -C account      clean
+	$(MAKE) -C byteseq      clean
+	$(MAKE) -C badcall      clean
+	$(MAKE) -C name-resolve clean
 
-distclean:
-	$(MAKE) -C echo       distclean
-	$(MAKE) -C calculator distclean
-	$(MAKE) -C account    distclean
-	$(MAKE) -C byteseq    distclean
-	$(MAKE) -C badcall    distclean
+distclean: 
+	rm -rf *~
+	$(MAKE) -C echo         distclean
+	$(MAKE) -C calculator   distclean
+	$(MAKE) -C account      distclean
+	$(MAKE) -C byteseq      distclean
+	$(MAKE) -C badcall      distclean
+	$(MAKE) -C name-resolve distclean
+

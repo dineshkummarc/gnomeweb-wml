@@ -37,68 +37,6 @@ impl_Examples_ByteSeq_Storage_exchange(impl_POA_Examples_ByteSeq_Storage *
 				       Examples_ByteSeq_Chunk * chunk,
 				       CORBA_Environment * ev);
 
-static
-Examples_ByteSeq_Chunk*
-chunk_create (CORBA_long maximum)
-{
-        Examples_ByteSeq_Chunk* chunk = Examples_ByteSeq_Chunk__alloc();
-        /* FIXME, handle out of memory */
-        chunk->_buffer  = Examples_ByteSeq_Chunk_allocbuf (maximum);
-        /* FIXME, handle out of memory */
-        chunk->_maximum = maximum;
-        chunk->_length  = 0;
-
-	/* lifetime of _buffer corresponds to chunk */
-	CORBA_sequence_set_release (chunk, TRUE);
-
-        return chunk;
-}
-
-static
-void
-chunk_exchange (Examples_ByteSeq_Chunk* c, 
-		Examples_ByteSeq_Chunk* d)
-{
-	Examples_ByteSeq_Chunk bucket[1];
-	
-	bucket->_buffer  = c->_buffer;
-	bucket->_maximum = c->_maximum;
-	bucket->_length  = c->_length;
-	/* do not copy  c->_release */
-
-	c->_buffer  = d->_buffer;
-	c->_maximum = d->_maximum;
-	c->_length  = d->_length;
-	/* keep original c->_release */
-
-	d->_buffer  = bucket->_buffer;
-	d->_maximum = bucket->_maximum;
-	d->_length  = bucket->_length;
-	/* keep original d->_release */
-}
-
-static
-Examples_ByteSeq_Chunk*
-chunk_clone (const Examples_ByteSeq_Chunk* chunk)
-{
-        CORBA_long i = 0;
-	Examples_ByteSeq_Chunk* clone = Examples_ByteSeq_Chunk__alloc ();
-
-        clone->_buffer  = Examples_ByteSeq_Chunk_allocbuf (chunk->_maximum);
-	clone->_maximum = chunk->_maximum;
-	clone->_length  = chunk->_length;
-
-	/* lifetime of _buffer corresponds to chunk */
-	CORBA_sequence_set_release (clone, TRUE);
-
-        for (i=0; i<(chunk->_length); ++i)
-        {
-                clone->_buffer[i] = chunk->_buffer[i];
-        }
-                                                                               
-        return clone;
-}
-
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Examples_ByteSeq_Storage_base_epv
@@ -144,7 +82,7 @@ impl_Examples_ByteSeq_Storage__create(PortableServer_POA poa,
     * private attributes must be initialized.  */
 
    /* ------ init private attributes here ------ */
-   newservant->chunk = chunk_create (1024); /* FIXME, handle out of memory */
+   newservant->chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64);
    /* ------ ---------- end ------------- ------ */
 
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
@@ -176,9 +114,15 @@ impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
 {
    /* ------   insert method code here   ------ */
    fprintf (stderr, "!");
- 
-   CORBA_free (servant->chunk);
-   servant->chunk = chunk_clone (chunk);
+
+   ORBit_sequence_set_size (servant->chunk, chunk->_length);
+   
+   { 
+	   CORBA_long i=0;
+	   for (i = 0; i < chunk->_length; ++i)
+		   ORBit_sequence_index (servant->chunk, i) 
+			   = ORBit_sequence_index (chunk, i);
+   }
    /* ------ ---------- end ------------ ------ */
 }
 
@@ -191,7 +135,15 @@ impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage * servant,
    /* ------   insert method code here   ------ */
    fprintf (stderr, ".");
 
-   retval = chunk_clone (servant->chunk);
+   retval = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,
+				  servant->chunk->_length);
+   
+   { 
+	   CORBA_long i=0;
+	   for (i = 0; i < servant->chunk->_length; ++i)
+		   ORBit_sequence_index (retval, i) 
+			   = ORBit_sequence_index (servant->chunk, i);
+   }
    /* ------ ---------- end ------------ ------ */
 
    return retval;
@@ -206,6 +158,11 @@ impl_Examples_ByteSeq_Storage_exchange(impl_POA_Examples_ByteSeq_Storage *
    /* ------   insert method code here   ------ */
    fprintf (stderr, "#");
 
-   chunk_exchange (servant->chunk, chunk);
+   /* cross over copy */
+   { 
+	   Examples_ByteSeq_Chunk tmp = *chunk;
+	   *chunk            = *(servant->chunk); 
+	   *(servant->chunk) = tmp; 
+   }
    /* ------ ---------- end ------------ ------ */
 }

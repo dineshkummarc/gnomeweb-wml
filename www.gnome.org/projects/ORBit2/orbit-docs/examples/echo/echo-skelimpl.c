@@ -85,6 +85,6 @@ impl_Echo_echoString(impl_POA_Echo * servant,
 		     const CORBA_char * input, CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-	g_print ("%s\n", input);
+   g_print ("%s\n", input);
    /* ------ ---------- end ------------ ------ */
 }

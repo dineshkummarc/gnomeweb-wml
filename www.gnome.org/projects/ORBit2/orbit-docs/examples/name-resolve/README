@@ -1,0 +1,25 @@
+name-resolve example demonstrates how to handle common name-service
+for bootstraping. Often the name-service is the only service whose
+address is known in advance, used by server to offer specific services
+under abstract name, and used by client to resolve abstract names to
+get in touch to these services. Please use two terminals, one for
+server and one for client.
+ 
+At first start a CORBA name-service. You can use the name-service
+shipped with ORBit, ORBit2, Mico, ORBacus, or any other CORBA
+environment. 
+
+If using the name-service of ORBit it will print its stringified
+object reference, IOR, to terminal.
+
+[frehberg@localhost name-resolve]$ orbit-name-server
+IOR:010000002800000049444c3a6f6d672e6f72672f436f734e616d696e672f4e616d696e67436f6e746578743a312e300001000000caaedfba54000000010100002c0000002f746d702f6f726269742d66726568626572672f6f72622d31353436373236353138313734303633393635000000000018000000000000007f45d3327faee11c0100000029b216af9dd6ab01
+
+
+To start the name-resolve-server and name-resolve-client you must
+specifiy the reference of name-service to both programs. This is done
+using the standard CORBA option -ORBInitRef:
+
+[frehberg@localhost name-resolve]$ ./name-resolve-server -ORBInitRef NameService=IOR:010000002800000049444c3a6f6d672e6f72672f436f734e616d696e672f4e616d696e67436f6e746578743a312e300001000000caaedfba54000000010100002c0000002f746d702f6f726269742d66726568626572672f6f72622d31353436373236353138313734303633393635000000000018000000000000007f45d3327faee11c0100000029b216af9dd6ab01 &
+
+[frehberg@localhost name-resolve]$ ./name-resolve-client -ORBInitRef NameService=IOR:010000002800000049444c3a6f6d672e6f72672f436f734e616d696e672f4e616d696e67436f6e746578743a312e300001000000caaedfba54000000010100002c0000002f746d702f6f726269742d66726568626572672f6f72622d31353436373236353138313734303633393635000000000018000000000000007f45d3327faee11c0100000029b216af9dd6ab01 

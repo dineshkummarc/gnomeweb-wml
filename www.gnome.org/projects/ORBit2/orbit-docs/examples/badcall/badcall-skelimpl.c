@@ -136,7 +136,7 @@ impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
 		   = Examples_BadCall_SingleParam__alloc();
 
 	   ex_parameters->mesg 
-		   = CORBA_string_dup ("describing the problem for client");
+		   = CORBA_string_dup ("raised in \"" __FILE__ "\"");
 
 	   /* after user has assinged exception attributes, user may
 	    * not touch the data anymore, ownership is handed over to

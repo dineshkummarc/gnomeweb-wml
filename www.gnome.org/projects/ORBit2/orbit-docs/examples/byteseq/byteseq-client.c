@@ -10,30 +10,8 @@
 
 #include "byteseq.h"
 
-/** 
- * test for exception 
- */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) 
-{
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  
- */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
-
+#include "examples-toolkit.h" /* ie. etk_etk_abort_if_exception() */
+ 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
@@ -49,7 +27,7 @@ client_shutdown (int sig)
         if (global_orb != CORBA_OBJECT_NIL)
         {
                 CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
-                abort_if_exception (local_ev, "caught exception");
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
  
@@ -76,7 +54,7 @@ client_init (int               *argc_ptr,
         /* create Object Request Broker (ORB) */
          
         (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -90,81 +68,15 @@ client_cleanup (CORBA_ORB                 orb,
 {
         /* releasing managed object */
         CORBA_Object_release(servant, ev);
-        if (raised_exception(ev)) return;
+        if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
-                if (raised_exception(ev)) return;
+                if (etk_raised_exception(ev)) return;
         }
-}
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
-{
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
-    
-	fscanf (stream, "%as", &objref);  /* FIXME, handle input error */ 
-	
-	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);
-	free (objref);
-	
-	return (Examples_ByteSeq_Storage) obj;
-}
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_file (CORBA_ORB          orb,
-                                 CORBA_char        *filename,
-                                 CORBA_Environment *ev)
-{
-        CORBA_Object  obj    = NULL;
-        FILE         *file   = NULL;
-  
-        /* write objref to file */
-          
-        if ((file=fopen(filename, "r"))==NULL)
-                g_error ("could not open %s\n", filename);
-     
-        obj= client_import_service_from_stream (orb, file, ev);
-         
-        fclose (file);
- 
-        return obj;
-}
- 
-/**
- *
- */
-static
-Examples_ByteSeq_Chunk*
-chunk_create (CORBA_long maximum)
-{
-        Examples_ByteSeq_Chunk* chunk = Examples_ByteSeq_Chunk__alloc();
-        /* FIXME, handle out of memory */
-        chunk->_buffer  = Examples_ByteSeq_Chunk_allocbuf (maximum);
-        /* FIXME, handle out of memory */
-        chunk->_maximum = maximum;
-        chunk->_length  = 0;
-
-	/* lifetime of _buffer corresponds to chunk */
-	CORBA_sequence_set_release (chunk, TRUE);         
-
-        return chunk;
 }
 
 /**
@@ -175,23 +87,33 @@ void
 client_run_set (Examples_ByteSeq_Storage  servant,
 		CORBA_Environment        *ev)
 {
-	CORBA_long maximum=2048;
-	CORBA_long length =0;
+
+	CORBA_long LEN      = 4*1024; /* 4KB */ 
+	CORBA_long ITER     = 1000; 
+
+	CORBA_long iter     = 0; 
 
 	Examples_ByteSeq_Chunk* chunk = NULL;
 
-	chunk = chunk_create (maximum+1);
 
-	/* increment sequence length, beginning with 0 up to 2048 */
-	for (length=0; length<maximum+1; length+=8)
+	/* flood service witth large chunks of byte streams */
+	for (iter = 0; iter < ITER; ++iter)
 	{
-		Examples_ByteSeq_Storage_set (servant, chunk, ev); 
-		if (raised_exception(ev)) return;
+		CORBA_long len      = 0; 
+		CORBA_octet elem    = 'A';
 
-		chunk->_buffer [(length+1) % maximum] = (CORBA_octet) 0xFF;
-		chunk->_length = ((length+1) % maximum) + 1;
+		g_print ("!");
+
+		chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 
+					      1024);
+		for (len = 0; len < LEN; ++len)
+			ORBit_sequence_append (chunk, &elem);
+
+		Examples_ByteSeq_Storage_set (servant, chunk, ev); 
+		if (etk_raised_exception(ev)) return;
+
+		CORBA_free (chunk);
 	}
-	CORBA_free (chunk);
 }
 
 /**
@@ -210,8 +132,10 @@ client_run_get (Examples_ByteSeq_Storage  servant,
 	/* increment sequence length, beginning with 0 up to 2048 */
 	for (i=0; i<n; ++i)
 	{
+		g_print ("?");
+
 		chunk = Examples_ByteSeq_Storage_get (servant, ev); 
-		if (raised_exception(ev)) return;
+		if (etk_raised_exception(ev)) return;
 
  		CORBA_free (chunk);
 	}
@@ -225,21 +149,39 @@ void
 client_run_exchange (Examples_ByteSeq_Storage  servant,
 		     CORBA_Environment        *ev)
 {
-	CORBA_long n=100;
-	CORBA_long i=0;
+	CORBA_long MAX      = 2048;
+	CORBA_long len      = 0;
+	CORBA_long iter     = 0;
+	CORBA_long ix       = 0;
 
-	CORBA_long maximum=2048;
-	CORBA_long length =0;
+	Examples_ByteSeq_Chunk* chunk = NULL;
 
-	Examples_ByteSeq_Chunk* chunk = chunk_create (maximum+1);
-
-	/* increment sequence length, beginning with 0 up to 2048 */
-	for (i=0; i<n; ++i)
+	/* create sequence of 1KB and init with 0 */ 
+	chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 1024);
+	for (len = 0; len < 1024; ++ len)
 	{
-		Examples_ByteSeq_Storage_exchange (servant, chunk, ev); 
-		if (raised_exception(ev)) return;
+		CORBA_octet oct = 0;
+		ORBit_sequence_append (chunk, &oct);	
+	}
 
-		/* now use octet sequence */ 
+	/* MAX times, edit all values in local sequence and exchange
+	 * it with the one at server. The length of returned sequence
+	 * is not known a-priory, thererfore use chunk->_length to get
+	 * to know.  */
+	for (iter = 0; iter <= MAX; ++iter)
+	{
+		CORBA_octet elem = 0;
+
+		g_print ("#");
+
+		for (ix = 0; ix < chunk->_length; ++ix)
+		{
+			CORBA_octet oct = (CORBA_octet) iter % 256;
+			ORBit_sequence_index (chunk, ix) = oct;
+		}
+
+		Examples_ByteSeq_Storage_exchange (servant, chunk, ev); 
+		if (etk_raised_exception(ev)) return;
 	}
 
 	CORBA_free (chunk);
@@ -259,27 +201,27 @@ main(int argc, char* argv[])
         CORBA_exception_init(ev);
 
 	client_init (&argc, argv, &global_orb, ev);
-	abort_if_exception(ev, "init failed");
+	etk_abort_if_exception(ev, "init failed");
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
 	servant = (Examples_ByteSeq_Storage) 
-		client_import_service_from_file (global_orb,
-						filename,
-						ev);
-        abort_if_exception(ev, "exporting IOR failed");
+		etk_import_object_from_file (global_orb,
+					     filename,
+					     ev);
+        etk_abort_if_exception(ev, "exporting IOR failed");
 
 	client_run_set (servant, ev);
-        abort_if_exception(ev, "client stopped");
+        etk_abort_if_exception(ev, "client stopped");
  
 	client_run_get (servant, ev);
-        abort_if_exception(ev, "client stopped");
+        etk_abort_if_exception(ev, "client stopped");
  
 	client_run_exchange (servant, ev);
-        abort_if_exception(ev, "client stopped");
+        etk_abort_if_exception(ev, "client stopped");
  
 	client_cleanup (global_orb, servant, ev);
-        abort_if_exception(ev, "cleanup failed");
+        etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }
