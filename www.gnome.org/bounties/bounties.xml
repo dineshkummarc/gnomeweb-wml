@@ -1979,4 +1979,100 @@ in 2.0).</p>
 </bounty>
 
 
+
+<bounty> <title><![CDATA[Add image data to the icon cache]]></title> <amount>100</amount> <category>Miscellaneous</category>
+<bug>169344</bug>
+<html><![CDATA[
+<p>For the GTK 2.6 release, a memory mappable icon cache was developed.
+This allows us to avoid scanning lots of directories on the startup
+of every application. However, one thing it does not do is to store
+the actual icon data in a shared file. This means that common images
+(consider the "x" on a close button) are duplicated many times.</p>
+
+<p>The image cache should be modified to store the actual bytes of images
+inside the cache. There is already a field for this offset; all that
+needs to happen is for the generation program to be modified. A few
+challenges present themselves:</p>
+
+	<ul><li>Various byte ordering (ARGB, RBGA) are used in various
+	  places. Which format should be used in the file. This
+	  should be chosen as so to minimize the amount of modification
+	  needed to render.</li></ul>
+<p>
+A solution to this problem will:
+</p>
+<ul>
+	<li>Modify gtk-update-icon-cache to include the image data</li>
+	<li>Modify the theme loading code to get the image data from
+	    the file</li>
+	<li>Document extensions to the icon specification to freedesktop.org.</li>
+</ul>
+]]>
+</html>
+</bounty>
+
+<bounty> <title><![CDATA[Use a mmap'able cache for fontconfig]]></title> <amount>200</amount> <category>Miscellaneous</category>
+<bug>169345</bug>
+<html><![CDATA[
+<p>On the startup of every program, fontconfig allocates about 100 kb of data.
+This data should be read from a memory mappable cache on disk. This way,
+the data is shared between processes. Also, it allows more expensive
+techniques to optimize the data storage.</p>
+
+<p>A solution to this bounty will:</p>
+
+	<ul>
+		<li>Create a program that generates an on-disk cache.</li>
+		<li>Modify fontconfig to read from this file, allowing
+		  a fallback path with the existing code.</li>
+
+	</ul>
+]]>
+</html>
+</bounty>
+
+<bounty> <title><![CDATA[Create a test suite for browsing in Nautilus]]></title> <amount>200</amount> <category>Miscellaneous</category>
+<bug>169346</bug>
+<html><![CDATA[
+<p>A test case is needed for Nautilus doing a long session of browsing. This
+test case can be used to detect leaks, using tools such as valgrind. The
+test case should use the LDTP project. It should do the following:</p>
+<ul>
+	<li>Put Nautilus in the root directory (/)</li>
+	<li>Spider around across different folders</li>
+	<li>Use various views (browser, spatial, as icons, as a list)</li>
+	<li>Be able to account for the fact that under valgrind, things
+	  will not happen fast (so it must wait)</li>
+</ul>
+]]>
+</html>
+</bounty>
+
+<bounty> <title><![CDATA[Remove duplication of desktop backgrounds]]></title> <amount>200</amount> <category>Miscellaneous</category>
+<bug>169347</bug>
+<html><![CDATA[
+<p>
+Right now, the background image is stored in three places:
+</p>
+<ul>
+	<li>In gnome-settings-daemon</li>
+	<li>In nautilus</li>
+	<li>In the X server (stored there by nautilus)</li>
+</ul>
+<p>
+The background must be stored in one and only one location.
+</p>
+<p>
+A solution to this bounty will:
+</p>
+<ul>
+	<li>Use only (screen height) * (screen width) * sizeof (int) bytes
+	  of memory for a background image.</li>
+	<li>Still keep reasonable performance for icons on the desktop,
+	  rubberbanding, etc.</li>
+</ul>
+]]>
+</html>
+</bounty>
+
 </bounties>
