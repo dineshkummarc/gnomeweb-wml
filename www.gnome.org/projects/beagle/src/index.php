@@ -29,7 +29,7 @@ search in many different domains:
 		<li><img src="img/office-doc.png">documents</li>
 		<li><img src="img/stock_mail.png">emails</li>
 		<li><img src="img/gnome-globe-16.png">web history</li>
-		<li><img src="img/office-doc.png">IM/IRC&nbsp;<!-- lazyhack -->conversations</li>
+		<li><img src="img/office-doc.png">IM/IRC conversations</li>
 		<li><img src="img/source-doc.png">source code</li>
 		<li><img src="img/image-doc.png">images</li>
 		<li><img src="img/music-doc.png">music files</li>
