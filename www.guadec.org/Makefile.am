@@ -4,7 +4,7 @@ urlpath =
 
 page_SCRIPTS = \
 	index.html \
-	htaccess
+	.htaccess
 
 page_DATA = \
 	metal-tile.jpg \
