@@ -7,12 +7,39 @@
 
 <p>There is a bug overview report for 1.5 at <a href="http://bugzilla.ximian.com/evo-report15.cgi">http://bugzilla.ximian.com/evo-report15.cgi</a>
 
-<p>Individual milestone information is at <a href="http://bugzilla.ximian.com/reports.cgi">http://bugzilla.ximian.com/reports.cgi</a>
+<p>Individual milestone information is at <a href="http://bugzilla.ximian.com/evotarget.cgi">http://bugzilla.ximian.com/evotarget.cgi</a>
 
 <p>A quick guide to submitting a bug is at <a href="http://bugzilla.ximian.com/bug-HOWTO.html">http://bugzilla.ximian.com/bug-HOWTO.html</a>
 
-<p><h2>Getting a trace</h2>
+<p><h2>Getting a debug backtrace</h2>
 
+To get a backtrace of a process, you can either directly run this process under gdb, or attach gdb to a running instance of the process. For getting a debug backtrace for evolution, you would be interested in these process-files.
+
+<ol>
+<li> ${install_prefix}/bin/evolution
+<li> ${install_prefix}/libexec/evolution-data-server-1.0
+<li> ${install_prefix}/libexec/evolution/${version}/evolution-alarm-notify
+<li> ${install_prefix}/libexec/evolution/${version}/evolution-exchange-storage
+</ol>
+
+<p> <h3> Follow these steps to run the process under gdb </h3>
+
+<ol>
+<li> Run the command 'gdb ${install_prefix}/path/of/process-file'
+<li> At the gdb prompt type 'run'
+<li> To get the backtrace at a particular instant, press ctrl+c, and you should get the gdb prompt. You could also reach the gdb prompt directly, if the process crashes.
+<li> At the gdb prompt type 'thread apply all bt' to get the backtrace
+</ol>
+
+<p> <h3> To attach gdb to a running process </h3>
+
+<ol>
+<li> Get the process id of the process
+<li> Run the command 'gdb -p &lt;process id&gt;'
+<li> At the gdb prompt, type 'thread apply all bt' to get the backtrace.
+</ol>
+
+<p> You could also type 'continue' at the gdb prompt and proceed as usual and then press ctrl+c, to get the gdb prompt again.
 
 <p><h2>Camel verbose debug</h2>
 
@@ -39,5 +66,29 @@ You can debug the communications with GroupWise server with GROUPWISE_DEBUG envi
 </ol>
 
 Evolution process also communicates with GroupWise server during Novell GroupWise account setup. One can run evolution after setting the GROUPWISE_DEBUG in the same manner described above to debug any Novell GroupWise account setup related problems. 
+
+<p> <h2> Exchange Connector Debug </h2>
+
+You can debug the communications with Exchange server using the E2K_DEBUG environment variable. Exchange connector runs as a separate process [evolution-exchange-storage]. You can run evolution-exchange-storage with E2K_DEBUG set to a value
+from 1 to 5:
+
+<ol>
+E2K_DEBUG=1 =&gt; Print each request and response <br/>
+E2K_DEBUG=2 =&gt; #1 plus all request and response headers <br/>
+E2K_DEBUG=3 =&gt; #2 plus bodies (except text/html) <br/>
+E2K_DEBUG=4 =&gt; #3 plus global catalog debug too <br/>
+E2K_DEBUG=5 =&gt; #4 plus text/html bodies too <br/>
+</ol>
+
+You can also append 'm' to E2K_DEBUG to see mail stub debugging: it will print out everything read to or written from the stub socket. (You can set E2K_DEBUG=m on evolution itself as well, to see the conversation from the other side.)
+
+<p>Follow these steps to create a log file containing the webdav traffic.
+
+<ol>
+<li> Exit evolution and run the command 'evolution --force-shutdown'
+<li> Run the command 'env E2K_DEBUG=4 ${install_prefix}/libexec/evolution-exchange-storage >& /tmp/exchange.out' [ You can replace 4 in the command with any of the digits mentioned earlier ] 
+<li> Use evolution like usual.
+</ol>
+
 
 <!--#include virtual="foot.shtml"-->
