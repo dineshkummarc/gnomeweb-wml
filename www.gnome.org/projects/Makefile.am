@@ -2,8 +2,8 @@ SUBDIRS=			\
 	application-framework	\
 	desktop			\
 	gnome-core		\
-	gnome-libs
-
+	gnome-libs		\
+	gnumeric
 urlpath=/projects
 
 page_SCRIPTS=

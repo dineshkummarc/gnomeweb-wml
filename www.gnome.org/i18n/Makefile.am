@@ -1,4 +1,4 @@
-SUBDIRS= translate-gnome
+SUBDIRS= translate-gnome release
 
 urlpath=/i18n
 

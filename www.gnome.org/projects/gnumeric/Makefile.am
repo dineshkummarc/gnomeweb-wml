@@ -51,3 +51,5 @@ page_SCRIPTS=bg.jpg			\
     	    mailing-list.html		\
 	    palaeolithic.html		\
 	    thumb.gif
+
+include $(top_srcdir)/rules.common

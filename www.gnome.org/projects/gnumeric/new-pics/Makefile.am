@@ -21,3 +21,5 @@ page_SCRIPTS=analysis-tools.gif		\
 	    sample-thumb.gif		\
 	    sample.gif			\
 	    startup.gif
+	    
+include $(top_srcdir)/rules.common
