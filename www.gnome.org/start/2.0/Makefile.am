@@ -13,6 +13,6 @@ page_SCRIPTS=index.html\
 	themes.html \
 	whatsnew.html
 
-EXTRA_DIST=foot.png
-
 include $(top_srcdir)/rules.common
+
+EXTRA_DIST=foot.png
