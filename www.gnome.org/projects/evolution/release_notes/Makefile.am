@@ -18,7 +18,9 @@ page_DATA =			\
 	1.4.4.shtml		\
 	1.4.5.shtml		\
 	1.4.6.shtml		\
-	1.4.shtml		
+	1.4.shtml		\
+	head.shtml		\
+	foot.shtml
 
 
 include $(top_srcdir)/rules.common
