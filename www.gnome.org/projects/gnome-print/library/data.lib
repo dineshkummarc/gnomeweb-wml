@@ -1,0 +1,49 @@
+<? if (!$datalib) {$datalib = TRUE;
+
+include ("library/page.lib");
+
+function data_read_meta ($dir)
+{
+	if (!file_exists ("$dir/meta")) {return NULL;}
+	$file = file ("$dir/meta");
+	$len = sizeof ($file);
+	for ($i = 0; $i < $len; $i++) {
+		$p = explode ("/", $file[$i]);
+		$np = sizeof ($p);
+		if ($np) {
+			$desc = NULL;
+			for ($j = 0; $j < $np; $j++) {
+				$kv = explode ("=", $p[$j]);
+				$key = trim ($kv[0]);
+				$val = trim ($kv[1]);
+				$desc[$key] = $val;
+			}
+			if (!$desc['title']) {$desc['title'] = $desc['name'];}
+			if ($desc['name']) {$meta[$desc['name']] = $desc;}
+		}
+	}
+
+	return $meta;
+}
+
+function data_show_page ($section, $page)
+{
+	/* Read global metadata */
+	$gm = data_read_meta (".");
+	/* Read section metadata */
+	$sm = data_read_meta ($section);
+
+	$sinfo = $gm[$section];
+	if (!$page) {$page = $sinfo['intro'];}
+	$pinfo = $sm[$page];
+
+	$ga = array_keys ($gm);
+	$sa = array_keys ($sm);
+	$file = $pinfo['file'];
+
+	page_start ($pinfo[$title]);
+	page_show ($ga, $sa, $section, $page, "$section/$file");
+	page_end ();
+}
+
+} ?>

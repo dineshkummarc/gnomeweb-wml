@@ -1,5 +1,9 @@
 <?
-print "<html><body>";
-print "Gnome print website will be soon here";
-print "</body><html>";
+
+include ("library/data.lib");
+
+if (!$section) {$section = "home";}
+
+data_show_page ($section, $page);
+
 ?>

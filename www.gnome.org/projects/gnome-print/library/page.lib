@@ -1,0 +1,377 @@
+<? if (!$pagelib) {$pagelib = TRUE;
+
+function page_ns4_hack ($width, $height)
+{
+	if ($width) {$ws = "width=\"$width\"";}
+	if ($height) {$hs = "height=\"$height\"";}
+	print "<!-- Netscape 4 empty cell pursh open trick -->\n";
+	print "<table $ws cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td $hs></td></tr></table>\n";
+}
+
+function page_start ($title)
+{
+	print "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">
+
+<html>
+<head>
+	<title>gnome-print</title>
+	<meta name=\"description\" content=\"The gnome-print Web Site\">
+	<meta name=\"keywords\" content=\"gnome-print, gnome, print, linux, bsd, nix, desktop\">
+	<meta name=\"robots\" content=\"index, follow\">
+	<meta name=\"distribution\" content=\"Global\">
+	<meta name=\"copyright\" content=\"(c) 2001\">
+	<meta name=\"rating\" content=\"General\">
+	<meta name=\"author\" content=\"Steve Hall\">
+	<meta name=\"generator\" content=\"UltraEdit (manually!)\">
+
+	<!-- Style sheets ... -->
+	<link href=\"gnome-print.css\" rel=\"stylesheet\" type=\"text/css\">
+	<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">
+
+
+<style type=\"text/css\">
+
+TABLE, TD, TR
+	{
+	color: #666666;
+	font-family: \"Helvetica\", \"Arial\", \"Sans\", sans-serif;
+	}
+
+BODY, 
+P, 
+UL, OL, LI, 
+SMALL, 
+H1, H2, H3, H4, H5, H6,
+BLOCKQUOTE
+	{
+	color: #666666;
+	font-family: \"Helvetica\", \"Arial\", \"Sans\", sans-serif;
+	text-align: justify;	
+	}
+
+BODY {margin: 0 0 0 0;}
+
+PRE {
+	font-family: \"Lucidatypewriter\", \"Andale Mono\", \"Courier New\", \"Courier\", monospace
+	}
+A
+	{
+	font-family: \"Helvetica\", \"Arial\", \"Sans\", sans-serif;
+	}
+
+A:link {color: #3333cc; text-decoration: none;}
+A:visited {color: #6666cc; text-decoration: none;}
+A:active {color: #990000; text-decoration: underline;}
+A:hover {color: #3300ff; text-decoration: underline;}
+
+.navigation {
+	font-size: xx-small;
+	text-align: center;
+	font-weight: normal;
+	white-space: no-wrap;
+	}
+
+HR {color: #ccccff;}
+
+</style>
+
+<!--
+
+This \"code\" attempts to be HTML 4.01 and CSS 2.0 compliant. Unfortunately,
+most browsers are unable to properly render these standards correctly and
+so work-arounds were required.
+
+Mozilla work-arounds
+* (none!)
+
+Netscape 4.7x work-arounds:
+* Non-functioning [td] \"align\" attributes. Require access [div] tags.
+* Non-functioning CSS font sizes require [font] tags. (Table classes
+  are not interpreted and are required for each cell.)
+* [table] \"spacers\" in empty cells for non-functioning [td] width and height attributes.
+* .PNG transparency (.GIFs substituted)
+* External CSS doesn't work correctly for \"font-family\")
+* In-line CSS doesn't work correctly for [A] link attributes.
+* Nested table cell bgcolor attributes don't work. Background image used.
+* Incorrect interpretation of external CSS \"text-justify: all\" for nested tables.
+
+Netscape 4.7x malfunctions (unfixable):
+* Incorrect justification and coloration of the footer's horizontal line.
+* Incorrect diplay of tables with width or height attributes of 100%.
+
+IE work-arounds:
+* [div] tags needed for text alignment in nested tables
+* in-line style sheet (external doesn't work correctly for \"font-family\")
+
+
+General
+========
+* Block elements are wrapped at 90 characters. Text and in-line tags
+  are unwrapped for maintainability.
+
+-->
+
+
+</head>
+<body 
+	text=\"#666666\" 
+	bgcolor=\"#f2f2f0\">
+
+<!--   Table Cell Sizes      
+                             
+        | 35 |  *  | 50      
+     ===|====|=====|====     
+     115|    |     |         
+     ===|====|=====|====     
+      * |    |     |         
+     ===|====|=====|====     
+     100|    |     |      -->\n\n";
+}
+
+function page_end ()
+{
+	print "</body>\n</html>\n";
+}
+
+function page_show ($ga, $sa, $section, $page, $file)
+{
+	/* Start global table */
+	print "<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
+	/* Header row */
+	print "<!-- HEADER ROW -->\n";
+	print "<tr>\n";
+	print "<td width=\"35\" background=\"images/frame-left-top.png\">\n";
+	page_ns4_hack (35, NULL);
+	print "</td>\n";
+	print "<td width=\"*\" background=\"images/frame-top.png\" valign=\"top\">
+	
+		<table 
+			class=\"navigation\" 
+			cellspacing=\"0\" 
+			cellpadding=\"10\" 
+			border=\"0\">
+		<tr>
+			<!-- Icon -->
+			<td width=\"1%\">
+				<a href=\"index.php3\">
+					<img src=\"images/icon.gif\" border=\"0\" alt=\"gnome-print\">
+				</a>
+			</td>\n";
+
+	/* Navigation */
+	print "<!-- Navigation -->\n";
+	print "<td width=\"*\" align=\"left\" valign=\"top\">\n";
+	print "<table class=\"navigation\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+	/* Section row */
+	print "<tr>\n";
+	/* Cells */
+	$len = sizeof ($ga);
+	for ($i = 0; $i < $len; $i++) {
+		/* Section entry */
+		$sn = $ga[$i];
+		print "<td align=\"center\" background=\"images/1x1white.gif\">\n";
+		print "<div align=\"center\">\n";
+		print "<font size=\"-2\">\n";
+		print "&nbsp;<a href=\"index.php3?section=$sn\">";
+		if ($sn == $section) {
+			print "<b>$sn</b>";
+		} else {
+			print $sn;
+		}
+		print "</a>&nbsp;\n";
+		print "</font>\n";
+		print "</div>\n";
+		print "</td>\n";
+		if ($i < ($len - 1)) {
+			/* Print separator */
+			/* fixme: Use shading as well */
+			print "<td align=\"center\" background=\"images/shadow-right.png\">\n";
+			print "<div align=\"center\">\n";
+			print "<font size=\"-2\">&nbsp;&nbsp;</font>\n";
+			print "</div>\n";
+			print "</td>\n";
+		}
+	}
+	/* Shadows */
+	print "<!-- shadows :) -->\n";
+	print "<td width=\"10\" align=\"center\" bgcolor=\"#f2f2f0\">\n";
+	page_ns4_hack (10, NULL);
+	print "</td>\n";
+	print "</tr>\n";
+	/* Page row */
+	print "<tr>\n";
+	print "<td colspan=\"7\">\n";
+	/* Subtable */
+	print "<table class=\"navigation\" width=\"100%\" border=\"0\" background=\"images/1x1white.gif\" cellspacing=\"0\" cellpadding=\"3\">\n";
+	print "<tr>\n";
+	/* Initial cell */
+	print "<td align=\"center\"> <div align=\"center\"><font size=\"-2\">&nbsp;</font></div></td>\n";
+	/* Cells */
+	$len = sizeof ($sa);
+	for ($i = 0; $i < $len; $i++) {
+		/* Page entry */
+		$pn = $sa[$i];
+		print "<td align=\"center\">\n";
+		print "<div align=\"center\">\n";
+		print "<font size=\"-2\">\n";
+		print "<a href=\"index.php3?section=$section&page=$pn\">\n";
+		if ($pn == $page) {
+			print "<b>$pn</b>";
+		} else {
+			print $pn;
+		}
+		print "</a>\n";
+		print "</font>\n";
+		print "</div>\n";
+		print "</td>\n";
+		if ($i < ($len - 1)) {
+			/* Print separator */
+			/* fixme: Use shading as well */
+			print "<td align=\"center\">\n";
+			print "<div align=\"center\"><font size=\"-2\">&nbsp;|&nbsp;</font></div>\n";
+			print "</td>\n";
+		}
+	}
+	/* Final cell */
+	print "<td align=\"center\"><div align=\"center\"><font size=\"-2\">&nbsp;</font></div></td>\n";
+	/* End of row */
+	print "</tr>\n";
+	/* End of page table */
+	print "</table>\n";
+	/* End of parent cell */
+	print "</td>\n";
+	print "<td width=\"10\" background=\"images/shadow-right.png\">\n";
+	page_ns4_hack (10, NULL);
+	print "</td>\n";
+	print "</tr>\n";
+	/* Shadows */
+	print "<!-- shadows :) -->\n";
+	print "<tr>\n";
+	print "<td colspan=\"7\" height=\"5\" background=\"images/shadow-bottom.png\">\n";
+	page_ns4_hack (NULL, 5);
+	print "</td>\n";
+	print "<td background=\"images/shadow-corner.png\">\n";
+	page_ns4_hack (10, 5);
+	print "</td>\n";
+	print "</tr>\n";
+	print "</table>\n";
+	print "</td>\n";
+	print "<!-- Banner -->\n";
+	print "<td width=\"1%\" align=\"right\" valign=\"top\">\n";
+	print "<div align=\"right\">\n";
+	print "<a href=\"index.php3\"><img src=\"images/banner.gif\" border=\"0\" alt=\"gnome-print\"></a>\n";
+	print "</div>\n";
+	print "</td>\n";
+	print "</tr>\n";
+	print "</table>\n";
+	print "</td>\n";
+	print "<td width=\"50\" background=\"images/frame-right-top.png\">\n";
+	page_ns4_hack (50, NULL);
+	print "</td>\n";
+	print "</tr>\n";
+	/* End of top row */
+
+	/* Body row */
+	print "<!-- BODY ROW -->\n";
+	print "<tr>\n";
+	print "<!-- Left Margin -->\n";
+	print "<td width=\"35\" height=\"*\" background=\"images/frame-left.png\">\n";
+	page_ns4_hack (35, NULL);
+	print "</td>\n";
+	/* Body */
+	print "<!-- Body -->\n";
+	print "<td width=\"*\" bgcolor=\"#ffffff\" valign=\"top\" align=\"left\">\n";
+	print "<blockquote>\n";
+	include ($file);
+	print "</blockquote>\n";
+	print "</td>\n";
+
+	print "<!-- Right Margin -->\n";
+	print "<td width=\"50\" background=\"images/frame-right.png\">\n";
+	page_ns4_hack (50, NULL);
+	print "</td>\n";
+	print "</tr>\n";
+
+	print "
+<!-- FOOTER ROW -->
+<tr>
+	<td width=\"35\" height=\"100\" background=\"images/frame-left-bottom.png\">
+		<!-- Netscape 4 empty cell pursh open trick -->
+		<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+			<tr><td width=\"35\" height=\"100\"></td></tr>
+		</table>
+	</td>
+	<td width=\"*\" height=\"100\" background=\"images/frame-bottom.png\" align=\"center\" valign=\"top\">
+	
+		<div align=\"center\">
+		<table 
+			width=\"90%\" 
+			bgcolor=\"#ffffff\" 
+			align=\"center\" 
+			cellspacing=\"0\" 
+			cellpadding=\"0\" 
+			border=\"0\">
+		<tr>
+			<td colspan=\"3\" width=\"100%\">
+				<hr noshade size=\"1\" width=\"100%\">
+			</td>
+		</tr>
+		<tr>
+			<!-- Counter -->
+			<td width=\"30%\" align=\"left\" valign=\"top\">
+				<font size=\"-2\" color=\"#999999\">
+					<!-- actual image size is [15 x # of digits] x [20] --> 
+					<img 
+						src=\"http://counter.digits.com/wc/-d/4/-c/0/-f/999999/-b/ffffff/-r/gnome-print\" 
+						alt=\"WebCounter\" 
+						border=\"0\" 
+						width=\"30\" 
+						height=\"10\">
+					&nbsp; by &nbsp;
+					<a href=\"http://www.digits.com/\">
+						<img 
+							src=\"images/webcount.png\" 
+							alt=\"WebCounter\" 
+							border=\"0\" 
+							width=\"86\" 
+							height=\"9\">
+					</a>
+				</font>
+			</td>
+			<!-- Feedback -->
+			<td width=\"*\" align=\"center\" valign=\"top\">
+				<div align=\"center\">
+					<font size=\"-2\" color=\"#999999\">
+						send page design comments to <a href=\"mailto:digitect  -REMOVE-THIS-ANTI-SPAM-PREVENTER!- @mindspring.com\">digitect</a>.
+					</font>
+				</div>
+			</td>
+";
+
+	print "<!-- Revision -->\n";
+	print "<td width=\"20%\" align=\"right\" valign=\"top\">\n";
+	print "<div align=\"right\">\n";
+	print "<font size=\"-2\" color=\"#999999\">\n";
+	print date ("j F Y", filemtime ($file));
+	print "</font>\n";
+	print "</div>\n";
+	print "</td>\n";
+
+	print "</tr>
+		</table>
+		</div>
+	
+	</td>
+	<td width=\"50\" height=\"100\" background=\"images/frame-right-bottom.png\">
+		<!-- Netscape 4 empty cell pursh open trick -->
+		<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+			<tr><td width=\"50\" height=\"100\"></td></tr>
+		</table>
+	</td>
+</tr>
+";
+	/* End global table */
+	print "</table>\n";
+}
+
+} ?>
