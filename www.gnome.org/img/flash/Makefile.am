@@ -14,6 +14,7 @@ page_DATA = \
 	two-six.png \
 	official-gnome-2-developers-guide.png \
 	guadec-2004.png \
-	guadec-2004-end.png
+	guadec-2004-end.png \
+	gnome_tshirts.png
 
 include $(top_srcdir)/rules.common
