@@ -83,7 +83,7 @@ an aggregator for the blogs various Beagle hackers.
 
 <p>
 There is a volunteer-maintained
-<a href="http://yakko.cs.wmich.edu/gasiorek/wiki">wiki</a> devoted
+<a href="http://www.beaglewiki.org">wiki</a> devoted
 to Beagle and Dashboard development.  If you are having problems,
 check there first.
 </p>
@@ -104,8 +104,12 @@ Beagle section</a> of
 	<li><img src="img/office-doc.png"> Microsoft Word
 		<ul><li>doc</li></ul>
 	</li>
-	<li><img src="img/office-doc.png"> OpenOffice.org Write
-		<ul><li>sxw</li></ul>
+	<li><img src="img/office-doc.png"> OpenOffice.org
+		<ul>
+			<li>sxw</li>
+			<li>sxi</li>
+			<li>sxm></li>
+		</ul>
 	</li>
 	<li><img src="img/office-doc.png"> Microsoft PowerPoint
 		<ul><li>ppt</li></ul>
@@ -129,6 +133,7 @@ Beagle section</a> of
 		<ul>
 			<li>mp3</li>
 			<li>ogg</li>
+			<li>flac</li>
 		</ul>
 	</li>
 	<li><img src="img/source-doc.png"> Texinfo Files
@@ -184,6 +189,7 @@ mailing list.
 			<div id="sidebar">
 				<h2><img src="img/news.png">Newsletters</h2>
 				<ul id="newsletters">
+					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%203">Thursday November 5th</a></li>
 					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%202">Monday October 11th</a></li>
 					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%201">Tuesday September 21st</a></li>
 					</ul>
