@@ -180,7 +180,7 @@ Edit Existing Release
 				. $project->getDescription()."\n\n"
 				. "Enhancements\n============\n\n-\n-\n\n"
 				. "Fixes\n=====\n\n-\n-\n\n"
-				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/"
+				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/\n\n"
 				. "GNOME Software Map entry\n"
    				. "========================\n\n"
 				. "http://www.gnome.org/softwaremap/projects/"
