@@ -1,4 +1,4 @@
-SUBDIRS = images intro start mirrors projects resources developerinterviews applist developers learn i18n press faqs account export include people register admin my project softwaremap friends summit guadec fonts img
+SUBDIRS = about images start mirrors projects resources developerinterviews applist developers learn i18n press faqs account export include people register admin my project softwaremap friends summit guadec fonts img
 
 urlpath =
 
