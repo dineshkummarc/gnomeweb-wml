@@ -16,6 +16,7 @@ page_SCRIPTS = \
 	gnome20.html \
 	gnome22.html \
 	gnomeenelsur.html \
+	gnumericgrant.wml \
 	guadec.html \
 	guadec4.html \
 	linuxatwork.html \
