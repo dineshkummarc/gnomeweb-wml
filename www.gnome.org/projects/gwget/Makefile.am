@@ -9,6 +9,8 @@ page_SCRIPTS =
 
 page_DATA = \
 	style.css \
+	$(JPG_FILES) \
+	$(GIF_FILES) \
 	$(HTML_FILES)
 
 include $(top_srcdir)/rules.common
