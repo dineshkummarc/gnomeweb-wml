@@ -197,11 +197,11 @@
 	  </td>
 	</tr>
         <tr>
-          <td>
+          <td colspan=2>
              <input type="checkbox" name="placetostay"> Help!  I need a place to crash while I'm in town.
           </td>
         </tr>
-        <tr>
+        <tr colspan=2>
           <td>
              <input type="checkbox" name="gfmember"> *I am a GNOME Foundation member.
           </td>
