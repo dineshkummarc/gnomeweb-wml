@@ -2,7 +2,7 @@ SUBDIRS=screenshots images
 
 urlpath=/projects/guppi/
 
-page_SCRIPTS= index.shtml \	
+page_SCRIPTS=index.shtml \
 		foot.shtml \
 		go.css	\
 		head.shtml \

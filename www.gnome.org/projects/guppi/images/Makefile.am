@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/projects/guppi/images
 
-page_SCRIPTS =  3h.gif  		\	 
+page_SCRIPTS =  3h.gif  		\
 		3w.gif			\
 		foot-transparent.gif	\
 		guppi-icon.png		\

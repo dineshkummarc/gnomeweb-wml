@@ -259,4 +259,4 @@ solver.html \
 toolbar-buttons.html \
 tutorials.html
 
-include $(top_srcdir)/rules.common \
+include $(top_srcdir)/rules.common

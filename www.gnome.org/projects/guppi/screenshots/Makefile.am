@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/projects/guppi/screenshots
 
-page_SCRIPTS =  2000_08_29_114942_shot.jpg 	\	 
+page_SCRIPTS =  2000_08_29_114942_shot.jpg 	\
 		2000_08_29_115035_shot.jpg	\
 		2000_08_29_115223_shot.jpg	\
 		2000_08_29_115909_shot.jpg	\
