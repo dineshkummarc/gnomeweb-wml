@@ -38,7 +38,7 @@ misc_images=\
 	save16.png\
 	trash.png\
 	trash-x.png\
-	nophoto.png\
+	nophoto.jpg\
 	ofolder15.png\
 	cfolder15.png
 
