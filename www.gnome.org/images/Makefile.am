@@ -54,7 +54,11 @@ banner_images=\
 	banner-latestnews.gif\
 	banner-learn.png\
 	banner-learn.gif\
-	banner-mailinglists.png\
+  banner-faq.png\
+  banner-faq.gif\
+	banner-translations.gif\
+	banner-translations.png\
+  banner-mailinglists.png\
 	banner-mailinglists.gif\
 	banner-maintainers.png\
 	banner-maintainers.gif\
@@ -161,7 +165,12 @@ sidebar_items=\
   sidebar-contribute.png\
 	sidebar-contribute.gif\
   sidebar-gnomeoffice.png\
-	sidebar-gnomeoffice.gif
+	sidebar-gnomeoffice.gif\
+	sidebar-faq.png\
+	sidebar-faq.gif\
+	sidebar-translations.png\
+	sidebar-translations.gif
+
 
 topbar_headers=\
   topbar-contact.png\
