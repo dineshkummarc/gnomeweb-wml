@@ -13,6 +13,7 @@ page_SCRIPTS = \
 	epatents.css
 
 page_DATA = \
-	index.html
+	index.html \
+	robots.txt
 
 include $(top_srcdir)/rules.common
