@@ -1,4 +1,4 @@
-SUBDIRS=images
+SUBDIRS=images libs
 
 urlpath=/projects/agnubis/
 
