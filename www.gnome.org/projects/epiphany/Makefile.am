@@ -6,7 +6,7 @@ SUBDIRS=			\
 
 urlpath=/projects/epiphany
 
-page_SCRIPTS=			\
+page_DATA=			\
 	default.css			\
 	epiphany.css		\
 	epiphany-old.css \
@@ -16,8 +16,9 @@ page_SCRIPTS=			\
 	extensions.html		\
 	extensions.xhtml \
 	smartbookmarks.html \
-	epiphany.php \
 	bugreports.xhtml \
+
+page_SCRIPTS= \
 	.htaccess
 
 include $(top_srcdir)/rules.common
