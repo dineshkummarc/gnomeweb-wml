@@ -215,7 +215,7 @@ cellpadding="0" cellspacing="0" bgcolor="#000000" name="menucontact">
 <tr><td rowspan="5"><?php print $this->img("dot.gif", "1", "1"); ?></td>
 <td width=12 background="<?php print $GLOBALS['sys_http_domain']; ?>/images/sidebar-stripe-purple.png" rowspan="5"><?php print $this->img("dot.gif", "1", "12"); ?></td>
 <?php
-print $this->menurow("mailinglists", "Mailing lists", "/resources/mailing-lists.html")."</tr>\n<tr>"
+print $this->menurow("mailinglists", "Mailing lists", "http://mail.gnome.org/")."</tr>\n<tr>"
 . $this->menurow("developersbyregion", "Developers by region", "/developers/")."</tr>\n<tr>"
 . $this->menurow("speakingabout", "Speaking about GNOME", "/speakingabout.html")."</tr>\n<tr>"
 . $this->menurow("pressreleases", "Press releases", "/pressreleases.html")."</tr>\n<tr>"
