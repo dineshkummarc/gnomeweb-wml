@@ -71,6 +71,8 @@
         $formmail .= "Country: " . $country . "\n";
         $formmail .= "Phone: " . $contactphone . "\n\n";
 
+	$formmail .= "Need a place to stay: " . $placetostay . "\n\n";
+
         $formmail .= "GNOME Foundation Member: " . $gfmember ."\n\n";
 
 
@@ -191,6 +193,11 @@
 		   size="30" value="<? echo $zip ?>">
 	  </td>
 	</tr>
+        <tr>
+          <td>
+             <input type="checkbox" name="placetostay"> I need a place to stay.
+          </td>
+        </tr>
         <tr>
           <td>
              <input type="checkbox" name="gfmember"> *I am a GNOME Foundation member.
