@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GUADEC 4 Preregistration Survey</title>
+    <title>GNOME Users and Developers Survey</title>
   </head>
 
   <body bgcolor="#ffffff" text="#000000">
@@ -17,7 +17,7 @@
 
                   <table border=0 bgcolor="#ffffff" cellpadding=50 width="100%"> <!-- start content -->
                     <tr><td>
-                        <h1>GUADEC 4 Preregistration Survey:</h1>
+                        <h1>GNOME Users and Developers Survey:</h1>
 
 <?
   $bad_elements = array();
@@ -42,7 +42,7 @@
         $errors[] = "Please enter your contributions to GNOME.";
       }
  
-     if ($paris != "true" && $copenhagen != "true" && $none != "true" && $seville != "true") {
+     if ($paris == "null" && $copenhagen == "null" && $none == "null" && $seville != "null") {
 	$bad_elements[] = "attend";
 	$errors[] = "Please specify if you have previously attended GUADEC.";
      }
@@ -87,13 +87,14 @@
 
         // send the mail
 
-        mail("glynn.foster@sun.com", "GUADEC Preregistration Survey :: reply", $formmail, $headers);
+        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
 
         // print the thank you page
 
         print ("
-          <h2>Thank you for giving your input into the GUADEC process. We will let you know more information about the conference as
-	      soon as it is available.</h2> ");
+          <h2>Thank you for giving your responses. Your information will
+	      help us to target the needs of our users and contributors more
+	      effectively and plan better for future GNOME events.</h2> ");
        } 
 
   }
@@ -103,7 +104,7 @@
 
   <p>
     Please fill in the following to details to give us better information
-    while organizing GUADEC 4. 
+    of GNOME's users and contributors. 
   </p>
     <ul>
 
@@ -198,16 +199,24 @@
 		foreach ($attend as $location) {
 		  if ($location == "none") { 
 			$none = "true";
+		  } else {
+			$none = "null";
 		  }
 		  if ($location == "paris") {
 			$paris = "true";
+		  } else {
+			$paris = "null";
 		  }
 		  if ($location == "copenhagen") {
 			$copenhagen = "true";
+		  } else {
+			$copenhagen = "null";
 		  }
 		  if ($location == "seville") {
 			$seville = "true";
-	  	  }
+	  	  } else {
+			$seville = "null";
+		  }
               }} ?>
              <option value="none" <? if ($none) { ?> selected <? } ?> > I have not attended a past GUADEC</option>
 
