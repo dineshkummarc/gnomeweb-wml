@@ -116,7 +116,7 @@ bounty.
 	    <td align="center">
 	      <a STYLE="text-decoration:none" href="Memory.html"><img src="memory.png" 
 						       alt="" border=0><br>
-		    <b>Tasks</b></a>
+		    <b>Memory</b></a>
 	    </td>
 	  </tr>
 </table>
