@@ -1,0 +1,19 @@
+SUBDIRS= 
+
+urlpath=/projects/gb/
+
+page_SCRIPTS=bg.jpg			\
+	    foot-transparent.gif	\
+	    index.html			\
+	    gb-0.0.12			\
+	    gb-0.0.13			\
+	    gb-0.0.14			\
+	    gb-0.0.15			\
+	    gb-0.0.16			\
+	    gb-0.0.17			\
+	    gb-0.0.18			\
+	    gb-0.0.19			\
+	    gb-tc-vbp.jpeg		\
+	    gnome-basic.jpeg		
+	    
+include $(top_srcdir)/rules.common
