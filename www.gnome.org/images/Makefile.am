@@ -123,7 +123,10 @@ title_texts=\
 	title-asia.png\
 	title-americas.png\
   title-africa.png\
-	title-oceania.png
+	title-oceania.png\
+	title-stablesourcepackages.png\
+	title-unstablesourcepackages.png\
+	title-getitfromcvs.png
 
 icons=\
   icon-new.png\
