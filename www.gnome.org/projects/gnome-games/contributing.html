@@ -57,33 +57,38 @@ CVS password:<br>
 
 <h2>Finding your way around</h2>
 
-<p>Now you've got the code, you need to find the bit you want to alter. All the games are in subdirectories. There is also a subdirectory of library code called <tt>libgames-support</tt>. Some subdirectories are split into further <tt>src</tt> and <tt>data</tt> subdirectories.</p>
-<p>With each game there are several common files beyond the normal <tt>.c</tt> and <tt>.h</tt> files.<p>
+<p>Now you've got the code, you need to find the bit you want to alter. All the games are in individual subdirectories. There is also a subdirectory of library code called <tt>libgames-support</tt>. The directory name <tt>po</tt> is for translations. Some subdirectories are split into further <tt>src</tt> and <tt>data</tt> subdirectories.</p>
+<p>Each game has a distinct structure, but there are several common file types beyond the normal <tt>.c</tt> and <tt>.h</tt> files.<p>
 <ul>
 <li><p><tt>*.schemas.in</tt> - These files contain <a href="http://www.gnome.org/projects/gconf/">gconf</a> keys.</p></li>
 <li><p><tt>*.desktop</tt> - Files that describe menu entries.</p></li>
-<li><p><tt>help/*</tt> - The help files. These are written in <a href="www.docbook.org">docbook</a> and are read by <a href="http://ftp.gnome.org/pub/GNOME/sources/yelp">yelp</a>. For English speakers the <tt>C</tt> subdirectory is what you want.</p></li> 
+<li><p><tt>help/*</tt> - The help files. These are written in <a href="www.docbook.org">docbook</a> and are read by <a href="http://ftp.gnome.org/pub/GNOME/sources/yelp">yelp</a>. For English speakers the C subdirectory is probably what you want.</p></li> 
 </ul>
 
 
 <h2>Style</h2>
 
-<p>In general you should stick to the style currently used in the files you are editing. There is a <a href="http://developer.gnome.org/doc/guides/programming-guidelines/code-style.html">GNOME coding style</a> but many games pre-date this and it is better for revision-tracking purposes not to re-indent the code.</p>
+<p>In general you should use the same style as the files you are editing. There is a <a href="http://developer.gnome.org/doc/guides/programming-guidelines/code-style.html">GNOME coding style</a> but many games pre-date this. Re-indenting the code interferes with revision tracking and fills patches with useless changes so please don't do it.</p>
 <p>You will also want to look at the <a href="http://developer.gnome.org/doc/guides/programming-guidelines/book1.html">GNOME programming guidelines</a> although these are a little old. For issues of user-interface style you should refer to the <a href="http://developer.gnome.org/projects/gup/hig/1.0/">Humand Interface Guidelines</a>.</p>
+<p>Choices of algorithm and technique are of course up to you, but remember that the programs have to run on a wide variety of hardware: Slow and fast, 32-bit and 64-bit, little-endian and big-endian. There is also a wide variety of operating systems. Use glib macros and utility functions instead of libc ones where possible, glib has already solved most of the cross-platform problems for you.</p>
+
+<h2>Internationalisation</h2>
+
+<p>All GNOME programs are internationalised so they can be easily translated into other languages. Doing this requires special care when using strings that will be presented to the user. Often this is as simple as placing _( ) around these strings. However there are a few catches and if in doubt you should refer to the document <a href="http://www.gnome.org/~malcolm/i18n/">Internationalising GNOME Applications</a>. For example you should not contruct sentences from individual pieces, what works in English often doesn't work in other languages.</p>
 
 <h2>ChangeLogs</h2>
 
-<p>When you make a change please document it in the ChangeLog file. Using <tt>emacs</tt> the key-combination <tt>C-x 4 a</tt> will create a new entry ready for you to fill in. Not all GNOME modules like ChangeLog entries for minor changes but for Gnome Games we appreciate it. It helps explain your patch and ensures you get proper credit.</p>
+<p>When you make a change please document it in the ChangeLog file. Using <tt>emacs</tt> the key-combination <tt>C-x 4 a</tt> will create a new entry ready for you to fill in. Not all GNOME modules use ChangeLog entries for minor changes but for Gnome Games we appreciate it. It helps explain your patch and ensures you get proper credit.</p>
 
 <h2>Keeping up to date</h2>
 
-<p>Between the time you started hacking and when you finished the code in CVS has probably changed. To re-synchronise your code use the command:</p>
+<p>Between the time you started hacking and when you finish the code in CVS has probably changed. To re-synchronise your code use the command:</p>
 
 <tt class="programlisting">
 <b>$ cvs -z3 -q -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome update -Pd gnome-games</b>
 </tt>
 
-<p>from the same directory you issues the previous cvs commands. You do not need to login again, in fact you only need to do that once ever. A list of files will be displayed along with a single character denoting their status. The only ones you need to know about are those labelled with a "C". The C is for conflict and it means that someone has changed a file you changed and the changes are incompatible.</p>
+<p>in the same directory you issues the previous cvs commands. You do not need to login again, in fact you only need to do that once ever. A list of files will be displayed along with a single character denoting their status. The only ones you need to know about are those labelled with a "C". The C stands for conflict and it means that someone has changed a file you changed and the changes are incompatible. If there is a C beside a file, edit that file to resolve the differences, CVS should have clearly marked the problem and there is usually no difficulty resolving them. ChangeLogs are a common source of conflicts.</p>
 
 <h2>Patches</h2>
 <p>Now that you have your code is synchronised with the GNOME CVS repository you need to generate a patch. You do this using the command:</p>
@@ -92,11 +97,12 @@ CVS password:<br>
 <b>$ cvs -z3 -q -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome diff -u gnome-games > patch-file</b>
 </tt>
 
+<p><tt>patch-file</tt> should now contain the difference between your code and the code in CVS. It is ready to be sent to the maintainer to be reviewed and hopefully applied. The usual way to do this is to attach it to a bug report using the "Create New Attachment" link. If you generate a patch any other way, say using <tt>diff</tt>, then try and use the "unified" format. For <tt>diff</tt> use the <tt>-u</tt> switch.</p>
+
 <h2>Once you have submitted a patch</h2>
 
-The maintainer will have to have a look at your patch and decide whether he wants to apply it. Usually he does, but often changes need to be made. He may do them himself or ask you to do them. The time it takes to apply the patch depends on both how busy the maintainer is and what code freezes are in place. Code freezes mean that only bugs get fixed, new features aren't added. The best time for large pieces of code is at the beginning of a development cycle, usually a week or so after a major GNOME release (e.g. 2.6.0). People who consistently post good quality patches are given direct access to the GNOME CVS server so they can do it themselves.
+<p>Once he has received it, the maintainer will have to have a look at your patch and decide whether he wants to apply it. Usually he does, but sometimes changes need to be made. The time it takes to apply the patch depends on both how busy the maintainer is and what code freezes are in place. Code freezes are used to stabilise the code before a major release and mean that only bugs are fixed, new features are not added. In that case the patch will be defered until the next development cycle. The best time for large pieces of code is at the beginning of a development cycle, usually a week or so after a major GNOME release (e.g. 2.6.0).</p> <p>People who consistently post good quality patches are given direct access to the GNOME CVS server so they can do it themselves.</p>
 
-<p>Note the use of the <tt>-u</tt> option. For Gnome Games the prefered form of diff is a unified diff. The patch is now in the file <tt>patch-file</tt> which you can attach to a bug-report using the "Create a New Attachment" link.</p>
 
      </div>
 
@@ -108,8 +114,9 @@ The maintainer will have to have a look at your patch and decide whether he want
     <p class="section">Links</p>
     <ul>
     <li><a href="index.html">Gnome Games</a></li>
-    <li><a href="http://cvs.gnome.org/">GNOME CVS Tools</a></li>
-    <li><a href="http://bugzilla.gnome.org/">GNOME Bug Tracking System</a></li>
+    <li><a href="http://cvs.gnome.org/">CVS Tools</a></li>
+    <li><a href="http://bugzilla.gnome.org/">Bug Tracking System</a></li>
+    <li><a href="http://mail.gnome.org/">Mailing Lists</a></li>
     </ul>	
 </div>
 
