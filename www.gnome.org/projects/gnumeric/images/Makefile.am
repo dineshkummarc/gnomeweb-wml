@@ -1,0 +1,10 @@
+SUBDIRS= 
+
+urlpath=/projects/gnumeric/
+
+page_SCRIPTS=bg.jpg			\
+		abacus.png		\
+		foot-transparent.png	\
+		gnumericlogo.png	\
+		spacer.png		\
+include $(top_srcdir)/rules.common

@@ -1,10 +1,17 @@
-SUBDIRS= new-pics screenshots doc
+SUBDIRS= new-pics screenshots doc images
 
 urlpath=/projects/gnumeric/
 
-page_SCRIPTS=bg.jpg			\
-	    foot-transparent.gif	\
-	    index.html			\
+page_SCRIPTS= 	index.shtml		\
+		credits.shtml		\
+		download.shtml		\
+		faq.shtml		\
+		features.shtml		\
+		foot.shtml		\
+		go.css			\
+		head.shtml		\
+		screenshots.shtml	\
+		technology.shtml	\
     	    mailing-list.html		\
 	    palaeolithic.html		\
 	    thumb.gif			\
