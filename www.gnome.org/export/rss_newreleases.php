@@ -30,7 +30,7 @@ print " <channel>\n";
 print "  <copyright>Copyright 2003 GNOME Foundation</copyright>\n";
 print "  <pubDate>".gmdate('r',time())."</pubDate>\n";
 print "  <description>GNOME New Releases</description>\n";
-print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
+print "  <link>http://".$GLOBALS[sys_default_domain]."/softwaremap/latest.php</link>\n";
 print "  <title>GNOME New Releases</title>\n";
 print "  <webMaster>webmaster@gnome.org</webMaster>\n";
 print "  <language>en-us</language>\n";
