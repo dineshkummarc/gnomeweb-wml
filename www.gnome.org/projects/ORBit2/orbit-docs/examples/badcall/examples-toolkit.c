@@ -104,15 +104,13 @@ etk_import_object_from_stream (CORBA_ORB          orb,
 			       CORBA_Environment *ev)
 {
 	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
+	gchar objref[(32*1024)+1];
     
-	fscanf (stream, "%as", &objref);  /* FIXME, handle input error */ 
+	fscanf (stream, "%32768s", objref);  /* FIXME, handle input error */ 
 	
 	obj = (CORBA_Object) CORBA_ORB_string_to_object (orb,
 							 objref, 
 							 ev);
-	free (objref);
-	
 	return obj;
 }
 
