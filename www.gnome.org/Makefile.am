@@ -1,4 +1,4 @@
-SUBDIRS=images intro start projects resources developerinterviews applist developers learn
+SUBDIRS=images intro start projects resources developerinterviews applist developers learn todo
 
 include $(top_srcdir)/rules.common
 
