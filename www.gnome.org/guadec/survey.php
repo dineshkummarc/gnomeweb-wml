@@ -110,7 +110,9 @@
         print ("
           <h2>Thank you for giving your responses. Your information will
 	      help us to target the needs of our users and contributors more
-	      effectively and plan better for future GNOME events.</h2> ");
+	      effectively and plan better for future GNOME events. All 
+	      information submitted will be treated as private and 
+	      confidential.</h2> ");
        }
 
   }
@@ -120,7 +122,8 @@
 
   <p>
     Please fill in the following to details to give us better information
-    of GNOME's users and contributors. 
+    of GNOME's users and contributors. All information submitted will be 
+    treated as private and confidential.
   </p>
     <ul>
 
