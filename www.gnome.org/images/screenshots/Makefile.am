@@ -14,7 +14,11 @@ screen_images=\
 	20000520-jtz-big.png\
 	20000520-jtz-thumb.png\
 	20000520-ole-big.png\
-	20000520-ole-thumb.png
+	20000520-ole-thumb.png\
+  20000520-ng-big.jpg\
+	20000520-ng-thumb.png\
+	20000520-n0mada-big.png\
+	20000520-n0mada-thumb.png
 
 page_DATA=$(screen_images)
 
