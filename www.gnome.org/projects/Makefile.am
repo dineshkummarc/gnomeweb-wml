@@ -25,6 +25,7 @@ SUBDIRS = \
 	libgsf			\
 	evince			\
 	sabayon			\
+	totem			\
 	gwget
 
 urlpath = /projects
