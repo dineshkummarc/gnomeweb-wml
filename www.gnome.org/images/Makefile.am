@@ -71,7 +71,9 @@ sidebar_items=\
 	sidebar-mailinglists.png\
 	sidebar-maintainers.png\
 	sidebar-meetthedevelopers.png\
-	sidebar-presscontacts.png\
+  sidebar-developerinterviews.png\
+	sidebar-developersbyregion.png\
+  sidebar-presscontacts.png\
 	sidebar-pressreleases.png\
   sidebar-projectindex.png\
   sidebar-resourceindex.png\
