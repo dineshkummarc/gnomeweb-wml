@@ -60,21 +60,21 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.itemLink = self.itemLink + ch[start:start+length]
 
 
-print "<p><a href='http://news.gnome.org/gnome-news/'><font size=\"+2\" color=\"#400000\"><b>GNOME News:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'><tr><td>"
+print "<p><a href='http://news.gnome.org/gnome-news/'><font size=\"+2\" color=\"#400000\"><b>GNOME News:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'>"
 
 
-feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf/")
+try:
+	feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf/")
 
-#feedfile.readline();
+	#feedfile.readline();
 
-if __name__ == '__main__':
-    parser = saxexts.make_parser()
-    dh = PrintHeadline(5)
-    parser.setDocumentHandler(dh)
-    parser.parseFile(feedfile)
-    parser.close()
-
-
-
+	if __name__ == '__main__':
+	    parser = saxexts.make_parser()
+	    dh = PrintHeadline(5)
+	    parser.setDocumentHandler(dh)
+	    parser.parseFile(feedfile)
+	    parser.close()
+except:
+	pass
 
 print "</table>"
