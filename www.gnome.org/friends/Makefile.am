@@ -7,6 +7,7 @@ page_SCRIPTS = \
 	thanks.php \
 	donors.php \
 	donors_2002.php \
+	donors_2003.php \
 	check.html
 
 include $(top_srcdir)/rules.common
