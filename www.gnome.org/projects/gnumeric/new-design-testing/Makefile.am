@@ -17,6 +17,7 @@ page_SCRIPTS= 		\
     screenshots.shtml	\
     how-to-help.shtml   \
     to-do.shtml     \
+    contact-info.shtml     \
     technology.shtml
 
 include $(top_srcdir)/rules.common
