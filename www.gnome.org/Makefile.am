@@ -7,7 +7,8 @@ urlpath=
 page_SCRIPTS=index.php3		\
 	seegnome.html   		\
 	commsupp.html       \
-	speakingabout.html
+	speakingabout.html  \
+	pressreleases.html
 
 page_DATA=menucontrol.js
 
