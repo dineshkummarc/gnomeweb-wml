@@ -135,7 +135,7 @@
 	  </td>
 	</tr>
 	<tr>
-	  <td>Age:</td>
+	  <td> Age:</td>
 	  <td>
 	    <input type="text" name="contactage" 
 		   size="3" value="<? echo $contactage ?>">
@@ -160,12 +160,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="user"> I am a GNOME user.
+             <input type="checkbox" name="user">  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="developer"> I am a GNOME developer.
+             <input type="checkbox" name="developer">  I am a GNOME developer.
           </td>
         </tr>
 	<tr>
@@ -204,7 +204,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="guadec"> * I am interested in attending GUADEC in 2003.
+             <input type="checkbox" name="guadec">  I am interested in attending GUADEC in 2003.
           </td>
         </tr>
 	<tr>
@@ -212,12 +212,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="sponsor"> I will need sponsorship if I am to attend GUADEC in 2003.
+             <input type="checkbox" name="sponsor">  I will need sponsorship if I am to attend GUADEC in 2003.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="tutorial"> I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
+             <input type="checkbox" name="tutorial">  I am interested in attending professional tutorials about GTK+/GNOME technology for a fee.
           </td>
         </tr>
 	<tr>
@@ -225,7 +225,7 @@
 	</tr>
         <tr>
           <td colspan=2>
-             <input type="checkbox" name="gfmember"> I am a GNOME Foundation member.
+             <input type="checkbox" name="gfmember">  I am a GNOME Foundation member.
           </td>
         </tr>
 	</tr>
