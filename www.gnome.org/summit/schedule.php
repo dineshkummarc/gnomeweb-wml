@@ -1,35 +1,6 @@
 <html>
 <head><title>
 2002 Boston GNOME Summit Schedule</title>
-<style>
-td.nav  {
-        height: 16px;
-        }
-td.cell {
-	background-color: #eeeeee;
-	text-align: center;
-        }
-td.white {
-    background-color: #eeeeee;
-	color: #eeeeee;
-    text-align: top;
-	width: 200px;
-	height: 200px;
-        }
-
-td.title {
-        background-color: #000000;
-        color: #ffffff;
-	text-align: center;
-        height: 25px;
-	font-weight: bold;
-        }
-td.bold {
-        font-weight: bold;
-	font-size: 11px;
-	}
-
-  </style>
 </head>
 <body text="#000000" bgcolor="#FFFFFF" link="#990000" vlink="#990000" alink="#990000">
 
@@ -49,7 +20,7 @@ td.bold {
 
 
 <h2>Thursday, July 18th</h2>
-<table cellpadding=5 cols=3 width="700" text="#ffffff" align=center bgcolor="#000000">
+<table cellpadding=5 cols=3 width="700" text="#ffffff" align=center bgcolor="#000000" border=1>
 <tr bgcolor="#000000" align=center>
     <td width="16%" bgcolor="white"><font color="#ffffff"></font></td>
     <td width="16%"><font color="#ffffff">Room 33-319</font></td>

@@ -1,0 +1,6 @@
+<?php
+
+include ("./util.php");
+
+?>
+

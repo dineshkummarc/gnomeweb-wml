@@ -1,4 +1,4 @@
-SUBDIRS = about images start projects resources developerinterviews applist learn i18n press faqs account export include register admin my project softwaremap friends summit fonts img contact
+SUBDIRS = about images start projects resources developerinterviews applist learn i18n press faqs account export include register admin my project softwaremap friends summit fonts img contact bounties
 
 urlpath =
 
