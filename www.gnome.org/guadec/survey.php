@@ -25,22 +25,27 @@
 
   if ($submit) {
 
-      if (! $contactname){
+      if (!$contactname){
         $bad_elements[] = "contactname";
         $errors[] = "Please enter your name.";
       }
-      if (! $contactaddress){
+      if (!$contactaddress){
         $bad_elements[] = "contactaddress";
         $errors[] = "Please enter your country of residence.";
       }
-      if (! $email) {
+      if (!$email) {
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if ($developer && ! trim($contributions)){
+      if (trim($developer) == "on" && !$contributions){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
+ 
+     if (!$paris && !$copenhagen && !$none && !$seville) {
+	$bad_elements[] = "attend";
+	$errors[] = "Please specify if you have previously attended GUADEC.";
+     }
 
 
       if (count($bad_elements) == 0)
@@ -117,7 +122,7 @@
     <form action="<?=$PHP_SELF?>" method="POST">
       <table>
 	<tr>
-	  <td>*Name:</td>
+	  <td><font color="red">*</font>Name:</td>
 	  <td>
 	    <input type="text" name="contactname" 
 		   size="30" value="<? if ($contactname) { echo $contactname; } ?>">
@@ -131,14 +136,14 @@
 	  </td>
 	</tr>
 	<tr>
-	  <td>*Country of residence:</td>
+	  <td><font color="red">*</font>Country of residence:</td>
 	  <td>
 	    <input type="text" name="contactaddress" 
 		   size="30" value="<? if ($contactaddress) { echo $contactaddress; } ?>"> 
 	  </td>
 	</tr>
 	<tr>
-	  <td>*Email:</td>
+	  <td><font color="red">*</font>Email:</td>
 	  <td>
 	    <input type="text" name="email" 
 		   size="30" value="<? if ($email) { echo $email; } ?>">
@@ -162,7 +167,7 @@
 	</tr>
         <tr>
 	  <td valign="top" colspan="2">
-	    *Contributions to GNOME:
+	    <font color="red">*</font>Contributions to GNOME [developer only]:
 	  </td>
         </tr>
 	<tr>
@@ -175,7 +180,7 @@
 	</tr>
         <tr>
           <td valign="top" colspan="2">
-	    *Previous GUADEC attendance:
+	    <font color="red">*</font>Previous GUADEC attendance:
           </td>
         </tr>
         <tr>
