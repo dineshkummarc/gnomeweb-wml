@@ -29,6 +29,7 @@ page_SCRIPTS=account.php \
 	Error.class \
 	logger.php \
 	proj_email.php \
+	canned_responses.php \
 	theme.class
 
 include $(top_srcdir)/rules.common
