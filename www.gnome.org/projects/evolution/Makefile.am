@@ -23,6 +23,7 @@ page_DATA =			\
 	map.shtml 	 	\
 	screenshots15.shtml	\
 	unstable.shtml		\
+	releasenotes.shtml	\
 	roadmap.ics		\
 	jhbuildrc
 
