@@ -11,6 +11,7 @@ template_header($option);
 <h2>
 Quickly find the stuff you care about
 </h2>
+	<!-- Locate version 2.0!  We've combined the power of 'grep' with the snaziness of 'locate'! -->
 	<p>
 	It slices, it dices, and it may even find exactly what you're looking for.  Beagle is your one stop searching utility when it comes to quickly locating all the information you need.
 	</p>

@@ -5,7 +5,7 @@ function template_header($option="") {
 	$bodytag="";
 
 	if ($option['name'] == "")
-		$option['name']="Beagle: searching and a whole lot more";
+		$option['name']="Beagle";
 
 	if ($option['pageid'] != "")
 		$bodytag.=' id="page-main"';
