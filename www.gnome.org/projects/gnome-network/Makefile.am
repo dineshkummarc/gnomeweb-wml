@@ -2,17 +2,16 @@ SUBDIRS = style images screenshots release_notes
 
 urlpath=/projects/gnome-network
 
-page_SCRIPTS =  bugs.html	\
-		contact.html	\
-		credits.html	\
-		download.html   \
-		features.html	\
-		home.html	\
-		index.php	\
-		menu.html	\
-		news.html	\
+page_SCRIPTS =  bugs.shtml	\
+		contact.shtml	\
+		credits.shtml	\
+		download.shtml   \
+		features.shtml	\
+		index.shtml	\
+		menu.shtml	\
+		news.shtml	\
 		release.html	\
-		screenshots.html
+		screenshots.shtml
 
 include $(top_srcdir)/rules.common
 
