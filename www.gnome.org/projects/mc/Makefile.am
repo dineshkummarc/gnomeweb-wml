@@ -1,4 +1,4 @@
-SUBDIRS = images
+SUBDIRS =
 
 urlpath = /projects/mc/
 
