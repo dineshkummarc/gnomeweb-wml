@@ -193,7 +193,6 @@ print $this->menurow("findout", "Find out what GNOME is", "/intro/findout.html")
 . $this->menurow("learn", "Learn to use GNOME", "/learn/")."</tr>\n<tr>"
 . $this->menurow("getmore", "Get more software", "/softwaremap/")."</tr>\n<tr>"
 . $this->menurow("developwith", "Develop with GNOME", "http://developer.gnome.org")."</tr>\n<tr>"
-. $this->menurow("contribute", "Contribute to GNOME", "/todo/index.php3")."</tr>\n";
 ?>
 <tr>
       <td colspan="3"><a href="javascript:pullup_tasks();"><?php print $this->img("popdown-endcap-green.png","10","181"); ?></a></td>
