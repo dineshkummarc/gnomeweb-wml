@@ -1,13 +1,15 @@
 SUBDIRS=images start projects resources
 
+include $(top_srcdir)/rules.common
+
 urlpath=
 
 page_SCRIPTS=index.shtml		\
 	findout.html 			\
 	seegnome.html   		\
 	getgnome.html   		\
-	menucontrol.js  		\
 	recentsoftware.php3
 
-include $(top_srcdir)/rules.common
+page_DATA=menucontrol.js
+
 
