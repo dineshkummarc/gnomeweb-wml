@@ -3,6 +3,10 @@ include "pre.php";
 
 $HTML->header(array('title'=>'Latest Releases'));
 
+print "<p align=\"center\"><a href=\"list\">Browse the software map by category</a><br>"
+	. "<a href=\"".$GLOALS['sys_default_domain']."/register/\">Add a new project to the "
+	. "software map</a></p>\n";
+
 // ## default limit
 if (!$limit) $limit = 20;
 if ($limit > 100) $limit = 100;
