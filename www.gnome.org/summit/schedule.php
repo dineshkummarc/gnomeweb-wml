@@ -71,7 +71,7 @@ td.bold {
     <td rowspan=2> Hacking, etc.</td> <!-- 33-419 -->
     <td rowspan=2>"GNOME Release Process: 2.0 post-mortem and looking ahead," Jeff
       Waugh.</td> <!-- 33-418 -->
-    <td></td> <!-- 33-422 -->
+    <td>&quot;Building applications with the GStreamer system,&quot; Thomas Vander Stichele</td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
     <td rowspan=2>&quot;Extending Nautilus through Views and Scripts,&quot; Dave Camp</td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
@@ -110,7 +110,7 @@ td.bold {
     <td></td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
-    <td bgcolor="#acaba9" align=right>8:300 PM - 10:30 PM</td>
+    <td bgcolor="#acaba9" align=right>8:30 - 10:30 PM</td>
     <td colspan=5 align=center>Dinner at Fire + Ice</td>
 </table>
 
@@ -133,49 +133,43 @@ td.bold {
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>11:00 AM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
-    <td></td> <!-- 33-418 -->
+    <td rowspan=2> Hacking, etc.</td> <!-- 33-419 -->
+    <td rowspan=2>&quot;Building a GNOME Media Player,&quot; Thomas Vander Stichele</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
-    <td></td> <!--  1-135 -->
+    <td>&quot;Role-Playing Games for Fun and Profit: Usability Testing,&quot;
+      Anna Dirks</td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>12:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
-    <td></td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
-    <td>&quot;Role-Playing Games for Fun and Profit: Usability Testing,&quot;
-      Anna Dirks.</td> <!--  1-135 -->
-    <td>&quot;Building applications with the GStreamer system,&quot; Thomas Vander Stichele</td> <!--  1-136 -->
+    <td></td> <!--  1-135 -->
+    <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>1:00 PM</td>
     <td colspan=5 align=center bgcolor="#fc87de">Lunch</td>
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>2:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
+    <td rowspan=5> Hacking, etc.</td> <!-- 33-419 -->
     <td rowspan=2>&quot;The File Selector,&quot; Havoc Pennington</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
-    <td rowspan=2>&quot;The new gnome.org web site,&quot; Jeff Waugh, Tim Ney, et al.</td> <!--  1-136 -->
+    <td rowspan=2>&quot;The New gnome.org Web Site,&quot; Jeff Waugh, Tim Ney, et al.</td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>3:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>4:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
-    <td rowspan=2>&quot;Building a GNOME Media Player,&quot; Thomas Vander Stichele</td> <!-- 33-418 -->
+    <td rowspan=2></td> <!-- 33-418 -->
     <td rowspan=2>&quot;GNOME Development and Release Process,&quot; Michael Meeks.</td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
-    <td></td> <!--  1-136 -->
+    <td>&quot;GPhoto2: The Foundation for a GNOME Photo Management Application,&quot; Christophe Barbé</td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>5:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>6:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
@@ -201,36 +195,33 @@ td.bold {
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>11:00 AM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
+    <td rowspan=2> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>12:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td>&quot;ABI Compatibility and ABICheck,&quot; Karl Runge</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td>&quot;Demo of the X.Org Media Application Server,&quot; Leon Shiman</td> <!--  1-135 -->
-    <td></td> <!--  1-136 -->
+    <td>&quot;Bug tracking in GNOME,&quot; Luis Villa</td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>1:00 PM</td>
     <td colspan=5 align=center bgcolor="#fc87de">Lunch</td>
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>2:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
+    <td rowspan=3> Hacking, etc.</td> <!-- 33-419 -->
     <td rowspan=2>&quot;Making Accessibility work for users,&quot; Bill Haneman.</td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td rowspan=2>&quot;GU4DEC and GNOME event planning," Tim Ney et al.</td> <!--  1-135 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>3:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-136 -->
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>4:00 PM</td>
-    <td> Hacking, etc.</td> <!-- 33-419 -->
     <td></td> <!-- 33-418 -->
     <td></td> <!-- 33-422 -->
     <td></td> <!--  1-135 -->
@@ -245,6 +236,7 @@ td.bold {
       </td></tr>
   </table>
 </center>
+
 
 </body>
 </html>
