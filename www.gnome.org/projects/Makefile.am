@@ -6,6 +6,7 @@ SUBDIRS=			\
 	gnome-libs		\
 	gnumeric		\
 	gb			\
+	mc			\
 	gnome-print
 urlpath=/projects
 
