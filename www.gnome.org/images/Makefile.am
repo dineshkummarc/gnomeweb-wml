@@ -29,7 +29,9 @@ misc_images=\
   news-software.png\
 	news-software.gif\
   arrow.png\
-	arrow.gif
+	arrow.gif\
+	button-helixgnome.png\
+	button-helixgnome.gif
 
 banner_images=\
 	banner-gnomeis.png\
