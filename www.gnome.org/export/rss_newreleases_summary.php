@@ -21,9 +21,16 @@ if ($HTTP_GET_VARS['date'])
 
 	if (!checkdate ($m, $d, $y)) bad ();
 }
+elseif (isset ($HTTP_GET_VARS['send_report']))
+{
+	$date = time () - 604800; // Now minus a week
+	$y = date ("Y", $date);
+	$m = date ("m", $date);
+	$d = date ("d", $date);
+}
 else bad ();
 
-print '<?xml version="1.0"?>
+$output = '<?xml version="1.0"?>
 <apps>
 ';
 
@@ -43,21 +50,34 @@ $res = db_query ($query);
 
 $outputtotal = 0;
 while ($row = db_fetch_array ($res)) {
-	print "  <app>\n";
-	print "   <name>".htmlspecialchars ($row['group_name'])."</name>\n";
+	$output .= "  <app>\n";
+	$output .= "   <name>".htmlspecialchars ($row['group_name'])."</name>\n";
 
 	if ($row['mini_description'] != "")
 	{
-		print "   <desc>".rss_description (str_replace ("\n", "", trim ($row['mini_description'])))."</desc>\n";
+		$output .= "   <desc>".rss_description (str_replace ("\n", "", 
+			trim ($row['mini_description'])))."</desc>\n";
 	}
 	else
 	{
-		print "   <desc>".rss_description (str_replace ("\n", "", trim ($row['short_description'])))."</desc>\n";
+		$output .= "   <desc>".rss_description (str_replace ("\n", "", 
+			trim ($row['short_description'])))."</desc>\n";
 	}
 	
-	print "  </app>\n";
+	$output .= "  </app>\n";
 	$outputtotal++;
 }
-// ## end output
+
+$output .= "</apps>";
+
+if (isset ($HTTP_GET_VARS['send_report']))
+{
+	mail ("gnome-summary@gnome.org", "Software Map releases this last week",
+		$output, "From: webmaster@gnome.org");
+}
+else
+{
+	print $output;
+}
+
 ?>
-</apps>
