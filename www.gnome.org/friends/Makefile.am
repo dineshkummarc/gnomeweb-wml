@@ -4,7 +4,6 @@ urlpath=/friends
 
 page_SCRIPTS=index.php\
 	order.php\
-	browse.php\
 	showitem.php
 
 include $(top_srcdir)/rules.common
