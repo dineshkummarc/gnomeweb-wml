@@ -27,6 +27,7 @@ page_SCRIPTS = \
 	redflagjoins.html \
 	redhat.html \
 	sunjoins.html \
-	summit2003.html
+	summit2003.html \
+	gnome2book.html
 
 include $(top_srcdir)/rules.common
