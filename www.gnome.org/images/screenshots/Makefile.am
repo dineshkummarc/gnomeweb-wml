@@ -32,7 +32,11 @@ screen_images=\
 	20000520-n0mada-big.png\
 	20000520-n0mada-big.jpg\
 	20000520-n0mada-thumb.png\
-	20000520-n0mada-thumb.jpg
+	20000520-n0mada-thumb.jpg\
+	20010704-bratsche-big.png\
+	20010704-bratsche-big.jpg\
+	20010704-bratsche-thumb.png\
+	20010704-bratsche-thumb.jpg
 
 page_DATA=$(screen_images)\
           .htaccess
