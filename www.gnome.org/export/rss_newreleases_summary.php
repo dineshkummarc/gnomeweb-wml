@@ -58,6 +58,7 @@ while ($row = db_fetch_array ($res)) {
 	if (!$G_RELEASE["$row[group_id]"]) {
 		$output .= "<app>\n";
 		$output .= "<name>".htmlspecialchars ($row['group_name'])."</name>\n";
+		$output .= "<unixname>".$row['unix_group_name']."</unixname>\n";
 	
 		if ($row['mini_description'] != "")
 		{
