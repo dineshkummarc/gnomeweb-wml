@@ -6,7 +6,7 @@ page_SCRIPTS=index.html
 
 include $(top_srcdir)/rules.common
 
-EXTRA_DIST=csm-desktop.png \
+page_DATA=csm-desktop.png \
 	drc-desktop.png \
 	gconf-editor-hindi.png \
 	gconf-editor-korean.png \
