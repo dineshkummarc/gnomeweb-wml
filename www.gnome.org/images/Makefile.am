@@ -37,8 +37,11 @@ banner_images=\
 	banner-pressreleases.png\
 	banner-resourceindex.png\
   banner-projectindex.png\
-  banner-tipsandtutorials.png
-	
+  banner-tipsandtutorials.png\
+	banner-developerinterviews.png\
+	banner-developersbyregion.png
+
+
 popdown_images=\
 	popdown-endcap-blue.png\
 	popdown-endcap-green.png\
