@@ -1,4 +1,4 @@
-PREFIX=/usr/local
+PREFIX=/usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2

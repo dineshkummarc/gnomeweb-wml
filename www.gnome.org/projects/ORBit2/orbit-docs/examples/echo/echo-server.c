@@ -50,8 +50,6 @@ echo_server_shutdown (int sig)
         {
                 CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
                 abort_if_exception (local_ev, "caught exception");
-
-                global_orb=CORBA_OBJECT_NIL;
         }
 }
 

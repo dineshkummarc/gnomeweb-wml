@@ -1,4 +1,4 @@
-PREFIX=/usr/local
+PREFIX=/usr
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=orbit-idl-2
