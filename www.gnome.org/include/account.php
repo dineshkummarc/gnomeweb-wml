@@ -75,8 +75,7 @@ function account_register_new($unix_name,$realname,$password1,$password2,$email,
 			. "Enjoy the site.\n\n"
 			. " -- the Gnome.org web monkies\n";
 			
-		//mail($email,"Gnome.org Account Registration",$message,"From: noreply@".$GLOBALS['HTTP_HOST']);
-		mail($email,"Gnome.org Account Registration",$message,"From: drfickle@k-lug.org");
+		mail($email,"Gnome.org Account Registration",$message,"From: webmaster@gnome.org");
 		
 		return $user_id;
 	}       
