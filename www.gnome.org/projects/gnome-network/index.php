@@ -2,8 +2,8 @@
   "http://www.w3.org/TR/REC-html40/loose.dtd">
 
 <?
-  $current_version = "1.99.1";
-  $date_release = "September 01, 2003";
+  $current_version = "1.99.2";
+  $date_release = "October 24, 2003";
 ?>
   
 <html>
