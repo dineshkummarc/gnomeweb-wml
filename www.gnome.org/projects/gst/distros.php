@@ -10,69 +10,78 @@
           "icon" => "tool_runlevel.png", 
           "description" => "This tool is used to select which services should be run at each runlevel."
         ),
-      "Debian GNU/Linux"  => array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1" ),
+      "Debian GNU/Linux"  => array ( "2.2 Potato", "3.0 Woody", "3.1 Sarge", "Current unstable" ),
+      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1", "10.0", "10.1" ),
       "Red Hat Linux" => array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
-      "Slackware Linux" => array ( "9.1" ),
-      "SuSE Linux"  => array ( "7.0" ),
+      "Slackware Linux" => array ( "9.1", "10.0" ),
+      "SuSE Linux"  => array ( "7.0", "9.0" ),
       "Turbolinux"  => array( "7.0" ),
-      "PLD Linux"    => array( "1.0" ),
+      "PLD Linux"    => array( "1.0", "1.1", "1.99" ),
       "OpenNA"    => array ( "1.0" ),
-      "Fedora Core" => array ( "1" )
+      "Fedora Core" => array ( "1", "2" ),
+	 "Gentoo Linux" => array ("Current"),
+	 "FreeBSD" => array ("5.x")
     ),
     "Network" => array(
       "metadata"    => array(
           "icon" => "tool_ethernet.png",
           "description" => "This tool is used to setup network cards, Internet connections and file shares."
         ),
-      "Debian GNU/Linux"  => array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1" ),
+      "Debian GNU/Linux"  => array ( "2.2 Potato", "3.0 Woody", "3.1 Sarge", "Current unstable" ),
+      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1", "10.0", "10.1" ),
       "Red Hat Linux" => array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "8.0", "9.0" ),
-      "SuSE Linux"  => array ( "7.0" ),
+      "SuSE Linux"  => array ( "7.0", "9.0" ),
       "Turbolinux"  => array ( "7.0" ),
-      "PLD Linux"    => array ( "1.0" ),
+      "PLD Linux"    => array ( "1.0", "1.1", "1.99" ),
       "OpenNA"    => array ( "1.0" ),
-      "Fedora Core" => array ( "1" )
+      "Fedora Core" => array ( "1", "2" ),
+	 "BlackPanther OS" => array ("4.0"),
+	 "Conectiva" => array ("9.0", "10.0"),
+	 "Slackware" => array ("9.1", "10.0"),
+	 "Gentoo Linux" => array ("Current"),
+	 "FreeBSD" => array ("5.x")
     ),
     "Time"  => array(
       "metadata"    => array(
           "icon" => "tool_time.png",
           "description" => "This tool is used to setup date and time, including timezone."
         ),
-      "Debian GNU/Linux"  => array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-      "Gentoo Linux"  => array ( "gentoo" ),
-      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1" ),
+      "Debian GNU/Linux"  => array ( "2.2 Potato", "3.0 Woody", "3.1 Sarge", "Current unstable" ),
+      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1", "10.0", "10.1" ),
       "Red Hat Linux" => array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
-      "Slackware Linux" => array ( "8.0", "9.0", "9.1" ),
-      "SuSE Linux"  => array ( "7.0" ),
+      "Slackware Linux" => array ( "8.0", "9.0", "9.1", "10.0" ),
+      "SuSE Linux"  => array ( "7.0", "9.0" ),
       "Turbolinux"  => array( "7.0" ),
-      "PLD Linux" => array ( "1.0" ),
+      "PLD Linux" => array ( "1.0", "1.1", "1.99" ),
       "OpenNA"    => array ( "1.0" ),
-      "Fedora Core"  => array ( "1.0" )
+      "Fedora Core"  => array ( "1", "2" ),
+      "Gentoo Linux"  => array ( "current" ),
+	 "FreeBSD" => array ("5.x")
     ),
     "Users" => array(
       "metadata"    => array(
           "icon" => "tool_users.png",
           "description" => "This tool is used to administrate users and groups on your system."
         ),
-      "Debian GNU/Linux"  => array ( "2.2 Potato", "Sarge", "3.0 Woody" ),
-      "FreeBSD" => array ( "4", "5" ),
-      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1" ),
+      "Debian GNU/Linux"  => array ( "2.2 Potato", "3.0 Woody", "3.1 Sarge", "Current unstable" ),
+      "Mandrake Linux"  => array ( "7.1", "7.2", "9.0", "9.1", "10.0", "10.1" ),
       "Red Hat Linux" => array ( "5.2", "6.0", "6.1", "6.2", "7.0", "7.1", "7.2", "7.3", "8.0", "9.0" ),
-      "Slackware Linux" => array ( "8.0", "8.1", "9.0", "9.1" ),
-      "SuSE Linux"  => array ( "7.0" ),
+      "Slackware Linux" => array ( "8.0", "8.1", "9.0", "9.1", "10.0" ),
+      "SuSE Linux"  => array ( "7.0", "9.0" ),
       "Turbolinux"  => array( "7.0" ),
-      "Gentoo"       => array( "1.4" ),
-      "PLD Linux"    => array( "1.0" ),
+      "PLD Linux"    => array( "1.0", "1.1", "1.99" ),
       "OpenNA"    => array ( "1.0" ),
-      "Fedora Core" => array ( "1" )
+      "Fedora Core" => array ( "1", "2" )
+      "Gentoo"       => array( "current" ),
+      "FreeBSD" => array ( "4.x", "5.x" ),
     ),
     "Boot"  => array(
       "metadata"    => array(
           "icon" => "tool_boot.png",
           "description" => "This tool is used to select boot-method and administrate different Linux-kernels."
         ),
-      "Linux"   => array ( "Lilo, Grub and Yaboot is supported for all Linux distributions." )
+      "Linux"   => array ( "Lilo, Grub and Yaboot is supported for all Linux distributions." ),
+	 "FreeBSD" => array ( "Grub is supported for FreeBSD 5.x" )
     )
   );
 ?>
