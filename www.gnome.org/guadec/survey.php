@@ -55,7 +55,7 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if ($user_developer == "developer" && !$contributions){
+      if ($user_contributor == "contributor" && !$contributions){
         $bad_elements[] = "contributions";
         $errors[] = "Please enter your contributions to GNOME.";
       }
@@ -77,9 +77,7 @@
 	$formmail .= "Affiliation [if any]:\t". $affiliation . "\n";
         $formmail .= "Email:\t" . $email . "\n\n";
 
-	$formmail .= "User/Developer:\t" . $user_developer . "\n";
-//        $formmail .= "User:\t" . $user . "\n";
-//        $formmail .= "Developer:\t" . $developer . "\n";
+	$formmail .= "User/Contributor:\t" . $user_contributor . "\n";
 
         $formmail .= "Contributions:\n" . $contributions . "\n\n";
 
@@ -95,7 +93,6 @@
 	$formmail .= "GUADECs Attended:\t" . $guadecs_attended . "\n\n";
         $formmail .= "Needs Sponsorship:\t" . $sponsor . "\n\n";
         $formmail .= "Paid Tutorials:\t" . $tutorial . "\n\n";
-        $formmail .= "Not interested in paid tutorials:\t" . $notutorial . "\n\n";
 
         $formmail .= "GNOME Foundation Member:\t" . $gfmember ."\n\n";
 
@@ -106,8 +103,7 @@
 
         // send the mail
 
-//        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
-        mail("micke@codefactory.se", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
+        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
 
         // print the thank you page
 
@@ -183,12 +179,12 @@
 	</tr>
         <tr>
           <td colspan=2>
-              <input type="radio" name="user_developer" value="user" <? if ($user_developer == "user") { ?> checked <? } ?> >  I am a GNOME user.
+              <input type="radio" name="user_contributor" value="user" <? if ($user_contributor == "user") { ?> checked <? } ?> >  I am a GNOME user.
           </td>
         </tr>
         <tr>
           <td colspan=2>
-               <input type="radio" name="user_developer" value="developer" <? if ($user_developer == "developer") { ?> checked <? } ?> >  I am a GNOME contributor.
+               <input type="radio" name="user_contributor" value="contributor" <? if ($user_contributor == "contributor") { ?> checked <? } ?> >  I am a GNOME contributor.
           </td>
         </tr>
 	<tr>
@@ -242,16 +238,16 @@
 	<tr>
 	  <td colspan=2>&nbsp;</td>
 	</tr>
-        <tr>
-          <td colspan=2>
-            <input type="checkbox" name="tutorial" <? if ($tutorial) { ?> checked <? } ?> >  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
+	<tr>
+	  <td colspan=2>
+            <input type="radio" name="tutorial" value="interested" <? if ($tutorial== "interested") { ?> checked <? } ?> >  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
           </td>
         </tr>
-        <tr>
-          <td colspan=2>
-            <input type="checkbox" name="notutorial" <? if ($notutorial) { ?> checked <? } ?> >  I am <B>not</B> interested in attending any professional tutorials for a fee.
+	<tr>
+	  <td colspan=2>
+            <input type="radio" name="tutorial" value="not interested" <? if ($tutorial== "not interested") { ?> checked <? } ?> >  I am <B>not</B> interested in attending any professional tutorials for a fee.
           </td>
-        </tr>
+	</tr>
 	<tr>
 	  <td colspan=2>&nbsp;</td>
 	</tr>
