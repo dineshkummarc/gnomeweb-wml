@@ -15,6 +15,8 @@ page_SCRIPTS= 		\
     index.shtml		\
     mailing-list.html	\
     screenshots.shtml	\
+    how-to-help.shtml   \
+    todo-list.shtml     \
     technology.shtml
 
 include $(top_srcdir)/rules.common
