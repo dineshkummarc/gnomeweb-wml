@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GNOME Users and Developers Survey</title>
+    <title>GNOME Users and Contributors Survey</title>
   </head>
 
   <body bgcolor="#ffffff" text="#000000">
@@ -17,7 +17,7 @@
 
                   <table border=0 bgcolor="#ffffff" cellpadding=50 width="100%"> <!-- start content -->
                     <tr><td>
-                        <h1>GNOME Users and Developers Survey:</h1>
+                        <h1>GNOME Users and Contributors Survey:</h1>
 
 <?
   $bad_elements = array();
@@ -103,7 +103,7 @@
 
         // send the mail
 
-        mail("glynn.foster@sun.com", "GNOME Users and Developers Survey :: reply", $formmail, $headers);
+        mail("glynn.foster@sun.com", "GNOME Users and Contributors Survey :: reply", $formmail, $headers);
 
         // print the thank you page
 
