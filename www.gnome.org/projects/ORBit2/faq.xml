@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" []>
+<book>
+<bookinfo>
+<title>ORBit2 Frequently Asked Questions - FAQs</title>
+<authorgroup>
+  <author>
+    <firstname>Frank</firstname><surname>Rehberger</surname>
+  </author>
+</authorgroup>
+<pubdate>2003</pubdate>
+</bookinfo>
+
+<toc></toc>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+
+  <chapter id="CORBA">
+  <title>CORBA</title> 
+  <!-- =========== Linc related Questions ======================= -->
+    <sect1 id="ClientConnection">
+    <title>How does a client connect to a server?</title> 
+
+    <para>
+    This is a well known problem in CORBA (more precisely in any
+    distributed object system). It is commonly known under the term
+    &quot;bootstrapping&quot;. In general, object references can be
+    obtained from a <application>Name Service</application> (or a
+    <application>Trading Object Servicee</application>), but a name
+    service (thanks to the clear design of CORBA) is itself an
+    object. So, how do you get the reference to the name service if it
+    is itself an object ?  </para>
+
+    <para> The standard solution for a client, finding a first object
+    reference to a server is by exchanging an Interoperable Object
+    Reference (IOR). The server process produces an IOR of the created
+    object by using the method <funcsynopsis> <funcprototype>
+    <funcdef>CORBA_string
+    <function>CORBA_ORB_object_to_string</function></funcdef>
+    <paramdef>CORBA_ORB <parameter>orb</parameter></paramdef>
+    <paramdef>const CORBA_Object <parameter>obj</parameter></paramdef>
+    <paramdef>CORBA_Environment* <parameter>env</parameter></paramdef>
+    </funcprototype> </funcsynopsis> The generated string, also called
+    stringified object reference, can be transfered by any kind of
+    media, like email, HTTP, NFS, filesystem, or even as a message in
+    a bottle ;-) . The client process reads the IOR from the medium
+    and converts it back into its binary representation via
+    <funcsynopsis> <funcprototype> <funcdef>CORBA_Object
+    <function>CORBA_ORB_string_to_object</function></funcdef>
+    <paramdef>CORBA_ORB <parameter>orb</parameter></paramdef>
+    <paramdef>const CORBA_char *<parameter>str</parameter></paramdef>
+    <paramdef>CORBA_Environment *<parameter>env</parameter></paramdef>
+    </funcprototype> </funcsynopsis>. Afterwards the client holds a
+    valid object reference to the server and thus is able to invoke
+    methods in the usual way.  </para>
+
+    <para> Until now non-standard ways to solve this bootstrapping
+    issue have been introduced by different ORBs. One example is the
+    Visibroker Location Service. The ORB registers each object at a
+    central service by a proprietary _bind() method. The discovery of
+    the service is done by network broadcasts. The drawback of this
+    mechanism is that the information about the objects is stored in a
+    central table.  The table needs to be updated on a regular
+    basis. This is necessary because of malicious objects not cleanly
+    deregistering.  If the broadcast interval is to short the updates
+    will cause a lot of noise on the network. If the interval is to
+    long the table contains zombie objects. Such kind of proprietary
+    solutions exists for many major CORBA implementations.  </para>
+
+    <para> Ideally the method resolve_initial_references() could be
+    used to find a reference to the naming service. Therefore the ORB
+    must be able to read IORs without requiring the developer to write
+    some additional code. In the past each ORB had its own command
+    line parameters to pass IORs to the ORB's core (ORBit:
+    ORBNamingIOR=IOR:.....). <application>The Interoperable Naming
+    Service (INS) </application> specification introduces the
+    standardized command line parameter <envar>-ORBInitRef</envar> to
+    achieve this.  </para>
+
+    <screen>
+    <prompt>bash$</prompt><userinput>appname -ORBInitRef NameService=IOR_of_naming_service</userinput> </screen>
+          
+    <para> The only trick is to pass argc and argv to the ORB_init()
+    call of the ORB, so that the ORB's core can extract the relevant
+    parameters.  Afterwards the call </para>
+
+    <para><command>nsobj =
+    resolve_initial_references("NameService");</command> returns the
+    desired object reference. The INS specification defines, besides
+    the IOR, other human readable object references.
+    <command>corbaloc:iiop://IIOPVersion@hostname:port/ObjectKey</command>
+    </para>
+
+    <para>This offers the possibility for a client to point to a
+    server object just by providing a human readable address. Another
+    proposed naming scheme is corbaname, which refers to a naming
+    service running on the host the, specified by hostname.
+    <replaceable>corbaname://hostname#a/b/obj</replaceable> The
+    a/b/obj specifies a Name, i.e. a sequence of NameComponents, which
+    resolves to an object reference.  These mechanisms will extremly
+    improve the whole bootstrapping process and finally solve the
+    problem, as it has been one of the most annoying issues in the
+    past. There are are also a few critics of the human readable
+    object reference corbaloc. They think that the fact of having
+    opaque IORs is weakened by the INS specification. Specifying
+    protocol details, like port numbers or protocol version numbers,
+    can result in references to become invalid when the protocol, used
+    for transportation is exchanged. The Object URLs have to be
+    extended to support the new protocol information, whereas IORs
+    always remain the same, a sequence of numbers. </para>
+
+
+    <para>The CVS HEAD version of ORBit has a partial implementation
+    of the INS specification.  <ulink type="http"
+    url="http://www.ooc.com.au/staff/michi/binding.txt">Michi Henning
+    has a more elaborate description of the problem here.</ulink>
+    </para>
+
+    </sect1>
+
+    <sect1 id="DefaultParameterInIDL">
+    <title>How can I specify default parameters in IDL?</title> 
+     
+    <para>
+    IDL does not allow to specifiy default parameters. There are
+    mainly two reasons for that. First, IDL is some kind of least
+    common denominator of all the languages for which a CORBA mapping
+    is available. Many languages do not support the concept of default
+    parameters and thus have difficulties in supporting this feature
+    in the mapping. And second, default parameters are not really
+    necessary. The designer of an interface can easily split such
+    funtionality into two or more separate methods (Attention:
+    Overloading is not supported for the same reasons, so that methods
+    must have different names). </para> </sect1>
+
+    <sect1 id="GettingIpAdressOfObject">
+    <title>How can I get the IP address of a cient/server object in
+    CORBA?</title> 
+
+    <para> The IP address (as well as the port number or any other
+    protocol related feature) is hidden in the IOR (Interoperable
+    Object Reference). The reason for this opacity is that CORBA can
+    use any protocol for transportation of requests between object
+    instances. The GIOP (General Inter ORB Protocol) is independent
+    from any special network protocol. The IIOP (Internet Inter ORB
+    Protocol) is a translation of GIOP into TCP/IP. IIOP support is
+    not a mandatory feature of an ORB, but because of the Internet it
+    has become a must for any ORB to implement. If we start relying on
+    the presence of a specific protocol the original intention becomes
+    weakened and may render object references, valid today, invalid in
+    the future. (see TAO (The ACE ORB, ACE - Adaptive Communication
+    Environment) for an ORB which supports pluggable protocols)
+    </para>
+   
+    </sect1> 
+
+  </chapter> 
+
+</book>
