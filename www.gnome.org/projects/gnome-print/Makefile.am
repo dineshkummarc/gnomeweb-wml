@@ -3,6 +3,6 @@ SUBDIRS=
 urlpath=/projects/gnome-print/
 
 page_SCRIPTS = \
-		    index.html			\
+		    index.html
 
 include $(top_srcdir)/rules.common
