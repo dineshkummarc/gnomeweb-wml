@@ -11,6 +11,8 @@ page_DATA = \
 	goodbye_phone.png \
 	epatents.png \
 	gimp2.png \
-	two-six.png
+	two-six.png \
+	official-gnome-2-developers-guide.png
+
 
 include $(top_srcdir)/rules.common
