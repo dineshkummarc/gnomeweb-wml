@@ -59,6 +59,7 @@ page_SCRIPTS=		\
 	extensions.png \
 	sandy-stripes.png \
 	security.png \
-	smartbookmarks.png
+	smartbookmarks.png \
+	epiphany-download.png
 
 include $(top_srcdir)/rules.common
