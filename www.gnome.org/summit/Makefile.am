@@ -6,7 +6,8 @@ page_DATA=index.html		\
 	attendance.png		\
 	boston-summit.jpg	\
 	map.png			\
-	register.php
+	register.php		\
+	schedule.php
 
 page_SCRIPTS=
 
