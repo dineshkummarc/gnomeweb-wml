@@ -10,7 +10,6 @@ page_SCRIPTS=editgroupinfo.php \
 	project_admin_utils.php \
 	editreleases.php \
 	history.php \
-	qrs.php \
 	filerelease-edit.php \
 	index.php \
 	userperms.php \

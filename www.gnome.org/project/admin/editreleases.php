@@ -35,7 +35,7 @@ if ($step1) {
 		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'),
 			filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
 		if ((strlen($changes) < 20) || (strlen($changes) > 256000)) {
-			$feedback .= " Change Log Is Either Too Small Or Too Large ";
+			$feedback .= " Release Notes are either too small or too large ";
 			$exec_changes = false;
 		}
 	} else {
@@ -152,18 +152,18 @@ Edit Existing Release
 <tr>
 	<td colspan="2">
 		<br>
-		Edit the Change Log for this release. These changes will apply to all files attached to this release.<br>
-		You can either upload the change log individually, or paste it in below.<br><br>
-		Change Logs should be text only.<br><br>
+		Edit the release notes for this release.<br>
+		You can either upload the release notes individually, or paste it in below.<br><br>
+		Release notes should be text only.<br><br>
 	</td>
 </tr>
 <tr>
-	<td nowrap><b>Upload Change Log:</b></td>
+	<td nowrap><b>Upload Release Notes:</b></td>
 	<td><input type="file" name="uploaded_changes" size="30"></td>
 </tr>
 <TR>
 	<td COLSPAN=2>
-		<b>Paste The Change Log In:</b><br>
+		<b>Paste the release notes in:</b><br>
 		<textarea name="release_changes" rows="15" cols="80" wrap="soft"><?php 
 		
 		$changes = db_result($result,0,'changes');
