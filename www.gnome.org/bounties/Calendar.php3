@@ -8,7 +8,7 @@ include ("./util.php");
 <?php write_table_header ("no"); ?>
 <?php taskrow ("National, religious, event calendars", "hidden", "15", "127528", ""); ?>
 <?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", ""); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", ""); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Weather calendar backend", "hidden", "750", "127537", ""); ?>
 <?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
 <?php taskrow ("Publish free/busy information", "hidden", "500", "127539", ""); ?>
@@ -113,7 +113,7 @@ bonsai ("evolution-data-server/calendar/libecal"); ?>.
 You may find this <a href="clock-calendar.tar.bz2">glade mockup</a> useful.
 
 <?php box_end (); ?>
-<?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535", ""); ?>
+<?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 
 
 <p>Evolution's contact editor allows you to annotate a contact with

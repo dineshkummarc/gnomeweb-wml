@@ -218,7 +218,7 @@ channels.</p>
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528", ""); ?>
 <?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", ""); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", ""); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", ""); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", ""); ?>
@@ -250,7 +250,7 @@ channels.</p>
 <?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", ""); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
 <?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", ""); ?>
+<?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
@@ -260,7 +260,7 @@ channels.</p>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", ""); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
-<?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", ""); ?>
+<?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
 <br>
 <br>

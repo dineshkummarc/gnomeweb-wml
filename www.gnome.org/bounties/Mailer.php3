@@ -13,12 +13,12 @@ include ("./util.php");
 <?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
 <?php taskrow ("Custom mail headers display", "hidden", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526", ""); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527", ""); ?>
+<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "hidden", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533", ""); ?>
 <?php taskrow ("Message receipts", "hidden", "500", "127534", ""); ?>
-<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", ""); ?>
+<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 
@@ -417,7 +417,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "127527", ""); ?>
+<?php box_start ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 
 <p>
 Currently, to drag and drop a file into an Evolution message, you
@@ -646,7 +646,7 @@ Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 
 <?php box_end (); ?>
-<?php box_start ("Link URLs in the status bar", "Mailer", "200", "127536", "127536", ""); ?>
+<?php box_start ("Link URLs in the status bar", "Mailer", "200", "127536", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 
 
 <p>Evolution should make URLs embedded in emails visible to the user.
