@@ -6,6 +6,7 @@
 //
 // $Id$
 
+
 function add_canned_response($title, $text)
 {
 		global $feedback;
