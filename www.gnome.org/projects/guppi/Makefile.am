@@ -6,13 +6,11 @@ page_SCRIPTS=index.shtml		\
 		news.shtml		\
 		features.shtml		\
 		history.shtml		\
-		gettingguppi.shtml	\
 		developers.shtml	\
 		go.css			\
 		head.shtml		\
 		otherprogs.shtml	\
-		links.html		\
-		thumb.gif		\
+		links.shtml		\
 		guppies.shtml
 
 include $(top_srcdir)/rules.common

@@ -7,6 +7,8 @@ page_DATA=index.html		\
 	boston-summit.jpg	\
 	map.png
 
+page_SCRIPTS=
+
 include $(top_srcdir)/rules.common
 
 EXTRA_DIST=$(page_DATA)
