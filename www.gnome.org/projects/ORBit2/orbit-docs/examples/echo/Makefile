@@ -18,3 +18,6 @@ $(IDLOUT): echo.idl
 
 clean:
 	rm -rf *.o *~ $(IDLOUT)
+
+distclean: clean
+	rm -rf echo-client echo-server

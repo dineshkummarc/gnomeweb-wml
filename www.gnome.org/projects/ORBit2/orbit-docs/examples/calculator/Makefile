@@ -18,3 +18,6 @@ $(IDLOUT): calculator.idl
 
 clean:
 	rm -rf *.o *~ $(IDLOUT)
+
+distclean: clean
+	rm -rf calculator-client calculator-server

@@ -18,3 +18,6 @@ $(IDLOUT): account.idl
 
 clean:
 	rm -rf *.o *~ $(IDLOUT)
+
+distclean: clean
+	rm -rf account-client account-server
