@@ -6,6 +6,58 @@ urlpath = /start/2.10/notes
 # also, delete Makefile.am* from this list
 # couldn't be arsed fixing that above atm
 nobase_page_DATA = \
+	es/rnlookingahead.html \
+	es/index.html \
+	es/rnknownissues.html \
+	es/figures/figure-applet-drivemount.png \
+	es/figures/figure-backgrounds.png \
+	es/figures/figure-floppy-formatter.png \
+	es/figures/figure-logviewer.png \
+	es/figures/figure-applet-trash.png \
+	es/figures/figure-applet-modem.png \
+	es/figures/figure-evolution-mail.png \
+	es/figures/figure-applet-cpufreq.png \
+	es/figures/figure-game-same-gnome.png \
+	es/figures/figure-applet-stickies.png \
+	es/figures/figure-applet-weather.png \
+	es/figures/figure-applet-mixer.png \
+	es/figures/figure-nautilus.png \
+	es/figures/figure-totem.png \
+	es/figures/figure-evolution-weather.png \
+	es/figures/figure-file-roller.png \
+	es/figures/figure-gnome-desktop.png \
+	es/figures/figure-epiphany.png \
+	es/figures/figure-keyboard-properties+layout.png \
+	es/figures/figure-gnome-system-tools.png \
+	es/figures/figure-dictionary.png \
+	es/figures/figure-gnome-meeting.png \
+	es/figures/figure-soundjuicer.png \
+	es/figures/figure-game-nibbles.png \
+	es/figures/figure-gedit.png \
+	es/figures/CVS/Root \
+	es/figures/CVS/Entries \
+	es/figures/CVS/Repository \
+	es/rninstallation.html \
+	es/rnwhatsnew.html \
+	es/images/next.png \
+	es/images/note.png \
+	es/images/prev.png \
+	es/images/caution.png \
+	es/images/important.png \
+	es/images/warning.png \
+	es/images/up.png \
+	es/images/tip.png \
+	es/images/home.png \
+	es/images/blank.png \
+	es/images/CVS/Root \
+	es/images/CVS/Entries \
+	es/images/CVS/Repository \
+	es/rngettinginvolved.html \
+	es/rnstandards.html \
+	es/rncredits.html \
+	es/rndocs.html \
+	es/rni18.html \
+
 	id/rnlookingahead.html \
 	id/index.html \
 	id/rnknownissues.html \
