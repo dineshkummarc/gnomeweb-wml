@@ -17,17 +17,9 @@ opendir(DIR, $maindir) or die("Unable to open directory \"$maindir\"!  ($!).\n")
 
 #First, output to the header.
 print <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>Gnumeric Release Announcements</title>
-    <meta name="GENERATOR" content="Emacs and perl"/>
-    <meta name="Use" content="Mozilla!"/>
-    <meta name="contains" content="only 47.2% of the gross kludges compared to the
- leading web pages!">
+    <!--#set var="title" value="Gnumeric Release Announcements" -->
+    <!--#set var="rootdir" value="../.." -->
+    <!--#include virtual="header-begin.shtml" -->
     <style type="text/css">
      <!--
         html {
@@ -41,27 +33,27 @@ print <<EOF
         }
       -->
     </style>
-  </head>
-  <body>
+    <!--#include virtual="header-end.shtml" -->
+
     <div>
     <ul>
 EOF
 ;
 
-my $dir;
-my $tmp;
+my $file;
+my $name;
 my @pieces;
 my $modded = 0;
-while($dir = readdir(DIR)){
-  if($dir eq "." || $dir eq ".."){next;}
+while($file = readdir(DIR)){
+  if($file eq "." || $file eq ".."){next;}
   #Make sure it's in the proper format.
-  if(!($dir =~ /^gnumeric-[0-9]+\.[0-9]+\.[0-9]+(\.html|\.shtml)*$/)){next;}
-  #Trim off any .html
-  $tmp = $dir;
-  $tmp =~ s/\.[a-zA-Z]*$//g;
+  if(!($file =~ /^gnumeric-[0-9]+\.[0-9]+\.[0-9]+(\.html|\.shtml){0,1}$/)){next;}
+  #Trim off any suffix.
+  $name = $file;
+  $name =~ s/\.[a-zA-Z]*$//g;
   #Alright.  It is.  Now, output our links.
-  @pieces = split(/-+/, $tmp);
-  print "      <li><a href=\"$dir\">$pieces[1]</a></i>\n";
+  @pieces = split(/-+/, $name);
+  print "      <li><a href=\"$file\">$pieces[1]</a></i>\n";
   $modded=1;
 }
 if(!$modded){
@@ -72,7 +64,6 @@ if(!$modded){
 print <<EOF
     </ul>
     </div>
-  </body>
-</html>
+  <!--#include virtual="footer.shtml"-->
 EOF
 ;
