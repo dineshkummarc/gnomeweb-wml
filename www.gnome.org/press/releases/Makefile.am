@@ -29,6 +29,7 @@ page_SCRIPTS = \
 	sunjoins.html \
 	summit2003.html \
 	gnome2book.html \
-	guadec5-speakers.html
+	guadec5-speakers.html	\
+	rockandroll.wml
 
 include $(top_srcdir)/rules.common
