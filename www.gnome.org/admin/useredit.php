@@ -42,7 +42,9 @@ $row_user = db_fetch_array($res_user);
 
 ?>
 <p>
-Alexandria User Edit for user: <b><?php print $user_id . ": " . user_getname($user_id); ?></b>
+User Edit for user: <b><?php print $user_id . ": " . user_getname($user_id); ?></b>
+<?php
+/*
 <p>
 Unix Account Info:
 <FORM method="post" action="<?php echo $PHP_SELF; ?>">
@@ -63,7 +65,9 @@ Unix Account Status:
 <OPTION <?php echo ($row_user['unix_status'] == 'S') ? 'selected ' : ''; ?>value="S">Suspended
 <OPTION <?php echo ($row_user['unix_status'] == 'D') ? 'selected ' : ''; ?>value="D">Deleted
 </SELECT>
+*/
 
+?>
 <P>
 Email:
 <INPUT TYPE="TEXT" NAME="email" VALUE="<?php echo $row_user[email]; ?>" SIZE="25" MAXLENGTH="55">
