@@ -2,26 +2,26 @@ SUBDIRS =
 
 urlpath = /press/releases
 
-page_SCRIPTS = accessible.wml \
-	assistivetech.wml \
-	bitstreamfonts.wml \
-	borlandjoins.wml \
-	extremadura.wml \
-	foundation.wml \
-	gnome10.wml \
-	gnome12.wml \
-	gnome14.wml \
-	gnome20.wml \
-	gnome22.wml \
-	gnomeenelsur.wml \
-	guadec.wml \
-	guadec4.wml \
-	linuxatwork.wml \
-	mandrakesoftjoins.wml \
-	newcommitments.wml \
-	ney_execdir.wml \
-	redflagjoins.wml \
-	redhat.wml \
-	sunjoins.wml
+page_SCRIPTS = accessible.html \
+	assistivetech.html \
+	bitstreamfonts.html \
+	borlandjoins.html \
+	extremadura.html \
+	foundation.html \
+	gnome10.html \
+	gnome12.html \
+	gnome14.html \
+	gnome20.html \
+	gnome22.html \
+	gnomeenelsur.html \
+	guadec.html \
+	guadec4.html \
+	linuxatwork.html \
+	mandrakesoftjoins.html \
+	newcommitments.html \
+	ney_execdir.html \
+	redflagjoins.html \
+	redhat.html \
+	sunjoins.html
 
 include $(top_srcdir)/rules.common
