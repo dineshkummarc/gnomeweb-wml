@@ -25,7 +25,6 @@ function defaultSort ()
 
 <body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()">
 
-<center>This is an internal, unlaunched contest.  Go away.</center><p>
 <p>
 <center>
 <b><font size="+2">Desktop Integration Bounty Hunt</font></b><br><br>
