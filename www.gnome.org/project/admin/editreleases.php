@@ -61,7 +61,7 @@ if ($step1) {
 	
 				// Announce the release to gnome-announce
 				mail ("gnome-announce-list@gnome.org",
-					"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
+					"ANNOUNCE: ".$project->getPublicName()." ".stripslashes ($release_name),
 					wordwrap (stripslashes ($changes)),
 					$from);
 			}
