@@ -14,8 +14,10 @@ page_SCRIPTS=			\
 	news.html			\
 	resources.html		\
 	extensions.html		\
+	extensions.xhtml \
 	smartbookmarks.html \
 	epiphany.php \
-	bugreports.xhtml
+	bugreports.xhtml \
+	.htaccess
 
 include $(top_srcdir)/rules.common
