@@ -176,7 +176,7 @@ Edit Existing Release
 				. "Description\n===========\n\n".$project->getDescription()."\n\n"
 				. "Enhancements\n============\n\n-\n-\n\n"
 				. "Fixes\n=====\n\n-\n-\n\n"
-				. "Download\n========\n\nftp://ftp.gnome.org/pub/GNOME/";
+				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/";
 		}
 			
 		?></textarea>
