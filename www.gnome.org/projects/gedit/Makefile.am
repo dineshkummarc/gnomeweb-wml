@@ -7,7 +7,7 @@ page_SCRIPTS= \
 	features.html \
 	screenshots.html \
 	developers.html \
-	index.html \
+	index.html
 
 include $(top_srcdir)/rules.common
 
