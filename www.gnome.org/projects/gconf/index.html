@@ -382,15 +382,33 @@ the <tt>chkconfig</tt> tool - see its manual page. Turn it on
 or off at any given time with <tt>service nfslock start</tt> or 
 <tt>service nfslock stop</tt>. You must be root to do this.
 
-<p>If the kernel crashes (or the power cord gets pulled) on an NFS
-client machine, theoretically when you reboot the client machine it
-will notify the NFS server that it has rebooted and all
-previously-held locks should be released. However, many operating
-systems including Red Hat Linux 7.2 do not properly do this; so you
-will have stale locks after a crash. If no gconfd is running, these
-locks may safely be removed. If gconfd is running though, <i>DO
-NOT</i> remove them; if you have two gconfd processes for a single
-user, very bad things will happen to that user's preferences.
+<p>If the kernel crashes (or the power cord gets pulled) on an NFS client
+machine, theoretically when you reboot the client machine it will notify the NFS
+server that it has rebooted and all previously-held locks should be
+released. However, many operating systems including Red Hat Linux 7.2 do not
+properly do this; so you will have stale locks after a crash. If no gconfd is
+running, these locks may safely be removed. If gconfd is running though, <i>DO
+NOT</i> remove them; if you have two gconfd processes for a single user, bad
+things may happen to that user's preferences once in a while.
+
+<p>See also the next question.
+
+<h3>Can I bypass the lockfile stuff?</h3>
+
+<p>Red Hat Linux 8.0 contains an experimental patch that allows you to set the
+environment variable "GCONF_LOCAL_LOCKS=1" - do this in a script in
+/etc/profile.d for example. Then locks will be kept in /tmp. This has two
+important caveats. First, there is a security flaw where users can keep each
+other from logging in by creating someone else's lock file. YOU SHOULD NOT
+ENABLE GCONF_LOCAL_LOCKS IF THIS IS A PROBLEM FOR YOUR SITE. However, it's
+"only" a denial of service attack, and the user would have to leave the
+problem-causing file owned by themselves, so you could track them down and get
+angry. Second, preferences notification won't work between machines; you will
+get "last machine to write preferences wins" behavior instead of "state is
+shared" behavior. You can probably live with that.
+
+<p>This patch will probably be in GNOME 2.2, ideally with the denial-of-service
+issue fixed.
 
 <h3>How do I log in from two machines at once?</h3>
 
