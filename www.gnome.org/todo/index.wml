@@ -1,0 +1,236 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Contribute to GNOME" imgid="contribute">
+<content>
+
+<? 
+
+$connection = mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
+
+mysql_select_db("todo");
+
+if ($query) {
+
+$complete_query = "SELECT id, short_desc, project_name, project_url,
+required_skill, required_familiarity FROM todo_items WHERE (";
+
+if ($required_skill) {
+  $complete_query = $complete_query . "required_skill = '$required_skill' and ";
+}
+
+if ($required_familiarity) {
+  $complete_query = $complete_query . "required_familiarity = '$required_familiarity' and ";
+}
+
+if ($category) {
+  $complete_query = $complete_query . "category = '$category' and ";
+}
+
+if ($status) {
+  $complete_query = $complete_query . "status = '$status' and ";
+}
+
+if ($match_string) {
+  $complete_query = $complete_query . "short_desc LIKE '%$match_string%' and ";
+}
+
+if ($update_time) {
+
+  switch($update_time) {
+	
+	case 1: #Last day
+    $timestring = date("YmdHis", time()-86400);
+		break;
+	case 2: #Last 3 days
+    $timestring = date("YmdHis", time()-259200);
+	  break;
+	case 3: #Last week
+    $timestring = date("YmdHis", time()-604800);
+	  break;
+	case 4: #Last month
+    $timestring = date("YmdHis", time()-2592000);
+	  break;
+	}
+
+  $complete_query = $complete_query . "update_time >= '$timestring' and ";
+}
+
+$complete_query = ereg_replace(' and $', ")", $complete_query);
+
+
+$res = mysql_query($complete_query);
+
+?>
+
+<table width="95%" border="0" cellspacing="0" cellpadding="4">
+<tr><th bgcolor="#cce6ff">Description</th><th
+bgcolor="#cce6ff">Project</th><th bgcolor="#cce6ff">Required skill</th><th
+bgcolor="#cce6ff">Required familiarity</th></tr>
+
+<?
+
+while ($res_object = mysql_fetch_object($res) ) {
+
+
+?>
+
+<tr><td><b><?
+
+print "<a href=\"view.php3?id=" . $res_object->id . "\">";
+
+print $res_object->short_desc;
+
+?></a></b></td><td><?
+
+if ($res_object->project_url) {
+  print "<a href=\"" . $res_object->project_url . "\">";
+}
+?><?print $res_object->project_name ?><?
+if ($res_object->project_url) {
+  print "</a>";
+}
+?></td><td><?
+
+switch ($res_object->required_skill) {
+  case 1:
+	  print "Very low";
+	  break;
+	case 2:
+	  print "Low";
+		break;
+	case 3:
+	  print "Medium";
+		break;
+	case 4:
+	  print "High";
+		break;
+	case 5:
+	  print "Very high";
+		break;
+}
+
+?></td><td><?
+
+switch ($res_object->required_familiarity) {
+  case 1:
+	  print "Very low";
+	  break;
+	case 2:
+	  print "Low";
+		break;
+	case 3:
+	  print "Medium";
+		break;
+	case 4:
+	  print "High";
+		break;
+	case 5:
+	  print "Very high";
+		break;
+
+}
+?></td></tr>
+
+<?
+
+}
+
+?></table><?
+
+} else {
+
+$res = mysql_query("SELECT count(*) as rowcount FROM todo_items");
+
+$res_obj = mysql_fetch_object($res);
+
+?>
+
+There are always a lot of small things that need doing in GNOME. If you're
+looking for a way to get involved, this is for you. The form below lets you
+search the <? print $res_obj->rowcount ?> entries in the todo database.
+<p>
+
+<form action="index.php3" method="get">
+
+<table width="95%" border="0" cellspacing="0" cellpadding="3">
+
+<tr valign="top"><th colspan="2" bgcolor="#cce6ff">Search for a task</th></tr>
+
+<tr valign="top"><td align="right">String match:</td><td><input
+type="text" size="30" name="match_string"></td></tr>
+
+<tr valign="top"><td align="right">In category:</td><td>
+<select name="category">
+<option value="0" selected>Any</option>
+<option value="application">Applications</option>
+<option value="core">Core</option>
+<option value="ui">UI</option>
+<option value="docs">Documentation</option>
+<option value="translation">Translation</option>
+<option value="graphics">Graphics</option>
+<option value="web">Web</option>
+<option value="other">Other</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Required general skill level:</td><td>
+<select name="required_skill">
+<option value="0" selected>Any</option>
+<option value="1">Very low</option>
+<option value="2">Low</option>
+<option value="3">Medium</option>
+<option value="4">High</option>
+<option value="5">Very high</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Required familiarity with the project:</td><td>
+<select name="required_familiarity">
+<option value="0" selected>Any</option>
+<option value="1">Very low</option>
+<option value="2">Low</option>
+<option value="3">Medium</option>
+<option value="4">High</option>
+<option value="5">Very high</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Status:</td><td>
+<select name="status">
+<option value="0" selected>All</option>
+<option value="new">New</option>
+<option value="interest">Have interested people</option>
+<option value="work">Have people working</option>
+<option value="closed">Finished</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Added or updated:</td><td>
+<select name="update_time">
+<option selected value="5">Whenever</option>
+<option value="1">Last 24 hours</option>
+<option value="2">Last 3 days</option>
+<option value="3">Last week</option>
+<option value="4">Last month</option>
+</select>
+</td></tr>
+
+<tr><td><input type="submit" name="query" value="Find"></td><td></td></tr>
+
+</table>
+
+</form>
+
+<hr>
+
+If you're responsible for a project that has suitable tasks to offer, you can
+<a href="add.php3">add them to the todo list</a>. At the moment, there is no
+modification or deletion functionality, but that's right around the corner.
+
+<? } ?>
+
+
+</content>
+</document>
