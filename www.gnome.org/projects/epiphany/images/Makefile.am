@@ -53,6 +53,12 @@ page_SCRIPTS=		\
 	sbm-toolbar.png	\
 	screenshot.png	\
 	spacer.png	\
-	wheat.png
+	wheat.png \
+	customizable.png \
+	esa_portal.png \
+	extensions.png \
+	sandy-stripes.png \
+	security.png \
+	smartbookmarks.png
 
 include $(top_srcdir)/rules.common
