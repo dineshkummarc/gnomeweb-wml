@@ -42,7 +42,7 @@ Click here to <a href="editreleases.php?release_id=<?php echo $release_id; ?>&gr
 <table border="0" cellpadding="2" cellspacing="2">
 <tr>
 	<td>New release name:</td>
-	<td><input type="text" name="release_name" value="" size="20" maxlength="25"></td>
+	<td><input type="text" name="release_name" value=""></td>
 </tr>
 <tr>
 	<td colspan="2"><input type="submit" name="submit" value="Create This Release"></td>
