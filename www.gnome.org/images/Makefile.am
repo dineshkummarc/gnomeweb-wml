@@ -41,7 +41,8 @@ banner_images=\
 	banner-developerinterviews.png\
 	banner-developersbyregion.png\
   banner-speakingabout.png\
-	banner-downloadingsource.png
+	banner-downloadingsource.png\
+	banner-contribute.png
 
 popdown_images=\
 	popdown-endcap-blue.png\
@@ -84,7 +85,8 @@ sidebar_items=\
 	sidebar-seegnome.png\
 	sidebar-tipsandtutorials.png\
   sidebar-reportbugs.png\
-	sidebar-speakingabout.png
+	sidebar-speakingabout.png\
+  sidebar-contribute.png
 
 topbar_headers=\
   topbar-contact.png\
