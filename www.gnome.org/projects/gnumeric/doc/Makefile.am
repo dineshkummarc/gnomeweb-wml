@@ -3,142 +3,536 @@ SUBDIRS = figures
 urlpath=/projects/gnumeric/doc
 
 page_SCRIPTS= \
-LEGALNOTICE.html alignmentandothertabs.html analysis-tools.html anova.html \
-authors.html autocorrect-tool.html autofill.html autosave.html \
-cell-elements.html cell-grid.html cell-referencing.html context-menu.html \
-copying-moving.html correlation-tool.html covariance-tool.html cutandpaste.html \
-data-entry.html data-menu.html descriptive-statistics-tool.html edit-menu.html \
-editing-selections.html editing.html fdl-section1.html fdl-section10.html \
-fdl-section2.html fdl-section3.html fdl-section4.html fdl-section5.html \
-fdl-section6.html fdl-section7.html fdl-section8.html fdl-section9.html \
-fdl-using.html fdl.html file-format.html file-menu.html files.html filters.html \
-fmt-toolbar.html forecasting-tools.html format-menu.html formatting.html \
-formulas.html fourier-analysis-tool.html \
-ftest-two-sample-for-variances-tool.html function-reference.html \
-gnumeric-abs.html gnumeric-accrint.html gnumeric-accrintm.html \
-gnumeric-acos.html gnumeric-acosh.html gnumeric-address.html \
-gnumeric-amordegrc.html gnumeric-amorlinc.html gnumeric-and.html \
-gnumeric-asin.html gnumeric-asinh.html gnumeric-atan.html gnumeric-atan2.html \
-gnumeric-atanh.html gnumeric-avedev.html gnumeric-average.html \
-gnumeric-averagea.html gnumeric-besseli.html gnumeric-besselj.html \
-gnumeric-besselk.html gnumeric-bessely.html gnumeric-betadist.html \
-gnumeric-betainv.html gnumeric-bin2dec.html gnumeric-bin2hex.html \
-gnumeric-bin2oct.html gnumeric-binomdist.html gnumeric-bitand.html \
-gnumeric-bitlshift.html gnumeric-bitor.html gnumeric-bitrshift.html \
-gnumeric-bitxor.html gnumeric-ceil.html gnumeric-ceiling.html \
-gnumeric-cell.html gnumeric-char.html gnumeric-chidist.html \
-gnumeric-chiinv.html gnumeric-chitest.html gnumeric-choose.html \
-gnumeric-clean.html gnumeric-code.html gnumeric-column.html \
-gnumeric-columns.html gnumeric-combin.html gnumeric-complex.html \
-gnumeric-concatenate.html gnumeric-confidence.html gnumeric-convert.html \
-gnumeric-correl.html gnumeric-cos.html gnumeric-cosh.html gnumeric-count.html \
-gnumeric-counta.html gnumeric-countblank.html gnumeric-countif.html \
-gnumeric-coupdaybs.html gnumeric-coupdays.html gnumeric-coupdaysnc.html \
-gnumeric-coupncd.html gnumeric-coupnum.html gnumeric-couppcd.html \
-gnumeric-covar.html gnumeric-critbinom.html gnumeric-cumipmt.html \
-gnumeric-cumprinc.html gnumeric-date.html gnumeric-date2unix.html \
-gnumeric-datedif.html gnumeric-datevalue.html gnumeric-daverage.html \
-gnumeric-day.html gnumeric-days360.html gnumeric-db.html gnumeric-dcount.html \
-gnumeric-dcounta.html gnumeric-ddb.html gnumeric-dec2bin.html \
-gnumeric-dec2hex.html gnumeric-dec2oct.html gnumeric-degrees.html \
-gnumeric-delta.html gnumeric-devsq.html gnumeric-dget.html gnumeric-disc.html \
-gnumeric-dmax.html gnumeric-dmin.html gnumeric-dollar.html \
-gnumeric-dollarde.html gnumeric-dollarfr.html gnumeric-dproduct.html \
-gnumeric-dstdev.html gnumeric-dstdevp.html gnumeric-dsum.html \
-gnumeric-duration.html gnumeric-dvar.html gnumeric-dvarp.html \
-gnumeric-edate.html gnumeric-effect.html gnumeric-eomonth.html \
-gnumeric-erf.html gnumeric-erfc.html gnumeric-error.html \
-gnumeric-error.type.html gnumeric-euro.html gnumeric-even.html \
-gnumeric-exact.html gnumeric-exp.html gnumeric-expondist.html \
-gnumeric-expression.html gnumeric-fact.html gnumeric-factdouble.html \
-gnumeric-false.html gnumeric-fdist.html gnumeric-find.html gnumeric-finv.html \
-gnumeric-fisher.html gnumeric-fisherinv.html gnumeric-fixed.html \
-gnumeric-floor.html gnumeric-forecast.html gnumeric-frequency.html \
-gnumeric-ftest.html gnumeric-fv.html gnumeric-fvschedule.html \
-gnumeric-gammadist.html gnumeric-gammainv.html gnumeric-gammaln.html \
-gnumeric-gcd.html gnumeric-geomean.html gnumeric-gestep.html \
-gnumeric-getenv.html gnumeric-getpivotdata.html gnumeric-gnumericxversion.html \
-gnumeric-growth.html gnumeric-gxproduct.html gnumeric-harmean.html \
-gnumeric-hex2bin.html gnumeric-hex2dec.html gnumeric-hex2oct.html \
-gnumeric-hlookup.html gnumeric-hour.html gnumeric-hyperlink.html \
-gnumeric-hypgeomdist.html gnumeric-if.html gnumeric-imabs.html \
-gnumeric-imaginary.html gnumeric-imargument.html gnumeric-imconjugate.html \
-gnumeric-imcos.html gnumeric-imdiv.html gnumeric-imexp.html gnumeric-imln.html \
-gnumeric-imlog10.html gnumeric-imlog2.html gnumeric-impower.html \
-gnumeric-improduct.html gnumeric-imreal.html gnumeric-imsin.html \
-gnumeric-imsqrt.html gnumeric-imsub.html gnumeric-imsum.html \
-gnumeric-imtan.html gnumeric-index.html gnumeric-indirect.html \
-gnumeric-info.html gnumeric-int.html gnumeric-intercept.html \
-gnumeric-intrate.html gnumeric-ipmt.html gnumeric-irr.html \
-gnumeric-isblank.html gnumeric-iserr.html gnumeric-iserror.html \
-gnumeric-iseven.html gnumeric-islogical.html gnumeric-isna.html \
-gnumeric-isnontext.html gnumeric-isnumber.html gnumeric-isodd.html \
-gnumeric-isoweeknum.html gnumeric-ispmt.html gnumeric-isprime.html \
-gnumeric-isref.html gnumeric-istext.html gnumeric-ithprime.html \
-gnumeric-kurt.html gnumeric-kurtp.html gnumeric-large.html gnumeric-lcm.html \
-gnumeric-left.html gnumeric-len.html gnumeric-linest.html gnumeric-ln.html \
-gnumeric-log.html gnumeric-log10.html gnumeric-log2.html gnumeric-logest.html \
-gnumeric-loginv.html gnumeric-lognormdist.html gnumeric-lookup.html \
-gnumeric-lower.html gnumeric-match.html gnumeric-max.html gnumeric-maxa.html \
-gnumeric-mdeterm.html gnumeric-mduration.html gnumeric-median.html \
-gnumeric-mid.html gnumeric-min.html gnumeric-mina.html gnumeric-minute.html \
-gnumeric-minverse.html gnumeric-mirr.html gnumeric-mmult.html gnumeric-mod.html \
-gnumeric-mode.html gnumeric-month.html gnumeric-mround.html \
-gnumeric-multinomial.html gnumeric-n.html gnumeric-na.html \
-gnumeric-negbinomdist.html gnumeric-networkdays.html gnumeric-nominal.html \
-gnumeric-normdist.html gnumeric-norminv.html gnumeric-normsdist.html \
-gnumeric-normsinv.html gnumeric-not.html gnumeric-now.html gnumeric-nper.html \
-gnumeric-npv.html gnumeric-ntxd.html gnumeric-ntxmu.html gnumeric-ntxphi.html \
-gnumeric-ntxpi.html gnumeric-ntxsigma.html gnumeric-oct2bin.html \
-gnumeric-oct2dec.html gnumeric-oct2hex.html gnumeric-odd.html \
-gnumeric-oddfprice.html gnumeric-oddfyield.html gnumeric-oddlprice.html \
-gnumeric-oddlyield.html gnumeric-offset.html gnumeric-optxbs_call.html \
-gnumeric-optxbs_call_delta.html gnumeric-optxbs_call_rho.html \
-gnumeric-optxbs_call_theta.html gnumeric-optxbs_gamma.html \
-gnumeric-optxbs_put.html gnumeric-optxbs_put_delta.html \
-gnumeric-optxbs_put_rho.html gnumeric-optxbs_put_theta.html \
-gnumeric-optxbs_vega.html gnumeric-or.html gnumeric-pearson.html \
-gnumeric-percentile.html gnumeric-percentrank.html gnumeric-permut.html \
-gnumeric-pi.html gnumeric-pmt.html gnumeric-poisson.html gnumeric-power.html \
-gnumeric-ppmt.html gnumeric-price.html gnumeric-pricedisc.html \
-gnumeric-pricemat.html gnumeric-prob.html gnumeric-product.html \
-gnumeric-proper.html gnumeric-pv.html gnumeric-quartile.html \
-gnumeric-quotient.html gnumeric-radians.html gnumeric-rand.html \
-gnumeric-randbernoulli.html gnumeric-randbetween.html gnumeric-randbinom.html \
-gnumeric-randexp.html gnumeric-randnegbinom.html gnumeric-randpoisson.html \
-gnumeric-rank.html gnumeric-rate.html gnumeric-received.html \
-gnumeric-replace.html gnumeric-rept.html gnumeric-right.html \
-gnumeric-roman.html gnumeric-round.html gnumeric-rounddown.html \
-gnumeric-roundup.html gnumeric-row.html gnumeric-rows.html gnumeric-rsq.html \
-gnumeric-search.html gnumeric-second.html gnumeric-selection.html \
-gnumeric-seriessum.html gnumeric-sign.html gnumeric-sin.html gnumeric-sinh.html \
-gnumeric-skew.html gnumeric-skewp.html gnumeric-sln.html gnumeric-slope.html \
-gnumeric-small.html gnumeric-sqrt.html gnumeric-sqrtpi.html \
-gnumeric-standardize.html gnumeric-stdev.html gnumeric-stdeva.html \
-gnumeric-stdevp.html gnumeric-stdevpa.html gnumeric-steyx.html \
-gnumeric-substitute.html gnumeric-subtotal.html gnumeric-sum.html \
-gnumeric-suma.html gnumeric-sumif.html gnumeric-sumproduct.html \
-gnumeric-sumsq.html gnumeric-sumx2my2.html gnumeric-sumx2py2.html \
-gnumeric-sumxmy2.html gnumeric-syd.html gnumeric-t.html gnumeric-tan.html \
-gnumeric-tanh.html gnumeric-tbilleq.html gnumeric-tbillprice.html \
-gnumeric-tbillyield.html gnumeric-tdist.html gnumeric-text.html \
-gnumeric-time.html gnumeric-timevalue.html gnumeric-tinv.html \
-gnumeric-today.html gnumeric-transpose.html gnumeric-trend.html \
-gnumeric-trim.html gnumeric-trimmean.html gnumeric-true.html \
-gnumeric-trunc.html gnumeric-ttest.html gnumeric-type.html \
-gnumeric-unix2date.html gnumeric-upper.html gnumeric-value.html \
-gnumeric-var.html gnumeric-vara.html gnumeric-varp.html gnumeric-varpa.html \
-gnumeric-vdb.html gnumeric-vlookup.html gnumeric-weekday.html \
-gnumeric-weeknum.html gnumeric-weibull.html gnumeric-workday.html \
-gnumeric-xirr.html gnumeric-xnpv.html gnumeric-year.html gnumeric-yield.html \
-gnumeric-yielddisc.html gnumeric-yieldmat.html gnumeric-ztest.html \
-goal-seek.html graphs.html gui-elements.html help-menu.html histogram-tool.html \
-index.html info-area.html insert-menu.html license.html menus.html \
-number-formatting-overview.html obj-toolbar.html opening-importing.html \
-other-elements.html preface.html print-preview.html print-setup.html \
-printing.html protectionandvalidation.html random-number-generation-tool.html \
-rank-and-percentile-tool.html regression-tool.html sampling-tool.html \
-selecting-cells-entering-formulas.html solver.html std-toolbar.html t-test.html \
-toolbars.html tools-menu.html view-menu.html
+Data-Menu.html \
+Edit-Menu.html \
+File-Menu.html \
+Format-Menu.html \
+Help-Menu.html \
+Insert-Menu.html \
+Makefile.am \
+Tools-Menu.html \
+View-Menu.html \
+about.html \
+advanced-analysis.html \
+authors-intro.html \
+cell-grid.html \
+cgraphing.html \
+configuring.html \
+context-menu.html \
+data-entry.html \
+data.html \
+filecontentsNsettings.html \
+files.html \
+fmt-toolbar.html \
+function-reference.html \
+gnumeric-ABS.html \
+gnumeric-ACCRINT.html \
+gnumeric-ACCRINTM.html \
+gnumeric-ACOS.html \
+gnumeric-ACOSH.html \
+gnumeric-ADDRESS.html \
+gnumeric-AMORDEGRC.html \
+gnumeric-AMORLINC.html \
+gnumeric-AND.html \
+gnumeric-ASIN.html \
+gnumeric-ASINH.html \
+gnumeric-ATAN.html \
+gnumeric-ATAN2.html \
+gnumeric-ATANH.html \
+gnumeric-AVEDEV.html \
+gnumeric-AVERAGE.html \
+gnumeric-AVERAGEA.html \
+gnumeric-B2STRING.html \
+gnumeric-BERNOULLI.html \
+gnumeric-BESSELI.html \
+gnumeric-BESSELJ.html \
+gnumeric-BESSELK.html \
+gnumeric-BESSELY.html \
+gnumeric-BETADIST.html \
+gnumeric-BETAINV.html \
+gnumeric-BIN2DEC.html \
+gnumeric-BIN2HEX.html \
+gnumeric-BIN2OCT.html \
+gnumeric-BINOMDIST.html \
+gnumeric-BITAND.html \
+gnumeric-BITLSHIFT.html \
+gnumeric-BITOR.html \
+gnumeric-BITRSHIFT.html \
+gnumeric-BITXOR.html \
+gnumeric-CAUCHY.html \
+gnumeric-CEIL.html \
+gnumeric-CEILING.html \
+gnumeric-CELL.html \
+gnumeric-CHAR.html \
+gnumeric-CHIDIST.html \
+gnumeric-CHIINV.html \
+gnumeric-CHITEST.html \
+gnumeric-CHOOSE.html \
+gnumeric-CLEAN.html \
+gnumeric-CODE.html \
+gnumeric-COLUMN.html \
+gnumeric-COLUMNS.html \
+gnumeric-COMBIN.html \
+gnumeric-COMPLEX.html \
+gnumeric-CONCATENATE.html \
+gnumeric-CONFIDENCE.html \
+gnumeric-CONVERT.html \
+gnumeric-CORREL.html \
+gnumeric-COS.html \
+gnumeric-COSH.html \
+gnumeric-COUNT.html \
+gnumeric-COUNTA.html \
+gnumeric-COUNTBLANK.html \
+gnumeric-COUNTIF.html \
+gnumeric-COUPDAYBS.html \
+gnumeric-COUPDAYS.html \
+gnumeric-COUPDAYSNC.html \
+gnumeric-COUPNCD.html \
+gnumeric-COUPNUM.html \
+gnumeric-COUPPCD.html \
+gnumeric-COVAR.html \
+gnumeric-CRITBINOM.html \
+gnumeric-CRONBACH.html \
+gnumeric-CUMIPMT.html \
+gnumeric-CUMPRINC.html \
+gnumeric-DATE.html \
+gnumeric-DATE2UNIX.html \
+gnumeric-DATEDIF.html \
+gnumeric-DATEVALUE.html \
+gnumeric-DAVERAGE.html \
+gnumeric-DAY.html \
+gnumeric-DAYS360.html \
+gnumeric-DB.html \
+gnumeric-DCOUNT.html \
+gnumeric-DCOUNTA.html \
+gnumeric-DDB.html \
+gnumeric-DEC2BIN.html \
+gnumeric-DEC2HEX.html \
+gnumeric-DEC2OCT.html \
+gnumeric-DEGREES.html \
+gnumeric-DELTA.html \
+gnumeric-DEVSQ.html \
+gnumeric-DGET.html \
+gnumeric-DISC.html \
+gnumeric-DMAX.html \
+gnumeric-DMIN.html \
+gnumeric-DOLLAR.html \
+gnumeric-DOLLARDE.html \
+gnumeric-DOLLARFR.html \
+gnumeric-DPRODUCT.html \
+gnumeric-DSTDEV.html \
+gnumeric-DSTDEVP.html \
+gnumeric-DSUM.html \
+gnumeric-DURATION.html \
+gnumeric-DVAR.html \
+gnumeric-DVARP.html \
+gnumeric-EDATE.html \
+gnumeric-EFFECT.html \
+gnumeric-EOMONTH.html \
+gnumeric-ERF.html \
+gnumeric-ERFC.html \
+gnumeric-ERROR.TYPE.html \
+gnumeric-ERROR.html \
+gnumeric-EURO.html \
+gnumeric-EUROCONVERT.html \
+gnumeric-EVEN.html \
+gnumeric-EXACT.html \
+gnumeric-EXECSQL.html \
+gnumeric-EXP.html \
+gnumeric-EXPONDIST.html \
+gnumeric-EXPPOWDIST.html \
+gnumeric-EXPRESSION.html \
+gnumeric-F2STRING.html \
+gnumeric-FACT.html \
+gnumeric-FACTDOUBLE.html \
+gnumeric-FALSE.html \
+gnumeric-FDIST.html \
+gnumeric-FIB.html \
+gnumeric-FIBO.html \
+gnumeric-FIND.html \
+gnumeric-FINV.html \
+gnumeric-FISHER.html \
+gnumeric-FISHERINV.html \
+gnumeric-FIXED.html \
+gnumeric-FLOOR.html \
+gnumeric-FORECAST.html \
+gnumeric-FREQUENCY.html \
+gnumeric-FTEST.html \
+gnumeric-FV.html \
+gnumeric-FVSCHEDULE.html \
+gnumeric-GAMMADIST.html \
+gnumeric-GAMMAINV.html \
+gnumeric-GAMMALN.html \
+gnumeric-GCD.html \
+gnumeric-GEOMDIST.html \
+gnumeric-GEOMEAN.html \
+gnumeric-GESTEP.html \
+gnumeric-GETENV.html \
+gnumeric-GETPIVOTDATA.html \
+gnumeric-GNUMERICxVERSION.html \
+gnumeric-GROWTH.html \
+gnumeric-GxPRODUCT.html \
+gnumeric-HARMEAN.html \
+gnumeric-HEX2BIN.html \
+gnumeric-HEX2DEC.html \
+gnumeric-HEX2OCT.html \
+gnumeric-HLOOKUP.html \
+gnumeric-HOUR.html \
+gnumeric-HYPERLINK.html \
+gnumeric-HYPGEOMDIST.html \
+gnumeric-IF.html \
+gnumeric-IMABS.html \
+gnumeric-IMAGINARY.html \
+gnumeric-IMARCCOS.html \
+gnumeric-IMARCCOSH.html \
+gnumeric-IMARCCOT.html \
+gnumeric-IMARCCOTH.html \
+gnumeric-IMARCCSC.html \
+gnumeric-IMARCCSCH.html \
+gnumeric-IMARCSEC.html \
+gnumeric-IMARCSECH.html \
+gnumeric-IMARCSIN.html \
+gnumeric-IMARCSINH.html \
+gnumeric-IMARCTAN.html \
+gnumeric-IMARCTANH.html \
+gnumeric-IMARGUMENT.html \
+gnumeric-IMCONJUGATE.html \
+gnumeric-IMCOS.html \
+gnumeric-IMCOSH.html \
+gnumeric-IMCOT.html \
+gnumeric-IMCOTH.html \
+gnumeric-IMCSC.html \
+gnumeric-IMCSCH.html \
+gnumeric-IMDIV.html \
+gnumeric-IMEXP.html \
+gnumeric-IMINV.html \
+gnumeric-IMLN.html \
+gnumeric-IMLOG10.html \
+gnumeric-IMLOG2.html \
+gnumeric-IMNEG.html \
+gnumeric-IMPOWER.html \
+gnumeric-IMPRODUCT.html \
+gnumeric-IMREAL.html \
+gnumeric-IMSEC.html \
+gnumeric-IMSECH.html \
+gnumeric-IMSIN.html \
+gnumeric-IMSINH.html \
+gnumeric-IMSQRT.html \
+gnumeric-IMSUB.html \
+gnumeric-IMSUM.html \
+gnumeric-IMTAN.html \
+gnumeric-IMTANH.html \
+gnumeric-INDEX.html \
+gnumeric-INDIRECT.html \
+gnumeric-INFO.html \
+gnumeric-INT.html \
+gnumeric-INTERCEPT.html \
+gnumeric-INTRATE.html \
+gnumeric-IPMT.html \
+gnumeric-IRR.html \
+gnumeric-ISBLANK.html \
+gnumeric-ISERR.html \
+gnumeric-ISERROR.html \
+gnumeric-ISEVEN.html \
+gnumeric-ISLOGICAL.html \
+gnumeric-ISNA.html \
+gnumeric-ISNONTEXT.html \
+gnumeric-ISNUMBER.html \
+gnumeric-ISODD.html \
+gnumeric-ISOWEEKNUM.html \
+gnumeric-ISOYEAR.html \
+gnumeric-ISPMT.html \
+gnumeric-ISPRIME.html \
+gnumeric-ISREF.html \
+gnumeric-ISTEXT.html \
+gnumeric-ITHPRIME.html \
+gnumeric-KURT.html \
+gnumeric-KURTP.html \
+gnumeric-LANDAU.html \
+gnumeric-LAPLACE.html \
+gnumeric-LARGE.html \
+gnumeric-LCM.html \
+gnumeric-LEFT.html \
+gnumeric-LEN.html \
+gnumeric-LINEST.html \
+gnumeric-LN.html \
+gnumeric-LOG.html \
+gnumeric-LOG10.html \
+gnumeric-LOG2.html \
+gnumeric-LOGEST.html \
+gnumeric-LOGINV.html \
+gnumeric-LOGISTIC.html \
+gnumeric-LOGNORMDIST.html \
+gnumeric-LOOKUP.html \
+gnumeric-LOWER.html \
+gnumeric-MATCH.html \
+gnumeric-MAX.html \
+gnumeric-MAXA.html \
+gnumeric-MDETERM.html \
+gnumeric-MDURATION.html \
+gnumeric-MEDIAN.html \
+gnumeric-MID.html \
+gnumeric-MIN.html \
+gnumeric-MINA.html \
+gnumeric-MINUTE.html \
+gnumeric-MINVERSE.html \
+gnumeric-MIRR.html \
+gnumeric-MMULT.html \
+gnumeric-MOD.html \
+gnumeric-MODE.html \
+gnumeric-MONTH.html \
+gnumeric-MROUND.html \
+gnumeric-MULTINOMIAL.html \
+gnumeric-N.html \
+gnumeric-NA.html \
+gnumeric-NEGBINOMDIST.html \
+gnumeric-NETWORKDAYS.html \
+gnumeric-NOMINAL.html \
+gnumeric-NORMDIST.html \
+gnumeric-NORMINV.html \
+gnumeric-NORMSDIST.html \
+gnumeric-NORMSINV.html \
+gnumeric-NOT.html \
+gnumeric-NOW.html \
+gnumeric-NPER.html \
+gnumeric-NPV.html \
+gnumeric-NTxD.html \
+gnumeric-NTxMU.html \
+gnumeric-NTxPHI.html \
+gnumeric-NTxPI.html \
+gnumeric-NTxSIGMA.html \
+gnumeric-OCT2BIN.html \
+gnumeric-OCT2DEC.html \
+gnumeric-OCT2HEX.html \
+gnumeric-ODD.html \
+gnumeric-ODDFPRICE.html \
+gnumeric-ODDFYIELD.html \
+gnumeric-ODDLPRICE.html \
+gnumeric-ODDLYIELD.html \
+gnumeric-OFFSET.html \
+gnumeric-OPTxBS_CALL.html \
+gnumeric-OPTxBS_CALL_DELTA.html \
+gnumeric-OPTxBS_CALL_RHO.html \
+gnumeric-OPTxBS_CALL_THETA.html \
+gnumeric-OPTxBS_GAMMA.html \
+gnumeric-OPTxBS_PUT.html \
+gnumeric-OPTxBS_PUT_DELTA.html \
+gnumeric-OPTxBS_PUT_RHO.html \
+gnumeric-OPTxBS_PUT_THETA.html \
+gnumeric-OPTxBS_VEGA.html \
+gnumeric-OR.html \
+gnumeric-PARETO.html \
+gnumeric-PEARSON.html \
+gnumeric-PERCENTILE.html \
+gnumeric-PERCENTRANK.html \
+gnumeric-PERMUT.html \
+gnumeric-PI.html \
+gnumeric-PMT.html \
+gnumeric-POISSON.html \
+gnumeric-POWER.html \
+gnumeric-PPMT.html \
+gnumeric-PRICE.html \
+gnumeric-PRICEDISC.html \
+gnumeric-PRICEMAT.html \
+gnumeric-PROB.html \
+gnumeric-PRODUCT.html \
+gnumeric-PROPER.html \
+gnumeric-PV.html \
+gnumeric-PYxABS.html \
+gnumeric-PYxBITOR.html \
+gnumeric-PYxCAPWORDS.html \
+gnumeric-PYxMID.html \
+gnumeric-PYxN_ABS.html \
+gnumeric-PYxPRINTF.html \
+gnumeric-QUARTILE.html \
+gnumeric-QUOTIENT.html \
+gnumeric-RADIANS.html \
+gnumeric-RAND.html \
+gnumeric-RANDBERNOULLI.html \
+gnumeric-RANDBETA.html \
+gnumeric-RANDBETWEEN.html \
+gnumeric-RANDBINOM.html \
+gnumeric-RANDCAUCHY.html \
+gnumeric-RANDCHISQ.html \
+gnumeric-RANDDISCRETE.html \
+gnumeric-RANDEXP.html \
+gnumeric-RANDEXPPOW.html \
+gnumeric-RANDFDIST.html \
+gnumeric-RANDGAMMA.html \
+gnumeric-RANDGAUSSIAN.html \
+gnumeric-RANDGAUSSIANTAIL.html \
+gnumeric-RANDGEOM.html \
+gnumeric-RANDGUMBEL.html \
+gnumeric-RANDHYPERG.html \
+gnumeric-RANDLANDAU.html \
+gnumeric-RANDLAPLACE.html \
+gnumeric-RANDLEVY.html \
+gnumeric-RANDLOG.html \
+gnumeric-RANDLOGISTIC.html \
+gnumeric-RANDLOGNORM.html \
+gnumeric-RANDNEGBINOM.html \
+gnumeric-RANDPARETO.html \
+gnumeric-RANDPOISSON.html \
+gnumeric-RANDRAYLEIGH.html \
+gnumeric-RANDRAYLEIGHTAIL.html \
+gnumeric-RANDTDIST.html \
+gnumeric-RANDUNIFORM.html \
+gnumeric-RANDWEIBULL.html \
+gnumeric-RANK.html \
+gnumeric-RATE.html \
+gnumeric-RAYLEIGH.html \
+gnumeric-RAYLEIGHTAIL.html \
+gnumeric-RECEIVED.html \
+gnumeric-REPLACE.html \
+gnumeric-REPT.html \
+gnumeric-RIGHT.html \
+gnumeric-ROMAN.html \
+gnumeric-ROUND.html \
+gnumeric-ROUNDDOWN.html \
+gnumeric-ROUNDUP.html \
+gnumeric-ROW.html \
+gnumeric-ROWS.html \
+gnumeric-RSQ.html \
+gnumeric-S2STRING.html \
+gnumeric-SEARCH.html \
+gnumeric-SECOND.html \
+gnumeric-SERIESSUM.html \
+gnumeric-SIGN.html \
+gnumeric-SIMTABLE.html \
+gnumeric-SIN.html \
+gnumeric-SINH.html \
+gnumeric-SKEW.html \
+gnumeric-SKEWP.html \
+gnumeric-SLN.html \
+gnumeric-SLOPE.html \
+gnumeric-SMALL.html \
+gnumeric-SQRT.html \
+gnumeric-SQRTPI.html \
+gnumeric-STANDARDIZE.html \
+gnumeric-STDEV.html \
+gnumeric-STDEVA.html \
+gnumeric-STDEVP.html \
+gnumeric-STDEVPA.html \
+gnumeric-STEYX.html \
+gnumeric-SUBSTITUTE.html \
+gnumeric-SUBTOTAL.html \
+gnumeric-SUM.html \
+gnumeric-SUMA.html \
+gnumeric-SUMIF.html \
+gnumeric-SUMPRODUCT.html \
+gnumeric-SUMSQ.html \
+gnumeric-SUMX2MY2.html \
+gnumeric-SUMX2PY2.html \
+gnumeric-SUMXMY2.html \
+gnumeric-SYD.html \
+gnumeric-T.html \
+gnumeric-TAN.html \
+gnumeric-TANH.html \
+gnumeric-TBILLEQ.html \
+gnumeric-TBILLPRICE.html \
+gnumeric-TBILLYIELD.html \
+gnumeric-TDIST.html \
+gnumeric-TEXT.html \
+gnumeric-TIME.html \
+gnumeric-TIMEVALUE.html \
+gnumeric-TINV.html \
+gnumeric-TODAY.html \
+gnumeric-TRANSPOSE.html \
+gnumeric-TREND.html \
+gnumeric-TRIM.html \
+gnumeric-TRIMMEAN.html \
+gnumeric-TRUE.html \
+gnumeric-TRUNC.html \
+gnumeric-TTEST.html \
+gnumeric-TYPE.html \
+gnumeric-UNIX2DATE.html \
+gnumeric-UPPER.html \
+gnumeric-VALUE.html \
+gnumeric-VAR.html \
+gnumeric-VARA.html \
+gnumeric-VARP.html \
+gnumeric-VARPA.html \
+gnumeric-VDB.html \
+gnumeric-VLOOKUP.html \
+gnumeric-WEEKDAY.html \
+gnumeric-WEEKNUM.html \
+gnumeric-WEIBULL.html \
+gnumeric-WORKDAY.html \
+gnumeric-X2STRING.html \
+gnumeric-XFIBO.html \
+gnumeric-XIRR.html \
+gnumeric-XNPV.html \
+gnumeric-XOR.html \
+gnumeric-XSUM.html \
+gnumeric-YEAR.html \
+gnumeric-YIELD.html \
+gnumeric-YIELDDISC.html \
+gnumeric-YIELDMAT.html \
+gnumeric-ZTEST.html \
+gnumeric-atlxlast.html \
+goal-seek.html \
+graphing-advanced.html \
+graphing-start.html \
+graphs-basic.html \
+gui-elements.html \
+index.html \
+info-area.html \
+keybinding.html \
+keybindings.html \
+license-intro.html \
+manual-usage.html \
+obj-toolbar.html \
+print-preview.html \
+print-setup.html \
+print.html \
+printing.html \
+quick-closing-gnumeric.html \
+quick-commands.html \
+quick-complex-select.html \
+quick-cut-n-paste.html \
+quick-data.html \
+quick-files.html \
+quick-format.html \
+quick-graphing.html \
+quick-printing.html \
+quick-sheets.html \
+quick-start-top.html \
+quick-start.html \
+quick-starting-gnumeric.html \
+quick-working-with-gnumeric.html \
+reference.html \
+sect-about-compiling.html \
+sect-about-getting-involved.html \
+sect-about-history.html \
+sect-advanced-analysis-simulation.html \
+sect-analysis-overview.html \
+sect-analysis-statistical.html \
+sect-configuration-localization.html \
+sect-configuration-overview.html \
+sect-data-entry.html \
+sect-data-format.html \
+sect-data-modify.html \
+sect-data-overview.html \
+sect-data-selections.html \
+sect-data-types.html \
+sect-filecontentsNsettings-data.html \
+sect-filecontentsNsettings-docsummary.html \
+sect-filecontentsNsettings-names.html \
+sect-filecontentsNsettings-settings.html \
+sect-filecontentsNsettings.html \
+sect-files-opening-importing.html \
+sect-files-overview.html \
+sect-files-saving.html \
+sect-gui-menus.html \
+sect-gui-mouse.html \
+sect-gui-other-elements.html \
+sect-gui-overview.html \
+sect-gui-toolbars.html \
+sect-movecopy.html \
+solver-chapter.html \
+std-toolbar.html \
+titlepage.html \
+usage-autosave.html \
+welcome.html
 
 include $(top_srcdir)/rules.common
