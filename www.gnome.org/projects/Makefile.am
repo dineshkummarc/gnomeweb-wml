@@ -22,7 +22,8 @@ SUBDIRS = \
 	gst			\
 	gnome-network		\
 	epiphany		\
-	libgsf
+	libgsf			\
+	evince
 
 urlpath = /projects
 
