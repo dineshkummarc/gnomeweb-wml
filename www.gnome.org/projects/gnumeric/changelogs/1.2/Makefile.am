@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/new-design-testing/changelogs/1.2
+urlpath=/projects/gnumeric/changelogs/1.2
 
 page_SCRIPTS= 		\
     index.shtml

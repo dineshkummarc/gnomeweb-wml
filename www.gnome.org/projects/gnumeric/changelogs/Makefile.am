@@ -1,6 +1,6 @@
 SUBDIRS= ancient 1.0 1.1 1.2 1.3 1.4
 
-urlpath=/projects/gnumeric/new-design-testing/changelogs
+urlpath=/projects/gnumeric/changelogs
 
 page_SCRIPTS= \
     index.shtml
