@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>NNTP module for GNOME-vfs and Nautilus</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+
+<CENTER>
+<FONT SIZE=5><U>NNTP module for GNOME-vfs and Nautilus</U></FONT><BR>
+<FONT SIZE=4>Andy Hertzfeld 1/12/02</FONT>
+<BR><BR>
+</CENTER>
+
+<P>
+	The alt.binaries.* newsgroups harbor hundreds of thousands of images, songs and other binary files of every conceivable description (and then some),
+	but they are hard to use because newsgroups were only designed to transport relatively small text files; large binary files like mp3s
+	have to be encoded into text (typically using uu or base64 encoding) and then broken into a series of smaller messages.  Fortunately, there are
+	newsreaders that automatically coalesce and decode the fragments for you, but none of them do a great job of making
+	the content very accessible (like previewing songs before you download them, for example).
+<P>	
+	Recently, I realized that it would be pretty cool to be able to access the binary newsgroups with Nautilus, since they are really just collections of files.
+	So last month I wrote a gnome-vfs "nntp-method" module that does all the dirty work of assembling and decoding the fragments, presenting the user with a
+	simple directory of binary files that can be copied and previewed like ordinary files.  After getting it going, I saw that there were often sets of related
+	files (like songs from the same album, or page images of a comic book) that should be grouped together, so I added heuristics to group related files together
+	in directories, which made it much more usable.
+<P>
+	Here are some screen shots.  Just click on an image to enlarge it:<BR>
+	<CENTER>
+	<TABLE>
+	<TR>
+	<TD WIDTH=224 HEIGHT=160><A HREF="images/nntp.1.jpg"><IMG src="images/nntp.1.s.jpg" border=0></A></TD>
+	<TD WIDTH=224 HEIGHT=160><A HREF="images/nntp.2.jpg"><IMG src="images/nntp.2.s.jpg" border=0></A></TD>
+	</TR>
+	
+	<TR>
+	<TD WIDTH=224 HEIGHT=160><A HREF="images/nntp.3.jpg"><IMG src="images/nntp.3.s.jpg" border=0></A></TD>
+	<TD WIDTH=224 HEIGHT=160><A HREF="images/nntp.4.jpg"><IMG src="images/nntp.4.s.jpg" border=0></A></TD>
+	</TR>
+	</TABLE>
+	</CENTER>	
+ 	
+<P>	
+	Once installed, you can access newsgroups with urls like "nntp://your.newsserver.address/alt.binaries.pictures.comics".  You might also have to supply a username
+	and password in the url (i.e., "nntp://username:password@your.newserver.address..."), since it doesn't prompt for it yet.  You'll also have to
+	turn on remote previewing in Nautilus's preferences "Speed Tradeoffs" section if you want to see icon text, thumbnails or sound previewing, which is
+	highly recommended, since it's the coolest part.
+<P>	
+	One caveat is that you have to use a fairly reliable news server for large files like mp3s, since if a single message is dropped, the file won't show up.  Also, I
+	made it not show files smaller than 4Kbytes, since that removes a lot of clutter; we should eventually make it a configurable preference.
+<P>	
+	While it seems to work with the few news servers that I've tried it with, it certainly could benefit from more widespread testing; please report any bugs to the gnome-vfs list.
+	I've got a number of significant extensions planned for it like making the directory writable so you can post files to the newsgroups, and also letting you browse through
+	the newsgroups names, using folders (for example, nttp://newserver.com/alt.* would show you folders for all the subgroups); there are also smaller tasks like 
+	making it prompt for passwords or adding a preference UI to configure stuff. I won't get around to those for at least a few months, though, so let me know if anyone is interested in working on those or other extensions.
+<P>	
+	 
+	There were no changes required to gnome-vfs itself, it's  strictly a module, so I don't think it can cause any problems without it being used directly.
+	Unless anyone objects, I will check it into the GNOME1 branch of gnome-vfs soon (GNOME2 Nautilus isn't robust enough yet for it to be used effectively, but  I'll
+	check it in on head there as well).
+	
+<P>	
+	Thanks.<BR><BR>
+	
+	-- Andy
+</BODY>
+</HTML>
+
+	
+	
