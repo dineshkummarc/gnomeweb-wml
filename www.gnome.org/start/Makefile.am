@@ -3,6 +3,7 @@ SUBDIRS = 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7
 urlpath = /start
 
 page_SCRIPTS= \
-	index.html
+	index.html \
+        getstable.html
 
 include $(top_srcdir)/rules.common
