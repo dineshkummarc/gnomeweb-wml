@@ -11,10 +11,8 @@ misc_images=\
 	background.gif\
 	dot.gif\
 	logo-large.png\
-	logo-large.png.old\
 	logo-large.gif\
 	logo-small.png\
-	logo-small.png.old\
 	logo-small.gif\
 	projects-separator.png\
 	projects-separator.gif\
@@ -25,7 +23,6 @@ misc_images=\
 	subpage-side.png\
 	subpage-side.gif\
 	news-bullet.png\
-	news-bullet.png.old\
 	news-bullet.gif\
 	news-header.png\
 	news-header.gif\
@@ -39,7 +36,6 @@ misc_images=\
 	button-helixgnome.gif\
 	gnome2.png\
 	gnome-16.png\
-	gnome-16.png.old\
 	mail16d.png\
 	manual16c.png\
 	save16.png\
