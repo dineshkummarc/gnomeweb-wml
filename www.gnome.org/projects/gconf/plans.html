@@ -16,6 +16,16 @@ it's a good starting point.
 <p>
 Some changes since then:
 <ul>
+<li>
+We could do some quick hack to make gconfd per-session instead of 
+per-user or per-machine, such that gconfd would exit immediately 
+on logout and not have a lock file at all anywhere.
+Possible hacks are X selection (maybe via a fork/exec'd proxy to avoid 
+gconfd connecting directly) and just hardcoding in gnome-session.
+</li>
+<li>
+LDAP backend, two have been written in the past to look at.
+</li>
 <li>Ettore, Jeff, and others convinced me that we need to be able to 
 store non-preferences data such as the address book. 
 To that end, we need to have stronger guarantees of robustness, 
@@ -33,6 +43,13 @@ emergency fallback values when nothing is set in the gconf server.
 </li>
 <li>
 I posted some <a href="http://mail.gnome.org/archives/gconf-list/2003-May/msg00000.html">random API thoughts</a>.
+</li>
+<li>
+Addition to the API thoughts: we could actually do a signal with detail, 
+g_signal_connect (prefs, "changed::/apps/metacity/foo") with caveat
+that GObject may forbid slash characters in signal details, and 
+that I believe emitting such a signal is O(n) in number of handlers regardless 
+of handler detail.
 </li>
 <li>
 I'd go ahead and use GLib etc. in the API, and standardize with other desktops
