@@ -25,6 +25,6 @@ page_SCRIPTS=index.php3		\
   .htaccess \
   users
 
-page_DATA=menucontrol.js
+#page_DATA=menucontrol.js
 
 
