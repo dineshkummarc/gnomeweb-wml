@@ -93,11 +93,12 @@
       </div>
       <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
         <h3 class="title">Note</h3>
-        <p>In any conflict between Epiphany's coding style and this document's, Epiphany's is right and this document's is wrong. Particularly, tabs are 8 spaces wide and are <span class="emphasis"><em>tabs</em></span>, and in each function declaration, each argument should appear on its own line, in line with the argument above it.</p>
+        <p>In any conflict between Epiphany's C coding style and this document's, Epiphany's is right and this document's is wrong. Particularly, tabs are 8 spaces wide and are <span class="emphasis"><em>tabs</em></span>, and in each function declaration, each argument should appear on its own line, in line with the argument above it.</p>
+        <p>There is no coding standard for Python extensions.</p>
       </div>
       <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
         <h3 class="title">Tip</h3>
-        <p><tt class="function">LOG</tt> is included in <tt class="filename">ephy-debug.h</tt>. If you use <b class="userinput"><tt>--enable-debug</tt></b> while running <span><b class="command">configure</b></span> or <span><b class="command">autogen.sh</b></span> from within the <tt class="filename">epiphany-extensions/</tt> directory, the messages will be printed with <tt class="function">g_print</tt>, which uses a <tt class="function">printf</tt>-like syntax.</p>
+        <p>The C <tt class="function">LOG</tt> macro is included in <tt class="filename">ephy-debug.h</tt>. If you use <b class="userinput"><tt>--enable-debug</tt></b> while running <span><b class="command">configure</b></span> or <span><b class="command">autogen.sh</b></span> from within the <tt class="filename">epiphany-extensions/</tt> directory, the messages will be printed with <tt class="function">g_print</tt>, which uses a <tt class="function">printf</tt>-like syntax.</p>
       </div>
       <div class="sect1" lang="en" xml:lang="en">
         <div class="titlepage">
@@ -107,7 +108,8 @@
             </div>
           </div>
         </div>
-        <p>Epiphany will look for a <tt class="function">register_module</tt> function. This function is defined in <tt class="filename">extension.c</tt> if you used the <tt class="filename">copy-template</tt> script.</p>
+        <p>This function is only necessary for C extensions; Python coders may skip this section.</p>
+        <p>Epiphany will look for a <tt class="function">register_module</tt> function when loading the extension. This function is defined in <tt class="filename">extension.c</tt> if you used the <tt class="filename">copy-template</tt> script.</p>
         <p>Read over the default example to understand what is expected: <tt class="function">register_module</tt> must return a GObject type. Almost always, this GObject should implement the <span class="interface">EphyExtension</span> interface. In the template extension, this is described in the last line of the function: </p>
         <pre class="programlisting">return ephy_<i class="replaceable"><tt>foo</tt></i>_extension_register_type (module);</pre>
         <p>. If you wish to register other GObject types, simply put their register_type calls above this one.</p>

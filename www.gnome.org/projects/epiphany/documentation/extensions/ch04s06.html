@@ -28,7 +28,7 @@
       <div class="titlepage">
         <div>
           <div>
-            <h2 class="title" style="clear: both"><a id="id2464664"></a>User Interface Integration</h2>
+            <h2 class="title" style="clear: both"><a id="id2464757"></a>User Interface Integration</h2>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
       </div>
       <p>The <tt class="classname">GtkUIManager</tt> functions allow you to add new user interface elements. Epiphany's <tt class="function">ephy_window_get_ui_manager</tt> will return the appropriate <tt class="classname">GtkUIManager</tt> for an <tt class="classname">EphyWindow</tt>. Use <tt class="classname">GtkAction</tt>s to represent actions. For example, an extension could place an action at the bottom of the <span class="guimenu">Go</span> menu of Epiphany. To do so, write the following in <tt class="filename">ephy-<i class="replaceable"><tt>foo</tt></i>-extension.c</tt>:</p>
       <div class="example">
-        <a id="id2464724"></a>
+        <a id="id2464817"></a>
         <p class="title">
           <b>Example 4.4. Adding menu entries</b>
         </p>
@@ -141,6 +141,50 @@ impl_detach_window (EphyExtension *extension,
 
 	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
 }</pre>
+      </div>
+      <div class="example">
+        <a id="id2464129"></a>
+        <p class="title">
+          <b>Example 4.5. Adding menu entries (Python)</b>
+        </p>
+        <pre class="programlisting">import gtk
+
+_ui_str = """
+&lt;ui&gt;
+	&lt;menubar name="menubar"&gt;
+		&lt;menu name="GoMenu" action="Go"&gt;
+			&lt;separator/&gt;
+			&lt;menuitem name="SampleMenuEntry"
+				action="SampleMenuEntry"/&gt;
+			&lt;separator/&gt;
+		&lt;/menu&gt;
+	&lt;/menubar&gt;
+&lt;/ui&gt;
+"""
+
+def _menu_entry_cb(action, data):
+	print data
+
+_actions = [('SampleMenuEntry', None, 'Sample Menu Entry',
+	     None, None, _menu_entry_cb)]
+
+def attach_window(window):
+	ui_manager = window.get_ui_manager()
+	group = gtk.ActionGroup('SampleMenu')
+	group.add_actions(_actions, 'Data')
+	ui_manager.insert_action_group(group, 0)
+	ui_id = ui_manager.add_ui_from_string(_ui_str)
+
+	window._sample_menu_entry_data = (group, ui_id)
+
+def detach_window(window):
+	group, ui_id = window._sample_menu_entry_data
+	del window._sample_menu_entry_data
+
+	ui_manager = window.get_ui_manager()
+	ui_manager.remove_ui(ui_id)
+	ui_manager.remove_action_group(group)
+	ui_manager.ensure_update()</pre>
       </div>
       <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
         <h3 class="title">Tip</h3>
