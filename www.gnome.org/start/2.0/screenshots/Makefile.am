@@ -4,6 +4,8 @@ urlpath=/start/2.0/screenshots
 
 page_SCRIPTS=index.html
 
+include $(top_srcdir)/rules.common
+
 EXTRA_DIST=csm-desktop.png \
 	drc-desktop.png \
 	gconf-editor-hindi.png \
@@ -30,5 +32,3 @@ EXTRA_DIST=csm-desktop.png \
 	thumb-micampe-desktop.png \
 	thumb-ross-desktop.png \
 	thumb-snorp-rhythmbox.png
-
-include $(top_srcdir)/rules.common
