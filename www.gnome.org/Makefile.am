@@ -12,8 +12,8 @@ page_SCRIPTS=index.php3		\
   pr-gnome12.html     \
   pr-foundation.html  \
   pr-ney_execdir.html \
-  pr-newcommitments.html
-
+  pr-newcommitments.html \
+  pr-accessible.html
 page_DATA=menucontrol.js
 
 
