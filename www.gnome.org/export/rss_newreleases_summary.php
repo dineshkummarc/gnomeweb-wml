@@ -9,6 +9,10 @@ function bad ()
 	die ('No soup for you!');
 }
 
+// ## default limit
+if (!$limit) $limit = 100;
+if ($limit > 100) $limit = 100;
+
 if ($HTTP_GET_VARS['date'])
 {
 	$date = $HTTP_GET_VARS['date'];
@@ -44,9 +48,10 @@ $query = "SELECT groups.group_name AS group_name,"
 	. "AND frs_release.release_date >= '".mktime (0,0,0,$m,$d,$y)."' "
 	. "ORDER BY frs_release.release_date DESC";
 
-//print $query."\n";
-
 $res = db_query ($query);
+
+//print $query."\n";
+//print db_numrows ($res);
 
 $outputtotal = 0;
 while ($row = db_fetch_array ($res)) {
