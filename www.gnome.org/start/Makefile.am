@@ -1,8 +1,8 @@
-SUBDIRS=installing 2.0 2.1 2.2 2.3
+SUBDIRS = 2.0 2.1 2.2 2.3
 
-urlpath=/start
+urlpath = /start
 
-page_SCRIPTS=index.html\
-             source.html
+page_SCRIPTS= \
+	index.html
 
 include $(top_srcdir)/rules.common
