@@ -31,10 +31,6 @@
 # Error Checking
 #--------------------------------------
 
-      if (! $orgname){
-        $bad_elements[] = "orgname";
-        $errors[] = "Please enter the name of your company or organization.";
-      }
       if (! $contactname){
         $bad_elements[] = "contactname";
         $errors[] = "Please enter your name.";
@@ -51,18 +47,9 @@
         $bad_elements[] = "contactphone";
         $errors[] = "Please enter a phone number complete with area code and country code.";
       }
-      if (! $orgsize) {
-        $bad_elements[] = "orgsize";
-        $errors[] = "Please enter the size of your organization.";
-      }
       if (! $gfmember) {
         $bad_elements[] = "gfmember";
         $errors[] = "You must be a GNOME Foundation member to register.";
-      }
-
-      if ((! $xchfive) && (! $xchtwok) && (! $domino) && (! $novell) && (! $unixbased)) {
-        $bad_elements[] = "email";
-        $errors[] = "Please select the email system or systems in use at your organization.";
       }
 
 
@@ -76,7 +63,6 @@
         // make the mail 
 
         $formmail = "";
-        $formmail .= "Company name: " . $orgname . "\n";
         $formmail .= "Primary contact name: " . $contactname . "\n";
         $formmail .= "Title: " . $contacttitle . "\n";
         $formmail .= "Email: " . $email . "\n\n";
@@ -93,13 +79,6 @@
 
         $formmail .= "GNOME Foundation Member: " . $gfmember ."\n\n";
 
-        $formmail .= "Email System in Use:\n";
-
-        if ($xchfive)   { $formmail .= "\tExchange 5.5\n"; }
-        if ($xchtwok)   { $formmail .= "\tExchange 2000\n"; }
-        if ($domino)    { $formmail .= "\tNotes and Domino\n"; }
-        if ($novell)    { $formmail .= "\tNovell Groupwise\n"; }
-        if ($unixbased) { $formmail .= "\tLinux or UNIX based system\n"; }
 
         $formmail .= "\nComments:\n";
         $formmail .= "$comments\n\n";
