@@ -24,6 +24,7 @@ page_DATA = \
 	panel-applet-networkmonitor.png \
 	soundrecorder.png \
 	svg-game.png \
-	volumecontrol.png
+	volumecontrol.png \
+	inmemory-dudes.jpg
 
 include $(top_srcdir)/rules.common
