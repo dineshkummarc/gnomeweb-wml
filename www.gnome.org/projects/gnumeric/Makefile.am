@@ -13,7 +13,6 @@ page_SCRIPTS=index.shtml		\
 		screenshots.shtml	\
 		technology.shtml	\
     	    mailing-list.html		\
-	    palaeolithic.html		\
 	    thumb.gif			\
 	    v8.xsd			\
     	    gnumeric-0.3		\
@@ -81,6 +80,9 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-0.74		\
 	    gnumeric-0.75		\
 	    gnumeric-0.76		\
-	    gnumeric-0.99.0
+	    gnumeric-0.99.0		\
+	    gnumeric-0.99.1		\
+	    gnumeric-0.x.html		\
+	    gnumeric-1.0.0
 
 include $(top_srcdir)/rules.common
