@@ -31,7 +31,8 @@ misc_images=\
   arrow.png\
 	arrow.gif\
 	button-helixgnome.png\
-	button-helixgnome.gif
+	button-helixgnome.gif\
+	gnome-16.png
 
 banner_images=\
 	banner-gnomeis.png\
