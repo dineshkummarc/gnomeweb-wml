@@ -127,6 +127,10 @@ bounties is at the sole discretion of the judging panel, and we may
 refuse to award a bounty to anyone for any reason at any time.  <p>
 But we're good people, so as long as you play nice, we will too.</li>
 
+<li><b>Updated December 8, 2003</b>: You may elect to not collect your
+bounty winnings.  The unclaimed money will go to the "Pay it Forward"
+program and will be used to fund more desktop bounties.</li>
+
 </ol>
 
 <?php box_end (); ?>
@@ -263,8 +267,7 @@ channels.</p>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530"); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533"); ?>
 <?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553"); ?>
-<?php taskrow ("Make Evolution Use the
-gnome-icon-theme", "Miscellaneous", "500", "645366955"); ?>
+<?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812"); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547"); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549"); ?>

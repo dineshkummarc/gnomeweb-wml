@@ -115,6 +115,10 @@ bounties is at the sole discretion of the judging panel, and we may
 refuse to award a bounty to anyone for any reason at any time.  <p>
 But we're good people, so as long as you play nice, we will too.</li>
 
+<li><b>Updated December 8, 2003</b>: You may elect to not collect your
+bounty winnings.  The unclaimed money will go to the "Pay it Forward"
+program and will be used to fund more desktop bounties.</li>
+
 </ol>
 
 <?php box_end (); ?>

@@ -8,7 +8,8 @@ $message = "\r\n" .
 	   "bounty: " . $_POST['bounty'] . "\r\n" .
 	   "name: " . $_POST['name'] . "\r\n" . 
 	   "email: " . $_POST['email'] . "\r\n" .
-	   "phone: " . $_POST['phone'] . "\r\n\r\n" .
+	   "phone: " . $_POST['phone'] . "\r\n" .
+           "donate: " . $_POST['donate'] . "\r\n\r\n" .
            "solution: " . "\r\n" . $_POST['solution'] . "\r\n\r\n" .
            "team: " . "\r\n" . $_POST['team'] . "\r\n\r\n" .
            "help: " . "\r\n" . $_POST['help'] . "\r\n\r\n" . 

@@ -15,7 +15,7 @@ prize you must register yourself in the <a
 href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print
 $_GET['bounty']; ?>">relevant bug</a>.
 
-<form method="post" action="claim-post.php3">
+<form method="post" action="claim-post.php3" name="myForm">
 
 <p align="center">
 
@@ -28,7 +28,7 @@ $_GET['bounty']; ?>">relevant bug</a>.
 <tr><td width="30%" align="right" valign="top"><b>Team mates:</b><br>Name &lt;email@address.com&gt;</td><td><textarea rows="5" cols="50" name="team" wrap="soft"></textarea></td></tr>
 <tr><td width="30%" align="right" valign="top"><b>Help From:</b><br>List the GNOME people who helped you</td><td><textarea rows="3" cols="50" name="help" wrap="soft"></textarea></td></tr>
 <tr><td width="30%" align="right" valign="top"><b>Notes:</b><br>Please provide any comments or notes you want to make here</td><td><textarea rows="7" cols="50" name="notes" wrap="soft"></textarea></td></tr>
-
+<tr><td width="30%" align="right" valign="top"><b>Donate my Winnings:</b></td><td><input type="checkbox" name="donate" value="yes"><span onclick="document.forms.myForm.donate.checked=(!document.forms.myForm.donate.checked)">Yes.  Please use the money to fund future desktop bounties</span></td></tr>
 </table>
 
 <input type="submit" value="Claim Your Solution">
