@@ -1,9 +1,12 @@
-SUBDIRS=
+SUBDIRS =
 
-urlpath=
+urlpath =
 
-page_SCRIPTS= \
+page_SCRIPTS = \
 	index.html \
+	htaccess
+
+page_DATA = \
 	metal-tile.jpg \
 	metal-tile-left.png \
 	metal-tile-right.png \
