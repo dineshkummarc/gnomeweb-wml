@@ -28,7 +28,7 @@
         .navigation .title {
             font-size: 200%;
         }
-      </style><link rel="home" href="index.html" title="[Insert name here] Reference Manual"><link rel="up" href="ch01.html" title="[Insert title here]"><link rel="previous" href="ch01.html" title="[Insert title here]"><link rel="next" href="ECalListener.html" title="ECalListener"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">[Insert name here] Reference Manual</th><td><a accesskey="n" href="ECalListener.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="ECalComponent"></a><div class="titlepage"></div><div class="refnamediv"><h2>ECalComponent</h2><p>ECalComponent &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+      </style><link rel="home" href="index.html" title="Evolution API Reference: libecal, the Calendar Library"><link rel="up" href="ch01.html" title="Evolution API Reference: libecal, the Calendar Library"><link rel="previous" href="ch01.html" title="Evolution API Reference: libecal, the Calendar Library"><link rel="next" href="ECalListener.html" title="ECalListener"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Evolution API Reference: libecal, the Calendar Library</th><td><a accesskey="n" href="ECalListener.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="ECalComponent"></a><div class="titlepage"></div><div class="refnamediv"><h2>ECalComponent</h2><p>ECalComponent &#8212; Typically an appointment or task, part of the ECal object.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
 
 
 
@@ -309,9 +309,9 @@ icalcomponent* <a href="ECalComponent.html#e-cal-component-alarm-get-icalcompone
    +----ECalComponent
 </pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
 
-</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="ECalComponent-struct"></a>struct ECalComponent</h3><a class="indexterm" name="id2515758"></a><pre class="programlisting">struct ECalComponent;</pre><p>
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="ECalComponent-struct"></a>struct ECalComponent</h3><a class="indexterm" name="id2515754"></a><pre class="programlisting">struct ECalComponent;</pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentVType"></a>enum ECalComponentVType</h3><a class="indexterm" name="id2515776"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentVType"></a>enum ECalComponentVType</h3><a class="indexterm" name="id2515772"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_NO_TYPE,
 	E_CAL_COMPONENT_EVENT,
 	E_CAL_COMPONENT_TODO,
@@ -321,33 +321,59 @@ icalcomponent* <a href="ECalComponent.html#e-cal-component-alarm-get-icalcompone
 } ECalComponentVType;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentField"></a>enum ECalComponentField</h3><a class="indexterm" name="id2515797"></a><pre class="programlisting">typedef enum {
-	E_CAL_COMPONENT_FIELD_CATEGORIES,		/* concatenation of the categories list */
-	E_CAL_COMPONENT_FIELD_CLASSIFICATION,
-	E_CAL_COMPONENT_FIELD_COMPLETED,
-	E_CAL_COMPONENT_FIELD_DTEND,
-	E_CAL_COMPONENT_FIELD_DTSTART,
-	E_CAL_COMPONENT_FIELD_DUE,
-	E_CAL_COMPONENT_FIELD_GEO,
-	E_CAL_COMPONENT_FIELD_PERCENT,
-	E_CAL_COMPONENT_FIELD_PRIORITY,
-	E_CAL_COMPONENT_FIELD_SUMMARY,
-	E_CAL_COMPONENT_FIELD_TRANSPARENCY,
-	E_CAL_COMPONENT_FIELD_URL,
-	E_CAL_COMPONENT_FIELD_HAS_ALARMS,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_ICON,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_COMPLETE,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_RECURRING,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_OVERDUE,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_COLOR,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_STATUS,
-	E_CAL_COMPONENT_FIELD_COMPONENT,		/* not a real field */
-	E_CAL_COMPONENT_FIELD_LOCATION,
-	E_CAL_COMPONENT_FIELD_NUM_FIELDS
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentField"></a>enum ECalComponentField</h3><a class="indexterm" name="id2515793"></a><pre class="programlisting">typedef enum {
+	E_CAL_COMPONENT_NONE,
+	
+	E_CAL_COMPONENT_FIELD_UID,     	         /* string field */
+	
+	/* Descriptive fields of the cal_component */
+	E_CAL_COMPONENT_FIELD_SUMMARY,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_DESCRIPTION,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_CLASS,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_GEO,     	         /* string field */
+	E_CAL_COMPONENT_FIELD_LOCATION,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_PRIORITY,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_STATUS,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_TRANSP,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_URL,     	         /* string field */
+	E_CAL_COMPONENT_FIELD_CATEGORIES,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_COMMENT,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_CONTACT,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RELATED,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RESOURCES,     	 /* string field */
+	
+	/* Dates and times */
+	E_CAL_COMPONENT_FIELD_DTSTART,     	 /* date/time field */
+	E_CAL_COMPONENT_FIELD_DTEND,     	 /* date/time field */
+	E_CAL_COMPONENT_FIELD_DTSTAMP,     	 /* date/time field */
+	E_CAL_COMPONENT_FIELD_DURATION,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_CREATED,     	 /* date/time field */
+	E_CAL_COMPONENT_FIELD_LAST_MOD,     	 /* date/time field */
+
+	/* Recurrences and exceptions to those recurrences */
+	E_CAL_COMPONENT_FIELD_EXDATE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_EXRULE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RDATE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RRULE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RECURID,     	 /* string field */
+
+	/* Meeting related */
+	E_CAL_COMPONENT_FIELD_ATTENDEE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_ORGANIZER,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_SEQUENCE,     	 /* string field */
+	E_CAL_COMPONENT_FIELD_RSTATUS,     	 /* string field */
+
+	/* Attachments */
+	E_CAL_COMPONENT_FIELD_ATTACH,     	 /* string field */
+
+	E_CAL_COMPONENT_FIELD_LAST,
+
+	/* useful constants */
+	E_CAL_COMPONENT_FIELD_LAST_SIMPLE_STRING = E_CAL_COMPONENT_FIELD_RESOURCES
 } ECalComponentField;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentClassification"></a>enum ECalComponentClassification</h3><a class="indexterm" name="id2547558"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentClassification"></a>enum ECalComponentClassification</h3><a class="indexterm" name="id2536036"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_CLASS_NONE,
 	E_CAL_COMPONENT_CLASS_PUBLIC,
 	E_CAL_COMPONENT_CLASS_PRIVATE,
@@ -356,23 +382,29 @@ icalcomponent* <a href="ECalComponent.html#e-cal-component-alarm-get-icalcompone
 } ECalComponentClassification;
 </pre><p>
 These values determine the privacy classification of the event.
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentDateTime"></a>struct ECalComponentDateTime</h3><a class="indexterm" name="id2524779"></a><pre class="programlisting">struct ECalComponentDateTime {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentDateTime"></a>struct ECalComponentDateTime</h3><a class="indexterm" name="id2528204"></a><pre class="programlisting">struct ECalComponentDateTime {
 
-	/* Actual date/time value */
-	struct icaltimetype *value;
+	guint hour   : 5;
+	guint minute : 7;
+	guint second : 7;
+	
+	guint day   : 6;
+	guint month : 4;
+	guint year  : 16;
 
-	/* Timezone ID */
-	const char *tzid;
+	gboolean date_only;
+	
+	EComponentTimezone *zone;
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentPeriodType"></a>enum ECalComponentPeriodType</h3><a class="indexterm" name="id2515838"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentPeriodType"></a>enum ECalComponentPeriodType</h3><a class="indexterm" name="id2515858"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_PERIOD_DATETIME,
 	E_CAL_COMPONENT_PERIOD_DURATION
 } ECalComponentPeriodType;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentPeriod"></a>struct ECalComponentPeriod</h3><a class="indexterm" name="id2515855"></a><pre class="programlisting">struct ECalComponentPeriod {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentPeriod"></a>struct ECalComponentPeriod</h3><a class="indexterm" name="id2515877"></a><pre class="programlisting">struct ECalComponentPeriod {
 
 	ECalComponentPeriodType type;
 
@@ -385,14 +417,14 @@ These values determine the privacy classification of the event.
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentRangeType"></a>enum ECalComponentRangeType</h3><a class="indexterm" name="id2515876"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentRangeType"></a>enum ECalComponentRangeType</h3><a class="indexterm" name="id2515897"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_RANGE_SINGLE,
 	E_CAL_COMPONENT_RANGE_THISPRIOR,
 	E_CAL_COMPONENT_RANGE_THISFUTURE
 } ECalComponentRangeType;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentRange"></a>struct ECalComponentRange</h3><a class="indexterm" name="id2515895"></a><pre class="programlisting">struct ECalComponentRange {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentRange"></a>struct ECalComponentRange</h3><a class="indexterm" name="id2515916"></a><pre class="programlisting">struct ECalComponentRange {
 
 	ECalComponentRangeType type;
 	
@@ -400,7 +432,7 @@ These values determine the privacy classification of the event.
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentText"></a>struct ECalComponentText</h3><a class="indexterm" name="id2515912"></a><pre class="programlisting">struct ECalComponentText {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentText"></a>struct ECalComponentText</h3><a class="indexterm" name="id2518051"></a><pre class="programlisting">struct ECalComponentText {
 
 	/* Description string */
 	const char *value;
@@ -410,7 +442,7 @@ These values determine the privacy classification of the event.
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentTransparency"></a>enum ECalComponentTransparency</h3><a class="indexterm" name="id2500147"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentTransparency"></a>enum ECalComponentTransparency</h3><a class="indexterm" name="id2563924"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_TRANSP_NONE,
 	E_CAL_COMPONENT_TRANSP_TRANSPARENT,
 	E_CAL_COMPONENT_TRANSP_OPAQUE,
@@ -418,7 +450,7 @@ These values determine the privacy classification of the event.
 } ECalComponentTransparency;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAttendee"></a>struct ECalComponentAttendee</h3><a class="indexterm" name="id2529492"></a><pre class="programlisting">struct ECalComponentAttendee {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAttendee"></a>struct ECalComponentAttendee</h3><a class="indexterm" name="id2563944"></a><pre class="programlisting">struct ECalComponentAttendee {
 
 	const char *value;
 	
@@ -436,7 +468,7 @@ These values determine the privacy classification of the event.
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentOrganizer"></a>struct ECalComponentOrganizer</h3><a class="indexterm" name="id2563919"></a><pre class="programlisting">struct ECalComponentOrganizer {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentOrganizer"></a>struct ECalComponentOrganizer</h3><a class="indexterm" name="id2563966"></a><pre class="programlisting">struct ECalComponentOrganizer {
 
 	const char *value;
 	const char *sentby;
@@ -445,25 +477,25 @@ These values determine the privacy classification of the event.
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-gen-uid"></a>e_cal_component_gen_uid ()</h3><a class="indexterm" name="id2563938"></a><pre class="programlisting">char*       e_cal_component_gen_uid         (void);</pre><p>
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-gen-uid"></a>e_cal_component_gen_uid ()</h3><a class="indexterm" name="id2563985"></a><pre class="programlisting">char*       e_cal_component_gen_uid         (void);</pre><p>
 Generates a unique identifier suitable for calendar components.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A unique identifier string.  Every time this function is called
 a different string is returned.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-new"></a>e_cal_component_new ()</h3><a class="indexterm" name="id2563977"></a><pre class="programlisting"><a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>* e_cal_component_new          (void);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-new"></a>e_cal_component_new ()</h3><a class="indexterm" name="id2564024"></a><pre class="programlisting"><a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>* e_cal_component_new          (void);</pre><p>
 Creates a new empty calendar component object.  You should set it from an
 icalcomponent structure by using <a href="ECalComponent.html#e-cal-component-set-icalcomponent"><tt>e_cal_component_set_icalcomponent()</tt></a> or with a
 new empty component type by using <a href="ECalComponent.html#e-cal-component-set-new-vtype"><tt>e_cal_component_set_new_vtype()</tt></a>.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A newly-created calendar component object.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-clone"></a>e_cal_component_clone ()</h3><a class="indexterm" name="id2564031"></a><pre class="programlisting"><a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>* e_cal_component_clone        (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-clone"></a>e_cal_component_clone ()</h3><a class="indexterm" name="id2564078"></a><pre class="programlisting"><a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>* e_cal_component_clone        (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Creates a new calendar component object by copying the information from
 another one.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A newly-created calendar component with the same values as the
 original one.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-new-vtype"></a>e_cal_component_set_new_vtype ()</h3><a class="indexterm" name="id2564086"></a><pre class="programlisting">void        e_cal_component_set_new_vtype   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-new-vtype"></a>e_cal_component_set_new_vtype ()</h3><a class="indexterm" name="id2564133"></a><pre class="programlisting">void        e_cal_component_set_new_vtype   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentVType">ECalComponentVType</a> type);</pre><p>
 Clears any existing component data from a calendar component object and
 creates a new icalcomponent of the specified type for it.  The only property
@@ -471,7 +503,7 @@ that will be set in the new component will be its unique identifier.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>type</tt></i>:</span></td><td> Type of calendar component to create.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-icalcomponent"></a>e_cal_component_set_icalcomponent ()</h3><a class="indexterm" name="id2564155"></a><pre class="programlisting">gboolean    e_cal_component_set_icalcomponent
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-icalcomponent"></a>e_cal_component_set_icalcomponent ()</h3><a class="indexterm" name="id2564202"></a><pre class="programlisting">gboolean    e_cal_component_set_icalcomponent
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              icalcomponent *icalcomp);</pre><p>
 Sets the contents of a calendar component object from an icalcomponent
@@ -485,7 +517,7 @@ Supported component types are VEVENT, VTODO, VJOURNAL, VFREEBUSY, and VTIMEZONE.
 </td></tr><tr><td><span class="term"><i><tt>icalcomp</tt></i>:</span></td><td> An icalcomponent.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE on success, FALSE if <i><tt>icalcomp</tt></i> is an unsupported component
 type.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-icalcomponent"></a>e_cal_component_get_icalcomponent ()</h3><a class="indexterm" name="id2564264"></a><pre class="programlisting">icalcomponent* e_cal_component_get_icalcomponent
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-icalcomponent"></a>e_cal_component_get_icalcomponent ()</h3><a class="indexterm" name="id2564307"></a><pre class="programlisting">icalcomponent* e_cal_component_get_icalcomponent
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries the icalcomponent structure that a calendar component object is
 wrapping.</p><p>
@@ -493,23 +525,23 @@ wrapping.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> An icalcomponent structure, or NULL if the <i><tt>comp</tt></i> has no
 icalcomponent set to it.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-rescan"></a>e_cal_component_rescan ()</h3><a class="indexterm" name="id2564344"></a><pre class="programlisting">void        e_cal_component_rescan          (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-rescan"></a>e_cal_component_rescan ()</h3><a class="indexterm" name="id2564386"></a><pre class="programlisting">void        e_cal_component_rescan          (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-strip-errors"></a>e_cal_component_strip_errors ()</h3><a class="indexterm" name="id2564388"></a><pre class="programlisting">void        e_cal_component_strip_errors    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-strip-errors"></a>e_cal_component_strip_errors ()</h3><a class="indexterm" name="id2564429"></a><pre class="programlisting">void        e_cal_component_strip_errors    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-vtype"></a>e_cal_component_get_vtype ()</h3><a class="indexterm" name="id2564431"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentVType">ECalComponentVType</a> e_cal_component_get_vtype
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-vtype"></a>e_cal_component_get_vtype ()</h3><a class="indexterm" name="id2564472"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentVType">ECalComponentVType</a> e_cal_component_get_vtype
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries the type of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The type of the component, as defined by RFC 2445.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-as-string"></a>e_cal_component_get_as_string ()</h3><a class="indexterm" name="id2564490"></a><pre class="programlisting">char*       e_cal_component_get_as_string   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-as-string"></a>e_cal_component_get_as_string ()</h3><a class="indexterm" name="id2564532"></a><pre class="programlisting">char*       e_cal_component_get_as_string   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Gets the iCalendar string representation of a calendar component.  You should
 call <a href="ECalComponent.html#e-cal-component-commit-sequence"><tt>e_cal_component_commit_sequence()</tt></a> before this function to ensure that the
 component's sequence number is consistent with the state of the object.</p><p>
@@ -517,7 +549,7 @@ component's sequence number is consistent with the state of the object.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> String representation of the calendar component according to
 RFC 2445.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-commit-sequence"></a>e_cal_component_commit_sequence ()</h3><a class="indexterm" name="id2564557"></a><pre class="programlisting">void        e_cal_component_commit_sequence (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-commit-sequence"></a>e_cal_component_commit_sequence ()</h3><a class="indexterm" name="id2564599"></a><pre class="programlisting">void        e_cal_component_commit_sequence (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Increments the sequence number property in a calendar component object if it
 needs it.  This needs to be done when any of a number of properties listed in
 RFC 2445 change values, such as the start and end dates of a component.
@@ -526,36 +558,36 @@ This function must be called before calling <a href="ECalComponent.html#e-cal-co
 ensure that the component is fully consistent.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-abort-sequence"></a>e_cal_component_abort_sequence ()</h3><a class="indexterm" name="id2564619"></a><pre class="programlisting">void        e_cal_component_abort_sequence  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-abort-sequence"></a>e_cal_component_abort_sequence ()</h3><a class="indexterm" name="id2564660"></a><pre class="programlisting">void        e_cal_component_abort_sequence  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-uid"></a>e_cal_component_get_uid ()</h3><a class="indexterm" name="id2564662"></a><pre class="programlisting">void        e_cal_component_get_uid         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-uid"></a>e_cal_component_get_uid ()</h3><a class="indexterm" name="id2564704"></a><pre class="programlisting">void        e_cal_component_get_uid         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char **uid);</pre><p>
 Queries the unique identifier of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>uid</tt></i>:</span></td><td> Return value for the UID string.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-uid"></a>e_cal_component_set_uid ()</h3><a class="indexterm" name="id2564728"></a><pre class="programlisting">void        e_cal_component_set_uid         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-uid"></a>e_cal_component_set_uid ()</h3><a class="indexterm" name="id2564769"></a><pre class="programlisting">void        e_cal_component_set_uid         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *uid);</pre><p>
 Sets the unique identifier string of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>uid</tt></i>:</span></td><td> Unique identifier.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-categories"></a>e_cal_component_get_categories ()</h3><a class="indexterm" name="id2564794"></a><pre class="programlisting">void        e_cal_component_get_categories  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-categories"></a>e_cal_component_get_categories ()</h3><a class="indexterm" name="id2564835"></a><pre class="programlisting">void        e_cal_component_get_categories  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char **categories);</pre><p>
 </p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>categories</tt></i>:</span></td><td>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-categories"></a>e_cal_component_set_categories ()</h3><a class="indexterm" name="id2564858"></a><pre class="programlisting">void        e_cal_component_set_categories  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-categories"></a>e_cal_component_set_categories ()</h3><a class="indexterm" name="id2564899"></a><pre class="programlisting">void        e_cal_component_set_categories  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *categories);</pre><p>
 </p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>categories</tt></i>:</span></td><td>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-categories-list"></a>e_cal_component_get_categories_list ()</h3><a class="indexterm" name="id2564922"></a><pre class="programlisting">void        e_cal_component_get_categories_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-categories-list"></a>e_cal_component_get_categories_list ()</h3><a class="indexterm" name="id2564964"></a><pre class="programlisting">void        e_cal_component_get_categories_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **categ_list);</pre><p>
 Queries the list of categories of a calendar component object.  Each element
@@ -564,14 +596,14 @@ in the returned categ_list is a string with the corresponding category.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>categ_list</tt></i>:</span></td><td> Return value for the list of strings, where each string is a
 category.  This should be freed using <a href="ECalComponent.html#e-cal-component-free-categories-list"><tt>e_cal_component_free_categories_list()</tt></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-categories-list"></a>e_cal_component_set_categories_list ()</h3><a class="indexterm" name="id2564999"></a><pre class="programlisting">void        e_cal_component_set_categories_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-categories-list"></a>e_cal_component_set_categories_list ()</h3><a class="indexterm" name="id2565040"></a><pre class="programlisting">void        e_cal_component_set_categories_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *categ_list);</pre><p>
 Sets the list of categories of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>categ_list</tt></i>:</span></td><td> List of strings, one for each category.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-classification"></a>e_cal_component_get_classification ()</h3><a class="indexterm" name="id2565066"></a><pre class="programlisting">void        e_cal_component_get_classification
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-classification"></a>e_cal_component_get_classification ()</h3><a class="indexterm" name="id2565108"></a><pre class="programlisting">void        e_cal_component_get_classification
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentClassification">ECalComponentClassification</a> *classif);</pre><p>
 Queries the classification of a calendar component object.  If the
@@ -580,7 +612,7 @@ E_CAL_COMPONENT_CLASS_NONE.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>classif</tt></i>:</span></td><td> Return value for the classification.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-classification"></a>e_cal_component_set_classification ()</h3><a class="indexterm" name="id2565141"></a><pre class="programlisting">void        e_cal_component_set_classification
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-classification"></a>e_cal_component_set_classification ()</h3><a class="indexterm" name="id2565182"></a><pre class="programlisting">void        e_cal_component_set_classification
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentClassification">ECalComponentClassification</a> classif);</pre><p>
 Sets the classification property of a calendar component object.  To unset
@@ -588,7 +620,7 @@ the property, specify E_CAL_COMPONENT_CLASS_NONE for <i><tt>classif</tt></i>.</p
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>classif</tt></i>:</span></td><td> Classification to use.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-comment-list"></a>e_cal_component_get_comment_list ()</h3><a class="indexterm" name="id2565213"></a><pre class="programlisting">void        e_cal_component_get_comment_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-comment-list"></a>e_cal_component_get_comment_list ()</h3><a class="indexterm" name="id2565254"></a><pre class="programlisting">void        e_cal_component_get_comment_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **text_list);</pre><p>
 Queries the comment of a calendar component object.  The comment property can
@@ -599,7 +631,7 @@ appear several times inside a calendar component, and so a list of
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> Return value for the comment properties and their parameters, as
 a list of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-text-list"><tt>e_cal_component_free_text_list()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-comment-list"></a>e_cal_component_set_comment_list ()</h3><a class="indexterm" name="id2565304"></a><pre class="programlisting">void        e_cal_component_set_comment_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-comment-list"></a>e_cal_component_set_comment_list ()</h3><a class="indexterm" name="id2565344"></a><pre class="programlisting">void        e_cal_component_set_comment_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *text_list);</pre><p>
 Sets the comment of a calendar component object.  The comment property can
@@ -608,20 +640,20 @@ appear several times inside a calendar component, and so a list of
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-completed"></a>e_cal_component_get_completed ()</h3><a class="indexterm" name="id2565388"></a><pre class="programlisting">void        e_cal_component_get_completed   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-completed"></a>e_cal_component_get_completed ()</h3><a class="indexterm" name="id2565427"></a><pre class="programlisting">void        e_cal_component_get_completed   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype **t);</pre><p>
 Queries the date at which a calendar compoment object was completed.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Return value for the completion date.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-icaltimetype"><tt>e_cal_component_free_icaltimetype()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-completed"></a>e_cal_component_set_completed ()</h3><a class="indexterm" name="id2565468"></a><pre class="programlisting">void        e_cal_component_set_completed   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-completed"></a>e_cal_component_set_completed ()</h3><a class="indexterm" name="id2565507"></a><pre class="programlisting">void        e_cal_component_set_completed   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype *t);</pre><p>
 Sets the date at which a calendar component object was completed.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Value for the completion date.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-contact-list"></a>e_cal_component_get_contact_list ()</h3><a class="indexterm" name="id2565539"></a><pre class="programlisting">void        e_cal_component_get_contact_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-contact-list"></a>e_cal_component_get_contact_list ()</h3><a class="indexterm" name="id2565578"></a><pre class="programlisting">void        e_cal_component_get_contact_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **text_list);</pre><p>
 Queries the contact of a calendar component object.  The contact property can
@@ -632,7 +664,7 @@ appear several times inside a calendar component, and so a list of
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> Return value for the contact properties and their parameters, as
 a list of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-text-list"><tt>e_cal_component_free_text_list()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-contact-list"></a>e_cal_component_set_contact_list ()</h3><a class="indexterm" name="id2565634"></a><pre class="programlisting">void        e_cal_component_set_contact_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-contact-list"></a>e_cal_component_set_contact_list ()</h3><a class="indexterm" name="id2565673"></a><pre class="programlisting">void        e_cal_component_set_contact_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *text_list);</pre><p>
 Sets the contact of a calendar component object.  The contact property can
@@ -641,7 +673,7 @@ appear several times inside a calendar component, and so a list of
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-created"></a>e_cal_component_get_created ()</h3><a class="indexterm" name="id2565717"></a><pre class="programlisting">void        e_cal_component_get_created     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-created"></a>e_cal_component_get_created ()</h3><a class="indexterm" name="id2565756"></a><pre class="programlisting">void        e_cal_component_get_created     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype **t);</pre><p>
 Queries the date in which a calendar component object was created in the
 calendar store.</p><p>
@@ -649,7 +681,7 @@ calendar store.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Return value for the creation date.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-icaltimetype"><tt>e_cal_component_free_icaltimetype()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-created"></a>e_cal_component_set_created ()</h3><a class="indexterm" name="id2565794"></a><pre class="programlisting">void        e_cal_component_set_created     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-created"></a>e_cal_component_set_created ()</h3><a class="indexterm" name="id2565834"></a><pre class="programlisting">void        e_cal_component_set_created     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype *t);</pre><p>
 Sets the date in which a calendar component object is created in the calendar
 store.  This should only be used inside a calendar store application, i.e.
@@ -657,7 +689,7 @@ not by calendar user agents.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Value for the creation date.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-description-list"></a>e_cal_component_get_description_list ()</h3><a class="indexterm" name="id2565867"></a><pre class="programlisting">void        e_cal_component_get_description_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-description-list"></a>e_cal_component_get_description_list ()</h3><a class="indexterm" name="id2565907"></a><pre class="programlisting">void        e_cal_component_get_description_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **text_list);</pre><p>
 Queries the description of a calendar component object.  Journal components
@@ -669,7 +701,7 @@ most one description.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> Return value for the description properties and their parameters,
 as a list of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-text-list"><tt>e_cal_component_free_text_list()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-description-list"></a>e_cal_component_set_description_list ()</h3><a class="indexterm" name="id2565965"></a><pre class="programlisting">void        e_cal_component_set_description_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-description-list"></a>e_cal_component_set_description_list ()</h3><a class="indexterm" name="id2566004"></a><pre class="programlisting">void        e_cal_component_set_description_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *text_list);</pre><p>
 Sets the description of a calendar component object.  Journal components may
@@ -679,27 +711,27 @@ at most one description.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> List of ECalComponentSummary structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtend"></a>e_cal_component_get_dtend ()</h3><a class="indexterm" name="id2566050"></a><pre class="programlisting">void        e_cal_component_get_dtend       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtend"></a>e_cal_component_get_dtend ()</h3><a class="indexterm" name="id2566089"></a><pre class="programlisting">void        e_cal_component_get_dtend       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Queries the date/time end of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> Return value for the date/time end.  This should be freed with the
 <a href="ECalComponent.html#e-cal-component-free-datetime"><tt>e_cal_component_free_datetime()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtend"></a>e_cal_component_set_dtend ()</h3><a class="indexterm" name="id2566126"></a><pre class="programlisting">void        e_cal_component_set_dtend       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtend"></a>e_cal_component_set_dtend ()</h3><a class="indexterm" name="id2566165"></a><pre class="programlisting">void        e_cal_component_set_dtend       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Sets the date/time end property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> End date/time.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtstamp"></a>e_cal_component_get_dtstamp ()</h3><a class="indexterm" name="id2566194"></a><pre class="programlisting">void        e_cal_component_get_dtstamp     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtstamp"></a>e_cal_component_get_dtstamp ()</h3><a class="indexterm" name="id2566233"></a><pre class="programlisting">void        e_cal_component_get_dtstamp     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype *t);</pre><p>
 Queries the date/timestamp property of a calendar component object, which is
 the last time at which the object was modified by a calendar user agent.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> A value for the date/timestamp.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtstamp"></a>e_cal_component_set_dtstamp ()</h3><a class="indexterm" name="id2566264"></a><pre class="programlisting">void        e_cal_component_set_dtstamp     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtstamp"></a>e_cal_component_set_dtstamp ()</h3><a class="indexterm" name="id2566303"></a><pre class="programlisting">void        e_cal_component_set_dtstamp     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype *t);</pre><p>
 Sets the date/timestamp of a calendar component object.  This should be
 called whenever a calendar user agent makes a change to a component's
@@ -707,33 +739,33 @@ properties.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Date/timestamp value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtstart"></a>e_cal_component_get_dtstart ()</h3><a class="indexterm" name="id2566333"></a><pre class="programlisting">void        e_cal_component_get_dtstart     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-dtstart"></a>e_cal_component_get_dtstart ()</h3><a class="indexterm" name="id2566372"></a><pre class="programlisting">void        e_cal_component_get_dtstart     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Queries the date/time start of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> Return value for the date/time start.  This should be freed with the
 <a href="ECalComponent.html#e-cal-component-free-datetime"><tt>e_cal_component_free_datetime()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtstart"></a>e_cal_component_set_dtstart ()</h3><a class="indexterm" name="id2566410"></a><pre class="programlisting">void        e_cal_component_set_dtstart     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-dtstart"></a>e_cal_component_set_dtstart ()</h3><a class="indexterm" name="id2566449"></a><pre class="programlisting">void        e_cal_component_set_dtstart     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Sets the date/time start property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> Start date/time.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-due"></a>e_cal_component_get_due ()</h3><a class="indexterm" name="id2566477"></a><pre class="programlisting">void        e_cal_component_get_due         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-due"></a>e_cal_component_get_due ()</h3><a class="indexterm" name="id2566516"></a><pre class="programlisting">void        e_cal_component_get_due         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Queries the due date/time of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> Return value for the due date/time.  This should be freed with the
 <a href="ECalComponent.html#e-cal-component-free-datetime"><tt>e_cal_component_free_datetime()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-due"></a>e_cal_component_set_due ()</h3><a class="indexterm" name="id2566553"></a><pre class="programlisting">void        e_cal_component_set_due         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-due"></a>e_cal_component_set_due ()</h3><a class="indexterm" name="id2566592"></a><pre class="programlisting">void        e_cal_component_set_due         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Sets the due date/time property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> End date/time.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exdate-list"></a>e_cal_component_get_exdate_list ()</h3><a class="indexterm" name="id2566622"></a><pre class="programlisting">void        e_cal_component_get_exdate_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exdate-list"></a>e_cal_component_get_exdate_list ()</h3><a class="indexterm" name="id2566662"></a><pre class="programlisting">void        e_cal_component_get_exdate_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **exdate_list);</pre><p>
 Queries the list of exception date properties in a calendar component object.</p><p>
 
@@ -741,19 +773,19 @@ Queries the list of exception date properties in a calendar component object.</p
 </td></tr><tr><td><span class="term"><i><tt>exdate_list</tt></i>:</span></td><td> Return value for the list of exception dates, as a list of
 <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> structures.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-exdate-list"><tt>e_cal_component_free_exdate_list()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-exdate-list"></a>e_cal_component_set_exdate_list ()</h3><a class="indexterm" name="id2566709"></a><pre class="programlisting">void        e_cal_component_set_exdate_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-exdate-list"></a>e_cal_component_set_exdate_list ()</h3><a class="indexterm" name="id2566748"></a><pre class="programlisting">void        e_cal_component_set_exdate_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *exdate_list);</pre><p>
 Sets the list of exception dates in a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>exdate_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exdates"></a>e_cal_component_has_exdates ()</h3><a class="indexterm" name="id2566784"></a><pre class="programlisting">gboolean    e_cal_component_has_exdates     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exdates"></a>e_cal_component_has_exdates ()</h3><a class="indexterm" name="id2566823"></a><pre class="programlisting">gboolean    e_cal_component_has_exdates     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any exception dates defined
 for it.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has exception dates, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exrule-list"></a>e_cal_component_get_exrule_list ()</h3><a class="indexterm" name="id2566847"></a><pre class="programlisting">void        e_cal_component_get_exrule_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exrule-list"></a>e_cal_component_get_exrule_list ()</h3><a class="indexterm" name="id2566886"></a><pre class="programlisting">void        e_cal_component_get_exrule_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **recur_list);</pre><p>
 Queries the list of exception rule properties of a calendar component
 object.</p><p>
@@ -762,45 +794,45 @@ object.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> List of exception rules as struct icalrecurrencetype
 structures.  This should be freed using the <a href="ECalComponent.html#e-cal-component-free-recur-list"><tt>e_cal_component_free_recur_list()</tt></a>
 function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exrule-property-list"></a>e_cal_component_get_exrule_property_list ()</h3><a class="indexterm" name="id2566933"></a><pre class="programlisting">void        e_cal_component_get_exrule_property_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-exrule-property-list"></a>e_cal_component_get_exrule_property_list ()</h3><a class="indexterm" name="id2566973"></a><pre class="programlisting">void        e_cal_component_get_exrule_property_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **recur_list);</pre><p>
 Queries the list of exception rule properties of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> Returns a list of exception rule properties.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-exrule-list"></a>e_cal_component_set_exrule_list ()</h3><a class="indexterm" name="id2567006"></a><pre class="programlisting">void        e_cal_component_set_exrule_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-exrule-list"></a>e_cal_component_set_exrule_list ()</h3><a class="indexterm" name="id2567045"></a><pre class="programlisting">void        e_cal_component_set_exrule_list (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *recur_list);</pre><p>
 Sets the list of exception rules in a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> List of struct icalrecurrencetype structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exrules"></a>e_cal_component_has_exrules ()</h3><a class="indexterm" name="id2567081"></a><pre class="programlisting">gboolean    e_cal_component_has_exrules     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exrules"></a>e_cal_component_has_exrules ()</h3><a class="indexterm" name="id2567120"></a><pre class="programlisting">gboolean    e_cal_component_has_exrules     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any exception rules defined
 for it.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has exception rules, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exceptions"></a>e_cal_component_has_exceptions ()</h3><a class="indexterm" name="id2567144"></a><pre class="programlisting">gboolean    e_cal_component_has_exceptions  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-exceptions"></a>e_cal_component_has_exceptions ()</h3><a class="indexterm" name="id2567183"></a><pre class="programlisting">gboolean    e_cal_component_has_exceptions  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any exception dates
 or exception rules.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has exceptions, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-geo"></a>e_cal_component_get_geo ()</h3><a class="indexterm" name="id2567204"></a><pre class="programlisting">void        e_cal_component_get_geo         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-geo"></a>e_cal_component_get_geo ()</h3><a class="indexterm" name="id2567244"></a><pre class="programlisting">void        e_cal_component_get_geo         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icalgeotype **geo);</pre><p>
 Sets the geographic position property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>geo</tt></i>:</span></td><td> Return value for the geographic position property.  This should be
 freed using the <a href="ECalComponent.html#e-cal-component-free-geo"><tt>e_cal_component_free_geo()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-geo"></a>e_cal_component_set_geo ()</h3><a class="indexterm" name="id2567280"></a><pre class="programlisting">void        e_cal_component_set_geo         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-geo"></a>e_cal_component_set_geo ()</h3><a class="indexterm" name="id2567319"></a><pre class="programlisting">void        e_cal_component_set_geo         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icalgeotype *geo);</pre><p>
 Sets the geographic position property on a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>geo</tt></i>:</span></td><td> Value for the geographic position property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-last-modified"></a>e_cal_component_get_last_modified ()</h3><a class="indexterm" name="id2567351"></a><pre class="programlisting">void        e_cal_component_get_last_modified
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-last-modified"></a>e_cal_component_get_last_modified ()</h3><a class="indexterm" name="id2567391"></a><pre class="programlisting">void        e_cal_component_get_last_modified
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype **t);</pre><p>
 Queries the time at which a calendar component object was last modified in
@@ -808,7 +840,7 @@ the calendar store.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Return value for the last modified time value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-last-modified"></a>e_cal_component_set_last_modified ()</h3><a class="indexterm" name="id2567424"></a><pre class="programlisting">void        e_cal_component_set_last_modified
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-last-modified"></a>e_cal_component_set_last_modified ()</h3><a class="indexterm" name="id2567464"></a><pre class="programlisting">void        e_cal_component_set_last_modified
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              struct icaltimetype *t);</pre><p>
 Sets the time at which a calendar component object was last stored in the
@@ -816,62 +848,62 @@ calendar store.  This should not be called by plain calendar user agents.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> Value for the last time modified.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-organizer"></a>e_cal_component_get_organizer ()</h3><a class="indexterm" name="id2567497"></a><pre class="programlisting">void        e_cal_component_get_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-organizer"></a>e_cal_component_get_organizer ()</h3><a class="indexterm" name="id2567536"></a><pre class="programlisting">void        e_cal_component_get_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentOrganizer">ECalComponentOrganizer</a> *organizer);</pre><p>
 Queries the organizer property of a calendar component object</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>  A calendar component object
 </td></tr><tr><td><span class="term"><i><tt>organizer</tt></i>:</span></td><td> A value for the organizer
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-organizer"></a>e_cal_component_set_organizer ()</h3><a class="indexterm" name="id2567568"></a><pre class="programlisting">void        e_cal_component_set_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-organizer"></a>e_cal_component_set_organizer ()</h3><a class="indexterm" name="id2567607"></a><pre class="programlisting">void        e_cal_component_set_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentOrganizer">ECalComponentOrganizer</a> *organizer);</pre><p>
 Sets the organizer of a calendar component object</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>  A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>organizer</tt></i>:</span></td><td> Value for the organizer property
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-organizer"></a>e_cal_component_has_organizer ()</h3><a class="indexterm" name="id2567638"></a><pre class="programlisting">gboolean    e_cal_component_has_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-organizer"></a>e_cal_component_has_organizer ()</h3><a class="indexterm" name="id2567678"></a><pre class="programlisting">gboolean    e_cal_component_has_organizer   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 </p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> 
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-percent"></a>e_cal_component_get_percent ()</h3><a class="indexterm" name="id2567696"></a><pre class="programlisting">void        e_cal_component_get_percent     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-percent"></a>e_cal_component_get_percent ()</h3><a class="indexterm" name="id2567736"></a><pre class="programlisting">void        e_cal_component_get_percent     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int **percent);</pre><p>
 Queries the percent-complete property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>percent</tt></i>:</span></td><td> Return value for the percent-complete property.  This should be
 freed using the <a href="ECalComponent.html#e-cal-component-free-percent"><tt>e_cal_component_free_percent()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-percent"></a>e_cal_component_set_percent ()</h3><a class="indexterm" name="id2567773"></a><pre class="programlisting">void        e_cal_component_set_percent     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-percent"></a>e_cal_component_set_percent ()</h3><a class="indexterm" name="id2567813"></a><pre class="programlisting">void        e_cal_component_set_percent     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int *percent);</pre><p>
 Sets the percent-complete property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>percent</tt></i>:</span></td><td> Value for the percent-complete property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-priority"></a>e_cal_component_get_priority ()</h3><a class="indexterm" name="id2567844"></a><pre class="programlisting">void        e_cal_component_get_priority    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-priority"></a>e_cal_component_get_priority ()</h3><a class="indexterm" name="id2567883"></a><pre class="programlisting">void        e_cal_component_get_priority    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int **priority);</pre><p>
 Queries the priority property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>priority</tt></i>:</span></td><td> Return value for the priority property.  This should be freed using
 the <a href="ECalComponent.html#e-cal-component-free-priority"><tt>e_cal_component_free_priority()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-priority"></a>e_cal_component_set_priority ()</h3><a class="indexterm" name="id2567923"></a><pre class="programlisting">void        e_cal_component_set_priority    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-priority"></a>e_cal_component_set_priority ()</h3><a class="indexterm" name="id2567963"></a><pre class="programlisting">void        e_cal_component_set_priority    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int *priority);</pre><p>
 Sets the priority property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>priority</tt></i>:</span></td><td> Value for the priority property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-recurid"></a>e_cal_component_get_recurid ()</h3><a class="indexterm" name="id2568009"></a><pre class="programlisting">void        e_cal_component_get_recurid     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-recurid"></a>e_cal_component_get_recurid ()</h3><a class="indexterm" name="id2568047"></a><pre class="programlisting">void        e_cal_component_get_recurid     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentRange">ECalComponentRange</a> *recur_id);</pre><p>
 Queries the recurrence id property of a calendar component object</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_id</tt></i>:</span></td><td> Return value for the recurrence id property
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-recurid"></a>e_cal_component_set_recurid ()</h3><a class="indexterm" name="id2568096"></a><pre class="programlisting">void        e_cal_component_set_recurid     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-recurid"></a>e_cal_component_set_recurid ()</h3><a class="indexterm" name="id2568134"></a><pre class="programlisting">void        e_cal_component_set_recurid     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentRange">ECalComponentRange</a> *recur_id);</pre><p>
 Sets the recurrence id property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_id</tt></i>:</span></td><td> Value for the recurrence id property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rdate-list"></a>e_cal_component_get_rdate_list ()</h3><a class="indexterm" name="id2568182"></a><pre class="programlisting">void        e_cal_component_get_rdate_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rdate-list"></a>e_cal_component_get_rdate_list ()</h3><a class="indexterm" name="id2568220"></a><pre class="programlisting">void        e_cal_component_get_rdate_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **period_list);</pre><p>
 Queries the list of recurrence date properties in a calendar component
 object.</p><p>
@@ -880,19 +912,19 @@ object.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>period_list</tt></i>:</span></td><td> Return value for the list of recurrence dates, as a list of
 <a href="ECalComponent.html#ECalComponentPeriod">ECalComponentPeriod</a> structures.  This should be freed using the
 <a href="ECalComponent.html#e-cal-component-free-period-list"><tt>e_cal_component_free_period_list()</tt></a> function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-rdate-list"></a>e_cal_component_set_rdate_list ()</h3><a class="indexterm" name="id2568286"></a><pre class="programlisting">void        e_cal_component_set_rdate_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-rdate-list"></a>e_cal_component_set_rdate_list ()</h3><a class="indexterm" name="id2568324"></a><pre class="programlisting">void        e_cal_component_set_rdate_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *period_list);</pre><p>
 Sets the list of recurrence dates in a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>period_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentPeriod">ECalComponentPeriod</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-rdates"></a>e_cal_component_has_rdates ()</h3><a class="indexterm" name="id2568381"></a><pre class="programlisting">gboolean    e_cal_component_has_rdates      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-rdates"></a>e_cal_component_has_rdates ()</h3><a class="indexterm" name="id2568419"></a><pre class="programlisting">gboolean    e_cal_component_has_rdates      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any recurrence dates defined
 for it.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has recurrence dates, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rrule-list"></a>e_cal_component_get_rrule_list ()</h3><a class="indexterm" name="id2568458"></a><pre class="programlisting">void        e_cal_component_get_rrule_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rrule-list"></a>e_cal_component_get_rrule_list ()</h3><a class="indexterm" name="id2568496"></a><pre class="programlisting">void        e_cal_component_get_rrule_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **recur_list);</pre><p>
 Queries the list of recurrence rule properties of a calendar component
 object.</p><p>
@@ -901,52 +933,52 @@ object.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> List of recurrence rules as struct icalrecurrencetype
 structures.  This should be freed using the <a href="ECalComponent.html#e-cal-component-free-recur-list"><tt>e_cal_component_free_recur_list()</tt></a>
 function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rrule-property-list"></a>e_cal_component_get_rrule_property_list ()</h3><a class="indexterm" name="id2568562"></a><pre class="programlisting">void        e_cal_component_get_rrule_property_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-rrule-property-list"></a>e_cal_component_get_rrule_property_list ()</h3><a class="indexterm" name="id2568601"></a><pre class="programlisting">void        e_cal_component_get_rrule_property_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **recur_list);</pre><p>
 Queries a list of recurrence rule properties of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> Returns a list of recurrence rule properties.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-rrule-list"></a>e_cal_component_set_rrule_list ()</h3><a class="indexterm" name="id2568650"></a><pre class="programlisting">void        e_cal_component_set_rrule_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-rrule-list"></a>e_cal_component_set_rrule_list ()</h3><a class="indexterm" name="id2568688"></a><pre class="programlisting">void        e_cal_component_set_rrule_list  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *recur_list);</pre><p>
 Sets the list of recurrence rules in a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> List of struct icalrecurrencetype structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-rrules"></a>e_cal_component_has_rrules ()</h3><a class="indexterm" name="id2568745"></a><pre class="programlisting">gboolean    e_cal_component_has_rrules      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-rrules"></a>e_cal_component_has_rrules ()</h3><a class="indexterm" name="id2568783"></a><pre class="programlisting">gboolean    e_cal_component_has_rrules      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any recurrence rules defined
 for it.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has recurrence rules, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-recurrences"></a>e_cal_component_has_recurrences ()</h3><a class="indexterm" name="id2568821"></a><pre class="programlisting">gboolean    e_cal_component_has_recurrences (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-recurrences"></a>e_cal_component_has_recurrences ()</h3><a class="indexterm" name="id2568859"></a><pre class="programlisting">gboolean    e_cal_component_has_recurrences (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Queries whether a calendar component object has any recurrence dates or
 recurrence rules.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has recurrences, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-simple-recurrence"></a>e_cal_component_has_simple_recurrence ()</h3><a class="indexterm" name="id2568899"></a><pre class="programlisting">gboolean    e_cal_component_has_simple_recurrence
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-simple-recurrence"></a>e_cal_component_has_simple_recurrence ()</h3><a class="indexterm" name="id2568937"></a><pre class="programlisting">gboolean    e_cal_component_has_simple_recurrence
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-is-instance"></a>e_cal_component_is_instance ()</h3><a class="indexterm" name="id2568970"></a><pre class="programlisting">gboolean    e_cal_component_is_instance     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-is-instance"></a>e_cal_component_is_instance ()</h3><a class="indexterm" name="id2569008"></a><pre class="programlisting">gboolean    e_cal_component_is_instance     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-sequence"></a>e_cal_component_get_sequence ()</h3><a class="indexterm" name="id2569040"></a><pre class="programlisting">void        e_cal_component_get_sequence    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-sequence"></a>e_cal_component_get_sequence ()</h3><a class="indexterm" name="id2569078"></a><pre class="programlisting">void        e_cal_component_get_sequence    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int **sequence);</pre><p>
 Queries the sequence number of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>sequence</tt></i>:</span></td><td> Return value for the sequence number.  This should be freed using
 <a href="ECalComponent.html#e-cal-component-free-sequence"><tt>e_cal_component_free_sequence()</tt></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-sequence"></a>e_cal_component_set_sequence ()</h3><a class="indexterm" name="id2569136"></a><pre class="programlisting">void        e_cal_component_set_sequence    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-sequence"></a>e_cal_component_set_sequence ()</h3><a class="indexterm" name="id2569174"></a><pre class="programlisting">void        e_cal_component_set_sequence    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              int *sequence);</pre><p>
 Sets the sequence number of a calendar component object.  Normally this
 function should not be called, since the sequence number is incremented
@@ -954,59 +986,59 @@ automatically at the proper times.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>sequence</tt></i>:</span></td><td> Sequence number value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-status"></a>e_cal_component_get_status ()</h3><a class="indexterm" name="id2569224"></a><pre class="programlisting">void        e_cal_component_get_status      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-status"></a>e_cal_component_get_status ()</h3><a class="indexterm" name="id2569263"></a><pre class="programlisting">void        e_cal_component_get_status      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              icalproperty_status *status);</pre><p>
 Queries the status property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>status</tt></i>:</span></td><td> Return value for the status value.  It is set to ICAL_STATUS_NONE
 if the component has no status property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-status"></a>e_cal_component_set_status ()</h3><a class="indexterm" name="id2569319"></a><pre class="programlisting">void        e_cal_component_set_status      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-status"></a>e_cal_component_set_status ()</h3><a class="indexterm" name="id2569358"></a><pre class="programlisting">void        e_cal_component_set_status      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              icalproperty_status status);</pre><p>
 Sets the status property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>status</tt></i>:</span></td><td> Status value.  You should use ICAL_STATUS_NONE if you want to unset
 this property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-summary"></a>e_cal_component_get_summary ()</h3><a class="indexterm" name="id2569414"></a><pre class="programlisting">void        e_cal_component_get_summary     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-summary"></a>e_cal_component_get_summary ()</h3><a class="indexterm" name="id2569453"></a><pre class="programlisting">void        e_cal_component_get_summary     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> *summary);</pre><p>
 Queries the summary of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>summary</tt></i>:</span></td><td> Return value for the summary property and its parameters.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-summary"></a>e_cal_component_set_summary ()</h3><a class="indexterm" name="id2569501"></a><pre class="programlisting">void        e_cal_component_set_summary     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-summary"></a>e_cal_component_set_summary ()</h3><a class="indexterm" name="id2569539"></a><pre class="programlisting">void        e_cal_component_set_summary     (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> *summary);</pre><p>
 Sets the summary of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>summary</tt></i>:</span></td><td> Summary property and its parameters.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-transparency"></a>e_cal_component_get_transparency ()</h3><a class="indexterm" name="id2569586"></a><pre class="programlisting">void        e_cal_component_get_transparency
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-transparency"></a>e_cal_component_get_transparency ()</h3><a class="indexterm" name="id2569624"></a><pre class="programlisting">void        e_cal_component_get_transparency
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentTransparency">ECalComponentTransparency</a> *transp);</pre><p>
 Queries the time transparency of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>transp</tt></i>:</span></td><td> Return value for the time transparency.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-transparency"></a>e_cal_component_set_transparency ()</h3><a class="indexterm" name="id2569674"></a><pre class="programlisting">void        e_cal_component_set_transparency
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-transparency"></a>e_cal_component_set_transparency ()</h3><a class="indexterm" name="id2569712"></a><pre class="programlisting">void        e_cal_component_set_transparency
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentTransparency">ECalComponentTransparency</a> transp);</pre><p>
 Sets the time transparency of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>transp</tt></i>:</span></td><td> Time transparency value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-url"></a>e_cal_component_get_url ()</h3><a class="indexterm" name="id2569760"></a><pre class="programlisting">void        e_cal_component_get_url         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-url"></a>e_cal_component_get_url ()</h3><a class="indexterm" name="id2569799"></a><pre class="programlisting">void        e_cal_component_get_url         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char **url);</pre><p>
 Queries the uniform resource locator property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>url</tt></i>:</span></td><td> Return value for the URL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-url"></a>e_cal_component_set_url ()</h3><a class="indexterm" name="id2569846"></a><pre class="programlisting">void        e_cal_component_set_url         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-url"></a>e_cal_component_set_url ()</h3><a class="indexterm" name="id2569884"></a><pre class="programlisting">void        e_cal_component_set_url         (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *url);</pre><p>
 Sets the uniform resource locator property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>url</tt></i>:</span></td><td> URL value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-attendee-list"></a>e_cal_component_get_attendee_list ()</h3><a class="indexterm" name="id2569933"></a><pre class="programlisting">void        e_cal_component_get_attendee_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-attendee-list"></a>e_cal_component_get_attendee_list ()</h3><a class="indexterm" name="id2569971"></a><pre class="programlisting">void        e_cal_component_get_attendee_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList **attendee_list);</pre><p>
 Queries the attendee properties of the calendar component object</p><p>
@@ -1015,32 +1047,32 @@ Queries the attendee properties of the calendar component object</p><p>
 </td></tr><tr><td><span class="term"><i><tt>attendee_list</tt></i>:</span></td><td> Return value for the attendee property.
 This should be freed using the <a href="ECalComponent.html#e-cal-component-free-attendee-list"><tt>e_cal_component_free_attendee_list()</tt></a>
 function.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-attendee-list"></a>e_cal_component_set_attendee_list ()</h3><a class="indexterm" name="id2570030"></a><pre class="programlisting">void        e_cal_component_set_attendee_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-attendee-list"></a>e_cal_component_set_attendee_list ()</h3><a class="indexterm" name="id2570068"></a><pre class="programlisting">void        e_cal_component_set_attendee_list
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              GSList *attendee_list);</pre><p>
 Sets the attendees of a calendar component object</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object. 
 </td></tr><tr><td><span class="term"><i><tt>attendee_list</tt></i>:</span></td><td> Values for attendee properties
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-attendees"></a>e_cal_component_has_attendees ()</h3><a class="indexterm" name="id2570116"></a><pre class="programlisting">gboolean    e_cal_component_has_attendees   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-attendees"></a>e_cal_component_has_attendees ()</h3><a class="indexterm" name="id2570154"></a><pre class="programlisting">gboolean    e_cal_component_has_attendees   (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-location"></a>e_cal_component_get_location ()</h3><a class="indexterm" name="id2570186"></a><pre class="programlisting">void        e_cal_component_get_location    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-location"></a>e_cal_component_get_location ()</h3><a class="indexterm" name="id2570224"></a><pre class="programlisting">void        e_cal_component_get_location    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char **location);</pre><p>
 Queries the location property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object
 </td></tr><tr><td><span class="term"><i><tt>location</tt></i>:</span></td><td> Return value for the location.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-location"></a>e_cal_component_set_location ()</h3><a class="indexterm" name="id2570272"></a><pre class="programlisting">void        e_cal_component_set_location    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-set-location"></a>e_cal_component_set_location ()</h3><a class="indexterm" name="id2570311"></a><pre class="programlisting">void        e_cal_component_set_location    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *location);</pre><p>
 Sets the location property of a calendar component object.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>location</tt></i>:</span></td><td> Location value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-event-dates-match"></a>e_cal_component_event_dates_match ()</h3><a class="indexterm" name="id2570360"></a><pre class="programlisting">gboolean    e_cal_component_event_dates_match
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-event-dates-match"></a>e_cal_component_event_dates_match ()</h3><a class="indexterm" name="id2570398"></a><pre class="programlisting">gboolean    e_cal_component_event_dates_match
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp1,
                                              <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp2);</pre><p>
 Checks if the DTSTART and DTEND properties of the 2 components match.
@@ -1050,74 +1082,74 @@ taken into account here.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp1</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><i><tt>comp2</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the DTSTART and DTEND properties of the 2 components match.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-categories-list"></a>e_cal_component_free_categories_list ()</h3><a class="indexterm" name="id2570462"></a><pre class="programlisting">void        e_cal_component_free_categories_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-categories-list"></a>e_cal_component_free_categories_list ()</h3><a class="indexterm" name="id2570500"></a><pre class="programlisting">void        e_cal_component_free_categories_list
                                             (GSList *categ_list);</pre><p>
 Frees a list of category strings.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>categ_list</tt></i>:</span></td><td> List of category strings.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-datetime"></a>e_cal_component_free_datetime ()</h3><a class="indexterm" name="id2570525"></a><pre class="programlisting">void        e_cal_component_free_datetime   (<a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-datetime"></a>e_cal_component_free_datetime ()</h3><a class="indexterm" name="id2570563"></a><pre class="programlisting">void        e_cal_component_free_datetime   (<a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> *dt);</pre><p>
 Frees a date/time structure.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td> A date/time structure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-range"></a>e_cal_component_free_range ()</h3><a class="indexterm" name="id2570589"></a><pre class="programlisting">void        e_cal_component_free_range      (<a href="ECalComponent.html#ECalComponentRange">ECalComponentRange</a> *range);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-range"></a>e_cal_component_free_range ()</h3><a class="indexterm" name="id2570627"></a><pre class="programlisting">void        e_cal_component_free_range      (<a href="ECalComponent.html#ECalComponentRange">ECalComponentRange</a> *range);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>range</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-exdate-list"></a>e_cal_component_free_exdate_list ()</h3><a class="indexterm" name="id2570646"></a><pre class="programlisting">void        e_cal_component_free_exdate_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-exdate-list"></a>e_cal_component_free_exdate_list ()</h3><a class="indexterm" name="id2570684"></a><pre class="programlisting">void        e_cal_component_free_exdate_list
                                             (GSList *exdate_list);</pre><p>
 Frees a list of <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> structures as returned by the
 <a href="ECalComponent.html#e-cal-component-get-exdate-list"><tt>e_cal_component_get_exdate_list()</tt></a> function.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>exdate_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentDateTime">ECalComponentDateTime</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-geo"></a>e_cal_component_free_geo ()</h3><a class="indexterm" name="id2570735"></a><pre class="programlisting">void        e_cal_component_free_geo        (struct icalgeotype *geo);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-geo"></a>e_cal_component_free_geo ()</h3><a class="indexterm" name="id2570773"></a><pre class="programlisting">void        e_cal_component_free_geo        (struct icalgeotype *geo);</pre><p>
 Frees a struct icalgeotype structure as returned by the calendar component
 functions.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>geo</tt></i>:</span></td><td> An icalgeotype structure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-icaltimetype"></a>e_cal_component_free_icaltimetype ()</h3><a class="indexterm" name="id2570814"></a><pre class="programlisting">void        e_cal_component_free_icaltimetype
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-icaltimetype"></a>e_cal_component_free_icaltimetype ()</h3><a class="indexterm" name="id2570852"></a><pre class="programlisting">void        e_cal_component_free_icaltimetype
                                             (struct icaltimetype *t);</pre><p>
 Frees a struct icaltimetype value as returned by the calendar component
 functions.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>t</tt></i>:</span></td><td> An icaltimetype structure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-percent"></a>e_cal_component_free_percent ()</h3><a class="indexterm" name="id2570894"></a><pre class="programlisting">void        e_cal_component_free_percent    (int *percent);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-percent"></a>e_cal_component_free_percent ()</h3><a class="indexterm" name="id2570932"></a><pre class="programlisting">void        e_cal_component_free_percent    (int *percent);</pre><p>
 Frees a percent value as returned by the <a href="ECalComponent.html#e-cal-component-get-percent"><tt>e_cal_component_get_percent()</tt></a>
 function.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>percent</tt></i>:</span></td><td> Percent value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-priority"></a>e_cal_component_free_priority ()</h3><a class="indexterm" name="id2570965"></a><pre class="programlisting">void        e_cal_component_free_priority   (int *priority);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-priority"></a>e_cal_component_free_priority ()</h3><a class="indexterm" name="id2571004"></a><pre class="programlisting">void        e_cal_component_free_priority   (int *priority);</pre><p>
 Frees a priority value as returned by the <a href="ECalComponent.html#e-cal-component-get-priority"><tt>e_cal_component_get_priority()</tt></a>
 function.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>priority</tt></i>:</span></td><td> Priority value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-period-list"></a>e_cal_component_free_period_list ()</h3><a class="indexterm" name="id2571037"></a><pre class="programlisting">void        e_cal_component_free_period_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-period-list"></a>e_cal_component_free_period_list ()</h3><a class="indexterm" name="id2571075"></a><pre class="programlisting">void        e_cal_component_free_period_list
                                             (GSList *period_list);</pre><p>
 Frees a list of <a href="ECalComponent.html#ECalComponentPeriod">ECalComponentPeriod</a> structures.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>period_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentPeriod">ECalComponentPeriod</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-recur-list"></a>e_cal_component_free_recur_list ()</h3><a class="indexterm" name="id2571116"></a><pre class="programlisting">void        e_cal_component_free_recur_list (GSList *recur_list);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-recur-list"></a>e_cal_component_free_recur_list ()</h3><a class="indexterm" name="id2571155"></a><pre class="programlisting">void        e_cal_component_free_recur_list (GSList *recur_list);</pre><p>
 Frees a list of struct icalrecurrencetype structures.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>recur_list</tt></i>:</span></td><td> List of struct icalrecurrencetype structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-sequence"></a>e_cal_component_free_sequence ()</h3><a class="indexterm" name="id2571196"></a><pre class="programlisting">void        e_cal_component_free_sequence   (int *sequence);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-sequence"></a>e_cal_component_free_sequence ()</h3><a class="indexterm" name="id2571234"></a><pre class="programlisting">void        e_cal_component_free_sequence   (int *sequence);</pre><p>
 Frees a sequence number value.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>sequence</tt></i>:</span></td><td> Sequence number value.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-text-list"></a>e_cal_component_free_text_list ()</h3><a class="indexterm" name="id2571259"></a><pre class="programlisting">void        e_cal_component_free_text_list  (GSList *text_list);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-text-list"></a>e_cal_component_free_text_list ()</h3><a class="indexterm" name="id2571297"></a><pre class="programlisting">void        e_cal_component_free_text_list  (GSList *text_list);</pre><p>
 Frees a list of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.  This function should only be
 used to free lists of text values as returned by the other getter functions
 of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>text_list</tt></i>:</span></td><td> List of <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> structures.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-attendee-list"></a>e_cal_component_free_attendee_list ()</h3><a class="indexterm" name="id2571349"></a><pre class="programlisting">void        e_cal_component_free_attendee_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-free-attendee-list"></a>e_cal_component_free_attendee_list ()</h3><a class="indexterm" name="id2571387"></a><pre class="programlisting">void        e_cal_component_free_attendee_list
                                             (GSList *attendee_list);</pre><p>
 </p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>attendee_list</tt></i>:</span></td><td> 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarm"></a>struct ECalComponentAlarm</h3><a class="indexterm" name="id2571411"></a><pre class="programlisting">struct ECalComponentAlarm;</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarm"></a>struct ECalComponentAlarm</h3><a class="indexterm" name="id2571449"></a><pre class="programlisting">struct ECalComponentAlarm;</pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmInstance"></a>struct ECalComponentAlarmInstance</h3><a class="indexterm" name="id2571437"></a><pre class="programlisting">struct ECalComponentAlarmInstance {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmInstance"></a>struct ECalComponentAlarmInstance</h3><a class="indexterm" name="id2571475"></a><pre class="programlisting">struct ECalComponentAlarmInstance {
 
 	/* UID of the alarm that triggered */
 	const char *auid;
@@ -1131,7 +1163,7 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarms"></a>struct ECalComponentAlarms</h3><a class="indexterm" name="id2571466"></a><pre class="programlisting">struct ECalComponentAlarms {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarms"></a>struct ECalComponentAlarms</h3><a class="indexterm" name="id2571504"></a><pre class="programlisting">struct ECalComponentAlarms {
 
 	/* The actual component */
 	ECalComponent *comp;
@@ -1141,7 +1173,7 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmAction"></a>enum ECalComponentAlarmAction</h3><a class="indexterm" name="id2571493"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmAction"></a>enum ECalComponentAlarmAction</h3><a class="indexterm" name="id2571531"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_ALARM_NONE,
 	E_CAL_COMPONENT_ALARM_AUDIO,
 	E_CAL_COMPONENT_ALARM_DISPLAY,
@@ -1151,7 +1183,7 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 } ECalComponentAlarmAction;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmTriggerType"></a>enum ECalComponentAlarmTriggerType</h3><a class="indexterm" name="id2571522"></a><pre class="programlisting">typedef enum {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmTriggerType"></a>enum ECalComponentAlarmTriggerType</h3><a class="indexterm" name="id2571560"></a><pre class="programlisting">typedef enum {
 	E_CAL_COMPONENT_ALARM_TRIGGER_NONE,
 	E_CAL_COMPONENT_ALARM_TRIGGER_RELATIVE_START,
 	E_CAL_COMPONENT_ALARM_TRIGGER_RELATIVE_END,
@@ -1159,7 +1191,7 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 } ECalComponentAlarmTriggerType;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmTrigger"></a>struct ECalComponentAlarmTrigger</h3><a class="indexterm" name="id2571551"></a><pre class="programlisting">struct ECalComponentAlarmTrigger {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmTrigger"></a>struct ECalComponentAlarmTrigger</h3><a class="indexterm" name="id2571589"></a><pre class="programlisting">struct ECalComponentAlarmTrigger {
 
 	ECalComponentAlarmTriggerType type;
 
@@ -1170,7 +1202,7 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmRepeat"></a>struct ECalComponentAlarmRepeat</h3><a class="indexterm" name="id2571579"></a><pre class="programlisting">struct ECalComponentAlarmRepeat {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ECalComponentAlarmRepeat"></a>struct ECalComponentAlarmRepeat</h3><a class="indexterm" name="id2571617"></a><pre class="programlisting">struct ECalComponentAlarmRepeat {
 
 	/* Number of extra repetitions, zero for none */
 	int repetitions;
@@ -1180,12 +1212,12 @@ of <a href="ECalComponent.html" title="ECalComponent">ECalComponent</a>.</p><p>
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-alarms"></a>e_cal_component_has_alarms ()</h3><a class="indexterm" name="id2571606"></a><pre class="programlisting">gboolean    e_cal_component_has_alarms      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-has-alarms"></a>e_cal_component_has_alarms ()</h3><a class="indexterm" name="id2571645"></a><pre class="programlisting">gboolean    e_cal_component_has_alarms      (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Checks whether the component has any alarms.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component object.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the component has any alarms.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-add-alarm"></a>e_cal_component_add_alarm ()</h3><a class="indexterm" name="id2571682"></a><pre class="programlisting">void        e_cal_component_add_alarm       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-add-alarm"></a>e_cal_component_add_alarm ()</h3><a class="indexterm" name="id2571720"></a><pre class="programlisting">void        e_cal_component_add_alarm       (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              <a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 Adds an alarm subcomponent to a calendar component.  You should have created
 the <i><tt>alarm</tt></i> by using <a href="ECalComponent.html#e-cal-component-alarm-new"><tt>e_cal_component_alarm_new()</tt></a>; it is invalid to use a
@@ -1196,7 +1228,7 @@ internal structures may change and you should get rid of it by using
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component.
 </td></tr><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-remove-alarm"></a>e_cal_component_remove_alarm ()</h3><a class="indexterm" name="id2571812"></a><pre class="programlisting">void        e_cal_component_remove_alarm    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-remove-alarm"></a>e_cal_component_remove_alarm ()</h3><a class="indexterm" name="id2571850"></a><pre class="programlisting">void        e_cal_component_remove_alarm    (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *auid);</pre><p>
 Removes an alarm subcomponent from a calendar component.  If the alarm that
 corresponds to the specified <i><tt>auid</tt></i> had been fetched with
@@ -1206,19 +1238,19 @@ function.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component.
 </td></tr><tr><td><span class="term"><i><tt>auid</tt></i>:</span></td><td> UID of the alarm to remove.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-remove-all-alarms"></a>e_cal_component_remove_all_alarms ()</h3><a class="indexterm" name="id2571922"></a><pre class="programlisting">void        e_cal_component_remove_all_alarms
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-remove-all-alarms"></a>e_cal_component_remove_all_alarms ()</h3><a class="indexterm" name="id2571960"></a><pre class="programlisting">void        e_cal_component_remove_all_alarms
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Remove all alarms from the calendar component</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-alarm-uids"></a>e_cal_component_get_alarm_uids ()</h3><a class="indexterm" name="id2571986"></a><pre class="programlisting">GList*      e_cal_component_get_alarm_uids  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-alarm-uids"></a>e_cal_component_get_alarm_uids ()</h3><a class="indexterm" name="id2572024"></a><pre class="programlisting">GList*      e_cal_component_get_alarm_uids  (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp);</pre><p>
 Builds a list of the unique identifiers of the alarm subcomponents inside a
 calendar component.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>comp</tt></i>:</span></td><td> A calendar component.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> List of unique identifiers for alarms.  This should be freed
 using <a href="libecal-e-cal-util.html#cal-obj-uid-list-free"><tt>cal_obj_uid_list_free()</tt></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-alarm"></a>e_cal_component_get_alarm ()</h3><a class="indexterm" name="id2572072"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_get_alarm
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-get-alarm"></a>e_cal_component_get_alarm ()</h3><a class="indexterm" name="id2572110"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_get_alarm
                                             (<a href="ECalComponent.html" title="ECalComponent">ECalComponent</a> *comp,
                                              const char *auid);</pre><p>
 Queries a particular alarm subcomponent of a calendar component.</p><p>
@@ -1228,81 +1260,81 @@ Queries a particular alarm subcomponent of a calendar component.</p><p>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The alarm subcomponent that corresponds to the specified <i><tt>auid</tt></i>,
 or NULL if no alarm exists with that UID.  This should be freed using
 <a href="ECalComponent.html#e-cal-component-alarm-free"><tt>e_cal_component_alarm_free()</tt></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarms-free"></a>e_cal_component_alarms_free ()</h3><a class="indexterm" name="id2572193"></a><pre class="programlisting">void        e_cal_component_alarms_free     (<a href="ECalComponent.html#ECalComponentAlarms">ECalComponentAlarms</a> *alarms);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarms-free"></a>e_cal_component_alarms_free ()</h3><a class="indexterm" name="id2572231"></a><pre class="programlisting">void        e_cal_component_alarms_free     (<a href="ECalComponent.html#ECalComponentAlarms">ECalComponentAlarms</a> *alarms);</pre><p>
 Frees a <a href="ECalComponent.html#ECalComponentAlarms">ECalComponentAlarms</a> structure.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarms</tt></i>:</span></td><td> Component alarms structure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-new"></a>e_cal_component_alarm_new ()</h3><a class="indexterm" name="id2572263"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_alarm_new
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-new"></a>e_cal_component_alarm_new ()</h3><a class="indexterm" name="id2572301"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_alarm_new
                                             (void);</pre><p>
 </p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a new alarm component
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-clone"></a>e_cal_component_alarm_clone ()</h3><a class="indexterm" name="id2572317"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_alarm_clone
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-clone"></a>e_cal_component_alarm_clone ()</h3><a class="indexterm" name="id2572355"></a><pre class="programlisting"><a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>* e_cal_component_alarm_clone
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 Creates a new alarm subcomponent by copying the information from another one.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm subcomponent.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A newly-created alarm subcomponent with the same values as the
 original one.  Should be freed with <a href="ECalComponent.html#e-cal-component-alarm-free"><tt>e_cal_component_alarm_free()</tt></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-free"></a>e_cal_component_alarm_free ()</h3><a class="indexterm" name="id2572403"></a><pre class="programlisting">void        e_cal_component_alarm_free      (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-free"></a>e_cal_component_alarm_free ()</h3><a class="indexterm" name="id2572442"></a><pre class="programlisting">void        e_cal_component_alarm_free      (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 Frees an alarm structure.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> A calendar alarm.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-uid"></a>e_cal_component_alarm_get_uid ()</h3><a class="indexterm" name="id2572466"></a><pre class="programlisting">const char* e_cal_component_alarm_get_uid   (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-uid"></a>e_cal_component_alarm_get_uid ()</h3><a class="indexterm" name="id2572504"></a><pre class="programlisting">const char* e_cal_component_alarm_get_uid   (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 Queries the unique identifier of an alarm subcomponent.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm subcomponent.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> UID of the alarm.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-action"></a>e_cal_component_alarm_get_action ()</h3><a class="indexterm" name="id2572543"></a><pre class="programlisting">void        e_cal_component_alarm_get_action
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-action"></a>e_cal_component_alarm_get_action ()</h3><a class="indexterm" name="id2572581"></a><pre class="programlisting">void        e_cal_component_alarm_get_action
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmAction">ECalComponentAlarmAction</a> *action);</pre><p>
 Queries the action type of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>action</tt></i>:</span></td><td> Return value for the alarm's action type.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-action"></a>e_cal_component_alarm_set_action ()</h3><a class="indexterm" name="id2572630"></a><pre class="programlisting">void        e_cal_component_alarm_set_action
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-action"></a>e_cal_component_alarm_set_action ()</h3><a class="indexterm" name="id2572668"></a><pre class="programlisting">void        e_cal_component_alarm_set_action
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmAction">ECalComponentAlarmAction</a> action);</pre><p>
 Sets the action type for an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>action</tt></i>:</span></td><td> Action type.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-attach"></a>e_cal_component_alarm_get_attach ()</h3><a class="indexterm" name="id2572716"></a><pre class="programlisting">void        e_cal_component_alarm_get_attach
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-attach"></a>e_cal_component_alarm_get_attach ()</h3><a class="indexterm" name="id2572754"></a><pre class="programlisting">void        e_cal_component_alarm_get_attach
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              icalattach **attach);</pre><p>
 Queries the attachment property of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>attach</tt></i>:</span></td><td> Return value for the attachment; should be freed using <tt>icalattach_unref()</tt>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-attach"></a>e_cal_component_alarm_set_attach ()</h3><a class="indexterm" name="id2572811"></a><pre class="programlisting">void        e_cal_component_alarm_set_attach
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-attach"></a>e_cal_component_alarm_set_attach ()</h3><a class="indexterm" name="id2572849"></a><pre class="programlisting">void        e_cal_component_alarm_set_attach
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              icalattach *attach);</pre><p>
 Sets the attachment property of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>attach</tt></i>:</span></td><td> Attachment property or NULL to remove an existing property.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-description"></a>e_cal_component_alarm_get_description ()</h3><a class="indexterm" name="id2572899"></a><pre class="programlisting">void        e_cal_component_alarm_get_description
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-description"></a>e_cal_component_alarm_get_description ()</h3><a class="indexterm" name="id2572937"></a><pre class="programlisting">void        e_cal_component_alarm_get_description
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> *description);</pre><p>
 Queries the description property of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>description</tt></i>:</span></td><td> Return value for the description property and its parameters.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-description"></a>e_cal_component_alarm_set_description ()</h3><a class="indexterm" name="id2572987"></a><pre class="programlisting">void        e_cal_component_alarm_set_description
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-description"></a>e_cal_component_alarm_set_description ()</h3><a class="indexterm" name="id2573025"></a><pre class="programlisting">void        e_cal_component_alarm_set_description
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentText">ECalComponentText</a> *description);</pre><p>
 Sets the description property of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>description</tt></i>:</span></td><td> Description property and its parameters, or NULL for no description.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-repeat"></a>e_cal_component_alarm_get_repeat ()</h3><a class="indexterm" name="id2573075"></a><pre class="programlisting">void        e_cal_component_alarm_get_repeat
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-repeat"></a>e_cal_component_alarm_get_repeat ()</h3><a class="indexterm" name="id2573113"></a><pre class="programlisting">void        e_cal_component_alarm_get_repeat
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmRepeat">ECalComponentAlarmRepeat</a> *repeat);</pre><p>
 Queries the repeat/duration properties of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>repeat</tt></i>:</span></td><td> Return value for the repeat/duration properties.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-repeat"></a>e_cal_component_alarm_set_repeat ()</h3><a class="indexterm" name="id2573163"></a><pre class="programlisting">void        e_cal_component_alarm_set_repeat
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-repeat"></a>e_cal_component_alarm_set_repeat ()</h3><a class="indexterm" name="id2573201"></a><pre class="programlisting">void        e_cal_component_alarm_set_repeat
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmRepeat">ECalComponentAlarmRepeat</a> repeat);</pre><p>
 Sets the repeat/duration values for an alarm.</p><p>
@@ -1310,21 +1342,21 @@ Sets the repeat/duration values for an alarm.</p><p>
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>repeat</tt></i>:</span></td><td> Repeat/duration values.  To remove any repetitions from the alarm,
 set the <i><tt>repeat.repetitions</tt></i> to 0.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-trigger"></a>e_cal_component_alarm_get_trigger ()</h3><a class="indexterm" name="id2573256"></a><pre class="programlisting">void        e_cal_component_alarm_get_trigger
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-trigger"></a>e_cal_component_alarm_get_trigger ()</h3><a class="indexterm" name="id2573294"></a><pre class="programlisting">void        e_cal_component_alarm_get_trigger
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmTrigger">ECalComponentAlarmTrigger</a> *trigger);</pre><p>
 Queries the trigger time for an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>trigger</tt></i>:</span></td><td> Return value for the trigger time.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-trigger"></a>e_cal_component_alarm_set_trigger ()</h3><a class="indexterm" name="id2573343"></a><pre class="programlisting">void        e_cal_component_alarm_set_trigger
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-trigger"></a>e_cal_component_alarm_set_trigger ()</h3><a class="indexterm" name="id2573381"></a><pre class="programlisting">void        e_cal_component_alarm_set_trigger
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              <a href="ECalComponent.html#ECalComponentAlarmTrigger">ECalComponentAlarmTrigger</a> trigger);</pre><p>
 Sets the trigger time of an alarm.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><i><tt>trigger</tt></i>:</span></td><td> Trigger time structure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-attendee-list"></a>e_cal_component_alarm_get_attendee_list ()</h3><a class="indexterm" name="id2573430"></a><pre class="programlisting">void        e_cal_component_alarm_get_attendee_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-attendee-list"></a>e_cal_component_alarm_get_attendee_list ()</h3><a class="indexterm" name="id2573468"></a><pre class="programlisting">void        e_cal_component_alarm_get_attendee_list
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              GSList **attendee_list);</pre><p>
 
@@ -1332,7 +1364,7 @@ Sets the trigger time of an alarm.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>attendee_list</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-attendee-list"></a>e_cal_component_alarm_set_attendee_list ()</h3><a class="indexterm" name="id2573512"></a><pre class="programlisting">void        e_cal_component_alarm_set_attendee_list
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-set-attendee-list"></a>e_cal_component_alarm_set_attendee_list ()</h3><a class="indexterm" name="id2573551"></a><pre class="programlisting">void        e_cal_component_alarm_set_attendee_list
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm,
                                              GSList *attendee_list);</pre><p>
 
@@ -1340,17 +1372,17 @@ Sets the trigger time of an alarm.</p><p>
 </td></tr><tr><td><span class="term"><i><tt>attendee_list</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-has-attendees"></a>e_cal_component_alarm_has_attendees ()</h3><a class="indexterm" name="id2573595"></a><pre class="programlisting">gboolean    e_cal_component_alarm_has_attendees
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-has-attendees"></a>e_cal_component_alarm_has_attendees ()</h3><a class="indexterm" name="id2573633"></a><pre class="programlisting">gboolean    e_cal_component_alarm_has_attendees
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-icalcomponent"></a>e_cal_component_alarm_get_icalcomponent ()</h3><a class="indexterm" name="id2573666"></a><pre class="programlisting">icalcomponent* e_cal_component_alarm_get_icalcomponent
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-component-alarm-get-icalcomponent"></a>e_cal_component_alarm_get_icalcomponent ()</h3><a class="indexterm" name="id2573704"></a><pre class="programlisting">icalcomponent* e_cal_component_alarm_get_icalcomponent
                                             (<a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a> *alarm);</pre><p>
 Get the icalcomponent associated with the given <a href="ECalComponent.html#ECalComponentAlarm">ECalComponentAlarm</a>.</p><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>alarm</tt></i>:</span></td><td> An alarm.
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the icalcomponent.
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="ch01.html"><b>&lt;&lt; [Insert title here]</b></a></td><td align="right"><a accesskey="n" href="ECalListener.html"><b>ECalListener &gt;&gt;</b></a></td></tr></table></body></html>
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="ch01.html"><b>&lt;&lt; Evolution API Reference: libecal, the Calendar Library</b></a></td><td align="right"><a accesskey="n" href="ECalListener.html"><b>ECalListener &gt;&gt;</b></a></td></tr></table></body></html>
