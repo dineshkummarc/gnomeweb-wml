@@ -1,0 +1,373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Frequently Asked Questions</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.4"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="c25.html"><LINK
+REL="NEXT"
+TITLE="Common Coding Problems"
+HREF="x134.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.4</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c25.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x134.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="AEN79"
+></A
+>Frequently Asked Questions</H1
+><P
+>This is to answer your questions about ORBit and Corba</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN82"
+></A
+>General Questions</H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN84"
+></A
+>What is CORBA?</H2
+><P
+>&#13;CORBA stands for Common Object Request Broker Architecture,
+standardized by the Object Management Group (OMG). It consists of an
+Interface Definition Language (IDL), language bindings and protocols
+to allow interoperation between applications
+<P
+></P
+><UL
+><LI
+><P
+>written in different programming languages</P
+></LI
+><LI
+><P
+>running in different processes</P
+></LI
+><LI
+><P
+>developed for different operating systems</P
+></LI
+></UL
+>
+
+A more detailed answer to this question is available at
+<A
+HREF="http://www.omg.org/gettingstarted/"
+TARGET="_top"
+>&#13;http://www.omg.org/gettingstarted
+</A
+>
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN95"
+></A
+>What is ORBit?</H2
+><P
+> ORBit is an implementation of CORBA, which is used (amongst
+other things) in the GNOME project. Active development is done for
+ORBit2, being a clean re-implementation from scratch. The old ORBit
+code is no longer maintained. </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN98"
+></A
+>Why aren't you using ILU/MICO/TAO?</H2
+><P
+> Most
+of GNOME is written in C, both for performance reasons, and because
+C++ still isn't as portable and widely available. So integration with
+CORBA should use the IDL C mapping, which rules out TAO and MICO. ILU
+was ruled out because the license appeared as too restrictive at the
+time for free software.  </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN101"
+></A
+>Is ORBit stable?</H2
+><P
+>&#13;ORBit is used in pretty much any GNOME application, which gives quite
+some testing for the features used. Other features have seen little or
+no testing.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN104"
+></A
+>Does ORBit work with other ORBs?</H2
+><P
+>&#13;Yes. This is one of the primary features of CORBA, and available
+through the Internet Inter-ORB Protocol (IIOP). There is one pitfall:
+ORBit has a proprietary security mechanism to authenticate clients. If
+interoperability is desired then you might have to figure out a 
+work-around for this.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN107"
+></A
+>What license does ORBit get distributed with and how does it affect me?</H2
+><P
+>&#13;The idl compiler is <I
+CLASS="emphasis"
+>GNU Public licensed</I
+> (
+<SPAN
+CLASS="acronym"
+>GPL</SPAN
+>).  The libaries are <I
+CLASS="emphasis"
+>Library
+GPL</I
+> (<SPAN
+CLASS="acronym"
+>L-GPL</SPAN
+>) licensed. The code generated
+from the idl compiler have no restriction. Bascially this means you
+can use ORBit in your own applications (including proprietary
+applications), the only restriction being that people whom you
+distribute your working code to must be able to update the ORBit
+libraries at will.  If you wish to modify and distribute the ORBit idl
+compiler you have to distribute that modification under the GPL.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN114"
+></A
+>Why doesn't ORBit compile with my cc compiler ?</H2
+><P
+>&#13;ORBit uses some of the extensions that gcc allows, including
+assignment to casts and void * pointer arithmetic. More current versions
+of ORBit will remove these and eventually it is likely the ORBit will
+compile with all ANSI C compilers.
+</P
+><P
+>&#13;You can always install gcc and use that. This will always work.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN118"
+></A
+>What is a language binding?</H2
+><P
+>&#13;A language binding defines how to use the IDL operations in a
+programming language. There is a client-side mapping which explains
+how to call operations, and a server-side mapping which defines how to
+implement them. The client side mapping is largely
+implementation-independent.
+</P
+><P
+>&#13;On the server side, different 'object adapters' are provided by ORB
+vendors; only the 'Portable Object Adapter' (POA) implemented by ORBit
+allows portability between CORBA implementations.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN122"
+></A
+>What language bindings does ORBit provide?</H2
+><P
+>&#13;At the moment only the C binding. Python and Perl bindings are being
+seriously talked about. Bindings (in various degrees of completeness)
+are also available for C++, Lisp, Pascal, Python, Ruby, and TCL; others are in-progress.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN125"
+></A
+>Does ORBit have DII and DSI?</H2
+><P
+>&#13;Yes. Though beware that using DII and DSI in some cases requires
+the use of dynAny, which is not supported yet.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN128"
+></A
+>Does ORBit provide a naming service?</H2
+><P
+>&#13;Yes. In addition, it is possible to use a third-party naming service,
+e.g. using the --ORBNamingIOR command line option. The 'Interoperable
+Naming' specification is not yet supported.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN131"
+></A
+>Can you encrypt a CORBA connection?</H2
+><P
+>&#13;Yes, ORBit supports IIOP over SSL. the implementation is based on
+OpenSSL and support client and server side authentication.  Frank
+O'Dwyer did initial work on this for ORBit.  </P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c25.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x134.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Common Coding Problems</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Difference between the client and the server</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.4"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="How to do garbage collection under CORBA"
+HREF="c1238.html"><LINK
+REL="PREVIOUS"
+TITLE="How to do garbage collection under CORBA"
+HREF="c1238.html"><LINK
+REL="NEXT"
+TITLE="Server-side deactivation"
+HREF="x1273.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.4</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c1238.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>How to do garbage collection under CORBA</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1273.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1247"
+></A
+>Difference between the client and the server</H1
+><P
+>&#13;
+Elliot Lee, ever the prescient one, asked:
+</P
+><P
+>&#13;<SPAN
+CLASS="QUOTE"
+>"Object or object reference?
+"</SPAN
+>
+</P
+><P
+>&#13;And then observed:
+</P
+><P
+>&#13;<SPAN
+CLASS="QUOTE"
+>"I think Todd is confused as to what the difference between object references
+ and objects is. Think of an object reference and an object as being analogous
+ to a pointer and pointed-to memory, respectively. You can stop using a pointer,
+ but until you get the server side to actually free() the memory (object) being
+ pointed to (referenced), it is still there.
+"</SPAN
+>
+</P
+><P
+>&#13;Indeed I was confused. There are actually two processes which occur within
+ CORBA:
+<P
+></P
+><UL
+><LI
+><P
+>the client drops all references to an object, after which the ORB local
+ to the client then can clean up all of its data structures related to that
+object, and </P
+></LI
+><LI
+><P
+>the server can decide that the object needs to be destroyed, and it then
+ does the job of deactivating the object (so that the POA can know not to answer
+ any more queries to that object) and freeing associated resources, etc. 
+</P
+></LI
+></UL
+>
+</P
+><P
+>&#13;Since object references can be generated in one program, passed to a second
+ program, the first program can forget about it, and the second can continue,
+ these are separate processes. It was understanding this fact which was the
+ biggest impediment to my figuring this matter out.
+</P
+><P
+>&#13;Sascha Brawer &#60;brawer@coli.uni-sb.de&#62; described these two potential
+ interpretations of what I wanted to do, reflecting a nuance which I did not
+ appreciate when I asked the question:
+</P
+><P
+>&#13;<P
+></P
+><UL
+><LI
+><P
+>You want the client to forget about the object reference, but the server-side
+ object should continue its life: Call CORBA_free on the client side. The purpose
+ of CORBA_free is to release the memory in the client. Therefore, the server
+ will not get any notification about this. If other clients had references to
+ the same object, they will continue to work.
+</P
+></LI
+><LI
+><P
+> You want to destroy the object on the server: define a method in the
+ object's interface, e.g. "destroy" (though any name is fine). First, call that
+ method on the client side. The server will receive the call, and your server
+ implementation will destroy the object. Second, call CORBA_free on the client
+ side, to free the client-side memory for the object reference which has now
+ become stale. If other clients had references to the same object, they will
+ receive an exception as soon they call a method on that object. However, they
+ won't be notified in advance, because the server does not keep track on issued
+ references.
+</P
+></LI
+></UL
+>
+</P
+><P
+>&#13;Which Elliot Lee then corrected with:
+</P
+><P
+>&#13;CORBA_Object_release() on object references, CORBA_free() on data structures.
+</P
+><P
+>&#13;Dick Porter added:
+</P
+><P
+>&#13;It is _only_ the client side. These pseudo-object methods do not cause requests
+to be made to the server.
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c1238.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1273.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>How to do garbage collection under CORBA</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1238.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Server-side deactivation</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

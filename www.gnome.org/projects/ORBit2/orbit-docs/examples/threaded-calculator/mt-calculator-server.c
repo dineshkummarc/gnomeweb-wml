@@ -1,6 +1,6 @@
 /*
- * echo-server program. Hacked from Echo test suite by by Frank
- * Rehberger <F.Rehberger@xtradyne.de>
+ * calculator-server program. Hacked from Frank Rehberger
+ * <F.Rehberger@xtradyne.de>.
  */
 
 #include <stdio.h>
@@ -9,10 +9,10 @@
 #include <signal.h>
 #include <orbit/orbit.h>
 
-#include "badcall.h"
-#include "badcall-skelimpl.c" 
+#include "calculator.h"
+#include "calculator-skelimpl.c"
 
-#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+#include "examples-toolkit.h"
 
 static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
 static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
@@ -54,7 +54,6 @@ server_init (int                 *argc_ptr,
 	CORBA_exception_init(local_ev);
 
 	/* init signal handling */
-	signal(SIGINT,  server_shutdown);
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
@@ -153,9 +152,9 @@ server_activate_service (CORBA_ORB           orb,
 			 PortableServer_POA  poa,
 			 CORBA_Environment  *ev)
 {
-	Examples_BadCall ref = CORBA_OBJECT_NIL; 
+	Calculator  ref = CORBA_OBJECT_NIL; 
 
-	ref = impl_Examples_BadCall__create (poa, ev);
+	ref = impl_Calculator__create (poa, ev);
 	if (etk_raised_exception(ev)) 
 		return CORBA_OBJECT_NIL;
 	
@@ -163,15 +162,22 @@ server_activate_service (CORBA_ORB           orb,
 }
 
 /* 
- * main 
+ * background task 
  */
+typedef struct {
+	int    argc;
+	char **argv;
+} BackgroundData;
 
-int
-main (int argc, char *argv[])
+static gpointer
+server_in_background (BackgroundData *data)
 {
+	int    argc = data->argc;
+	char **argv = data->argv;
+
 	CORBA_Object servant = CORBA_OBJECT_NIL;
 	
-	CORBA_char filename[] = "badcall.ref";
+	CORBA_char filename[] = "calculator.ref";
 
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
@@ -196,5 +202,54 @@ main (int argc, char *argv[])
 	server_cleanup (global_orb, root_poa, servant, ev);
 	etk_abort_if_exception(ev, "failed cleanup");
 
+	g_thread_exit (NULL);
+}
+
+static
+void
+main_shutdown (int sig)
+{
+	/* progate SIGTERM signal to every process/thread in process
+	 * group */ 
+	kill (0, 15);
+	
+	/* terminate main thread */ 
 	exit (0);
+}
+
+/* 
+ * main 
+ */
+int 
+main (int argc, char *argv[])
+{
+	BackgroundData data[1];
+	gint     i      = 0;
+	GError  *err    = NULL;
+	GThread *thread = NULL;
+
+	g_thread_init (NULL);
+
+	data->argc = argc;
+	data->argv = argv;
+
+	thread = g_thread_create ((GThreadFunc) server_in_background, 
+				  data, 
+				  TRUE,   /*joinable */
+				  &err);
+
+	/* init signal handling */
+	signal(SIGINT,  main_shutdown);
+	signal(SIGHUP,  main_shutdown);
+	
+	/* concurrent main task */ 
+	while (i++ < 1000) {
+		g_print ("main thread active\n");
+		sleep (1);
+	}
+	
+	g_print ("main thread waiting for background task\n");
+	g_thread_join (thread);
+	
+	exit (0);	
 }

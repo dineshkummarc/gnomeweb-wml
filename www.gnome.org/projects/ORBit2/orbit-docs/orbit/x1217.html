@@ -1,0 +1,694 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Threaded calculator server</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.4"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="First CORBA Programs"
+HREF="c258.html"><LINK
+REL="PREVIOUS"
+TITLE="Factory client & server"
+HREF="x1109.html"><LINK
+REL="NEXT"
+TITLE="How to do garbage collection under CORBA"
+HREF="c1238.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.4</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1109.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>First CORBA Programs</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c1238.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="threaded_server"
+></A
+>Threaded calculator server</H1
+><P
+>&#13;Lets take the calculator-server from previous chapter to demonstrate ORBit2
+in multi threaded environment.
+
+<DIV
+CLASS="example"
+><A
+NAME="AEN1220"
+></A
+><P
+><B
+>Example 45. </B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;//
+// Calculator interface
+//
+
+interface Calculator
+{
+      double add(in double number1, in double number2);
+      double sub(in double number1, in double number2);
+};
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+      </P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1223"
+></A
+>multi-threaded calculator server</H2
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN1226"
+></A
+><P
+><B
+>Example 46. mt-calculator-server.c</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>/*
+ * calculator-server program. Hacked from Frank Rehberger
+ * &#60;F.Rehberger@xtradyne.de&#62;.
+ */
+
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+#include &#60;signal.h&#62;
+#include &#60;orbit/orbit.h&#62;
+
+#include "calculator.h"
+#include "calculator-skelimpl.c"
+
+#include "examples-toolkit.h"
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+        (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+        (*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+        poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	PortableServer_POAManager_activate(poa_manager, ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+        CORBA_ORB_run(orb, ev);
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	objid = PortableServer_POA_reference_to_id (poa, ref, ev);
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	PortableServer_POA_deactivate_object (poa, objid, ev);
+	if (etk_raised_exception(ev)) return;
+
+	PortableServer_POA_destroy (poa, TRUE, FALSE, ev);
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+        CORBA_Object_release ((CORBA_Object) poa, ev);
+	if (etk_raised_exception(ev)) return;
+	
+        CORBA_Object_release (ref, ev);
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                CORBA_ORB_destroy(orb, ev);
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Calculator  ref = CORBA_OBJECT_NIL; 
+
+	ref = impl_Calculator__create (poa, ev);
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * background task 
+ */
+typedef struct {
+	int    argc;
+	char **argv;
+} BackgroundData;
+
+static gpointer
+server_in_background (BackgroundData *data)
+{
+	int    argc = data-&#62;argc;
+	char **argv = data-&#62;argv;
+
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "calculator.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	server_init (&#38;argc, argv, &#38;global_orb, &#38;root_poa, ev);
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	servant = server_activate_service (global_orb, root_poa, ev);
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev);
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	server_run (global_orb, ev);
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	server_cleanup (global_orb, root_poa, servant, ev);
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	g_thread_exit (NULL);
+}
+
+static
+void
+main_shutdown (int sig)
+{
+	/* progate SIGTERM  to every process/thread in
+	 * process group */ 
+	kill (0, 15);
+
+        /* terminate main thread */
+	exit (0);
+}
+
+/* 
+ * main 
+ */
+int 
+main (int argc, char *argv[])
+{
+	BackgroundData data[1];
+	gint     i      = 0;
+	GError  *err    = NULL;
+	GThread *thread = NULL;
+
+	g_thread_init (NULL);
+
+	data-&#62;argc = argc;
+	data-&#62;argv = argv;
+
+	thread = g_thread_create ((GThreadFunc) server_in_background, 
+				  data, 
+				  TRUE,   /*joinable */
+				  &#38;err);
+
+	/* init signal handling */
+	signal(SIGINT,  main_shutdown);
+	signal(SIGHUP,  main_shutdown);
+
+	/* concurrent main task */ 
+	while (i++ &#60; 1000) {
+		g_print ("main thread active\n");
+		sleep (1);
+	}
+	
+	g_print ("main thread waiting for background task\n");
+	g_thread_join (thread);
+	
+	exit (0);	
+}
+
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+In this case calculator-skelimpl.c file can be kept as before, no
+changes are necessary. But if servants would share common resource, it
+would be necessary to protect critical code sections with muteces
+(locks).
+<DIV
+CLASS="example"
+><A
+NAME="AEN1229"
+></A
+><P
+><B
+>Example 47. calculator-skelimpl.c</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>#include "calculator.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_Calculator servant;
+   PortableServer_POA poa;
+
+   /* ------ add private attributes here ------ */
+   /* ------ ---------- end ------------ ------ */
+}
+impl_POA_Calculator;
+
+/*** Implementation stub prototypes ***/
+
+static void impl_Calculator__fini (impl_POA_Calculator * servant,
+				   CORBA_Environment * ev);
+static CORBA_double
+impl_Calculator_add(impl_POA_Calculator * servant,
+		    const CORBA_double number1,
+		    const CORBA_double number2, CORBA_Environment * ev);
+
+static CORBA_double
+impl_Calculator_sub(impl_POA_Calculator * servant,
+		    const CORBA_double number1,
+		    const CORBA_double number2, CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_Calculator_base_epv = {
+   NULL,			/* _private data */
+   (gpointer) &#38; impl_Calculator__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_Calculator__epv impl_Calculator_epv = {
+   NULL,			/* _private */
+   (gpointer) &#38; impl_Calculator_add,
+
+   (gpointer) &#38; impl_Calculator_sub,
+
+};
+
+/*** vepv structures ***/
+
+static POA_Calculator__vepv impl_Calculator_vepv = {
+   &#38;impl_Calculator_base_epv,
+   &#38;impl_Calculator_epv,
+};
+
+/*** Stub implementations ***/
+
+static Calculator
+impl_Calculator__create (PortableServer_POA poa, CORBA_Environment * ev)
+{
+   Calculator retval;
+   impl_POA_Calculator *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_Calculator, 1);
+   newservant-&#62;servant.vepv = &#38;impl_Calculator_vepv;
+   newservant-&#62;poa =       
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+   POA_Calculator__init((PortableServer_Servant) newservant, ev);
+   /* Before servant is going to be activated all
+    * private attributes must be initialized.  */
+
+   /* ------ init private attributes here ------ */
+   /* ------ ---------- end ------------- ------ */
+
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+/**
+ * impl_Calculator__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation invocation, method invoation is being delayed.
+ * Note, in former versions of ORBit2 this function would have been 
+ * named impl_Calculator__destroy.
+ **/
+static void
+impl_Calculator__fini (impl_POA_Calculator * servant,
+		       CORBA_Environment * ev)
+{
+   CORBA_Object_release((CORBA_Object) servant-&#62;poa, ev);
+ 
+   /* No further remote method calls are delegated to 
+    * servant and you may free your private attributes. */
+   /* ------ free private attributes here ------ */
+   /* ------ ---------- end ------------- ------ */
+
+   POA_Calculator__fini((PortableServer_Servant) servant, ev);
+   
+   g_free (servant);
+}
+
+static CORBA_double
+impl_Calculator_add(impl_POA_Calculator * servant,
+		    const CORBA_double number1,
+		    const CORBA_double number2, CORBA_Environment * ev)
+{
+   CORBA_double retval;
+
+   /* ------   insert method code here   ------ */
+   g_print ("%f + %f\n", number1, number2);
+   retval = number1 + number2;
+   /* ------ ---------- end ------------ ------ */
+
+   return retval;
+}
+
+static CORBA_double
+impl_Calculator_sub(impl_POA_Calculator * servant,
+		    const CORBA_double number1,
+		    const CORBA_double number2, CORBA_Environment * ev)
+{
+   CORBA_double retval;
+
+   /* ------   insert method code here   ------ */
+   g_print ("%f - %f\n", number1, number2);
+   retval = number1 - number2;
+   /* ------ ---------- end ------------ ------ */
+
+   return retval;
+}
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+        </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1232"
+></A
+>Compiling client &#38; server</H2
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN1235"
+></A
+><P
+><B
+>Example 48. Makefile</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>PREFIX ?= /usr
+CC = gcc
+TARGETS=calculator-client mt-calculator-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+       -I$(PREFIX)/lib/glib-2.0/include -g
+LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm       \
+	     -lORBitCosNaming-2 
+
+IDLOUT=calculator-common.c calculator-stubs.c calculator-skels.c calculator.h
+
+all: $(IDLOUT) calculator-client mt-calculator-server
+
+mt-calculator-server.o : mt-calculator-server.c calculator-skelimpl.c
+
+calculator-client : calculator-client.o calculator-stubs.o calculator-common.o examples-toolkit.o 
+mt-calculator-server : mt-calculator-server.o calculator-skels.o calculator-common.o examples-toolkit.o 
+
+$(IDLOUT): calculator.idl
+	$(ORBIT_IDL) calculator.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+
+distclean: clean
+	rm -rf calculator-client mt-calculator-server
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+        </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1109.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c1238.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Factory client &#38; server</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c258.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>How to do garbage collection under CORBA</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

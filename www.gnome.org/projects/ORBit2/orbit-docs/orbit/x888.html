@@ -1,0 +1,1214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>BadCall client &#38; server</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation V1.4"
+HREF="book1.html"><LINK
+REL="UP"
+TITLE="First CORBA Programs"
+HREF="c258.html"><LINK
+REL="PREVIOUS"
+TITLE="Byte-Sequence client & server"
+HREF="x780.html"><LINK
+REL="NEXT"
+TITLE="NameResolve client & server"
+HREF="x992.html"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation V1.4</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x780.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>First CORBA Programs</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x992.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="badcall"
+></A
+>BadCall client &#38; server</H1
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN891"
+></A
+><P
+><B
+>Example 27. badcall.idl</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>&#13;module Examples {
+
+	interface BadCall {
+		struct Foo { 
+			double fval; 
+		};
+
+		exception NoParam     { };
+		exception SingleParam { string mesg; };
+		exception DoubleParam { string mesg; long val; };
+
+		Foo trigger (in long val, out Foo bar) 
+			raises (NoParam, SingleParam, DoubleParam);
+	};
+};</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+
+<TT
+CLASS="computeroutput"
+>$ <B
+CLASS="command"
+>orbit-idl-2 --skeleton-impl
+badcall.idl</B
+>
+</TT
+>
+geenrates all the files we will use in this example.
+
+<DIV
+CLASS="informaltable"
+><A
+NAME="AEN896"
+></A
+><P
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>File</TH
+><TH
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Usage for Client</TH
+><TH
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>Usage for Server</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall.h</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-common.c</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-stubs.c</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>-</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-skels.c</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>-</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>readonly</TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-skelimpl.c</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>-</TD
+><TD
+WIDTH="33%"
+ALIGN="CENTER"
+VALIGN="MIDDLE"
+>template for user code</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+>
+
+Files remaining to write are listed in following table, starting with 
+<I
+CLASS="emphasis"
+>badcall-client.c</I
+> in following chapter.
+<DIV
+CLASS="informaltable"
+><A
+NAME="AEN928"
+></A
+><P
+></P
+><TABLE
+BORDER="1"
+BGCOLOR="#E0E0E0"
+CELLSPACING="0"
+CELLPADDING="4"
+CLASS="CALSTABLE"
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-client.c</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>write the client code</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>badcall-server.c</TD
+><TD
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>write the generic code for servant creation</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+>
+
+      </P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN937"
+></A
+>BadCall client</H2
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN940"
+></A
+><P
+><B
+>Example 28. badcall-client.c</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>/* badcall-client.c hacked by Frank Rehberger
+ * &#60;F.Rehberger@xtradyne.de&#62;.  */
+
+#include &#60;assert.h&#62;
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+#include &#60;signal.h&#62;
+#include &#60;orbit/orbit.h&#62;
+
+#include "badcall.h"
+
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <B
+CLASS="command"
+>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
+>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+         <B
+CLASS="command"
+>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </B
+>
+        if (etk_raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              servant,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+         <B
+CLASS="command"
+>CORBA_Object_release(servant, ev); </B
+>
+        if (etk_raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <B
+CLASS="command"
+>CORBA_ORB_destroy(orb, ev); </B
+>
+                if (etk_raised_exception(ev)) return;
+        }
+}
+
+
+static 
+void
+client_trigger_exception (Examples_BadCall          servant,
+			  CORBA_long                arg,
+			  CORBA_Environment        *ev)
+{
+	CORBA_long            in_arg  = arg;	
+	Examples_BadCall_Foo *out_arg = NULL;
+
+	Examples_BadCall_Foo  ret_val;
+	
+	 <B
+CLASS="command"
+>ret_val = Examples_BadCall_trigger (servant, 
+					    in_arg, 
+					    out_arg,
+					    ev);  </B
+>
+	
+	switch(etk_exception_type(ev)) {
+	case CORBA_NO_EXCEPTION:/* successful outcome*/
+		
+		/* now use data the server delivered to client
+		 * over the return-value, or those out- and
+		 * inout-parameters */
+		
+		break;
+		
+	case CORBA_USER_EXCEPTION:/* a user-defined exception */
+		if (etk_raised_exception_is_a (ev, 
+					       ex_Examples_BadCall_NoParam)) 
+		{
+			/* NoParam exception  does not own members */ 
+			Examples_BadCall_NoParam *bc 
+				= (Examples_BadCall_NoParam*)CORBA_exception_value(ev);
+			g_warning ("raised exception: %s\n",  
+				   CORBA_exception_id(ev));
+		} 
+		else if (etk_raised_exception_is_a (ev,
+						    ex_Examples_BadCall_SingleParam)) 
+		{
+			Examples_BadCall_SingleParam *bc 
+				= (Examples_BadCall_SingleParam*)
+				CORBA_exception_value(ev);
+			
+			g_warning ("raised exception: %s\n"
+				   " mesg: %s\n",  
+				   CORBA_exception_id(ev),
+				   bc-&#62;mesg);
+
+		} else if (etk_raised_exception_is_a 
+			   (ev, ex_Examples_BadCall_DoubleParam)) 
+		{
+			Examples_BadCall_DoubleParam *bc 
+				= (Examples_BadCall_DoubleParam*)
+				CORBA_exception_value(ev);
+			
+			g_warning ("raised exception: %s\n"
+				   " mesg: %s\n"
+				   " val: %d\n",  
+				   CORBA_exception_id(ev),
+				   bc-&#62;mesg,
+				   bc-&#62;val);
+		}
+		else 
+		{       
+			/* should never get here ... */
+			g_print ("unexpected CORBA_USER_EXCEPTION -%s\n",
+				 CORBA_exception_id(ev));
+		}
+		break;
+		
+	case CORBA_SYSTEM_EXCEPTION:
+	default: /* standard exception */
+		/*
+		 * CORBA_exception_id() can be used to determine which
+		 * particular standard exception was raised; the minor
+		 * member of the struct associated with the exception
+		 * (as yielded by CORBA_exception_value()) may provide
+		 * additional system-specific information about the
+		 * exception
+		 */
+		g_print ("BadCall::trigger raised system exception: %s\n",  
+			 CORBA_exception_id(ev));
+		
+		break;
+	}
+	
+	/* free any storage associated with exception */
+	CORBA_exception_free(ev);
+	
+	CORBA_free (out_arg); /* free Foo data */
+	
+}
+
+/**
+ *
+ */
+static
+void
+client_run (Examples_BadCall          servant,
+	    CORBA_Environment        *ev)
+{
+	CORBA_long N=1000;
+	CORBA_long i=0;
+
+	/* increment sequence length, beginning with 0 up to 2048 */
+	for (i=0; i&#60;N; ++i)
+	{
+		 <B
+CLASS="command"
+>client_trigger_exception (servant, i, ev); </B
+>
+	}
+}
+
+
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char filename[] = "badcall.ref";
+
+        Examples_BadCall  servant = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+
+	 <B
+CLASS="command"
+>client_init (&#38;argc, argv, &#38;global_orb, ev); </B
+>
+	etk_abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", 
+		 filename);
+
+	 <B
+CLASS="command"
+>servant = etk_import_object_from_file (global_orb,
+					       filename,
+					       ev); </B
+>
+        etk_abort_if_exception(ev, "importing IOR failed");
+
+	 <B
+CLASS="command"
+>client_run (servant, ev); </B
+>
+        etk_abort_if_exception(ev, "client stopped");
+ 
+	 <B
+CLASS="command"
+>client_cleanup (global_orb, servant, ev); </B
+>
+        etk_abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+        </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN953"
+></A
+>BadCall server</H2
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN956"
+></A
+><P
+><B
+>Example 29. badcall-server.c</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>/*
+ * echo-server program. Hacked from Echo test suite by by Frank
+ * Rehberger &#60;F.Rehberger@xtradyne.de&#62;
+ */
+
+#include &#60;stdio.h&#62;
+#include &#60;stdlib.h&#62;
+#include &#60;string.h&#62;
+#include &#60;signal.h&#62;
+#include &#60;orbit/orbit.h&#62;
+
+#include "badcall.h"
+#include "badcall-skelimpl.c" 
+
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                 <B
+CLASS="command"
+>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
+>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+         <B
+CLASS="command"
+>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+         <B
+CLASS="command"
+>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+         <B
+CLASS="command"
+>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	 <B
+CLASS="command"
+>PortableServer_POAManager_activate(poa_manager, ev); </B
+>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+         <B
+CLASS="command"
+>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </B
+>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+         <B
+CLASS="command"
+>CORBA_ORB_run(orb, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	 <B
+CLASS="command"
+>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <B
+CLASS="command"
+>PortableServer_POA_deactivate_object (poa, objid, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+
+	 <B
+CLASS="command"
+>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <B
+CLASS="command"
+>CORBA_Object_release ((CORBA_Object) poa, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+	
+         <B
+CLASS="command"
+>CORBA_Object_release (ref, ev); </B
+>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <B
+CLASS="command"
+>CORBA_ORB_destroy(orb, ev); </B
+>
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_BadCall ref = CORBA_OBJECT_NIL; 
+
+	<B
+CLASS="command"
+>ref = impl_Examples_BadCall__create (poa, ev);</B
+>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * main 
+ */
+
+int
+main (int argc, char *argv[])
+{
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "badcall.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	<B
+CLASS="command"
+>server_init (&#38;argc, argv, &#38;global_orb, &#38;root_poa, ev);</B
+>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	<B
+CLASS="command"
+>servant = server_activate_service (global_orb, root_poa, ev);</B
+>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	<B
+CLASS="command"
+>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev);</B
+>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	<B
+CLASS="command"
+>server_run (global_orb, ev);</B
+>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	<B
+CLASS="command"
+>server_cleanup (global_orb, root_poa, servant, ev);</B
+>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+<DIV
+CLASS="example"
+><A
+NAME="AEN978"
+></A
+><P
+><B
+>Example 30. badcall-skelimpl.c</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>/* This is a template file generated by command */
+/* orbit-idl-2 --skeleton-impl badcall.idl */
+/* User must edit this file, inserting servant  */
+/* specific code between markers. */
+
+#include "badcall.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_Examples_BadCall servant;
+   PortableServer_POA poa;
+
+   /* ------ add private attributes here ------ */
+   <B
+CLASS="command"
+>CORBA_long counter;</B
+>
+   /* ------ ---------- end ------------ ------ */
+} impl_POA_Examples_BadCall;
+
+/*** Implementation stub prototypes ***/
+
+static void impl_Examples_BadCall__fini(impl_POA_Examples_BadCall *
+					servant, CORBA_Environment * ev);
+
+static Examples_BadCall_Foo
+impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
+			      const CORBA_long val,
+			      Examples_BadCall_Foo * bar,
+			      CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_Examples_BadCall_base_epv = {
+   NULL,			/* _private data */
+   (gpointer) &#38; impl_Examples_BadCall__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_Examples_BadCall__epv impl_Examples_BadCall_epv = {
+   NULL,			/* _private */
+
+   (gpointer) &#38; impl_Examples_BadCall_trigger,
+
+};
+
+/*** vepv structures ***/
+
+static POA_Examples_BadCall__vepv impl_Examples_BadCall_vepv = {
+   &#38;impl_Examples_BadCall_base_epv,
+   &#38;impl_Examples_BadCall_epv,
+};
+
+/*** Stub implementations ***/
+
+static Examples_BadCall
+impl_Examples_BadCall__create(PortableServer_POA poa, CORBA_Environment * ev)
+{
+   Examples_BadCall retval;
+   impl_POA_Examples_BadCall *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_Examples_BadCall, 1);
+   newservant-&#62;servant.vepv = &#38;impl_Examples_BadCall_vepv;
+   newservant-&#62;poa =
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+   POA_Examples_BadCall__init((PortableServer_Servant) newservant, ev);
+   /* Before servant is going to be activated all
+    * private attributes must be initialized.  */
+
+   /* ------ init private attributes here ------ */ 
+   <B
+CLASS="command"
+>newservant-&#62;counter=0;  /* init */</B
+>
+   /* ------ ---------- end ------------- ------ */
+
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_Examples_BadCall__fini (impl_POA_Examples_BadCall * servant,
+			     CORBA_Environment * ev)
+{
+   CORBA_Object_release((CORBA_Object) servant-&#62;poa, ev);
+
+   /* No further remote method calls are delegated to 
+    * servant and you may free your private attributes. */
+   /* ------ free private attributes here ------ */ 
+   <B
+CLASS="command"
+>servant-&#62;counter=0;  /* reset */</B
+>
+   /* ------ ---------- end ------------- ------ */
+
+   POA_Examples_BadCall__fini((PortableServer_Servant) servant, ev);
+   
+   g_free (servant);
+}
+
+static Examples_BadCall_Foo
+impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
+			      const CORBA_long val,
+			      Examples_BadCall_Foo * bar,
+			      CORBA_Environment * ev)
+{
+   Examples_BadCall_Foo ret_val = {0.0};
+
+
+   /* ------   insert method code here   ------ */
+   switch ((servant-&#62;counter++) % 2)
+   {
+   case 0:
+   {
+	   /* this piece of code demonstrates how to raise exception
+	    * without any further parameter */
+
+	   Examples_BadCall_Foo dummy_foo = {0.0};
+
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
+           <B
+CLASS="command"
+>CORBA_exception_set (ev, 
+				CORBA_USER_EXCEPTION,
+                                ex_Examples_BadCall_NoParam,
+                                NULL); /* exception has no members */
+           </B
+>
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
+           return dummy_foo;
+           break;
+   }
+   case 1:
+   {
+	   /* this piece of code demonstrates how to raise exception
+	    * that has a string as parameter */
+
+	   Examples_BadCall_Foo dummy_foo = {0.0};
+
+	   Examples_BadCall_SingleParam* ex_parameters
+		   = Examples_BadCall_SingleParam__alloc();
+
+	   ex_parameters-&#62;mesg 
+		   = CORBA_string_dup ("raised in \"" __FILE__ "\"");
+
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
+         <B
+CLASS="command"
+>  CORBA_exception_set (ev, 
+				CORBA_USER_EXCEPTION,
+                                ex_Examples_BadCall_SingleParam,
+                                ex_parameters); /* exception has members */
+         </B
+>
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
+           return dummy_foo;
+           break;
+   }
+   /* this code will never raise exception DoubleParam */
+
+   default:
+           g_assert_not_reached ();
+   }
+   /* ------ ---------- end ------------ ------ */
+
+   return ret_val;
+}
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+        </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN986"
+></A
+>Compiling client &#38; server</H2
+><P
+>&#13;<DIV
+CLASS="example"
+><A
+NAME="AEN989"
+></A
+><P
+><B
+>Example 31. Makefile</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="programlisting"
+>PREFIX ?= /usr
+CC = gcc
+TARGETS=badcall-client badcall-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+         -I$(PREFIX)/lib/glib-2.0/include 
+LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm        \
+             -lORBitCosNaming-2
+
+IDLOUT=badcall-common.c badcall-stubs.c badcall-skels.c badcall.h
+
+all: $(IDLOUT) badcall-client badcall-server
+
+badcall-server.o: badcall-server.c badcall-skelimpl.c
+
+badcall-client : badcall-client.o badcall-stubs.o badcall-common.o examples-toolkit.o
+badcall-server : badcall-server.o badcall-skels.o badcall-common.o examples-toolkit.o
+
+$(IDLOUT): badcall.idl
+	$(ORBIT_IDL) badcall.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+
+distclean: clean
+	rm -rf badcall-client badcall-server
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
+>
+        </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x780.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x992.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Byte-Sequence client &#38; server</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c258.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>NameResolve client &#38; server</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
