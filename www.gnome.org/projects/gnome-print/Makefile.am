@@ -1,9 +1,10 @@
-SUBDIRS= 
+SUBDIRS=images library home
 
 urlpath=/projects/gnome-print/
 
 page_SCRIPTS = \
-	index.html \
-	index.php3
+	index.php3 \
+	gnome-print.css \
+	meta
 
 include $(top_srcdir)/rules.common
