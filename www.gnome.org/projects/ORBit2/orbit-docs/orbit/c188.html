@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>CORBA concepts</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="ORBit Beginners Documentation"
+HREF="book1.html"><LINK
+REL="PREVIOUS"
+TITLE="Known platforms where ORBit works"
+HREF="x168.html"><LINK
+REL="NEXT"
+TITLE="First CORBA Programs"
+HREF="c226.html"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>ORBit Beginners Documentation</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x168.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c226.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="AEN188"
+></A
+>CORBA concepts</H1
+><P
+>&#13;Please skip this chapter and head straight to the first examples if
+you are the sort of person who understands better just by example. 
+The examples chapter can be read without reading this chapter.
+</P
+><P
+>&#13;This chapter is to help you get an understanding of all the different
+terms that are bandied about ORBs and CORBA.
+</P
+><P
+>&#13;CORBA is a collection of standards defined by the Object Management Group
+(OMG - the sole purpose of the OMG is to provide a framework for people
+to agree on standards for CORBA). The OMG does not provide any working
+implementations of the CORBA standards, and so can be impartial.
+Most people who use CORBA only really
+keep one or two of these standards in their heads, but all the standards
+are free to be read from the OMG web site 
+<A
+HREF="http://www.omg.org/"
+TARGET="_top"
+>&#13;http://www.omg.org/
+</A
+>.
+However it is good to have an idea about how all these standards fit
+together to provide CORBA.
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN194"
+></A
+>Quick tour of a working client/server</H1
+><P
+>&#13;The basic mechanism of CORBA is to run a method (that is a function) of an
+object from a separate program (in fact the program need not be separate,
+but don't worry about that yet). Going from one end of this to the other,
+this is what needs to be defined.
+</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN197"
+></A
+>Definition of the object - the IDL</H2
+><P
+>&#13;A definition of what methods can be called on what objects need to be
+provided for both the caller and callee. This is done using the 
+<I
+CLASS="emphasis"
+> Interface Definition Language </I
+> or <SPAN
+CLASS="acronym"
+> IDL </SPAN
+> of the object.
+The only information which is required to make a caller able to call an
+object on a remote server is the IDL of the object. Everything else is
+handled by the standards defined by the OMG.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN202"
+></A
+>Identifying the Object</H2
+><P
+>The calling program needs to identify the (possibly remote)
+object somehow. This is done by something called an
+<I
+CLASS="emphasis"
+>IOR</I
+>, which can be represented as a string, and
+therefore used as an argument in the program.  Decoding the IOR the
+client can tell the CORBA protocol and character encoding the server
+supports, beside much more details.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN206"
+></A
+>Calling the method</H2
+><P
+>&#13;The calling program needs to actually call the method on the object somehow.
+This is done in the programming language of the caller, and the way
+the IDL of the maps to the programming language is standardised by the OMG.
+This is called the <I
+CLASS="emphasis"
+>Language Mapping</I
+>, and all the different
+ORBs provide at least one mapping. ORBit provides at the moment a C mapping.
+</P
+><P
+>&#13;Of course, C is a compiled language, so to write a C program which is going
+to make an ORBit call, one needs to compile the IDL of the object one wants
+to access using the orbit-idl compiler, and then write a C program which
+call functions that the orbit-idl compiler defines, compile this user written
+code along with the code generated for the client by the orbit compiler,
+and link it to the orbit and network libraries.
+</P
+><P
+>&#13;However for more dynamic languages (eg, Python), a more natural way of
+using CORBA is to dynamically load in the IDL definition and use it without
+any separate compile phase. The beauty of CORBA is that it supports both
+mechanisms
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN212"
+></A
+>Moving the call across the network</H2
+><P
+>&#13;The function call on the client now gets handled by the <I
+CLASS="emphasis"
+>Object Request
+Broker</I
+> or <I
+CLASS="emphasis"
+>ORB</I
+> and gets translated to the actual TCP/IP
+request to the server <I
+CLASS="emphasis"
+>ORB</I
+> which is handling the object to be
+called. The two ORBs communicate via a protocol called the 
+<I
+CLASS="emphasis"
+>Internet InterOrb Protocol</I
+> or <I
+CLASS="emphasis"
+>IIOP</I
+>, which is
+standard. This means that the ORBs could come from different suppliers,
+and never had been tested against each other, and yet still work. 
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN220"
+></A
+>Returning the answer</H2
+><P
+>&#13;On the server side, a mirror of the client process happens, translating the
+request from TCP/IP packets to an actual call in the programming language
+used to write the server. The servant object, written by whoever wrote
+the server then provides the return values, and the results are sent 
+back down the ORBs to the client in reply message.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN223"
+></A
+>Continue</H2
+><P
+>&#13;This may seem like a lot of work for a rather simple thing, but the idea
+about having so many standards is that some of the standards can change
+and adapt without everything in CORBA shifting. Learning about CORBA is
+usually much easier by example, so I would dip into the next chapter 
+and come back to this one later.
+</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x168.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="book1.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c226.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Known platforms where ORBit works</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>First CORBA Programs</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

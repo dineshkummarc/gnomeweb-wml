@@ -1,4 +1,4 @@
-SUBDIRS=python backup images 
+SUBDIRS=python backup images orbit-docs
 
 urlpath=/projects/ORBit2/
 
