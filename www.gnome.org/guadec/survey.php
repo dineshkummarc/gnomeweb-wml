@@ -152,6 +152,9 @@
 		   size="30" value="<? echo $email ?>">
 	  </td>
 	</tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
         <tr>
           <td colspan=2>
              <input type="checkbox" name="user"> I am a GNOME user.
@@ -162,16 +165,21 @@
              <input type="checkbox" name="developer"> I am a GNOME developer.
           </td>
         </tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
         <tr>
-	  <td valign="top" colspan="3">
+	  <td valign="top" colspan="2">
 	    *Committments to GNOME:
 	  </td>
         </tr>
 	<tr>
-	  <td valign="top">&nbsp;</td>
 	  <td valign="top" colspan="2">
 	    <textarea name="committment" cols="70" rows="5"></TEXTAREA>
 	  </td>
+	</tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
 	</tr>
         <tr>
           <td colspan=2>
@@ -193,6 +201,9 @@
              <input type="checkbox" name="tutorial"> I am interested in paying for professional tutorials about GTK+/GNOME technology.
           </td>
         </tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
         <tr>
           <td colspan=2>
              <input type="checkbox" name="gfmember"> I am a GNOME Foundation member.
