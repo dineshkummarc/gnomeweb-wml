@@ -1,0 +1,133 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.3. Minimum C Code</title><meta name="generator" content="DocBook XSL Stylesheets V1.45"><link rel="home" href="index.html" title="Writing Epiphany Extensions"><link rel="up" href="Coding.html" title="Chapter 4. Coding"><link rel="previous" href="ch04s02.html" title="4.2. Header File"><link rel="next" href="ch04s04.html" title="4.4. The Extension Interface"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.3. Minimum C Code</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s02.html">&lt;&lt;&lt; Prev</a> </td><th width="60%" align="center">Chapter 4. Coding</th><td width="20%" align="right"> <a accesskey="n" href="ch04s04.html">Next &gt;&gt;&gt;</a></td></tr></table><hr></hr></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id3349003"></a>4.3. Minimum C Code</h2></div></div><p>As a <tt>GObject</tt>, the extension requires a minimum level of code, which is mostly copy-paste work. Place the following in <tt>ephy-<i><tt>foo</tt></i>-extension.c</tt>:</p><pre class="programlisting">
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include "ephy-<i><tt>foo</tt></i>-extension.h"
+#include "ephy-debug.h"
+
+#include &lt;epiphany/ephy-extension.h&gt;
+
+#include &lt;gmodule.h&gt;
+
+#define EPHY_<i><tt>FOO</tt></i>_EXTENSION_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION, Ephy<i><tt>Foo</tt></i>ExtensionPrivate))
+
+struct Ephy<i><tt>Foo</tt></i>ExtensionPrivate
+{
+};
+
+static void ephy_<i><tt>foo</tt></i>_extension_class_init (Ephy<i><tt>Foo</tt></i>ExtensionClass *klass);
+static void ephy_<i><tt>foo</tt></i>_extension_iface_init (EphyExtensionClass *iface);
+static void ephy_<i><tt>foo</tt></i>_extension_init (Ephy<i><tt>Foo</tt></i>Extension *extension);
+
+enum
+{
+	PROP_0
+	/* Extension-specific properties go here, to be added using
+	 * <tt>g_object_class_install_property</tt> in the
+	 * <tt>class_init</tt> function.
+	 */
+};
+
+static GObjectClass *<i><tt>foo</tt></i>_extension_parent_class = NULL;
+
+static GType <i><tt>foo</tt></i>_extension_type = 0;
+
+GType
+ephy_<i><tt>foo</tt></i>_extension_get_type (void)
+{
+	return <i><tt>foo</tt></i>_extension_type;
+}
+
+GType
+ephy_<i><tt>foo</tt></i>_extension_register_type (GTypeModule *module)
+{
+	static const GTypeInfo our_info =
+	{
+		sizeof (Ephy<i><tt>Foo</tt></i>ExtensionClass),
+		NULL, /* base_init */
+		NULL, /* base_finalize */
+		(GClassInitFunc) ephy_<i><tt>foo</tt></i>_extension_class_init,
+		NULL,
+		NULL, /* class_data */
+		sizeof (Ephy<i><tt>Foo</tt></i>Extension),
+		0, /* n_preallocs */
+		(GInstanceInitFunc) ephy_<i><tt>foo</tt></i>_extension_init
+	};
+
+	static const GInterfaceInfo extension_info =
+	{
+		(GInterfaceInitFunc) ephy_<i><tt>foo</tt></i>_extension_iface_init,
+		NULL,
+		NULL
+	};
+
+	<i><tt>foo</tt></i>_extension_type =
+		g_type_module_register_type (module, G_TYPE_OBJECT, "Ephy<i><tt>Foo</tt></i>Extension", &amp;our_info, 0);
+	
+	g_type_module_add_interface (module, <i><tt>foo</tt></i>_extension_type, EPHY_TYPE_EXTENSION, &amp;extension_info);
+
+	return <i><tt>foo</tt></i>_extension_type;
+}
+
+static void
+ephy_<i><tt>foo</tt></i>_extension_init (Ephy<i><tt>Foo</tt></i>Extension *extension)
+{
+	extension-&gt;priv = EPHY_<i><tt>FOO</tt></i>_EXTENSION_GET_PRIVATE (extension);
+
+	LOG ("Ephy<i><tt>Foo</tt></i>Extension initialising")
+}
+
+static void
+ephy_<i><tt>foo</tt></i>_extension_finalize (GObject *object)
+{
+	/* If needed,
+	 * Ephy<i><tt>Foo</tt></i>Extension *extension = EPHY_<i><tt>FOO</tt></i>_EXTENSION (object);
+	 * ...followed by, say, some <tt>g_free</tt> calls.
+	 */
+	
+	LOG ("Ephy<i><tt>Foo</tt></i>Extension finalizing")
+
+	G_OBJECT_CLASS (<i><tt>foo</tt></i>_extension_parent_class)-&gt;finalize (object);
+}
+
+static void
+ephy_<i><tt>foo</tt></i>_extension_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
+{
+/* Code this function if anything was placed after <tt>PROP_0</tt> in the <tt>enum</tt> above. */
+/*
+	Ephy<i><tt>Foo</tt></i>Extension *extension = EPHY_<i><tt>FOO</tt></i>_EXTENSION (object);
+
+	switch (prop_id)
+	{
+	}
+*/
+}
+
+static void
+ephy_<i><tt>foo</tt></i>_extension_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+/* Code this function if anything was placed after <tt>PROP_0</tt> in the <tt>enum</tt> above. */
+/*
+	Ephy<i><tt>Foo</tt></i>Extension *extension = EPHY_<i><tt>FOO</tt></i>_EXTENSION (object);
+
+	switch (prop_id)
+	{
+	}
+*/
+}
+
+static void
+ephy_<i><tt>foo</tt></i>_extension_class_init (Ephy<i><tt>Foo</tt></i>ExtensionClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	<i><tt>foo</tt></i>_extension_parent_class = g_type_class_peek_parent (klass);
+
+	object_class-&gt;finalize = ephy_<i><tt>foo</tt></i>_extension_finalize;
+	object_class-&gt;get_property = ephy_<i><tt>foo</tt></i>_extension_get_property;
+	object_class-&gt;set_property = ephy_<i><tt>foo</tt></i>_extension_set_property;
+
+	g_type_class_add_private (object_class, sizeof (Ephy<i><tt>Foo</tt></i>ExtensionPrivate));
+}
+			</pre><p>The astute reader will undoubtably be shocked by the missing <tt>ephy_<i><tt>foo</tt></i>_extension_iface_init</tt> function. It is written and described in the next chapter.</p></div><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s02.html">&lt;&lt;&lt; Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s04.html">Next &gt;&gt;&gt;</a></td></tr><tr><td width="40%" align="left">4.2. Header File </td><td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td><td width="40%" align="right"> 4.4. The Extension Interface</td></tr></table></div></body></html>

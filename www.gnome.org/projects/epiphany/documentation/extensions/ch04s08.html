@@ -1,0 +1,49 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.8. Statusbar</title><meta name="generator" content="DocBook XSL Stylesheets V1.45"><link rel="home" href="index.html" title="Writing Epiphany Extensions"><link rel="up" href="Coding.html" title="Chapter 4. Coding"><link rel="previous" href="ch04s07.html" title="4.7. User Interface Integration"><link rel="next" href="ch04s09.html" title="4.9. GConf Settings"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.8. Statusbar</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s07.html">&lt;&lt;&lt; Prev</a> </td><th width="60%" align="center">Chapter 4. Coding</th><td width="20%" align="right"> <a accesskey="n" href="ch04s09.html">Next &gt;&gt;&gt;</a></td></tr></table><hr></hr></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id3342927"></a>4.8. Statusbar</h2></div></div><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0"><tr><td rowspan="2" align="center" valign="top" width="25"><img src="./stylesheet/warning.png"></img></td><th align="left" valign="top">Warning</th></tr><tr><td colspan="2" align="left" valign="top"><p xmlns="">The statusbar can only display one message at a time. What's more, the statusbar can be disabled. Statusbar messages from one extension can conflict with another &#8212; and all extensions can conflict with Epiphany's standard statusbar messages. There are many reasons <b>not</b> to write statusbar messages in your extension.</p></td></tr></table></div><p>Writing statusbar messages is one of the easiest things to do from an extension. Just be sure to understand <tt>GtkStatusbar</tt>s: in a given context, there is a stack of messages. Only the top message from <b>all</b> contexts can be shown at a time, and messages can be pushed and popped to and from the stack on any given context.</p><p>This sample code should give some ideas:</p><pre class="programlisting">
+static void
+impl_attach_window (EphyExtension *extension, EphyWindow *window)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
+
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
+
+	context_id = gtk_statusbar_get_context_id (statusbar, "<i><tt>Foo</tt></i> extension");
+
+	g_object_set_data (G_OBJECT (window), "<i><tt>foo</tt></i>-statusbar-cid", GUINT_TO_POINTER (context_id));
+}
+
+static void
+write_statusbar_message (EphyWindow *window, const char *message)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
+
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
+
+	context_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (window), "<i><tt>foo</tt></i>-statusbar-cid"));
+	g_return_if_fail (context_id != 0);
+
+	/* Keep a maximum of one element on the stack */
+	gtk_statusbar_pop (statusbar, context_id);
+
+	/* Write our message */
+	gtk_statusbar_push (statusbar, context_id, message);
+}
+
+static void
+remove_statusbar_message (EphyWindow *window)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
+
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
+
+	context_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (window), "<i><tt>foo</tt></i>-statusbar-cid"));
+	g_return_if_fail (context_id != 0);
+
+	gtk_statusbar_pop (statusbar, context_id);
+}
+			</pre></div><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s07.html">&lt;&lt;&lt; Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s09.html">Next &gt;&gt;&gt;</a></td></tr><tr><td width="40%" align="left">4.7. User Interface Integration </td><td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td><td width="40%" align="right"> 4.9. GConf Settings</td></tr></table></div></body></html>
