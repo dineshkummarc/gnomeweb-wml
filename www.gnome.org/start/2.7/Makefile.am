@@ -1,4 +1,4 @@
-SUBDIRS = platform desktop bindings ui-review
+SUBDIRS = platform desktop bindings
 
 urlpath = /start/2.7
 
