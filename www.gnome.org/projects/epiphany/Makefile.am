@@ -15,6 +15,7 @@ page_SCRIPTS=			\
 	resources.html		\
 	extensions.html		\
 	smartbookmarks.html \
-	epiphany.php
+	epiphany.php \
+	bugreports.xhtml
 
 include $(top_srcdir)/rules.common
