@@ -42,7 +42,7 @@
         $errors[] = "Please enter your contributions to GNOME.";
       }
  
-     if (!$paris && !$copenhagen && !$none && !$seville) {
+     if ($paris != "true" && $copenhagen != "true" && $none != "true" && $seville != "true") {
 	$bad_elements[] = "attend";
 	$errors[] = "Please specify if you have previously attended GUADEC.";
      }
@@ -56,7 +56,7 @@
         $formmail .= "Name:\t" . $contactname . "\n";
         $formmail .= "Age:\t" . $contactage . "\n";
         $formmail .= "Residence:\t" . $contactaddress . "\n";
-	$formmail .= "Affiliation:\t". $affiliation . "\n";
+	$formmail .= "Affiliation [if any]:\t". $affiliation . "\n";
         $formmail .= "Email:\t" . $email . "\n\n";
 
         $formmail .= "User:\t" . $user . "\n";
@@ -175,7 +175,7 @@
 	</tr>
         <tr>
 	  <td valign="top" colspan="2">
-	    <font color="red">*</font>Contributions to GNOME [developer only]:
+	    <font color="red">*</font>Contributions to GNOME [if contributor]:
 	  </td>
         </tr>
 	<tr>
@@ -228,14 +228,14 @@
              <input type="checkbox" name="guadec" <? if ($guadec) { ?> checked <? } ?> >  I am interested in attending GUADEC in 2003.
           </td>
         </tr>
-	<tr>
-	  <td colspan=2>&nbsp;</td>
-	</tr>
         <tr>
           <td colspan=2>
                  <input type="checkbox" name="sponsor" <? if ($sponsor) { ?> checked <? } ?> >  I will need sponsorship to attend GUADEC in 2003.
           </td>
         </tr>
+	<tr>
+	  <td colspan=2>&nbsp;</td>
+	</tr>
         <tr>
           <td colspan=2>
             <input type="checkbox" name="tutorial" <? if ($tutorial) { ?> checked <? } ?> >  I am interested in attending professional tutorials about GTK+ and GNOME technology for a fee.
@@ -243,7 +243,7 @@
         </tr>
         <tr>
           <td colspan=2>
-            <input type="checkbox" name="notutorial" <? if ($notutorial) { ?> checked <? } ?> >  I am <B>not</B> interested in attending any professional tutorials about GTK+ and GNOME technology for a fee.
+            <input type="checkbox" name="notutorial" <? if ($notutorial) { ?> checked <? } ?> >  I am <B>not</B> interested in attending any professional tutorials for a fee.
           </td>
         </tr>
 	<tr>
