@@ -12,6 +12,7 @@ page_DATA =			\
 	devdoc.shtml  		\
 	faq.shtml       	\
 	foot.shtml  		\
+	hackfest-eplugin.shtml	\
 	index.shtml  		\
 	patch.shtml		\
 	screenshots14.shtml	\
