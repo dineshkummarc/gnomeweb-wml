@@ -13,7 +13,8 @@ SUBDIRS=			\
 	gnome-print		\
 	agnubis			\
 	gst			\
-	gnome-network
+	gnome-network	\
+	epiphany
 
 urlpath=/projects
 
