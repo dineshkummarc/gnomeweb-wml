@@ -50,8 +50,78 @@ them.</p>
 
 <p><h2>Camel</h2>
 
-<p>Camel resides in the <i>camel</i> directory of the <i>evolution</i>
-cvs module. Included in this library are a MIME parser and a
-JavaMail-like mailbox access library.</p>
+<b>C</b>amel is <b>A</b> <b>M</b>ail ac<b>E</b>ss <b>L</b>ibrary.
+<p>
+True indeed, however <b>Camel</b> doesn't really stand for
+anything like that.  It's just a short catchy name.
+<p>
+
+<p>Camel resides in the <i><a
+href="http://cvs.gnome.org/viewcvs/evolution/camel">camel</a></i>
+directory of the <i>evolution</i> cvs module.  It is a very complete
+mail user agent library for internet mail access, sending and processing,
+loosely based on JavaMail.  It totals nearly
+100KLOC of &quot;Pure C&quot;.
+<p>
+Conceptually Camel contains two main parts, a library of email and MIME related
+utilities, and an API and set of implementations for mail storage and
+retrieval.  Although these are integrated into the one library, with
+implementations provided using a simple plugin system.
+<p>
+Like JavaMail it works via a synchronous multi-threading api.
+Because of this Camel uses its own object system, historically since
+GtkObject didn't provide any multithread capability, and it continues
+to because it has evolved features not present in GObject that greatly
+simplify multithreaded programming.  Camel Objects are lighter weight
+and also provide thread-safe event handling in an efficient manner.
+<p>
+At its heart Camel merely implements RFC's, many of them.  An example
+of some of the RFC's it implements or references:
+<ul>
+<li>RFC 821 - Simple Mail Transfer Protocol (SMTP)
+<li>RFC 822 - Message format of internet mail messages
+<li>RFC 1642 - UTF-7 encoding
+<li>RFC 1652 - SMTP 8 bit extension
+<li>RFC 1730 - IMAP version 4
+<li>RFC 1738 - Uniform Resource Locators
+<li>RFC 1808 - relative URLs
+<li>RFC 1896 - text/enriched
+<li>RFC 1939 - POP v 3.
+<li>RFC 2034 - SMTP enhanced error code extension
+<li>RFC 2045 - MIME message format
+<li>RFC 2046 - MIME media types
+<li>RFC 2047 - MIME header format
+<li>RFC 2060 - IMAP version 4.1
+<li>RFC 2070 - Internationlisation of HTML.
+<li>RFC 2184 - MIME parameter format
+<li>RFC 2554 - SMTP authentication extension
+<li>RFC 2595 - TLS with IMAP, POP3 and ACAP
+<li>RFC 2632 - S/MIME v3 certificate handling
+<li>RFC 2633 - S/MIME v3 message format
+<li>RFC 2683 - IMAP4 implementation recommendations
+<li>RFC 2831 - Digest Agorithm for SASL Authentication
+<li>RFC 3156 - OpenPGP MIME message format
+<li>... and many more!
+</ul>
+
+<p>
+But as well as implementing RFC's it provides a consistent high-level
+and generally high performance abstraction for working with mail
+folders and messages.  Although it provides no direct display mechisms it
+provides many utilities and mechanisms to support the MUA.
+<ul>
+<li>Searching, including full body indexing
+<li>Message threading
+<li>Message parsing and creation
+<li>Addressing
+<li>Mail transport
+<li>Mail storage and retrieval
+<li>Stream processing of message content
+<li>Event notifications
+<li>URL and URI parsing and creation
+<li>Virtual folders
+<li>Email filtering
+<li>per-message and per-folder metadata
+</ul>
 
 <!--#include virtual="foot.shtml"-->
