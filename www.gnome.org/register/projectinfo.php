@@ -46,30 +46,30 @@ They are:
 
 <P><B>Project Information</B></P>
 Full Name :<BR>
-<INPUT size="40" maxlength="40" type=text name="form_full_name"><BR>
+<INPUT size="40" maxlength="40" type=text name="form_full_name"><BR><BR>
 Unix Name :<BR>
-<INPUT type="text" maxlength="15" SIZE="15" name="form_unix_name"><BR>
+<INPUT type="text" maxlength="15" SIZE="15" name="form_unix_name"><BR><BR>
 Short Description (255 chars or less) :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_description"><BR>
+<INPUT type="text" maxlength="255" size="60" name="form_description"><BR><BR>
+Mini Description (2 - 5 words; Used in GNOME Weekly Summary) :<BR>
+<INPUT type="text" maxlength="40" name="form_minidesc"><BR><BR>
 Gnome Support :<BR>
 <SELECT name="form_gnome_support">
 <OPTION value="1" selected>Yes
 <OPTION value="0">No, GTK+ only
-</SELECT><BR>
-Contact email (usually mailing list or maintainer) :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_contact"><BR>
+</SELECT><BR><BR>
 Homepage :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_homepage"><BR>
+http://<INPUT type="text" maxlength="255" size="60" name="form_homepage"><BR><BR>
 Screenshots :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_screenshot"><BR>
-Download :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_download"><BR>
+http://<INPUT type="text" maxlength="255" size="60" name="form_screenshot"><BR><BR>
+Download (fully qualifed URL) :<BR>
+<font color="#FFFFFF">http://</font><INPUT type="text" maxlength="255" size="60" name="form_download"><BR><BR>
 Mailing List :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_maillist"><BR>
+http://<INPUT type="text" maxlength="255" size="60" name="form_maillist"><BR><BR>
 CVS (e.g. CVSWEB or ViewCVS) :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_cvs"><BR>
-Bug Tracker URL :<BR>
-<INPUT type="text" maxlength="255" size="60" name="form_bugs"><BR>
+http://<INPUT type="text" maxlength="255" size="60" name="form_cvs"><BR><BR>
+Bug Tracker :<BR>
+http://<INPUT type="text" maxlength="255" size="60" name="form_bugs"><BR><BR>
 License :<BR>
 <?php
 	echo '<SELECT NAME="form_license">';

@@ -61,11 +61,17 @@ $HTML->box1_top("Misc. Project Information");
 
 print '
 <P>
-Short Description: '. db_result($res_grp,0,'short_description') .'
+Short Description: '. db_result($res_grp,0,'short_description');
+
+$homepage = db_result($res_grp,0,'url_homepage');
+
+if ($homepage != "")
+{
+	print '
 <P>
-Homepage Link: <B><A HREF="http://'. db_result($res_grp,0,'url_homepage') .'">http://'
- . db_result($res_grp,0,'url_homepage') .'</A></B>
+Homepage Link: <B><A HREF="http://'. $homepage .'">http://' . $homepage .'</A></B>
 </P>';
+}
 
 $HTML->box1_bottom(); 
 

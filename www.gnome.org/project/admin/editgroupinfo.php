@@ -102,7 +102,8 @@ if ($Update) {
 		."url_mail='$form_mail',"
 		."url_bugtracker='$form_bugtracker',"
 		."url_screenshot='$form_screenshot',"
-		."short_description='$form_shortdesc'"
+		."short_description='$form_shortdesc',"
+		."mini_description='$form_minidesc'"
 /*		
 		."use_bugs='$use_bugs',"
 		."use_bug_depend_box='$use_bug_depend',"
@@ -155,6 +156,9 @@ print '
 <P>Short Description (255 Character Max, HTML will be stripped from this description):
 <BR><TEXTAREA cols=60 rows=3 wrap="virtual" name="form_shortdesc">
 '.$row_grp['short_description'].'</TEXTAREA></P>
+
+<P>Mini Description (2-5 words; to be used in GNOME Summaries):
+<BR><INPUT type="text" name="form_minidesc" maxlength="40" value="'.$row_grp['mini_description'].'">
 
 <P>Homepage Link:
 <BR>http://<INPUT type="text" size="60" maxlength="255" name="form_homepage" value="'.$row_grp['url_homepage'].'"></P>
