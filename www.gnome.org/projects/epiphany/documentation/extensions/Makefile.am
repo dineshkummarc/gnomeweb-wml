@@ -18,6 +18,7 @@ page_SCRIPTS= \
     ch02s03.html \
     ch02s04.html \
     ch02s05.html \
+    ch02s06.html \
     ch03.html \
     ch04.html \
     ch04s02.html \
