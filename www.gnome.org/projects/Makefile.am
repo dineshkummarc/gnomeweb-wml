@@ -4,6 +4,7 @@ SUBDIRS=			\
 	devtools		\
 	dia			\
 	evolution		\
+	f-spot			\
 	gconf			\
 	gnome-core		\
 	gnome-libs		\
