@@ -15,4 +15,8 @@ page_SCRIPTS=index.html\
 
 include $(top_srcdir)/rules.common
 
-EXTRA_DIST=foot.png
+misc_images=foot.png
+
+page_DATA=$(misc_images)
+		  
+EXTRA_DIST=$(page_DATA)
