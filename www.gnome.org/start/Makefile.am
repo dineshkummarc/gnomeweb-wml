@@ -4,6 +4,7 @@ urlpath = /start
 
 page_SCRIPTS= \
 	index.html \
-        getstable.html
+        getstable.html \
+	helping.html
 
 include $(top_srcdir)/rules.common
