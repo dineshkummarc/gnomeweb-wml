@@ -98,7 +98,7 @@ if (browser_is_ie() && browser_is_mac()) {
 <p>
 <b>Gnome.org Site Login</b>
 <p>
-<font color="red"><B>Cookies must be enabled past this point.</B></font>
+<B><font color="red">NOTE:</font> Cookies must be enabled past this point.</B>
 <P>
 <form action="http://<?php echo $HTTP_HOST; ?>/account/login.php" method="post">
 <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">

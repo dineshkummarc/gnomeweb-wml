@@ -20,7 +20,7 @@ desktop:</p>
 <a href="<?php print $GLOBALS['sys_http_domain']."/register/"; ?>">Add a new project to the software map.</a><br>
 </p>
 
-<p>Contact <a href="webmaster@gnome.org">webmaster@gnome.org</a> with questions.</p>
+<p>Contact <a href="mailto:webmaster@gnome.org">webmaster@gnome.org</a> with questions.</p>
 
 <?php
 $HTML->footer();
