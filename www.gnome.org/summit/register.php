@@ -39,14 +39,13 @@
         $bad_elements[] = "email";
         $errors[] = "Please enter an email address we can use to contact you.";
       }
-      if (! $contactphone) {
-        $bad_elements[] = "contactphone";
-        $errors[] = "Please enter a phone number complete with area code and country code.";
-      }
-      if (! $gfmember) {
-        $bad_elements[] = "gfmember";
-        $errors[] = "You must be a <a href=\"http://foundation.gnome.org/membership-form.html\">GNOME Foundation member</a> to register.";
-      }
+#
+# We are now relaxing this restriction.
+#
+#      if (! $contactphone) {
+#        $bad_elements[] = "contactphone";
+#        $errors[] = "Please enter a phone number complete with area code and country code.";
+#      }
 
 
 
