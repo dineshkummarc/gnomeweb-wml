@@ -3,7 +3,7 @@ SUBDIRS = releases
 urlpath = /press
 
 page_SCRIPTS = \
-	index.wml
+	index.html
 
 include $(top_srcdir)/rules.common
 
