@@ -32,6 +32,17 @@ page_SCRIPTS = \
 	guadec5-speakers.html	\
 	rockandroll.html \
 	gnome28.html \
-	simultaneous_conferences.html
+	simultaneous_conferences.html \
+	gnome210_press_release.da.html \
+	gnome210_press_release.de.html \
+	gnome210_press_release.el.html \
+	gnome210_press_release.fr.html \
+	gnome210_press_release.mk.html \
+	gnome210_press_release.nl.html \
+	gnome210_press_release.pa.html \
+	gnome210_press_release.pt_BR.html \
+	gnome210_press_release.sq.html \
+	gnome210_press_release.th.html \
+	gnome210_press_release.html
 
 include $(top_srcdir)/rules.common
