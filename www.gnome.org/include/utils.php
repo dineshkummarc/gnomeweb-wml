@@ -27,6 +27,15 @@ function util_unconvert_htmlspecialchars($string) {
 	}
 }
 
+function util_spamproof_email($email) {
+	$pos = strpos ($email, "@");
+	if (($pos != FALSE) && ($pos < strlen ($email)))
+	{
+		$chunks = explode ("@", $email);
+		return $chunks[0]." at ".$chunks[1];
+	}
+}
+
 function util_result_columns_to_assoc($result, $col_key=0, $col_val=1) {
 	/*
 		Takes a result set and turns the column pair into

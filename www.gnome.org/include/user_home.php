@@ -40,19 +40,19 @@ $HTML->header(array('title'=>'User Profile'));
 	<TD><B><?php print $user->getRealName(); ?></B></TD>
 </TR>
 <?php
-/*
+if ($user->getShowEmail())
+{
+?>
 <TR valign=top>
-	<TD>Email Addr: </TD>
-	<TD>
-	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></A></B>
+	<TD>Email Address: </TD>
+	<TD><B><?php print util_spamproof_email ($user->getEmail()); ?></A></B>
 	</TD>
 </TR>
-*/
+<?php
+}
 ?>
 
 <TR><TD COLSPAN=2>
-	<H4>Project Info</H4>
 	<P>
 <?php
 	// now get listing of groups for that user
