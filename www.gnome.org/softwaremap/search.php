@@ -345,7 +345,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 	echo "</TD>\n\t<TD ALIGN=\"right\">";
 	if ( $rows_returned > $rows) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
-		echo "<A HREF=\"/softwaremap/search/?type=$type_of_search&exact=$exact&q=".urlencode($words)."&offset=".($offset+25);
+		echo "<A HREF=\"/softwaremap/search.php?type=$type_of_search&exact=$exact&q=".urlencode($words)."&offset=".($offset+25);
 		if ( $type_of_search == 'artifact' ) {
 			echo "&group_id=$group_id&atid=$atid";
 		} 
