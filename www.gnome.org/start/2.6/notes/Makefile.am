@@ -13,7 +13,6 @@ page_DATA = index.html \
 	rnlookingahead.html \
 	rnmemorial.html \
 	rnstandards.html \
-	rnthanks.html \
 	rnwhatsnew.html
 
 include $(top_srcdir)/rules.common
