@@ -3,6 +3,7 @@ SUBDIRS=
 urlpath=/projects/gedit/images
 
 page_SCRIPTS= \
+	gedit-banner.png \
 	gedit-logo.png \
 	favicon.png \
 	sshot1.png \
