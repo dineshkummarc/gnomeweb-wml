@@ -7,6 +7,8 @@ page_SCRIPTS =  bugs.shtml	\
 		credits.shtml	\
 		download.shtml   \
 		features.shtml	\
+		foot.shtml	\
+		head.shtml	\
 		index.shtml	\
 		menu.shtml	\
 		news.shtml	\
