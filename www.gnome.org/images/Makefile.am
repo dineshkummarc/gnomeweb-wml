@@ -1,6 +1,8 @@
-include $(top_srcdir)/rules.common
+urlpath=/images
 
-urlpath=images
+page_SCRIPTS=
+
+include $(top_srcdir)/rules.common
 
 misc_images=\
   background.png\
@@ -79,11 +81,10 @@ topbar_headers=\
 
 page_DATA=$(misc_images)	\
 	$(banner_images)	\
-	$(popdown_images) \
-	$(sidebar_headers) \
-	$(sidebar_images) \
-	$(sidebar_items) \
+	$(popdown_images)	\
+	$(sidebar_headers)	\
+	$(sidebar_images)	\
+	$(sidebar_items)	\
 	$(topbar_headers)
-  
 
 EXTRA_DIST=$(page_DATA)
