@@ -195,25 +195,25 @@
         <tr>
           <td colspan=2>
              <select name="attend[]" multiple>
-	     <? if (trim(attend[0]) == "none")) { ?>
+	     <? if (trim(attend[0]) == "none") { ?>
 	            <option value="none" selected> I have not attended a past GUADEC</option>
 	        <? } else { ?>
 	            <option value="none"> I have not attended a past GUADEC</option>
 		<? } ?>
 
-	     <? if (trim(attend[1]) == "paris")) { ?>
+	     <? if (trim(attend[1]) == "paris") { ?>
 	     	    <option value="paris" selected> I attended GUADEC 1 (Paris, France)</option>
 	        <? } else { ?>
 	     	    <option value="paris"> I attended GUADEC 1 (Paris, France)</option>
 		<? } ?>
 
-	     <? if (trim(attend[2]) == "copenhagen")) { ?>
+	     <? if (trim(attend[2]) == "copenhagen") { ?>
                      <option value="copenhagen" selected> I attended GUADEC 2 (Copenhagen, Denmark)</option>
 	        <? } else { ?>
              	     <option value="copenhagen"> I attended GUADEC 2 (Copenhagen, Denmark)</option>
 		<? } ?>
 
-	     <? if (trim(attend[2]) == "seville")) { ?>
+	     <? if (trim(attend[2]) == "seville") { ?>
                      <option value="seville" selected> I attended GUADEC 3 (Seville, Spain)</option>
 	        <? } else { ?>
                      <option value="seville"> I attended GUADEC 3 (Seville, Spain)</option>
