@@ -188,8 +188,8 @@ cellpadding="0" cellspacing="0" bgcolor="#000000" name="menutasks">
 <td width=12 background="<?php print $GLOBALS['sys_http_domain']; ?>/images/sidebar-stripe-green.png" rowspan="7"><?php print $this->img("dot.gif", "1", "12"); ?></td>
 <?php 
 print $this->menurow("findout", "Find out what GNOME is", "/intro/findout.html")."</tr>\n<tr>"
-. $this->menurow("seegnome", "See GNOME in action", "/seegnome.html")."</tr>\n<tr>"
-. $this->menurow("getgnome", "Get GNOME", "/start/")."</tr>\n<tr>"
+. $this->menurow("seegnome", "See GNOME in action", "/start/2.0/screenshots/")."</tr>\n<tr>"
+. $this->menurow("getgnome", "Get GNOME", "/start/2.0/")."</tr>\n<tr>"
 . $this->menurow("learn", "Learn to use GNOME", "/learn/")."</tr>\n<tr>"
 . $this->menurow("getmore", "Get more software", "/softwaremap/")."</tr>\n<tr>"
 . $this->menurow("developwith", "Develop with GNOME", "http://developer.gnome.org")."</tr>\n<tr>"
