@@ -7,7 +7,8 @@ urlpath=
 page_SCRIPTS=index.shtml		\
 	seegnome.html   		\
 	getgnome.html   		\
-	commsupp.html
+	commsupp.html       \
+	speakingabout.html
 
 page_DATA=menucontrol.js
 
