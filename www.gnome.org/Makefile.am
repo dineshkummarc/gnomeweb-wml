@@ -4,7 +4,6 @@ urlpath =
 
 page_SCRIPTS = \
 	commsupp.html \
-	speakingabout.html \
 	.htaccess \
 	users \
 	default.css \
