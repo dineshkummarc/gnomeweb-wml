@@ -7,7 +7,8 @@ page_SCRIPTS=index.php3		\
 	seegnome.html   		\
 	commsupp.html       \
 	speakingabout.html  \
-	pressreleases.html
+	pressreleases.html  \
+	pressresources.html
 
 page_DATA=menucontrol.js
 
