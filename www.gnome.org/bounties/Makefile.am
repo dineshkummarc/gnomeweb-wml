@@ -48,6 +48,8 @@ page_DATA = \
 	mail-custom-header.png\
 	mailer-icon.png\
 	Mailer.php3\
+	Memory.php3\
+	memory.png \
 	miscellaneous-icon.png\
 	Miscellaneous.php3\
 	ml-headers.gif\
