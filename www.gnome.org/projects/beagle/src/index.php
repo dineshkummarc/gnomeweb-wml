@@ -11,8 +11,6 @@ template_header($option);
 <h2>
 Quickly find the stuff you care about
 </h2>
-  Forgot what that important file was called?  Don't remember where you saved it?  <em>Beagle to the rescue!</em>
-	</p>
 	<p>
 	It slices, it dices, and it may even find exactly what you're looking for.  Beagle is your one stop searching utility when it comes to quickly locating all the information you need.
 	</p>
