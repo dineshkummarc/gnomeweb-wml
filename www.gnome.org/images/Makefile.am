@@ -103,7 +103,12 @@ title_texts=\
 	title-november.png\
 	title-december.png\
 	title-binary-packages.png\
-	title-source-code.png
+	title-source-code.png\
+  title-ircchannels.png\
+	title-newsgroups.png\
+	title-mailinglists.png\
+	title-nationalwebsite.png\
+	title-relatedprojects.png
 
 icons=\
   icon-new.png\
