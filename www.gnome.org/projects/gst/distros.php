@@ -71,7 +71,7 @@
       "Turbolinux"  => array( "7.0" ),
       "PLD Linux"    => array( "1.0", "1.1", "1.99" ),
       "OpenNA"    => array ( "1.0" ),
-      "Fedora Core" => array ( "1", "2" )
+      "Fedora Core" => array ( "1", "2" ),
       "Gentoo"       => array( "current" ),
       "FreeBSD" => array ( "4.x", "5.x" ),
     ),
