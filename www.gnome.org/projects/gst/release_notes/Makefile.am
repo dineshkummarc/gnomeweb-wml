@@ -13,7 +13,8 @@ page_SCRIPTS = 0.21.html \
 	       0.28.0.html \
 	       0.29.0.html \
 	       0.30.0.html \
-	       0.31.0.html
+	       0.31.0.html \
+	       0.33.0.html
 
 include $(top_srcdir)/rules.common
 
