@@ -81,7 +81,7 @@ td.bold {
 <tr bgcolor="#c8d4e2">
     <td bgcolor="#acaba9" align=right>2:00 PM</td>
     <td rowspan=5 align=center> Hacking, etc.</td> <!-- 33-419 -->
-    <td rowspan=2 valign=top>&quot;GNOME Project Infrastructure,&quot; Jeff Waugh.</td> <!--  1-135 -->
+    <td rowspan=2 valign=top>&quot;GNOME Project Infrastructure: cvs, www, bugzilla, etc.,&quot; Jeff Waugh.</td> <!--  1-135 -->
     <td rowspan=2>&quot;Setting your computer's time and other 'sysadmin' tasks,&quot; Chema Celorio</td> <!-- 33-418 -->
     <td rowspan=5></td> <!--  1-135 -->
     <td rowspan=5></td> <!--  1-136 -->
