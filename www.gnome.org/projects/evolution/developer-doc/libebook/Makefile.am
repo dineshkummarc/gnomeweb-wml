@@ -1,5 +1,3 @@
-SUBDIRS = doc images
-
 urlpath=/projects/evolution/developer-doc/libebook
 
 page_DATA = 				\
