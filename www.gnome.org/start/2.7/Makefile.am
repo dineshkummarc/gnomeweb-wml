@@ -1,9 +1,11 @@
-SUBDIRS=ui-review modules
+SUBDIRS = platform desktop bindings ui-review
 
-urlpath=/start/2.7
+urlpath = /start/2.7
 
-page_SCRIPTS=index.html helping.html
+page_SCRIPTS = \
+	index.html
+
+page_DATA = \
+	schedule.ics
 
 include $(top_srcdir)/rules.common
-
-page_DATA=
