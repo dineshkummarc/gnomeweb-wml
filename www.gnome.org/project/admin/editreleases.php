@@ -31,8 +31,9 @@ if ($step1) {
 	$exec_changes = true;
 
 	// Check for uplaoded change logs
-	if ($uploaded_changes != "none") {
-		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'), filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
+	if ($uploaded_changes != "") {
+		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'),
+			filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
 		if ((strlen($changes) < 20) || (strlen($changes) > 256000)) {
 			$feedback .= " Change Log Is Either Too Small Or Too Large ";
 			$exec_changes = false;
