@@ -1,0 +1,365 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EBook</title><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><meta name="generator" content="GTK-Doc V1.1 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style><link rel="home" href="index.html" title="[Insert name here] Reference Manual"><link rel="up" href="ch01.html" title="[Insert title here]"><link rel="previous" href="EBookView.html" title="EBookView"><link rel="next" href="EContact.html" title="EContact"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EBookView.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">[Insert name here] Reference Manual</th><td><a accesskey="n" href="EContact.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EBook"></a><div class="titlepage"></div><div class="refnamediv"><h2>EBook</h2><p>EBook &#8212; The primary Evolution addressbook client object.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+<a href="EBook.html" title="EBook">EBook</a>*      <a href="EBook.html#e-book-new">e_book_new</a>                      (void);
+gboolean    <a href="EBook.html#e-book-load-uri">e_book_load_uri</a>                 (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *uri,
+                                             gboolean only_if_exists,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-unload-uri">e_book_unload_uri</a>               (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-remove">e_book_remove</a>                   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-load-local-addressbook">e_book_load_local_addressbook</a>   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-supported-fields">e_book_get_supported_fields</a>     (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList **fields,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-supported-auth-methods">e_book_get_supported_auth_methods</a>
+                                            (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList **auth_methods,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-authenticate-user">e_book_authenticate_user</a>        (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *user,
+                                             const char *passwd,
+                                             const char *auth_method,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-contact">e_book_get_contact</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             <a href="EContact.html" title="EContact">EContact</a> **contact,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-remove-contact">e_book_remove_contact</a>           (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-remove-contacts">e_book_remove_contacts</a>          (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList *id_list,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-add-contact">e_book_add_contact</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-commit-contact">e_book_commit_contact</a>           (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-book-view">e_book_get_book_view</a>            (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             EBookQuery *query,
+                                             GList *requested_fields,
+                                             int max_results,
+                                             <a href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-contacts">e_book_get_contacts</a>             (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             EBookQuery *query,
+                                             GList **contacts,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-changes">e_book_get_changes</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             char *changeid,
+                                             GList **changes,
+                                             GError **error);
+void        <a href="EBook.html#e-book-free-change-list">e_book_free_change_list</a>         (GList *change_list);
+const char* <a href="EBook.html#e-book-get-uri">e_book_get_uri</a>                  (<a href="EBook.html" title="EBook">EBook</a> *book);
+const char* <a href="EBook.html#e-book-get-static-capabilities">e_book_get_static_capabilities</a>  (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-check-static-capability">e_book_check_static_capability</a>  (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *cap);
+gboolean    <a href="EBook.html#e-book-is-writable">e_book_is_writable</a>              (<a href="EBook.html" title="EBook">EBook</a> *book);
+gboolean    <a href="EBook.html#e-book-cancel">e_book_cancel</a>                   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-self">e_book_get_self</a>                 (<a href="EContact.html" title="EContact">EContact</a> **contact,
+                                             <a href="EBook.html" title="EBook">EBook</a> **book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-set-self">e_book_set_self</a>                 (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-default-addressbook">e_book_get_default_addressbook</a>  (<a href="EBook.html" title="EBook">EBook</a> **book,
+                                             GError **error);
+gboolean    <a href="EBook.html#e-book-get-addressbooks">e_book_get_addressbooks</a>         (ESourceList **addressbook_sources,
+                                             GError **error);
+
+
+</pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="e-book-new"></a>e_book_new ()</h3><a class="indexterm" name="id2522850"></a><pre class="programlisting"><a href="EBook.html" title="EBook">EBook</a>*      e_book_new                      (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-load-uri"></a>e_book_load_uri ()</h3><a class="indexterm" name="id2524928"></a><pre class="programlisting">gboolean    e_book_load_uri                 (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *uri,
+                                             gboolean only_if_exists,
+                                             GError **error);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>uri</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>only_if_exists</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-unload-uri"></a>e_book_unload_uri ()</h3><a class="indexterm" name="id2525038"></a><pre class="programlisting">gboolean    e_book_unload_uri               (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-remove"></a>e_book_remove ()</h3><a class="indexterm" name="id2525109"></a><pre class="programlisting">gboolean    e_book_remove                   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-load-local-addressbook"></a>e_book_load_local_addressbook ()</h3><a class="indexterm" name="id2525182"></a><pre class="programlisting">gboolean    e_book_load_local_addressbook   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-supported-fields"></a>e_book_get_supported_fields ()</h3><a class="indexterm" name="id2433774"></a><pre class="programlisting">gboolean    e_book_get_supported_fields     (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList **fields,
+                                             GError **error);</pre><p>
+queries <i><tt>book</tt></i> for the list of fields it supports.  mostly for use
+by the contact editor so it knows what fields to sensitize.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>fields</tt></i>:</span></td><td> a GList
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-supported-auth-methods"></a>e_book_get_supported_auth_methods ()</h3><a class="indexterm" name="id2433893"></a><pre class="programlisting">gboolean    e_book_get_supported_auth_methods
+                                            (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList **auth_methods,
+                                             GError **error);</pre><p>
+queries <i><tt>book</tt></i> for the list of authentication methods it supports.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>auth_methods</tt></i>:</span></td><td> a GList
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-authenticate-user"></a>e_book_authenticate_user ()</h3><a class="indexterm" name="id2437983"></a><pre class="programlisting">gboolean    e_book_authenticate_user        (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *user,
+                                             const char *passwd,
+                                             const char *auth_method,
+                                             GError **error);</pre><p>
+authenticates <i><tt>user</tt></i> with <i><tt>passwd</tt></i>, using the auth method
+<i><tt>auth_method</tt></i>.  <i><tt>auth_method</tt></i> must be one of the authentication
+methods returned using e_book_get_supported_auth_methods.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>user</tt></i>:</span></td><td> a string
+</td></tr><tr><td><span class="term"><i><tt>passwd</tt></i>:</span></td><td> a string
+</td></tr><tr><td><span class="term"><i><tt>auth_method</tt></i>:</span></td><td> a string
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-contact"></a>e_book_get_contact ()</h3><a class="indexterm" name="id2438139"></a><pre class="programlisting">gboolean    e_book_get_contact              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             <a href="EContact.html" title="EContact">EContact</a> **contact,
+                                             GError **error);</pre><p>
+Fills in <i><tt>contact</tt></i> with the contents of the vcard in <i><tt>book</tt></i>
+corresponding to <i><tt>id</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>id</tt></i>:</span></td><td> a string
+</td></tr><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td> an <a href="EContact.html" title="EContact">EContact</a>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-remove-contact"></a>e_book_remove_contact ()</h3><a class="indexterm" name="id2438277"></a><pre class="programlisting">gboolean    e_book_remove_contact           (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             GError **error);</pre><p>
+Removes the contact with id <i><tt>id</tt></i> from <i><tt>book</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>id</tt></i>:</span></td><td> a string
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-remove-contacts"></a>e_book_remove_contacts ()</h3><a class="indexterm" name="id2438388"></a><pre class="programlisting">gboolean    e_book_remove_contacts          (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GList *id_list,
+                                             GError **error);</pre><p>
+Removes the contacts with ids from the list <i><tt>ids</tt></i> from <i><tt>book</tt></i>.  This is
+always more efficient than calling e_book_remove_contact_by_id if you
+have more than one id to remove, as some backends can implement it
+as a batch request.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>id_list</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-add-contact"></a>e_book_add_contact ()</h3><a class="indexterm" name="id2520510"></a><pre class="programlisting">gboolean    e_book_add_contact              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-commit-contact"></a>e_book_commit_contact ()</h3><a class="indexterm" name="id2520598"></a><pre class="programlisting">gboolean    e_book_commit_contact           (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
+                                             GError **error);</pre><p>
+applies the changes made to <i><tt>contact</tt></i> to the stored version in
+<i><tt>book</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td> an <a href="EContact.html" title="EContact">EContact</a>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-book-view"></a>e_book_get_book_view ()</h3><a class="indexterm" name="id2520716"></a><pre class="programlisting">gboolean    e_book_get_book_view            (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             EBookQuery *query,
+                                             GList *requested_fields,
+                                             int max_results,
+                                             <a href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                             GError **error);</pre><p>
+need docs here..</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>query</tt></i>:</span></td><td> an EBookQuery
+<i><tt>requested_fields</tt></i> a GList containing the names of fields to return, or NULL for all
+<i><tt>max_results</tt></i> the maximum number of contacts to show (or 0 for all)
+</td></tr><tr><td><span class="term"><i><tt>requested_fields</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>max_results</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>book_view</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-contacts"></a>e_book_get_contacts ()</h3><a class="indexterm" name="id2520895"></a><pre class="programlisting">gboolean    e_book_get_contacts             (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             EBookQuery *query,
+                                             GList **contacts,
+                                             GError **error);</pre><p>
+need docs here..</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>query</tt></i>:</span></td><td> an EBookQuery
+</td></tr><tr><td><span class="term"><i><tt>contacts</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-changes"></a>e_book_get_changes ()</h3><a class="indexterm" name="id2521024"></a><pre class="programlisting">gboolean    e_book_get_changes              (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             char *changeid,
+                                             GList **changes,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>changeid</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>changes</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-free-change-list"></a>e_book_free_change_list ()</h3><a class="indexterm" name="id2521131"></a><pre class="programlisting">void        e_book_free_change_list         (GList *change_list);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>change_list</tt></i>:</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-uri"></a>e_book_get_uri ()</h3><a class="indexterm" name="id2521174"></a><pre class="programlisting">const char* e_book_get_uri                  (<a href="EBook.html" title="EBook">EBook</a> *book);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-static-capabilities"></a>e_book_get_static_capabilities ()</h3><a class="indexterm" name="id2521231"></a><pre class="programlisting">const char* e_book_get_static_capabilities  (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-check-static-capability"></a>e_book_check_static_capability ()</h3><a class="indexterm" name="id2521309"></a><pre class="programlisting">gboolean    e_book_check_static_capability  (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *cap);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>cap</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-is-writable"></a>e_book_is_writable ()</h3><a class="indexterm" name="id2521395"></a><pre class="programlisting">gboolean    e_book_is_writable              (<a href="EBook.html" title="EBook">EBook</a> *book);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-cancel"></a>e_book_cancel ()</h3><a class="indexterm" name="id2521459"></a><pre class="programlisting">gboolean    e_book_cancel                   (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             GError **error);</pre><p>
+Used to cancel an already running operation on <i><tt>book</tt></i>.  This
+function makes a synchronous CORBA to the backend telling it to
+cancel the operation.  If the operation wasn't cancellable (either
+transiently or permanently) or had already comopleted on the server
+side, this function will return E_BOOK_STATUS_COULD_NOT_CANCEL, and
+the operation will continue uncancelled.  If the operation could be
+cancelled, this function will return E_BOOK_ERROR_OK, and the
+blocked e_book function corresponding to current operation will
+return with a status of E_BOOK_STATUS_CANCELLED.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td> an <a href="EBook.html" title="EBook">EBook</a>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a <a href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> value.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-self"></a>e_book_get_self ()</h3><a class="indexterm" name="id2521529"></a><pre class="programlisting">gboolean    e_book_get_self                 (<a href="EContact.html" title="EContact">EContact</a> **contact,
+                                             <a href="EBook.html" title="EBook">EBook</a> **book,
+                                             GError **error);</pre><p>
+Gets the address information for the current Evolution user.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-set-self"></a>e_book_set_self ()</h3><a class="indexterm" name="id2494463"></a><pre class="programlisting">gboolean    e_book_set_self                 (<a href="EBook.html" title="EBook">EBook</a> *book,
+                                             const char *id,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>id</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-default-addressbook"></a>e_book_get_default_addressbook ()</h3><a class="indexterm" name="id2494566"></a><pre class="programlisting">gboolean    e_book_get_default_addressbook  (<a href="EBook.html" title="EBook">EBook</a> **book,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>book</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-get-addressbooks"></a>e_book_get_addressbooks ()</h3><a class="indexterm" name="id2494648"></a><pre class="programlisting">gboolean    e_book_get_addressbooks         (ESourceList **addressbook_sources,
+                                             GError **error);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>addressbook_sources</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><i><tt>error</tt></i>:</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EBookView.html"><b>&lt;&lt; EBookView</b></a></td><td align="right"><a accesskey="n" href="EContact.html"><b>EContact &gt;&gt;</b></a></td></tr></table></body></html>

@@ -7,6 +7,7 @@ page_SCRIPTS=			\
 	arch.shtml   		\
 	bugs.shtml   		\
 	credits.shtml  		\
+	devdoc.shtml  		\
 	faq.shtml       	\
 	foot.shtml  		\
 	index.shtml  		\

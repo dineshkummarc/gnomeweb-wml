@@ -1,0 +1,146 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>ECalView</title><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><meta name="generator" content="GTK-Doc V1.1 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style><link rel="home" href="index.html" title="[Insert name here] Reference Manual"><link rel="up" href="ch01.html" title="[Insert title here]"><link rel="previous" href="libecal-e-cal-util.html" title="e-cal-util"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="libecal-e-cal-util.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">[Insert name here] Reference Manual</th></tr></table><div class="refentry" lang="en"><a name="ECalView"></a><div class="titlepage"></div><div class="refnamediv"><h2>ECalView</h2><p>ECalView &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="ECal"></a><pre class="synopsis">
+
+
+
+struct      <a href="ECal.html#ECal-struct">ECal</a>;
+#define     <a href="ECalView.html#E-CAL-VIEW-CAPS">E_CAL_VIEW</a>                      (obj)
+#define     <a href="ECalView.html#E-CAL-VIEW-CLASS-CAPS">E_CAL_VIEW_CLASS</a>                (klass)
+GType       <a href="ECalView.html#e-cal-view-get-type">e_cal_view_get_type</a>             (void);
+<a href="ECalView.html" title="ECalView">ECalView</a>*   <a href="ECalView.html#e-cal-view-new">e_cal_view_new</a>                  (GNOME_Evolution_Calendar_CalView corba_view,
+                                             <a href="ECalViewListener.html" title="ECalViewListener">ECalViewListener</a> *listener,
+                                             struct <a href="ECal.html" title="ECal">_ECal</a> *client);
+
+</pre></div><div class="refsect1" lang="en"><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GObject
+   +----ECal
+</pre></div><div class="refsect1" lang="en"><h2>Signal Prototypes</h2><pre class="synopsis">
+
+"<a href="ECal.html#ECal-backend-died">backend-died</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gpointer user_data);
+"<a href="ECal.html#ECal-backend-error">backend-error</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gchar *arg1,
+                                            gpointer user_data);
+"<a href="ECal.html#ECal-cal-opened">cal-opened</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gint arg1,
+                                            gpointer user_data);
+"<a href="ECal.html#ECal-cal-set-mode">cal-set-mode</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            ECalSetModeStatusEnum arg1,
+                                            CalModeEnum arg2,
+                                            gpointer user_data);
+"<a href="ECal.html#ECal-categories-changed">categories-changed</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gpointer arg1,
+                                            gpointer user_data);
+"<a href="ECal.html#ECal-forget-password">forget-password</a>"
+            void        user_function      (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gchar *arg1,
+                                            gpointer user_data);
+</pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="ECal-struct"></a>struct ECal</h3><a class="indexterm" name="id2563465"></a><pre class="programlisting">struct ECal;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="E-CAL-VIEW-CAPS"></a>E_CAL_VIEW()</h3><a class="indexterm" name="id2563482"></a><pre class="programlisting">#define E_CAL_VIEW(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), E_TYPE_CAL_VIEW, ECalView))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>obj</tt></i>:</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="E-CAL-VIEW-CLASS-CAPS"></a>E_CAL_VIEW_CLASS()</h3><a class="indexterm" name="id2563516"></a><pre class="programlisting">#define E_CAL_VIEW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), E_TYPE_CAL_VIEW, ECalViewClass))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>klass</tt></i>:</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-view-get-type"></a>e_cal_view_get_type ()</h3><a class="indexterm" name="id2563550"></a><pre class="programlisting">GType       e_cal_view_get_type             (void);</pre><p>
+Registers the <a href="ECalView.html" title="ECalView">ECalView</a> class if necessary, and returns the type ID assigned
+to it.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The type ID of the <a href="ECalView.html" title="ECalView">ECalView</a> class.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-cal-view-new"></a>e_cal_view_new ()</h3><a class="indexterm" name="id2562949"></a><pre class="programlisting"><a href="ECalView.html" title="ECalView">ECalView</a>*   e_cal_view_new                  (GNOME_Evolution_Calendar_CalView corba_view,
+                                             <a href="ECalViewListener.html" title="ECalViewListener">ECalViewListener</a> *listener,
+                                             struct <a href="ECal.html" title="ECal">_ECal</a> *client);</pre><p>
+Creates a new view object by issuing the view creation request to the
+calendar server.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>corba_view</tt></i>:</span></td><td> 
+</td></tr><tr><td><span class="term"><i><tt>listener</tt></i>:</span></td><td> 
+</td></tr><tr><td><span class="term"><i><tt>client</tt></i>:</span></td><td> 
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A newly-created view object, or NULL if the request failed.
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><h2>Signals</h2><div class="refsect2" lang="en"><h3><a name="ECal-backend-died"></a>The "backend-died" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@:</div><hr><div class="refsect2" lang="en"><h3><a name="ECal-backend-error"></a>The "backend-error" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gchar *arg1,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@: 
+@:</div><hr><div class="refsect2" lang="en"><h3><a name="ECal-cal-opened"></a>The "cal-opened" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gint arg1,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@: 
+@:</div><hr><div class="refsect2" lang="en"><h3><a name="ECal-cal-set-mode"></a>The "cal-set-mode" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            ECalSetModeStatusEnum arg1,
+                                            CalModeEnum arg2,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@: 
+@: 
+@:</div><hr><div class="refsect2" lang="en"><h3><a name="ECal-categories-changed"></a>The "categories-changed" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gpointer arg1,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@: 
+@:</div><hr><div class="refsect2" lang="en"><h3><a name="ECal-forget-password"></a>The "forget-password" signal</h3><pre class="programlisting">void        user_function                  (<a href="ECal.html" title="ECal">ECal</a> *ecal,
+                                            gchar *arg1,
+                                            gpointer user_data);</pre><p>
+
+</p>
+
+@: 
+@:</div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="libecal-e-cal-util.html"><b>&lt;&lt; e-cal-util</b></a></td><td align="right"></td></tr></table></body></html>

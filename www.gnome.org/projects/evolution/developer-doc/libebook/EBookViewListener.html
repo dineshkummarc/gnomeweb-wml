@@ -1,0 +1,83 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EBookViewListener</title><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><meta name="generator" content="GTK-Doc V1.1 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style><link rel="home" href="index.html" title="[Insert name here] Reference Manual"><link rel="up" href="ch01.html" title="[Insert title here]"><link rel="previous" href="EBookListener.html" title="EBookListener"><link rel="next" href="EBookView.html" title="EBookView"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EBookListener.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">[Insert name here] Reference Manual</th><td><a accesskey="n" href="EBookView.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EBookViewListener"></a><div class="titlepage"></div><div class="refnamediv"><h2>EBookViewListener</h2><p>EBookViewListener &#8212; Listens for responses from the e-book backend. Exposes the Evolution:BookViewListener interface.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+struct      <a href="EBookViewListener.html#EBookViewListenerResponse">EBookViewListenerResponse</a>;
+enum        <a href="EBookViewListener.html#EBookViewListenerOperation">EBookViewListenerOperation</a>;
+<a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a>* <a href="EBookViewListener.html#e-book-view-listener-new">e_book_view_listener_new</a> (void);
+void        <a href="EBookViewListener.html#e-book-view-listener-stop">e_book_view_listener_stop</a>       (<a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a> *listener);
+
+
+</pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
+When an e-book-query is performed, the e-book backend will send the response to the listener.
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="EBookViewListenerResponse"></a>struct EBookViewListenerResponse</h3><a class="indexterm" name="id2535295"></a><pre class="programlisting">struct EBookViewListenerResponse {
+
+	EBookViewListenerOperation  op;
+
+	/* For SequenceComplete */
+	EBookViewStatus             status;
+
+	/* For ContactsRemovedEvent */
+	GList                  *ids;
+
+	/* For Contact[sAdded|Modified]Event */
+	GList                  *contacts; /* Of type EContact. */
+
+	/* For StatusMessageEvent */
+	char                   *message;
+	
+};
+</pre><p>
+Data sent back to the e-book object.
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EBookViewListenerOperation"></a>enum EBookViewListenerOperation</h3><a class="indexterm" name="id2537300"></a><pre class="programlisting">typedef enum {
+	/* Async events */
+	ContactsAddedEvent,
+	ContactsRemovedEvent,
+	ContactsModifiedEvent,
+	SequenceCompleteEvent,
+	StatusMessageEvent,
+} EBookViewListenerOperation;
+</pre><p>
+Asynchronous events that are listened for.
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-view-listener-new"></a>e_book_view_listener_new ()</h3><a class="indexterm" name="id2529256"></a><pre class="programlisting"><a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a>* e_book_view_listener_new (void);</pre><p>
+Creates and returns a new <a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a> for the book.</p><p>
+Creation function.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a new <a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-book-view-listener-stop"></a>e_book_view_listener_stop ()</h3><a class="indexterm" name="id2529306"></a><pre class="programlisting">void        e_book_view_listener_stop       (<a href="EBookViewListener.html" title="EBookViewListener">EBookViewListener</a> *listener);</pre><p>
+Stops the listener.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>listener</tt></i>:</span></td><td>
+
+
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><h2>See Also</h2><p>
+EBookTypes
+</p></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EBookListener.html"><b>&lt;&lt; EBookListener</b></a></td><td align="right"><a accesskey="n" href="EBookView.html"><b>EBookView &gt;&gt;</b></a></td></tr></table></body></html>
