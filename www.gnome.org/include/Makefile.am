@@ -28,6 +28,7 @@ page_SCRIPTS=account.php \
 	session.php \
 	Error.class \
 	logger.php \
+	proj_email.php \
 	theme.class
 
 include $(top_srcdir)/rules.common
