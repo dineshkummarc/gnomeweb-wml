@@ -8,7 +8,6 @@ SUBDIRS=			\
 	gnumeric		\
 	guppi			\
 	gb			\
-	mc			\
 	nautilus		\
 	ORBit2			\
 	gnome-print		\
