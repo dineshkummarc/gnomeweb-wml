@@ -1,71 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-  <title>4.10. Your Own Ideas</title>
-  <meta name="generator" content="DocBook XSL Stylesheets V1.45" />
-  <link rel="home" href="index.html" title="Writing Epiphany Extensions" />
-  <link rel="up" href="Coding.html" title="Chapter 4. Coding" />
-  <link rel="previous" href="ch04s09.html" title="4.9. GConf Settings" />
-  <link rel="next" href="ch04s11.html" title="4.11. Hacking at Epiphany" />
-</head>
-
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-  <div class="navheader">
-    <table width="100%" summary="Navigation header">
-      <tr>
-        <th colspan="3" align="center">4.10. Your Own Ideas</th>
-      </tr>
-
-      <tr>
-        <td width="20%" align="left"><a accesskey="p" href="ch04s09.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
-
-        <th width="60%" align="center">Chapter 4. Coding</th>
-
-        <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04s11.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <hr />
-  </div>
-
-  <div class="sect1">
-    <div class="titlepage">
-      <div>
-        <h2 class="title" style="clear: both"><a name="id3343224" id="id3343224"></a>4.10. Your Own Ideas</h2>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hacking at Epiphany</title>
+    <meta name="generator" content="DocBook XSL Stylesheets V1.66.1" />
+    <link rel="start" href="index.html" title="Writing Epiphany Extensions" />
+    <link rel="up" href="ch04.html" title="Chapter 4. Coding" />
+    <link rel="prev" href="ch04s09.html" title="Your Own Ideas" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Hacking at Epiphany</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ch04s09.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 4. Coding</th>
+          <td width="20%" align="right"> </td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="id2465193"></a>Hacking at Epiphany</h2>
+          </div>
+        </div>
+      </div>
+      <p>Extensions can do a heck of a lot. Since the system is still under development, new (<span class="emphasis"><em>good</em></span>) ideas would likely be welcome. Mozilla integration, for example, is a bit loose. To get certain signals from Mozilla, you may have to hack at files within the <tt class="filename">epiphany/embed/</tt> directory in the Epiphany source code. If your patch is clean and logical, submit it to <a href="http://bugzilla.gnome.org/enter_bug.cgi?product=epiphany" target="_top">GNOME's Bugzilla</a> and you'll have a good chance of its getting applied.</p>
+      <p>Stylesheet manipulation is one very important missing feature (all the more important because Mozilla Firefox's extensions are so powerful in this respect). At the time of this document's writing, the author is hacking at Epiphany to improve CSS manipulation from within extensions (and Epiphany itself, for that matter).</p>
+      <p>Are you an uber-hacker? Here are some challenges. Note: very possibly, a perfectly acceptable patch would <span class="emphasis"><em>not</em></span> be applied to the official Epiphany source tree. Consider discussing on <a href="ch01s03.html" title="Getting Help">developer communication channels</a> about how you would modify Epiphany; you will probably get some helpful advice.</p>
+      <div class="itemizedlist">
+        <ul type="disc">
+          <li>
+            <p>A JavaScript extension system similar to Firefox's: this would naturally be integrated much more tightly with Mozilla, and loosely (if at all) with the Epiphany UI.</p>
+            <p>Note: Some such JavaScript-heavy, UI-free extensions actually work fine with Epiphany already (flashblock is one such extension).</p>
+          </li>
+          <li>
+            <p>A C# extension loader. Look at <tt class="filename">epiphany/src/ephy-extensions-manager.c</tt> and <tt class="filename">epiphany/lib/ephy-shlib-loader.c</tt> to begin your quest. Note that C# Epiphany bindings have not yet been written.</p>
+          </li>
+          <li>
+            <p>[Insert your favourite Firefox extension here. Then make it better.]</p>
+          </li>
+        </ul>
       </div>
     </div>
-
-    <p>Many of the Epiphany integration ideas above were first discovered (or in some cases, the integration functionality was coded into Epiphany itself) by the author while creating the <b><tt>Popup Blocker</tt></b> extension.</p>
-
-    <p>While writing an extension, you will almost certainly need to keep looking around <tt>epiphany/src/ephy-window.c</tt>, <tt>epiphany/src/ephy-tab.c</tt>, <tt>epiphany/embed/ephy-embed.h</tt>, and others. The code is very clean; if you still have questions, IRC is a great place to ask (see <a href="getting-help.html" title="1.3. Getting Help">Getting Help</a>.)</p>
-
-    <p>You may come up with great ideas when writing your own extension. Feel free to email <a href="author.html" title="1.4. About the Author">the author</a> some sample code; a new section could be added to this document to help other extension writers.</p>
-  </div>
-
-  <div class="navfooter">
-    <hr />
-
-    <table width="100%" summary="Navigation footer">
-      <tr>
-        <td width="40%" align="left"><a accesskey="p" href="ch04s09.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-
-        <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04s11.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-
-      <tr>
-        <td width="40%" align="left">4.9. GConf Settings&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td>
-
-        <td width="40%" align="right">&nbsp;4.11. Hacking at Epiphany</td>
-      </tr>
-    </table>
-  </div>
-</body>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ch04s09.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ch04.html">Up</a>
+          </td>
+          <td width="40%" align="right"> </td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Your Own Ideas </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> </td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>

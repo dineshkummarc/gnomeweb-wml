@@ -1,181 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Statusbar</title>
+    <meta name="generator" content="DocBook XSL Stylesheets V1.66.1" />
+    <link rel="start" href="index.html" title="Writing Epiphany Extensions" />
+    <link rel="up" href="ch04.html" title="Chapter 4. Coding" />
+    <link rel="prev" href="ch04s06.html" title="User Interface Integration" />
+    <link rel="next" href="ch04s08.html" title="GConf Settings" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Statusbar</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ch04s06.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 4. Coding</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ch04s08.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="id2464896"></a>Statusbar</h2>
+          </div>
+        </div>
+      </div>
+      <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <h3 class="title">Warning</h3>
+        <p>The statusbar can only display one message at a time. What's more, the statusbar can be disabled. Statusbar messages from one extension can conflict with another — and all extensions can conflict with Epiphany's standard statusbar messages. There are many reasons <span class="emphasis"><em>not</em></span> to write statusbar messages in your extension.</p>
+      </div>
+      <p>Writing statusbar messages is one of the easiest things to do from an extension. Just be sure to understand <tt class="literal">GtkStatusbar</tt>s: in a given context, there is a stack of messages. Only the top message from <span class="emphasis"><em>all</em></span> contexts can be shown at a time, and messages can be pushed and popped to and from the stack on any given context.</p>
+      <p>This sample code should give some ideas:</p>
+      <div class="example">
+        <a id="id2464939"></a>
+        <p class="title">
+          <b>Example 4.5. Manipulating the statusbar</b>
+        </p>
+        <pre class="programlisting">#define STATUSBAR_CONTEXT "Ephy<i class="replaceable"><tt>Foo</tt></i>StatusbarContext"
+					
+static void
+write_statusbar_message (EphyWindow *window, const char *message)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
 
-  <title>4.7. User Interface Integration</title>
-  <meta name="generator" content="DocBook XSL Stylesheets V1.45" />
-  <link rel="home" href="index.html" title="Writing Epiphany Extensions" />
-  <link rel="up" href="Coding.html" title="Chapter 4. Coding" />
-  <link rel="previous" href="translation.html" title="4.6. Translation" />
-  <link rel="next" href="ch04s08.html" title="4.8. Statusbar" />
-</head>
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
 
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-  <div class="navheader">
-    <table width="100%" summary="Navigation header">
-      <tr>
-        <th colspan="3" align="center">4.7. User Interface Integration</th>
-      </tr>
+	context_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (window),
+							  STATUSBAR_CONTEXT));
+	g_return_if_fail (context_id != 0);
 
-      <tr>
-        <td width="20%" align="left"><a accesskey="p" href="translation.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
+	/* Keep a maximum of one element on the stack */
+	gtk_statusbar_pop (statusbar, context_id);
 
-        <th width="60%" align="center">Chapter 4. Coding</th>
+	/* Write our message */
+	gtk_statusbar_push (statusbar, context_id, message);
+}
 
-        <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04s08.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <hr />
-  </div>
+static void
+remove_statusbar_message (EphyWindow *window)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
 
-  <div class="sect1">
-    <div class="titlepage">
-      <div>
-        <h2 class="title" style="clear: both"><a name="id3344003" id="id3344003"></a>4.7. User Interface Integration</h2>
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
+
+	context_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (window),
+							  STATUSBAR_CONTEXT));
+	g_return_if_fail (context_id != 0);
+
+	gtk_statusbar_pop (statusbar, context_id);
+}
+
+static void
+impl_attach_window (EphyExtension *extension,
+		    EphyWindow *window)
+{
+	GtkStatusbar *statusbar;
+	guint context_id;
+
+	statusbar = GTK_STATUSBAR (ephy_window_get_statusbar (window));
+	g_return_if_fail (GTK_IS_STATUSBAR (statusbar));
+
+	context_id = gtk_statusbar_get_context_id (statusbar, "<i class="replaceable"><tt>Foo</tt></i> extension");
+
+	g_object_set_data (G_OBJECT (window), "<i class="replaceable"><tt>foo</tt></i>-statusbar-cid", GUINT_TO_POINTER (context_id));
+}
+
+static void
+impl_detach_window (EphyExtension *extension,
+		    EphyWindow *window)
+{
+	remove_statusbar_message (window);
+}</pre>
       </div>
     </div>
-
-    <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-      <table border="0">
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
         <tr>
-          <td rowspan="2" align="center" valign="top" width="25"><img src="./stylesheet/warning.png" alt="][" /></td>
-
-          <th align="left" valign="top">Warning</th>
-        </tr>
-
-        <tr>
-          <td colspan="2" align="left" valign="top">
-            <p>This section describes changing Epiphany's user interface. Epiphany developers take pride in Epiphany's simplicity and ease of use: you should continue the trend. UI additions should be simple, minor, and non-intrusive. Carefully plan each addition.</p>
+          <td width="40%" align="left"><a accesskey="p" href="ch04s06.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ch04.html">Up</a>
           </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ch04s08.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">User Interface Integration </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GConf Settings</td>
         </tr>
       </table>
     </div>
-
-    <p>The <tt>GtkUIManager</tt> functions allow you to add new user interface elements. Epiphany's <tt>EphyWindow-&gt;ui_merge</tt> is the appropriate <tt>GtkUIManager</tt> with which to merge. Use <tt>GtkAction</tt>s to represent actions. For example, an extension could place an action in the <tt>Go</tt> menu of Epiphany. To do so, place the following in <tt>ephy-<i><tt>foo</tt></i>-extension.c</tt>:</p>
-    <pre class="programlisting">
-#include &lt;gtk/gtkaction.&gt;
-#include &lt;gtk/gtkactiongroup&gt;
-#include &lt;gtk/gtkuimanager.h&gt;
-
-#include &lt;glib/gi18n-lib.h&gt; /* see <a href="translation.html" title="4.6. Translation">Translation</a> */
-
-/* ... */
-
-static void my_action_activate_cb (GtkAction *action, EphyWindow *window)
-{
-  /* Do something */
-}
-      
-</pre>
-
-    <p>Then place the following in <tt>impl_attach_window</tt> (or a function it calls):</p>
-    <pre class="programlisting">
-static void
-impl_attach_window (EphyExtension *extension, EphyWindow *window)
-{
-  GtkActionGroup *action_group;
-  GtkUIManager *manager;
-  guint merge_id;
-
-  static GtkActionEntry action_entries [] =
-  {
-  { "<i><tt>MyAction</tt></i>", NULL, N_("<i><tt>Menu Entry Name</tt></i>"), NULL, /* shortcut key */ N_("<i><tt>Does Whatever I Want</tt></i>"), G_CALLBACK (my_action_activate_cb) }
-  };
-  static const guint n_action_entries = G_N_ELEMENTS (action_entries);
-
-  manager = GTK_UI_MANAGER (window-&gt;ui_merge);
-
-  action_group = gtk_action_group_new ("Ephy<i><tt>Foo</tt></i>ExtensionActions");
-
-  gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
-  gtk_action_group_add_actions (action_group, action_entries, n_action_entries, window);
-
-  gtk_ui_manager_insert_action_group (manager, action_group, 0);
-  g_object_unref (action_group);
-
-  merge_id = gtk_ui_manager_new_merge_id (manager);
-
-  gtk_ui_manager_add_ui (manager, merge_id, "/menubar/GoMenu", "<i><tt>MyAction</tt></i>Sep", NULL, GTK_UI_MANAGER_SEPARATOR, TRUE);
-  gtk_ui_manager_add_ui (manager, merge_id, "/menubar/GoMenu", "<i><tt>MyAction</tt></i>", "<i><tt>MyAction</tt></i>", GTK_UI_MANAGER_MENUITEM, TRUE);
-}
-      
-</pre>
-
-    <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
-      <table border="0">
-        <tr>
-          <td rowspan="2" align="center" valign="top" width="25"><img src="./stylesheet/tip.png" alt="][" /></td>
-
-          <th align="left" valign="top">Tip</th>
-        </tr>
-
-        <tr>
-          <td colspan="2" align="left" valign="top">
-            <p>The existing epiphany menu hierarchy is described in <tt>epiphany/data/ui/epiphany-ui.xml</tt>.</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-      <table border="0">
-        <tr>
-          <td rowspan="2" align="center" valign="top" width="25"><img src="./stylesheet/note.png" alt="][" /></td>
-
-          <th align="left" valign="top">Note</th>
-        </tr>
-
-        <tr>
-          <td colspan="2" align="left" valign="top">
-            <p>Without a <tt>placeholder</tt> element in <tt>epiphany/data/ui/epiphany-ui.xml</tt>, extensions can only add menu entries to the top or bottom of menus.</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-      <table border="0">
-        <tr>
-          <td rowspan="2" align="center" valign="top" width="25"><img src="./stylesheet/warning.png" alt="][" /></td>
-
-          <th align="left" valign="top">Warning</th>
-        </tr>
-
-        <tr>
-          <td colspan="2" align="left" valign="top">
-            <p>FIXME: Investigate farther</p>
-
-            <p>At the time this document was written, adding toolbar entries to extension-created actions is impossible.</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="navfooter">
-    <hr />
-
-    <table width="100%" summary="Navigation footer">
-      <tr>
-        <td width="40%" align="left"><a accesskey="p" href="translation.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-
-        <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04s08.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-
-      <tr>
-        <td width="40%" align="left">4.6. Translation&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td>
-
-        <td width="40%" align="right">&nbsp;4.8. Statusbar</td>
-      </tr>
-    </table>
-  </div>
-</body>
+  </body>
 </html>

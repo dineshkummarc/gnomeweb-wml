@@ -1,108 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-  <title>4.2. Header File</title>
-  <meta name="generator" content="DocBook XSL Stylesheets V1.45" />
-  <link rel="home" href="index.html" title="Writing Epiphany Extensions" />
-  <link rel="up" href="Coding.html" title="Chapter 4. Coding" />
-  <link rel="previous" href="register-module.html" title="4.1. register_module" />
-  <link rel="next" href="ch04s03.html" title="4.3. Minimum C Code" />
-</head>
-
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-  <div class="navheader">
-    <table width="100%" summary="Navigation header">
-      <tr>
-        <th colspan="3" align="center">4.2. Header File</th>
-      </tr>
-
-      <tr>
-        <td width="20%" align="left"><a accesskey="p" href="register-module.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
-
-        <th width="60%" align="center">Chapter 4. Coding</th>
-
-        <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04s03.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-    </table>
-    <hr />
-  </div>
-
-  <div class="sect1">
-    <div class="titlepage">
-      <div>
-        <h2 class="title" style="clear: both"><a name="id3349843" id="id3349843"></a>4.2. Header File</h2>
-      </div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Header File</title>
+    <meta name="generator" content="DocBook XSL Stylesheets V1.66.1" />
+    <link rel="start" href="index.html" title="Writing Epiphany Extensions" />
+    <link rel="up" href="ch04.html" title="Chapter 4. Coding" />
+    <link rel="prev" href="ch04.html" title="Chapter 4. Coding" />
+    <link rel="next" href="ch04s03.html" title="Minimum C Code" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Header File</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td>
+          <th width="60%" align="center">Chapter 4. Coding</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
     </div>
-
-    <p>The <tt><i><tt>foo</tt></i>.c</tt> file above referred to <tt>ephy-<i><tt>foo</tt></i>-extension.h</tt>, so the header file must be written. Also, as hinted above, an extension is a <tt>GObject</tt>. There are no surprises in the header file: just standard <tt>GObject</tt> stuff:</p>
-    <pre class="programlisting">
-/* header information */
-#ifndef EPHY_<i><tt>FOO</tt></i>_EXTENSION_H
-#define EPHY_<i><tt>FOO</tt></i>_EXTENSION_H
-
-#include &lt;glib.h&gt;
-#include &lt;glib-object.h&gt;
-
-G_BEGIN_DECLS
-
-#define EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION (ephy_<i><tt>foo</tt></i>_extension_get_type ())
-#define EPHY_<i><tt>FOO</tt></i>_EXTENSION(o) (G_TYPE_CHECK_INSTANCE_CAST ((o, EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION, Ephy<i><tt>Foo</tt></i>Extension))
-#define EPHY_<i><tt>FOO</tt></i>_EXTENSION_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION, Ephy<i><tt>Foo</tt></i>ExtensionClass))
-#define EPHY_IS_<i><tt>FOO</tt></i>_EXTENSION(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION))
-#define EPHY_IS_<i><tt>FOO</tt></i>_EXTENSION_CLASS(k) (G_TYPE_CHECK_CLASS_TYPE ((k), EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION))
-#define EPHY_<i><tt>FOO</tt></i>_EXTENSION_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), EPHY_TYPE_<i><tt>FOO</tt></i>_EXTENSION, Ephy<i><tt>Foo</tt></i>ExtensionClass))
-
-typedef struct Ephy<i><tt>Foo</tt></i>Extension Ephy<i><tt>Foo</tt></i>Extension;
-typedef struct Ephy<i><tt>Foo</tt></i>ExtensionClass Ephy<i><tt>Foo</tt></i>ExtensionClass;
-typedef struct Ephy<i><tt>Foo</tt></i>ExtensionPrivate Ephy<i><tt>Foo</tt></i>ExtensionPrivate;
-
-struct Ephy<i><tt>Foo</tt></i>ExtensionClass
-{
-  GObjectClass parent_class;
-};
-
-struct Ephy<i><tt>Foo</tt></i>Extension
-{
-  GObject parent_instance;
-
-  Ephy<i><tt>Foo</tt></i>ExtensionPrivate *priv;
-};
-
-GType ephy_<i><tt>foo</tt></i>_extension_get_type (void);
-GType ephy_<i><tt>foo</tt></i>_extension_register_type (GTypeModule *module);
-
-G_END_DECLS
-
-#endif
-      
-</pre>
-  </div>
-
-  <div class="navfooter">
-    <hr />
-
-    <table width="100%" summary="Navigation footer">
-      <tr>
-        <td width="40%" align="left"><a accesskey="p" href="register-module.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-
-        <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04s03.html">Next&nbsp;&gt;&gt;&gt;</a></td>
-      </tr>
-
-      <tr>
-        <td width="40%" align="left">4.1. <tt>register_module</tt>&nbsp;</td>
-
-        <td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td>
-
-        <td width="40%" align="right">&nbsp;4.3. Minimum C Code</td>
-      </tr>
-    </table>
-  </div>
-</body>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="id2470086"></a>Header File</h2>
+          </div>
+        </div>
+      </div>
+      <p>The <tt class="filename">extension.c</tt> file above referred to <tt class="filename">ephy-<i class="replaceable"><tt>foo</tt></i>-extension.h</tt>, so that header file must be present. An extension is a <tt class="literal">GObject</tt>. There are no surprises in the header file: it's a standard header for a GObject. It's quite possible that editing this file (after creating it with <tt class="filename">copy-template</tt>) is unnecessary.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ch04.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ch04s03.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Chapter 4. Coding </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Minimum C Code</td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>
