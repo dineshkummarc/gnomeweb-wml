@@ -1,9 +1,10 @@
-SUBDIRS=
+SUBDIRS= translate-gnome
 
-urlpath=
+urlpath=/i18n
 
 page_SCRIPTS=index.html			\
-	atatus.html 			\
+	status.shtml 			\
+	details.shtml
 
 include $(top_srcdir)/rules.common
 
