@@ -4,7 +4,8 @@ SUBDIRS=			\
 	devtools		\
 	gnome-core		\
 	gnome-libs		\
-	gnumeric			\
+	gnumeric		\
+	gb			\
 	gnome-print
 urlpath=/projects
 
