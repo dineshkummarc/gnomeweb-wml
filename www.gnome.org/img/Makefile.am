@@ -14,6 +14,7 @@ page_DATA = \
 	summit.gif \
 	summit.png \
 	hammer.gif \
-	hammer.png
+	hammer.png \
+	bg4.png
 
 include $(top_srcdir)/rules.common
