@@ -1,4 +1,4 @@
-SUBDIRS= images
+SUBDIRS= figures
 
 urlpath=/projects/gnumeric/doc
 
@@ -6,7 +6,7 @@ page_SCRIPTS= \
 analysis-tools.html  \
 anova.html  \
 authors.html  \
-autocorrect.html  \
+autocorrect-tool.html  \
 autofill.html  \
 autosave.html  \
 cell-elements.html  \
@@ -21,7 +21,7 @@ editing.html  \
 exp-smoothing-tool.html  \
 file-format.html  \
 files.html  \
-filter.html  \
+filters.html  \
 formatting.html  \
 formulas.html  \
 fourier-analysis-tool.html  \
@@ -373,7 +373,6 @@ histogram-tool.html  \
 index.html  \
 introduction.html  \
 license.html  \
-ln8.html  \
 menu-bar.html  \
 moving-average-tool.html  \
 number-formatting-overview.html  \
@@ -385,10 +384,10 @@ rank-and-percentile-tool.html  \
 regression-tool.html  \
 rest.html  \
 sampling-tool.html  \
-selecting-cells-entering-formulas.html  \
-solver.html  \
-t-test.html  \
-toolbar-buttons.html  \
-tutorials.html
+selecting-cells-entering-formulas.html \
+solver.html \
+t-test.html \
+toolbar-buttons.html \
+tutorials.html 
 
 include $(top_srcdir)/rules.common
