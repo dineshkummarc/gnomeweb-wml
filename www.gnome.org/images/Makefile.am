@@ -33,7 +33,8 @@ banner_images=\
 	banner-presscontacts.png\
 	banner-pressreleases.png\
 	banner-resourceindex.png\
-	banner-tipsandtutorials.png
+  banner-projectindex.png\
+  banner-tipsandtutorials.png
 	
 popdown_images=\
 	popdown-endcap-blue.png\
@@ -69,7 +70,8 @@ sidebar_items=\
 	sidebar-meetthedevelopers.png\
 	sidebar-presscontacts.png\
 	sidebar-pressreleases.png\
-	sidebar-resourceindex.png\
+  sidebar-projectindex.png\
+  sidebar-resourceindex.png\
 	sidebar-seegnome.png\
 	sidebar-tipsandtutorials.png
 
