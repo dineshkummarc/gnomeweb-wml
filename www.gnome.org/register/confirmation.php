@@ -129,7 +129,7 @@ if ($show_confirm) {
 		. "An admin will need to approve the registration at:\n\n"
 		. "http://".$sys_default_domain."/admin/\n\n";
 	mail ("Steve Fox &lt;drfickle@k-lug.org&gt;, ".
-        "GNOME Web Team &lt;webmaster@".$GLOBALS['sys_default_domain']."&gt;", ".
+        "GNOME Web Team &lt;webmaster@".$GLOBALS['sys_default_domain']."&gt;".
         "New project added to Software Map", $message, 
         "From: GNOME Software Map &lt;webmaster@".$GLOBALS['sys_default_domain']."&gt;");
 
