@@ -49,6 +49,8 @@ page_SCRIPTS=		\
 	extensions-small.png	\
 	extensions.png	\
 	ext-errorviewer-180.png	\
-	ext-errorviewer.png
+	ext-errorviewer.png	\
+	ext-certificateviewer-180.png	\
+	ext-certificateviewer.png
 
 include $(top_srcdir)/rules.common
