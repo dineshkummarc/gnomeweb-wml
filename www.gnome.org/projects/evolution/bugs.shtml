@@ -28,4 +28,16 @@ The server traffic will be logged to /tmp/camel.out file delimited by the words 
 
 <p>From evolution 1.5.5 onwards, a simpler debug variable with more features has been added, CAMEL_DEBUG.  For most cases, simply use CAMEL_DEBUG=all instead of CAMEL_VEBOSE_DEBUG=1.
 
+<p> <h2> GroupWise Debug </h2>
+
+You can debug the communications with GroupWise server with GROUPWISE_DEBUG environment variable. Evolution Data Server communicates with GroupWise server using SOAP over http for accessing calendar and contacts data. When Evolution Data Server is run with GROUPWISE_DEBUG set, the http headers and body (xml conent) of SOAP request/responses are printed to standard output. 
+
+<ol>
+<li> Exit evolution and run the command 'evolution --forceshutdown'
+<li> Run the command 'env GROUPWISE_DEBUG=1 ${install_prefix}/libexec/evolution-data-server-1.x >& /tmp/groupwise.out' 
+<li> start evolution and access GroupWise calendar or contacts
+</ol>
+
+Evolution process also communicates with GroupWise server during Novell GroupWise account setup. One can run evolution after setting the GROUPWISE_DEBUG in the same manner described above to debug any Novell GroupWise account setup related problems. 
+
 <!--#include virtual="foot.shtml"-->
