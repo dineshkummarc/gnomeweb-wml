@@ -22,7 +22,7 @@ and works on many other UNIX systems.</p>
 <tr>
 	<td><img src="images/computer.png" width="48" height="48" alt="GNOME 2"></td>
 	<td><a href="/pr-extremadura.html">The regional government of Extremadura, Spain has put 80,000 computers in schools, loaded with GNOME,
-Linux and other free software!</td>
+Linux and other free software!</a></td>
 </tr>
 <tr>
 	<td><img src="images/gnome2.png" width="48" height="48" alt="GNOME 2"></td>
@@ -51,15 +51,15 @@ href="http://www.gnome.org/softwaremap/latest.php">
 
 <table border='0' cellspacing='0' cellpadding='0'><tr><td>
 
-<? 
+<?php 
 
-if (filectime("recentapps-cache.html") < (time() - 300)) { # If cache is older than 5 minutes
-
+# If cache is older than 5 minutes
+if (filectime("recentapps-cache.html") < (time() - 300)) {  
   $tempfilename = tempnam("/tmp", "appcache");
 
-  $tmpfd = fopen( $tempfilename, "w");
+  $tmpfd = fopen($tempfilename, "w");
 
-  Include("/home/admin/applist/private.php3");
+  include("/home/admin/applist/private.php3");
   mysql_select_db("gnomeweb");
 
 	$query = "SELECT groups.group_name AS group_name,"
@@ -86,7 +86,7 @@ if (filectime("recentapps-cache.html") < (time() - 300)) { # If cache is older t
   mysql_close();
 
   fclose($tmpfd);
-	copy($tempfilename, "recentapps-cache.html");
+  copy($tempfilename, "recentapps-cache.html");
   unlink ($tempfilename);
 }
 
