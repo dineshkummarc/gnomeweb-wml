@@ -57,7 +57,7 @@ class PrintHeadline(saxlib.HandlerBase):
 	    self.itemLink = self.itemLink + ch[start:start+length]
 
 
-print "<p><a href='http://www.gnomedesktop.org/'><font size=\"+2\" color=\"#400000\"><b>From gnomedesktop.org:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'>"
+print "<p><a href='http://www.gnomedesktop.org/'><font size=\"+2\" color=\"#400000\"><b>FootNotes News:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'>"
 
 
 try:
