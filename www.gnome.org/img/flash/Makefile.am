@@ -17,6 +17,7 @@ page_DATA = \
 	guadec-2004-end.png \
 	gnome_tshirts.png \
 	gnome28.png \
-	summit_mit_2004.png
+	summit_mit_2004.png \
+	forum_gnome_2004.png
 
 include $(top_srcdir)/rules.common
