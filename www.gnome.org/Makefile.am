@@ -27,6 +27,7 @@ page_SCRIPTS=index.php3		\
   pr-sunjoins.html \
   pr-accessible.html \
   pr-guadec.html \
+  pr-guadec4.html \
   .htaccess \
   users
 
