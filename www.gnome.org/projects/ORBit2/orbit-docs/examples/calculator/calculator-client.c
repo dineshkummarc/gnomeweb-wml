@@ -105,7 +105,7 @@ int
 main(int argc, char* argv[])
          
 {
-        CORBA_char  filename[] = "calculator.ior";
+        CORBA_char  filename[] = "calculator.ref";
 
 	Calculator service = CORBA_OBJECT_NIL;
 

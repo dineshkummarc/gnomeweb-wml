@@ -2,13 +2,16 @@
  * <F.Rehberger@xtradyne.de>.  */
 
 #include <assert.h>
-#include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <signal.h>
+#include <unistd.h>
 #include <orbit/orbit.h>
 
-#include "account.h"
+#include "examples-toolkit.h" /* etk_ functions */ 
+#include "factory.h"
 
-#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */ 
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -61,19 +64,21 @@ client_init (int               *argc_ptr,
 static
 void
 client_cleanup (CORBA_ORB                 orb,
-                CORBA_Object              service,
+                CORBA_Object              servant,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        CORBA_Object_release(service, ev);
-        if (etk_raised_exception(ev)) return;
+        CORBA_Object_release(servant, ev);
+        if (etk_raised_exception(ev))
+		return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
-                if (etk_raised_exception(ev)) return;
+                if (etk_raised_exception(ev)) 
+			return;
         }
 }
 
@@ -82,36 +87,51 @@ client_cleanup (CORBA_ORB                 orb,
  */
 static
 void
-client_run (Account            service,
-	    CORBA_long         amount,
-	    CORBA_Environment *ev)
+client_run (Examples_Factory_Producer     factory,
+	    CORBA_Environment            *ev)
 {
-	CORBA_long balance=0;
+	#define MAX_ID_LEN 100
 
-	/*
-         * use calculator server
-         */
-         
-        balance = Account__get_balance (service, ev);
-	if (etk_raised_exception (ev)) return;
-         
-        g_print ("balance %5d, ", balance);
-         
-        if (amount > 0)
-        {
-                Account_deposit (service, amount, ev);
-                if (etk_raised_exception (ev)) return;
-        }
-        else
-        {
-                Account_withdraw (service, abs(amount), ev);
-                if (etk_raised_exception (ev)) return;
-        }
-                                                                               
-        balance = Account__get_balance (service, ev);
-	if (etk_raised_exception (ev)) return;
-                                                                               
-        g_print ("new balance %5d\n", balance);
+	CORBA_char  service_id [MAX_ID_LEN+1] = "";
+	gint i = 0;
+	gint j = 0;
+
+	for (i = 0; i<20; ++i)
+	{
+		snprintf (service_id, MAX_ID_LEN, "id-%d", i);
+
+		g_printf ("abstract-service: create,");
+		Examples_Factory_AbstractService service 
+			= Examples_Factory_Producer_produce (factory, 
+							     service_id, 
+							     ev);
+		if (etk_raised_exception (ev)) 
+			return;
+		
+		for (j = 0; j < 5; ++j)
+		{
+			g_printf (" apply,");
+
+			CORBA_char *mesg = "hallo welt";
+			Examples_Factory_AbstractService_doit (service, 
+							       mesg, 
+							       ev);
+			if (etk_raised_exception (ev)) 
+				return;
+		}
+
+		g_printf (" destroy\n");
+
+		Examples_Factory_AbstractService_destroy (service, ev);
+		if (etk_raised_exception (ev)) 
+			return;
+
+		CORBA_Object_release ((CORBA_Object) service, ev);
+		if (etk_raised_exception (ev)) 
+			return;
+
+	}
+	#undef MAX_IDL_LEN
 }
 
 /*
@@ -119,35 +139,33 @@ client_run (Account            service,
  */
 int
 main(int argc, char* argv[])
-         
 {
-        CORBA_char        filename[] = "account.ref";
-        CORBA_long        amount=0;
-
-	Account service = CORBA_OBJECT_NIL;
-
+        CORBA_char filename[] = "factory.ref";
+         
+        Examples_Factory_Producer producer = CORBA_OBJECT_NIL;
+ 
         CORBA_Environment ev[1];
         CORBA_exception_init(ev);
-
-	client_init (&argc, argv, &global_orb, ev);
-	etk_abort_if_exception(ev, "init failed");
-
-        if (argc<2) g_error ("usage: %s <amount>", argv[0]);
-
-        amount  = atoi(argv[1]);
-
-	g_print ("Reading service reference from file \"%s\"\n", filename);
-
-	service = (Account) etk_import_object_from_file (global_orb,
-							 filename,
-							 ev);
+ 
+        client_init (&argc, argv, &global_orb, ev);
+        etk_abort_if_exception(ev, "init failed");
+ 
+        g_print ("Reading service reference from file \"%s\"\n", filename);
+ 
+        producer 
+          = (Examples_Factory_Producer) 
+		etk_import_object_from_file (global_orb,
+					     filename,
+					     ev);
         etk_abort_if_exception(ev, "import service failed");
-
-	client_run (service, amount, ev);
+ 
+        client_run (producer, ev);
         etk_abort_if_exception(ev, "service not reachable");
- 
-	client_cleanup (global_orb, service, ev);
+  
+        client_cleanup (global_orb, producer, ev);
         etk_abort_if_exception(ev, "cleanup failed");
- 
+  
         exit (0);
 }
+
+

@@ -89,7 +89,7 @@ client_run_set (Examples_ByteSeq_Storage  servant,
 {
 
 	CORBA_long LEN      = 4*1024; /* 4KB */ 
-	CORBA_long ITER     = 1000; 
+	CORBA_long ITER     = 10; 
 
 	CORBA_long iter     = 0; 
 
@@ -102,7 +102,7 @@ client_run_set (Examples_ByteSeq_Storage  servant,
 		CORBA_long len      = 0; 
 		CORBA_octet elem    = 'A';
 
-		g_print ("!");
+		g_print ("+");
 
 		chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,0);
 
@@ -124,7 +124,7 @@ void
 client_run_get (Examples_ByteSeq_Storage  servant,
 		CORBA_Environment        *ev)
 {
-	CORBA_long n=100;
+	CORBA_long n=10;
 	CORBA_long i=0;
 
 	Examples_ByteSeq_Chunk* chunk = NULL; 
@@ -132,7 +132,7 @@ client_run_get (Examples_ByteSeq_Storage  servant,
 	/* increment sequence length, beginning with 0 up to 2048 */
 	for (i=0; i<n; ++i)
 	{
-		g_print ("?");
+		g_print ("-");
 
 		chunk = Examples_ByteSeq_Storage_get (servant, ev); 
 		if (etk_raised_exception(ev)) return;
@@ -141,57 +141,13 @@ client_run_get (Examples_ByteSeq_Storage  servant,
 	}
 }
 
-/**
- *
- */
-static
-void
-client_run_exchange (Examples_ByteSeq_Storage  servant,
-		     CORBA_Environment        *ev)
-{
-	CORBA_long MAX      = 2048;
-	CORBA_long iter     = 0;
-	CORBA_long ix       = 0;
-
-	Examples_ByteSeq_Chunk* chunk = NULL;
-
-	/* create sequence of 1KB and init with 0 */ 
-	chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 1024);
-	for (ix = 0; ix < chunk->_length /* 1024 */ ; ++ix)
-	{
-		ORBit_sequence_index (chunk, ix) = 0;	
-	}
-
-	/* MAX times, edit all values in local sequence and exchange
-	 * it with the one at server. The length of returned sequence
-	 * is not known a-priory, thererfore use chunk->_length to get
-	 * to know.  */
-	for (iter = 0; iter <= MAX; ++iter)
-	{
-		CORBA_octet elem = 0;
-
-		g_print ("#");
-
-		for (ix = 0; ix < chunk->_length; ++ix)
-		{
-			CORBA_octet oct = (CORBA_octet) iter % 256;
-			ORBit_sequence_index (chunk, ix) = oct;
-		}
-
-		Examples_ByteSeq_Storage_exchange (servant, chunk, ev); 
-		if (etk_raised_exception(ev)) return;
-	}
-
-	CORBA_free (chunk);
-}
-
 /*
  * main 
  */
 int
 main(int argc, char* argv[])
 {
-	CORBA_char *filename = "byteseq.ior";
+	CORBA_char *filename = "byteseq.ref";
 
         Examples_ByteSeq_Storage  servant = CORBA_OBJECT_NIL;
 
@@ -213,9 +169,6 @@ main(int argc, char* argv[])
         etk_abort_if_exception(ev, "client stopped");
  
 	client_run_get (servant, ev);
-        etk_abort_if_exception(ev, "client stopped");
- 
-	client_run_exchange (servant, ev);
         etk_abort_if_exception(ev, "client stopped");
  
 	client_cleanup (global_orb, servant, ev);

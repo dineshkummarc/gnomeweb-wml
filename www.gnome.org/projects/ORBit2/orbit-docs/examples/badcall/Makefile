@@ -1,4 +1,4 @@
-PREFIX=/usr
+PREFIX ?= /usr
 CC = gcc
 TARGETS=badcall-client badcall-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
@@ -13,6 +13,8 @@ IDLOUT=badcall-common.c badcall-stubs.c badcall-skels.c badcall.h
 
 all: $(IDLOUT) badcall-client badcall-server
 
+badcall-server.o: badcall-server.c badcall-skelimpl.c
+
 badcall-client : badcall-client.o badcall-stubs.o badcall-common.o examples-toolkit.o
 badcall-server : badcall-server.o badcall-skels.o badcall-common.o examples-toolkit.o
 
@@ -23,7 +25,7 @@ $(IDLOUT): badcall.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT)
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
 
 distclean: clean
 	rm -rf badcall-client badcall-server

@@ -1,4 +1,4 @@
-PREFIX=/usr
+PREFIX ?= /usr
 CC = gcc
 TARGETS=calculator-client calculator-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
@@ -13,6 +13,8 @@ IDLOUT=calculator-common.c calculator-stubs.c calculator-skels.c calculator.h
 
 all: $(IDLOUT) calculator-client calculator-server
 
+calculator-server.o : calculator-server.c calculator-skelimpl.c
+
 calculator-client : calculator-client.o calculator-stubs.o calculator-common.o examples-toolkit.o 
 calculator-server : calculator-server.o calculator-skels.o calculator-common.o examples-toolkit.o 
 
@@ -23,7 +25,7 @@ $(IDLOUT): calculator.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT)
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
 
 distclean: clean
 	rm -rf calculator-client calculator-server

@@ -72,7 +72,10 @@ etk_import_object_from_file (CORBA_ORB          orb,
 			     CORBA_Environment *ev);
 
 
-/**
+/** resolves default name-service, usually given to application as
+ * command line argument "-ORBInitRef NameService=IOR:0100000028..",
+ * or since release 2.8.0 corbalocs in form of URL can be used, eg:
+ * "-ORBInitRef NameService=corbaloc:iiop:HOSTNAME:PORT/NameService%00"
  */
 CosNaming_NamingContext 
 etk_get_name_service (CORBA_ORB         orb,

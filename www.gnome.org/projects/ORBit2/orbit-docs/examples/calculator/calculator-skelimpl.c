@@ -14,8 +14,8 @@ impl_POA_Calculator;
 
 /*** Implementation stub prototypes ***/
 
-static void impl_Calculator__destroy(impl_POA_Calculator * servant,
-				     CORBA_Environment * ev);
+static void impl_Calculator__fini (impl_POA_Calculator * servant,
+				   CORBA_Environment * ev);
 static CORBA_double
 impl_Calculator_add(impl_POA_Calculator * servant,
 		    const CORBA_double number1,
@@ -30,7 +30,7 @@ impl_Calculator_sub(impl_POA_Calculator * servant,
 
 static PortableServer_ServantBase__epv impl_Calculator_base_epv = {
    NULL,			/* _private data */
-   (gpointer) & impl_Calculator__destroy,	/* finalize routine */
+   (gpointer) & impl_Calculator__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Calculator__epv impl_Calculator_epv = {
@@ -51,7 +51,7 @@ static POA_Calculator__vepv impl_Calculator_vepv = {
 /*** Stub implementations ***/
 
 static Calculator
-impl_Calculator__create(PortableServer_POA poa, CORBA_Environment * ev)
+impl_Calculator__create (PortableServer_POA poa, CORBA_Environment * ev)
 {
    Calculator retval;
    impl_POA_Calculator *newservant;
@@ -75,9 +75,17 @@ impl_Calculator__create(PortableServer_POA poa, CORBA_Environment * ev)
    return retval;
 }
 
+/**
+ * impl_Calculator__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation invocation, method invoation is being delayed.
+ * Note, in former versions of ORBit2 this function would have been 
+ * named impl_Calculator__destroy.
+ **/
 static void
-impl_Calculator__destroy(impl_POA_Calculator * servant,
-			 CORBA_Environment * ev)
+impl_Calculator__fini (impl_POA_Calculator * servant,
+		       CORBA_Environment * ev)
 {
    CORBA_Object_release((CORBA_Object) servant->poa, ev);
  
@@ -87,6 +95,8 @@ impl_Calculator__destroy(impl_POA_Calculator * servant,
    /* ------ ---------- end ------------- ------ */
 
    POA_Calculator__fini((PortableServer_Servant) servant, ev);
+   
+   g_free (servant);
 }
 
 static CORBA_double

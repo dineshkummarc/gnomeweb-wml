@@ -197,7 +197,7 @@ client_run (Examples_BadCall          servant,
 int
 main(int argc, char* argv[])
 {
-	CORBA_char filename[] = "badcall.ior";
+	CORBA_char filename[] = "badcall.ref";
 
         Examples_BadCall  servant = CORBA_OBJECT_NIL;
 

@@ -1,16 +1,23 @@
-/* account-client.c hacked by Frank Rehberger
- * <F.Rehberger@xtradyne.de>.  */
+/*
+ * Echo client program.. Hacked by Ewan Birney <birney@sanger.ac.uk>
+ * from echo test suite, update for ORBit2 by Frank Rehberger
+ * <F.Rehberger@xtradyne.de>
+ *
+ * Client reads object reference (IOR) from local file 'echo.ior' and
+ * forwards console input to echo-server. A dot . as single character
+ * in input terminates the client.
+ */
 
-#include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <signal.h>
-#include <unistd.h>
 #include <orbit/orbit.h>
 
-#include "examples-toolkit.h" /* etk_ functions */ 
+/*
+ * This header file was generated from the idl
+ */
+
 #include "name-resolve.h"
+#include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
 
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
@@ -64,11 +71,11 @@ client_init (int               *argc_ptr,
 static
 void
 client_cleanup (CORBA_ORB                 orb,
-                CORBA_Object              servant,
+                CORBA_Object              service,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        CORBA_Object_release(servant, ev);
+        CORBA_Object_release(service, ev);
         if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
@@ -80,46 +87,38 @@ client_cleanup (CORBA_ORB                 orb,
         }
 }
 
+
+
 /**
  *
  */
 static
 void
-client_run (Examples_NameResolve_Factory  factory,
+client_run (Examples_NameResolve_Service  service,
 	    CORBA_Environment            *ev)
 {
-	CORBA_char  service_id [100] = "";
-	gint i = 0;
-	gint j = 0;
+	char filebuffer[1024+1];
 
-	for (i = 0; TRUE; ++i)
-	{
-		sprintf (service_id, "service %d", i);
-
-		Examples_NameResolve_Service service 
-			= Examples_NameResolve_Factory_produce (factory, 
-								service_id, 
-								ev);
-		if (etk_raised_exception (ev)) return;
+	g_print("Type any text to console to be sent to server,\n"
+		"a single dot in line will terminate input\n");
+	
+	while( fgets(filebuffer,1024,stdin) ) {
+		if( filebuffer[0] == '.' && filebuffer[1] == '\n' ) 
+			break;
 		
-		for (j = 0; j < 10; ++j)
-		{
-			CORBA_char *mesg = "hallo welt";
-			Examples_NameResolve_Service_doit (service, mesg, ev);
-			if (etk_raised_exception (ev)) return;
-			
-			usleep (10*1000);
-		}
+		/* chop the newline off */
+		filebuffer[strlen(filebuffer)-1] = '\0';
+      
+		/* using the echoString method in the Echo object 
+		 * this is defined in the echo.h header, compiled from
+		 * echo.idl */
 
-		Examples_NameResolve_Service_destroy (service, ev);
+		Examples_NameResolve_Service_echoString (service,
+							 filebuffer,
+							 ev);
 		if (etk_raised_exception (ev)) return;
-
-		CORBA_Object_release ((CORBA_Object) service, ev);
-		if (etk_raised_exception (ev)) return;
-
 	}
 }
-
 
 /*
  * main 
@@ -127,10 +126,10 @@ client_run (Examples_NameResolve_Factory  factory,
 int
 main(int argc, char* argv[])
 {
-	gchar *id_vec[] = {"Examples", "NameResolve", "Factory", NULL};
+	Examples_NameResolve_Service service = CORBA_OBJECT_NIL;
+	CosNaming_NamingContext name_service = CORBA_OBJECT_NIL;
 
-	CosNaming_NamingContext name_service  = CORBA_OBJECT_NIL;
-        CORBA_Object            servant       = CORBA_OBJECT_NIL;
+	gchar *id[] = {"Examples", "NameResolve", "Service", NULL};
 
         CORBA_Environment ev[1];
         CORBA_exception_init(ev);
@@ -138,24 +137,21 @@ main(int argc, char* argv[])
 	client_init (&argc, argv, &global_orb, ev);
 	etk_abort_if_exception(ev, "init failed");
 
+	g_print ("Resolving service reference from name-service with id \"%s/%s/%s\"\n", id[0], id[1], id[2]);
+
 	name_service = etk_get_name_service (global_orb, ev);
-        etk_abort_if_exception(ev, "get name-service failed");
+	etk_abort_if_exception(ev, "failed resolving name-service");
 
-	g_print ("Resolve object reference for /%s/%s/%s\n\n", 
-		 id_vec [0], id_vec [1], id_vec [2]);
+	service 
+	  = (Examples_NameResolve_Service) 
+		etk_name_service_resolve (name_service, id, ev);
+	etk_abort_if_exception(ev, "failed resolving service at name-service");
 
-	servant = etk_name_service_resolve (name_service,
-					    id_vec,
-					    ev);
-        etk_abort_if_exception(ev, "resolving servant failed");
-
-	client_run (servant, ev);
-        etk_abort_if_exception(ev, "client stopped");
+	client_run (service, ev);
+        etk_abort_if_exception(ev, "service not reachable");
  
-	client_cleanup (global_orb, servant, ev);
+	client_cleanup (global_orb, service, ev);
         etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }
-
-

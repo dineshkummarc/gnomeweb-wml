@@ -1,6 +1,6 @@
 /*
- * echo-server program. Hacked from Echo test suite by by Frank
- * Rehberger <F.Rehberger@xtradyne.de>
+ * byteseq-server program. Hacked from Examples test suite 
+ * by Frank Rehberger <F.Rehberger@xtradyne.de>
  */
 
 #include <stdio.h>
@@ -12,9 +12,10 @@
 #include "byteseq.h"
 #include "byteseq-skelimpl.c" 
 
-#include "examples-toolkit.h" /* ie. etk_etk_abort_if_exception() */
+#include "examples-toolkit.h" /* provides etk_abort_if_exception() */
 
-static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -41,66 +42,57 @@ server_shutdown (int sig)
  * return.
  */static 
 void 
-server_init (int               *argc_ptr, 
-	     char              *argv[],
-	     CORBA_ORB         *orb,
-	     CORBA_Environment *ev)
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
 {
-	/* init signal handling */
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
 	signal(SIGINT,  server_shutdown);
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
         (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
-	if (etk_raised_exception(ev)) return;
-}
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
 
-/* Creates servant and registers in context of ORB @orb. The ORB will
- * delegate incoming requests to specific servant object.  @return
- * object reference. If error occures @ev points to exception object
- * on return.
- */
-static 
-Examples_ByteSeq_Storage
-server_activate_service (CORBA_ORB         orb,
-			 CORBA_Environment *ev)
-{
-	Examples_ByteSeq_Storage   servant     = CORBA_OBJECT_NIL; 
-	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+        (*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
 
-        /* get Portable Object Adaptor (POA) */
-
-        poa = 
-	 (PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
-								   "RootPOA",
-								   ev);
-	if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-       /* create servant in context of poa container */
-
-	servant = impl_Examples_ByteSeq_Storage__create (poa, ev);
-	if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
-	
-        /* activate POA Manager */
-
-        poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);
-	if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
+        poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
 
 	PortableServer_POAManager_activate(poa_manager, ev);
-	if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
 
-	return servant;
+        CORBA_Object_release ((CORBA_Object) poa_manager, ev);
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
+static void 
 server_run (CORBA_ORB          orb,
 	    CORBA_Environment *ev)
 {
@@ -116,23 +108,58 @@ server_run (CORBA_ORB          orb,
 /* Releases @servant object and finally destroys @orb. If error
  * occures @ev points to exception object on return.
  */
-static 
-void 
-server_cleanup (CORBA_ORB                 orb,
-		Examples_ByteSeq_Storage  servant,
-		CORBA_Environment        *ev)
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
 {
-	/* releasing managed object */
-        CORBA_Object_release(servant, ev);
+	PortableServer_ObjectId   *objid       = NULL;
+
+	objid = PortableServer_POA_reference_to_id (poa, ref, ev);
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	PortableServer_POA_deactivate_object (poa, objid, ev);
 	if (etk_raised_exception(ev)) return;
 
-        /* tear down the ORB */
+	PortableServer_POA_destroy (poa, TRUE, FALSE, ev);
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+        CORBA_Object_release ((CORBA_Object) poa, ev);
+	if (etk_raised_exception(ev)) return;
+	
+        CORBA_Object_release (ref, ev);
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
 		if (etk_raised_exception(ev)) return;
         }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_ByteSeq_Storage ref = CORBA_OBJECT_NIL;
+
+	ref = impl_Examples_ByteSeq_Storage__create (poa, ev);
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
 }
 
 /* 
@@ -142,18 +169,18 @@ server_cleanup (CORBA_ORB                 orb,
 int
 main (int argc, char *argv[])
 {
-	CORBA_char filename[] = "byteseq.ior";
-
-	Examples_ByteSeq_Storage servant = CORBA_OBJECT_NIL;
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "byteseq.ref";
 
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	server_init (&argc, argv, &global_orb, ev);
-	etk_abort_if_exception(ev, "init failed");
+	server_init (&argc, argv, &global_orb, &root_poa, ev);
+	etk_abort_if_exception(ev, "failed ORB init");
 
-	servant = server_activate_service (global_orb, ev);
-	etk_abort_if_exception(ev, "activating service failed");
+	servant = server_activate_service (global_orb, root_poa, ev);
+	etk_abort_if_exception(ev, "failed activating service");
 
 	g_print ("Writing service reference to: %s\n\n", filename);
 
@@ -161,15 +188,16 @@ main (int argc, char *argv[])
 				   servant, 
 				   filename, 
 				   ev);
-	etk_abort_if_exception(ev, "exporting IOR failed");
+	etk_abort_if_exception(ev, "failed exporting IOR");
 	
 	server_run (global_orb, ev);
-	etk_abort_if_exception(ev, "entering main loop failed");
+	etk_abort_if_exception(ev, "failed entering main loop");
 
-	server_cleanup (global_orb, servant, ev);
-	etk_abort_if_exception(ev, "cleanup failed");
+	server_cleanup (global_orb, root_poa, servant, ev);
+	etk_abort_if_exception(ev, "failed cleanup");
 
 	exit (0);
 }
+	
 	
 

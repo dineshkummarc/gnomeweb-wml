@@ -13,67 +13,31 @@ typedef struct
    PortableServer_POA poa;
 
    /* ------ add private attributes here ------ */
-   CORBA_char *id;
-   CORBA_long  counter;
-    /* ------ ---------- end ------------ ------ */
-} impl_POA_Examples_NameResolve_Service;
-
-typedef struct
-{
-   POA_Examples_NameResolve_Factory servant;
-   PortableServer_POA poa;
-
-   /* ------ add private attributes here ------ */
    /* ------ ---------- end ------------ ------ */
-} impl_POA_Examples_NameResolve_Factory;
+} impl_POA_Examples_NameResolve_Service;
 
 /*** Implementation stub prototypes ***/
 
 static void
-impl_Examples_NameResolve_Service__destroy
-(impl_POA_Examples_NameResolve_Service * servant, CORBA_Environment * ev);
+impl_Examples_NameResolve_Service__fini(impl_POA_Examples_NameResolve_Service
+					* servant, CORBA_Environment * ev);
 static void
-impl_Examples_NameResolve_Service_doit(impl_POA_Examples_NameResolve_Service *
-				       servant, const CORBA_char * mesg,
-				       CORBA_Environment * ev);
-
-static void
-impl_Examples_NameResolve_Service_destroy
-(impl_POA_Examples_NameResolve_Service * servant, CORBA_Environment * ev);
-
-static void
-impl_Examples_NameResolve_Factory__destroy
-(impl_POA_Examples_NameResolve_Factory * servant, CORBA_Environment * ev);
-static Examples_NameResolve_Service
-impl_Examples_NameResolve_Factory_produce
-(impl_POA_Examples_NameResolve_Factory * servant, const CORBA_char * id, CORBA_Environment * ev);
+impl_Examples_NameResolve_Service_echoString
+(impl_POA_Examples_NameResolve_Service * servant, const CORBA_char * input,
+CORBA_Environment * ev);
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv
    impl_Examples_NameResolve_Service_base_epv = {
    NULL,			/* _private data */
-   (gpointer) & impl_Examples_NameResolve_Service__destroy,	/* finalize routine */
+   (gpointer) & impl_Examples_NameResolve_Service__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Examples_NameResolve_Service__epv
    impl_Examples_NameResolve_Service_epv = {
    NULL,			/* _private */
-   (gpointer) & impl_Examples_NameResolve_Service_doit,
-
-   (gpointer) & impl_Examples_NameResolve_Service_destroy,
-
-};
-static PortableServer_ServantBase__epv
-   impl_Examples_NameResolve_Factory_base_epv = {
-   NULL,			/* _private data */
-   (gpointer) & impl_Examples_NameResolve_Factory__destroy,	/* finalize routine */
-   NULL,			/* default_POA routine */
-};
-static POA_Examples_NameResolve_Factory__epv
-   impl_Examples_NameResolve_Factory_epv = {
-   NULL,			/* _private */
-   (gpointer) & impl_Examples_NameResolve_Factory_produce,
+   (gpointer) & impl_Examples_NameResolve_Service_echoString,
 
 };
 
@@ -84,17 +48,11 @@ static POA_Examples_NameResolve_Service__vepv
    &impl_Examples_NameResolve_Service_base_epv,
    &impl_Examples_NameResolve_Service_epv,
 };
-static POA_Examples_NameResolve_Factory__vepv
-   impl_Examples_NameResolve_Factory_vepv = {
-   &impl_Examples_NameResolve_Factory_base_epv,
-   &impl_Examples_NameResolve_Factory_epv,
-};
 
 /*** Stub implementations ***/
 
 static Examples_NameResolve_Service
 impl_Examples_NameResolve_Service__create(PortableServer_POA poa,
-					  const CORBA_char  * id,
 					  CORBA_Environment * ev)
 {
    Examples_NameResolve_Service retval;
@@ -105,15 +63,14 @@ impl_Examples_NameResolve_Service__create(PortableServer_POA poa,
    newservant->servant.vepv = &impl_Examples_NameResolve_Service_vepv;
    newservant->poa =
       (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+
    POA_Examples_NameResolve_Service__init((PortableServer_Servant) newservant,
 					  ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
 
    /* ------ init private attributes here ------ */
-   newservant->id      = CORBA_string_dup (id);
-   newservant->counter = 0;
-    /* ------ ---------- end ------------- ------ */
+   /* ------ ---------- end ------------- ------ */
 
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
    CORBA_free(objid);
@@ -122,97 +79,37 @@ impl_Examples_NameResolve_Service__create(PortableServer_POA poa,
    return retval;
 }
 
+/**
+ * impl_Examples_NameResolve_Service__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any active operation invocation, method call is being delayed.
+ * Note, in former versions of ORBit2 this function would have been
+ * named impl_Examples_NameResolve_Service__destroy.
+**/
 static void
-impl_Examples_NameResolve_Service__destroy
-   (impl_POA_Examples_NameResolve_Service * servant, CORBA_Environment * ev)
+impl_Examples_NameResolve_Service__fini(impl_POA_Examples_NameResolve_Service
+					* servant, CORBA_Environment * ev)
 {
    CORBA_Object_release((CORBA_Object) servant->poa, ev);
 
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
    /* ------ free private attributes here ------ */
-   CORBA_free (servant->id);
-    /* ------ ---------- end ------------- ------ */
+   /* ------ ---------- end ------------- ------ */
 
    POA_Examples_NameResolve_Service__fini((PortableServer_Servant) servant,
 					  ev);
+
+   g_free(servant);
 }
 
 static void
-impl_Examples_NameResolve_Service_doit(impl_POA_Examples_NameResolve_Service *
-				       servant, const CORBA_char * mesg,
-				       CORBA_Environment * ev)
-{
-   /* ------   insert method code here   ------ */
-   g_print ("do it (%4d %s)\n", servant->counter, servant->id);
-   ++(servant->counter);
-   /* ------ ---------- end ------------ ------ */
-}
-
-static void
-impl_Examples_NameResolve_Service_destroy
-   (impl_POA_Examples_NameResolve_Service * servant, CORBA_Environment * ev)
-{
-   /* ------   insert method code here   ------ */
-   impl_Examples_NameResolve_Service__destroy (servant, ev); 
-   /* ------ ---------- end ------------ ------ */
-}
-
-static Examples_NameResolve_Factory
-impl_Examples_NameResolve_Factory__create(PortableServer_POA poa,
-					  CORBA_Environment * ev)
-{
-   Examples_NameResolve_Factory retval;
-   impl_POA_Examples_NameResolve_Factory *newservant;
-   PortableServer_ObjectId *objid;
-
-   newservant = g_new0(impl_POA_Examples_NameResolve_Factory, 1);
-   newservant->servant.vepv = &impl_Examples_NameResolve_Factory_vepv;
-   newservant->poa =
-      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
-   POA_Examples_NameResolve_Factory__init((PortableServer_Servant) newservant,
-					  ev);
-   /* Before servant is going to be activated all
-    * private attributes must be initialized.  */
-
-   /* ------ init private attributes here ------ */
-   /* ------ ---------- end ------------- ------ */
-
-   objid = PortableServer_POA_activate_object(poa, newservant, ev);
-   CORBA_free(objid);
-   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
-
-   return retval;
-}
-
-static void
-impl_Examples_NameResolve_Factory__destroy
-   (impl_POA_Examples_NameResolve_Factory * servant, CORBA_Environment * ev)
-{
-   CORBA_Object_release((CORBA_Object) servant->poa, ev);
-
-   /* No further remote method calls are delegated to 
-    * servant and you may free your private attributes. */
-   /* ------ free private attributes here ------ */
-   /* ------ ---------- end ------------- ------ */
-
-   POA_Examples_NameResolve_Factory__fini((PortableServer_Servant) servant,
-					  ev);
-}
-
-static Examples_NameResolve_Service
-impl_Examples_NameResolve_Factory_produce
-   (impl_POA_Examples_NameResolve_Factory * servant, const CORBA_char * id,
+impl_Examples_NameResolve_Service_echoString
+   (impl_POA_Examples_NameResolve_Service * servant, const CORBA_char * input,
     CORBA_Environment * ev)
 {
-   Examples_NameResolve_Service retval;
-
    /* ------   insert method code here   ------ */
-   retval = impl_Examples_NameResolve_Service__create(servant->poa, id, ev);
-   if (etk_raised_exception (ev)) {
-           retval = CORBA_OBJECT_NIL;
-   }
+   g_print (">> %s\n", input);
    /* ------ ---------- end ------------ ------ */
-
-   return retval;
 }

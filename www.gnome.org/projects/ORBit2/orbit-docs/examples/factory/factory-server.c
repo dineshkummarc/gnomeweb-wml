@@ -8,11 +8,12 @@
 #include <string.h>
 #include <signal.h>
 #include <orbit/orbit.h>
+#include <ORBitservices/CosNaming.h>
 
-#include "badcall.h"
-#include "badcall-skelimpl.c" 
+#include "factory.h"
+#include "factory-skelimpl.c" 
 
-#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+#include "examples-toolkit.h" /* etk_ functions */ 
 
 static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
 static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
@@ -153,9 +154,9 @@ server_activate_service (CORBA_ORB           orb,
 			 PortableServer_POA  poa,
 			 CORBA_Environment  *ev)
 {
-	Examples_BadCall ref = CORBA_OBJECT_NIL; 
+	Examples_Factory_Producer ref = CORBA_OBJECT_NIL; 
 
-	ref = impl_Examples_BadCall__create (poa, ev);
+	ref = impl_Examples_Factory_Producer__create (poa, ev);
 	if (etk_raised_exception(ev)) 
 		return CORBA_OBJECT_NIL;
 	
@@ -171,7 +172,7 @@ main (int argc, char *argv[])
 {
 	CORBA_Object servant = CORBA_OBJECT_NIL;
 	
-	CORBA_char filename[] = "badcall.ref";
+	CORBA_char filename[] = "factory.ref";
 
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
@@ -198,3 +199,4 @@ main (int argc, char *argv[])
 
 	exit (0);
 }
+	

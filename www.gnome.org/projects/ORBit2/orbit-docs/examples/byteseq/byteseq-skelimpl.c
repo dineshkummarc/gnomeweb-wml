@@ -20,8 +20,8 @@ typedef struct
 /*** Implementation stub prototypes ***/
 
 static void
-impl_Examples_ByteSeq_Storage__destroy(impl_POA_Examples_ByteSeq_Storage *
-				       servant, CORBA_Environment * ev);
+impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
+				    servant, CORBA_Environment * ev);
 static void
 impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
 				  const Examples_ByteSeq_Chunk * chunk,
@@ -31,28 +31,20 @@ static Examples_ByteSeq_Chunk
    *impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage *
 				      servant, CORBA_Environment * ev);
 
-static void
-impl_Examples_ByteSeq_Storage_exchange(impl_POA_Examples_ByteSeq_Storage *
-				       servant,
-				       Examples_ByteSeq_Chunk * chunk,
-				       CORBA_Environment * ev);
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Examples_ByteSeq_Storage_base_epv
    = {
    NULL,			/* _private data */
-   (gpointer) & impl_Examples_ByteSeq_Storage__destroy,	/* finalize routine */
+   (gpointer) & impl_Examples_ByteSeq_Storage__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Examples_ByteSeq_Storage__epv impl_Examples_ByteSeq_Storage_epv = {
    NULL,			/* _private */
    (gpointer) & impl_Examples_ByteSeq_Storage_set,
 
-   (gpointer) & impl_Examples_ByteSeq_Storage_get,
-
-   (gpointer) & impl_Examples_ByteSeq_Storage_exchange,
-
+   (gpointer) & impl_Examples_ByteSeq_Storage_get
 };
 
 /*** vepv structures ***/
@@ -76,14 +68,14 @@ impl_Examples_ByteSeq_Storage__create(PortableServer_POA poa,
    newservant->servant.vepv = &impl_Examples_ByteSeq_Storage_vepv;
    newservant->poa =
       (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+
    POA_Examples_ByteSeq_Storage__init((PortableServer_Servant) newservant,
 				      ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
 
    /* ------ init private attributes here ------ */
-   newservant->chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64);
-   /* ------ ---------- end ------------- ------ */
+   newservant->chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64);   /* ------ ---------- end ------------- ------ */
 
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
    CORBA_free(objid);
@@ -92,9 +84,15 @@ impl_Examples_ByteSeq_Storage__create(PortableServer_POA poa,
    return retval;
 }
 
+/**
+ * impl_Examples_ByteSeq_Storage__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation is invoked, application is being delayed.
+**/
 static void
-impl_Examples_ByteSeq_Storage__destroy(impl_POA_Examples_ByteSeq_Storage *
-				       servant, CORBA_Environment * ev)
+impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
+				    servant, CORBA_Environment * ev)
 {
    CORBA_Object_release((CORBA_Object) servant->poa, ev);
 
@@ -105,6 +103,8 @@ impl_Examples_ByteSeq_Storage__destroy(impl_POA_Examples_ByteSeq_Storage *
    /* ------ ---------- end ------------- ------ */
 
    POA_Examples_ByteSeq_Storage__fini((PortableServer_Servant) servant, ev);
+
+   g_free(servant);
 }
 
 static void
@@ -113,15 +113,15 @@ impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
 				  CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-   fprintf (stderr, "!");
-
+   fprintf (stderr, "+");
+ 
    ORBit_sequence_set_size (servant->chunk, chunk->_length);
-   
-   { 
-	   CORBA_long i=0;
-	   for (i = 0; i < chunk->_length; ++i)
-		   ORBit_sequence_index (servant->chunk, i) 
-			   = ORBit_sequence_index (chunk, i);
+    
+   {
+           CORBA_long i=0;
+           for (i = 0; i < chunk->_length; ++i)
+                   ORBit_sequence_index (servant->chunk, i)
+                           = ORBit_sequence_index (chunk, i);
    }
    /* ------ ---------- end ------------ ------ */
 }
@@ -133,36 +133,19 @@ impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage * servant,
    Examples_ByteSeq_Chunk *retval;
 
    /* ------   insert method code here   ------ */
-   fprintf (stderr, ".");
+   fprintf (stderr, "-");
 
    retval = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,
-				  servant->chunk->_length);
-   
-   { 
-	   CORBA_long i=0;
-	   for (i = 0; i < servant->chunk->_length; ++i)
-		   ORBit_sequence_index (retval, i) 
-			   = ORBit_sequence_index (servant->chunk, i);
+                                  servant->chunk->_length);
+
+   {
+           CORBA_long i=0;
+           for (i = 0; i < servant->chunk->_length; ++i)
+                   ORBit_sequence_index (retval, i)
+                           = ORBit_sequence_index (servant->chunk, i);
    }
    /* ------ ---------- end ------------ ------ */
 
    return retval;
 }
 
-static void
-impl_Examples_ByteSeq_Storage_exchange(impl_POA_Examples_ByteSeq_Storage *
-				       servant,
-				       Examples_ByteSeq_Chunk * chunk,
-				       CORBA_Environment * ev)
-{
-   /* ------   insert method code here   ------ */
-   fprintf (stderr, "#");
-
-   /* cross over copy */
-   { 
-	   Examples_ByteSeq_Chunk tmp = *chunk;
-	   *chunk            = *(servant->chunk); 
-	   *(servant->chunk) = tmp; 
-   }
-   /* ------ ---------- end ------------ ------ */
-}

@@ -1,4 +1,4 @@
-PREFIX=/usr
+PREFIX ?= /usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
@@ -12,8 +12,10 @@ IDLOUT=echo-common.c echo-stubs.c echo-skels.c echo.h
 
 all: $(IDLOUT) echo-client echo-server
 
+echo-server.o: echo-server.c echo-skelimpl.c
+
 echo-client : echo-client.o echo-stubs.o echo-common.o examples-toolkit.o
-echo-server : echo-server.o echo-skels.o echo-common.o examples-toolkit.o
+echo-server : echo-server.o echo-skels.o echo-common.o examples-toolkit.o echo-skelimpl.o
 
 $(IDLOUT): echo.idl
 	$(ORBIT_IDL) echo.idl
@@ -22,7 +24,7 @@ $(IDLOUT): echo.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT)
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
 
 distclean: clean
 	rm -rf echo-client echo-server

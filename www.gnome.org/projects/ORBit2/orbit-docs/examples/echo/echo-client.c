@@ -89,48 +89,48 @@ client_cleanup (CORBA_ORB                 orb,
 /**
  *
  */
-static
-CORBA_Object
-client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
-{
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
+/* static */
+/* CORBA_Object */
+/* client_import_service_from_stream (CORBA_ORB          orb, */
+/* 				   FILE              *stream, */
+/* 				   CORBA_Environment *ev) */
+/* { */
+/* 	CORBA_Object obj = CORBA_OBJECT_NIL; */
+/* 	gchar *objref=NULL; */
     
-	fscanf (stream, "%as", &objref);  /* FIXME, handle input error */ 
+/* 	fscanf (stream, "%as", &objref);  /\* FIXME, handle input error *\/  */
 	
-	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);
-	free (objref);
+/* 	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb, */
+/* 							 objref,  */
+/* 							 ev); */
+/* 	free (objref); */
 	
-	return obj;
-}
+/* 	return obj; */
+/* } */
 
 /**
  *
  */
-static
-CORBA_Object
-client_import_service_from_file (CORBA_ORB          orb,
-				 char              *filename,
-				 CORBA_Environment *ev)
-{
-        CORBA_Object  obj    = NULL;
-        FILE         *file   = NULL;
+/* static */
+/* CORBA_Object */
+/* client_import_service_from_file (CORBA_ORB          orb, */
+/* 				 char              *filename, */
+/* 				 CORBA_Environment *ev) */
+/* { */
+/*         CORBA_Object  obj    = NULL; */
+/*         FILE         *file   = NULL; */
  
-        /* write objref to file */
+/*         /\* write objref to file *\/ */
          
-        if ((file=fopen(filename, "r"))==NULL)
-                g_error ("could not open %s\n", filename);
+/*         if ((file=fopen(filename, "r"))==NULL) */
+/*                 g_error ("could not open %s\n", filename); */
     
-	obj=client_import_service_from_stream (orb, file, ev);
+/* 	obj=client_import_service_from_stream (orb, file, ev); */
 	
-	fclose (file);
+/* 	fclose (file); */
 
-	return obj;
-}
+/* 	return obj; */
+/* } */
 
 
 /**
@@ -168,7 +168,7 @@ client_run (Echo  echo_service,
 int
 main(int argc, char* argv[])
 {
-	CORBA_char filename[] = "echo.ior";
+	CORBA_char filename[] = "echo.ref";
         
 	Echo echo_service = CORBA_OBJECT_NIL;
 
@@ -180,9 +180,9 @@ main(int argc, char* argv[])
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	echo_service = (Echo) client_import_service_from_file (global_orb,
-							       "echo.ior",
-							       ev);
+	echo_service = (Echo) etk_import_object_from_file (global_orb,
+							   filename,
+							   ev);
         etk_abort_if_exception(ev, "import service failed");
 
 	client_run (echo_service, ev);

@@ -19,8 +19,8 @@ typedef struct
 
 /*** Implementation stub prototypes ***/
 
-static void impl_Examples_BadCall__destroy(impl_POA_Examples_BadCall *
-					   servant, CORBA_Environment * ev);
+static void impl_Examples_BadCall__fini(impl_POA_Examples_BadCall *
+					servant, CORBA_Environment * ev);
 
 static Examples_BadCall_Foo
 impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
@@ -32,7 +32,7 @@ impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
 
 static PortableServer_ServantBase__epv impl_Examples_BadCall_base_epv = {
    NULL,			/* _private data */
-   (gpointer) & impl_Examples_BadCall__destroy,	/* finalize routine */
+   (gpointer) & impl_Examples_BadCall__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Examples_BadCall__epv impl_Examples_BadCall_epv = {
@@ -78,8 +78,8 @@ impl_Examples_BadCall__create(PortableServer_POA poa, CORBA_Environment * ev)
 }
 
 static void
-impl_Examples_BadCall__destroy(impl_POA_Examples_BadCall * servant,
-			       CORBA_Environment * ev)
+impl_Examples_BadCall__fini (impl_POA_Examples_BadCall * servant,
+			     CORBA_Environment * ev)
 {
    CORBA_Object_release((CORBA_Object) servant->poa, ev);
 
@@ -90,6 +90,8 @@ impl_Examples_BadCall__destroy(impl_POA_Examples_BadCall * servant,
    /* ------ ---------- end ------------- ------ */
 
    POA_Examples_BadCall__fini((PortableServer_Servant) servant, ev);
+   
+   g_free (servant);
 }
 
 static Examples_BadCall_Foo

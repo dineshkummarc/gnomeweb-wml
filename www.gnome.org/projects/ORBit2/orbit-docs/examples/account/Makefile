@@ -1,4 +1,4 @@
-PREFIX=/usr
+PREFIX ?= /usr
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
@@ -13,6 +13,7 @@ IDLOUT=account-common.c account-stubs.c account-skels.c account.h
 
 all: $(IDLOUT) account-client account-server
 
+account-server.o: account-server.c account-skelimpl.c
 account-client : account-client.o account-stubs.o account-common.o examples-toolkit.o
 account-server : account-server.o account-skels.o account-common.o examples-toolkit.o
 
@@ -24,7 +25,7 @@ $(IDLOUT): account.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT)
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
 
 distclean: clean
 	rm -rf account-client account-server
