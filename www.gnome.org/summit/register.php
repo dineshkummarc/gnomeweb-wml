@@ -124,7 +124,7 @@
     </ul>
 
     <form action="<?=$PHP_SELF?>" method="POST">
-      <table colspacing=15>
+      <table>
 	<tr>
 	  <td>*Name:</td>
 	  <td>
@@ -234,6 +234,10 @@
 
 <? } ?>
 
+	  </td></tr>
+      </table>
+	  </td></tr>
+      </table>
 	  </td></tr>
       </table>
     </center>
