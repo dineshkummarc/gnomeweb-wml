@@ -1,10 +1,13 @@
-SUBDIRS =
+SUBDIRS = img
 
 urlpath = /projects/beagle
 
-page_SCRIPTS = \
-	index.html
+HTML_FILES := $(wildcard *.html)
 
-page_DATA =
+page_SCRIPTS = 
+
+page_DATA = \
+	style.css \
+	$(HTML_FILES)
 
 include $(top_srcdir)/rules.common
