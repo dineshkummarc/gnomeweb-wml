@@ -6,7 +6,7 @@ page_SCRIPTS =
 
 include $(top_srcdir)/rules.common
 
-page_DATA =	blackjack.png \
+page_DATA = blackjack.png \
 	burn.png \
 	drwright.png \
 	epiphany.png \
@@ -19,4 +19,5 @@ page_DATA =	blackjack.png \
 	gpdf.png \
 	gucharmap.png \
 	i18n.png \
+	stickynotes.png \
 	zenity.png
