@@ -65,7 +65,7 @@ print "<p><a href='http://news.gnome.org/gnome-news/'><font size=\"+2\" color=\"
 
 feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf/")
 
-feedfile.readline();
+#feedfile.readline();
 
 if __name__ == '__main__':
     parser = saxexts.make_parser()
