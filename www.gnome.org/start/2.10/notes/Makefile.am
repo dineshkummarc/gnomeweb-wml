@@ -530,6 +530,54 @@ nobase_page_DATA = \
 	zh_TW/rncredits.html \
 	zh_TW/rndocs.html \
 	zh_TW/rni18.html \
+	zh_CN/rnlookingahead.html \
+	zh_CN/index.html \
+	zh_CN/rnknownissues.html \
+	zh_CN/figures/figure-applet-drivemount.png \
+	zh_CN/figures/figure-backgrounds.png \
+	zh_CN/figures/figure-floppy-formatter.png \
+	zh_CN/figures/figure-logviewer.png \
+	zh_CN/figures/figure-applet-trash.png \
+	zh_CN/figures/figure-applet-modem.png \
+	zh_CN/figures/figure-evolution-mail.png \
+	zh_CN/figures/figure-applet-cpufreq.png \
+	zh_CN/figures/figure-game-same-gnome.png \
+	zh_CN/figures/figure-applet-stickies.png \
+	zh_CN/figures/figure-applet-weather.png \
+	zh_CN/figures/figure-applet-mixer.png \
+	zh_CN/figures/figure-nautilus.png \
+	zh_CN/figures/figure-totem.png \
+	zh_CN/figures/figure-evolution-weather.png \
+	zh_CN/figures/figure-file-roller.png \
+	zh_CN/figures/figure-gnome-desktop.png \
+	zh_CN/figures/figure-epiphany.png \
+	zh_CN/figures/figure-keyboard-properties+layout.png \
+	zh_CN/figures/figure-gnome-system-tools.png \
+	zh_CN/figures/figure-dictionary.png \
+	zh_CN/figures/figure-gnome-meeting.png \
+	zh_CN/figures/figure-soundjuicer.png \
+	zh_CN/figures/figure-game-nibbles.png \
+	zh_CN/figures/figure-gedit.png \
+	zh_CN/rninstallation.html \
+	zh_CN/rnwhatsnew.html \
+	zh_CN/images/next.png \
+	zh_CN/images/note.png \
+	zh_CN/images/prev.png \
+	zh_CN/images/caution.png \
+	zh_CN/images/important.png \
+	zh_CN/images/warning.png \
+	zh_CN/images/up.png \
+	zh_CN/images/tip.png \
+	zh_CN/images/home.png \
+	zh_CN/images/blank.png \
+	zh_CN/images/CVS/Root \
+	zh_CN/images/CVS/Entries \
+	zh_CN/images/CVS/Repository \
+	zh_CN/rngettinginvolved.html \
+	zh_CN/rnstandards.html \
+	zh_CN/rncredits.html \
+	zh_CN/rndocs.html \
+	zh_CN/rni18.html \
 	sv/rnlookingahead.html \
 	sv/index.html \
 	sv/rnknownissues.html \
