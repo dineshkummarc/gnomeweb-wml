@@ -28,7 +28,7 @@ $res = db_query ($query);
 // ## one time output
 print " <channel>\n";
 print "  <copyright>Copyright 2003 GNOME Foundation</copyright>\n";
-print "  <pubDate>".gmdate('r',time())." GMT</pubDate>\n";
+print "  <pubDate>".gmdate('r',time())."</pubDate>\n";
 print "  <description>GNOME New Releases</description>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
 print "  <title>GNOME New Releases</title>\n";
@@ -43,7 +43,7 @@ while ($row = db_fetch_array($res)) {
 		print "   <link>http://".$GLOBALS[sys_default_domain]."/softwaremap/projects/"
 			. $row[unix_group_name]."</link>\n";
 		print "   <description>".rss_description($row[short_description])."</description>\n";
-		print "   <pubDate>".gmdate('r',$row['release_date'])." GMT</pubDate>\n";
+		print "   <pubDate>".gmdate('r',$row['release_date'])."</pubDate>\n";
 		print "  </item>\n";
 		$outputtotal++;
 	}
