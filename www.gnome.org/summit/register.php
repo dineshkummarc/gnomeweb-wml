@@ -220,7 +220,6 @@
 	    <textarea name="comments" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
-	</tr>
 	<tr>
 	  <td>&nbsp;</td>
 	  <td valign="top">
