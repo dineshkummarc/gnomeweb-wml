@@ -6,4 +6,4 @@ page_SCRIPTS=index.html
 
 include $(top_srcdir)/rules.common
 
-page_DATA=
+page_DATA=gnome-about.png
