@@ -79,7 +79,7 @@
 	$formmail .= "Affiliation [if any]:\t". $affiliation . "\n";
 	$formmail .= "User/Contributor:\t" . $user_contributor . "\n\n";
 
-        $formmail .= "Contributions:==============\n" . $contributions . "\n\n";
+        $formmail .= "Contributions:\n==============\n" . $contributions . "\n\n";
 
         $formmail .= "Interested in attending GUADEC 4:\t" . $guadec . "\n\n";
 
@@ -96,7 +96,7 @@
 
         $formmail .= "GNOME Foundation Member:\t\t" . $gfmember ."\n\n";
 
-        $formmail .= "\nSuggestions:============\n";
+        $formmail .= "\nSuggestions:\n============\n";
         $formmail .= "$suggestions\n\n";
 
         $headers = "From: guadec_pre_register@gnome.org \n";
