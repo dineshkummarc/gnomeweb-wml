@@ -1,0 +1,342 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; I; Linux 2.3.39 i686) [Netscape]">
+</head>
+<body>
+
+<h1>
+Gnome-Pilot FAQ</h1>
+last updated 2000-02-25
+<br>This is work-in-progress. I've got more Q's then answers right now,
+but I'll fill
+<br>it up as time goes by.
+<p>Index:
+<ol>
+<li>
+General Information</li>
+
+<ol TYPE=a>
+<li>
+What is gnome-pilot ?</li>
+
+<li>
+Where can I get it ?</li>
+
+<li>
+How do I install it ..</li>
+
+<ul>
+<li>
+... from CVS ?</li>
+
+<li>
+... from .tar.gz ?</li>
+
+<li>
+... from RPM's ?</li>
+</ul>
+
+<li>
+What other software do I need ?</li>
+
+<li>
+What other software should I have ?</li>
+
+<li>
+Where do I report bugs ?</li>
+
+<li>
+Where can I learn more about gnome-pilot ?</li>
+
+<li>
+I have an XXX device, does that work with gnome-pilot ?</li>
+</ol>
+
+<li>
+Installation questions</li>
+
+<ol TYPE=a>
+<li>
+Compiler errors</li>
+
+<ol TYPE=a>
+<li>
+GOB_CHECK missing ?</li>
+
+<li>
+Cannot find pi-* headers.</li>
+
+<li>
+Doesn't find my installed pilot-link</li>
+
+<li>
+My platform isn't supported</li>
+</ol>
+
+<li>
+RPM installation</li>
+
+<ol TYPE=a>
+<li>
+Where do I get pilot-link ?</li>
+</ol>
+</ol>
+
+<li>
+Grave problems</li>
+
+<ol TYPE=a>
+<li>
+I press HotSync, nothing happens ?</li>
+
+<li>
+I get <tt>*** ERROR *** Cannot connect to GnomePilot Daemon</tt></li>
+
+<li>
+All syncs end with timeout or SIGINT ?</li>
+</ol>
+
+<li>
+Pilot-Link configuration</li>
+
+<ol TYPE=a>
+<li>
+What is a SyncId ?</li>
+
+<li>
+What is "Synchronize Action" ?</li>
+
+<li>
+What is the "User Id" ?</li>
+</ol>
+
+<li>
+Conduit problems</li>
+
+<ol TYPE=a>
+<li>
+How do I install files ? / How does the file conduit work ?</li>
+
+<li>
+How do I use the backup conduit ?</li>
+
+<li>
+When I delete or edit items in gnomecard, the change is not reflected on
+the pilot<b>?</b></li>
+
+<li>
+What are these strange garbage characters in my gcrd file?</li>
+
+<li>
+My AvantGo doens't start/work, que ?</li>
+</ol>
+
+<li>
+Misc</li>
+
+<ol TYPE=a>
+<li>
+How do I install periodically updated local DB's ?</li>
+</ol>
+</ol>
+&nbsp;<b>&nbsp;&nbsp; Q: What is gnome-pilot ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: A package aiming at offering as complete as possible
+integration between your
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PalmPilot pda and the Gnome
+desktop. This means a daemon for monitoring Sync
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; requests, backup and file
+installation capabilities and conduits for <a href="http://www.gnome.org">Gnome</a>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applications.
+<p>&nbsp;<b>&nbsp;&nbsp; Q: Where can I get it ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: Newest releases are available at&nbsp; <a href="http://www.gnome.org/gnome-pilot/download">http://www.gnome.org/gnome-pilot/download</a>
+.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The newest development code
+is also available via anonymous CVS from the
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gnome&nbsp; CVS repository.
+See&nbsp; <a href="http://developer.gnome.org/tools/cvs.html">http://developer.gnome.org/tools/cvs.html</a>
+.
+<p>&nbsp;&nbsp;&nbsp; <b>Q: GOB_CHECK&nbsp;missing ?</b><b></b>
+<p><b>&nbsp;&nbsp;&nbsp; </b>A: GOB is the Gtk+ Object builder, that builds
+.c and .h files from .gob files. You can find it
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://www.5z.com/jirka/gob.html">http://www.5z.com/jirka/gob.html</a>.
+<p>&nbsp;&nbsp;&nbsp; <b>Q: I've got a XXX device, does that work with
+gnome-pilot ?</b>
+<p><b>&nbsp;&nbsp;&nbsp; </b>A: gnome-pilot should work with anything that
+pilot-link works with, as the underlying
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; communication is done by
+pilot-link.
+<br>&nbsp;&nbsp;&nbsp; A: As for Visors with USB support, check&nbsp; <a href="http://usbvisor.sourceforge.net/">http://usbvisor.sourceforge.net/</a>&nbsp;
+for info on
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; connecting the Visor to
+Linux via USB.
+<p>&nbsp;&nbsp;&nbsp;<b> Q: I get "*** ERROR *** Cannot connect to GnomePilot
+Daemons", huh ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: If you compiled gnome-pilot yourself, you probably
+misconfigured your compile.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More specifically, the --sysconfdir
+parameter to configure was most likely omitted.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Try the following :
+<br><tt>&nbsp;&nbsp;&nbsp; $./autogen.sh --prefix=`gnome-config --prefix`
+\</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -sysconfdir=`gnome-config --sysconfdir`</tt>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This should ensure, that
+the .gnorba files end up where the CORBA nameserver can find them.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you did not compile gnome-pilot
+yourself, check manually that the <tt>gpilotd.gnorba </tt>file is placed
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; along the other .gnorba
+files. It should be in the same directory as eg. <tt>panel.gnorba</tt>.
+<p>&nbsp;&nbsp;&nbsp; <b>Q: All syncs end with timeout or SIGINT ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: This bug is known, no need to bug report it. However,
+this is a very odd bug that has yet not
+<br>&nbsp;&nbsp;&nbsp; been fixed (0.1.47 at the time of writing). The
+bug only appears if gpilotd is started as a CORBA
+<br>&nbsp;&nbsp;&nbsp; service, eg.&nbsp; by starting pilot_applet before
+gpilotd. If you manually (or pr. config) start gpilotd before
+<br>&nbsp;&nbsp;&nbsp; other gnome-pilot tools, you should be safe and
+sound, if not, please let <a href="mailto:deity@eskil.dk">me know</a> that
+this also fails.
+<p>&nbsp;&nbsp;&nbsp; The bug is sporadic, and may appear at one time,
+and after watching a South Park episode be gone
+<br>&nbsp;&nbsp;&nbsp; again. Also, this bug is apparantly related to the
+serial port, as you should no experience it with
+<br>&nbsp;&nbsp;&nbsp; simulators such as <a href="http://xcopilot.cuspy.com">XCopilot</a>.
+<p>&nbsp;&nbsp;&nbsp; UPDATE: 20000114: This bug should now be fixed, as
+of version 0.1.48.
+<p>&nbsp;&nbsp;&nbsp; <b>Q: What is a SyncId ?</b>
+<p><b>&nbsp;&nbsp;&nbsp; </b>A: The syncid is just a random number, that
+identifies your machine. The pilot uses this number during
+<br>&nbsp;&nbsp;&nbsp; sync to check if the last synchronize was with the
+same machine as the current. Thus this number only
+<br>&nbsp;&nbsp;&nbsp; has to be unique within the set of machines with
+which you sync. In most cases, you won't have to set
+<br>&nbsp;&nbsp;&nbsp; this value.
+<p>&nbsp;&nbsp;&nbsp;<b> Q: What is "Synchronize Action" ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: The synchronize action determines how conduits
+should transfer data between the local storage
+<br>&nbsp;&nbsp;&nbsp; and the handheld's storage. This setting can be
+used to impose a certain action on the conduits.
+<br>&nbsp;
+<center><table BORDER COLS=2 WIDTH="80%" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE>Use conduit Settings
+<p>&nbsp;</td>
+
+<td>Use whatever the conduit is configured to do.&nbsp;</td>
+</tr>
+
+<tr>
+<td>Synchronize</td>
+
+<td>Call synchronize. This synchronizes db's at the record level. See note
+below.</td>
+</tr>
+
+<tr>
+<td>Copy from pilot</td>
+
+<td>Call copy from pilot. The deletes the local storage, and then copies
+all records from the pilot. See note below.</td>
+</tr>
+
+<tr>
+<td>Copy to pilot</td>
+
+<td>As copy from pilot, only the other way around. See note below.</td>
+</tr>
+
+<tr>
+<td>Merge from pilot</td>
+
+<td>Perform record level merge but do not modify/add records on the pilot.</td>
+</tr>
+
+<tr>
+<td>Merge to pilot</td>
+
+<td>Perform record level merge but do not modify/add records in the local
+db.</td>
+</tr>
+</table></center>
+
+<p>&nbsp;&nbsp;&nbsp; Note : If the imposed action is not supported by
+the conduit, no synchronization will happen. Also
+<br>&nbsp;&nbsp;&nbsp; please note, that copy to/from pilot <i>deletes</i>
+db's before proceeding. This can cause dataloss is the
+<br>&nbsp;&nbsp;&nbsp; synchronization is ended prematurely.
+<p>&nbsp;&nbsp;&nbsp; In most cases, "Use conduit settings" will be the
+option you want.
+<p>&nbsp;&nbsp;&nbsp; <i>Additional Note: This option may be removed.</i>
+<p><b>&nbsp;&nbsp;&nbsp; Q: What is the "User Id" ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: The user id identifies your pilot. In multi user
+environment (when gpilotd truly supports that), it
+<br>&nbsp;&nbsp;&nbsp; will be used to match the pilot with you. When you
+buy or reset your pilot, it has a ID=0. Normally, a
+<br>&nbsp;&nbsp;&nbsp; pilot with ID=0 will mean just that, a blank slate.
+Therefore, you should not use 0 as an ID.
+<p>&nbsp;&nbsp;&nbsp; If you have used the 3Com supplied software for Windows/Mac,
+the pilot will have an ID set.
+<br>&nbsp;&nbsp;&nbsp; Other sync packages might also set an ID, in this
+case, try the "get from pilot" button in the
+<br>&nbsp;&nbsp;&nbsp; Pilot-Link capplet. If this results in a ID=0, please
+set it to another value, and press
+<br>&nbsp;&nbsp;&nbsp; "send to pilot". Not doing this, will someday bring
+trouble (we're talking about stuff like missing
+<br>&nbsp;&nbsp;&nbsp; toilet paper and worse!)
+<p>&nbsp;&nbsp;&nbsp; <b>Q: How do I install files ?/How does the file
+conduit work ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: To install files, first, you must remember to
+enable the file conduit. If this conduit is not enabled,
+<br>&nbsp;&nbsp;&nbsp; the installation will not happen. Once enabled,
+there are three ways :
+<ol>
+<li>
+Rightclick on prc/pdb files in GMC, there should be an option called <i>Install
+Now </i>and <i>Install Later</i>. <i>Now</i> displays a box asking you
+to press sync, <i>Later</i> queues the files till a later sync.</li>
+
+<li>
+Drag and drop files onto the panel applet.</li>
+
+<li>
+Run <tt>gpilot-install-file [-l|-n] [FILES] </tt>from commandline. The
+-l corresponds to the <i>Install Later </i>in GMC, -n to <i>Install Now</i>.</li>
+</ol>
+&nbsp;&nbsp;&nbsp; <b>Q: How do I use the backup conduit ?</b>
+<p>&nbsp;&nbsp;&nbsp; A:
+<br>&nbsp;
+<p><b>&nbsp;&nbsp;&nbsp; Q. When I delete or edit items in gnomecard, the
+change is not reflected on the pilot?</b>
+<p>&nbsp;&nbsp;&nbsp; A: This is limitation of current gnomecard program.
+There's no way for the address conduit to find
+<br>&nbsp;&nbsp;&nbsp; out, which entries have been modified or deleted.
+Changes in the gnomecard implementation will be
+<br>&nbsp;&nbsp;&nbsp; required to add such functionality.
+<p><b>&nbsp;&nbsp;&nbsp; Q. What are these strange garbage characters in
+my gcrd file?</b>
+<p>&nbsp;&nbsp;&nbsp; A: Certain characters need to be quoted to correctly
+read/write vcard files. "=A0" represents "\n",
+<br>&nbsp;&nbsp;&nbsp; "=3D" represents "=" etc., "=" by itself at the
+end of the line means the entry is continued on the
+<br>&nbsp;&nbsp;&nbsp; next line.
+<p>&nbsp;&nbsp;&nbsp;<b> Q: My AvantGo doens't start/work, que ?</b>
+<p>&nbsp;&nbsp;&nbsp; A: It has been reported, that eg. the Minstrel wireless
+modem which apparently adds AvantGo to the
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flash does not work, since
+the main DB is not reported (since it's in flash). The temporary
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fix (making the conduit
+start if another AvantGo base is present) also failed. Stay tuned
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for updates.
+<p>&nbsp;&nbsp; <b>Q: Hot do I install periodically updated local DB's
+?</b>
+<p>&nbsp;&nbsp;&nbsp; A: If you eg. have a cron job that updates some .pdb's
+locally, let the cronjob call
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gpilot-install-file
+-l file1.pdb file2.pdb ...</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; </tt>that should do the trick.
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+</body>
+</html>

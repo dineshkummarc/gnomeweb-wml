@@ -1,0 +1,1922 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+]>
+
+<book id="gnome-pilot-conduit-design">
+  <bookinfo>
+    <title>Gnome pilot conduits</title>
+    <date>1998 August</date>
+    <releaseinfo>Minor changes to second draft for the gnome community.</releaseinfo>
+    <revhistory>
+      <revision>
+	<revnumber>1.2</revnumber> <date>19990940</date>
+        <revremark>Updated for the new conduit architecture</revremark>
+	<revremark>added the new sync functions and commented out the
+	run_config</revremark>
+      </revision>
+      <revision>	
+	<revnumber>1.1</revnumber>
+	<date>19980822</date>
+      </revision>
+    </revhistory>
+    <authorgroup>
+      <author>
+	<firstname>Eskil</firstname>
+	<surname>Olsen</surname>
+      </author>
+      <author>
+	<firstname>Manish</firstname>
+	<surname>Vachharajani</surname>
+      </author>
+      
+    </authorgroup>
+    <address><email>deity@trinity.dbc.bib.dk</email></address>
+    <address><email>mvachhar@vger.rutgers.edu</email></address>
+  </bookinfo>
+
+  <preface>
+
+    <title>Conduits</title>
+    <para>This document describes the conduit interface for the gnome-pilot project.</para>
+    <para>See <citetitle>POSC</citetitle> for general info on conduit design.</para>
+  </preface>
+
+  <chapter>
+   <title>Introduction to Gnome-Pilot conduits.</title>
+
+   <sect1>
+     <title>What are the conduits</title>
+ 
+     <para>A conduit is a plugin for the Gnome-Pilot daemon, which
+     handles synchronization of a database on the pilot (eg. DateDB,
+     the calendardatabase) with a local program/database
+     (eg. GnomeCal, the Gnome calendar program).</para>
+
+     <para>Conduits come in various flavors, two systems conduits for
+     backing up data and installing files, custom conduits and
+     conduits of the SyncAbs type.</para>
+
+     <para>En example is the GnomeCal conduit, a SyncAbs conduit. It
+     is responsible for matching pilot records against local entries,
+     comparing them for differences, converting to/from pilot record
+     format.</para>
+
+     <para>The Email conduit is a custom conduit. It is not concerned
+     with record states, its only concern is copying data to/from a
+     database.</para>
+
+     <para>If you're planning to write a conduit to synchronize your
+     favorite application with your pilot device, you'll have to
+     decide on the type of conduit, normally the choice will be
+     limited to a custom conduit or a SyncAbs conduit.</para>
+
+   </sect1>
+
+   <sect1>
+      <title>Conduit flavors</title>
+ 
+      <para>This is a short description of the types of conduits.</para>
+
+      <sect2>
+         <title>File conduits</title>
+
+         <para>File conduits are conduits which handle installation of
+         files on the pilot. This is both single file installation and
+         restoring a pilot from a backup directory.</para>
+
+         <para>This is one of the system conduits.</para>
+      </sect2>
+
+      <sect2>
+         <title>Backup conduits</title>
+
+         <para>Backup conduits handles the copying of all pilot
+         databases to a local directory.</para>
+
+         <para>This is one of the system conduits.</para>
+      </sect2>
+
+      <sect2>
+         <title>Custom conduits</title>
+
+         <para>A custom conduit is registered to handle a specific
+         database. Once this database is encountered during
+         synchronization, the conduit is loaded and one of its
+         synchronization methods are called.</para>
+
+         <para>Custom conduits can have five synchronization methods ;
+         copy to/from pilot which overwrites either the pilots or the
+         local database, merge to/from pilot which integrates records
+         to the pilots or the local database and finally synchronize,
+         which does "correct" record level synchronization.</para>
+
+         <para>Conduits of this type are specialised for databases
+         like the email database, in which records do not change, but
+         rather are to be sent/received. Another example would be the
+         preferences database, where the conduits to/from methods
+         could synchronize the pilots clock with the local
+         system.</para>
+      </sect2>
+
+      <sect2>
+         <title>SyncAbs conduits</title>
+
+         <para>SyncAbs conduits are must like custom conduits, but
+         where a custom conduit is good for certain databases, SyncAbs
+         conduits are specialised or databases such as the dateboot,
+         addressbook, memopad etc, where records are longlived and
+         change from time to time and therefore require
+         synchronization.</para>
+
+         <para>Where a custom conduit will do a lot of lowlevel work
+         to access records in the database, the SyncAbs conduit will
+         have that work done for it. It will also be given the
+         synchronisation logic as given in
+         <citetitle>POSC</citetitle>, which describes what to do when
+         eg. local record is modified but deleted on the pilot
+         etc.</para>
+      </sect2>
+   </sect1>
+
+  <sect1>
+     <title>Beginning conduit implemention</title>
+
+     <para>Before you start implementing a conduit, there are certain
+     things you have to think about. There are issues such as conduit
+     type and whether or not the local application to which you'll
+     sync is ready for it.</para>
+
+     <sect2>
+        <title>Conduit type</title>
+  
+        <para>First there is the conduit type. Depending on the
+        functionality you wish to implement, your choices are the
+        custom conduits and the syncabs conduits.</para>
+
+        <para>The custom conduit is good for simple databases, like
+        the email database, in which all records from category
+        "Outgoing" are to be mailed, and moved to category "Deleted"
+        and new mail to be inserted into "Inbox". The single record
+        isn't synchronized with respect to its contents.</para>
+
+        <para>SyncAbs conduits are however tailored for databases like
+        the address book. In this, an existing record can undergo
+        certain modifications such as contents change, category
+        movement, deletion, creation etc.  All this has the be
+        compared against the local instance of the records, and in
+        each case (there are twenty), actions such as inserting the
+        record to the pilot, modifying local flags etc, are to be
+        taken.</para>
+
+        <para>Where a custom conduit has to implement its own
+        synchronisation logic, which is fine to many databases, most
+        databases like memopad, calendar, expense etc. will benefit
+        from a SyncAbs conduit, where implementing about methods gives
+        you an almost complete conduit.</para>
+     </sect2>
+
+     <sect2>
+        <title>Local application issues</title>
+
+        <para>Next problem ; is your application ready for the conduit
+        ? A pilot record is identified by a 32 bit unsigned integer,
+        and in order to easily find a local record given the pilot
+        record, it is easier to compare the ID with an local
+        ID. Also has the local record changed since last ?</para>
+
+        <para>So if possible, it is often desirable to add two fields
+        to the local records, namely the pilot id and a status flag
+        (unless the record already has something useable for this,
+        eg. a last-modified ield). In the case of GnomeCal, calendar
+        records were simply given these two fields.</para>
+
+        <para>If on the other hand, you do not have the possibility to
+        add fields, you'll have to in some other way, match local
+        records with the ID info. Keeping a seperate map is one
+        feasible way of achieving this..</para>
+
+        <para>The last resort is to decode a given pilot record, and
+        map it against the local records, a cumbersome way.</para>
+     </sect2>
+  </sect1>
+
+  </chapter>
+
+  <chapter>
+    <title>Conduit methods</title>
+
+    <para>This chapter deals with methods your conduit should/must
+support. At the time of writing, the code examples are untested,
+meaning they have not been compiled. Comments are welcome.</para>
+
+    <sect1 id="so-requirements">
+      <title>Minimal requirements</title>
+      <sect2>
+	<title>Required methods of the conduit</title>
+	<para>Conduits are stored in .so file, and are opened by the
+	conduit manager using <function>dlopen</function>. The
+	following two methods <emphasis>must</emphasis> be present in
+	the .so file.</para>
+	<itemizedlist>
+	  <listitem>
+
+	    <funcsynopsis>
+	      <funcprototype>
+		<funcdef>GnomePilotConduit* <function>conduit_get_gpilot_conduit</function></funcdef>
+		<paramdef>guint32<parameter>pilotId</parameter></paramdef> 
+	      </funcprototype>
+	    </funcsynopsis>
+
+	    <variablelist>
+	      <varlistentry>
+		<term>Description</term>
+		<listitem>
+		  <para>This method shall initialize the returned
+		  GnomePilotConduit structure.</para> <para>The
+		  structure must be aware of the paramater
+		  <parameter>pilotId</parameter>.  Any configurations
+		  read or written must be for this id.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Parameters</term>
+		<listitem>
+		  <variablelist>
+		    <varlistentry>
+		      <term><parameter>pilotId</parameter></term>
+		      <listitem>
+			<para>The Id number of the pilot for which the
+			conduit is being instantiated.</para>
+		      </listitem>
+		    </varlistentry>
+		  </variablelist>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Returns</term>
+		<listitem>
+		  <para>A newly instantiated conduit or NULL if failure.</para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
+
+            <para>A suggested method is having a gnomeconfig file,
+            named after the conduit, and inside this file have a
+            section for each pilotid.</para>
+
+            <para>The return type determines your conduit type. If you
+            return a <type>GnomePilotConduitStandard</type> pointer,
+            the conduit is a custom conduit, whereas a
+            <type>GnomePilotConduitStandardAbs</type> is a SyncAbs
+            conduit.</para>
+
+            <para>Since the return type of
+            <function>conduit_get_gpilot_conduit</function> is simply
+            <type>GnomePilotConduit</type>, you can implement your own
+            type inheriting from the given types. The conduit classes
+            are implemented using the GtkObject system, see <ulink
+url="http://developer.gnome.org/arch/gtk/object.html">GTK+ Object System</ulink>.</para>
+
+            <para>At the beginning of
+            <function>conduit_get_gpilot_conduit</function>, you'll
+            want to call the appropriate new method,
+            eg. <function>gnome_pilot_conduit_standard_abs_new</function>
+            for creating a SyncAbs object.</para>
+
+	    <para>This is an example that creates a SyncAbs
+	    conduit. This example will be reused later in this
+	    document, where more code will be added</para>
+
+ 	    <programlisting role="C">
+GnomePilotConduit *
+conduit_get_gpilotd_conduit( guint32 pilotId) 
+{ 
+        GnomePilotConduitStandardAbs *retval;
+    
+        /* create a new conduit for the pilots database called
+           MemoDB, which has a creator id of 0x6d656d6f */
+        retval = gnome_pilot_conduit_standard_abs_new("MemoDB",0x6d656d6f);
+     
+        /* load configuration, see later */
+        /* set conduit data, see later */
+        /* connect signals, see later */  
+
+        return GNOME_PILOT_CONDUIT(retval);
+}
+ </programlisting>
+
+	  </listitem>
+	  <listitem>
+	    <funcsynopsis>
+	      <funcprototype>
+		<funcdef>void <function>conduit_destroy_gpilot_conduit</function></funcdef>
+		<paramdef>GnomePilotConduit* <parameter>conduit</parameter></paramdef>
+	      </funcprototype>
+	    </funcsynopsis>	    
+
+	    <variablelist>
+	      <varlistentry>
+		<term>Description</term>
+		<listitem>
+		  <para>This method shall free all dynamically
+		  allocated memory. The paramter
+		  <parameter>conduit</parameter> points the structure
+		  returned by the conduits own
+		  <function>conduit_get_gpilot_conduit</function>
+		  method. After this method is called, the conduit
+		  will not be used again.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term>Parameters</term>
+		<listitem>
+		  <variablelist>
+		    <varlistentry>
+		      <term><parameter>conduit</parameter></term>
+		      <listitem>
+			<para>The conduit structure returned from
+			<function>conduit_get_gpilot_conduit</function>.</para>
+		      </listitem>
+		    </varlistentry>
+		  </variablelist>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
+
+
+	    <para>Again, an example.</para>
+
+<programlisting role="C">
+void
+conduit_destroy_gpilotd_conduit( GnomePilotConduit *conduit ) 
+{ 
+        /* delete any conduit data, such as config etc */
+        gtk_object_destroy(conduit);
+}
+</programlisting>
+
+	  </listitem>
+	</itemizedlist>
+      </sect2>
+
+      <sect2>
+	<title>Conduit signals</title>
+
+        <para>The conduit objects all have to respond to certain
+        signals. Which signals depend on the conduit. In this section,
+        all conduit signals are explained.</para>
+
+        <para>Implementing the conduit methods is done in the usual
+matter of connecting signals in the GtkObject system, see <ulink
+url="http://developer.gnome.org/arch/gtk/object.html">GTK+ Object
+System</ulink>.</para>
+
+	<para>Here is the continued example, for creating a
+SyncAbonduit, and connecting to the "match_record" signal c</para>
+<programlisting role="C">
+
+/* a skeleton match_record. The initial g_return_val_if_fail
+   checks the parameters are correct. */
+   
+static gint
+my_conduit_match_record (GnomePilotConduitStandardAbs *conduit,
+                         LocalRecord **local,
+                         PilotRecord *remote,
+                         gpointer data)
+{
+        g_return_val_if_fail(local!=NULL,0);
+        g_return_val_if_fail(remote!=NULL,0);
+
+        ... find a local record
+        ... if none return -1
+        ... else allocate and fill local.
+
+        return 0;
+}
+
+static gpointer
+load_my_conduit_data(...)
+{
+   ... returns a pointer containing the data your conduit
+   needs, eg. GLists with records etc.
+  
+   return NULL;
+}
+
+GnomePilotConduit *
+conduit_get_gpilotd_conduit( guint32 pilotId) 
+{ 
+        GnomePilotConduitStandardAbs *retval;
+        gpointer my_conduit_data;   
+ 
+        /* create a new conduit for the pilots database called
+           MemoDB, which has a creator id of 0x6d656d6f */
+        retval = gnome_pilot_conduit_standard_abs_new("MemoDB",0x6d656d6f);
+     
+        /* load configuration, see later */
+
+        my_conduit_data = load_my_conduit_data(...);
+        gtk_signal_connect(retval,"match_record",
+                           (GtkSignalFunc)my_conduit_match_record,
+                           my_conduit_data);
+        /* gtk_signal_connect for the rest of the signals */
+
+        return GNOME_PILOT_CONDUIT(retval);
+}
+</programlisting>
+
+	<sect3 id="signal-conduit-file">
+	  <title>Signals for file conduits</title>
+
+          <para>*** This will contain a description of signals for file conduits</para>
+        </sect3>
+
+	<sect3 id="signal-conduit-backup">
+	  <title>Signals for backup conduits</title>
+
+          <para>*** This will contain a description of signals for backup conduits</para>
+        </sect3>
+
+	<sect3 id="signal-conduit-standard">
+	  <title>Signals for custom conduits</title>
+
+	  <para>A conduit must support <emphasis>at least</emphasis>
+	  one of the following signals. It may choose to support more
+	  or all, in which case the user gets to choose which is used
+	  during synchronization, using the conduits control-center
+	  applet (see <xref
+	  linkend="conduit-capplet">).</para>
+
+	  <para>These methods, in addition to
+	  <parameter>conduit</parameter> take an additional parameter
+	  <type>GPilotDBInfo*</type> <parameter>dbi</parameter>, a
+	  pointer to a structure containing eg. a socket handle for
+	  communicating with the pilot.</para>
+
+	  <orderedlist>
+	    <listitem xreflabel=" custom-conduit-synchronize"
+	      id="custom-conduit-synchronize">
+              <para>Signal <function>"synchronize"</function></para>
+	      <funcsynopsis>
+
+		<funcprototype>
+		  <funcdef>gint<function>(*synchronize)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandard* <parameter>conduit</parameter></paramdef>
+		  <paramdef>GnomePilotDBInfo* <parameter>dbi</parameter></paramdef>
+                  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>This method implements synchronization,
+		    where the conduit does record-level
+		    synchronization of updates new records between the
+		    two devices, see <citetitle>POSC</citetitle> for
+		    more on this.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>The conduits <keycap>this</keycap>
+			  pointer, the conduit structure returned from
+			  <function>conduit_get_gpilot_conduit</function>.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>dbi</parameter></term>
+			<listitem>
+			  <para>Structure containing
+			  <productname>pilot-link</productname>
+			  connection info and other. Found in the
+			  <filename>gnome-pilot-dbinfo.h</filename>
+			  header file.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>user_data</parameter></term>
+			<listitem>
+			  <para>The pointer given as the last
+			  parameter to the
+			  <function>gtk_signal_new</function> for the
+			  callback.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>Returns 0 for success, a negative value for
+		    failure.</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>	     
+	    </listitem>
+
+	    <listitem>
+              <para>Signal <function>"copy_from_pilot"</function></para>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>gint<function>(*copy_from_pilot)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandard* <parameter>conduit</parameter></paramdef>
+		  <paramdef>GnomePilotDBInfo* <parameter>dbi</parameter></paramdef>
+                  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>This method will delete all local records
+		    and store all records from the pilot in the local
+		    system.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+	      
+	    <listitem>
+              <para>Signal <function>"copy_to_pilot"</function></para>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>gint<function>(*copy_to_pilot)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandard* <parameter>conduit</parameter></paramdef>
+		  <paramdef>GnomePilotDBInfo* <parameter>dbi</parameter></paramdef>
+                  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>This method will delete all records in the
+		    pilot, and write all the local records to the
+		    pilot.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+              <para>Signal <function>"merge_to_pilot"</function></para>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>gint<function>(*merge_to_pilot)</function></funcdef>
+
+		  <paramdef>GnomePilotConduitStandard* <parameter>conduit</parameter></paramdef>
+		  <paramdef>GnomePilotDBInfo* <parameter>dbi</parameter></paramdef>
+                  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Merges new data on the local system into the
+		    pilot by adding new records to the pilot.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+
+	    </listitem>
+
+	    <listitem>
+              <para>Signal <function>"merge_from_pilot"</function></para>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>gint<function>(*merge_from_pilot)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandard* <parameter>conduit</parameter></paramdef>
+		  <paramdef>GnomePilotDBInfo* <parameter>dbi</parameter></paramdef>
+                  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Merges new data on the pilot onto local
+		    system by adding new records to the local
+		    system.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>See <xref linkend="custom-conduit-synchronize"></para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+	  </orderedlist>
+	</sect3>
+
+	<sect3 id="signal-conduit-syncabs">
+	  <title>Signals for SyncAbs conduits</title>
+
+	  <para>This a a walkthrough of <acronym>SyncAbs</acronym>'s
+	  seventeen methods. Their purpose, importance, usage by the foru
+	  synchronization process (Fast/Slow sync, copy to/from
+	  remote) and how the should behave.</para>
+
+	  <para>These use normal UNIX api return values, meaning 0 on
+	  success, negative values on failure. However, the iteration
+	  methods differ, in that they return 0 on completed iteration
+	  and 1 on successfull iteration step. Other methods are also
+	  required to do other parameter changes depending on their
+	  success.</para>
+
+	  <orderedlist> 
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*MatchRecord)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord** <parameter>local</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>This method takes the
+		    <parameter>remote</parameter> record, and locates
+		    the local record which is supposed to be the same
+		    as the remote. The contents on *local belongs to
+		    the
+		    <acronym>GnomePilotConduitStandardAbs</acronym>
+		    structure, and is not tampered with by the calling
+		    method, so you may freely return a pointer to a
+		    local static variable.</para> <para>The memory
+		    allocated by <function>MatchRecord</function> is
+		    freed by the caller by a call to
+		    <function>FreeMatch</function>.</para>
+
+		    <para>If a call to
+		    <function>MatchRecord</function> is successfull,
+		    it <emphasis>will not be called before</emphasis>
+		    a call to <function>FreeMatch</function>, so if
+		    needed, you can use static variables.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <para><parameter>local</parameter> is a pointer to a
+		  pointer for storing the record. If no local record
+		  matching the remote is found, set
+		  *<parameter>local</parameter> to NULL.</para>
+		    <para>Only one local record should match a remote
+		  record.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, a negative value for
+		  failure. And on success, sets
+		  *<parameter>local</parameter> to the appropriate
+		  record.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync and SlowSync.</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*FreeMatch)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord** <parameter>local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>This method is responsible for freeing memory
+		  allocated by
+		  <function>MatchRecord</function>.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para> pointer to pointer to record. This
+			records resources should be freed, and
+			*<parameter>local</parameter> set to
+			NULL.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*ArchiveLocal)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>When a record is marked as archived on the
+		  pilot, this method is called for the corresponding
+		  (if any) local record. The method should move this
+		  archived record from to local database to a backup
+		  "place". If you think in terms of the pilots
+		  categories, you would eg. move an archived address
+		  to a category called "Archive".</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para>pointer to local record to archive.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*ArchiveRemote)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Unknown</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*StoreRemote)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Stores a remote record in the local
+		  database/files/whatever.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>remote</term>
+			<listitem>
+			  <para> pointer to a pilots record that is to
+			be stored. The method should copy all the
+			information needed, and either immediately
+			store the record, or queue it for
+			storage.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*ClearStatusArchiveLocal)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Unknown</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*Iterate)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* *<parameter>local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Iterates over all the local records.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para>the iterations "pointer". At first call,
+			*<parameter>local</parameter> is NULL. The
+			method should then set
+			<parameter>local</parameter> to point at the
+			first local record (if none, set to NULL and
+			return -1). Upon proceeding calls, move
+			<parameter>local</parameter> to the next
+			record, if you reach the end, set
+			<parameter>local</parameter> to NULL and
+			return -1.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>1 on success and
+		    *<parameter>local</parameter> is set to non NULL,
+		    0 on completion and *<parameter>local</parameter>
+		    is set to NULL, negative value on error.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*IterateSpecific)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord** <parameter>local</parameter></paramdef>
+		  <paramdef>int <parameter>flag</parameter></paramdef>
+		  <paramdef>int <parameter>archived</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Iterates over records that statisfy the criteria.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para>Same as in <function>Iterate</function>.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>flag</term>
+			<listitem>
+			  <para>the records iterated over must have
+			the same attribute as
+			<parameter>flag.</parameter></para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>archived</term>
+			<listitem>
+			  <para>if positive, the records iterated over
+			must be marked as archived.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>1 on success and
+		    *<parameter>local</parameter> is set to non NULL,
+		    0 on completion and *<parameter>local</parameter>
+		    is set to NULL, negative value on error.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*Purge)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Purges the local base - all records marked
+		  Delete are deleted and all records marked Archived
+		  are archived.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote.</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*SetStatus)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>int<parameter>status</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Sets the status of a local record</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term><parameter>local</parameter></term>
+			<listitem>
+			  <para>the local record</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term><parameter>status</parameter></term>
+			<listitem>
+			  <para>The new status for the record</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*SetArchived)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>int<parameter>archived</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Unknown</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>guint32  <function>(*GetPilotID)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Retrieves the pilot-record-number for the
+		  given local record. The returned number should be a
+		  record id that matches a record on the pilot, which
+		  should be "the same" as the local.
+		  </para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para>A <type>LocalRecord</type>* pointing to
+			a local record.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>A <type>guint32</type>, containing the
+		  record id (unsigned 32 bit integer).</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>?</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*SetPilotID)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>local</parameter></paramdef>
+		  <paramdef>guint32 <parameter>ID</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Associates a local record with a pilot
+		    record. This is called during synchronization,
+		    when a new record is found in the local base. The
+		    record is added to the pilot, which assigns a id
+		    to the record. This id is then passed on to the
+		    conduit via this call.</para> <para>This id is
+		    also used when iterating over records, where a
+		    modification to a local record requires a lookup
+		    in the pilot. This lookup is done using this Id,
+		    so it is important to save it in the local
+		    database.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>local</term>
+			<listitem>
+			  <para>A <type>LocalRecord</type>* pointing to
+			the record to which the id was
+			assigned. </para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>ID</term>
+			<listitem>
+			  <para>A <type>guint32</type> integer
+			containg the id.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*Compare)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>Local</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Compares a local record with a pilot record,
+		  used during synchronization. If both the local the
+		  pilot record has been modfied, this is called to
+		  determine if the changes are identical.</para>
+		    <para>Typical, a conduit will compare the contents
+		  of an decoded record in some way, but excatly how,
+		  is up to the conduit.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>Local</term>
+			<listitem>
+			  <para>Pointer to the local record</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>remote</term>
+			<listitem>
+			  <para>Pointer to the pilots record</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 if identical in whatever way the conduit
+		  decides, positive if different, negative if failure.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync.</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*CompareBackup)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>Local</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Unknown</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote, Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*FreeTransmit)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>Local</parameter></paramdef>
+		  <paramdef>PilotRecord* <parameter>remote</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Free memory allocated by a call to
+		  <function>Transmit</function>. Unless
+		  <function>Transmit</function> returns NULL, this
+		  method is called to free all resources allocated to
+		  the pilot record. As with
+		  <function>MatchRecord</function>/<function>FreeMatch</function>,
+		  the allocation/freeing is pairwise, so after a
+		  successfull <function>Transmit</function> call,
+		  <function>FreeTransmit</function> will be called
+		  <emphasis>before</emphasis> another
+		  <function>Transmit</function> is called.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>Local</term>
+			<listitem>
+			  <para>The local record given as argument to
+			<function>Transmit.</function></para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>Remote</term>
+			<listitem>
+			  <para>The returnvalue from the preceeding
+			<function>Transmit</function> call.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>int <function>(*DeleteAll)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>Delete all local records. Called eg. when
+		  doing a Copy From Remote. All the local records must
+		  perish and begone.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>0 on success, negative value on error</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>Copy From Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+
+	    <listitem>
+	      <funcsynopsis>
+		<funcprototype>
+		  <funcdef>PilotRecord*  <function>(*Transmit)</function></funcdef>
+		  <paramdef>GnomePilotConduitStandardAbs* <parameter>conduit</parameter></paramdef>
+		  <paramdef>LocalRecord* <parameter>Local</parameter></paramdef>
+		  <paramdef>gpointer <parameter>user_data</parameter></paramdef>
+		</funcprototype>
+	      </funcsynopsis>
+	      <variablelist>
+		<varlistentry>
+		  <term>Description</term>
+		  <listitem>
+		    <para>From a given local record, create a
+		  <type>PilotRecord</type> record ready for transmit
+		  to the pilot.</para> <para>The memory allocated is
+		  freed by the caller, who calls
+		  <function>FreeTransmit</function>.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Parameters</term>
+		  <listitem>
+		    <variablelist>
+		      <varlistentry>
+			<term><parameter>conduit</parameter></term>
+			<listitem>
+			  <para>pointer to the current
+			GnomePilotConduitStandardAbs structure.</para>
+			</listitem>
+		      </varlistentry>
+		      <varlistentry>
+			<term>Local</term>
+			<listitem>
+			  <para>A non-null <type>LocalRecord</type>*,
+			pointing to a local record returned from
+			eg. <function>Iterate</function>.</para>
+			</listitem>
+		      </varlistentry>
+		    </variablelist>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Returns</term>
+		  <listitem>
+		    <para>A pointer to a ready-to-go
+		  <type>PilotRecord</type>, NULL if an error
+		  occurred.</para>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Needed by</term>
+		  <listitem>
+		    <para>FastSync, SlowSync, Copy To Remote</para>
+		  </listitem>
+		</varlistentry>
+	      </variablelist>
+	    </listitem>
+	  </orderedlist>
+        </sect3>
+      </sect2>
+	  
+      <sect2>
+	<title>GnomePilotConduitStandardAbs record structures</title>
+	
+	<para>This chapter describes how the <type>LocalRecord</type>
+	type for a SyncAbs conduit can be constructed.</para>
+
+	<para>Where the type <type>LocalRecord</type> is used, you'll
+	most likely prefer it to contain a bit more then what is
+	defined in
+	<filename>gnome-pilot-conduit-standard-abs.h</filename>. And
+	since it is a structure rather then a GtkObject, you cannot
+	store data with it using
+	<function>gtk_object_set_data</function>.</para>
+
+	<para>However, since <type>LocalRecord</type> "objects" only
+	leave the conduit from the <function>MatchRecord</function>
+	call, you can choose one of several approach.</para>
+	    
+	<orderedlist>
+	  <listitem>
+	    <para>Only use <type>LocalRecord</type> when dealing with
+	    the surrounding system. That means the only times you
+	    operate on a <type>LocalRecord</type> is when you create
+	    it in <function>MatchRecord</function> and when you
+	    receive it in the other calls, where it is used to locate
+	    a record of another type.</para> <para>Matching
+	    <type>LocalRecord</type> "objects" against another object
+	    is quite easy, since the id field of a
+	    <type>RemoteRecord</type> is guaranteed to be unique,
+	    setting the id field in the returned
+	    <type>LocalRecord</type> in
+	    <function>MatchRecord</function> will easily allow other
+	    calls to find the conduits own record, eg. using
+	    hashtables.</para>
+	    
+	    <para>Here is an (untested) code example on using
+	    hashtables for record storage:</para>
+
+<programlisting role="C"> 
+static gint
+my_conduit_match_record (GnomePilotConduitStandardAbs *conduit,
+                         LocalRecord **local,
+                         PilotRecord *remote,
+                         GHashTable *my_records)
+{
+        MyLocalRecord *my_local;
+
+        g_return_val_if_fail(local!=NULL,0);
+        g_return_val_if_fail(remote!=NULL,0);
+
+        my_local = g_hash_table_lookup(my_records,G_INT_TO_POINTER(remote->ID));
+
+        if (my_local == NULL) return -1;
+
+        (*local) = g_new0(LocalRecord,1);
+        (*local)->attr = my_conduit_determine_pilot_attributes(my_local);
+        (*local)->archived = my_conduit_determine_pilot_archive_state(my_local);
+        (*local)->secret = my_conduit_determine_pilot_secret_state(my_local);
+        (*local)->ID = remote->ID;
+
+        return 0;
+}
+
+static gint
+my_conduit_set_pilot_id (GnomePilotConduitStandardAbs *conduit,
+                         LocalRecord *local,
+                         guint32 new_id,
+                         GHashTable *my_records)
+{
+        MyLocalRecord *my_local;
+
+        g_return_val_if_fail(local!=NULL,0);
+        g_return_val_if_fail(*local!=NULL,0);
+
+        my_local = g_hash_table_lookup(my_records,G_INT_TO_POINTER((*local)->ID));
+
+        if (my_local == NULL) return -1;
+
+        my_conduit_set_pilot_id(my_local,new_id);
+
+        /* remove from hashtable */
+        g_hash_table_remove(my_records,G_INT_TO_POINTER((*local)->ID));
+        /* reinsert with new id */
+        g_hash_table_insert(my_records,my_local,G_INT_TO_POINTER(new_id));
+
+        return 0;
+}
+
+GnomePilotConduit *
+conduit_get_gpilotd_conduit( guint32 pilotId) 
+{ 
+        GnomePilotConduitStandardAbs *retval;
+        GHashTable *my_records;
+ 
+        /* create a new conduit for the pilots database called
+           MemoDB, which has a creator id of 0x6d656d6f */
+        retval = gnome_pilot_conduit_standard_abs_new("MemoDB",0x6d656d6f);
+     
+        /* load configuration, see later */
+
+        my_records = my_conduit_load_records(pilotId);
+        gtk_signal_connect(retval,"match_record",
+                           (GtkSignalFunc)my_conduit_match_record,
+                           my_records);
+        gtk_signal_connect(retval,"set_pilot_id",
+                           (GtkSignalFunc)my_conduit_set_pilot_id,
+                           my_records);
+        /* gtk_signal_connect for the rest of the signals */
+
+        return GNOME_PILOT_CONDUIT(retval);
+}
+</programlisting>
+
+	    <para>Note that this example may be very inefficient,
+	    since it loads all the records at conduit creation. Fine
+	    for 42 simple text records, bad for 42000 complex
+	    records. You may want to load the record when
+	    <function>my_conduit_match_record</function> is called,
+	    insert into the hashtable and keep there until
+	    <function>FreeMatch</function> is called.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Create a structure <type>MyLocalRecord</type> to use
+	    instead of <type>LocalRecord</type>.</para>
+
+<programlisting role="C">
+struct _MyLocalRecord {
+        LocalRecord local;
+        gpointer my_data;
+};
+
+typedef struct _MyLocalRecord MyLocalRecord;
+#define MY_LOCAL_RECORD(s) ((MyLocalRecord*)(s))
+
+static gint
+my_conduit_match_record (GnomePilotConduitStandardAbs *conduit,
+                         LocalRecord **local,
+                         PilotRecord *remote,
+                         gpointer data)
+{
+        g_return_val_if_fail(local!=NULL,0);
+        g_return_val_if_fail(remote!=NULL,0);
+
+        (*local) = g_new0(MyLocalRecord,1);
+        (*local)->local = my_conduit_determine_local_record_values(remote);
+        (*local)->my_data = my_conduit_determine_local_record_my_data(remote);
+
+        return 0;
+}
+
+static gint
+my_conduit_set_pilot_id (GnomePilotConduitStandardAbs *conduit,
+                         MyLocalRecord *local,
+                         guint32 new_id,
+                         gpointer data)
+{
+        MyLocalRecord *my_local;
+
+        g_return_val_if_fail(local!=NULL,0);
+        g_return_val_if_fail(*local!=NULL,0);
+
+        my_local = MY_LOCAL_RECORD(local);
+
+        my_local->local.ID = new_id;
+
+        my_conduit_save_my_local_record(my_local);
+
+        return 0;
+}
+
+GnomePilotConduit *
+conduit_get_gpilotd_conduit( guint32 pilotId) 
+{ 
+        GnomePilotConduitStandardAbs *retval;
+ 
+        /* create a new conduit for the pilots database called
+           MemoDB, which has a creator id of 0x6d656d6f */
+        retval = gnome_pilot_conduit_standard_abs_new("MemoDB",0x6d656d6f);
+     
+        /* load configuration, see later */
+
+        my_records = my_conduit_load_records(pilotId);
+        gtk_signal_connect(retval,"match_record",
+                           (GtkSignalFunc)my_conduit_match_record,
+                           NULL);
+        gtk_signal_connect(retval,"set_pilot_id",
+                           (GtkSignalFunc)my_conduit_set_pilot_id,
+                           NULL);
+        /* gtk_signal_connect for the rest of the signals */
+
+        return GNOME_PILOT_CONDUIT(retval);
+}
+</programlisting>
+
+	  </listitem>
+	</orderedlist>
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="conduit-capplet">
+    <title>Conduit control-center applet</title>
+
+    <para>*** How to use the conduitmgmt lib for capplet implementation</para>
+
+  </chapter>
+
+  <bibliography>
+    <biblioentry>
+      <abbrev>POSC</abbrev>
+      <title>Developing Palm OS Conduits</title>
+      <corpname>U.S. Robotics</corpname>      
+    </biblioentry>
+  </bibliography>
+
+</book>
