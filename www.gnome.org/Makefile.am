@@ -3,7 +3,6 @@ SUBDIRS = about images start projects resources developerinterviews applist lear
 urlpath =
 
 page_SCRIPTS = \
-	seegnome.html \
 	commsupp.html \
 	speakingabout.html \
 	.htaccess \
