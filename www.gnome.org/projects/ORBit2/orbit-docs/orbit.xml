@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
-"docbook/xml-dtd-4.2-1.0-17/docbookx.dtd" [ 
-<!-- "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd" [ -->
-   <!ENTITY manrevision "1.2">
+"docbook/xml-dtd-4.1.2-1.0-17/docbookx.dtd" [
+<!--"docbook/xml-dtd-4.2-1.0-17/docbookx.dtd" [ --> 
+<!-- "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [ -->
+   <!ENTITY manrevision "1.3">
 ]> 
 
 <book>
@@ -138,11 +139,34 @@ You can get :
   </para>
 </listitem>
 </itemizedlist>
-
-
 </para>
+
+<sect2> 
+<title>Change Notes between 1.3 and 1.2</title>
+<para>
+<itemizedlist>
+   <listitem><para>POrt back to docbook4.1.2 used by gnome-doc project</para></listitem>
+   <listitem><para>rename impl_*__destroy to impl_*__fini, being CORBA's nomenclature</para></listitem>
+   <listitem><para>fix memory-leaks in server implementations: deactivate servants at termination</para></listitem>
+</itemizedlist>
+</para>
+</sect2>
+
+<sect2> 
+<title>Change Notes between 1.2 and 1.1</title>
+<para>
+<itemizedlist>
+   <listitem><para>Introduced section for change notes</para></listitem>
+   <listitem><para>fixing __destroy __fini confusion</para></listitem>
+   <listitem><para>Add chapter for sample codes byteseq, badcall and 
+name-resolve</para></listitem>
+</itemizedlist>
+</para>
+</sect2>
+
 </sect1>
 </chapter>
+
 
 <!-- Chapter FAQ -->
 <chapter>
@@ -423,11 +447,11 @@ Proceed similarly for the calculator example.
 To actually run the echo example, open two windows up. 
 Run <filename>echo-server</filename> in one and 
 <filename>echo-client</filename> in the other 
-(echo-server writes out the file <filename>echo.ior</filename> which echo-client reads).
+(echo-server writes out the file <filename>echo.ref</filename> which echo-client reads).
 
 If you want to have fun now, compile
 orbit on a different machine, make echo-client on the different machine,
-move <filename> echo.ior </filename> from the first machine to the second and run echo-client:
+move <filename> echo.ref </filename> from the first machine to the second and run echo-client:
 eh voila - client/server over tcp/ip with the same code that ran using
 unix sockets on a single machine.
 </para>
@@ -670,7 +694,7 @@ automatically generated from your IDL file.
 The <filename> f-skelimpl.c </filename> file contains the framework
 of the servant functions: you should find near the end of the file,
 function prototypes corresponding to the one you have declared in
-your IDL. You have to fill in these function with the real code.
+your IDL, your real code must be inserted between markers.
 Of course, you should keep this file only on the server side since
 it is of no use for the client.
 </para>
@@ -791,7 +815,7 @@ The client code is shown here
  * from echo test suite, update for ORBit2 by Frank Rehberger
  * &lt;F.Rehberger@xtradyne.de&gt;
  *
- * Client reads object reference (IOR) from local file 'echo.ior' and
+ * Client reads object reference (IOR) from local file 'echo.ref' and
  * forwards console input to echo-server. A dot . as single character
  * in input terminates the client.
  */
@@ -979,7 +1003,7 @@ client_run (Echo  echo_service,
 int
 main(int argc, char* argv[])
 {
-	CORBA_char filename[] = "echo.ior";
+	CORBA_char filename[] = "echo.ref";
         
 	Echo echo_service = CORBA_OBJECT_NIL;
 
@@ -992,7 +1016,7 @@ main(int argc, char* argv[])
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
 	<command>echo_service = (Echo) client_import_service_from_file (global_orb,
-							       "echo.ior",
+							       "echo.ref",
 							       ev);</command>
         abort_if_exception(ev, "import service failed");
 
@@ -1057,7 +1081,7 @@ process.
 <title>echo-server.c source code</title>
 <programlisting role="C">/*
  * echo-server program. Hacked from Echo test suite by
- * %lt;birney@sanger.ac.uk&gt;, ORBit2 udpate by Frank Rehberger
+ * &lt;birney@sanger.ac.uk&gt;, ORBit2 udpate by Frank Rehberger
  * &lt;F.Rehberger@xtradyne.de&gt;
  */
 
@@ -1067,31 +1091,11 @@ process.
 #include &lt;signal.h&gt;
 #include &lt;orbit/orbit.h&gt;
 
-<command>#include "echo.h"</command>
-<command>#include "echo-skelimpl.c" </command>
+#include "echo-skelimpl.c"
+#include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
 
-/** 
- * test for exception */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) {
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
-
-static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -1106,7 +1110,7 @@ server_shutdown (int sig)
         if (global_orb != CORBA_OBJECT_NIL)
         {
                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
-                abort_if_exception (local_ev, "caught exception");
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
 
@@ -1118,103 +1122,64 @@ server_shutdown (int sig)
  * return.
  */static 
 void 
-server_init (int               *argc_ptr, 
-	     char              *argv[],
-             CORBA_ORB         *orb,
-             CORBA_Environment *ev)
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
 {
-	/* init signal handling */
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
 	signal(SIGINT,  server_shutdown);
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
-        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
-	if (raised_exception(ev)) return;
-}
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
 
-/* Creates servant and registers in context of ORB @orb. The ORB will
- * delegate incoming requests to specific servant object.  @return
- * object reference. If error occures @ev points to exception object
- * on return.
- */
-static 
-Echo
-server_activate_service (CORBA_ORB         orb,
-			 CORBA_Environment *ev)
-{
-	Echo                       servant     = CORBA_OBJECT_NIL; 
-	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+         <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
 
-        /* get Portable Object Adaptor (POA) */
+         <command>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
 
-        <command>poa = 
-	 (PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
-								   "RootPOA",
-								   ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+	 <command>PortableServer_POAManager_activate(poa_manager, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
 
-       /* create servant in context of poa container */
+         <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </command>
+	return;
 
-	<command>servant = impl_Echo__create (poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-	
-        /* activate POA Manager */
-
-        <command>poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	<command>PortableServer_POAManager_activate(poa_manager, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	return servant;
-}
-
-/* Writes stringified object reference of @servant to file
- * @filename. If error occures @ev points to exception object on
- * return.
- */
-static 
-void 
-server_export_service_to_file (CORBA_ORB          orb,
-			       CORBA_Object       servant,
-			       char              *filename, 
-			       CORBA_Environment *ev)
-{
-        CORBA_char *objref = NULL;
-	FILE       *file   = NULL;
-
-	/* write objref to file */
-	
-        <command>objref = CORBA_ORB_object_to_string (orb, servant, ev);</command>
-	if (raised_exception(ev)) return;
-
-	if ((file=fopen(filename, "w"))==NULL) 
-		g_error ("could not open %s\n", filename);
-	
-        /* print ior to terminal */
-	fprintf (file, "%s\n", objref);
-	fflush (file);
-	fclose (file);
-	
-        CORBA_free (objref);
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
+static void 
 server_run (CORBA_ORB          orb,
-            CORBA_Environment *ev)
+	    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
-        <command>CORBA_ORB_run(orb, ev);</command>
-	if (raised_exception(ev)) return;
+         <command>CORBA_ORB_run(orb, ev); </command>
+	if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
 	 * CORBA_ORB_shutdown(.) has been called */
@@ -1223,22 +1188,58 @@ server_run (CORBA_ORB          orb,
 /* Releases @servant object and finally destroys @orb. If error
  * occures @ev points to exception object on return.
  */
-static 
-void server_cleanup (CORBA_ORB          orb,
-		     Echo               servant,
-	             CORBA_Environment *ev)
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
 {
-	/* releasing managed object */
-        <command>CORBA_Object_release(servant, ev);</command>
-	if (raised_exception(ev)) return;
+	PortableServer_ObjectId   *objid       = NULL;
 
-        /* tear down the ORB */
+	 <command>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <command>PortableServer_POA_deactivate_object (poa, objid, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	 <command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <command>CORBA_Object_release ((CORBA_Object) poa, ev); </command>
+	if (etk_raised_exception(ev)) return;
+	
+         <command>CORBA_Object_release (ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <command>CORBA_ORB_destroy(orb, ev);</command>
-		if (raised_exception(ev)) return;
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+		if (etk_raised_exception(ev)) return;
         }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Echo  ref = CORBA_OBJECT_NIL; 
+
+	 <command>ref = impl_Echo__create (poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
 }
 
 /* 
@@ -1248,31 +1249,38 @@ void server_cleanup (CORBA_ORB          orb,
 int
 main (int argc, char *argv[])
 {
-	Echo servant = CORBA_OBJECT_NIL;
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "echo.ref";
 
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	<command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-	abort_if_exception(ev, "init failed");
+	 <command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed ORB init");
 
-	<command>servant = server_activate_service (global_orb, ev);</command>
-	abort_if_exception(ev, "activating service failed");
+	 <command>servant = server_activate_service (global_orb, root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed activating service");
 
-	<command>server_export_service_to_file (global_orb, 
-				       servant, 
-				       "echo.ior", 
-				       ev);</command>
-	abort_if_exception(ev, "exporting IOR failed");
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	 <command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev); </command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
 	
-	<command>server_run (global_orb, ev);</command>
-	abort_if_exception(ev, "entering main loop failed");
+	 <command>server_run (global_orb, ev); </command>
+	etk_abort_if_exception(ev, "failed entering main loop");
 
-	<command>server_cleanup (global_orb, servant, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
+	 <command>server_cleanup (global_orb, root_poa, servant, ev); </command>
+	etk_abort_if_exception(ev, "failed cleanup");
 
 	exit (0);
-}</programlisting>
+}
+	
+
+</programlisting>
 </example>
 
 <para>
@@ -1291,7 +1299,7 @@ by <command>orbit-idl-2</command> tool as template for user. Therefor
 only a single line has been added by user <command>g_print ("%s\n",
 input);</command> at very end of file in function body
 <emphasis>impl_Echo_echoString(..)</emphasis>.</para>
-<note><para>Constructor (create) and Destructor (destroy) are defined,
+<note><para>Constructor (__create) and Destructor (__fini) are defined,
 too. How to extend those functions defining lifecycle of objects will
 be subject to next chapters.</para></note>
 
@@ -1313,7 +1321,7 @@ impl_POA_Echo;
 
 /*** Implementation stub prototypes ***/
 
-static void impl_Echo__destroy(impl_POA_Echo * servant,
+static void impl_Echo__fini(impl_POA_Echo * servant,
 			       CORBA_Environment * ev);
 static void
 impl_Echo_echoString(impl_POA_Echo * servant,
@@ -1323,7 +1331,7 @@ impl_Echo_echoString(impl_POA_Echo * servant,
 
 static PortableServer_ServantBase__epv impl_Echo_base_epv = {
    NULL,			/* _private data */
-   (gpointer) &amp; impl_Echo__destroy,	/* finalize routine */
+   (gpointer) &amp;amp; impl_Echo__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Echo__epv impl_Echo_epv = {
@@ -1367,9 +1375,9 @@ impl_Echo__create(PortableServer_POA poa, CORBA_Environment * ev)
 }
 
 static void
-impl_Echo__destroy(impl_POA_Echo * servant, CORBA_Environment * ev)
+impl_Echo__fini(impl_POA_Echo * servant, CORBA_Environment * ev)
 {
-   CORBA_Object_release((CORBA_Object) servant->poa, ev);
+    <command>CORBA_Object_release((CORBA_Object) servant->poa, ev); </command>
  
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
@@ -1377,6 +1385,8 @@ impl_Echo__destroy(impl_POA_Echo * servant, CORBA_Environment * ev)
    /* ------ ---------- end ------------- ------ */
 
    POA_Echo__fini((PortableServer_Servant) servant, ev);
+
+   g_free(servant);
 }
 
 static void
@@ -1403,7 +1413,7 @@ distribution the makefile below will do.
 <example> 
 <title>Makefile</title>
 <programlisting role="make">
-PREFIX=/usr
+PREFIX ?= /usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2
@@ -1416,6 +1426,8 @@ IDLOUT=echo-common.c echo-stubs.c echo-skels.c echo.h
  
 all: $(IDLOUT) echo-client echo-server
  
+echo-server.o : echo-server.c echo-skelimpl.c 
+
 echo-client : echo-client.o echo-common.o echo-stubs.o
 echo-server : echo-server.o echo-common.o echo-skels.o
  
@@ -1466,9 +1478,9 @@ After calling <command>make</command> in terminal window all sources
 have been compiled and you should open a second terminal window. In
 the first window we will start the server with the command:
 <command>./echo-server</command>. The server should print a very long
-string into the file <filename>echo.ior</filename>, starting with the
+string into the file <filename>echo.ref</filename>, starting with the
 4 character sequence <computeroutput>IOR:</computeroutput> In the
-second window we will print content of <filename>echo.ior</filename>
+second window we will print content of <filename>echo.ref</filename>
 to console and start the client with the command
 <command>./echo-client</command>. You should not try to type the IOR
 string, instead use the cut and paste functionality of your terminal.
@@ -1484,7 +1496,7 @@ string, instead use the cut and paste functionality of your terminal.
 <example>
 <title>Terminal 2 - Starting Echo Client</title>
 <screen width="80">
-<prompt>[frehberg@papaya echo]$ </prompt><userinput>cat echo.ior</userinput>
+<prompt>[frehberg@papaya echo]$ </prompt><userinput>cat echo.ref</userinput>
 IOR:010000000d00000049444c3a4563686f3a312e3000000000030000000054424f540000000101
 020005000000554e4958000000000700000070617061796100002e0000002f746d702f6f72626974
 2d66726568626572672f6c696e632d323230662d302d323532356663323537306430340000000000
@@ -1606,29 +1618,7 @@ complicated.
 
 #include "calculator.h"
 
-/** 
- * test for exception 
- */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) 
-{
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  
- */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
+#include "examples-toolkit.h"
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -1644,8 +1634,8 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
-                abort_if_exception (local_ev, "caught exception");
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
  
@@ -1671,8 +1661,8 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
-        if (raised_exception(ev)) return;
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+        if (etk_raised_exception(ev)) return;
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -1685,65 +1675,17 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        <command>CORBA_Object_release(service, ev);</command>
-        if (raised_exception(ev)) return;
+         <command>CORBA_Object_release(service, ev); </command>
+        if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <command>CORBA_ORB_destroy(orb, ev);</command>
-                if (raised_exception(ev)) return;
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+                if (etk_raised_exception(ev)) return;
         }
 }
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
-{
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
-    
-	fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
-	
-	<command>obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);</command>
-	free (objref);
-	
-	return obj;
-}
-
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_file (CORBA_ORB          orb,
-				 char              *filename,
-				 CORBA_Environment *ev)
-{
-        CORBA_Object  obj    = NULL;
-        FILE         *file   = NULL;
- 
-        /* write objref to file */
-         
-        if ((file=fopen(filename, "r"))==NULL)
-                g_error ("could not open %s\n", filename);
-    
-	obj=client_import_service_from_stream (orb, file, ev);
-	
-	fclose (file);
-
-	return obj;
-}
-
 
 /**
  *
@@ -1759,8 +1701,8 @@ client_run (Calculator         service,
          * use calculator service
          */
 	
-        <command>result = Calculator_add(service, 1.0, 2.0, ev);</command>
-        if (raised_exception (ev)) return;
+         <command>result = Calculator_add(service, 1.0, 2.0, ev); </command>
+        if (etk_raised_exception (ev)) return;
 	
         /* prints results to console */
         g_print("Result: 1.0 + 2.0 = %2.0f\n", result);
@@ -1773,32 +1715,31 @@ int
 main(int argc, char* argv[])
          
 {
-        CORBA_char  filename[] = "calculator.ior";
+        CORBA_char  filename[] = "calculator.ref";
 
 	Calculator service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
-        <command>CORBA_exception_init(ev);</command>
+        CORBA_exception_init(ev);
 
-	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-	abort_if_exception(ev, "init failed");
+	 <command>client_init (&amp;argc, argv, &amp;global_orb, ev); </command>
+	etk_abort_if_exception(ev, "init failed");
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	<command>service = (Calculator) client_import_service_from_file (global_orb,
-								filename,
-								ev);</command>
-        abort_if_exception(ev, "import service failed");
+	 <command>service = (Calculator) etk_import_object_from_file (global_orb,
+							       filename,
+							       ev); </command>
+        etk_abort_if_exception(ev, "import service failed");
 
-	<command>client_run (service, ev);</command>
-        abort_if_exception(ev, "service not reachable");
+	 <command>client_run (service, ev); </command>
+        etk_abort_if_exception(ev, "service not reachable");
  
-	client_cleanup (global_orb, service, ev);
-        abort_if_exception(ev, "cleanup failed");
+	 <command>client_cleanup (global_orb, service, ev); </command>
+        etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
-}
-</programlisting>
+}</programlisting>
 </example>
 </para>
 <para>
@@ -1853,8 +1794,6 @@ supposed to be called with the string representation of the Calculator
 server as the first parameter. How to obtain this string, will be
 shown in the next example, where I describe how the server.
 </para>
-
-
     </sect2>
     <sect2 id="calculator-server">
       <title>Calculator server</title>
@@ -1894,8 +1833,8 @@ impl_POA_Calculator;
 
 /*** Implementation stub prototypes ***/
 
-static void impl_Calculator__destroy(impl_POA_Calculator * servant,
-				     CORBA_Environment * ev);
+static void impl_Calculator__fini(impl_POA_Calculator * servant,
+				  CORBA_Environment * ev);
 static CORBA_double
 impl_Calculator_add(impl_POA_Calculator * servant,
 		    const CORBA_double number1,
@@ -1912,7 +1851,7 @@ impl_Calculator_sub(impl_POA_Calculator * servant,
 
 static PortableServer_ServantBase__epv impl_Calculator_base_epv = {
    NULL,			/* _private data */
-   (gpointer) &amp; impl_Calculator__destroy,	/* finalize routine */
+   (gpointer) &amp; impl_Calculator__fini,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Calculator__epv impl_Calculator_epv = {
@@ -1958,8 +1897,8 @@ impl_Calculator__create(PortableServer_POA poa,
 }
 
 static void
-impl_Calculator__destroy(impl_POA_Calculator * servant,
-			 CORBA_Environment * ev)
+impl_Calculator__fini (impl_POA_Calculator * servant,
+		       CORBA_Environment * ev)
 {
    CORBA_Object_release((CORBA_Object) servant->poa, ev);
  
@@ -1969,6 +1908,8 @@ impl_Calculator__destroy(impl_POA_Calculator * servant,
    /* ------ ---------- end ------------- ------ */
 
    POA_Calculator__fini((PortableServer_Servant) servant, ev);
+
+   g_free (servant);
 }
 
 static CORBA_double
@@ -2079,7 +2020,7 @@ can be implemented in the following way, note analogy to
 
           <example>
 	    <title>calculator-server.c</title>
-	    <programlisting role="C">/*
+<programlisting role="C">/*
  * calculator-server program. Hacked from Frank Rehberger
  * &lt;F.Rehberger@xtradyne.de&gt;.
  */
@@ -2090,31 +2031,13 @@ can be implemented in the following way, note analogy to
 #include &lt;signal.h&gt;
 #include &lt;orbit/orbit.h&gt;
 
-<command>#include "calculator.h"</command>
-<command>#include "calculator-skelimpl.c"</command>
+#include "calculator.h"
+#include "calculator-skelimpl.c"
 
-/** 
- * test for exception */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) {
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
+#include "examples-toolkit.h"
 
-/**
- * in case of any exception this macro will abort the process  */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
-
-static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -2128,116 +2051,77 @@ server_shutdown (int sig)
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
-                 abort_if_exception (local_ev, "ORB shutdown failed");
+                <command> CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
 
 /* Inits ORB @orb using @argv arguments for configuration. For each
- * consumed option from vector @argv the counter of @argc_ptr
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
  * will be decremented. Signal handler is set to call
- * server_shutdown function in case of SIGINT and SIGTERM
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
  * signals.  If error occures @ev points to exception object on
  * return.
  */static 
 void 
-server_init (int               *argc_ptr, 
-			char              *argv[],
-			CORBA_ORB         *orb,
-			CORBA_Environment *ev)
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
 {
-	/* init signal handling */
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
 	signal(SIGINT,  server_shutdown);
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
-        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
-	if (raised_exception(ev)) return;
-}
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
 
-/* Creates servant and registers in context of ORB @orb. The ORB will
- * delegate incoming requests to specific servant object.  @return
- * object reference. If error occures @ev points to exception object
- * on return.
- */
-static 
-Calculator
-server_activate_service (CORBA_ORB         orb,
-				    CORBA_Environment *ev)
-{
-	Calculator                 servant     = CORBA_OBJECT_NIL; 
-	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+         <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
 
-        /* get Portable Object Adaptor (POA) */
+         <command>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
 
-        poa = 
-	 <command>(PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
-								   "RootPOA",
-								   ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+	 <command>PortableServer_POAManager_activate(poa_manager, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
 
-       /* create servant in context of poa container */
+         <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </command>
+	return;
 
-	<command>servant = impl_Calculator__create (poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-	
-        /* activate POA Manager */
-
-        <command>poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	<command>PortableServer_POAManager_activate(poa_manager, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	return servant;
-}
-
-/* Writes stringified object reference of @servant to file
- * @filename. If error occures @ev points to exception object on
- * return.
- */
-static
-void
-server_export_service_to_file (CORBA_ORB          orb,
-                               CORBA_Object       service,
-                               char              *filename,
-                               CORBA_Environment *ev)
-{
-        CORBA_char *objref = NULL;
-        FILE       *file   = NULL;
- 
-        /* write objref to file */
-         
-        <command>objref = CORBA_ORB_object_to_string (orb, service, ev);</command>
-        if (raised_exception(ev)) return;
- 
-        if ((file=fopen(filename, "w"))==NULL)
-                g_error ("could not open %s\n", filename);
-         
-        /* print ior to terminal */
-        fprintf (file, "%s\n", objref);
-        fflush (file);
-        fclose (file);
-         
-        CORBA_free (objref);
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
+static void 
 server_run (CORBA_ORB          orb,
-		       CORBA_Environment *ev)
+	    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
-        <command>CORBA_ORB_run(orb, ev);</command>
-	if (raised_exception(ev)) return;
+         <command>CORBA_ORB_run(orb, ev); </command>
+	if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
 	 * CORBA_ORB_shutdown(.) has been called */
@@ -2246,22 +2130,58 @@ server_run (CORBA_ORB          orb,
 /* Releases @servant object and finally destroys @orb. If error
  * occures @ev points to exception object on return.
  */
-static 
-void server_cleanup (CORBA_ORB          orb,
-				Calculator         servant,
-				CORBA_Environment *ev)
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
 {
-	/* releasing managed object */
-        <command>CORBA_Object_release(servant, ev);</command>
-	if (raised_exception(ev)) return;
+	PortableServer_ObjectId   *objid       = NULL;
 
-        /* tear down the ORB */
+	 <command>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <command>PortableServer_POA_deactivate_object (poa, objid, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	 <command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <command>CORBA_Object_release ((CORBA_Object) poa, ev); </command>
+	if (etk_raised_exception(ev)) return;
+	
+         <command>CORBA_Object_release (ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <command>CORBA_ORB_destroy(orb, ev);</command>
-		if (raised_exception(ev)) return;
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+		if (etk_raised_exception(ev)) return;
         }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Calculator  ref = CORBA_OBJECT_NIL; 
+
+	 <command>ref = impl_Calculator__create (poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
 }
 
 /* 
@@ -2271,48 +2191,43 @@ void server_cleanup (CORBA_ORB          orb,
 int
 main (int argc, char *argv[])
 {
-        Calculator servant = CORBA_OBJECT_NIL;
- 
-        CORBA_char filename[] = "calculator.ior";
- 
-        CORBA_Environment  ev[1];
-        <command>CORBA_exception_init(ev);</command>
-         
-        <command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-        abort_if_exception(ev, "init failed");
- 
-        <command>servant = server_activate_service (global_orb, ev);</command>
-        abort_if_exception(ev, "activating service failed");
- 
-        g_print ("Writing service reference to: %s\n\n", filename);
-         
-        <command>server_export_service_to_file (global_orb, /* ORB    */
-                                       servant,    /* object */
-                                       filename,     /* stream */
-                                       ev);</command>
-        abort_if_exception(ev, "exporting IOR failed");
-         
-        <command>server_run (global_orb, ev);</command>
-        abort_if_exception(ev, "entering main loop failed");
- 
-        <command>server_cleanup (global_orb, servant, ev);</command>
-        abort_if_exception(ev, "cleanup failed");
- 
-        exit (0);
-}</programlisting> </example> </para> <para> I'm not
-going to explain every line of this example yet, because we want the
-server up and make our first calls to it. Though one line deserves
-some explanation and this is the <function>fprintf(stream,
-"%s\n",objref)</function> call. The purpose of this call is to print
-the string representation of the the object reference. This string,
-which always starts with the magic sequence "IOR:", is the argument to
-the client program. It identifies a specific object, the server
-process which hosts it, the location of the server, and the identity
-of the object in this specific server, because it's possible that one
-server hosts many objects.  How to get such strings or object
-references without cutting the output of one program (the server) and
-pasting it into the commandline of another program (the client) will
-be explained later.  </para> </sect3> </sect2> 
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "calculator.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	 <command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	 <command>servant = server_activate_service (global_orb, root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	 <command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev); </command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	 <command>server_run (global_orb, ev); </command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	 <command>server_cleanup (global_orb, root_poa, servant, ev); </command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0); }</programlisting> </example> </para> <para> I'm not
+going to explain every line of this example yet; you only need to know
+that it creates a servant object whos object-reference is written to
+file "calculator.ref". File-IO is done using specific function
+from "example-toolkit" laying beside each example; the file contains
+a string always starting with the magic sequence "IOR:" and is read by
+client application to get hold of servants object-reference. The IOR
+string contains sufficient information to get to know host, port and
+object key within server. ORBit2 provides tools to decode the IOR
+string, namely <command>ior-decode-2</command>.  </para> </sect3> </sect2>
 
 <sect2 id="calculator-compilation"> <title>Compiling server &amp; client</title> <para> The following
 makefile can be used to compile both, the client and the server. Be
@@ -2322,7 +2237,7 @@ sources, and hence the path for ORBIT variables below may
 vary. If using ORBit binary packages shipped with Linux or BSD/Unix the simple makefile below will do.
 <example> 
 <title>makefile</title>
-<programlisting role="make">PREFIX=/usr
+<programlisting role="make">PREFIX ?= /usr
 CC = gcc
 TARGETS=calculator-client calculator-server
 ORBIT_IDL=orbit-idl-2
@@ -2335,6 +2250,8 @@ IDLOUT=calculator-common.c calculator-stubs.c calculator-skels.c calculator.h
  
 all: $(IDLOUT) calculator-client calculator-server
  
+calculator-server.o : calculator-server.c calculator-skelimpl.c
+
 calculator-client : calculator-client.o calculator-common.o calculator-stubs.o
 calculator-server : calculator-server.o calculator-common.o calculator-skels.o
  
@@ -2353,12 +2270,12 @@ distclean: clean
 After calling <command>make</command> in terminal window
 all sources have been compiled and you should open a second terminal
 window. In the first window we will start the server with the command:
-<command>calculator-server &gt; calculator.ior</command>. The server
+<command>calculator-server &gt; calculator.ref</command>. The server
 should print a very long string into the file
-<filename>calculator.ior</filename>, starting with the 4 character
+<filename>calculator.ref</filename>, starting with the 4 character
 sequence <computeroutput>IOR:</computeroutput> In the second window we
 start the client with the command <command>calculator-client `cat
-calculator.ior` IOR-string</command>. You should not try to type the
+calculator.ref` IOR-string</command>. You should not try to type the
 IOR string, instead use the cut and paste functionality of your xterm
 or whatever you are using.</para>
 <para>
@@ -2450,8 +2367,6 @@ Files remaining to write are listed in following table, starting with
 </row>
 </tbody></tgroup>
 </informaltable>
-
-
 </para>
 <!--
 ******************************** Account client  ******************************************
@@ -2479,29 +2394,7 @@ before invoking calls to the server.
 
 #include "account.h"
 
-/** 
- * test for exception 
- */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) 
-{
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
-
-/**
- * in case of any exception this macro will abort the process  
- */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */ 
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -2517,8 +2410,8 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
-                abort_if_exception (local_ev, "caught exception");
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
  
@@ -2544,8 +2437,8 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
-        if (raised_exception(ev)) return;
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+        if (etk_raised_exception(ev)) return;
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -2558,65 +2451,17 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        <command>CORBA_Object_release(service, ev);</command>
-        if (raised_exception(ev)) return;
+         <command>CORBA_Object_release(service, ev); </command>
+        if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <command>CORBA_ORB_destroy(orb, ev);</command>
-                if (raised_exception(ev)) return;
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+                if (etk_raised_exception(ev)) return;
         }
 }
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
-{
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
-    
-	fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
-	
-	<command>obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);</command>
-	free (objref);
-	
-	return obj;
-}
-
-
-/**
- *
- */
-static
-CORBA_Object
-client_import_service_from_file (CORBA_ORB          orb,
-				 char              *filename,
-				 CORBA_Environment *ev)
-{
-        CORBA_Object  obj    = NULL;
-        FILE         *file   = NULL;
- 
-        /* write objref to file */
-         
-        if ((file=fopen(filename, "r"))==NULL)
-                g_error ("could not open %s\n", filename);
-    
-	obj=client_import_service_from_stream (orb, file, ev);
-	
-	fclose (file);
-
-	return obj;
-}
-
 
 /**
  *
@@ -2633,24 +2478,24 @@ client_run (Account            service,
          * use calculator server
          */
          
-        <command>balance = Account__get_balance (service, ev);</command>
-	if (raised_exception (ev)) return;
+         <command>balance = Account__get_balance (service, ev); </command>
+	if (etk_raised_exception (ev)) return;
          
         g_print ("balance %5d, ", balance);
          
         if (amount > 0)
         {
-                <command>Account_deposit (service, amount, ev);</command>
-                if (raised_exception (ev)) return;
+                 <command>Account_deposit (service, amount, ev); </command>
+                if (etk_raised_exception (ev)) return;
         }
         else
         {
-                <command>Account_withdraw (service, abs(amount), ev);</command>
-                if (raised_exception (ev)) return;
+                 <command>Account_withdraw (service, abs(amount), ev); </command>
+                if (etk_raised_exception (ev)) return;
         }
                                                                                
-        <command>balance = Account__get_balance (service, ev);</command>
-	if (raised_exception (ev)) return;
+         <command>balance = Account__get_balance (service, ev); </command>
+	if (etk_raised_exception (ev)) return;
                                                                                
         g_print ("new balance %5d\n", balance);
 }
@@ -2662,37 +2507,37 @@ int
 main(int argc, char* argv[])
          
 {
-        CORBA_char        filename[] = "account.ior";
+        CORBA_char        filename[] = "account.ref";
         CORBA_long        amount=0;
 
 	Account service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
-        <command>CORBA_exception_init(ev);</command>
+        CORBA_exception_init(ev);
 
-	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-	abort_if_exception(ev, "init failed");
+	 <command>client_init (&amp;argc, argv, &amp;global_orb, ev); </command>
+	etk_abort_if_exception(ev, "init failed");
 
-        if (argc&lt;2)
-                g_error ("usage: %s %lt;amount&gt;", argv[0]);
+        if (argc<2) g_error ("usage: %s &lt;amount&gt;", argv[0]);
 
         amount  = atoi(argv[1]);
 
 	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	<command>service = (Account) client_import_service_from_file (global_orb,
-							     filename,
-							     ev);</command>
-        abort_if_exception(ev, "import service failed");
+	 <command>service = (Account) etk_import_object_from_file (global_orb,
+							 filename,
+							 ev); </command>
+        etk_abort_if_exception(ev, "import service failed");
 
-	<command>client_run (service, amount, ev);</command>
-        abort_if_exception(ev, "service not reachable");
+	 <command>client_run (service, amount, ev); </command>
+        etk_abort_if_exception(ev, "service not reachable");
  
-	<command>client_cleanup (global_orb, service, ev);</command>
-        abort_if_exception(ev, "cleanup failed");
+	 <command>client_cleanup (global_orb, service, ev); </command>
+        etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }
+
 
 </programlisting>
 </example>
@@ -2859,31 +2704,13 @@ account-server.c
 #include &lt;signal.h&gt;
 #include &lt;orbit/orbit.h&gt;
 
-<command>#include "account.h"</command>
-<command>#include "account-skelimpl.c"</command>
+#include "account.h"
+#include "account-skelimpl.c"
 
-/** 
- * test for exception */
-static
-gboolean 
-raised_exception(CORBA_Environment *ev) {
-	return ((ev)->_major != CORBA_NO_EXCEPTION);
-}
+#include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
 
-/**
- * in case of any exception this macro will abort the process  */
-static
-void 
-abort_if_exception(CORBA_Environment *ev, const char* mesg) 
-{    
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
-}
-
-static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
 	
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
@@ -2897,117 +2724,77 @@ server_shutdown (int sig)
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
-                abort_if_exception (local_ev, "ORB shutdown failed");
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
         }
 }
 
 /* Inits ORB @orb using @argv arguments for configuration. For each
- * consumed option from vector @argv the counter of @argc_ptr
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
  * will be decremented. Signal handler is set to call
- * server_shutdown function in case of SIGINT and SIGTERM
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
  * signals.  If error occures @ev points to exception object on
  * return.
  */static 
 void 
-server_init (int               *argc_ptr, 
-		     char              *argv[],
-		     CORBA_ORB         *orb,
-		     CORBA_Environment *ev)
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
 {
-	/* init signal handling */
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
 	signal(SIGINT,  server_shutdown);
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
-        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
-	if (raised_exception(ev)) return;
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+         <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+         <command>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	 <command>PortableServer_POAManager_activate(poa_manager, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+         <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </command>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
 }
-
-/* Creates servant and registers in context of ORB @orb. The ORB will
- * delegate incoming requests to specific servant object.  @return
- * object reference. If error occures @ev points to exception object
- * on return.
- */
-static 
-Account
-server_activate_service (CORBA_ORB         orb,
-				 CORBA_Environment *ev)
-{
-	Account                    servant     = CORBA_OBJECT_NIL; 
-	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
-
-        /* get Portable Object Adaptor (POA) */
-
-        <command>poa = 
-	 (PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
-								   "RootPOA",
-								   ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-       /* create servant in context of poa container */
-
-	<command>servant = impl_Account__create (poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-	
-        /* activate POA Manager */
-
-        <command>poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	<command>PortableServer_POAManager_activate(poa_manager, ev);</command>
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-
-	return servant;
-}
-
-/* Writes stringified object reference of @servant to file
- * @filename. If error occures @ev points to exception object on
- * return.
- */
-static
-void
-server_export_service_to_file (CORBA_ORB          orb,
-                               CORBA_Object       service,
-                               char              *filename,
-                               CORBA_Environment *ev)
-{
-        CORBA_char *objref = NULL;
-        FILE       *file   = NULL;
- 
-        /* write objref to file */
-         
-        <command>objref = CORBA_ORB_object_to_string (orb, service, ev);</command>
-        if (raised_exception(ev)) return;
- 
-        if ((file=fopen(filename, "w"))==NULL)
-                g_error ("could not open %s\n", filename);
-         
-        /* print ior to terminal */
-        fprintf (file, "%s\n", objref);
-        fflush (file);
-        fclose (file);
-         
-        CORBA_free (objref);
-}
-
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
+static void 
 server_run (CORBA_ORB          orb,
-		    CORBA_Environment *ev)
+	    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
-        <command>CORBA_ORB_run(orb, ev);</command>
-	if (raised_exception(ev)) return;
+         <command>CORBA_ORB_run(orb, ev); </command>
+	if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
 	 * CORBA_ORB_shutdown(.) has been called */
@@ -3016,22 +2803,58 @@ server_run (CORBA_ORB          orb,
 /* Releases @servant object and finally destroys @orb. If error
  * occures @ev points to exception object on return.
  */
-static 
-void server_cleanup (CORBA_ORB          orb,
-			     Account            servant,
-			     CORBA_Environment *ev)
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
 {
-	/* releasing managed object */
-        <command>CORBA_Object_release(servant, ev);</command>
-	if (raised_exception(ev)) return;
+	PortableServer_ObjectId   *objid       = NULL;
 
-        /* tear down the ORB */
+	 <command>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <command>PortableServer_POA_deactivate_object (poa, objid, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	 <command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <command>CORBA_Object_release ((CORBA_Object) poa, ev); </command>
+	if (etk_raised_exception(ev)) return;
+	
+         <command>CORBA_Object_release (ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                CORBA_ORB_destroy(orb, ev);
-		if (raised_exception(ev)) return;
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+		if (etk_raised_exception(ev)) return;
         }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Account ref = CORBA_OBJECT_NIL; 
+
+	 <command>ref = impl_Account__create (poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
 }
 
 /* 
@@ -3041,36 +2864,39 @@ void server_cleanup (CORBA_ORB          orb,
 int
 main (int argc, char *argv[])
 {
-        Account servant = CORBA_OBJECT_NIL;
- 
-        CORBA_char filename[] = "account.ior";
- 
-        CORBA_Environment  ev[1];
-        <command>CORBA_exception_init(ev);</command>
-         
-        <command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-        abort_if_exception(ev, "init failed");
- 
-        
-        <command>servant = server_activate_service (global_orb, ev);</command>
-        abort_if_exception(ev, "activating service failed");
- 
-        g_print ("Writing service reference to: %s\n\n", filename);
- 
-        <command>server_export_service_to_file (global_orb, /* ORB      */
-                                       servant,    /* object   */
-                                       filename,   /* filename */
-                                       ev);</command>
-        abort_if_exception(ev, "exporting IOR failed");
-         
-        <command>server_run (global_orb, ev);</command>
-        abort_if_exception(ev, "entering main loop failed");
- 
-        <command>server_cleanup (global_orb, servant, ev);</command>
-        abort_if_exception(ev, "cleanup failed");
- 
-        exit (0);
-}</programlisting>
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "account.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	 <command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	 <command>servant = server_activate_service (global_orb, root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	 <command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev); </command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	 <command>server_run (global_orb, ev); </command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	 <command>server_cleanup (global_orb, root_poa, servant, ev); </command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}
+	
+
+
+</programlisting>
 </example>
 
 </sect3>
@@ -3091,7 +2917,7 @@ reuse this Makefile for numerous small projects.
 <example>
 <title>Makefile for the Account example</title>
 
-<programlisting>PREFIX=/usr
+<programlisting>PREFIX ?= /usr
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=orbit-idl-2
@@ -3104,6 +2930,8 @@ IDLOUT=account-common.c account-stubs.c account-skels.c account.h
  
 all: $(IDLOUT) account-client account-server
  
+account-server.o : account-server.c account-skelimpl.c
+
 account-client : account-client.o account-common.o account-stubs.o
 account-server : account-server.o account-common.o account-skels.o
  
@@ -3119,83 +2947,2993 @@ distclean: clean
 </para>
 </sect2>
 
-<!-- 
-*************************  ORBIT and GNOME *****************************************
--->
 </sect1>
+
 
 <sect1 id="byteseq">
 <title>Byte-Sequence client &amp; server</title>
       <para>
-      to be done
-      </para>
-      <sect2>
-	<title>Byte-Sequence client</title>
-	<para>to be done</para>
+      In this more advanced example, we will see how we can set up a
+      client exchanging byte sequences with server.  The idl
+      definition (<filename>byteseq.idl</filename>) covers in-, out-
+      and inout-parameters and looks like:
+      <example>
+	  <title>byteseq.idl</title>
+
+	  <programlisting role="byteseq-idl">module Examples {
+         
+        module ByteSeq {
+                typedef sequence&lt;octet&gt; Chunk;
+                 
+                interface Storage {
+                        void  set (in Chunk chunk);
+                        Chunk get ();
+                };
+        };
+};</programlisting>
+	</example>
+
+     Then you have to generate the skeleton and stub files. In
+     addition to these two files the ORBit IDL compiler also generates
+     a common file and a header file. The common file implements the
+     memory management functions and other things, useful in the
+     client as well as in the server. The sequence to generate the C
+     source files is rather simple.  
+     <computeroutput>$<command>orbit-idl-2 --skeleton-impl byteseq.idl</command></computeroutput> geenrates all the files we will use in this example.
+
+     <informaltable>
+	  <tgroup cols="3">
+	    <colspec align="left"/>
+	    <colspec align="center"/>
+	    <colspec align="center"/>
+	    <thead>
+	      <row>
+		<entry>File</entry><entry>Usage for Client</entry><entry>Usage for Server</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>byteseq.h</entry><entry>readonly</entry><entry>readonly</entry>
+	      </row>
+	      <row>
+		<entry>byteseq-common.c</entry><entry>readonly</entry><entry>readonly</entry>
+	      </row>
+	      <row>
+		<entry>byteseq-stubs.c</entry><entry>readonly</entry><entry>-</entry>
+	      </row>
+	      
+	      <row>
+		<entry>byteseq-skels.c</entry><entry>-</entry><entry>readonly</entry>
+	      </row>
+	      <row><entry>byteseq-skelimpl.c</entry><entry>-</entry><entry>template for user code</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+     </informaltable>
+
+     Files remaining to write are listed in following table, starting with 
+     <emphasis>byteseq-client.c</emphasis> in following chapter.
+     <informaltable>
+	  <tgroup cols="2">
+	    <tbody>
+	      <row>
+		<entry>byteseq-client.c</entry><entry>write the client code</entry>
+	      </row>
+	      <row>
+		<entry>byteseq-server.c</entry><entry>write the generic code for servant creation</entry>
+	      </row>
+	    </tbody></tgroup>
+	</informaltable>
+   </para>
+   <sect2><title>Byte-Sequence client</title>
+	<para>
+<example>
+<title>byteseq-client.c</title>
+<programlisting role="C">/* byteseq-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "byteseq.h"
+
+#include "examples-toolkit.h" /* ie. etk_etk_abort_if_exception() */
+ 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+        if (etk_raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                Examples_ByteSeq_Storage  servant,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+         <command>CORBA_Object_release(servant, ev); </command>
+        if (etk_raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+                if (etk_raised_exception(ev)) return;
+        }
+}
+
+/**
+ *
+ */
+static
+void
+client_run_set (Examples_ByteSeq_Storage  servant,
+		CORBA_Environment        *ev)
+{
+
+	CORBA_long LEN      = 4*1024; /* 4KB */ 
+	CORBA_long ITER     = 10; 
+
+	CORBA_long iter     = 0; 
+
+	Examples_ByteSeq_Chunk* chunk = NULL;
+
+
+	/* flood service witth large chunks of byte streams */
+	for (iter = 0; iter &lt; ITER; ++iter)
+	{
+		CORBA_long len      = 0; 
+		CORBA_octet elem    = 'A';
+
+		g_print ("+");
+
+	 <command>	chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,0); </command>
+
+		for (len = 0; len &lt; LEN; ++len)
+		 <command>	ORBit_sequence_append (chunk, &amp;elem); </command>
+
+		 <command>Examples_ByteSeq_Storage_set (servant, chunk, ev);  </command>
+		if (etk_raised_exception(ev)) return;
+
+		CORBA_free (chunk);
+	}
+}
+
+/**
+ *
+ */
+static
+void
+client_run_get (Examples_ByteSeq_Storage  servant,
+		CORBA_Environment        *ev)
+{
+	CORBA_long n=10;
+	CORBA_long i=0;
+
+	Examples_ByteSeq_Chunk* chunk = NULL; 
+
+	/* increment sequence length, beginning with 0 up to 2048 */
+	for (i=0; i&lt;n; ++i)
+	{
+		g_print ("-");
+
+		 <command>chunk = Examples_ByteSeq_Storage_get (servant, ev);  </command>
+		if (etk_raised_exception(ev)) return;
+
+ 		CORBA_free (chunk);
+	}
+}
+
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char *filename = "byteseq.ref";
+
+        Examples_ByteSeq_Storage  servant = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+
+	 <command>client_init (&amp;argc, argv, &amp;global_orb, ev); </command>
+	etk_abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", filename);
+
+	 <command>servant = (Examples_ByteSeq_Storage) 
+		etk_import_object_from_file (global_orb,
+					     filename,
+					     ev); </command>
+        etk_abort_if_exception(ev, "exporting IOR failed");
+
+	 <command>client_run_set (servant, ev); </command>
+        etk_abort_if_exception(ev, "client stopped");
+ 
+	 <command>client_run_get (servant, ev); </command>
+        etk_abort_if_exception(ev, "client stopped");
+ 
+	 <command>client_cleanup (global_orb, servant, ev); </command>
+        etk_abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}</programlisting>
+</example>
+        </para>
       </sect2>
+
       <sect2>
 	<title>Byte-Sequence server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>byteseq-server.c</title>
+<programlisting role="C">/*
+ * byteseq-server program. Hacked from Examples test suite 
+ * by Frank Rehberger &lt;F.Rehberger@xtradyne.de&gt;
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "byteseq.h"
+#include "byteseq-skelimpl.c" 
+
+#include "examples-toolkit.h" /* provides etk_abort_if_exception() */
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+         <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+         <command>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	 <command>PortableServer_POAManager_activate(poa_manager, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+         <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </command>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+         <command>CORBA_ORB_run(orb, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	 <command>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <command>PortableServer_POA_deactivate_object (poa, objid, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	 <command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <command>CORBA_Object_release ((CORBA_Object) poa, ev); </command>
+	if (etk_raised_exception(ev)) return;
+	
+         <command>CORBA_Object_release (ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_ByteSeq_Storage ref = CORBA_OBJECT_NIL;
+
+	 <command>ref = impl_Examples_ByteSeq_Storage__create (poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * main 
+ */
+
+int
+main (int argc, char *argv[])
+{
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "byteseq.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	 <command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	 <command>servant = server_activate_service (global_orb, root_poa, ev); </command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	 <command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev); </command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	 <command>server_run (global_orb, ev); </command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	 <command>server_cleanup (global_orb, root_poa, servant, ev); </command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}</programlisting>
+</example>
+
+<example>
+<title>byteseq-skelimpl.c</title>
+<programlisting>/* This is a template file generated by command */
+/* orbit-idl-2 --skeleton-impl byteseq.idl */
+/* User must edit this file, inserting servant  */
+/* specific code between markers. */
+
+#include "byteseq.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_Examples_ByteSeq_Storage servant;
+   PortableServer_POA poa;
+
+   /* ------ add private attributes here ------ */  
+    <command>Examples_ByteSeq_Chunk * chunk; </command>
+   /* ------ ---------- end ------------ ------ */
+} impl_POA_Examples_ByteSeq_Storage;
+
+/*** Implementation stub prototypes ***/
+
+static void
+impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
+				    servant, CORBA_Environment * ev);
+static void
+impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
+				  const Examples_ByteSeq_Chunk * chunk,
+				  CORBA_Environment * ev);
+
+static Examples_ByteSeq_Chunk
+   *impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage *
+				      servant, CORBA_Environment * ev);
+
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_Examples_ByteSeq_Storage_base_epv
+   = {
+   NULL,			/* _private data */
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_Examples_ByteSeq_Storage__epv impl_Examples_ByteSeq_Storage_epv = {
+   NULL,			/* _private */
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage_set,
+
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage_get
+};
+
+/*** vepv structures ***/
+
+static POA_Examples_ByteSeq_Storage__vepv impl_Examples_ByteSeq_Storage_vepv = {
+   &amp;impl_Examples_ByteSeq_Storage_base_epv,
+   &amp;impl_Examples_ByteSeq_Storage_epv,
+};
+
+/*** Stub implementations ***/
+
+static Examples_ByteSeq_Storage
+impl_Examples_ByteSeq_Storage__create(PortableServer_POA poa,
+				      CORBA_Environment * ev)
+{
+   Examples_ByteSeq_Storage retval;
+   impl_POA_Examples_ByteSeq_Storage *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_Examples_ByteSeq_Storage, 1);
+   newservant-&gt;servant.vepv = &amp;impl_Examples_ByteSeq_Storage_vepv;
+   newservant-&gt;poa =
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+
+   POA_Examples_ByteSeq_Storage__init((PortableServer_Servant) newservant,
+				      ev);
+   /* Before servant is going to be activated all
+    * private attributes must be initialized.  */
+
+   /* ------ init private attributes here ------ */
+    <command>newservant-&gt;chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64); </command>   
+   /* ------ ---------- end ------------- ------ */
+
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+/**
+ * impl_Examples_ByteSeq_Storage__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation is invoked, application is being delayed.
+**/
+static void
+impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
+				    servant, CORBA_Environment * ev)
+{
+   CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev);
+
+   /* No further remote method calls are delegated to 
+    * servant and you may free your private attributes. */
+   /* ------ free private attributes here ------ */
+    <command>CORBA_free (servant-&gt;chunk); </command>
+   /* ------ ---------- end ------------- ------ */
+
+   POA_Examples_ByteSeq_Storage__fini((PortableServer_Servant) servant, ev);
+
+   g_free(servant);
+}
+
+static void
+impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
+				  const Examples_ByteSeq_Chunk * chunk,
+				  CORBA_Environment * ev)
+{
+   /* ------   insert method code here   ------ */
+    <command>ORBit_sequence_set_size (servant-&gt;chunk, chunk-&gt;_length);
+    
+   {
+           CORBA_long i=0;
+           for (i = 0; i &lt; chunk-&gt;_length; ++i)
+                   ORBit_sequence_index (servant-&gt;chunk, i)
+                           = ORBit_sequence_index (chunk, i);
+   } </command>
+   /* ------ ---------- end ------------ ------ */
+}
+
+static Examples_ByteSeq_Chunk *
+impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage * servant,
+				  CORBA_Environment * ev)
+{
+   Examples_ByteSeq_Chunk *retval;
+
+   /* ------   insert method code here   ------ */
+    <command>retval = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,
+                                  servant-&gt;chunk-&gt;_length);
+
+   {
+           CORBA_long i=0;
+           for (i = 0; i &lt; servant-&gt;chunk-&gt;_length; ++i)
+                   ORBit_sequence_index (retval, i)
+                           = ORBit_sequence_index (servant-&gt;chunk, i);
+   } </command>
+   /* ------ ---------- end ------------ ------ */
+
+   return retval;
+}</programlisting>
+</example>
+
+        </para>
       </sect2>
+
       <sect2>
 	<title>Compiling client &amp; server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>Makefile</title>
+<programlisting>PREFIX ?= /usr
+CC = gcc
+TARGETS=byteseq-client byteseq-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+         -I$(PREFIX)/lib/glib-2.0/include 
+LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm        \
+             -lORBitCosNaming-2
+IDLOUT=byteseq-common.c byteseq-stubs.c byteseq-skels.c byteseq.h
+
+all: $(IDLOUT) byteseq-client byteseq-server
+
+byteseq-server.o: byteseq-server.c byteseq-skelimpl.c
+byteseq-client : byteseq-client.o byteseq-stubs.o byteseq-common.o examples-toolkit.o
+byteseq-server : byteseq-server.o byteseq-skels.o byteseq-common.o examples-toolkit.o 
+
+$(IDLOUT): byteseq.idl
+	$(ORBIT_IDL) byteseq.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) 
+
+distclean: clean
+	rm -rf byteseq-client byteseq-server</programlisting>
+</example>
+         </para>
       </sect2>
 </sect1>
+
 <sect1 id="badcall">
 <title>BadCall client &amp; server</title>
       <para>
-      to be done
+<example>
+<title>badcall.idl</title>
+<programlisting role="IDL">
+module Examples {
+
+	interface BadCall {
+		struct Foo { 
+			double fval; 
+		};
+
+		exception NoParam     { };
+		exception SingleParam { string mesg; };
+		exception DoubleParam { string mesg; long val; };
+
+		Foo trigger (in long val, out Foo bar) 
+			raises (NoParam, SingleParam, DoubleParam);
+	};
+};</programlisting>
+</example>
+
+<computeroutput>$ <command>orbit-idl-2 --skeleton-impl
+badcall.idl</command>
+</computeroutput>
+geenrates all the files we will use in this example.
+
+<informaltable>
+<tgroup cols="3">
+<colspec align="left"/>
+<colspec align="center"/>
+<colspec align="center"/>
+<thead>
+<row>
+<entry>File</entry><entry>Usage for Client</entry><entry>Usage for Server</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>badcall.h</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>badcall-common.c</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>badcall-stubs.c</entry><entry>readonly</entry><entry>-</entry>
+</row>
+
+<row>
+<entry>badcall-skels.c</entry><entry>-</entry><entry>readonly</entry>
+</row>
+<row><entry>badcall-skelimpl.c</entry><entry>-</entry><entry>template for user code</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+Files remaining to write are listed in following table, starting with 
+<emphasis>badcall-client.c</emphasis> in following chapter.
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry>badcall-client.c</entry><entry>write the client code</entry>
+</row>
+<row>
+<entry>badcall-server.c</entry><entry>write the generic code for servant creation</entry>
+</row>
+</tbody></tgroup>
+</informaltable>
+
       </para>
       <sect2>
 	<title>BadCall client</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>badcall-client.c</title>
+<programlisting role="C">/* badcall-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "badcall.h"
+
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+        if (etk_raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              servant,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+         <command>CORBA_Object_release(servant, ev); </command>
+        if (etk_raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+                if (etk_raised_exception(ev)) return;
+        }
+}
+
+
+static 
+void
+client_trigger_exception (Examples_BadCall          servant,
+			  CORBA_long                arg,
+			  CORBA_Environment        *ev)
+{
+	CORBA_long            in_arg  = arg;	
+	Examples_BadCall_Foo *out_arg = NULL;
+
+	Examples_BadCall_Foo  ret_val;
+	
+	 <command>ret_val = Examples_BadCall_trigger (servant, 
+					    in_arg, 
+					    out_arg,
+					    ev);  </command>
+	
+	switch(etk_exception_type(ev)) {
+	case CORBA_NO_EXCEPTION:/* successful outcome*/
+		
+		/* now use data the server delivered to client
+		 * over the return-value, or those out- and
+		 * inout-parameters */
+		
+		break;
+		
+	case CORBA_USER_EXCEPTION:/* a user-defined exception */
+		if (etk_raised_exception_is_a (ev, 
+					       ex_Examples_BadCall_NoParam)) 
+		{
+			/* NoParam exception  does not own members */ 
+			Examples_BadCall_NoParam *bc 
+				= (Examples_BadCall_NoParam*)CORBA_exception_value(ev);
+			g_warning ("raised exception: %s\n",  
+				   CORBA_exception_id(ev));
+		} 
+		else if (etk_raised_exception_is_a (ev,
+						    ex_Examples_BadCall_SingleParam)) 
+		{
+			Examples_BadCall_SingleParam *bc 
+				= (Examples_BadCall_SingleParam*)
+				CORBA_exception_value(ev);
+			
+			g_warning ("raised exception: %s\n"
+				   " mesg: %s\n",  
+				   CORBA_exception_id(ev),
+				   bc-&gt;mesg);
+
+		} else if (etk_raised_exception_is_a 
+			   (ev, ex_Examples_BadCall_DoubleParam)) 
+		{
+			Examples_BadCall_DoubleParam *bc 
+				= (Examples_BadCall_DoubleParam*)
+				CORBA_exception_value(ev);
+			
+			g_warning ("raised exception: %s\n"
+				   " mesg: %s\n"
+				   " val: %d\n",  
+				   CORBA_exception_id(ev),
+				   bc-&gt;mesg,
+				   bc-&gt;val);
+		}
+		else 
+		{       
+			/* should never get here ... */
+			g_print ("unexpected CORBA_USER_EXCEPTION -%s\n",
+				 CORBA_exception_id(ev));
+		}
+		break;
+		
+	case CORBA_SYSTEM_EXCEPTION:
+	default: /* standard exception */
+		/*
+		 * CORBA_exception_id() can be used to determine which
+		 * particular standard exception was raised; the minor
+		 * member of the struct associated with the exception
+		 * (as yielded by CORBA_exception_value()) may provide
+		 * additional system-specific information about the
+		 * exception
+		 */
+		g_print ("BadCall::trigger raised system exception: %s\n",  
+			 CORBA_exception_id(ev));
+		
+		break;
+	}
+	
+	/* free any storage associated with exception */
+	CORBA_exception_free(ev);
+	
+	CORBA_free (out_arg); /* free Foo data */
+	
+}
+
+/**
+ *
+ */
+static
+void
+client_run (Examples_BadCall          servant,
+	    CORBA_Environment        *ev)
+{
+	CORBA_long N=1000;
+	CORBA_long i=0;
+
+	/* increment sequence length, beginning with 0 up to 2048 */
+	for (i=0; i&lt;N; ++i)
+	{
+		 <command>client_trigger_exception (servant, i, ev); </command>
+	}
+}
+
+
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char filename[] = "badcall.ref";
+
+        Examples_BadCall  servant = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+
+	 <command>client_init (&amp;argc, argv, &amp;global_orb, ev); </command>
+	etk_abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", 
+		 filename);
+
+	 <command>servant = etk_import_object_from_file (global_orb,
+					       filename,
+					       ev); </command>
+        etk_abort_if_exception(ev, "importing IOR failed");
+
+	 <command>client_run (servant, ev); </command>
+        etk_abort_if_exception(ev, "client stopped");
+ 
+	 <command>client_cleanup (global_orb, servant, ev); </command>
+        etk_abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}</programlisting>
+</example>
+        </para>
       </sect2>
       <sect2>
 	<title>BadCall server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>badcall-server.c</title>
+<programlisting role="C">/*
+ * echo-server program. Hacked from Echo test suite by by Frank
+ * Rehberger &lt;F.Rehberger@xtradyne.de&gt;
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "badcall.h"
+#include "badcall-skelimpl.c" 
+
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                 <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+         <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+         <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+         <command>poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	 <command>PortableServer_POAManager_activate(poa_manager, ev); </command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+         <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev); </command>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+         <command>CORBA_ORB_run(orb, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	 <command>objid = PortableServer_POA_reference_to_id (poa, ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	 <command>PortableServer_POA_deactivate_object (poa, objid, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	 <command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+         <command>CORBA_Object_release ((CORBA_Object) poa, ev); </command>
+	if (etk_raised_exception(ev)) return;
+	
+         <command>CORBA_Object_release (ref, ev); </command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                 <command>CORBA_ORB_destroy(orb, ev); </command>
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_BadCall ref = CORBA_OBJECT_NIL; 
+
+	<command>ref = impl_Examples_BadCall__create (poa, ev);</command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * main 
+ */
+
+int
+main (int argc, char *argv[])
+{
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "badcall.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	<command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	<command>servant = server_activate_service (global_orb, root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	<command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev);</command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	<command>server_run (global_orb, ev);</command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	<command>server_cleanup (global_orb, root_poa, servant, ev);</command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}
+</programlisting>
+</example>
+<example>
+<title>badcall-skelimpl.c</title>
+<programlisting role="C">/* This is a template file generated by command */
+/* orbit-idl-2 --skeleton-impl badcall.idl */
+/* User must edit this file, inserting servant  */
+/* specific code between markers. */
+
+#include "badcall.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_Examples_BadCall servant;
+   PortableServer_POA poa;
+
+   /* ------ add private attributes here ------ */
+   <command>CORBA_long counter;</command>
+   /* ------ ---------- end ------------ ------ */
+} impl_POA_Examples_BadCall;
+
+/*** Implementation stub prototypes ***/
+
+static void impl_Examples_BadCall__fini(impl_POA_Examples_BadCall *
+					servant, CORBA_Environment * ev);
+
+static Examples_BadCall_Foo
+impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
+			      const CORBA_long val,
+			      Examples_BadCall_Foo * bar,
+			      CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv impl_Examples_BadCall_base_epv = {
+   NULL,			/* _private data */
+   (gpointer) &amp; impl_Examples_BadCall__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_Examples_BadCall__epv impl_Examples_BadCall_epv = {
+   NULL,			/* _private */
+
+   (gpointer) &amp; impl_Examples_BadCall_trigger,
+
+};
+
+/*** vepv structures ***/
+
+static POA_Examples_BadCall__vepv impl_Examples_BadCall_vepv = {
+   &amp;impl_Examples_BadCall_base_epv,
+   &amp;impl_Examples_BadCall_epv,
+};
+
+/*** Stub implementations ***/
+
+static Examples_BadCall
+impl_Examples_BadCall__create(PortableServer_POA poa, CORBA_Environment * ev)
+{
+   Examples_BadCall retval;
+   impl_POA_Examples_BadCall *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_Examples_BadCall, 1);
+   newservant-&gt;servant.vepv = &amp;impl_Examples_BadCall_vepv;
+   newservant-&gt;poa =
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+   POA_Examples_BadCall__init((PortableServer_Servant) newservant, ev);
+   /* Before servant is going to be activated all
+    * private attributes must be initialized.  */
+
+   /* ------ init private attributes here ------ */ 
+   <command>newservant-&gt;counter=0;  /* init */</command>
+   /* ------ ---------- end ------------- ------ */
+
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+static void
+impl_Examples_BadCall__fini (impl_POA_Examples_BadCall * servant,
+			     CORBA_Environment * ev)
+{
+   CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev);
+
+   /* No further remote method calls are delegated to 
+    * servant and you may free your private attributes. */
+   /* ------ free private attributes here ------ */ 
+   <command>servant-&gt;counter=0;  /* reset */</command>
+   /* ------ ---------- end ------------- ------ */
+
+   POA_Examples_BadCall__fini((PortableServer_Servant) servant, ev);
+   
+   g_free (servant);
+}
+
+static Examples_BadCall_Foo
+impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
+			      const CORBA_long val,
+			      Examples_BadCall_Foo * bar,
+			      CORBA_Environment * ev)
+{
+   Examples_BadCall_Foo ret_val = {0.0};
+
+
+   /* ------   insert method code here   ------ */
+   switch ((servant-&gt;counter++) % 2)
+   {
+   case 0:
+   {
+	   /* this piece of code demonstrates how to raise exception
+	    * without any further parameter */
+
+	   Examples_BadCall_Foo dummy_foo = {0.0};
+
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
+           <command>CORBA_exception_set (ev, 
+				CORBA_USER_EXCEPTION,
+                                ex_Examples_BadCall_NoParam,
+                                NULL); /* exception has no members */
+           </command>
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
+           return dummy_foo;
+           break;
+   }
+   case 1:
+   {
+	   /* this piece of code demonstrates how to raise exception
+	    * that has a string as parameter */
+
+	   Examples_BadCall_Foo dummy_foo = {0.0};
+
+	   Examples_BadCall_SingleParam* ex_parameters
+		   = Examples_BadCall_SingleParam__alloc();
+
+	   ex_parameters-&gt;mesg 
+		   = CORBA_string_dup ("raised in \"" __FILE__ "\"");
+
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
+         <command>  CORBA_exception_set (ev, 
+				CORBA_USER_EXCEPTION,
+                                ex_Examples_BadCall_SingleParam,
+                                ex_parameters); /* exception has members */
+         </command>
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
+           return dummy_foo;
+           break;
+   }
+   /* this code will never raise exception DoubleParam */
+
+   default:
+           g_assert_not_reached ();
+   }
+   /* ------ ---------- end ------------ ------ */
+
+   return ret_val;
+}
+</programlisting>
+</example>
+        </para>
       </sect2>
       <sect2>
 	<title>Compiling client &amp; server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>Makefile</title>
+<programlisting>PREFIX ?= /usr
+CC = gcc
+TARGETS=badcall-client badcall-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+         -I$(PREFIX)/lib/glib-2.0/include 
+LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm        \
+             -lORBitCosNaming-2
+
+IDLOUT=badcall-common.c badcall-stubs.c badcall-skels.c badcall.h
+
+all: $(IDLOUT) badcall-client badcall-server
+
+badcall-server.o: badcall-server.c badcall-skelimpl.c
+
+badcall-client : badcall-client.o badcall-stubs.o badcall-common.o examples-toolkit.o
+badcall-server : badcall-server.o badcall-skels.o badcall-common.o examples-toolkit.o
+
+$(IDLOUT): badcall.idl
+	$(ORBIT_IDL) badcall.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+
+distclean: clean
+	rm -rf badcall-client badcall-server
+</programlisting>
+</example>
+        </para>
       </sect2>
 </sect1>
+
+
+<sect1 id="name-resolve">
+<title>NameResolve client &amp; server</title>
+      <para>
+<example>
+<title>name-resolve.idl</title>
+<programlisting role="IDL">module Examples {
+	module NameResolve {
+		interface Service {
+			void echoString (in string input);
+		};
+	};
+};
+</programlisting>
+</example>
+<computeroutput>$ <command>orbit-idl-2 --skeleton-impl
+name-resolve.idl</command>
+</computeroutput>
+geenrates all the files we will use in this example.
+
+<informaltable>
+<tgroup cols="3">
+<colspec align="left"/>
+<colspec align="center"/>
+<colspec align="center"/>
+<thead>
+<row>
+<entry>File</entry><entry>Usage for Client</entry><entry>Usage for Server</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>name-resolve.h</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>name-resolve-common.c</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>name-resolve-stubs.c</entry><entry>readonly</entry><entry>-</entry>
+</row>
+
+<row>
+<entry>name-resolve-skels.c</entry><entry>-</entry><entry>readonly</entry>
+</row>
+<row><entry>name-resolve-skelimpl.c</entry><entry>-</entry><entry>template for user code</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+Files remaining to write are listed in following table, starting with 
+<emphasis>name-resolve-client.c</emphasis> in following chapter.
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry>name-resolve-client.c</entry><entry>write the client code</entry>
+</row>
+<row>
+<entry>name-resolve-server.c</entry><entry>write the generic code for servant creation</entry>
+</row>
+</tbody></tgroup>
+</informaltable>
+      </para>
+
+<sect2>
+   <title>Example-Toolkit Helpers</title>
+   <para>
+         <example>
+            <title>example-toolkit.c(etk_get_name_service)</title>
+<programlisting role="C">
+ 
+/** resolves default name-service, usually given to application as
+ * command line argument "-ORBInitRef NameService=IOR:0100000028..",
+ * or since release 2.8.0 corbalocs in form of URL can be used, eg:
+ * "-ORBInitRef NameService=corbaloc:iiop:HOSTNAME:PORT/NameService%00"
+ */
+CosNaming_NamingContext 
+etk_get_name_service (CORBA_ORB         orb,
+		      CORBA_Environment *ev)
+{
+        CORBA_char   *str=NULL;
+        <command>CORBA_Object  ref
+                = (CORBA_Object) CORBA_ORB_resolve_initial_references(orb,
+								      "NameService",
+                                                                      ev);</command>
+        if (etk_raised_exception(ev)) return CORBA_OBJECT_NIL;
+	
+        return (CosNaming_NamingContext) ref;
+}
+</programlisting>
+         </example>
+
+         <example>
+            <title>example-toolkit.c(etk_name_service_bind)</title>
+<programlisting role="C">
+/** calculate length of NULL terminated string vector */
+static
+guint 
+id_vec_len (char *id_vec[]) 
+{ 
+	gint i=0; 
+	for (i = 0; id_vec[i]; ++i); 
+	return i;
+} 
+
+/* binds @servant object reference to unique @name at
+ * @name_service. @name is a NULL terminated list of strings
+ * (CORBA_char*). If error occures @ev points to exception object on
+ * return.
+ */
+void 
+etk_name_service_bind (CosNaming_NamingContext  name_service,
+		       CORBA_Object             servant,
+		       gchar                   *id_vec[], 
+		       CORBA_Environment       *ev)
+{
+	gint i = 0;
+	gint len = id_vec_len (id_vec);
+
+	/* Allocate a CosNaming::Name (sequence of CosNaming::NameComponent) */
+	CosNaming_Name *name = CosNaming_Name__alloc();
+
+	name->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf(len);
+	name->_maximum = len;
+	name->_length  = 0;
+	
+	/* Relinquish ownership of the NameComponent to the
+         * sequence. When CORBA_free is called on it later, the
+         * NameComponent will be freed */	
+	CORBA_sequence_set_release (name, TRUE);
+
+	/* iterate components of name and create sub-context
+	 * (directory) if needed */ 
+	for (i = 0; i < len; ++i) {
+		name->_length = i+1;
+		name->_buffer[i].id   = CORBA_string_dup(id_vec[i]);
+		name->_buffer[i].kind = CORBA_string_dup(""); 
+		/* don't know what 'kind' shall be good for */ 
+
+		if (name->_length < len) 
+		{
+			/* create a sub-context */ 
+		<command>	CosNaming_NamingContext nc = 
+				CosNaming_NamingContext_bind_new_context (name_service, 
+									  name, 
+									  ev);	</command>
+			if (etk_raised_exception_is_a (ev, 
+						       ex_CosNaming_NamingContext_AlreadyBound))
+			{
+				/* ignore - ctx allread exists, this
+				 * is not dramatic */
+				CORBA_exception_free (ev);
+			}
+			else if (etk_raised_exception (ev)) 
+			{
+				/* critical - unexpected exception  */ 
+				CORBA_free (name); 
+				return;
+			}
+		}
+		else
+		{
+			/* Bind object to last context - use 'rebind'
+			 * operation in case the name has been
+			 * registered allready in context - note, this
+			 * might interfere with other service choosing
+			 * same name */ 
+		<command>	CosNaming_NamingContext_rebind (name_service, 
+							name, 
+							servant,
+							ev);</command>
+			if (etk_raised_exception(ev)) {
+				/* critical - can not bind object */ 
+				CORBA_free (name);
+				return;
+			}
+		}
+	}
+
+	CORBA_free (name);
+	return;
+}
+</programlisting>
+         </example>
+
+         <example>
+            <title>example-toolkit.c(etk_name_service_resolve)</title>
+<programlisting role="C">
+/* resolves object reference @return with unique @name at
+ *  @name_service. @name is a NULL terminated list of strings
+ *  (CORBA_char*).  If error occures @ev points to * exception object
+ *  on return.
+ */
+CORBA_Object 
+etk_name_service_resolve (CosNaming_NamingContext  name_service,
+			  gchar                   *id_vec[], 
+			  CORBA_Environment       *ev)
+{
+	CORBA_Object retval = CORBA_OBJECT_NIL;
+	gint i = 0;
+	gint len = id_vec_len (id_vec);
+
+	/* Allocate a CosNaming::Name (sequence of CosNaming::NameComponent) */
+	CosNaming_Name *name = CosNaming_Name__alloc();
+
+	g_assert (id_vec_len (id_vec) > 0);
+
+	name->_buffer = CORBA_sequence_CosNaming_NameComponent_allocbuf(len);
+	name->_maximum = len;
+	name->_length  = 0;
+	
+	/* Relinquish ownership of the NameComponent to the
+         * sequence. When CORBA_free is called on it later, the
+         * NameComponent will be freed */	
+	CORBA_sequence_set_release (name, TRUE);
+
+	/* iterate components of name and create sub-context
+	 * (directory) if needed */ 
+	for (i = 0; i < len; ++i) {
+		name->_length = i+1;
+		name->_buffer[i].id   = CORBA_string_dup(id_vec[i]);
+		name->_buffer[i].kind = CORBA_string_dup(""); 
+		/* don't know what 'kind' shall be good for */ 
+	}
+	
+<command>	retval = CosNaming_NamingContext_resolve (name_service, 
+						  name, 
+						  ev);</command>
+	
+	if (etk_raised_exception (ev)) { 
+		CORBA_free (name);
+		return CORBA_OBJECT_NIL;
+	}
+	
+	return retval;
+}
+</programlisting>
+         </example>
+   </para>
+</sect2>
+
+
+      <sect2>
+	<title>NameResolve client</title>
+	<para>
+<example>
+<title>name-resolve-client.c</title>
+<programlisting role="C">/*
+ * Name-Resolve client program.. Hacked by  Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;
+ *
+ * Client connects to name-service and resolves object reference from server and
+ * forwards console input to name-resolve-server. A dot . as single character
+ * in input terminates the client.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+/*
+ * This header file was generated from the idl
+ */
+
+#include "name-resolve.h"
+#include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
+
+
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+        if (etk_raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <command>CORBA_Object_release(service, ev);</command>
+        if (etk_raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+                if (etk_raised_exception(ev)) return;
+        }
+}
+
+/**
+ *
+ */
+static
+void
+client_run (Examples_NameResolve_Service  service,
+	    CORBA_Environment            *ev)
+{
+	char filebuffer[1024+1];
+
+	g_print("Type any text to console to be sent to server,\n"
+		"a single dot in line will terminate input\n");
+	
+	while( fgets(filebuffer,1024,stdin) ) {
+		if( filebuffer[0] == '.' &amp;&amp; filebuffer[1] == '\n' ) 
+			break;
+		
+		/* chop the newline off */
+		filebuffer[strlen(filebuffer)-1] = '\0';
+      
+		/* using the echoString method in the Echo object 
+		 * this is defined in the echo.h header, compiled from
+		 * echo.idl */
+
+		<command>Examples_NameResolve_Service_echoString (service,
+							 filebuffer,
+							 ev);</command>
+		if (etk_raised_exception (ev)) return;
+	}
+}
+
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	Examples_NameResolve_Service service = CORBA_OBJECT_NIL;
+	CosNaming_NamingContext name_service = CORBA_OBJECT_NIL;
+
+	gchar *id[] = {"Examples", "NameResolve", "Service", NULL};
+
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+
+	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+	etk_abort_if_exception(ev, "init failed");
+
+	g_print ("Resolving service reference from name-service with id \"%s/%s/%s\"\n", id[0], id[1], id[2]);
+
+<command>	name_service = etk_get_name_service (global_orb, ev);</command>
+	etk_abort_if_exception(ev, "failed resolving name-service");
+
+<command>	service 
+	  = (Examples_NameResolve_Service) 
+		etk_name_service_resolve (name_service, id, ev);</command>
+	etk_abort_if_exception(ev, "failed resolving service at name-service");
+
+	<command>client_run (service, ev);</command>
+        etk_abort_if_exception(ev, "service not reachable");
+ 
+	<command>client_cleanup (global_orb, service, ev);</command>
+        etk_abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}</programlisting>
+</example>
+         </para>
+      </sect2>
+      <sect2>
+	<title>NameResolve server</title>
+	<para>
+<example>
+<title>name-resolve-server.c</title>
+<programlisting role="C">/*
+ * echo-server program. Hacked from Echo test suite by
+ * &lt;birney@sanger.ac.uk&gt;, ORBit2 udpate by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "name-resolve-skelimpl.c"
+#include "examples-toolkit.h" /* provides etk_abort_if_exception */ 
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+        <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+       <command> poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+	<command>PortableServer_POAManager_activate(poa_manager, ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+        <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev);</command>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+        <command>CORBA_ORB_run(orb, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	<command>objid = PortableServer_POA_reference_to_id (poa, ref, ev);</command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	<command>PortableServer_POA_deactivate_object (poa, objid, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+	<command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+        <command>CORBA_Object_release ((CORBA_Object) poa, ev);</command>
+	if (etk_raised_exception(ev)) return;
+	
+        <command>CORBA_Object_release (ref, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_NameResolve_Service ref = CORBA_OBJECT_NIL; 
+
+	<command>ref = impl_Examples_NameResolve_Service__create (poa, ev);</command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * main 
+ */
+
+int
+main (int argc, char *argv[])
+{
+	CORBA_Object servant                 = CORBA_OBJECT_NIL;
+	CosNaming_NamingContext name_service = CORBA_OBJECT_NIL;
+
+	gchar *id[] = {"Examples", "NameResolve", "Service", NULL};
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	<command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	<command>servant = server_activate_service (global_orb, root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Binding service reference at name service against id: %s/%s/%s\n\n", id[0], id[1], id[2]);
+	
+	<command>name_service = etk_get_name_service (global_orb, ev);</command>
+	etk_abort_if_exception(ev, "failed resolving name-service");
+
+	<command>etk_name_service_bind (name_service, servant, id, ev);</command>
+	etk_abort_if_exception(ev, "failed binding of service");
+
+	<command>server_run (global_orb, ev);</command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	<command>server_cleanup (global_orb, root_poa, servant, ev);</command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}
+	
+
+</programlisting>
+</example>
+<example>
+<title>name-resolve-skelimpl.c</title>
+<programlisting role="C">/* This is a template file generated by command */
+/* orbit-idl-2 --skeleton-impl name-resolve.idl */
+/* User must edit this file, inserting servant  */
+/* specific code between markers. */
+
+#include "name-resolve.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+   POA_Examples_NameResolve_Service servant;
+   PortableServer_POA poa;
+
+   /* ------ add private attributes here ------ */
+   /* ------ ---------- end ------------ ------ */
+} impl_POA_Examples_NameResolve_Service;
+
+/*** Implementation stub prototypes ***/
+
+static void
+impl_Examples_NameResolve_Service__fini(impl_POA_Examples_NameResolve_Service
+					* servant, CORBA_Environment * ev);
+static void
+impl_Examples_NameResolve_Service_echoString
+(impl_POA_Examples_NameResolve_Service * servant, const CORBA_char * input,
+CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv
+   impl_Examples_NameResolve_Service_base_epv = {
+   NULL,			/* _private data */
+   (gpointer) &amp; impl_Examples_NameResolve_Service__fini,	/* finalize routine */
+   NULL,			/* default_POA routine */
+};
+static POA_Examples_NameResolve_Service__epv
+   impl_Examples_NameResolve_Service_epv = {
+   NULL,			/* _private */
+   (gpointer) &amp; impl_Examples_NameResolve_Service_echoString,
+
+};
+
+/*** vepv structures ***/
+
+static POA_Examples_NameResolve_Service__vepv
+   impl_Examples_NameResolve_Service_vepv = {
+   &amp;impl_Examples_NameResolve_Service_base_epv,
+   &amp;impl_Examples_NameResolve_Service_epv,
+};
+
+/*** Stub implementations ***/
+
+static Examples_NameResolve_Service
+impl_Examples_NameResolve_Service__create(PortableServer_POA poa,
+					  CORBA_Environment * ev)
+{
+   Examples_NameResolve_Service retval;
+   impl_POA_Examples_NameResolve_Service *newservant;
+   PortableServer_ObjectId *objid;
+
+   newservant = g_new0(impl_POA_Examples_NameResolve_Service, 1);
+   newservant-&gt;servant.vepv = &amp;impl_Examples_NameResolve_Service_vepv;
+   newservant-&gt;poa =
+      (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
+
+   POA_Examples_NameResolve_Service__init((PortableServer_Servant) newservant,
+					  ev);
+   /* Before servant is going to be activated all
+    * private attributes must be initialized.  */
+
+   /* ------ init private attributes here ------ */
+   /* ------ ---------- end ------------- ------ */
+
+   objid = PortableServer_POA_activate_object(poa, newservant, ev);
+   CORBA_free(objid);
+   retval = PortableServer_POA_servant_to_reference(poa, newservant, ev);
+
+   return retval;
+}
+
+/**
+ * impl_Examples_NameResolve_Service__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any active operation invocation, method call is being delayed.
+ * Note, in former versions of ORBit2 this function would have been
+ * named impl_Examples_NameResolve_Service__destroy.
+**/
+static void
+impl_Examples_NameResolve_Service__fini(impl_POA_Examples_NameResolve_Service
+					* servant, CORBA_Environment * ev)
+{
+   CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev);
+
+   /* No further remote method calls are delegated to 
+    * servant and you may free your private attributes. */
+   /* ------ free private attributes here ------ */
+   /* ------ ---------- end ------------- ------ */
+
+   POA_Examples_NameResolve_Service__fini((PortableServer_Servant) servant,
+					  ev);
+
+   g_free(servant);
+}
+
+static void
+impl_Examples_NameResolve_Service_echoString
+   (impl_POA_Examples_NameResolve_Service * servant, const CORBA_char * input,
+    CORBA_Environment * ev)
+{
+   /* ------   insert method code here   ------ */
+   <command>g_print ("&gt;&gt; %s\n", input);</command>
+   /* ------ ---------- end ------------ ------ */
+}
+</programlisting>
+</example>
+        </para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>
+<example>
+<title>Makefile</title>
+<programlisting>PREFIX ?= /usr
+CC = gcc
+TARGETS=name-resolve-client name-resolve-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+       -I$(PREFIX)/lib/glib-2.0/include -g
+LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm       \
+             -lORBitCosNaming-2 
+IDLOUT=name-resolve-common.c name-resolve-stubs.c name-resolve-skels.c name-resolve.h
+
+all: $(IDLOUT) name-resolve-client name-resolve-server
+
+name-resolve-server.o: name-resolve-server.c name-resolve-skelimpl.c
+
+name-resolve-client : name-resolve-client.o name-resolve-stubs.o name-resolve-common.o examples-toolkit.o
+name-resolve-server : name-resolve-server.o name-resolve-skels.o name-resolve-common.o examples-toolkit.o name-resolve-skelimpl.o
+
+$(IDLOUT): name-resolve.idl
+	$(ORBIT_IDL) name-resolve.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+
+distclean: clean
+	rm -rf name-resolve-client name-resolve-server
+</programlisting>
+</example>
+        </para>
+      </sect2>
+</sect1>
+
+
+<sect1 id="factory">
+<title>Factory client &amp; server</title>
+      <para>
+<example>
+<title>factory.idl</title>
+<programlisting role="IDL">
+module Examples {
+
+	module Factory {
+
+		interface AbstractService {
+			void doit (in string mesg);
+			void destroy ();
+		};
+
+		interface Producer {
+			AbstractService produce (in string id);
+		};
+	};
+};
+</programlisting>
+</example>
+<computeroutput>$ <command>orbit-idl-2 --skeleton-impl
+factory.idl</command>
+</computeroutput>
+geenrates all the files we will use in this example.
+
+<informaltable>
+<tgroup cols="3">
+<colspec align="left"/>
+<colspec align="center"/>
+<colspec align="center"/>
+<thead>
+<row>
+<entry>File</entry><entry>Usage for Client</entry><entry>Usage for Server</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry>factory.h</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>factory-common.c</entry><entry>readonly</entry><entry>readonly</entry>
+</row>
+<row>
+<entry>factory-stubs.c</entry><entry>readonly</entry><entry>-</entry>
+</row>
+
+<row>
+<entry>factory-skels.c</entry><entry>-</entry><entry>readonly</entry>
+</row>
+<row><entry>factory-skelimpl.c</entry><entry>-</entry><entry>template for user code</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+Files remaining to write are listed in following table, starting with 
+<emphasis>factory-client.c</emphasis> in following chapter.
+<informaltable>
+<tgroup cols="2">
+<tbody>
+<row>
+<entry>factory-client.c</entry><entry>write the client code</entry>
+</row>
+<row>
+<entry>factory-server.c</entry><entry>write the generic code for servant creation</entry>
+</row>
+</tbody></tgroup>
+</informaltable>
+
+      </para>
+      <sect2>
+	<title>Factory client</title>
+	<para>
+<example>
+<title>factory-client.c</title>
+<programlisting role="C">/* factory-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;orbit/orbit.h&gt;
+
+#include "examples-toolkit.h" /* etk_ functions */ 
+#include "factory.h"
+
+
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+        if (etk_raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              servant,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <command>CORBA_Object_release(servant, ev);</command>
+        if (etk_raised_exception(ev))
+		return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+                if (etk_raised_exception(ev)) 
+			return;
+        }
+}
+
+/**
+ *
+ */
+static
+void
+client_run (Examples_Factory_Producer     factory,
+	    CORBA_Environment            *ev)
+{
+	#define MAX_ID_LEN 100
+
+	CORBA_char  service_id [MAX_ID_LEN+1] = "";
+	gint i = 0;
+	gint j = 0;
+
+	for (i = 0; i&lt;20; ++i)
+	{
+		snprintf (service_id, MAX_ID_LEN, "id-%d", i);
+
+		g_printf ("abstract-service: create,");
+		<command>Examples_Factory_AbstractService service 
+			= Examples_Factory_Producer_produce (factory, 
+							     service_id, 
+							     ev);</command>
+		if (etk_raised_exception (ev)) 
+			return;
+		
+		for (j = 0; j &lt; 5; ++j)
+		{
+			g_printf (" apply,");
+
+			CORBA_char *mesg = "hallo welt";
+			<command>Examples_Factory_AbstractService_doit (service, 
+							       mesg, 
+							       ev);</command>
+			if (etk_raised_exception (ev)) 
+				return;
+		}
+
+		g_printf (" destroy\n");
+
+		<command>Examples_Factory_AbstractService_destroy (service, ev);</command>
+		if (etk_raised_exception (ev)) 
+			return;
+
+		<command>CORBA_Object_release ((CORBA_Object) service, ev);</command>
+		if (etk_raised_exception (ev)) 
+			return;
+
+	}
+	#undef MAX_IDL_LEN
+}
+
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+        CORBA_char filename[] = "factory.ref";
+         
+        Examples_Factory_Producer producer = CORBA_OBJECT_NIL;
+ 
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+ 
+        <command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+        etk_abort_if_exception(ev, "init failed");
+ 
+        g_print ("Reading service reference from file \"%s\"\n", filename);
+ 
+        <command>producer 
+          = (Examples_Factory_Producer) 
+		etk_import_object_from_file (global_orb,
+					     filename,
+					     ev);</command>
+        etk_abort_if_exception(ev, "import service failed");
+ 
+        <command>client_run (producer, ev);</command>
+        etk_abort_if_exception(ev, "service not reachable");
+  
+        <command>client_cleanup (global_orb, producer, ev);</command>
+        etk_abort_if_exception(ev, "cleanup failed");
+  
+        exit (0);
+}</programlisting>
+</example>
+         </para>
+      </sect2>
+      <sect2>
+	<title>Factory server</title>
+	<para>
+<example>
+<title>factory-server.c</title>
+<programlisting role="C">/*
+ * factory-server program. Hacked by Frank
+ * Rehberger &lt;F.Rehberger@xtradyne.de&gt;
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
+#include &lt;ORBitservices/CosNaming.h&gt;
+
+#include "factory.h"
+#include "factory-skelimpl.c" 
+
+#include "examples-toolkit.h" /* etk_ functions */ 
+
+static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
+static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
+	
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+server_shutdown (int sig)
+{
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                etk_abort_if_exception (local_ev, "caught exception");
+        }
+}
+
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_server_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */static 
+void 
+server_init (int                 *argc_ptr, 
+	     char                *argv[],
+	     CORBA_ORB           *orb,
+	     PortableServer_POA  *poa,
+	     CORBA_Environment   *ev)
+{
+	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+
+	CORBA_Environment  local_ev[1];
+	CORBA_exception_init(local_ev);
+
+	/* init signal handling */
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
+	
+	/* create Object Request Broker (ORB) */
+	
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_orb;
+
+        <command>(*poa) = (PortableServer_POA) 
+		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poa;
+
+       <command> poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_poamanager;
+
+<command>	PortableServer_POAManager_activate(poa_manager, ev);</command>
+	if (etk_raised_exception(ev)) 
+		goto failed_activation;
+
+        <command>CORBA_Object_release ((CORBA_Object) poa_manager, ev);</command>
+	return;
+
+ failed_activation:
+ failed_poamanager:
+        CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
+ failed_poa:
+	CORBA_ORB_destroy(*orb, local_ev);		
+ failed_orb:
+	return;
+}
+
+/* Entering main loop @orb handles incoming request and delegates to
+ * servants. If error occures @ev points to exception object on
+ * return.
+ */
+static void 
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
+{
+        /* enter main loop until SIGINT or SIGTERM */
+	
+        <command>CORBA_ORB_run(orb, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+        /* user pressed SIGINT or SIGTERM and in signal handler
+	 * CORBA_ORB_shutdown(.) has been called */
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static void 
+server_cleanup (CORBA_ORB           orb,
+		PortableServer_POA  poa,
+		CORBA_Object        ref,
+		CORBA_Environment  *ev)
+{
+	PortableServer_ObjectId   *objid       = NULL;
+
+	<command>objid = PortableServer_POA_reference_to_id (poa, ref, ev);</command>
+	if (etk_raised_exception(ev)) return;
+		
+	/* Servant: deactivatoin - will invoke  __fini destructor */
+	<command>PortableServer_POA_deactivate_object (poa, objid, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+	<command>PortableServer_POA_destroy (poa, TRUE, FALSE, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+	CORBA_free (objid);
+
+        <command>CORBA_Object_release ((CORBA_Object) poa, ev);</command>
+	if (etk_raised_exception(ev)) return;
+	
+        <command>CORBA_Object_release (ref, ev);</command>
+	if (etk_raised_exception(ev)) return;
+
+        /* ORB: tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+		if (etk_raised_exception(ev)) return;
+        }
+}
+
+/* Creates servant and registers in context of ORB @orb. The ORB will
+ * delegate incoming requests to specific servant object.  @return
+ * object reference. If error occures @ev points to exception object
+ * on return.
+ */
+static CORBA_Object
+server_activate_service (CORBA_ORB           orb,
+			 PortableServer_POA  poa,
+			 CORBA_Environment  *ev)
+{
+	Examples_Factory_Producer ref = CORBA_OBJECT_NIL; 
+
+	<command>ref = impl_Examples_Factory_Producer__create (poa, ev);</command>
+	if (etk_raised_exception(ev)) 
+		return CORBA_OBJECT_NIL;
+	
+	return ref;
+}
+
+/* 
+ * main 
+ */
+
+int
+main (int argc, char *argv[])
+{
+	CORBA_Object servant = CORBA_OBJECT_NIL;
+	
+	CORBA_char filename[] = "factory.ref";
+
+	CORBA_Environment  ev[1];
+	CORBA_exception_init(ev);
+	
+	<command>server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed ORB init");
+
+	<command>servant = server_activate_service (global_orb, root_poa, ev);</command>
+	etk_abort_if_exception(ev, "failed activating service");
+
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	<command>etk_export_object_to_file (global_orb, 
+				   servant, 
+				   filename, 
+				   ev);</command>
+	etk_abort_if_exception(ev, "failed exporting IOR");
+	
+	<command>server_run (global_orb, ev);</command>
+	etk_abort_if_exception(ev, "failed entering main loop");
+
+	<command>server_cleanup (global_orb, root_poa, servant, ev);</command>
+	etk_abort_if_exception(ev, "failed cleanup");
+
+	exit (0);
+}</programlisting>
+</example>
+<example>
+<title>factory-skelimpl.c</title>
+<programlisting role="C">/*
+ * This is a template file generated by command 
+ * orbit-idl-2 --skeleton-impl name-resolve.idl 
+ * User must edit this file, inserting servant 
+ * specific code between markers. 
+ */
+
+#include "factory.h"
+
+/*** App-specific servant structures ***/
+
+typedef struct
+{
+  POA_Examples_Factory_AbstractService servant;
+  PortableServer_POA poa;
+
+  /* ------ add private attributes here ------  */
+  <command>CORBA_char *id;
+  CORBA_long counter;</command>
+  /* ------ ---------- end ------------ ------  */
+} impl_POA_Examples_Factory_AbstractService;
+
+typedef struct
+{
+  POA_Examples_Factory_Producer servant;
+  PortableServer_POA poa;
+
+  /* ------ add private attributes here ------ */
+  /* ------ ---------- end ------------ ------ */
+} impl_POA_Examples_Factory_Producer;
+
+/*** Implementation stub prototypes ***/
+
+static void
+  impl_Examples_Factory_AbstractService__fini
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   CORBA_Environment * ev);
+static void
+  impl_Examples_Factory_AbstractService_doit
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   const CORBA_char * mesg, CORBA_Environment * ev);
+
+static void
+  impl_Examples_Factory_AbstractService_destroy
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   CORBA_Environment * ev);
+
+static void
+  impl_Examples_Factory_Producer__fini
+  (impl_POA_Examples_Factory_Producer * servant, CORBA_Environment * ev);
+static Examples_Factory_AbstractService
+  impl_Examples_Factory_Producer_produce
+  (impl_POA_Examples_Factory_Producer * servant, const CORBA_char * id,
+   CORBA_Environment * ev);
+
+/*** epv structures ***/
+
+static PortableServer_ServantBase__epv
+  impl_Examples_Factory_AbstractService_base_epv = {
+  NULL,				/* _private data */
+  (gpointer) &amp; impl_Examples_Factory_AbstractService__fini,	/* finalize routine */
+  NULL,				/* default_POA routine */
+};
+static POA_Examples_Factory_AbstractService__epv
+  impl_Examples_Factory_AbstractService_epv = {
+  NULL,				/* _private */
+  (gpointer) &amp; impl_Examples_Factory_AbstractService_doit,
+
+  (gpointer) &amp; impl_Examples_Factory_AbstractService_destroy,
+
+};
+static PortableServer_ServantBase__epv
+  impl_Examples_Factory_Producer_base_epv = {
+  NULL,				/* _private data */
+  (gpointer) &amp; impl_Examples_Factory_Producer__fini,	/* finalize routine */
+  NULL,				/* default_POA routine */
+};
+static POA_Examples_Factory_Producer__epv impl_Examples_Factory_Producer_epv = {
+  NULL,				/* _private */
+  (gpointer) &amp; impl_Examples_Factory_Producer_produce,
+
+};
+
+/*** vepv structures ***/
+
+static POA_Examples_Factory_AbstractService__vepv
+  impl_Examples_Factory_AbstractService_vepv = {
+  &amp;impl_Examples_Factory_AbstractService_base_epv,
+  &amp;impl_Examples_Factory_AbstractService_epv,
+};
+static POA_Examples_Factory_Producer__vepv
+  impl_Examples_Factory_Producer_vepv = {
+  &amp;impl_Examples_Factory_Producer_base_epv,
+  &amp;impl_Examples_Factory_Producer_epv,
+};
+
+/*** Stub implementations ***/
+
+static Examples_Factory_AbstractService
+impl_Examples_Factory_AbstractService__create (PortableServer_POA poa,
+					       const CORBA_char * id,
+					       CORBA_Environment * ev)
+{
+  Examples_Factory_AbstractService retval;
+  impl_POA_Examples_Factory_AbstractService *newservant;
+  PortableServer_ObjectId *objid;
+
+  newservant = g_new0 (impl_POA_Examples_Factory_AbstractService, 1);
+  newservant-&gt;servant.vepv = &amp;impl_Examples_Factory_AbstractService_vepv;
+  newservant-&gt;poa =
+    (PortableServer_POA) CORBA_Object_duplicate ((CORBA_Object) poa, ev);
+  POA_Examples_Factory_AbstractService__init ((PortableServer_Servant)
+					      newservant, ev);
+  /*
+   * Before servant is going to be activated all private attributes must 
+   * be initialized.  
+   */
+
+  /* ------ init private attributes here ------ */
+  <command>newservant-&gt;id = CORBA_string_dup (id);
+  newservant-&gt;counter = 0;</command>
+  /* ------ ---------- end ------------- ------ */
+
+  objid = PortableServer_POA_activate_object (poa, newservant, ev);
+  CORBA_free (objid);
+  retval = PortableServer_POA_servant_to_reference (poa, newservant, ev);
+
+  return retval;
+}
+
+/**
+ * impl_Exampels_Factory_AbstractService__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation invocation, method invoation is being delayed.
+ * Note, in former versions of ORBit2 this function would have been 
+ * named impl_Exampels_Factory_AbstractService__destroy.
+**/
+static void
+  impl_Examples_Factory_AbstractService__fini
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   CORBA_Environment * ev)
+{
+  CORBA_Object_release ((CORBA_Object) servant-&gt;poa, ev);
+
+  /*
+   * No further remote method calls are delegated to servant and you
+   * may free your private attributes. 
+   */
+  /* ------ free private attributes here ------  */
+  <command>CORBA_free (servant-&gt;id);</command>
+  /* ------ ---------- end ------------- ------  */
+
+  POA_Examples_Factory_AbstractService__fini ((PortableServer_Servant)
+					      servant, ev);
+
+  g_free (servant);
+}
+
+static void
+  impl_Examples_Factory_AbstractService_doit
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   const CORBA_char * mesg, CORBA_Environment * ev)
+{
+  /* ------ insert method code here ------ */
+  <command>g_print ("service-id=\"%s\", nth-call=\"%d\", \n", 
+	   servant-&gt;id, 
+	   servant-&gt;counter);
+  ++(servant-&gt;counter);</command>
+  /* ------ ---------- end ------------ ------  */
+}
+
+
+static void
+deactivate_servant (PortableServer_POA poa,
+		    PortableServer_Servant servant, CORBA_Environment * ev)
+{
+ <command> PortableServer_ObjectId *id
+    = PortableServer_POA_servant_to_id (poa, servant, ev);
+
+  if (etk_raised_exception (ev))
+    return;
+
+  PortableServer_POA_deactivate_object (poa, id, ev);
+
+  /* free id in any case  */
+  g_free (id);</command>
+}
+
+static void
+  impl_Examples_Factory_AbstractService_destroy
+  (impl_POA_Examples_Factory_AbstractService * servant,
+   CORBA_Environment * ev)
+{
+  /* ------ insert method code here ------ */
+  <command>deactivate_servant (servant-&gt;poa, servant, ev);</command>
+  /* ------ ---------- end ------------ ------ */
+}
+
+static Examples_Factory_Producer
+impl_Examples_Factory_Producer__create (PortableServer_POA poa,
+					CORBA_Environment * ev)
+{
+  Examples_Factory_Producer retval;
+  impl_POA_Examples_Factory_Producer *newservant;
+  PortableServer_ObjectId *objid;
+
+  newservant = g_new0 (impl_POA_Examples_Factory_Producer, 1);
+  newservant-&gt;servant.vepv = &amp;impl_Examples_Factory_Producer_vepv;
+  newservant-&gt;poa =
+    (PortableServer_POA) CORBA_Object_duplicate ((CORBA_Object) poa, ev);
+  POA_Examples_Factory_Producer__init ((PortableServer_Servant)
+				       newservant, ev);
+  /*
+   * Before servant is going to be activated all private attributes must 
+   * be initialized.  
+   */
+
+  /* ------ init private attributes here ------ */ 
+  /* ------ ---------- end ------------- ------ */
+
+  objid = PortableServer_POA_activate_object (poa, newservant, ev);
+  CORBA_free (objid);
+  retval = PortableServer_POA_servant_to_reference (poa, newservant, ev);
+
+  return retval;
+}
+
+/**
+ * impl_Examples_Factory_Producer__fini
+ * 
+ * Destructor called after servant has been deactivated finally.
+ * In case any operation invocation, method invoation is being delayed.
+ * Note, in former versions of ORBit2 this function would have been 
+ * named impl_Exampels_Factory_Producer__destroy
+**/
+static void
+  impl_Examples_Factory_Producer__fini
+  (impl_POA_Examples_Factory_Producer * servant, CORBA_Environment * ev)
+{
+  CORBA_Object_release ((CORBA_Object) servant-&gt;poa, ev);
+
+  /*
+   * No further remote method calls are delegated to servant and you
+   * may free your private attributes. 
+   */ 
+  /* ------ free private attributes here ------  */
+  /* ------ ---------- end ------------- ------ */
+
+  POA_Examples_Factory_Producer__fini ((PortableServer_Servant) servant, ev);
+
+  g_free (servant);
+}
+
+static Examples_Factory_AbstractService
+  impl_Examples_Factory_Producer_produce
+  (impl_POA_Examples_Factory_Producer * servant, const CORBA_char * id,
+   CORBA_Environment * ev)
+{
+  Examples_Factory_AbstractService retval;
+
+  /* ------ insert method code here ------ */
+<command>  retval =
+    impl_Examples_Factory_AbstractService__create (servant-&gt;poa, id, ev);
+  if (etk_raised_exception (ev))
+    {
+      retval = CORBA_OBJECT_NIL;
+    }</command>
+  /* ------ ---------- end ------------ ------  */
+
+  return retval;
+}
+</programlisting>
+</example>
+        </para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>
+<example>
+<title>Makefile</title>
+<programlisting>PREFIX ?= /usr
+CC = gcc
+TARGETS=factory-client factory-server
+ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+         -I$(PREFIX)/lib/glib-2.0/include 
+LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBitCosNaming-2 -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
+IDLOUT=factory-common.c factory-stubs.c factory-skels.c factory.h
+
+all: $(IDLOUT) factory-client factory-server
+
+factory-server.o: factory-server.c factory-skelimpl.c
+
+factory-client : factory-client.o factory-stubs.o factory-common.o examples-toolkit.o
+factory-server : factory-server.o factory-skels.o factory-common.o examples-toolkit.o
+
+$(IDLOUT): factory.idl
+	$(ORBIT_IDL) factory.idl
+
+%-skelimpl.c: %.idl
+	$(ORBIT_IDL) --skeleton-impl $^
+
+clean:
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+
+distclean: clean
+	rm -rf factory-client factory-server
+</programlisting>
+</example>
+        </para>
+      </sect2>
+</sect1>
+
+<!--
 <sect1 id="nameservice">
 <title>NameService client &amp; server</title>
       <para>
-      to be done
+<example>
+<title>XXXX</title>
+<programlisting role="IDL"></programlisting>
+</example>
       </para>
       <sect2>
 	<title>NameService client</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>XXXX</title>
+<programlisting role="C"></programlisting>
+</example>
+         </para>
       </sect2>
       <sect2>
 	<title>NameService server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>XXXX</title>
+<programlisting role="C"></programlisting>
+</example>
+<example>
+<title></title>
+<programlisting role="C"></programlisting>
+</example>
+        </para>
       </sect2>
       <sect2>
 	<title>Compiling client &amp; server</title>
-	<para>to be done</para>
+	<para>
+<example>
+<title>XXXX</title>
+<programlisting></programlisting>
+</example>
+        </para>
       </sect2>
 </sect1>
-<sect1 id="callback">
-<title>Callback client &amp; server</title>
-      <para>
-      to be done
-      </para>
-      <sect2>
-	<title>Callback client</title>
-	<para>to be done</para>
-      </sect2>
-      <sect2>
-	<title>Callback server</title>
-	<para>to be done</para>
-      </sect2>
-      <sect2>
-	<title>Compiling client &amp; server</title>
-	<para>to be done</para>
-      </sect2>
-</sect1>
+-->
+<!-- 
+*************************  ORBIT and GNOME *****************************************
+-->
+
 </chapter>
 
 
@@ -3409,7 +6147,6 @@ This is a problem. If your client disappears, then you've got unneeded
 </sect1>
 </chapter>
 </book>
-
 
 
 
