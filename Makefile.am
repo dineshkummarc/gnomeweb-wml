@@ -1,4 +1,4 @@
-SUBDIRS = www.gnome.org www.guadec.org
+SUBDIRS = www.gnome.org
 
 install-data-local:
 	$(INSTALL) -d $(prefix)/scripts
