@@ -141,7 +141,18 @@ class HTML
 <table border="0" cellspacing="0" cellpadding="0" hspace="0" vspace="0">
 <tr><td rowspan="2"><a href="/"><?php print $this->img("logo-small.png", "125", "129", "", array("hspace"=>"0", "vspace"=>"0")); ?></a></td><td>
 <a href="javascript:dropdown_tasks();"><?php print $this->img("topbar-tasks.png","22", "63"); ?></a><a
-href="javascript:dropdown_sections();"><?php print $this->img("topbar-sections.png", "22", "76"); ?></a><a href="javascript:dropdown_contact();"><?php print $this->img("topbar-contact.png", "22", "133"); ?></a><?php print $this->img("topbar-endcap.png", "22", "200"); ?></td></tr><tr><td><?php print $this->img("banner-getmore.png", "103", "421", "Get More Software"); ?></td></tr></table><?php print $this->img("subpage-side.png", "182", "129", "", array("align"=>"left", "hspace"=>"0", "vspace"=>"0")); ?><table border="0" hspace="0" vspace="0" cellspacing="0"
+href="javascript:dropdown_sections();"><?php print $this->img("topbar-sections.png", "22", "76"); ?></a><a href="javascript:dropdown_contact();"><?php print $this->img("topbar-contact.png", "22", "133"); ?></a><?php print $this->img("topbar-endcap.png", "22", "200"); ?></td></tr><tr><td><?php
+
+if ($params['banner'] == "friends")
+{
+	print $this->img("banner-contribute.png", "103", "421", "Contribute to GNOME");
+}
+else
+{
+	print $this->img("banner-getmore.png", "103", "421", "Get More Software");
+}
+
+?></td></tr></table><?php print $this->img("subpage-side.png", "182", "129", "", array("align"=>"left", "hspace"=>"0", "vspace"=>"0")); ?><table border="0" hspace="0" vspace="0" cellspacing="0"
 cellpadding="0"><tr valign="top"><td>
 
 <?php
