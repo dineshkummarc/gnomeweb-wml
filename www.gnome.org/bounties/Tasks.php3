@@ -94,7 +94,7 @@ It would be handy to be able to create tasks in Evolution by dragging
 a mail, file or link into the tasks folder.  See <?php bug(4006); ?>.
 
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

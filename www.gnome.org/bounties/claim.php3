@@ -15,7 +15,8 @@ prize you must register yourself in the <a
 href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print
 $_GET['bounty']; ?>">relevant bug</a>.
 
-<form method="post" action="claim-post.php3" name="myForm">
+<!-- <form method="post" action="claim-post.php3" name="myForm"> -->
+<form method="post" action="mailto:bounty@lists.ximian.com?Submission for Bounty #<?php print $_GET['bounty']; ?>" name="myForm">
 
 <p align="center">
 
@@ -39,6 +40,8 @@ $_GET['bounty']; ?>">relevant bug</a>.
 
 
 <?php box_end (); ?>
+
+<?php write_page_footer (); ?>
 
 </body>
 </html>

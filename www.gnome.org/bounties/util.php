@@ -3,16 +3,15 @@
 function write_table_header ($show_category)
 {
 ?>
-<center>
-<table id="table-tasks" cellspacing=2 border=0 width="750">
+<table class="table-tasks" cellspacing=2 border=0>
 <thead><tr>
 <?php
 if ($show_category == "yes") {
 ?>
-    <th style="background: #303030; cursor: n-resize;" onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Text')" id="column-category"><b><font color="#ffffff"><u>Category</u></font></b></th>
+    <th class="column-category" style=onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Text')">Category</th>
 <? } ?>
-    <th style="background: #303030;"><b><font color="#ffffff">Task Name</font></b></th>
-    <th style="background: #303030; cursor: n-resize;" onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Money')"><b><font color="#ffffff"><u>Bounty</u></font></b></th>
+    <th class="category">Task Name</th>
+    <th class="column-category" style=onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Money')">Bounty</th>
 </tr></thead>
 <?php
 }
@@ -20,15 +19,15 @@ if ($show_category == "yes") {
 function taskrow ($title, $category, $amount, $id, $solution = "")
 {
 ?>
-<tr>
+<tr class="taskrow">
 <?php
 if ($category != "hidden") { ?>
-    <td bgcolor="#d0d0ff"><?php print $category; ?></td>
-    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<font color=\"#007f00\"><b>Solved:</b> </font>"; ?><a href="<?php print $category; ?>.html#<?php print $id; ?>"><?php if ($solution) {print "<strike><font color=\"#ff0000\">" . $title . "</font></strike></font>";} else {print $title;} ?></a></td>
+    <td><?php print $category; ?></td>
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<span class=\"solved\">Solved:</span>"; ?><a href="<?php print $category; ?>.html#<?php print $id; ?>"><?php if ($solution) {print "<span class=\"solved-strike\">" . $title . "</span>";} else {print $title;} ?></a></td>
 <?php } else { ?>
-    <td bgcolor="#d0d0ff" align=left style="cursor: default;" onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<font color=\"#007f00\"><b>Solved:</b> </font>"; ?><a href="#<?php print $id; ?>"><?php if ($solution) {print "<strike><font color=\"#ff0000\">" . $title . "</font></strike></font>";} else {print $title;} ?></a></td>
+    <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<span class=\"solved\">Solved: </span>"; ?><a href="#<?php print $id; ?>"><?php if ($solution) {print "<span class=\"solved-strike\">" . $title . "</span>";} else {print $title;} ?></a></td>
 <?php } ?>
-    <td bgcolor="#d0d0ff">$<?php print $amount; ?></td>
+    <td bgcolor="#d0d0ff" >$<?php print $amount; ?></td>
 </tr>
 
 <?php
@@ -38,14 +37,13 @@ function write_table_footer ()
 {
 ?>
 </table>
-</center>
 <p>
 <?php
 }
 
-function box_start ($title, $category = "unset", $bounty = "unset", $id = "UNKNOWN-ID", $bug = "0", $solution = "",
+function box_start($title, $category = "unset", $bounty = "unset", $id = "UNKNOWN-ID", $bug = "0", $solution = "",
                     $title_fg = "#ffffff", $title_bg = "#303030", $fg = "#000000", 
-		    $bg = "#d0d0ff", $width = "750", $titlealign = "left", $tablealign = "left")
+		    $bg = "#d0d0ff", $width = "650", $titlealign = "left", $tablealign = "left")
 {
     global $solved;
     if ($solution) {
@@ -60,95 +58,74 @@ function box_start ($title, $category = "unset", $bounty = "unset", $id = "UNKNO
     }
     $box_num++;
 ?>
+  
     <a name="<?php print $id; ?>"></a><a name="box<?php print $box_num; ?>"></a>
-    <table border="0" cellpadding="0" cellspacing="0" align="center" width="<?php print $width ?>">
-	      <tr bgcolor="#ffffff"> <td align="<?php print $titlealign; ?>">
-		  <table border="0" cellspacing="1" cellpadding="0" width="100%">
-		    <tr bgcolor="<?php print $bg; ?>"> <td align="<?php print $tablealign; ?>">
-			<table border="0" cellpadding="2" cellspacing="0" width="100%">
-			  <tr bgcolor="<?php print $title_bg; ?>"> <td align="<?php print $titlealign; ?>">
-			      <font color="<?php print $title_fg; ?>">
-				<b><?php 
-					 if ($solved) print "<font color=\"#70ff70\"><b>Solved:</b> </font>";
-					 print $title ?></b>
-			      </font>
-			    </td> 
-                            <?php if ($bug != "0") { ?>
-                            <td align="right">
-			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print $bug ?>" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty."><font color="<?php print $title_fg; ?>">(Bug #<?php print $bug ?>)</font></a> <?php if (!$solved) { ?><font color="#ffffff">|</font> <a href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties"><font color="<?php print $title_fg; ?>">Discuss</font></a> <font color="#ffffff">|</font> <a href="mailto:bounty@lists.ximian.com?subject=submission for Bounty #<?php print $bug ?>&body=Bounty: <?php print $bug ?>%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here."><font color="<?php print $title_fg; ?>">Claim Bounty</font></a><?php } ?>
-			    </td>
-			    <?php } ?>
-		          </tr>
-			</table>
-<?php if ($category != "unset") { ?>
-			<table border="0" cellpadding="2" cellspacing="0" width="100%">
-			  <tr bgcolor="#808080">
-			    <td align="left">
-			      <font color="<?php print $title_fg; ?>">
-				<?php print $category ?>
-			      </font>
-			    </td>
-			    <td align="right">
-			      <font color="<?php print $title_fg; ?>">
-				Bounty: <font color="#00ff00">$<?php 
-								     if ($solved) {
-									print "<strike>" . $bounty . "</strike>"; 
-								     } else {
-								        print $bounty;
-								     }
+    <div class="content-box">
+      <div class="content-box-header">
+	<?php if ($bug != "0") { ?> <?php // This runs if it's a bug ?>
+           <?php if($solved) { ?>
+	      <span class="table-header"><span class="solved-light">Solved: </span> <?php print $title ?></span>
+              <span class="bug-number">             
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print $bug ?>" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #<?php print $bug ?>)</a>
+	      </span>
+           <?php } else { ?>
+	      <span class="table-header"><?php print $title ?></span>
+              <span class="bug-number">             
+			      <a href="http://bugzilla.gnome.org/show_bug.cgi?id=<?php print $bug ?>" title="Visit the Bug to meet with others working on this bounty, declare your interest in working on this bounty, and get up to the minute information on this bounty.">(Bug #<?php print $bug ?>)</a> | | <a href="discuss.html" title="All discussions take place in IRC on irc.gnome.org in #bounties">Discuss</a> | <a href="mailto:bounty@lists.ximian.com?subject=submission for Bounty #<?php print $bug ?>&body=Bounty: <?php print $bug ?>%0AName: %0AEmail: %0APhone: %0ASolution: %0ATeam mates: %0AHelp from: %0ANotes: %0ADonate My Winning: " title="Once your patch has been accepted by the module maintainers and you have registered yourself in the bug, claim your prize here.">Claim Bounty</a>
+	    </span>
+           <?php } ?>
+           </div>
+           <div class="content-box-second-header">
+	     <?php print $category ?>
+	     <span>
+	     Bounty: <span class="bounty">$<?php 
+			  if ($solved) {
+				print "<strike>" . $bounty . "</strike>"; 
+			  } else {
+				print $bounty;
+		          }
 
-								?></font>
-			      </font>
-			    </td>
-			  </tr>
-			<?php if ($solved) { ?>
-			</table>
-			<table border="0" cellpadding="2" cellspacing="0" width="100%">
-			  <tr bgcolor="#ff0000">
-			    <td align="left">
-			      <font color="#000000">
-				<?php print "This bounty has been solved.  The solution is: <a href=\"" . $solution . "\"><u><font color=\"#0000ff\">" . $solution . "</font></u></a>"; ?>
-			      </font>
-			    </td>
-			  </tr>
-			</table>			
-<?php } } ?>
-			<table cellpadding="2" cellspacing="18" border="0"> <tr> <td>
-
+			?>
+		      </span>
+	     </span>
+	   </div>
+	   <?php if($solved) { ?>
+	   <div class="content-box-solved-header">
+	      <?php print "This bounty has been solved.  The solution is: <a href=\"" . $solution . "\">" . $solution . "</a>"; ?>
+	   </div>
+	   <?php } ?>
+        <?php } else { ?> <?php // This runs if it's not a bug ?>
+           <div class="table-header"><?php print $title ?></div></div>
+        <?php } ?>
+      <?php if($solved) {?>
+		<div class="content-box-body-solved">
+	    <?php } else { ?>
+	    	<div class="content-box-body">
+	    <?php } ?>
 <?php
-if ($solved) print "<font color=\"#707070\">";
 }
 
-function box_sec ($sec = "")
+function box_end()
+{
+?>
+      </div>
+    </div>
+<?php }
+
+
+function box_sec($sec = "")
 {
   global $solved;
 
-  if ($solved) print "</font>";
+  if ($solved) print "</span>";
 ?>
-</td></tr>
-<tr><td bgcolor="#a0a0a0" align="left"><font color="<?php if ($solved) print "#c0c0c0"; else print "#ffffff"; ?>"><?php print $sec;
-?></font></td></tr>
-<tr><td>
-<?php
-if ($solved) print "<font color=\"#707070\">";
-} 
 
-function box_end ()
-{
-   global $solved;
-   
-   if ($solved) print "</font>";
-   
-   $solved = 0;
+<?php if($solved) print "<div class=\"headlinebar-solved\">"; else print "<div class=\"headlinebar\">";?> <?php print $sec; ?>
+</div>
 
-?>
-			      </td></tr></table>
-		      </td> </tr>
-		  </table>
-		</td> </tr>
-	    </table> <br>
 <?php
-} 
+if ($solved) print "<span class=\"solved-body\">";
+}
 
 function bonsai ($dirname ="UNKNOWN")
 {
@@ -182,7 +159,7 @@ function difficultycolor ($difficulty)
         return "#f80000";
 }
 
-function write_page_header ($name, $style = "style.css")
+function write_page_header ($name)
 {
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -190,16 +167,59 @@ function write_page_header ($name, $style = "style.css")
 <head>
     <script src="dhtml-table.js"></script>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" media="screen" href="styles.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://www.gnome.org/default.css">
+    <link rel="icon" type="image/png" href="http://www.gnome.org/img/logo/foot-16.png">
     <title><?php print $name; ?></title>
-    <LINK REL="stylesheet" HREF="<?php print $style; ?>" TYPE="text/css">
 </head>
 
-<body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()">
+<body onLoad="defaultSort()"><div id="body">
 <center>
-<b><font size="+2"><?php print $name; ?></font></b><br>
-<a href="index.html#categories">[Main Page]</a><br><br>
+<h1><?php print $name; ?></h1>
+<div class="navigation"><a href="index.html#categories">[Main Page]</a></div>
 </center>
 <?php 
+}
+
+function write_page_footer ()
+{
+?>
+</div>
+
+<div id="sidebar">
+<p class="section">More Information</p>
+<ul>
+<li><a href="index.html">Bounties Main Page</a><li>
+<li><a href="rules.html">Contest Rules</a></li>
+<li><a href="hints.html">Helpful Hints</a></li>
+<li><a href="discuss.html">Bounties Discussion</a></li>
+<li><a href="Winners.html">Claimed Bounties</a></li>
+</ul>
+</div>
+
+<div id="hdr">
+<div id="logo"><a href="http://www.gnome.org/"><img src="http://www.gnome.org/img/spacer" alt="Home"></a></div>
+<div id="banner"><img src="http://www.gnome.org/img/spacer" alt=""></div>
+<p class="none"></p>
+<div id="hdrNav">
+<a href="http://www.gnome.org/about/">About GNOME</a> &middot;
+<a href="http://www.gnome.org/start/2.4/">Download</a> &middot;
+<a href="http://www.gnome.org/">Users</a> &middot;
+<a href="http://developer.gnome.org/">Developers</a> &middot;
+<a href="http://foundation.gnome.org/">Foundation</a> &middot;
+<a href="http://www.gnome.org/contact/">Contact</a>
+</div>
+</div>
+
+<br>
+<br>
+<center>
+<i>These pages were <a href="build.cs">autogenerated</a> using <a href="http://www.go-mono.com/">Mono</a>.</i>
+</center>
+</body>
+</html>
+
+<?php
 }
 
 ?>

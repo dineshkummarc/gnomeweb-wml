@@ -1,3 +1,29 @@
+</div>
+
+<div id="sidebar">
+<p class="section">More Information</p>
+<ul>
+<li><a href="rules.html">Contest Rules</a></li>
+<li><a href="hints.html">Helpful Hints</a></li>
+<li><a href="discuss.html">Bounties Discussion</a></li>
+<li><a href="Winners.html">Claimed Bounties</a></li>
+</ul>
+</div>
+
+<div id="hdr">
+<div id="logo"><a href="http://www.gnome.org/"><img src="http://www.gnome.org/img/spacer" alt="Home"></a></div>
+<div id="banner"><img src="http://www.gnome.org/img/spacer" alt=""></div>
+<p class="none"></p>
+<div id="hdrNav">
+<a href="http://www.gnome.org/about/">About GNOME</a> &middot;
+<a href="http://www.gnome.org/start/2.4/">Download</a> &middot;
+<a href="http://www.gnome.org/">Users</a> &middot;
+<a href="http://developer.gnome.org/">Developers</a> &middot;
+<a href="http://foundation.gnome.org/">Foundation</a> &middot;
+<a href="http://www.gnome.org/contact/">Contact</a>
+</div>
+</div>
+
 <br>
 <br>
 <center>

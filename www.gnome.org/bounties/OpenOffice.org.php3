@@ -84,7 +84,7 @@ The functions should behave more correctly, preferably as well as
 gnumeric. There should also be a spreadsheet containing these corner
 cases for future smoke regression testing.
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

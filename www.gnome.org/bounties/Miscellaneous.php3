@@ -180,7 +180,7 @@ href="http://freedesktop.org/Standards/icon-theme-spec/0.7/ar01s05.html">icon
 lookup section</a> may be handy.</p>
 
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

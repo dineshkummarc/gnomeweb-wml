@@ -33,6 +33,8 @@ Thank you for your submission.
 
 <?php box_end (); ?>
 
+<?php write_page_footer (); ?>
+
 </body>
 </html>
 

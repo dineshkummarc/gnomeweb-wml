@@ -7,6 +7,11 @@ include ("./util.php");
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <link rel="stylesheet" media="screen" href="styles.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="http://www.gnome.org/default.css">
+    <link rel="icon" type="image/png" href="http://www.gnome.org/img/logo/foot-16.png">
+    <meta name="cvsdate" content="$Date$">
+
     <script src="dhtml-table.js"></script>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Desktop Integration Bounty Hunt</title>
@@ -23,7 +28,7 @@ function defaultSort ()
 -->
 </script>
 
-<body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()">
+<body bgcolor="#ffffff" text="#000000" onLoad="defaultSort()"><div id="body">
 
 <p>
 <center>
@@ -32,7 +37,7 @@ function defaultSort ()
 
 <?php box_start ("Summary"); ?>
 
-Welcome to the first-ever open source desktop bounty hunt!  <p>
+Welcome to Round Two of the first-ever open source desktop bounty hunt!  <p>
 
 The goal of this contest is to help improve the level of integration
 between some of the core components of the Linux desktop.
@@ -60,110 +65,6 @@ bounty.
 
 <?php box_end (); ?>
 
-<?php box_start ("Contest Rules"); ?>
-
-<ol>
-
-<li>All submissions must be open source, without any known
-intellectual property encumbrances that might stop the submission from
-being distributed as free software.</li><br>
-
-<li>Patch acceptance by module maintainers into the main development
-branch of the affected modules is a prerequisite for bounty payment.
-For example, for <a
-href="http://www.gnome.org/projects/evolution">Evolution</a>, this
-means that your patch must be reviewed (through <a
-href="">evolution-patches</a>), accepted and checked into the 2.0
-development branch before you qualify to receive a bounty.</li><br>
-
-<li>Eligible entries must be submitted and accepted by all the
-applicable module maintainers before the <a
-href="http://www.gnome.org/start/2.5/#UI_Freeze">GNOME 2.6 UI
-freeze</a>, scheduled for January 12th, 2004.</li><br>
-
-<li>Your patch has to work, and it has to work <i>nicely</i>. <p> "I
-just got it working," or "it works most of the time," or "it works but
-the UI is just a placeholder," or "what &mdash; I have to add UI?"
-don't cut it.  (Some of the bounties below include UI mockups, but
-these may not necessarily be the best possible solutions.)
-<p> See rule #5 below for further incentive to do a
-good job.</li><br>
-
-<li>At the top of each bounty item, in the little header, there's a
-link to a bug in bugzilla.gnome.org.  If you intend to work on a
-bounty, please add a comment to this bug registering your intent to
-work on it.  That way, if multiple people want to work on the same
-task, they can more easily find each other and collaborate.  Please do
-not close this bug; it will be marked <tt>FIXED</tt> by the contest
-organizers when the prize is claimed.</li><br>
-
-<li>In the case of multiple submissions for the same bounty, the
-judging panel will do its best to choose the highest-quality
-submission and award a bounty to the submitter responsible for
-it.</li><br>
-
-<li>Submissions by a group are not allowed.  If you want to work on
-these tasks as a team, appoint one person you trust to be the official
-submitter, and he or she can divide the bounty up after it is
-awarded.</li><br>
-
-<li>Novell employees in the Ximian division are not eligible to
-participate.</li><br>
-
-<li>And, sorry to have to do it, but the catch-all: The awarding of
-bounties is at the sole discretion of the judging panel, and we may
-refuse to award a bounty to anyone for any reason at any time.  <p>
-But we're good people, so as long as you play nice, we will too.</li>
-
-<li><b>Updated December 8, 2003</b>: You may elect to not collect your
-bounty winnings.  The unclaimed money will go to the "Pay it Forward"
-program and will be used to fund more desktop bounties.</li>
-
-</ol>
-
-<?php box_end (); ?>
-
-<?php box_start ("Helpful Hints"); ?>
-
-<p>Before you begin, visit the web pages of the modules you need to
-modify and do your best to learn how they work on your own.  Good
-hackers are good learners; if you're not familiar with the way the
-code you're hacking works, read through any available documentation,
-check out the mailing list archives, and browse the code.  Do this
-<i>before</i> you start asking questions of the individual developers.
-This contest is going to attract a lot of attention and we don't want
-to overrun the hackers with newbie questions.</p>
-
-<p>Once you've done this, go ahead and check with developers to learn
-about their individual patch acceptance policies. In the case of
-Evolution, that means reading the <a
-href="http://developer.ximian.com/projects/evolution/contributing.html">developer
-contributions page</a> and <a
-href="http://developer.ximian.com/projects/evolution/patch_guidelines.html">patch
-guidelines</a>.  </p> <p> To build / hack on OpenOffice.org, see <a
-href="http://ooo.ximian.com/"> ooo.ximian.com</a> for instructions on
-getting started, patch generation / submission and IRC in the
-hackers-guide.  </p>
-
-<p> Some of the projects in this contest require a lot of work in
-multiple modules, and may be difficult for one person to complete.
-You might want to hang out on the IRC channels for the various
-affected projects and find other people to team up with for some of
-the particularly arduous bounties.  Working as a team can offer you a
-big advantage.  Then, appoint one person to apply for and collect the
-bounty. It is important that it is only one person- we will not deal
-with multiple people and the responsibility of dividing up a bounty.
-That person can distribute the prize to everyone else on your team, as
-you see fit.  </p>
-
-<p>There will be an IRC channel on <b>irc.gimp.org</b> for the bounty
-hunt; you can hang out with us there on <b>#bounties</b>.  This will
-be a good place to ask questions about the contest and to find other
-people to work with.  For specific technical questions about a given
-module, you should use that module's mailing lists and IRC
-channels.</p>
-
-<?php box_end (); ?>
 
 <a name="categories">
 <?php box_start ("Bounty Categories"); ?>
@@ -218,21 +119,14 @@ channels.</p>
 <a name="table">
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528", ""); ?>
-<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", ""); ?>
 <?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", ""); ?>
 <?php taskrow ("&quot;Me&quot;", "Addressbook", "300", "127517", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
-<?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
 <?php taskrow ("Mailing list actions", "Mailer", "500", "127518", ""); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
-<?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
@@ -248,21 +142,43 @@ channels.</p>
 <?php taskrow ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555", ""); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", ""); ?>
 <?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", ""); ?>
-<?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
 <?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
-<?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
-<?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
+</div>
+
+<div id="sidebar">
+<p class="section">More Information</p>
+<ul>
+<li><a href="rules.html">Contest Rules</a></li>
+<li><a href="hints.html">Helpful Hints</a></li>
+<li><a href="discuss.html">Bounties Discussion</a></li>
+<li><a href="Winners.html">Claimed Bounties</a></li>
+</ul>
+</div>
+
+<div id="hdr">
+<div id="logo"><a href="http://www.gnome.org/"><img src="http://www.gnome.org/img/spacer" alt="Home"></a></div>
+<div id="banner"><img src="http://www.gnome.org/img/spacer" alt=""></div>
+<p class="none"></p>
+<div id="hdrNav">
+<a href="http://www.gnome.org/about/">About GNOME</a> &middot;
+<a href="http://www.gnome.org/start/2.4/">Download</a> &middot;
+<a href="http://www.gnome.org/">Users</a> &middot;
+<a href="http://developer.gnome.org/">Developers</a> &middot;
+<a href="http://foundation.gnome.org/">Foundation</a> &middot;
+<a href="http://www.gnome.org/contact/">Contact</a>
+</div>
+</div>
+
 <br>
 <br>
 <center>

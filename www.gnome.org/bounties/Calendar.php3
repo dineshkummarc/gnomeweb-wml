@@ -7,11 +7,8 @@ include ("./util.php");
 <?php write_page_header ("Calendar Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("National, religious, event calendars", "hidden", "15", "127528", ""); ?>
-<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Weather calendar backend", "hidden", "750", "127537", ""); ?>
 <?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
-<?php taskrow ("Publish free/busy information", "hidden", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "hidden", "300", "127541", ""); ?>
 <?php taskrow ("Calendar attachments", "hidden", "750", "127543", ""); ?>
 <?php write_table_footer (); ?>
@@ -74,74 +71,6 @@ must provide an unencumbered, freely-licensed (X11) iCalendar file.
 
 The bounty for this task is per-calendar.  We will pay bounties for up
 to 30 calendars.</p>
-
-<?php box_end (); ?>
-<?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
-
-<p>When you click on the clock on the GNOME panel, a little calendar
-descends.  A proper integration patch for this calendar would do the
-following:</p>
-<img border=0 align=right src="panel-calendar.png" alt="">
-
-<ul> 
-<li>Highlight in bold the days which have appointments.</li><br>
-<li>Below the calendar, show a small summary of the appointments on the selected day.</li><br>
-<li>Double clicking on a day opens the Evolution calendar to that day.</li><br>
-<li>Aggregate multiple calendars, with a configuration dialog to select which calendars to aggregate.</li><br>
-<li>Redo the QuickAlarm frame <a href="http://patches.ximian.com/download.cgi?object=gnome-panel-clock.patch-3">patch</a> to take up less space.</li>
-</ul>
-
-<?php box_sec ("How"); ?>
-
-There is code in gnome-cal.c and tag-calendar.c which is in <? bonsai
-("evolution/calendar/gui/"); ?> to tag the mini calendar in Evolution,
-which should serve as a useful starting point.  Essentially you will
-need to create an ECalView (see <?php bonsai
-("evolution-data-server/calendar/libecal"); ?>, and monitor it to
-track the changes.  You can create a different ECalView for the
-current day to get the list of events for the day and monitor them if
-there are changes.
-
- <?php box_sec ("Affected Modules"); ?>
- 
-The clock applet is part of the <? bonsai ("gnome-panel"); ?> 
-module. You will need to make use of the new calendar APIs in <?
-bonsai ("evolution-data-server/calendar/libecal"); ?>.
-
-<?php box_sec ("Pointers"); ?>
-
-You may find this <a href="clock-calendar.tar.bz2">glade mockup</a> useful.
-
-<?php box_end (); ?>
-<?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-
-
-<p>Evolution's contact editor allows you to annotate a contact with
-the dates of their birthday and anniversary.  However, these dates <a
-href="contact-bday.png"><img border=0 align=right
-src="contact-bday-thumb.png" alt=""></a> don't automatically copy themselves
-into your calendar.  Unless you explicitly add the dates to your
-calendar, you won't see them when you glance through your schedule,
-and an alarm won't fire to warn you of a friend's upcoming
-birthday.</p>
-
-<p>Clearly, this is a travesty.</p>
-
-<p>The right solution is to create a special calendar backend which
-reads birthdays and anniversaries out of the user's addressbook.
-Using Evolution 2.0's calendar aggregation feature, the user can then
-overlay a friend's important life events into the calendar view by
-clicking a single checkbox.</p>
-
-<?php box_sec ("Affected Modules"); ?>
-
-The only module affected will be <? bonsai ("evolution"); ?>.
-
-<?php box_sec ("Pointers"); ?>
-
-Start by joining the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
-Hackers</a> mailing list.
 
 <?php box_end (); ?>
 <?php box_start ("Weather calendar backend", "Calendar", "750", "127537", "127537", ""); ?>
@@ -262,48 +191,6 @@ so that should provide some clues too.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Publish free/busy information", "Calendar", "500", "127539", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
-
-
-<p><?php rfc(2445); ?> describes a method of describing free/busy
-information (VFREEBUSY components).  Evolution currently
-can only publish free/busy information via email attachments.
-</p>
-
-<p> Evolution should support publishing free/busy information to an
-http:// type URL, as discussed in <?php bug(16567); ?>.</p>
-
-<?php box_sec ("How"); ?> <p>
-
-<p>
-There should be a configuration control (see cal-prefs-dialog in <?php
-bonsai ("evolution/calendar/gui/dialogs"); ?> for an example) that
-allows the user to setup the URLs to publish to and which calendars to
-use for creating the free/busy information.  There should be a
-configuration option for the user to detail when they want their
-calendar published, ie "Every Day", and Evolution should endeavor to
-do this.  There should also be a menu option added to the calendar to
-allow the user to publish the information whenever desired.
-</p>
-
-<p>
-  To actually obtain the free/busy information, you simply need to call
-e_cal_get_free_busy in <?php bonsai("evolution-data-server/calendar/libecal"); ?>, 
-see calendar-commands.c in  <?php bonsai ("evolution/calendar/gui/"); ?> for an example of this.
-
-<?php box_sec ("Pointers"); ?>
-
-<p>
-You should subscribe to the <a
-href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
-evolution-hackers</a> mailing list, and discuss any technical issues
-there.  JP Rosevear &lt;<a
-href="mailto:jpr@ximian.com">jpr@ximian.com</a>&gt; and Hans Petter Jansson 
-&lt;<a href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
-will be the primary contacts on the list for the Calendar.
-</p>
-
-<?php box_end (); ?>
 <?php box_start ("Default free/busy URI", "Calendar", "300", "127541", "127541", ""); ?>
 
 
@@ -408,7 +295,7 @@ will be the primary contacts on the list for the Calendar.
 </p>
 
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

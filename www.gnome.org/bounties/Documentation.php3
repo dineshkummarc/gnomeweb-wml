@@ -121,7 +121,7 @@ page</a>.  Before you begin any work on the help browser, be sure to
 maintainers.</a> The primary contact for this task will be <a href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
 
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>

@@ -8,7 +8,6 @@ include ("./util.php");
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "hidden", "2000", "127546", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "hidden", "400", "127547", ""); ?>
-<?php taskrow ("Gaim drag and drop of links", "hidden", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "hidden", "100", "127549", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Gaim/Evolution presence integration", "IM", "2000", "127546", "127546", ""); ?>
@@ -178,14 +177,6 @@ contents of the <tt>.desktop</tt> file are probably not what the user
 wants to send, so you'll have to figure out how to handle these.</p>
 
 <?php box_end (); ?>
-<?php box_start ("Gaim drag and drop of links", "IM", "250", "127548", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
-
-
-<p>This one is pretty straightforward: Make it so that dragging a URL
-from the browser or the desktop onto a Gaim conversation window copies
-the URL into the text of the conversation.</p>
-
-<?php box_end (); ?>
 <?php box_start ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", "127549", ""); ?>
 
 
@@ -196,7 +187,7 @@ buddy.  Your job is pretty easy: set the default protocol handler for
 <tt>aim:</tt> to be <tt>gaim-remote</tt>.
 
 <?php box_end (); ?>
-
+<?php write_page_footer (); ?>
 
 </center>
 </body>
