@@ -5,7 +5,6 @@ SUBDIRS= \
 urlpath=/projects/epiphany/documentation
 
 page_SCRIPTS= \
-	faq.html \
 	index.html \
 	manifesto.html \
 	ephy2moz.xsl
