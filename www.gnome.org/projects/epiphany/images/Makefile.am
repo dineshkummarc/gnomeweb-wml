@@ -47,6 +47,8 @@ page_SCRIPTS=		\
 	wheat.png	\
 	smartbookmarks.png	\
 	extensions-small.png	\
-	extensions.png
+	extensions.png	\
+	ext-errorviewer-180.png	\
+	ext-errorviewer.png
 
 include $(top_srcdir)/rules.common
