@@ -26,6 +26,7 @@ page_SCRIPTS = \
 	ney_execdir.html \
 	redflagjoins.html \
 	redhat.html \
-	sunjoins.html
+	sunjoins.html \
+	summit2003.html
 
 include $(top_srcdir)/rules.common
