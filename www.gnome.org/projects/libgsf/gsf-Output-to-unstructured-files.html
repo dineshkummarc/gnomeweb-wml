@@ -1,0 +1,163 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Output to unstructured files</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="io.html" title="Basic Input/Output"><link rel="previous" href="gsf-Input-from-unstructured-files.html" title="Input from unstructured files"><link rel="next" href="sources.html" title="Stream Sources"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-Input-from-unstructured-files.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="io.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="sources.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-Output-to-unstructured-files"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">Output to unstructured files</span></h2><p>Output to unstructured files &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfOutput"></a><pre class="synopsis">
+
+
+
+struct      <a href="gsf-Output-to-unstructured-files.html#GsfOutput-struct">GsfOutput</a>;
+<a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>* <a href="gsf-Output-to-unstructured-files.html#gsf-output-container">gsf_output_container</a>            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> const *output);
+<a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   <a href="gsf-Output-to-unstructured-files.html#gsf-output-size">gsf_output_size</a>                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-close">gsf_output_close</a>                (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);
+<a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   <a href="gsf-Output-to-unstructured-files.html#gsf-output-tell">gsf_output_tell</a>                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-seek">gsf_output_seek</a>                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset,
+                                             GSeekType whence);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-write">gsf_output_write</a>                (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             size_t num_bytes,
+                                             guint8 const *data);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-puts">gsf_output_puts</a>                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *line);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-printf">gsf_output_printf</a>               (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *format,
+                                             ...);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-is-closed">gsf_output_is_closed</a>            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> const *output);
+GQuark      <a href="gsf-Output-to-unstructured-files.html#gsf-output-error-id">gsf_output_error_id</a>             (void);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-set-error">gsf_output_set_error</a>            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             gint code,
+                                             char const *format,
+                                             ...);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-wrap">gsf_output_wrap</a>                 (GObject *wrapper,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *wrapee);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-unwrap">gsf_output_unwrap</a>               (GObject *wrapper,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *wrapee);
+
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-set-name">gsf_output_set_name</a>             (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *name);
+gboolean    <a href="gsf-Output-to-unstructured-files.html#gsf-output-set-container">gsf_output_set_container</a>        (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             <a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *container);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2510351"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GObject
+   +----GsfOutput
+         +----<a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
+         +----<a href="gsf-Compression.html#GsfOutputBzip">GsfOutputBzip</a>
+         +----<a href="gsf-GIOChannel.html#GsfOutputIOChannel">GsfOutputIOChannel</a>
+         +----<a href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a>
+         +----<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutputStdio">GsfOutputStdio</a>
+</pre></div><div class="refsect1" lang="en"><a name="id2510412"></a><h2>Properties</h2><pre class="synopsis">
+
+  "<a href="gsf-Output-to-unstructured-files.html#GsfOutput--is-closed">is-closed</a>"            gpointer              : Read
+  "<a href="gsf-Output-to-unstructured-files.html#GsfOutput--name">name</a>"                 gpointer              : Read
+  "<a href="gsf-Output-to-unstructured-files.html#GsfOutput--position">position</a>"             gpointer              : Read
+  "<a href="gsf-Output-to-unstructured-files.html#GsfOutput--size">size</a>"                 gpointer              : Read
+</pre></div><div class="refsect1" lang="en"><a name="id2510490"></a><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><a name="id2510500"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2510505"></a><h3><a name="GsfOutput-struct"></a>struct GsfOutput</h3><a class="indexterm" name="id2510516"></a><pre class="programlisting">struct GsfOutput;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2510531"></a><h3><a name="gsf-output-container"></a>gsf_output_container ()</h3><a class="indexterm" name="id2510542"></a><pre class="programlisting"><a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>* gsf_output_container            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> const *output);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>, but does not add a reference to <i class="parameter"><tt>output</tt></i>'s container.
+Potentially NULL
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2510609"></a><h3><a name="gsf-output-size"></a>gsf_output_size ()</h3><a class="indexterm" name="id2510620"></a><pre class="programlisting"><a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   gsf_output_size                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the size of the output, or -1 if it does not have a size.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2510680"></a><h3><a name="gsf-output-close"></a>gsf_output_close ()</h3><a class="indexterm" name="id2510690"></a><pre class="programlisting">gboolean    gsf_output_close                (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);</pre><p>
+Close a stream.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>FALSE on error
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2510750"></a><h3><a name="gsf-output-tell"></a>gsf_output_tell ()</h3><a class="indexterm" name="id2510760"></a><pre class="programlisting"><a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   gsf_output_tell                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the current position in the file
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2510820"></a><h3><a name="gsf-output-seek"></a>gsf_output_seek ()</h3><a class="indexterm" name="id2510831"></a><pre class="programlisting">gboolean    gsf_output_seek                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset,
+                                             GSeekType whence);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>offset</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>whence</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>FALSE on error.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2510932"></a><h3><a name="gsf-output-write"></a>gsf_output_write ()</h3><a class="indexterm" name="id2510943"></a><pre class="programlisting">gboolean    gsf_output_write                (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             size_t num_bytes,
+                                             guint8 const *data);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>num_bytes</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>FALSE on error.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511045"></a><h3><a name="gsf-output-puts"></a>gsf_output_puts ()</h3><a class="indexterm" name="id2511055"></a><pre class="programlisting">gboolean    gsf_output_puts                 (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *line);</pre><p>
+Like fputs, this assumes that the line already ends with a newline</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td> A <a href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>line</tt></i> :</span></td><td> <tt class="literal">null</tt> terminated string to write
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if successful, FALSE if not
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511152"></a><h3><a name="gsf-output-printf"></a>gsf_output_printf ()</h3><a class="indexterm" name="id2511163"></a><pre class="programlisting">gboolean    gsf_output_printf               (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *format,
+                                             ...);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td> A <a href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>format</tt></i> :</span></td><td> The printf-style format string
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>...</tt></i> :</span></td><td> the arguments for <i class="parameter"><tt>format</tt></i>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if successful, FALSE if not
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511272"></a><h3><a name="gsf-output-is-closed"></a>gsf_output_is_closed ()</h3><a class="indexterm" name="id2511283"></a><pre class="programlisting">gboolean    gsf_output_is_closed            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> const *output);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE if <i class="parameter"><tt>output</tt></i> has already been closed.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511348"></a><h3><a name="gsf-output-error-id"></a>gsf_output_error_id ()</h3><a class="indexterm" name="id2511360"></a><pre class="programlisting">GQuark      gsf_output_error_id             (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511395"></a><h3><a name="gsf-output-set-error"></a>gsf_output_set_error ()</h3><a class="indexterm" name="id2511406"></a><pre class="programlisting">gboolean    gsf_output_set_error            (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             gint code,
+                                             char const *format,
+                                             ...);</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>This is a utility routine that should only be used by derived
+outputs.</div><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>code</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>format</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>...</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>Always returns FALSE to facilitate its use.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511526"></a><h3><a name="gsf-output-wrap"></a>gsf_output_wrap ()</h3><a class="indexterm" name="id2511536"></a><pre class="programlisting">gboolean    gsf_output_wrap                 (GObject *wrapper,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *wrapee);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>wrapper</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>wrapee</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE if the wrapping succeeded.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511617"></a><h3><a name="gsf-output-unwrap"></a>gsf_output_unwrap ()</h3><a class="indexterm" name="id2511628"></a><pre class="programlisting">gboolean    gsf_output_unwrap               (GObject *wrapper,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *wrapee);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>wrapper</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>wrapee</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE if the unwrapping succeeded.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511708"></a><h3><a name="gsf-output-set-name"></a>gsf_output_set_name ()</h3><a class="indexterm" name="id2511720"></a><pre class="programlisting">gboolean    gsf_output_set_name             (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             char const *name);</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>This is a utility routine that should only be used by derived
+outputs.</div><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the assignment was ok.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2511804"></a><h3><a name="gsf-output-set-container"></a>gsf_output_set_container ()</h3><a class="indexterm" name="id2511815"></a><pre class="programlisting">gboolean    gsf_output_set_container        (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output,
+                                             <a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *container);</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>This is a utility routine that should only be used by derived
+outputs.</div><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>container</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the assignment was ok.
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2511900"></a><h2>Properties</h2><div class="refsect2" lang="en"><a name="id2511906"></a><h3><a name="GsfOutput--is-closed"></a>The "<tt class="literal">is-closed</tt>" property</h3><pre class="programlisting">  "is-closed"            gpointer              : Read</pre><p>Whether the Output is Closed.</p></div><hr><div class="refsect2" lang="en"><a name="id2511940"></a><h3><a name="GsfOutput--name"></a>The "<tt class="literal">name</tt>" property</h3><pre class="programlisting">  "name"                 gpointer              : Read</pre><p>The Output's Name.</p></div><hr><div class="refsect2" lang="en"><a name="id2511973"></a><h3><a name="GsfOutput--position"></a>The "<tt class="literal">position</tt>" property</h3><pre class="programlisting">  "position"             gpointer              : Read</pre><p>The Output's Current Position.</p></div><hr><div class="refsect2" lang="en"><a name="id2512006"></a><h3><a name="GsfOutput--size"></a>The "<tt class="literal">size</tt>" property</h3><pre class="programlisting">  "size"                 gpointer              : Read</pre><p>The Output's Size.</p></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-Input-from-unstructured-files.html"><b>&lt;&lt; Input from unstructured files</b></a></td><td align="right"><a accesskey="n" href="sources.html"><b>Stream Sources &gt;&gt;</b></a></td></tr></table></body></html>

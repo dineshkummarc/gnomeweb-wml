@@ -1,0 +1,638 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>utils</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="misc.html" title="Miscellaneous"><link rel="previous" href="misc.html" title="Miscellaneous"><link rel="next" href="ix01.html" title="Index"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="misc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="misc.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="ix01.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-utils"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">utils</span></h2><p>utils &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+
+void        <a href="gsf-utils.html#gsf-init">gsf_init</a>                        (void);
+void        <a href="gsf-utils.html#gsf-shutdown">gsf_shutdown</a>                    (void);
+extern      int <a href="gsf-utils.html#libgsf-major-version">libgsf_major_version</a>;
+extern      int <a href="gsf-utils.html#libgsf-minor-version">libgsf_minor_version</a>;
+extern      int <a href="gsf-utils.html#libgsf-micro-version">libgsf_micro_version</a>;
+
+#define     <a href="gsf-utils.html#GSF-CLASS-CAPS">GSF_CLASS</a>                       (name, prefix, class_init, instance_init, parent)
+#define     <a href="gsf-utils.html#GSF-CLASS-FULL-CAPS">GSF_CLASS_FULL</a>                  (name, prefix, class_init, instance_init, parent_type, \
+		       abstract, interface_decl)
+#define     <a href="gsf-utils.html#GSF-CLASS-ABSTRACT-CAPS">GSF_CLASS_ABSTRACT</a>              (name, prefix, class_init, instance_init, parent)
+#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-CAPS">GSF_DYNAMIC_CLASS</a>               (name, prefix, class_init, instance_init, parent, plugin, type)
+#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-FULL-CAPS">GSF_DYNAMIC_CLASS_FULL</a>          (name, prefix, class_init, instance_init, parent_type, \
+			       abstract, interface_decl, plugin, type)
+#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-ABSTRACT-CAPS">GSF_DYNAMIC_CLASS_ABSTRACT</a>      (name, prefix, class_init, instance_init, parent, plugin, type)
+#define     <a href="gsf-utils.html#GSF-INTERFACE-CAPS">GSF_INTERFACE</a>                   (init_func, iface_type)
+#define     <a href="gsf-utils.html#GSF-INTERFACE-FULL-CAPS">GSF_INTERFACE_FULL</a>              (type, init_func, iface_type)
+
+void        <a href="gsf-utils.html#gsf-mem-dump">gsf_mem_dump</a>                    (guint8 const *ptr,
+                                             size_t len);
+void        <a href="gsf-utils.html#gsf-input-dump">gsf_input_dump</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             gboolean dump_as_hex);
+
+#define     <a href="gsf-utils.html#GSF-OFF-T-FORMAT-CAPS">GSF_OFF_T_FORMAT</a>
+typedef     <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>;
+char*       <a href="gsf-utils.html#gsf-filename-to-utf8">gsf_filename_to_utf8</a>            (const char *filename,
+                                             gboolean quoted);
+void        <a href="gsf-utils.html#gsf-iconv-close">gsf_iconv_close</a>                 (GIConv handle);
+
+guint8*     <a href="gsf-utils.html#gsf-base64-encode-simple">gsf_base64_encode_simple</a>        (guint8 const *data,
+                                             size_t len);
+size_t      <a href="gsf-utils.html#gsf-base64-encode-close">gsf_base64_encode_close</a>         (guint8 const *in,
+                                             size_t inlen,
+                                             gboolean break_lines,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned int *save);
+size_t      <a href="gsf-utils.html#gsf-base64-encode-step">gsf_base64_encode_step</a>          (guint8 const *in,
+                                             size_t len,
+                                             gboolean break_lines,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned int *save);
+size_t      <a href="gsf-utils.html#gsf-base64-decode-simple">gsf_base64_decode_simple</a>        (guint8 *data,
+                                             size_t len);
+size_t      <a href="gsf-utils.html#gsf-base64-decode-step">gsf_base64_decode_step</a>          (guint8 const *in,
+                                             size_t len,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned *save);
+#define     <a href="gsf-utils.html#GSF-LE-GET-GINT8-CAPS">GSF_LE_GET_GINT8</a>                (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT64-CAPS">GSF_LE_GET_GUINT64</a>              (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GINT16-CAPS">GSF_LE_GET_GINT16</a>               (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT8-CAPS">GSF_LE_GET_GUINT8</a>               (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GINT32-CAPS">GSF_LE_GET_GINT32</a>               (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT16-CAPS">GSF_LE_GET_GUINT16</a>              (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT32-CAPS">GSF_LE_GET_GUINT32</a>              (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-FLOAT-CAPS">GSF_LE_GET_FLOAT</a>                (p)
+#define     <a href="gsf-utils.html#GSF-LE-GET-DOUBLE-CAPS">GSF_LE_GET_DOUBLE</a>               (p)
+guint64     <a href="gsf-utils.html#gsf-le-get-guint64">gsf_le_get_guint64</a>              (void const *p);
+float       <a href="gsf-utils.html#gsf-le-get-float">gsf_le_get_float</a>                (void const *p);
+double      <a href="gsf-utils.html#gsf-le-get-double">gsf_le_get_double</a>               (void const *p);
+#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT8-CAPS">GSF_LE_SET_GUINT8</a>               (p, dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT16-CAPS">GSF_LE_SET_GUINT16</a>              (p, dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT32-CAPS">GSF_LE_SET_GUINT32</a>              (p, dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-GINT8-CAPS">GSF_LE_SET_GINT8</a>                (p,dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-GINT16-CAPS">GSF_LE_SET_GINT16</a>               (p,dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-GINT32-CAPS">GSF_LE_SET_GINT32</a>               (p,dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-FLOAT-CAPS">GSF_LE_SET_FLOAT</a>                (p,dat)
+#define     <a href="gsf-utils.html#GSF-LE-SET-DOUBLE-CAPS">GSF_LE_SET_DOUBLE</a>               (p,dat)
+void        <a href="gsf-utils.html#gsf-le-set-float">gsf_le_set_float</a>                (void *p,
+                                             float f);
+void        <a href="gsf-utils.html#gsf-le-set-double">gsf_le_set_double</a>               (void *p,
+                                             double d);
+
+<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-copy">gsf_timestamp_copy</a>            (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
+void        <a href="gsf-utils.html#gsf-timestamp-free">gsf_timestamp_free</a>              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);
+<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-new-now">gsf_timestamp_new_now</a>         (void);
+GType       <a href="gsf-utils.html#gsf-timestamp-get-type">gsf_timestamp_get_type</a>          (void);
+char*       <a href="gsf-utils.html#gsf-timestamp-as-string">gsf_timestamp_as_string</a>         (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
+int         <a href="gsf-utils.html#gsf-timestamp-parse">gsf_timestamp_parse</a>             (char const *spec,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);
+guint       <a href="gsf-utils.html#gsf-timestamp-hash">gsf_timestamp_hash</a>              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
+gboolean    <a href="gsf-utils.html#gsf-timestamp-equal">gsf_timestamp_equal</a>             (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *a,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *b);
+#define     <a href="gsf-utils.html#GSF-TIMESTAMP-TYPE-CAPS">GSF_TIMESTAMP_TYPE</a>
+struct      <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>;
+<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-new">gsf_timestamp_new</a>             (GDate const *date,
+                                             glong seconds,
+                                             char const *tz);
+void        <a href="gsf-utils.html#g-value-set-timestamp">g_value_set_timestamp</a>           (GValue *value,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
+</pre></div><div class="refsect1" lang="en"><a name="id2553199"></a><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><a name="id2553209"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2553215"></a><h3><a name="gsf-init"></a>gsf_init ()</h3><a class="indexterm" name="id2553225"></a><pre class="programlisting">void        gsf_init                        (void);</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2553246"></a><h3><a name="gsf-shutdown"></a>gsf_shutdown ()</h3><a class="indexterm" name="id2553257"></a><pre class="programlisting">void        gsf_shutdown                    (void);</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2553279"></a><h3><a name="libgsf-major-version"></a>libgsf_major_version</h3><a class="indexterm" name="id2553290"></a><pre class="programlisting">extern int libgsf_major_version;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2553305"></a><h3><a name="libgsf-minor-version"></a>libgsf_minor_version</h3><a class="indexterm" name="id2553317"></a><pre class="programlisting">extern int libgsf_minor_version;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2553332"></a><h3><a name="libgsf-micro-version"></a>libgsf_micro_version</h3><a class="indexterm" name="id2553343"></a><pre class="programlisting">extern int libgsf_micro_version;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2553359"></a><h3><a name="GSF-CLASS-CAPS"></a>GSF_CLASS()</h3><a class="indexterm" name="id2553370"></a><pre class="programlisting">#define     GSF_CLASS(name, prefix, class_init, instance_init, parent)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553457"></a><h3><a name="GSF-CLASS-FULL-CAPS"></a>GSF_CLASS_FULL()</h3><a class="indexterm" name="id2553468"></a><pre class="programlisting">#define     GSF_CLASS_FULL(name, prefix, class_init, instance_init, parent_type, \
+		       abstract, interface_decl)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent_type</tt></i> :</span></td><td>
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract:
+@\
+		       abstract: 
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>interface_decl</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553584"></a><h3><a name="GSF-CLASS-ABSTRACT-CAPS"></a>GSF_CLASS_ABSTRACT()</h3><a class="indexterm" name="id2553595"></a><pre class="programlisting">#define     GSF_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553683"></a><h3><a name="GSF-DYNAMIC-CLASS-CAPS"></a>GSF_DYNAMIC_CLASS()</h3><a class="indexterm" name="id2553695"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS(name, prefix, class_init, instance_init, parent, plugin, type)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553811"></a><h3><a name="GSF-DYNAMIC-CLASS-FULL-CAPS"></a>GSF_DYNAMIC_CLASS_FULL()</h3><a class="indexterm" name="id2553822"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS_FULL(name, prefix, class_init, instance_init, parent_type, \
+			       abstract, interface_decl, plugin, type)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent_type</tt></i> :</span></td><td>
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract:
+@\
+			       abstract: 
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>interface_decl</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553965"></a><h3><a name="GSF-DYNAMIC-CLASS-ABSTRACT-CAPS"></a>GSF_DYNAMIC_CLASS_ABSTRACT()</h3><a class="indexterm" name="id2553977"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent, plugin, type)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554093"></a><h3><a name="GSF-INTERFACE-CAPS"></a>GSF_INTERFACE()</h3><a class="indexterm" name="id2554104"></a><pre class="programlisting">#define     GSF_INTERFACE(init_func, iface_type)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>init_func</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>iface_type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554151"></a><h3><a name="GSF-INTERFACE-FULL-CAPS"></a>GSF_INTERFACE_FULL()</h3><a class="indexterm" name="id2554162"></a><pre class="programlisting">#define     GSF_INTERFACE_FULL(type, init_func, iface_type)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>init_func</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>iface_type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554223"></a><h3><a name="gsf-mem-dump"></a>gsf_mem_dump ()</h3><a class="indexterm" name="id2554234"></a><pre class="programlisting">void        gsf_mem_dump                    (guint8 const *ptr,
+                                             size_t len);</pre><p>
+Dump <i class="parameter"><tt>len</tt></i> bytes from the memory location given by <i class="parameter"><tt>ptr</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ptr</tt></i> :</span></td><td> memory area to be dumped.
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td> how many bytes will be dumped.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554317"></a><h3><a name="gsf-input-dump"></a>gsf_input_dump ()</h3><a class="indexterm" name="id2554328"></a><pre class="programlisting">void        gsf_input_dump                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             gboolean dump_as_hex);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dump_as_hex</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554395"></a><h3><a name="GSF-OFF-T-FORMAT-CAPS"></a>GSF_OFF_T_FORMAT</h3><a class="indexterm" name="id2554407"></a><pre class="programlisting">#define GSF_OFF_T_FORMAT	G_GINT64_FORMAT
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2554423"></a><h3><a name="gsf-off-t"></a>gsf_off_t</h3><a class="indexterm" name="id2554433"></a><pre class="programlisting">typedef gint64 gsf_off_t;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2554448"></a><h3><a name="gsf-filename-to-utf8"></a>gsf_filename_to_utf8 ()</h3><a class="indexterm" name="id2554460"></a><pre class="programlisting">char*       gsf_filename_to_utf8            (const char *filename,
+                                             gboolean quoted);</pre><p>
+A utility wrapper to make sure filenames are valid utf8.
+Caller must g_free the result.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i> :</span></td><td> file name suitable for open(2).
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>quoted</tt></i> :</span></td><td> if TRUE, the resulting utf8 file name will be quoted
+   (unless it is invalid).
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td><i class="parameter"><tt>filename</tt></i> using utf-8 encoding for display
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554549"></a><h3><a name="gsf-iconv-close"></a>gsf_iconv_close ()</h3><a class="indexterm" name="id2554560"></a><pre class="programlisting">void        gsf_iconv_close                 (GIConv handle);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>handle</tt></i> :</span></td><td>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554609"></a><h3><a name="gsf-base64-encode-simple"></a>gsf_base64_encode_simple ()</h3><a class="indexterm" name="id2554621"></a><pre class="programlisting">guint8*     gsf_base64_encode_simple        (guint8 const *data,
+                                             size_t len);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554698"></a><h3><a name="gsf-base64-encode-close"></a>gsf_base64_encode_close ()</h3><a class="indexterm" name="id2554709"></a><pre class="programlisting">size_t      gsf_base64_encode_close         (guint8 const *in,
+                                             size_t inlen,
+                                             gboolean break_lines,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned int *save);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>inlen</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>break_lines</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554870"></a><h3><a name="gsf-base64-encode-step"></a>gsf_base64_encode_step ()</h3><a class="indexterm" name="id2554881"></a><pre class="programlisting">size_t      gsf_base64_encode_step          (guint8 const *in,
+                                             size_t len,
+                                             gboolean break_lines,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned int *save);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>break_lines</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555041"></a><h3><a name="gsf-base64-decode-simple"></a>gsf_base64_decode_simple ()</h3><a class="indexterm" name="id2555052"></a><pre class="programlisting">size_t      gsf_base64_decode_simple        (guint8 *data,
+                                             size_t len);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555129"></a><h3><a name="gsf-base64-decode-step"></a>gsf_base64_decode_step ()</h3><a class="indexterm" name="id2555141"></a><pre class="programlisting">size_t      gsf_base64_decode_step          (guint8 const *in,
+                                             size_t len,
+                                             guint8 *out,
+                                             int *state,
+                                             unsigned *save);</pre><p>
+Decodes a chunk of base64 encoded data</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td> input stream
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td> max length of data to decode
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td> output stream
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td> holds the number of bits that are stored in <i class="parameter"><tt>save</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td> leftover bits that have not yet been decoded
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the number of bytes converted
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555294"></a><h3><a name="GSF-LE-GET-GINT8-CAPS"></a>GSF_LE_GET_GINT8()</h3><a class="indexterm" name="id2555306"></a><pre class="programlisting">#define GSF_LE_GET_GINT8(p) ((gint8)GSF_LE_GET_GUINT8(p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555339"></a><h3><a name="GSF-LE-GET-GUINT64-CAPS"></a>GSF_LE_GET_GUINT64()</h3><a class="indexterm" name="id2555350"></a><pre class="programlisting">#define GSF_LE_GET_GUINT64(p) (gsf_le_get_guint64 (p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555383"></a><h3><a name="GSF-LE-GET-GINT16-CAPS"></a>GSF_LE_GET_GINT16()</h3><a class="indexterm" name="id2555395"></a><pre class="programlisting">#define GSF_LE_GET_GINT16(p) ((gint16)GSF_LE_GET_GUINT16(p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555429"></a><h3><a name="GSF-LE-GET-GUINT8-CAPS"></a>GSF_LE_GET_GUINT8()</h3><a class="indexterm" name="id2555440"></a><pre class="programlisting">#define GSF_LE_GET_GUINT8(p) (*(guint8 const *)(p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555474"></a><h3><a name="GSF-LE-GET-GINT32-CAPS"></a>GSF_LE_GET_GINT32()</h3><a class="indexterm" name="id2555485"></a><pre class="programlisting">#define GSF_LE_GET_GINT32(p) ((gint32)GSF_LE_GET_GUINT32(p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555518"></a><h3><a name="GSF-LE-GET-GUINT16-CAPS"></a>GSF_LE_GET_GUINT16()</h3><a class="indexterm" name="id2555530"></a><pre class="programlisting">#define     GSF_LE_GET_GUINT16(p)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555562"></a><h3><a name="GSF-LE-GET-GUINT32-CAPS"></a>GSF_LE_GET_GUINT32()</h3><a class="indexterm" name="id2555574"></a><pre class="programlisting">#define     GSF_LE_GET_GUINT32(p)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555607"></a><h3><a name="GSF-LE-GET-FLOAT-CAPS"></a>GSF_LE_GET_FLOAT()</h3><a class="indexterm" name="id2555619"></a><pre class="programlisting">#define GSF_LE_GET_FLOAT(p) (gsf_le_get_float (p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555652"></a><h3><a name="GSF-LE-GET-DOUBLE-CAPS"></a>GSF_LE_GET_DOUBLE()</h3><a class="indexterm" name="id2555663"></a><pre class="programlisting">#define GSF_LE_GET_DOUBLE(p) (gsf_le_get_double (p))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555696"></a><h3><a name="gsf-le-get-guint64"></a>gsf_le_get_guint64 ()</h3><a class="indexterm" name="id2555707"></a><pre class="programlisting">guint64     gsf_le_get_guint64              (void const *p);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555762"></a><h3><a name="gsf-le-get-float"></a>gsf_le_get_float ()</h3><a class="indexterm" name="id2555773"></a><pre class="programlisting">float       gsf_le_get_float                (void const *p);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555829"></a><h3><a name="gsf-le-get-double"></a>gsf_le_get_double ()</h3><a class="indexterm" name="id2555840"></a><pre class="programlisting">double      gsf_le_get_double               (void const *p);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555895"></a><h3><a name="GSF-LE-SET-GUINT8-CAPS"></a>GSF_LE_SET_GUINT8()</h3><a class="indexterm" name="id2555907"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT8(p, dat)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555953"></a><h3><a name="GSF-LE-SET-GUINT16-CAPS"></a>GSF_LE_SET_GUINT16()</h3><a class="indexterm" name="id2555964"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT16(p, dat)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556010"></a><h3><a name="GSF-LE-SET-GUINT32-CAPS"></a>GSF_LE_SET_GUINT32()</h3><a class="indexterm" name="id2556021"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT32(p, dat)</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556068"></a><h3><a name="GSF-LE-SET-GINT8-CAPS"></a>GSF_LE_SET_GINT8()</h3><a class="indexterm" name="id2556080"></a><pre class="programlisting">#define GSF_LE_SET_GINT8(p,dat) GSF_LE_SET_GUINT8((p),(dat))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556126"></a><h3><a name="GSF-LE-SET-GINT16-CAPS"></a>GSF_LE_SET_GINT16()</h3><a class="indexterm" name="id2556138"></a><pre class="programlisting">#define GSF_LE_SET_GINT16(p,dat) GSF_LE_SET_GUINT16((p),(dat))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556184"></a><h3><a name="GSF-LE-SET-GINT32-CAPS"></a>GSF_LE_SET_GINT32()</h3><a class="indexterm" name="id2556196"></a><pre class="programlisting">#define GSF_LE_SET_GINT32(p,dat) GSF_LE_SET_GUINT32((p),(dat))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556243"></a><h3><a name="GSF-LE-SET-FLOAT-CAPS"></a>GSF_LE_SET_FLOAT()</h3><a class="indexterm" name="id2556254"></a><pre class="programlisting">#define GSF_LE_SET_FLOAT(p,dat) gsf_le_set_float((p),(dat))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556301"></a><h3><a name="GSF-LE-SET-DOUBLE-CAPS"></a>GSF_LE_SET_DOUBLE()</h3><a class="indexterm" name="id2556312"></a><pre class="programlisting">#define GSF_LE_SET_DOUBLE(p,dat) gsf_le_set_double((p),(dat))
+</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556359"></a><h3><a name="gsf-le-set-float"></a>gsf_le_set_float ()</h3><a class="indexterm" name="id2556369"></a><pre class="programlisting">void        gsf_le_set_float                (void *p,
+                                             float f);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>f</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556436"></a><h3><a name="gsf-le-set-double"></a>gsf_le_set_double ()</h3><a class="indexterm" name="id2556447"></a><pre class="programlisting">void        gsf_le_set_double               (void *p,
+                                             double d);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>d</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556513"></a><h3><a name="gsf-timestamp-copy"></a>gsf_timestamp_copy ()</h3><a class="indexterm" name="id2556525"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_copy            (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556581"></a><h3><a name="gsf-timestamp-free"></a>gsf_timestamp_free ()</h3><a class="indexterm" name="id2556592"></a><pre class="programlisting">void        gsf_timestamp_free              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556638"></a><h3><a name="gsf-timestamp-new-now"></a>gsf_timestamp_new_now ()</h3><a class="indexterm" name="id2556650"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_new_now         (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556686"></a><h3><a name="gsf-timestamp-get-type"></a>gsf_timestamp_get_type ()</h3><a class="indexterm" name="id2556697"></a><pre class="programlisting">GType       gsf_timestamp_get_type          (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556732"></a><h3><a name="gsf-timestamp-as-string"></a>gsf_timestamp_as_string ()</h3><a class="indexterm" name="id2556744"></a><pre class="programlisting">char*       gsf_timestamp_as_string         (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556800"></a><h3><a name="gsf-timestamp-parse"></a>gsf_timestamp_parse ()</h3><a class="indexterm" name="id2556812"></a><pre class="programlisting">int         gsf_timestamp_parse             (char const *spec,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>spec</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556888"></a><h3><a name="gsf-timestamp-hash"></a>gsf_timestamp_hash ()</h3><a class="indexterm" name="id2556900"></a><pre class="programlisting">guint       gsf_timestamp_hash              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556956"></a><h3><a name="gsf-timestamp-equal"></a>gsf_timestamp_equal ()</h3><a class="indexterm" name="id2556967"></a><pre class="programlisting">gboolean    gsf_timestamp_equal             (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *a,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *b);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>a</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>b</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2557044"></a><h3><a name="GSF-TIMESTAMP-TYPE-CAPS"></a>GSF_TIMESTAMP_TYPE</h3><a class="indexterm" name="id2557056"></a><pre class="programlisting">#define GSF_TIMESTAMP_TYPE        (gsf_timestamp_get_type ())
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2557072"></a><h3><a name="GsfTimestamp"></a>struct GsfTimestamp</h3><a class="indexterm" name="id2557082"></a><pre class="programlisting">struct GsfTimestamp {
+
+	GDate	  date;			/* In local timezone */
+	glong     seconds;		/* time of day */
+	GString	  time_zone;		/* possibly blank */
+
+	guint32	  timet;
+};
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2557100"></a><h3><a name="gsf-timestamp-new"></a>gsf_timestamp_new ()</h3><a class="indexterm" name="id2557111"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_new             (GDate const *date,
+                                             glong seconds,
+                                             char const *tz);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>date</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>seconds</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>tz</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2557209"></a><h3><a name="g-value-set-timestamp"></a>g_value_set_timestamp ()</h3><a class="indexterm" name="id2557221"></a><pre class="programlisting">void        g_value_set_timestamp           (GValue *value,
+                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>value</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="misc.html"><b>&lt;&lt; Miscellaneous</b></a></td><td align="right"><a accesskey="n" href="ix01.html"><b>Index &gt;&gt;</b></a></td></tr></table></body></html>

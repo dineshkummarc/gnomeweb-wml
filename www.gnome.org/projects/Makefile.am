@@ -18,8 +18,9 @@ SUBDIRS=			\
 	gnome-print		\
 	agnubis			\
 	gst			\
-	gnome-network	\
-	epiphany
+	gnome-network		\
+	epiphany		\
+	libgsf
 
 urlpath=/projects
 

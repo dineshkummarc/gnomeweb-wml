@@ -1,0 +1,157 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Input from unstructured files</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="io.html" title="Basic Input/Output"><link rel="previous" href="io.html" title="Basic Input/Output"><link rel="next" href="gsf-Output-to-unstructured-files.html" title="Output to unstructured files"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="io.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="io.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-Output-to-unstructured-files.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-Input-from-unstructured-files"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">Input from unstructured files</span></h2><p>Input from unstructured files &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfInput"></a><pre class="synopsis">
+
+
+
+struct      <a href="gsf-Input-from-unstructured-files.html#GsfInput-struct">GsfInput</a>;
+<a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>*  <a href="gsf-Input-from-unstructured-files.html#gsf-input-container">gsf_input_container</a>             (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);
+<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   <a href="gsf-Input-from-unstructured-files.html#gsf-input-dup">gsf_input_dup</a>                   (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             GError **err);
+<a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   <a href="gsf-Input-from-unstructured-files.html#gsf-input-size">gsf_input_size</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-eof">gsf_input_eof</a>                   (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);
+<a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   <a href="gsf-Input-from-unstructured-files.html#gsf-input-remaining">gsf_input_remaining</a>             (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);
+<a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   <a href="gsf-Input-from-unstructured-files.html#gsf-input-tell">gsf_input_tell</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-seek">gsf_input_seek</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset,
+                                             GSeekType whence);
+GQuark      <a href="gsf-Input-from-unstructured-files.html#gsf-input-error">gsf_input_error</a>                 (void);
+<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   <a href="gsf-Input-from-unstructured-files.html#gsf-input-sibling">gsf_input_sibling</a>               (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> const *input,
+                                             char const *name,
+                                             GError **err);
+
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-copy">gsf_input_copy</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);
+<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   <a href="gsf-Input-from-unstructured-files.html#gsf-input-uncompress">gsf_input_uncompress</a>            (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *src);
+
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-set-name">gsf_input_set_name</a>              (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             char const *name);
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-set-container">gsf_input_set_container</a>         (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *container);
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-set-size">gsf_input_set_size</a>              (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size);
+gboolean    <a href="gsf-Input-from-unstructured-files.html#gsf-input-seek-emulate">gsf_input_seek_emulate</a>          (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> pos);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2505975"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GObject
+   +----GsfInput
+         +----<a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
+         +----<a href="gsf-Compression.html#GsfInputGZip">GsfInputGZip</a>
+         +----<a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>
+         +----<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInputStdio">GsfInputStdio</a>
+         +----<a href="gsf-Text.html#GsfInputTextline">GsfInputTextline</a>
+</pre></div><div class="refsect1" lang="en"><a name="id2506036"></a><h2>Properties</h2><pre class="synopsis">
+
+  "<a href="gsf-Input-from-unstructured-files.html#GsfInput--eof">eof</a>"                  gpointer              : Read
+  "<a href="gsf-Input-from-unstructured-files.html#GsfInput--name">name</a>"                 gpointer              : Read
+  "<a href="gsf-Input-from-unstructured-files.html#GsfInput--position">position</a>"             gpointer              : Read
+  "<a href="gsf-Input-from-unstructured-files.html#GsfInput--remaining">remaining</a>"            gpointer              : Read
+  "<a href="gsf-Input-from-unstructured-files.html#GsfInput--size">size</a>"                 gpointer              : Read
+</pre></div><div class="refsect1" lang="en"><a name="id2506130"></a><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><a name="id2506140"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2506146"></a><h3><a name="GsfInput-struct"></a>struct GsfInput</h3><a class="indexterm" name="id2506156"></a><pre class="programlisting">struct GsfInput;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2506171"></a><h3><a name="gsf-input-container"></a>gsf_input_container ()</h3><a class="indexterm" name="id2506182"></a><pre class="programlisting"><a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>*  gsf_input_container             (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td> 
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>, but does not add a reference to <i class="parameter"><tt>input</tt></i>'s container.
+Potentially NULL
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506248"></a><h3><a name="gsf-input-dup"></a>gsf_input_dup ()</h3><a class="indexterm" name="id2506257"></a><pre class="programlisting"><a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   gsf_input_dup                   (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             GError **err);</pre><p>
+Duplicates input <i class="parameter"><tt>src</tt></i> leaving the new one at the same offset.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td> The input to duplicate
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i> :</span></td><td> optionally NULL
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: the duplicate, or NULL on error
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506348"></a><h3><a name="gsf-input-size"></a>gsf_input_size ()</h3><a class="indexterm" name="id2506359"></a><pre class="programlisting"><a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   gsf_input_size                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);</pre><p>
+Looks up and caches the number of bytes in the input</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td> The input
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>:  the size or -1 on error
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506420"></a><h3><a name="gsf-input-eof"></a>gsf_input_eof ()</h3><a class="indexterm" name="id2506430"></a><pre class="programlisting">gboolean    gsf_input_eof                   (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);</pre><p>
+Are we at the end of the file ?</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td> the input
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the input is at the eof.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506491"></a><h3><a name="gsf-input-remaining"></a>gsf_input_remaining ()</h3><a class="indexterm" name="id2506502"></a><pre class="programlisting"><a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   gsf_input_remaining             (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the number of bytes left in the file.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506561"></a><h3><a name="gsf-input-tell"></a>gsf_input_tell ()</h3><a class="indexterm" name="id2506572"></a><pre class="programlisting"><a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>   gsf_input_tell                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the current offset in the file.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506632"></a><h3><a name="gsf-input-seek"></a>gsf_input_seek ()</h3><a class="indexterm" name="id2506642"></a><pre class="programlisting">gboolean    gsf_input_seek                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset,
+                                             GSeekType whence);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>offset</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>whence</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE on error.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506744"></a><h3><a name="gsf-input-error"></a>gsf_input_error ()</h3><a class="indexterm" name="id2506754"></a><pre class="programlisting">GQuark      gsf_input_error                 (void);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: A utility quark to flag a GError as being an input problem.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506794"></a><h3><a name="gsf-input-sibling"></a>gsf_input_sibling ()</h3><a class="indexterm" name="id2506805"></a><pre class="programlisting"><a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   gsf_input_sibling               (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> const *input,
+                                             char const *name,
+                                             GError **err);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2506903"></a><h3><a name="gsf-input-copy"></a>gsf_input_copy ()</h3><a class="indexterm" name="id2506913"></a><pre class="programlisting">gboolean    gsf_input_copy                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *output);</pre><p>
+Copy the contents from <i class="parameter"><tt>input</tt></i> to <i class="parameter"><tt>output</tt></i> from their respective
+current positions. So if you want to be sure to copy *everything*,
+make sure to call gsf_input_seek (input, 0, G_SEEK_SET) and
+gsf_output_seek (output, 0, G_SEEK_SET) first, if applicable.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td> a non-null <a href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>output</tt></i> :</span></td><td> a non-null <a href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE on Success
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2507026"></a><h3><a name="gsf-input-uncompress"></a>gsf_input_uncompress ()</h3><a class="indexterm" name="id2507037"></a><pre class="programlisting"><a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*   gsf_input_uncompress            (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *src);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>src</tt></i> :</span></td><td> stream to be uncompressed.
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A stream equivalent to the source stream, but uncompressed if
+the source was compressed.
+
+This functions takes ownership of the incoming reference and yields a
+new one as its output.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2507100"></a><h3><a name="gsf-input-set-name"></a>gsf_input_set_name ()</h3><a class="indexterm" name="id2507111"></a><pre class="programlisting">gboolean    gsf_input_set_name              (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             char const *name);</pre><p>
+protected.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the assignment was ok.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2507192"></a><h3><a name="gsf-input-set-container"></a>gsf_input_set_container ()</h3><a class="indexterm" name="id2507203"></a><pre class="programlisting">gboolean    gsf_input_set_container         (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *container);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>container</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the assignment was ok.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2507284"></a><h3><a name="gsf-input-set-size"></a>gsf_input_set_size ()</h3><a class="indexterm" name="id2507295"></a><pre class="programlisting">gboolean    gsf_input_set_size              (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>size</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the assignment was ok.
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2507375"></a><h3><a name="gsf-input-seek-emulate"></a>gsf_input_seek_emulate ()</h3><a class="indexterm" name="id2507387"></a><pre class="programlisting">gboolean    gsf_input_seek_emulate          (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> pos);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>pos</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: TRUE if the emulation worked.
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2507469"></a><h2>Properties</h2><div class="refsect2" lang="en"><a name="id2507475"></a><h3><a name="GsfInput--eof"></a>The "<tt class="literal">eof</tt>" property</h3><pre class="programlisting">  "eof"                  gpointer              : Read</pre><p>End Of File.</p></div><hr><div class="refsect2" lang="en"><a name="id2507507"></a><h3><a name="GsfInput--name"></a>The "<tt class="literal">name</tt>" property</h3><pre class="programlisting">  "name"                 gpointer              : Read</pre><p>The Input's Name.</p></div><hr><div class="refsect2" lang="en"><a name="id2507541"></a><h3><a name="GsfInput--position"></a>The "<tt class="literal">position</tt>" property</h3><pre class="programlisting">  "position"             gpointer              : Read</pre><p>The Output's Current Position.</p></div><hr><div class="refsect2" lang="en"><a name="id2507574"></a><h3><a name="GsfInput--remaining"></a>The "<tt class="literal">remaining</tt>" property</h3><pre class="programlisting">  "remaining"            gpointer              : Read</pre><p>Amount of Data Remaining.</p></div><hr><div class="refsect2" lang="en"><a name="id2507607"></a><h3><a name="GsfInput--size"></a>The "<tt class="literal">size</tt>" property</h3><pre class="programlisting">  "size"                 gpointer              : Read</pre><p>The Input's Size.</p></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="io.html"><b>&lt;&lt; Basic Input/Output</b></a></td><td align="right"><a accesskey="n" href="gsf-Output-to-unstructured-files.html"><b>Output to unstructured files &gt;&gt;</b></a></td></tr></table></body></html>
