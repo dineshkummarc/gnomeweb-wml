@@ -1,4 +1,4 @@
-SUBDIRS = www.gnome.org
+SUBDIRS = www.gnome.org news.gnome.org
 
 install-data-local:
 	$(INSTALL) -d $(prefix)/scripts
