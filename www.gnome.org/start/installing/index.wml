@@ -62,7 +62,7 @@ $strMir = preg_replace("@$rstring$@","",$linkstring);
 	<? echo $strMir ?></small>
     <form method="POST" action="index.php3" name="mirrors">
       <input type="hidden" name="mirror" value="change"><p><select name="D1" size="1">
-		<option selected value="<? echo $strUrl ?>"><? echo $strMir ?></option>
+		<option selected value="<? echo $strUrl ?>"><? echo $strMir ?> (current)</option>
 
 <?
 
@@ -83,11 +83,17 @@ $res = mysql_query($query);
 	
 while ($res_object = mysql_fetch_object($res)) {
 
-	print "<option value=\"".$res_object->url."\">";
+	// Make sure it ends with a /
+	$url = $res_object->url;
+	if ($url[strlen($url)-1] != "/") {
+		$url = $url."/";
+	}
+	
+	print "<option value=\"".$url."\">";
 
 	// Get just hostname
-	if (preg_match("@^ftp://@",$res_object->url)) {
-        $linkstring = preg_replace("@^ftp://@","",$res_object->url);
+	if (preg_match("@^ftp://@",$url)) {
+        $linkstring = preg_replace("@^ftp://@","",$url);
 	}
 	$rstring = preg_replace("@^[^/]*@","",$linkstring);
 	$strMir = preg_replace("@$rstring$@","",$linkstring);
