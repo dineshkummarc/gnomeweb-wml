@@ -36,6 +36,7 @@ page_SCRIPTS = \
 	gnome210_press_release.da.html \
 	gnome210_press_release.de.html \
 	gnome210_press_release.el.html \
+	gnome210_press_release.es.html \
 	gnome210_press_release.fr.html \
 	gnome210_press_release.mk.html \
 	gnome210_press_release.nl.html \
