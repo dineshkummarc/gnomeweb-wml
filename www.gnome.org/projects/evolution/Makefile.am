@@ -8,6 +8,7 @@ page_DATA =			\
 	bugs.shtml   		\
 	bugday.shtml   		\
 	credits.shtml  		\
+	copyright.shtml		\
 	devdoc.shtml  		\
 	faq.shtml       	\
 	foot.shtml  		\
