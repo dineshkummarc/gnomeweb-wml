@@ -1,4 +1,4 @@
-PREFIX=/usr
+PREFIX=/opt
 CC = gcc
 TARGETS=badcall-client badcall-server
 ORBIT_IDL=orbit-idl-2

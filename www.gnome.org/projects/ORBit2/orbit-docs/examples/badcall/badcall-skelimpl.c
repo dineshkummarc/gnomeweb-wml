@@ -102,39 +102,58 @@ impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
 
 
    /* ------   insert method code here   ------ */
-   switch ((servant->counter++) % 3)
+   switch ((servant->counter++) % 2)
    {
    case 0:
    {
+	   /* this piece of code demonstrates how to raise exception
+	    * without any further parameter */
+
 	   Examples_BadCall_Foo dummy_foo = {0.0};
 
-	   /* FIXME, define ownership */
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
            CORBA_exception_set (ev, 
 				CORBA_USER_EXCEPTION,
                                 ex_Examples_BadCall_NoParam,
                                 NULL); /* exception has no members */
- 	   *bar=dummy_foo; 
+
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
            return dummy_foo;
            break;
    }
    case 1:
-   case 2:
    {
+	   /* this piece of code demonstrates how to raise exception
+	    * that has a string as parameter */
+
 	   Examples_BadCall_Foo dummy_foo = {0.0};
 
-	   Examples_BadCall_SingleParam* ex_param
+	   Examples_BadCall_SingleParam* ex_parameters
 		   = Examples_BadCall_SingleParam__alloc();
-	   ex_param->mesg = CORBA_string_dup ("describing the problem for client");
 
-	   /* FIXME, define ownership */
+	   ex_parameters->mesg 
+		   = CORBA_string_dup ("describing the problem for client");
+
+	   /* after user has assinged exception attributes, user may
+	    * not touch the data anymore, ownership is handed over to
+	    * CORBA environment  */
            CORBA_exception_set (ev, 
 				CORBA_USER_EXCEPTION,
                                 ex_Examples_BadCall_SingleParam,
-                                ex_param); /* exception has members */
- 	   *bar=dummy_foo; 
+                                ex_parameters); /* exception has members */
+
+ 	   /* on exception you need not to care about out-argument
+	    * @bar, but due to programming language C it is necessary
+	    * to return valid value */ 
            return dummy_foo;
            break;
    }
+   /* this code will never raise exception DoubleParam */
+
    default:
            g_assert_not_reached ();
    }

@@ -157,16 +157,17 @@ void
 client_run (Examples_BadCall          servant,
 	    CORBA_Environment        *ev)
 {
-	CORBA_long N=getenv("BADCALL_N")!=NULL?atoi(getenv("BADCALL_N")):1000;
+	CORBA_long N=1000;
 	CORBA_long i=0;
 
 	/* increment sequence length, beginning with 0 up to 2048 */
 	for (i=0; i<N; ++i)
 	{
-		Examples_BadCall_Foo *out_arg=NULL;
-		Examples_BadCall_Foo  ret_val;
 		CORBA_long in_arg=i;
 		
+		Examples_BadCall_Foo  ret_val={ 0.0 /* CORBA_double */ };
+		Examples_BadCall_Foo *out_arg=NULL;
+
 		ret_val = Examples_BadCall_trigger (servant, 
 						    in_arg, 
 						    out_arg,
@@ -174,7 +175,10 @@ client_run (Examples_BadCall          servant,
 		
 		switch(ev->_major) {
 		case CORBA_NO_EXCEPTION:/* successful outcome*/
-			/* process out and inout arguments */
+
+			/* now use data the server delivered to client
+			 * over the return-value, or those out- and
+			 * inout-parameters */
 
 			break;
 
@@ -186,30 +190,34 @@ client_run (Examples_BadCall          servant,
 				Examples_BadCall_NoParam *bc 
 					= (Examples_BadCall_NoParam*)CORBA_exception_value(ev);
 				g_assert (bc==NULL);  
- 				g_print ("BadCall::trigger raised exception: %s\n",  
+ 				g_warning ("raised exception: %s\n",  
  					 CORBA_exception_id(ev));
 			}
 			else if (strcmp(ex_Examples_BadCall_SingleParam,
 				   CORBA_exception_id(ev)) == 0) {
 				Examples_BadCall_SingleParam *bc 
-					= (Examples_BadCall_SingleParam*)CORBA_exception_value(ev);
+					= (Examples_BadCall_SingleParam*)
+					CORBA_exception_value(ev);
+
 				g_assert (bc!=NULL);
-				g_print ("BadCall::trigger raised exception: %s\n"
-					 " message: %s\n",  
+				g_warning ("raised exception: %s\n"
+					   " message: %s\n",  
 					 CORBA_exception_id(ev),
 					 bc->mesg);
 			}
 			else if (strcmp(ex_Examples_BadCall_DoubleParam,
 				   CORBA_exception_id(ev)) == 0) {
 				Examples_BadCall_DoubleParam *bc 
-					= (Examples_BadCall_DoubleParam*)CORBA_exception_value(ev);
+					= (Examples_BadCall_DoubleParam*)
+					CORBA_exception_value(ev);
+
 				g_assert (bc!=NULL);
-				g_print ("BadCall::trigger raised exception: %s\n"
-					 " message: %s\n"
-					 " code: %d\n",  
-					 CORBA_exception_id(ev),
-					 bc->mesg,
-					 bc->val);
+				g_warning ("raised exception: %s\n"
+					   " message: %s\n"
+					   " code: %d\n",  
+					   CORBA_exception_id(ev),
+					   bc->mesg,
+					   bc->val);
 			}
 			else {       /* should never get here ... */
 				g_print ("unknown user-defined exception -%s\n",
@@ -234,7 +242,6 @@ client_run (Examples_BadCall          servant,
 		CORBA_exception_free(ev);
 
 		CORBA_free (out_arg); /* free Foo data */
-/* 		CORBA_free (ret_val); /\* free Foo data *\/ */
 	}
 }
 
