@@ -2,9 +2,6 @@ SUBDIRS = doc developer-doc images
 
 urlpath=/projects/evolution
 
-page_DATA= 			\
-	jhbuildrc
-
 page_SCRIPTS=			\
 	go.css			\
 	arch.shtml   		\
@@ -26,6 +23,7 @@ page_SCRIPTS=			\
 	unstable.shtml
 
 page_DATA =			\
-	roadmap.ics
+	roadmap.ics		\
+	jhbuildrc
 
 include $(top_srcdir)/rules.common
