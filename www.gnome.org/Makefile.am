@@ -7,7 +7,8 @@ urlpath=
 page_SCRIPTS=index.shtml		\
 	seegnome.html   		\
 	getgnome.html   		\
-	recentsoftware.php3
+	recentsoftware.php3\
+	commsupp.html
 
 page_DATA=menucontrol.js
 
