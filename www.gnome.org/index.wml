@@ -39,6 +39,61 @@ other UNIX systems.
 
 <br>
 
+<table width="450" cellpadding="0" cellspacing="0" border="0"><tr
+valign="top"><td width="215">
+<?  readfile ("newsheadlines.html")  ?>
+</td><td width="20"><img src="/images/dot.gif" width="16"
+height="16" alt=""></td><td width="215"><a
+href="http://www.gnome.org/softwaremap/latest.php">
+<font size="+2" color="#400000"><b>Recent software:</b></font></a><br>
+
+<table border='0' cellspacing='0' cellpadding='0'><tr><td>
+
+<? 
+
+if (filectime("recentapps-cache.html") < (time() - 300)) { # If cache is older than 5 minutes
+
+  $tempfilename = tempnam("/tmp", "appcache");
+
+  $tmpfd = fopen( $tempfilename, "w");
+
+  Include("/home/admin/applist/private.php3");
+  mysql_select_db("gnomeweb");
+
+	$query = "SELECT groups.group_name AS group_name,"
+		. "groups.group_id AS group_id,"
+		. "groups.unix_group_name AS unix_group_name,"
+		. "groups.short_description AS short_description,"
+		. "frs_release.release_date AS release_date "
+		. "FROM frs_release,groups WHERE "
+		. "frs_release.group_id=groups.group_id "
+		. "ORDER BY frs_release.release_date DESC LIMIT 6";
+
+  $res = mysql_query($query);
+
+  while ($res_obj = mysql_fetch_object($res)) { 
+
+    fwrite($tmpfd, "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td><b><a href='");
+    fwrite($tmpfd, "/softwaremap/projects/".$res_obj->unix_group_name."'>");
+    fwrite($tmpfd, $res_obj->group_name);
+    fwrite($tmpfd, "</a></b><font size='-2'><br>[" . date("D, M d Y", $res_obj->release_date) );
+    fwrite($tmpfd, "]</font></td></tr>\n");
+
+  }
+  mysql_close();
+
+  fclose($tmpfd);
+	copy($tempfilename, "recentapps-cache.html");
+  unlink ($tempfilename);
+}
+
+
+readfile ("recentapps-cache.html");
+
+?>
+
+</table>
+
 </td></tr>
 </table>
 
