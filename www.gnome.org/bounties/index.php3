@@ -228,10 +228,10 @@ channels.</p>
 <?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
 <?php taskrow ("Mailing list actions", "Mailer", "500", "127518", ""); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", ""); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
 <?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", ""); ?>
+<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
@@ -247,7 +247,7 @@ channels.</p>
 <?php taskrow ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555", ""); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", ""); ?>
 <?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", ""); ?>
-<?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", ""); ?>
+<?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
 <?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
 <?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
@@ -257,7 +257,7 @@ channels.</p>
 <?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
-<?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", ""); ?>
+<?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>

@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", ""); ?>
 <?php taskrow ("Mailing list actions", "hidden", "500", "127518", ""); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", ""); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
 <?php taskrow ("Custom mail headers display", "hidden", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526", ""); ?>
@@ -172,7 +172,7 @@ href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "127519", ""); ?>
+<?php box_start ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 
 
 <p>
