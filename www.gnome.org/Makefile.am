@@ -13,6 +13,6 @@ page_SCRIPTS = \
 
 page_DATA = \
 	index.html \
-	index.shtml
+	index.php
 
 include $(top_srcdir)/rules.common
