@@ -21,6 +21,7 @@ page_DATA=news.gif		\
 	solid-dot-red.gif	\
 	solid-dot-yellow.gif	\
 	solid-dot-ob1.gif	\
-	solid-dot-brown.gif
+	solid-dot-brown.gif	\
+	clickstart.gif
 
 EXTRA_DIST=$(page_DATA)
