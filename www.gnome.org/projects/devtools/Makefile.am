@@ -2,7 +2,7 @@ SUBDIRS=images
 
 urlpath=/projects/devtools
 
-page_SCRIPTS=			
+page_SCRIPTS=		        \	
 	index.shtml 		\
 	anjuta.shtml		\
 	bindings.shtml		\
