@@ -75,6 +75,9 @@ print "<option value=\"ftp://ftp.gnome.org/pub/GNOME/\">ftp.gnome.org (US; Defau
 
 include("/home/admin/mirrors/read-only.php3");
 
+$dirlatestsource = "desktop/2.0/2.0.2/sources/";
+$dirname = "/ftp/pub/GNOME/".$dirlatestsource;
+
 $connection = mysql_pconnect("canvas.gnome.org",$mysql_user,$mysql_password);
 mysql_select_db("mirrors");
 
@@ -121,8 +124,7 @@ while ($res_object = mysql_fetch_object($res)) {
     <a href="<? echo $strUrl.$dirlatestsource; ?>"><? echo $strUrl.$dirlatestsource; ?></a><br>
     </p>
 <?
-$dirlatestsource = "desktop/2.0/2.0.2/sources/";
-$dirname = "/ftp/pub/GNOME/".$dirlatestsource;
+
 $handle = opendir($dirname);
 $file = readdir($handle);
 while($file) {
