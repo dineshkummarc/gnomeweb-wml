@@ -68,7 +68,8 @@ page_DATA=address-applet-anim.gif\
 	tasks-icon.png\
 	Tasks.php3\
 	timezone.png\
-	util.php
+	util.php\
+	dhtml-table.js
 
 page_SCRIPTS=
 
