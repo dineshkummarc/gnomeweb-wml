@@ -4,12 +4,7 @@ urlpath=/projects/gnumeric/doc
 
 page_SCRIPTS= \
 	alignmentandothertabs.html		\
-	alignment.html		\
 	anova.html		\
-	anova-single-factor-tool.html		\
-	anova-two-factor-tool.html		\
-	background.html		\
-	border.html		\
 	CATEGORY_Bitwise_Operations.html		\
 	CATEGORY_Complex.html		\
 	CATEGORY_Database.html		\
@@ -42,21 +37,15 @@ page_SCRIPTS= \
 	chapter-welcome.html		\
 	col-row-headers.html		\
 	context-menu.html		\
-	continuous-selections.html		\
-	copy.html		\
 	correlation-tool.html		\
 	covariance-tool.html		\
-	cut.html		\
 	data-entry.html		\
 	Data-Menu.html		\
 	data-selections-advanced.html		\
 	descriptive-statistics-tool.html		\
-	discontinuous-selections.html		\
 	Edit-Menu.html		\
 	exp-smoothing-tool.html		\
 	extending-python-upgrading.html		\
-	extending-python-writing-help.html		\
-	extending-python-writing-programs.html		\
 	file-format-applix.html		\
 	file-format-csv.html		\
 	file-format-dif.html		\
@@ -83,9 +72,7 @@ page_SCRIPTS= \
 	File-Menu.html		\
 	file-open-dialog.html		\
 	fmt-toolbar.html		\
-	font.html		\
 	Format-Menu.html		\
-	formulas-names.html		\
 	fourier-analysis-tool.html		\
 	ftest-two-sample-for-variances-tool.html		\
 	function-reference.html		\
@@ -562,18 +549,11 @@ page_SCRIPTS= \
 	gnumeric-YIELDMAT.html		\
 	gnumeric-ZTEST.html		\
 	Help-Menu.html		\
-	histogram-tool-binstab.html		\
-	histogram-tool-example.html		\
 	histogram-tool.html		\
-	histogram-tool-inputtab.html		\
-	histogram-tool-intro.html		\
-	histogram-tool-optionstab.html		\
-	histogram-tool-outputtab.html		\
 	index.html		\
 	info-area.html		\
 	Insert-Menu.html		\
 	keybinding.html		\
-	keybindings.html		\
 	menu-bar.html		\
 	menu-bars.html		\
 	menu-context-col-row-header.html		\
@@ -585,12 +565,10 @@ page_SCRIPTS= \
 	note-file-textImport-druid.html		\
 	number-formatting-overview.html		\
 	obj-toolbar.html		\
-	paste.html		\
 	print-setup-header-config.html		\
 	print-setup-header.html		\
 	print-setup-page.html		\
 	print-setup-sheet.html		\
-	protection.html		\
 	quick-closing-gnumeric.html		\
 	quick-commands.html		\
 	quick-complex-select.html		\
@@ -607,7 +585,6 @@ page_SCRIPTS= \
 	quick-start-by-file.html		\
 	quick-start-other.html		\
 	rank-and-percentile-tool.html		\
-	reference.html		\
 	regression-tool.html		\
 	sampling-tool.html		\
 	sect-advanced-analysis-complexNumbers.html		\
@@ -649,11 +626,7 @@ page_SCRIPTS= \
 	sect-data-boolean.html		\
 	sect-data-comment.html		\
 	sect-data-delete.html		\
-	sect-data-entry-advanced-editing-mode.html		\
-	sect-dataentryadv-autocorrect-cap-days.html		\
-	sect-dataentryadv-autocorrect-first-letter.html		\
 	sect-dataentryadv-autocorrect.html		\
-	sect-dataentryadv-autocorrect-init-caps.html		\
 	sect-dataentryadv.html		\
 	sect-dataentryadv-large.html		\
 	sect-dataentryadv-random.html		\
@@ -664,10 +637,7 @@ page_SCRIPTS= \
 	sect-dataentryextern-cutnpaste.html		\
 	sect-dataentryextern-files.html		\
 	sect-dataentryextern.html		\
-	sect-data-entry-formulas-guru.html		\
 	sect-data-entry-formulas.html		\
-	sect-data-entry-formulas-list.html		\
-	sect-data-entry-formulas-shortcuts-references.html		\
 	sect-data-entry.html		\
 	sect-data-entry-numbers.html		\
 	sect-data-entry-simple.html		\
@@ -675,18 +645,13 @@ page_SCRIPTS= \
 	sect-data-errors.html		\
 	sect-data-format.html		\
 	sect-data-format-protectionandvalidation.html		\
-	sect-data-format-validation.html		\
 	sect-data-formulas.html		\
-	sect-data-formulas-references.html		\
 	sect-data-generate-consolidate.html		\
 	sect-data-generate-fillmerge.html		\
 	sect-data-generate-filltabulate.html		\
 	sect-data-generate.html		\
 	sect-data-insert.html		\
 	sect-data-link.html		\
-	sect-data-modify-filter-advanced.html		\
-	sect-data-modify-filter-custom.html		\
-	sect-data-modify-filter-default.html		\
 	sect-data-modify-filter.html		\
 	sect-data-modify.html		\
 	sect-data-modify-search.html		\
@@ -704,48 +669,22 @@ page_SCRIPTS= \
 	sect-extending-overview.html		\
 	sect-extending-plugins.html		\
 	sect-extending-python-builtins.html		\
-	sect-extending-python-console-enabling.html		\
 	sect-extending-python-console.html		\
-	sect-extending-python-console-morefun.html		\
-	sect-extending-python-console-playing.html		\
 	sect-extending-python-fancy.html		\
 	sect-extending-python.html		\
-	sect-extending-python-install-build.html		\
 	sect-extending-python-install.html		\
-	sect-extending-python-install-prelim.html		\
 	sect-extending-python-questions.html		\
 	sect-extending-python-writing.html		\
-	sect-extending-python-writing-newspells2.html		\
-	sect-extending-python-writing-newspells.html		\
-	sect-extending-python-writing-prepare.html		\
 	sect-file-formats.html		\
-	sect-file-open-dialog-bookmarks.html		\
-	sect-file-open-dialog-components.html		\
-	sect-file-open-dialog-process.html		\
 	sect-file-open-formats.html		\
 	sect-file-open.html		\
-	sect-file-save-dialog-bookmarks.html		\
-	sect-file-save-dialog-chdir.html		\
-	sect-file-save-dialog-compact-components.html		\
-	sect-file-save-dialog-expanded-components.html		\
 	sect-file-save-dialog.html		\
-	sect-file-save-dialog-mkdir.html		\
-	sect-file-save-dialog-quickintro.html		\
 	sect-file-save.html		\
 	sect-files-email.html		\
 	sect-files-overview.html		\
 	sect-files-ssconvert.html		\
-	sect-file-textExport-druid-panel1.html		\
-	sect-file-textExport-druid-panel2.html		\
 	sect-file-textExport.html		\
-	sect-file-textImport-complex-dataStruct.html		\
-	sect-file-textImport-complex-encoding.html		\
 	sect-file-textImport-complex.html		\
-	sect-file-textImport-complex-lineBreak.html		\
-	sect-file-textImport-druid-panel1.html		\
-	sect-file-textImport-druid-panel2fixed.html		\
-	sect-file-textImport-druid-panel2separated.html		\
-	sect-file-textImport-druid-panel3.html		\
 	sect-file-textImport.html		\
 	sect-graphical-overview-adding.html		\
 	sect-graphical-overview-contextmenu.html		\
@@ -753,66 +692,32 @@ page_SCRIPTS= \
 	sect-graphical-overview.html		\
 	sect-graphical-overview-modifing.html		\
 	sect-graphical-overview-moveNresize.html		\
-	sect-graphical-overview-moveNresize-mouse.html		\
-	sect-graphical-overview-moveNresize-move-keys.html		\
-	sect-graphical-overview-moveNresize-resize.html		\
 	sect-graphical-overview-restacking.html		\
 	sect-graphical-overview-saving.html		\
 	sect-graphical-overview-selecting.html		\
-	sect-graphics-drawings-arrow-configure.html		\
 	sect-graphics-drawings-arrow.html		\
 	sect-graphics-drawings.html		\
-	sect-graphics-drawings-line-configure.html		\
 	sect-graphics-drawings-line.html		\
-	sect-graphics-drawings-oval-configure.html		\
 	sect-graphics-drawings-oval.html		\
-	sect-graphics-drawings-rectangle-configure.html		\
 	sect-graphics-drawings-rectangle.html		\
 	sect-graphics-images-delete.html		\
 	sect-graphics-images.html		\
 	sect-graphics-images-insert.html		\
 	sect-graphics-images-save.html		\
-	sect-graphics-plots-elementProperties-axes.html		\
-	sect-graphics-plots-elementProperties-backPanels.html		\
 	sect-graphics-plots-elementProperties.html		\
-	sect-graphics-plots-elementProperties-legend.html		\
-	sect-graphics-plots-elementProperties-plots.html		\
-	sect-graphics-plots-elementProperties-series.html		\
-	sect-graphics-plots-elementProperties-title.html		\
-	sect-graphics-plots-graphguru-components.html		\
 	sect-graphics-plots-graphguru.html		\
-	sect-graphics-plots-graphguru-navigating.html		\
 	sect-graphics-plots.html		\
-	sect-graphics-plots-overview-componentHierarchy.html		\
-	sect-graphics-plots-overview-components.html		\
 	sect-graphics-plots-overview.html		\
-	sect-graphics-plots-overview-process.html		\
-	sect-graphics-plots-overview-terms.html		\
-	sect-graphics-plots-overview-types-area.html		\
-	sect-graphics-plots-overview-types-bar.html		\
-	sect-graphics-plots-overview-types-bubble.html		\
-	sect-graphics-plots-overview-types-column.html		\
 	sect-graphics-plots-overview-types.html		\
-	sect-graphics-plots-overview-types-line.html		\
-	sect-graphics-plots-overview-types-pie.html		\
-	sect-graphics-plots-overview-types-radar.html		\
-	sect-graphics-plots-overview-types-ring.html		\
-	sect-graphics-plots-overview-types-xy.html		\
 	sect-graphics-plots-preselect.html		\
-	sect-graphics-widgets-checkbox-configure.html		\
 	sect-graphics-widgets-checkbox.html		\
 	sect-graphics-widgets-combobox.html		\
-	sect-graphics-widgets-frame-configure.html		\
 	sect-graphics-widgets-frame.html		\
 	sect-graphics-widgets.html		\
-	sect-graphics-widgets-label-configure.html		\
 	sect-graphics-widgets-label.html		\
 	sect-graphics-widgets-list.html		\
-	sect-graphics-widgets-scrollbar-configure.html		\
 	sect-graphics-widgets-scrollbar.html		\
-	sect-graphics-widgets-slider-configure.html		\
 	sect-graphics-widgets-slider.html		\
-	sect-graphics-widgets-spinbutton-configure.html		\
 	sect-graphics-widgets-spinbutton.html		\
 	sect-gui-menus.html		\
 	sect-gui-mouse.html		\
@@ -834,7 +739,6 @@ page_SCRIPTS= \
 	sect-printing-setup.html		\
 	sect-quick-format-number.html		\
 	sect-quick-starting-gnumeric-doze.html		\
-	sect-quick-starting-gnumeric-dozePrompt.html		\
 	sect-quick-starting-gnumeric-gnome.html		\
 	sect-quick-starting-gnumeric.html		\
 	sect-quick-starting-gnumeric-unixdesktop.html		\
@@ -846,10 +750,6 @@ page_SCRIPTS= \
 	toolbar-use.html		\
 	Tools-Menu.html		\
 	t-test.html		\
-	t-test-paired-two-samples-for-means-tool.html		\
-	t-test-two-sample-equal-variances-tool.html		\
-	t-test-two-samples-unequal-variances.html		\
-	View-Menu.html		\
-	ztest-two-samples-for-means-tool.html
+	View-Menu.html
 
 include $(top_srcdir)/rules.common
