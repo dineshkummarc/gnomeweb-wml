@@ -12,7 +12,9 @@ screen_images=\
 	20000518-iain-big.png\
 	20000518-iain-thumb.png\
 	20000520-jtz-big.png\
-	20000520-jtz-thumb.png
+	20000520-jtz-thumb.png\
+	20000520-ole-big.png\
+	20000520-ole-thumb.png
 
 page_DATA=$(screen_images)
 
