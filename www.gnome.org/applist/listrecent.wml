@@ -16,7 +16,7 @@ function qmeta ($a) {
 mysql_connect("www.gnome.org","gnomeweb","saHrl@nd");
 
 # get time since last change 
-$res = mysql("gnomeapps", "SELECT touched FROM applist ORDER BY touched DESC");
+$res = mysql("gnomeapps", "SELECT touched FROM applist ORDER BY touched DESC LIMIT 1");
 if(!$res) {
 	echo "Query failed</td></tr></table>";
 	mysql_close();
@@ -42,20 +42,19 @@ mysql_freeresult($res);
 <!-- start of the software map -->
 <center>
 <table bgcolor = #ffffff border=0 cellspacing=1 cellpadding=4 width="95%">
-<tr bgcolor="#ffffff"><th colspan=4><BIG><BIG><B>Gnome Software
-Map</B></BIG></BIG><br><SMALL>Last updated: <?echo Date("Y-m-d H:i:s",$touchedts);?></SMALL></th></tr>
+<tr bgcolor="#ffffff"><th colspan=4><SMALL>Last updated: <?echo Date("Y-m-d H:i:s",$touchedts);?></SMALL></th></tr>
 
 <tr bgcolor=#ffffff><th colspan=4><BIG><BIG><B>
 <?
-if ($numlist) {
-   echo $numlist, " ";
+if ($entrylimit) {
+   echo $entrylimit, " ";
 } else {
    echo "";
 }
 echo "Most Recently Updated Software Entries";
 echo "</B></BIG></BIG>";
-if ($numlist != "") {
-   echo "   <a href=\"http://www.gnome.org/applist/listrecent.php3\">(click for complete list)</a>";
+if ($entrylimit != "") {
+   echo "<br><a href=\"http://www.gnome.org/applist/listrecent.php3\">(click for complete list)</a>";
 } else {
    echo " [Last month of activity]";
 }
@@ -88,7 +87,13 @@ echo "</th></tr>";
 <?
 
 # get list of all categories, sorted
-$new = mysql("gnomeapps", "SELECT * FROM applist ORDER BY touched desc");
+
+if ($entrylimit) {
+  $new = mysql("gnomeapps", "SELECT * FROM applist ORDER BY touched desc LIMIT " . $entrylimit);
+} else {
+  $new = mysql("gnomeapps", "SELECT * FROM applist ORDER BY touched desc");
+}
+
 
 if(!$new) {
 	echo "No entries exist!</td></tr></table>";
@@ -98,9 +103,6 @@ if(!$new) {
 $inew = 0;
 $nnew = mysql_numrows($new);
 
-if ($numlist != "" && $numlist < $nnew) {
-   $nnew = $numlist;
-}
 
 while($inew < $nnew) {
 #	get current category name and grab all entries in that category
@@ -153,7 +155,7 @@ while($inew < $nnew) {
         echo "   <table border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n";
 	echo "   <tr bgcolor=\"#ffffff\" valign=\"top\">\n";
 	echo "      <td align=\"left\">\n";
-        echo "        <a href=\"view.php3?name=",ereg_replace(" ","%20",$name),"&prevpage=listrecent.php3?numlist=",$numlist,"\">";
+        echo "        <a href=\"view.php3?name=",ereg_replace(" ","%20",$name),"&prevpage=listrecent.php3?entrylimig=",$entrylimit,"\">";
 	echo $name,"</a>\n";
 
 	if ( $sinceadd < $oneweek ) {
