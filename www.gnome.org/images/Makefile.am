@@ -40,7 +40,8 @@ misc_images=\
 	trash-x.png\
 	nophoto.jpg\
 	ofolder15.png\
-	cfolder15.png
+	cfolder15.png\
+	guadec.png
 
 banner_images=\
 	banner-gnomeis.png\
