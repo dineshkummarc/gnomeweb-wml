@@ -76,7 +76,8 @@ sidebar_items=\
   sidebar-projectindex.png\
   sidebar-resourceindex.png\
 	sidebar-seegnome.png\
-	sidebar-tipsandtutorials.png
+	sidebar-tipsandtutorials.png\
+  sidebar-reportbugs.png
 
 topbar_headers=\
   topbar-contact.png\
