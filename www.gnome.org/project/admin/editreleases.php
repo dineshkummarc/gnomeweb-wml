@@ -180,6 +180,9 @@ Edit Existing Release
 				. "Enhancements\n============\n\n-\n-\n\n"
 				. "Fixes\n=====\n\n-\n-\n\n"
 				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/";
+				. "GNOME Software Map entry\n"
+        . "========================\n\n"
+        . "http://www.gnome.org/softwaremap/projects/".$project->getUnixName();
 		}
 			
 		?></textarea>
