@@ -12,7 +12,6 @@ page_SCRIPTS = \
 	frontpage.css
 
 page_DATA = \
-	index.html \
-	index.php
+	index.html
 
 include $(top_srcdir)/rules.common
