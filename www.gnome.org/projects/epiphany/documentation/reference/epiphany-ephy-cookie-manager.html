@@ -1,0 +1,116 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>ephy-cookie-manager</title><meta name="generator" content="DocBook XSL Stylesheets V1.61.2"><meta name="generator" content="GTK-Doc V1.1 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="epiphany-ephy-embed-single.html" title="ephy-embed-single"><link rel="next" href="epiphany-ephy-password-manager.html" title="ephy-password-manager"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="epiphany-ephy-embed-single.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="epiphany-ephy-password-manager.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="epiphany-ephy-cookie-manager"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">ephy-cookie-manager</span></h2><p>ephy-cookie-manager &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+#define     <a href="epiphany-ephy-cookie-manager.html#EPHY-TYPE-COOKIE-CAPS">EPHY_TYPE_COOKIE</a>
+enum        <a href="epiphany-ephy-cookie-manager.html#EphyCookieP3PState">EphyCookieP3PState</a>;
+enum        <a href="epiphany-ephy-cookie-manager.html#EphyCookieP3PPolicy">EphyCookieP3PPolicy</a>;
+<GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK>* <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-new">ephy_cookie_new</a>                 (void);
+<GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK>* <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-copy">ephy_cookie_copy</a>                (const <GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);
+void        <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-free">ephy_cookie_free</a>                (<GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);
+<GTKDOCLINK HREF="GType">GType</GTKDOCLINK>       <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-manager-get-type">ephy_cookie_manager_get_type</a>    (void);
+<GTKDOCLINK HREF="GList">GList</GTKDOCLINK>*      <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-manager-list-cookies">ephy_cookie_manager_list_cookies</a>
+                                            (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager);
+void        <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-manager-remove-cookie">ephy_cookie_manager_remove_cookie</a>
+                                            (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager,
+                                             const <GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);
+void        <a href="epiphany-ephy-cookie-manager.html#ephy-cookie-manager-clear">ephy_cookie_manager_clear</a>       (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager);
+
+</pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="EPHY-TYPE-COOKIE-CAPS"></a>EPHY_TYPE_COOKIE</h3><pre class="programlisting">#define EPHY_TYPE_COOKIE			(ephy_cookie_get_type ())
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EphyCookieP3PState"></a>enum EphyCookieP3PState</h3><pre class="programlisting">typedef enum
+{
+	EPHY_COOKIE_P3P_STATE_UNKNOWN,
+	EPHY_COOKIE_P3P_STATE_ACCEPTED,
+	EPHY_COOKIE_P3P_STATE_DOWNGRADED,
+	EPHY_COOKIE_P3P_STATE_FLAGGED,
+	EPHY_COOKIE_P3P_STATE_REJECTED
+} EphyCookieP3PState;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EphyCookieP3PPolicy"></a>enum EphyCookieP3PPolicy</h3><pre class="programlisting">typedef enum
+{
+	EPHY_COOKIE_P3P_POLICY_UNKNOWN,
+	EPHY_COOKIE_P3P_POLICY_NONE,
+	EPHY_COOKIE_P3P_POLICY_NO_CONSENT,
+	EPHY_COOKIE_P3P_POLICY_IMPLICIT_CONSENT,
+	EPHY_COOKIE_P3P_POLICY_EXPLICIT_CONSENT,
+	EPHY_COOKIE_P3P_POLICY_NO_II,
+} EphyCookieP3PPolicy;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-new"></a>ephy_cookie_new ()</h3><pre class="programlisting"><GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK>* ephy_cookie_new                 (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-copy"></a>ephy_cookie_copy ()</h3><pre class="programlisting"><GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK>* ephy_cookie_copy                (const <GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>cookie</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-free"></a>ephy_cookie_free ()</h3><pre class="programlisting">void        ephy_cookie_free                (<GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>cookie</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-manager-get-type"></a>ephy_cookie_manager_get_type ()</h3><pre class="programlisting"><GTKDOCLINK HREF="GType">GType</GTKDOCLINK>       ephy_cookie_manager_get_type    (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-manager-list-cookies"></a>ephy_cookie_manager_list_cookies ()</h3><pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK>*      ephy_cookie_manager_list_cookies
+                                            (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-manager-remove-cookie"></a>ephy_cookie_manager_remove_cookie ()</h3><pre class="programlisting">void        ephy_cookie_manager_remove_cookie
+                                            (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager,
+                                             const <GTKDOCLINK HREF="EphyCookie">EphyCookie</GTKDOCLINK> *cookie);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>cookie</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-cookie-manager-clear"></a>ephy_cookie_manager_clear ()</h3><pre class="programlisting">void        ephy_cookie_manager_clear       (<GTKDOCLINK HREF="EphyCookieManager">EphyCookieManager</GTKDOCLINK> *manager);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="epiphany-ephy-embed-single.html"><b>&lt;&lt; ephy-embed-single</b></a></td><td align="right"><a accesskey="n" href="epiphany-ephy-password-manager.html"><b>ephy-password-manager &gt;&gt;</b></a></td></tr></table></body></html>

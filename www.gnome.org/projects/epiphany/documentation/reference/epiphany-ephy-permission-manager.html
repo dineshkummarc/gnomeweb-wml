@@ -1,0 +1,152 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>ephy-permission-manager</title><meta name="generator" content="DocBook XSL Stylesheets V1.61.2"><meta name="generator" content="GTK-Doc V1.1 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="epiphany-ephy-password-manager.html" title="ephy-password-manager"><link rel="next" href="epiphany-ephy-session.html" title="ephy-session"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="epiphany-ephy-password-manager.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="epiphany-ephy-session.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="epiphany-ephy-permission-manager"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">ephy-permission-manager</span></h2><p>ephy-permission-manager &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+#define     <a href="epiphany-ephy-permission-manager.html#EPHY-TYPE-PERMISSION-INFO-CAPS">EPHY_TYPE_PERMISSION_INFO</a>
+enum        <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a>;
+enum        <a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a>;
+<GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK>* <a href="epiphany-ephy-permission-manager.html#ephy-permission-info-new">ephy_permission_info_new</a>
+                                            (const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> permission);
+<GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK>* <a href="epiphany-ephy-permission-manager.html#ephy-permission-info-copy">ephy_permission_info_copy</a>
+                                            (const <GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK> *info);
+void        <a href="epiphany-ephy-permission-manager.html#ephy-permission-info-free">ephy_permission_info_free</a>       (<GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK> *info);
+<GTKDOCLINK HREF="GType">GType</GTKDOCLINK>       <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-get-type">ephy_permission_manager_get_type</a>
+                                            (void);
+void        <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-add">ephy_permission_manager_add</a>     (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> permission);
+void        <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-remove">ephy_permission_manager_remove</a>  (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);
+void        <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-clear">ephy_permission_manager_clear</a>   (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager);
+<a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-test">ephy_permission_manager_test</a> (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);
+<GTKDOCLINK HREF="GList">GList</GTKDOCLINK>*      <a href="epiphany-ephy-permission-manager.html#ephy-permission-manager-list">ephy_permission_manager_list</a>    (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);
+
+</pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
+
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="EPHY-TYPE-PERMISSION-INFO-CAPS"></a>EPHY_TYPE_PERMISSION_INFO</h3><pre class="programlisting">#define EPHY_TYPE_PERMISSION_INFO		(ephy_permission_info_get_type ())
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EphyPermissionType"></a>enum EphyPermissionType</h3><pre class="programlisting">typedef enum
+{
+	EPT_COOKIE,
+	EPT_IMAGE,
+	EPT_POPUP
+} EphyPermissionType;
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EphyPermission"></a>enum EphyPermission</h3><pre class="programlisting">typedef enum
+{
+	EPHY_PERMISSION_ALLOWED,
+	EPHY_PERMISSION_DENIED,
+	EPHY_PERMISSION_DEFAULT
+} EphyPermission;
+</pre></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-info-new"></a>ephy_permission_info_new ()</h3><pre class="programlisting"><GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK>* ephy_permission_info_new
+                                            (const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> permission);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>allowed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-info-copy"></a>ephy_permission_info_copy ()</h3><pre class="programlisting"><GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK>* ephy_permission_info_copy
+                                            (const <GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK> *info);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>info</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-info-free"></a>ephy_permission_info_free ()</h3><pre class="programlisting">void        ephy_permission_info_free       (<GTKDOCLINK HREF="EphyPermissionInfo">EphyPermissionInfo</GTKDOCLINK> *info);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>info</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-get-type"></a>ephy_permission_manager_get_type ()</h3><pre class="programlisting"><GTKDOCLINK HREF="GType">GType</GTKDOCLINK>       ephy_permission_manager_get_type
+                                            (void);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-add"></a>ephy_permission_manager_add ()</h3><pre class="programlisting">void        ephy_permission_manager_add     (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> permission);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>allow</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-remove"></a>ephy_permission_manager_remove ()</h3><pre class="programlisting">void        ephy_permission_manager_remove  (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-clear"></a>ephy_permission_manager_clear ()</h3><pre class="programlisting">void        ephy_permission_manager_clear   (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-test"></a>ephy_permission_manager_test ()</h3><pre class="programlisting"><a href="epiphany-ephy-permission-manager.html#EphyPermission">EphyPermission</a> ephy_permission_manager_test (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             const char *host,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="ephy-permission-manager-list"></a>ephy_permission_manager_list ()</h3><pre class="programlisting"><GTKDOCLINK HREF="GList">GList</GTKDOCLINK>*      ephy_permission_manager_list    (<GTKDOCLINK HREF="EphyPermissionManager">EphyPermissionManager</GTKDOCLINK> *manager,
+                                             <a href="epiphany-ephy-permission-manager.html#EphyPermissionType">EphyPermissionType</a> type);</pre><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+
+
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="epiphany-ephy-password-manager.html"><b>&lt;&lt; ephy-password-manager</b></a></td><td align="right"><a accesskey="n" href="epiphany-ephy-session.html"><b>ephy-session &gt;&gt;</b></a></td></tr></table></body></html>

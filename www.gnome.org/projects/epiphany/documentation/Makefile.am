@@ -1,4 +1,5 @@
-SUBDIRS=
+SUBDIRS=		\
+			reference
 
 urlpath=/projects/epiphany/documentation
 
