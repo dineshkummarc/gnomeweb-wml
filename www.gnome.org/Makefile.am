@@ -18,6 +18,7 @@ page_SCRIPTS=index.php3		\
   pr-borlandjoins.html \
   pr-gnome10.html \
   pr-gnome14.html \
+  pr-gnome20.html \
   pr-mandrakesoftjoins.html \
   pr-redflagjoins.html \
   pr-redhat.html \
