@@ -3,7 +3,7 @@ SUBDIRS =
 urlpath = /bounties
 
 # the html files are pre-generated with mono and php-cgi
-HTML_FILES := $(wildcard $(srcdir)/*.html)
+HTML_FILES := $(wildcard *.html)
 
 page_DATA = \
 	address-applet-anim.gif\
