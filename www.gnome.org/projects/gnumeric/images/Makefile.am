@@ -7,6 +7,7 @@ page_SCRIPTS= 				\
     down-active-2.png			\
     down-deactivated.png		\
     gnumeric-sample-rotated.png		\
+    gnumeric-sample-rtl.png		\
     gnumeric-sample-thumb.png		\
     gnumeric-sample.png			\
     gnumeric-sample.gnumeric		\
