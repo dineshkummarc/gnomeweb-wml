@@ -11,6 +11,7 @@ page_SCRIPTS=			\
 	faq.shtml       	\
 	foot.shtml  		\
 	index.shtml  		\
+	patch.shtml		\
 	screenshots14.shtml	\
 	stable.shtml		\
 	build.shtml		\
