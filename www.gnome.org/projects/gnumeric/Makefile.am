@@ -23,4 +23,4 @@ page_SCRIPTS=index.shtml		\
 include $(top_srcdir)/rules.common
 
 install-exec-hook:
-	rm -rf $(pagedir)/new-design-testing
+	ls -lR $(pagedir) >$(pagedir)/files
