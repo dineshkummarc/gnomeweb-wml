@@ -4,6 +4,7 @@ urlpath=/projects/agnubis/
 
 page_SCRIPTS=				\
 		foot.shtml		\
+		index.shtml		\
 		go.css			\
 		head.shtml
 
