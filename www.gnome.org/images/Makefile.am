@@ -21,7 +21,8 @@ menudot_images=\
 	bigdot-red.gif
 
 header_images=\
-	dev-framework.gif
+	dev-framework.gif	\
+	header-news.gif
 
 page_DATA=$(menudot_images)	\
 	$(header_images)	\
