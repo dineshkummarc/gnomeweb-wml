@@ -5,6 +5,7 @@ urlpath=/projects/gst/
 page_SCRIPTS =  bugs.html	\
 		contact.html	\
 		contrib.html	\
+		distros.php     \
 		download.html	\
 		gst.css		\
 		index.html	\
