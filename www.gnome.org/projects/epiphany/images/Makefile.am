@@ -15,6 +15,8 @@ page_SCRIPTS=		\
     1.1.0-preferences-general.png	\
     1.1.0-preferences-language-180.png	\
     1.1.0-preferences-language.png	\
+    1.1.0-preferences-language-add.png	\
+    1.1.0-preferences-language-add-180.png	\
     1.1.0-preferences-privacy-180.png	\
     1.1.0-preferences-privacy.png	\
     1.1.0-print-180.png	\
