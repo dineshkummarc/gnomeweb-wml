@@ -45,6 +45,8 @@ page_SCRIPTS=		\
 	weibull.png	\
 	weibull-tn.png	\
 	wheat.png	\
-	smartbookmarks.png
+	smartbookmarks.png	\
+	extensions-small.png	\
+	extensions.png
 
 include $(top_srcdir)/rules.common
