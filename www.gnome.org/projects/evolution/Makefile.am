@@ -25,6 +25,7 @@ page_DATA =			\
 	faq.shtml \
 	features.shtml \
 	hackfest-eplugin.shtml \
+	hackfest-ui.shtml \
 	information.shtml \
 	keys.shtml \
 	map.shtml \
