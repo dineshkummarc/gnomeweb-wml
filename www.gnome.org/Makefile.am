@@ -14,6 +14,8 @@ page_SCRIPTS = \
 
 page_DATA = \
 	index.html \
+	WGO-FOOTER.html \
+	WGO-HEADER.html \
 	robots.txt
 
 include $(top_srcdir)/rules.common
