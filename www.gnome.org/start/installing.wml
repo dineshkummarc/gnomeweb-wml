@@ -1,3 +1,10 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Getting Started - Installing source" imgid="downloadingsource">
+<content>
+
 <?
 
 /* Initialize Default Mirror and platform */ 
@@ -29,31 +36,23 @@ $linkstring;
 
 /* Check for ftp or http at start of string and strip */
 
-if (reg_match("^ftp://",$strUrl)) {
-	$linkstring = reg_replace("^ftp://","",$strUrl);
+if (ereg("^ftp://",$strUrl)) {
+	$linkstring = ereg("^ftp://","",$strUrl);
 }
-if (reg_match("^http://",$strUrl)) {
-	$linkstring = reg_replace("^http://","",$strUrl);
+if (ereg("^http://",$strUrl)) {
+	$linkstring = ereg("^http://","",$strUrl);
 }
 
 /* Check for path at end of string and strip */
 
-$rstring = reg_search("/",$linkstring);
-$strMir = reg_replace("$rstring$","",$linkstring);
+$rstring = ereg("/",$linkstring);
+$strMir = ereg_replace("$rstring$","",$linkstring);
 
-$title="Getting Started with GNOME";
-include "../include/header.phtml";
-$title="Getting GNOME Sources";
-include "../include/table-start.phtml";
 ?>
-<p>
-<a href="index.shtml">[Table of Contents]</a>
-<a href="../">[Up]</a>
-<p>
-<table border="1" cellpadding="4" cellspacing="0" width="100%">
+<table border="0" cellpadding="4" cellspacing="0" width="90%">
   <tr>
-    <th valign="middle"><a name="Top">Current Links</a></th>
-    <th valign="middle">Project Comments</th>
+    <th valign="middle" bgcolor="#cde6ff"><a name="Top">Current Links</a></th>
+    <th valign="middle" bgcolor="#cde6ff">Project Comments</th>
   </tr>
   <tr>
     <td valign="top" align="left">
@@ -61,7 +60,7 @@ include "../include/table-start.phtml";
 	<? echo $strMir ?></small>
     <form method="POST" action="gnometar-new.phtml" name="mirrors">
       <input type="hidden" name="mirror" value="change"><p><select name="D1" size="1">
-		<option selected value=<? echo $strUrl ?>><? echo $strMir ?></option>
+		<option selected value="<? echo $strUrl ?>"><? echo $strMir ?></option>
         <option value="ftp://ftp.gnome.org/pub/GNOME/">ftp.gnome.org(US)(Default)</option>
  	<option value="ftp://gnomeftp.wgn.net/pub/gnome/">gnomeftp.wgn.net(US)</option>
         <option value="ftp://epoch.res.cmu.edu/mirrors/ftp.gnome.org/">epoch.res.cmu.edu(US)</option>
@@ -136,28 +135,28 @@ include "../include/table-start.phtml";
 $dirname = "/ftp/pub/GNOME/stable/latest/sources/";
 opendir($dirname);
 $dir[] = readdir();
-while($dir[]) ;
+while($dir[]) {
 	$dir[] = readdir();
-endwhile;
+}
 rewinddir();
 closedir();
 reset($dir);
 sort($dir);
 $j = 0;
-while($j < count($dir));
-	if (eregi("^\.",$dir[$j]));
-	else ;
+while($j < count($dir)) {
+	if (eregi("^\.",$dir[$j])) {
+	} else {
 		$i = strrchr($dir[$j], "-");
-		if ($i) ;
+		if ($i) {
 			$tmp = substr($dir[$j], 0, strlen($dir[$j]) - strlen($i));
 			echo "<!-- adding ", $tmp, " -->\n";
 			$sources[$tmp] = $dir[$j];
-		endif;
-	endif;
+		}
+	}
 	$j++;
-endwhile;
+}
 unset($dir);
->
+?>
 
     <p><a name="Required"><strong>Required Downloads</strong></a><br>
     <strong>Base library downloads:<br>
@@ -262,7 +261,7 @@ echo $sources["gdm"], ">", $sources["gdm"], "</a></br>";
 
 echo "<a href=", $strUrl, "stable/latest/sources/";
 echo $sources["xchat"], ">", $sources["xchat"], "</a></br>";
->
+?>
 
 	</small>
 	</td>
@@ -307,12 +306,6 @@ environment, no changes are necessary.  Simply start your X session or log in th
   </td>
  </tr>
 </table>
-<p>
-<a href="index.shtml">[Table of Contents]</a>
-<a href="../">[Up]</a>
-<p>
-<?
-include "../include/table-end.html";
-include "../include/footer.html";
->
 
+</content>
+</document>
