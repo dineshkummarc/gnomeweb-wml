@@ -20,6 +20,8 @@ page_DATA =			\
 	1.4.6.shtml		\
 	1.4.shtml		\
 	2.0.0.shtml		\
+	2.0.1.shtml		\
+	2.0.2.shtml		\
 	head.shtml		\
 	foot.shtml
 

@@ -4,6 +4,7 @@ urlpath=/projects/evolution
 
 page_DATA =			\
 	go.css			\
+	pngbehavior.htc \
 	arch.shtml   		\
 	bugs.shtml   		\
 	bugday.shtml   		\

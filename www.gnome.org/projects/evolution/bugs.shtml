@@ -1,96 +1,108 @@
 <!--#set var="title" value="Evolution Bugs" -->
+<!--#set var="section" value="developer" -->
 <!--#include virtual="head.shtml" -->
 
-<p><h1>Evolution Bugs</h1>
+<h2>Evolution Bugs</h2>
 
-<p>The bugzilla system for evolution resides at <a href="http://bugzilla.ximian.com/">http://bugzilla.ximian.com</a>
+<p>The bugzilla system for evolution resides at <a href="http://bugzilla.ximian.com/">http://bugzilla.ximian.com</a></p>
 
-<p>There is a bug overview report for 2.0.3 at <a href="http://bugzilla.ximian.com/target_reports.cgi?milestone=2.0.3%3A+">http://bugzilla.ximian.com/target_reports.cgi?milestone=2.0.3%3A+</a>
+<p>There is a bug overview report for 2.0.3 at <a href="http://bugzilla.ximian.com/target_reports.cgi?milestone=2.0.3%3A+">http://bugzilla.ximian.com/target_reports.cgi?milestone=2.0.3%3A+</a></p>
 
-<p>There is a bug overview report for 2.1 at <a href="http://bugzilla.ximian.com/target_reports.cgi?milestone=2.1%3A+">http://bugzilla.ximian.com/target_reports.cgi?milestone=2.1%3A+</a>
+<p>There is a bug overview report for 2.1 at <a href="http://bugzilla.ximian.com/target_reports.cgi?milestone=2.1%3A+">http://bugzilla.ximian.com/target_reports.cgi?milestone=2.1%3A+</a></p>
 
-<p>Individual milestone information is at <a href="http://bugzilla.ximian.com/evotarget.cgi">http://bugzilla.ximian.com/evotarget.cgi</a>
+<p>Individual milestone information is at <a href="http://bugzilla.ximian.com/evotarget.cgi">http://bugzilla.ximian.com/evotarget.cgi</a></p>
 
-<p>A quick guide to submitting a bug is at <a href="http://bugzilla.ximian.com/bug-HOWTO.html">http://bugzilla.ximian.com/bug-HOWTO.html</a>
+<p>A quick guide to submitting a bug is at <a href="http://bugzilla.ximian.com/bug-HOWTO.html">http://bugzilla.ximian.com/bug-HOWTO.html</a></p>
 
-<p><h2>Getting a debug backtrace</h2>
+<h3>Getting a debug backtrace</h3>
 
-To get a backtrace of a process, you can either directly run this process under gdb, or attach gdb to a running instance of the process. For getting a debug backtrace for evolution, you would be interested in these process-files.
-
-<ol>
-<li> ${install_prefix}/bin/evolution
-<li> ${install_prefix}/libexec/evolution-data-server-1.0
-<li> ${install_prefix}/libexec/evolution/${version}/evolution-alarm-notify
-<li> ${install_prefix}/libexec/evolution/${version}/evolution-exchange-storage
-</ol>
-
-<p> <h3> Follow these steps to run the process under gdb </h3>
+<p>To get a backtrace of a process, you can either directly run this process under gdb, or attach gdb to a running instance of the process. For getting a debug backtrace for evolution, you would be interested in these process-files.</p>
 
 <ol>
-<li> Run the command 'gdb ${install_prefix}/path/of/process-file'
-<li> At the gdb prompt type 'run'
-<li> To get the backtrace at a particular instant, press ctrl+c, and you should get the gdb prompt. You could also reach the gdb prompt directly, if the process crashes.
-<li> At the gdb prompt type 'thread apply all bt' to get the backtrace
+  <li>${install_prefix}/bin/evolution</li>
+
+  <li>${install_prefix}/libexec/evolution-data-server-1.0</li>
+
+  <li>${install_prefix}/libexec/evolution/${version}/evolution-alarm-notify</li>
+
+  <li>${install_prefix}/libexec/evolution/${version}/evolution-exchange-storage</li>
 </ol>
 
-<p> <h3> To attach gdb to a running process </h3>
+<h4>Follow these steps to run the process under gdb</h4>
 
 <ol>
-<li> Get the process id of the process
-<li> Run the command 'gdb -p &lt;process id&gt;'
-<li> At the gdb prompt, type 'thread apply all bt' to get the backtrace.
+  <li>Run the command 'gdb ${install_prefix}/path/of/process-file'</li>
+
+  <li>At the gdb prompt type 'run'</li>
+
+  <li>To get the backtrace at a particular instant, press ctrl+c, and you should get the gdb prompt. You could also reach the gdb prompt directly, if the process crashes.</li>
+
+  <li>At the gdb prompt type 'thread apply all bt' to get the backtrace</li>
 </ol>
 
-<p> You could also type 'continue' at the gdb prompt and proceed as usual and then press ctrl+c, to get the gdb prompt again.
-
-<p><h2>Camel verbose debug</h2>
-
-You can debug the communications with your mail server with environment variable CAMEL_VERBOSE_DEBUG.
+<h4>To attach gdb to a running process</h4>
 
 <ol>
-<li>Exit evolution and run the command 'evolution --force-shutdown'
-<li>Run the command 'env CAMEL_VERBOSE_DEBUG=1 evolution >& /tmp/camel.out'
-<li>Use evolution like usual
+  <li>Get the process id of the process</li>
+
+  <li>Run the command 'gdb -p &lt;process id&gt;'</li>
+
+  <li>At the gdb prompt, type 'thread apply all bt' to get the backtrace.</li>
 </ol>
 
-The server traffic will be logged to /tmp/camel.out file delimited by the words "sending:" and "receiving:".  Certain information such as usernames and passwords, and most message content will be hidden or not printed.
+<p>You could also type 'continue' at the gdb prompt and proceed as usual and then press ctrl+c, to get the gdb prompt again.</p>
 
-<p>From evolution 1.5.5 onwards, a simpler debug variable with more features has been added, CAMEL_DEBUG.  For most cases, simply use CAMEL_DEBUG=all instead of CAMEL_VEBOSE_DEBUG=1.
+<h3>Camel verbose debug</h3>
 
-<p> <h2> GroupWise Debug </h2>
-
-You can debug the communications with GroupWise server with GROUPWISE_DEBUG environment variable. Evolution Data Server communicates with GroupWise server using SOAP over http for accessing calendar and contacts data. When Evolution Data Server is run with GROUPWISE_DEBUG set, the http headers and body (xml conent) of SOAP request/responses are printed to standard output. 
+<p>You can debug the communications with your mail server with environment variable CAMEL_VERBOSE_DEBUG.</p>
 
 <ol>
-<li> Exit evolution and run the command 'evolution --force-shutdown'
-<li> Run the command 'env GROUPWISE_DEBUG=1 ${install_prefix}/libexec/evolution-data-server-1.x >& /tmp/groupwise.out' 
-<li> start evolution and access GroupWise calendar or contacts
+  <li>Exit evolution and run the command 'evolution --force-shutdown'</li>
+
+  <li>Run the command 'env CAMEL_VERBOSE_DEBUG=1 evolution &gt;&amp; /tmp/camel.out'</li>
+
+  <li>Use evolution like usual</li>
 </ol>
 
-Evolution process also communicates with GroupWise server during Novell GroupWise account setup. One can run evolution after setting the GROUPWISE_DEBUG in the same manner described above to debug any Novell GroupWise account setup related problems. 
+<p>The server traffic will be logged to /tmp/camel.out file delimited by the words "sending:" and "receiving:". Certain information such as usernames and passwords, and most message content will be hidden or not printed.</p>
 
-<p> <h2> Exchange Connector Debug </h2>
+<p>From evolution 1.5.5 onwards, a simpler debug variable with more features has been added, CAMEL_DEBUG. For most cases, simply use CAMEL_DEBUG=all instead of CAMEL_VEBOSE_DEBUG=1.</p>
 
-You can debug the communications with Exchange server using the E2K_DEBUG environment variable. Exchange connector runs as a separate process [evolution-exchange-storage]. You can run evolution-exchange-storage with E2K_DEBUG set to a value
-from 1 to 5:
+<h3>GroupWise Debug</h3>
+
+<p>You can debug the communications with GroupWise server with GROUPWISE_DEBUG environment variable. Evolution Data Server communicates with GroupWise server using SOAP over http for accessing calendar and contacts data. When Evolution Data Server is run with GROUPWISE_DEBUG set, the http headers and body (xml conent) of SOAP request/responses are printed to standard output.</p>
 
 <ol>
-E2K_DEBUG=1 =&gt; Print each request and response <br/>
-E2K_DEBUG=2 =&gt; #1 plus all request and response headers <br/>
-E2K_DEBUG=3 =&gt; #2 plus bodies (except text/html) <br/>
-E2K_DEBUG=4 =&gt; #3 plus global catalog debug too <br/>
-E2K_DEBUG=5 =&gt; #4 plus text/html bodies too <br/>
+  <li>Exit evolution and run the command 'evolution --force-shutdown'</li>
+
+  <li>Run the command 'env GROUPWISE_DEBUG=1 ${install_prefix}/libexec/evolution-data-server-1.x &gt;&amp; /tmp/groupwise.out'</li>
+
+  <li>start evolution and access GroupWise calendar or contacts</li>
 </ol>
 
-You can also append 'm' to E2K_DEBUG to see mail stub debugging: it will print out everything read to or written from the stub socket. (You can set E2K_DEBUG=m on evolution itself as well, to see the conversation from the other side.)
+<p>Evolution process also communicates with GroupWise server during Novell GroupWise account setup. One can run evolution after setting the GROUPWISE_DEBUG in the same manner described above to debug any Novell GroupWise account setup related problems.</p>
 
-<p>Follow these steps to create a log file containing the webdav traffic.
+<h3>Exchange Connector Debug</h3>
+
+<p>You can debug the communications with Exchange server using the E2K_DEBUG environment variable. Exchange connector runs as a separate process [evolution-exchange-storage]. You can run evolution-exchange-storage with E2K_DEBUG set to a value from 1 to 5:</p>
+
+<div style="margin-left: 2em">
+  E2K_DEBUG=1 =&gt; Print each request and response<br>
+  E2K_DEBUG=2 =&gt; #1 plus all request and response headers<br>
+  E2K_DEBUG=3 =&gt; #2 plus bodies (except text/html)<br>
+  E2K_DEBUG=4 =&gt; #3 plus global catalog debug too<br>
+  E2K_DEBUG=5 =&gt; #4 plus text/html bodies too<br>
+</div>
+
+<p>You can also append 'm' to E2K_DEBUG to see mail stub debugging: it will print out everything read to or written from the stub socket. (You can set E2K_DEBUG=m on evolution itself as well, to see the conversation from the other side.)</p>
+
+<p>Follow these steps to create a log file containing the webdav traffic.</p>
 
 <ol>
-<li> Exit evolution and run the command 'evolution --force-shutdown'
-<li> Run the command 'env E2K_DEBUG=4 ${install_prefix}/libexec/evolution-exchange-storage >& /tmp/exchange.out' [ You can replace 4 in the command with any of the digits mentioned earlier ] 
-<li> Use evolution like usual.
+  <li>Exit evolution and run the command 'evolution --force-shutdown'</li>
+
+  <li>Run the command 'env E2K_DEBUG=4 ${install_prefix}/libexec/evolution-exchange-storage &gt;&amp; /tmp/exchange.out' [ You can replace 4 in the command with any of the digits mentioned earlier ]</li>
+
+  <li>Use evolution like usual.</li>
 </ol>
-
-
 <!--#include virtual="foot.shtml"-->

@@ -1,127 +1,113 @@
 <!--#set var="title" value="Evolution" -->
+<!--#set var="section" value="developer" -->
 <!--#include virtual="head.shtml" -->
 
-<p><h2>Evolution and Evolution Data Server</h2> 
+<h2>Evolution and Evolution Data Server</h2>
 
-<p>There are two major components involved the operation of Evolution,
-the client and the data server.  The client, called "Evolution", is
-responsible for what the user sees on the screen.  The data server,
-called "Evolution Data Server" is responsible for managing calendar
-and addressbook information.
+<p>There are two major components involved the operation of Evolution, the client and the data server. The client, called "Evolution", is responsible for what the user sees on the screen. The data server, called "Evolution Data Server" is responsible for managing calendar and addressbook information.</p>
 
-<p><h2>Evolution Data Server</h2>
+<h2>Evolution Data Server</h2>
 
-<p>The Evolution Data Server resides in the evolution-data-server <a
-href="cvs.html">CVS</a> module or the evolution-data-server package and
-is logically separated into client libraries and the backend implementations.  
+<p>The Evolution Data Server resides in the evolution-data-server <a href="cvs.html">CVS</a> module or the evolution-data-server package and is logically separated into client libraries and the backend implementations.</p>
 
-<p>There are currently client libraries for addressbooks and calendars
-(calendars in this case referring to events and tasks), although this
-does not preclude the addition of other major types of data stores.
-The client libraries use CORBA (via bonobo) to communicate with the
-backends, but the communications layer is hidden from the user.
+<p>There are currently client libraries for addressbooks and calendars (calendars in this case referring to events and tasks), although this does not preclude the addition of other major types of data stores. The client libraries use CORBA (via bonobo) to communicate with the backends, but the communications layer is hidden from the user.</p>
 
-<p>A backend implementation is divided into two parts, the corba
-pieces which handle incoming requests and outgoing responses and the
-pluggable C backends which do most of the work communicating with the
-storage mechanism.  Both these pieces reside in a separate process to
-handle multiple clients properly.  The corba piece is asyncrhonous,
-the calls are made "oneway" and the responses are sent "oneway". The
-pluggable C backends register themselves with the corba piece as a
-handler for various protocol types (and in the case of the calendar
-iCalendar object types) and when the corba piece gets a request for a
-calendar or addressbook it instantiates an appropriate C backend.  The
-backends are asynchronous in nature, however to simplify the building
-of a backend you can subclass the synchronous backend class and
-implement it instead.
+<p>A backend implementation is divided into two parts, the corba pieces which handle incoming requests and outgoing responses and the pluggable C backends which do most of the work communicating with the storage mechanism. Both these pieces reside in a separate process to handle multiple clients properly. The corba piece is asyncrhonous, the calls are made "oneway" and the responses are sent "oneway". The pluggable C backends register themselves with the corba piece as a handler for various protocol types (and in the case of the calendar iCalendar object types) and when the corba piece gets a request for a calendar or addressbook it instantiates an appropriate C backend. The backends are asynchronous in nature, however to simplify the building of a backend you can subclass the synchronous backend class and implement it instead.</p>
 
-<p><h2>Evolution</h2>
+<h2>Evolution</h2>
 
-<p>Evolution integrates calendar, addressbook and mail into a single
-user interface.  Each of these pieces is implemented as a separate
-Bonobo component and is embedded into the main UI which is called the
-Evolution shell.</p>
+<p>Evolution integrates calendar, addressbook and mail into a single user interface. Each of these pieces is implemented as a separate Bonobo component and is embedded into the main UI which is called the Evolution shell.</p>
 
-<p>Each Evolution component has to implement a canonical
-<tt>Evolution::Component</tt> CORBA interface; when the shell starts
-up it queries Bonobo Activation asking for a list of all the Bonobo
-components that support that interfaces, activates them, and embeds
-them.</p>
+<p>Each Evolution component has to implement a canonical <tt>Evolution::Component</tt> CORBA interface; when the shell starts up it queries Bonobo Activation asking for a list of all the Bonobo components that support that interfaces, activates them, and embeds them.</p>
 
-<p><h2>Camel</h2>
+<h2>Camel</h2>
+<p><strong>C</strong>amel is <strong>A</strong> <strong>M</strong>ail ac<strong>E</strong>ss <strong>L</strong>ibrary.</p>
 
-<b>C</b>amel is <b>A</b> <b>M</b>ail ac<b>E</b>ss <b>L</b>ibrary.
-<p>
-True indeed, however <b>Camel</b> doesn't really stand for
-anything like that.  It's just a short catchy name.
-<p>
+<p>True indeed, however <strong>Camel</strong> doesn't really stand for anything like that. It's just a short catchy name.</p>
 
-<p>Camel resides in the <i><a
-href="http://cvs.gnome.org/viewcvs/evolution/camel">camel</a></i>
-directory of the <i>evolution</i> cvs module.  It is a very complete
-mail user agent library for internet mail access, sending and processing,
-loosely based on JavaMail.  It totals nearly
-100KLOC of &quot;Pure C&quot;.
-<p>
-Conceptually Camel contains two main parts, a library of email and MIME related
-utilities, and an API and set of implementations for mail storage and
-retrieval.  Although these are integrated into the one library, with
-implementations provided using a simple plugin system.
-<p>
-Like JavaMail it works via a synchronous multi-threading api.
-Because of this Camel uses its own object system, historically since
-GtkObject didn't provide any multithread capability, and it continues
-to because it has evolved features not present in GObject that greatly
-simplify multithreaded programming.  Camel Objects are lighter weight
-and also provide thread-safe event handling in an efficient manner.
-<p>
-At its heart Camel merely implements RFC's, many of them.  An example
-of some of the RFC's it implements or references:
+<p>Camel resides in the <em><a href="http://cvs.gnome.org/viewcvs/evolution/camel">camel</a></em> directory of the <em>evolution</em> cvs module. It is a very complete mail user agent library for internet mail access, sending and processing, loosely based on JavaMail. It totals nearly 100KLOC of "Pure C".</p>
+
+<p>Conceptually Camel contains two main parts, a library of email and MIME related utilities, and an API and set of implementations for mail storage and retrieval. Although these are integrated into the one library, with implementations provided using a simple plugin system.</p>
+
+<p>Like JavaMail it works via a synchronous multi-threading api. Because of this Camel uses its own object system, historically since GtkObject didn't provide any multithread capability, and it continues to because it has evolved features not present in GObject that greatly simplify multithreaded programming. Camel Objects are lighter weight and also provide thread-safe event handling in an efficient manner.</p>
+
+<p>At its heart Camel merely implements RFC's, many of them. An example of some of the RFC's it implements or references:</p>
+
 <ul>
-<li>RFC 821 - Simple Mail Transfer Protocol (SMTP)
-<li>RFC 822 - Message format of internet mail messages
-<li>RFC 1642 - UTF-7 encoding
-<li>RFC 1652 - SMTP 8 bit extension
-<li>RFC 1730 - IMAP version 4
-<li>RFC 1738 - Uniform Resource Locators
-<li>RFC 1808 - relative URLs
-<li>RFC 1896 - text/enriched
-<li>RFC 1939 - POP v 3.
-<li>RFC 2034 - SMTP enhanced error code extension
-<li>RFC 2045 - MIME message format
-<li>RFC 2046 - MIME media types
-<li>RFC 2047 - MIME header format
-<li>RFC 2060 - IMAP version 4.1
-<li>RFC 2070 - Internationlisation of HTML.
-<li>RFC 2184 - MIME parameter format
-<li>RFC 2554 - SMTP authentication extension
-<li>RFC 2595 - TLS with IMAP, POP3 and ACAP
-<li>RFC 2632 - S/MIME v3 certificate handling
-<li>RFC 2633 - S/MIME v3 message format
-<li>RFC 2683 - IMAP4 implementation recommendations
-<li>RFC 2831 - Digest Agorithm for SASL Authentication
-<li>RFC 3156 - OpenPGP MIME message format
-<li>... and many more!
+  <li><a href="http://www.faqs.org/rfcs/rfc821.html">RFC 821</a> - Simple Mail Transfer Protocol (SMTP)</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc822.html">RFC 822</a> - Message format of internet mail messages</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1642.html">RFC 1642</a> - UTF-7 encoding</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1652.html">RFC 1652</a> - SMTP 8 bit extension</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1730.html">RFC 1730</a> - IMAP version 4</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1738.html">RFC 1738</a> - Uniform Resource Locators</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1808.html">RFC 1808</a> - relative URLs</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1896.html">RFC 1896</a> - text/enriched</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc1939.html">RFC 1939</a> - POP v 3.</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2034.html">RFC 2034</a> - SMTP enhanced error code extension</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2045.html">RFC 2045</a> - MIME message format</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2046.html">RFC 2046</a> - MIME media types</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2047.html">RFC 2047</a> - MIME header format</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2060.html">RFC 2060</a> - IMAP version 4.1</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2070.html">RFC 2070</a> - Internationlisation of HTML.</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2184.html">RFC 2184</a> - MIME parameter format</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2554.html">RFC 2554</a> - SMTP authentication extension</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2595.html">RFC 2595</a> - TLS with IMAP, POP3 and ACAP</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2632.html">RFC 2632</a> - S/MIME v3 certificate handling</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2633.html">RFC 2633</a> - S/MIME v3 message format</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2683.html">RFC 2683</a> - IMAP4 implementation recommendations</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc2831.html">RFC 2831</a> - Digest Agorithm for SASL Authentication</li>
+
+  <li><a href="http://www.faqs.org/rfcs/rfc3156.html">RFC 3156</a> - OpenPGP MIME message format</li>
+
+  <li>... and many more!</li>
 </ul>
 
-<p>
-But as well as implementing RFC's it provides a consistent high-level
-and generally high performance abstraction for working with mail
-folders and messages.  Although it provides no direct display mechisms it
-provides many utilities and mechanisms to support the MUA.
-<ul>
-<li>Searching, including full body indexing
-<li>Message threading
-<li>Message parsing and creation
-<li>Addressing
-<li>Mail transport
-<li>Mail storage and retrieval
-<li>Stream processing of message content
-<li>Event notifications
-<li>URL and URI parsing and creation
-<li>Virtual folders
-<li>Email filtering
-<li>per-message and per-folder metadata
-</ul>
+<p>But as well as implementing RFC's it provides a consistent high-level and generally high performance abstraction for working with mail folders and messages. Although it provides no direct display mechisms it provides many utilities and mechanisms to support the MUA.</p>
 
+<ul>
+  <li>Searching, including full body indexing</li>
+
+  <li>Message threading</li>
+
+  <li>Message parsing and creation</li>
+
+  <li>Addressing</li>
+
+  <li>Mail transport</li>
+
+  <li>Mail storage and retrieval</li>
+
+  <li>Stream processing of message content</li>
+
+  <li>Event notifications</li>
+
+  <li>URL and URI parsing and creation</li>
+
+  <li>Virtual folders</li>
+
+  <li>Email filtering</li>
+
+  <li>per-message and per-folder metadata</li>
+</ul>
 <!--#include virtual="foot.shtml"-->
