@@ -1,4 +1,4 @@
-SUBDIRS=
+SUBDIRS =
 
 urlpath=/projects/gnome-print/home
 
@@ -8,3 +8,6 @@ page_SCRIPTS= \
 	copying.html \
 	download.html \
 	meta
+
+include $(top_srcdir)/rules.common
+

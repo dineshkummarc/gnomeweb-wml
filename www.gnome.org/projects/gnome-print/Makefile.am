@@ -1,4 +1,4 @@
-SUBDIRS =
+SUBDIRS = library images home
 
 urlpath=/projects/gnome-print/
 
@@ -8,3 +8,4 @@ page_SCRIPTS = \
 	meta
 
 include $(top_srcdir)/rules.common
+
