@@ -28,6 +28,7 @@ page_SCRIPTS = \
 	redhat.html \
 	sunjoins.html \
 	summit2003.html \
-	gnome2book.html
+	gnome2book.html \
+	guadec5-speakers.html
 
 include $(top_srcdir)/rules.common
