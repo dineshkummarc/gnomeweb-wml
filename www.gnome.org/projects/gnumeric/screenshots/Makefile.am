@@ -10,6 +10,7 @@ page_SCRIPTS=index.html			\
 	    gnumeric7.gif		\
 	    gnumeric8.gif		\
 	    left-align.gif		\
-	    zoom.jpeg	    
+	    zoom.jpeg	    		\
+	    graph-sample.gif
 	    	    
 include $(top_srcdir)/rules.common
