@@ -210,6 +210,8 @@ server_cleanup (CORBA_ORB                 orb,
 int
 main (int argc, char *argv[])
 {
+	CORBA_char filename[] = "byteseq.ior";
+
 	Examples_ByteSeq_Storage servant = CORBA_OBJECT_NIL;
 
 	CORBA_Environment  ev[1];
@@ -221,10 +223,12 @@ main (int argc, char *argv[])
 	servant = server_activate_service (global_orb, ev);
 	abort_if_exception(ev, "activating service failed");
 
-	server_export_service_to_stream (global_orb, 
-					 servant, 
-					 stdout, 
-					 ev);
+	g_print ("Writing service reference to: %s\n\n", filename);
+
+	server_export_service_to_file (global_orb, 
+				       servant, 
+				       filename, 
+				       ev);
 	abort_if_exception(ev, "exporting IOR failed");
 	
 	server_run (global_orb, ev);

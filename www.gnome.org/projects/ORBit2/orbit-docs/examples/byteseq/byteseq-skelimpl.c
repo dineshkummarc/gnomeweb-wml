@@ -48,7 +48,33 @@ chunk_create (CORBA_long maximum)
         chunk->_maximum = maximum;
         chunk->_length  = 0;
 
+	/* lifetime of _buffer corresponds to chunk */
+	CORBA_sequence_set_release (chunk, TRUE);
+
         return chunk;
+}
+
+static
+void
+chunk_exchange (Examples_ByteSeq_Chunk* c, 
+		Examples_ByteSeq_Chunk* d)
+{
+	Examples_ByteSeq_Chunk bucket[1];
+	
+	bucket->_buffer  = c->_buffer;
+	bucket->_maximum = c->_maximum;
+	bucket->_length  = c->_length;
+	/* do not copy  c->_release */
+
+	c->_buffer  = d->_buffer;
+	c->_maximum = d->_maximum;
+	c->_length  = d->_length;
+	/* keep original c->_release */
+
+	d->_buffer  = bucket->_buffer;
+	d->_maximum = bucket->_maximum;
+	d->_length  = bucket->_length;
+	/* keep original d->_release */
 }
 
 static
@@ -56,10 +82,15 @@ Examples_ByteSeq_Chunk*
 chunk_clone (const Examples_ByteSeq_Chunk* chunk)
 {
         CORBA_long i = 0;
-        Examples_ByteSeq_Chunk* clone = chunk_create (chunk->_maximum);
-                                                                               
-        g_assert (chunk->_length <= chunk->_maximum);
-                                                                               
+	Examples_ByteSeq_Chunk* clone = Examples_ByteSeq_Chunk__alloc ();
+
+        clone->_buffer  = Examples_ByteSeq_Chunk_allocbuf (chunk->_maximum);
+	clone->_maximum = chunk->_maximum;
+	clone->_length  = chunk->_length;
+
+	/* lifetime of _buffer corresponds to chunk */
+	CORBA_sequence_set_release (clone, TRUE);
+
         for (i=0; i<(chunk->_length); ++i)
         {
                 clone->_buffer[i] = chunk->_buffer[i];
@@ -174,11 +205,7 @@ impl_Examples_ByteSeq_Storage_exchange(impl_POA_Examples_ByteSeq_Storage *
 {
    /* ------   insert method code here   ------ */
    fprintf (stderr, "#");
-   {
 
-	   Examples_ByteSeq_Chunk* bucket = servant->chunk;
-	   servant->chunk = chunk;
-	   chunk=bucket;
-   }
+   chunk_exchange (servant->chunk, chunk);
    /* ------ ---------- end ------------ ------ */
 }

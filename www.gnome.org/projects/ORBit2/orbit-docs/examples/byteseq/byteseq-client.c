@@ -105,10 +105,10 @@ client_cleanup (CORBA_ORB                 orb,
  *
  */
 static
-Examples_ByteSeq_Storage
-client_import_object_from_stream (CORBA_ORB          orb,
-				  FILE              *stream,
-				  CORBA_Environment *ev)
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
 {
 	CORBA_Object obj = CORBA_OBJECT_NIL;
 	gchar *objref=NULL;
@@ -127,6 +127,30 @@ client_import_object_from_stream (CORBA_ORB          orb,
  *
  */
 static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+                                 CORBA_char        *filename,
+                                 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+  
+        /* write objref to file */
+          
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+     
+        obj= client_import_service_from_stream (orb, file, ev);
+         
+        fclose (file);
+ 
+        return obj;
+}
+ 
+/**
+ *
+ */
+static
 Examples_ByteSeq_Chunk*
 chunk_create (CORBA_long maximum)
 {
@@ -136,10 +160,12 @@ chunk_create (CORBA_long maximum)
         /* FIXME, handle out of memory */
         chunk->_maximum = maximum;
         chunk->_length  = 0;
-         
+
+	/* lifetime of _buffer corresponds to chunk */
+	CORBA_sequence_set_release (chunk, TRUE);         
+
         return chunk;
 }
-
 
 /**
  *
@@ -152,16 +178,18 @@ client_run_set (Examples_ByteSeq_Storage  servant,
 	CORBA_long maximum=2048;
 	CORBA_long length =0;
 
-	Examples_ByteSeq_Chunk* chunk = chunk_create (maximum+1);
+	Examples_ByteSeq_Chunk* chunk = NULL;
+
+	chunk = chunk_create (maximum+1);
 
 	/* increment sequence length, beginning with 0 up to 2048 */
-	for (length=0; length<maximum+1; ++length)
+	for (length=0; length<maximum+1; length+=8)
 	{
 		Examples_ByteSeq_Storage_set (servant, chunk, ev); 
 		if (raised_exception(ev)) return;
 
-		chunk->_buffer [length+1] = (CORBA_octet) 0xFF;
-		chunk->_length = length+1;
+		chunk->_buffer [(length+1) % maximum] = (CORBA_octet) 0xFF;
+		chunk->_length = ((length+1) % maximum) + 1;
 	}
 	CORBA_free (chunk);
 }
@@ -185,9 +213,7 @@ client_run_get (Examples_ByteSeq_Storage  servant,
 		chunk = Examples_ByteSeq_Storage_get (servant, ev); 
 		if (raised_exception(ev)) return;
 
-		/* use octet sequence */ 
-
-		CORBA_free (chunk);
+ 		CORBA_free (chunk);
 	}
 }
 
@@ -213,7 +239,7 @@ client_run_exchange (Examples_ByteSeq_Storage  servant,
 		Examples_ByteSeq_Storage_exchange (servant, chunk, ev); 
 		if (raised_exception(ev)) return;
 
-		/* use octet sequence */ 
+		/* now use octet sequence */ 
 	}
 
 	CORBA_free (chunk);
@@ -225,6 +251,8 @@ client_run_exchange (Examples_ByteSeq_Storage  servant,
 int
 main(int argc, char* argv[])
 {
+	CORBA_char *filename = "byteseq.ior";
+
         Examples_ByteSeq_Storage  servant = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
@@ -233,9 +261,12 @@ main(int argc, char* argv[])
 	client_init (&argc, argv, &global_orb, ev);
 	abort_if_exception(ev, "init failed");
 
-	servant = client_import_object_from_stream (global_orb,
-						    stdin,
-						    ev);
+	g_print ("Reading service reference from file \"%s\"\n", filename);
+
+	servant = (Examples_ByteSeq_Storage) 
+		client_import_service_from_file (global_orb,
+						filename,
+						ev);
         abort_if_exception(ev, "exporting IOR failed");
 
 	client_run_set (servant, ev);

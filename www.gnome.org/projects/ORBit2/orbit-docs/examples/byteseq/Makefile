@@ -1,10 +1,10 @@
-PREFIX=/usr
+PREFIX=/opt
 CC = gcc
 TARGETS=byteseq-client byteseq-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS= -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
          -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
-         -I$(PREFIX)/lib/glib-2.0/include
+         -I$(PREFIX)/lib/glib-2.0/include 
 LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
              -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
 IDLOUT=byteseq-common.c byteseq-stubs.c byteseq-skels.c byteseq.h
