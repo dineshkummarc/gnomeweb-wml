@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/start/2.2/figures
 
-#page_SCRIPTS=
+page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
 
