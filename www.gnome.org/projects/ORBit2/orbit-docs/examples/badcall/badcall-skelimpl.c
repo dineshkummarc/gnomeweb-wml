@@ -105,8 +105,6 @@ impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
    switch ((servant->counter++) % 3)
    {
    case 0:
-   case 1:
-   case 2:
    {
 	   Examples_BadCall_Foo dummy_foo = {0.0};
 
@@ -119,7 +117,24 @@ impl_Examples_BadCall_trigger(impl_POA_Examples_BadCall * servant,
            return dummy_foo;
            break;
    }
-                                                                                
+   case 1:
+   case 2:
+   {
+	   Examples_BadCall_Foo dummy_foo = {0.0};
+
+	   Examples_BadCall_SingleParam* ex_param
+		   = Examples_BadCall_SingleParam__alloc();
+	   ex_param->mesg = CORBA_string_dup ("describing the problem for client");
+
+	   /* FIXME, define ownership */
+           CORBA_exception_set (ev, 
+				CORBA_USER_EXCEPTION,
+                                ex_Examples_BadCall_SingleParam,
+                                ex_param); /* exception has members */
+ 	   *bar=dummy_foo; 
+           return dummy_foo;
+           break;
+   }
    default:
            g_assert_not_reached ();
    }

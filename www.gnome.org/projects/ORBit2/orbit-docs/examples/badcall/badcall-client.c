@@ -186,9 +186,8 @@ client_run (Examples_BadCall          servant,
 				Examples_BadCall_NoParam *bc 
 					= (Examples_BadCall_NoParam*)CORBA_exception_value(ev);
 				g_assert (bc==NULL);  
-				g_print (".");
-/* 				g_print ("BadCall::trigger raised exception: %s\n",   */
-/* 					 CORBA_exception_id(ev)); */
+ 				g_print ("BadCall::trigger raised exception: %s\n",  
+ 					 CORBA_exception_id(ev));
 			}
 			else if (strcmp(ex_Examples_BadCall_SingleParam,
 				   CORBA_exception_id(ev)) == 0) {
@@ -196,7 +195,7 @@ client_run (Examples_BadCall          servant,
 					= (Examples_BadCall_SingleParam*)CORBA_exception_value(ev);
 				g_assert (bc!=NULL);
 				g_print ("BadCall::trigger raised exception: %s\n"
-					 " message %s\n",  
+					 " message: %s\n",  
 					 CORBA_exception_id(ev),
 					 bc->mesg);
 			}
