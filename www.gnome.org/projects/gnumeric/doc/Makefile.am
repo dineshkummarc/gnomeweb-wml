@@ -282,7 +282,7 @@ page_SCRIPTS= \
 	gnumeric-INDEX.shtml		\
 	gnumeric-INDIRECT.shtml		\
 	gnumeric-INFO.shtml		\
-	gnumeric-info.shtml		\
+	gnumeric-info.html		\
 	gnumeric-INTERCEPT.shtml	\
 	gnumeric-INT.shtml		\
 	gnumeric-INTRATE.shtml		\
