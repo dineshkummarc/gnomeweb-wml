@@ -166,6 +166,7 @@
 	  <td valign="top" colspan="3">
 	    *Committments to GNOME:
 	  </td>
+        </tr>
 	<tr>
 	  <td valign="top">&nbsp;</td>
 	  <td valign="top" colspan="2">
