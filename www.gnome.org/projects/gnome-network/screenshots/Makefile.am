@@ -15,7 +15,9 @@ page_SCRIPTS = 	info_info.jpg		\
 		info_lookup.jpg		\
 		info_lookup-thumb.jpg	\
 		remote_shell.jpg	\
-		remote_shell-thumb.jpg
+		remote_shell-thumb.jpg	\
+		remote_desktop.jpg	\
+		remote_desktop-thumb.jpg
 
 include $(top_srcdir)/rules.common
 
