@@ -1,0 +1,24 @@
+PREFIX=/usr
+CC = gcc
+TARGETS=badcall-client badcall-server
+ORBIT_IDL=orbit-idl-2
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
+         -I$(PREFIX)/lib/glib-2.0/include 
+LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
+             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
+IDLOUT=badcall-common.c badcall-stubs.c badcall-skels.c badcall.h
+
+all: $(IDLOUT) badcall-client badcall-server
+
+badcall-client : badcall-client.o badcall-common.o badcall-stubs.o 
+badcall-server : badcall-server.o badcall-common.o badcall-skels.o 
+
+$(IDLOUT): badcall.idl
+	$(ORBIT_IDL) badcall.idl
+
+clean:
+	rm -rf *.o *~ $(IDLOUT)
+
+distclean: clean
+	rm -rf badcall-client badcall-server
