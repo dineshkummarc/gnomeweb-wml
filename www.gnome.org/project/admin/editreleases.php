@@ -47,11 +47,21 @@ if ($step1) {
 		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $announce,
 			$status_id, htmlspecialchars ($changes), $group_id, $release_id)) {
 
+			if ($result = session_getdata ($GLOBALS['session_hash']))
+			{
+				$from = "From: ".db_result($result,0,'realname')." <"
+					. db_result($result,0,'email').">";
+			}
+			else
+			{
+				$from = "From: GNOME Software Map <webmaster@gnome.org>";
+			}
+
 			// Announce the release to gnome-announce
 			mail ("gnome-announce-list@gnome.org",
 				"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
 				wordwrap (stripslashes ($changes)),
-				"From: GNOME Software Map <webmaster@gnome.org>");
+				$from);
 			
 			$feedback .= " Data Saved ";
 		} else {
@@ -182,6 +192,7 @@ Edit Existing Release
 	<TD colspan="2" nowrap>
 		<br>
 		<b>Announce this release:</b><br>
+		Note: This will send an email that appears to come from your registered email address.<br>
 		<?php
 		if (db_result($result,0,'announce') == 1)
 		{
@@ -189,7 +200,7 @@ Edit Existing Release
 		}
 		else
 		{
-			print "<input type=\"checkbox\" name=\"announce\" value=\"1\"> Announce this release to the gnome-announce mailing list.";
+			print "<p><input type=\"checkbox\" name=\"announce\" value=\"1\"> Announce this release to the gnome-announce mailing list.</p>";
 		}
 		?>
 		<p>
