@@ -4,7 +4,7 @@ urlpath=/projects/gedit
 
 page_SCRIPTS= \
 	gedit.css \
-	features.html \
+	plugins.html \
 	screenshots.html \
 	developers.html \
 	index.html
