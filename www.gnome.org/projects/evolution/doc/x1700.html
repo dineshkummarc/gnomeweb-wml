@@ -1,827 +1,314 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Encryption</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="A User's Guide to Ximian Evolution 1.4"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="Using Evolution for Email"
-HREF="c1008.html"><LINK
-REL="PREVIOUS"
-TITLE="Subscription Management"
-HREF="x1678.html"><LINK
-REL="NEXT"
-TITLE="Organizing and Managing your Email"
-HREF="c1827.html"></HEAD
-><BODY
-CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->A User's Guide to Ximian Evolution 1.4</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x1678.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Using Evolution for Email</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="c1827.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="sect1"
-><H1
-CLASS="sect1"
-><A
-NAME="encryption"
-></A
->Encryption</H1
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encryption-whatis"
-></A
->What is Encryption?</H2
-><P
->&#13;	Encryption is an ancient method of keeping information safe
-	from prying eyes. <TT
-CLASS="application"
->Evolution</TT
-> helps
-	you you protect your privacy by using
-	<TT
-CLASS="application"
->gpg</TT
->, an implementation of strong
-	<A
-HREF="g4137.html#public-key-encryption"
-><I
-CLASS="glossterm"
->Public Key
-	Encryption.</I
-></A
->
-      </P
-><DIV
-CLASS="note"
-><A
-NAME="pub-priv"
-></A
-><P
-></P
-><TABLE
-CLASS="note"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/note.gif"
-HSPACE="5"
-ALT="Note"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->Public Key?  Private Key?  What is the difference?</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	    GPG uses two keys: public and private.  You can give your
-	    public key to anyone you want to receive
-	    encrypted messages, or put it on a public key server so
-	    that people can look it up before contacting you.
-	    <I
-CLASS="emphasis"
->Never give your private key to anyone,
-	    ever</I
->.  Your private key lets you decrypt any
-	    message encrypted with your public key.
-	  </P
-></TD
-></TR
-></TABLE
-></DIV
-><P
->&#13;        Using encryption takes a bit of forethought.  When you send a
-        message that is encrypted, you must encrypt it using your
-        intended recipient's public key.  To <I
-CLASS="emphasis"
->get</I
->
-        an encrypted message, you must make sure that the sender has
-        your public key in advance. For signing messages, it's
-        reversed: you encrypt the signature with your private key, so
-        only your public key can unlock it. When you send it, the
-        recipient gets your public key and unlocks the signature,
-        verifying your identity.
-      </P
-><P
->&#13;	You can use encryption in two different ways:
-        <P
-></P
-><TABLE
-BORDER="0"
-><TBODY
-><TR
-><TD
->&#13;             Encrypt the entire message, so that nobody but the recipient can read it.
-          </TD
-></TR
-><TR
-><TD
->&#13;            Attach an encrypted signature to a plain text message, so
-            that the recipient can read the message without decrypting
-            it, and only needs decryption to verify the sender's
-            identity. 
-           </TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
->
-      </P
-><DIV
-CLASS="example"
-><A
-NAME="AEN1718"
-></A
-><P
-><B
->Example 2. Sending an Encrypted Message</B
-></P
-><P
->&#13;	    Kevin wants to send an encrypted message to his friend
-	    Rachel.  He looks up her public key on a general key
-	    server, and then tells
-	    <TT
-CLASS="application"
->Evolution</TT
-> to encrypt the
-	    message.  The message now reads "@#$23ui7yr87#@!48970fsd."
-	    When the information gets to Rachel, she decrypts it using
-	    her private key, and it appears as plain text for her to
-	    read.
-	  </P
-></DIV
-><DIV
-CLASS="tip"
-><A
-NAME="always-sign"
-></A
-><P
-></P
-><TABLE
-CLASS="tip"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/tip.gif"
-HSPACE="5"
-ALT="Tip"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->Always Sign</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	  You can set <TT
-CLASS="application"
->Evolution</TT
-> to always sign your email messages:
-	  <P
-></P
-><OL
-TYPE="1"
-><LI
-><P
->&#13;                Select
-                <B
-CLASS="guimenu"
->Tools</B
->-&gt;<B
-CLASS="guimenuitem"
->Settings</B
->, go to the Mail Account settings, and
-                select the account with which you want to use encryption.
-	      </P
-></LI
-><LI
-><P
->&#13;		Open the <TT
-CLASS="guilabel"
-><B
->Security</B
-></TT
-> tab.
-	      </P
-></LI
-><LI
-><P
->&#13;		Click the <B
-CLASS="guibutton"
->Always sign outgoing messages when using this account</B
-> button.
-	      </P
-></LI
-></OL
->
-	</P
-></TD
-></TR
-></TABLE
-></DIV
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encryption-keygen"
-></A
->Making Encryption Keys</H2
-><P
->&#13;        Before you can get or send encrypted mail, you need to
-	generate your public and private keys with GPG. Here's how:
-      </P
-><DIV
-CLASS="tip"
-><P
-></P
-><TABLE
-CLASS="tip"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/tip.gif"
-HSPACE="5"
-ALT="Tip"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->GPG Versions</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	  This manual covers version 1.0.6 of GPG.  If your version is
-	  different, this may not be entirely accurate.  You may find
-	  out your version number by typing in the command: <B
-CLASS="command"
->gpg
-	  --version</B
->.
-	</P
-></TD
-></TR
-></TABLE
-></DIV
-><P
->&#13;        <P
-></P
-><OL
-TYPE="1"
-><LI
-><P
->&#13;            Open a terminal and type <B
-CLASS="command"
->gpg --gen-key</B
->.
-	  </P
-></LI
-><LI
-><P
-> 
-             Choose the default algorithm, "DSA and ElGamal."
-	  </P
-></LI
-><LI
-><P
->&#13;            Choose a key length. The default, 1024 bits, should be
-            long enough.
-	  </P
-></LI
-><LI
-><P
->&#13;             Decide if you want your key to expire automatically, and if so, when.
-	  </P
-></LI
-><LI
-><P
->&#13;            Enter your name, email address, and any additional
-            personal information you think is appropriate. Do not
-            falsify this information, because it will be needed to
-            verify your identity later on.
-	  </P
-></LI
-><LI
-><P
->&#13;             Next, enter your passphrase. It does not have to be the
-             same as your email password or your login password. In
-             fact, it probably shouldn't. Don't forget it. If you lose
-             it, your keys will be useless and you will be unable to
-             decrypt messages sent to you with those keys.
-	  </P
-></LI
-><LI
-><P
->&#13;             Now, GPG will generate your keys.  This may take awhile,
-             so feel free to do something else while it's
-             happening. In fact, using your computer for something
-             else actually helps to generate better keys, because it
-             increases the randomness in the key generation seeds.
-	  </P
-></LI
-></OL
->
-      </P
-><P
->&#13;	Once the keys are generated, you can view your key information
-        by typing <B
-CLASS="command"
->gpg --list-keys</B
->.  You should see
-        something similar to this:
-        <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;	    /home/you/.gnupg/pubring.gpg
-	    ----------------------------
-	    pub 1024D/32j38dk2 2001-06-20 you &#60;you@your-address.com&#62;
-	    sub 1024g/289sklj3 2001-06-20 [expires: 2002-11-14]
-	</PRE
-></TD
-></TR
-></TABLE
->
-      </P
-><P
->&#13;         GPG will create one list, or keyring, for your public keys
-         and one for your private keys. All the public keys you know
-         are stored in the file
-         <TT
-CLASS="filename"
->~/.gnupg/pubring.gpg</TT
->. If you want to
-         give other people your key, send them that file.
-      </P
-><P
->&#13;          If you wish, you can upload your keys to a key server. Here's
-          how:
-        <P
-></P
-><OL
-TYPE="1"
-><LI
-><P
->&#13;              Check your public key ID with <B
-CLASS="command"
->gpg
---list-keys</B
->. It will be the string after 1024D on the line
-beginning with "pub." In this example, it's 32j38dk2.
-            </P
-></LI
-><LI
-><P
->&#13;	     Enter the command <B
-CLASS="command"
->gpg --send-keys --keyserver
-wwwkeys.pgp.net 32j38dk2</B
->.  Substitute your key ID for
-32j38dk2. You will need your password to do this.
-             </P
-></LI
-></OL
->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-	<DIV
-CLASS="note"
-><A
-NAME="why-keyserver"
-></A
-><P
-></P
-><TABLE
-CLASS="note"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/note.gif"
-HSPACE="5"
-ALT="Note"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->Why Use a Key Server?</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	    Key servers store your public keys for you so that your
-	    friends can decrypt your messages.  If you choose not to
-	    use a key server, you can manually send your people public
-	    key, include it in your signature file, or put it on your
-	    own web page. However, it's easier to publish them once,
-	    and then let people download them from a central place when
-	    they want.
-	  </P
-><P
->&#13;             If you don't have a key you need to unlock or encrypt a
-             message, you can have your encryption tool set to look it
-             up automatically. If it can't find the key, then you'll
-             get an error message.
-          </P
-></TD
-></TR
-></TABLE
-></DIV
->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Encryption</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="A User's Guide to Ximian Evolution 1.4" href="book1.html" />
+  <link rel="UP" title="Using Evolution for Email" href="c1008.html" />
+  <link rel="PREVIOUS" title="Subscription Management" href="x1678.html" />
+  <link rel="NEXT" title="Organizing and Managing your Email" href="c1827.html" />
+</head>
 
-      </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encrypt-getting-key"
-></A
->Getting and Using Public Keys</H2
-><P
->&#13;	To encrypt a message to your someone else you'll need to use
-	their public key in combination with your private key.
-	<TT
-CLASS="application"
->Evolution</TT
-> does that for you, but
-	you still need to get their key and add it to your keyring.
-     </P
-><P
->&#13;        To get public keys from a public key server, enter the
-        command:
-	<B
-CLASS="command"
->&#13;	  gpg --recv-keys --keyserver wwwkeys.pgp.net keyid
-	</B
->, substituting "keyid" for your recipient's ID.  You
-	will need to type in your password, and then their ID will
-	automatically be added to your keyring. When you send mail to
-	them, <TT
-CLASS="application"
->Evolution</TT
-> will allow you to
-	encrypt your messages.
-      </P
-><P
->&#13;        If someone sends you their public key directly, save it as a
-        plain text file and enter the command <B
-CLASS="command"
->gpg
-        filename</B
->. This will add it to your keyring.
-      </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encrypt-evo-integ"
-></A
->Setting up Evolution's Encryption</H2
-><P
->&#13;	You'll need to open
-	<B
-CLASS="guimenu"
->Tools</B
->-&gt;<B
-CLASS="guimenuitem"
->Settings</B
->
-	and select the <TT
-CLASS="guilabel"
-><B
->Mail Accounts</B
-></TT
-> button, then
-	select the account you want to use securely, and click the
-	<B
-CLASS="guibutton"
->Edit</B
-> button. Then, select the
-	<TT
-CLASS="guilabel"
-><B
->Security</B
-></TT
-> tab in the account dialog.   In the
-	<TT
-CLASS="guilabel"
-><B
->Security</B
-></TT
-> tab is a section labeled
-	<TT
-CLASS="guilabel"
-><B
->Pretty Good Privacy</B
-></TT
->.  Enter your key ID
-	and click <B
-CLASS="guibutton"
->OK</B
->.  Your key is now
-	integrated into your identity in
-	<TT
-CLASS="application"
->Evolution</TT
->.
-      </P
-><DIV
-CLASS="note"
-><P
-></P
-><TABLE
-CLASS="note"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/note.gif"
-HSPACE="5"
-ALT="Note"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->What is my Key ID again?</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	  <TT
-CLASS="application"
->Evolution</TT
-> requires that you know your key ID.  If you don't remember it, you can find it by typing <B
-CLASS="command"
->gpg --list-keys</B
-> in a console window.  Your key ID will be an eight character string with random numbers and letters.
-	</P
-></TD
-></TR
-></TABLE
-></DIV
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encrypt-sending"
-></A
->Sending Encrypted Messages</H2
-><P
->&#13;	As you know, you can use encryption to hide the entire
-	message, or just to verify your signature. Once you've
-	generated your public and private keys, and have the public
-	keys of the people to whom you want to send mail, here's what
-	to do:
-      </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="sign-msg"
-></A
->Signing a Message</H2
-><P
->&#13;	To sign a message, choose:
-	<B
-CLASS="guimenu"
->Security</B
->-&gt;<B
-CLASS="guimenuitem"
->PGP Sign</B
->
-	.  You will be prompted for your encryption password.  Once
-	you enter it, click <B
-CLASS="guibutton"
->OK</B
-> and your message
-	will be signed.
-      </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="encrypt-msg"
-></A
->Encrypting a Message</H2
-><P
->&#13;	  Encrypting a message is very similar to signing a message.
-	  Just choose the menu item
-	  <B
-CLASS="guimenu"
->Security</B
->-&gt;<B
-CLASS="guimenuitem"
->PGP Encrypt</B
->
-	</P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="unencrypting"
-></A
->Unencrypting a Received Message</H2
-><P
->&#13;	  If you get an encrypted message, you will need to decrypt it
-	  before you read it. Remember, the sender has to have your
-	  public key before they can send you an encrypted message.
-	</P
-><P
->&#13;	  When you view the message,
-	  <TT
-CLASS="application"
->Evolution</TT
-> will ask you for your
-	  PGP password.  Enter it, and the message will be displayed
-	  properly.  
-       </P
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x1678.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="c1827.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Subscription Management</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="c1008.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Organizing and Managing your Email</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">A User's Guide to Ximian Evolution 1.4</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x1678.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom">Using Evolution for Email</td>
+
+        <td width="10%" align="right" valign="bottom"><a href="c1827.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="sect1">
+    <h1 class="sect1"><a name="encryption" id="encryption"></a>Encryption</h1>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encryption-whatis" id="encryption-whatis"></a>What is Encryption?</h2>
+
+      <p>Encryption is an ancient method of keeping information safe from prying eyes. <tt class="application">Evolution</tt> helps you you protect your privacy by using <tt class="application">gpg</tt>, an implementation of strong <a href="g4137.html#public-key-encryption"><i class="glossterm">Public Key Encryption.</i></a></p>
+
+      <div class="note">
+        <a name="pub-priv" id="pub-priv"></a>
+
+        <table class="note" width="100%" border="0">
+          <tr>
+            <td width="25" align="center" valign="top"><img src="./stylesheet-images/note.gif" hspace="5" alt="Note" /></td>
+
+            <th align="left" valign="middle"><b>Public Key? Private Key? What is the difference?</b></th>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+
+            <td align="left" valign="top">
+              <p>GPG uses two keys: public and private. You can give your public key to anyone you want to receive encrypted messages, or put it on a public key server so that people can look it up before contacting you. <i class="emphasis">Never give your private key to anyone, ever</i>. Your private key lets you decrypt any message encrypted with your public key.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <p>Using encryption takes a bit of forethought. When you send a message that is encrypted, you must encrypt it using your intended recipient's public key. To <i class="emphasis">get</i> an encrypted message, you must make sure that the sender has your public key in advance. For signing messages, it's reversed: you encrypt the signature with your private key, so only your public key can unlock it. When you send it, the recipient gets your public key and unlocks the signature, verifying your identity.</p>
+
+      <p>You can use encryption in two different ways:</p>
+
+      <table border="0">
+        <tbody>
+          <tr>
+            <td>Encrypt the entire message, so that nobody but the recipient can read it.</td>
+          </tr>
+
+          <tr>
+            <td>Attach an encrypted signature to a plain text message, so that the recipient can read the message without decrypting it, and only needs decryption to verify the sender's identity.</td>
+          </tr>
+        </tbody>
+      </table><br />
+      <br />
+
+      <div class="example">
+        <a name="AEN1718" id="AEN1718"></a>
+
+        <p><b>Example 2. Sending an Encrypted Message</b></p>
+
+        <p>Kevin wants to send an encrypted message to his friend Rachel. He looks up her public key on a general key server, and then tells <tt class="application">Evolution</tt> to encrypt the message. The message now reads "@#$23ui7yr87#@!48970fsd." When the information gets to Rachel, she decrypts it using her private key, and it appears as plain text for her to read.</p>
+      </div>
+
+      <div class="tip">
+        <a name="always-sign" id="always-sign"></a>
+
+        <table class="tip" width="100%" border="0">
+          <tr>
+            <td width="25" align="center" valign="top"><img src="./stylesheet-images/tip.gif" hspace="5" alt="Tip" /></td>
+
+            <th align="left" valign="middle"><b>Always Sign</b></th>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+
+            <td align="left" valign="top">
+              <p>You can set <tt class="application">Evolution</tt> to always sign your email messages:</p>
+
+              <ol type="1">
+                <li>
+                  <p>Select <b class="guimenu">Tools</b>-&gt;<b class="guimenuitem">Settings</b>, go to the Mail Account settings, and select the account with which you want to use encryption.</p>
+                </li>
+
+                <li>
+                  <p>Open the <tt class="guilabel"><b>Security</b></tt> tab.</p>
+                </li>
+
+                <li>
+                  <p>Click the <b class="guibutton">Always sign outgoing messages when using this account</b> button.</p>
+                </li>
+              </ol><br />
+              <br />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encryption-keygen" id="encryption-keygen"></a>Making Encryption Keys</h2>
+
+      <p>Before you can get or send encrypted mail, you need to generate your public and private keys with GPG. Here's how:</p>
+
+      <div class="tip">
+        <table class="tip" width="100%" border="0">
+          <tr>
+            <td width="25" align="center" valign="top"><img src="./stylesheet-images/tip.gif" hspace="5" alt="Tip" /></td>
+
+            <th align="left" valign="middle"><b>GPG Versions</b></th>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+
+            <td align="left" valign="top">
+              <p>This manual covers version 1.0.6 of GPG. If your version is different, this may not be entirely accurate. You may find out your version number by typing in the command: <b class="command">gpg --version</b>.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <ol type="1">
+        <li>
+          <p>Open a terminal and type <b class="command">gpg --gen-key</b>.</p>
+        </li>
+
+        <li>
+          <p>Choose the default algorithm, "DSA and ElGamal."</p>
+        </li>
+
+        <li>
+          <p>Choose a key length. The default, 1024 bits, should be long enough.</p>
+        </li>
+
+        <li>
+          <p>Decide if you want your key to expire automatically, and if so, when.</p>
+        </li>
+
+        <li>
+          <p>Enter your name, email address, and any additional personal information you think is appropriate. Do not falsify this information, because it will be needed to verify your identity later on.</p>
+        </li>
+
+        <li>
+          <p>Next, enter your passphrase. It does not have to be the same as your email password or your login password. In fact, it probably shouldn't. Don't forget it. If you lose it, your keys will be useless and you will be unable to decrypt messages sent to you with those keys.</p>
+        </li>
+
+        <li>
+          <p>Now, GPG will generate your keys. This may take awhile, so feel free to do something else while it's happening. In fact, using your computer for something else actually helps to generate better keys, because it increases the randomness in the key generation seeds.</p>
+        </li>
+      </ol><br />
+      <br />
+
+      <p>Once the keys are generated, you can view your key information by typing <b class="command">gpg --list-keys</b>. You should see something similar to this:</p>
+
+      <table border="0" bgcolor="#E0E0E0" width="100%">
+        <tr>
+          <td>
+            <pre class="programlisting">
+
+      /home/you/.gnupg/pubring.gpg
+      ----------------------------
+      pub 1024D/32j38dk2 2001-06-20 you &lt;you@your-address.com&gt;
+      sub 1024g/289sklj3 2001-06-20 [expires: 2002-11-14]
+  
+</pre>
+          </td>
+        </tr>
+      </table><br />
+      <br />
+
+      <p>GPG will create one list, or keyring, for your public keys and one for your private keys. All the public keys you know are stored in the file <tt class="filename">~/.gnupg/pubring.gpg</tt>. If you want to give other people your key, send them that file.</p>
+
+      <p>If you wish, you can upload your keys to a key server. Here's how:</p>
+
+      <ol type="1">
+        <li>
+          <p>Check your public key ID with <b class="command">gpg --list-keys</b>. It will be the string after 1024D on the line beginning with "pub." In this example, it's 32j38dk2.</p>
+        </li>
+
+        <li>
+          <p>Enter the command <b class="command">gpg --send-keys --keyserver wwwkeys.pgp.net 32j38dk2</b>. Substitute your key ID for 32j38dk2. You will need your password to do this.</p>
+        </li>
+      </ol>
+
+      <div class="note">
+        <a name="why-keyserver" id="why-keyserver"></a>
+
+        <table class="note" width="100%" border="0">
+          <tr>
+            <td width="25" align="center" valign="top"><img src="./stylesheet-images/note.gif" hspace="5" alt="Note" /></td>
+
+            <th align="left" valign="middle"><b>Why Use a Key Server?</b></th>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+
+            <td align="left" valign="top">
+              <p>Key servers store your public keys for you so that your friends can decrypt your messages. If you choose not to use a key server, you can manually send your people public key, include it in your signature file, or put it on your own web page. However, it's easier to publish them once, and then let people download them from a central place when they want.</p>
+
+              <p>If you don't have a key you need to unlock or encrypt a message, you can have your encryption tool set to look it up automatically. If it can't find the key, then you'll get an error message.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div><br />
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encrypt-getting-key" id="encrypt-getting-key"></a>Getting and Using Public Keys</h2>
+
+      <p>To encrypt a message to your someone else you'll need to use their public key in combination with your private key. <tt class="application">Evolution</tt> does that for you, but you still need to get their key and add it to your keyring.</p>
+
+      <p>To get public keys from a public key server, enter the command: <b class="command">gpg --recv-keys --keyserver wwwkeys.pgp.net keyid</b> , substituting "keyid" for your recipient's ID. You will need to type in your password, and then their ID will automatically be added to your keyring. When you send mail to them, <tt class="application">Evolution</tt> will allow you to encrypt your messages.</p>
+
+      <p>If someone sends you their public key directly, save it as a plain text file and enter the command <b class="command">gpg filename</b>. This will add it to your keyring.</p>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encrypt-evo-integ" id="encrypt-evo-integ"></a>Setting up Evolution's Encryption</h2>
+
+      <p>You'll need to open <b class="guimenu">Tools</b>-&gt;<b class="guimenuitem">Settings</b> and select the <tt class="guilabel"><b>Mail Accounts</b></tt> button, then select the account you want to use securely, and click the <b class="guibutton">Edit</b> button. Then, select the <tt class="guilabel"><b>Security</b></tt> tab in the account dialog. In the <tt class="guilabel"><b>Security</b></tt> tab is a section labeled <tt class="guilabel"><b>Pretty Good Privacy</b></tt>. Enter your key ID and click <b class="guibutton">OK</b>. Your key is now integrated into your identity in <tt class="application">Evolution</tt>.</p>
+
+      <div class="note">
+        <table class="note" width="100%" border="0">
+          <tr>
+            <td width="25" align="center" valign="top"><img src="./stylesheet-images/note.gif" hspace="5" alt="Note" /></td>
+
+            <th align="left" valign="middle"><b>What is my Key ID again?</b></th>
+          </tr>
+
+          <tr>
+            <td>&nbsp;</td>
+
+            <td align="left" valign="top">
+              <p><tt class="application">Evolution</tt> requires that you know your key ID. If you don't remember it, you can find it by typing <b class="command">gpg --list-keys</b> in a console window. Your key ID will be an eight character string with random numbers and letters.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encrypt-sending" id="encrypt-sending"></a>Sending Encrypted Messages</h2>
+
+      <p>As you know, you can use encryption to hide the entire message, or just to verify your signature. Once you've generated your public and private keys, and have the public keys of the people to whom you want to send mail, here's what to do:</p>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="sign-msg" id="sign-msg"></a>Signing a Message</h2>
+
+      <p>To sign a message, choose: <b class="guimenu">Security</b>-&gt;<b class="guimenuitem">PGP Sign</b> . You will be prompted for your encryption password. Once you enter it, click <b class="guibutton">OK</b> and your message will be signed.</p>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="encrypt-msg" id="encrypt-msg"></a>Encrypting a Message</h2>
+
+      <p>Encrypting a message is very similar to signing a message. Just choose the menu item <b class="guimenu">Security</b>-&gt;<b class="guimenuitem">PGP Encrypt</b></p>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="unencrypting" id="unencrypting"></a>Unencrypting a Received Message</h2>
+
+      <p>If you get an encrypted message, you will need to decrypt it before you read it. Remember, the sender has to have your public key before they can send you an encrypted message.</p>
+
+      <p>When you view the message, <tt class="application">Evolution</tt> will ask you for your PGP password. Enter it, and the message will be displayed properly.</p>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x1678.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top"><a href="c1827.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Subscription Management</td>
+
+        <td width="34%" align="center" valign="top"><a href="c1008.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">Organizing and Managing your Email</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

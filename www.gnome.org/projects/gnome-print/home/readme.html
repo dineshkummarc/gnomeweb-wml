@@ -1,217 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-			<h3>readme</h3>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+</head>
 
+<body>
+  <h3>readme</h3>
 
-<h3>gnome printing library</h3>
+  <h3>gnome printing library</h3>
 
-<p>
-This is an implementation of the Gnome Printing Architecture, as
-described in:
-<blockquote>
-   <a href="http://www.levien.com/gnome/print-arch.html">http://www.levien.com/gnome/print-arch.html</a>
-</blockquote>
+  <p>This is an implementation of the Gnome Printing Architecture, as described in:</p>
 
-<p>
-An updated description of gnome-print and future plans can be
-found in :
-<blockquote>
-   <a href="http://www.levien.com/gnome/print-summit-2000.html">http://www.levien.com/gnome/print-summit-2000.html</a>
-</blockquote>
+  <blockquote>
+    <a href="http://www.levien.com/gnome/print-arch.html">http://www.levien.com/gnome/print-arch.html</a>
+  </blockquote>
 
-<p>
-We have a mailing list setup:
-<blockquote>
-   <a href="mailto:gnome-print -REMOVE-THIS-ANTI-SPAM-PREVENTER!- @helixcode.com">gnome-print@helixcode.com</a>
-</blockquote>
+  <p>An updated description of gnome-print and future plans can be found in :</p>
 
-<p>
-For information about the native drivers read NATIVE_DRIVERS
+  <blockquote>
+    <a href="http://www.levien.com/gnome/print-summit-2000.html">http://www.levien.com/gnome/print-summit-2000.html</a>
+  </blockquote>
 
-<h3>overview</h3>
+  <p>We have a mailing list setup:</p>
 
-<h4>1. imaging</h4>
-Gnome-print uses semi-standard PostScript imaging model. I.e. all
-shapes are described as sequences of path commands (moveto, lineto
-curveto, closepath) and images created through fill and stroke
-operators.
+  <blockquote>
+    <a href="mailto:gnome-print%20-REMOVE-THIS-ANTI-SPAM-PREVENTER!-%20@helixcode.com">gnome-print@helixcode.com</a>
+  </blockquote>
 
-<h4>2. coordinates</h4>
-The initial coordinate system is identical to the PostScript one,
-i.e. unit is 1 typographic point and y grows upwards on the page.
-Coordinate system can be modified, using concat operator.
+  <p>For information about the native drivers read NATIVE_DRIVERS</p>
 
-<h4>3. graphic state</h4>
-Graphic state is manipulated through usual operators, like
-setrgbcolor, setopacity, setlinewidth. There are gsave and grestore
-operators that manipulate graphic state stack.
-Currently the only supported colorspace is RGB, as we have yet to
-figure out the patent issues involved in CMYK and other colorspaces.
+  <h3>overview</h3>
 
-<h4>4. text</h4>
-There are 2 primary text operators. The simpler one (show) accepts
-UTF-8 encoded string, and outputs it as well as possible using
-current font from graphic state.
-The other one (glyphlist) accepts device idependently formatted
-sequence of glyphs - i.e. user program should do exact layout and
-languge analyzing itself. Glyphlist can include glyphs from different
-fonts, use different colors and position glyphs either in
-predetermined coordinates or use simple font-specific positioning
-rules (glyph advances for latin-like fonts).
+  <h4>1. imaging</h4>
 
-<h4>5. fonts</h4>
-Gnome-print uses type1 fonts for all rendering, so printed output
-is always identical to onscreen preview.
+  <p>Gnome-print uses semi-standard PostScript imaging model. I.e. all shapes are described as sequences of path commands (moveto, lineto curveto, closepath) and images created through fill and stroke operators.</p>
 
-<h3>features</h3>
+  <h4>2. coordinates</h4>
 
-<h4>1. client side page description API</h4>
+  <p>The initial coordinate system is identical to the PostScript one, i.e. unit is 1 typographic point and y grows upwards on the page. Coordinate system can be modified, using concat operator.</p>
 
-<p>
-<ul>
-<li>Basic vector path mainipulation, using newpath, moveto, lineto,
-  curveto and closepath
+  <h4>3. graphic state</h4>
 
-<li>stroking and filling - stroke, fill and eofill
+  <p>Graphic state is manipulated through usual operators, like setrgbcolor, setopacity, setlinewidth. There are gsave and grestore operators that manipulate graphic state stack. Currently the only supported colorspace is RGB, as we have yet to figure out the patent issues involved in CMYK and other colorspaces.</p>
 
-<li>generating outline of stroked line - strokepath
+  <h4>4. text</h4>
 
-<li>clipping to vector paths - clip, eoclip
+  <p>There are 2 primary text operators. The simpler one (show) accepts UTF-8 encoded string, and outputs it as well as possible using current font from graphic state. The other one (glyphlist) accepts device idependently formatted sequence of glyphs - i.e. user program should do exact layout and languge analyzing itself. Glyphlist can include glyphs from different fonts, use different colors and position glyphs either in predetermined coordinates or use simple font-specific positioning rules (glyph advances for latin-like fonts).</p>
 
-<li>rgb, rgba and grayscale bitmaps - rgbimage, rgbaimage, grayimage
+  <h4>5. fonts</h4>
 
-<li>graphic state manipulation - setrgbcolor, setopacity, setlinewidth,
-  setlinejoin, setlinecap, setfont
+  <p>Gnome-print uses type1 fonts for all rendering, so printed output is always identical to onscreen preview.</p>
 
-<li>graphic state stack - gsave and grestore
+  <h3>features</h3>
 
-<li>coordinate system manipulation - concat
+  <h4>1. client side page description API</h4>
 
-<li>utf-8 encoded text display - show
+  <ul>
+    <li>Basic vector path mainipulation, using newpath, moveto, lineto, curveto and closepath</li>
 
-<li>prepositioned text display - glyphlist
-</ul>
+    <li>stroking and filling - stroke, fill and eofill</li>
 
-<p>
-Several basic page description commands are also combined to easier
-frontend function - bpath, rotate, scale, translate
-</p>
+    <li>generating outline of stroked line - strokepath</li>
 
-<h4>2. rendering context</h4>
+    <li>clipping to vector paths - clip, eoclip</li>
 
-<p>
-There exist several stock rendering contexts, and new ones can be
-easily derived from GnomePrintContext base class, using Gtk+
-object system.
-All rendering contexts use same fonts, so display is guaranteed
-to be identical.
-</p>
+    <li>rgb, rgba and grayscale bitmaps - rgbimage, rgbaimage, grayimage</li>
 
-<p>
-GnomePrintPreview
-Generates high-quality antialiased representation of page on
-gnome-canvas. Resulting image can be zoomed without re-rendering.
-</p>
+    <li>graphic state manipulation - setrgbcolor, setopacity, setlinewidth, setlinejoin, setlinecap, setfont</li>
 
-<p>
-GnomePrintPs and GnomePrintPs2
-Generate PostScript representation of page. Although PostScript
-itself cannot use transparency, stock PostScript rendering
-contexts are wrapped into GnomePrintFRGBA meta-context, so
-semiopaque shapes and images are rendered through temporary
-bitmaps.
-</p>
+    <li>graphic state stack - gsave and grestore</li>
 
-<p>
-GnomePrintMeta
-Generates page description metafile, that can be replayed to
-any other rendering context.
-</p>
+    <li>coordinate system manipulation - concat</li>
 
-<p>
-GnomePrintRBuf
-Generates high-quality antialiased bitmap from arbitrarily
-positioned part of the page.
-</p>
+    <li>utf-8 encoded text display - show</li>
 
-<p>
-GnomePrintPDF (in development)
-Generates Portable Document Format file from page.
-</p>
+    <li>prepositioned text display - glyphlist</li>
+  </ul>
 
-<p>
-GnomePrintMultipage
-Allows placing more than 1 page of input to single output
-page.
-</p>
+  <p>Several basic page description commands are also combined to easier frontend function - bpath, rotate, scale, translate</p>
 
-<h4>3. fonts</h4>
+  <h4>2. rendering context</h4>
 
-<p>
-Gnome-print encapsulates fonts in opaque Gtk+ objects, giving
-applications consistent API. This allows us to extend font
-system using Gtk+ object inheritance, so taking advance of
-OpenType, multiple-master and composite fonts. At current
-stage only type1 fonts are supported.
-There are three levels of font objects, representing different
-logical rendering frameworks.
-</p>
+  <p>There exist several stock rendering contexts, and new ones can be easily derived from GnomePrintContext base class, using Gtk+ object system. All rendering contexts use same fonts, so display is guaranteed to be identical.</p>
 
-<p>
-<ul>
-<li>GnomeFontFace - is unscaled unmodified typeface, using
-  1000x1000 unit em square.
-<li>GnomeFont - is typeface scaled and adjusted for certain output
-  device (certain priner, screen)
-<li>GnomeRFont - instance of font, adapted to certain raster
-  resolution. If raster resolution is the same, as one used by
-  GnomeFont, gnome rfont glyph shapes are identical to the
-  gnome font ones. Otherwise there can be slight differences.
-</ul>
+  <p>GnomePrintPreview Generates high-quality antialiased representation of page on gnome-canvas. Resulting image can be zoomed without re-rendering.</p>
 
-<p>
-Thus structure allows us to keep single, high optimized layout
-for certain device and yet adapt it as well as possible to
-different actual output device (on screen preview, draft printer)
-At current stage gnome-print does not do grid-fitting, so
-actually GnomeFont and GnomeRFont are identical for all
-contexts.
-</p>
+  <p>GnomePrintPs and GnomePrintPs2 Generate PostScript representation of page. Although PostScript itself cannot use transparency, stock PostScript rendering contexts are wrapped into GnomePrintFRGBA meta-context, so semiopaque shapes and images are rendered through temporary bitmaps.</p>
 
-<p>
-GnomeFont is explicitly glyph, not character based. For simple
-cases, when 1:1 mapping between unicode character and glyph is
-possible, there exists lookup function to find certain
-font glyph value, given unicode character. For more complicated
-cases user-side software has to do font and language analyzing
-and generate output consisting of glyph values.
-</p>
+  <p>GnomePrintMeta Generates page description metafile, that can be replayed to any other rendering context.</p>
 
-<p>
-If glyph mapping rules are simple, one can use gnome-print
-show or show_sized operators to print UTF-8 encoded text
-directly.
-</p>
+  <p>GnomePrintRBuf Generates high-quality antialiased bitmap from arbitrarily positioned part of the page.</p>
 
-<p>
-For complicated languages layout program can generate
-GnomeGlyphList object, encapsulating series of glyphs, fonts
-and positioning rules.
-</p>
+  <p>GnomePrintPDF (in development) Generates Portable Document Format file from page.</p>
 
-<p>
-At current stage GnomeFont glyph mapping covers latin, greek and
-cyrillic character, in case type1 font has these defined. More
-support will be added in future when GnomeFont will be ported to
-FreeType2 library.
-Font-specific glyphs are supported, using unicode private
-area 0xe000-0xf800
-</p>
+  <p>GnomePrintMultipage Allows placing more than 1 page of input to single output page.</p>
 
-<p>
-Font information is currently read from xml fontmap files,
-describing pfb and afm file locations. Fonts are referenced
-internally by GnomeFont objects. Each print context decides
-itself, transparently from user, how to guarantee font presence
-in final rendering destination, i.e. nonstandard fonts are
-embedded in PostScript streams.
-</p>
+  <h4>3. fonts</h4>
+
+  <p>Gnome-print encapsulates fonts in opaque Gtk+ objects, giving applications consistent API. This allows us to extend font system using Gtk+ object inheritance, so taking advance of OpenType, multiple-master and composite fonts. At current stage only type1 fonts are supported. There are three levels of font objects, representing different logical rendering frameworks.</p>
+
+  <ul>
+    <li>GnomeFontFace - is unscaled unmodified typeface, using 1000x1000 unit em square.</li>
+
+    <li>GnomeFont - is typeface scaled and adjusted for certain output device (certain priner, screen)</li>
+
+    <li>GnomeRFont - instance of font, adapted to certain raster resolution. If raster resolution is the same, as one used by GnomeFont, gnome rfont glyph shapes are identical to the gnome font ones. Otherwise there can be slight differences.</li>
+  </ul>
+
+  <p>Thus structure allows us to keep single, high optimized layout for certain device and yet adapt it as well as possible to different actual output device (on screen preview, draft printer) At current stage gnome-print does not do grid-fitting, so actually GnomeFont and GnomeRFont are identical for all contexts.</p>
+
+  <p>GnomeFont is explicitly glyph, not character based. For simple cases, when 1:1 mapping between unicode character and glyph is possible, there exists lookup function to find certain font glyph value, given unicode character. For more complicated cases user-side software has to do font and language analyzing and generate output consisting of glyph values.</p>
+
+  <p>If glyph mapping rules are simple, one can use gnome-print show or show_sized operators to print UTF-8 encoded text directly.</p>
+
+  <p>For complicated languages layout program can generate GnomeGlyphList object, encapsulating series of glyphs, fonts and positioning rules.</p>
+
+  <p>At current stage GnomeFont glyph mapping covers latin, greek and cyrillic character, in case type1 font has these defined. More support will be added in future when GnomeFont will be ported to FreeType2 library. Font-specific glyphs are supported, using unicode private area 0xe000-0xf800</p>
+
+  <p>Font information is currently read from xml fontmap files, describing pfb and afm file locations. Fonts are referenced internally by GnomeFont objects. Each print context decides itself, transparently from user, how to guarantee font presence in final rendering destination, i.e. nonstandard fonts are embedded in PostScript streams.</p>
+</body>
+</html>

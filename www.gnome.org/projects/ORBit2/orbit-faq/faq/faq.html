@@ -1,1370 +1,646 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->ORBit2 Frequently Asked Questions - FAQs</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"></HEAD
-><BODY
-CLASS="book"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="BOOK"
-><A
-NAME="AEN1"
-></A
-><DIV
-CLASS="TITLEPAGE"
-><H1
-CLASS="title"
-><A
-NAME="AEN2"
-></A
->ORBit2 Frequently Asked Questions - FAQs</H1
-><H3
-CLASS="author"
-><A
-NAME="AEN5"
-></A
->Michael Meeks</H3
-><H3
-CLASS="author"
-><A
-NAME="AEN8"
-></A
->Michael Rumpf</H3
-><H3
-CLASS="author"
-><A
-NAME="AEN11"
-></A
->Frank Rehberger</H3
-><HR></DIV
-><DIV
-CLASS="TOC"
-><DL
-><DT
-><B
->Table of Contents</B
-></DT
-><DT
-><A
-HREF="#CORBA"
->CORBA</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="#ClientConnection"
->How does a client connect to a server?</A
-></DT
-><DT
-><A
-HREF="#DefaultParameterInIDL"
->How can I specify default parameters in IDL?</A
-></DT
-><DT
-><A
-HREF="#GettingIpAdressOfObject"
->How can I get the IP address of a cient/server object in
-    CORBA?</A
-></DT
-><DT
-><A
-HREF="#Who_is_resonsible"
->Who is responsible ?</A
-></DT
-><DT
-><A
-HREF="#why_cant_i_keep_a_pointer_to_an_argument"
->Why can't I keep a pointer to an argument ?</A
-></DT
-></DL
-></DD
-><DT
-><A
-HREF="#orbit"
->ORBit2</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="#what_is_ORBit2"
->What is ORBit2?</A
-></DT
-><DT
-><A
-HREF="#when_and_who_started_the_project"
->When and who started the project?</A
-></DT
-><DT
-><A
-HREF="#how_is_orbit2_better_than_orbit_stable"
->How is ORBit2 better than ORBit 'stable' ?</A
-></DT
-><DT
-><A
-HREF="#how_can_i_install_a_version_of_orbit_without_affecting_my_gnome_desktop"
->How can I install a version of ORBit without affecting my GNOME desktop</A
-></DT
-><DT
-><A
-HREF="#where_can_i_get_the_cvs_head_version_of_orbit2"
->Where can I get the CVS HEAD version of ORBit2?</A
-></DT
-><DT
-><A
-HREF="#what_is_the_difference_between_the_cvs_version_and_the_gnome_package"
->What is the difference between the CVS version and the GNOME
-  package?</A
-></DT
-><DT
-><A
-HREF="#i_cant_connect_to_my_remote_objects"
->I can't connect to my remote objects ?</A
-></DT
-><DT
-><A
-HREF="#which_parameters_are_supported_by_corba_orb_init"
->Which parameters are supported by CORBA_ORB_init() ?</A
-></DT
-><DT
-><A
-HREF="#calling_orb_init_what_is_orbit_local_orb_good_for"
->Calling ORB_init(), what is string "orbit-local-orb" good for?</A
-></DT
-><DT
-><A
-HREF="#is_orbit2_thread_safe"
->Is ORBit2 thread safe ?</A
-></DT
-><DT
-><A
-HREF="#mem_debug_mode"
->How do I debug memory leaks?</A
-></DT
-><DT
-><A
-HREF="#what_is_this_re_enterancy_thing"
->What is this re-enterancy thing ?</A
-></DT
-><DT
-><A
-HREF="#can_i_invoke_methods_from_multiple_threads"
->Can I invoke methods from multiple threads ?</A
-></DT
-><DT
-><A
-HREF="#can_i_receive_invocations_in_multiple_threads"
->Can I receive invocations in multiple threads ?</A
-></DT
-><DT
-><A
-HREF="#can_i_have_each_invocation_handled_by_a_different_thread"
->Can I have each invocation handled by a different thread ?</A
-></DT
-><DT
-><A
-HREF="#how_does_the_new_type_system_work"
->How does the new 'type' system work ?</A
-></DT
-><DT
-><A
-HREF="#what_do_mean_by_type_data"
->What do you mean by 'type' data ?</A
-></DT
-><DT
-><A
-HREF="#how_do_we_get_type_data_for_an_interface"
->How do we get type data for an interface ?</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="#type_data_from_an_object_reference"
->Type data from an object reference ?</A
-></DT
-><DT
-><A
-HREF="#type_data_from_a_type_library"
->Type data from a type library ?</A
-></DT
-></DL
-></DD
-><DT
-><A
-HREF="#what_is_type_library_or_imodule"
->What is a type library (or imodule) ?</A
-></DT
-><DT
-><A
-HREF="#how_do_i_find_what_type_libraries_are_installed"
->How do I find what type libraries are installed ?</A
-></DT
-><DT
-><A
-HREF="#why_bother_generating_type_information_from_an_interface"
->Why bother generating type information from an interface ?</A
-></DT
-><DT
-><A
-HREF="#why_is_a_type_based_orb_better"
->Why is a type based ORB better ?</A
-></DT
-><DT
-><A
-HREF="#why_is_a_type_based_orb_potentialy_faster"
->Why is a type based ORB potentialy faster ?</A
-></DT
-><DT
-><A
-HREF="#what_is_the_purify_cleanliness_autoconf_option"
->What is the "purify cleanliness" autoconf option ?</A
-></DT
-><DT
-><A
-HREF="#using_strings"
->How do I use CORBA_strings?</A
-></DT
-><DT
-><A
-HREF="#my_skels_leak_memory"
->My skels leak memory - why ?</A
-></DT
-><DT
-><A
-HREF="#why_should_I_not_use_the_release_flag"
->Why should I not use the _release flag?</A
-></DT
-><DT
-><A
-HREF="#why_is_the_ior_from_orb_xyz_not_understood_by_orbit"
->Why is the IOR from ORB XYZ not understood by ORBit?</A
-></DT
-></DL
-></DD
-><DT
-><A
-HREF="#help"
->Help</A
-></DT
-><DD
-><DL
-><DT
-><A
-HREF="#is_there_a_mailing_list_howto"
->Is there a mailing list HOWTO?</A
-></DT
-><DT
-><A
-HREF="#how_can_i_subscribe_to_the_mailing_list"
->How can I subscribe to the mailing list?</A
-></DT
-><DT
-><A
-HREF="#how_can_i_unsubscribe_from_the_mailing_list"
->How can I unsubscribe from the mailing list?</A
-></DT
-><DT
-><A
-HREF="#how_can_i_send_an_email_to_the_mailing_list"
->How can I send an e-mail to the mailing list?</A
-></DT
-><DT
-><A
-HREF="#is_there_a_mailing_list_archive"
->Is there a mailing list archive?</A
-></DT
-><DT
-><A
-HREF="#i_am_new_to_corba_what_books_are_available"
->I'm new to CORBA. What books are available?</A
-></DT
-></DL
-></DD
-></DL
-></DIV
-><DIV
-CLASS="chapter"
-><HR><H1
-><A
-NAME="CORBA"
-></A
->CORBA</H1
-><DIV
-CLASS="sect1"
-><H2
-CLASS="sect1"
-><A
-NAME="ClientConnection"
-></A
->How does a client connect to a server?</H2
-><P
->&#13;    This is a well known problem in CORBA (more precisely in any
-    distributed object system). It is commonly known under the term
-    "bootstrapping". In general, object references can be
-    obtained from a <TT
-CLASS="application"
->Name Service</TT
-> (or a
-    <TT
-CLASS="application"
->Trading Object Service</TT
->), but a name
-    service (thanks to the clear design of CORBA) is itself an
-    object. So, how do you get the reference to the name service if it
-    is itself an object ?  </P
-><P
-> The standard solution for a client, finding a first object
-    reference to a server is by exchanging an Interoperable Object
-    Reference (IOR). The server process produces an IOR of the created
-    object by using the method <DIV
-CLASS="funcsynopsis"
-><A
-NAME="AEN24"
-></A
-><P
-></P
-><P
-><CODE
-><CODE
-CLASS="FUNCDEF"
->CORBA_string
-    <TT
-CLASS="function"
->CORBA_ORB_object_to_string</TT
-></CODE
->(CORBA_ORB <TT
-CLASS="parameter"
-><I
->orb</I
-></TT
->, const CORBA_Object <TT
-CLASS="parameter"
-><I
->obj</I
-></TT
->, CORBA_Environment* <TT
-CLASS="parameter"
-><I
->env</I
-></TT
->);</CODE
-></P
-><P
-></P
-></DIV
-> The generated string, also called
-    stringified object reference, can be transfered by any kind of
-    media, like email, HTTP, NFS, filesystem, or even as a message in
-    a bottle ;-) . The client process reads the IOR from the medium
-    and converts it back into its binary representation via
-    <DIV
-CLASS="funcsynopsis"
-><A
-NAME="AEN34"
-></A
-><P
-></P
-><P
-><CODE
-><CODE
-CLASS="FUNCDEF"
->CORBA_Object
-    <TT
-CLASS="function"
->CORBA_ORB_string_to_object</TT
-></CODE
->(CORBA_ORB <TT
-CLASS="parameter"
-><I
->orb</I
-></TT
->, const CORBA_char *<TT
-CLASS="parameter"
-><I
->str</I
-></TT
->, CORBA_Environment *<TT
-CLASS="parameter"
-><I
->env</I
-></TT
->);</CODE
-></P
-><P
-></P
-></DIV
-> Afterwards the client holds a
-    valid object reference to the server and thus is able to invoke
-    methods in the usual way.  </P
-><P
-> Until now non-standard ways to solve this bootstrapping
-    issue have been introduced by different ORBs. One example is the
-    Visibroker Location Service. The ORB registers each object at a
-    central service by a proprietary _bind() method. The discovery of
-    the service is done by network broadcasts. The drawback of this
-    mechanism is that the information about the objects is stored in a
-    central table.  The table needs to be updated on a regular
-    basis. This is necessary because of malicious objects not cleanly
-    deregistering.  If the broadcast interval is to short the updates
-    will cause a lot of noise on the network. If the interval is to
-    long the table contains zombie objects. Such kind of proprietary
-    solutions exists for many major CORBA implementations.  </P
-><P
-> Ideally the method resolve_initial_references() could be
-    used to find a reference to the naming service. Therefore the ORB
-    must be able to read IORs without requiring the developer to write
-    some additional code. In the past each ORB had its own command
-    line parameters to pass IORs to the ORB's core (ORBit:
-    ORBNamingIOR=IOR:.....). <TT
-CLASS="application"
->The Interoperable Naming
-    Service (INS) </TT
-> specification introduces the
-    standardized command line parameter <TT
-CLASS="envar"
->-ORBInitRef</TT
-> to
-    achieve this.  </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;    <TT
-CLASS="prompt"
->bash$</TT
-><TT
-CLASS="userinput"
-><B
->appname -ORBInitRef NameService=IOR_of_naming_service</B
-></TT
-> </PRE
-></TD
-></TR
-></TABLE
-><P
-> The only trick is to pass argc and argv to the ORB_init()
-    call of the ORB, so that the ORB's core can extract the relevant
-    parameters.  Afterwards the call </P
-><P
-><B
-CLASS="command"
->nsobj =
-    resolve_initial_references("NameService");</B
-> returns the
-    desired object reference. The INS specification defines, besides
-    the IOR, other human readable object references.
-    <B
-CLASS="command"
->corbaloc:iiop://IIOPVersion@hostname:port/ObjectKey</B
->
-    </P
-><P
->This offers the possibility for a client to point to a
-    server object just by providing a human readable address. Another
-    proposed naming scheme is corbaname, which refers to a naming
-    service running on the host the, specified by hostname.
-    <TT
-CLASS="replaceable"
-><I
->corbaname://hostname#a/b/obj</I
-></TT
-> The
-    a/b/obj specifies a Name, i.e. a sequence of NameComponents, which
-    resolves to an object reference.  These mechanisms will extremly
-    improve the whole bootstrapping process and finally solve the
-    problem, as it has been one of the most annoying issues in the
-    past. There are are also a few critics of the human readable
-    object reference corbaloc. They think that the fact of having
-    opaque IORs is weakened by the INS specification. Specifying
-    protocol details, like port numbers or protocol version numbers,
-    can result in references to become invalid when the protocol, used
-    for transportation is exchanged. The Object URLs have to be
-    extended to support the new protocol information, whereas IORs
-    always remain the same, a sequence of numbers. </P
-><P
->The CVS HEAD version of ORBit has a partial implementation
-    of the INS specification.  <A
-HREF="http://www.ooc.com.au/staff/michi/binding.txt"
-TARGET="_top"
->Michi Henning
-    has a more elaborate description of the problem here.</A
->
-    </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="DefaultParameterInIDL"
-></A
->How can I specify default parameters in IDL?</H2
-><P
->&#13;    IDL does not allow to specifiy default parameters. There are
-    mainly two reasons for that. First, IDL is some kind of least
-    common denominator of all the languages for which a CORBA mapping
-    is available. Many languages do not support the concept of default
-    parameters and thus have difficulties in supporting this feature
-    in the mapping. And second, default parameters are not really
-    necessary. The designer of an interface can easily split such
-    funtionality into two or more separate methods (Attention:
-    Overloading is not supported for the same reasons, so that methods
-    must have different names). </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="GettingIpAdressOfObject"
-></A
->How can I get the IP address of a cient/server object in
-    CORBA?</H2
-><P
-> The IP address (as well as the port number or any other
-    protocol related feature) is hidden in the IOR (Interoperable
-    Object Reference). The reason for this opacity is that CORBA can
-    use any protocol for transportation of requests between object
-    instances. The GIOP (General Inter ORB Protocol) is independent
-    from any special network protocol. The IIOP (Internet Inter ORB
-    Protocol) is a translation of GIOP into TCP/IP. IIOP support is
-    not a mandatory feature of an ORB, but because of the Internet it
-    has become a must for any ORB to implement. If we start relying on
-    the presence of a specific protocol the original intention becomes
-    weakened and may render object references, valid today, invalid in
-    the future. (see TAO (The ACE ORB, ACE - Adaptive Communication
-    Environment) for an ORB which supports pluggable protocols)
-    </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="Who_is_resonsible"
-></A
->Who is responsible ?</H2
-><P
->&#13;   The bulk of the initial work is down to Elliot Lee, and various
-   people whose ideas he fused liberaly Kennard White, Sebastian
-   Wilhelmi - the polishing and recent work down to Mark McLoughlin,
-   Martin Baulig and Michael Meeks.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_cant_i_keep_a_pointer_to_an_argument"
-></A
->Why can't I keep a pointer to an argument ?</H2
-><P
->&#13;      If you are implementing a CORBA method, often you are sent data
-      and wish to keep it around; one scenario might be where you are
-      sent a sequence as an 'in' or 'inout' argument:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-      <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->static void
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>ORBit2 Frequently Asked Questions - FAQs</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+</head>
+
+<body class="book" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="BOOK">
+    <a name="AEN1" id="AEN1"></a>
+
+    <div class="TITLEPAGE">
+      <h1 class="title"><a name="AEN2" id="AEN2"></a>ORBit2 Frequently Asked Questions - FAQs</h1>
+
+      <h3 class="author"><a name="AEN5" id="AEN5"></a>Michael Meeks</h3>
+
+      <h3 class="author"><a name="AEN8" id="AEN8"></a>Michael Rumpf</h3>
+
+      <h3 class="author"><a name="AEN11" id="AEN11"></a>Frank Rehberger</h3>
+      <hr />
+    </div>
+
+    <div class="TOC">
+      <dl>
+        <dt><b>Table of Contents</b></dt>
+
+        <dt><a href="#CORBA">CORBA</a></dt>
+
+        <dd>
+          <dl>
+            <dt><a href="#ClientConnection">How does a client connect to a server?</a></dt>
+
+            <dt><a href="#DefaultParameterInIDL">How can I specify default parameters in IDL?</a></dt>
+
+            <dt><a href="#GettingIpAdressOfObject">How can I get the IP address of a cient/server object in CORBA?</a></dt>
+
+            <dt><a href="#Who_is_resonsible">Who is responsible ?</a></dt>
+
+            <dt><a href="#why_cant_i_keep_a_pointer_to_an_argument">Why can't I keep a pointer to an argument ?</a></dt>
+          </dl>
+        </dd>
+
+        <dt><a href="#orbit">ORBit2</a></dt>
+
+        <dd>
+          <dl>
+            <dt><a href="#what_is_ORBit2">What is ORBit2?</a></dt>
+
+            <dt><a href="#when_and_who_started_the_project">When and who started the project?</a></dt>
+
+            <dt><a href="#how_is_orbit2_better_than_orbit_stable">How is ORBit2 better than ORBit 'stable' ?</a></dt>
+
+            <dt><a href="#how_can_i_install_a_version_of_orbit_without_affecting_my_gnome_desktop">How can I install a version of ORBit without affecting my GNOME desktop</a></dt>
+
+            <dt><a href="#where_can_i_get_the_cvs_head_version_of_orbit2">Where can I get the CVS HEAD version of ORBit2?</a></dt>
+
+            <dt><a href="#what_is_the_difference_between_the_cvs_version_and_the_gnome_package">What is the difference between the CVS version and the GNOME package?</a></dt>
+
+            <dt><a href="#i_cant_connect_to_my_remote_objects">I can't connect to my remote objects ?</a></dt>
+
+            <dt><a href="#which_parameters_are_supported_by_corba_orb_init">Which parameters are supported by CORBA_ORB_init() ?</a></dt>
+
+            <dt><a href="#calling_orb_init_what_is_orbit_local_orb_good_for">Calling ORB_init(), what is string "orbit-local-orb" good for?</a></dt>
+
+            <dt><a href="#is_orbit2_thread_safe">Is ORBit2 thread safe ?</a></dt>
+
+            <dt><a href="#mem_debug_mode">How do I debug memory leaks?</a></dt>
+
+            <dt><a href="#what_is_this_re_enterancy_thing">What is this re-enterancy thing ?</a></dt>
+
+            <dt><a href="#can_i_invoke_methods_from_multiple_threads">Can I invoke methods from multiple threads ?</a></dt>
+
+            <dt><a href="#can_i_receive_invocations_in_multiple_threads">Can I receive invocations in multiple threads ?</a></dt>
+
+            <dt><a href="#can_i_have_each_invocation_handled_by_a_different_thread">Can I have each invocation handled by a different thread ?</a></dt>
+
+            <dt><a href="#how_does_the_new_type_system_work">How does the new 'type' system work ?</a></dt>
+
+            <dt><a href="#what_do_mean_by_type_data">What do you mean by 'type' data ?</a></dt>
+
+            <dt><a href="#how_do_we_get_type_data_for_an_interface">How do we get type data for an interface ?</a></dt>
+
+            <dd>
+              <dl>
+                <dt><a href="#type_data_from_an_object_reference">Type data from an object reference ?</a></dt>
+
+                <dt><a href="#type_data_from_a_type_library">Type data from a type library ?</a></dt>
+              </dl>
+            </dd>
+
+            <dt><a href="#what_is_type_library_or_imodule">What is a type library (or imodule) ?</a></dt>
+
+            <dt><a href="#how_do_i_find_what_type_libraries_are_installed">How do I find what type libraries are installed ?</a></dt>
+
+            <dt><a href="#why_bother_generating_type_information_from_an_interface">Why bother generating type information from an interface ?</a></dt>
+
+            <dt><a href="#why_is_a_type_based_orb_better">Why is a type based ORB better ?</a></dt>
+
+            <dt><a href="#why_is_a_type_based_orb_potentialy_faster">Why is a type based ORB potentialy faster ?</a></dt>
+
+            <dt><a href="#what_is_the_purify_cleanliness_autoconf_option">What is the "purify cleanliness" autoconf option ?</a></dt>
+
+            <dt><a href="#using_strings">How do I use CORBA_strings?</a></dt>
+
+            <dt><a href="#my_skels_leak_memory">My skels leak memory - why ?</a></dt>
+
+            <dt><a href="#why_should_I_not_use_the_release_flag">Why should I not use the _release flag?</a></dt>
+
+            <dt><a href="#why_is_the_ior_from_orb_xyz_not_understood_by_orbit">Why is the IOR from ORB XYZ not understood by ORBit?</a></dt>
+          </dl>
+        </dd>
+
+        <dt><a href="#help">Help</a></dt>
+
+        <dd>
+          <dl>
+            <dt><a href="#is_there_a_mailing_list_howto">Is there a mailing list HOWTO?</a></dt>
+
+            <dt><a href="#how_can_i_subscribe_to_the_mailing_list">How can I subscribe to the mailing list?</a></dt>
+
+            <dt><a href="#how_can_i_unsubscribe_from_the_mailing_list">How can I unsubscribe from the mailing list?</a></dt>
+
+            <dt><a href="#how_can_i_send_an_email_to_the_mailing_list">How can I send an e-mail to the mailing list?</a></dt>
+
+            <dt><a href="#is_there_a_mailing_list_archive">Is there a mailing list archive?</a></dt>
+
+            <dt><a href="#i_am_new_to_corba_what_books_are_available">I'm new to CORBA. What books are available?</a></dt>
+          </dl>
+        </dd>
+      </dl>
+    </div>
+
+    <div class="chapter">
+      <hr />
+
+      <h1><a name="CORBA" id="CORBA"></a>CORBA</h1>
+
+      <div class="sect1">
+        <h2 class="sect1"><a name="ClientConnection" id="ClientConnection"></a>How does a client connect to a server?</h2>
+
+        <p>This is a well known problem in CORBA (more precisely in any distributed object system). It is commonly known under the term "bootstrapping". In general, object references can be obtained from a <tt class="application">Name Service</tt> (or a <tt class="application">Trading Object Service</tt>), but a name service (thanks to the clear design of CORBA) is itself an object. So, how do you get the reference to the name service if it is itself an object ?</p>
+
+        <p>The standard solution for a client, finding a first object reference to a server is by exchanging an Interoperable Object Reference (IOR). The server process produces an IOR of the created object by using the method</p>
+
+        <div class="funcsynopsis">
+          <a name="AEN24" id="AEN24"></a>
+
+          <p><code><code class="FUNCDEF">CORBA_string <tt class="function">CORBA_ORB_object_to_string</tt></code>(CORBA_ORB <tt class="parameter"><i>orb</i></tt>, const CORBA_Object <tt class="parameter"><i>obj</i></tt>, CORBA_Environment* <tt class="parameter"><i>env</i></tt>);</code></p>
+        </div>The generated string, also called stringified object reference, can be transfered by any kind of media, like email, HTTP, NFS, filesystem, or even as a message in a bottle ;-) . The client process reads the IOR from the medium and converts it back into its binary representation via
+
+        <div class="funcsynopsis">
+          <a name="AEN34" id="AEN34"></a>
+
+          <p><code><code class="FUNCDEF">CORBA_Object <tt class="function">CORBA_ORB_string_to_object</tt></code>(CORBA_ORB <tt class="parameter"><i>orb</i></tt>, const CORBA_char *<tt class="parameter"><i>str</i></tt>, CORBA_Environment *<tt class="parameter"><i>env</i></tt>);</code></p>
+        </div>Afterwards the client holds a valid object reference to the server and thus is able to invoke methods in the usual way.<br />
+        <br />
+
+        <p>Until now non-standard ways to solve this bootstrapping issue have been introduced by different ORBs. One example is the Visibroker Location Service. The ORB registers each object at a central service by a proprietary _bind() method. The discovery of the service is done by network broadcasts. The drawback of this mechanism is that the information about the objects is stored in a central table. The table needs to be updated on a regular basis. This is necessary because of malicious objects not cleanly deregistering. If the broadcast interval is to short the updates will cause a lot of noise on the network. If the interval is to long the table contains zombie objects. Such kind of proprietary solutions exists for many major CORBA implementations.</p>
+
+        <p>Ideally the method resolve_initial_references() could be used to find a reference to the naming service. Therefore the ORB must be able to read IORs without requiring the developer to write some additional code. In the past each ORB had its own command line parameters to pass IORs to the ORB's core (ORBit: ORBNamingIOR=IOR:.....). <tt class="application">The Interoperable Naming Service (INS)</tt> specification introduces the standardized command line parameter <tt class="envar">-ORBInitRef</tt> to achieve this.</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="screen">
+
+    <tt class="prompt">bash$</tt><tt class="userinput"><b>appname -ORBInitRef NameService=IOR_of_naming_service</b></tt> 
+</pre>
+            </td>
+          </tr>
+        </table>
+
+        <p>The only trick is to pass argc and argv to the ORB_init() call of the ORB, so that the ORB's core can extract the relevant parameters. Afterwards the call</p>
+
+        <p><b class="command">nsobj = resolve_initial_references("NameService");</b> returns the desired object reference. The INS specification defines, besides the IOR, other human readable object references. <b class="command">corbaloc:iiop://IIOPVersion@hostname:port/ObjectKey</b></p>
+
+        <p>This offers the possibility for a client to point to a server object just by providing a human readable address. Another proposed naming scheme is corbaname, which refers to a naming service running on the host the, specified by hostname. <tt class="replaceable"><i>corbaname://hostname#a/b/obj</i></tt> The a/b/obj specifies a Name, i.e. a sequence of NameComponents, which resolves to an object reference. These mechanisms will extremly improve the whole bootstrapping process and finally solve the problem, as it has been one of the most annoying issues in the past. There are are also a few critics of the human readable object reference corbaloc. They think that the fact of having opaque IORs is weakened by the INS specification. Specifying protocol details, like port numbers or protocol version numbers, can result in references to become invalid when the protocol, used for transportation is exchanged. The Object URLs have to be extended to support the new protocol information, whereas IORs always remain the same, a sequence of numbers.</p>
+
+        <p>The CVS HEAD version of ORBit has a partial implementation of the INS specification. <a href="http://www.ooc.com.au/staff/michi/binding.txt" target="_top">Michi Henning has a more elaborate description of the problem here.</a></p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="DefaultParameterInIDL" id="DefaultParameterInIDL"></a>How can I specify default parameters in IDL?</h2>
+
+        <p>IDL does not allow to specifiy default parameters. There are mainly two reasons for that. First, IDL is some kind of least common denominator of all the languages for which a CORBA mapping is available. Many languages do not support the concept of default parameters and thus have difficulties in supporting this feature in the mapping. And second, default parameters are not really necessary. The designer of an interface can easily split such funtionality into two or more separate methods (Attention: Overloading is not supported for the same reasons, so that methods must have different names).</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="GettingIpAdressOfObject" id="GettingIpAdressOfObject"></a>How can I get the IP address of a cient/server object in CORBA?</h2>
+
+        <p>The IP address (as well as the port number or any other protocol related feature) is hidden in the IOR (Interoperable Object Reference). The reason for this opacity is that CORBA can use any protocol for transportation of requests between object instances. The GIOP (General Inter ORB Protocol) is independent from any special network protocol. The IIOP (Internet Inter ORB Protocol) is a translation of GIOP into TCP/IP. IIOP support is not a mandatory feature of an ORB, but because of the Internet it has become a must for any ORB to implement. If we start relying on the presence of a specific protocol the original intention becomes weakened and may render object references, valid today, invalid in the future. (see TAO (The ACE ORB, ACE - Adaptive Communication Environment) for an ORB which supports pluggable protocols)</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="Who_is_resonsible" id="Who_is_resonsible"></a>Who is responsible ?</h2>
+
+        <p>The bulk of the initial work is down to Elliot Lee, and various people whose ideas he fused liberaly Kennard White, Sebastian Wilhelmi - the polishing and recent work down to Mark McLoughlin, Martin Baulig and Michael Meeks.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="why_cant_i_keep_a_pointer_to_an_argument" id="why_cant_i_keep_a_pointer_to_an_argument"></a>Why can't I keep a pointer to an argument ?</h2>
+
+        <p>If you are implementing a CORBA method, often you are sent data and wish to keep it around; one scenario might be where you are sent a sequence as an 'in' or 'inout' argument:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+static void
 impl_MyModule_myMethod (PortableServer_Servant            servant,
-			const CORBA_sequence_CORBA_octet *data,
-			CORBA_Environment                *ev)
+      const CORBA_sequence_CORBA_octet *data,
+      CORBA_Environment                *ev)
 {
-	/* This code contains an error */
-	g_hash_table_insert (my_hash, data);
-}</PRE
-></TD
-></TR
-></TABLE
->
- 
-      The lifetime of the 'data' variable is only that of the method
-      invocation. What this means is that when the invocation comes in
-      across the wire - the arguments are de-marshaled to temporary
-      storage.  The method is then invoked - on the data, and then the
-      data is freed after the invocation ( to avoid leaking it, or the
-      user having to explicitely free it ).
-      </P
-><P
->&#13;      Thus - if you want to keep a pointer to data; you need to copy
-      it to insert it into the table. ORBit2 provides a helpful
-      convenience function to copy any value, specified by type:
+  /* This code contains an error */
+  g_hash_table_insert (my_hash, data);
+}
+</pre>
+            </td>
+          </tr>
+        </table>The lifetime of the 'data' variable is only that of the method invocation. What this means is that when the invocation comes in across the wire - the arguments are de-marshaled to temporary storage. The method is then invoked - on the data, and then the data is freed after the invocation ( to avoid leaking it, or the user having to explicitely free it ).<br />
+        <br />
 
-      <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->{
-	CORBA_sequence_CORBA_octet *copy;
+        <p>Thus - if you want to keep a pointer to data; you need to copy it to insert it into the table. ORBit2 provides a helpful convenience function to copy any value, specified by type:</p>
 
-	copy = ORBit_copy_value (data, TC_CORBA_sequence_CORBA_octet);
-	g_hash_table_insert (my_hash, copy);
-}</PRE
-></TD
-></TR
-></TABLE
->
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+{
+  CORBA_sequence_CORBA_octet *copy;
 
-	is correct.
-	</P
-></DIV
-></DIV
-><DIV
-CLASS="chapter"
-><HR><H1
-><A
-NAME="orbit"
-></A
->ORBit2</H1
-><DIV
-CLASS="sect1"
-><H2
-CLASS="sect1"
-><A
-NAME="what_is_ORBit2"
-></A
->What is ORBit2?</H2
-><P
->&#13;   ORBit2 is the next revision in the ORBit development plan. It is
-   substantialy re-written, and contains a number of new, advanced
-   features. One of these is an abstract IO layer split out into the
-   separate 'linc' library. This allows features such as SSL operation
-   and multiple new connection types.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="when_and_who_started_the_project"
-></A
->When and who started the project?</H2
-><P
->The project
-  was started by Elliot Lee and Dick Porter around February 1998.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_is_orbit2_better_than_orbit_stable"
-></A
->How is ORBit2 better than ORBit 'stable' ?</H2
-><P
->&#13;   In many ways:
-   <P
-></P
-><UL
-><LI
-><P
-> 
-        Targets CORBA 2.4 instead of CORBA 2.2
-        </P
-></LI
-><LI
-><P
-> 
-        Theoreticaly thread safe - see later.
-        </P
-></LI
-><LI
-><P
-> 
-        In conjunction with linc allows all manner of new transports
-        </P
-></LI
-><LI
-><P
-> 
-        Protection against malicious / badly formed wire data
-        </P
-></LI
-><LI
-><P
-> 
-        Type centric
-        <P
-></P
-><UL
-><LI
-><P
-> smaller - stubs / skels are tiny: ~50% smaller.</P
-></LI
-><LI
-><P
-> generic operation, eg. method tracing</P
-></LI
-><LI
-><P
-> fast in-proc language bindings</P
-></LI
-><LI
-><P
-> marginaly slower currently</P
-></LI
-></UL
->
-        </P
-></LI
-><LI
-><P
-> 
-        Uses glib mainloop
-        </P
-></LI
-><LI
-><P
-> 
-        "URL for IOR" to allow retrieving an IOR via HTTP
-        </P
-></LI
-><LI
-><P
-> 
-        Cleaner
-        <P
-></P
-><UL
-><LI
-><P
-> lots of code cleaning and re-factoring</P
-></LI
-><LI
-><P
-> most CORBA interfaces generated from pseudo-IDL</P
-></LI
-><LI
-><P
-> a more pleasant directory structure</P
-></LI
-><LI
-><P
-> more complete implementations of many things</P
-></LI
-></UL
->
-        </P
-></LI
-><LI
-><P
-> 
-        Tested - fairly comprehensive stress testing.
-        </P
-></LI
-><LI
-><P
-> 
-        No resource leakage of TypeCodes
-        </P
-></LI
-><LI
-><P
-> 
-        Lots of bugs fixed, and new ones created.
-        </P
-></LI
-></UL
->
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_can_i_install_a_version_of_orbit_without_affecting_my_gnome_desktop"
-></A
->How can I install a version of ORBit without affecting my GNOME desktop</H2
-><P
->&#13;Configure the package with the following command:
+  copy = ORBit_copy_value (data, TC_CORBA_sequence_CORBA_octet);
+  g_hash_table_insert (my_hash, copy);
+}
+</pre>
+            </td>
+          </tr>
+        </table>is correct.
+      </div>
+    </div>
 
-<B
-CLASS="command"
->./configure --prefix=~/orbit_test_dir --exec-prefix=~/orbit_test_dir</B
->
+    <div class="chapter">
+      <hr />
 
-   Where orbit_test_dir is an arbitrary subdirectory. Then call make
-   and make install, which will copy ORBit to the specified
-   directory. Finally you just need to adapt your PATH and
-   LD_LIBRARY_PATH environment variables by adding
-   ~/orbit_test_dir/bin to PATH and ~/orbit_test_dir/lib to
-   LD_LIBRARY_PATH respectively.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="where_can_i_get_the_cvs_head_version_of_orbit2"
-></A
->Where can I get the CVS HEAD version of ORBit2?</H2
-><P
->The gnome <A
-HREF="http://www.gnome.org/projects/ORBit2/download.html"
-TARGET="_top"
->developer
-  site </A
->has a description on how to use the anonymous CVS access. After
-  logging on you just need to type "cvs -z3 co ORBit2", whereas
-  "ORBit2" is the name of the module
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="what_is_the_difference_between_the_cvs_version_and_the_gnome_package"
-></A
->What is the difference between the CVS version and the GNOME
-  package?</H2
-><P
->The <A
-HREF="http://www.gnome.org/start/2.3"
-TARGET="_top"
->Roadmap for GNOME</A
->
-  version 2.x requires ORBit2 to be binary and source-code
-  compatible. Therefore updates on the ORBit2 package are accepted as
-  long as these requirements are not violated.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="i_cant_connect_to_my_remote_objects"
-></A
->I can't connect to my remote objects ?</H2
-><P
->&#13;   A GNOME <A
-HREF="http://mail.gnome.org/archives/gnome-list/2000-June/thread.html#00439"
-TARGET="_top"
->&#13;   security discussion</A
-> led to disabling IIOP over IP server
-   sockets (i.e. ports) per default. Instead either UNIX domain
-   sockets or shared memory for interprocess communication are
-   used. This disables communcation over the network but prevents the
-   system from Denial of Service attacks. If you want to use ORBit
-   over the network you need to turn it on again. This can either be
-   done in /etc/orbitrc (system-wide settings), in ~/.orbitrc (user's
-   settings), or on a per application basis by passing a parameter to
-   the ORB. For Solution one and two you need to put ORBIIOPIPv4=1
-   into one of the orbitrc files. Controlling the settings for each
-   application can be done by providing ORBIIOPIPv4=1 at the
-   command-line to your client/server application and passing the argc
-   and argv parameters to the CORBA_ORB_init() call
-   (default-handling).  You can check the setting with the command:
-   <B
-CLASS="command"
->netstat -ao | grep LISTEN</B
->. You should not have
-   any orbit related sockets in listen mode (a line: "unix 0 [ ACC ]
-   STREAM LISTENING XXXX /tmp/orbit-USER/orb-YYYYYYYYYYYYYYYY" should
-   not appear)
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="which_parameters_are_supported_by_corba_orb_init"
-></A
->Which parameters are supported by CORBA_ORB_init() ?</H2
-><P
-> ORBit specific parameters:
-   <P
-></P
-><UL
-><LI
-><P
->&#13;	    <TT
-CLASS="guilabel"
-><B
->ORBDebugFlags=traces|inproc_traces|timings|types|messages|errors|objects|giop|refs</B
-></TT
->
-	    The amount of debugging information to display. The
-	    modules can be combined by using , ":" as separator.
-	    </P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIPv4=0|1</B
-></TT
->
-	     Disable/Enable IPv4 server sockets.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIPv6=0|1</B
-></TT
->
-	    Disable/Enable IPv6 sockets.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIPName=HostInterface</B
-></TT
->
-	    Defines the IP host-name the server shall bind to.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIPSock=#port</B
-></TT
-> Number of
-	    port to listen for IIOP connections. This parameter is
-	    required for persistent object references
-	    (PortableServer_PERSISTENT policy).  </P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBInitialMsgLimit=#</B
-></TT
-> Amount of
-	    data accepted on first method invocation. Succeeding
-	    method invocations are not limited. This option is used to
-	    prevent DOS attacks - ie. opening a connection to service,
-	    sending huge amount of junk data. </P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPUNIX=0|1</B
-></TT
->
-	    Disable/Enable UNIX domain sockets.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIrDA=0|1</B
-></TT
->
-	    Disable/Enable IrDA capabilities.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPSSL=0|1</B
-></TT
->
-	    Disable/Enable IIOP over SSL.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBIIOPIrDA=0|1</B
-></TT
->
-	    Disable/Enable IrDA capabilities.</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBNamingIOR=IOR</B
-></TT
-> (Available for
-	    ORBit2.8) Define specific reference of NameService, ie. on
-	    command line define reference of NameService by
-	    -ORBNamingIOR=IOR:010000002800000.., or as human readable
-	    CORBA-Loc URL
-	    -ORBNamingIOR=corbaloc:iiop:gnome.org:8884/NameService%00. The
-	    suffix %00 terminates the char-sequence forming a
-	    C-string.  If used in combination with option ORBInitRef,
-	    the option ORBInitRef dominates. </P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBInitRef=Id=IOR</B
-></TT
-> (Available
-	    for ORBit2.8) Define initial reference of generic service,
-	    ie. on command line define reference of NameService by
-	    -ORBInitRef=NameService=IOR:010000002800000..</P
-></LI
-><LI
-><P
-><TT
-CLASS="guilabel"
-><B
->ORBCorbaloc=0|1</B
-></TT
->(Available for
-	    ORBit2.9) If set, object_to_string will create corbaloc
-	    URL terms instead of IORs, ie. corbaloc:iiop:1.2@gnome.org:8884/NameService%00 
-          </P
-></LI
-></UL
->
+      <h1><a name="orbit" id="orbit"></a>ORBit2</h1>
 
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="calling_orb_init_what_is_orbit_local_orb_good_for"
-></A
->Calling ORB_init(), what is string "orbit-local-orb" good for?</H2
-><P
->&#13;      ORBit2 supports single- and multi-threaded mode. the string is
-      used to tell ORBit2 what mode it shall run into. Using the
-      string "orbit-local-mt-orb" for initialization, ORBit2 will
-      enter the multi-threaded mode:
-      <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);
-      </PRE
-></TD
-></TR
-></TABLE
->
- 
-      For single threaded application usually "orbit-local-orb" is
-      given as argument:
-      <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
-      </PRE
-></TD
-></TR
-></TABLE
->
+      <div class="sect1">
+        <h2 class="sect1"><a name="what_is_ORBit2" id="what_is_ORBit2"></a>What is ORBit2?</h2>
 
-      Footnote: Since release ORBit2-2.7.5 multi-threaded setup is
-      used by default. To force single threaded setup you must give
-      string argument "orbit-local-non-threaded-orb", any other string
-      will keep multi threaded settings.
-      <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-non-threaded-orb", ev);
-      </PRE
-></TD
-></TR
-></TABLE
->
-      </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="is_orbit2_thread_safe"
-></A
->Is ORBit2 thread safe ?</H2
-><P
->&#13;   ORBit2 is theoreticaly thread safe, ie. we thought about it a bit
-   during the design - which is nominaly thread safe, we added a lot
-   of locks, and we fixed deadlocks when they were found. With release
-   ORBit2-2.7.5 thread safe setup is used by default.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="mem_debug_mode"
-></A
->How do I debug memory leaks?</H2
-><P
->&#13;   OK - if you compile ORBit2 with --enable-debug (perhaps you did
-   this already), then export ORBIT2_DEBUG=refs, then re-run - it
-   should show you the type of object that is leaked - which may help.
-   Probably you are missing a CORBA_Object_release (foo, NULL);
-   somewhere.  
-   </P
-><P
-> You might want to use memory debugger of some sort; I would
-   recommend valgrind - google for it; you need to build ORBit2 with
-   --enable-purify and run with --alignment=8 but it's an extremely
-   powerful &#38; useful tool.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="what_is_this_re_enterancy_thing"
-></A
->What is this re-enterancy thing ?</H2
-><P
->&#13;   When a method is invoked, while the ORB is waiting for a return
-   value or exception (if applicable) the ORB processes any other
-   incoming requests in a re-enterant fashion. This occurs even during
-   threaded operation currently.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="can_i_invoke_methods_from_multiple_threads"
-></A
->Can I invoke methods from multiple threads ?</H2
-><P
->&#13;   Yes, this should present no particular problem.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="can_i_receive_invocations_in_multiple_threads"
-></A
->Can I receive invocations in multiple threads ?</H2
-><P
->&#13;   Yes - assuming you have a glib mainloop ( or a linc_mainloop )
-   running in one or several of your threads. The precice thread that
-   the invocation is recieved in is unpredictable.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="can_i_have_each_invocation_handled_by_a_different_thread"
-></A
->Can I have each invocation handled by a different thread ?</H2
-><P
->&#13;   Yes - much effort has been put into this. POA policies must be used to
-   define behaviour of newly created POAs; eg. 'THREAD_PER_REQUEST' policy.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_does_the_new_type_system_work"
-></A
->How does the new 'type' system work ?</H2
-><P
->&#13;   The new type system forms a fundamental part of ORBit2 and presents
-   a major simplification.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="what_do_mean_by_type_data"
-></A
->What do you mean by 'type' data ?</H2
-><P
->&#13;   By type data we mean not only structure layout information, but
-   also full interface and method information. ie. not just value
-   class types but interfaces as well.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_do_we_get_type_data_for_an_interface"
-></A
->How do we get type data for an interface ?</H2
-><P
->&#13;   There are two answers to this. Firstly, if you have a pointer to an
-   Object reference and you know nothing more than that it is a ORBit2
-   handled CORBA object, you can (via. an ORBit2 extension) request
-   it's type id, and from this, a full interface description.
-   </P
-><P
->&#13;        see ORBit2/include/orb/orb-core/orbit-small.h
-        and ORBit2/include/orb/orb-core/orbit-iinterface.h (from)
-            ORBit2/src/orb/orb-core/orbit-iinterface.idl
-   </P
-><DIV
-CLASS="sect2"
-><HR><H3
-CLASS="sect2"
-><A
-NAME="type_data_from_an_object_reference"
-></A
->Type data from an object reference ?</H3
-><P
->&#13;   <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;        CORBA_char *type_id;
+        <p>ORBit2 is the next revision in the ORBit development plan. It is substantialy re-written, and contains a number of new, advanced features. One of these is an abstract IO layer split out into the separate 'linc' library. This allows features such as SSL operation and multiple new connection types.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="when_and_who_started_the_project" id="when_and_who_started_the_project"></a>When and who started the project?</h2>
+
+        <p>The project was started by Elliot Lee and Dick Porter around February 1998.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_is_orbit2_better_than_orbit_stable" id="how_is_orbit2_better_than_orbit_stable"></a>How is ORBit2 better than ORBit 'stable' ?</h2>
+
+        <p>In many ways:</p>
+
+        <ul>
+          <li>
+            <p>Targets CORBA 2.4 instead of CORBA 2.2</p>
+          </li>
+
+          <li>
+            <p>Theoreticaly thread safe - see later.</p>
+          </li>
+
+          <li>
+            <p>In conjunction with linc allows all manner of new transports</p>
+          </li>
+
+          <li>
+            <p>Protection against malicious / badly formed wire data</p>
+          </li>
+
+          <li>
+            <p>Type centric</p>
+
+            <ul>
+              <li>
+                <p>smaller - stubs / skels are tiny: ~50% smaller.</p>
+              </li>
+
+              <li>
+                <p>generic operation, eg. method tracing</p>
+              </li>
+
+              <li>
+                <p>fast in-proc language bindings</p>
+              </li>
+
+              <li>
+                <p>marginaly slower currently</p>
+              </li>
+            </ul><br />
+            <br />
+          </li>
+
+          <li>
+            <p>Uses glib mainloop</p>
+          </li>
+
+          <li>
+            <p>"URL for IOR" to allow retrieving an IOR via HTTP</p>
+          </li>
+
+          <li>
+            <p>Cleaner</p>
+
+            <ul>
+              <li>
+                <p>lots of code cleaning and re-factoring</p>
+              </li>
+
+              <li>
+                <p>most CORBA interfaces generated from pseudo-IDL</p>
+              </li>
+
+              <li>
+                <p>a more pleasant directory structure</p>
+              </li>
+
+              <li>
+                <p>more complete implementations of many things</p>
+              </li>
+            </ul><br />
+            <br />
+          </li>
+
+          <li>
+            <p>Tested - fairly comprehensive stress testing.</p>
+          </li>
+
+          <li>
+            <p>No resource leakage of TypeCodes</p>
+          </li>
+
+          <li>
+            <p>Lots of bugs fixed, and new ones created.</p>
+          </li>
+        </ul>
+      </div><br />
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_can_i_install_a_version_of_orbit_without_affecting_my_gnome_desktop" id="how_can_i_install_a_version_of_orbit_without_affecting_my_gnome_desktop"></a>How can I install a version of ORBit without affecting my GNOME desktop</h2>
+
+        <p>Configure the package with the following command: <b class="command">./configure --prefix=~/orbit_test_dir --exec-prefix=~/orbit_test_dir</b> Where orbit_test_dir is an arbitrary subdirectory. Then call make and make install, which will copy ORBit to the specified directory. Finally you just need to adapt your PATH and LD_LIBRARY_PATH environment variables by adding ~/orbit_test_dir/bin to PATH and ~/orbit_test_dir/lib to LD_LIBRARY_PATH respectively.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="where_can_i_get_the_cvs_head_version_of_orbit2" id="where_can_i_get_the_cvs_head_version_of_orbit2"></a>Where can I get the CVS HEAD version of ORBit2?</h2>
+
+        <p>The gnome <a href="http://www.gnome.org/projects/ORBit2/download.html" target="_top">developer site</a> has a description on how to use the anonymous CVS access. After logging on you just need to type "cvs -z3 co ORBit2", whereas "ORBit2" is the name of the module</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="what_is_the_difference_between_the_cvs_version_and_the_gnome_package" id="what_is_the_difference_between_the_cvs_version_and_the_gnome_package"></a>What is the difference between the CVS version and the GNOME package?</h2>
+
+        <p>The <a href="http://www.gnome.org/start/2.3" target="_top">Roadmap for GNOME</a> version 2.x requires ORBit2 to be binary and source-code compatible. Therefore updates on the ORBit2 package are accepted as long as these requirements are not violated.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="i_cant_connect_to_my_remote_objects" id="i_cant_connect_to_my_remote_objects"></a>I can't connect to my remote objects ?</h2>
+
+        <p>A GNOME <a href="http://mail.gnome.org/archives/gnome-list/2000-June/thread.html#00439" target="_top">security discussion</a> led to disabling IIOP over IP server sockets (i.e. ports) per default. Instead either UNIX domain sockets or shared memory for interprocess communication are used. This disables communcation over the network but prevents the system from Denial of Service attacks. If you want to use ORBit over the network you need to turn it on again. This can either be done in /etc/orbitrc (system-wide settings), in ~/.orbitrc (user's settings), or on a per application basis by passing a parameter to the ORB. For Solution one and two you need to put ORBIIOPIPv4=1 into one of the orbitrc files. Controlling the settings for each application can be done by providing ORBIIOPIPv4=1 at the command-line to your client/server application and passing the argc and argv parameters to the CORBA_ORB_init() call (default-handling). You can check the setting with the command: <b class="command">netstat -ao | grep LISTEN</b>. You should not have any orbit related sockets in listen mode (a line: "unix 0 [ ACC ] STREAM LISTENING XXXX /tmp/orbit-USER/orb-YYYYYYYYYYYYYYYY" should not appear)</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="which_parameters_are_supported_by_corba_orb_init" id="which_parameters_are_supported_by_corba_orb_init"></a>Which parameters are supported by CORBA_ORB_init() ?</h2>
+
+        <p>ORBit specific parameters:</p>
+
+        <ul>
+          <li>
+            <p><tt class="guilabel"><b>ORBDebugFlags=traces|inproc_traces|timings|types|messages|errors|objects|giop|refs</b></tt> The amount of debugging information to display. The modules can be combined by using , ":" as separator.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIPv4=0|1</b></tt> Disable/Enable IPv4 server sockets.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIPv6=0|1</b></tt> Disable/Enable IPv6 sockets.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIPName=HostInterface</b></tt> Defines the IP host-name the server shall bind to.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIPSock=#port</b></tt> Number of port to listen for IIOP connections. This parameter is required for persistent object references (PortableServer_PERSISTENT policy).</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBInitialMsgLimit=#</b></tt> Amount of data accepted on first method invocation. Succeeding method invocations are not limited. This option is used to prevent DOS attacks - ie. opening a connection to service, sending huge amount of junk data.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPUNIX=0|1</b></tt> Disable/Enable UNIX domain sockets.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIrDA=0|1</b></tt> Disable/Enable IrDA capabilities.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPSSL=0|1</b></tt> Disable/Enable IIOP over SSL.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBIIOPIrDA=0|1</b></tt> Disable/Enable IrDA capabilities.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBNamingIOR=IOR</b></tt> (Available for ORBit2.8) Define specific reference of NameService, ie. on command line define reference of NameService by -ORBNamingIOR=IOR:010000002800000.., or as human readable CORBA-Loc URL -ORBNamingIOR=corbaloc:iiop:gnome.org:8884/NameService%00. The suffix %00 terminates the char-sequence forming a C-string. If used in combination with option ORBInitRef, the option ORBInitRef dominates.</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBInitRef=Id=IOR</b></tt> (Available for ORBit2.8) Define initial reference of generic service, ie. on command line define reference of NameService by -ORBInitRef=NameService=IOR:010000002800000..</p>
+          </li>
+
+          <li>
+            <p><tt class="guilabel"><b>ORBCorbaloc=0|1</b></tt>(Available for ORBit2.9) If set, object_to_string will create corbaloc URL terms instead of IORs, ie. corbaloc:iiop:1.2@gnome.org:8884/NameService%00</p>
+          </li>
+        </ul>
+      </div><br />
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="calling_orb_init_what_is_orbit_local_orb_good_for" id="calling_orb_init_what_is_orbit_local_orb_good_for"></a>Calling ORB_init(), what is string "orbit-local-orb" good for?</h2>
+
+        <p>ORBit2 supports single- and multi-threaded mode. the string is used to tell ORBit2 what mode it shall run into. Using the string "orbit-local-mt-orb" for initialization, ORBit2 will enter the multi-threaded mode:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);
+      
+</pre>
+            </td>
+          </tr>
+        </table>For single threaded application usually "orbit-local-orb" is given as argument:
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
+      
+</pre>
+            </td>
+          </tr>
+        </table>Footnote: Since release ORBit2-2.7.5 multi-threaded setup is used by default. To force single threaded setup you must give string argument "orbit-local-non-threaded-orb", any other string will keep multi threaded settings.
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+       (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-non-threaded-orb", ev);
+      
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div><br />
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="is_orbit2_thread_safe" id="is_orbit2_thread_safe"></a>Is ORBit2 thread safe ?</h2>
+
+        <p>ORBit2 is theoreticaly thread safe, ie. we thought about it a bit during the design - which is nominaly thread safe, we added a lot of locks, and we fixed deadlocks when they were found. With release ORBit2-2.7.5 thread safe setup is used by default.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="mem_debug_mode" id="mem_debug_mode"></a>How do I debug memory leaks?</h2>
+
+        <p>OK - if you compile ORBit2 with --enable-debug (perhaps you did this already), then export ORBIT2_DEBUG=refs, then re-run - it should show you the type of object that is leaked - which may help. Probably you are missing a CORBA_Object_release (foo, NULL); somewhere.</p>
+
+        <p>You might want to use memory debugger of some sort; I would recommend valgrind - google for it; you need to build ORBit2 with --enable-purify and run with --alignment=8 but it's an extremely powerful &amp; useful tool.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="what_is_this_re_enterancy_thing" id="what_is_this_re_enterancy_thing"></a>What is this re-enterancy thing ?</h2>
+
+        <p>When a method is invoked, while the ORB is waiting for a return value or exception (if applicable) the ORB processes any other incoming requests in a re-enterant fashion. This occurs even during threaded operation currently.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="can_i_invoke_methods_from_multiple_threads" id="can_i_invoke_methods_from_multiple_threads"></a>Can I invoke methods from multiple threads ?</h2>
+
+        <p>Yes, this should present no particular problem.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="can_i_receive_invocations_in_multiple_threads" id="can_i_receive_invocations_in_multiple_threads"></a>Can I receive invocations in multiple threads ?</h2>
+
+        <p>Yes - assuming you have a glib mainloop ( or a linc_mainloop ) running in one or several of your threads. The precice thread that the invocation is recieved in is unpredictable.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="can_i_have_each_invocation_handled_by_a_different_thread" id="can_i_have_each_invocation_handled_by_a_different_thread"></a>Can I have each invocation handled by a different thread ?</h2>
+
+        <p>Yes - much effort has been put into this. POA policies must be used to define behaviour of newly created POAs; eg. 'THREAD_PER_REQUEST' policy.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_does_the_new_type_system_work" id="how_does_the_new_type_system_work"></a>How does the new 'type' system work ?</h2>
+
+        <p>The new type system forms a fundamental part of ORBit2 and presents a major simplification.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="what_do_mean_by_type_data" id="what_do_mean_by_type_data"></a>What do you mean by 'type' data ?</h2>
+
+        <p>By type data we mean not only structure layout information, but also full interface and method information. ie. not just value class types but interfaces as well.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_do_we_get_type_data_for_an_interface" id="how_do_we_get_type_data_for_an_interface"></a>How do we get type data for an interface ?</h2>
+
+        <p>There are two answers to this. Firstly, if you have a pointer to an Object reference and you know nothing more than that it is a ORBit2 handled CORBA object, you can (via. an ORBit2 extension) request it's type id, and from this, a full interface description.</p>
+
+        <p>see ORBit2/include/orb/orb-core/orbit-small.h and ORBit2/include/orb/orb-core/orbit-iinterface.h (from) ORBit2/src/orb/orb-core/orbit-iinterface.idl</p>
+
+        <div class="sect2">
+          <hr />
+
+          <h3 class="sect2"><a name="type_data_from_an_object_reference" id="type_data_from_an_object_reference"></a>Type data from an object reference ?</h3>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+
+        CORBA_char *type_id;
         ORBit_IInterface *iface;
 
         type_id = ORBit_small_get_type_id (obj, ev);
         iface   = ORBit_small_get_iinterface (obj, type_id, ev);
-   </PRE
-></TD
-></TR
-></TABLE
->
-   </P
-></DIV
-><DIV
-CLASS="sect2"
-><HR><H3
-CLASS="sect2"
-><A
-NAME="type_data_from_a_type_library"
-></A
->Type data from a type library ?</H3
-><P
->&#13;   If we wish to implement an interface in our scripting language
-   that is not currently registered with the ORB, then we can load it
-   dynamicaly from the type library interface:
-   <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->ORBit_small_load_typelib ("Bonobo");</PRE
-></TD
-></TR
-></TABLE
->
    
-   We can then suck all the interface and TypeCode information out of
-   the library, in order to construct local language bound peers:
-   
-   <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->CORBA_sequence_CORBA_TypeCode   *ORBit_small_get_types ("Bonobo");
-CORBA_sequence_ORBit_IInterface *ORBit_small_get_iinterfaces (...);</PRE
-></TD
-></TR
-></TABLE
->
-   </P
-></DIV
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="what_is_type_library_or_imodule"
-></A
->What is a type library (or imodule) ?</H2
-><P
->&#13;   Type libraries are essentialy the same generic interface
-   information that the ORB uses to marshal and de-marshal information
-   in the C stubs. It is contained in the -common.c file of a compiled
-   set.
-   </P
-><P
->&#13;   To install a type library correctly you need to have some
-   automake a little like:
-   </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;orbittypelib_LTLIBRARIES = Bonobo_module.la
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div><br />
+
+        <div class="sect2">
+          <hr />
+
+          <h3 class="sect2"><a name="type_data_from_a_type_library" id="type_data_from_a_type_library"></a>Type data from a type library ?</h3>
+
+          <p>If we wish to implement an interface in our scripting language that is not currently registered with the ORB, then we can load it dynamicaly from the type library interface:</p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+ORBit_small_load_typelib ("Bonobo");
+</pre>
+              </td>
+            </tr>
+          </table>We can then suck all the interface and TypeCode information out of the library, in order to construct local language bound peers:
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+CORBA_sequence_CORBA_TypeCode   *ORBit_small_get_types ("Bonobo");
+CORBA_sequence_ORBit_IInterface *ORBit_small_get_iinterfaces (...);
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="what_is_type_library_or_imodule" id="what_is_type_library_or_imodule"></a>What is a type library (or imodule) ?</h2>
+
+        <p>Type libraries are essentialy the same generic interface information that the ORB uses to marshal and de-marshal information in the C stubs. It is contained in the -common.c file of a compiled set.</p>
+
+        <p>To install a type library correctly you need to have some automake a little like:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+orbittypelib_LTLIBRARIES = Bonobo_module.la
 orbittypelibdir = $(libdir)/orbit-2.0
 IMODULE_SOURCE =        \
         Bonobo.h        \
@@ -1380,126 +656,82 @@ Bonobo_module_la_LDFLAGS = \
 $(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
         $(ORBIT_IDL) $(idl_flags) --imodule \
                      $(top_srcdir)/idl/Bonobo.idl
-   </PRE
-></TD
-></TR
-></TABLE
-><P
->&#13;   Note that the library is installed into $(libdir)/orbit-2.0.  When
-   a typelib is loaded, an explicit path can be passed in, otherwise
-   the ':' delimited path environment variables ORBIT_TYPELIB_PATH and
-   GNOME_PATH are searched.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_do_i_find_what_type_libraries_are_installed"
-></A
->How do I find what type libraries are installed ?</H2
-><P
->&#13;   There is a utility ORBit2/test/typelib-dump that will display a
-   list of available libraries for your path setup:
-   </P
-><P
->&#13;   Installed type libraries:
-   <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;        /opt/ngnome2/lib/orbit:
+   
+</pre>
+            </td>
+          </tr>
+        </table>
+
+        <p>Note that the library is installed into $(libdir)/orbit-2.0. When a typelib is loaded, an explicit path can be passed in, otherwise the ':' delimited path environment variables ORBIT_TYPELIB_PATH and GNOME_PATH are searched.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_do_i_find_what_type_libraries_are_installed" id="how_do_i_find_what_type_libraries_are_installed"></a>How do I find what type libraries are installed ?</h2>
+
+        <p>There is a utility ORBit2/test/typelib-dump that will display a list of available libraries for your path setup:</p>
+
+        <p>Installed type libraries:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+        /opt/ngnome2/lib/orbit:
 
                 Everything
                 Accessibility
                 Bonobo
-   </PRE
-></TD
-></TR
-></TABLE
->
-   It can also rudimantarily dump the contents of a type library.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_bother_generating_type_information_from_an_interface"
-></A
->Why bother generating type information from an interface ?</H2
-><P
->&#13;   With ORBit stable, language bindings had to load and parse the IDL
-   definitions for the interface. This had several disadvantages.
+   
+</pre>
+            </td>
+          </tr>
+        </table>It can also rudimantarily dump the contents of a type library.
+      </div><br />
 
-   <P
-></P
-><UL
-><LI
-><P
->&#13;   Primarily performance - loading a load of IDL text, forking the
-   pre-preocessor to pre-process it, resolving all the symbols as
-   strings, converting to an internal representaton - took time. With
-   a standard internal representation, and a simple dlopen to grab it
-   we have a major performance win.
-   </P
-></LI
-><LI
-><P
-> 
-   Include problems: many IDL files are grouped into a
-   single file to build, and can cause grief when included
-   individualy. This contrasts with a working bundle of interfaces,
-   verified at package IDL compile time.
-   </P
-></LI
-><LI
-><P
->&#13;   libIDL - is an unmaintained mess, and is not particularly
-   pleasant to link against, or code to.
-   </P
-></LI
-><LI
-><P
->&#13;   Finding the IDL files - there was no standard path structure, or
-   method of reliably locating all the relevant IDL files.  Now at
-   least there is an ad-hoc shared standard.
-   </P
-></LI
-></UL
->
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_is_a_type_based_orb_better"
-></A
->Why is a type based ORB better ?</H2
-><P
->&#13;   Firstly ABI reduction, in ORBit stable the API usage by the stubs
-   was very considerable - many methods were called, and there was a
-   considerable body of code in a stub or a skel.
-   </P
-><P
->&#13;   With ORBit2 a stub looks like a bit like this:
-   <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;Bonobo_Unknown
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="why_bother_generating_type_information_from_an_interface" id="why_bother_generating_type_information_from_an_interface"></a>Why bother generating type information from an interface ?</h2>
+
+        <p>With ORBit stable, language bindings had to load and parse the IDL definitions for the interface. This had several disadvantages.</p>
+
+        <ul>
+          <li>
+            <p>Primarily performance - loading a load of IDL text, forking the pre-preocessor to pre-process it, resolving all the symbols as strings, converting to an internal representaton - took time. With a standard internal representation, and a simple dlopen to grab it we have a major performance win.</p>
+          </li>
+
+          <li>
+            <p>Include problems: many IDL files are grouped into a single file to build, and can cause grief when included individualy. This contrasts with a working bundle of interfaces, verified at package IDL compile time.</p>
+          </li>
+
+          <li>
+            <p>libIDL - is an unmaintained mess, and is not particularly pleasant to link against, or code to.</p>
+          </li>
+
+          <li>
+            <p>Finding the IDL files - there was no standard path structure, or method of reliably locating all the relevant IDL files. Now at least there is an ad-hoc shared standard.</p>
+          </li>
+        </ul>
+      </div><br />
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="why_is_a_type_based_orb_better" id="why_is_a_type_based_orb_better"></a>Why is a type based ORB better ?</h2>
+
+        <p>Firstly ABI reduction, in ORBit stable the API usage by the stubs was very considerable - many methods were called, and there was a considerable body of code in a stub or a skel.</p>
+
+        <p>With ORBit2 a stub looks like a bit like this:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+Bonobo_Unknown
 Bonobo_Unknown_queryInterface (Bonobo_Unknown     obj,
                                const CORBA_char  *repoid,
                                CORBA_Environment *ev)
@@ -1509,444 +741,251 @@ Bonobo_Unknown_queryInterface (Bonobo_Unknown     obj,
         ... local fast case ... else ...
         { /* remote marshal */
                 gpointer _args[] = {
-                        (gpointer) &#38; repoid
+                        (gpointer) &amp; repoid
                 };
 
                 ORBit_small_invoke_stub (
                         obj,
-                        &#38;Bonobo_Unknown__iinterface.methods._buffer[2],
-                        &#38;_ORBIT_retval, _args, NULL, ev);
+                        &amp;Bonobo_Unknown__iinterface.methods._buffer[2],
+                        &amp;_ORBIT_retval, _args, NULL, ev);
 
         }
 
         return _ORBIT_retval;
 }
-   </PRE
-></TD
-></TR
-></TABLE
->
+   
+</pre>
+            </td>
+          </tr>
+        </table>ie. we expose a single method call here 'ORBit_small_invoke_stub'. This method is passed the object reference, the arguments in a normalized form ( as an array of gpointers ) a pointer to the return value, any CORBA_Context we might be _sing and the exception environent.<br />
+        <br />
 
-        ie. we expose a single method call here
-'ORBit_small_invoke_stub'. This method is passed the object reference,
-the arguments in a normalized form ( as an array of gpointers ) a
-pointer to the return value, any CORBA_Context we might be _sing and
-the exception environent.
-   </P
-><P
->&#13;   The skeleton is similar, unwinding a gpointer array of arguments
-   and invoking the C method. NB. for language bindings, you can hook
-   the a virtual invocation pointer on the servant to recieve a method
-   type data pointer and handle the invocation fully yourself.
-   </P
-><P
->&#13;   The indirection and allocation semantics of the argument passing,
-   as well as the C CORBA semantics are lucidly documented in
-   ORBit2/docs/internals/interface-indirection.gnumeric.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_is_a_type_based_orb_potentialy_faster"
-></A
->Why is a type based ORB potentialy faster ?</H2
-><P
->&#13;   Well - partly due to encapsulation. Encapsulation often carries a
-   cost; in ORBit stable there are several layers. Even though the
-   stubs and skels are substantialy unrolled, there are a considerable
-   amount of method calls, and lots of wasteful indirection.
-   </P
-><P
->&#13;   In ORBit2 we can hide an _extremely_ optimized, top to bottom to
-   the wire generic marshaler behind ORBit_small_invoke_stub. This
-   would be totaly private to the ORB, maintaining ORB encapsulation,
-   but giving us buckets of room for optimization.
-   </P
-><P
->&#13;   Secondarily, in ORBit stable the stubs and skels are massively
-   unrolled, giving not only a size penalty but also a speed penalty
-   in terms of the processors instruction cache (Icache). In contrast
-   ORBit2 maintains a far smaller Icached working set, since the
-   generated code that is different per method is tiny, and the same
-   generic code is executed to do the marshaling for each method.
-   </P
-><P
->&#13;   Hence - although currently what performance tests we have suggest
-   that ORBit2 is ~20% slower than ORBit stable, it will be possible (
-   in a totaly binary compatible fashion ) to tweak and optimize the
-   marshal / de-marshal process to make it arbitarily fast.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="what_is_the_purify_cleanliness_autoconf_option"
-></A
->What is the "purify cleanliness" autoconf option ?</H2
-><P
->&#13;   This (unfinished) option allows the ORB to be configured to run in
-   a slightly slower, but 'cleaner' mode. Purify is a tool that
-   performs advanced memory debugging, and it will detect many common
-   errors. Some of the things ORBit2 can do eg. using uninitialized
-   stack space as a source of randomness will flag false positives as
-   purify errors ( an Uninitialized Memory Read or UMR ). Enabling
-   this flag ensures that all such memory will be blanked first before
-   being read.  This also applies to initializing return values before
-   returning them, even on exceptions - a case where CORBA specifies
-   an uninitialized return value.
-   </P
-><P
->&#13;   The performance impact of having a putify clean ORB is probably
-   fairly minimal, perhaps ~10% slower max., finger in the air
-   guestimation.
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="using_strings"
-></A
->How do I use CORBA_strings?</H2
-><P
->&#13;   For instance if you have a struct like so:
- <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;struct employee
+        <p>The skeleton is similar, unwinding a gpointer array of arguments and invoking the C method. NB. for language bindings, you can hook the a virtual invocation pointer on the servant to recieve a method type data pointer and handle the invocation fully yourself.</p>
+
+        <p>The indirection and allocation semantics of the argument passing, as well as the C CORBA semantics are lucidly documented in ORBit2/docs/internals/interface-indirection.gnumeric.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="why_is_a_type_based_orb_potentialy_faster" id="why_is_a_type_based_orb_potentialy_faster"></a>Why is a type based ORB potentialy faster ?</h2>
+
+        <p>Well - partly due to encapsulation. Encapsulation often carries a cost; in ORBit stable there are several layers. Even though the stubs and skels are substantialy unrolled, there are a considerable amount of method calls, and lots of wasteful indirection.</p>
+
+        <p>In ORBit2 we can hide an _extremely_ optimized, top to bottom to the wire generic marshaler behind ORBit_small_invoke_stub. This would be totaly private to the ORB, maintaining ORB encapsulation, but giving us buckets of room for optimization.</p>
+
+        <p>Secondarily, in ORBit stable the stubs and skels are massively unrolled, giving not only a size penalty but also a speed penalty in terms of the processors instruction cache (Icache). In contrast ORBit2 maintains a far smaller Icached working set, since the generated code that is different per method is tiny, and the same generic code is executed to do the marshaling for each method.</p>
+
+        <p>Hence - although currently what performance tests we have suggest that ORBit2 is ~20% slower than ORBit stable, it will be possible ( in a totaly binary compatible fashion ) to tweak and optimize the marshal / de-marshal process to make it arbitarily fast.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="what_is_the_purify_cleanliness_autoconf_option" id="what_is_the_purify_cleanliness_autoconf_option"></a>What is the "purify cleanliness" autoconf option ?</h2>
+
+        <p>This (unfinished) option allows the ORB to be configured to run in a slightly slower, but 'cleaner' mode. Purify is a tool that performs advanced memory debugging, and it will detect many common errors. Some of the things ORBit2 can do eg. using uninitialized stack space as a source of randomness will flag false positives as purify errors ( an Uninitialized Memory Read or UMR ). Enabling this flag ensures that all such memory will be blanked first before being read. This also applies to initializing return values before returning them, even on exceptions - a case where CORBA specifies an uninitialized return value.</p>
+
+        <p>The performance impact of having a putify clean ORB is probably fairly minimal, perhaps ~10% slower max., finger in the air guestimation.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="using_strings" id="using_strings"></a>How do I use CORBA_strings?</h2>
+
+        <p>For instance if you have a struct like so:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+struct employee
 {
     CORBA_string name;
-}</PRE
-></TD
-></TR
-></TABLE
->
+}
+</pre>
+            </td>
+          </tr>
+        </table>As long as you do not permit any CORBA/ORBit to free it, you can do:
 
-  As long as you do not permit any CORBA/ORBit to free it, you can do:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;  struct employee thisemployee;
-  thisemployee.name = "someone";</PRE
-></TD
-></TR
-></TABLE
->
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
 
-Otherwise / the more correct way is to use the CORBA API:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;/usr/include/orbit-2.0/orbit/orb-core/corba-string.h:
-	CORBA_char          *CORBA_string_dup  (const CORBA_char *str);
-	CORBA_char  *CORBA_string_alloc  (CORBA_unsigned_long len);
-</PRE
-></TD
-></TR
-></TABLE
->
-therefore simply <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;	thisemployee.name = CORBA_string_dup ("someone");</PRE
-></TD
-></TR
-></TABLE
->
-   </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="my_skels_leak_memory"
-></A
->My skels leak memory - why ?</H2
-><P
->&#13;	Sometimes people post to the list saying I'm doing:
-    <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;CORBA_sequence_CORBA_string *
+  struct employee thisemployee;
+  thisemployee.name = "someone";
+</pre>
+            </td>
+          </tr>
+        </table>Otherwise / the more correct way is to use the CORBA API:
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+/usr/include/orbit-2.0/orbit/orb-core/corba-string.h:
+  CORBA_char          *CORBA_string_dup  (const CORBA_char *str);
+  CORBA_char  *CORBA_string_alloc  (CORBA_unsigned_long len);
+</pre>
+            </td>
+          </tr>
+        </table>therefore simply
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+  thisemployee.name = CORBA_string_dup ("someone");
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div><br />
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="my_skels_leak_memory" id="my_skels_leak_memory"></a>My skels leak memory - why ?</h2>
+
+        <p>Sometimes people post to the list saying I'm doing:</p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+
+CORBA_sequence_CORBA_string *
 get_StringSequence (PortableServer_Servant servant,
                     CORBA_Environment     *ev)
 {
-	int i;
-	CORBA_sequence_CORBA_string *s;
+  int i;
+  CORBA_sequence_CORBA_string *s;
          
-	s = CORBA_sequence_CORBA_string__alloc ();
-	s-&#62;_buffer = CORBA_sequence_CORBA_string_allocbuf (100);
-	s-&#62;_length = 100;
+  s = CORBA_sequence_CORBA_string__alloc ();
+  s-&gt;_buffer = CORBA_sequence_CORBA_string_allocbuf (100);
+  s-&gt;_length = 100;
 
-	for (i = 0; i &#60; 100; i++)
-		s-&#62;_buffer[i] = CORBA_string_dup ("A string");
+  for (i = 0; i &lt; 100; i++)
+    s-&gt;_buffer[i] = CORBA_string_dup ("A string");
 
-	return s;        
-} </PRE
-></TD
-></TR
-></TABLE
->
+  return s;        
+} 
+</pre>
+            </td>
+          </tr>
+        </table>Why am I leaking huge chunks of memory ? The answer is the _release feature. This field is set to FALSE when the sequence is allocated (s-&gt;_release), and when you return from the implementation to the skel, the skel marshals the sequence, and then CORBA_free's it. However, if the _release flag is FALSE, the _buffer and it's contents are not freed. This allows people to return static copies of their data which can be a big efficiency win.<br />
+        <br />
 
-	Why am I leaking huge chunks of memory ? The answer is the
-        _release feature. This field is set to FALSE when the sequence
-        is allocated (s-&#62;_release), and when you return from the
-        implementation to the skel, the skel marshals the sequence,
-        and then CORBA_free's it.  However, if the _release flag is
-        FALSE, the _buffer and it's contents are not freed. This
-        allows people to return static copies of their data which can
-        be a big efficiency win.
-        </P
-><P
->&#13;	In this case you want the release flag set; this can be done
-        by:
-        <TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
-> s-&#62;_release = TRUE; </PRE
-></TD
-></TR
-></TABLE
->
+        <p>In this case you want the release flag set; this can be done by:</p>
 
-        before you return, or
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+ s-&gt;_release = TRUE; 
+</pre>
+            </td>
+          </tr>
+        </table>before you return, or
 
-	<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->CORBA_sequence_set_release (s, TRUE); </PRE
-></TD
-></TR
-></TABLE
->
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+CORBA_sequence_set_release (s, TRUE); 
+</pre>
+            </td>
+          </tr>
+        </table>A similar scheme is used for the value of a CORBA_any being returned.
+      </div><br />
 
-	A similar scheme is used for the value of a CORBA_any being
-        returned.
-        </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_should_I_not_use_the_release_flag"
-></A
->Why should I not use the _release flag?</H2
-><P
->&#13;	While _release works really well out of process, if you are
-        writing library code, or code that might be used by another
-        component in process - then the _release flag is a
-        nightmare. The reason is quite simple; in the remote case, the
-        data is copied to the wire, and the client receives a copy of
-        which he controls the lifecycle. The problem is that in-proc,
-        the client receives only a shallow copy and has no control (
-        or idea ) of it's lifecycle.
+      <div class="sect1">
+        <hr />
 
-	Thus you might return some data, and then in a later method
-        alter the data - the client's copy then would contain bad
-        information.
-        </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="why_is_the_ior_from_orb_xyz_not_understood_by_orbit"
-></A
->Why is the IOR from ORB XYZ not understood by ORBit?</H2
-><P
->Check whether the IOR has some whitespaces at the end. ORBit version below 0.5.x does not accept IORs with trailing whitespaces. 
-  </P
-></DIV
-></DIV
-><DIV
-CLASS="chapter"
-><HR><H1
-><A
-NAME="help"
-></A
->Help</H1
-><DIV
-CLASS="sect1"
-><H2
-CLASS="sect1"
-><A
-NAME="is_there_a_mailing_list_howto"
-></A
->Is there a mailing list HOWTO?</H2
-><P
->The mailing-list
-  demon provides a short description on how to use it. Send an e-mail
-  to <TT
-CLASS="email"
->&#60;<A
-HREF="mailto:orbit-list-requestNOSPAM@gnome.org"
->orbit-list-requestNOSPAM@gnome.org</A
->&#62;</TT
-> with subject "help".
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_can_i_subscribe_to_the_mailing_list"
-></A
->How can I subscribe to the mailing list?</H2
-><P
->Go to
-  <A
-HREF="http://mail.gnome.org/mailman/listinfo/orbit-list"
-TARGET="_top"
->&#13;   mail.gnome.org/mailman/listinfo/orbit-list</A
->.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_can_i_unsubscribe_from_the_mailing_list"
-></A
->How can I unsubscribe from the mailing list?</H2
-><P
->Go to
-  <A
-HREF="http://mail.gnome.org/mailman/listinfo/orbit-list"
-TARGET="_top"
->&#13;   mail.gnome.org/mailman/listinfo/orbit-list</A
->.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="how_can_i_send_an_email_to_the_mailing_list"
-></A
->How can I send an e-mail to the mailing list?</H2
-><P
->Send e-mail to <TT
-CLASS="email"
->&#60;<A
-HREF="mailto:orbit-list@NOSPAMgnome.org"
->orbit-list@NOSPAMgnome.org</A
->&#62;</TT
->.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="is_there_a_mailing_list_archive"
-></A
->Is there a mailing list archive?</H2
-><P
->There is a searchable archive available on <A
-HREF="http://mail.gnome.org/archives/orbit-list/"
-TARGET="_top"
->mail.gnome.org/archives/orbit-list</A
->.
-  </P
-></DIV
-><DIV
-CLASS="sect1"
-><HR><H2
-CLASS="sect1"
-><A
-NAME="i_am_new_to_corba_what_books_are_available"
-></A
->I'm new to CORBA. What books are available?</H2
-><P
->&#13;  There are a lot of books available. The major online stores have
-  ratings and comments of almost any CORBA book on the market.
-   <P
-></P
-><UL
-><LI
-><P
-><A
-HREF="http://btobsearch.barnesandnoble.com/booksearch/results.asp?WRD=CORBA&userid=2XMF0OO66D&btob=Y"
-TARGET="_top"
-> CORBA books at Barnes&#38;Noble</A
-></P
-></LI
-><LI
-><P
-><A
-HREF="http://www.infosys.tuwien.ac.at/Research/Corba/books.html"
-TARGET="_top"
-> CORBA books at TU Vienna (2000)</A
-></P
-></LI
-><LI
-><P
-><A
-HREF="http://www.javaworld.com/isearch?qt=book+corba&x=0&y=0&site=javaworld&ms=1&tid=1&st=1&rf=0"
-TARGET="_top"
->CORBA books &#38; whitepapers at JavaWorld </A
-></P
-></LI
-></UL
->
+        <h2 class="sect1"><a name="why_should_I_not_use_the_release_flag" id="why_should_I_not_use_the_release_flag"></a>Why should I not use the _release flag?</h2>
 
-   One of the best books is Michi Henning's and Steve Vinoski's book:
-   "Advanced CORBA Programming with C++" (ISBN
-   0-201-37927-9). Although the title seems to address only for C++
-   programmers it contains explanations of many fundamental concepts
-   and is thus useful for a general understanding.
-  </P
-></DIV
-></DIV
-></DIV
-></BODY
-></HTML
->
+        <p>While _release works really well out of process, if you are writing library code, or code that might be used by another component in process - then the _release flag is a nightmare. The reason is quite simple; in the remote case, the data is copied to the wire, and the client receives a copy of which he controls the lifecycle. The problem is that in-proc, the client receives only a shallow copy and has no control ( or idea ) of it's lifecycle. Thus you might return some data, and then in a later method alter the data - the client's copy then would contain bad information.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="why_is_the_ior_from_orb_xyz_not_understood_by_orbit" id="why_is_the_ior_from_orb_xyz_not_understood_by_orbit"></a>Why is the IOR from ORB XYZ not understood by ORBit?</h2>
+
+        <p>Check whether the IOR has some whitespaces at the end. ORBit version below 0.5.x does not accept IORs with trailing whitespaces.</p>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <hr />
+
+      <h1><a name="help" id="help"></a>Help</h1>
+
+      <div class="sect1">
+        <h2 class="sect1"><a name="is_there_a_mailing_list_howto" id="is_there_a_mailing_list_howto"></a>Is there a mailing list HOWTO?</h2>
+
+        <p>The mailing-list demon provides a short description on how to use it. Send an e-mail to <tt class="email">&lt;<a href="mailto:orbit-list-requestNOSPAM@gnome.org">orbit-list-requestNOSPAM@gnome.org</a>&gt;</tt> with subject "help".</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_can_i_subscribe_to_the_mailing_list" id="how_can_i_subscribe_to_the_mailing_list"></a>How can I subscribe to the mailing list?</h2>
+
+        <p>Go to <a href="http://mail.gnome.org/mailman/listinfo/orbit-list" target="_top">mail.gnome.org/mailman/listinfo/orbit-list</a>.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_can_i_unsubscribe_from_the_mailing_list" id="how_can_i_unsubscribe_from_the_mailing_list"></a>How can I unsubscribe from the mailing list?</h2>
+
+        <p>Go to <a href="http://mail.gnome.org/mailman/listinfo/orbit-list" target="_top">mail.gnome.org/mailman/listinfo/orbit-list</a>.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="how_can_i_send_an_email_to_the_mailing_list" id="how_can_i_send_an_email_to_the_mailing_list"></a>How can I send an e-mail to the mailing list?</h2>
+
+        <p>Send e-mail to <tt class="email">&lt;<a href="mailto:orbit-list@NOSPAMgnome.org">orbit-list@NOSPAMgnome.org</a>&gt;</tt>.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="is_there_a_mailing_list_archive" id="is_there_a_mailing_list_archive"></a>Is there a mailing list archive?</h2>
+
+        <p>There is a searchable archive available on <a href="http://mail.gnome.org/archives/orbit-list/" target="_top">mail.gnome.org/archives/orbit-list</a>.</p>
+      </div>
+
+      <div class="sect1">
+        <hr />
+
+        <h2 class="sect1"><a name="i_am_new_to_corba_what_books_are_available" id="i_am_new_to_corba_what_books_are_available"></a>I'm new to CORBA. What books are available?</h2>
+
+        <p>There are a lot of books available. The major online stores have ratings and comments of almost any CORBA book on the market.</p>
+
+        <ul>
+          <li>
+            <p><a href="http://btobsearch.barnesandnoble.com/booksearch/results.asp?WRD=CORBA&amp;userid=2XMF0OO66D&amp;btob=Y" target="_top">CORBA books at Barnes&amp;Noble</a></p>
+          </li>
+
+          <li>
+            <p><a href="http://www.infosys.tuwien.ac.at/Research/Corba/books.html" target="_top">CORBA books at TU Vienna (2000)</a></p>
+          </li>
+
+          <li>
+            <p><a href="http://www.javaworld.com/isearch?qt=book+corba&amp;x=0&amp;y=0&amp;site=javaworld&amp;ms=1&amp;tid=1&amp;st=1&amp;rf=0" target="_top">CORBA books &amp; whitepapers at JavaWorld</a></p>
+          </li>
+        </ul>One of the best books is Michi Henning's and Steve Vinoski's book: "Advanced CORBA Programming with C++" (ISBN 0-201-37927-9). Although the title seems to address only for C++ programmers it contains explanations of many fundamental concepts and is thus useful for a general understanding.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

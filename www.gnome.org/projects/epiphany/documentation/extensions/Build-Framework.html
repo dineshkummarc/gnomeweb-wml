@@ -1,27 +1,143 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter 3. Build Framework</title><meta name="generator" content="DocBook XSL Stylesheets V1.45"><link rel="home" href="index.html" title="Writing Epiphany Extensions"><link rel="up" href="index.html" title="Writing Epiphany Extensions"><link rel="previous" href="ch02s05.html" title="2.5. Before Coding"><link rel="next" href="Coding.html" title="Chapter 4. Coding"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Build Framework</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02s05.html">&lt;&lt;&lt; Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="Coding.html">Next &gt;&gt;&gt;</a></td></tr></table><hr></hr></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="Build-Framework"></a>Chapter 3. Build Framework</h2></div></div><p>To avoid autoconf/automake hell, you could simply code your extension in the existing ephyplugins framework (download the source from <a href="http://savannah.nongnu.org/projects/ephyplugins" target="_top">http://savannah.nongnu.org/projects/ephyplugins</a>). To do so:</p><div class="orderedlist"><ol type="1"><li><p>Create a subdirectory within <tt>ephyplugins/extensions/</tt> for your very own extension: For example, <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/</tt>.</p></li><li><p>Edit <tt>ephyplugins/extensions/Makefile.am</tt> and add your SUBDIRS entry:</p><pre class="programlisting">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>Chapter 3. Build Framework</title>
+  <meta name="generator" content="DocBook XSL Stylesheets V1.45" />
+  <link rel="home" href="index.html" title="Writing Epiphany Extensions" />
+  <link rel="up" href="index.html" title="Writing Epiphany Extensions" />
+  <link rel="previous" href="ch02s05.html" title="2.5. Before Coding" />
+  <link rel="next" href="Coding.html" title="Chapter 4. Coding" />
+</head>
+
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="navheader">
+    <table width="100%" summary="Navigation header">
+      <tr>
+        <th colspan="3" align="center">Chapter 3. Build Framework</th>
+      </tr>
+
+      <tr>
+        <td width="20%" align="left"><a accesskey="p" href="ch02s05.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
+
+        <th width="60%" align="center">&nbsp;</th>
+
+        <td width="20%" align="right">&nbsp;<a accesskey="n" href="Coding.html">Next&nbsp;&gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr />
+  </div>
+
+  <div class="chapter">
+    <div class="titlepage">
+      <div>
+        <h2 class="title"><a name="Build-Framework" id="Build-Framework"></a>Chapter 3. Build Framework</h2>
+      </div>
+    </div>
+
+    <p>To avoid autoconf/automake hell, you could simply code your extension in the existing ephyplugins framework (download the source from <a href="http://savannah.nongnu.org/projects/ephyplugins" target="_top">http://savannah.nongnu.org/projects/ephyplugins</a>). To do so:</p>
+
+    <div class="orderedlist">
+      <ol type="1">
+        <li>
+          <p>Create a subdirectory within <tt>ephyplugins/extensions/</tt> for your very own extension: For example, <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/</tt>.</p>
+        </li>
+
+        <li>
+          <p>Edit <tt>ephyplugins/extensions/Makefile.am</tt> and add your SUBDIRS entry:</p>
+          <pre class="programlisting">
 if ENABLE_<i><tt>FOO</tt></i>_EXTENSION
 SUBDIRS += <i><tt>foo</tt></i>
 endif
-				</pre><p>Also, add your extension to the end of the <tt>DIST_SUBDIRS</tt> line.</p></li><li><div class="itemizedlist"><ul><li><p>Edit <tt>ephyplugins/configure.ac</tt>, adding your own extension. As a minimum, add a line similar to the existing ones:</p><pre class="programlisting">
+        
+</pre>
+
+          <p>Also, add your extension to the end of the <tt>DIST_SUBDIRS</tt> line.</p>
+        </li>
+
+        <li>
+          <div class="itemizedlist">
+            <ul>
+              <li>
+                <p>Edit <tt>ephyplugins/configure.ac</tt>, adding your own extension. As a minimum, add a line similar to the existing ones:</p>
+                <pre class="programlisting">
 AM_CONDITIONAL(ENABLE_<i><tt>FOO</tt></i>_EXTENSION, echo "$extensions" | egrep '(^|,)<i><tt>foo</tt></i>($|,)' &gt; /dev/null)
-						</pre></li><li><p>Add <tt>extensions/<i><tt>foo</tt></i>/Makefile</tt> to the <tt>AC_OUTPUT</tt> call.</p></li><li><p>Add your extension to the <tt>all_extensions=</tt> line.</p></li></ul></div></li><li><p>If your extension will include strings which should be translated, edit <tt>ephyplugins/po/POTFILES.in</tt> and add <tt>extensions/<i><tt>foo</tt></i>/ephy-<i><tt>foo</tt></i>-extension.c</tt>. (No, the filename is not important.)</p></li><li><p>Create <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/Makefile.am</tt>:</p><pre class="programlisting">
+            
+</pre>
+              </li>
+
+              <li>
+                <p>Add <tt>extensions/<i><tt>foo</tt></i>/Makefile</tt> to the <tt>AC_OUTPUT</tt> call.</p>
+              </li>
+
+              <li>
+                <p>Add your extension to the <tt>all_extensions=</tt> line.</p>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <p>If your extension will include strings which should be translated, edit <tt>ephyplugins/po/POTFILES.in</tt> and add <tt>extensions/<i><tt>foo</tt></i>/ephy-<i><tt>foo</tt></i>-extension.c</tt>. (No, the filename is not important.)</p>
+        </li>
+
+        <li>
+          <p>Create <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/Makefile.am</tt>:</p>
+          <pre class="programlisting">
 extensiondir = $(libdir)/epiphany/extensions
 
 INCLUDES = \
-	-I$(top_srcdir)/include \
-	$(EPIPHANY_DEPENDENCY_CFLAGS) \
-	-DSHARE_DIR=\"pkgdatadir\" \
-	-DEPHY_EXTENSIONS_LOCALEDIR=\"$(datadir)/locale\" \
-	-DG_DISABLE_DEPRECATED \
-	-DGDK_DISABLE_DEPRECATED \
-	-DGTK_DISABLE_DEPRECATED \
-	-DGDK_PIXBUF_DISABLE_DEPRECATED \
-	-DGNOME_DISABLE_DEPRECATED
+  -I$(top_srcdir)/include \
+  $(EPIPHANY_DEPENDENCY_CFLAGS) \
+  -DSHARE_DIR=\"pkgdatadir\" \
+  -DEPHY_EXTENSIONS_LOCALEDIR=\"$(datadir)/locale\" \
+  -DG_DISABLE_DEPRECATED \
+  -DGDK_DISABLE_DEPRECATED \
+  -DGTK_DISABLE_DEPRECATED \
+  -DGDK_PIXBUF_DISABLE_DEPRECATED \
+  -DGNOME_DISABLE_DEPRECATED
 
 extension_LTLIBRARIES = lib<i><tt>foo</tt></i>extension.la
 
 lib<i><tt>foo</tt></i>extension_la_SOURCES = \
-	ephy-<i><tt>foo</tt></i>-extension.c \
-	ephy-<i><tt>foo</tt></i>-extension.h \
-	<i><tt>foo</tt></i>.c
-				</pre></li></ol></div><p>Now all work will take place in the <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/</tt> directory. After coding is finished, run <b><tt>./autogen.sh --enable-debug --enable-extensions=<i><tt>foo</tt></i></tt></b> in the <tt>ephyplugins/</tt> directory, then <b><tt>make</tt></b> and <b><tt>make install</tt></b> as root.</p><p>All extensions are loaded on Epiphany startup and unloaded on Epiphany shutdown. Epiphany's extension manager only sees extensions with a filename like <tt>$(prefix)/lib/epiphany/extensions/*.so</tt>. To uninstall an extension, just remove this file and restart Epiphany.</p></div><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02s05.html">&lt;&lt;&lt; Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right"> <a accesskey="n" href="Coding.html">Next &gt;&gt;&gt;</a></td></tr><tr><td width="40%" align="left">2.5. Before Coding </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> Chapter 4. Coding</td></tr></table></div></body></html>
+  ephy-<i><tt>foo</tt></i>-extension.c \
+  ephy-<i><tt>foo</tt></i>-extension.h \
+  <i><tt>foo</tt></i>.c
+        
+</pre>
+        </li>
+      </ol>
+    </div>
+
+    <p>Now all work will take place in the <tt>ephyplugins/extensions/<i><tt>foo</tt></i>/</tt> directory. After coding is finished, run <b><tt>./autogen.sh --enable-debug --enable-extensions=<i><tt>foo</tt></i></tt></b> in the <tt>ephyplugins/</tt> directory, then <b><tt>make</tt></b> and <b><tt>make install</tt></b> as root.</p>
+
+    <p>All extensions are loaded on Epiphany startup and unloaded on Epiphany shutdown. Epiphany's extension manager only sees extensions with a filename like <tt>$(prefix)/lib/epiphany/extensions/*.so</tt>. To uninstall an extension, just remove this file and restart Epiphany.</p>
+  </div>
+
+  <div class="navfooter">
+    <hr />
+
+    <table width="100%" summary="Navigation footer">
+      <tr>
+        <td width="40%" align="left"><a accesskey="p" href="ch02s05.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
+
+        <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+
+        <td width="40%" align="right">&nbsp;<a accesskey="n" href="Coding.html">Next&nbsp;&gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="40%" align="left">2.5. Before Coding&nbsp;</td>
+
+        <td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td>
+
+        <td width="40%" align="right">&nbsp;Chapter 4. Coding</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,352 +1,161 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->&#13;Account client &#38; server
-</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="ORBit Beginners Documentation V1.2"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="First CORBA Programs"
-HREF="c226.html"><LINK
-REL="PREVIOUS"
-TITLE="Calculator client & server"
-HREF="x437.html"><LINK
-REL="NEXT"
-TITLE="Byte-Sequence client & server"
-HREF="x745.html"></HEAD
-><BODY
-CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->ORBit Beginners Documentation V1.2</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x437.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->First CORBA Programs</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="x745.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="sect1"
-><H1
-CLASS="sect1"
-><A
-NAME="AEN615"
-></A
->Account client &#38; server</H1
-><P
->&#13;In this third simple example, we will see how we can set up a 
-client that can modify the value of a variable stored on the server. 
-It is basically the way an account manager works. 
-The stored variable here is balance. 
-The idl definition (<TT
-CLASS="filename"
->account.idl</TT
->) for our account is : 
-<DIV
-CLASS="example"
-><A
-NAME="AEN619"
-></A
-><P
-><B
->Example 15. account.idl</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;   interface Account {
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Account client &amp; server</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="ORBit Beginners Documentation V1.2" href="book1.html" />
+  <link rel="UP" title="First CORBA Programs" href="c226.html" />
+  <link rel="PREVIOUS" title="Calculator client &amp; server" href="x437.html" />
+  <link rel="NEXT" title="Byte-Sequence client &amp; server" href="x745.html" />
+</head>
+
+<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">ORBit Beginners Documentation V1.2</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x437.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom">First CORBA Programs</td>
+
+        <td width="10%" align="right" valign="bottom"><a href="x745.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="sect1">
+    <h1 class="sect1"><a name="AEN615" id="AEN615"></a>Account client &amp; server</h1>
+
+    <p>In this third simple example, we will see how we can set up a client that can modify the value of a variable stored on the server. It is basically the way an account manager works. The stored variable here is balance. The idl definition (<tt class="filename">account.idl</tt>) for our account is :</p>
+
+    <div class="example">
+      <a name="AEN619" id="AEN619"></a>
+
+      <p><b>Example 15. account.idl</b></p>
+
+      <table border="0" bgcolor="#E0E0E0" width="100%">
+        <tr>
+          <td>
+            <pre class="programlisting">
+
+   interface Account {
       void deposit (in unsigned long amount);
       void withdraw (in unsigned long amount);
       readonly attribute long balance;
-   };</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
+   };
+</pre>
+          </td>
+        </tr>
+      </table>
+    </div>Then you have to generate the skeleton and stub files. In addition to these two files the ORBit IDL compiler also generates a common file and a header file. The common file implements the memory management functions and other things, useful in the client as well as in the server. The sequence to generate the C source files is rather simple. <tt class="computeroutput">$ <b class="command">orbit-idl-2 --skeleton-impl account.idl</b></tt> geenrates all the files we will use in this example.
 
-Then you have to generate the skeleton and stub files. In addition to
-these two files the ORBit IDL compiler also generates a common file
-and a header file. The common file implements the memory management
-functions and other things, useful in the client as well as in the
-server. The sequence to generate the C source files is rather
-simple.
-<TT
-CLASS="computeroutput"
->$ <B
-CLASS="command"
->orbit-idl-2 --skeleton-impl
-account.idl</B
->
-</TT
->
-geenrates all the files we will use in this example.
+    <div class="informaltable">
+      <a name="AEN624" id="AEN624"></a>
 
-<DIV
-CLASS="informaltable"
-><A
-NAME="AEN624"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><THEAD
-><TR
-><TH
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->File</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Client</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Server</TH
-></TR
-></THEAD
-><TBODY
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account.h</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-common.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-stubs.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-skels.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-skelimpl.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->template for user code</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <thead>
+          <tr>
+            <th width="33%" align="left" valign="middle">File</th>
 
-Files remaining to write are listed in following table, starting with 
-<I
-CLASS="emphasis"
->account-client.c</I
-> in following chapter.
-<DIV
-CLASS="informaltable"
-><A
-NAME="AEN656"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><TBODY
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-client.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the client code</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->account-server.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the generic code for servant creation</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
+            <th width="33%" align="center" valign="middle">Usage for Client</th>
 
+            <th width="33%" align="center" valign="middle">Usage for Server</th>
+          </tr>
+        </thead>
 
-</P
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN665"
-></A
->Account client</H2
-><P
->&#13;There is no difficulty in setting the client (at least no more than in the previous examples).
-Only one thing has been added : we test for the availabilty of the server 
-(<TT
-CLASS="function"
->if (!acc_client) </TT
-> ...) 
-before invoking calls to the server.
-</P
-><P
->&#13;<DIV
-CLASS="example"
-><A
-NAME="AEN670"
-></A
-><P
-><B
->Example 16. account-client.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/* account-client.c hacked by Frank Rehberger
- * &#60;F.Rehberger@xtradyne.de&#62;.  */
+        <tbody>
+          <tr>
+            <td width="33%" align="left" valign="middle">account.h</td>
 
-#include &#60;assert.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;stdio.h&#62;
-#include &#60;orbit/orbit.h&#62;
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">account-common.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">account-stubs.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">account-skels.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">account-skelimpl.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">template for user code</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>Files remaining to write are listed in following table, starting with <i class="emphasis">account-client.c</i> in following chapter.
+
+    <div class="informaltable">
+      <a name="AEN656" id="AEN656"></a>
+
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <tbody>
+          <tr>
+            <td align="left" valign="middle">account-client.c</td>
+
+            <td align="left" valign="middle">write the client code</td>
+          </tr>
+
+          <tr>
+            <td align="left" valign="middle">account-server.c</td>
+
+            <td align="left" valign="middle">write the generic code for servant creation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br />
+    <br />
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN665" id="AEN665"></a>Account client</h2>
+
+      <p>There is no difficulty in setting the client (at least no more than in the previous examples). Only one thing has been added : we test for the availabilty of the server (<tt class="function">if (!acc_client)</tt> ...) before invoking calls to the server.</p>
+
+      <div class="example">
+        <a name="AEN670" id="AEN670"></a>
+
+        <p><b>Example 16. account-client.c</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+/* account-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
 #include "account.h"
 
@@ -357,7 +166,7 @@ static
 gboolean 
 raised_exception(CORBA_Environment *ev) 
 {
-	return ((ev)-&#62;_major != CORBA_NO_EXCEPTION);
+  return ((ev)-&gt;_major != CORBA_NO_EXCEPTION);
 }
 
 /**
@@ -367,11 +176,11 @@ static
 void 
 abort_if_exception(CORBA_Environment *ev, const char* mesg) 
 {
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
+  if (raised_exception (ev)) {
+    g_error ("%s %s", mesg, CORBA_exception_id (ev));
+    CORBA_exception_free (ev); 
+    abort(); 
+  }
 }
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
@@ -388,10 +197,7 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <B
-CLASS="command"
->CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</B
->
+                <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</b>
                 abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -407,7 +213,7 @@ CLASS="command"
 static
 void
 client_init (int               *argc_ptr,
-	     char              *argv[],
+       char              *argv[],
              CORBA_ORB         *orb,
              CORBA_Environment *ev)
 {
@@ -418,10 +224,7 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-        <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</B
->
+        <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</b>
         if (raised_exception(ev)) return;
 }
 
@@ -435,20 +238,14 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-        <B
-CLASS="command"
->CORBA_Object_release(service, ev);</B
->
+        <b class="command">CORBA_Object_release(service, ev);</b>
         if (raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                <B
-CLASS="command"
->CORBA_ORB_destroy(orb, ev);</B
->
+                <b class="command">CORBA_ORB_destroy(orb, ev);</b>
                 if (raised_exception(ev)) return;
         }
 }
@@ -459,23 +256,20 @@ CLASS="command"
 static
 CORBA_Object
 client_import_service_from_stream (CORBA_ORB          orb,
-				   FILE              *stream,
-				   CORBA_Environment *ev)
+           FILE              *stream,
+           CORBA_Environment *ev)
 {
-	CORBA_Object obj = CORBA_OBJECT_NIL;
-	gchar *objref=NULL;
+  CORBA_Object obj = CORBA_OBJECT_NIL;
+  gchar *objref=NULL;
     
-	fscanf (stream, "%as", &#38;objref);  /* FIXME, handle input error */ 
-	
-	<B
-CLASS="command"
->obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
-							 objref, 
-							 ev);</B
->
-	free (objref);
-	
-	return obj;
+  fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
+  
+  <b class="command">obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+               objref, 
+               ev);</b>
+  free (objref);
+  
+  return obj;
 }
 
 
@@ -485,8 +279,8 @@ CLASS="command"
 static
 CORBA_Object
 client_import_service_from_file (CORBA_ORB          orb,
-				 char              *filename,
-				 CORBA_Environment *ev)
+         char              *filename,
+         CORBA_Environment *ev)
 {
         CORBA_Object  obj    = NULL;
         FILE         *file   = NULL;
@@ -496,11 +290,11 @@ client_import_service_from_file (CORBA_ORB          orb,
         if ((file=fopen(filename, "r"))==NULL)
                 g_error ("could not open %s\n", filename);
     
-	obj=client_import_service_from_stream (orb, file, ev);
-	
-	fclose (file);
+  obj=client_import_service_from_stream (orb, file, ev);
+  
+  fclose (file);
 
-	return obj;
+  return obj;
 }
 
 
@@ -510,45 +304,33 @@ client_import_service_from_file (CORBA_ORB          orb,
 static
 void
 client_run (Account            service,
-	    CORBA_long         amount,
-	    CORBA_Environment *ev)
+      CORBA_long         amount,
+      CORBA_Environment *ev)
 {
-	CORBA_long balance=0;
+  CORBA_long balance=0;
 
-	/*
+  /*
          * use calculator server
          */
          
-        <B
-CLASS="command"
->balance = Account__get_balance (service, ev);</B
->
-	if (raised_exception (ev)) return;
+        <b class="command">balance = Account__get_balance (service, ev);</b>
+  if (raised_exception (ev)) return;
          
         g_print ("balance %5d, ", balance);
          
-        if (amount &#62; 0)
+        if (amount &gt; 0)
         {
-                <B
-CLASS="command"
->Account_deposit (service, amount, ev);</B
->
+                <b class="command">Account_deposit (service, amount, ev);</b>
                 if (raised_exception (ev)) return;
         }
         else
         {
-                <B
-CLASS="command"
->Account_withdraw (service, abs(amount), ev);</B
->
+                <b class="command">Account_withdraw (service, abs(amount), ev);</b>
                 if (raised_exception (ev)) return;
         }
                                                                                
-        <B
-CLASS="command"
->balance = Account__get_balance (service, ev);</B
->
-	if (raised_exception (ev)) return;
+        <b class="command">balance = Account__get_balance (service, ev);</b>
+  if (raised_exception (ev)) return;
                                                                                
         g_print ("new balance %5d\n", balance);
 }
@@ -563,124 +345,62 @@ main(int argc, char* argv[])
         CORBA_char        filename[] = "account.ior";
         CORBA_long        amount=0;
 
-	Account service = CORBA_OBJECT_NIL;
+  Account service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
-        <B
-CLASS="command"
->CORBA_exception_init(ev);</B
->
+        <b class="command">CORBA_exception_init(ev);</b>
 
-	<B
-CLASS="command"
->client_init (&#38;argc, argv, &#38;global_orb, ev);</B
->
-	abort_if_exception(ev, "init failed");
+  <b class="command">client_init (&amp;argc, argv, &amp;global_orb, ev);</b>
+  abort_if_exception(ev, "init failed");
 
-        if (argc&#60;2)
-                g_error ("usage: %s %lt;amount&#62;", argv[0]);
+        if (argc&lt;2)
+                g_error ("usage: %s %lt;amount&gt;", argv[0]);
 
         amount  = atoi(argv[1]);
 
-	g_print ("Reading service reference from file \"%s\"\n", filename);
+  g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	<B
-CLASS="command"
->service = (Account) client_import_service_from_file (global_orb,
-							     filename,
-							     ev);</B
->
+  <b class="command">service = (Account) client_import_service_from_file (global_orb,
+                   filename,
+                   ev);</b>
         abort_if_exception(ev, "import service failed");
 
-	<B
-CLASS="command"
->client_run (service, amount, ev);</B
->
+  <b class="command">client_run (service, amount, ev);</b>
         abort_if_exception(ev, "service not reachable");
  
-	<B
-CLASS="command"
->client_cleanup (global_orb, service, ev);</B
->
+  <b class="command">client_cleanup (global_orb, service, ev);</b>
         abort_if_exception(ev, "cleanup failed");
  
         exit (0);
 }
 
-</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-</P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN687"
-></A
->Account server</H2
-><DIV
-CLASS="sect3"
-><H3
-CLASS="sect3"
-><A
-NAME="AEN689"
-></A
->Account server Skeleton Implementation</H3
-><P
->&#13;
-For the server, like in the previous example, we first generate the source file
-<TT
-CLASS="filename"
->account-skelimpl.c</TT
-> 
-that will receive the implementation code for
-the methods.
-This is done once again with <TT
-CLASS="userinput"
-><B
->orbit-idl-2 --skeleton-impl
-account.idl</B
-></TT
->.
-</P
-><P
->&#13;Now, let us edit <TT
-CLASS="filename"
->account-skelimpl.c</TT
->. 
-We search for the the <TT
-CLASS="varname"
->balance</TT
-> attribute that was declared
-in the IDL file. 
-At the beginning of the file, we can spot the way it has been translated into
-C by the idl compiler:
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div><br />
 
-<DIV
-CLASS="example"
-><A
-NAME="AEN697"
-></A
-><P
-><B
->Example 17. 
-account-skelimpl.c fragment - object declaration
-</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->typedef struct
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN687" id="AEN687"></a>Account server</h2>
+
+      <div class="sect3">
+        <h3 class="sect3"><a name="AEN689" id="AEN689"></a>Account server Skeleton Implementation</h3>
+
+        <p>For the server, like in the previous example, we first generate the source file <tt class="filename">account-skelimpl.c</tt> that will receive the implementation code for the methods. This is done once again with <tt class="userinput"><b>orbit-idl-2 --skeleton-impl account.idl</b></tt>.</p>
+
+        <p>Now, let us edit <tt class="filename">account-skelimpl.c</tt>. We search for the the <tt class="varname">balance</tt> attribute that was declared in the IDL file. At the beginning of the file, we can spot the way it has been translated into C by the idl compiler:</p>
+
+        <div class="example">
+          <a name="AEN697" id="AEN697"></a>
+
+          <p><b>Example 17. account-skelimpl.c fragment - object declaration</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+typedef struct
 {
    POA_Account servant;
    PortableServer_POA poa;
@@ -688,75 +408,44 @@ CLASS="programlisting"
    CORBA_long attr_balance;
 
    /* ------ add private attributes here ------ */
-   <B
-CLASS="command"
->CORBA_long attr_balance;</B
->
+   <b class="command">CORBA_long attr_balance;</b>
    /* ------ ---------- end ------------ ------ */
 }
-impl_POA_Account;</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-So, the server methods (withdraw and deposit) will have to manage the balance
-of the account through the <TT
-CLASS="varname"
->servant-&#62;attr_balance</TT
-> (the
-servant variable is passed as parameter to each method).
-</P
-><P
->&#13;Now, let us get to the end of the file and find the methods stubs.
-We find the <TT
-CLASS="function"
->impl_Account_*</TT
-> functions, to which we add the
-implementation code. 
-This could be:
-</P
-><DIV
-CLASS="example"
-><A
-NAME="AEN704"
-></A
-><P
-><B
->Example 18. 
-account-skelimpl.c fragment - method definition
-</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->static void
+impl_POA_Account;
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>So, the server methods (withdraw and deposit) will have to manage the balance of the account through the <tt class="varname">servant-&gt;attr_balance</tt> (the servant variable is passed as parameter to each method).<br />
+        <br />
+
+        <p>Now, let us get to the end of the file and find the methods stubs. We find the <tt class="function">impl_Account_*</tt> functions, to which we add the implementation code. This could be:</p>
+
+        <div class="example">
+          <a name="AEN704" id="AEN704"></a>
+
+          <p><b>Example 18. account-skelimpl.c fragment - method definition</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+static void
 impl_Account_deposit(impl_POA_Account * servant,
-		     const CORBA_unsigned_long amount, CORBA_Environment * ev)
+         const CORBA_unsigned_long amount, CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->servant-&#62;attr_balance += amount;</B
->
+   <b class="command">servant-&gt;attr_balance += amount;</b>
    /* ------ ---------- end ------------ ------ */
 }
 
 static void
 impl_Account_withdraw(impl_POA_Account * servant,
-		      const CORBA_unsigned_long amount,
-		      CORBA_Environment * ev)
+          const CORBA_unsigned_long amount,
+          CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->servant-&#62;attr_balance -= amount;</B
->
+   <b class="command">servant-&gt;attr_balance -= amount;</b>
    /* ------ ---------- end ------------ ------ */
 }
 
@@ -766,41 +455,29 @@ impl_Account__get_balance(impl_POA_Account * servant, CORBA_Environment * ev)
    CORBA_long retval;
 
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->retval = servant-&#62;attr_balance;</B
->
+   <b class="command">retval = servant-&gt;attr_balance;</b>
    /* ------ ---------- end ------------ ------ */
 
    return retval;
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
-><P
->The missing key stone is the constructor that establishs
-initial, consistent state for object on creation.</P
-><DIV
-CLASS="example"
-><A
-NAME="AEN711"
-></A
-><P
-><B
->Example 19. 
-account-skelimpl.c fragment - constructor
-</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->...
+}
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <p>The missing key stone is the constructor that establishs initial, consistent state for object on creation.</p>
+
+        <div class="example">
+          <a name="AEN711" id="AEN711"></a>
+
+          <p><b>Example 19. account-skelimpl.c fragment - constructor</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+...
 static Account
 impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
 {
@@ -809,18 +486,15 @@ impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
    PortableServer_ObjectId *objid;
 
    newservant = g_new0(impl_POA_Account, 1);
-   newservant-&#62;servant.vepv = &#38;impl_Account_vepv;
-   newservant-&#62;poa =       
+   newservant-&gt;servant.vepv = &amp;impl_Account_vepv;
+   newservant-&gt;poa =       
       (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
    POA_Account__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
 
    /* ------ init private attributes here ------ */
-   <B
-CLASS="command"
->newservant-&#62;attr_balance = 0;</B
->
+   <b class="command">newservant-&gt;attr_balance = 0;</b>
    /* ------ ---------- end ------------- ------ */
 
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
@@ -829,74 +503,48 @@ CLASS="command"
 
    return retval;
 }
-..</PRE
-></TD
-></TR
-></TABLE
-></DIV
-></DIV
-><DIV
-CLASS="sect3"
-><H3
-CLASS="sect3"
-><A
-NAME="AEN715"
-></A
->Account server implementation</H3
-><P
->&#13;Lastly, we have to write a rather generic code to set up the server.
-We call it <TT
-CLASS="filename"
->account-server.c</TT
->.
-It is roughly the same code as in the calculator and echo examples.
-The code just initializes the ORB and publishes an IOR for the server object.
-</P
-><DIV
-CLASS="example"
-><A
-NAME="AEN719"
-></A
-><P
-><B
->Example 20. 
-account-server.c 
-</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/*
+..
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="sect3">
+        <h3 class="sect3"><a name="AEN715" id="AEN715"></a>Account server implementation</h3>
+
+        <p>Lastly, we have to write a rather generic code to set up the server. We call it <tt class="filename">account-server.c</tt>. It is roughly the same code as in the calculator and echo examples. The code just initializes the ORB and publishes an IOR for the server object.</p>
+
+        <div class="example">
+          <a name="AEN719" id="AEN719"></a>
+
+          <p><b>Example 20. account-server.c</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+/*
  * account-server program. Hacked from Frank Rehberger
- * &#60;F.Rehberger@xtradyne.de&#62;.
+ * &lt;F.Rehberger@xtradyne.de&gt;.
  */
 
-#include &#60;stdio.h&#62;
-#include &#60;stdlib.h&#62;
-#include &#60;string.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;orbit/orbit.h&#62;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
-<B
-CLASS="command"
->#include "account.h"</B
->
-<B
-CLASS="command"
->#include "account-skelimpl.c"</B
->
+<b class="command">#include "account.h"</b>
+<b class="command">#include "account-skelimpl.c"</b>
 
 /** 
  * test for exception */
 static
 gboolean 
 raised_exception(CORBA_Environment *ev) {
-	return ((ev)-&#62;_major != CORBA_NO_EXCEPTION);
+  return ((ev)-&gt;_major != CORBA_NO_EXCEPTION);
 }
 
 /**
@@ -905,15 +553,15 @@ static
 void 
 abort_if_exception(CORBA_Environment *ev, const char* mesg) 
 {    
-	if (raised_exception (ev)) {
-		g_error ("%s %s", mesg, CORBA_exception_id (ev));
-		CORBA_exception_free (ev); 
-		abort(); 
-	}
+  if (raised_exception (ev)) {
+    g_error ("%s %s", mesg, CORBA_exception_id (ev));
+    CORBA_exception_free (ev); 
+    abort(); 
+  }
 }
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
-	
+  
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
  */
@@ -921,15 +569,12 @@ static
 void
 server_shutdown (int sig)
 {
-	CORBA_Environment  local_ev[1];
-	CORBA_exception_init(local_ev);
+  CORBA_Environment  local_ev[1];
+  CORBA_exception_init(local_ev);
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <B
-CLASS="command"
->CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</B
->
+                <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</b>
                 abort_if_exception (local_ev, "ORB shutdown failed");
         }
 }
@@ -943,22 +588,19 @@ CLASS="command"
  */static 
 void 
 server_init (int               *argc_ptr, 
-		     char              *argv[],
-		     CORBA_ORB         *orb,
-		     CORBA_Environment *ev)
+         char              *argv[],
+         CORBA_ORB         *orb,
+         CORBA_Environment *ev)
 {
-	/* init signal handling */
+  /* init signal handling */
 
-	signal(SIGINT,  server_shutdown);
-	signal(SIGTERM, server_shutdown);
-	
-	/* create Object Request Broker (ORB) */
-	
-        <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</B
->
-	if (raised_exception(ev)) return;
+  signal(SIGINT,  server_shutdown);
+  signal(SIGTERM, server_shutdown);
+  
+  /* create Object Request Broker (ORB) */
+  
+        <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</b>
+  if (raised_exception(ev)) return;
 }
 
 /* Creates servant and registers in context of ORB @orb. The ORB will
@@ -969,46 +611,34 @@ CLASS="command"
 static 
 Account
 server_activate_service (CORBA_ORB         orb,
-				 CORBA_Environment *ev)
+         CORBA_Environment *ev)
 {
-	Account                    servant     = CORBA_OBJECT_NIL; 
-	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+  Account                    servant     = CORBA_OBJECT_NIL; 
+  PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
+  PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
         /* get Portable Object Adaptor (POA) */
 
-        <B
-CLASS="command"
->poa = 
-	 (PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
-								   "RootPOA",
-								   ev);</B
->
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+        <b class="command">poa = 
+   (PortableServer_POA) CORBA_ORB_resolve_initial_references(orb,
+                   "RootPOA",
+                   ev);</b>
+  if (raised_exception(ev)) return CORBA_OBJECT_NIL;
 
        /* create servant in context of poa container */
 
-	<B
-CLASS="command"
->servant = impl_Account__create (poa, ev);</B
->
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
-	
+  <b class="command">servant = impl_Account__create (poa, ev);</b>
+  if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+  
         /* activate POA Manager */
 
-        <B
-CLASS="command"
->poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);</B
->
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+        <b class="command">poa_manager = PortableServer_POA__get_the_POAManager(poa, ev);</b>
+  if (raised_exception(ev)) return CORBA_OBJECT_NIL;
 
-	<B
-CLASS="command"
->PortableServer_POAManager_activate(poa_manager, ev);</B
->
-	if (raised_exception(ev)) return CORBA_OBJECT_NIL;
+  <b class="command">PortableServer_POAManager_activate(poa_manager, ev);</b>
+  if (raised_exception(ev)) return CORBA_OBJECT_NIL;
 
-	return servant;
+  return servant;
 }
 
 /* Writes stringified object reference of @servant to file
@@ -1027,10 +657,7 @@ server_export_service_to_file (CORBA_ORB          orb,
  
         /* write objref to file */
          
-        <B
-CLASS="command"
->objref = CORBA_ORB_object_to_string (orb, service, ev);</B
->
+        <b class="command">objref = CORBA_ORB_object_to_string (orb, service, ev);</b>
         if (raised_exception(ev)) return;
  
         if ((file=fopen(filename, "w"))==NULL)
@@ -1052,18 +679,15 @@ CLASS="command"
 static 
 void 
 server_run (CORBA_ORB          orb,
-		    CORBA_Environment *ev)
+        CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
-	
-        <B
-CLASS="command"
->CORBA_ORB_run(orb, ev);</B
->
-	if (raised_exception(ev)) return;
+  
+        <b class="command">CORBA_ORB_run(orb, ev);</b>
+  if (raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
-	 * CORBA_ORB_shutdown(.) has been called */
+   * CORBA_ORB_shutdown(.) has been called */
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -1071,22 +695,19 @@ CLASS="command"
  */
 static 
 void server_cleanup (CORBA_ORB          orb,
-			     Account            servant,
-			     CORBA_Environment *ev)
+           Account            servant,
+           CORBA_Environment *ev)
 {
-	/* releasing managed object */
-        <B
-CLASS="command"
->CORBA_Object_release(servant, ev);</B
->
-	if (raised_exception(ev)) return;
+  /* releasing managed object */
+        <b class="command">CORBA_Object_release(servant, ev);</b>
+  if (raised_exception(ev)) return;
 
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
                 CORBA_ORB_destroy(orb, ev);
-		if (raised_exception(ev)) return;
+    if (raised_exception(ev)) return;
         }
 }
 
@@ -1102,85 +723,54 @@ main (int argc, char *argv[])
         CORBA_char filename[] = "account.ior";
  
         CORBA_Environment  ev[1];
-        <B
-CLASS="command"
->CORBA_exception_init(ev);</B
->
+        <b class="command">CORBA_exception_init(ev);</b>
          
-        <B
-CLASS="command"
->server_init (&#38;argc, argv, &#38;global_orb, ev);</B
->
+        <b class="command">server_init (&amp;argc, argv, &amp;global_orb, ev);</b>
         abort_if_exception(ev, "init failed");
  
         
-        <B
-CLASS="command"
->servant = server_activate_service (global_orb, ev);</B
->
+        <b class="command">servant = server_activate_service (global_orb, ev);</b>
         abort_if_exception(ev, "activating service failed");
  
         g_print ("Writing service reference to: %s\n\n", filename);
  
-        <B
-CLASS="command"
->server_export_service_to_file (global_orb, /* ORB      */
+        <b class="command">server_export_service_to_file (global_orb, /* ORB      */
                                        servant,    /* object   */
                                        filename,   /* filename */
-                                       ev);</B
->
+                                       ev);</b>
         abort_if_exception(ev, "exporting IOR failed");
          
-        <B
-CLASS="command"
->server_run (global_orb, ev);</B
->
+        <b class="command">server_run (global_orb, ev);</b>
         abort_if_exception(ev, "entering main loop failed");
  
-        <B
-CLASS="command"
->server_cleanup (global_orb, servant, ev);</B
->
+        <b class="command">server_cleanup (global_orb, servant, ev);</b>
         abort_if_exception(ev, "cleanup failed");
  
         exit (0);
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
-></DIV
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN739"
-></A
->Compiling server &#38; client</H2
-><P
->&#13;The Makefile is the roughly the same as the one in the Calculator
-example. By now the schema should be clear and you should be able to
-reuse this Makefile for numerous small projects.
-<DIV
-CLASS="example"
-><A
-NAME="AEN742"
-></A
-><P
-><B
->Example 21. Makefile for the Account example</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->PREFIX=/usr
+}
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN739" id="AEN739"></a>Compiling server &amp; client</h2>
+
+      <p>The Makefile is the roughly the same as the one in the Calculator example. By now the schema should be clear and you should be able to reuse this Makefile for numerous small projects.</p>
+
+      <div class="example">
+        <a name="AEN742" id="AEN742"></a>
+
+        <p><b>Example 21. Makefile for the Account example</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+PREFIX=/usr
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=orbit-idl-2
@@ -1203,77 +793,35 @@ clean:
         rm -rf *.o *~ $(IDLOUT)
  
 distclean: clean
-        rm -rf account-client account-server</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-</P
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x437.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="x745.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Calculator client &#38; server</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="c226.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Byte-Sequence client &#38; server</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+        rm -rf account-client account-server
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x437.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top"><a href="x745.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Calculator client &amp; server</td>
+
+        <td width="34%" align="center" valign="top"><a href="c226.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">Byte-Sequence client &amp; server</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

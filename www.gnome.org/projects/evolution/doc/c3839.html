@@ -1,374 +1,141 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Setting up your synchronization system</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="A User's Guide to Ximian Evolution 1.4"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="Configuring and Managing Ximian Evolution"
-HREF="p3361.html"><LINK
-REL="PREVIOUS"
-TITLE="Directory Server Settings"
-HREF="x3760.html"><LINK
-REL="NEXT"
-TITLE="Quick Reference"
-HREF="a3895.html"></HEAD
-><BODY
-CLASS="chapter"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->A User's Guide to Ximian Evolution 1.4</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x3760.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
-></TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="a3895.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="chapter"
-><H1
-><A
-NAME="config-sync"
-></A
->Setting up your synchronization system</H1
-><P
->&#13;        Synchronization presents you with two issues you'll need to
-        address. 
-        <P
-></P
-><TABLE
-BORDER="0"
-><TBODY
-><TR
-><TD
->&#13;            Your computer needs to recognize and access your handheld.
-            At this time, <TT
-CLASS="application"
->Ximian Evolution</TT
-> only
-            supports Palm-OS devices like the Palm Pilot and the
-            Handspring Visor.
-          </TD
-></TR
-><TR
-><TD
->&#13;           You should decide what sort of synchronization behavior you
-           want.
-          </TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
->
-    </P
-><P
->&#13;       If you haven't used a handheld device with your computer
-       before, you'll need to run the GNOME <TT
-CLASS="application"
->Control
-       Center</TT
-> by selecting
-       <B
-CLASS="guimenu"
->System</B
->-&gt;<B
-CLASS="guimenuitem"
->Settings</B
->,
-       and make sure that <TT
-CLASS="application"
->Pilot Link</TT
-> is
-       properly configured. You will need to make sure that you have
-       read and write permissions on the device, which is normally
-       /dev/pilot. If that does not work, check /dev/ttyS0 if you have
-       a serial connection, or /dev/ttyUSB0 for a USB connection. You
-       can do this by becoming root and running the command:
-       <TT
-CLASS="userinput"
-><B
->chmod 777 /dev/ttyUSB0</B
-></TT
->.
-    </P
-><P
->&#13;        Once your computer and your Palm-OS device are talking happily
-        to each other, select the <A
-HREF="g4137.html#conduit"
-><I
-CLASS="glossterm"
->conduits</I
-></A
-> you want under the
-        <TT
-CLASS="guilabel"
-><B
->Pilot Conduits</B
-></TT
-> section of the Control
-        Center.  You may use conduits to synchronize data with several
-        applications; the <TT
-CLASS="application"
->Ximian Evolution</TT
->
-        conduits are labeled <TT
-CLASS="guilabel"
-><B
->EAddress</B
-></TT
->, for the
-        contacts in your addressbook, <TT
-CLASS="guilabel"
-><B
->ECalendar</B
-></TT
->,
-        for your calendar, and <TT
-CLASS="guilabel"
-><B
->ETodo</B
-></TT
->, for your
-        task list.
-    </P
-><P
->&#13;      To enable a conduit, click the
-        <B
-CLASS="guibutton"
->Enable</B
-> to enable it, and click
-        <B
-CLASS="guibutton"
->Settings</B
-> to change what it will do when
-        activated.  Your options may vary depending on the conduit,
-        but typically they will be:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-        <P
-></P
-><DIV
-CLASS="variablelist"
-><DL
-><DT
->Disabled:</DT
-><DD
-><P
->&#13;                  Do nothing.
-               </P
-></DD
-><DT
->Synchronize:</DT
-><DD
-><P
->&#13;                  Copy new data from the computer to the handheld, and
-                  from the handheld to the computer.  Remove items
-                  that were on both systems but have been deleted on
-                  one.
-               </P
-></DD
-><DT
->Copy From Pilot:</DT
-><DD
-><P
->&#13;                  If there is any new data on the the handheld device,
-                  copy it to the computer.
-               </P
-></DD
-><DT
->Copy To Pilot:</DT
-><DD
-><P
->&#13;                 Copy new data from the computer to the handheld. 
-               </P
-></DD
-><DT
->Merge From Pilot:</DT
-><DD
-><P
->&#13;                  Copy new data from the handheld to the computer, and
-                  remove any information from the computer that has
-                  been deleted on the handheld.
-               </P
-></DD
-><DT
->Merge To Pilot:</DT
-><DD
-><P
->&#13;                  Copy new data from the computer to the handheld, and
-                  remove any information from the handheld that has
-                  been deleted on the computer.
-               </P
-></DD
-></DL
-></DIV
->
-    </P
-><P
->&#13;      Select the behavior you want for each conduit you choose to use.
-      If you're not sure, go ahead and stick with
-      <TT
-CLASS="guilabel"
-><B
->Synchronize</B
-></TT
->.  Then, put your handheld on
-      its cradle and press the HotSync button.
-    </P
-><P
-> 
-         <DIV
-CLASS="tip"
-><P
-></P
-><TABLE
-CLASS="tip"
-WIDTH="100%"
-BORDER="0"
-><TR
-><TD
-WIDTH="25"
-ALIGN="CENTER"
-VALIGN="TOP"
-><IMG
-SRC="./stylesheet-images/tip.gif"
-HSPACE="5"
-ALT="Tip"></TD
-><TH
-ALIGN="LEFT"
-VALIGN="CENTER"
-><B
->Data Loss Prevention</B
-></TH
-></TR
-><TR
-><TD
->&nbsp;</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
-><P
->&#13;	    It's always a good idea to make a backup.  To do that,
-	    make a copy of the <TT
-CLASS="filename"
->evolution</TT
->
-	    directory inside your home directory.
-          </P
-></TD
-></TR
-></TABLE
-></DIV
->
-       </P
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x3760.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="a3895.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Directory Server Settings</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="p3361.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Quick Reference</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Setting up your synchronization system</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="A User's Guide to Ximian Evolution 1.4" href="book1.html" />
+  <link rel="UP" title="Configuring and Managing Ximian Evolution" href="p3361.html" />
+  <link rel="PREVIOUS" title="Directory Server Settings" href="x3760.html" />
+  <link rel="NEXT" title="Quick Reference" href="a3895.html" />
+</head>
+
+<body class="chapter" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">A User's Guide to Ximian Evolution 1.4</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x3760.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom"></td>
+
+        <td width="10%" align="right" valign="bottom"><a href="a3895.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="chapter">
+    <h1><a name="config-sync" id="config-sync"></a>Setting up your synchronization system</h1>
+
+    <p>Synchronization presents you with two issues you'll need to address.</p>
+
+    <table border="0">
+      <tbody>
+        <tr>
+          <td>Your computer needs to recognize and access your handheld. At this time, <tt class="application">Ximian Evolution</tt> only supports Palm-OS devices like the Palm Pilot and the Handspring Visor.</td>
+        </tr>
+
+        <tr>
+          <td>You should decide what sort of synchronization behavior you want.</td>
+        </tr>
+      </tbody>
+    </table><br />
+    <br />
+
+    <p>If you haven't used a handheld device with your computer before, you'll need to run the GNOME <tt class="application">Control Center</tt> by selecting <b class="guimenu">System</b>-&gt;<b class="guimenuitem">Settings</b>, and make sure that <tt class="application">Pilot Link</tt> is properly configured. You will need to make sure that you have read and write permissions on the device, which is normally /dev/pilot. If that does not work, check /dev/ttyS0 if you have a serial connection, or /dev/ttyUSB0 for a USB connection. You can do this by becoming root and running the command: <tt class="userinput"><b>chmod 777 /dev/ttyUSB0</b></tt>.</p>
+
+    <p>Once your computer and your Palm-OS device are talking happily to each other, select the <a href="g4137.html#conduit"><i class="glossterm">conduits</i></a> you want under the <tt class="guilabel"><b>Pilot Conduits</b></tt> section of the Control Center. You may use conduits to synchronize data with several applications; the <tt class="application">Ximian Evolution</tt> conduits are labeled <tt class="guilabel"><b>EAddress</b></tt>, for the contacts in your addressbook, <tt class="guilabel"><b>ECalendar</b></tt>, for your calendar, and <tt class="guilabel"><b>ETodo</b></tt>, for your task list.</p>
+
+    <p>To enable a conduit, click the <b class="guibutton">Enable</b> to enable it, and click <b class="guibutton">Settings</b> to change what it will do when activated. Your options may vary depending on the conduit, but typically they will be:</p>
+
+    <div class="variablelist">
+      <dl>
+        <dt>Disabled:</dt>
+
+        <dd>
+          <p>Do nothing.</p>
+        </dd>
+
+        <dt>Synchronize:</dt>
+
+        <dd>
+          <p>Copy new data from the computer to the handheld, and from the handheld to the computer. Remove items that were on both systems but have been deleted on one.</p>
+        </dd>
+
+        <dt>Copy From Pilot:</dt>
+
+        <dd>
+          <p>If there is any new data on the the handheld device, copy it to the computer.</p>
+        </dd>
+
+        <dt>Copy To Pilot:</dt>
+
+        <dd>
+          <p>Copy new data from the computer to the handheld.</p>
+        </dd>
+
+        <dt>Merge From Pilot:</dt>
+
+        <dd>
+          <p>Copy new data from the handheld to the computer, and remove any information from the computer that has been deleted on the handheld.</p>
+        </dd>
+
+        <dt>Merge To Pilot:</dt>
+
+        <dd>
+          <p>Copy new data from the computer to the handheld, and remove any information from the handheld that has been deleted on the computer.</p>
+        </dd>
+      </dl>
+    </div><br />
+    <br />
+
+    <p>Select the behavior you want for each conduit you choose to use. If you're not sure, go ahead and stick with <tt class="guilabel"><b>Synchronize</b></tt>. Then, put your handheld on its cradle and press the HotSync button.</p>
+
+    <div class="tip">
+      <table class="tip" width="100%" border="0">
+        <tr>
+          <td width="25" align="center" valign="top"><img src="./stylesheet-images/tip.gif" hspace="5" alt="Tip" /></td>
+
+          <th align="left" valign="middle"><b>Data Loss Prevention</b></th>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+
+          <td align="left" valign="top">
+            <p>It's always a good idea to make a backup. To do that, make a copy of the <tt class="filename">evolution</tt> directory inside your home directory.</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x3760.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top"><a href="a3895.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Directory Server Settings</td>
+
+        <td width="34%" align="center" valign="top"><a href="p3361.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">Quick Reference</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

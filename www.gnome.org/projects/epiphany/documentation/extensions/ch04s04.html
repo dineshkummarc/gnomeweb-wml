@@ -1,20 +1,90 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>4.4. The Extension Interface</title><meta name="generator" content="DocBook XSL Stylesheets V1.45"><link rel="home" href="index.html" title="Writing Epiphany Extensions"><link rel="up" href="Coding.html" title="Chapter 4. Coding"><link rel="previous" href="ch04s03.html" title="4.3. Minimum C Code"><link rel="next" href="ch04s05.html" title="4.5. Connecting Signals"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. The Extension Interface</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s03.html">&lt;&lt;&lt; Prev</a> </td><th width="60%" align="center">Chapter 4. Coding</th><td width="20%" align="right"> <a accesskey="n" href="ch04s05.html">Next &gt;&gt;&gt;</a></td></tr></table><hr></hr></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id3343588"></a>4.4. The Extension Interface</h2></div></div><p>Besides the basic <tt>GObject</tt> functions, the Epiphany extensions manager will only call two functions directly: the <tt>attach_window</tt> and <tt>detach_window</tt> functions in its class. Write skeleton functions, and your extension should actually compile and run:</p><pre class="programlisting">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>4.4. The Extension Interface</title>
+  <meta name="generator" content="DocBook XSL Stylesheets V1.45" />
+  <link rel="home" href="index.html" title="Writing Epiphany Extensions" />
+  <link rel="up" href="Coding.html" title="Chapter 4. Coding" />
+  <link rel="previous" href="ch04s03.html" title="4.3. Minimum C Code" />
+  <link rel="next" href="ch04s05.html" title="4.5. Connecting Signals" />
+</head>
+
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="navheader">
+    <table width="100%" summary="Navigation header">
+      <tr>
+        <th colspan="3" align="center">4.4. The Extension Interface</th>
+      </tr>
+
+      <tr>
+        <td width="20%" align="left"><a accesskey="p" href="ch04s03.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
+
+        <th width="60%" align="center">Chapter 4. Coding</th>
+
+        <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04s05.html">Next&nbsp;&gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr />
+  </div>
+
+  <div class="sect1">
+    <div class="titlepage">
+      <div>
+        <h2 class="title" style="clear: both"><a name="id3343588" id="id3343588"></a>4.4. The Extension Interface</h2>
+      </div>
+    </div>
+
+    <p>Besides the basic <tt>GObject</tt> functions, the Epiphany extensions manager will only call two functions directly: the <tt>attach_window</tt> and <tt>detach_window</tt> functions in its class. Write skeleton functions, and your extension should actually compile and run:</p>
+    <pre class="programlisting">
 static void
 impl_attach_window (EphyExtension *extension, EphyWindow *window)
 {
-	LOG ("Ephy<i><tt>Foo</tt></i>Extension attach_window")
+  LOG ("Ephy<i><tt>Foo</tt></i>Extension attach_window")
 }
 
 static void
 impl_detach_window (EphyExtension *extension, EphyWindow *window)
 {
-	LOG ("Ephy<i><tt>Foo</tt></i>Extension detach_window")
+  LOG ("Ephy<i><tt>Foo</tt></i>Extension detach_window")
 }
 
 static void
 ephy_<i><tt>foo</tt></i>_extension_iface_init (EphyExtensionClass *iface)
 {
-	iface-&gt;attach_window = impl_attach_window;
-	iface-&gt;detach_window = impl_detach_window;
+  iface-&gt;attach_window = impl_attach_window;
+  iface-&gt;detach_window = impl_detach_window;
 }
-			</pre><p>You're now ready to write code. Your creativity should begin in <tt>impl_attach_window</tt> and extend beyond limits. The next sections just contain ideas to spark your creativity.</p></div><div xmlns="http://www.w3.org/TR/xhtml1/transitional" class="navfooter"><hr></hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s03.html">&lt;&lt;&lt; Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s05.html">Next &gt;&gt;&gt;</a></td></tr><tr><td width="40%" align="left">4.3. Minimum C Code </td><td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td><td width="40%" align="right"> 4.5. Connecting Signals</td></tr></table></div></body></html>
+      
+</pre>
+
+    <p>You're now ready to write code. Your creativity should begin in <tt>impl_attach_window</tt> and extend beyond limits. The next sections just contain ideas to spark your creativity.</p>
+  </div>
+
+  <div class="navfooter">
+    <hr />
+
+    <table width="100%" summary="Navigation footer">
+      <tr>
+        <td width="40%" align="left"><a accesskey="p" href="ch04s03.html">&lt;&lt;&lt;&nbsp;Prev</a>&nbsp;</td>
+
+        <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+
+        <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04s05.html">Next&nbsp;&gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="40%" align="left">4.3. Minimum C Code&nbsp;</td>
+
+        <td width="20%" align="center"><a accesskey="u" href="Coding.html">Up</a></td>
+
+        <td width="40%" align="right">&nbsp;4.5. Connecting Signals</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

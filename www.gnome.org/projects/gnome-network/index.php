@@ -1,16 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-  "http://www.w3.org/TR/REC-html40/loose.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?
   $current_version = "1.99.5";
   $date_release = "November 27, 2003";
 ?>
   
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>GNOME Network</title>
-    <link rel="stylesheet" href="style/gn.css" type="text/css">
-    <link rel="icon" type="image/png" href="images/foot-16.png">
+    <link rel="stylesheet" href="style/gn.css" type="text/css" />
+    <link rel="icon" type="image/png" href="images/foot-16.png" />
   </head>
   <body bgcolor="#FFFFFF">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -22,7 +23,7 @@
           <img src="images/spacer.png" alt="" hspace="12" width="1" height="1" />
         </td>
         <td align="left" style="background: #ffffff" width="100%" height=135>
-          <img src="images/gnomenetworklogo.png" alt="GNOME Network" width="445" height="91" ALIGN="center" />
+          <img src="images/gnomenetworklogo.png" alt="GNOME Network" width="445" height="91" align="center" />
         </td>
       </tr>
       <tr>
@@ -42,7 +43,7 @@
       </tr>
     </table>
     <div align="center">
-      <p><font color="#777777" size="-1">Copyright &copy; 1999-2003 GNOME Foundation.</font></p>
+      <p style="color:#777777; font-size:small;">Copyright &copy; 1999-2003 GNOME Foundation.</p>
     </div>
   </body>
 </html>

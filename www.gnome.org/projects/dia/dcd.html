@@ -1,93 +1,71 @@
-<HTML>
-<HEAD>
-<META NAME="Author" CONTENT="C.Chépélov">
-<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<TITLE>The Dia ChangeLog Daemon</TITLE>
-<link rel="StyleSheet" href="dia.css" type="text/css">
-<LINK rel="shortcut icon" href="images/dia_gnome_icon.png">
-</HEAD>
-<BODY BGCOLOR="#FFFFFF">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<table width="100%" cellpadding="0" border="0">
-<tr>
- <td>
-  <h1>The Dia ChangeLog Daemon</h1>
- </td>
- <td>
-  <P ALIGN="right">
-  <IMG SRC="images/develop.jpg" alt="Developers logo">
-  </P>
- </td>
-</tr>
-</table>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="Author" content="C.Chépélov" />
 
-<h2>What is it?</h2>
-<p>The Dia ChangeLog Daemon (DCD for short) is a cron script which is
-      run daily on one of the developers' machine. Its intent at the
-      beginning was to simply post a daily development activity report
-      to the mailing list (which helps users seeing whether their pet
-      features and bugs are taken care of or not, and also helps
-      developers who can't contribute regularly to keep up with the
-      recent development). It has expanded and now performs the
-      following duties:</p>
-<ul>
-<li>Daily ChangeLog reports</li>
-<li><a href="http://www.crans.org/~chepelov/dia/snapshots/">Daily
-          snapshot tarballs and diffs</a></li>
-<li><a href="http://www.crans.org/~chepelov/dia/snapshots/">Translation
-          report graphs</a></li>
-</ul>
+  <title>The Dia ChangeLog Daemon</title>
+  <link rel="StyleSheet" href="dia.css" type="text/css" />
+  <link rel="shortcut icon" href="images/dia_gnome_icon.png" />
+</head>
 
-<h2>How it works?</h2>
+<body bgcolor="#FFFFFF">
+  <table width="100%" cellpadding="0" border="0">
+    <tr>
+      <td>
+        <h1>The Dia ChangeLog Daemon</h1>
+      </td>
 
-<h3>infrastructure</h3>
-<p>The DCD enjoys its own access to the primary GNOME CVS server, and
-      has its own tree, separate from its owner's development
-      tree.</p>
-<p>Every day at 9:25 CEST (CET on winters), it starts by updating this 
-tree.</p> 
+      <td>
+        <p align="right"><img src="images/develop.jpg" alt="Developers logo" /></p>
+      </td>
+    </tr>
+  </table>
 
-<h3>Daily ChangeLog Reports</h3>
-<p>The second action is to perform a unified diff of the ChangeLog
-      from the previous day (the previous day's copy is saved). If the
-      diff is empty (meaning, there has been no development activity),
-      then the process stops and nothing else happens.</p>
+  <h2>What is it?</h2>
 
-<p>If the diff is not empty, it is e-mailed to the dia list, and the
-      rest of the process follows.</p>
+  <p>The Dia ChangeLog Daemon (DCD for short) is a cron script which is run daily on one of the developers' machine. Its intent at the beginning was to simply post a daily development activity report to the mailing list (which helps users seeing whether their pet features and bugs are taken care of or not, and also helps developers who can't contribute regularly to keep up with the recent development). It has expanded and now performs the following duties:</p>
 
-<h3>Tarballs</h3>
-<p>The third action is to build a snapshot tarball. In order for the
-      snapshot to be compilable by semi-casual people, the
-      ./autogen.sh script is run (so there is a ./configure ready to
-      be used).</p>
+  <ul>
+    <li>Daily ChangeLog reports</li>
 
-<p>The last tarball is diff'ed with the previous, for the
-      bandwith-constrained people.</p>
+    <li><a href="http://www.crans.org/~chepelov/dia/snapshots/">Daily snapshot tarballs and diffs</a></li>
 
-<h3>Translation graphs</h3>
-<p>Once the tarball is done, the script goes into the po/
-      subdirectory, and refreshes the dia.pot and *.po files. It also
-      merges the translations of the .sheet.in files into the .sheet
-      files. The .sheet files are also tarred, because the Win32
-      platform is not capable of doing the PO merge.</p>
+    <li><a href="http://www.crans.org/~chepelov/dia/snapshots/">Translation report graphs</a></li>
+  </ul>
 
-<p>Finally, the script runs "make core-translation-report", which is a
-      text file with a summary of the percentage of translations
-      complete for each language.</p>
+  <h2>How it works?</h2>
 
-<p>Lastly, the core-translation-report is archived into <a
-      href="http://www.crans.org/~chepelov/dia/translation-graph/">another
-      directory</a>, and the <a
-      href="http://www.crans.org/~chepelov/dia/translation-graph/reports/">graphs</a>
-      are regenerated. 
+  <h3>infrastructure</h3>
 
-<p><em>You can notice on the translation graphs, that some days are
-        missing: this means that there was no development activity
-        that day. Some translations may have appeared in the
-        mean-time, though. They are accounted for the next day with
-        development.</em></p> 
-<p><em>Tip: if the translation graph for today is up, it means the
-        transfer of the snapshot tarball is complete.</em></p>
+  <p>The DCD enjoys its own access to the primary GNOME CVS server, and has its own tree, separate from its owner's development tree.</p>
+
+  <p>Every day at 9:25 CEST (CET on winters), it starts by updating this tree.</p>
+
+  <h3>Daily ChangeLog Reports</h3>
+
+  <p>The second action is to perform a unified diff of the ChangeLog from the previous day (the previous day's copy is saved). If the diff is empty (meaning, there has been no development activity), then the process stops and nothing else happens.</p>
+
+  <p>If the diff is not empty, it is e-mailed to the dia list, and the rest of the process follows.</p>
+
+  <h3>Tarballs</h3>
+
+  <p>The third action is to build a snapshot tarball. In order for the snapshot to be compilable by semi-casual people, the ./autogen.sh script is run (so there is a ./configure ready to be used).</p>
+
+  <p>The last tarball is diff'ed with the previous, for the bandwith-constrained people.</p>
+
+  <h3>Translation graphs</h3>
+
+  <p>Once the tarball is done, the script goes into the po/ subdirectory, and refreshes the dia.pot and *.po files. It also merges the translations of the .sheet.in files into the .sheet files. The .sheet files are also tarred, because the Win32 platform is not capable of doing the PO merge.</p>
+
+  <p>Finally, the script runs "make core-translation-report", which is a text file with a summary of the percentage of translations complete for each language.</p>
+
+  <p>Lastly, the core-translation-report is archived into <a href="http://www.crans.org/~chepelov/dia/translation-graph/">another directory</a>, and the <a href="http://www.crans.org/~chepelov/dia/translation-graph/reports/">graphs</a> are regenerated.</p>
+
+  <p><em>You can notice on the translation graphs, that some days are missing: this means that there was no development activity that day. Some translations may have appeared in the mean-time, though. They are accounted for the next day with development.</em></p>
+
+  <p><em>Tip: if the translation graph for today is up, it means the transfer of the snapshot tarball is complete.</em></p>
 </body>
 </html>

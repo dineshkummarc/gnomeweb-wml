@@ -1,355 +1,166 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Calculator client &#38; server</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="ORBit Beginners Documentation V1.3"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="First CORBA Programs"
-HREF="c250.html"><LINK
-REL="PREVIOUS"
-TITLE="Echo client & server"
-HREF="x302.html"><LINK
-REL="NEXT"
-TITLE="
-Account client & server
-"
-HREF="x642.html"></HEAD
-><BODY
-CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->ORBit Beginners Documentation V1.3</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x302.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->First CORBA Programs</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="x642.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="sect1"
-><H1
-CLASS="sect1"
-><A
-NAME="calculator-IDL"
-></A
->Calculator client &#38; server</H1
-><P
->&#13;This example will take you further into understanding how to actually
-make a working server, using the support that comes from ORBit. It
-will demonstrate handling of replies from server.
-</P
-><P
->&#13;
-The system will not be doing very much. The server just provides two
-functions, one to add two numbers and one to subtract two numbers. The
-first thing you have to do is to write the IDL files for the
-server. In our example it is very simple.
-<DIV
-CLASS="example"
-><A
-NAME="AEN468"
-></A
-><P
-><B
->Example 9. calculator.idl</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Calculator client &amp; server</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="ORBit Beginners Documentation V1.3" href="book1.html" />
+  <link rel="UP" title="First CORBA Programs" href="c250.html" />
+  <link rel="PREVIOUS" title="Echo client &amp; server" href="x302.html" />
+  <link rel="NEXT" title=" Account client &amp; server " href="x642.html" />
+</head>
+
+<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">ORBit Beginners Documentation V1.3</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x302.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom">First CORBA Programs</td>
+
+        <td width="10%" align="right" valign="bottom"><a href="x642.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="sect1">
+    <h1 class="sect1"><a name="calculator-IDL" id="calculator-IDL"></a>Calculator client &amp; server</h1>
+
+    <p>This example will take you further into understanding how to actually make a working server, using the support that comes from ORBit. It will demonstrate handling of replies from server.</p>
+
+    <p>The system will not be doing very much. The server just provides two functions, one to add two numbers and one to subtract two numbers. The first thing you have to do is to write the IDL files for the server. In our example it is very simple.</p>
+
+    <div class="example">
+      <a name="AEN468" id="AEN468"></a>
+
+      <p><b>Example 9. calculator.idl</b></p>
+
+      <table border="0" bgcolor="#E0E0E0" width="100%">
+        <tr>
+          <td>
+            <pre class="programlisting">
+
 interface Calculator
 {
       double add(in double number1, in double number2);
       double sub(in double number1, in double number2);
 };
 
-</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
+</pre>
+          </td>
+        </tr>
+      </table>
+    </div>Then you have to generate the skeleton and stub files. In addition to these two files the ORBit IDL compiler also generates a common file and a header file. The common file implements the memory management functions and other things, useful in the client as well as in the server. The sequence to generate the C source files is rather simple. <tt class="computeroutput">$ <b class="command">orbit-idl-2 --skeleton-impl calculator.idl</b></tt> geenrates all the files we will use in this example.
 
-Then you have to generate the skeleton and stub files. In addition to
-these two files the ORBit IDL compiler also generates a common file
-and a header file. The common file implements the memory management
-functions and other things, useful in the client as well as in the
-server. The sequence to generate the C source files is rather
-simple.
-<TT
-CLASS="computeroutput"
->$ <B
-CLASS="command"
->orbit-idl-2 --skeleton-impl
-calculator.idl</B
->
-</TT
->
-geenrates all the files we will use in this example.
+    <div class="informaltable">
+      <a name="AEN473" id="AEN473"></a>
 
-<DIV
-CLASS="informaltable"
-><A
-NAME="AEN473"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><THEAD
-><TR
-><TH
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->File</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Client</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Server</TH
-></TR
-></THEAD
-><TBODY
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator.h</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-common.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-stubs.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-skels.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-skelimpl.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->template for user code</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <thead>
+          <tr>
+            <th width="33%" align="left" valign="middle">File</th>
 
-Files remaining to write are listed in following table, starting with 
-<I
-CLASS="emphasis"
->calculator-client.c</I
-> in following chapter.
-<DIV
-CLASS="informaltable"
-><A
-NAME="AEN505"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><TBODY
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-client.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the client code</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->calculator-server.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the generic code for servant creation</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
+            <th width="33%" align="center" valign="middle">Usage for Client</th>
 
+            <th width="33%" align="center" valign="middle">Usage for Server</th>
+          </tr>
+        </thead>
 
-</P
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="calculator-client"
-></A
->Calculator client</H2
-><P
->&#13;The next thing you have to do is to write the server and client
-programs. We start with the client, because it's easier and not very
-complicated. 
-</P
-><P
->&#13;  A simple implementation of the client might look like this
-  <DIV
-CLASS="example"
-><A
-NAME="AEN518"
-></A
-><P
-><B
->Example 10. calculator-client.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/* calculator-client.c hacked by Frank Rehberger
- * &#60;F.Rehberger@xtradyne.de&#62;.  */
+        <tbody>
+          <tr>
+            <td width="33%" align="left" valign="middle">calculator.h</td>
 
-#include &#60;assert.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;stdio.h&#62;
-#include &#60;orbit/orbit.h&#62;
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">calculator-common.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">calculator-stubs.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">calculator-skels.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">calculator-skelimpl.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">template for user code</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>Files remaining to write are listed in following table, starting with <i class="emphasis">calculator-client.c</i> in following chapter.
+
+    <div class="informaltable">
+      <a name="AEN505" id="AEN505"></a>
+
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <tbody>
+          <tr>
+            <td align="left" valign="middle">calculator-client.c</td>
+
+            <td align="left" valign="middle">write the client code</td>
+          </tr>
+
+          <tr>
+            <td align="left" valign="middle">calculator-server.c</td>
+
+            <td align="left" valign="middle">write the generic code for servant creation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br />
+    <br />
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="calculator-client" id="calculator-client"></a>Calculator client</h2>
+
+      <p>The next thing you have to do is to write the server and client programs. We start with the client, because it's easier and not very complicated.</p>
+
+      <p>A simple implementation of the client might look like this</p>
+
+      <div class="example">
+        <a name="AEN518" id="AEN518"></a>
+
+        <p><b>Example 10. calculator-client.c</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+/* calculator-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
 #include "calculator.h"
 
@@ -369,10 +180,7 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                 <B
-CLASS="command"
->CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
->
+                 <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </b>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -388,7 +196,7 @@ CLASS="command"
 static
 void
 client_init (int               *argc_ptr,
-	     char              *argv[],
+       char              *argv[],
              CORBA_ORB         *orb,
              CORBA_Environment *ev)
 {
@@ -399,10 +207,7 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-         <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </B
->
+         <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </b>
         if (etk_raised_exception(ev)) return;
 }
 
@@ -416,20 +221,14 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-         <B
-CLASS="command"
->CORBA_Object_release(service, ev); </B
->
+         <b class="command">CORBA_Object_release(service, ev); </b>
         if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                 <B
-CLASS="command"
->CORBA_ORB_destroy(orb, ev); </B
->
+                 <b class="command">CORBA_ORB_destroy(orb, ev); </b>
                 if (etk_raised_exception(ev)) return;
         }
 }
@@ -440,20 +239,17 @@ CLASS="command"
 static
 void
 client_run (Calculator         service,
-	    CORBA_Environment *ev)
+      CORBA_Environment *ev)
 {
-	CORBA_double      result=0.0;
+  CORBA_double      result=0.0;
 
-	/*
+  /*
          * use calculator service
          */
-	
-         <B
-CLASS="command"
->result = Calculator_add(service, 1.0, 2.0, ev); </B
->
+  
+         <b class="command">result = Calculator_add(service, 1.0, 2.0, ev); </b>
         if (etk_raised_exception (ev)) return;
-	
+  
         /* prints results to console */
         g_print("Result: 1.0 + 2.0 = %2.0f\n", result);
 }
@@ -467,176 +263,84 @@ main(int argc, char* argv[])
 {
         CORBA_char  filename[] = "calculator.ref";
 
-	Calculator service = CORBA_OBJECT_NIL;
+  Calculator service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
         CORBA_exception_init(ev);
 
-	 <B
-CLASS="command"
->client_init (&#38;argc, argv, &#38;global_orb, ev); </B
->
-	etk_abort_if_exception(ev, "init failed");
+   <b class="command">client_init (&amp;argc, argv, &amp;global_orb, ev); </b>
+  etk_abort_if_exception(ev, "init failed");
 
-	g_print ("Reading service reference from file \"%s\"\n", filename);
+  g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	 <B
-CLASS="command"
->service = (Calculator) etk_import_object_from_file (global_orb,
-							       filename,
-							       ev); </B
->
+   <b class="command">service = (Calculator) etk_import_object_from_file (global_orb,
+                     filename,
+                     ev); </b>
         etk_abort_if_exception(ev, "import service failed");
 
-	 <B
-CLASS="command"
->client_run (service, ev); </B
->
+   <b class="command">client_run (service, ev); </b>
         etk_abort_if_exception(ev, "service not reachable");
  
-	 <B
-CLASS="command"
->client_cleanup (global_orb, service, ev); </B
->
+   <b class="command">client_cleanup (global_orb, service, ev); </b>
         etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-</P
-><P
->&#13;Rather simple, but full of unexplained stuff.
-Let's take a close look to the defined variables.
+}
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div><br />
+      <br />
 
-        <P
-></P
-><DIV
-CLASS="variablelist"
-><DL
-><DT
-><TT
-CLASS="parameter"
-><I
->&#13;                env </I
-></TT
-></DT
-><DD
-><P
->&#13;	      This varaible is used to hold information about
-	      exceptions which might have occurred during a function
-	      call. How to use this variable to detect errors in
-	      function will be explained in a later example.
-	      </P
-></DD
-><DT
-><TT
-CLASS="parameter"
-><I
->&#13;             orb
-            </I
-></TT
-></DT
-><DD
-><P
->&#13;This is the ORB itself.
-              </P
-></DD
-><DT
-><TT
-CLASS="parameter"
-><I
->&#13;              server
-            </I
-></TT
-></DT
-><DD
-><P
->&#13;	      This is the object reference to the server.
-	      </P
-></DD
-></DL
-></DIV
->
-</P
-><P
->&#13;The example above is a full functional client. 
-The magic in this
-example is the usage of the function
-<I
-CLASS="emphasis"
->CORBA_ORB_string_to_object</I
-> with the parameter
-<TT
-CLASS="parameter"
-><I
->argv[1]</I
-></TT
->. The explantion is that the program is
-supposed to be called with the string representation of the Calculator 
-server as the first parameter. How to obtain this string, will be
-shown in the next example, where I describe how the server.
-</P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="calculator-server"
-></A
->Calculator server</H2
-><P
->&#13;To implement the server, the IDL compiler does a great deal of work
-for you. It can emit all the stuff necessary to set up the data
-structures and function calls for the server implementation. All you
-have to write is the setup stuff in your main function and the actual
-implementation of the server functions. First I'll present the
-functions and data structures the IDL compiler generates and then I'll 
-show what's necessary to set up the environment for these functions to
-work properly.
-</P
-><DIV
-CLASS="sect3"
-><H3
-CLASS="sect3"
-><A
-NAME="calculator-server-idl"
-></A
->Calculator Implementation Skeleton</H3
-><P
->&#13;To ease the task of implementing the calculator the ORBit IDL compiler
-can output an implementation skeleton of the server. 
-This is enabled with the --skeleton-impl switch to the IDL compiler. 
-The output of <B
-CLASS="command"
->orbit-idl-2 --skeleton-impl calculator.idl</B
-> looks like this (the default name for the generated source file is <TT
-CLASS="filename"
->calculator-skelimpl.c</TT
->:
+      <p>Rather simple, but full of unexplained stuff. Let's take a close look to the defined variables.</p>
 
-<DIV
-CLASS="example"
-><A
-NAME="AEN558"
-></A
-><P
-><B
->Example 11. calculator-skelimpl.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->#include "calculator.h"
+      <div class="variablelist">
+        <dl>
+          <dt><tt class="parameter"><i>env</i></tt></dt>
+
+          <dd>
+            <p>This varaible is used to hold information about exceptions which might have occurred during a function call. How to use this variable to detect errors in function will be explained in a later example.</p>
+          </dd>
+
+          <dt><tt class="parameter"><i>orb</i></tt></dt>
+
+          <dd>
+            <p>This is the ORB itself.</p>
+          </dd>
+
+          <dt><tt class="parameter"><i>server</i></tt></dt>
+
+          <dd>
+            <p>This is the object reference to the server.</p>
+          </dd>
+        </dl>
+      </div><br />
+      <br />
+
+      <p>The example above is a full functional client. The magic in this example is the usage of the function <i class="emphasis">CORBA_ORB_string_to_object</i> with the parameter <tt class="parameter"><i>argv[1]</i></tt>. The explantion is that the program is supposed to be called with the string representation of the Calculator server as the first parameter. How to obtain this string, will be shown in the next example, where I describe how the server.</p>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="calculator-server" id="calculator-server"></a>Calculator server</h2>
+
+      <p>To implement the server, the IDL compiler does a great deal of work for you. It can emit all the stuff necessary to set up the data structures and function calls for the server implementation. All you have to write is the setup stuff in your main function and the actual implementation of the server functions. First I'll present the functions and data structures the IDL compiler generates and then I'll show what's necessary to set up the environment for these functions to work properly.</p>
+
+      <div class="sect3">
+        <h3 class="sect3"><a name="calculator-server-idl" id="calculator-server-idl"></a>Calculator Implementation Skeleton</h3>
+
+        <p>To ease the task of implementing the calculator the ORBit IDL compiler can output an implementation skeleton of the server. This is enabled with the --skeleton-impl switch to the IDL compiler. The output of <b class="command">orbit-idl-2 --skeleton-impl calculator.idl</b> looks like this (the default name for the generated source file is <tt class="filename">calculator-skelimpl.c</tt>:</p>
+
+        <div class="example">
+          <a name="AEN558" id="AEN558"></a>
+
+          <p><b>Example 11. calculator-skelimpl.c</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+#include "calculator.h"
 
 /*** App-specific servant structures ***/
 
@@ -653,39 +357,39 @@ impl_POA_Calculator;
 /*** Implementation stub prototypes ***/
 
 static void impl_Calculator__fini(impl_POA_Calculator * servant,
-				  CORBA_Environment * ev);
+          CORBA_Environment * ev);
 static CORBA_double
 impl_Calculator_add(impl_POA_Calculator * servant,
-		    const CORBA_double number1,
-		    const CORBA_double number2, 
-		    CORBA_Environment * ev);
+        const CORBA_double number1,
+        const CORBA_double number2, 
+        CORBA_Environment * ev);
 
 static CORBA_double
 impl_Calculator_sub(impl_POA_Calculator * servant,
-		    const CORBA_double number1,
-		    const CORBA_double number2, 
-		    CORBA_Environment * ev);
+        const CORBA_double number1,
+        const CORBA_double number2, 
+        CORBA_Environment * ev);
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Calculator_base_epv = {
-   NULL,			/* _private data */
-   (gpointer) &#38; impl_Calculator__fini,	/* finalize routine */
-   NULL,			/* default_POA routine */
+   NULL,      /* _private data */
+   (gpointer) &amp; impl_Calculator__fini,  /* finalize routine */
+   NULL,      /* default_POA routine */
 };
 static POA_Calculator__epv impl_Calculator_epv = {
-   NULL,			/* _private */
-   (gpointer) &#38; impl_Calculator_add,
+   NULL,      /* _private */
+   (gpointer) &amp; impl_Calculator_add,
 
-   (gpointer) &#38; impl_Calculator_sub,
+   (gpointer) &amp; impl_Calculator_sub,
 
 };
 
 /*** vepv structures ***/
 
 static POA_Calculator__vepv impl_Calculator_vepv = {
-   &#38;impl_Calculator_base_epv,
-   &#38;impl_Calculator_epv,
+   &amp;impl_Calculator_base_epv,
+   &amp;impl_Calculator_epv,
 };
 
 /*** Stub implementations ***/
@@ -699,8 +403,8 @@ impl_Calculator__create(PortableServer_POA poa,
    PortableServer_ObjectId *objid;
 
    newservant = g_new0(impl_POA_Calculator, 1);
-   newservant-&#62;servant.vepv = &#38;impl_Calculator_vepv;
-   newservant-&#62;poa = poa;
+   newservant-&gt;servant.vepv = &amp;impl_Calculator_vepv;
+   newservant-&gt;poa = poa;
    POA_Calculator__init((PortableServer_Servant) newservant, ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
@@ -717,9 +421,9 @@ impl_Calculator__create(PortableServer_POA poa,
 
 static void
 impl_Calculator__fini (impl_POA_Calculator * servant,
-		       CORBA_Environment * ev)
+           CORBA_Environment * ev)
 {
-   CORBA_Object_release((CORBA_Object) servant-&#62;poa, ev);
+   CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev);
  
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
@@ -733,17 +437,14 @@ impl_Calculator__fini (impl_POA_Calculator * servant,
 
 static CORBA_double
 impl_Calculator_add(impl_POA_Calculator * servant,
-		    const CORBA_double number1,
-		    const CORBA_double number2, 
-		    CORBA_Environment * ev)
+        const CORBA_double number1,
+        const CORBA_double number2, 
+        CORBA_Environment * ev)
 {
    CORBA_double retval;
 
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->retval = number1 + number2;</B
->
+   <b class="command">retval = number1 + number2;</b>
    /* ------ ---------- end ------------ ------ */
 
    return retval;
@@ -753,235 +454,99 @@ static CORBA_double
 impl_Calculator_sub(impl_POA_Calculator * servant,
                     const CORBA_double number1,
                     const CORBA_double number2, 
-		    CORBA_Environment * ev)
+        CORBA_Environment * ev)
 {
    CORBA_double retval;
 
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->retval = number1 - number2;</B
->
+   <b class="command">retval = number1 - number2;</b>
    /* ------ ---------- end ------------ ------ */
 
    return retval;
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-</P
-><P
->&#13;This source file provides you with most of the magic of a server. 
-Note that we generate this file (with the <B
-CLASS="command"
->--skeleton-impl</B
-> switch) only once, 
-and then the makefile invokes <B
-CLASS="command"
->orbit-idl-2</B
-> with no switch.
-If you call <B
-CLASS="command"
->orbit-idl-2 --skeleton-impl</B
-> from the makefile, the previous file will be overwritten and your implementation code lost.
-Once the implementation code is written, just include the source file at the
-beginning of the
-<TT
-CLASS="filename"
->calculator-server.c</TT
-> file. 
-</P
-><P
->&#13;For
-this first example, I won't explain all the bits and pieces of the
-generated source file. This will be done later. We'll just concentrate on 
-getting the server running.
-</P
-><P
->&#13;As you see there are two functions:
-<DIV
-CLASS="funcsynopsis"
-><A
-NAME="AEN570"
-></A
-><P
-></P
-><P
-><CODE
-><CODE
-CLASS="FUNCDEF"
->CORBA_double <TT
-CLASS="function"
->impl_Calculator_add</TT
-></CODE
->(impl_POA_Calculator* <TT
-CLASS="parameter"
-><I
->servant</I
-></TT
->, CORBA_double <TT
-CLASS="parameter"
-><I
->number1</I
-></TT
->, CORBA_double <TT
-CLASS="parameter"
-><I
->number2</I
-></TT
->, CORBA_Environment* <TT
-CLASS="parameter"
-><I
->ev</I
-></TT
->);</CODE
-></P
-><P
-></P
-></DIV
->
-and
-<DIV
-CLASS="funcsynopsis"
-><A
-NAME="AEN582"
-></A
-><P
-></P
-><P
-><CODE
-><CODE
-CLASS="FUNCDEF"
->CORBA_double <TT
-CLASS="function"
->impl_Calculator_sub</TT
-></CODE
->(impl_POA_Calculator* <TT
-CLASS="parameter"
-><I
->servant</I
-></TT
->, CORBA_double <TT
-CLASS="parameter"
-><I
->number1</I
-></TT
->, CORBA_double <TT
-CLASS="parameter"
-><I
->number2</I
-></TT
->, CORBA_Environment* <TT
-CLASS="parameter"
-><I
->ev</I
-></TT
->);</CODE
-></P
-><P
-></P
-></DIV
->
+}
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div><br />
+        <br />
 
-These two functions are implementing the function defined in the IDL
-file. Because the IDL compiler doesn't provide you with a real
-implementation (it doesn't know what the function should do), you have 
-to extend this skeleton yourself where marked.
-</P
-><P
->&#13;The <TT
-CLASS="function"
->impl_Calculator_add()</TT
-> should add it's two 
-parameters and return the result so this function should be changed
-into:
+        <p>This source file provides you with most of the magic of a server. Note that we generate this file (with the <b class="command">--skeleton-impl</b> switch) only once, and then the makefile invokes <b class="command">orbit-idl-2</b> with no switch. If you call <b class="command">orbit-idl-2 --skeleton-impl</b> from the makefile, the previous file will be overwritten and your implementation code lost. Once the implementation code is written, just include the source file at the beginning of the <tt class="filename">calculator-server.c</tt> file.</p>
 
-<DIV
-CLASS="example"
-><A
-NAME="AEN596"
-></A
-><P
-><B
->Example 12. calculator-skelimpl.c fragment</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->&#13;static CORBA_double
+        <p>For this first example, I won't explain all the bits and pieces of the generated source file. This will be done later. We'll just concentrate on getting the server running.</p>
+
+        <p>As you see there are two functions:</p>
+
+        <div class="funcsynopsis">
+          <a name="AEN570" id="AEN570"></a>
+
+          <p><code><code class="FUNCDEF">CORBA_double <tt class="function">impl_Calculator_add</tt></code>(impl_POA_Calculator* <tt class="parameter"><i>servant</i></tt>, CORBA_double <tt class="parameter"><i>number1</i></tt>, CORBA_double <tt class="parameter"><i>number2</i></tt>, CORBA_Environment* <tt class="parameter"><i>ev</i></tt>);</code></p>
+        </div>and
+
+        <div class="funcsynopsis">
+          <a name="AEN582" id="AEN582"></a>
+
+          <p><code><code class="FUNCDEF">CORBA_double <tt class="function">impl_Calculator_sub</tt></code>(impl_POA_Calculator* <tt class="parameter"><i>servant</i></tt>, CORBA_double <tt class="parameter"><i>number1</i></tt>, CORBA_double <tt class="parameter"><i>number2</i></tt>, CORBA_Environment* <tt class="parameter"><i>ev</i></tt>);</code></p>
+        </div>These two functions are implementing the function defined in the IDL file. Because the IDL compiler doesn't provide you with a real implementation (it doesn't know what the function should do), you have to extend this skeleton yourself where marked.<br />
+        <br />
+
+        <p>The <tt class="function">impl_Calculator_add()</tt> should add it's two parameters and return the result so this function should be changed into:</p>
+
+        <div class="example">
+          <a name="AEN596" id="AEN596"></a>
+
+          <p><b>Example 12. calculator-skelimpl.c fragment</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+
+static CORBA_double
 impl_Calculator_add(impl_POA_Calculator * servant,
                     const CORBA_double number1,
                     const CORBA_double number2, 
-		    CORBA_Environment * ev)
+        CORBA_Environment * ev)
 {
    CORBA_double retval;
 
    /* ------   insert method code here   ------ */
-   <B
-CLASS="command"
->retval = number1 + number2;</B
->
+   <b class="command">retval = number1 + number2;</b>
    /* ------ ---------- end ------------ ------ */
 
    return retval;
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-</P
-></DIV
-><DIV
-CLASS="sect3"
-><H3
-CLASS="sect3"
-><A
-NAME="calculator-server-main"
-></A
->Calculator Server Implementation</H3
-><P
->&#13;The things you need in your minimal main function to make things work
-can be implemented in the following way, note analogy to
-<TT
-CLASS="filename"
->echo-server.c</TT
-> of previous example.
+}
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div><br />
 
-          <DIV
-CLASS="example"
-><A
-NAME="AEN604"
-></A
-><P
-><B
->Example 13. calculator-server.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/*
+      <div class="sect3">
+        <h3 class="sect3"><a name="calculator-server-main" id="calculator-server-main"></a>Calculator Server Implementation</h3>
+
+        <p>The things you need in your minimal main function to make things work can be implemented in the following way, note analogy to <tt class="filename">echo-server.c</tt> of previous example.</p>
+
+        <div class="example">
+          <a name="AEN604" id="AEN604"></a>
+
+          <p><b>Example 13. calculator-server.c</b></p>
+
+          <table border="0" bgcolor="#E0E0E0" width="100%">
+            <tr>
+              <td>
+                <pre class="programlisting">
+/*
  * calculator-server program. Hacked from Frank Rehberger
- * &#60;F.Rehberger@xtradyne.de&#62;.
+ * &lt;F.Rehberger@xtradyne.de&gt;.
  */
 
-#include &#60;stdio.h&#62;
-#include &#60;stdlib.h&#62;
-#include &#60;string.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;orbit/orbit.h&#62;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
 #include "calculator.h"
 #include "calculator-skelimpl.c"
@@ -990,7 +555,7 @@ CLASS="programlisting"
 
 static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
 static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
-	
+  
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
  */
@@ -998,15 +563,12 @@ static
 void
 server_shutdown (int sig)
 {
-	CORBA_Environment  local_ev[1];
-	CORBA_exception_init(local_ev);
+  CORBA_Environment  local_ev[1];
+  CORBA_exception_init(local_ev);
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                <B
-CLASS="command"
-> CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
->
+                <b class="command"> CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </b>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -1020,64 +582,49 @@ CLASS="command"
  */static 
 void 
 server_init (int                 *argc_ptr, 
-	     char                *argv[],
-	     CORBA_ORB           *orb,
-	     PortableServer_POA  *poa,
-	     CORBA_Environment   *ev)
+       char                *argv[],
+       CORBA_ORB           *orb,
+       PortableServer_POA  *poa,
+       CORBA_Environment   *ev)
 {
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+  PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
-	CORBA_Environment  local_ev[1];
-	CORBA_exception_init(local_ev);
+  CORBA_Environment  local_ev[1];
+  CORBA_exception_init(local_ev);
 
-	/* init signal handling */
-	signal(SIGINT,  server_shutdown);
-	signal(SIGTERM, server_shutdown);
-	
-	/* create Object Request Broker (ORB) */
-	
-         <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_orb;
+  /* init signal handling */
+  signal(SIGINT,  server_shutdown);
+  signal(SIGTERM, server_shutdown);
+  
+  /* create Object Request Broker (ORB) */
+  
+         <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_orb;
 
-         <B
-CLASS="command"
->(*poa) = (PortableServer_POA) 
-		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_poa;
+         <b class="command">(*poa) = (PortableServer_POA) 
+    CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_poa;
 
-         <B
-CLASS="command"
->poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_poamanager;
+         <b class="command">poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_poamanager;
 
-	 <B
-CLASS="command"
->PortableServer_POAManager_activate(poa_manager, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_activation;
+   <b class="command">PortableServer_POAManager_activate(poa_manager, ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_activation;
 
-         <B
-CLASS="command"
->CORBA_Object_release ((CORBA_Object) poa_manager, ev); </B
->
-	return;
+         <b class="command">CORBA_Object_release ((CORBA_Object) poa_manager, ev); </b>
+  return;
 
  failed_activation:
  failed_poamanager:
         CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
  failed_poa:
-	CORBA_ORB_destroy(*orb, local_ev);		
+  CORBA_ORB_destroy(*orb, local_ev);    
  failed_orb:
-	return;
+  return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
@@ -1086,18 +633,15 @@ CLASS="command"
  */
 static void 
 server_run (CORBA_ORB          orb,
-	    CORBA_Environment *ev)
+      CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
-	
-         <B
-CLASS="command"
->CORBA_ORB_run(orb, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+  
+         <b class="command">CORBA_ORB_run(orb, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
-	 * CORBA_ORB_shutdown(.) has been called */
+   * CORBA_ORB_shutdown(.) has been called */
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -1105,54 +649,36 @@ CLASS="command"
  */
 static void 
 server_cleanup (CORBA_ORB           orb,
-		PortableServer_POA  poa,
-		CORBA_Object        ref,
-		CORBA_Environment  *ev)
+    PortableServer_POA  poa,
+    CORBA_Object        ref,
+    CORBA_Environment  *ev)
 {
-	PortableServer_ObjectId   *objid       = NULL;
+  PortableServer_ObjectId   *objid       = NULL;
 
-	 <B
-CLASS="command"
->objid = PortableServer_POA_reference_to_id (poa, ref, ev); </B
->
-	if (etk_raised_exception(ev)) return;
-		
-	/* Servant: deactivatoin - will invoke  __fini destructor */
-	 <B
-CLASS="command"
->PortableServer_POA_deactivate_object (poa, objid, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+   <b class="command">objid = PortableServer_POA_reference_to_id (poa, ref, ev); </b>
+  if (etk_raised_exception(ev)) return;
+    
+  /* Servant: deactivatoin - will invoke  __fini destructor */
+   <b class="command">PortableServer_POA_deactivate_object (poa, objid, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
-	 <B
-CLASS="command"
->PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+   <b class="command">PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
-	CORBA_free (objid);
+  CORBA_free (objid);
 
-         <B
-CLASS="command"
->CORBA_Object_release ((CORBA_Object) poa, ev); </B
->
-	if (etk_raised_exception(ev)) return;
-	
-         <B
-CLASS="command"
->CORBA_Object_release (ref, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+         <b class="command">CORBA_Object_release ((CORBA_Object) poa, ev); </b>
+  if (etk_raised_exception(ev)) return;
+  
+         <b class="command">CORBA_Object_release (ref, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
         /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                 <B
-CLASS="command"
->CORBA_ORB_destroy(orb, ev); </B
->
-		if (etk_raised_exception(ev)) return;
+                 <b class="command">CORBA_ORB_destroy(orb, ev); </b>
+    if (etk_raised_exception(ev)) return;
         }
 }
 
@@ -1163,19 +689,16 @@ CLASS="command"
  */
 static CORBA_Object
 server_activate_service (CORBA_ORB           orb,
-			 PortableServer_POA  poa,
-			 CORBA_Environment  *ev)
+       PortableServer_POA  poa,
+       CORBA_Environment  *ev)
 {
-	Calculator  ref = CORBA_OBJECT_NIL; 
+  Calculator  ref = CORBA_OBJECT_NIL; 
 
-	 <B
-CLASS="command"
->ref = impl_Calculator__create (poa, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		return CORBA_OBJECT_NIL;
-	
-	return ref;
+   <b class="command">ref = impl_Calculator__create (poa, ev); </b>
+  if (etk_raised_exception(ev)) 
+    return CORBA_OBJECT_NIL;
+  
+  return ref;
 }
 
 /* 
@@ -1185,103 +708,60 @@ CLASS="command"
 int
 main (int argc, char *argv[])
 {
-	CORBA_Object servant = CORBA_OBJECT_NIL;
-	
-	CORBA_char filename[] = "calculator.ref";
+  CORBA_Object servant = CORBA_OBJECT_NIL;
+  
+  CORBA_char filename[] = "calculator.ref";
 
-	CORBA_Environment  ev[1];
-	CORBA_exception_init(ev);
-	
-	 <B
-CLASS="command"
->server_init (&#38;argc, argv, &#38;global_orb, &#38;root_poa, ev); </B
->
-	etk_abort_if_exception(ev, "failed ORB init");
+  CORBA_Environment  ev[1];
+  CORBA_exception_init(ev);
+  
+   <b class="command">server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </b>
+  etk_abort_if_exception(ev, "failed ORB init");
 
-	 <B
-CLASS="command"
->servant = server_activate_service (global_orb, root_poa, ev); </B
->
-	etk_abort_if_exception(ev, "failed activating service");
+   <b class="command">servant = server_activate_service (global_orb, root_poa, ev); </b>
+  etk_abort_if_exception(ev, "failed activating service");
 
-	g_print ("Writing service reference to: %s\n\n", filename);
+  g_print ("Writing service reference to: %s\n\n", filename);
 
-	 <B
-CLASS="command"
->etk_export_object_to_file (global_orb, 
-				   servant, 
-				   filename, 
-				   ev); </B
->
-	etk_abort_if_exception(ev, "failed exporting IOR");
-	
-	 <B
-CLASS="command"
->server_run (global_orb, ev); </B
->
-	etk_abort_if_exception(ev, "failed entering main loop");
+   <b class="command">etk_export_object_to_file (global_orb, 
+           servant, 
+           filename, 
+           ev); </b>
+  etk_abort_if_exception(ev, "failed exporting IOR");
+  
+   <b class="command">server_run (global_orb, ev); </b>
+  etk_abort_if_exception(ev, "failed entering main loop");
 
-	 <B
-CLASS="command"
->server_cleanup (global_orb, root_poa, servant, ev); </B
->
-	etk_abort_if_exception(ev, "failed cleanup");
+   <b class="command">server_cleanup (global_orb, root_poa, servant, ev); </b>
+  etk_abort_if_exception(ev, "failed cleanup");
 
-	exit (0); }</PRE
-></TD
-></TR
-></TABLE
-></DIV
-> </P
-><P
-> I'm not
-going to explain every line of this example yet; you only need to know
-that it creates a servant object whos object-reference is written to
-file "calculator.ref". File-IO is done using specific function
-from "example-toolkit" laying beside each example; the file contains
-a string always starting with the magic sequence "IOR:" and is read by
-client application to get hold of servants object-reference. The IOR
-string contains sufficient information to get to know host, port and
-object key within server. ORBit2 provides tools to decode the IOR
-string, namely <B
-CLASS="command"
->ior-decode-2</B
->.  </P
-></DIV
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="calculator-compilation"
-></A
->Compiling server &#38; client</H2
-><P
-> The following
-makefile can be used to compile both, the client and the server. Be
-aware of the location of ORBit : on my system it has been installed
-under /usr but it could be /usr/local if you have built it from the
-sources, and hence the path for ORBIT variables below may
-vary. If using ORBit binary packages shipped with Linux or BSD/Unix the simple makefile below will do.
-<DIV
-CLASS="example"
-><A
-NAME="AEN631"
-></A
-><P
-><B
->Example 14. makefile</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->PREFIX ?= /usr
+  exit (0); }
+</pre>
+              </td>
+            </tr>
+          </table>
+        </div><br />
+        <br />
+
+        <p>I'm not going to explain every line of this example yet; you only need to know that it creates a servant object whos object-reference is written to file "calculator.ref". File-IO is done using specific function from "example-toolkit" laying beside each example; the file contains a string always starting with the magic sequence "IOR:" and is read by client application to get hold of servants object-reference. The IOR string contains sufficient information to get to know host, port and object key within server. ORBit2 provides tools to decode the IOR string, namely <b class="command">ior-decode-2</b>.</p>
+      </div>
+    </div>
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="calculator-compilation" id="calculator-compilation"></a>Compiling server &amp; client</h2>
+
+      <p>The following makefile can be used to compile both, the client and the server. Be aware of the location of ORBit : on my system it has been installed under /usr but it could be /usr/local if you have built it from the sources, and hence the path for ORBIT variables below may vary. If using ORBit binary packages shipped with Linux or BSD/Unix the simple makefile below will do.</p>
+
+      <div class="example">
+        <a name="AEN631" id="AEN631"></a>
+
+        <p><b>Example 14. makefile</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+PREFIX ?= /usr
 CC = gcc
 TARGETS=calculator-client calculator-server
 ORBIT_IDL=orbit-idl-2
@@ -1306,111 +786,40 @@ clean:
         rm -rf *.o *~ $(IDLOUT)
  
 distclean: clean
-        rm -rf calculator-client calculator-server</PRE
-></TD
-></TR
-></TABLE
-></DIV
-> 
-</P
-><P
->&#13;After calling <B
-CLASS="command"
->make</B
-> in terminal window
-all sources have been compiled and you should open a second terminal
-window. In the first window we will start the server with the command:
-<B
-CLASS="command"
->calculator-server &#62; calculator.ref</B
->. The server
-should print a very long string into the file
-<TT
-CLASS="filename"
->calculator.ref</TT
->, starting with the 4 character
-sequence <TT
-CLASS="computeroutput"
->IOR:</TT
-> In the second window we
-start the client with the command <B
-CLASS="command"
->calculator-client `cat
-calculator.ref` IOR-string</B
->. You should not try to type the
-IOR string, instead use the cut and paste functionality of your xterm
-or whatever you are using.</P
-><P
->&#13;If everything works, you should get the following output:
-<TT
-CLASS="computeroutput"
->Result: 1.0 + 2.0 = 3</TT
->.
-</P
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x302.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="x642.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Echo client &#38; server</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="c250.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Account client &#38; server</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+        rm -rf calculator-client calculator-server
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div><br />
+      <br />
+
+      <p>After calling <b class="command">make</b> in terminal window all sources have been compiled and you should open a second terminal window. In the first window we will start the server with the command: <b class="command">calculator-server &gt; calculator.ref</b>. The server should print a very long string into the file <tt class="filename">calculator.ref</tt>, starting with the 4 character sequence <tt class="computeroutput">IOR:</tt> In the second window we start the client with the command <b class="command">calculator-client `cat calculator.ref` IOR-string</b>. You should not try to type the IOR string, instead use the cut and paste functionality of your xterm or whatever you are using.</p>
+
+      <p>If everything works, you should get the following output: <tt class="computeroutput">Result: 1.0 + 2.0 = 3</tt>.</p>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x302.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top"><a href="x642.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Echo client &amp; server</td>
+
+        <td width="34%" align="center" valign="top"><a href="c250.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">Account client &amp; server</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

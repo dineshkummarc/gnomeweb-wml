@@ -1,346 +1,166 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Byte-Sequence client &#38; server</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="ORBit Beginners Documentation V1.5"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="First CORBA Programs"
-HREF="c264.html"><LINK
-REL="PREVIOUS"
-TITLE="
-Account client & server
-"
-HREF="x656.html"><LINK
-REL="NEXT"
-TITLE="BadCall client & server"
-HREF="x894.html"></HEAD
-><BODY
-CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->ORBit Beginners Documentation V1.5</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x656.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->First CORBA Programs</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="x894.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="sect1"
-><H1
-CLASS="sect1"
-><A
-NAME="byteseq"
-></A
->Byte-Sequence client &#38; server</H1
-><P
->&#13;      In this more advanced example, we will see how we can set up a
-      client exchanging byte sequences with server.  The idl
-      definition (<TT
-CLASS="filename"
->byteseq.idl</TT
->) covers in-, out-
-      and inout-parameters and looks like:
-      <DIV
-CLASS="example"
-><A
-NAME="AEN790"
-></A
-><P
-><B
->Example 22. byteseq.idl</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->module Examples {
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Byte-Sequence client &amp; server</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="ORBit Beginners Documentation V1.5" href="book1.html" />
+  <link rel="UP" title="First CORBA Programs" href="c264.html" />
+  <link rel="PREVIOUS" title=" Account client &amp; server " href="x656.html" />
+  <link rel="NEXT" title="BadCall client &amp; server" href="x894.html" />
+</head>
+
+<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">ORBit Beginners Documentation V1.5</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x656.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom">First CORBA Programs</td>
+
+        <td width="10%" align="right" valign="bottom"><a href="x894.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="sect1">
+    <h1 class="sect1"><a name="byteseq" id="byteseq"></a>Byte-Sequence client &amp; server</h1>
+
+    <p>In this more advanced example, we will see how we can set up a client exchanging byte sequences with server. The idl definition (<tt class="filename">byteseq.idl</tt>) covers in-, out- and inout-parameters and looks like:</p>
+
+    <div class="example">
+      <a name="AEN790" id="AEN790"></a>
+
+      <p><b>Example 22. byteseq.idl</b></p>
+
+      <table border="0" bgcolor="#E0E0E0" width="100%">
+        <tr>
+          <td>
+            <pre class="programlisting">
+module Examples {
          
         module ByteSeq {
-                typedef sequence&#60;octet&#62; Chunk;
+                typedef sequence&lt;octet&gt; Chunk;
                  
                 interface Storage {
                         void  set (in Chunk chunk);
                         Chunk get ();
                 };
         };
-};</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
+};
+</pre>
+          </td>
+        </tr>
+      </table>
+    </div>Then you have to generate the skeleton and stub files. In addition to these two files the ORBit IDL compiler also generates a common file and a header file. The common file implements the memory management functions and other things, useful in the client as well as in the server. The sequence to generate the C source files is rather simple. <tt class="computeroutput">$<b class="command">orbit-idl-2 --skeleton-impl byteseq.idl</b></tt> geenrates all the files we will use in this example.
 
-     Then you have to generate the skeleton and stub files. In
-     addition to these two files the ORBit IDL compiler also generates
-     a common file and a header file. The common file implements the
-     memory management functions and other things, useful in the
-     client as well as in the server. The sequence to generate the C
-     source files is rather simple.  
-     <TT
-CLASS="computeroutput"
->$<B
-CLASS="command"
->orbit-idl-2 --skeleton-impl byteseq.idl</B
-></TT
-> geenrates all the files we will use in this example.
+    <div class="informaltable">
+      <a name="AEN795" id="AEN795"></a>
 
-     <DIV
-CLASS="informaltable"
-><A
-NAME="AEN795"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><THEAD
-><TR
-><TH
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->File</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Client</TH
-><TH
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->Usage for Server</TH
-></TR
-></THEAD
-><TBODY
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq.h</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-common.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-stubs.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-skels.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->readonly</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-skelimpl.c</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->-</TD
-><TD
-WIDTH="33%"
-ALIGN="CENTER"
-VALIGN="MIDDLE"
->template for user code</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <thead>
+          <tr>
+            <th width="33%" align="left" valign="middle">File</th>
 
-     Files remaining to write are listed in following table, starting with 
-     <I
-CLASS="emphasis"
->byteseq-client.c</I
-> in following chapter.
-     <DIV
-CLASS="informaltable"
-><A
-NAME="AEN827"
-></A
-><P
-></P
-><TABLE
-BORDER="1"
-BGCOLOR="#E0E0E0"
-CELLSPACING="0"
-CELLPADDING="4"
-CLASS="CALSTABLE"
-><TBODY
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-client.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the client code</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->byteseq-server.c</TD
-><TD
-ALIGN="LEFT"
-VALIGN="MIDDLE"
->write the generic code for servant creation</TD
-></TR
-></TBODY
-></TABLE
-><P
-></P
-></DIV
->
-   </P
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN836"
-></A
->Byte-Sequence client</H2
-><P
->&#13;<DIV
-CLASS="example"
-><A
-NAME="AEN839"
-></A
-><P
-><B
->Example 23. byteseq-client.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/* byteseq-client.c hacked by Frank Rehberger
- * &#60;F.Rehberger@xtradyne.de&#62;.  */
+            <th width="33%" align="center" valign="middle">Usage for Client</th>
 
-#include &#60;assert.h&#62;
-#include &#60;stdio.h&#62;
-#include &#60;stdlib.h&#62;
-#include &#60;string.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;orbit/orbit.h&#62;
+            <th width="33%" align="center" valign="middle">Usage for Server</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td width="33%" align="left" valign="middle">byteseq.h</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">byteseq-common.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">byteseq-stubs.c</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">byteseq-skels.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">readonly</td>
+          </tr>
+
+          <tr>
+            <td width="33%" align="left" valign="middle">byteseq-skelimpl.c</td>
+
+            <td width="33%" align="center" valign="middle">-</td>
+
+            <td width="33%" align="center" valign="middle">template for user code</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>Files remaining to write are listed in following table, starting with <i class="emphasis">byteseq-client.c</i> in following chapter.
+
+    <div class="informaltable">
+      <a name="AEN827" id="AEN827"></a>
+
+      <table border="1" bgcolor="#E0E0E0" cellspacing="0" cellpadding="4" class="CALSTABLE">
+        <tbody>
+          <tr>
+            <td align="left" valign="middle">byteseq-client.c</td>
+
+            <td align="left" valign="middle">write the client code</td>
+          </tr>
+
+          <tr>
+            <td align="left" valign="middle">byteseq-server.c</td>
+
+            <td align="left" valign="middle">write the generic code for servant creation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br />
+    <br />
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN836" id="AEN836"></a>Byte-Sequence client</h2>
+
+      <div class="example">
+        <a name="AEN839" id="AEN839"></a>
+
+        <p><b>Example 23. byteseq-client.c</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+/* byteseq-client.c hacked by Frank Rehberger
+ * &lt;F.Rehberger@xtradyne.de&gt;.  */
+
+#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
 #include "byteseq.h"
 
@@ -360,10 +180,7 @@ client_shutdown (int sig)
  
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                 <B
-CLASS="command"
->CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
->
+                 <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </b>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -379,7 +196,7 @@ CLASS="command"
 static
 void
 client_init (int               *argc_ptr,
-	     char              *argv[],
+       char              *argv[],
              CORBA_ORB         *orb,
              CORBA_Environment *ev)
 {
@@ -390,10 +207,7 @@ client_init (int               *argc_ptr,
          
         /* create Object Request Broker (ORB) */
          
-         <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </B
->
+         <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </b>
         if (etk_raised_exception(ev)) return;
 }
 
@@ -407,20 +221,14 @@ client_cleanup (CORBA_ORB                 orb,
                 CORBA_Environment        *ev)
 {
         /* releasing managed object */
-         <B
-CLASS="command"
->CORBA_Object_release(servant, ev); </B
->
+         <b class="command">CORBA_Object_release(servant, ev); </b>
         if (etk_raised_exception(ev)) return;
  
         /* tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                 <B
-CLASS="command"
->CORBA_ORB_destroy(orb, ev); </B
->
+                 <b class="command">CORBA_ORB_destroy(orb, ev); </b>
                 if (etk_raised_exception(ev)) return;
         }
 }
@@ -431,44 +239,35 @@ CLASS="command"
 static
 void
 client_run_set (Examples_ByteSeq_Storage  servant,
-		CORBA_Environment        *ev)
+    CORBA_Environment        *ev)
 {
 
-	CORBA_long LEN      = 4*1024; /* 4KB */ 
-	CORBA_long ITER     = 10; 
+  CORBA_long LEN      = 4*1024; /* 4KB */ 
+  CORBA_long ITER     = 10; 
 
-	CORBA_long iter     = 0; 
+  CORBA_long iter     = 0; 
 
-	Examples_ByteSeq_Chunk* chunk = NULL;
+  Examples_ByteSeq_Chunk* chunk = NULL;
 
 
-	/* flood service witth large chunks of byte streams */
-	for (iter = 0; iter &#60; ITER; ++iter)
-	{
-		CORBA_long len      = 0; 
-		CORBA_octet elem    = 'A';
+  /* flood service witth large chunks of byte streams */
+  for (iter = 0; iter &lt; ITER; ++iter)
+  {
+    CORBA_long len      = 0; 
+    CORBA_octet elem    = 'A';
 
-		g_print ("+");
+    g_print ("+");
 
-	 <B
-CLASS="command"
->	chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,0); </B
->
+   <b class="command"> chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,0); </b>
 
-		for (len = 0; len &#60; LEN; ++len)
-		 <B
-CLASS="command"
->	ORBit_sequence_append (chunk, &#38;elem); </B
->
+    for (len = 0; len &lt; LEN; ++len)
+     <b class="command"> ORBit_sequence_append (chunk, &amp;elem); </b>
 
-		 <B
-CLASS="command"
->Examples_ByteSeq_Storage_set (servant, chunk, ev);  </B
->
-		if (etk_raised_exception(ev)) return;
+     <b class="command">Examples_ByteSeq_Storage_set (servant, chunk, ev);  </b>
+    if (etk_raised_exception(ev)) return;
 
-		CORBA_free (chunk);
-	}
+    CORBA_free (chunk);
+  }
 }
 
 /**
@@ -477,26 +276,23 @@ CLASS="command"
 static
 void
 client_run_get (Examples_ByteSeq_Storage  servant,
-		CORBA_Environment        *ev)
+    CORBA_Environment        *ev)
 {
-	CORBA_long n=10;
-	CORBA_long i=0;
+  CORBA_long n=10;
+  CORBA_long i=0;
 
-	Examples_ByteSeq_Chunk* chunk = NULL; 
+  Examples_ByteSeq_Chunk* chunk = NULL; 
 
-	/* increment sequence length, beginning with 0 up to 2048 */
-	for (i=0; i&#60;n; ++i)
-	{
-		g_print ("-");
+  /* increment sequence length, beginning with 0 up to 2048 */
+  for (i=0; i&lt;n; ++i)
+  {
+    g_print ("-");
 
-		 <B
-CLASS="command"
->chunk = Examples_ByteSeq_Storage_get (servant, ev);  </B
->
-		if (etk_raised_exception(ev)) return;
+     <b class="command">chunk = Examples_ByteSeq_Storage_get (servant, ev);  </b>
+    if (etk_raised_exception(ev)) return;
 
- 		CORBA_free (chunk);
-	}
+    CORBA_free (chunk);
+  }
 }
 
 /*
@@ -505,93 +301,64 @@ CLASS="command"
 int
 main(int argc, char* argv[])
 {
-	CORBA_char *filename = "byteseq.ref";
+  CORBA_char *filename = "byteseq.ref";
 
         Examples_ByteSeq_Storage  servant = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
         CORBA_exception_init(ev);
 
-	 <B
-CLASS="command"
->client_init (&#38;argc, argv, &#38;global_orb, ev); </B
->
-	etk_abort_if_exception(ev, "init failed");
+   <b class="command">client_init (&amp;argc, argv, &amp;global_orb, ev); </b>
+  etk_abort_if_exception(ev, "init failed");
 
-	g_print ("Reading service reference from file \"%s\"\n", filename);
+  g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	 <B
-CLASS="command"
->servant = (Examples_ByteSeq_Storage) 
-		etk_import_object_from_file (global_orb,
-					     filename,
-					     ev); </B
->
+   <b class="command">servant = (Examples_ByteSeq_Storage) 
+    etk_import_object_from_file (global_orb,
+               filename,
+               ev); </b>
         etk_abort_if_exception(ev, "exporting IOR failed");
 
-	 <B
-CLASS="command"
->client_run_set (servant, ev); </B
->
+   <b class="command">client_run_set (servant, ev); </b>
         etk_abort_if_exception(ev, "client stopped");
  
-	 <B
-CLASS="command"
->client_run_get (servant, ev); </B
->
+   <b class="command">client_run_get (servant, ev); </b>
         etk_abort_if_exception(ev, "client stopped");
  
-	 <B
-CLASS="command"
->client_cleanup (global_orb, servant, ev); </B
->
+   <b class="command">client_cleanup (global_orb, servant, ev); </b>
         etk_abort_if_exception(ev, "cleanup failed");
  
         exit (0);
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-        </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN855"
-></A
->Byte-Sequence server</H2
-><P
->&#13;<DIV
-CLASS="example"
-><A
-NAME="AEN858"
-></A
-><P
-><B
->Example 24. byteseq-server.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/*
+}
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div><br />
+
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN855" id="AEN855"></a>Byte-Sequence server</h2>
+
+      <div class="example">
+        <a name="AEN858" id="AEN858"></a>
+
+        <p><b>Example 24. byteseq-server.c</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+/*
  * byteseq-server program. Hacked from Examples test suite 
- * by Frank Rehberger &#60;F.Rehberger@xtradyne.de&#62;
+ * by Frank Rehberger &lt;F.Rehberger@xtradyne.de&gt;
  */
 
-#include &#60;stdio.h&#62;
-#include &#60;stdlib.h&#62;
-#include &#60;string.h&#62;
-#include &#60;signal.h&#62;
-#include &#60;orbit/orbit.h&#62;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;orbit/orbit.h&gt;
 
 #include "byteseq.h"
 #include "byteseq-skelimpl.c" 
@@ -600,7 +367,7 @@ CLASS="programlisting"
 
 static CORBA_ORB          global_orb = CORBA_OBJECT_NIL; /* global orb */
 static PortableServer_POA root_poa   = CORBA_OBJECT_NIL; /* root POA
-	
+  
 /* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
  * function, which will terminate the processes main loop.
  */
@@ -608,15 +375,12 @@ static
 void
 server_shutdown (int sig)
 {
-	CORBA_Environment  local_ev[1];
-	CORBA_exception_init(local_ev);
+  CORBA_Environment  local_ev[1];
+  CORBA_exception_init(local_ev);
 
         if (global_orb != CORBA_OBJECT_NIL)
         {
-                 <B
-CLASS="command"
->CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </B
->
+                 <b class="command">CORBA_ORB_shutdown (global_orb, FALSE, local_ev); </b>
                 etk_abort_if_exception (local_ev, "caught exception");
         }
 }
@@ -630,64 +394,49 @@ CLASS="command"
  */static 
 void 
 server_init (int                 *argc_ptr, 
-	     char                *argv[],
-	     CORBA_ORB           *orb,
-	     PortableServer_POA  *poa,
-	     CORBA_Environment   *ev)
+       char                *argv[],
+       CORBA_ORB           *orb,
+       PortableServer_POA  *poa,
+       CORBA_Environment   *ev)
 {
-	PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
+  PortableServer_POAManager  poa_manager = CORBA_OBJECT_NIL; 
 
-	CORBA_Environment  local_ev[1];
-	CORBA_exception_init(local_ev);
+  CORBA_Environment  local_ev[1];
+  CORBA_exception_init(local_ev);
 
-	/* init signal handling */
-	signal(SIGINT,  server_shutdown);
-	signal(SIGTERM, server_shutdown);
-	
-	/* create Object Request Broker (ORB) */
-	
-         <B
-CLASS="command"
->(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_orb;
+  /* init signal handling */
+  signal(SIGINT,  server_shutdown);
+  signal(SIGTERM, server_shutdown);
+  
+  /* create Object Request Broker (ORB) */
+  
+         <b class="command">(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_orb;
 
-         <B
-CLASS="command"
->(*poa) = (PortableServer_POA) 
-		CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_poa;
+         <b class="command">(*poa) = (PortableServer_POA) 
+    CORBA_ORB_resolve_initial_references(*orb, "RootPOA", ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_poa;
 
-         <B
-CLASS="command"
->poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_poamanager;
+         <b class="command">poa_manager = PortableServer_POA__get_the_POAManager(*poa, ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_poamanager;
 
-	 <B
-CLASS="command"
->PortableServer_POAManager_activate(poa_manager, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		goto failed_activation;
+   <b class="command">PortableServer_POAManager_activate(poa_manager, ev); </b>
+  if (etk_raised_exception(ev)) 
+    goto failed_activation;
 
-         <B
-CLASS="command"
->CORBA_Object_release ((CORBA_Object) poa_manager, ev); </B
->
-	return;
+         <b class="command">CORBA_Object_release ((CORBA_Object) poa_manager, ev); </b>
+  return;
 
  failed_activation:
  failed_poamanager:
         CORBA_Object_release ((CORBA_Object) poa_manager, local_ev);
  failed_poa:
-	CORBA_ORB_destroy(*orb, local_ev);		
+  CORBA_ORB_destroy(*orb, local_ev);    
  failed_orb:
-	return;
+  return;
 }
 
 /* Entering main loop @orb handles incoming request and delegates to
@@ -696,18 +445,15 @@ CLASS="command"
  */
 static void 
 server_run (CORBA_ORB          orb,
-	    CORBA_Environment *ev)
+      CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
-	
-         <B
-CLASS="command"
->CORBA_ORB_run(orb, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+  
+         <b class="command">CORBA_ORB_run(orb, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
         /* user pressed SIGINT or SIGTERM and in signal handler
-	 * CORBA_ORB_shutdown(.) has been called */
+   * CORBA_ORB_shutdown(.) has been called */
 }
 
 /* Releases @servant object and finally destroys @orb. If error
@@ -715,54 +461,36 @@ CLASS="command"
  */
 static void 
 server_cleanup (CORBA_ORB           orb,
-		PortableServer_POA  poa,
-		CORBA_Object        ref,
-		CORBA_Environment  *ev)
+    PortableServer_POA  poa,
+    CORBA_Object        ref,
+    CORBA_Environment  *ev)
 {
-	PortableServer_ObjectId   *objid       = NULL;
+  PortableServer_ObjectId   *objid       = NULL;
 
-	 <B
-CLASS="command"
->objid = PortableServer_POA_reference_to_id (poa, ref, ev); </B
->
-	if (etk_raised_exception(ev)) return;
-		
-	/* Servant: deactivatoin - will invoke  __fini destructor */
-	 <B
-CLASS="command"
->PortableServer_POA_deactivate_object (poa, objid, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+   <b class="command">objid = PortableServer_POA_reference_to_id (poa, ref, ev); </b>
+  if (etk_raised_exception(ev)) return;
+    
+  /* Servant: deactivatoin - will invoke  __fini destructor */
+   <b class="command">PortableServer_POA_deactivate_object (poa, objid, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
-	 <B
-CLASS="command"
->PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+   <b class="command">PortableServer_POA_destroy (poa, TRUE, FALSE, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
-	CORBA_free (objid);
+  CORBA_free (objid);
 
-         <B
-CLASS="command"
->CORBA_Object_release ((CORBA_Object) poa, ev); </B
->
-	if (etk_raised_exception(ev)) return;
-	
-         <B
-CLASS="command"
->CORBA_Object_release (ref, ev); </B
->
-	if (etk_raised_exception(ev)) return;
+         <b class="command">CORBA_Object_release ((CORBA_Object) poa, ev); </b>
+  if (etk_raised_exception(ev)) return;
+  
+         <b class="command">CORBA_Object_release (ref, ev); </b>
+  if (etk_raised_exception(ev)) return;
 
         /* ORB: tear down the ORB */
         if (orb != CORBA_OBJECT_NIL)
         {
                 /* going to destroy orb.. */
-                 <B
-CLASS="command"
->CORBA_ORB_destroy(orb, ev); </B
->
-		if (etk_raised_exception(ev)) return;
+                 <b class="command">CORBA_ORB_destroy(orb, ev); </b>
+    if (etk_raised_exception(ev)) return;
         }
 }
 
@@ -773,19 +501,16 @@ CLASS="command"
  */
 static CORBA_Object
 server_activate_service (CORBA_ORB           orb,
-			 PortableServer_POA  poa,
-			 CORBA_Environment  *ev)
+       PortableServer_POA  poa,
+       CORBA_Environment  *ev)
 {
-	Examples_ByteSeq_Storage ref = CORBA_OBJECT_NIL;
+  Examples_ByteSeq_Storage ref = CORBA_OBJECT_NIL;
 
-	 <B
-CLASS="command"
->ref = impl_Examples_ByteSeq_Storage__create (poa, ev); </B
->
-	if (etk_raised_exception(ev)) 
-		return CORBA_OBJECT_NIL;
-	
-	return ref;
+   <b class="command">ref = impl_Examples_ByteSeq_Storage__create (poa, ev); </b>
+  if (etk_raised_exception(ev)) 
+    return CORBA_OBJECT_NIL;
+  
+  return ref;
 }
 
 /* 
@@ -795,74 +520,51 @@ CLASS="command"
 int
 main (int argc, char *argv[])
 {
-	CORBA_Object servant = CORBA_OBJECT_NIL;
-	
-	CORBA_char filename[] = "byteseq.ref";
+  CORBA_Object servant = CORBA_OBJECT_NIL;
+  
+  CORBA_char filename[] = "byteseq.ref";
 
-	CORBA_Environment  ev[1];
-	CORBA_exception_init(ev);
-	
-	 <B
-CLASS="command"
->server_init (&#38;argc, argv, &#38;global_orb, &#38;root_poa, ev); </B
->
-	etk_abort_if_exception(ev, "failed ORB init");
+  CORBA_Environment  ev[1];
+  CORBA_exception_init(ev);
+  
+   <b class="command">server_init (&amp;argc, argv, &amp;global_orb, &amp;root_poa, ev); </b>
+  etk_abort_if_exception(ev, "failed ORB init");
 
-	 <B
-CLASS="command"
->servant = server_activate_service (global_orb, root_poa, ev); </B
->
-	etk_abort_if_exception(ev, "failed activating service");
+   <b class="command">servant = server_activate_service (global_orb, root_poa, ev); </b>
+  etk_abort_if_exception(ev, "failed activating service");
 
-	g_print ("Writing service reference to: %s\n\n", filename);
+  g_print ("Writing service reference to: %s\n\n", filename);
 
-	 <B
-CLASS="command"
->etk_export_object_to_file (global_orb, 
-				   servant, 
-				   filename, 
-				   ev); </B
->
-	etk_abort_if_exception(ev, "failed exporting IOR");
-	
-	 <B
-CLASS="command"
->server_run (global_orb, ev); </B
->
-	etk_abort_if_exception(ev, "failed entering main loop");
+   <b class="command">etk_export_object_to_file (global_orb, 
+           servant, 
+           filename, 
+           ev); </b>
+  etk_abort_if_exception(ev, "failed exporting IOR");
+  
+   <b class="command">server_run (global_orb, ev); </b>
+  etk_abort_if_exception(ev, "failed entering main loop");
 
-	 <B
-CLASS="command"
->server_cleanup (global_orb, root_poa, servant, ev); </B
->
-	etk_abort_if_exception(ev, "failed cleanup");
+   <b class="command">server_cleanup (global_orb, root_poa, servant, ev); </b>
+  etk_abort_if_exception(ev, "failed cleanup");
 
-	exit (0);
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
+  exit (0);
+}
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-<DIV
-CLASS="example"
-><A
-NAME="AEN880"
-></A
-><P
-><B
->Example 25. byteseq-skelimpl.c</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->/* This is a template file generated by command */
+      <div class="example">
+        <a name="AEN880" id="AEN880"></a>
+
+        <p><b>Example 25. byteseq-skelimpl.c</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+/* This is a template file generated by command */
 /* orbit-idl-2 --skeleton-impl byteseq.idl */
 /* User must edit this file, inserting servant  */
 /* specific code between markers. */
@@ -877,10 +579,7 @@ typedef struct
    PortableServer_POA poa;
 
    /* ------ add private attributes here ------ */  
-    <B
-CLASS="command"
->Examples_ByteSeq_Chunk * chunk; </B
->
+    <b class="command">Examples_ByteSeq_Chunk * chunk; </b>
    /* ------ ---------- end ------------ ------ */
 } impl_POA_Examples_ByteSeq_Storage;
 
@@ -888,64 +587,61 @@ CLASS="command"
 
 static void
 impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
-				    servant, CORBA_Environment * ev);
+            servant, CORBA_Environment * ev);
 static void
 impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
-				  const Examples_ByteSeq_Chunk * chunk,
-				  CORBA_Environment * ev);
+          const Examples_ByteSeq_Chunk * chunk,
+          CORBA_Environment * ev);
 
 static Examples_ByteSeq_Chunk
    *impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage *
-				      servant, CORBA_Environment * ev);
+              servant, CORBA_Environment * ev);
 
 
 /*** epv structures ***/
 
 static PortableServer_ServantBase__epv impl_Examples_ByteSeq_Storage_base_epv
    = {
-   NULL,			/* _private data */
-   (gpointer) &#38; impl_Examples_ByteSeq_Storage__fini,	/* finalize routine */
-   NULL,			/* default_POA routine */
+   NULL,      /* _private data */
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage__fini,  /* finalize routine */
+   NULL,      /* default_POA routine */
 };
 static POA_Examples_ByteSeq_Storage__epv impl_Examples_ByteSeq_Storage_epv = {
-   NULL,			/* _private */
-   (gpointer) &#38; impl_Examples_ByteSeq_Storage_set,
+   NULL,      /* _private */
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage_set,
 
-   (gpointer) &#38; impl_Examples_ByteSeq_Storage_get
+   (gpointer) &amp; impl_Examples_ByteSeq_Storage_get
 };
 
 /*** vepv structures ***/
 
 static POA_Examples_ByteSeq_Storage__vepv impl_Examples_ByteSeq_Storage_vepv = {
-   &#38;impl_Examples_ByteSeq_Storage_base_epv,
-   &#38;impl_Examples_ByteSeq_Storage_epv,
+   &amp;impl_Examples_ByteSeq_Storage_base_epv,
+   &amp;impl_Examples_ByteSeq_Storage_epv,
 };
 
 /*** Stub implementations ***/
 
 static Examples_ByteSeq_Storage
 impl_Examples_ByteSeq_Storage__create(PortableServer_POA poa,
-				      CORBA_Environment * ev)
+              CORBA_Environment * ev)
 {
    Examples_ByteSeq_Storage retval;
    impl_POA_Examples_ByteSeq_Storage *newservant;
    PortableServer_ObjectId *objid;
 
    newservant = g_new0(impl_POA_Examples_ByteSeq_Storage, 1);
-   newservant-&#62;servant.vepv = &#38;impl_Examples_ByteSeq_Storage_vepv;
-   newservant-&#62;poa =
+   newservant-&gt;servant.vepv = &amp;impl_Examples_ByteSeq_Storage_vepv;
+   newservant-&gt;poa =
       (PortableServer_POA) CORBA_Object_duplicate((CORBA_Object) poa, ev);
 
    POA_Examples_ByteSeq_Storage__init((PortableServer_Servant) newservant,
-				      ev);
+              ev);
    /* Before servant is going to be activated all
     * private attributes must be initialized.  */
 
    /* ------ init private attributes here ------ */
-    <B
-CLASS="command"
->newservant-&#62;chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64); </B
->   
+    <b class="command">newservant-&gt;chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 64); </b>   
    /* ------ ---------- end ------------- ------ */
 
    objid = PortableServer_POA_activate_object(poa, newservant, ev);
@@ -963,17 +659,14 @@ CLASS="command"
 **/
 static void
 impl_Examples_ByteSeq_Storage__fini(impl_POA_Examples_ByteSeq_Storage *
-				    servant, CORBA_Environment * ev)
+            servant, CORBA_Environment * ev)
 {
-   CORBA_Object_release((CORBA_Object) servant-&#62;poa, ev);
+   CORBA_Object_release((CORBA_Object) servant-&gt;poa, ev);
 
    /* No further remote method calls are delegated to 
     * servant and you may free your private attributes. */
    /* ------ free private attributes here ------ */
-    <B
-CLASS="command"
->CORBA_free (servant-&#62;chunk); </B
->
+    <b class="command">CORBA_free (servant-&gt;chunk); </b>
    /* ------ ---------- end ------------- ------ */
 
    POA_Examples_ByteSeq_Storage__fini((PortableServer_Servant) servant, ev);
@@ -983,82 +676,61 @@ CLASS="command"
 
 static void
 impl_Examples_ByteSeq_Storage_set(impl_POA_Examples_ByteSeq_Storage * servant,
-				  const Examples_ByteSeq_Chunk * chunk,
-				  CORBA_Environment * ev)
+          const Examples_ByteSeq_Chunk * chunk,
+          CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
-    <B
-CLASS="command"
->ORBit_sequence_set_size (servant-&#62;chunk, chunk-&#62;_length);
+    <b class="command">ORBit_sequence_set_size (servant-&gt;chunk, chunk-&gt;_length);
     
    {
            CORBA_long i=0;
-           for (i = 0; i &#60; chunk-&#62;_length; ++i)
-                   ORBit_sequence_index (servant-&#62;chunk, i)
+           for (i = 0; i &lt; chunk-&gt;_length; ++i)
+                   ORBit_sequence_index (servant-&gt;chunk, i)
                            = ORBit_sequence_index (chunk, i);
-   } </B
->
+   } </b>
    /* ------ ---------- end ------------ ------ */
 }
 
 static Examples_ByteSeq_Chunk *
 impl_Examples_ByteSeq_Storage_get(impl_POA_Examples_ByteSeq_Storage * servant,
-				  CORBA_Environment * ev)
+          CORBA_Environment * ev)
 {
    Examples_ByteSeq_Chunk *retval;
 
    /* ------   insert method code here   ------ */
-    <B
-CLASS="command"
->retval = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,
-                                  servant-&#62;chunk-&#62;_length);
+    <b class="command">retval = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,
+                                  servant-&gt;chunk-&gt;_length);
 
    {
            CORBA_long i=0;
-           for (i = 0; i &#60; servant-&#62;chunk-&#62;_length; ++i)
+           for (i = 0; i &lt; servant-&gt;chunk-&gt;_length; ++i)
                    ORBit_sequence_index (retval, i)
-                           = ORBit_sequence_index (servant-&#62;chunk, i);
-   } </B
->
+                           = ORBit_sequence_index (servant-&gt;chunk, i);
+   } </b>
    /* ------ ---------- end ------------ ------ */
 
    return retval;
-}</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
+}
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div><br />
 
-        </P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="AEN888"
-></A
->Compiling client &#38; server</H2
-><P
->&#13;<DIV
-CLASS="example"
-><A
-NAME="AEN891"
-></A
-><P
-><B
->Example 26. Makefile</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="programlisting"
->PREFIX ?= /usr
+    <div class="sect2">
+      <h2 class="sect2"><a name="AEN888" id="AEN888"></a>Compiling client &amp; server</h2>
+
+      <div class="example">
+        <a name="AEN891" id="AEN891"></a>
+
+        <p><b>Example 26. Makefile</b></p>
+
+        <table border="0" bgcolor="#E0E0E0" width="100%">
+          <tr>
+            <td>
+              <pre class="programlisting">
+PREFIX ?= /usr
 CC = gcc
 TARGETS=byteseq-client byteseq-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
@@ -1077,86 +749,44 @@ byteseq-client : byteseq-client.o byteseq-stubs.o byteseq-common.o examples-tool
 byteseq-server : byteseq-server.o byteseq-skels.o byteseq-common.o examples-toolkit.o 
 
 $(IDLOUT): byteseq.idl
-	$(ORBIT_IDL) byteseq.idl
+  $(ORBIT_IDL) byteseq.idl
 
 %-skelimpl.c: %.idl
-	$(ORBIT_IDL) --skeleton-impl $^
+  $(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) 
+  rm -rf *.o *~ $(IDLOUT) 
 
 distclean: clean
-	rm -rf byteseq-client byteseq-server</PRE
-></TD
-></TR
-></TABLE
-></DIV
->
-         </P
-></DIV
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x656.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="x894.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Account client &#38; server</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="c264.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->BadCall client &#38; server</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+  rm -rf byteseq-client byteseq-server
+</pre>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x656.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top"><a href="x894.html" accesskey="N">Next &gt;&gt;&gt;</a></td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Account client &amp; server</td>
+
+        <td width="34%" align="center" valign="top"><a href="c264.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">BadCall client &amp; server</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

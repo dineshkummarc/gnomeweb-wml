@@ -1,177 +1,68 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<HTML
-><HEAD
-><TITLE
->Why is this an issue?</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
-REL="HOME"
-TITLE="ORBit Beginners Documentation V1.4"
-HREF="book1.html"><LINK
-REL="UP"
-TITLE="How to do garbage collection under CORBA"
-HREF="c1238.html"><LINK
-REL="PREVIOUS"
-TITLE="Server-side deactivation"
-HREF="x1273.html"></HEAD
-><BODY
-CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->ORBit Beginners Documentation V1.4</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="x1273.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->How to do garbage collection under CORBA</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
->&nbsp;</TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="sect1"
-><H1
-CLASS="sect1"
-><A
-NAME="AEN1281"
-></A
->Why is this an issue?</H1
-><DIV
-CLASS="formalpara"
-><P
-><B
-><B
->Sascha Brawer suggests: </B
-></B
->
-Maybe the confusion arises because there do exist distributed object systems
- that perform this sort of reference counting, allowing the server to know when
- no client has a reference left. DCOM has such a mechanism, and ILU has something
- similar, AFAIK.
-</P
-></DIV
-><P
->&#13;Why doesn't CORBA follow these other systems? My personal impression is
- that this is another case of CORBA doing the right thing instead of the easy
- thing. Sascha continues:
-</P
-><P
->&#13;However, I've read somewhere (don't remeber the exact location, sorry...)
- that the problem with distributed reference counting would be that first, it
- consumes network bandwith, and second, it does not work well with unreliable
- network connections. It was told in that article that these drawbacks would
- have been the rationale for designing CORBA without refcounting.
-</P
-><P
->&#13;This is a problem. If your client disappears, then you've got unneeded
- objects lying around. All it takes for clients to disappear is for
- them to be coded by bad programmers, and we all know how unlikely
- that is, right? So how does one deal with this? There are several
- ways. The easiest is to have a timeout.  This is the approach that I
- am using in the GNU Transaction Server; when the timeout expires, I
- deactivate all of my servant objects and free up their resources.
- Fortunately, the CosTransactions spec supports timeouts on
- transactions. Unfortunately, I don't really see how to do timeouts
- with the normal CORBA event model, so I'm going to have to use the
- ORBit-specific hack of having a glib event loop which supports both
- CORBA events and timeouts. Another way, I am told, is something
- called an Evictor pattern. I should understand this soon once I get
- my fancy CORBA book in the mail. The final way is just to leak memory
- like a sieve leaks goldfish; this is the easiest thing to do.
-</P
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="x1273.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="book1.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->&nbsp;</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Server-side deactivation</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="c1238.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->&nbsp;</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Why is this an issue?</title>
+  <meta name="GENERATOR" content="Modular DocBook HTML Stylesheet Version 1.76b+" />
+  <link rel="HOME" title="ORBit Beginners Documentation V1.4" href="book1.html" />
+  <link rel="UP" title="How to do garbage collection under CORBA" href="c1238.html" />
+  <link rel="PREVIOUS" title="Server-side deactivation" href="x1273.html" />
+</head>
+
+<body class="sect1" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#840084" alink="#0000FF">
+  <div class="NAVHEADER">
+    <table summary="Header navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th colspan="3" align="center">ORBit Beginners Documentation V1.4</th>
+      </tr>
+
+      <tr>
+        <td width="10%" align="left" valign="bottom"><a href="x1273.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="80%" align="center" valign="bottom">How to do garbage collection under CORBA</td>
+
+        <td width="10%" align="right" valign="bottom">&nbsp;</td>
+      </tr>
+    </table>
+    <hr align="left" width="100%" />
+  </div>
+
+  <div class="sect1">
+    <h1 class="sect1"><a name="AEN1281" id="AEN1281"></a>Why is this an issue?</h1>
+
+    <div class="formalpara">
+      <p><b>Sascha Brawer suggests:</b> Maybe the confusion arises because there do exist distributed object systems that perform this sort of reference counting, allowing the server to know when no client has a reference left. DCOM has such a mechanism, and ILU has something similar, AFAIK.</p>
+    </div>
+
+    <p>Why doesn't CORBA follow these other systems? My personal impression is that this is another case of CORBA doing the right thing instead of the easy thing. Sascha continues:</p>
+
+    <p>However, I've read somewhere (don't remeber the exact location, sorry...) that the problem with distributed reference counting would be that first, it consumes network bandwith, and second, it does not work well with unreliable network connections. It was told in that article that these drawbacks would have been the rationale for designing CORBA without refcounting.</p>
+
+    <p>This is a problem. If your client disappears, then you've got unneeded objects lying around. All it takes for clients to disappear is for them to be coded by bad programmers, and we all know how unlikely that is, right? So how does one deal with this? There are several ways. The easiest is to have a timeout. This is the approach that I am using in the GNU Transaction Server; when the timeout expires, I deactivate all of my servant objects and free up their resources. Fortunately, the CosTransactions spec supports timeouts on transactions. Unfortunately, I don't really see how to do timeouts with the normal CORBA event model, so I'm going to have to use the ORBit-specific hack of having a glib event loop which supports both CORBA events and timeouts. Another way, I am told, is something called an Evictor pattern. I should understand this soon once I get my fancy CORBA book in the mail. The final way is just to leak memory like a sieve leaks goldfish; this is the easiest thing to do.</p>
+  </div>
+
+  <div class="NAVFOOTER">
+    <hr align="left" width="100%" />
+
+    <table summary="Footer navigation table" width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="33%" align="left" valign="top"><a href="x1273.html" accesskey="P">&lt;&lt;&lt; Previous</a></td>
+
+        <td width="34%" align="center" valign="top"><a href="book1.html" accesskey="H">Home</a></td>
+
+        <td width="33%" align="right" valign="top">&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td width="33%" align="left" valign="top">Server-side deactivation</td>
+
+        <td width="34%" align="center" valign="top"><a href="c1238.html" accesskey="U">Up</a></td>
+
+        <td width="33%" align="right" valign="top">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

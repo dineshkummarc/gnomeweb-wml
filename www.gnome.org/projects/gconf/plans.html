@@ -1,81 +1,47 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>GConf future improvements</title>
+  <title>GConf future improvements</title>
 </head>
+
 <body>
-<h1>GConf future improvements</h1>
+  <p>"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</p>
 
-<p><a href="index.html">Overview of GConf</a>.
-</p>
+  <h1>GConf future improvements</h1>
 
-<p>A summer 2002 OLS paper on GConf future is <a href="gconf-OLS-2002.ps">here</a>,
-it's a good starting point.
-</p>
+  <p><a href="index.html">Overview of GConf</a>.</p>
 
-<p>
-Some changes since then:
-<ul>
-<li>
-We could do some quick hack to make gconfd per-session instead of 
-per-user or per-machine, such that gconfd would exit immediately 
-on logout and not have a lock file at all anywhere.
-Possible hacks are X selection (maybe via a fork/exec'd proxy to avoid 
-gconfd connecting directly) and just hardcoding in gnome-session.
-</li>
-<li>
-LDAP backend, two have been written in the past to look at.
-</li>
-<li>Ettore, Jeff, and others convinced me that we need to be able to 
-store non-preferences data such as the address book. 
-To that end, we need to have stronger guarantees of robustness, 
-better efficiency for large data collections, etc.
-Unless we use <a href="http://www.gnome.org/~seth/storage/">Storage</a> or something instead?
-</li>
-<li>For desktop-independence, 
-<a href="http://www.freedesktop.org/software/dbus/">D-BUS</a> may be 
-useful if KDE supports it. D-BUS also addresses some of the needs
-of a client-server architecture outlined in the 
-<a href="gconf-OLS-2002.pdf">OLS paper</a>.
-</li>
-<li>
-We should support having the apps load .schemas files directly for 
-emergency fallback values when nothing is set in the gconf server.
-</li>
-<li>
-I posted some <a href="http://mail.gnome.org/archives/gconf-list/2003-May/msg00000.html">random API thoughts</a>.
-</li>
-<li>
-Addition to the API thoughts: we could actually do a signal with detail, 
-g_signal_connect (prefs, "changed::/apps/metacity/foo") with caveat
-that GObject may forbid slash characters in signal details, and 
-that I believe emitting such a signal is O(n) in number of handlers regardless 
-of handler detail.
-</li>
-<li>
-I'd go ahead and use GLib etc. in the API, and standardize with other desktops
-on the D-BUS protocol level, if we can get D-BUS (or equivalent) adopted.
-</li>
-<li>
-Get rid of syslog stuff, or at least only syslog for genuine serious errors.
-</li>
-<li>
-See <a href="http://log.ometer.com/2004-03.html#1">two blog entries</a>.
-</li>
-<li>
-See <a href="http://mail.gnome.org/archives/gconf-list/2004-April/msg00024.html">this mail</a> and surrounding threads.
-</li>
-<li>
-A way to handle per-session state (that's required to be writable) might be to 
-have a separate gconf_client_get_session() in addition to gconf_client_get_default(). 
-i.e. just have two separate GConfClient objects, one for normal prefs that may 
-well be all read-only, one for storing little state bits that will always be 
-writable.
-</li>
-</ul>
-</p>
+  <p>A summer 2002 OLS paper on GConf future is <a href="gconf-OLS-2002.ps">here</a>, it's a good starting point.</p>
 
+  <p>Some changes since then:</p>
+
+  <ul>
+    <li>We could do some quick hack to make gconfd per-session instead of per-user or per-machine, such that gconfd would exit immediately on logout and not have a lock file at all anywhere. Possible hacks are X selection (maybe via a fork/exec'd proxy to avoid gconfd connecting directly) and just hardcoding in gnome-session.</li>
+
+    <li>LDAP backend, two have been written in the past to look at.</li>
+
+    <li>Ettore, Jeff, and others convinced me that we need to be able to store non-preferences data such as the address book. To that end, we need to have stronger guarantees of robustness, better efficiency for large data collections, etc. Unless we use <a href="http://www.gnome.org/~seth/storage/">Storage</a> or something instead?</li>
+
+    <li>For desktop-independence, <a href="http://www.freedesktop.org/software/dbus/">D-BUS</a> may be useful if KDE supports it. D-BUS also addresses some of the needs of a client-server architecture outlined in the <a href="gconf-OLS-2002.pdf">OLS paper</a>.</li>
+
+    <li>We should support having the apps load .schemas files directly for emergency fallback values when nothing is set in the gconf server.</li>
+
+    <li>I posted some <a href="http://mail.gnome.org/archives/gconf-list/2003-May/msg00000.html">random API thoughts</a>.</li>
+
+    <li>Addition to the API thoughts: we could actually do a signal with detail, g_signal_connect (prefs, "changed::/apps/metacity/foo") with caveat that GObject may forbid slash characters in signal details, and that I believe emitting such a signal is O(n) in number of handlers regardless of handler detail.</li>
+
+    <li>I'd go ahead and use GLib etc. in the API, and standardize with other desktops on the D-BUS protocol level, if we can get D-BUS (or equivalent) adopted.</li>
+
+    <li>Get rid of syslog stuff, or at least only syslog for genuine serious errors.</li>
+
+    <li>See <a href="http://log.ometer.com/2004-03.html#1">two blog entries</a>.</li>
+
+    <li>See <a href="http://mail.gnome.org/archives/gconf-list/2004-April/msg00024.html">this mail</a> and surrounding threads.</li>
+
+    <li>A way to handle per-session state (that's required to be writable) might be to have a separate gconf_client_get_session() in addition to gconf_client_get_default(). i.e. just have two separate GConfClient objects, one for normal prefs that may well be all read-only, one for storing little state bits that will always be writable.</li>
+  </ul>
 </body>
 </html>
-
-

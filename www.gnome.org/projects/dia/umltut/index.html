@@ -1,94 +1,90 @@
-<html>
-  <head>
-    <title>A UML tutorial</title>
-<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
-<META name="description" content="Tutorial on using UML">
-<META name="keywords" content="UML,tutorial,Altima">
-  </head>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-  <body BGCOLOR=white>
-<table border=2 bgcolor="#FFFFAA">
-<tr><td>This tutorial has been retrieved from <a
-href="http://www.google.com">Google</a> and <a
-href="http://web.archive.org">the Web Archive</a> after the original site
-disappeared.
-</td></tr></table>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>A UML tutorial</title>
+  <link rel="StyleSheet" href="style.css" type="text/css" media="screen" />
+  <meta name="description" content="Tutorial on using UML" />
+  <meta name="keywords" content="UML,tutorial,Altima" />
+</head>
 
-    <h1>A UML tutorial</h1>
+<body bgcolor="white">
+  <table border="2" bgcolor="#FFFFAA">
+    <tr>
+      <td>This tutorial has been retrieved from <a href="http://www.google.com">Google</a> and <a href="http://web.archive.org">the Web Archive</a> after the original site disappeared.</td>
+    </tr>
+  </table>
 
-<P>I couldn't find a tutorial on the web on how to use UML in an actual
-design. So I will share with you my bad grammar along with my
-experience on my first UML design.</P>
+  <h1>A UML tutorial</h1>
 
-<P>You can probably use a graphic tool to create UML designs. However
-I'd recommand a tool created with UML in mind. It will save you a lot
-of grief. I'm using a freeware tool named <A
-HREF="http://www.lysator.liu.se/~alla/dia/dia.html">dia</A>. I'm not
-using the latest version, but the 0.2 version seems to work ok, except
-for the EPS output which I don't particularly like.</p>
+  <p>I couldn't find a tutorial on the web on how to use UML in an actual design. So I will share with you my bad grammar along with my experience on my first UML design.</p>
 
-<H2>The basics</H2>
+  <p>You can probably use a graphic tool to create UML designs. However I'd recommand a tool created with UML in mind. It will save you a lot of grief. I'm using a freeware tool named <a href="http://www.lysator.liu.se/~alla/dia/dia.html">dia</a>. I'm not using the latest version, but the 0.2 version seems to work ok, except for the EPS output which I don't particularly like.</p>
 
-<P>A class diagram allows you to document how the class relates to
-other classes. The class diagram doesn't fix the actual
-implementation. The actual code might not be a direct translation of
-the diagram. However the functionnality of the code will remain the
-same. In the following figure you can observe the following:
-    <UL>
-      <LI> <code>Class A</code> is a class which has some attributes (<code>variable</code>) and functions (<code>function</code>).
-      <LI> <code>Class A</code> is the parent class of <code>Sub-Class</code>
-      <LI> <code>Class A</code> is associated with <code>Class B</code>. In this case only 1 <code>Class B</code> is associated with possibly multple versions of <code>Class A</code>. The association is named <code>something</code>. Depending on the type of UML diagrams you are using, <code>something</code> can be implemented using a variable or by something else.
-      <LI> <code>Class T</code> is a template class. In C++ it would be defined by something like <code>template <class T> Class_T { ... } </code>
-      <LI> <code>Class B</code> is an instance of <code>Class T</code> where the parameter <code>T</code> is binded to <code>int</code>.
-      <LI> <code>General</code> is a class that can add attributes (or function) to the association between <code>Class A</code> and <code>Class B</code>. In the present case, it adds the variable <code>period</code>. 
-    </UL>
-</P>
+  <h2>The basics</h2>
 
-<DIV align=center><IMG SRC="basic.gif"></DIV>
+  <p>A class diagram allows you to document how the class relates to other classes. The class diagram doesn't fix the actual implementation. The actual code might not be a direct translation of the diagram. However the functionnality of the code will remain the same. In the following figure you can observe the following:</p>
 
-<P>The above diagram shows the logical relationship between the
-components. It doesn't mean that a C++ class would be implemented
-using all the 5 classes represented here. Short cuts can be
-taken. However, the logical structure <em>must</em> remain the
-same. For example, you can move <code>period</code> outside of the
-<code>General</code> class and inside the <code>Sub-Class</code>. But
-the logic of the association remains the same.</p>
+  <ul>
+    <li><code>Class A</code> is a class which has some attributes (<code>variable</code>) and functions (<code>function</code>).</li>
 
-<H2>The problem</H2>
+    <li><code>Class A</code> is the parent class of <code>Sub-Class</code></li>
 
-<P>I'm working on the <A HREF="http://www.altima.org">Altima</A> project and
-for it I want to create an isometric editor that can create worlds. It
-was decided that everything on the Altima world would be an
-entity. Using polymorphism, behavior can be added to the basic entity
-model. My problem is to define an entity that is usable by the server
-and the iso client.</P>
+    <li><code>Class A</code> is associated with <code>Class B</code>. In this case only 1 <code>Class B</code> is associated with possibly multple versions of <code>Class A</code>. The association is named <code>something</code>. Depending on the type of UML diagrams you are using, <code>something</code> can be implemented using a variable or by something else.</li>
 
-<P>The simplified requirements are:
-<UL>
-<LI> An entity has a unique id.
-<LI> An entity has a bounding volume.
-<LI> An entity has a graphic associated with it.
-<LI> An entity has some general information associated with it.
-<LI> A container contains multiple entities. A room would contain a bed, a table, a chair, a dresser, a chest, a lamp, etc. 
-<LI> An entity (such as a player) can move from container to container.
-</UL>
-</P>
+    <li><code>Class T</code> is a template class. In C++ it would be defined by something like <code>template &lt;class T&gt; Class_T { ... }</code></li>
 
-<h2>The UML designs</H2>
+    <li><code>Class B</code> is an instance of <code>Class T</code> where the parameter <code>T</code> is binded to <code>int</code>.</li>
 
-<P>To solve the above problem I started to design using UML. The first and second try introduce new UML particularities and the latest one tries to split and simplify the diagrams.</p>
+    <li><code>General</code> is a class that can add attributes (or function) to the association between <code>Class A</code> and <code>Class B</code>. In the present case, it adds the variable <code>period</code>.</li>
+  </ul><br />
 
-<OL>
-<LI> <A HREF="draft.shtml">The draft design</A>: based on the C++ code that was there at the time.
-<LI> <A HREF="second.shtml">The second design</A>: a design that addresses the shortcomings of the first draft.
-<LI> <A HREF="third.shtml">The third design</A>: adds functionnality and tries to simplify the entity diagram.
-</OL>
+  <div align="center">
+    <img src="basic.gif" alt="][" />
+  </div>
 
-    <hr>
-    <address><a href="mailto:lavoie@zeus.genie.uottawa.ca">Lavoie Philippe</a></address>
-<!-- Created: Thu Jan 14 11:26:04 EST 1999 -->
-<!-- hhmts start -->
-Last modified: Mon Jan 18 15:43:57 EST 1999
-<!-- hhmts end -->
-  </body>
+  <p>The above diagram shows the logical relationship between the components. It doesn't mean that a C++ class would be implemented using all the 5 classes represented here. Short cuts can be taken. However, the logical structure <em>must</em> remain the same. For example, you can move <code>period</code> outside of the <code>General</code> class and inside the <code>Sub-Class</code>. But the logic of the association remains the same.</p>
+
+  <h2>The problem</h2>
+
+  <p>I'm working on the <a href="http://www.altima.org">Altima</a> project and for it I want to create an isometric editor that can create worlds. It was decided that everything on the Altima world would be an entity. Using polymorphism, behavior can be added to the basic entity model. My problem is to define an entity that is usable by the server and the iso client.</p>
+
+  <p>The simplified requirements are:</p>
+
+  <ul>
+    <li>An entity has a unique id.</li>
+
+    <li>An entity has a bounding volume.</li>
+
+    <li>An entity has a graphic associated with it.</li>
+
+    <li>An entity has some general information associated with it.</li>
+
+    <li>A container contains multiple entities. A room would contain a bed, a table, a chair, a dresser, a chest, a lamp, etc.</li>
+
+    <li>An entity (such as a player) can move from container to container.</li>
+  </ul><br />
+
+  <h2>The UML designs</h2>
+
+  <p>To solve the above problem I started to design using UML. The first and second try introduce new UML particularities and the latest one tries to split and simplify the diagrams.</p>
+
+  <ol>
+    <li><a href="draft.shtml">The draft design</a>: based on the C++ code that was there at the time.</li>
+
+    <li><a href="second.shtml">The second design</a>: a design that addresses the shortcomings of the first draft.</li>
+
+    <li><a href="third.shtml">The third design</a>: adds functionnality and tries to simplify the entity diagram.</li>
+  </ol>
+  <hr />
+
+  <address>
+    <a href="mailto:lavoie@zeus.genie.uottawa.ca">Lavoie Philippe</a>
+  </address><!-- Created: Thu Jan 14 11:26:04 EST 1999 -->
+  <!-- hhmts start -->
+
+  <p>Last modified: Mon Jan 18 15:43:57 EST 1999 <!-- hhmts end --></p>
+</body>
 </html>
