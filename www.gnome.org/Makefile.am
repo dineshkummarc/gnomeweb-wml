@@ -3,15 +3,12 @@ SUBDIRS = about images start projects resources learn i18n press faqs include fr
 urlpath =
 
 page_SCRIPTS = \
-	commsupp.html \
-	.htaccess \
-	users \
-	default.css \
-	frontpage.css \
-	epatents.css
+	.htaccess
 
 page_DATA = \
 	index.html \
+	default.css \
+	frontpage.css \
 	WGO-FOOTER.html \
 	WGO-HEADER.html \
 	robots.txt
