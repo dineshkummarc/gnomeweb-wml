@@ -22,61 +22,62 @@
 <body>
 	<div id="body">
     <h1>Epiphany 1.4 Plan</h1>
+    <p>
+        Epiphany 1.2 has been a gradual improvements release, both in the product itself
+        and in the team work. There was several aspects of the development process to improve
+        and in general I think we did it:
+    </p>
+    <ul>
+        <li>
+            <strong>Better communication with GNOME teams.</strong>
+            Progressing. We helped out testing the new gtk widgets and had no problems getting in the
+            patches we needed. Other projects developers are getting epiphany in consideration
+            when making changes.
+            Unlike what happened with bookmarks we have been able to solve the disagreements the new
+            downloader design generated.
+        </li>
+        <li>
+            <strong>Better communication with testers</strong> I have the impression a lot of people now
+            understand better our reasons and goals. Flames are not disappeared but the situation is improved a lot.
+        </li>
+        <li>
+            <strong>We tend to introduce bad bugs just before the releases</strong>
+            Nearly all patches had a review before being checked in. That worked pretty well avoiding
+            regressions.
+        </li>
+        <li>
+            <strong>Design decisions should be documented.</strong>
+            More work necessary here. We tried to do it for certificates, but that effort still did not lead to
+            a design we are happy with. It's probably worth trying with something easier.
+        </li>
+        <li>
+            <strong>Connection with Mozilla people.</strong>
+            Patch approvals has been quick lately. Though I think in general the situation regressed a bit.
+            Their (mozilla foundation and developers) strong interest is now definately the browser and
+            the work on the embedding is very slow. We need to start contributing more than bugfixes.
+        </li>
+    </ul>
+    <p>
+        Epiphany project did grow very fastly in user and requirements (from a personal project to the GNOME
+        default browser). 1.2 development showed <strong>scalability issues</strong>, especially because for a large part of
+        the time I've not been personally able to do any work (since I was working on my university thesis).
+        Christian did an awesome work ande managed to deal with them acceptably but both the UI freeze
+        and the hard freeze did come a bit too early for us. Often there was people volountering to do the
+        work or to help with it, though they did block because there was not a clear spec of what needed to
+        be done or decisions was delayed. I think for 1.4, from a development process point of view,
+        we should especially focus on improving this aspect, with <strong>better planning and distribution
+        of responsiblities</strong>.
+        On the positive side we started to <strong>work as a team</strong> on bug triaging, releases and testing. The plugin
+        framework is a great example on how things can progress quickly without any individual putting a
+        lot of work on it but just because of the collaboration of the whole team.
+    </p>
     <table>
-      <tr>
-        <td class="title" colspan="2">Bookmarks Menu and Toolbars Code</td>
-      </tr>
-      <tr>
-        <td class="description">
-      Look at improving code to create the bookmarks menu and toolbars.
-    <span class="responsible">
-                    [<a href="mailto:marco@gnome.org">Marco Pesenti Gritti</a>]
-            </span></td>
-        <td class="status">
-          <span class="orphan">orphan</span>
-        </td>
-      </tr>
-      <tr>
-        <td class="blank" colspan="2"/>
-      </tr>
-      <tr>
-        <td class="title" colspan="2">Extensions: Adding Toolbar Buttons</td>
-      </tr>
-      <tr>
-        <td class="description">
-      Ability for extensions to add toolbar buttons.
-    <span class="responsible">
-                    [<a href="mailto:adamh@densi.com">Adam Hooper</a>]
-            </span></td>
-        <td class="status">
-          <span class="orphan">orphan</span>
-        </td>
-      </tr>
-      <tr>
-        <td class="blank" colspan="2"/>
-      </tr>
       <tr>
         <td class="title" colspan="2">GtkMozEmbed</td>
       </tr>
       <tr>
         <td class="description">
       Improve gtkmozembed to be more friendly to GNOME.
-    <span class="responsible"/></td>
-        <td class="status">
-          <span class="orphan">orphan</span>
-        </td>
-      </tr>
-      <tr>
-        <td class="blank" colspan="2"/>
-      </tr>
-      <tr>
-        <td class="title" colspan="2">History/Bookmarks Formats</td>
-      </tr>
-      <tr>
-        <td class="description">
-      Find a better format for History file and drop intermediate bookmarks 
-      file. Need to chat to Edd about extending the RDF. Not essential, but 
-      worth investigating.
     <span class="responsible"/></td>
         <td class="status">
           <span class="orphan">orphan</span>
@@ -94,6 +95,22 @@
     <span class="responsible"/></td>
         <td class="status">
           <span class="orphan">orphan</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="blank" colspan="2"/>
+      </tr>
+      <tr>
+        <td class="title" colspan="2">Bookmarks Menu and Toolbars Code</td>
+      </tr>
+      <tr>
+        <td class="description">
+      Look at improving code to create the bookmarks menu and toolbars.
+    <span class="responsible">
+                    [<a href="mailto:marco@gnome.org">Marco Pesenti Gritti</a>]
+            </span></td>
+        <td class="status">
+          <span class="pending">pending</span>
         </td>
       </tr>
       <tr>
@@ -132,11 +149,33 @@
         <td class="blank" colspan="2"/>
       </tr>
       <tr>
-        <td class="title" colspan="2">Extensions: Documentation</td>
+        <td class="title" colspan="2">Downloader Improvements</td>
       </tr>
       <tr>
         <td class="description">
-      API and UI guidelines documentation for extensions.
+      Misc. improvements for the downloader (nautilus metadata integration, proper
+      duplicated naming, inter-session resume?)
+    <span class="responsible">
+                    [<a href="mailto:xan@gnome.org">Xan Lopez</a>]
+            </span></td>
+        <td class="status">
+          <span class="pending">pending</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="blank" colspan="2"/>
+      </tr>
+      <tr>
+        <td class="title" colspan="2">Extensions Lifecycle</td>
+      </tr>
+      <tr>
+        <td class="description">
+      Right now the startup process is: "startup -&gt; get session -&gt;
+      get extensions manager -&gt; load extensions -&gt; get session". We
+      should make the extensions manager load extensions *later*, so that the
+      session is created for them by the time they need it.
+
+      This should pave the way for dynamic loading/unloading of extensions.
     <span class="responsible">
                     [<a href="mailto:adamh@densi.com">Adam Hooper</a>]
             </span></td>
@@ -148,11 +187,27 @@
         <td class="blank" colspan="2"/>
       </tr>
       <tr>
-        <td class="title" colspan="2">Extensions: Loading/Unloading</td>
+        <td class="title" colspan="2">Extensions: Adding Toolbar Buttons</td>
       </tr>
       <tr>
         <td class="description">
-      Dynamic loading/unloading of extensions.
+      Ability for extensions to add toolbar buttons.
+    <span class="responsible">
+                    [<a href="mailto:adamh@densi.com">Adam Hooper</a>]
+            </span></td>
+        <td class="status">
+          <span class="pending">pending</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="blank" colspan="2"/>
+      </tr>
+      <tr>
+        <td class="title" colspan="2">Extensions: Documentation</td>
+      </tr>
+      <tr>
+        <td class="description">
+      API and UI guidelines documentation for extensions.
     <span class="responsible">
                     [<a href="mailto:adamh@densi.com">Adam Hooper</a>]
             </span></td>
@@ -216,6 +271,24 @@
         <td class="blank" colspan="2"/>
       </tr>
       <tr>
+        <td class="title" colspan="2">History/Bookmarks Formats</td>
+      </tr>
+      <tr>
+        <td class="description">
+      Find a better format for History file and drop intermediate bookmarks 
+      file. Need to chat to Edd about extending the RDF. Not essential, but 
+      worth investigating.
+    <span class="responsible">
+                    [<a href="mailto:linux@stefanrotsch.de">Stefan Rotsch</a>]
+            </span></td>
+        <td class="status">
+          <span class="pending">pending</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="blank" colspan="2"/>
+      </tr>
+      <tr>
         <td class="title" colspan="2">Multihead support</td>
       </tr>
       <tr>
@@ -236,9 +309,9 @@
       </tr>
       <tr>
         <td class="description">
-      Use Nautlus for FTP/SFTP.
+      Use Nautilus for FTP/SFTP.
     <span class="responsible">
-                    [<a href="mailto:xan@masilla.org">Xan Lopez</a>]
+                    [<a href="mailto:xan@gnome.org">Xan Lopez</a>]
             </span></td>
         <td class="status">
           <span class="pending">pending</span>
@@ -268,7 +341,7 @@
       </tr>
       <tr>
         <td class="description">
-      Work on getting are bug count even lower.
+      Work on getting the bug count even lower.
     <span class="responsible">
                     [<a href="mailto:piersc@cogs.susx.ac.uk">Piers Cornwell</a>]
             </span></td>
