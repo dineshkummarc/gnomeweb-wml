@@ -1,0 +1,50 @@
+<?php
+// ## export gnome.org file releases in RSS
+include("/home/admin/applist/private.php3");
+include "rss_utils.inc";
+header("Content-Type: text/plain");
+
+function bad ()
+{
+	die ('No soup for you!');
+}
+
+if ($HTTP_GET_VARS['date'])
+{
+	$date = $HTTP_GET_VARS['date'];
+
+	if (strlen ($date) != 8)
+		bad ();
+
+	$y = intval (substr ($date, 0, 4));
+	$m = intval (substr ($date, 4, 2));
+	$d = intval (substr ($date, 6, 2));
+
+	if (!checkdate ($m, $d, $y))
+		bad ();
+}
+else bad ();
+
+print '<?xml version="1.0"?>
+<apps>
+';
+
+$query = "SELECT name, description FROM applist WHERE touched >= ".$date."000000 "
+	. "ORDER BY touched DESC";
+
+//print $query."\n";
+
+$res = db_query ($query);
+
+$outputtotal = 0;
+while ($row = db_fetch_array ($res)) {
+	print "  <app>\n";
+	print "   <name>".htmlspecialchars ($row['name'])."</name>\n";
+	print "   <desc>".rss_description (str_replace ("\n", "", trim ($row['description'])))
+		."</desc>\n";
+	print "  </app>\n";
+	$outputtotal++;
+}
+// ## end output
+?>
+</apps>
