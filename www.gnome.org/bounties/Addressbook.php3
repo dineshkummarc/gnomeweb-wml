@@ -6,15 +6,15 @@ include ("./util.php");
 
 <?php write_page_header ("Addressbook Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513"); ?>
-<?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515"); ?>
-<?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517"); ?>
-<?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520"); ?>
-<?php taskrow ("Contact search applet", "hidden", "750", "127522"); ?>
-<?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524"); ?>
-<?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525"); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", ""); ?>
+<?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515", ""); ?>
+<?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517", ""); ?>
+<?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
+<?php taskrow ("Contact search applet", "hidden", "750", "127522", ""); ?>
+<?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
+<?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513"); ?>
+<?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", ""); ?>
 
 
 
@@ -82,7 +82,7 @@ Hackers</a> mailing list.  You'll find Gaim resources at <a
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
-<?php box_start ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", "127515"); ?>
+<?php box_start ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", "127515", ""); ?>
 
 
 The desktop environment's central addressbook should be able to store
@@ -125,7 +125,7 @@ You'll also want to subscribe to the <a href="http://lists.ximian.com/mailman/li
 mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("&quot;Me&quot;", "Addressbook", "300", "127517", "127517"); ?>
+<?php box_start ("&quot;Me&quot;", "Addressbook", "300", "127517", "127517", ""); ?>
 
 
 <p>The Evolution 2.0 addressbook will have a "me" concept that will
@@ -149,7 +149,7 @@ need.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", "127520"); ?>
+<?php box_start ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", "127520", ""); ?>
 
 
 <p>There are lots of things that could be done here, though they might
@@ -180,7 +180,7 @@ this challenge.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Contact search applet", "Addressbook", "750", "127522", "127522"); ?>
+<?php box_start ("Contact search applet", "Addressbook", "750", "127522", "127522", ""); ?>
 
 
 <p>
@@ -208,7 +208,7 @@ Most of this task revolves around writing a panel applet and GUI. The rest invol
 is <? bonsai ("evolution-data-server/addressbook/libebook"); ?>, and the interfaces you'll find there.
 
 <?php box_end (); ?>
-<?php box_start ("Choice of database for contacts back-end", "Addressbook", "250", "127524", "127524"); ?>
+<?php box_start ("Choice of database for contacts back-end", "Addressbook", "250", "127524", "127524", ""); ?>
 
 
 <p>
@@ -245,7 +245,7 @@ addressbook backend.
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Advanced LDAP Configuration", "Addressbook", "250", "127525", "127525"); ?>
+<?php box_start ("Advanced LDAP Configuration", "Addressbook", "250", "127525", "127525", ""); ?>
 
 
 <p>Evolution can store contacts in an LDAP directory, but there is no way

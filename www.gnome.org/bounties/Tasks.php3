@@ -6,11 +6,11 @@ include ("./util.php");
 
 <?php write_page_header ("Tasks Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "hidden", "300", "127557"); ?>
-<?php taskrow ("Bugzilla tasks backend", "hidden", "500", "127558"); ?>
-<?php taskrow ("Drag-n-drop task creation", "hidden", "300", "127559"); ?>
+<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "hidden", "300", "127557", ""); ?>
+<?php taskrow ("Bugzilla tasks backend", "hidden", "500", "127558", ""); ?>
+<?php taskrow ("Drag-n-drop task creation", "hidden", "300", "127559", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", "127557"); ?>
+<?php box_start ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", "127557", ""); ?>
 
 
 
@@ -38,7 +38,7 @@ have that, the export to a CSV export should be relatively simple.
 Just <? bonsai ("evolution"); ?>.
 
 <?php box_end (); ?>
-<?php box_start ("Bugzilla tasks backend", "Tasks", "500", "127558", "127558"); ?>
+<?php box_start ("Bugzilla tasks backend", "Tasks", "500", "127558", "127558", ""); ?>
 
 
 <p>Evolution and the GNOME project as a whole both use Bugzilla to
@@ -87,7 +87,7 @@ supported.
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Drag-n-drop task creation", "Tasks", "300", "127559", "127559"); ?>
+<?php box_start ("Drag-n-drop task creation", "Tasks", "300", "127559", "127559", ""); ?>
 
 
 It would be handy to be able to create tasks in Evolution by dragging

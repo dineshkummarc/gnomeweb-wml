@@ -6,21 +6,21 @@ include ("./util.php");
 
 <?php write_page_header ("Mailer Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514"); ?>
-<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516"); ?>
-<?php taskrow ("Mailing list actions", "hidden", "500", "127518"); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519"); ?>
-<?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521"); ?>
-<?php taskrow ("Custom mail headers display", "hidden", "200", "127523"); ?>
-<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526"); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527"); ?>
-<?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529"); ?>
-<?php taskrow ("Language selection in composer", "hidden", "400", "127530"); ?>
-<?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533"); ?>
-<?php taskrow ("Message receipts", "hidden", "500", "127534"); ?>
-<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536"); ?>
+<?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
+<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", ""); ?>
+<?php taskrow ("Mailing list actions", "hidden", "500", "127518", ""); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", ""); ?>
+<?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
+<?php taskrow ("Custom mail headers display", "hidden", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
+<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526", ""); ?>
+<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527", ""); ?>
+<?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529", ""); ?>
+<?php taskrow ("Language selection in composer", "hidden", "400", "127530", ""); ?>
+<?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533", ""); ?>
+<?php taskrow ("Message receipts", "hidden", "500", "127534", ""); ?>
+<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514"); ?>
+<?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 
 
 <p>
@@ -65,7 +65,7 @@ GNOME Desktop programming and mailing list information is available on
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516"); ?>
+<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516", ""); ?>
 
 
 <p>
@@ -127,7 +127,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Mailing list actions", "Mailer", "500", "127518", "127518"); ?>
+<?php box_start ("Mailing list actions", "Mailer", "500", "127518", "127518", ""); ?>
 
 
 <p>Many mailing lists follow <?php rfc(2369); ?> and provide mailing list
@@ -172,7 +172,7 @@ href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "127519"); ?>
+<?php box_start ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "127519", ""); ?>
 
 
 <p>
@@ -241,7 +241,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521"); ?>
+<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521", ""); ?>
 
 
 <p>
@@ -314,7 +314,7 @@ is not relevant.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Custom mail headers display", "Mailer", "200", "127523", "127523"); ?>
+<?php box_start ("Custom mail headers display", "Mailer", "200", "127523", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 
 
 <p>As in <?php bug(1186); ?>, it would be nice to configure the header
@@ -377,7 +377,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526"); ?>
+<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526", ""); ?>
 
 <p>It would be nice if Evolution would prompt the user if he or she would like to set
 Evolution as the default "mailto:" handler for GNOME if:</p>
@@ -417,7 +417,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "127527"); ?>
+<?php box_start ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "127527", ""); ?>
 
 <p>
 Currently, to drag and drop a file into an Evolution message, you
@@ -478,7 +478,7 @@ with composer knowledge as well.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Templates for new messages and replies", "Mailer", "500", "127529", "127529"); ?>
+<?php box_start ("Templates for new messages and replies", "Mailer", "500", "127529", "127529", ""); ?>
 
 <p>
 We would like to allow people to prepare their own message
@@ -545,7 +545,7 @@ with GtkHTML knowledge.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Language selection in composer", "Mailer", "400", "127530", "127530"); ?>
+<?php box_start ("Language selection in composer", "Mailer", "400", "127530", "127530", ""); ?>
 
 
 <p>Add a pop-up menu to the composer toolbar for selecting the
@@ -590,7 +590,7 @@ href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
 Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list for the Mailer.
 <?php box_end (); ?>
-<?php box_start ("Better smiley substitution in the composer", "Mailer", "200", "127533", "127533"); ?>
+<?php box_start ("Better smiley substitution in the composer", "Mailer", "200", "127533", "127533", ""); ?>
 
 
 <p>Make automatic smiley substitution easier to work around when enabled</p>
@@ -602,7 +602,7 @@ is no easy way to reverse the substitution.  Modify the behavior such
 that if the user hits backspace while the cursor is on a smiley the 
 first time the substitution is undone, but the smiley text remains.</p>
 <?php box_end (); ?>
-<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534"); ?>
+<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534", ""); ?>
 
 
 <p><?php rfc(2298); ?> describes a standard method for clients to
@@ -646,7 +646,7 @@ Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 
 <?php box_end (); ?>
-<?php box_start ("Link URLs in the status bar", "Mailer", "200", "127536", "127536"); ?>
+<?php box_start ("Link URLs in the status bar", "Mailer", "200", "127536", "127536", ""); ?>
 
 
 <p>Evolution should make URLs embedded in emails visible to the user.

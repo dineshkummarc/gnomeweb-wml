@@ -6,9 +6,20 @@ include ("./util.php");
 
 <?php write_page_header ("Devices Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("Evolution/iPod synchronization", "hidden", "0", "1138100848"); ?>
+<?php taskrow ("Additional Conduits", "hidden", "0", "5727758"); ?>
+<?php taskrow ("Notes metaphor for pilot sync", "hidden", "0", "444402437"); ?>
+<?php taskrow ("Evolution/iPod Synchronization", "hidden", "0", "2135118480"); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Evolution/iPod synchronization", "Devices", "0", "1138100848", "0"); ?>
+<?php box_start ("Additional Conduits", "Devices", "0", "5727758", "0"); ?>
+
+<?php box_end (); ?>
+<?php box_start ("Notes metaphor for pilot sync", "Devices", "0", "444402437", "0"); ?>
+
+
+FIXME: What does this mean?
+
+<?php box_end (); ?>
+<?php box_start ("Evolution/iPod Synchronization", "Devices", "0", "2135118480", "0"); ?>
 
 <p>
 Since the iPod supports calendars and addressbooks, it would be handy for
@@ -42,14 +53,12 @@ You'll be working on <? bonsai ("evolution"); ?>.
 
 <?php box_sec ("Pointers"); ?>
 
-To learn more about how Linux works with the iPod and how to
-synchronize a device with Evolution, check out some of the following
-links:
+To learn more about how Linux works with the iPod, check out some of
+the other iPod-related projects:
 <ul>
-<li><a href="http://multisync.sourceforge.net/">MultiSync</a></li>
-<li><a href="http://gtkpod.sourceforge.net/">GTKPod</a>, a GUI iPod management system</li>
-<li><a  href="http://sourceforge.net/projects/ipod-on-linux/">ipod-on-linux</a>, a conglomeration of other iPod and Linux work</li>
-<li><a href="http://www.gnu.org/software/gnupod/">GNUPod</a>, Perl scripts for manipulating iPods</li>
+<li><a href="http://gtkpod.sourceforge.net/">GTKPod</a>, a GUI iPod management system
+<li><a  href="http://sourceforge.net/projects/ipod-on-linux/">ipod-on-linux</a>, a conglomeration of other iPod and Linux work
+<li><a href="http://www.gnu.org/software/gnupod/">GNUPod</a>, Perl scripts for manipulating iPods
 </ul>
 
 <?php box_end (); ?>

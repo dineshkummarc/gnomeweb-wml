@@ -15,6 +15,7 @@ class Bounty {
 	public string amount;
 	public string category;
 	public string html;
+	public string solved;
         public int    bug;
 	public int    id;
 
@@ -44,7 +45,8 @@ class DoIt {
 			b.amount     = GetXmlNodeText (bounty_xml, "amount");
 			b.category   = GetXmlNodeText (bounty_xml, "category");
 			b.html       = GetXmlNodeText (bounty_xml, "html");
-			
+			b.solved     = GetXmlNodeText (bounty_xml, "solved");			
+
 			tmp          = GetXmlNodeText (bounty_xml, "bug");
 			
 			if (tmp != "") {
@@ -139,8 +141,8 @@ class DoIt {
 			if (! show_category)
 				cat = "hidden";
 
-			sw.WriteLine ("<?php taskrow (\"{0}\", \"{1}\", \"{2}\", \"{3}\"); ?>",
-					   b.title, cat, b.amount, b.id);
+			sw.WriteLine ("<?php taskrow (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"); ?>",
+					   b.title, cat, b.amount, b.id, b.solved);
 		}
 		sw.WriteLine ("<?php write_table_footer (); ?>");
 	}
@@ -148,8 +150,8 @@ class DoIt {
 	static void OutputBounties (ArrayList bounties, StreamWriter sw)
 	{
 		foreach (Bounty b in bounties) {
-			sw.WriteLine ("<?php box_start (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"); ?>",
-					   b.title, b.category, b.amount, b.id, b.bug);
+			sw.WriteLine ("<?php box_start (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\"); ?>",
+					   b.title, b.category, b.amount, b.id, b.bug, b.solved);
 			sw.Write (b.html);
 			sw.WriteLine ("<?php box_end (); ?>");
 		}

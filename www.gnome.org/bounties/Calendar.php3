@@ -6,16 +6,16 @@ include ("./util.php");
 
 <?php write_page_header ("Calendar Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("National, religious, event calendars", "hidden", "15", "127528"); ?>
-<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535"); ?>
-<?php taskrow ("Weather calendar backend", "hidden", "750", "127537"); ?>
-<?php taskrow ("Publish your calendar", "hidden", "1000", "127538"); ?>
-<?php taskrow ("Publish free/busy information", "hidden", "500", "127539"); ?>
-<?php taskrow ("Default free/busy URI", "hidden", "300", "127541"); ?>
-<?php taskrow ("Calendar attachments", "hidden", "750", "127543"); ?>
+<?php taskrow ("National, religious, event calendars", "hidden", "15", "127528", ""); ?>
+<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", ""); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", ""); ?>
+<?php taskrow ("Weather calendar backend", "hidden", "750", "127537", ""); ?>
+<?php taskrow ("Publish your calendar", "hidden", "1000", "127538", ""); ?>
+<?php taskrow ("Publish free/busy information", "hidden", "500", "127539", ""); ?>
+<?php taskrow ("Default free/busy URI", "hidden", "300", "127541", ""); ?>
+<?php taskrow ("Calendar attachments", "hidden", "750", "127543", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("National, religious, event calendars", "Calendar", "15", "127528", "127528"); ?>
+<?php box_start ("National, religious, event calendars", "Calendar", "15", "127528", "127528", ""); ?>
 
 
 <p>In Evolution 2.0, users can aggregate multiple simultaneous
@@ -76,7 +76,7 @@ The bounty for this task is per-calendar.  We will pay bounties for up
 to 30 calendars.</p>
 
 <?php box_end (); ?>
-<?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532"); ?>
+<?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", ""); ?>
 
 <p>When you click on the clock on the GNOME panel, a little calendar
 descends.  A proper integration patch for this calendar would do the
@@ -113,7 +113,7 @@ bonsai ("evolution-data-server/calendar/libecal"); ?>.
 You may find this <a href="clock-calendar.tar.bz2">glade mockup</a> useful.
 
 <?php box_end (); ?>
-<?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535"); ?>
+<?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535", ""); ?>
 
 
 <p>Evolution's contact editor allows you to annotate a contact with
@@ -144,7 +144,7 @@ href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("Weather calendar backend", "Calendar", "750", "127537", "127537"); ?>
+<?php box_start ("Weather calendar backend", "Calendar", "750", "127537", "127537", ""); ?>
 
 
 <img border=0 src="suncloud.png" align=right alt="">
@@ -201,7 +201,7 @@ it's hooked in. The old summary code used to pull weather data,
 so that should provide some clues too.
 
 <?php box_end (); ?>
-<?php box_start ("Publish your calendar", "Calendar", "1000", "127538", "127538"); ?>
+<?php box_start ("Publish your calendar", "Calendar", "1000", "127538", "127538", ""); ?>
 
 
 <p>
@@ -262,7 +262,7 @@ so that should provide some clues too.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Publish free/busy information", "Calendar", "500", "127539", "127539"); ?>
+<?php box_start ("Publish free/busy information", "Calendar", "500", "127539", "127539", ""); ?>
 
 
 <p><?php rfc(2445); ?> describes a method of describing free/busy
@@ -304,7 +304,7 @@ will be the primary contacts on the list for the Calendar.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Default free/busy URI", "Calendar", "300", "127541", "127541"); ?>
+<?php box_start ("Default free/busy URI", "Calendar", "300", "127541", "127541", ""); ?>
 
 
 <p><?php rfc(2445); ?> describes a method of describing free/busy
@@ -342,7 +342,7 @@ there.  JP Rosevear <jpr@ximian.com> and Hans Petter Jansson
 <hpj@ximian.com>
 will be the primary contacts on the list for the Calendar.
 <?php box_end (); ?>
-<?php box_start ("Calendar attachments", "Calendar", "750", "127543", "127543"); ?>
+<?php box_start ("Calendar attachments", "Calendar", "750", "127543", "127543", ""); ?>
 
 <p>Add support in evolution for attaching files to events.</p>
 

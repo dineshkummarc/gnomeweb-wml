@@ -60,21 +60,6 @@ bounty.
 
 <?php box_end (); ?>
 
-<?php box_start ("Important Note", "unset", "unset", "UNKNOWN-ID", "0", "#ffffff", "#303030", "#000000", "#f00000"); ?>
-
-Bounties will not be awarded unless:
-
-<ul>
-<li>Your code is complete and works,</li><br>
-<li>It has been accepted into the main development trees by the module
-maintainers, and</li><br>
-<li>You have completed the <a href="claim.php3">bounty claim form</a>!</li><br>
-</ul>
-
-And of course, all of the rules below still apply.
-
-<?php box_end (); ?>
-
 <?php box_start ("Contest Rules"); ?>
 
 <ol>
@@ -121,6 +106,9 @@ it.</li><br>
 these tasks as a team, appoint one person you trust to be the official
 submitter, and he or she can divide the bounty up after it is
 awarded.</li><br>
+
+<li>Novell employees in the Ximian division are not eligible to
+participate.</li><br>
 
 <li>And, sorry to have to do it, but the catch-all: The awarding of
 bounties is at the sole discretion of the judging panel, and we may
@@ -228,51 +216,51 @@ channels.</p>
 </center>
 <?php box_end (); ?><a name="table">
 <?php write_table_header ("yes"); ?>
-<?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528"); ?>
-<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513"); ?>
-<?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546"); ?>
-<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551"); ?>
-<?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515"); ?>
-<?php taskrow ("&quot;Me&quot;", "Addressbook", "300", "127517"); ?>
-<?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520"); ?>
-<?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514"); ?>
-<?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516"); ?>
-<?php taskrow ("Mailing list actions", "Mailer", "500", "127518"); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519"); ?>
-<?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521"); ?>
-<?php taskrow ("Custom mail headers display", "Mailer", "200", "127523"); ?>
-<?php taskrow ("Contact search applet", "Addressbook", "750", "127522"); ?>
-<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557"); ?>
-<?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524"); ?>
-<?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552"); ?>
-<?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558"); ?>
-<?php taskrow ("Weather calendar backend", "Calendar", "750", "127537"); ?>
-<?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525"); ?>
-<?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544"); ?>
-<?php taskrow ("Publish your calendar", "Calendar", "1000", "127538"); ?>
-<?php taskrow ("Quick reference card", "Documentation", "300", "127545"); ?>
-<?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526"); ?>
-<?php taskrow ("Drag-n-drop task creation", "Tasks", "300", "127559"); ?>
-<?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554"); ?>
-<?php taskrow ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555"); ?>
-<?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556"); ?>
-<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771"); ?>
-<?php taskrow ("Publish free/busy information", "Calendar", "500", "127539"); ?>
-<?php taskrow ("Default free/busy URI", "Calendar", "300", "127541"); ?>
-<?php taskrow ("Calendar attachments", "Calendar", "750", "127543"); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527"); ?>
-<?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529"); ?>
-<?php taskrow ("Language selection in composer", "Mailer", "400", "127530"); ?>
-<?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533"); ?>
-<?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553"); ?>
-<?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812"); ?>
-<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547"); ?>
-<?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548"); ?>
-<?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549"); ?>
-<?php taskrow ("Message receipts", "Mailer", "500", "127534"); ?>
-<?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536"); ?>
+<?php taskrow ("National, religious, event calendars", "Calendar", "15", "127528", ""); ?>
+<?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", ""); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", ""); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", ""); ?>
+<?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
+<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", ""); ?>
+<?php taskrow ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", ""); ?>
+<?php taskrow ("&quot;Me&quot;", "Addressbook", "300", "127517", ""); ?>
+<?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
+<?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
+<?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
+<?php taskrow ("Mailing list actions", "Mailer", "500", "127518", ""); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", ""); ?>
+<?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
+<?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
+<?php taskrow ("Contact search applet", "Addressbook", "750", "127522", ""); ?>
+<?php taskrow ("Support export of tasks or other items to Excel (CSV)", "Tasks", "300", "127557", ""); ?>
+<?php taskrow ("Choice of database for contacts back-end", "Addressbook", "250", "127524", ""); ?>
+<?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
+<?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
+<?php taskrow ("Weather calendar backend", "Calendar", "750", "127537", ""); ?>
+<?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
+<?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
+<?php taskrow ("Publish your calendar", "Calendar", "1000", "127538", ""); ?>
+<?php taskrow ("Quick reference card", "Documentation", "300", "127545", ""); ?>
+<?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", ""); ?>
+<?php taskrow ("Drag-n-drop task creation", "Tasks", "300", "127559", ""); ?>
+<?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
+<?php taskrow ("OO.o slides side-pane", "OpenOffice.org", "1500", "127555", ""); ?>
+<?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", ""); ?>
+<?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "500", "127771", ""); ?>
+<?php taskrow ("Publish free/busy information", "Calendar", "500", "127539", ""); ?>
+<?php taskrow ("Default free/busy URI", "Calendar", "300", "127541", ""); ?>
+<?php taskrow ("Calendar attachments", "Calendar", "750", "127543", ""); ?>
+<?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", ""); ?>
+<?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
+<?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
+<?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", ""); ?>
+<?php taskrow ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", ""); ?>
+<?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", ""); ?>
+<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
+<?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", ""); ?>
+<?php taskrow ("Handle <tt>aim:</tt> links in Epiphany", "IM", "100", "127549", ""); ?>
+<?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
+<?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", ""); ?>
 <?php write_table_footer (); ?>
 <br>
 <br>
