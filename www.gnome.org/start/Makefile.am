@@ -1,4 +1,4 @@
-SUBDIRS=installing 2.0 2.1 2.2
+SUBDIRS=installing 2.0 2.1 2.2 2.3
 
 urlpath=/start
 
