@@ -127,7 +127,7 @@ bounty.
 <?php taskrow ("Support export of tasks to CSV spreadsheet
 files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
-<?php taskrow ("Bugzilla tasks backend", "Tasks", "1000", "127558", ""); ?>
+<?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
 <?php taskrow ("Publish your calendar", "Calendar", "2000", "127538", ""); ?>

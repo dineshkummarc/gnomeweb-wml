@@ -8,7 +8,7 @@ include ("./util.php");
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Support export of tasks to CSV spreadsheet
 files", "hidden", "300", "127557", ""); ?>
-<?php taskrow ("Bugzilla tasks backend", "hidden", "1000", "127558", ""); ?>
+<?php taskrow ("Bugzilla tasks backend", "hidden", "500", "127558", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Support export of tasks to CSV spreadsheet
 files", "Tasks", "300", "127557", "127557", ""); ?>
@@ -38,7 +38,7 @@ have that, the export to a CSV file should be relatively simple.
 Just <? bonsai ("evolution"); ?>.
 
 <?php box_end (); ?>
-<?php box_start ("Bugzilla tasks backend", "Tasks", "1000", "127558", "127558", ""); ?>
+<?php box_start ("Bugzilla tasks backend", "Tasks", "500", "127558", "127558", ""); ?>
 
 
 <p>Evolution and the GNOME project as a whole both use Bugzilla to
