@@ -1,0 +1,11 @@
+SUBDIRS=
+
+urlpath=/projects/gedit/images
+
+page_SCRIPTS= \
+	gedit-logo.png \
+	sshot1.png \
+	sshot2.png
+
+include $(top_srcdir)/rules.common
+
