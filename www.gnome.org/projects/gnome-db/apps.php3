@@ -17,7 +17,7 @@ html_begin_doc('Application List');
   included on this list.
 </p>
 <ul>
-  <li><B><a href="http://members.xoom.com/gojitalm/db_designer.html">db_designer</a></B>
+  <li><B><a href="http://db-designer.sourceforge.net/">db_designer</a></B>
        - is a program to design a data base using formalism 
        of Merise diagram.</li>
   <li><B><a href="http://malerba.linuxave.net/">gASQL</a></B>

@@ -31,7 +31,7 @@ html_begin_doc('Documentation');
 <p>
   We also have these other sources of information:
 <ul>
-   <li><B><a href="http://www.advogato.org/projects...">GNOME-DB
+   <li><B><a href="http://www.advogato.org/proj/GNOME-DB/">GNOME-DB
        Activity log</a></B> in <b>www.advogato.org</b></LI>
   <li><B><a href="XML_queries_proposal.html">XML queries proposal</a></B>,
       by <B><a href="mailto:malerba@linuxave.net">Vivien Malerba</a></B></li>
