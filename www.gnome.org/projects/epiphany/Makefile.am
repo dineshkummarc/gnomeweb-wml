@@ -9,6 +9,7 @@ urlpath=/projects/epiphany
 page_SCRIPTS=			\
 	default.css			\
 	epiphany.css		\
+	epiphany-old.css \
 	index.html			\
 	news.html			\
 	resources.html		\
