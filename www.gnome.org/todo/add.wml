@@ -1,0 +1,129 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Contribute to GNOME" imgid="contribute">
+<content>
+
+<? 
+
+$connection = mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
+
+mysql_select_db("todo");
+
+if ($add) {
+
+if ($short_desc && $long_desc && $project_name && $contact_name &&
+$contact_mail) {
+
+$short_desc = addslashes($short_desc);
+$long_desc  = addslashes($long_desc);
+$project_name = addslashes($project_name);
+$contact_name = addslashes($contact_name);
+
+$query_string = "INSERT INTO todo_items (creation_time, update_time, short_desc, long_desc, project_name, project_url, contact_name, contact_mail, required_skill, required_familiarity, category, importance, status) VALUES (";
+$query_string = $query_string . "'" . date("YmdHis", time()) . "', '" . date("YmdHis", time()) . "', ";
+$query_string = $query_string . "'$short_desc', '$long_desc', '$project_name', '$project_url', ";
+$query_string = $query_string . "'$contact_name', '$contact_mail', ";
+$query_string = $query_string . "'$required_skill', '$required_familiarity', '$category', ";
+$query_string = $query_string . "'$importance', '$status')";
+
+print ($query_string);
+mysql_query ($query_string);
+
+} else { # A required field was blank
+echo "You left out a required field.";
+}
+
+} else {
+
+?>
+
+<form action="add.php3" method="post">
+
+<table width="95%" border="0" cellspacing="0" cellpadding="3">
+
+<tr valign="top"><th colspan="2" bgcolor="#cce6ff">Add a new todo item</th></tr>
+
+<tr valign="top"><td align="right">Short description:</td>
+<td><input type="text" size="40" name="short_desc"></td></tr>
+
+<tr valign="top"><td align="right">Long description:</td>
+<td><textarea name="long_desc" rows="10" cols="40" wrap="virtual">
+</textarea></td></tr>
+
+<tr valign="top"><td align="right">Name of the project this belongs to:</td>
+<td><input type="text" size="40" name="project_name"></td></tr>
+
+<tr valign="top"><td align="right">URL for the project this belongs to:</td>
+<td><input type="text" size="40" name="project_url"></td></tr>
+
+<tr valign="top"><td align="right">Contact person name:</td>
+<td><input type="text" size="40" name="contact_name"></td></tr>
+
+<tr valign="top"><td align="right">Contact person email:</td>
+<td><input type="text" size="40" name="contact_mail"></td></tr>
+
+<tr valign="top"><td align="right">Category:</td><td>
+<select name="category">
+<option value="application">Applications</option>
+<option value="core">Core</option>
+<option value="ui">UI</option>
+<option value="docs">Documentation</option>
+<option value="translation">Translation</option>
+<option value="graphics">Graphics</option>
+<option value="web">Web</option>
+<option value="other">Other</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Required general skill level:</td><td>
+<select name="required_skill">
+<option value="1" selected>Very low</option>
+<option value="2">Low</option>
+<option value="3">Medium</option>
+<option value="4">High</option>
+<option value="5">Very high</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Required familiarity with the project:</td><td>
+<select name="required_familiarity">
+<option value="1" selected>Very low</option>
+<option value="2">Low</option>
+<option value="3">Medium</option>
+<option value="4">High</option>
+<option value="5">Very high</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Status:</td><td>
+<select name="status">
+<option value="new" selected>New</option>
+<option value="interest">Have interested people</option>
+<option value="work">Have people working</option>
+<option value="closed">Finished</option>
+</select>
+</td></tr>
+
+<tr valign="top"><td align="right">Importance of this task:</td><td>
+<select name="importance">
+<option value="casual">Casual</option>
+<option value="medium">Medium</option>
+<option value="high">High</option>
+<option value="severe">Severe</option>
+</select>
+</td></tr>
+
+<tr><td><input type="submit" name="add" value="Add"> <input type="reset"
+value="Reset"></td><td></td></tr>
+
+</table>
+
+</form>
+
+<? } ?>
+
+
+</content>
+</document>
