@@ -104,8 +104,8 @@ client_run_set (Examples_ByteSeq_Storage  servant,
 
 		g_print ("!");
 
-		chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 
-					      1024);
+		chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet,0);
+
 		for (len = 0; len < LEN; ++len)
 			ORBit_sequence_append (chunk, &elem);
 
@@ -150,7 +150,6 @@ client_run_exchange (Examples_ByteSeq_Storage  servant,
 		     CORBA_Environment        *ev)
 {
 	CORBA_long MAX      = 2048;
-	CORBA_long len      = 0;
 	CORBA_long iter     = 0;
 	CORBA_long ix       = 0;
 
@@ -158,10 +157,9 @@ client_run_exchange (Examples_ByteSeq_Storage  servant,
 
 	/* create sequence of 1KB and init with 0 */ 
 	chunk = ORBit_sequence_alloc (TC_CORBA_sequence_CORBA_octet, 1024);
-	for (len = 0; len < 1024; ++ len)
+	for (ix = 0; ix < chunk->_length /* 1024 */ ; ++ix)
 	{
-		CORBA_octet oct = 0;
-		ORBit_sequence_append (chunk, &oct);	
+		ORBit_sequence_index (chunk, ix) = 0;	
 	}
 
 	/* MAX times, edit all values in local sequence and exchange
