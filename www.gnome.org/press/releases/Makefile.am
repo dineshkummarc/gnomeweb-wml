@@ -2,7 +2,9 @@ SUBDIRS =
 
 urlpath = /press/releases
 
-page_SCRIPTS = accessible.html \
+page_SCRIPTS = \
+	index.html \
+	accessible.html \
 	assistivetech.html \
 	bitstreamfonts.html \
 	borlandjoins.html \
