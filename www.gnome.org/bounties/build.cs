@@ -203,7 +203,7 @@ class DoIt {
 
 		PasteFile ("header.php", sw);
 
-		sw.WriteLine ("<a name=\"table\">");
+		sw.WriteLine ("<a STYLE=\"text-decoration:none\" name=\"table\">");
 
 		OutputTable (bounties, sw, true);
 		

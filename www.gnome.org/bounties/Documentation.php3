@@ -28,10 +28,10 @@ include ("./util.php");
 <p>
  To get started, visit the
  irc.gnome.org channel #docs, or read up on the GNOME docs process at
- the <a href="http://developer.gnome.org/projects/gdp">GNOME
- Documentation Project</a> home page and the <a
+ the <a STYLE="text-decoration:none" href="http://developer.gnome.org/projects/gdp">GNOME
+ Documentation Project</a> home page and the <a STYLE="text-decoration:none" 
  href="http://www.docbook.org/tdg/en/html/docbook.html">official
-DocBook manual</a>.  The primary contact for this task will be <a href="mailto:aaron@ximian.com">Aaron Weber</a>.
+DocBook manual</a>.  The primary contact for this task will be <a STYLE="text-decoration:none" href="mailto:aaron@ximian.com">Aaron Weber</a>.
 </p>
 <p> 
  Your work should reflect the Evolution 2.0 user interface; you may
@@ -91,7 +91,7 @@ DocBook manual</a>.  The primary contact for this task will be <a href="mailto:a
  </p>
 
 <p>
-  If that sounds too easy, you could work with the <a
+  If that sounds too easy, you could work with the <a STYLE="text-decoration:none" 
   href="http://www.gnome.org/~shaunm/yelp/">Yelp help browser</a> team
   to add print support to the help browser, so that the reference
   section can be printed out directly.  However, this approach is much
@@ -110,15 +110,15 @@ DocBook manual</a>.  The primary contact for this task will be <a href="mailto:a
 <?php box_sec ("Pointers"); ?>
  
 <p>
-For information on the DocBook XML format, check <a
+For information on the DocBook XML format, check <a STYLE="text-decoration:none" 
 href="http://www.docbook.org/tdg/en/html/docbook.html">DocBook: The
 Definitive Guide</a>. To talk to GNOME documentation team members,
 visit the #docs channel in irc.gnome.org.  For information on the
-GNOME printing architecture, visit <a
+GNOME printing architecture, visit <a STYLE="text-decoration:none" 
 href="http://www.gnome.org/projects/gnome-print/">the GNOME-print
 page</a>.  Before you begin any work on the help browser, be sure to
-<a href="http://www.gnome.org/~shaunm/yelp/">check with the
-maintainers.</a> The primary contact for this task will be <a href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
+<a STYLE="text-decoration:none" href="http://www.gnome.org/~shaunm/yelp/">check with the
+maintainers.</a> The primary contact for this task will be <a STYLE="text-decoration:none" href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
 
 <?php box_end (); ?>
 <?php write_page_footer (); ?>

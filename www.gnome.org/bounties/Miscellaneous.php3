@@ -56,15 +56,15 @@ to the user.</p>
 
 <?php box_sec ("Affected Modules"); ?>
 
-<? bonsai ("nautilus"); ?>, <? bonsai ("evolution"); ?>, <? bonsai ("gaim"); ?> and <? bonsai ("file-roller"); ?>.  See our general note about <a href="gaim.php">gaim extension</a>.
+<? bonsai ("nautilus"); ?>, <? bonsai ("evolution"); ?>, <? bonsai ("gaim"); ?> and <? bonsai ("file-roller"); ?>.  See our general note about <a STYLE="text-decoration:none" href="gaim.php">gaim extension</a>.
 
 <?php box_sec ("Pointers"); ?>
 
-Check the <a
+Check the <a STYLE="text-decoration:none" 
 href="http://lists.gnome.org/mailman/listinfo/nautilus-list">Nautilus</a>
-mailing list, as well as <a
+mailing list, as well as <a STYLE="text-decoration:none" 
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
-Hackers</a>, and visit <a
+Hackers</a>, and visit <a STYLE="text-decoration:none" 
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
@@ -106,10 +106,10 @@ To learn more about how Linux works with the iPod and how to
 synchronize a device with Evolution, check out some of the following
 links:
 <ul>
-<li><a href="http://multisync.sourceforge.net/">MultiSync</a></li>
-<li><a href="http://gtkpod.sourceforge.net/">GTKPod</a>, a GUI iPod management system</li>
-<li><a  href="http://sourceforge.net/projects/ipod-on-linux/">ipod-on-linux</a>, a conglomeration of other iPod and Linux work</li>
-<li><a href="http://www.gnu.org/software/gnupod/">GNUPod</a>, Perl scripts for manipulating iPods</li>
+<li><a STYLE="text-decoration:none" href="http://multisync.sourceforge.net/">MultiSync</a></li>
+<li><a STYLE="text-decoration:none" href="http://gtkpod.sourceforge.net/">GTKPod</a>, a GUI iPod management system</li>
+<li><a STYLE="text-decoration:none" href="http://sourceforge.net/projects/ipod-on-linux/">ipod-on-linux</a>, a conglomeration of other iPod and Linux work</li>
+<li><a STYLE="text-decoration:none" href="http://www.gnu.org/software/gnupod/">GNUPod</a>, Perl scripts for manipulating iPods</li>
 </ul>
 
 <?php box_end (); ?>
@@ -155,8 +155,8 @@ What we'd like to see:
   on the desktop will live.  Mozilla will also probably need changes to
   recognize .desktop files and take the appropriate action.
 <?php box_sec ("Pointers"); ?>
-  The <a href="http://mail.gnome.org/archives/desktop-devel-list/">desktop-devel-list</a> and 
-<a href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Mozilla can be found at <a href="http://mozilla.org/">mozilla.org.</a>
+  The <a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/desktop-devel-list/">desktop-devel-list</a> and 
+<a STYLE="text-decoration:none" href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a STYLE="text-decoration:none" href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a STYLE="text-decoration:none" href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Mozilla can be found at <a STYLE="text-decoration:none" href="http://mozilla.org/">mozilla.org.</a>
 <?php box_end (); ?>
 <?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812", ""); ?>
 
@@ -173,9 +173,9 @@ gnome-icon-theme. Most of the icons are already in place
 
 <?php box_sec ("Pointers"); ?>
 
-<p>The icon theme spec is available at <a
+<p>The icon theme spec is available at <a STYLE="text-decoration:none" 
 href="http://freedesktop.org/Standards/icon-theme-spec">freedesktop.org</a>,
-particulary the <a
+particulary the <a STYLE="text-decoration:none" 
 href="http://freedesktop.org/Standards/icon-theme-spec/0.7/ar01s05.html">icon
 lookup section</a> may be handy.</p>
 

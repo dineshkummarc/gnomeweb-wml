@@ -16,9 +16,9 @@ being distributed as free software.</li><br>
 
 <li>Patch acceptance by module maintainers into the main development
 branch of the affected modules is a prerequisite for bounty payment.
-For example, for <a
+For example, for <a STYLE="text-decoration:none"
 href="http://www.gnome.org/projects/evolution">Evolution</a>, this
-means that your patch must be reviewed (through <a
+means that your patch must be reviewed (through <a STYLE="text-decoration:none"
 href="">evolution-patches</a>), accepted and checked into the 2.0
 development branch before you qualify to receive a bounty.</li><br>
 
@@ -57,7 +57,12 @@ participate.</li><br>
 
 <li>You may elect to not collect your bounty winnings.  The unclaimed
 money will go to the "Pay it Forward" program and will be used to fund
-more desktop bounties.</li>
+more desktop bounties.</li><br>
+
+<li>Bounties that are completed by submitting a patch and got accepted should be claimed 
+with in a month of time. After a month the unclaimed money will go to 
+the "Pay it Forward" program and will be used to fund more desktop bounties.
+</li> <br>
 
 <li>And, sorry to have to do it, but the catch-all: The awarding of
 bounties is at the sole discretion of the judging panel, and we may

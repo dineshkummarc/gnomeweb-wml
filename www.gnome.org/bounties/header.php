@@ -66,49 +66,49 @@ bounty.
 <?php box_end (); ?>
 
 
-<a name="categories">
+<a STYLE="text-decoration:none" name="categories">
 <?php box_start ("Bounty Categories"); ?>
 <table width="100%" cellpadding=12>
 	  <tr>
 	    <td align="center">
-	      <a href="Addressbook.html"><img src="addressbook-icon.png" 
+	      <a STYLE="text-decoration:none" href="Addressbook.html"><img src="addressbook-icon.png" 
 					alt="" border=0><br>
 		    <b>Addressbook</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="Calendar.html"><img src="calendar-icon.png" 
+	      <a STYLE="text-decoration:none" href="Calendar.html"><img src="calendar-icon.png" 
 						  alt="" border=0><br>
 		    <b>Calendar</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="Documentation.html"><img src="documentation-icon.png" 
+	      <a STYLE="text-decoration:none" href="Documentation.html"><img src="documentation-icon.png" 
 						  alt="" border=0><br>
 		    <b>Documentation</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="IM.html"><img src="im-icon.png" 
+	      <a STYLE="text-decoration:none" href="IM.html"><img src="im-icon.png" 
 						       alt="" border=0><br>
 		    <b>IM</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="Mailer.html"><img src="mailer-icon.png" 
+	      <a STYLE="text-decoration:none" href="Mailer.html"><img src="mailer-icon.png" 
 						       alt="" border=0><br>
 		    <b>Mailer</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="Miscellaneous.html"><img src="miscellaneous-icon.png" 
+	      <a STYLE="text-decoration:none" href="Miscellaneous.html"><img src="miscellaneous-icon.png" 
 						       alt="" border=0><br>
 		    <b>Misc.</b></a>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td align="center">
-	      <a href="OpenOffice.org.html"><img src="openoffice-icon.png" 
+	      <a STYLE="text-decoration:none" href="OpenOffice.org.html"><img src="openoffice-icon.png" 
 						       alt="" border=0><br>
 		    <b>OpenOffice.org</b></a>
 	    </td>
 	    <td align="center">
-	      <a href="Tasks.html"><img src="tasks-icon.png" 
+	      <a STYLE="text-decoration:none" href="Tasks.html"><img src="tasks-icon.png" 
 						       alt="" border=0><br>
 		    <b>Tasks</b></a>
 	    </td>

@@ -21,7 +21,7 @@ If you are using Mozilla, or a web browser which has a built in IRC client, you 
 
 <p>
 
-<a href="irc://irc.gnome.org/%23bounties" title="Mozilla users can click here to join #bounties.">irc://irc.gnome.org/#bounties</a>
+<a STYLE="text-decoration:none" href="irc://irc.gnome.org/%23bounties" title="Mozilla users can click here to join #bounties.">irc://irc.gnome.org/#bounties</a>
 
 <?php box_end (); ?>
 

@@ -17,6 +17,7 @@ include ("./util.php");
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
+<?php taskrow ("OO.o Image Save", "OO.o", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 
@@ -30,7 +31,7 @@ following:</p>
 <li>Below the calendar, show a small summary of the appointments on the selected day.</li><br>
 <li>Double clicking on a day opens the Evolution calendar to that day.</li><br>
 <li>Aggregate multiple calendars, with a configuration dialog to select which calendars to aggregate.</li><br>
-<li>Redo the QuickAlarm frame <a href="http://patches.ximian.com/download.cgi?object=gnome-panel-clock.patch-3">patch</a> to take up less space.</li>
+<li>Redo the QuickAlarm frame <a STYLE="text-decoration:none" href="http://patches.ximian.com/download.cgi?object=gnome-panel-clock.patch-3">patch</a> to take up less space.</li>
 </ul>
 
 <?php box_sec ("How"); ?>
@@ -52,14 +53,14 @@ bonsai ("evolution-data-server/calendar/libecal"); ?>.
 
 <?php box_sec ("Pointers"); ?>
 
-You may find this <a href="clock-calendar.tar.bz2">glade mockup</a> useful.
+You may find this <a STYLE="text-decoration:none" href="clock-calendar.tar.bz2">glade mockup</a> useful.
 
 <?php box_end (); ?>
 <?php box_start ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 
 
 <p>Evolution's contact editor allows you to annotate a contact with
-the dates of their birthday and anniversary.  However, these dates <a
+the dates of their birthday and anniversary.  However, these dates <a STYLE="text-decoration:none"
 href="contact-bday.png"><img border=0 align=right
 src="contact-bday-thumb.png" alt=""></a> don't automatically copy themselves
 into your calendar.  Unless you explicitly add the dates to your
@@ -81,7 +82,7 @@ The only module affected will be <? bonsai ("evolution"); ?>.
 
 <?php box_sec ("Pointers"); ?>
 
-Start by joining the <a
+Start by joining the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.
 
@@ -144,11 +145,11 @@ addressbook.</p>
 
 <?php box_sec ("Affected Modules"); ?>
 
-Both <? bonsai ("evolution"); ?> and <a href="http://gaim.sf.net/">gaim</a> are affected.
+Both <? bonsai ("evolution"); ?> and <a STYLE="text-decoration:none" href="http://gaim.sf.net/">gaim</a> are affected.
 
 <?php box_sec ("Pointers"); ?>
 
-For Evolution information, join the <a
+For Evolution information, join the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
 Hackers</a> mailing list.  You'll find Gaim resources at <a
 href="http://gaim.sf.net">the Gaim home page</a>.
@@ -186,16 +187,16 @@ to save to a specific file, if GNOME wont copy a temporary file
 <?php box_sec ("Pointers"); ?>
 
 <p>
-You should subscribe to the <a
+You should subscribe to the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
 evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
+there.  Michael Zucchi &lt;<a STYLE="text-decoration:none"
 href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
+Stedfast &lt;<a STYLE="text-decoration:none" href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 <p>
 GNOME Desktop programming and mailing list information is available on
-<a href="http://developer.gnome.org/">developer.gnome.org</a>
+<a STYLE="text-decoration:none" href="http://developer.gnome.org/">developer.gnome.org</a>
 </p>
 
 <?php box_end (); ?>
@@ -258,12 +259,12 @@ The NNTP protocol is described in <?php rfc(977); ?>.  An
 additional information RFC, <?php rfc(2980); ?> provides an
 overview of commonly implemented NNTP extensions.
 <p>
-You should subscribe to the <a
+You should subscribe to the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
 evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
+there.  Michael Zucchi &lt;<a STYLE="text-decoration:none"
 href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
+Stedfast &lt;<a STYLE="text-decoration:none" href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 </p>
 
@@ -321,12 +322,12 @@ configuration page and configuration key, and even extended.
 <?php box_sec ("Pointers"); ?>
 
 <p>
-You should subscribe to the <a
+You should subscribe to the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
 evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
+there.  Michael Zucchi &lt;<a STYLE="text-decoration:none"
 href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
+Stedfast &lt;<a STYLE="text-decoration:none" href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list.
 </p>
 
@@ -391,12 +392,12 @@ see calendar-commands.c in  <?php bonsai ("evolution/calendar/gui/"); ?> for an 
 <?php box_sec ("Pointers"); ?>
 
 <p>
-You should subscribe to the <a
+You should subscribe to the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
 evolution-hackers</a> mailing list, and discuss any technical issues
-there.  JP Rosevear &lt;<a
+there.  JP Rosevear &lt;<a STYLE="text-decoration:none"
 href="mailto:jpr@ximian.com">jpr@ximian.com</a>&gt; and Hans Petter Jansson 
-&lt;<a href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
+&lt;<a STYLE="text-decoration:none" href="mailto:hpj@ximian.com">hpj@ximian.com</a>&gt;
 will be the primary contacts on the list for the Calendar.
 </p>
 
@@ -448,15 +449,15 @@ Gtk's drag-and-drop API.
 <?php box_sec ("Pointers"); ?>
 
 <p>
-You should subscribe to the <a
+You should subscribe to the <a STYLE="text-decoration:none"
 href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">
 evolution-hackers</a> mailing list, and discuss any technical issues
-there.  Michael Zucchi &lt;<a
+there.  Michael Zucchi &lt;<a STYLE="text-decoration:none"
 href="mailto:notzed@ximian.com">notzed@ximian.com</a>&gt; and Jeffrey
-Stedfast &lt;<a href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
+Stedfast &lt;<a STYLE="text-decoration:none" href="mailto:fejj@ximian.com">fejj@ximian.com</a>&gt;
 will be the primary contacts on the list for the Mailer. Larry Ewing
-&lt;<a href="mailto:lewing@ximian.com">lewing@ximian.com</a>&gt; and
-Radek Doulik &lt;<a
+&lt;<a STYLE="text-decoration:none" href="mailto:lewing@ximian.com">lewing@ximian.com</a>&gt; and
+Radek Doulik &lt;<a STYLE="text-decoration:none"
 href="mailto:rodo@ximian.com">rodo@ximian.com</a>&gt; might help you
 with composer knowledge as well.
 </p>
@@ -504,6 +505,21 @@ this bug (though some of it may be specific to APIs that are changing
 in 2.0).</p>
 
 <?php box_end (); ?>
+<?php box_start ("OO.o Image Save", "OpenOffice.org", "300", "127556", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
+                                                                                                                  
+<p>
+ After inserting an image into a document or presentation, you may
+ wish to save it as a separate file.  However, it is not currently
+ easy to do so.
+</p>
+                                                                                                                  
+<?php box_sec ("How"); ?>
+<p>
+  Add a 'Save As' item to the right-click context menu for images in
+  documents or presentations. The menu item should open up a dialog
+  allowing the image to be saved to disk as an individual file.
+</p> <?php box_end (); ?>
+
 <?php write_page_footer (); ?>
 
 </center>
