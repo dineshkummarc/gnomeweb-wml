@@ -56,6 +56,7 @@
         $formmail .= "Name:\t" . $contactname . "\n";
         $formmail .= "Age:\t" . $contactage . "\n";
         $formmail .= "Residence:\t" . $contactaddress . "\n";
+	$formmail .= "Affiliation:\t". $affiliation . "\n";
         $formmail .= "Email:\t" . $email . "\n\n";
 
         $formmail .= "User:\t" . $user . "\n";
@@ -130,7 +131,7 @@
 	  </td>
 	</tr>
 	<tr>
-	  <td> Age:</td>
+	  <td>&nbsp;Age:</td>
 	  <td>
 	    <input type="text" name="contactage" 
 		   size="3" value="<? if ($contactage) { echo $contactage; } ?>">
@@ -143,6 +144,12 @@
 		   size="30" value="<? if ($contactaddress) { echo $contactaddress; } ?>"> 
 	  </td>
 	</tr>
+	<tr>
+	  <td>&nbsp;Affiliation:</td>
+	  <td>
+	    <input type="text" name="affiliation" 
+		   size="30" value="<? if ($affiliation) { echo $affiliation; } ?>">
+	  </td>
 	<tr>
 	  <td><font color="red">*</font>Email:</td>
 	  <td>
