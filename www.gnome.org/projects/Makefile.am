@@ -4,7 +4,6 @@ SUBDIRS=			\
 	devtools		\
 	evolution		\
 	gconf			\
-	gnome			\
 	gnome-core		\
 	gnome-libs		\
 	gnumeric		\
