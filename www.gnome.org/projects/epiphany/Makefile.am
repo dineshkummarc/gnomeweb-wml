@@ -1,7 +1,8 @@
 SUBDIRS=			\
 	development		\
 	documentation	\
-	images
+	images	\
+	screenshots
 
 urlpath=/projects/epiphany
 
@@ -13,7 +14,6 @@ page_SCRIPTS=			\
 	news.html			\
 	plan.html			\
 	resources.html		\
-	screenshots.html	\
 	extensions.html		\
 	smartbookmarks.html
 
