@@ -8,7 +8,6 @@ onmouseout="activate_image(<get-var imgnum>, '/images/<get-var dotimg>-wash.gif'
 align=center><img src="/images/<get-var txtimg>.gif" align=center alt="<get-var name>"
 border=0></a></define-tag>
 
-<defun get-correct-bigdot>
 <define-tag correct-bigdot>
 <:{
 	my $tmpurl = '$(URL)';
@@ -20,18 +19,19 @@ border=0></a></define-tag>
 		print "green";
 	} elsif($tmpurl =~ m|/devel|) {
 		print "blue";
+	} else {
+		print "none";
 	}
 }:>
 </define-tag>
-</defun>
 
 <define-tag normal-title>
-
 <td align=right width=20%>
 <a href="http://www.gnome.org/"><img
 src="/images/foot-outline-small.gif" align=left border=0></a></td><td>
-<get-correct-bigdot>
-<h1 align=left><img src="/images/bigdot-<correct-bigdot>.gif" hspace=20 align=bottom><document-title></h1>
+<h1 align=left><when <not <eq "$(URLDIR)" "">>>
+<img src="/images/bigdot-<correct-bigdot>.gif" hspace=20 align=bottom>
+</when><document-title></h1>
 </td>
 </define-tag>
 

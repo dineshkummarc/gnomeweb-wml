@@ -1,0 +1,33 @@
+package webwrap;
+
+$topdir = "@prefix@";
+
+sub item {
+  my($site, $item, $title, $attrs) = @_;
+
+  open(WEBWRAP_IF, $topdir."/".$site."/special-$item.html") || return "";
+
+  my($txt) = join("", <WEBWRAP_IF>);
+  close(WEBWRAP_IF);
+  $txt =~ s/!!TITLE!!/$title/g;
+  my($akey);
+  foreach $akey(keys %{$attrs}) {
+    $txt =~ s/!!$akey!!/%{$attrs}{$akey}/g;
+  }
+
+  return $txt;
+};
+
+sub header {
+  my($site, $title, $attrs) = @_;
+  return item($site, "footer", $title, $attrs)
+    || "<html><head><title>$title</title><body><!-- couldn't open the special-header.html file -->";
+};
+
+sub footer {
+  my($site, $title, $attrs) = @_;
+  return item($site, "footer", $title, $attrs)
+    || "</body></html>";
+};
+
+1;

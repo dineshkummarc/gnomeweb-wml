@@ -1,0 +1,22 @@
+<?
+function webwrap_item($site, $item, $title) {
+	$ww_fh = fopen("@prefix@/src/special-"+$item+".html", "r");
+	if(! $ww_fh) { return ""; }
+
+	$retval = "";
+	while ($buffer = fgets($ww_fh, 4096)) {
+		$retval = $retval + $buffer;
+	}
+	fclose($ww_fh);
+
+	return str_replace("!!TITLE!!", $title, $retval);
+}
+
+function webwrap_header($site, $title) {
+	return webwrap_item($site, "header", $title);
+}
+
+function webwrap_footer($site, $title) {
+	return webwrap_item($site, "footer", $title);
+}
+>
