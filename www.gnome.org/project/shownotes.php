@@ -32,7 +32,7 @@ if (!$result || db_numrows($result) < 1) {
 		echo '
 <HR NOSHADE>
 <B>Changes:</B>
-'.db_result($result,0,'changes').'</PRE>';
+<PRE>'.db_result($result,0,'changes').'</PRE>';
 
 	} else {
 		echo '
