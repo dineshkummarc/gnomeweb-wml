@@ -9,6 +9,7 @@ page_DATA = \
 	index.html \
 	default.css \
 	frontpage.css \
+	protest.css \
 	WGO-FOOTER.html \
 	WGO-HEADER.html \
 	robots.txt \
