@@ -2,6 +2,9 @@ SUBDIRS =
 
 urlpath = /bounties
 
+# the html files are pre-generated with mono and php-cgi
+HTML_FILES := $(wildcard *.html)
+
 page_DATA = \
 	address-applet-anim.gif\
 	address-applet-popup.png\
@@ -66,37 +69,9 @@ page_DATA = \
 	util.php\
 	dhtml-table.js\
 	clock-calendar.tar.bz2\
-	styles.css
-	
-
-#PHP3FILES := $(patsubst %.php3, %.html, $(wildcard ./*.php3))
+	styles.css \
+	$(HTML_FILES)
 
 page_SCRIPTS = 
 
-#index.php3 index.html $(PHP3FILES) discuss.html
-
 include $(top_srcdir)/rules.common
-
-#EXTRA_DIST=$(page_DATA)
-
-#index.php3: build.exe header.php footer.php bounties.xml cat-header.php cat-footer.php util.php Makefile
-#	mono --debug build.exe
-#	chmod 644 *.php3
-                                                                                                                  
-#build.exe: build.cs
-#	mcs -g build.cs -o build.exe
-                                                                                                                  
-#xml2csv.exe: xml2csv.cs
-#	mcs -g xml2csv.cs -o xml2csv.exe
-                                                                                                                  
-#index.csv: bounties.xml xml2csv.exe Makefile xml2csv.cs
-#	mono --debug xml2csv.exe
-                                                                                                                  
-#%.html: %.php3 util.php
-#	@echo Converting $< to $@
-#	@php -q $< > $@
-                                                                                                                  
-#%.html: %.php util.php
-#	@echo Converting $< to $@
-#	@php -q $< > $@
-
