@@ -9,7 +9,8 @@ page_SCRIPTS = \
 	.htaccess \
 	users \
 	default.css \
-	frontpage.css
+	frontpage.css \
+	epatents.css
 
 page_DATA = \
 	index.html
