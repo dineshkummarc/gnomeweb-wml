@@ -1,4 +1,4 @@
-SUBDIRS=
+SUBDIRS=screenshots
 
 urlpath=/start/2.0
 
