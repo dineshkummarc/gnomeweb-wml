@@ -31,7 +31,9 @@ html_begin_doc('Download');
   <li>libxml, libxml-devel</li>
   <li>gnome-libs, gnome-libs-devel</li>
   <li>gnome-print, gnome-print-devel</li>
-  <li>bonobo</a>, bonobo-devel</a></li>
+  <li>bonobo, bonobo-devel</li>
+  <li>GConf, GConf-devel</li>
+  <li>oaf, oaf-devel</li>
   <li><b>Optional</b> - libraries and header files for building the
       native <a href="current_servers.php3">database servers</a></li>
 </ul>
@@ -57,6 +59,7 @@ html_begin_doc('Download');
         <li><B><a href="ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-db/">Source Tarballs</a></B></li>
         <li><B><a href="ftp://ftp.gnome.org/pub/GNOME/stable/redhat/i386/gnome-db/">RPM Packages</a></B></li>
         <li><B><a href="ftp://ftp.gnome.org/pub/GNOME/stable/redhat/SRPMS/gnome-db/">SRPM Packages</a></B></li>
+        <li><b><a href="ftp://ftp.gnome.org/pub/GNOME/stable/debian/gnome-db/">Debian Packages</a></b></li>
       </ul>
   </td>
 </tr>

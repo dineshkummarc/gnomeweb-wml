@@ -37,7 +37,6 @@ html_begin_doc('Documentation');
       by <B><a href="mailto:malerba@linuxave.net">Vivien Malerba</a></B></li>
 </ul>
 </p>
-?>
 <?php
 
 html_end_doc();

@@ -110,10 +110,10 @@ function html_end_doc ()
   <td>
     <table>
     <div align="right">
-      <font size=2>Last modified 2000/06/15</font>
+      <font size=2>Last modified 2000/09/15</font>
     </div>
     <div align="right">
-      <B><a href="mailto:rmoya@chez.com">rmoya@chez.com</a></B>
+      <B><a href="mailto:rmoya@chez.com">rodrigo@linuxave.net</a></B>
     </div>
     </table>
   </td>
