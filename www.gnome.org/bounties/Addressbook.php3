@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Addressbook Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
-<?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "500", "127515", ""); ?>
+<?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "500", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
 <?php taskrow ("Contact search applet", "hidden", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
@@ -80,7 +80,7 @@ Hackers</a> mailing list.  You'll find Gaim resources at <a STYLE="text-decorati
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
-<?php box_start ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", "127515", ""); ?>
+<?php box_start ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
 
 
 The desktop environment's central addressbook should be able to store

@@ -37,34 +37,26 @@ function defaultSort ()
 
 <?php box_start ("Summary"); ?>
 
-Welcome to Round Two of the first-ever open source desktop bounty hunt!  <p>
+Welcome to the first-ever open source desktop bounty hunt!  <p>
 
-The goal of this contest is to help improve the level of integration
-between some of the core components of the Linux desktop.
+The goal of this contest is to improve the quality and functionality
+of the Linux desktop.  <p>
 
-<p>
+This contest is sponsored by Novell, and the
+bounties herein are mainly chosen by Novell employees.  If you'd like
+to create a bounty of your own, and are willing to fund it yourself,
+you might get in touch with <a href="mailto:nat@nat.org">Nat
+Friedman</a>.  Some day I'd like there to be a <a
+href="http://nat.org/2005/january/#bountysystem">general bounty
+system</a> that anyone can use. <p>
 
-Our specific aim is to improve the <i>experience of collaboration</i>
-in the desktop environment.  We believe that communicating and working
-with other people is not simply a function of a single application
-that sits in a rectangular window on your screen &mdash; Evolution or
-Outlook, for example &mdash; but one of the primary functions of a
-computer.  Therefore, collaboration should be a first-class element of
-the user experience. In other words, it should be really easy for a
-GNOME user to talk to, share with, and work with their friends.
-
-<p>
-
-Below you will find a set of concrete tasks all of which are designed
-to improve collaboration in the open source desktop.  Each task has a
-bounty associated with it.  Your job is simple: choose a task, do the
-work, fill out the claim form, and collect the
-bounty.
+Each task listed below has a bounty associated with it.  Your job is
+simple: choose a task, do the work, fill out the claim form, and
+collect the bounty.
 
 <p>
 
 <?php box_end (); ?>
-
 
 <a STYLE="text-decoration:none" name="categories">
 <?php box_start ("Bounty Categories"); ?>
@@ -123,15 +115,12 @@ bounty.
 </center>
 <?php box_end (); ?>
 <a STYLE="text-decoration:none" name="table">
-<a name="unclaimed"><h2>Unclaimed Bounties</h2>
+<a name="unclaimed"></a><h2>Unclaimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
-<?php taskrow ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
-<?php taskrow ("Support export of tasks to CSV spreadsheet
-files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
@@ -149,17 +138,20 @@ files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Create a test suite for browsing in Nautilus", "Memory", "200", "169346", ""); ?>
 <?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", ""); ?>
 <?php write_table_footer (); ?>
-<a name="claimed"><h2>Already Claimed Bounties</h2>
+<a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("Panel clock/calendar integration", "Calendar", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 <?php taskrow ("Birthday and anniversary calendar backend", "Calendar", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
 <?php taskrow ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
+<?php taskrow ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
 <?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 <?php taskrow ("Mailing list actions", "Mailer", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
 <?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 <?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
+<?php taskrow ("Support export of tasks to CSV spreadsheet
+files", "Tasks", "300", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=34391"); ?>
 <?php taskrow ("Weather calendar backend", "Calendar", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
 <?php taskrow ("Quick reference card", "Documentation", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>

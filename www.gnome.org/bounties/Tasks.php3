@@ -7,11 +7,11 @@ include ("./util.php");
 <?php write_page_header ("Tasks Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Support export of tasks to CSV spreadsheet
-files", "hidden", "300", "127557", ""); ?>
+files", "hidden", "300", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=34391"); ?>
 <?php taskrow ("Bugzilla tasks backend", "hidden", "500", "127558", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Support export of tasks to CSV spreadsheet
-files", "Tasks", "300", "127557", "127557", ""); ?>
+files", "Tasks", "300", "127557", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=34391"); ?>
 
 
 

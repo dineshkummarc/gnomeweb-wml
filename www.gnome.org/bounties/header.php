@@ -37,34 +37,26 @@ function defaultSort ()
 
 <?php box_start ("Summary"); ?>
 
-Welcome to Round Two of the first-ever open source desktop bounty hunt!  <p>
+Welcome to the first-ever open source desktop bounty hunt!  <p>
 
-The goal of this contest is to help improve the level of integration
-between some of the core components of the Linux desktop.
+The goal of this contest is to improve the quality and functionality
+of the Linux desktop.  <p>
 
-<p>
+This contest is sponsored by Novell, and the
+bounties herein are mainly chosen by Novell employees.  If you'd like
+to create a bounty of your own, and are willing to fund it yourself,
+you might get in touch with <a href="mailto:nat@nat.org">Nat
+Friedman</a>.  Some day I'd like there to be a <a
+href="http://nat.org/2005/january/#bountysystem">general bounty
+system</a> that anyone can use. <p>
 
-Our specific aim is to improve the <i>experience of collaboration</i>
-in the desktop environment.  We believe that communicating and working
-with other people is not simply a function of a single application
-that sits in a rectangular window on your screen &mdash; Evolution or
-Outlook, for example &mdash; but one of the primary functions of a
-computer.  Therefore, collaboration should be a first-class element of
-the user experience. In other words, it should be really easy for a
-GNOME user to talk to, share with, and work with their friends.
-
-<p>
-
-Below you will find a set of concrete tasks all of which are designed
-to improve collaboration in the open source desktop.  Each task has a
-bounty associated with it.  Your job is simple: choose a task, do the
-work, fill out the claim form, and collect the
-bounty.
+Each task listed below has a bounty associated with it.  Your job is
+simple: choose a task, do the work, fill out the claim form, and
+collect the bounty.
 
 <p>
 
 <?php box_end (); ?>
-
 
 <a STYLE="text-decoration:none" name="categories">
 <?php box_start ("Bounty Categories"); ?>
