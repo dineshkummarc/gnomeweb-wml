@@ -19,6 +19,7 @@ page_SCRIPTS = \
 	gnumericgrant.html \
 	guadec.html \
 	guadec4.html \
+	guadec5.html \
 	linuxatwork.html \
 	mandrakesoftjoins.html \
 	newcommitments.html \
