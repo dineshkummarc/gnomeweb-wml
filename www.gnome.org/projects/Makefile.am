@@ -5,6 +5,7 @@ SUBDIRS=			\
 	gnome-core		\
 	gnome-libs		\
 	gnumeric		\
+	guppi			\
 	gb			\
 	mc			\
 	nautilus		\
