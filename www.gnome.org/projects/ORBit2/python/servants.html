@@ -1,0 +1,200 @@
+<html>
+<head>
+
+   <link rel="STYLESHEET" type="text/css" href="style.css">
+   <title>ORBit-Python: Documentation: Servants</title>
+</head>
+<body bgcolor="white">
+
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
+<tr>
+<td align="left" width="104">
+	<a href="/"><img src="images/o-p.png" border=0 alt=""></a>
+</td>
+<td align="right" width="181">
+<img align="right" src="images/blurb.png" alt="Python bindings for
+ORBit">
+</td></tr></table>
+
+<p>
+<table width="100%" border=0 cellspacing=0 cellpadding=0><tr>
+<td width="175" valign="top">
+<img src="images/trans.png" width=175 height=1 alt=""><br>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<table border=0 cellpadding=3 cellspacing=0 class="blueboxframe"
+width="100%">
+<tr><td class="blueboxheader"><b>Documentation</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="dynamic_idl.html">Dynamic IDL</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba.html">CORBA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba_orb.html">CORBA.ORB</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="poa.html">POA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="servants.html">Servants</a><br>
+<hr class='box'><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="changelog.html">CVS ChangeLog</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Project Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/projects/orbit-python/">SourceForge</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/project/showfiles.php?group_id=3561">Downloads</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://bugzilla.sault.org/">Bugzilla</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/orbit-python/">CVS</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/mail/?group_id=3561">Mailing List</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="../index.html">ORBit2</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/ORBit2">ORBit2 Resources</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://people.redhat.com/otaylor/corba/orbit.html">Perl bindings</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://orbitcpp.sourceforge.net/">C++ bindings</a><br>
+</td>
+</tr>
+</table>
+</center>
+</td>
+<td width="20"><img src="images/trans.png" width=20 height=1 alt=""></td>
+<td valign="top" width="100%">
+
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Documentation: Servants</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><h1>Servants</h1>
+
+<p>A servant is a mapping between an interface implementation in some language
+(Python in this case) and a CORBA object.  This mapping can be made using one
+of two approaches: inheritance or delegation.  While the Python language mapping
+specification requires that only the inheritance approach be implemented, ORBit-Python supports both.
+
+<p>In order to create a servant, you first need to import the POA for the module that contains the interface you're implementing.  We'll use the following IDL for our examples:
+
+<p>
+<center>
+<pre>
+module Bank {
+   interface Account {
+      typedef double Amount;
+      readonly attribute Amount balance;
+
+      exception InsufficientFunds { Amount overdraft; };
+      void withdraw(in Amount x) raises (InsufficientFunds);
+   };
+};
+</pre>
+</center>
+
+<p>The POA for the Bank module is <i>Bank__POA</i>.  (This convention is defined by the Python mapping specification.)  Using the inheritance-based approach, your implementation of <i>Bank.Account</i> will derive <i>Bank__POA.Account</i>.  The implementation of the Account interface, then, could look like:
+
+<center>
+<pre>
+import CORBA, Bank, Bank__POA
+ 
+class Account(Bank__POA.Account):
+   def __init__(self):
+      self.balance = 100.0
+   
+   def withdraw(self, amount):
+      if self.balance - amount < 0:
+         d = Bank.Account.InsufficientFunds()
+         d.overdraft = amount - self.balance
+         raise Bank.Account.InsufficientFunds, d
+      else:
+         self.balance = self.balance - amount
+
+servant = Account()
+</pre>
+</center>
+
+<p>With delegation, your implementation class needn't derive anything.  You use
+the POA to create a servant that binds an instance of the implementation.  Using delegation, the above code looks slightly different:
+
+<center>
+<pre>
+import CORBA, Bank, Bank__POA
+ 
+class Account:
+   def __init__(self):
+      self.balance = 100.0
+   
+   def withdraw(self, amount):
+      if self.balance - amount < 0:
+         d = Bank.Account.InsufficientFunds()
+         d.overdraft = amount - self.balance
+         raise Bank.Account.InsufficientFunds, d
+      else:
+         self.balance = self.balance - amount
+
+servant = Bank__POA.Account( Account() )
+
+</pre>
+</center>
+
+<p>The fact that the implementation class in the above to fragments is called <i>Account</i> is irrelevant.  The actual name of the implementation class is arbitrary.  It's a common convention to suffix the class name with <i>_impl</i>.
+
+<p>The inheritance-based approach is the prefered method because the mapping
+specification requires it be implemented, whereas delegation is optional.
+Using inhertance will ensure your code will be easily portable between all
+compliant Python ORBs.  Still, delegation is available to you if you find it
+suits your needs better.  You may use delegation in circumstances where you are
+wrapping the functionality of an existing Python class -- one that you can't modify -- as a CORBA object.
+
+
+
+
+<p>All servants have the following methods and attributes:
+
+<p class="apih1">_this()
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+		None
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+      Returns a reference to the servant, implicitly activating it
+      (by calling POA.activate_object) if necessary.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+      
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+   
+# Servant through inheritance
+ref = Account()._this()
+</pre></ul>
+	</ul>
+
+<hr>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+
+

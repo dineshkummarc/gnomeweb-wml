@@ -1,0 +1,117 @@
+<html>
+<head>
+   <link rel="STYLESHEET" type="text/css" href="style.css">
+   <title>ORBit-Python: Documentation: Dynamic IDL Compiling</title>
+</head>
+<body bgcolor="white">
+
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
+<tr>
+<td align="left" width="104">
+	<a href="/"><img src="images/o-p.png" border=0 alt=""></a>
+</td>
+<td align="right" width="181">
+<img align="right" src="images/blurb.png" alt="Python bindings for
+ORBit">
+</td></tr></table>
+
+<p>
+<table width="100%" border=0 cellspacing=0 cellpadding=0><tr>
+<td width="175" valign="top">
+<img src="images/trans.png" width=175 height=1 alt=""><br>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<table border=0 cellpadding=3 cellspacing=0 class="blueboxframe"
+width="100%">
+<tr><td class="blueboxheader"><b>Documentation</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="dynamic_idl.html">Dynamic IDL</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba.html">CORBA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba_orb.html">CORBA.ORB</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="poa.html">POA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="servants.html">Servants</a><br>
+<hr class='box'><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="changelog.html">CVS ChangeLog</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Project Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/projects/orbit-python/">SourceForge</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/project/showfiles.php?group_id=3561">Downloads</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://bugzilla.sault.org/">Bugzilla</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/orbit-python/">CVS</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/mail/?group_id=3561">Mailing List</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="../index.html">ORBit2</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/ORBit2">ORBit2 Resources</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://people.redhat.com/otaylor/corba/orbit.html">Perl bindings</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://orbitcpp.sourceforge.net/">C++ bindings</a><br>
+</td>
+</tr>
+</table>
+</center>
+</td>
+<td width="20"><img src="images/trans.png" width=20 height=1 alt=""></td>
+<td valign="top" width="100%">
+
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Documentation: Dynamic IDL Compiling</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><h1>Dynamic IDL Compiling</h1>
+
+<p>
+Python is a dynamic language, so why not take advantage of it?  O-P doesn't
+use stubs or skeletons like most other ORBs, but instead compiles IDL files
+at run-time.  This means incremental design and rapid prototyping can be
+done easily and quickly.
+
+<p>
+The function CORBA._load_idl() is used to load a specific IDL file.  Other
+ORBs don't implement this function, of course, so in order for code to be
+portable from these ORBs, an alternative approach must be used.  This
+approach is called "IDL preprocessing."  When the CORBA module is imported
+for the first time, it scans a list of directories, naively (and quickly)
+parsing each IDL file to discover what modules and interfaces the IDL files
+provide.  This list of directories is specified in the IDLPATH environment
+variable.  If IDLPATH is unset, O-P defaults to the current directory, and
+the system IDL directories if they exist (/usr/share/idl and
+/usr/local/share/idl).
+
+<p>
+O-P hooks the import function to determine if the requested module exists
+in an IDL file.  If it does, the IDL file is automatically parsed (using
+libIDL), processed into corresponding Python objects, and imported into the
+caller's namespace.  Note that because ORBit-Python's CORBA module overloads the import function, you must import CORBA before importing any IDL modules.
+
+<p>
+When an IDL module is being imported, O-P attempts to make intelligent
+decisions about which files to actually parse using libIDL.  For example,
+if you import Bonobo, O-P really only needs to process Bonobo.idl, and not
+the dozen or so other Bonobo_* files.  In most cases, O-P's algorithms to
+narrow the list of IDL files for a module are sufficient, but sometimes
+they'll fail.  If this happens to you, please report it as a bug.  As a
+work-around, you can use CORBA._load_idl() to load the correct file(s), and
+then import the module.
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+
+

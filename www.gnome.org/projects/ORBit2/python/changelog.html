@@ -1,0 +1,985 @@
+<html>
+<head>
+   <link rel="STYLESHEET" type="text/css" href="style.css">
+   <title>ORBit-Python: Documentation: CVS ChangeLog</title>
+</head>
+<body bgcolor="white">
+
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
+<tr>
+<td align="left" width="104">
+	<a href="/"><img src="images/o-p.png" border=0 alt=""></a>
+</td>
+<td align="right" width="181">
+<img align="right" src="images/blurb.png" alt="Python bindings for
+ORBit">
+</td></tr></table>
+
+<p>
+<table width="100%" border=0 cellspacing=0 cellpadding=0><tr>
+<td width="175" valign="top">
+<img src="images/trans.png" width=175 height=1 alt=""><br>
+<table border=0 cellpadding=3 cellspacing=0 class="blueboxframe"
+width="100%">
+<tr><td class="blueboxheader"><b>Documentation</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="dynamic_idl.html">Dynamic IDL</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba.html">CORBA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba_orb.html">CORBA.ORB</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="poa.html">POA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="servants.html">Servants</a><br>
+<hr class='box'><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="changelog.html">CVS ChangeLog</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Project Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/projecs/orbit-python/">SourceForge</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/project/showfiles.php?group_id=3561">Downloads</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://bugzilla.sault.org/">Bugzilla</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/orbit-python/">CVS</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/mail/?group_id=3561">Mailing List</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="../index.html">ORBit2</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/ORBit2">ORBit2 Resources</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://people.redhat.com/otaylor/corba/orbit.html">Perl bindings</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://orbitcpp.sourceforge.net/">C++ bindings</a><br>
+</td>
+</tr>
+</table>
+</center>
+</td>
+<td width="20"><img src="images/trans.png" width=20 height=1 alt=""></td>
+<td valign="top" width="100%">
+
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Documentation: CVS ChangeLog</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><center><pre nowrap style='width: 80%;'>2003-04-20  Frank Rehberger  &lt;frehberg@gnome.org&gt;
+
+   * reverse engineering of orbit-python webpage
+
+2002-02-05  Johan Dahlin  &lt;jdahlin@telia.com&gt;
+
+   * src/types.c (Union_PyClass__init): s/v/_v/ && s/d/_d/
+
+   * src/marshal.c (marshal_union): Dito
+
+2002-02-05  Johan Dahlin  &lt;jdahlin@telia.com&gt;
+
+   * src/CORBAmodule.c (CORBA__ORB_init): Add a third arg that control
+   if we should use the main loop from glib or not
+
+2002-01-25  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/PortableServer.c (POA_PyObject__deactivate_object): Fixed a
+   segfault on object deactivation (Bugzilla bug #12).  That's what you
+   get when you access ORBit internals a little too deeply.
+   (POA_PyObject__activate_object): Now that you can deactivate an object
+   without segfaulting, there appears another segfaulting when you try
+   reactivating an object you previously deactivated.  Fixed that one
+   too.
+
+2001-12-09  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/marshal.c: Replaced a few calls to PyArg_Parse and Py_BuildValue
+   by calls to non-deprecated functions.
+
+   * src/demarshal.c: Ditto.
+
+2001-12-07  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/marshal.c (marshal_boolean): fixed segfault in boolean
+     marshalling (Bugzilla bug #11, Debian bug #122619).  Patch by Jochen
+     Voss &lt;jvoss2@web.de&gt;, slightly edited.
+
+   * src/demarshal.c (demarshal_boolean): fixed potential segfault too.
+
+2001-11-13  Johan Dahlin  &lt;zilch.am@home.se&gt;
+
+   * src/Makefile.am (INCLUDES): 
+   * configure.in: Update to automake 1.5
+
+2001-11-13  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * Announced 0.3.1 release.
+
+2001-10-10  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * test-suite/StressTest.py: new independent module, cooler pretty
+     printing.
+   * test-suite/Stress.py: hacked to support new module.
+   * src/CORBAmodule.c: make __import__.__doc__ not SEGV and even made
+     it print out a nice message explaining O-P's import extension.
+   * src/marshal.c: fixed buglet that crushed CORBA_doubles, fix by
+     Chip Richards &lt;chipr@niestu.com&gt;.
+
+2001-10-10  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * src/CORBA_Any.c (CORBA_Any_PyObject__getattr): integrated
+     refcounting fix by Brad Chapman &lt;chapmanb@arches.uga.edu&gt;.
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_type): fixed
+     problem with _narrow() CORBA objects being mistakenly released.
+   * test-suite/complete.idl, test-suite/TestHarness.py,
+     test-suite/ClientServer.py: added simple CORBA.Any testcase to
+     validate above fix.
+
+2001-10-06  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * src/CORBAmodule.c (import func, auto_load_module_idls,
+     import_from_idl_list): Fixed __import__() to work properly for all
+     tested cases, cleaned it up a bit. Hopefully stable.
+   * src/CORBAmodule.c tabs/space cleanup.
+   * Built 0.3.1 release candidate 1.
+
+2001-10-05  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * src/CORBAmodule.c (CORBA__ORB_init) : Fixed problem with
+   * commandline arguments passed into ORBit.
+   * test-suite/BasicTest.py: Improved __import__ tests.
+
+2001-08-26  Christian Reis  &lt;kiko@async.com.br&gt;
+
+   * test-suite/BasicTest.py: added __import__ tests that kill O-P,
+     changed indent to spaces.
+   * test-suite/ClientServer.py, reftest.idl, reftest2.idl, Stress.py,
+     Test.py: added basic ObjectReference tests (incomplete)
+
+2001-08-26  Johan Dahlin  &lt;zilch.am@home.se&gt;
+
+   * src/idl.c (ORBit_Python_init_typecodes): Add Null and Void.
+   * src/CORBA_TypeCode.c (CORBA_TypeCode_PyObject__repr): 
+     Make the output more pythonish.
+
+2001-08-24  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/demarshal.c (demarshal_boolean): pull sizeof(CORBA_boolean)
+     from the buffer, not sizeof(CORBA_short).  Fixes bug reported
+     by Cristian Marinescu &lt;Cristian.Marinescu@nokia.com&gt;
+   * src/marshal.c (marshal_typecode): Commented out buf_putn.  We
+     shouldn't need to do this.
+
+2001-08-21  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * orbit-python.spec.in: Fixed pydir so that it actually works; added
+     orbit-python-config to orbit-python-devel package, and examples/ 
+     directory to docs in orbit-python package.
+   * removed old test suite (and core ;)
+   * Built 0.3.0 final.  All rejoice.
+
+2001-08-19  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/server.c (operation_skel): significantly reworked how return 
+     values are handled.  Added more useful comments, flattened out some
+     unnecessary nesting, and included more parameter validation.  The
+     result is that now octet sequences in their various forms ("foo", 
+     (1, 2, 3, 4), ['a', 'b', 'c']) are now dealt with properly.
+   * test-suite/BasicTest.py: removed B5 test for 0.3.0 release.  It's
+     still broken but it's not critical.
+   * Built 0.3.0 RC2.  Hopefully this is the one. :)
+
+2001-08-17  Johan Dahlin  &lt;zilch.am@home.se&gt;
+
+   * src/server.c (operation_skel): Strings are now treated as sequences in
+     return values.
+   * test-suite/runtest.sh: set IDLPATH.
+   * src/marshal.c (marshal_octet): Also accept a string of length 1.
+
+2001-08-16  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * test-suite/BasicORB.py: add tests for parameterless ORB_init()
+   * test-suite/ClientServer.py: fixed naming a bit, added skeleton for
+     future ParameterReturnValue tests, added hopefully complete set of
+     Parameter tests including octet sequence tests.
+   * test-suite/TestHarness.py: implementation for added tests.
+   * test-suite/Stress.py: changed default runs to 1000, changed names
+     and letters of suites according to above.
+   * test-suite/complete.idl: added IDL for tests implemented, did a
+     lot of cleaning up, added future ParameterReturnValue skels.
+   * test-suite/runtest.sh: added -gdb parameter to get backtraces.
+
+2001-08-16  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/server.c (operation_skel): if the servant doesn't implement
+     the requested operation, raise BAD_OPERATION.
+   * src/marshal.c: raise MARSHAL instead of BAD_PARAM on incorrect
+     types.
+   * src/marshal.c (marshal_sequence), src/demarshal.c (demarshal_sequence):
+     map octet sequences to strings (PLMS §1.3.2) (johan).
+   * src/marshal.c (marshal_sequence): return CORBA_FALSE if marshal_arg
+     fails, not CORBA_TRUE.
+   * src/marshal.c, src/CORBAmodule.c, src/api.c: PySequence_GetItem 
+     returns a _new_ reference!
+   * src/demarshal.c (demarshal_sequence): for the octet sequence case,
+     read len octets, not len-1.
+     
+2001-08-13  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/idl.c (find_repo_id_from_typecode): return repo_id stored in
+     typecode if it exists.
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_Type): create an
+     ORB PyObject for the ORB associated with the object if it doesn't
+     exist instead of failing.
+   * orbit-python-config.in: created
+   * fixed small compiler warnings  
+   * Built 0.3.0 release candidate.
+
+2001-08-11  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/marshal.c, src/demarshal.c: merged patch by Johan Dahlin
+     that handles marshalling/demarshalling of TypeCodes.
+
+2001-06-10  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/idl.c (find_repo_id_from_typecode): handle basic types explicitly,
+     otherwise it might incorrectly find a typedef for one of the basic
+     types.
+
+2001-06-08  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/orbit-python.h: added typedefs for various objects: PyORBit_Object,
+     PyORBit_ORB, PyORBit_Any, etc.
+
+2001-06-07  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/CORBA_ORB.c (CORBA_ORB_PyObject__object_to_string): fixed leak
+     (closes #4).
+
+2001-06-07  Christian Reis &lt;kiko@async.com.br&gt;
+
+   * Major test suite overhaul; more to come.
+   * test-suite/.cvsignore: added *.pyc and tidbits.
+   * test-suite/BasicTest.py: Numbered, commented and added basic
+     instantiation tests for Inheritance and Delegation.
+   * test-suite/ClientServer.py: Cleanups, numbered.
+   * test-suite/ORBPOATest.py: Numbers added.
+   * test-suite/BasicORB.py: Added very simple ORB_init and POA
+     resolution tests.
+   * test-suite/Stress.py: Major rewrite. Changed this to inherit from
+     TestSuite so now we have our own Stress suite runs tests exactly
+     the same way the plain TestSuite runs. Added commandline parsing
+     for test ranges.
+   * test-suite/stress-test.sh: Added -gdb and -nopp flags.
+
+2001-06-06  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/orbit-python.h: updated PyORBit_Any_Get to use the new function
+     in api.c; removed CORBA_ORB parameter from Any_New.
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_type): if an instance
+     for the object exists and we return the original instance, free the 
+     CORBA object because the function steals the reference.
+   * src/process_idl.c (get_idl_list_for_module): free 'files' hash table
+     even if the IDL module can't be found.  (Fixes leak with importing
+     non-IDL modules.)
+   * src/CORBAmodule.c (CORBA__ORB_init): fixed a couple leaks.
+   * src/except.c (raise_system_exception): fixed leaks.
+   * src/ORBPOATest.py: deactivate_object when necessary to prevent leaks.
+   * test-suite/ORBPOATest.py: deactivate_object when necessary to
+     prevent leaks.
+
+
+2001-06-04  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/server.c (operation_skel): don't deconstruct return tuple if
+     array is expected.
+   * src/marshal.c (marshal_long): might help to accept long values here.
+     (marshal_double): coerce longs and ints to doubles. (marshal_short):
+     small optimizations.
+   * src/demarshal.c (demarshal_short): small optimizations.
+   * Cleaned up various compiler warnings.
+   * configure.in: stepped up the version requirements for ORBit to 0.5.7
+   * src/PortableServer.c (POA_PyObject__servant_to_reference): don't
+     blindly DECREF result from activate_object without checking it
+     first.
+   * src/CORBA_ORB.c (CORBA_ORB_PyObject__resolve_initial_references):
+     add workaround for ORBit bug (gnome bugzilla 55726); INCREF root_poa
+     even if it already exists before returning.
+   * src/test-suite/ORBPOATest.py: several fixes.
+   * src/test-suite/runtest.sh, stresstest.sh: kill server after finished.
+   * src/CORBA_ORB.c (CORBA_ORB_PyObject__run): restore the default signal
+     handler for SIGINT so that Ctrl-C works while the ORB is running.
+   * src/idl.c (_find_repo_id_func): compare address for complex types,
+     compare typecode for basic types.
+   * src/api.c: started to implement PyORBit_Any_Get, which does the
+     opposite of PyORBit_Any_New.  These encoding functions can also be
+     used in the ORBit2 port.  Right now it's only partially implemented,
+     leaks memory, and is mostly untested.
+   * examples/random: example to fetch random numbers from random.org
+   * examples/dynamic: example to fetch IDL from a server and illustrate
+     introspection.
+
+
+2001-06-03  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/process_idl.c (process_idl_file): detect which #define's need to 
+     be made for the IDL to compile properly.  (get_defines_for_file) new
+     function that returns a list of defines to properly compile this
+     IDL.
+   * src/CORBAmodule.c (get_idl_params_as_string): accept a list from
+     get_defines_for_file.
+   * src/process_idl.c (find_module_from_path): import the whole IDL
+     module if a specific interface from that module was requested.
+   * src/demarshal.c (demarshal_arg): handle CORBA_tk_octet (where'd it
+     go??).  If demarshal_* calls demarshal_arg and it returns NULL,
+     also return NULL; fixed memory leaks on certain error conditions;
+     removed FIXMEs for raising system exceptions instead of calling
+     d_warning.
+   * src/api.c: implemented PyORBit_Any_New, which constructs a
+     CORBA_Any_PyObject out of a CORBA_any.  This required a lot of
+     code since I pretty much had to duplicate demarshal.c, except instead
+     of demarshalling from a GIOP buffer, I'm decoding from a bunch of
+     gpointers.  The good news is that this code can be mostly reused
+     when we port to ORBit2.  At this point this code is totally untested,
+     and aside from the fact that it compiles, I have no idea how well it
+     will work, or if it'll even work at all, for that matter.  Johan is
+     my tester. :)
+   * src/PortableServer.c: Resurrected POA::the_POAManager because, hey,
+     it's a transparent accessor for _get_the_POAManager.  Duh.
+   * src/idl.c (construct_interface): IDL stub classes now set the class
+     name and __module__ value correctly.
+   * examples/echo/: ported the Echo example from ORBit.
+
+
+2001-06-02  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/orbit-python.h: in _ORBitPython_FunctionStruct, orb_any becomes
+     any_new.
+   * src/idl.c: prefix operations that conflict with python keywords with
+     an underscore (PLMS §1.2).
+   * src/CORBA_module.c (CORBA__ORB_init): arguments are optional (PLMS
+     §1.6).
+   * src/server.c (Servant_PyClass__default_POA): implicitly call
+     resolve_initial_references to get the RootPOA if necessary
+     (#427973)
+   * src/PortableServer.c (servant_to_reference): moved implicit
+     activation here (from _this()), and it is only done if the POA
+     policy specifies IMPLICIT_ACTIVATION.
+   * src/CORBAmodule.h: created 2 new macros, d_assert and d_assert_val,
+     which raise exceptions on fail, or call g_assert if DEBUG is
+     set.  This way production code will fail gracefully, returning
+     control to Python space, while debug code will dump core for further
+     debugging.
+   * Replaced most g_assert's to d_assert.  Still need to do src/idl.c,
+     but that will require some reorganization.
+   * src/PortableServer.c (POA_PyObject__activate_object_with_id):
+     implemented.
+   * src/CORBAmodule.c (auto_load_module_idls): handle import case
+     "from Mod__POA import Interface" and "import Mod__POA.Interface"
+
+
+2001-05-28  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/server.c (get_class_glue_from_instance, get_class_glue_from_class):
+     made code much more sane; fixed segfault.
+   * Added 2 more global hashes: orb_objects, which maps CORBA_ORBs to
+     CORBA_ORB_PyObjects, and poa_objects, which maps PortableServer_POA
+     objects to POA_PyObjects.
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_type): figure out
+     the ORB associated with this object and store it in the instance glue
+   * src/PortableServer.c (POA_Object_to_PyObject): figure out the ORB
+     associated with the POA object and store it in the type object record;
+     return the PyObject for this POA object if it already exists rather than
+     create a new one.
+   * src/demarshal.c: pass the CORBA_ORB around to the functions that
+     need it.  All this is pretty much for demarshal_object.
+   * src/CORBA_ORB.c (CORBA_ORB_PyObject__new): return the PyObject for this
+     ORB if it already exists rather than create a new one; remove the now 
+     deprecated orb_instance
+   * ChangeLog: fixed ugly formatting from Roland's entries, and replaced 
+     tabs with whitespaces from Christian's.  Okay, I'm pedantic.
+   * src/orbit-python.h: fixed PyORBit_Object_Check and PyORBit_Object_Get
+     macros.
+
+
+2001-05-27  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/api.[c,h]: created for external API methods
+   * src/api.c: implemented PyORBit_Object_Check and PyORBit_Object_Get to
+     work with the new objref code.
+   * src/Makefile.am: updated for api.c
+   * src/demarshal.c (demarshal_exception): DECREF data parameter after
+     calling raise_user_exception; fixes leak.
+   * src/client.c (_stub_func): free GPtrArray returned from marshal_call
+     here instead of in demarshal_call; fixes leak for oneway calls.
+   * src/server.c (operation_skel): DECREF dict; fixes leak.  (This one
+     was a BITCH to find!)
+   * Fixed about 10 insignificant and a couple significant memory leaks
+     due to not DECREFing the result of PyObject_GetAttrString in
+     various places.
+   * src/demarshal.c (demarshal_union): fixed leaks
+   * src/demarshal.c (demarshal_any): call CORBA_TypeCode_PyObject__new
+     instead of constructing the TypeCode object manually; fixed leaks.
+   * src/CORBA_TypeCode.c: duplicate CORBA_TypeCode object and release it
+     in the destructor.
+   * src/server.c (operation_skel): reset the send buffer when marshalling
+     exceptions to prevent garbled data from passing over the wire.
+
+
+2001-05-27  Christian Reis  &lt;kiko@async.com.br&gt;
+
+   * test-suite/ added (#427024) following Roland's initial
+     implementation. The suite includes the interactive helper inter.py
+     and a suite of (36 at the moment) tests of ORBit-Python's
+     functionality. It's based on PyUnit (http://pyunit.sourceforge.net) 
+     so you'll need either that or Python2.
+
+2001-05-27  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/CORBA_Object.c (CORBA_PyClass__del) implemented (#427729).
+     (CORBA_Object_to_PyObject_with_type) don't create a new instance if
+     one already exists for that (CORBA Object, IDL interface) tuple
+     (#427771).
+   * src/server.c (Servant_PyClass__this): decref return value from
+     activate_object (#427409).  (Servant_PyClass__del): free servant
+     instance glue and vepv (#427409).
+   * src/process_idl.c (preprocess_idl_file): make keyword detection
+     smarter (#427724)
+   * src/PortableServer.c: misc cleanups and consistency checking (#427409,
+     #425079).  (POA_PyObject__deactivate_object): work around bug in ORBit 
+     to allow activating a previously deactivated object (#427468).
+   * src/CORBAmodule.h: sandwich __DEBUG_LEVEL__ between a DEBUG define.
+     make CFLAGS=-DDEBUG to enable debugging now (kiko)
+   * src/idl.c: removed temporary debugging cruft.
+   * src/except.c: merged a patch from kiko to validate system exceptions;
+     fixes segfault for unknown exceptions raised by the ORB (#427464).
+
+
+2001-05-25  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_type): if
+     given type is NULL, instantiate from CORBA.Object.
+
+2001-05-25  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   The code is still in a state of disarray.  Not much testing has
+   been done, and some things are only partially implemented.
+
+   * src/CORBAmodule.h: created CORBA_PyInstance_Glue, which contains
+     additional data for objref instances.  Created CORBA_PyClass_Glue
+     which contains additional data for objref classes.
+   * src/CORBA_Object.c: implemented most of the old CORBA_PyObject_*
+     functions as CORBA_PyClass_* functions for the base CORBA.Object
+     class.
+   * src/CORBAmodule.c: create base CORBA.Object class
+   * src/client.c, src/server.c: update most code to move away from
+     CORBA_PyObject_Glue to CORBA_PyInstance_Glue / CORBA_PyClass_Glue
+   * src/CORBA_Object.c (CORBA_Object_to_PyObject_with_type): created
+     this function which returns a new objref given a CORBA_Object and
+     class glue.  (CORBA_Object_to_PyObject): simplified to use
+     CORBA_Object_to_PyObject_with_type.
+   * src/CORBA_Object.c: implemented _narrow (PLMS §1.6)
+
+2001-05-24  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/CORBA_Object.c, src/idl.c: first steps to implementing CORBA.Object
+     objrefs as actual class instances.
+
+2001-05-23  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * src/server.c (init_local_objref): added function which is called from
+     various places within ORBit.  In particular, the _is_a implementation.
+   * src/idl.c (construct_interface): assign init_local_objref to class_info
+   * src/server.c (ORBit_Python_init_pserver): create an empty vepv so that
+     init_local_objref assigns something that is not NULL.  These changes
+     are necessary to work with omniORB (and probably others) which invoke
+     _is_a to validate objrefs.
+   * src/CORBAmodule.c: removed Object_cast cruft.
+   * src/CORBA_Object.c: created this file and moved CORBA.Object stuff
+     from CORBAmodule.c
+   * src/Makefile.am: updated to include CORBA_Object.[c,h]
+   * src/CORBA_Object.c: implemented _is_a (PLMS §1.6)
+   * src/CORBA_Object.c: implemented _is_equivalent (PLMS §1.6)
+   * src/CORBA_Object.c: implemented _hash (PLMS §1.6)
+   * src/CORBA_Object.c: implemented _non_existent (PLMS §1.6)
+   * orbit-python.spec.in: added, taken from Conectiva Linux package and
+     modified to work with any Python version &gt;= 1.5.
+   * configure.in: Handle orbit-python.spec.in
+
+2001-05-23  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/server.c (compare_object_interface): Some of my previous changes
+     were in fact conflicting with Tack's, and I apparently did not resolve
+     the conflict quite gracefully.  Removes the (hopefully) last artifact
+     of that problem.
+
+2001-05-21  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/client.c (_stub_func): As per the Python Language Mapping
+     Specification (§1.4.1): "If there is no result value, the method
+     returns None." 
+
+2001-05-20  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * marshal.c: marshal_object allows Py_None and marshals nil objects
+   * server.c: allow None return types for objrefs
+   * CORBAmodule.h: added a macro is_corba_pyobject()
+   * server.c: compare_glue_interface: accept nil objects for any
+     interface, fail if arg is not a CORBA PyObject, and accept any
+     object if the required value is a generic objref.
+   * orbit-python.h: fix typo in PyORBit_POAManager_Get macro.
+   * Merged patch from Christian to be a little less restrictive about
+     what is used for a servant implementation.  As long as it has
+     __class__ and __bases__ attributes and behaves like a class (like
+     extension classes), it should work.  I ammended the patch to
+     include tons of extra sanity checking.
+   * PortableServer.c: servant_to_reference raises exceptions on
+     error.  (Closes 425079)
+
+2001-05-20  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/CORBAmodule.h: Minor tweaks to make the compilation
+     "CFLAGS=-Wall"-proof. 
+
+   * src/server.c: Ditto.
+
+   * src/server.c: renamed compare_object_interface to
+     compare_glue_interface(), and recreate compare_object_interface() to
+     call compare_glue_interface().  The point is to have a recursive call
+     so that we can work through several levels of inheritance (previous
+     version only handled direct base classes, but no "grandparents").
+
+2001-05-17  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/server.c: added compare_object_interface(), and used it.  That
+     function checks that the object we're marshalling or demarshalling
+     actually matches what it should be according to the IDL.  Previously,
+     the only check was that it was an object reference, now we also check
+     that it corresponds to an object of the expected interface (or a
+     subclass).
+
+2001-05-16  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * orbit-python.h: added _Get macros to the API.
+   * except.c: Display extended info on system exceptions.
+
+2001-05-15  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Did s/CORBA_any/CORBA_Any/ everywhere, and renamed CORBA_any.h to
+     CORBA_Any.h
+   * CORBA_Any.c: CORBA_Any_PyObject__new now takes two parameters, a 
+     TypeCode PyObject and a PyObject representing the value.  Init code 
+     that used to be in this function is moved to CORBA.Any()
+   * CORBA_ORB.c: CORBA_ORB_PyObject__new now takes a CORBA_ORB as a 
+     parameter and constructs a Python ORB object around the given ORB.
+   * CORBA_TypeCode.c: CORBA_TypeCode_PyObject__new takes a CORBA_TypeCode
+     as a parameter.  Again, init code that used to be here is now in
+     CORBA.TypeCode().
+   * idl.c: made find_repo_id_from_typecode useful.  It will narrow
+     object references if it can before returning CORBA/Object.
+   * Use PyORBit as the prefix for the external API now.
+   * Add CORBA.Any and CORBA.TypeCode functions to the API.
+   * Most of the above was a rewrite of a patch submitted by Johan.
+
+2001-05-14  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * Updated config.guess and config.sub to more recent ones.  See
+     &lt;http://bugs.debian.org/97383&gt; for details.
+
+2001-05-10  Jason Tackaberry &lt;tack@linux.com&gt;
+ 
+   * client.c: report more correct error message in _stub_func when
+     number of parameters mismatches.
+
+2001-05-09  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBAmodule.c: Set ob_type to PyType_Type for CORBA.fixed,
+     CORBA.TypeCode, CORBA.Any.  Solves segfault for type() on
+     these objects
+   * idl.c: Again, set ob_type for dynamically created client/server
+     types.  (Resolution for bugs reported by Johan.)
+
+2001-05-08  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * idl.c: Don't recreate binding objects if they exist (such as the
+     case if importing the same IDL twice)
+   * CORBAmodule.c: preprocess IDLs before hooking __import__ (fix for
+     bug reported by Johan Dahlin)
+   * idl.c, marshal.c, except.c: fixed a few minor compiler warnings
+
+2001-04-18  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/CORBAmodule.c: suppressed an unneeded double call to
+     process_idl_path().  Should make preprocessing faster.
+
+2001-04-18  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Committed a patch from Christian that adds a CORBA_PyObject_to_Object
+     hash mapping Python CORBA objects onto CORBA objects and fixed
+     object_to_string to validate the argument as a CORBA PyObject.
+
+2001-04-12  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * marshal.c: marshal_object now verifies that the given Python object
+     is in fact a CORBA.Object
+   * Big changes in system exceptions.  Most of the defined CORBA
+     System exceptions have been implemented.  Work has begun to
+     raise the appropriate exceptions where necessary (especially in
+     marshalling/demarshalling code), but it's not finished yet.  (There
+     will be segfaults under certain error conditions until this is
+     done because parts of the code rely on exceptions being generated.)
+   * CORBA.SystemException and CORBA.UserException now derive from
+     CORBA.Exception (1.3.7 of the mapping spec)
+   * Implemented str() for user exceptions (and system exceptions) to
+     display some useful information.
+   * System exceptions can now be marshalled and demarshalled.
+   * Servers will now pass on CORBA.UNKNOWN exceptions to the client.
+   * System exceptions have "minor" and "completed" attributes
+   * Defined COMPLETED_YES, COMPLETED_NO, and COMPLETED_MAYBE constants
+     in the CORBA module.
+   * Fixed a few segfaults along the way
+
+2001-04-11  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBA_ORB.c: grab a reference to root_poa
+   * PortableServermodule.c: create a servant_base object to represent
+     the PortableServer.Servant class from which all skeleton classes
+     are derived (section 1.5.1 from the mapping spec)
+   * Implemented _default_POA for servant objects (also section 1.5.1)
+   * server.c: added a recursive get_class_glue_from_class.  Now any
+     class can be used as an implementation class for a servant as long
+     as it has a interface skeleton somewhere in its inheritance tree
+     (section 1.5.1)
+
+2001-04-02  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Fixed a segfault in the transparent set accessor function.
+   * Fixed a segfault in CORBA.TypeCode constructor when invalid
+     arguments where given.
+
+2001-04-02  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Updated TODO list.
+   * Built 0.2.0 release candidate.  Let's see what breaks. :)
+
+2001-04-01  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * PortableServer.c/server.c: fixed a problem with delegation;
+     activate_object now holds a reference to the servant, and 
+     deactive_object releases it.
+   * server.c: Fixed _this() so that it returns the servant's reference
+     and not the servant itself, as per the spec.
+   * idl.c: added a newline user exception names
+   * server.c: Removed create_reference since ORBit hasn't implemented
+     it yet.
+   * Updated README and removed DOCS.  (Docs are on the website now.)
+
+2001-03-29  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * idl.c: added support for forward declarations; fixed a small leak.
+   * test-suite: Created an Instance.new_factory() function to test
+     forward declarations
+
+2001-03-28  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * process_idl.c: fix segfault if a bad path was specified from
+     IDLPATH.  Thanks to Christian Reis for catching this one.
+   * Fixed a bazillion warnings when compiling with Python 2.x
+     (with -Wall -Wstrict-prototypes).  Thanks to Johan Dahlin for
+     providing me a shell account to hack on.
+   * CORBAmodule.c: Use PySequence_* instead of PyList_* for fromlist
+     since Python 2.x uses a tuple while Python 1.x uses a list.
+   * CORBAmodule.c: fixed a silly bug where the default IDLPATH
+     gets a corrupted value causing a segfault in process_idl.c.
+   * process_idl.c: completed step 2 from narrow_idl_file_list
+   * Updated README and added TODO and DOCS
+
+2001-03-28  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBAmodule.c: default IDLPATH now includes /usr/share/idl and
+     /usr/local/share/idl if they exist, as well as .
+   * idl.c/CORBAmodule.c: removed some deprecated code
+   * process_idl.c: significantly reworked the code to do things more
+     intelligently.  It now handles:
+         * Nested modules: e.g. import GNOME.Terminal
+         * From lists: from GNOME import Terminal
+           (the old code allowed this as well but it would auto-load
+            every single IDL file that defined the GNOME module; this
+            approach only loads Termina.idl)
+         * From lists with wildcards: from Bonobo import * 
+         * Can import interfaces on the from list:
+              e.g. from GNOME.Terminal import TerminalFactory
+     The new code is much faster at importing modules when you
+     specify a from list since it now only loads only the IDL files
+     necessary.  It will never load an IDL file twice, either.
+   * Rename load_idl() to _load_idl() because it's an ORBit-Python-
+     specific extension.
+   * Added a binding for CORBA_ORB_shutdown (CORBA.ORB.shutdown) which
+     takes 1 boolean argument (wait_for_completion).  Added this to
+     the test suite in Fruit.Factory.die()
+   * The CORBA module has an attribute _libidl_args which is a list of
+     parameters that will be passed to libIDL when parsing IDL files.
+     You can turn on specific defines for importing certain modules,
+     such as Bonobo, or the Object Factory.  e.g.:
+
+           import CORBA
+           CORBA._libidl_args.append("-DGNOME_FACTORY_COMPILATION")
+           from GNOME import ObjectFactory
+
+     This is another ORBit-Python-specific extension, but I'm not sure
+     how else to tackle the problem.
+   * #define ORBIT_PYTHON_NOT_THREADED by default until I have a chance
+     to make threads not broken.
+   * Stepped version up to 0.2.0 in anticipation of its forthcoming
+     release.  Woohoo!!
+
+2001-03-27  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Modified and merged a patch submitted by Johan Dahlin 
+     &lt;zilch.am@home.se&gt;:
+          * Added a _ORBitPython_API and a function struct, so certain
+            functions can be accessed from another extenstion module.
+          * Changed so CORBA__ORB_init does the init (CORBA_ORB_init) 
+            and not CORBA_ORB_PyObject__new.  So extension modules can 
+            create ORBs.
+          * Add a init_orbit_python() macro to use in extension modules.
+   * Created orbit-python.h and reorganized most of the objects' header
+     files.  orbit-python.h is a public include for extensions that
+     want to use ORBit-Python.  CORBAmodule.h still needs to be cleaned
+     but it's getting better.
+
+2001-03-19  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * process_idl.c: added simple benchmarking code.  Uncomment
+     #define __BENCHMARK__ to enable.
+
+2001-01-30  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * server.c: call __setattr__ and __getattr__ of servant if accessor
+     methods are not implemented.
+
+2001-01-28  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * the changes to the d_* macros to eliminate the gcc 2.96 warnings
+     caused segfaults for other versions of gcc. *sigh*  Changes
+     reverted.
+
+2001-01-28  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * marshal.c: be able to marshal generic object references
+   * demarshal.c: calculate the bytes left in the receive buffer properly
+     (we think) and handle the incomplete message case when this value
+     goes negative.  Sequences should now demarshal properly.  Since
+     this code was taken from CORBA::ORBit, it also suffered from this
+     bug.  Roland submitted a patch for this project.
+   * test-server: we don't need to import whrandom anymore.
+   * PortableServermodule.c: removed references to POAManager_PyObject
+     and POA_PyObject from the PortableServer module.  This should take
+     care of the undefined symbol problem with RTLD_GLOBAL vs. RTLD_LAZY.
+     Right now this is just an empty module.  I'm going to have to rethink
+     the interaction between the PortableServer and CORBA modules, and
+     how PortableServer.POA and POAManager types fit in.
+   * eliminated compiler warnings, including those horribly annoying
+     "pasting would not give a valid pre-processing token" warnings with
+     gcc 2.96
+   * Made a d_warning macro that works the same way has d_message.  Used
+     G_STMT_START and G_STMT_END so that these macros can have 
+     conditionals and still work.
+
+2001-01-28  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * Added test_list to test suite, as a test-case for the sequence
+     demarshalling bug.
+
+2000-11-30  Jason Tackaberry  &lt;tack@linux.com&gt;
+
+   * CORBA_ORB.c: fixed string_to_object to trim trailing whitespace from
+     the IOR
+
+2000-09-07  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * added a #define and some #ifndef's to make it easy to temporarily
+     comment out the (unfortunately buggy) thread-safe-ication code.  That
+     code will probably have to go when the bug is fixed.
+   * renamed init_*() to ORBit_Python_init_*() to avoid namespace conflict
+     with Python 2.0 (a function named init_exceptions() appeared
+     somewhere between Python 1.5.2 and Python 2.0, causing a bug).  Works
+     fine with 2.0b1.
+
+2000-08-28  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/marshal.c, src/demarshal.c: added *experimental* support for
+     wstring type, mapped to a Python Unicode object.  Only works with
+     Python &gt;= 2.0 (e.g. from Sourceforge CVS).  Very likely *not* to be
+     interoperable *at all* with other ORBs.
+
+2000-08-27  Roland Mas  &lt;mas@echo.fr&gt;
+
+   * src/server.c: added code to allow the server program to overload
+     the _get_* and _set_* operations (with e.g. side effects).
+   * src/server.c: fixed a compilation bug for current Python from CVS
+     (the soon-to-be Python 2.0).
+
+2000-08-26  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * server.c, client.c, CORBA_ORB.c: added necessary interpreter unlocking
+     to support Python threads properly.  (Not very tested, but seems to
+     work.)
+
+2000-08-21  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Completely rewrote the way IDL objects are handled internally to
+     more closely comply with the spec.  (IDL modules are Python modules,
+     interfaces are classes, etc.)
+   * inheritance is now supported, as well as delegation.  Inheritance is
+     preferred since the spec (while vague) seems to require it, whereas
+     delegation is optional.
+   * Complies with the mapping spec on mappings for module names.  import
+     Module for client side, import Module__POA for server side.
+   * servants support implicit activation through _this()
+   * deprecated POA::the_POAManager in favor of POA::_get_the_POAManager()
+   * Uses _GlobalIDL and _GlobalIDL__POA modules for the global IDL scope,
+     which is compatible with omniORBpy and Fnorb.
+   * Implemented preprocessing of IDL files at runtime to determine which
+     IDL files offer which modules.  Implications on performance are yet
+     to be determined.  This approach may not scale very well at all for
+     hundreds of IDL files.  It also could be broken in some cases; the
+     preprocessor is not a complete IDL parser, so it may not work 100%.
+     Time shall tell.  Uses the IDLPATH environment variable to get a
+     list of paths to scan, otherwise defaults to the current directory.
+   * hook __import__ to automagically load IDL files discovered by the
+     processor that are required for the requested module
+   * Pass -D__ORBIT_IDL__ -D__BONOBO_COMPILATION to libIDL so that we can
+     load Bonobo IDLs
+   * introduced more memory leaks, and probably more bugs.
+
+
+2000-08-18  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * PortableServer.c: fixed a leak in activate_object(); implemented
+     reference_to_servant(); removed deprecated method RootPOA(); removed
+     the _servant attribute from servant implementation instances (this
+     was a hack anyway)
+   * marshal.c: fixed a leak in marshal_sequence and marshal_struct
+   * CORBAmodule.c: changed CORBA_Object_to_PyObject_hash to hash on
+     addresses, not typecodes; CORBA_PyObject__dealloc now properly frees
+     the CORBA object; moved PortableServer module initialization into a
+     separate file and module (PortableServermodule.c)
+   * server.c: freeing a servant will deactivate it if necessary; fixed
+     various leaks and bugs with the servant destructor; fixed a leak with
+     exceptions in operation_skel; new_poa_servant adds new servants to the
+     CORBA_Object_to_PyObject_hash so they can be fetched by reference_to_
+     servant()
+   * fixed CORBA_Environment leaks all over the place
+   * fixed a few other leaks that I can't remember 
+   * various debugging information added; the debug level is inconsistent
+     all over the place -- this will need to be fixed.
+   * removed Instance::throw_away function from test-suite.idl, replaced
+     with Factory::discard_instance(); some other small changes to the
+     test server and clients.
+
+
+2000-08-18  Roland Mas &lt;mas@echo.fr&gt;
+
+   * Many memory leaks fixed by making static things that were previously 
+     dynamically created and sometimes not deleted.
+   * Some segfault-inducing bugs also fixed.
+   * Some FIXMEs done.
+   * The occasional code cleaning.
+
+2000-03-21  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * marshal.c: marshal_float: promote ints to floats
+
+2000-03-19  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Fixed a bug that fudged union discriminators.
+
+2000-03-18  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * Ported the whole mess to C.  Aside from compiling 20% faster, it should
+     hopefully build properly on more platforms.  I've also (through some 
+     crude measurements) noticed a 5-10% speed increase.
+   * idl.c, except.c, types.c: fixed unions, structs, and exceptions so that
+     attributes set on construction are set for the instance object, not for
+     the class object. 
+   * Released 0.1.3
+
+2000-03-16  Jon Kåre Hellan &lt;hellan@acm.org&gt;
+
+   * idl.cc: pass IDL_parse_filename IDLF_CODEFRAGS which is required for
+     Gnumeric.idl
+
+2000-03-16  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBA_ORB.cc: CORBA_ORB_PyObject__new properly accepts either lists or
+     tuples for parameter 1.
+   * CORBA_ORB.cc: resolve_initial_references handles RootPOA properly now
+   * CORBA_ORB.cc, CORBAmodule.cc: made ORB_init more conformant
+   * exceptions raised by check_corba_ex() now work properly
+
+2000-03-15  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBA_ORB.cc: implemented CORBA::ORB::resolve_initial_references
+     (still need to handle RootPOA and POACurrent)
+   * idl.cc, CORBAmodule.cc: load_idl() now takes optional preprocessor
+     parameters to pass to IDL_parse_filename
+   * demarshal.cc: can demarshal generic Objects now.
+   * idl.cc, CORBAmodule.cc: now handles libIDL errors (such as missing file) 
+     gracefully by raising an exception.
+
+2000-03-14  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBAmodule.h, idl.cc, marshal.cc, demarshal.cc: started adding debugging
+     output.  Set __DEBUG_LEVEL__ in CORBAmodule.h to enable (a 0 to 9 value).
+   * CORBAmodule.cc: CORBA_Object_to_PyObject returns Py_None if the passed
+     object is NULL rather than bailing out with an error.
+
+2000-03-14  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * CORBA_ORB.cc: fixed a stupid bug that caused a segfault with CVS ORBit, 
+     and as a result created one more FIXME item. :)
+   * Released 0.1.2
+
+2000-03-13  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * configure.in: forced precedence to g++ until I can fix the code to
+     compile properly with Sun's Workshop.  (Okay, it still doesn't work
+     properly.  I'm working on that.  Hack the Makefile to link in libgcc
+     in the meantime.)
+
+2000-03-13  Phil Dawes &lt;philipd@users.sourceforge.net&gt;
+
+   * idl.cc: fixed a buglet that stops it from compiling with gcc-2.95
+   * Added automake/autoconf support
+   * Added a 'make check' test target to the src directory
+   * Added an autogen.sh to generate the configure script and run it
+
+2000-03-12  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * PortableServermodule.[cc,h]: renamed to PortableServer.[cc,h] and the
+     module is initialized from CORBAmodule.cc.  This will eliminate the
+     shared library dependency problem between the two modules.
+   * Fixed a cosmetic bug in test-client
+   * Packaged this as version 0.1.1
+   
+
+2000-03-11  Jason Tackaberry &lt;tack@linux.com&gt;
+
+   * initial version (0.1.0) released
+
+# Local Variables:
+# left-margin:3
+# vim:expandtab:sw=3:sts=3:ts=3:fo=tcq:wrapmargin=8:
+# End:
+</pre></center></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+
+

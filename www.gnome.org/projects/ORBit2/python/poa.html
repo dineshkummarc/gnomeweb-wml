@@ -1,0 +1,312 @@
+<html>
+<head>
+
+   <link rel="STYLESHEET" type="text/css" href="style.css">
+   <title>ORBit-Python: Documentation: PortableServer.POA Object</title>
+</head>
+<body bgcolor="white">
+
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
+<tr>
+<td align="left" width="104">
+	<a href="/"><img src="images/o-p.png" border=0 alt=""></a>
+</td>
+<td align="right" width="181">
+<img align="right" src="images/blurb.png" alt="Python bindings for
+ORBit">
+</td></tr></table>
+
+<p>
+<table width="100%" border=0 cellspacing=0 cellpadding=0><tr>
+<td width="175" valign="top">
+<img src="images/trans.png" width=175 height=1 alt=""><br>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<table border=0 cellpadding=3 cellspacing=0 class="blueboxframe"
+width="100%">
+<tr><td class="blueboxheader"><b>Documentation</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="dynamic_idl.html">Dynamic IDL</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba.html">CORBA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba_orb.html">CORBA.ORB</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="poa.html">POA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="servants.html">Servants</a><br>
+<hr class='box'><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="changelog.html">CVS ChangeLog</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Project Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/projects/orbit-python/">SourceForge</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/project/showfiles.php?group_id=3561">Downloads</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://bugzilla.sault.org/">Bugzilla</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/orbit-python">CVS</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/mail/?group_id=3561">Mailing List</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="../index.html">ORBit2</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/ORBit2">ORBit2 Resources</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://people.redhat.com/otaylor/corba/orbit.html">Perl bindings</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://orbitcpp.sourceforge.net/">C++ bindings</a><br>
+</td>
+</tr>
+</table>
+</center>
+</td>
+<td width="20"><img src="images/trans.png" width=20 height=1 alt=""></td>
+<td valign="top" width="100%">
+
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Documentation: PortableServer.POA Object</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><h1>PortableServer.POA Object</h1>
+
+<hr>
+
+<p class="apih1">activate_object(servant)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">servant</span>: (<i>Servant object</i>) 
+		The servant to activate.  
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+		Activates the specified servant so that clients are able to invoke
+      its methods.  The servant is gotten from the POA using either
+      inheritance or delegation.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+servant = Account()
+poa.activate_object(servant)
+</pre></ul>
+	</ul>
+
+<hr>
+<p class="apih1">activate_object_with_id(oid, servant)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">oid</span>: (<i>string</i>) 
+		Arbitrary object id.<br>
+      <span class="apiarg">servant</span>: (<i>Servant object</i>) 
+		The servant to which to bind the object id.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+			Associates the object id with the servant in the POA.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+servant = Account()
+poa.activate_object_with_id("bank_account", servant)
+</pre></ul>
+	</ul>
+
+<hr>
+
+<p class="apih1">deactivate_object(servant)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">servant</span>: (<i>Servant object</i>) 
+		The servant to deactivate.  
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+		Deactivates the specified servant.  Clients that hold a reference
+      to this object and try to invoke a method will receive an
+      IDL:CORBA/OBJECT_NOT_EXIST:1.0 exception.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+servant = Account()
+poa.activate_object(servant)
+poa.deactivate_object(servant)
+</pre></ul>
+	</ul>
+
+<hr>
+
+<p class="apih1">servant_to_reference(servant)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">servant</span>: (<i>Servant object</i>) 
+		The servant for which to obtain a reference.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+			Returns a CORBA object reference for the given servant.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+servant = Account()
+poa.activate_object(servant)
+ref = poa.servant_to_reference(servant)
+print "Reference for servant:", ref
+</pre></ul>
+	</ul>
+
+<hr>
+
+<p class="apih1">reference_to_servant(reference)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">reference</span>: (<i>CORBA.Object</i>) 
+		The reference for which to obtain a servant.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+			Returns the servant for the object represented by the CORBA.Object
+         reference.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+servant = Account()
+poa.activate_object(servant)
+ref = poa.servant_to_reference(servant)
+if servant == poa.reference_to_servant(ref):
+   print "We've come full circle."
+</pre></ul>
+	</ul>
+
+<hr>
+
+<p class="apih1">_get_the_POAManager()
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+		No arguments.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+			Returns the POA's manager, a PortableServer.POAManager object.
+         PortableServer.POAManager currently only implements one method,
+         activate(), which must be invoked prior to calling
+         CORBA.ORB.run()
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+
+# Servant through inheritance
+ref = Account()._this()
+open("./bank.ior", "w").write(orb.object_to_string(ref))
+poa._get_the_POAManager().activate()
+orb.run()
+</pre></ul>
+	</ul>
+
+<hr>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+
+</html>
+
+

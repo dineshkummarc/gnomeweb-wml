@@ -1,0 +1,228 @@
+<html>
+<head>
+   <link rel="STYLESHEET" type="text/css" href="style.css">
+   <title>ORBit-Python: Documentation: CORBA.ORB Object</title>
+</head>
+<body bgcolor="white">
+
+<table width="100%" cellspacing=0 cellpadding=0 border=0>
+<tr>
+<td align="left" width="104">
+	<a href="/"><img src="images/o-p.png" border=0 alt=""></a>
+</td>
+<td align="right" width="181">
+<img align="right" src="images/blurb.png" alt="Python bindings for
+ORBit">
+</td></tr></table>
+
+<p>
+<table width="100%" border=0 cellspacing=0 cellpadding=0><tr>
+<td width="175" valign="top">
+<img src="images/trans.png" width=175 height=1 alt=""><br>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<table border=0 cellpadding=3 cellspacing=0 class="blueboxframe"
+width="100%">
+<tr><td class="blueboxheader"><b>Documentation</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="dynamic_idl.html">Dynamic IDL</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba.html">CORBA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="corba_orb.html">CORBA.ORB</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="poa.html">POA</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="servants.html">Servants</a><br>
+<hr class='box'><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="changelog.html">CVS ChangeLog</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Project Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/projects/orbit-python/">SourceForge</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/project/showfiles.php?group_id=3561">Downloads</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://bugzilla.sault.org/">Bugzilla</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/orbit-python/">CVS</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://sourceforge.net/mail/?group_id=3561">Mailing List</a><br>
+</td>
+</tr>
+</table>
+<p class='boxsep'>
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Links</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="../index.html">ORBit2</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://cvs.gnome.org/lxr/source/ORBit2">ORBit2 Resources</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://people.redhat.com/otaylor/corba/orbit.html">Perl bindings</a><br>
+<img src="images/sfbullet.png" border=0 alt="* " align="textmiddle" hspace=5><a href="http://orbitcpp.sourceforge.net/">C++ bindings</a><br>
+</td>
+</tr>
+</table>
+</center>
+</td>
+<td width="20"><img src="images/trans.png" width=20 height=1 alt=""></td>
+<td valign="top" width="100%">
+
+<table border=0 cellpadding=3 cellspacing=0 class="grayboxframe"
+width="100%">
+<tr><td class="grayboxheader"><b>Documentation: CORBA.ORB Object</b>
+</td></tr>
+<tr><td style="padding: 10px 10px 10px 10px"><h1>CORBA.ORB Object</h1>
+
+<hr>
+
+<p class="apih1">object_to_string(reference)
+
+	<ul><p class="apih2">
+   Arguments:
+		<ul><p class="apih3">
+      <span class="apiarg">reference</span>: (<i>CORBA reference</i>) 
+	   CORBA Object reference to stringify.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Description:
+		<ul><p class="apih3">
+		Convert a CORBA Object reference to a stringified reference.  The
+      Object reference can be gotten from CORBA.ORB.string_to_object(), or
+      PortableServer.POA.servant_to_reference()<br>
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+   Example:
+<ul><pre>
+import sys, CORBA, Bank__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+class Account(Bank__POA.Account):
+   pass
+servant = Account()
+servant._this()
+reference = poa.servant_to_reference(servant)
+print orb.object_to_string(reference)
+</pre></ul>
+	</ul>
+
+<hr>
+
+<p class="apih1">string_to_object(ior)
+
+	<ul><p class="apih2">
+	Arguments:
+		<ul><p class="apih3">
+		<span class="apiarg">ior</span>: (<i>string</i>) 
+		Stringified IOR
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Description:
+		<ul><p class="apih3">
+		Convert the given stringified IOR into a CORBA object reference.
+		If the object's type is known prior to invoking this function (in
+      other words, the module to which this interface belongs was imported), 
+      the returned object will be automatically narrowed to that type.  If
+      it is not known, a generic CORBA.Object will be returned.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Example:
+<ul><pre>
+import sys, CORBA, Bank
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+ior = open("bank_object.ior").readline()
+object = orb.string_to_object(ior)
+print object
+</pre></ul>
+	</ul>
+
+<hr>
+
+
+<p class="apih1">run()
+
+	<ul><p class="apih2">
+	Arguments:
+		<ul><p class="apih3">
+		None
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Description:
+		<ul><p class="apih3">
+		Enter ORBit's main event loop that waits for incoming requests from
+      clients.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Example:
+<ul><pre>
+import sys, CORBA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+# This by itself doesn't do anything except block; 
+# we haven't activated any servants yet
+orb.run()
+</pre></ul>
+	</ul>
+
+<hr>
+<p class="apih1">shutdown(wait_for_completion)
+
+	<ul><p class="apih2">
+	Arguments:
+		<ul><p class="apih3">
+		<span class="apiarg">wait_for_completion</span>: (<i>CORBA.boolean</i>) 
+		True (CORBA.TRUE or 1) if the function should block until the ORB
+      has completed all processing.  False (CORBA.False or 0) if the function
+      should return immediately, in which case shutdown may not be
+      completed.
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Description:
+		<ul><p class="apih3">
+		Cause ORBit's main event loop to terminate, returning control to the
+      python space that called CORBA.ORB.run().
+		</ul>
+	</ul>
+
+	<ul><p class="apih2">
+	Example:
+<ul><pre>
+import sys, CORBA, Foo__POA
+
+orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
+poa = orb.resolve_initial_references("RootPOA")
+
+class Bar(Foo__POA.Bar):
+   # Assume the interface for Bar defines void die();
+	def die(self):
+		orb.shutdown()
+
+servant = Account()._this()
+orb.run()
+</pre></ul>
+	</ul>
+
+<hr>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+
+
