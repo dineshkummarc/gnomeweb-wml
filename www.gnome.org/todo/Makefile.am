@@ -1,4 +1,4 @@
-SUBDIRS=
+SUBDIRS=admin
 
 urlpath=/todo
 
