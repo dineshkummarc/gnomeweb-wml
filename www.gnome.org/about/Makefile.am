@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath =
+urlpath = /about
 
 page_SCRIPTS = \
 	index.html
