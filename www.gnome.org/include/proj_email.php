@@ -31,7 +31,7 @@ while ($row_admins = db_fetch_array($res_admins)) {
 
 Project Full Name     :  '.$row_grp['group_name'].'
 Project Unix Name     :  '.$row_grp['unix_group_name'].'
-Project Administration:  'http://'.$GLOBALS['sys_default_domain'].'/project/admin/?group_id='
+Project Administration:  http://'.$GLOBALS['sys_default_domain'].'/project/admin/?group_id='
 .$row_grp['group_id'].'
 
 We highly suggest that you now create a public description for your project. 
