@@ -84,8 +84,8 @@ banner_images=\
 	banner-downloadingsource.gif\
 	banner-contribute.png\
 	banner-contribute.gif\
-  banner-accessability.png\
-  banner-accessability.gif
+  banner-accessibility.png\
+  banner-accessibility.gif
 
 popdown_images=\
 	popdown-endcap-blue.png\
@@ -174,8 +174,8 @@ sidebar_items=\
 	sidebar-translations.gif\
   sidebar-gnomefoundation.png\
   sidebar-gnomefoundation.gif\
-	sidebar-accessability.png\
-	sidebar-accessability.gif
+	sidebar-accessibility.png\
+	sidebar-accessibility.gif
 
 
 topbar_headers=\
