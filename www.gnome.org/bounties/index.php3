@@ -60,6 +60,21 @@ bounty.
 
 <?php box_end (); ?>
 
+<?php box_start ("Important Note", "unset", "unset", "UNKNOWN-ID", "0", "#ffffff", "#303030", "#000000", "#f00000"); ?>
+
+Bounties will not be awarded unless:
+
+<ul>
+<li>Your code is complete and works,</li><br>
+<li>It has been accepted into the main development trees by the module
+maintainers, and</li><br>
+<li>You have completed the <a href="claim.php3">bounty claim form</a>!</li><br>
+</ul>
+
+And of course, all of the rules below still apply.
+
+<?php box_end (); ?>
+
 <?php box_start ("Contest Rules"); ?>
 
 <ol>
