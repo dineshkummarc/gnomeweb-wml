@@ -17,7 +17,7 @@ misc_images=\
 banner_images=\
 	banner-gnomeis.png\
 	banner-seegnome.png\
-  banner-calendar.png\
+	banner-calendar.png\
 	banner-commercialsupport.png\
 	banner-developwith.png\
 	banner-findout.png\

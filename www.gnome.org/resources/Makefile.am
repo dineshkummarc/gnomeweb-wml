@@ -1,9 +1,9 @@
 SUBDIRS=
 
-urlpath=
+urlpath=/resources
 
 page_SCRIPTS= \
-	mailinglists.html
+	mailing-lists.html
 
 include $(top_srcdir)/rules.common
 
