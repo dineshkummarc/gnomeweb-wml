@@ -1,4 +1,4 @@
-SUBDIRS=images library home
+SUBDIRS=
 
 urlpath=/projects/gnome-print/
 
