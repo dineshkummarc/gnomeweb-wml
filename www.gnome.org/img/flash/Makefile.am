@@ -14,5 +14,4 @@ page_DATA = \
 	two-six.png \
 	official-gnome-2-developers-guide.png
 
-
 include $(top_srcdir)/rules.common
