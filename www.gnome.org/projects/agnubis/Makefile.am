@@ -6,6 +6,7 @@ page_SCRIPTS=				\
 		foot.shtml		\
 		index.shtml		\
 		building.shtml		\
+		screenshots.shtml	\
 		go.css			\
 		head.shtml
 
