@@ -218,7 +218,7 @@
 	<tr>
 	  <td valign="top">&nbsp;</td>
 	  <td valign="top" colspan="2">
-	    <textarea name="comments" cols="35" rows="5"></TEXTAREA>
+	    <textarea name="comments" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
 	</tr>
