@@ -16,3 +16,114 @@ inconvenience, so you're welcome to do these at any time:
 	anything else that doesn't help us shift towards XHTML Strict
 
 Otherwise, please mail gnome-web-list@gnome.org and ask for permission.
+
+
+
+---------------------------------------
+A brief primer about gnome-web hacking.
+---------------------------------------
+
+gnome.org hosts many Web sites.  The source for the sites are in GNOME CVS in several modules.  Each module contains one or more Web sites and a method to generate the site.  The long term goal is to unify the sites, both in presentation and how they are generated.
+
+
+
+WEb HACKING TOOLS
+
+CVS         - for checking out modules, updating code, creating patches  
+              and committing.
+build-tools - for generating and merging content with style and include 
+              files.  The most important tool is make, which controls 
+              the tools are used to generate each page.
+patch       - for applying diffs/patches to update code with changes 
+              from other developers.
+editor      - for making changes. GEdit, vi, emacs, bluefish, and screem 
+              to name a few.  The sites use HTML, PHP, Perl, and shell--
+              so a versatile editor that does syntax highlighting is 
+              practical.
+validator   - for proving the your changes are correct.  Tidy and xmllint 
+              are excellent, and can even correct minor errors. The w3 
+              hosts a validation service at validator.w3.org.
+Web Server  - for serving pages and running the applications.
+Web Browser - for viewing the changes.  Most modern browsers will will do, 
+              though Mozilla and Galeon provide the JavaScript debugger 
+              which can be useful.
+Bugzilla    - for opening, updating, and closing bugs and enhancements 
+              about the Web sites.
+
+
+
+CHECKING OUT THE CODE
+
+The GNOME Web sites are stored in cvs.gnome.org in gnomeweb-wml, web-devel-2, and foundation-web modules, as too are lxr (cvs), bosnsai (cvs), and bugzilla:
+
+Site                  Module
+www.gnome.org         gnomeweb-wml
+foundation.gnome.org  foundation-web
+developer.gnome.org   web-devel-2
+guadec.gnome.org      gnomeweb-wml
+cvs.gnome.org         lxr and bonsai
+bugzilla.gnome.org    bugzilla
+mail.gnome.org        none
+irc.gnome.org         none
+
+Instructions for using GNOME CVS are located at 
+http://developer.gnome.org/tools/cvs.html.  Check out one, or all, of the modules out.  
+
+Run, at the top of each module, 'autogen.sh --with-http-prefix=HOST', where HOST is the base URL where you will access the test site.  HOST may be like 'http://wgo' as was set in the host file example below.  I have:
+
+Site                  Host
+www.gnome.org         http://wgo
+foundation.gnome.org  http://fgo
+developer.gnome.org   http://dgo
+guadec.gnome.org      http://ggo
+
+For each site within each module, 'cd' into it, and type 'make' to build the test site.  The web-devel-2 module is an exception, 'cd' into its content directory and run 'make'.
+
+
+
+SETTING UP THE WEB SERVER
+
+I recommend setting up apache with vhosts, one for each Web site you wish to work on.  Almost Web server that will do, though PHP may require configuration.  Consult your Web server documentation for specifics.  What follows are the basic steps I took QA my changes to the code.
+
+I added additional host names to my /etc/hosts file:
+127.0.0.1       autumn    localhost       wgo dgo fgo ggo lgo
+
+Check that the htaccess files are enabled in the apache httpd.conf:
+AccessFileName .htaccess
+
+Check that virtual host naming is enabled in the apache httpd.conf:
+NameVirtualHost *
+
+For each virtual host, add a section like below to the apache httpd.conf
+<VirtualHost *>
+    DocumentRoot /home/chovey/Projects/gnome2/gnomeweb-wml/www.gnome.org/
+    ServerName wgo
+</VirtualHost>
+
+Restart Apache.  With your browser, test that everything worked by visiting each site.  Using the setup described above 'http://wgo/' should display the www.gnome.org homepage.
+
+
+
+MAKING CHANGES
+
+Make your changes to the site(s) using your editor.  Issue the 'make' command at the top of the site directory to regenerate the site to see your changes.  The make program uses the Makefile.am file in each directory to call a script that merges header, footer and CSS content with the source page to generate the final page.  The scripts and included content are located at the top of the module in the scripts and include directories.
+
+If you add files to a site, be sure to update the Makefile.am file in the same directory with the file names.  Makefile.am contains the list of files that the make program must compile and/or generate for the site.  If you create a directory, you must also create a Makefile.am in that directory, AND you must add that Makefile.am to the configure.in file located at the top of the module.  You must rerun 'autogen.sh --with-http-prefix=HOST' to make file and directory additions take affect, and you must run 'make' to see them.  
+
+Moving a directory will break its history in CVS, so please contact a CVS administrator to make arrangements.  Breaking URLs is a BAD THING for search engines, bookmarks, and linking sites.  If an asset must move, a redirect should be setup in the htaccess file located at the top of the module.  Note that the htaccess file is copied by the make program to the generated site as .htaccess.
+
+Some older PHP application require the true GNOME server to run so they cannot easily be developed.
+
+Good markup makes good pages.  Please check that your work is free of errors.  Tidy, from tidy.sf.org, is a HTML markup validator, cleaner, and transformer.  Use the 'tidy -e' command to check for errors.  Errors may come from your changes, the included, assets, or by their merger.  Tidy's cleaning and formating features can be used, but they are limited since it cannot check the source file.
+
+
+
+COMMITTING CHANGES
+
+If you created new files and directories, add them to cvs.  Remove your deleted files from CVS.  You should run 'cvs up' at the top of the module to get the most recent changes from CVS.  Be sure to check that none of your change show up as a conflict.
+
+Run the prepare-ChangeLog.pl script (from http://developer.gnome.org/tools/scripts.html) at the top of the module.  Update the ChangeLog file at the top of the module with your changes.  The modules's maintainer can give you permission to commit after the patch is reviewed.  If you do not have commit rights, the maintainer or another member of the webhackers group can.
+
+To create a patch, run 'cvs diff > module_name-your_name-fix_description.patch' at the top of the module.  The patch should be sent to the gnome-web-list to notify someone to review your changes.  If you can catch the attention of a maintainer in #webhackers on irc, you can send the patch to them.
+
+If the fix is for a filed bug in bugzilla, then the bug number will be a suitable description for the patch.  Please update the bug in bugzilla by attaching the patch and use the keyword PATCH so that it can be found.
