@@ -112,6 +112,12 @@ bounty.
 						       alt="" border=0><br>
 		    <b>Tasks</b></a>
 	    </td>
+	    
+	    <td align="center">
+	      <a STYLE="text-decoration:none" href="Memory.html"><img src="memory.png" 
+						       alt="" border=0><br>
+		    <b>Tasks</b></a>
+	    </td>
 	  </tr>
 </table>
 </center>
@@ -138,10 +144,10 @@ files", "Tasks", "300", "127557", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
 <?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
 <?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
-<?php taskrow ("Add image data to the icon cache", "Miscellaneous", "100", "169344", ""); ?>
-<?php taskrow ("Use a mmap'able cache for fontconfig", "Miscellaneous", "200", "169345", ""); ?>
-<?php taskrow ("Create a test suite for browsing in Nautilus", "Miscellaneous", "200", "169346", ""); ?>
-<?php taskrow ("Remove duplication of desktop backgrounds", "Miscellaneous", "200", "169347", ""); ?>
+<?php taskrow ("Add image data to the icon cache", "Memory", "100", "169344", ""); ?>
+<?php taskrow ("Use a mmap'able cache for fontconfig", "Memory", "200", "169345", ""); ?>
+<?php taskrow ("Create a test suite for browsing in Nautilus", "Memory", "200", "169346", ""); ?>
+<?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes"); ?>
