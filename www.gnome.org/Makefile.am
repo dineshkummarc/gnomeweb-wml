@@ -5,7 +5,8 @@ urlpath=
 page_SCRIPTS=index.shtml		\
 	findout.html 		\
 	seegnome.html   \
-	menucontrol.js
+	menucontrol.js  \
+	recentsoftware.php3
 
 include $(top_srcdir)/rules.common
 
