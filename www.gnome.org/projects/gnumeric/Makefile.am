@@ -12,6 +12,7 @@ page_SCRIPTS=index.shtml		\
 		head.shtml		\
 		screenshots.shtml	\
 		technology.shtml	\
+		functions.shtml	\
     	    mailing-list.html		\
 	    thumb.gif			\
 	    v8.xsd			\
