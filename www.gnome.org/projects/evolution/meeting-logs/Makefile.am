@@ -8,6 +8,8 @@ page_DATA =			\
 	2005-02-09.shtml	\
 	2005-02-16.shtml	\
 	2005-02-23.shtml	\
-	2005-03-02.shtml
+	2005-03-02.shtml	\
+	2005-03-09.shtml	\
+	2005-03-16.shtml
 
 include $(top_srcdir)/rules.common
