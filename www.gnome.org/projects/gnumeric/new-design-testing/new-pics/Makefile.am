@@ -1,6 +1,4 @@
-SUBDIRS=
-
-urlpath=/projects/gnumeric/new-pics
+urlpath=/projects/gnumeric/new-design-testing/new-pics
 
 page_SCRIPTS=\
 	    startup.png			\

@@ -1,12 +1,12 @@
 SUBDIRS=
 
-urlpath=/projects/gnumeric/func-tests
+urlpath=/projects/gnumeric/new-design-testing/func-tests
 
-page_SCRIPTS=	\
+page_SCRIPTS=		\
     address.xls 	\
     bitwise.xls 	\
     datefuns.xls 	\
-    dbfuns.xls 	\
+    dbfuns.xls 		\
     engfuns.xls 	\
     finfuns.xls 	\
     functions.xls 	\
