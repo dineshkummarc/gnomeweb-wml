@@ -18,6 +18,7 @@ $query = "SELECT groups.group_name AS group_name,"
 	. "frs_release.release_date AS release_date "
 	. "FROM frs_release,groups WHERE "
 	. "frs_release.group_id=groups.group_id "
+	. "AND frs_release.status_id=1 "
 	. "ORDER BY frs_release.release_date DESC LIMIT ".$limit;
 
 //print $query."\n";
