@@ -91,7 +91,7 @@ $res_memb = db_query("SELECT users.realname,users.user_id,users.user_name,user_g
 	while ($row_memb=db_fetch_array($res_memb)) {
 		if ($row_memb['admin_flags']=='A') $img="trash-x.png";
 		else $img="trash.png";
-                if ($is_admin) $button='<INPUT TYPE="IMAGE" NAME="DELETE" SRC="/images/ic/'.$img.'" HEIGHT="16" WIDTH="16" BORDER="0">';
+                if ($is_admin) $button='<INPUT TYPE="IMAGE" NAME="DELETE" SRC="/images/'.$img.'" HEIGHT="16" WIDTH="16" BORDER="0">';
                 else $button='&nbsp;';
 		print '
 		<FORM ACTION="'. $PHP_SELF .'" METHOD="POST"><INPUT TYPE="HIDDEN" NAME="func" VALUE="rmuser">'.

@@ -76,14 +76,14 @@ if ( !$res_release || $num_releases < 1 ) {
 	      	}
 		print '<TR BGCOLOR="'. $bgcolor .'"><TD>'.$project_release['name'].'</TD>'
 			. '<TD align="center"><A HREF="shownotes.php?release_id='.$project_release['release_id'].'">'
-			. html_image("images/ic/manual16c.png",'15','15',array('alt'=>'Change Log'))
+			. html_image("images/manual16c.png",'15','15',array('alt'=>'Change Log'))
 			. '</A></TD><TD align="center">';
 		
 		$project = new Project($group_id);
 
 		if ($project->getDownload() != "")
 		{
-			print '<A HREF="'.$project->getDownload().'">'.html_image("images/ic/save16.png",'15','15',array('alt'=>'Download')).'</A>';
+			print '<A HREF="'.$project->getDownload().'">'.html_image("images/save16.png",'15','15',array('alt'=>'Download')).'</A>';
 		}
 		else
 		{

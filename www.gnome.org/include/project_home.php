@@ -211,10 +211,10 @@ echo $HTML->box1_top($Language->LATEST_FILE_RELEASES);
 			</TD>
 			<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
 			<TD><A href="/project/shownotes.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">';
-			echo html_image("images/ic/manual16c.png",'15','15',array('alt'=>'Change Log'));
+			echo html_image("images/manual16c.png",'15','15',array('alt'=>'Change Log'));
 			/*
 			echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '">';
-			echo html_image("images/ic/mail16d.png",'15','15',array('alt'=>'Monitor This Package'));
+			echo html_image("images/mail16d.png",'15','15',array('alt'=>'Monitor This Package'));
 			echo '</A>
 			*/
 			echo '

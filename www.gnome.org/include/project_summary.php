@@ -100,7 +100,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/forum/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/notes16.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
+		$return .= html_image("images/notes16.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
 		$return .= '&nbsp;Forums</A>';
 
 		if ($mode != 'compact') {
@@ -116,7 +116,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/bugs/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/bug16b.png","20","20",array("BORDER"=>"0","ALT"=>"Bugs"));
+		$return .= html_image("images/bug16b.png","20","20",array("BORDER"=>"0","ALT"=>"Bugs"));
 		$return .= '&nbsp;Bug&nbsp;Tracker</A>';
 
 		if ($mode != 'compact') {
@@ -132,7 +132,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/support/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/support16b.jpg","20","20",array("BORDER"=>"0","ALT"=>"Support"));
+		$return .= html_image("images/support16b.jpg","20","20",array("BORDER"=>"0","ALT"=>"Support"));
 		$return .= '&nbsp;Tech&nbsp;Support</A>';
 
 		if ($mode != 'compact') {
@@ -148,7 +148,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/docman/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/docman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Docs"));
+		$return .= html_image("images/docman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Docs"));
 		$return .= '&nbsp;Doc&nbsp;Manager</A>';
 	}
 
@@ -159,7 +159,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/patch/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/patch.png","20","20",array("BORDER"=>"0","ALT"=>"Patches"));
+		$return .= html_image("images/patch.png","20","20",array("BORDER"=>"0","ALT"=>"Patches"));
 		$return .= '&nbsp;Patch&nbsp;Manager</A>';
 
 		if ($mode != 'compact') {
@@ -175,7 +175,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/mail/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/mail16b.png","20","20",array("BORDER"=>"0","ALT"=>"Mail Lists"));
+		$return .= html_image("images/mail16b.png","20","20",array("BORDER"=>"0","ALT"=>"Mail Lists"));
 		$return .= '&nbsp;Mailing&nbsp;Lists</A>';
 
 		if ($mode != 'compact') {
@@ -190,7 +190,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/pm/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/taskman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
+		$return .= html_image("images/taskman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
 		$return .= '&nbsp;Task&nbsp;Manager</A>';
 
 		if ($mode != 'compact') {
@@ -218,7 +218,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/survey/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/survey16b.png","20","20",array("BORDER"=>"0","ALT"=>"Surveys"));
+		$return .= html_image("images/survey16b.png","20","20",array("BORDER"=>"0","ALT"=>"Surveys"));
 		$return .= "&nbsp;Surveys</A>";
 		if ($mode != 'compact') {
 			$return .= ' ( <B>'. project_get_survey_count($group_id) .'</B> surveys )';
@@ -232,7 +232,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/cvs/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/cvs16b.png","20","20",array("BORDER"=>"0","ALT"=>"CVS"));
+		$return .= html_image("images/cvs16b.png","20","20",array("BORDER"=>"0","ALT"=>"CVS"));
 		$return .= "&nbsp;CVS&nbsp;Tree</A>";
 
 		if ($mode != 'compact') {
@@ -249,7 +249,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/project/showfiles.php?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/ftp16b.png","20","20",array("BORDER"=>"0","ALT"=>"FTP"));
+		$return .= html_image("images/ftp16b.png","20","20",array("BORDER"=>"0","ALT"=>"FTP"));
 		$return .= "&nbsp;Released&nbsp;Files</A>";
 	}
 
