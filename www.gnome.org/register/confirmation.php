@@ -36,7 +36,7 @@ if ($show_confirm) {
 	<TABLE cellpadding="2" cellspacing="2" border="0">
 	<TR><TD><B>Full Name</B></TD><TD>:</TD><TD>'.$form_full_name.'</TD></TR>
 	<TR><TD><B>UNIX Name</B></TD><TD><B>:</B></TD><TD>'.$form_unix_name.'</TD></TR>
-	<TR><TD><B>Description</B></TD><TD><B>:</B></TD><TD>'.$form_description.'</TD></TR>
+	<TR><TD><B>Description</B></TD><TD><B>:</B></TD><TD>'.stripslashes($form_description).'</TD></TR>
 	<TR><TD><B>Mini Description</B></TD><TD><B>:</B></TD><TD>'.$form_minidesc.'</TD></TR>
 	<TR><TD><B>GNOME Support</B></TD><TD><B>:</B></TD><TD>';
 	echo ($form_gnome_support) ? ('Yes') : ('No, GTK+ Only');
@@ -60,8 +60,8 @@ if ($show_confirm) {
 	<P>If everything looks good, click below and your project listing will be created.</P>
 	<INPUT TYPE="HIDDEN" NAME="form_full_name" VALUE="'.$form_full_name.'">
 	<INPUT TYPE="HIDDEN" NAME="form_unix_name" VALUE="'.$form_unix_name.'">
-	<INPUT TYPE="HIDDEN" NAME="form_description" VALUE="'.addslashes(htmlspecialchars($form_description)).'">
-	<INPUT TYPE="HIDDEN" NAME="form_minidesc" VALUE="'.addslashes(htmlspecialchars($form_minidesc)).'">
+	<INPUT TYPE="HIDDEN" NAME="form_description" VALUE="'.htmlspecialchars($form_description).'">
+	<INPUT TYPE="HIDDEN" NAME="form_minidesc" VALUE="'.htmlspecialchars($form_minidesc).'">
 	<INPUT TYPE="HIDDEN" NAME="form_gnome_support" VALUE="'.$form_gnome_support.'">
 	<INPUT TYPE="HIDDEN" NAME="form_homepage" VALUE="'.$form_homepage.'">
 	<INPUT TYPE="HIDDEN" NAME="form_screenshot" VALUE="'.$form_screenshot.'">
@@ -69,7 +69,7 @@ if ($show_confirm) {
 	<INPUT TYPE="HIDDEN" NAME="form_cvs" VALUE="'.$form_cvs.'">
 	<INPUT TYPE="HIDDEN" NAME="form_bugs" VALUE="'.$form_bugs.'">
 	<INPUT TYPE="HIDDEN" NAME="form_license" VALUE="'.$form_license.'">
-	<INPUT TYPE="HIDDEN" NAME="form_license_other" VALUE="'.addslashes(htmlspecialchars($form_license_other)).'">
+	<INPUT TYPE="HIDDEN" NAME="form_license_other" VALUE="'.htmlspecialchars($form_license_other).'">
 	<INPUT type=submit name="looks_good" value="Looks good to me">
 	</FORM>';
 
@@ -88,8 +88,8 @@ if ($show_confirm) {
 		. "'1',"
 		. "'P',"
 		. "'".$form_unix_name."',"
-		. "'".htmlspecialchars($form_description)."',"
-		. "'".htmlspecialchars($form_minidesc)."',"
+		. "'".stripslashes($form_description)."',"
+		. "'".stripslashes($form_minidesc)."',"
 		. "'".$form_gnome_support."',"
 		. "'".$form_homepage."',"
 		. "'".$form_cvs."',"
