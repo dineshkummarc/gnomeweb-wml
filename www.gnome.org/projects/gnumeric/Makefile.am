@@ -2,7 +2,7 @@ SUBDIRS= new-pics screenshots doc images
 
 urlpath=/projects/gnumeric/
 
-page_SCRIPTS= 	index.shtml		\
+page_SCRIPTS=index.shtml		\
 		credits.shtml		\
 		download.shtml		\
 		faq.shtml		\
