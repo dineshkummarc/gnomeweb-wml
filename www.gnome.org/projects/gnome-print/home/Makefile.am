@@ -7,7 +7,19 @@ page_SCRIPTS= \
 	authors.html \
 	copying.html \
 	download.html \
-	meta
+	meta \
+	starting.html \
+	changelog.html \
+	faq.html \
+	applications.html \
+	install.html \
+	architecture.html \
+	developer.meta \
+	tutorial.html \
+	documentation.meta \
+	contacts.html \
+	contacts.meta \
+	readme.html
 
 include $(top_srcdir)/rules.common
 
