@@ -289,7 +289,9 @@ class FRS extends Error {
 			return false;
 		} else {
 			$date_expl = explode("-",$release_date);
-		    $release_date = mktime(0,0,0,$date_expl[1],$date_expl[2],$date_expl[0]);
+			$time_expl = explode(":", date ("H:i:s"));
+		    $release_date = mktime($time_expl[0],$time_expl[1],$time_expl[2],
+				$date_expl[1],$date_expl[2],$date_expl[0]);
 		}
 		
 		$res=db_query("UPDATE 
