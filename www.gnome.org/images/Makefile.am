@@ -16,8 +16,23 @@ misc_images=\
 
 banner_images=\
 	banner-gnomeis.png\
-	banner-seegnome.png
-
+	banner-seegnome.png\
+  banner-calendar.png\
+	banner-commercialsupport.png\
+	banner-developwith.png\
+	banner-findout.png\
+	banner-getgnome.png\
+	banner-getmore.png\
+	banner-latestnews.png\
+	banner-learn.png\
+	banner-mailinlists.png\
+	banner-maintainers.png\
+	banner-meetthedevelopers.png\
+	banner-presscontacts.png\
+	banner-pressreleases.png\
+	banner-resourceindex.png\
+	banner-tipsandtutorials.png
+	
 popdown_images=\
 	popdown-endcap-blue.png\
 	popdown-endcap-green.png\
