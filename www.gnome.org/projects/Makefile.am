@@ -10,7 +10,6 @@ SUBDIRS=			\
 	gb			\
 	mc			\
 	nautilus		\
-	gnome-pilot		\
 	gnome-print		\
 	agnubis			\
 	gst
