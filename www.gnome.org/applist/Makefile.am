@@ -8,6 +8,8 @@ page_SCRIPTS=index.html\
              view.php3\
 						 editwhich.html\
 						 add.php3\
+						 rss_utils.inc\
+						 rss_newreleases.php\
 						 edit.php3
 
 
