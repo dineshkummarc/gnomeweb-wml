@@ -24,6 +24,10 @@ other UNIX systems.
 
 <table cellpadding="5">
 <tr>
+	<td><img src="images/summit.png" width="48" height="48" alt="GNOME News and Support"></td>
+	<td>A GNOME news website called <a href="http://www.gnomedesktop.org">FootNotes</a> is now available. An accompanying site <a href="http://www.gnomesupport.org/">GNOME Support</a> provides GNOME help from volunteers.</td>
+ </tr>
+<tr>
 	<td><img src="images/gnome2.png" width="48" height="48" alt="GNOME 2"></td>
 	<td>The <a href="/start/2.0/">GNOME 2.0 Desktop &amp; Developer Platform has been released</a> boasting a simpler user interface and a host of powerful developer tools. Read the <a href="/pr-gnome20.html">Press Release</a>.</td>
 </tr>
@@ -61,8 +65,9 @@ if (filectime("recentapps-cache.html") < (time() - 300)) { # If cache is older t
 		. "groups.unix_group_name AS unix_group_name,"
 		. "groups.short_description AS short_description,"
 		. "frs_release.release_date AS release_date "
-		. "FROM frs_release,groups WHERE "
-		. "frs_release.group_id=groups.group_id "
+		. "FROM frs_release,groups "
+		. "WHERE frs_release.group_id=groups.group_id "
+		. "AND frs_release.status_id=1 "
 		. "ORDER BY frs_release.release_date DESC LIMIT 6";
 
   $res = mysql_query($query);
