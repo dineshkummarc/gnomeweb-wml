@@ -12,6 +12,7 @@ page_SCRIPTS=go.css                \
                appletstutorial.html \
                orbit-python.pdf    \
                legal.xml           \
-               orbit-docs.tar.gz 
+               orbit-docs.tar.gz   \
+               guadec2004.sxi  linuxtag2004.sxi
 
 include $(top_srcdir)/rules.common
