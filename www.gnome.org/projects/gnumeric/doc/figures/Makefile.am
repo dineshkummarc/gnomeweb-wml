@@ -315,6 +315,6 @@ worksheet-rows-1.png  \
 worksheet-running-calc-1.png  \
 zoom-dialog.png  \
 zoom-toolbar.png  \
-zoom.pn1
+zoom.png
 
 include $(top_srcdir)/rules.common
