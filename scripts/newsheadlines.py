@@ -40,7 +40,7 @@ class PrintHeadline(saxlib.HandlerBase):
     def endElement(self, name):
 	if (self.headlineCount >= self.headlineLimit): return
 	if name == 'item':
-	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b><font size='-2'></font></td></tr>"
+	    print "<b><a href='" + self.itemLink + "'>" + self.itemTitle + "</a></b><font size='-2'></font><br>&nbsp;</td></tr>"
 	    self.inItem = 0
 	    self.headlineCount = self.headlineCount + 1
 	if name == 'title':
