@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/REC-html40/loose.dtd">
 
 <?
-  $current_version = "1.99.3";
+  $current_version = "1.99.4";
   $date_release = "November 25, 2003";
 ?>
   
