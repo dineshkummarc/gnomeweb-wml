@@ -37,7 +37,7 @@ while ($row = db_fetch_array($res)) {
 			. "<a href=\"http://$GLOBALS[sys_default_domain]/softwaremap/projects/"
 			. $row[unix_group_name]."\">".htmlspecialchars($row[group_name])."</a></td>\n\t"
 			. "<td nowrap>".date("Y-m-d", $row[release_date])."</td>\n\t"
-			. "<td align=\"center\" nowrap>".$row[release_name]."</td>\n\t"
+			. "<td align=\"center\">".$row[release_name]."</td>\n\t"
 			. "<td>".$row[short_description]."</td></tr>\n";
 		$outputtotal++;
 	}
