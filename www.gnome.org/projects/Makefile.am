@@ -12,7 +12,8 @@ SUBDIRS=			\
 	ORBit2			\
 	gnome-print		\
 	agnubis			\
-	gst
+	gst			\
+	gnome-network
 
 urlpath=/projects
 
