@@ -1,0 +1,282 @@
+**** BEGIN LOGGING AT Wed Feb  9 16:03:33 2005
+
+Feb 09 16:04:11 <jpr>	2 more minutes and then we'll start
+Feb 09 16:04:13 -->	seb128 (~seb128@ANancy-151-1-36-224.w83-196.abo.wanadoo.fr) has joined #evolution-meet
+Feb 09 16:04:41 -->	siva_ (~siva@202.88.171.168) has joined #evolution-meet
+Feb 09 16:05:23 -->	kmaraas (~kmaraas@106.80-203-35.nextgentel.com) has joined #evolution-meet
+Feb 09 16:05:24 -->	gicmo (~gicmo@www.deep-sorrow.de) has joined #evolution-meet
+Feb 09 16:05:40 <jpr>	ok, here go
+Feb 09 16:05:46 <jpr>	2.1 development status
+Feb 09 16:05:57 <jpr>	as per the GNOME schedule we've now hit feature freeze
+Feb 09 16:06:02 <jpr>	err
+Feb 09 16:06:05 <jpr>	string freeze :-)
+Feb 09 16:06:21 <jpr>	any string changes now require approval as do feature/ui freeze breaks
+Feb 09 16:06:25 <fejj>	8am too early for ya jp? :)
+Feb 09 16:06:37 <jpr>	i had a meeting before this even
+Feb 09 16:06:42 <fejj>	ouch
+Feb 09 16:06:53 <jpr>	we need to go over the i18n keyword bugs
+Feb 09 16:07:08 <jpr>	and see what ones are actually going to get fixed this time around
+Feb 09 16:07:39 <jpr>	if its a simple string change and it was reported by a translation team member it should probably be fixed
+Feb 09 16:07:48 <jpr>	and i'm sure we'd get approval for it
+Feb 09 16:08:04 <jpr>	kmaraas can probably back me up on that :-)
+Feb 09 16:08:20 <kmaraas>	hopefully
+Feb 09 16:08:32 <kmaraas>	historically christian has been stricter than me wrt those :)
+Feb 09 16:08:39 <jpr>	ok
+Feb 09 16:08:50 <jpr>	several outstanding ones were reported by him
+Feb 09 16:09:09 <kmaraas>	yeah, I don't think it's going to be a problem if it's done early in the freeze period
+Feb 09 16:09:32 <jpr>	especially if they are in the typo/grammar/untranslatable category
+Feb 09 16:09:36 <jpr>	i would think
+Feb 09 16:09:53 <kmaraas>	yeah
+Feb 09 16:09:54 <jpr>	now, coinciding with the string freeze we now have patch review mode
+Feb 09 16:10:17 <jpr>	there are atleast two reviewers in all modules except gtkhtml
+Feb 09 16:10:26 <jpr>	i need a volunteer for that
+Feb 09 16:10:40 <rodo>	heh
+Feb 09 16:10:43 <jpr>	or we have to decide to trust rodo :-)
+Feb 09 16:10:55 <jpr>	i'm not sure how difficult reviewing some of those patches are
+Feb 09 16:11:12 <jpr>	any takes?
+Feb 09 16:11:16 <jpr>	takers even
+Feb 09 16:11:17 <rodrigo>	we can review the code, but not the functionality I guess
+Feb 09 16:11:26 <dobey>	i suppose i could review them
+Feb 09 16:11:31 -->	smurfd (~smurfd@c-514970d5.010-6-76786a2.cust.bredbandsbolaget.se) has joined #evolution-meet
+Feb 09 16:11:33 <dobey>	or try to help anyway :)
+Feb 09 16:11:58 <jpr>	ok
+Feb 09 16:12:02 <jpr>	rodrigo and dobey it is then
+Feb 09 16:12:07 <jpr>	rodo: sound ok?
+Feb 09 16:12:16 <rodo>	yes, thanks guys
+Feb 09 16:12:25 <harish>	jpr,  gw mailer ?? 
+Feb 09 16:12:34 <dobey>	given that i also now maintain gtkkhtml2 :)
+Feb 09 16:12:41 <jpr>	harish: it was in the note i sent out
+Feb 09 16:12:45 <rodrigo>	well, as I said I can only have a look at coding mistakes, but yeah, ok :)
+Feb 09 16:13:17 <jpr>	harish: groupwise in e-d-s is you, chen and siva
+Feb 09 16:13:27 -->	mmoulder (~mmoulder@mmoulder.dnsdhcp.provo.novell.com) has joined #evolution-meet
+Feb 09 16:13:35 <jpr>	harish: as a whole
+Feb 09 16:13:44 <jpr>	maybe partha instead of siva?
+Feb 09 16:14:18 <jpr>	2.0.4 timeline
+Feb 09 16:14:23 <siva_>	jpr, all of us :)
+Feb 09 16:14:45 <jpr>	ok, we'll organize that after
+Feb 09 16:14:50 <jpr>	we are still a bit behind on 2.0.4
+Feb 09 16:15:08 -->	christine (~christine@130.57.22.69) has joined #evolution-meet
+Feb 09 16:15:14 <jpr>	however i think we now have most of the fixes modulo 69566
+Feb 09 16:15:18 *	harish still associates mailer with evo rather than eds ...sorry i did not see it codewise
+Feb 09 16:15:37 <jpr>	harish: yah, codewise all gw specific stuff is in e-d-s except for the plugins
+Feb 09 16:15:43 <rodrigo>	jpr: looking at it, but can't reproduce
+Feb 09 16:15:47 <jpr>	we discovered the cause of the crash
+Feb 09 16:15:54 <jpr>	but not the original issue
+Feb 09 16:16:04 <jpr>	rodrigo: i could get it about 1 time in 5
+Feb 09 16:16:19 <jpr>	if i destroyed all the gconf settings and let it guess
+Feb 09 16:16:23 <jpr>	1.2
+Feb 09 16:16:31 <rodrigo>	jpr: did the g_sreturn/e_ereturn change fix the crash
+Feb 09 16:16:32 <rodrigo>	?
+Feb 09 16:16:37 <jpr>	(because i had an old bonoboconf thing
+Feb 09 16:16:42 <jpr>	rodrigo: yes, that fixes the crash
+Feb 09 16:16:48 <jpr>	however the error still occurs
+Feb 09 16:17:16 <jpr>	i saw some sort of generic I/O error on the console
+Feb 09 16:17:36 <jpr>	perhaps its got to do with libical loading the file off disk in a thread
+Feb 09 16:17:58 <jpr>	we can follow up later
+Feb 09 16:18:04 <rodrigo>	ok
+Feb 09 16:18:12 <jpr>	are there any other major 2.0.4 issues we need to get in?
+Feb 09 16:18:23 <jpr>	we have siva's fix now
+Feb 09 16:18:29 <jpr>	and the 70590 fix
+Feb 09 16:18:36 <jpr>	plus the password forgetting fix
+Feb 09 16:18:37 <fejj>	did nozed ever do that camel-lock-helper fix?
+Feb 09 16:18:41 <jpr>	yep
+Feb 09 16:18:45 <jpr>	long time ago
+Feb 09 16:18:49 <fejj>	ok
+Feb 09 16:19:02 <siva_>	jpr, i will have one more ldap backend /active dir fix
+Feb 09 16:19:06 <jpr>	ok
+Feb 09 16:19:07 <siva_>	tommoroow
+Feb 09 16:19:10 <jpr>	ok
+Feb 09 16:19:36 <jpr>	surfy_home, christine: are there connector fixes we must take for 2.0.4 over and above the i18n one?
+Feb 09 16:19:48 <jpr>	oh, the plain text auth fix
+Feb 09 16:19:58 <jpr>	anything else?
+Feb 09 16:20:14 <jpr>	christine: note, "must take" not "would like too" :-)
+Feb 09 16:20:32 <christine>	jpr: are the others that surf said are fixed already in? 
+Feb 09 16:20:40 <jpr>	presumably
+Feb 09 16:20:47 <surfy_home>	yeah they are in
+Feb 09 16:21:03 <jpr>	anything other than those already fixed?
+Feb 09 16:21:26 <jpr>	ok
+Feb 09 16:21:27 <christine>	cool!, then i do not think there are more -- others need more info from submitters so we cannot fix what isn't currnety understood
+Feb 09 16:21:29 <surfy_home>	all fixes have been commtted to gnome-2-8 branch
+Feb 09 16:21:35 <jpr>	great
+Feb 09 16:21:37 <surfy_home>	yeah
+Feb 09 16:21:42 <surfy_home>	still waiting for more info
+Feb 09 16:21:43 <jpr>	status reports
+Feb 09 16:21:52 <jpr>	dobey: what ya got for us
+Feb 09 16:21:57 <cmeadors>	jpr: I was curious about 70046
+Feb 09 16:22:23 <jpr>	thats a dupe thats fixed
+Feb 09 16:22:29 <dobey>	snaps should be at least buildable again after the sonum change for libecal
+Feb 09 16:22:30 <cmeadors>	ok
+Feb 09 16:22:35 <dobey>	i rebuilt gnome-panel yesterday
+Feb 09 16:22:35 <jpr>	cmeadors: not in 2.0.x though
+Feb 09 16:22:42 <jpr>	only in 2.1 currently
+Feb 09 16:22:46 <christine>	cmeadors: was this customer reported?
+Feb 09 16:22:53 <jpr>	dobey: great
+Feb 09 16:23:04 <jpr>	dobey: what about the context menu patch?
+Feb 09 16:23:05 <dobey>	and have been triaging some ui/i18n bugs that are assigned to pdes
+Feb 09 16:23:20 <dobey>	and trying to get release-team to look at the context menus patch to very little avail
+Feb 09 16:23:24 <jpr>	ok
+Feb 09 16:23:35 <jpr>	and are we pretty much done with non-hig related UI issues then for 2.1/2.2?
+Feb 09 16:23:41 <cmeadors>	christine: yes
+Feb 09 16:24:12 <dobey>	there are a couple actual bugs that are still there, since i have been trying to get the HIG/freeze stuff done first
+Feb 09 16:24:30 <jpr>	ok
+Feb 09 16:24:37 <dobey>	and there are some bugs that we should probably punt to 2.3 at this point, like the keybindings bug for preview pane
+Feb 09 16:24:45 *	kmaraas hurries and files a bug for a leak in e-d-s
+Feb 09 16:25:01 <jpr>	dobey: well, that particular one i'm willing to fix still
+Feb 09 16:25:07 <jpr>	if there is a good solution
+Feb 09 16:25:31 <jpr>	fejj: status?
+Feb 09 16:26:28 *	jpr pokes fejj
+Feb 09 16:26:39 <fejj>	oh, sorry
+Feb 09 16:26:59 <fejj>	uh, checked with dave nuttall about the extra linefeed bug in GW IMAP
+Feb 09 16:27:14 <fejj>	he said that's been fixed in sequoia (sp?)
+Feb 09 16:27:28 <fejj>	they've also done a lot of speed up fixes
+Feb 09 16:27:42 <jpr>	are they noticeable for evo?
+Feb 09 16:27:42 <fejj>	I checked XGWMOVE and we handle that properly
+Feb 09 16:27:49 <fejj>	yes
+Feb 09 16:27:50 <jpr>	cool
+Feb 09 16:28:19 <jpr>	harish: ?
+Feb 09 16:28:37 <harish>	bug fixing, checking the functionality as well as the top bugs on dmz4, providing
+Feb 09 16:29:01 <harish>	the server team with traces and working on the null id, attach issues..some patch review
+Feb 09 16:29:20 <harish>	working on the new interface that allows formulae to be sent to the server
+Feb 09 16:29:32 <jpr>	right, recurrence formulas
+Feb 09 16:29:37 <harish>	yup
+Feb 09 16:29:45 <jpr>	sounds good
+Feb 09 16:29:47 <jpr>	hpj: status?
+Feb 09 16:29:58 <hpj>	last week, continued work on OS X port
+Feb 09 16:30:15 <hpj>	making a reproducible evolution-on-jhbuild walkthrough
+Feb 09 16:30:21 <hpj>	unfortunately not done yet
+Feb 09 16:30:22 -->	rodo_ (~rodo@gprs40-131.eurotel.cz) has joined #evolution-meet
+Feb 09 16:30:36 <hpj>	and am switching to deal with the address entry auth problem
+Feb 09 16:30:43 <--	mmoulder (~mmoulder@mmoulder.dnsdhcp.provo.novell.com) has left #evolution-meet
+Feb 09 16:30:49 <jpr>	hpj: how is that coming?
+Feb 09 16:30:51 <rodo_>	ops, my inet connection broke
+Feb 09 16:30:53 <hpj>	i also need your (jpr's) blessng for the fix for bug 69583
+Feb 09 16:31:14 <jpr>	oh, i thought that had happened
+Feb 09 16:31:15 <jpr>	ok
+Feb 09 16:31:21 <hpj>	well, it *looks* like it shouldn't present a problem
+Feb 09 16:31:23 <jpr>	hpj: poke me right after this meeting
+Feb 09 16:31:29 <hpj>	unless i hit a snag i should have it done today
+Feb 09 16:31:40 <jpr>	ok, sounds good
+Feb 09 16:31:56 <hpj>	i think that's all
+Feb 09 16:32:02 <jpr>	in summary
+Feb 09 16:32:11 <jpr>	os x evo is up and running, right?
+Feb 09 16:32:18 <hpj>	yeah, it is
+Feb 09 16:32:24 <christine>	cool
+Feb 09 16:32:25 <hpj>	but there are 4-5 patches that are not in
+Feb 09 16:32:37 <hpj>	and i have two for exchange component that i haven't sent yet
+Feb 09 16:32:41 <tml>	is that under X11 or natively?
+Feb 09 16:32:46 <--	rodo has quit (Ping timeout: 600 seconds)
+Feb 09 16:32:49 <hpj>	but it's just trivial stuff
+Feb 09 16:32:52 <hpj>	tml: X11
+Feb 09 16:32:59 <christine>	hpj: blog! blog! blog! :)
+Feb 09 16:33:01 <hpj>	tml: nowhere near as complicated as your port :)
+Feb 09 16:33:10 <christine>	heh
+Feb 09 16:33:48 <hpj>	i delayed the blog entry because i seem to have a problem with the icons right now
+Feb 09 16:33:53 <jpr>	ok
+Feb 09 16:33:53 <christine>	ah
+Feb 09 16:34:01 <jpr>	it would still be cool though :-)
+Feb 09 16:34:07 <jpr>	rodo_: status?
+Feb 09 16:34:34 <rodo_>	bug fixing, some RTL, some general
+Feb 09 16:34:43 <jpr>	did you get much RTL feed back?
+Feb 09 16:34:45 <rodo_>	I have now better feedback on RTL
+Feb 09 16:34:51 <jpr>	great
+Feb 09 16:35:09 <rodo_>	did gtkhtml release and some reviewing
+Feb 09 16:35:33 <jpr>	whats the general feeling on it? buggy? 
+Feb 09 16:35:41 <jpr>	or works with minor bugs?
+Feb 09 16:35:43 <jpr>	or what?
+Feb 09 16:35:52 <rodo_>	for RTL I was fixing things like citaion on right, indentation fixes, ...
+Feb 09 16:36:10 <jpr>	dobey: didn't you see issues with tables at one point? are those files?
+Feb 09 16:36:38 <rodo_>	jpr: well, first responses were like it renders very well, but I cannot use it because of this bug in editing
+Feb 09 16:36:39 <dobey>	the size allocation issue?
+Feb 09 16:37:11 <dobey>	i filed it against Mailer, and notzed moved it to GtkHTML
+Feb 09 16:37:11 <rodo_>	so I went ahead and fixed some and get another problems with rendering and so on
+Feb 09 16:37:28 <jpr>	ok
+Feb 09 16:37:39 <jpr>	rodrigo: status?
+Feb 09 16:37:54 <rodrigo>	bug fixing and recurrence work, looking at GW recurrences also
+Feb 09 16:38:45 <jpr>	how is the recurrence stuff now? have you and harish tracked down most of the issues?
+Feb 09 16:38:52 <rodrigo>	yes, most of them
+Feb 09 16:38:56 <jpr>	ok
+Feb 09 16:38:59 <rodrigo>	there are still a few details to fix
+Feb 09 16:39:03 <jpr>	ok
+Feb 09 16:39:09 <jpr>	siva_: status?
+Feb 09 16:39:16 <siva_>	jpr, tracked down hk's migration issue and another ldap auth problem with active dir for 2.0.4, fixed some 2.1 bugs , reviewd some patches attached in bugzilla, more 2.1 bug fixing to come 
+Feb 09 16:39:19 <harish>	jpr: there are still a few issues more.. we shud be done with it soon
+Feb 09 16:39:32 <jpr>	siva_: ok
+Feb 09 16:39:42 <jpr>	surfy_home: status?
+Feb 09 16:40:03 <surfy_home>	jpr, 2.0.x bug triaging, fixing, reviews
+Feb 09 16:40:12 <surfy_home>	and also a few 2.1 fixes
+Feb 09 16:40:25 <jpr>	ok
+Feb 09 16:40:36 <jpr>	tml: status?
+Feb 09 16:41:05 <tml>	found a workaround for the hang problem, that is not a problem any longer
+Feb 09 16:41:17 <jpr>	the dbus hang?
+Feb 09 16:41:44 <tml>	then some more alignment problems, this time changing the idl compiler's output would have been too hairy
+Feb 09 16:41:48 <tml>	jpr: not dbus, orbit2
+Feb 09 16:41:56 <jpr>	ok
+Feb 09 16:42:14 <tml>	so for the alignment problems instead changed the dbus code, now works fine
+Feb 09 16:42:25 <tml>	and the previous idl compiler changes can be reverted
+Feb 09 16:42:36 <jpr>	changed the orbit2 code you mean?
+Feb 09 16:42:36 <tml>	s/dbus/orb core/m, sorry...
+Feb 09 16:42:40 <tml>	yep
+Feb 09 16:42:44 <jpr>	clearly i confused you :-)
+Feb 09 16:42:47 <jpr>	ok
+Feb 09 16:42:49 <tml>	yeah ;-)
+Feb 09 16:43:16 <jpr>	tml: we need to talk after this and determine a course of action for the dbus work
+Feb 09 16:43:19 <jpr>	so we can call it "done"
+Feb 09 16:43:21 <tml>	mmeeks needs to go through the patch to the orb core though, it's such an essential part of orbit2
+Feb 09 16:43:27 <jpr>	ok
+Feb 09 16:43:43 <jpr>	tml: are we looking at this for the gnome 2.10 orbit?
+Feb 09 16:44:01 <tml>	jpr: it might be that the same workaround works also for the hang in dbus, haven't checked
+Feb 09 16:44:07 <jpr>	ok
+Feb 09 16:44:21 <tml>	i think orbit2 is forked for 2.10, i'm working on HEAD
+Feb 09 16:44:26 <jpr>	ok
+Feb 09 16:44:52 <jpr>	gicmo, gekker, kmaraas, seb128, smurfd: any comments, issues?
+Feb 09 16:44:56 <tml>	will be looking at  next dependencies of evo next
+Feb 09 16:45:06 <seb128>	jpr: yep, this bug : http://bugzilla.ximian.com/show_bug.cgi?id=71967
+Feb 09 16:45:16 <gicmo>	jpr, nope ..
+Feb 09 16:45:24 <kmaraas>	jpr, nothing much from me at least
+Feb 09 16:45:26 <seb128>	jpr: "keep mails on server" doesn't work with 2.1.4/2.1.5 ... which is quite annoying
+Feb 09 16:45:27 <gekker>	jpr: so you want me to add the groupwise support back in for SuSE 9.3 right?
+Feb 09 16:45:36 <kmaraas>	jpr, please announce the 2.0.4 release on gnome-i18n though
+Feb 09 16:45:51 <jpr>	seb128: hmm, ok
+Feb 09 16:45:51 <seb128>	jpr: is anybody working to fix that ?
+Feb 09 16:45:52 <kmaraas>	jpr, release *date*
+Feb 09 16:45:53 <christine>	gekker: yes 
+Feb 09 16:46:13 <gekker>	will do, it isn't in for preview 3 but will be for the next build
+Feb 09 16:46:15 <smurfd>	not really, just wonder if there is any more info i can give on the bug, 66451
+Feb 09 16:46:29 *	jpr sets the milestone to 2.1 so it gets looked at
+Feb 09 16:46:34 <seb128>	thanks
+Feb 09 16:46:39 <gekker>	also there are problems with evolution dependencies in preview 3
+Feb 09 16:46:42 <jpr>	fejj: i would guess it might not remember/use the setting?
+Feb 09 16:46:44 <gekker>	i have to track that down as well
+Feb 09 16:46:51 <jpr>	fejj: since the actual pop code didn't really change
+Feb 09 16:47:40 <surfy_home>	jpr, we need to plan on changing the package name for exchange connector for 2.1 ?
+Feb 09 16:47:55 <jpr>	or its a gmail issue
+Feb 09 16:48:07 <christine>	surfy_home: good point. you mean to remove the "ximian" name, right? we do
+Feb 09 16:48:14 <jpr>	surfy_home: yes, we should probably get that done
+Feb 09 16:48:30 <surfy_home>	christine, jpr : yeah, evolution-exchange or something
+Feb 09 16:48:37 <christine>	that sounds good to me
+Feb 09 16:48:43 <gekker>	if you do that let me know so i can change the naming in SuSE 9.3
+Feb 09 16:48:44 <jpr>	we might need to update snaps for that
+Feb 09 16:48:46 <gekker>	the sooner the better
+Feb 09 16:48:46 <dobey>	that's what we renamed it to when we made it GPL :)
+Feb 09 16:48:52 <dobey>	we just never renamed the tarballs/etc...
+Feb 09 16:48:58 <christine>	ah 
+Feb 09 16:49:02 <dobey>	and yes, we would need to update snaps
+Feb 09 16:49:09 <gekker>	also, do you want me to enable anything different than the default plugins?
+Feb 09 16:49:10 <surfy_home>	dobey, yeah .. the pkg name needs to change
+Feb 09 16:49:21 <jpr>	gekker: is that still doable for 9.3?
+Feb 09 16:49:35 <jpr>	any other business?
+Feb 09 16:49:37 <dobey>	and the gnome-i18n team will need to update the translation status pages to use the right pot file
+Feb 09 16:49:42 <jpr>	dobey: right
+Feb 09 16:49:45 <gekker>	the rename? yes, i'm quite sure it is
+Feb 09 16:50:28 <jpr>	any other business?
+Feb 09 16:50:48 <jpr>	ok
+Feb 09 16:50:51 <jpr>	thanks everyone
+Feb 09 16:50:56 <christine>	thx jp
+Feb 09 16:50:58 <jpr>	rodrigo will be posting the log/minutes
+Feb 09 16:51:07 <--	cmeadors (~cmeadors@pool-141-154-11-150.bos.east.verizon.net) has left #evolution-meet
+Feb 09 16:51:09 <--	gekker (~gekker@linux000d60feec05.dnsdhcp.provo.novell.com) has left #evolution-meet
+Feb 09 16:51:10 <harish>	thx 
+Feb 09 16:51:13 <--	christine (~christine@130.57.22.69) has left #evolution-meet
+Feb 09 16:51:16 <--	jpr (~jpr@bishop.dnsdhcp.provo.novell.com) has left #evolution-meet
+**** ENDING LOGGING AT Wed Feb  9 16:51:19 2005
+

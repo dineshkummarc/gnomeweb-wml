@@ -1,0 +1,503 @@
+**** BEGIN LOGGING AT Wed Feb  2 16:00:55 2005
+
+Feb 02 16:00:55 <fejj>	oh, no phone conf this am? :)
+Feb 02 16:00:59 <rodrigo>	ok
+Feb 02 16:01:00 -->	hpj (~hpj@201.128.87.126) has joined #evolution-meet
+Feb 02 16:01:07 <christine>	fejj: you prefer phone? :)
+Feb 02 16:01:10 <fejj>	no
+Feb 02 16:01:16 <fejj>	:)
+Feb 02 16:01:27 <hpj>	getting up at 8:30 is easily the hardest thing i do at novell
+Feb 02 16:01:32 <hpj>	the rest is easy
+Feb 02 16:01:33 <christine>	haha
+Feb 02 16:01:40 <jpr>	nope, we decided to keep irc meetings
+Feb 02 16:01:43 <rodrigo>	ok, logging
+Feb 02 16:01:48 <jpr>	see last weeks log :-)
+Feb 02 16:01:53 -->	dhm_home (~david@h000f66e3c536.ne.client2.attbi.com) has joined #evolution-meet
+Feb 02 16:02:13 <jpr>	ok, one more minute and then we'll get going
+Feb 02 16:02:30 <rodrigo>	btw, logs are at http://www.gnome.org/projects/evolution/developer.shtml
+Feb 02 16:02:43 -->	cmeadors (~cmeadors@pool-141-154-11-150.bos.east.verizon.net) has joined #evolution-meet
+Feb 02 16:02:49 -->	seb128 (~seb128@ANancy-151-1-19-134.w83-194.abo.wanadoo.fr) has joined #evolution-meet
+Feb 02 16:02:50 <rodrigo>	without colors though, I can'0t get iclog2html to use colors :(
+Feb 02 16:03:14 <jpr>	ok
+Feb 02 16:03:16 <dobey>	good
+Feb 02 16:03:19 <dobey>	colors suck :)
+Feb 02 16:03:20 <jpr>	lets begin
+Feb 02 16:03:28 <jpr>	2.1 development status
+Feb 02 16:03:41 <jpr>	as you know we are heading to string freeze on monday
+Feb 02 16:03:55 <jpr>	there are still a fair number of i18n keyword bugs in bugzilla
+Feb 02 16:04:06 <jpr>	some of which are quite easy to fix
+Feb 02 16:04:21 <jpr>	please make sure they get looked at this week
+Feb 02 16:04:39 <jpr>	and remember that if you do change the strings, to send the notifications
+Feb 02 16:05:07 <jpr>	any questions about that?
+Feb 02 16:05:18 -->	mmoulder (~mmoulder@mmoulder.dnsdhcp.provo.novell.com) has joined #evolution-meet
+Feb 02 16:05:28 <jpr>	with string freeze on monday, patch review mode will begin
+Feb 02 16:05:45 <jpr>	i will be sending out an updated patch review mode mail later this week
+Feb 02 16:06:59 <jpr>	for 2.0.4 bugs, it turns out there is actually a GNOME 2.8.3 release on Feb. 14th, so I'm willing to wait at least a couple extra days to see about fixing the calendar migration bug (which appears to be happening if 1.2 version is assumed when lacking gconf)
+Feb 02 16:07:12 <jpr>	and for an IMAP/GW fix
+Feb 02 16:07:25 <jpr>	i still hope we can push it out before the 14th though
+Feb 02 16:07:41 <jpr>	does any one else have bugs I should be aware of related to 2.0.x?
+Feb 02 16:07:52 <jpr>	that should be looked at
+Feb 02 16:07:57 <jpr>	dhm, seb128?
+Feb 02 16:08:22 <christine>	jpr: connector bugs? 
+Feb 02 16:08:34 <jpr>	right, you had a couple of specific ones
+Feb 02 16:08:38 <jpr>	can you get me the list?
+Feb 02 16:08:42 <siva>	jpr, hk's contact migration issue
+Feb 02 16:08:46 <christine>	yes, i will probably before lunch 
+Feb 02 16:08:46 <siva>	if fixed 
+Feb 02 16:08:49 <siva>	has to go in i think
+Feb 02 16:08:53 <jpr>	christine: ok
+Feb 02 16:08:54 <seb128>	jpr: for 2.0.n ? we have an import bug as RC in Debian, a sec I get the bugzilla number
+Feb 02 16:09:03 <jpr>	siva: yes, good
+Feb 02 16:09:46 <jpr>	anyone else while seb128 looks that up?
+Feb 02 16:09:57 <seb128>	jpr: #66451
+Feb 02 16:10:12 <jpr>	in our bugzilla or debian's?
+Feb 02 16:10:14 <harish>	jpr: and the optimizations we did on getQM - shud prolly go into the 2.0.x 
+Feb 02 16:10:35 <seb128>	jpr: bugzilla
+Feb 02 16:10:44 <seb128>	bugzilla.ximian.com I mean
+Feb 02 16:10:59 <jpr>	ok
+Feb 02 16:11:09 <jpr>	harish: i'm not convinced there
+Feb 02 16:11:20 <guenther>	jpr: So 2.0.4 will be delayed about 1 week or longer again?
+Feb 02 16:11:21 <jpr>	harish: they are just optimizations
+Feb 02 16:11:34 <jpr>	guenther: hopefully not quite that long, but maybe
+Feb 02 16:11:36 <rodrigo>	jpr: there is a patch from me from Jan 17th which should reduce a bit memory usage
+Feb 02 16:11:50 <jpr>	rodrigo: by how much?
+Feb 02 16:11:59 <jpr>	miguel already saw dramatic improvement
+Feb 02 16:12:06 <jpr>	with the current fixes
+Feb 02 16:12:19 <harish>	jpr: but the server stability apparently gets boosted much..and it is not too much of a risk, imo
+Feb 02 16:12:39 <rodrigo>	not too much, just a few listeners and views in e-cal-view.c
+Feb 02 16:12:49 <jpr>	harish: ok, we can consider it
+Feb 02 16:12:50 <guenther>	jpr: Please let me know, as soon as you know -- cause the next Garnome release might have it already (Paul wants to release soon)
+Feb 02 16:13:05 <jpr>	guenther: ok
+Feb 02 16:13:21 <jpr>	i'm surprised garnome isn't waiting for 2.8.3 though
+Feb 02 16:13:35 <jpr>	rodrigo: sounds like its not worth it really
+Feb 02 16:13:52 <jpr>	in 2.0.x i mean
+Feb 02 16:13:57 <jpr>	anything else?
+Feb 02 16:14:07 <jpr>	ok
+Feb 02 16:14:09 <guenther>	Oh, there sure will be a 2.8.3 Garnome release. But Garnome gets updated more frequently than Gnome, fixing issues ahead of packages as well.
+Feb 02 16:14:11 <rodrigo>	jpr: ok
+Feb 02 16:14:32 <jpr>	harish: ok, want to talk about the wiki?
+Feb 02 16:14:56 <harish>	not much of an update.. i have added some seed page on live.gnome.org 
+Feb 02 16:15:12 <harish>	the idea is to just provide some seed info on the site - with just enough critical mass and encouraging it to become self-sustaining by the community at large
+Feb 02 16:15:18 <rodrigo>	jpr: oh, yes, the one for using timezones in the http backend, from Dec 22nd
+Feb 02 16:15:23 <harish>	targeted originally for the nosip interns
+Feb 02 16:15:23 <jpr>	rodrigo: right
+Feb 02 16:15:43 <harish>	jpr: would like some f/b from the team and suggestions
+Feb 02 16:16:02 <jpr>	http://live.gnome.org/Evolution
+Feb 02 16:16:21 <jpr>	guenther: this might interest you a place for information
+Feb 02 16:16:27 <jpr>	especially wrt to migration issues
+Feb 02 16:16:45 <harish>	the short term plan is to get examples of developing a plugin or fixing a usabiliity defect - on the wiki 
+Feb 02 16:16:56 <harish>	something that can induce people to take up small activities with immediate rewards/feeling of success
+Feb 02 16:17:03 <jpr>	ok
+Feb 02 16:17:11 <jpr>	remember the easy_fix keyword in bugzilla
+Feb 02 16:17:14 <harish>	currently, working on a page with a small set of HIG principles. The newbies can then set off looking for HIG issues in the application and proceeding to make evo more HIG compliant 
+Feb 02 16:17:29 <harish>	easy_fix, yes
+Feb 02 16:17:38 <jpr>	dobey: maybe you want to give some input there?
+Feb 02 16:17:49 <guenther>	jpr: Dude, I currently don't even have time to nurse the users on the lists, don't expect me to add info to a Wiki. ;-)  I will have a loo, though. :)
+Feb 02 16:18:12 <dobey>	yeah, e-mail me what you have, i guess and i'll look at it
+Feb 02 16:18:23 <harish>	dobey, sure
+Feb 02 16:18:29 <jpr>	guenther: think of it as being able to paste a URI in a reply rather than typing it out again :-)
+Feb 02 16:18:41 <dhm_home>	totally!
+Feb 02 16:18:48 <jpr>	ok, anything else on that harish?
+Feb 02 16:18:58 <harish>	the original intent was  the perceived need to minimize the amount of time spent by novell developers with the nosip interns while remaining effective
+Feb 02 16:19:13 <harish>	i guess we could generalize that for evo community at large
+Feb 02 16:19:13 <guenther>	jpr: Like "think of it as an FAQ page"?
+Feb 02 16:19:25 <jpr>	maybe
+Feb 02 16:19:29 *	jpr looks innocent
+Feb 02 16:19:44 <rodrigo>	if there's a FAQ, maybe it should be in evo's website, with the other documentation
+Feb 02 16:19:46 <jpr>	harish: right, i agree, its a more general community issue
+Feb 02 16:19:55 <harish>	the idea is to get the crowds on #nosip to start maintaining this on their own 
+Feb 02 16:20:08 <guenther>	rodrigo: Yes, and I still want to write the FAQ eventually.
+Feb 02 16:20:16 <rodrigo>	good
+Feb 02 16:20:24 <harish>	helping each other, with nudges from us now and then :-)
+Feb 02 16:20:25 <jpr>	(for those that don't know NOSIP is the Novell Open Source Intership Program)
+Feb 02 16:20:27 <jpr>	(#nosip)
+Feb 02 16:20:40 *	tml was just going to ask that
+Feb 02 16:20:54 <jpr>	unpaid internships based in india
+Feb 02 16:21:01 <jpr>	harish: for school credit i believe, right?
+Feb 02 16:21:07 <harish>	jpr: yes
+Feb 02 16:21:28 <jpr>	ok
+Feb 02 16:21:31 <harish>	gnomebangalore.org has more info on that
+Feb 02 16:21:32 <jpr>	moving on
+Feb 02 16:21:43 <jpr>	status reports
+Feb 02 16:21:55 <jpr>	vivek: what you got for us?
+Feb 02 16:22:35 <vivek>	ya sent the patches for displaying warnings in case server build is old
+Feb 02 16:22:46 <jpr>	ok
+Feb 02 16:23:04 <vivek>	committed the camel part as per NoteZed suggested
+Feb 02 16:23:35 <vivek>	calendar and addressbook part will commit tomm
+Feb 02 16:23:50 <jpr>	ok
+Feb 02 16:23:52 <jpr>	and coming up?
+Feb 02 16:24:09 <vivek>	bug fixes, with partha mostly
+Feb 02 16:24:23 <jpr>	on the gw mailer, right?
+Feb 02 16:24:29 <vivek>	ya
+Feb 02 16:24:38 <jpr>	ok
+Feb 02 16:24:43 <jpr>	dhm_home: anything for us?
+Feb 02 16:25:02 <dhm_home>	got 2.1 into Fedora's Rawhide development channel
+Feb 02 16:25:09 <jpr>	cool
+Feb 02 16:25:26 <dhm_home>	but then got bogged down in that mailing list/filtering issue :-(
+Feb 02 16:25:40 <jpr>	ok, so you have e-d-s 1.1.4.2?
+Feb 02 16:25:43 <dhm_home>	so that's about it for this week
+Feb 02 16:25:47 <dhm_home>	yes
+Feb 02 16:25:58 <jpr>	and the problem is now solved with the checkbox?
+Feb 02 16:26:06 <jpr>	fejj: and that is the default now right?
+Feb 02 16:26:36 *	dhm_home slaps head
+Feb 02 16:26:42 <fejj>	right
+Feb 02 16:27:04 <jpr>	fejj: lets move on to your status then
+Feb 02 16:27:09 <fejj>	ok
+Feb 02 16:27:26 <fejj>	updated the imap4 summary saving code to work like notzed suggested
+Feb 02 16:27:32 <fejj>	using summary->flags to store the bit
+Feb 02 16:27:38 <fejj>	rather than a new int var
+Feb 02 16:28:01 <fejj>	bumped the version to 3 (and old imap code too, so they save the same format)
+Feb 02 16:28:08 <jpr>	so the imap/imap4 for summaries are now completely compatible?
+Feb 02 16:28:23 <fejj>	also updated the old imap code to handle version 2 (it just throws away the have_mlist value)
+Feb 02 16:28:29 <fejj>	yea
+Feb 02 16:28:43 <jpr>	ok
+Feb 02 16:28:48 <jpr>	and going forward?
+Feb 02 16:29:02 <fejj>	also added the old imap code back into the build
+Feb 02 16:29:41 <fejj>	the old imap is back to using imap:// for now, and imap4 uses imap4:// again
+Feb 02 16:29:52 <jpr>	oh
+Feb 02 16:29:57 <fejj>	I can change that to whatever
+Feb 02 16:30:02 <fejj>	2 minute change :)
+Feb 02 16:30:12 <jpr>	ok, we'll discuss tonight with zucchi
+Feb 02 16:30:15 <fejj>	ok
+Feb 02 16:30:19 <fejj>	that's what I figured
+Feb 02 16:30:24 <jpr>	dobey: status
+Feb 02 16:30:25 <jpr>	?
+Feb 02 16:30:54 <dobey>	hrmm, fixed a few bugs
+Feb 02 16:31:03 <dobey>	the VFolder vs. vFolder thing
+Feb 02 16:31:09 <dobey>	some HIG spacing/padding issues
+Feb 02 16:31:30 <jpr>	right
+Feb 02 16:31:36 <jpr>	status of the context menu patch?
+Feb 02 16:31:50 <dobey>	will look at the comments michael made on the context menus behavior today and see if i can make it work as he suggests it will
+Feb 02 16:31:58 <jpr>	ok
+Feb 02 16:32:10 <jpr>	anything else going forward?
+Feb 02 16:32:31 <dobey>	more HIG spacing/padding and strings fixes this week probably
+Feb 02 16:33:23 <jpr>	ok
+Feb 02 16:33:31 <jpr>	guenther: anything for us?
+Feb 02 16:34:13 <guenther>	lacking time currently, but I want to get back to the list soon
+Feb 02 16:34:18 <jpr>	ok
+Feb 02 16:34:21 <guenther>	so "as usual"...
+Feb 02 16:34:24 <jpr>	:-)
+Feb 02 16:34:31 <jpr>	haip: anything for us?
+Feb 02 16:34:36 <guenther>	jpr: Oh, the ximian-users list has "issues"
+Feb 02 16:34:42 <jpr>	guenther: oh?
+Feb 02 16:34:52 <haip>	jpr: most of the a11y patches are comitted
+Feb 02 16:35:02 <guenther>	unmaintained, and there even was sent an automated mail about being deprecated :/
+Feb 02 16:35:02 <haip>	still several left for you to review.
+Feb 02 16:35:10 <jpr>	ok
+Feb 02 16:35:19 <guenther>	although this was never ever mentioned on the list itself
+Feb 02 16:35:25 <jpr>	haip: and we need that to happen this week before the chinese new year festival?
+Feb 02 16:35:27 <haip>	the gal clean patch and one calendar a11y patch I sent today
+Feb 02 16:35:41 <jpr>	ok, any other ones?
+Feb 02 16:35:48 <haip>	It will be good, 
+Feb 02 16:35:53 <jpr>	guenther: ugh
+Feb 02 16:36:04 <haip>	we will work on weekends this week
+Feb 02 16:36:14 <jpr>	guenther: thanks, i will follow that up with ops
+Feb 02 16:36:17 <guenther>	jpr: apparently, I am the *only* one answering on that list at all
+Feb 02 16:36:22 <guenther>	jpr: thanks
+Feb 02 16:36:32 <haip>	and the e-table widgets invisible issue I found today. Hope someone to take a look
+Feb 02 16:36:42 <jpr>	i don't see it
+Feb 02 16:37:04 <jpr>	presumably you have you gal-clean patch applied though?
+Feb 02 16:37:06 <haip>	dobey see it, right?
+Feb 02 16:37:10 <guenther>	jpr: FYI: The "deprecated" notice was sent as a response only, not mentioned officially to all subscribers. Feel free to poke me later, about this.
+Feb 02 16:37:18 <jpr>	guenther: ok
+Feb 02 16:37:27 <dobey>	i do on my machine at work, yes
+Feb 02 16:37:33 <haip>	no, I am using the CVS HEAD GAL
+Feb 02 16:37:44 <dobey>	hrmm, and it just happened here
+Feb 02 16:37:45 <jpr>	ok
+Feb 02 16:37:58 <haip>	 with evolution codes checked out several days before is OK. 
+Feb 02 16:38:10 -->	ewhitten (~ewhitten@h000d93cb4647.ne.client2.attbi.com) has joined #evolution-meet
+Feb 02 16:38:17 <haip>	rodrigo, can you see the problem?
+Feb 02 16:38:19 <dobey>	there's definately a race in gal
+Feb 02 16:38:24 <jpr>	the only thing that i can imagine affecting all etables though is the big gal pat
+Feb 02 16:38:29 <jpr>	from li yuan
+Feb 02 16:38:40 <rodrigo>	haip:not sure, how can I reproduce it?
+Feb 02 16:38:44 <dobey>	yeah, nothing has changed in evo that would affect the gal etable drawing
+Feb 02 16:38:47 <jpr>	nothing regarding tables has changed
+Feb 02 16:38:50 <jpr>	in evo
+Feb 02 16:38:55 <haip>	but I checked out a gal without the patch, still happens
+Feb 02 16:38:57 <hpj>	I've seen odd warnings related to a11y/ETable.
+Feb 02 16:38:59 <haip>	very strange
+Feb 02 16:39:10 <jpr>	ok
+Feb 02 16:39:16 <jpr>	we'll have to track this down
+Feb 02 16:39:21 <dobey>	haip: yes, because it is a race, it will happen or not, totally arbitrarily :)
+Feb 02 16:39:22 <jpr>	harish: status?
+Feb 02 16:39:22 <haip>	rodrigo: cannot see the task table and other e-table widgets in evolution
+Feb 02 16:39:26 <harish>	co-ordinating with the QA team here on testing the new features -  some early diagnosis and triaging the bugs. working on the recurrences  code in gw backend and a few more calendar bugs with chen , reviewing the fixes, some commits on getQM , some changes requested by the server and helping partha and vivek in some mailer issues - and of course, attending 4 status meetings this week ;-)
+Feb 02 16:39:37 <haip>	ok
+Feb 02 16:39:40 <rodrigo>	haip: oh, I can see them
+Feb 02 16:39:50 <jpr>	hah
+Feb 02 16:39:55 <jpr>	hpj: status?
+Feb 02 16:40:28 <hpj>	I can now jhbuild GNOME all the way up to and including Evolution on OS X.
+Feb 02 16:40:39 <hpj>	And it works, for the most part.
+Feb 02 16:40:59 <hpj>	Haven't given the mailer a thorough testing yet, but the UI elements all seem to work all right.
+Feb 02 16:41:00 <haip>	you can check out the evolution code with a timestamp of Jan, 28, to have a try (which should works normally)
+Feb 02 16:41:10 <hpj>	Calendar/addressbook allow adding/editing without problems.
+Feb 02 16:41:32 <hpj>	I have a log of issues I've solved, and a few outstanding patches against GNOME projects.
+Feb 02 16:41:35 <christine>	hpj: thats really cool!
+Feb 02 16:41:39 <dhm_home>	cool!
+Feb 02 16:41:45 <siva>	hpj, screen shots :-)
+Feb 02 16:41:52 <christine>	blog :) 
+Feb 02 16:41:58 <dobey>	haip: i recall seeing the issues before Jan 28, so that won't solve it :)
+Feb 02 16:42:00 <hpj>	Going forward, I expect to work with Fink maintainers (specifically Tony Arnold, who maintains the Evo packages).
+Feb 02 16:42:22 <hpj>	And making a jhbuild setup/walkthrough that should minimize the pain for testers on OS X.
+Feb 02 16:42:29 <haip>	dobey, ok, will take a look at it tomorrow.
+Feb 02 16:42:41 <hpj>	I think that's it for me.
+Feb 02 16:42:49 <hpj>	And, I'm going to submit screenshots, yes :)
+Feb 02 16:43:07 <hpj>	Probably blog with screenshots.
+Feb 02 16:43:12 <jpr>	ok
+Feb 02 16:43:30 <jpr>	hpj: why don't you cover the autocomplete auth issue as well
+Feb 02 16:43:47 <hpj>	jpr: This week?
+Feb 02 16:44:01 <jpr>	i mean tell everyone about it
+Feb 02 16:44:04 <hpj>	jpr: So if I'm not mistaken, that involves moving e-passwords.
+Feb 02 16:44:06 <hpj>	Ah.
+Feb 02 16:44:33 <hpj>	So, autocomplete doesn't work properly if you didn't previously authenticate (in the same session).
+Feb 02 16:44:45 <hpj>	If you complete against addressbooks that need auth, that is.
+Feb 02 16:45:05 <hpj>	And we're thinking we may have to move e-passwords to e-d-s to make that work.
+Feb 02 16:45:28 <hpj>	It would also make it easier for other consumers to use saved passwords and the like (right, jpr?).
+Feb 02 16:45:44 <jpr>	i think so
+Feb 02 16:45:50 <jpr>	at least in the calendar/contacts case
+Feb 02 16:45:56 <rodrigo>	yes
+Feb 02 16:46:05 <jpr>	i'm not sure how this would affect the mailer though (fejj?)
+Feb 02 16:46:09 <hpj>	I'm not sure I'll get the time for it this week (until next meeting).
+Feb 02 16:46:19 <fejj>	saving passwds in eds?
+Feb 02 16:46:19 <siva>	hpj, so we are gonna prompt for password or just get passeord already there in session 
+Feb 02 16:46:23 <hpj>	I'd like to finish the OS X porting in a way that leaves it easy for others to pick up.
+Feb 02 16:46:32 <fejj>	I don't really see how it can be moved to eds
+Feb 02 16:46:40 <hpj>	siva: Prompt.
+Feb 02 16:46:43 <jpr>	fejj: libedataserverui
+Feb 02 16:46:49 <fejj>	ah
+Feb 02 16:46:54 <jpr>	prompt if the password is not saved
+Feb 02 16:47:04 <jpr>	otherwise it will just work
+Feb 02 16:47:08 <fejj>	well... camel is still gonna have to call out to mail
+Feb 02 16:47:14 <jpr>	(this is the same as 2.0 and before)
+Feb 02 16:47:14 <fejj>	and I guess mail could call out to eds
+Feb 02 16:47:25 <jpr>	fejj: it already calls e-util for it
+Feb 02 16:47:29 <harish>	hmm...
+Feb 02 16:47:31 <fejj>	camel doesn't
+Feb 02 16:47:35 <fejj>	mail does :)
+Feb 02 16:47:37 <jpr>	right
+Feb 02 16:48:02 <fejj>	so I guess it won't be a huge deal
+Feb 02 16:48:07 <jpr>	fejj: so it really doesn't affect mail, it just needs to link against a different lib
+Feb 02 16:48:14 <fejj>	right
+Feb 02 16:48:20 <jpr>	hpj: why don't you propose that on e-h
+Feb 02 16:48:20 <siva>	and some include changes :-)
+Feb 02 16:48:22 <fejj>	afaict anyway
+Feb 02 16:48:39 <hpj>	jpr: The whole moving e-passwords shebang?
+Feb 02 16:48:40 <jpr>	and just do it if no one complains
+Feb 02 16:48:46 <jpr>	yah
+Feb 02 16:48:51 <hpj>	jpr: Ok.
+Feb 02 16:49:01 <jpr>	mmoulder: anything for us?
+Feb 02 16:49:27 <Mirotrem>	dont mind me..just checking out the process..:)
+Feb 02 16:49:36 <mmoulder>	not really
+Feb 02 16:49:37 <jpr>	Mirotrem: ok :-)
+Feb 02 16:49:40 <jpr>	rodo: status?
+Feb 02 16:49:41 <mmoulder>	just working on the guide
+Feb 02 16:49:47 <rodo>	solved my #i18n bugs, one reassigned to addressbook guys as I didn't understand the background and it was more addressbook than gal bug
+Feb 02 16:50:08 <rodo>	patch reviewing, bugfixing (rtl bugs, tabs rendering, nested iframes rendering)
+Feb 02 16:50:09 <jpr>	rodo: see the hang i filed last night?
+Feb 02 16:50:14 <jpr>	i think its related to tables
+Feb 02 16:50:29 <jpr>	rodo: have you had any rtl feedback?
+Feb 02 16:50:51 <siva>	rodo : well even i don't know the meaning of "status" category, searched through outlookp help but no luck :-)
+Feb 02 16:50:55 <rodo>	gtkhtml 3.5.5 release
+Feb 02 16:50:56 <rodo>	jpr: yes, I am not fixing one I can reproduce and will look at your later, maybe it's the same
+Feb 02 16:51:05 <rodo>	s/not/
+Feb 02 16:51:29 <jpr>	rodo: and have any RTL people tried out the code?
+Feb 02 16:51:55 <fejj>	mtg was testing it the other day I hink
+Feb 02 16:52:00 <rodo>	jpr: I don't have much feedback yet, but I've mailed few people
+Feb 02 16:52:12 -->	jgraham (~jgraham@endmusic.com) has joined #evolution-meet
+Feb 02 16:52:23 <jpr>	this code is in the snaps btw
+Feb 02 16:52:24 <christine>	rodo: have you mentioned it to mtgordon? i bet he'd try it 
+Feb 02 16:52:28 <rodo>	there's one bug from mtgordon, but that looks more line IM issue
+Feb 02 16:52:32 <christine>	ah
+Feb 02 16:52:45 <jpr>	ok
+Feb 02 16:52:51 <jpr>	rodrigo: status?
+Feb 02 16:52:57 <rodrigo>	i18n fixes
+Feb 02 16:53:06 <rodrigo>	removed all categories method in backends
+Feb 02 16:53:16 <jpr>	did you notify e-h on that?
+Feb 02 16:53:18 <rodrigo>	recurrences fixes with Harish
+Feb 02 16:53:21 <rodrigo>	jpr: yes
+Feb 02 16:53:24 <jpr>	ok
+Feb 02 16:53:25 <rodrigo>	and more bug fixing
+Feb 02 16:53:28 <jpr>	right
+Feb 02 16:53:35 <jpr>	rodrigo: 71265, get anywhere on that?
+Feb 02 16:53:47 <rodrigo>	not really, still looking
+Feb 02 16:54:05 <rodrigo>	jpr: apart from fixing the crash
+Feb 02 16:54:09 <jpr>	rodrigo: i've been working on the .schemas descriptions and the e-itip-control recurrence descrption messages
+Feb 02 16:54:14 <jpr>	those two bugs
+Feb 02 16:54:44 <rodrigo>	the ones about splitted sentences?
+Feb 02 16:54:45 <jpr>	seb128: anything for us?
+Feb 02 16:54:50 <jpr>	rodrigo: yah
+Feb 02 16:54:54 <rodrigo>	ok
+Feb 02 16:55:01 <jpr>	"Every %d days" and such
+Feb 02 16:55:16 <rodrigo>	yeah
+Feb 02 16:55:47 <jpr>	siva: status?
+Feb 02 16:55:49 <siva>	jpr, 2.0.4, 2.1 and i18n bug fixes, some minor fixes on gw code , some addr book bug triaging, more bug fixing netxt week 
+Feb 02 16:56:14 <jpr>	siva: including hk's migration bug?
+Feb 02 16:56:56 <siva>	jpr, i am working on it now, it does not seem to be a migartion bug, it is a bug in vcard/econtact conversion
+Feb 02 16:57:04 <jpr>	ok
+Feb 02 16:57:13 <jpr>	tml: status?
+Feb 02 16:57:23 <tml>	Been working on the ORBit2 port. The ORBit2 code is quite, eh, hairy... Fixed a couple of alignment-related issues in the IDL compiler and orb, that IMHO were rather severe.
+Feb 02 16:57:30 <tml>	I just can't understand why they don't cause problems on Linux, and on other architectures than x86? Maybe nothing real uses long long or double parameters?  But do the ORBit2 tests run without problems on all Unixes?
+Feb 02 16:57:42 <tml>	Anyway, still no solution found for the hang in test/everything. Would help to have a Linux (virtual) machine to compare code behaviour with.
+Feb 02 16:58:24 <jpr>	tml: notzed is running evo on x86_64 i believe
+Feb 02 16:58:24 <tml>	about those ORBIt2 tests,  anybody run them recently on ORBit2 HEAD on Linux? No problems?
+Feb 02 16:58:29 <jpr>	and not seeing issues
+Feb 02 16:58:36 <jpr>	qa in bangalore also test on that
+Feb 02 16:59:25 <jpr>	tml: ok, talk to me afterwards about your machine
+Feb 02 16:59:27 <tml>	maybe it's just pure luck, or coincidence then. maytbe gcc on Linux aligns the stack pointer at function entry at 8 bytes, but not on Windows. or something like that
+Feb 02 16:59:50 <jpr>	tml: could be, you might want to ask meeks about alignment
+Feb 02 17:00:01 <jpr>	also
+Feb 02 17:00:06 <jpr>	with valgrind and evo
+Feb 02 17:00:08 <tml>	yeah, we have been discussing it on the evolution-win32-devel list 
+Feb 02 17:00:12 <hpj>	tml: what bothers me the most is how ORBit has coded into it the assumption that memory is 8-byte aligned
+Feb 02 17:00:13 <jpr>	we have to do --alignment=8
+Feb 02 17:00:21 <--	ewhitten (~ewhitten@h000d93cb4647.ne.client2.attbi.com) has left #evolution-meet
+Feb 02 17:00:22 <jpr>	in order for it to work right
+Feb 02 17:00:29 <hpj>	tml: i sent a patch for that once, which was refused :)
+Feb 02 17:00:47 <fejj>	what alignment did your patch make it?
+Feb 02 17:00:56 <tml>	it assumes long long and double are 8-byte aligned, also when as parameters on stack, which isn't true
+Feb 02 17:01:05 <hpj>	fejj: it made sure memory was 8-byte aligned
+Feb 02 17:01:10 <hpj>	fejj: instead of assuming it was
+Feb 02 17:01:13 <fejj>	ah
+Feb 02 17:01:27 <tml>	if you call a function and pass it say a mix of chars and a double
+Feb 02 17:01:34 <jpr>	tml: maybe you want hpj's patch at least for test purposes?
+Feb 02 17:01:34 <fejj>	fwiw, valgrind assumes 4-byte aligned
+Feb 02 17:01:44 <tml>	i mean mix of chars and doubles, the doubles won't be 8-byte aligned 
+Feb 02 17:02:08 <tml>	hpj, jpr: it would be nice to compare, yes
+Feb 02 17:02:18 <jpr>	hpj: send it on then hpj?
+Feb 02 17:02:18 <hpj>	tml: i'll unearth it and send it to you
+Feb 02 17:02:24 <hpj>	jpr: roger
+Feb 02 17:02:31 <jpr>	christine: anything other than the connector fixes you're going to send me?
+Feb 02 17:02:36 <tml>	jpr: --alignment=8,  is that a valgrind switch or what
+Feb 02 17:02:41 <jpr>	tml: yes
+Feb 02 17:02:42 <rodrigo>	tml: yes
+Feb 02 17:02:57 <jpr>	tml: it breaks if you let it assume 4 when running on evo
+Feb 02 17:03:00 <jpr>	because of orbit
+Feb 02 17:03:02 <christine>	jpr: nope. working on 2.4 requirements whenever i can
+Feb 02 17:03:20 <jpr>	ok
+Feb 02 17:03:44 <jpr>	christine: we need to update the roadmap on gnome.org and get some community and dev feedback as well soon
+Feb 02 17:03:50 <jpr>	cmeadors: anything for us?
+Feb 02 17:04:16 <haip>	BTW, today I noticed that calendar events support attachments. Can the attachment bar use the same widget as in mail's composer(or make a more general e-attachment-bar widget)? I saw most of the codes were copied from mail to calendar.
+Feb 02 17:04:21 <christine>	jpr: yes. we do ... there are some outstanding 2.2 issues that you & parag need to answer then we can correct the 2.2 stuff and post proposed 2.4 stuff etc
+Feb 02 17:04:39 <jpr>	christine: right, i did see that
+Feb 02 17:04:41 <jpr>	anyone else? ( Mirotrem, jgraham)
+Feb 02 17:04:42 <christine>	jpr: thx
+Feb 02 17:05:00 <jpr>	haip: follow up with harish
+Feb 02 17:05:18 <jpr>	he wrote that
+Feb 02 17:05:19 <Mirotrem>	jpr: just hanging out
+Feb 02 17:05:22 <jpr>	ok
+Feb 02 17:05:32 <haip>	jpr: ok
+Feb 02 17:05:32 <jpr>	any other business?  shall we keep going with the irc meetings?
+Feb 02 17:05:39 <harish>	haip: yep. but we cant use it as is for various reasons
+Feb 02 17:05:40 <fejj>	irc meetings are good
+Feb 02 17:05:41 <rodrigo>	me votes yes
+Feb 02 17:05:42 <fejj>	:)
+Feb 02 17:05:45 <hpj>	If anyone knows how to get in touch with James Henstridge or another jhbuild build sheriff, I'd like to know.
+Feb 02 17:05:47 <jpr>	i find them a bit more productive
+Feb 02 17:05:51 <rodo>	yup
+Feb 02 17:05:52 <jpr>	and they are better attended
+Feb 02 17:05:56 <rodrigo>	yes
+Feb 02 17:05:58 <hpj>	The only address I could find for jamesh is bouncing.
+Feb 02 17:06:11 <dobey>	hpj: jamesh@gnome.org?
+Feb 02 17:06:15 <hpj>	And he hasn't replied on IRC over a time span of severan days.
+Feb 02 17:06:15 <jpr>	hpj: ping him in irc?
+Feb 02 17:06:20 <hpj>	several
+Feb 02 17:06:39 <hpj>	jpr: Tried that two-three times a day for 5 days now, no luck :)
+Feb 02 17:06:42 <dobey>	hpj: he was pretty responsive to bugzilla about a week ago
+Feb 02 17:06:43 <hpj>	dobey: i'll try that
+Feb 02 17:06:45 <rodo>	btw, mtgordon says that Hebrew works fine
+Feb 02 17:06:53 <jpr>	for composing?
+Feb 02 17:06:55 <jpr>	cool
+Feb 02 17:06:55 <dobey>	and i think his bugzilla mail goes to that account :)
+Feb 02 17:06:56 <christine>	rodo: that's great! 
+Feb 02 17:07:03 <rodo>	yes
+Feb 02 17:07:08 <jpr>	rodo: do you have time to look at e-text at all then?
+Feb 02 17:07:19 <jpr>	thats the last major RTL issue i think
+Feb 02 17:07:40 <rodo>	eek, I think it will be easier to make evo use gtkentry
+Feb 02 17:07:55 <jpr>	rodo: it does for completion
+Feb 02 17:08:02 <jpr>	with hpj's new code
+Feb 02 17:08:15 <jpr>	rodo: but etable, calendar views and contact minicards
+Feb 02 17:08:20 <rodo>	and I have still bugs in gtkhtml
+Feb 02 17:08:26 <jpr>	are all stuck with etext
+Feb 02 17:08:27 <jpr>	ok
+Feb 02 17:08:31 <haip>	harish: ok. They look similar and if there are UI changes, we might need to sync them.
+Feb 02 17:08:50 <jpr>	rodo: it is using pango atleast
+Feb 02 17:09:04 <rodo>	gtkentry for autocompletion is great
+Feb 02 17:09:05 <jpr>	i had hoped it wouldn't be too bad because of theat
+Feb 02 17:09:21 <jpr>	rodo: thats been in for several weeks dude :-)
+Feb 02 17:09:24 <rodo>	maybe, I don't know the e-text much
+Feb 02 17:09:29 <dobey>	jpr: what about the non-etext minicard code toshok was working on in a branch a while ago?
+Feb 02 17:09:34 <harish>	haip, ok.. will talk to you on that later
+Feb 02 17:09:38 <dobey>	jpr: should we just look at merging that in for 2.3?
+Feb 02 17:09:39 <jpr>	too late to take it in and test
+Feb 02 17:09:43 <jpr>	dobey: yes
+Feb 02 17:10:00 <rodo>	I missed it then ;-) maybe it wasn't blogged about? :)
+Feb 02 17:10:05 <jpr>	i'm also working on seeing about getting gtk tree features and fixes for 2.3?
+Feb 02 17:10:11 <jpr>	s/?//
+Feb 02 17:10:22 <jpr>	so we can dump etable entirely
+Feb 02 17:10:23 <dobey>	sweet
+Feb 02 17:10:29 <dobey>	well, almost entirely
+Feb 02 17:10:37 <jpr>	which i think everyone pretty much agrees we want to do
+Feb 02 17:10:40 <jpr>	dobey: almost?
+Feb 02 17:10:43 <dobey>	or is the main calendar view not using etable at all?
+Feb 02 17:10:50 <jpr>	it is not
+Feb 02 17:10:56 <jpr>	it uses etext
+Feb 02 17:10:56 <dobey>	ah, ok
+Feb 02 17:11:00 <jpr>	and ecanvas
+Feb 02 17:11:04 <dobey>	right
+Feb 02 17:11:04 <jpr>	but not etable
+Feb 02 17:11:13 <fejj>	are the issues notzed had with gtktreeview being looked at at all?
+Feb 02 17:11:32 <dobey>	i was just wondering, because i'm very tempted to write a new month view widget :)
+Feb 02 17:11:32 <fejj>	because I gather if those aren't fixed, we can't drop etable :(
+Feb 02 17:11:34 <jpr>	yes, they are in the proposal
+Feb 02 17:11:39 <fejj>	ok
+Feb 02 17:11:42 <rodrigo>	dobey: go dobey go!
+Feb 02 17:11:57 <dobey>	heh
+Feb 02 17:12:00 <haip>	removing e-table and e-text is good for our a11y work :)
+Feb 02 17:12:01 <rodo>	what about making calendar use gtk widgets?
+Feb 02 17:12:04 <hpj>	dobey: can you write a year view widget while you're at it? :)
+Feb 02 17:12:13 <dobey>	rodo: that is exactly what i would do :)
+Feb 02 17:12:15 <rodrigo>	dobey: although it would be better to make all in e-calendar-view, and have the different views just draw the events
+Feb 02 17:12:15 <jpr>	haip: yes, that is one of the advantages i listed
+Feb 02 17:12:22 <rodo>	dobey: cool
+Feb 02 17:12:26 <jpr>	dobey: the calendar views all reviewing
+Feb 02 17:12:34 <rodrigo>	dobey: instead of duplicating code in all views, as we do now
+Feb 02 17:12:37 <jpr>	we need to think about inline editing, drag and drop
+Feb 02 17:12:44 <jpr>	multiple selection
+Feb 02 17:12:49 <dobey>	rodrigo: it needs to be MVC i guess
+Feb 02 17:12:50 <jpr>	cut and paste
+Feb 02 17:12:52 <dobey>	if it isn't
+Feb 02 17:12:53 <jpr>	etc
+Feb 02 17:13:07 <rodrigo>	dobey: already is, it uses a model
+Feb 02 17:13:09 <hpj>	grouping is an outstanding issue when switching away from ETable
+Feb 02 17:13:20 <jpr>	hpj: we currently only use it in tasks
+Feb 02 17:13:30 <hpj>	jpr: and addressbook
+Feb 02 17:13:31 <rodrigo>	dobey: but it could be very much improved
+Feb 02 17:13:34 <jpr>	hpj: oh
+Feb 02 17:13:35 <dobey>	rodrigo: then why are we duplicating a bunch of code? shouldn't it just be view_new (model); and be done with it?
+Feb 02 17:13:36 <jpr>	darn
+Feb 02 17:13:39 <dobey>	rodrigo: yeah, sure
+Feb 02 17:13:56 <jpr>	hpj: one solution was just to have multi column sorting
+Feb 02 17:13:57 <rodrigo>	dobey: because there was a lot of code and we just could remove some of them
+Feb 02 17:13:59 <hpj>	it would be possible to use a tree with a branch per group
+Feb 02 17:14:09 <jpr>	hpj: and that basically would do the same thing
+Feb 02 17:14:09 <rodrigo>	dobey: there's still all the drawing happening in each view
+Feb 02 17:14:20 <jpr>	i should start an e-h thread on this
+Feb 02 17:14:23 <dobey>	jpr: we should probably merge the mini calendar and the GtkCalendar widget upstream somehow to start with i guess
+Feb 02 17:14:27 <jpr>	lets wrap this up
+Feb 02 17:14:30 <hpj>	then we could make the "group rows" have a different bg color
+Feb 02 17:14:33 <dobey>	rodrigo: yeah
+Feb 02 17:14:36 <jpr>	dobey: good point
+Feb 02 17:14:45 <jpr>	ok
+Feb 02 17:14:53 <dobey>	rodrigo: but that makes since, as each view might need to draw things differently, i guess
+Feb 02 17:14:58 <jpr>	anything else aside from the tree/widget stuff?
+Feb 02 17:15:09 <jpr>	ok
+Feb 02 17:15:12 <jpr>	thanks everyone
+Feb 02 17:15:18 <rodrigo>	dobey: not really, they just need to position the events, we can have the events drawn on a single place
+Feb 02 17:15:22 <jpr>	rodrigo will post the log on the web
+Feb 02 17:15:43 <christine>	thx jpr
+Feb 02 17:16:14 <haip>	ok, bye all
+Feb 02 17:16:15 <rodo>	ok, see you
+Feb 02 17:16:19 <rodrigo>	bye
+**** ENDING LOGGING AT Wed Feb  2 17:16:24 2005
+
