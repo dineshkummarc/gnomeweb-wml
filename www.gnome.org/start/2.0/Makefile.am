@@ -2,7 +2,7 @@ SUBDIRS=screenshots
 
 urlpath=/start/2.0
 
-page_SCRIPTS=index.html
+page_SCRIPTS=index.html\
 	beyond.html \
 	errors.html \
 	gettinginvolved.html \
