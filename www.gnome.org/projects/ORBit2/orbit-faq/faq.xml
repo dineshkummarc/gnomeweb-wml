@@ -1,0 +1,566 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"docbook/xml-dtd-4.2-1.0-17/docbookx.dtd" []>
+<book>
+<bookinfo>
+<title>ORBit2 Frequently Asked Questions - FAQs</title>
+<authorgroup>
+  <author>
+    <firstname>Frank</firstname><surname>Rehberger</surname>
+  </author>
+  <author>
+    <firstname>Michael</firstname><surname>Meeks</surname>
+  </author>
+  <author>
+    <firstname>Michael</firstname><surname>Rumpf</surname>
+  </author>
+</authorgroup>
+<pubdate>2003</pubdate>
+</bookinfo>
+
+<toc></toc>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<!-- Use the Introduction section to give a brief overview of what
+     the application is and what it does. -->
+
+  <chapter id="CORBA">
+  <title>CORBA</title> 
+  <!-- =========== Linc related Questions ======================= -->
+    <sect1 id="ClientConnection">
+    <title>How does a client connect to a server?</title> 
+
+    <para>
+    This is a well known problem in CORBA (more precisely in any
+    distributed object system). It is commonly known under the term
+    &quot;bootstrapping&quot;. In general, object references can be
+    obtained from a <application>Name Service</application> (or a
+    <application>Trading Object Servicee</application>), but a name
+    service (thanks to the clear design of CORBA) is itself an
+    object. So, how do you get the reference to the name service if it
+    is itself an object ?  </para>
+
+    <para> The standard solution for a client, finding a first object
+    reference to a server is by exchanging an Interoperable Object
+    Reference (IOR). The server process produces an IOR of the created
+    object by using the method <funcsynopsis> <funcprototype>
+    <funcdef>CORBA_string
+    <function>CORBA_ORB_object_to_string</function></funcdef>
+    <paramdef>CORBA_ORB <parameter>orb</parameter></paramdef>
+    <paramdef>const CORBA_Object <parameter>obj</parameter></paramdef>
+    <paramdef>CORBA_Environment* <parameter>env</parameter></paramdef>
+    </funcprototype> </funcsynopsis> The generated string, also called
+    stringified object reference, can be transfered by any kind of
+    media, like email, HTTP, NFS, filesystem, or even as a message in
+    a bottle ;-) . The client process reads the IOR from the medium
+    and converts it back into its binary representation via
+    <funcsynopsis> <funcprototype> <funcdef>CORBA_Object
+    <function>CORBA_ORB_string_to_object</function></funcdef>
+    <paramdef>CORBA_ORB <parameter>orb</parameter></paramdef>
+    <paramdef>const CORBA_char *<parameter>str</parameter></paramdef>
+    <paramdef>CORBA_Environment *<parameter>env</parameter></paramdef>
+    </funcprototype> </funcsynopsis>. Afterwards the client holds a
+    valid object reference to the server and thus is able to invoke
+    methods in the usual way.  </para>
+
+    <para> Until now non-standard ways to solve this bootstrapping
+    issue have been introduced by different ORBs. One example is the
+    Visibroker Location Service. The ORB registers each object at a
+    central service by a proprietary _bind() method. The discovery of
+    the service is done by network broadcasts. The drawback of this
+    mechanism is that the information about the objects is stored in a
+    central table.  The table needs to be updated on a regular
+    basis. This is necessary because of malicious objects not cleanly
+    deregistering.  If the broadcast interval is to short the updates
+    will cause a lot of noise on the network. If the interval is to
+    long the table contains zombie objects. Such kind of proprietary
+    solutions exists for many major CORBA implementations.  </para>
+
+    <para> Ideally the method resolve_initial_references() could be
+    used to find a reference to the naming service. Therefore the ORB
+    must be able to read IORs without requiring the developer to write
+    some additional code. In the past each ORB had its own command
+    line parameters to pass IORs to the ORB's core (ORBit:
+    ORBNamingIOR=IOR:.....). <application>The Interoperable Naming
+    Service (INS) </application> specification introduces the
+    standardized command line parameter <envar>-ORBInitRef</envar> to
+    achieve this.  </para>
+
+    <screen>
+    <prompt>bash$</prompt><userinput>appname -ORBInitRef NameService=IOR_of_naming_service</userinput> </screen>
+          
+    <para> The only trick is to pass argc and argv to the ORB_init()
+    call of the ORB, so that the ORB's core can extract the relevant
+    parameters.  Afterwards the call </para>
+
+    <para><command>nsobj =
+    resolve_initial_references("NameService");</command> returns the
+    desired object reference. The INS specification defines, besides
+    the IOR, other human readable object references.
+    <command>corbaloc:iiop://IIOPVersion@hostname:port/ObjectKey</command>
+    </para>
+
+    <para>This offers the possibility for a client to point to a
+    server object just by providing a human readable address. Another
+    proposed naming scheme is corbaname, which refers to a naming
+    service running on the host the, specified by hostname.
+    <replaceable>corbaname://hostname#a/b/obj</replaceable> The
+    a/b/obj specifies a Name, i.e. a sequence of NameComponents, which
+    resolves to an object reference.  These mechanisms will extremly
+    improve the whole bootstrapping process and finally solve the
+    problem, as it has been one of the most annoying issues in the
+    past. There are are also a few critics of the human readable
+    object reference corbaloc. They think that the fact of having
+    opaque IORs is weakened by the INS specification. Specifying
+    protocol details, like port numbers or protocol version numbers,
+    can result in references to become invalid when the protocol, used
+    for transportation is exchanged. The Object URLs have to be
+    extended to support the new protocol information, whereas IORs
+    always remain the same, a sequence of numbers. </para>
+
+
+    <para>The CVS HEAD version of ORBit has a partial implementation
+    of the INS specification.  <ulink type="http"
+    url="http://www.ooc.com.au/staff/michi/binding.txt">Michi Henning
+    has a more elaborate description of the problem here.</ulink>
+    </para>
+
+    </sect1>
+
+    <sect1 id="DefaultParameterInIDL">
+    <title>How can I specify default parameters in IDL?</title> 
+     
+    <para>
+    IDL does not allow to specifiy default parameters. There are
+    mainly two reasons for that. First, IDL is some kind of least
+    common denominator of all the languages for which a CORBA mapping
+    is available. Many languages do not support the concept of default
+    parameters and thus have difficulties in supporting this feature
+    in the mapping. And second, default parameters are not really
+    necessary. The designer of an interface can easily split such
+    funtionality into two or more separate methods (Attention:
+    Overloading is not supported for the same reasons, so that methods
+    must have different names). </para> </sect1>
+
+    <sect1 id="GettingIpAdressOfObject">
+    <title>How can I get the IP address of a cient/server object in
+    CORBA?</title> 
+
+    <para> The IP address (as well as the port number or any other
+    protocol related feature) is hidden in the IOR (Interoperable
+    Object Reference). The reason for this opacity is that CORBA can
+    use any protocol for transportation of requests between object
+    instances. The GIOP (General Inter ORB Protocol) is independent
+    from any special network protocol. The IIOP (Internet Inter ORB
+    Protocol) is a translation of GIOP into TCP/IP. IIOP support is
+    not a mandatory feature of an ORB, but because of the Internet it
+    has become a must for any ORB to implement. If we start relying on
+    the presence of a specific protocol the original intention becomes
+    weakened and may render object references, valid today, invalid in
+    the future. (see TAO (The ACE ORB, ACE - Adaptive Communication
+    Environment) for an ORB which supports pluggable protocols)
+    </para>
+   
+    </sect1> 
+
+   <sect1 id="what_is_ORBit2">
+   <title> What is ORBit2?</title>
+   <para>
+   ORBit2 is the next revision in the ORBit development plan. It is
+   substantialy re-written, and contains a number of new, advanced
+   features. One of these is an abstract IO layer split out into the
+   separate 'linc' library. This allows features such as SSL operation
+   and multiple new connection types.
+   </para>
+   </sect1>
+
+   <sect1 id="Who_is_resonsible">
+   <title>Who is responsible ?</title>
+   <para>
+   The bulk of the initial work is down to Elliot Lee, and various
+   people whose ideas he fused liberaly Kennard White, Sebastian
+   Wilhelmi - the polishing and recent work down to Mark McLoughlin,
+   Martin Baulig and myself.
+   </para>
+   </sect1>
+
+   <sect1 id="how_is_orbit2_better_than_orbit_stable">
+   <title>How is ORBit2 better than ORBit 'stable' ?</title>
+   <para>
+   In many ways:
+   <itemizedlist>
+        <listitem><para> 
+        Targets CORBA 2.4 instead of CORBA 2.2
+        </para></listitem>
+        
+        <listitem><para> 
+        Theoreticaly thread safe - see later.
+        </para></listitem>
+
+        <listitem><para> 
+        In conjunction with linc allows all manner of new transports
+        </para></listitem>
+
+        <listitem><para> 
+        Protection against malicious / badly formed wire data
+        </para></listitem>
+
+        <listitem><para> 
+        Type centric
+        <itemizedlist>
+                <listitem><para> smaller - stubs / skels are tiny: ~50% smaller.</para></listitem>
+                <listitem><para> generic operation, eg. method tracing</para></listitem>
+                <listitem><para> fast in-proc language bindings</para></listitem>
+                <listitem><para> marginaly slower currently</para></listitem>
+        </itemizedlist>
+        </para></listitem>
+
+        <listitem><para> 
+        Uses glib mainloop
+        </para></listitem>
+
+        <listitem><para> 
+        "URL for IOR" to allow retrieving an IOR via HTTP
+        </para></listitem>
+
+        <listitem><para> 
+        Cleaner
+        <itemizedlist>
+                <listitem><para> lots of code cleaning and re-factoring</para></listitem>
+                <listitem><para> most CORBA interfaces generated from pseudo-IDL</para></listitem>
+                <listitem><para> a more pleasant directory structure</para></listitem>
+                <listitem><para> more complete implementations of many things</para></listitem>
+        </itemizedlist>
+        </para></listitem>
+
+        <listitem><para> 
+        Tested - fairly comprehensive stress testing.
+        </para></listitem>
+
+        <listitem><para> 
+        No resource leakage of TypeCodes
+        </para></listitem>
+
+        <listitem><para> 
+        Lots of bugs fixed, and new ones created.
+        </para></listitem>
+   </itemizedlist>
+   </para>
+   </sect1>
+
+   <sect1 id="is_orbit2_thread_safe">
+   <title>Is ORBit2 thread safe ?</title>
+   <para>
+   ORBit2 is theoreticaly thread safe, ie. we thought about it a bit
+   during the design - which is nominaly thread safe, we added a lot
+   of locks, and we fixed deadlocks when they were found. It has yet
+   to be tested in anger in a multi-threaded environment.
+   </para>
+   </sect1>
+
+   <sect1 id="what_is_this_re_enterancy_thing"> 
+   <title>What is this re-enterancy thing ?</title>
+   <para>
+   When a method is invoked, while the ORB is waiting for a return
+   value or exception (if applicable) the ORB processes any other
+   incoming requests in a re-enterant fashion. This occurs even during
+   threaded operation currently.
+   </para>
+   </sect1>
+
+   <sect1 id ="can_i_invoke_methods_from_multiple_threads">
+   <title>Can I invoke methods from multiple threads ?</title>
+   <para>
+   Yes, this should present no particular problem.
+   </para>
+   </sect1>
+
+   <sect1 id="can_i_receive_invocations_in_multiple_threads">
+   <title>Can I receive invocations in multiple threads ?</title>
+   <para>
+   Yes - assuming you have a glib mainloop ( or a linc_mainloop )
+   running in one or several of your threads. The precice thread that
+   the invocation is recieved in is unpredictable.
+   </para>
+   </sect1>
+
+   <sect1 id="can_i_have_each_invocation_handled_by_a_different_thread">
+   <title>Can I have each invocation handled by a different thread ?</title>
+   <para>
+   Currently no - there is tentative compile time support in the ORB
+   for this mode of operation, but currently no effort has been put
+   into this. If the compile time support for this is enabled, the
+   mainloop and re-enterant processing is disabled.
+   </para>
+   </sect1>
+
+   <sect1 id="how_does_the_new_type_system_work">
+   <title>How does the new 'type' system work ?</title>
+   <para>
+   The new type system forms a fundamental part of ORBit2 and presents
+   a major simplification.
+   </para>
+   </sect1>
+
+   <sect1 id="what_do_mean_by_type_data">
+   <title>What do you mean by 'type' data ?</title>
+   <para>
+   By type data we mean not only structure layout information, but
+   also full interface and method information. ie. not just value
+   class types but interfaces as well.
+   </para>
+   </sect1>
+
+   <sect1 id="how_do_we_get_type_data_for_an_interface">
+   <title>How do we get type data for an interface ?</title>
+   <para>
+   There are two answers to this. Firstly, if you have a pointer to an
+   Object reference and you know nothing more than that it is a ORBit2
+   handled CORBA object, you can (via. an ORBit2 extension) request
+   it's type id, and from this, a full interface description.
+   </para>
+   <para>
+        see ORBit2/include/orb/orb-core/orbit-small.h
+        and ORBit2/include/orb/orb-core/orbit-iinterface.h (from)
+            ORBit2/src/orb/orb-core/orbit-iinterface.idl
+   </para>
+
+   <sect2 id="type_data_from_an_object_reference">
+   <title>Type data from an object reference ?</title>
+   <para>
+   <programlisting>
+        CORBA_char *type_id;
+        ORBit_IInterface *iface;
+
+        type_id = ORBit_small_get_type_id (obj, ev);
+        iface   = ORBit_small_get_iinterface (obj, type_id, ev);
+   </programlisting>
+   </para>
+   </sect2>
+
+   <sect2 id="type_data_from_a_type_library">
+   <title>Type data from a type library ?</title>
+   <para>
+   If we wish to implement an interface in our scripting language
+   that is not currently registered with the ORB, then we can load it
+   dynamicaly from the type library interface:
+   <programlisting>ORBit_small_load_typelib ("Bonobo");</programlisting>
+   
+   We can then suck all the interface and TypeCode information out of
+   the library, in order to construct local language bound peers:
+   
+   <programlisting>CORBA_sequence_CORBA_TypeCode   *ORBit_small_get_types ("Bonobo");
+CORBA_sequence_ORBit_IInterface *ORBit_small_get_iinterfaces (...);</programlisting>
+   </para>
+   </sect2>
+   </sect1>
+
+   <sect1 id="what_is_type_library_or_imodule"> 
+   <title>What is a type library (or imodule) ?</title>
+   <para>
+   Type libraries are essentialy the same generic interface
+   information that the ORB uses to marshal and de-marshal information
+   in the C stubs. It is contained in the -common.c file of a compiled
+   set.
+   </para>
+   <para>
+   To install a type library correctly you need to have some
+   automake a little like:
+   </para>
+   <programlisting>
+orbittypelib_LTLIBRARIES = Bonobo_module.la
+orbittypelibdir = $(libdir)/orbit-2.0
+IMODULE_SOURCE =        \
+        Bonobo.h        \
+        Bonobo-common.c \
+        Bonobo-imodule.c
+Bonobo_module_la_SOURCES = \
+        Bonobo-imodule.c
+Bonobo_module_la_LIBADD = \
+        $(LIBBONOBO_LIBS)
+Bonobo_module_la_LDFLAGS = \
+        -export-dynamic -module
+
+$(IMODULE_SOURCE): $(idl_DATA) $(ORBIT_IDL)
+        $(ORBIT_IDL) $(idl_flags) --imodule \
+                     $(top_srcdir)/idl/Bonobo.idl
+   </programlisting>
+   <para>
+   Note that the library is installed into $(libdir)/orbit-2.0.  When
+   a typelib is loaded, an explicit path can be passed in, otherwise
+   the ':' delimited path environment variables ORBIT_TYPELIB_PATH and
+   GNOME_PATH are searched.
+   </para>
+   </sect1>
+
+   <sect1 id="how_do_i_find_what_type_libraries_are_installed">
+   <title>How do I find what type libraries are installed ?</title>
+   <para>
+   There is a utility ORBit2/test/typelib-dump that will display a
+   list of available libraries for your path setup:
+   </para>
+   <para>
+   Installed type libraries:
+   <programlisting>
+        /opt/ngnome2/lib/orbit:
+
+                Everything
+                Accessibility
+                Bonobo
+   </programlisting>
+   It can also rudimantarily dump the contents of a type library.
+   </para>
+   </sect1>
+
+   <sect1 id="why_bother_generating_type_information_from_an_interface">
+   <title>Why bother generating type information from an interface ?</title>
+   <para>
+   With ORBit stable, language bindings had to load and parse the IDL
+   definitions for the interface. This had several disadvantages.
+
+   <itemizedlist>
+   <listitem><para>
+   Primarily performance - loading a load of IDL text, forking the
+   pre-preocessor to pre-process it, resolving all the symbols as
+   strings, converting to an internal representaton - took time. With
+   a standard internal representation, and a simple dlopen to grab it
+   we have a major performance win.
+   </para></listitem>
+
+   <listitem><para> 
+   Include problems: many IDL files are grouped into a
+   single file to build, and can cause grief when included
+   individualy. This contrasts with a working bundle of interfaces,
+   verified at package IDL compile time.
+   </para></listitem>
+
+   <listitem><para>
+   libIDL - is an unmaintained mess, and is not particularly
+   pleasant to link against, or code to.
+   </para></listitem>
+  
+   <listitem><para>
+   Finding the IDL files - there was no standard path structure, or
+   method of reliably locating all the relevant IDL files.  Now at
+   least there is an ad-hoc shared standard.
+   </para></listitem>
+   
+   </itemizedlist>
+   </para>
+   </sect1>
+
+   <sect1 id="why_is_a_type_based_orb_better">
+   <title>Why is a type based ORB better ?</title>
+   <para>
+   Firstly ABI reduction, in ORBit stable the API usage by the stubs
+   was very considerable - many methods were called, and there was a
+   considerable body of code in a stub or a skel.
+   </para>
+
+   <para>
+   With ORBit2 a stub looks like a bit like this:
+   <programlisting>
+Bonobo_Unknown
+Bonobo_Unknown_queryInterface (Bonobo_Unknown     obj,
+                               const CORBA_char  *repoid,
+                               CORBA_Environment *ev)
+{
+        Bonobo_Unknown _ORBIT_retval;
+
+        ... local fast case ... else ...
+        { /* remote marshal */
+                gpointer _args[] = {
+                        (gpointer) &amp; repoid
+                };
+
+                ORBit_small_invoke_stub (
+                        obj,
+                        &amp;Bonobo_Unknown__iinterface.methods._buffer[2],
+                        &amp;_ORBIT_retval, _args, NULL, ev);
+
+        }
+
+        return _ORBIT_retval;
+}
+   </programlisting>
+
+        ie. we expose a single method call here
+'ORBit_small_invoke_stub'. This method is passed the object reference,
+the arguments in a normalized form ( as an array of gpointers ) a
+pointer to the return value, any CORBA_Context we might be _sing and
+the exception environent.
+   </para>
+
+   <para>
+   The skeleton is similar, unwinding a gpointer array of arguments
+   and invoking the C method. NB. for language bindings, you can hook
+   the a virtual invocation pointer on the servant to recieve a method
+   type data pointer and handle the invocation fully yourself.
+   </para>
+
+   <para>
+   The indirection and allocation semantics of the argument passing,
+   as well as the C CORBA semantics are lucidly documented in
+   ORBit2/docs/internals/interface-indirection.gnumeric.
+   </para>
+   </sect1>
+
+   <sect1 id="why_is_a_type_based_orb_potentialy_faster">
+   <title>Why is a type based ORB potentialy faster ?</title>
+   <para>
+   Well - partly due to encapsulation. Encapsulation often carries a
+   cost; in ORBit stable there are several layers. Even though the
+   stubs and skels are substantialy unrolled, there are a considerable
+   amount of method calls, and lots of wasteful indirection.
+   </para>
+
+   <para>
+   In ORBit2 we can hide an _extremely_ optimized, top to bottom to
+   the wire generic marshaler behind ORBit_small_invoke_stub. This
+   would be totaly private to the ORB, maintaining ORB encapsulation,
+   but giving us buckets of room for optimization.
+   </para>
+        
+   <para>
+   Secondarily, in ORBit stable the stubs and skels are massively
+   unrolled, giving not only a size penalty but also a speed penalty
+   in terms of the processors instruction cache (Icache). In contrast
+   ORBit2 maintains a far smaller Icached working set, since the
+   generated code that is different per method is tiny, and the same
+   generic code is executed to do the marshaling for each method.
+   </para>
+
+   <para>
+   Hence - although currently what performance tests we have suggest
+   that ORBit2 is ~20% slower than ORBit stable, it will be possible (
+   in a totaly binary compatible fashion ) to tweak and optimize the
+   marshal / de-marshal process to make it arbitarily fast.
+   </para>
+   </sect1>
+   
+   <sect1 id="what_is_the_purify_cleanliness_autoconf_option">
+   <title>What is the "purify cleanliness" autoconf option ?</title>
+   <para>
+   This (unfinished) option allows the ORB to be configured to run in
+   a slightly slower, but 'cleaner' mode. Purify is a tool that
+   performs advanced memory debugging, and it will detect many common
+   errors. Some of the things ORBit2 can do eg. using uninitialized
+   stack space as a source of randomness will flag false positives as
+   purify errors ( an Uninitialized Memory Read or UMR ). Enabling
+   this flag ensures that all such memory will be blanked first before
+   being read.  This also applies to initializing return values before
+   returning them, even on exceptions - a case where CORBA specifies
+   an uninitialized return value.
+   </para>
+
+   <para>
+   The performance impact of having a putify clean ORB is probably
+   fairly minimal, perhaps ~10% slower max., finger in the air
+   guestimation.
+   </para>
+   </sect1>
+
+  </chapter> 
+
+</book>
