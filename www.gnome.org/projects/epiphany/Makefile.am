@@ -6,17 +6,17 @@ SUBDIRS=			\
 
 urlpath=/projects/epiphany
 
-page_DATA=			\
-	default.css			\
+page_DATA=\
+	default.css		\
 	epiphany.css		\
-	epiphany-old.css \
-	index.html			\
-	news.html			\
+	epiphany-old.css	\
+	index.html		\
+	news.html		\
 	resources.html		\
 	extensions.html		\
-	extensions.xhtml \
-	smartbookmarks.html \
-	bugreports.xhtml \
+	extensions.xhtml	\
+	smartbookmarks.html	\
+	bugreports.xhtml
 
 page_SCRIPTS= \
 	.htaccess
