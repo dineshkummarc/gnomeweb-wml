@@ -1,7 +1,7 @@
-SUBDIRS=			\
-	development		\
+SUBDIRS=\
+	development	\
 	documentation	\
-	images	\
+	images		\
 	screenshots
 
 urlpath=/projects/epiphany
@@ -18,7 +18,7 @@ page_DATA=\
 	smartbookmarks.html	\
 	bugreports.xhtml
 
-page_SCRIPTS= \
+page_SCRIPTS=\
 	.htaccess
 
 include $(top_srcdir)/rules.common
