@@ -7,6 +7,7 @@ page_DATA =		\
 	cvs.png \
 	distros.png \
 	documentation.png \
+	evolution-icon.png \
 	plugin.png \
 	rc.png \
 	rc-snap.png \
@@ -14,5 +15,6 @@ page_DATA =		\
 	summary.png \
 	tip.png \
 	todo.png
+
 
 include $(top_srcdir)/rules.common
