@@ -1,4 +1,4 @@
-SUBDIRS=
+SUBDIRS =
 
 urlpath=/projects/gnome-print/images
 
@@ -18,3 +18,5 @@ page_SCRIPTS= \
 	frame-top.png \
 	frame-left-top.png \
 	icon.gif
+
+include $(top_srcdir)/rules.common

@@ -1,6 +1,6 @@
 <?
 
-print "Hello Again";
+print "Hello World";
 
 include ("library/data.lib");
 
