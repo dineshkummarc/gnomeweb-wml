@@ -4,8 +4,9 @@ urlpath=/guadec
 
 page_DATA=survey.php\
 	gnome-foot-large.png\
-	equals.png\
 	plus.png\
+	equals.png\
+	question.png\
 	guinness.png
 
 page_SCRIPTS=

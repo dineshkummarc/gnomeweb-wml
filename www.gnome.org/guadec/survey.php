@@ -162,11 +162,14 @@
              <input type="checkbox" name="developer"> I am a GNOME developer.
           </td>
         </tr>
+        <tr>
+	  <td valign="top" colspan="3">
+	    *Committments to GNOME:
+	  </td>
 	<tr>
-	  <td>*Committment to GNOME:</td>
-	  <td>
-	    <input type="text" name="gnomecommittment" 
-		   size="100" value="<? echo $gnomecommittment ?>">
+	  <td valign="top">&nbsp;</td>
+	  <td valign="top" colspan="2">
+	    <textarea name="gnomecommittment" cols="70" rows="5"></TEXTAREA>
 	  </td>
 	</tr>
         <tr>
