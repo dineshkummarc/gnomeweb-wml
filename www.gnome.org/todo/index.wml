@@ -67,7 +67,7 @@ $res = mysql_query($complete_query);
 <table width="95%" border="0" cellspacing="0" cellpadding="4">
 <tr><th bgcolor="#cce6ff">Description</th><th
 bgcolor="#cce6ff">Project</th><th bgcolor="#cce6ff">Required skill</th><th
-bgcolor="#cce6ff">Required familiarity</th></tr>
+bgcolor="#cce6ff">Required familiarity</th><th bgcolor="#cce6ff"></th></tr>
 
 <?
 
@@ -75,6 +75,10 @@ while ($res_object = mysql_fetch_object($res) ) {
 
 
 ?>
+
+<form action="admin/modify.php3" method="get">
+
+<? print "<input type=\"hidden\" name=\"id\" value=\"" . $res_object->id . "\">\n"; ?>
 
 <tr><td><b><?
 
@@ -131,7 +135,7 @@ switch ($res_object->required_familiarity) {
 		break;
 
 }
-?></td></tr>
+?></td><td><input type="submit" name="del" value="Del"></tr></form>
 
 <?
 

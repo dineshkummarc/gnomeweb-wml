@@ -1,0 +1,41 @@
+#use wml::www.gnome.org::page
+
+<set-last-changed "$Date$">
+
+<document title="Contribute to GNOME" imgid="contribute">
+<content>
+
+<? 
+
+$connection = mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
+
+mysql_select_db("todo");
+
+if ($del) {
+
+$res = mysql_query ("SELECT short_desc FROM todo_items WHERE (id='" . $id . "')");
+$res_obj = mysql_fetch_object($res);
+
+if (!$verify) {
+
+print "Please verify that you want to delete the item \"" . $res_obj->short_desc . "\"<br>";
+
+
+print "<a href=\"modify.php3?del=Del&id=" . $id . "&verify=Verify\">Verify</a>"; 
+
+} else {
+
+mysql_query("DELETE FROM todo_items WHERE (id = '" . $id . "')");
+
+print "Item \"" . $res_obj->short_desc . "\" was deleted.<p>\n";
+print "<a href=\"../index.php3\">Return to the todo page.</a>";
+}
+
+}
+
+
+?>
+
+
+</content>
+</document>
