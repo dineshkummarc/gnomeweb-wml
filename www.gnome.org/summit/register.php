@@ -124,8 +124,7 @@
     </ul>
 
     <form action="<?=$PHP_SELF?>" method="POST">
-
-      <table>
+      <table colspacing=15>
 	<tr>
 	  <td>*Name:</td>
 	  <td>
@@ -201,8 +200,8 @@
              <input type="checkbox" name="placetostay"> Help!  I need a place to crash while I'm in town.
           </td>
         </tr>
-        <tr colspan=2>
-          <td>
+        <tr>
+          <td colspan=2>
              <input type="checkbox" name="gfmember"> *I am a GNOME Foundation member.
           </td>
         </tr>
