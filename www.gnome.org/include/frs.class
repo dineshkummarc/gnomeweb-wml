@@ -266,11 +266,13 @@ class FRS extends Error {
 	 * @param $release_date int The date of the release
 	 * @param $release_name string The name of the release
 	 * @param $preformatted int The flag to store notes and changes as pre-formatted text
+	 * @param $announce int The flag to store whether the release was announced to the list
 	 * @param $status_id int The status ID of the release
 	 * @param $changes string The change log text
 	 * @param $release_id int The ID of the release
 	 */
-	function frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $changes, $group_id, $release_id)
+	function frsChangeRelease($release_date, $release_name, $preformatted, $announce,
+		$status_id, $changes, $group_id, $release_id)
 	{
 		// Make sure the date format is correct.
 		// If so then turn it into a timestamp.
@@ -288,6 +290,7 @@ class FRS extends Error {
 					   		release_date='$release_date',
 					  		name='$release_name',
 					  		preformatted='$preformatted',
+					  		announce='$announce',
 		              		status_id='$status_id',
 					  		group_id='$group_id',
 					  		changes='$changes'
@@ -388,7 +391,8 @@ class FRS extends Error {
 			  	release_name,
 				status_id,
 				changes,
-				preformatted 
+				preformatted,
+				announce
 			  FROM 
 			 	frs_release
 			  WHERE 

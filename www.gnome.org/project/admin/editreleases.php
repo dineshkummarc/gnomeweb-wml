@@ -31,7 +31,7 @@ if ($step1) {
 	$exec_changes = true;
 
 	// Check for uplaoded change logs
-	if ($uploaded_changes != "") {
+	if (($uploaded_changes != "") && ($uploaded_changes != "none")) {
 		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'),
 			filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
 		if ((strlen($changes) < 20) || (strlen($changes) > 256000)) {
@@ -44,7 +44,15 @@ if ($step1) {
 
 	// If we haven't encountered any problems so far then save the changes
 	if ($exec_changes == true) {
-		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $changes, $group_id, $release_id)) {
+		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $announce,
+			$status_id, htmlspecialchars ($changes), $group_id, $release_id)) {
+
+			// Announce the release to gnome-announce
+			mail ("gnome-announce@gnome.org",
+				"ANNOUNCE: ".$project->getPublicName()." ".$release_name,
+				wordwrap (stripslashes ($changes)),
+				"From: GNOME Software Map <webmaster@gnome.org>");
+			
 			$feedback .= " Data Saved ";
 		} else {
 			$feedback .= $frs->getErrorMessage();
@@ -133,6 +141,7 @@ Edit Existing Release
 		<br>
 		Edit the Change Log for this release. These changes will apply to all files attached to this release.<br>
 		You can either upload the change log individually, or paste it in below.<br><br>
+		Change Logs should be text only.<br><br>
 	</td>
 </tr>
 <tr>
@@ -142,13 +151,29 @@ Edit Existing Release
 <TR>
 	<td COLSPAN=2>
 		<b>Paste The Change Log In:</b><br>
-		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'changes')); ?></textarea>
+		<textarea name="release_changes" rows="15" cols="80" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'changes')); ?></textarea>
 	</td>
 </tr>
 <TR>
-	<TD nowrap>
+	<TD colspan="2" nowrap>
+		<!-- <input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text. -->
+		<input type="hidden" name="preformatted" value="1">
+	</td>
+</tr>
+<TR>
+	<TD colspan="2" nowrap>
 		<br>
-		<input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text.
+		<b>Announce this release:</b><br>
+		<?php
+		if (db_result($result,0,'announce') == 1)
+		{
+			print "<p>This release has already been announced.</p>\n";
+		}
+		else
+		{
+			print "<input type=\"checkbox\" name=\"announce\" value=\"1\"> Announce this release to the gnome-announce mailing list.";
+		}
+		?>
 		<p>
 		<input type="submit" name="submit" value="Submit/Refresh">
 	</td>
