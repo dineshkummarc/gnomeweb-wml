@@ -80,8 +80,8 @@
 
         $formmail .= "GNOME Foundation Member:\t" . $gfmember ."\n\n";
 
-        $formmail .= "\nComments:\n";
-        $formmail .= "$comments\n\n";
+        $formmail .= "\nSuggestions:\n";
+        $formmail .= "$suggestions\n\n";
 
         $headers = "From: guadec_pre_register@gnome.org \n";
 
@@ -269,11 +269,11 @@
 	</tr>
         <tr>
 	  <td valign="top" colspan="2">
-	    Comments:
+	    Suggestions:
 	  </td>
 	<tr>
 	  <td valign="top" colspan="2">
-	    <textarea name="comments" cols="70" rows="5" wrap=virtual><? if (trim($comments)) { echo trim($comments); } ?></textarea>
+	    <textarea name="suggestions" cols="70" rows="5" wrap=virtual><? if (trim($suggestions)) { echo trim($suggestions); } ?></textarea>
 	  </td>
 	</tr>
 	<tr>
