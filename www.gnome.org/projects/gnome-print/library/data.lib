@@ -2,10 +2,10 @@
 
 include ("library/page.lib");
 
-function data_read_meta ($dir)
+function data_read_meta ($filename)
 {
-	if (!file_exists ("$dir/meta")) {return NULL;}
-	$file = file ("$dir/meta");
+	if (!file_exists ("$filename")) {return NULL;}
+	$file = file ("$filename");
 	$len = sizeof ($file);
 	for ($i = 0; $i < $len; $i++) {
 		$p = explode ("/", $file[$i]);
@@ -29,20 +29,33 @@ function data_read_meta ($dir)
 function data_show_page ($section, $page)
 {
 	/* Read global metadata */
-	$gm = data_read_meta (".");
+	$gm = data_read_meta ("meta");
+	if (!$gm[$section]) $section = "home";
 	/* Read section metadata */
-	$sm = data_read_meta ($section);
-
 	$sinfo = $gm[$section];
+	if ($sinfo['meta']) {
+		$metaname = $sinfo['meta'];
+	} else {
+		$metaname = "meta";
+	}
+	if ($sinfo['directory']) {
+		$dirname = $sinfo['directory'];
+		$metaname = "$dirname/$metaname";
+	}
+	$sm = data_read_meta ($metaname);
+
 	if (!$page) {$page = $sinfo['intro'];}
 	$pinfo = $sm[$page];
 
 	$ga = array_keys ($gm);
 	$sa = array_keys ($sm);
 	$file = $pinfo['file'];
+	if ($dirname) {
+		$file = "$dirname/$file";
+	}
 
 	page_start ($pinfo[$title]);
-	page_show ($ga, $sa, $section, $page, "$section/$file");
+	page_show ($ga, $sa, $section, $page, $file);
 	page_end ();
 }
 

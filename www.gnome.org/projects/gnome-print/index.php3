@@ -1,7 +1,5 @@
 <?
 
-print "Hello World";
-
 include ("library/data.lib");
 
 /* Set default section */

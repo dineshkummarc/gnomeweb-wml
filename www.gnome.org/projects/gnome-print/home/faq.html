@@ -1,0 +1,409 @@
+			<h3>faq</h3>
+
+<h6>Version 0.1<br>
+03/05/2001<br>
+Lauris Kaplinski <a href="mailto:lauris -DE-SPAM-THIS!- @ximian.com">&lt;lauris@ximian.com&gt;</a></h6>
+
+<h4>What is gnome-print?</h4>
+<p>
+Gnome-print is high-quality printing framework for GNOME.
+
+<h4>What is there in gnome-print?</h4>
+<p>
+Gnome-print implements:
+<ul>
+<li>device-independent printing API, modelled loosely after PostScript language
+<li>font abstraction that allows device-independent text display (within
+  reasonable limits)
+<li>powerful configuration engine, dealing with all levels of output
+  pipeline
+<li>set of actual printer drivers (PostScript, PDF, fax)
+<li>print preview widget
+<li>printer selector widget
+</ul>
+
+<h4>Is there a mailing list for gnome-print?</h4>
+<p>
+Yes, there is. You can acess both subscription/unsubscription and
+archives from web address:
+<a href="http://lists.ximian.com/mailman/listinfo/gnome-print">http://lists.ximian.com/mailman/listinfo/gnome-print</a>
+The adress of list (for posting messages) is:
+<a href="mailto:gnome-print@ximian.com">gnome-print@ximian.com</a>
+
+<h4>I found a bug in gnome-print. How should I report it?</h4>
+<p>
+The best way is to use gnome bug tracking system
+(<a href="http://bugzilla.gnome.org/">http://bugzilla.gnome.org/</a>). Bugs entered there are never forgot by
+developers, as bugs reported by email often are.
+If reporting bug, be as exact as possible. Code examples are great. If
+reporting bugs related to PostScript printing, try to attach resulting
+PostScript file in addition to description, how your program produced
+it.
+
+<h4>Which application use gnome-print?</h4>
+<p>
+The list is continuously growing. The best known ones are:
+<ul>
+<li>gnumeric
+<li>evolution
+<li>gtkhtml
+<li>gnucash
+<li>gedit
+<li>sodipodi
+<li>ghex
+<li>guppi
+<li>eog
+</ul>
+
+
+<h4>Does gnome-print use ghostscript? lpr? CUPS?</h4>
+<p>
+Current gnome-print relies entirely on underlying printing system for
+interfacing with actual printers. So it uses whatever
+libraries/prograsm your printing system use.
+In future it may implement direct drivers too, but of course, the
+general ones remain always present.
+
+
+<h4>Why my application should use gnome-print? After all it is not so
+difficult to produce PostScript manually and doing so gives me endless
+possibilities.</h4>
+<p>
+The main role of gnome-print is standardization:
+<ul>
+<li>shared printer configuration profiles for all gnome apps
+<li>uniform print preview
+<li>standard set of printer configuration widgets
+<li>standard set of fonts, guaranteed to print on any device
+</ul>
+In general gnome-print tries to hide all complexity of different
+printing systems and printers, while presenting uniform easy-to-use
+and powerful-enough interface to application.
+
+
+<h4>I want feature XYZ to be implemented!</h4>
+<p>
+First send a message to gnome-print mailing list. Maybe someone is
+already implementing it, or has better ideas how to solve your problem.
+Then you can file a 'WISHLIST' bug report, using
+<a href="http://bugzilla.gnome.org">bugzilla.gnome.org</a>. If your idea has value for general audience,
+the chances for it to be implemented are good.
+
+
+<h4>How I can help developing gnome-print library?</h4>
+<p>
+Send message to gnome-print list and we will contact you ;)
+While you do not need any permission to start hacking on gnome-print,
+it is usually better to ask first, whether your idea is already in
+work, or does somebody have better idea, how to implement that.
+If you think you have produced useful patch, send it to gnome-print
+mailing list, or directly to maintainers. The former is preferred, as
+maintainer may be sick, in vacation or buried alive under emails at
+moment, and then your valuable contribution will remain unnoticed.
+
+
+<h4>How I can get gnome-print?</h4>
+<p>
+The easiest way is to use gnome binary distribution. Consult
+<a href="http://www.gnome.org/start/">http://www.gnome.org/start/</a> about both how to get binaries and/or
+source for gnome packages. If you are using realatively modern
+GNU/Linux distribution chances are that gnome-print is already
+included in it. But as gnome-print is rapidly developing, you may want
+to check for updates.
+
+
+<h4>How I can compile gnome-print from source tarball?</h4>
+<p>
+Just unpack tarball into separate directory. cd to gnome-print-X.Y
+directory and issue commands:
+<pre>./configure --prefix=PREFIX
+make
+Become superuser
+make install</pre>
+Where <tt>prefix</tt> is your gnome installation prefix. If unsure, try
+<tt>gnome-config --prefix</tt>
+
+
+<h4>What other libraries I need to compile gnome-print?</h4>
+
+<p>Generally you need working gnome installation. More specifically:
+<ul>
+<li>gnome-libs
+<li>gdk-pixbuf
+<li>gnome-xml (old) or libxml (new)
+<li>gtk, gdk, glib
+<li>X libraries
+</ul>
+
+
+<h4>I have <tt>MY_LIBRARY</tt> installed, but gnome-print compilation says I have
+not!</h4>
+
+<p>If you have installed gnome from binary packages, make sure that you
+have installed corresponding development packages as well.
+If you have compiled <tt>MY_LIBRARY</tt> yourself, make sure that prefixes match.
+
+
+<h4>How can I use gnome-print from my programs?</h4>
+
+<p>Unfortunately there is no good documentation about using
+gnome-print. The best way is probably to look into example code in
+tests directory in gnome-print source.
+
+
+<h4>Can I use gnome-print from console programs?</h4>
+
+<p>Yes, you can. You still need X, Gtk+ and gnome to be installed, but X
+does not have to run on your machine. Of course, you cannot use print
+preview or printer selection widgets in that case.
+You also have to start your console program with <tt>gtk_type_init</tt> instead
+of <tt>gtk_init</tt> or <tt>gnome-init</tt>.
+
+
+<h4>Which coordinate system does gnome-print use?</h4>
+
+<p>Gnome-print uses the same coordinate system as PostScript
+page description language. I.e. initially the 0,0 is at lower-left
+corner of page, x grows to right, y upwards and one unit corresponds
+to 1/72th of inch.
+You can change coordinate system using following methods:
+<pre>
+  gnome_print_translate (pc, x, y)
+  gnome_print_scale (pc, xscale, yscale)
+  gnome_print_concat (pc, matrix)</pre>
+If unsure, consult some textbook about computational geomtery. But in
+most cases you do not need anything other than translate and scale.
+Also, it is usually good idea to embed coordinate manipulation between
+<tt>gnome_print_gsave</tt> and <tt>gnome_print_grestore</tt> or you will soon loose
+track, which coordinate system is in use at any given moment.
+
+
+<h4>I want to print! How I can get that GnomePrintContext?</h4>
+
+<p>Either use
+<pre>
+  printer = gnome_printer_new_generic_ps (filename)
+  pc = gnome_print_context_new_with_paper_size [con't...]
+       (printer, "PAPER_NAME")</pre>
+It works for console, but does not allow you to choose driver (but in
+most cases you want PostScript anyways).
+<pre>
+  printer = gnome_printer_dialog_new_modal ()
+  pc = gnome_print_context_new_with_paper_size [con't...]
+       (printer, "PAPER_NAME")</pre>
+It works only from X, but presents user with printer selection dialog.
+Instead of dialog, you can use printer selection widget and embed it
+into your own page setup widget, consult gnome_printer_dialog.h for
+more information.
+
+
+<h4>Can I send output to pipe? To program as file argument?</h4>
+
+<p>Yes, you can.
+Use '|program' as output file name to pipe otuput to program
+Use '*program' as output file name to send output to file and
+execute program with file name as argument.
+
+
+<h4>How can I get that nice print preview?</h4>
+
+<p>Use GnomePrintMaster and GnomePrintMasterPreview:
+<pre>
+gpm = gnome_print_master_new ()
+pc = gnome_print_master_get_context (gpm)
+gpmp = gnome_print_master_preview_new (gpm, "title");
+gnome_print_master_close (gpm);</pre>
+
+
+<h4>How do I draw line in gnome-print?</h4>
+
+<p>
+<pre>gnome_print_newpath (pc)
+gnome_print_moveto (pc, x0, y0)
+gnome_print_lineto (pc, x1, y1)
+gnome_print_stroke (pc)</pre>
+You may, of course, want to specify graphic settings, like color, line
+width and so on.
+
+
+<h4>Is gnome-print methods identical to PostScript operators?</h4>
+
+<p>No, they are not. Most important differences are:
+<ul>
+<li>Every page has to start with <tt>gnome_print_beginpage</tt>
+<li>All graphic operators except line construction ones make
+  currentpoint and currentpath value undefined. 
+<li><tt>gnome_print_show</tt> expects text to be in utf8 encoding
+</ul>
+
+
+<h4>Bitmap images look bad on printout, but everything seems fine in
+preview!</h4>
+
+<p>Most probably you are using bitmaps with alpha channel. As PostScript
+cannot print semitransparent images, all bitmaps with alpha are
+rendered into temporary buffer and later sent to printer as RGB
+bitmaps. That method has currently (version 0.28) hardcoded resolution
+of 72dpi.
+
+<p>Please note, that your image does not have to use any transparency -
+just having a channel is enough to force intermediate rendering. If
+you are using gdk-pixbuf to read images, try either changing file
+format to png without alpha or jpeg, or reconde images manually to
+RGB. Some file formats are always loaded with alpha channel by
+gdk-pixbuf.
+
+
+<h4>Everything prints except bitmap images. Should I file bug report?</h4>
+
+<p>Make sure that you set up correct transformation matrix before
+printing bitmaps. Gnome-print uses PostScript convention to scale all
+bitmaps to (0,0 - 1,1) square in user coordinates. So if you do not
+set coordinate system, your image will be printed as tiny dot in
+lower-left corner of page (and usually falls into printers unprintable
+area).
+The correct way to print unscaled upright image is:
+<pre>
+gnome_print_gsave (pc)
+gnome_print_translate (pc, image_left_x, image_bottom_y)
+gnome_print_scale (pc, image_width, image_height)
+gnome_print_{rgb|rgba|gray}image [con't...]
+   (pc, pixels, width, height, rowstride)
+gnome_print_grestore (pc)</pre>
+
+
+<h4>Can gnome-print use TrueType fonts?</h4>
+
+<p>At moment (version 0.28) unfortunately not. This is much asked feature
+and will be present in next version of gnome-print.
+
+
+<h4>How I can add fonts to gnome-print?</h4>
+
+<p>It depends of your gnome-print version. Up to version 0.26 you have to
+manually add these to fontmap file (found at <tt>PREFIX/fonts</tt>).
+Starting from version 0.27 you can use program
+<tt>gnome-font-install</tt>. Just run it, giving the directory(ies) with your
+font files (pfb and afm) as argument, and send output to either
+<tt>PREFIX/fontmap2</tt> or <tt>~/.gnome/fonts/fontmap</tt>.
+
+
+<h4>Which text encoding gnome-print uses?</h4>
+
+<p>Some legacy code aside, gnome-print uses strictly utf-8 text encoding.
+
+
+<h4>Character metrics are not calculated correctly!</h4>
+
+<p>Please note, that several methods use glyph, not character
+value. Glyphs are actual printable shapes, as opposed to characters,
+that are language units - so single glyph may represent many
+characters (ligatures) or single character may be represented by
+several glyphs. Glyphs are font-dependent.
+
+
+<h4>So, how can you find, which glyph corresponds to given character?</h4>
+
+<p>If your typographic needs are modest, you can use
+gnome_font_face_lookup_default (face, character)
+For advanced typography you have to use afm files directly, and
+extract necessary information from glyph names.
+
+
+<h4>My russian Type1 fonts print well from almost any applications, but
+not from the ones using gnome-print!</h4>
+
+<p>Make sure, that your fonts use afiiXYZQ names for cyrillic
+glyphs. Some russian fonts use latin1 glyph names (like Aacute,
+otilde) for cyrillic glyphs, so supposed latin1 encoding becomes
+actually KOI8 or some similar cyrillic encoding. Gnome-print uses
+unicode internally and reencodes all fonts to private encoding, so it
+cannot be so easily fooled. As it does not find any cyrillic glyph
+names in font description, it supposes that given font cannot output
+cyrillic text.
+
+
+<h4>How can I output formatted text in gnome-print?</h4>
+
+<p>You have to use glyphlist interface.
+
+
+<h4>What is glyphlist?</h4>
+
+<p>Glyphlist is intermediate text format, used by gnome-print to generate
+identical text display on all output devices. Glyphlist uses
+font-specific glyphs instead of characters, so there is no ambiguity
+in actual text formatting (whether to use fi ligature, whether to use
+swashes etc.), but can preserve actual text flow (i.e. you give
+starting position and series of glyphs, instead of specifying the
+position of every glyph manually). Of course, if you need more complex
+placement (like typesetting 'TeX' ;), you can specify glyph positions
+manually too. In addition to that you can switch fonts and colors, and
+for flowing glyphs specify the amount of kerning and letterspacing.
+
+
+<h4>What are GnomeFontFace, GnomeFont, GnomeRFont</h4>
+
+<p>GnomeFontFace is unscaled typeface. I.e. all metrics are specified as
+of the font with 1000x1000 em square. GnomeFontFace implements the
+actual font file parsing code, so character-glyph mapping is done on
+it.
+
+<p>GnomeFont is typeface scaled to master output device and requested
+font size. I.e. 12pt Helvetica GnomeFont metrics correspond to 12x12
+em square. Or by other words - GnomeFont is font scaled to gnome-print
+base coordinate system units.
+
+<p>GnomeRFont is instance of GnomeFont, adjusted for printing on certain
+raster device with resolution that can be quite different from
+gnome-print base coordinate system. For example, 12pt Helvetica
+GnomeRFont for 720x720dpi printer metrics correspond to 120x120 em
+square.
+
+
+<h4>Why that font complexity? Wouldn't it be easier to use just single
+font class?</h4>
+
+<p>We have tried to resolve unavoidable grid-aligning problem. I.e. for
+actual printing font metrics are usually scaled to integer values in
+given device grid (resolution). So if you try to print long line of
+glyphs on different devices, either:
+<ul>
+<li>you place every glyph manually and line ending is always at the same
+  place, but inter-character distances may sometimes vary from
+  correct ones by one pixel (because positions are rounded to nearest
+  integer), so text does not look nice on low resolution
+<li>you let glyph flow freely, so inter-character distances are always
+  optimal, even on low-resolution device - but line ending may vary a
+  lot between devices.
+</ul>
+So the idea is to have GnomeFont, that is adjusted to master output
+device (for example typesetter), and for every actual output device we
+generate different GnomeRFont. If actual output device == master
+output device, the metrics of GnomeFont and GnomeRFont are identical
+(if multiplied by resolution difference), for any other they differ a
+little. Using glyphlists you can choose best strategy to minimise
+visual distortions for your application.
+
+
+<h4>What about CMYK colorspace?</h4>
+
+<p>We want it too. Hopefully in some near future version of
+gnome-print. Unfortunately it is area picked with patents, so probably
+we cannot give top-of-the-industry solution here.
+
+
+<h4>It would be cool to have printing interface on canvas items!</h4>
+
+<p>It is not so cool at all. In model-view-controller context both
+current gnome-canvas and gnome-print-context implement single
+view. Adding subview (printing interface) to existing view (canvas) is
+not very good idea.
+
+<p>What would be cool is either:
+<ul>
+<li>Make generic graphic object class, that can render to different
+  views (canvas and gnome-print)
+<li>Make model-view based canvas, so objects are clearly distinct from
+  display (and you can have multiple views of same object)
+</ul>
