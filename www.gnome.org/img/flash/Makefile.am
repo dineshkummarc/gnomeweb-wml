@@ -10,6 +10,7 @@ page_DATA = \
 	february-global-desktop.png \
 	goodbye_phone.png \
 	epatents.png \
-	gimp2.png
+	gimp2.png \
+	two-six.png
 
 include $(top_srcdir)/rules.common
