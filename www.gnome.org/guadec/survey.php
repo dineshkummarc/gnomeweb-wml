@@ -71,15 +71,15 @@
         // make the mail 
 
         $formmail = "";
-        $formmail .= "Name:\t" . $contactname . "\n";
-        $formmail .= "Age:\t" . $contactage . "\n";
+        $formmail .= "Name:\t\t" . $contactname . "\n";
+        $formmail .= "Age:\t\t" . $contactage . "\n";
         $formmail .= "Residence:\t" . $contactaddress . "\n";
+        $formmail .= "Email:\t\t" . $email . "\n\n";
+
 	$formmail .= "Affiliation [if any]:\t". $affiliation . "\n";
-        $formmail .= "Email:\t" . $email . "\n\n";
+	$formmail .= "User/Contributor:\t" . $user_contributor . "\n\n";
 
-	$formmail .= "User/Contributor:\t" . $user_contributor . "\n";
-
-        $formmail .= "Contributions:\n" . $contributions . "\n\n";
+        $formmail .= "Contributions:==============\n" . $contributions . "\n\n";
 
         $formmail .= "Interested in attending GUADEC 4:\t" . $guadec . "\n\n";
 
@@ -90,13 +90,13 @@
     		$guadecs_attended .= $attend[$i] . " ";
 	}
 	
-	$formmail .= "GUADECs Attended:\t" . $guadecs_attended . "\n\n";
-        $formmail .= "Needs Sponsorship:\t" . $sponsor . "\n\n";
-        $formmail .= "Paid Tutorials:\t" . $tutorial . "\n\n";
+	$formmail .= "GUADECs Attended:\t\t" . $guadecs_attended . "\n\n";
+        $formmail .= "Needs Sponsorship:\t\t" . $sponsor . "\n\n";
+        $formmail .= "Paid Tutorials:\t\t" . $tutorial . "\n\n";
 
-        $formmail .= "GNOME Foundation Member:\t" . $gfmember ."\n\n";
+        $formmail .= "GNOME Foundation Member:\t\t" . $gfmember ."\n\n";
 
-        $formmail .= "\nSuggestions:\n";
+        $formmail .= "\nSuggestions:============\n";
         $formmail .= "$suggestions\n\n";
 
         $headers = "From: guadec_pre_register@gnome.org \n";
