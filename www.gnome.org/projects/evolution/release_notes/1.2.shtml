@@ -1,0 +1,298 @@
+<!--#set var="title" value="Evolution" -->
+<!--#include virtual="head.shtml" -->
+
+
+<h1>Evolution 1.2 Release Notes</h1>
+
+<p>
+Ximian Evolution 1.2 is now available. The next major revision of the
+award-winning groupware suite, Evolution 1.2 offers exciting new
+features and improvements. 
+</p>
+
+
+<h2>Upgrading: Process and Caveats</h2>
+<p></p>
+<h3>Supported Systems</h3>
+<p>
+Evolution 1.2 is supported on the following operating systems:
+</p>
+<ul>
+     <li> Red Hat 7.1, 7.2 and 7.3
+     <li> Red Hat 8.0 (New!)
+     <li> SuSE 8.0 
+     <li> SuSE 8.1 (New!)
+     <li> Mandrake 8.2
+     <li> Mandrake 9.0 (New!)
+     <li> Solaris 8 for UltraSPARC
+     <li> Yellow Dog Linux 2.2 for PPC
+ <!--    <li> Debian GNU/Linux 3.0 (Woody) for x86 (New!) -->
+ </ul>
+
+<p>
+<b>Note:</b> Ximian Desktop and Ximian Evolution 1.0.x are not
+currently supported for SuSE 8.1, Red Hat 8.0, Mandrake
+9.0, and Debian Woody.
+</p>
+
+
+<h3>Upgrading from 1.0.x</h3>
+
+<p>
+The format of certain configuration files has changed in this version
+of Evolution.  When you start Evolution 1.2 for the first time, it
+will automatically migrate your configuration so that it will work as
+expected with this version.
+</p>
+<p>
+IMPORTANT: After you have installed Evolution 1.2, quit Evolution
+and type the command `killev' on the command-line (without quotes)
+before launching the new version of Evolution.
+</p>
+
+<h2>Significant Changes in 1.2</h2>
+<p></p>
+<h3>Search Criteria Changes</h3>
+
+<p>
+When you specify multiple words in search "contains" criterion,
+Evolution will now search the mail messages that contain all the words
+specified, in any order.  (The 1.0.x behavior was to look for the
+whole string in "subject contains" matches, and matched no messages in
+the case of body searches.)
+</p>
+<p>
+This applies to the search bar, the filter rules and the vFolder
+rules.  Filter rules and vFolder rules might need to be re-adjusted
+after you upgrade to version 1.2.
+</p>
+<h3>IMAP Folder Name Changes (I18N)</h3>
+<p>
+If you created any folder names using non-ASCII characters using prior
+versions of Evolution, you will find they may not be displayed
+properly anymore.  This is because previous versions did not implement
+IMAP I18N folder names correctly as specified in RFC 2060.
+</p>
+<p>
+The upgrade script will try to rectify any filters or vFolders using
+any such names.  However, as it does not know the character set used
+by the server, non ISO-8859-1 (latin-1) characters will not be
+properly converted.  You may need to reverify the filter and vFolder
+rules in this case.
+</p>
+<p>
+Also note that if such folder names do not display properly that it is
+purely cosmetic and may be fixed by renaming the folder(s) in
+question.
+</p>
+
+<h3>PalmOS Synchronization Changes</h3>
+
+<p>
+If you wish to synchronize Evolution 1.2 with a PalmOS device, you
+will need to install the additional packages "evolution-pilot" and
+"gnome-pilot-applet."
+</p>
+
+<h2>New Features in the 1.2 Series</h2>
+<p></p>
+<h3>General</h3>
+<ul>
+
+    <li> The toolbar now includes a "New" dropdown menu/button from which
+      you can create messages, appointments, etc. from within any
+      folder.
+
+    <li> A new, integrated configuration dialog for all of Evolution is
+      now provided.
+
+    <li> When you use the folder selection dialog, you can now jump to a
+      folder just by typing its name and hitting Enter (instead of
+      using the arrows or the mouse).
+
+    <li> You can now specify your default mail, calendar, tasks and
+      contacts folders.  The shortcuts in the shortcut bar will always
+      point to the default folder; so for example if you have an IMAP
+      account you can specify that the INBOX on the IMAP account is
+      default and clicking on the Inbox icon on the shortcut bar will
+      take you to the INBOX on the IMAP account.
+
+    <li> Fonts for displaying of HTML mail can now be configured from
+      within Evolution (instead of having to use GNOME Control
+      Center).
+
+    <li> You can now make Evolution play a sound, beep, or display a
+      message when new mail arrives.  It is also possible to trigger
+      these actions based on a filter rule.
+
+    <li> The behavior of the search bar has been improved, and the UI has
+      been integrated better with the menu bar and the rest of the
+      system.
+
+    <li> For the table-based views, you can now define, save and reuse
+      view settings using the "View" menu.
+
+    <li> The Send/Receive button is now always accessible from any
+      folder.
+
+    <li> You now can drop objects (e.g. mail messages, appointments)
+      directly to the folders on the shortcut bar (in 1.0.x, you could
+      only drop them in the folder folder bar).
+
+</ul>
+
+<h3>Calendar</h3>
+<ul>
+    <li> Loading speed has been improved.
+
+    <li> When you receive an appointment through email, you can choose
+      which calendar to update, and if it's for an existing appointment
+      the folder is automatically detected
+
+    <li> Calendar importer now supports importing to remote folders.
+
+    <li> Calendar GUI and alarm daemon now use listeners for the
+      configuration.
+
+    <li> Show status messages for all long calendar operations.
+
+    <li> Included timezone information on VCALENDAR objects used in copy/paste.
+
+    <li> Meeting scheduling improvements; sends replies when you update
+      your attendance status, warnings if the user changes a meeting
+      they didn't create.
+
+    <li> Deleting a meeting with a right click will now offer to send a
+      cancellation notice.
+
+    <li> Can accept meeting replies from non-attendees (they become
+      attendees).
+
+    <li> Fixed task view to update completion status the same as the
+      editor.
+      
+    <li> You can now set meetings to recur on "last day of the month"
+    or "last Tuesday of the month," etc...
+
+</ul>
+<h3>Contacts</h3>
+
+<ul>
+
+    <li> It is now possible to specify which folders are used for
+      autocompletion globally.
+
+    <li> Improved address selection dialog (for sending mail and meeting
+      requests).
+
+    <li> Improved feedback for search results for all backends and the
+      UI.
+
+    <li> SSL/STARTTLS support for LDAP has been added.
+
+    <li> Various performance improvements
+
+    <li> Fixed wombat/addressbook crashes dealing with autocompletion, it
+      should be much more stable now.
+
+    <li> Added support for categories searches on categories in LDAP 
+
+    <li> Much improved LDAP backend responsiveness and performance.
+</ul>
+<h3>Mail</h3>
+<ul>
+    <li> New, much faster indexing engine.  This results in faster mail
+      incorporation, faster mail display, and faster searches.
+      Overall, the new engine should work much better for larger
+      folders, and take considerably less space on the disk.
+
+    <li> If you type multiple words in the search bar for the
+      "... Contains" rules, Evolution will search messages that
+      contain all of the words you specified, in any order.
+
+    <li> More consistent search results for indexed, non-indexed and
+      remote folders.
+
+    <li> Better UTF8 (Unicode) support. Searches, folder names
+
+    <li> It is now possible to mark messages for follow-up and other
+      flags.  It is also possible to change the color in which a
+      specific message is displayed in the mail list.
+
+    <li> When the message list is sorted by a certain field, it is possible
+      to jump to the first item in the list that matches a certain
+      string by just typing the first few characters.
+
+    <li> You can now specify which folders get synced when switching to
+      IMAP/offline mode.
+
+    <li> All previously read messages are automatically downloaded for
+      IMAP/offline use. 
+
+    <li> STARTTLS support for POP, SMTP and IMAP has been added.
+
+    <li> You can have all of your mail Auto-Cc:ed or auto-Bcc:ed to a
+      specified set of recipients.
+
+    <li> SMTP error reporting has been improved.
+
+    <li> Vastly improving body search vFolder performance with IMAP
+sources..
+
+    <li> vFolders can now have an additional column which shows the
+      original location of the message.  
+</ul>
+<h3>Mail Composer</h3>
+<ul>
+    <li> You can now edit a set of signatures within Evolution, and pick
+      which signature you want when composing a message.
+
+    <li> Handling of replies has been improved; in particular, you can
+      now paste any text as a quotation, and quotation formatting is
+      preserved when switching between HTML and non-HTML mode.
+
+    <li> Evolution can now generate graphical smileys automatically as
+      you type.
+
+    <li> Quotation logic has been improved, re-wrapping long lines in
+      replies now preserves quotation marks.
+
+    <li> Multiple simultaneous language support in the spell checker.
+
+    <li> Cut & Paste support for html between netscape/mozilla/evolution.
+
+    <li> Optimized rendering of long messages.
+
+    <li> Improved html rendering, including support for the clear
+      attribute in &lt;br&gt; elements.
+</ul>
+
+<h3>Summary</h3>
+
+<ul>
+    <li> Can have non-local (IMAP) mail folders displayed on the summary.
+
+    <li> Improved Calendar and Tasks displayed. Displays overdue and todays
+      tasks in colors.
+
+    <li> Better folder selector.
+
+    <li> Better Weather/News Feed selector.
+
+    <li> Can delete user added news feeds.
+</ul>
+
+<h2>Bugs Fixed Since 1.1.90</h2>
+<p>
+The following bugs have been resolved since version 1.1.90:
+</p>
+  <ul>
+    <li>Made the default width of the mail filter editing dialog larger.
+    (Dan)
+
+  <li> Removed the development warning at startup.  (Ettore)
+
+  <li> Fixed a problem with the calendar navigation widget showing the
+    wrong year.  (JP)
+</ul>
+<!--#include virtual="foot.shtml" -->

@@ -1,0 +1,375 @@
+<!--#set var="title" value="Evolution" -->
+<!--#include virtual="head.shtml" -->
+<h1>Evolution 1.1.1 Release Notes</h1>
+
+<p>
+Ximian is proud to announce the first in a short series of beta
+releases leading up to the Evolution 1.2 release. Evolution 1.2 will
+have a number of exciting new features and improvements over the 1.0
+release. This release, Evolution 1.1.1, will demonstrate these
+features and serve as a stress-test before we declare the final 1.2
+release ready for launch.
+</p>
+
+<p>
+The release is available for these distributions:
+</p>
+<ul>
+<li>       Red Hat Linux 7.1, 7.2 and 7.3 for x86 
+ <li>      Solaris 8 for UltraSPARC 
+      <li> Debian GNU/Linux 2.2 (Potato) for x86 
+      <li> Linux Mandrake 8.1 and 8.2 for x86 
+      <li> SuSE 7.3 and 8.0 for x86 
+      <li> Yellow Dog Linux 2.2
+      <li> Red Hat Linux 6.2
+</ul>
+
+<p>
+Note: On SuSE 8.0, gnome-spell is not available for this release.
+</p>
+
+<h2>Upgrading: Process and Caveats</h2>
+
+<p></p>
+<h3>Warning</h3>
+
+<p>
+Evolution 1.1.1 is a BETA release.  This means that it has bugs,
+including possibly destructive bugs that can cause valuable data to be
+lost.
+</p>
+
+<p>
+Please make sure you back up your mail, calendar, and addressbook
+information before using Evolution 1.1.1.  In particular, you are
+strongly advised to backup the `evolution' directory in your home
+directory if you are upgrading from a 1.0.x version of Evolution to
+Evolution 1.1.1.
+</p>
+
+<p>
+If you encounter problems, please <a
+href="http://bugzilla.ximian.com/enter_bug.cgi?product=Evolution">file
+a bug in our tracking system</a> or use the <tt>bug-buddy</tt> problem
+reporter. We will do our best to fix any issues that you uncover.
+</p>
+
+<h3>Upgrading From 1.0.x</h3>
+
+<p>
+The format of certain configuration files has changed in this version
+of Evolution.  When you start Evolution 1.1.1 for the first time, it
+will automatically migrate your configuration so that it will work as
+expected with this version.
+</p>
+
+
+<h3>Returning to 1.0.x</h3>
+
+<p>
+If you want to return to a 1.0.x version after trying 1.1.1, you have
+to restore the original configuration files.  From the command-line,
+you can do the following, after having quit Evolution:
+</p>
+{include file="common/xterm.tpl" text="
+        killev<br>
+        cd ~/evolution<br>
+        mv filters.xml.bak-1.0 filters.xml<br>
+        mv vfolders.xml.bak-1.0 vfolders.xml<br>
+        mv shortcuts.xml.bak-1.0 shortcuts.xml<br>
+        mv mail/imap.bak-1.0 mail/imap<br>
+"}
+
+<p>
+Note that any changes to filters, vFolders or shortcuts made with
+1.1.1 will be lost after this operation.
+</p>
+<p>
+Also note that the upgrade mechanism runs automatically only the first
+time you run 1.1.1.  For this reason, if you run Evolution 1.1.1, then
+go back to 1.0 using the aforementioned procedure, and then go back to
+using 1.1.1 again, the settings will not be upgraded.
+</p>
+
+<p>
+To force the upgrade to happen again in this case, use the following
+command to start Evolution 1.1.1:
+</p>
+
+       
+{include file="common/xterm.tpl" text="evolution --force-upgrade"}
+
+<p>
+<b>IMPORTANT:</b> If you are using Ximian Connector 1.0.x, it will be
+uninstalled by Ximian Evolution 1.2 Beta 1 if you install using Red
+Carpet. If you install Evolution without using Red Carpet, please remove
+Ximian Connector 1.0.x before installing Evolution Evolution 1.2 Beta 1.
+You cannot use Connector 1.0.x with Evolution 1.2 Beta. If you would
+like to help test the next release of Ximian Connector, please contact
+your Ximian sales representative.
+</p>
+
+
+
+{include file="common/headlinebar.tpl" text="Significant Changes" class="h2"}
+<p></p>
+{include file="common/headlinebar.tpl" text="Search Criteria Changes" class="h3"}
+
+<p>
+When you specify multiple words in search "contains" criterion,
+Evolution will now search the mail messages that contain all the words
+specified, in any order.  (The 1.0.x behavior was to look for the
+whole string in "subject contains" matches, and matched no messages in
+the case of body searches.)
+</p>
+<p>
+This applies to the search bar, the filter rules and the vFolder
+rules.  Filter rules and vFolder rules might need to be re-adjusted
+after you upgrade to version 1.1.1.
+</p>
+
+{include file="common/headlinebar.tpl" text="IMAP Folder Name Changes (I18N)" class="h3"}
+
+<p>
+If you created any folder names using non-ASCII characters using prior
+versions of Evolution, you will find they may not be displayed
+properly anymore.  This is because previous versions did not implement
+IMAP I18N folder names correctly as specified in RFC 2060.
+</p>
+<p>
+The upgrade script will try to rectify any filters or vFolders using
+any such names.  However, as it does not know the character set used
+by the server, non ISO-8859-1 (latin-1) characters will not be
+properly converted.  You may need to verify the filter and vFolder
+rules in this case.
+</p>
+<p>
+Also note that if such folder names do not display properly that it is
+purely cosmetic and may be fixed by renaming the folder(s) in
+question.
+</p>
+
+{include file="common/headlinebar.tpl" text="Key Binding Changes" class="h3"}
+<p>
+Unmodified letter keys will now move to the next message whose sender
+or subject (depending on your sort order) begins with that letter. The
+previous key bindings that depended upon unmodified key-strokes have
+changed. Use the , and .  or [ and ] for previous and next unread
+message, and the ` (backtick) to toggle the message pane. Shortcuts
+using control keys are not affected.
+</p>
+
+
+{include file="common/headlinebar.tpl" text="Known Bugs" class="h3"}
+<p>
+<b>Unnamed Contact Lists:</b> If you have any unnamed contact lists in
+any of your addressbook folders, you might experience hangs and/or
+crashes when specifying destination addresses, for example when
+composing meeting requests.  Giving a name to all the contact lists
+will fix the problem. 
+</p>
+
+
+<p><b>Pilot Conduits:</b> Not yet available</p>
+
+<p>
+<b>Solaris/CDE Application Group:</b> This release of Evolution
+doesn't install icons in the CDE "Application" group as Evolution
+1.0.x used to do.  While this doesn't affect users who are running
+Ximian Desktop, users who wish to run Evolution under the CDE
+environment will also have to set the PATH, GNOME_PATH and
+LD_LIBRARY_PATH environment variables to point to the Evolution
+installation before launching the `evolution' executable.
+</p>
+
+<p>
+This can be done with a shell script like this <a href="/projects/evolution/evolution-nognome.tar">example</a>.</p>
+
+{include file="common/headlinebar.tpl" text="New Features" class="h2"}
+<p></p>
+{include file="common/headlinebar.tpl" text="General" class="h3"}
+<ul>
+
+    <li> The toolbar now includes a "New" dropdown menu/button from which
+      you can create messages, appointments, etc. from within any
+      folder.
+
+    <li> A new, integrated configuration dialog for all of Evolution is
+      now provided.
+
+    <li> When you use the folder selection dialog, you can now jump to a
+      folder just by typing its name and hitting Enter (instead of
+      using the arrows or the mouse).
+
+    <li> You can now specify your default mail, calendar, tasks and
+      contacts folders.  The shortcuts in the shortcut bar will always
+      point to the default folder; so for example if you have an IMAP
+      account you can specify that the INBOX on the IMAP account is
+      default and clicking on the Inbox icon on the shortcut bar will
+      take you to the INBOX on the IMAP account.
+
+    <li> Fonts for displaying of HTML mail can now be configured from
+      within Evolution (instead of having to use GNOME Control
+      Center).
+
+    <li> You can now make Evolution play a sound, beep, or display a
+      message when new mail arrives.  It is also possible to trigger
+      these actions based on a filter rule.
+
+    <li> The behavior of the search bar has been improved, and the UI has
+      been integrated better with the menu bar and the rest of the
+      system.
+
+    <li> For the table-based views, you can now define, save and reuse
+      view settings using the "View" menu.
+
+    <li> The Send/Receive button is now always accessible from any
+      folder.
+
+    <li> You now can drop objects (e.g. mail messages, appointments)
+      directly to the folders on the shortcut bar (in 1.0.x, you could
+      only drop them in the folder folder bar).
+
+</ul>
+
+{include file="common/headlinebar.tpl" text="Calendar" class="h3"}
+<ul>
+    <li> Loading speed has been improved.
+
+    <li> When you receive an appointment through email, you can choose
+      which calendar to update, and if it's for an existing appointment
+      the folder is automatically detected
+
+    <li> Calendar importer now supports importing to remote folders.
+
+    <li> Calendar GUI and alarm daemon now use listeners for the
+      configuration.
+
+    <li> Show status messages for all long calendar operations.
+
+    <li> Included timezone information on VCALENDAR objects used in copy/paste.
+
+    <li> Meeting scheduling improvements; sends replies when you update
+      your attendance status, warnings if the user changes a meeting
+      they didn't create.
+
+    <li> Deleting a meeting with a right click will now offer to send a
+      cancellation notice.
+
+    <li> Can accept meeting replies from non-attendees (they become
+      attendees).
+
+    <li> Fixed task view to update completion status the same as the
+      editor.
+      
+    <li> You can now set meetings to recur on "last day of the month"
+    or "last Tuesday of the month," etc...
+
+</ul>
+{include file="common/headlinebar.tpl" text="Contacts" class="h3"}
+
+<ul>
+
+    <li> It is now possible to specify which folders are used for
+      autocompletion globally.
+
+    <li> Improved address selection dialog (for sending mail and meeting
+      requests).
+
+    <li> Improved feedback for search results for all backends and the
+      UI.
+
+    <li> SSL/STARTTLS support for LDAP has been added.
+
+    <li> Various performance improvements
+
+    <li> Fixed wombat/addressbook crashes dealing with autocompletion, it
+      should be much more stable now.
+
+    <li> Added support for categories searches on categories in LDAP 
+
+    <li> Much improved LDAP backend responsiveness and performance.
+</ul>
+{include file="common/headlinebar.tpl" text="Mail" class="h3"}
+<ul>
+    <li> New, much faster indexing engine.  This results in faster mail
+      incorporation, faster mail display, and faster searches.
+      Overall, the new engine should work much better for larger
+      folders, and take considerably less space on the disk.
+
+    <li> If you type multiple words in the search bar for the
+      "... Contains" rules, Evolution will search messages that
+      contain all of the words you specified, in any order.
+
+    <li> More consistent search results for indexed, non-indexed and
+      remote folders.
+
+    <li> Better UTF8 (Unicode) support. Searches, folder names
+
+    <li> It is now possible to mark messages for follow-up and other
+      flags.  It is also possible to change the color in which a
+      specific message is displayed in the mail list.
+
+    <li> When the message list is sorted by a certain field, it is possible
+      to jump to the first item in the list that matches a certain
+      string by just typing the first few characters.
+
+    <li> You can now specify which folders get synced when switching to
+      IMAP/offline mode.
+
+    <li> All previously read messages are automatically downloaded for
+      IMAP/offline use. 
+
+    <li> STARTTLS support for POP, SMTP and IMAP has been added.
+
+    <li> You can have all of your mail Auto-Cc:ed or auto-Bcc:ed to a
+      specified set of recipients.
+
+    <li> SMTP error reporting has been improved.
+
+    <li> Vastly improving body search vFolder performance with IMAP
+sources..
+
+    <li> vFolders can now have an additional column which shows the
+      original location of the message.  
+</ul>
+{include file="common/headlinebar.tpl" text="Mail Composer" class="h3"}
+<ul>
+    <li> You can now edit a set of signatures within Evolution, and pick
+      which signature you want when composing a message.
+
+    <li> Handling of replies has been improved; in particular, you can
+      now paste any text as a quotation, and quotation formatting is
+      preserved when switching between HTML and non-HTML mode.
+
+    <li> Evolution can now generate graphical smileys automatically as
+      you type.
+
+    <li> Quotation logic has been improved, re-wrapping long lines in
+      replies now preserves quotation marks.
+
+    <li> Multiple simultaneous language support in the spell checker.
+
+    <li> Cut & Paste support for html between netscape/mozilla/evolution.
+
+    <li> Optimized rendering of long messages.
+
+    <li> Improved html rendering, including support for the clear
+      attribute in &lt;br&gt; elements.
+</ul>
+
+{include file="common/headlinebar.tpl" text="Summary" class="h3"}
+
+<ul>
+    <li> Can have non-local (IMAP) mail folders displayed on the summary.
+
+    <li> Improved Calendar and Tasks displayed. Displays overdue and todays
+      tasks in colors.
+
+    <li> Better folder selector.
+
+    <li> Better Weather/News Feed selector.
+
+    <li> Can delete user added news feeds.
+</ul>
+<!--#include virtual="foot.shtml" -->
