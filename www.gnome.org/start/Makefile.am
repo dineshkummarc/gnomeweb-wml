@@ -1,9 +1,8 @@
-SUBDIRS=
+SUBDIRS=installing
 
 urlpath=/start
 
 page_SCRIPTS=index.html\
-             source.html\
-						 installing.php3
+             source.html
 
 include $(top_srcdir)/rules.common
