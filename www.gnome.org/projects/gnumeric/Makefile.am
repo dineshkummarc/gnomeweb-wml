@@ -21,3 +21,6 @@ page_SCRIPTS=index.shtml		\
 		functions.shtml
 
 include $(top_srcdir)/rules.common
+
+install-exec-hook:
+	rm -rf $(pagedir)/new-design-testing
