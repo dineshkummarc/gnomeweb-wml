@@ -28,7 +28,7 @@
         .navigation .title {
             font-size: 200%;
         }
-      </style><link rel="home" href="index.html" title="[Insert name here] Reference Manual"><link rel="up" href="ch01.html" title="[Insert title here]"><link rel="previous" href="EBook.html" title="EBook"><link rel="next" href="EVCard.html" title="EVCard"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EBook.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">[Insert name here] Reference Manual</th><td><a accesskey="n" href="EVCard.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EContact"></a><div class="titlepage"></div><div class="refnamediv"><h2>EContact</h2><p>EContact &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+      </style><link rel="home" href="index.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="up" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="previous" href="EBook.html" title="EBook"><link rel="next" href="EVCard.html" title="EVCard"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EBook.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Evolution API Reference: libebook, the Addressbook Library</th><td><a accesskey="n" href="EVCard.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EContact"></a><div class="titlepage"></div><div class="refnamediv"><h2>EContact</h2><p>EContact &#8212; An individual contact in an addressbook.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
 
 
 
@@ -64,8 +64,8 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 
 
 </pre></div><div class="refsect1" lang="en"><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="EContactField"></a>enum EContactField</h3><a class="indexterm" name="id2500744"></a><pre class="programlisting">typedef enum {
+A convenient way of accessing the contact information in EVCard objects.
+</p></div><div class="refsect1" lang="en"><h2>Details</h2><div class="refsect2" lang="en"><h3><a name="EContactField"></a>enum EContactField</h3><a class="indexterm" name="id2532883"></a><pre class="programlisting">typedef enum {
 
 	E_CONTACT_UID = 1,     	 /* string field */
 	E_CONTACT_FILE_AS,     	 /* string field */
@@ -171,6 +171,11 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 	E_CONTACT_X509_CERT,                  /* string field */
 	E_CONTACT_X509_CERT_SHA1_FINGERPRINT, /* string field */
 
+	/* Convenience field for getting a name from the contact.
+	   Returns the first one of [File-As, Full Name, Org, Email1]
+	   to be set */
+	E_CONTACT_NAME_OR_ORG,
+
 	E_CONTACT_FIELD_LAST,
 
 	/* useful constants */
@@ -187,7 +192,7 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 } EContactField;
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactName"></a>struct EContactName</h3><a class="indexterm" name="id2551049"></a><pre class="programlisting">struct EContactName {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactName"></a>struct EContactName</h3><a class="indexterm" name="id2528899"></a><pre class="programlisting">struct EContactName {
 
 	char *family;
 	char *given;
@@ -197,14 +202,14 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactPhoto"></a>struct EContactPhoto</h3><a class="indexterm" name="id2541125"></a><pre class="programlisting">struct EContactPhoto {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactPhoto"></a>struct EContactPhoto</h3><a class="indexterm" name="id2538724"></a><pre class="programlisting">struct EContactPhoto {
 
 	int length;
 	char *data;
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactAddress"></a>struct EContactAddress</h3><a class="indexterm" name="id2543911"></a><pre class="programlisting">struct EContactAddress {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactAddress"></a>struct EContactAddress</h3><a class="indexterm" name="id2528678"></a><pre class="programlisting">struct EContactAddress {
 
 	char *address_format; /* the two letter country code that
 				 determines the format/meaning of the
@@ -219,7 +224,7 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactDate"></a>struct EContactDate</h3><a class="indexterm" name="id2543265"></a><pre class="programlisting">struct EContactDate {
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="EContactDate"></a>struct EContactDate</h3><a class="indexterm" name="id2545902"></a><pre class="programlisting">struct EContactDate {
 
 	int year;
 	int month;
@@ -227,24 +232,24 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 };
 </pre><p>
 
-</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-new"></a>e_contact_new ()</h3><a class="indexterm" name="id2544419"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_new                   (void);</pre><p>
+</p></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-new"></a>e_contact_new ()</h3><a class="indexterm" name="id2498833"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_new                   (void);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-new-from-vcard"></a>e_contact_new_from_vcard ()</h3><a class="indexterm" name="id2495317"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_new_from_vcard        (const char *vcard);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-new-from-vcard"></a>e_contact_new_from_vcard ()</h3><a class="indexterm" name="id2498866"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_new_from_vcard        (const char *vcard);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>vcard</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-duplicate"></a>e_contact_duplicate ()</h3><a class="indexterm" name="id2495366"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_duplicate             (<a href="EContact.html" title="EContact">EContact</a> *contact);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-duplicate"></a>e_contact_duplicate ()</h3><a class="indexterm" name="id2498916"></a><pre class="programlisting"><a href="EContact.html" title="EContact">EContact</a>*   e_contact_duplicate             (<a href="EContact.html" title="EContact">EContact</a> *contact);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-get"></a>e_contact_get ()</h3><a class="indexterm" name="id2495415"></a><pre class="programlisting">gpointer    e_contact_get                   (<a href="EContact.html" title="EContact">EContact</a> *contact,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-get"></a>e_contact_get ()</h3><a class="indexterm" name="id2498965"></a><pre class="programlisting">gpointer    e_contact_get                   (<a href="EContact.html" title="EContact">EContact</a> *contact,
                                              <a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td>
@@ -252,7 +257,7 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-get-const"></a>e_contact_get_const ()</h3><a class="indexterm" name="id2495481"></a><pre class="programlisting">const gpointer e_contact_get_const          (<a href="EContact.html" title="EContact">EContact</a> *contact,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-get-const"></a>e_contact_get_const ()</h3><a class="indexterm" name="id2499031"></a><pre class="programlisting">const gpointer e_contact_get_const          (<a href="EContact.html" title="EContact">EContact</a> *contact,
                                              <a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>contact</tt></i>:</span></td><td>
@@ -260,7 +265,7 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-set"></a>e_contact_set ()</h3><a class="indexterm" name="id2495566"></a><pre class="programlisting">void        e_contact_set                   (<a href="EContact.html" title="EContact">EContact</a> *contact,
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-set"></a>e_contact_set ()</h3><a class="indexterm" name="id2499115"></a><pre class="programlisting">void        e_contact_set                   (<a href="EContact.html" title="EContact">EContact</a> *contact,
                                              <a href="EContact.html#EContactField">EContactField</a> field_id,
                                              gpointer value);</pre><p>
 
@@ -269,82 +274,84 @@ const char* <a href="EContact.html#e-contact-pretty-name">e_contact_pretty_name<
 </td></tr><tr><td><span class="term"><i><tt>value</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-new"></a>e_contact_date_new ()</h3><a class="indexterm" name="id2495639"></a><pre class="programlisting"><a href="EContact.html#EContactDate">EContactDate</a>* e_contact_date_new            (void);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-new"></a>e_contact_date_new ()</h3><a class="indexterm" name="id2499189"></a><pre class="programlisting"><a href="EContact.html#EContactDate">EContactDate</a>* e_contact_date_new            (void);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-from-string"></a>e_contact_date_from_string ()</h3><a class="indexterm" name="id2495672"></a><pre class="programlisting"><a href="EContact.html#EContactDate">EContactDate</a>* e_contact_date_from_string    (const char *str);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-from-string"></a>e_contact_date_from_string ()</h3><a class="indexterm" name="id2499222"></a><pre class="programlisting"><a href="EContact.html#EContactDate">EContactDate</a>* e_contact_date_from_string    (const char *str);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>str</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-to-string"></a>e_contact_date_to_string ()</h3><a class="indexterm" name="id2495721"></a><pre class="programlisting">char*       e_contact_date_to_string        (<a href="EContact.html#EContactDate">EContactDate</a> *dt);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-to-string"></a>e_contact_date_to_string ()</h3><a class="indexterm" name="id2499271"></a><pre class="programlisting">char*       e_contact_date_to_string        (<a href="EContact.html#EContactDate">EContactDate</a> *dt);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>dt</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-new"></a>e_contact_name_new ()</h3><a class="indexterm" name="id2495770"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_new            (void);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-new"></a>e_contact_name_new ()</h3><a class="indexterm" name="id2499320"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_new            (void);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-to-string"></a>e_contact_name_to_string ()</h3><a class="indexterm" name="id2495803"></a><pre class="programlisting">char*       e_contact_name_to_string        (const <a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-to-string"></a>e_contact_name_to_string ()</h3><a class="indexterm" name="id2499353"></a><pre class="programlisting">char*       e_contact_name_to_string        (const <a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>name</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-from-string"></a>e_contact_name_from_string ()</h3><a class="indexterm" name="id2510532"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_from_string    (const char *name_str);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-from-string"></a>e_contact_name_from_string ()</h3><a class="indexterm" name="id2497195"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_from_string    (const char *name_str);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>name_str</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-copy"></a>e_contact_name_copy ()</h3><a class="indexterm" name="id2510581"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_copy           (<a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-copy"></a>e_contact_name_copy ()</h3><a class="indexterm" name="id2497244"></a><pre class="programlisting"><a href="EContact.html#EContactName">EContactName</a>* e_contact_name_copy           (<a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>name</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-free"></a>e_contact_date_free ()</h3><a class="indexterm" name="id2510630"></a><pre class="programlisting">void        e_contact_date_free             (<a href="EContact.html#EContactDate">EContactDate</a> *date);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-date-free"></a>e_contact_date_free ()</h3><a class="indexterm" name="id2497293"></a><pre class="programlisting">void        e_contact_date_free             (<a href="EContact.html#EContactDate">EContactDate</a> *date);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>date</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-free"></a>e_contact_name_free ()</h3><a class="indexterm" name="id2510670"></a><pre class="programlisting">void        e_contact_name_free             (<a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-name-free"></a>e_contact_name_free ()</h3><a class="indexterm" name="id2497332"></a><pre class="programlisting">void        e_contact_name_free             (<a href="EContact.html#EContactName">EContactName</a> *name);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>name</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-photo-free"></a>e_contact_photo_free ()</h3><a class="indexterm" name="id2510709"></a><pre class="programlisting">void        e_contact_photo_free            (<a href="EContact.html#EContactPhoto">EContactPhoto</a> *photo);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-photo-free"></a>e_contact_photo_free ()</h3><a class="indexterm" name="id2497372"></a><pre class="programlisting">void        e_contact_photo_free            (<a href="EContact.html#EContactPhoto">EContactPhoto</a> *photo);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>photo</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-address-free"></a>e_contact_address_free ()</h3><a class="indexterm" name="id2510749"></a><pre class="programlisting">void        e_contact_address_free          (<a href="EContact.html#EContactAddress">EContactAddress</a> *address);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-address-free"></a>e_contact_address_free ()</h3><a class="indexterm" name="id2497411"></a><pre class="programlisting">void        e_contact_address_free          (<a href="EContact.html#EContactAddress">EContactAddress</a> *address);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>address</tt></i>:</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-field-name"></a>e_contact_field_name ()</h3><a class="indexterm" name="id2546095"></a><pre class="programlisting">const char* e_contact_field_name            (<a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-field-name"></a>e_contact_field_name ()</h3><a class="indexterm" name="id2542859"></a><pre class="programlisting">const char* e_contact_field_name            (<a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>field_id</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-pretty-name"></a>e_contact_pretty_name ()</h3><a class="indexterm" name="id2546145"></a><pre class="programlisting">const char* e_contact_pretty_name           (<a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-pretty-name"></a>e_contact_pretty_name ()</h3><a class="indexterm" name="id2542913"></a><pre class="programlisting">const char* e_contact_pretty_name           (<a href="EContact.html#EContactField">EContactField</a> field_id);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>field_id</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-field-id"></a>e_contact_field_id ()</h3><a class="indexterm" name="id2546199"></a><pre class="programlisting"><a href="EContact.html#EContactField">EContactField</a> e_contact_field_id            (const char *field_name);</pre><p>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><h3><a name="e-contact-field-id"></a>e_contact_field_id ()</h3><a class="indexterm" name="id2542967"></a><pre class="programlisting"><a href="EContact.html#EContactField">EContactField</a> e_contact_field_id            (const char *field_name);</pre><p>
 
 </p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i><tt>field_name</tt></i>:</span></td><td>
 </td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
 
 
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EBook.html"><b>&lt;&lt; EBook</b></a></td><td align="right"><a accesskey="n" href="EVCard.html"><b>EVCard &gt;&gt;</b></a></td></tr></table></body></html>
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><h2>See Also</h2><p>
+e-vcard
+</p></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EBook.html"><b>&lt;&lt; EBook</b></a></td><td align="right"><a accesskey="n" href="EVCard.html"><b>EVCard &gt;&gt;</b></a></td></tr></table></body></html>
