@@ -176,13 +176,15 @@ Edit Existing Release
 		{
 			print "Application\n===========\n\n".$project->getPublicName()." "
 				. db_result($result,0,'release_name')."\n\n"
-				. "Description\n===========\n\n".$project->getDescription()."\n\n"
+				. "Description\n===========\n\n"
+				. $project->getDescription()."\n\n"
 				. "Enhancements\n============\n\n-\n-\n\n"
 				. "Fixes\n=====\n\n-\n-\n\n"
-				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/";
+				. "Download\n========\n\nhttp://ftp.gnome.org/pub/GNOME/"
 				. "GNOME Software Map entry\n"
-        . "========================\n\n"
-        . "http://www.gnome.org/softwaremap/projects/".$project->getUnixName();
+   				. "========================\n\n"
+				. "http://www.gnome.org/softwaremap/projects/"
+				. $project->getUnixName()."\n";
 		}
 			
 		?></textarea>
