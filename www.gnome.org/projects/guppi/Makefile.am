@@ -1,6 +1,6 @@
 SUBDIRS=screenshots images
 
-urlpath=/projects/guppi/
+urlpath=/projects/agnubis/
 
 page_SCRIPTS=index.shtml \
 		foot.shtml \
@@ -8,12 +8,6 @@ page_SCRIPTS=index.shtml \
 		head.shtml \
 		developers.shtml \
 		features.shtml \
-		gettingguppi.shtml \
-		guppies.shtml \
-		history.shtml \
-		links.shtml \
-		news.shtml \
-		otherprogs.shtml \
-		screenshots.shtml 
+		gettingagnubis.shtml 
 
 include $(top_srcdir)/rules.common
