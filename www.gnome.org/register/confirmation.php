@@ -136,7 +136,7 @@ if ($show_confirm) {
 	?>
 
 	<H1>Registration Complete!</H1>
-	<P>Your project has been submitted to the Gnome.org admininstrators. 
+	<P>Your project has been submitted to the Gnome.org administrators. 
 	Within 72 hours, you will receive decision notification and further 
 	instructions.
 	<P>
