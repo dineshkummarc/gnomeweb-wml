@@ -2,8 +2,7 @@ SUBDIRS=
 
 urlpath=/fonts
 
-page_SCRIPTS=index.html
+page_SCRIPTS=index.html\
+              local.conf
 
 include $(top_srcdir)/rules.common
-
-EXTRA_DIST=local.conf
