@@ -12,9 +12,6 @@ $HTML->header(array('title'=>"Lost Account Password"));
 
 <P><B>Lost your password?</B>
 
-<P>Hey... losing your password is serious business. It compromises the
-security of your account, your projects, and this site.
-
 <P>Clicking "Send Lost PW Hash" below will email a URL to the email
 address we have on file for you. In this URL is a 128-bit confirmation
 hash for your account. Visiting the URL will allow you to change
