@@ -17,6 +17,10 @@ page_SCRIPTS=		\
     1.1.0-preferences-language.png	\
     1.1.0-preferences-privacy-180.png	\
     1.1.0-preferences-privacy.png	\
+    1.1.0-print-180.png	\
+	1.1.0-print.png	\
+	1.1.0-print-setup-180.png	\
+	1.1.0-print-setup.png	\
 	aboutbox.png	\
 	bookmarks.png	\
 	bookmarks-tn.png	\
