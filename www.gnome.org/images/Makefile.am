@@ -2,54 +2,73 @@ include $(top_srcdir)/rules.common
 
 urlpath=images
 
-menudot_images=\
-	menudot-blue.gif	\
-	menudot-blue-wash.gif	\
-	menudot-red.gif		\
-	menudot-red-wash.gif	\
-	menudot-yellow.gif	\
-	menudot-yellow-wash.gif	\
-	menudot-orange.gif	\
-	menudot-orange-wash.gif	\
-	menudot-green.gif	\
-	menudot-green-wash.gif	\
-	menudot-brown.gif	\
-	menudot-brown-wash.gif	\
-	bigdot-blue.gif		\
-	bigdot-yellow.gif	\
-	bigdot-green.gif	\
-	bigdot-red.gif
+misc_images=\
+  background.png\
+	dot.gif\
+	logo-large.png\
+	logo-small.png\
+	projects-separator.png\
+	projects-top.png\
+	screenshot-example.png\
+	subpage-side.png\
+  news-bullet.png\
+	news-header.png
 
-header_images=\
-	dev-framework.gif	\
-	header-news.gif
+banner_images=\
+	banner-gnomeis.png\
+	banner-seegnome.png
 
-page_DATA=$(menudot_images)	\
-	$(header_images)	\
-	news.gif		\
-	help.gif		\
-	download.gif		\
-	developer.gif		\
-	search.gif		\
-	clickstart.gif		\
-	smallfootonly.gif	\
-	foot-outline-small.gif	\
-	foot-outline-tiny.gif	\
-	gnome1.gif		\
-	gnome2.gif		\
-	gnome3.gif		\
-	gnome4.gif		\
-	gnome5.gif		\
-	dot-red.gif		\
-	dot-yellow.gif		\
-	dot-ob1.gif		\
-	dot-blue.gif		\
-	dot-red2.gif		\
-	dot-brown.gif		\
-	solid-dot-red.gif	\
-	solid-dot-yellow.gif	\
-	solid-dot-ob1.gif	\
-	solid-dot-brown.gif	\
-	blank.gif
+popdown_images=\
+	popdown-endcap-blue.png\
+	popdown-endcap-green.png\
+	popdown-endcap-purple.png
+
+sidebar_headers=\
+  sidebar-header-contact.png\
+	sidebar-header-sections.png\
+	sidebar-header-tasks.png
+
+sidebar_images=\
+  sidebar-bottom.png\
+	sidebar-shadow.png\
+	sidebar-stripe-blue.png\
+	sidebar-stripe-green.png\
+	sidebar-stripe-purple.png\
+	sidebar-stripe-red.png\
+	sidebar-top-padding.png\
+	sidebar-top.png
+
+sidebar_items=\
+  sidebar-calendar.png\
+	sidebar-commercialsupport.png\
+	sidebar-developwith.png\
+	sidebar-findout.png\
+	sidebar-getgnome.png\
+	sidebar-getmore.png\
+	sidebar-latestnews.png\
+	sidebar-learn.png\
+	sidebar-mailinglists.png\
+	sidebar-maintainers.png\
+	sidebar-meetthedevelopers.png\
+	sidebar-presscontacts.png\
+	sidebar-pressreleases.png\
+	sidebar-resourceindex.png\
+	sidebar-seegnome.png\
+	sidebar-tipsandtutorials.png
+
+topbar_headers=\
+  topbar-contact.png\
+	topbar-endcap.png\
+	topbar-sections.png\
+	topbar-tasks.png
+
+page_DATA=$(misc_images)	\
+	$(banner_images)	\
+	$(popdown_images) \
+	$(sidebar_headers) \
+	$(sidebar_images) \
+	$(sidebar_items) \
+	$(topbar_headers)
+  
 
 EXTRA_DIST=$(page_DATA)

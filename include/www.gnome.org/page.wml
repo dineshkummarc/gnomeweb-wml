@@ -1,7 +1,9 @@
 #use wml::www.gnome.org::utils
+#use wml::www.gnome.org::menus
 #use wml::www.gnome.org::header
 #use wml::www.gnome.org::footer
 #use wml::www.gnome.org::fonts
+
 
 <set-var body-align left>
 
@@ -12,24 +14,40 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-<title>Gnome: <document-title></title>
+<title>GNOME - <document-title></title>
+<when <not <var-exists is-homepage>>>
+<style type="text/css">#menutasks {position: absolute; left: 129px; top: 21px; z-index: 101;visibility: hidden; width: 181px;} #menusections {position: absolute; left: 192px; top: 21px; z-index: 101;visibility: hidden; width: 181px;} #menucontact {position: absolute; left: 268px; top: 21px; z-index: 101;visibility: hidden; width: 181px;}</style>
 <script language="javascript">
-function activate_image(n, x) {
-	document.images[n].src=x;
+<!--
+function show_hide_layers() {
+  var i, visStr, args, theObj;
+	args = show_hide_layers.arguments;
+	for (i=0; i<(args.length-2); i+=3) { //with argument triples (objNS,objIE,visStr)
+		visStr   = args[i+2];
+		if ((navigator.appName == 'Netscape') && document.layers != null) {
+		  theObj = eval(args[i]);
+			if (theObj) theObj.visibility = visStr;
+		} else if (document.all != null) { // This is IE
+		  if (visStr == 'show') visStr = 'visible'; //convert values
+			if (visStr == 'hide') visStr = 'hidden';
+			theObj = eval(args[i+1]);
+			if (theObj) theObj.style.visibility = visStr;
+	  }
+	}
 }
+//-->																												
 </script>
+</when>
 </head>
 %body
 </html>
 </define-container>
 
 # Content surrounding
-<define-container content>
-<body bgcolor="#ffffff" text="#000000" marginwidth=0 marginheight=0>
-<header>
-<font-body>
+<define-container content banner-img banner-alt>
+<body bgcolor="#ffffff" text="#000000" marginwidth="0" marginheight="0" leftmargin="0" topmargin="0">
+<header "<get-var banner-img>" "<get-var banner-alt>">
 %body
-</font-body>
 <footer>
 </body>
 </define-container>

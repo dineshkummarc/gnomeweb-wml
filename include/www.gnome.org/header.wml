@@ -1,70 +1,49 @@
 #include wml::std::tags
 
-<define-tag index-menulink &key imgnum name dotimg txtimg url><a
-href="<get-var url>"
-onmouseover="activate_image(<get-var imgnum>, '/images/<get-var dotimg>.gif')"
-onmouseout="activate_image(<get-var imgnum>, '/images/<get-var dotimg>-wash.gif')"
-><img border=0 src="/images/<get-var dotimg>-wash.gif" hspace=10
-align=center><img src="/images/<get-var txtimg>.gif" align=center alt="<get-var name>"
-border=0></a></define-tag>
-
-<define-tag correct-bigdot>
-<:{
-	my $tmpurl = '$(URL)';
-	my $bd;
-	if($tmpurl =~ m|/start/|) {
-		$bd= "yellow";
-	} elsif($tmpurl =~ m|/news/|) {
-		$bd= "red";
-	} elsif($tmpurl =~ m|/help/|) {
-		$bd= "green";
-	} elsif($tmpurl =~ m|/devel|) {
-		$bd= "blue";
-	} else {
-		$bd= "none";
-	}
-	if($bd ne "none") {
-		print "<img src=\"/images/bigdot-$bd.gif\" hspace=20 align=bottom>";
-	}
-}:>
+<define-tag banner image alt>
+<img src="/images/banner-<get-var image>.png" alt="<get-var alt>">
 </define-tag>
 
-<define-tag normal-title>
-<td align=right width=20%>
-<a href="http://www.gnome.org/"><img
-src="/images/foot-outline-small.gif" align=left border=0></a></td><td>
-<h1 align=left><correct-bigdot><document-title></h1>
-</td>
-</define-tag>
 
-<define-tag home-title>
-<td align=left width=40% colspan=2>
-<img src="/images/foot-outline-small.gif" align=center border=0> <img src="/images/gnome5.gif" hspace=10 alt="Gnome" align=center>
-</td>
-</define-tag>
-
-<define-tag header>
-<table width=90% border=0 cellspacing=20>
-<tr>
+<define-tag header banner-img banner-alt>
 <get-var is-homepage>
 <when <var-exists is-homepage>>
-<home-title>
+<!-- Top table -->
+<table width="578" border="0" cellpadding="0" cellspacing="0"><tr><td><img src="/images/logo-large.png" width="192" height="187" alt="GNOME"></td>
+<td><img src="/images/banner-gnomeis.png" width="386" height="187" alt=" - GNOME is computing made easy."></td></tr></table>
+<!-- End top table -->
+<frontpage-menu>
+<project-table>
+<img src="images/dot.gif" width="10" height="10" alt=""><br>
 </when>
 <when <not <var-exists is-homepage>>>
-<normal-title>
+<table border="0" cellspacing="0" cellpadding="0" hspace="0" vspace="0">
+<tr><td rowspan="2"><img src="/images/logo-small.png"></td>
+    <td><img onMouseDown="show_hide_layers('document.layers[\'menutasks\']','document.all[\'menutasks\']','show','document.layers[\'menusections\']','document.all[\'menusections\']','hide','document.layers[\'menucontact\']','document.all[\'menucontact\']','hide')" src="/images/topbar-tasks.png" border="0"><img onMouseDown="show_hide_layers('document.layers[\'menutasks\']','document.all[\'menutasks\']','hide','document.layers[\'menusections\']','document.all[\'menusections\']','show','document.layers[\'menucontact\']','document.all[\'menucontact\']','hide')" src="/images/topbar-sections.png" border="0"><img onMouseDown="show_hide_layers('document.layers[\'menutasks\']','document.all[\'menutasks\']','hide','document.layers[\'menusections\']','document.all[\'menusections\']','hide','document.layers[\'menucontact\']','document.all[\'menucontact\']','show')" src="/images/topbar-contact.png" border="0"><img src="/images/topbar-endcap.png" border="0"></td></tr><tr><td><banner <get-var banner-img> <get-var banner-alt>></td></tr>
+</table>
+<img src="/images/subpage-side.png" align="left" hspace="0" vspace="0" border="0"><table border="0" hspace="0" vspace="0" cellspacing="0"
+cellpadding="0"><tr valign="top"><td>
 </when>
-<td align=right><form
-method=post
-action="/cgi-bin/nonexistent-search-program.cgi"><img
-src="/images/search.gif" alt="Search:">&nbsp;<input type=text name="search"></form></td></tr>
-<tr>
-<td align=left width=20% valign=top>
-<when <var-exists is-homepage>><br><br></when>
-<index-menulink name="News" dotimg="menudot-red" txtimg="news"
-url="/news/" imgnum=3><hr noshade width=50% align=left>
-<index-menulink imgnum=5 name="Download" dotimg="menudot-yellow"
-txtimg="download" url="/start/"><hr noshade width=50% align=left>
-<index-menulink name="Help" imgnum=7 dotimg="menudot-green" txtimg="help" url="/help/"><hr noshade width=50% align=left>
-<index-menulink name="Developers" imgnum=9 dotimg="menudot-blue" txtimg="developer" url="/devel/"></td>
-<td align="<get-var body-align>" valign="top" <when <not <var-exists is-homepage>>>colspan=2</when>>
+</define-tag>
+
+
+<define-tag project-table>
+<!-- Project table -->
+<table width="124" border="0" cellpadding="0" cellspacing="0" align="right" hspace="6">
+<tr><td width="120" colspan="3"><img src="/images/projects-top.png" width="120" height="22" alt="projects"></td><td rowspan="10" width="4"><img src="/images/dot.gif" width="4" height="4" alt=""></td></tr>
+<tr><td width="1" rowspan="10" bgcolor="#000040"><img src="/images/dot.gif" width="1" height="1" alt=""></td>
+<td width="118"><img src="/images/dot.gif" width="118" height="1" alt=""></td>
+<td width="1" rowspan="10" bgcolor="#000040"><img src="/images/dot.gif" width="1" height="1" alt=""></td></tr>
+<tr><td align="center"><img src="/images/icon-mahjongg.png" width="55" height="80" alt="mahjongg"></td></tr>
+<tr><td align="center"><img src="/images/projects-separator.png" width="110" height="1" alt="----"></td></tr>
+<tr><td align="center"><img src="/images/icon-utility.png" width="109" height="79" alt="utility program #82"></td></tr>
+<tr><td align="center"><img src="/images/projects-separator.png" width="110" height="1" alt="----"></td></tr>
+<tr><td align="center"><img src="/images/icon-mahjongg.png" width="55" height="80" alt="mahjongg"></td></tr>
+<tr><td align="center"><img src="/images/projects-separator.png" width="110" height="1" alt="----"></td></tr>
+<tr><td align="center"><img src="/images/icon-utility.png" width="109" height="79" alt="utility program #82"></td></tr>
+<tr><td align="center"><img src="/images/projects-separator.png" width="110" height="1" alt="----"></td></tr>
+<tr><td align="center"><img src="/images/icon-utility.png" width="109" height="79" alt="utility program #82"></td></tr>
+<tr><td></td><td bgcolor="#000040"><img src="/images/dot.gif" width="118" height="1" alt=""></td><td></td></tr>
+</table>
+<!-- End of project table -->
 </define-tag>
