@@ -129,7 +129,7 @@ if ($show_confirm) {
 		. "An admin will need to approve the registration at:\n\n"
 		. "http://".$sys_default_domain."/admin/\n\n";
 	mail ("webmaster@".$GLOBALS['sys_default_domain'], "New project added to Software Map",
-		$message, "From: webmaster@".$GLOBALS['sys_default_domain']);
+		$message, "From: drfickle@gnome.org");
 
 	$HTML->header(array('title'=>'Registration Complete'));
 	
