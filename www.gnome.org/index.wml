@@ -27,7 +27,7 @@ works on many other Unix systems.
 
 <table width="450" cellpadding="0" cellspacing="0" border="0"><tr
 valign="top"><td width="215">
-<? include ("newsheadlines.html") ?>
+<? readfile ("newsheadlines.html") ?>
 </td><td width="20"><img src="/images/dot.gif" width="16"
 height="16" alt=""></td><td width="215"><a
 href="applist/listrecent.php3?entrylimit=20">
@@ -37,53 +37,51 @@ href="applist/listrecent.php3?entrylimit=20">
 
 <? 
 
-mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
-mysql_select_db("gnomeapps");
+if (filectime("recentapps-cache.html") < (time() - 300)) { # If cache is older than 5 minutes
 
-$res = mysql_query("SELECT name, version, touched FROM applist ORDER BY touched DESC LIMIT 6");
+  $tempfilename = tempnam("/tmp", "appcache");
+
+  $tmpfd = fopen( $tempfilename, "w");
+
+  mysql_pconnect("www.gnome.org","gnomeweb","saHrl@nd");
+  mysql_select_db("gnomeapps");
+
+  $res = mysql_query("SELECT name, version, touched FROM applist ORDER BY touched DESC LIMIT 6");
+
+  while ($res_obj = mysql_fetch_object($res)) { 
+
+    $touched = $res_obj->touched;
+    $hour = substr($touched, 8, 2);
+    $min  = substr($touched, 10, 2);
+    $sec  = substr($touched, 12, 2);
+    $year = substr($touched, 0, 4);
+    $mon  = substr($touched, 4, 2);
+    $day  = substr($touched, 6, 2);
+    $touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
+
+    fwrite($tmpfd, "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td><b><a href='");
+    fwrite($tmpfd, "/applist/view.php3?name=" . ereg_replace(" ", "%20", $res_obj->name) . "&prevpage=listrecent.php3&entrylimit=20'>");
+    fwrite($tmpfd, $res_obj->name);
+    fwrite($tmpfd, "</a></b><font size='-2'><br>[" . date("D, M d Y", $touchedts) );
+    fwrite($tmpfd, "]</font></td></tr>\n");
+
+  }
+  mysql_close();
+
+  fclose($tmpfd);
+	copy($tempfilename, "recentapps-cache.html");
+  unlink ($tempfilename);
+}
 
 
-while ($res_obj = mysql_fetch_object($res)) { 
-
-$touched = $res_obj->touched;
-$hour = substr($touched, 8, 2);
-$min  = substr($touched, 10, 2);
-$sec  = substr($touched, 12, 2);
-$year = substr($touched, 0, 4);
-$mon  = substr($touched, 4, 2);
-$day  = substr($touched, 6, 2);
-$touchedts =  MkTime($hour,$min,$sec,$mon,$day,$year);
+readfile ("recentapps-cache.html");
 
 ?>
 
-<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td><b><a href='<?
-print "/applist/view.php3?name=" . ereg_replace(" ", "%20", $res_obj->name) . "&prevpage=listrecent.php3&entrylimit=20";
-?>'><?
-print $res_obj->name;
-?></a></b><font size='-2'><br>[<?
-
-print date("D, M d Y", $touchedts);
-
-?>]</font></td></tr>
-
-<? } ?>
-
-
 </table>
 
-
-
-
-
-
-
-
-
-
 </td></tr>
-
 </table
-
 
 </content>
 </document>

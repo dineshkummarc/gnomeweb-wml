@@ -29,10 +29,10 @@ class PrintHeadline(saxlib.HandlerBase):
 	if name == 'item':
 	    print "<tr><td colspan='2'><img src='/images/dot.gif' height='6' alt=''></td></tr><tr valign='top'><td width='28' align='center'><img src='/images/news-bullet' alt=''></td><td>"
 	    self.inItem = 1
-	if name == 'title':
+	if (name == 'title'):
 	    self.inTitle = 1
 	    self.itemTitle = ''
-	if name == 'link':
+	if (name == 'link'):
 	    self.inLink = 1
 	    self.itemLink = ''
 
@@ -63,7 +63,9 @@ class PrintHeadline(saxlib.HandlerBase):
 print "<p><a href='http://news.gnome.org/gnome-news/'><font size=\"+2\" color=\"#400000\"><b>GNOME News:</b></font></a><br><table border='0' cellspacing='0' cellpadding='0'><tr><td>"
 
 
-feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf")
+feedfile = urllib.urlopen("http://news.gnome.org/gnome-news/rdf/")
+
+feedfile.readline();
 
 if __name__ == '__main__':
     parser = saxexts.make_parser()
@@ -71,5 +73,8 @@ if __name__ == '__main__':
     parser.setDocumentHandler(dh)
     parser.parseFile(feedfile)
     parser.close()
+
+
+
 
 print "</table>"
