@@ -40,7 +40,7 @@ static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  */
 static
 void
-calculator_server_shutdown (int sig)
+server_shutdown (int sig)
 {
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -60,15 +60,15 @@ calculator_server_shutdown (int sig)
  * return.
  */static 
 void 
-calculator_server_init (int               *argc_ptr, 
-			char              *argv[],
-			CORBA_ORB         *orb,
-			CORBA_Environment *ev)
+server_init (int               *argc_ptr, 
+	     char              *argv[],
+	     CORBA_ORB         *orb,
+	     CORBA_Environment *ev)
 {
 	/* init signal handling */
 
-	signal(SIGINT,  calculator_server_shutdown);
-	signal(SIGTERM, calculator_server_shutdown);
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
@@ -83,8 +83,8 @@ calculator_server_init (int               *argc_ptr,
  */
 static 
 Calculator
-calculator_server_activate_service (CORBA_ORB         orb,
-				    CORBA_Environment *ev)
+server_activate_service (CORBA_ORB         orb,
+			 CORBA_Environment *ev)
 {
 	Calculator                 servant     = CORBA_OBJECT_NIL; 
 	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
@@ -114,28 +114,33 @@ calculator_server_activate_service (CORBA_ORB         orb,
 	return servant;
 }
 
-/* Writes stringified object reference of @servant to file-stream
- * @stream. If error occures @ev points to exception object on
+/* Writes stringified object reference of @servant to file
+ * @filename. If error occures @ev points to exception object on
  * return.
  */
 static 
 void 
-calculator_server_export_service_to_stream (CORBA_ORB          orb,
-					    Calculator         servant,
-					    FILE              *stream, 
-					    CORBA_Environment *ev)
+server_export_service_to_file (CORBA_ORB          orb,
+			       CORBA_Object       service,
+			       char              *filename, 
+			       CORBA_Environment *ev)
 {
         CORBA_char *objref = NULL;
+	FILE       *file   = NULL;
 
 	/* write objref to file */
 	
-        objref = CORBA_ORB_object_to_string (orb, servant, ev);
+        objref = CORBA_ORB_object_to_string (orb, service, ev);
 	if (raised_exception(ev)) return;
 
+	if ((file=fopen(filename, "w"))==NULL) 
+		g_error ("could not open %s\n", filename);
+	
         /* print ior to terminal */
-	fprintf (stream, "%s\n", objref);
-	fflush (stream);
-
+	fprintf (file, "%s\n", objref);
+	fflush (file);
+	fclose (file);
+	
         CORBA_free (objref);
 }
 
@@ -145,8 +150,8 @@ calculator_server_export_service_to_stream (CORBA_ORB          orb,
  */
 static 
 void 
-calculator_server_run (CORBA_ORB          orb,
-		       CORBA_Environment *ev)
+server_run (CORBA_ORB          orb,
+	    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
@@ -161,9 +166,9 @@ calculator_server_run (CORBA_ORB          orb,
  * occures @ev points to exception object on return.
  */
 static 
-void calculator_server_cleanup (CORBA_ORB          orb,
-				Calculator         servant,
-				CORBA_Environment *ev)
+void server_cleanup (CORBA_ORB          orb,
+		     CORBA_Object       servant,
+		     CORBA_Environment *ev)
 {
 	/* releasing managed object */
         CORBA_Object_release(servant, ev);
@@ -187,25 +192,29 @@ main (int argc, char *argv[])
 {
 	Calculator servant = CORBA_OBJECT_NIL;
 
+	CORBA_char filename[] = "calculator.ior";
+
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	calculator_server_init (&argc, argv, &global_orb, ev);
+	server_init (&argc, argv, &global_orb, ev);
 	abort_if_exception(ev, "init failed");
 
-	servant = calculator_server_activate_service (global_orb, ev);
+	servant = server_activate_service (global_orb, ev);
 	abort_if_exception(ev, "activating service failed");
 
-	calculator_server_export_service_to_stream (global_orb, /* ORB    */ 
-						    servant,    /* object */ 
-						    stdout,     /* stream */ 
-						    ev);       
+	g_print ("Writing service reference to: %s\n\n", filename);
+	
+	server_export_service_to_file (global_orb, /* ORB    */ 
+				       servant,    /* object */ 
+				       filename,     /* stream */ 
+				       ev);       
 	abort_if_exception(ev, "exporting IOR failed");
 	
-	calculator_server_run (global_orb, ev);
+	server_run (global_orb, ev);
 	abort_if_exception(ev, "entering main loop failed");
 
-	calculator_server_cleanup (global_orb, servant, ev);
+	server_cleanup (global_orb, servant, ev);
 	abort_if_exception(ev, "cleanup failed");
 
 	exit (0);

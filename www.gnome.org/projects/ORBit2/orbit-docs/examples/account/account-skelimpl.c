@@ -100,6 +100,7 @@ impl_Account_deposit(impl_POA_Account * servant,
 		     const CORBA_unsigned_long amount, CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
+   g_print ("account %7ld - deposit %5d\n", (long) servant, amount);
    servant->attr_balance += amount;
    /* ------ ---------- end ------------ ------ */
 }
@@ -110,6 +111,7 @@ impl_Account_withdraw(impl_POA_Account * servant,
 		      CORBA_Environment * ev)
 {
    /* ------   insert method code here   ------ */
+   g_print ("account %7ld - witdraw %5d\n", (long) servant, amount);
    servant->attr_balance -= amount;
    /* ------ ---------- end ------------ ------ */
 }
@@ -120,6 +122,7 @@ impl_Account__get_balance(impl_POA_Account * servant, CORBA_Environment * ev)
    CORBA_long retval;
 
    /* ------   insert method code here   ------ */
+   g_print ("account %7ld - get balance\n", (long) servant);
    retval = servant->attr_balance;
    /* ------ ---------- end ------------ ------ */
 

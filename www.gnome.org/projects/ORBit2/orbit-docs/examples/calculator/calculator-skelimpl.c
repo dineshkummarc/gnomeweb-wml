@@ -97,6 +97,7 @@ impl_Calculator_add(impl_POA_Calculator * servant,
    CORBA_double retval;
 
    /* ------   insert method code here   ------ */
+   g_print ("%f + %f\n", number1, number2);
    retval = number1 + number2;
    /* ------ ---------- end ------------ ------ */
 
@@ -111,6 +112,7 @@ impl_Calculator_sub(impl_POA_Calculator * servant,
    CORBA_double retval;
 
    /* ------   insert method code here   ------ */
+   g_print ("%f - %f\n", number1, number2);
    retval = number1 - number2;
    /* ------ ---------- end ------------ ------ */
 

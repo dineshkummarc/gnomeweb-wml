@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <signal.h>
 #include <orbit/orbit.h>
 
 /*
@@ -41,65 +42,137 @@ abort_if_exception(CORBA_Environment *ev, const char* mesg)
 	}
 }
 
-/*
- * main 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
  */
-int
-main (int argc, char *argv[])
+static
+void
+client_shutdown (int sig)
 {
-	FILE * ifp;
-	char * ior;
-	char filebuffer[1024];
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                CORBA_ORB_shutdown (global_orb, FALSE, local_ev);
+                abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);
+        if (raised_exception(ev)) return;
+}
 
-	CORBA_Environment ev[1];
-	CORBA_ORB orb;            /* ORB */
-	Echo echo_client;         /* the service */
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        CORBA_Object_release(service, ev);
+        if (raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                CORBA_ORB_destroy(orb, ev);
+                if (raised_exception(ev)) return;
+        }
+}
 
-	/*
-	 * Standard initalisation of the orb. Notice that
-	 * ORB_init 'eats' stuff off the command line
-	 */
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
+    
+	fscanf (stream, "%as", &objref);  /* FIXME, handle input error */ 
+	
+	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);
+	free (objref);
+	
+	return obj;
+}
 
-	CORBA_exception_init(ev);
-	orb = CORBA_ORB_init(&argc, argv, "orbit-local-orb", ev);
-	abort_if_exception(ev, "init ORB failed");
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+				 char              *filename,
+				 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+ 
+        /* write objref to file */
+         
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+    
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
 
-	/*
-	 * Get the IOR (object reference). It should be written out
-	 * by the echo-server into the file echo.ior. So - if you
-	 * are running the server in the same place as the client,
-	 * this should be fine!
-	 */
+	return obj;
+}
 
-	ifp = fopen("echo.ior","r");
-	if( ifp == NULL ) {
-		g_error("can not open \"echo.ior\"");
-		abort ();
-	}
 
-	fgets(filebuffer,1023,ifp);
-	ior = g_strdup(filebuffer);
-
-	fclose(ifp);
-
-	/*
-	 * Actually get the object. So easy!
-	 */
-
-	echo_client = CORBA_ORB_string_to_object(orb, ior, ev);
-	abort_if_exception(ev, "bind failed");
-
-	/*
-	 * Ok. Now we use the echo object...
-	 */
+/**
+ *
+ */
+static
+void
+client_run (Echo  echo_service,
+	    CORBA_Environment        *ev)
+{
+	char filebuffer[1024+1];
 
 	g_print("Type messages to the server\n"
 		"a single dot in line will terminate input\n");
-
+	
 	while( fgets(filebuffer,1024,stdin) ) {
 		if( filebuffer[0] == '.' && filebuffer[1] == '\n' ) 
 			break;
-
+		
 		/* chop the newline off */
 		filebuffer[strlen(filebuffer)-1] = '\0';
       
@@ -107,17 +180,39 @@ main (int argc, char *argv[])
 		 * this is defined in the echo.h header, compiled from
 		 * echo.idl */
 
-		Echo_echoString(echo_client,filebuffer,ev);
-		abort_if_exception(ev, "service not reachable");
+		Echo_echoString(echo_service,filebuffer,ev);
+		if (raised_exception (ev)) return;
 	}
-      
-	/* Clean up */
-	CORBA_Object_release(echo_client, ev);
-	abort_if_exception(ev, "releasing service failed");
+}
 
-	CORBA_ORB_destroy (orb, ev);
-	abort_if_exception(ev, "cleanup failed");
-    
-	/* successfull termination */
-	exit (0);
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char filename[] = "echo.ior";
+        
+	Echo echo_service = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        CORBA_exception_init(ev);
+
+	client_init (&argc, argv, &global_orb, ev);
+	abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", filename);
+
+	echo_service = (Echo) client_import_service_from_file (global_orb,
+							       "echo.ior",
+							       ev);
+        abort_if_exception(ev, "import service failed");
+
+	client_run (echo_service, ev);
+        abort_if_exception(ev, "service not reachable");
+ 
+	client_cleanup (global_orb, echo_service, ev);
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
 }

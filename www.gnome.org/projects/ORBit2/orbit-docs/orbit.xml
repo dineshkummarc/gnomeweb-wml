@@ -495,7 +495,7 @@ However it is good to have an idea about how all these standards fit
 together to provide CORBA.
 </para>
 <sect1>
-<title>Quick tour of a working client/server</title>
+<title>Quick tour of a working client&amp;server</title>
 <para>
 The basic mechanism of CORBA is to run a method (that is a function) of an
 object from a separate program (in fact the program need not be separate,
@@ -691,7 +691,7 @@ defined in <filename> f-skelimpl.c </filename>.
 </para>
 </sect1>
 <sect1>
-<title>Echo client and server</title>
+<title>Echo client &amp; server</title>
 <para>
 The aim for this example is to run a client which accepts typed
 input and this is printed out on the server on stdout
@@ -797,13 +797,14 @@ The client code is shown here
  */
 
 #include &lt;stdio.h&gt;
-#include &lt;orbit/orbit.h&gt;
+#include &lt;signal.h&gt;
+<command>#include &lt;orbit/orbit.h&gt;</command>
 
 /*
  * This header file was generated from the idl
  */
 
-#include "echo.h"
+<command>#include "echo.h"</command>
 
 /** 
  * test for exception 
@@ -829,65 +830,137 @@ abort_if_exception(CORBA_Environment *ev, const char* mesg)
 	}
 }
 
-/*
- * main 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
  */
-int
-main (int argc, char *argv[])
+static
+void
+client_shutdown (int sig)
 {
-	FILE * ifp;
-	char * ior;
-	char filebuffer[1024];
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+        if (raised_exception(ev)) return;
+}
 
-	CORBA_Environment ev[1];
-	CORBA_ORB orb;            /* ORB */
-	Echo echo_client;         /* the service */
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <command>CORBA_Object_release(service, ev);</command>
+        if (raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+                if (raised_exception(ev)) return;
+        }
+}
 
-	/*
-	 * Standard initalisation of the orb. Notice that
-	 * ORB_init 'eats' stuff off the command line
-	 */
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
+    
+	fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
+	
+	obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);
+	free (objref);
+	
+	return obj;
+}
 
-	CORBA_exception_init(ev);
-	<command>orb = CORBA_ORB_init(&amp;argc, argv, "orbit-local-orb", ev);</command>
-	abort_if_exception(ev, "init ORB failed");
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+				 char              *filename,
+				 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+ 
+        /* write objref to file */
+         
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+    
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
 
-	/*
-	 * Get the IOR (object reference). It should be written out
-	 * by the echo-server into the file echo.ior. So - if you
-	 * are running the server in the same place as the client,
-	 * this should be fine!
-	 */
+	return obj;
+}
 
-	ifp = fopen("echo.ior","r");
-	if( ifp == NULL ) {
-		g_error("can not open \"echo.ior\"");
-		abort ();
-	}
 
-	fgets(filebuffer,1023,ifp);
-	ior = g_strdup(filebuffer);
-
-	fclose(ifp);
-
-	/*
-	 * Actually get the object. So easy!
-	 */
-
-	<command>echo_client = CORBA_ORB_string_to_object(orb, ior, ev);</command>
-	abort_if_exception(ev, "bind failed");
-
-	/*
-	 * Ok. Now we use the echo object...
-	 */
+/**
+ *
+ */
+static
+void
+client_run (Echo  echo_service,
+	    CORBA_Environment        *ev)
+{
+	char filebuffer[1024+1];
 
 	g_print("Type messages to the server\n"
 		"a single dot in line will terminate input\n");
-
+	
 	while( fgets(filebuffer,1024,stdin) ) {
-		if( filebuffer[0] == '.' &amp;&amp; filebuffer[1] == '\n' ) 
+		if( filebuffer[0] == '.' && filebuffer[1] == '\n' ) 
 			break;
-
+		
 		/* chop the newline off */
 		filebuffer[strlen(filebuffer)-1] = '\0';
       
@@ -895,21 +968,42 @@ main (int argc, char *argv[])
 		 * this is defined in the echo.h header, compiled from
 		 * echo.idl */
 
-		<command>Echo_echoString(echo_client,filebuffer,ev);</command>
-		abort_if_exception(ev, "service not reachable");
+		<command>Echo_echoString(echo_service,filebuffer,ev);</command>
+		if (raised_exception (ev)) return;
 	}
-      
-	/* Clean up */
-	<command>CORBA_Object_release(echo_client, ev);</command>
-	abort_if_exception(ev, "releasing service failed");
-
-	<command>CORBA_ORB_destroy (orb, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
-    
-	/* successfull termination */
-	exit (0);
 }
 
+/*
+ * main 
+ */
+int
+main(int argc, char* argv[])
+{
+	CORBA_char filename[] = "echo.ior";
+        
+	Echo echo_service = CORBA_OBJECT_NIL;
+
+        CORBA_Environment ev[1];
+        <command>CORBA_exception_init(ev);</command>
+
+	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+	abort_if_exception(ev, "init failed");
+
+	g_print ("Reading service reference from file \"%s\"\n", filename);
+
+	<command>echo_service = (Echo) client_import_service_from_file (global_orb,
+							       "echo.ior",
+							       ev);</command>
+        abort_if_exception(ev, "import service failed");
+
+	<command>client_run (echo_service, ev);</command>
+        abort_if_exception(ev, "service not reachable");
+ 
+	<command>client_cleanup (global_orb, echo_service, ev);</command>
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}
 </programlisting>
 </example>
 
@@ -1004,7 +1098,7 @@ static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  */
 static
 void
-echo_server_shutdown (int sig)
+server_shutdown (int sig)
 {
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -1024,15 +1118,15 @@ echo_server_shutdown (int sig)
  * return.
  */static 
 void 
-echo_server_init (int               *argc_ptr, 
-		  char              *argv[],
-		  CORBA_ORB         *orb,
-		  CORBA_Environment *ev)
+server_init (int               *argc_ptr, 
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
 {
 	/* init signal handling */
 
-	signal(SIGINT,  echo_server_shutdown);
-	signal(SIGTERM, echo_server_shutdown);
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
@@ -1047,8 +1141,8 @@ echo_server_init (int               *argc_ptr,
  */
 static 
 Echo
-echo_server_activate_service (CORBA_ORB         orb,
-			      CORBA_Environment *ev)
+server_activate_service (CORBA_ORB         orb,
+			 CORBA_Environment *ev)
 {
 	Echo                       servant     = CORBA_OBJECT_NIL; 
 	PortableServer_POA         poa         = CORBA_OBJECT_NIL; 
@@ -1084,10 +1178,10 @@ echo_server_activate_service (CORBA_ORB         orb,
  */
 static 
 void 
-echo_server_export_service_to_file (CORBA_ORB          orb,
-				    Echo               servant,
-				    char              *filename, 
-				    CORBA_Environment *ev)
+server_export_service_to_file (CORBA_ORB          orb,
+			       CORBA_Object       servant,
+			       char              *filename, 
+			       CORBA_Environment *ev)
 {
         CORBA_char *objref = NULL;
 	FILE       *file   = NULL;
@@ -1114,8 +1208,8 @@ echo_server_export_service_to_file (CORBA_ORB          orb,
  */
 static 
 void 
-echo_server_run (CORBA_ORB          orb,
-		 CORBA_Environment *ev)
+server_run (CORBA_ORB          orb,
+            CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
 	
@@ -1130,9 +1224,9 @@ echo_server_run (CORBA_ORB          orb,
  * occures @ev points to exception object on return.
  */
 static 
-void echo_server_cleanup (CORBA_ORB          orb,
-			   Echo               servant,
-			   CORBA_Environment *ev)
+void server_cleanup (CORBA_ORB          orb,
+		     Echo               servant,
+	             CORBA_Environment *ev)
 {
 	/* releasing managed object */
         <command>CORBA_Object_release(servant, ev);</command>
@@ -1159,22 +1253,22 @@ main (int argc, char *argv[])
 	CORBA_Environment  ev[1];
 	CORBA_exception_init(ev);
 	
-	<command>echo_server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+	<command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
 	abort_if_exception(ev, "init failed");
 
-	<command>servant = echo_server_activate_service (global_orb, ev);</command>
+	<command>servant = server_activate_service (global_orb, ev);</command>
 	abort_if_exception(ev, "activating service failed");
 
-	<command>echo_server_export_service_to_file (global_orb, 
-					    servant, 
-					    "echo.ior", 
-					    ev);</command>
+	<command>server_export_service_to_file (global_orb, 
+				       servant, 
+				       "echo.ior", 
+				       ev);</command>
 	abort_if_exception(ev, "exporting IOR failed");
 	
-	<command>echo_server_run (global_orb, ev);</command>
+	<command>server_run (global_orb, ev);</command>
 	abort_if_exception(ev, "entering main loop failed");
 
-	<command>echo_server_cleanup (global_orb, servant, ev);</command>
+	<command>server_cleanup (global_orb, servant, ev);</command>
 	abort_if_exception(ev, "cleanup failed");
 
 	exit (0);
@@ -1296,8 +1390,7 @@ impl_Echo_echoString(impl_POA_Echo * servant,
 </example>
 </sect2>
 
-<sect2 id="echo-compilation"> <title>Compiling and
-Running the Server and the Client</title>
+<sect2 id="echo-compilation"> <title>Compiling  server &amp; client</title>
 
 <para> The following
 makefile can be used to compile both, the client and the server. Be
@@ -1310,11 +1403,11 @@ distribution the makefile below will do.
 <example> 
 <title>Makefile</title>
 <programlisting role="make">
-PREFIX=/usr/local
+PREFIX=/usr
 CC = gcc
 TARGETS=echo-client echo-server
 ORBIT_IDL=orbit-idl-2
-CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
+CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
        -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
        -I$(PREFIX)/lib/glib-2.0/include
 LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
@@ -1408,9 +1501,10 @@ a single dot in line will terminate input:
 </sect2>
 
 </sect1>
-    <sect1 id="calculator-IDL">
-      <title>Calculator Client Server</title>
-<para>
+   
+<sect1 id="calculator-IDL">
+      <title>Calculator client &amp; server</title>
+      <para>
 This example will take you further into understanding how to actually
 make a working server, using the support that comes from ORBit. It
 will demonstrate handling of replies from server.
@@ -1492,7 +1586,7 @@ Files remaining to write are listed in following table, starting with
 
 </para>
       <sect2 id="calculator-client">
-      <title>Calculator Client</title>
+      <title>Calculator client</title>
 <para>
 The next thing you have to do is to write the server and client
 programs. We start with the client, because it's easier and not very
@@ -1506,6 +1600,7 @@ complicated.
  * &lt;F.Rehberger@xtradyne.de&gt;.  */
 
 #include &lt;assert.h&gt;
+#include &lt;signal.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;orbit/orbit.h&gt;
 
@@ -1535,54 +1630,175 @@ abort_if_exception(CORBA_Environment *ev, const char* mesg)
 	}
 }
 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+        if (raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <command>CORBA_Object_release(service, ev);</command>
+        if (raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+                if (raised_exception(ev)) return;
+        }
+}
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
+    
+	fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
+	
+	<command>obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);</command>
+	free (objref);
+	
+	return obj;
+}
+
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+				 char              *filename,
+				 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+ 
+        /* write objref to file */
+         
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+    
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
+
+	return obj;
+}
+
+
+/**
+ *
+ */
+static
+void
+client_run (Calculator         service,
+	    CORBA_Environment *ev)
+{
+	CORBA_double      result=0.0;
+
+	/*
+         * use calculator service
+         */
+	
+        <command>result = Calculator_add(service, 1.0, 2.0, ev);</command>
+        if (raised_exception (ev)) return;
+	
+        /* prints results to console */
+        g_print("Result: 1.0 + 2.0 = %2.0f\n", result);
+}
+
 /*
  * main 
  */
 int
 main(int argc, char* argv[])
+         
 {
-	char*             ior;
+        CORBA_char  filename[] = "calculator.ior";
 
-        CORBA_ORB         orb;
-        CORBA_Object      server;
+	Calculator service = CORBA_OBJECT_NIL;
 
-        CORBA_double      result=0.0;
-	
         CORBA_Environment ev[1];
-        CORBA_exception_init(ev);
+        <command>CORBA_exception_init(ev);</command>
 
-	/* init - ORB might 'eat' arguments from command line */
-        <command>orb = CORBA_ORB_init(&amp;argc, argv, "orbit-local-orb", ev);</command>
-	abort_if_exception(ev, "init ORB failed");
+	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+	abort_if_exception(ev, "init failed");
 
-	/* make sure servant's IOR is given as command argument */
-	if (argc<2)
-		g_error ("usage: %s &lt;ior&gt;", argv[0]);
-	ior=argv[1];
-	
-	/* establish servant connection */
-        <command>server = CORBA_ORB_string_to_object(orb, ior, ev);</command>
-	abort_if_exception(ev, "bind failed");
+	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	/* 
-	 * use calculator server 
-	 */ 
-        <command>result = Calculator_add(server, 1.0, 2.0, ev);</command>
-	abort_if_exception(ev, "service not reachable");
+	<command>service = (Calculator) client_import_service_from_file (global_orb,
+								filename,
+								ev);</command>
+        abort_if_exception(ev, "import service failed");
 
-	/* prints results to console */
-        g_print("Result: 1.0 + 2.0 = %2.0f\n", result);
-
-	/* tear down object reference and ORB */
-        <command>CORBA_Object_release(server,ev);</command>
-	abort_if_exception(ev, "releasing service failed");
-
-	<command>CORBA_ORB_destroy (orb, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
-
-	/* successfull termination */
-	exit(0);
-}</programlisting>
+	<command>client_run (service, ev);</command>
+        abort_if_exception(ev, "service not reachable");
+ 
+	client_cleanup (global_orb, service, ev);
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}
+</programlisting>
 </example>
 </para>
 <para>
@@ -1641,7 +1857,7 @@ shown in the next example, where I describe how the server.
 
     </sect2>
     <sect2 id="calculator-server">
-      <title>Calculator Server</title>
+      <title>Calculator server</title>
       <para>
 To implement the server, the IDL compiler does a great deal of work
 for you. It can emit all the stuff necessary to set up the data
@@ -1696,14 +1912,14 @@ impl_Calculator_sub(impl_POA_Calculator * servant,
 
 static PortableServer_ServantBase__epv impl_Calculator_base_epv = {
    NULL,			/* _private data */
-   (gpointer) & impl_Calculator__destroy,	/* finalize routine */
+   (gpointer) &amp; impl_Calculator__destroy,	/* finalize routine */
    NULL,			/* default_POA routine */
 };
 static POA_Calculator__epv impl_Calculator_epv = {
    NULL,			/* _private */
-   (gpointer) & impl_Calculator_add,
+   (gpointer) &amp; impl_Calculator_add,
 
-   (gpointer) & impl_Calculator_sub,
+   (gpointer) &amp; impl_Calculator_sub,
 
 };
 
@@ -1905,7 +2121,7 @@ static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  */
 static
 void
-calculator_server_shutdown (int sig)
+server_shutdown (int sig)
 {
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -1920,20 +2136,20 @@ calculator_server_shutdown (int sig)
 /* Inits ORB @orb using @argv arguments for configuration. For each
  * consumed option from vector @argv the counter of @argc_ptr
  * will be decremented. Signal handler is set to call
- * calculator_server_shutdown function in case of SIGINT and SIGTERM
+ * server_shutdown function in case of SIGINT and SIGTERM
  * signals.  If error occures @ev points to exception object on
  * return.
  */static 
 void 
-calculator_server_init (int               *argc_ptr, 
+server_init (int               *argc_ptr, 
 			char              *argv[],
 			CORBA_ORB         *orb,
 			CORBA_Environment *ev)
 {
 	/* init signal handling */
 
-	signal(SIGINT,  calculator_server_shutdown);
-	signal(SIGTERM, calculator_server_shutdown);
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
@@ -1948,7 +2164,7 @@ calculator_server_init (int               *argc_ptr,
  */
 static 
 Calculator
-calculator_server_activate_service (CORBA_ORB         orb,
+server_activate_service (CORBA_ORB         orb,
 				    CORBA_Environment *ev)
 {
 	Calculator                 servant     = CORBA_OBJECT_NIL; 
@@ -1979,28 +2195,33 @@ calculator_server_activate_service (CORBA_ORB         orb,
 	return servant;
 }
 
-/* Writes stringified object reference of @servant to file-stream
- * @stream. If error occures @ev points to exception object on
+/* Writes stringified object reference of @servant to file
+ * @filename. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
-calculator_server_export_service_to_stream (CORBA_ORB          orb,
-					    Calculator         servant,
-					    FILE              *stream, 
-					    CORBA_Environment *ev)
+static
+void
+server_export_service_to_file (CORBA_ORB          orb,
+                               CORBA_Object       service,
+                               char              *filename,
+                               CORBA_Environment *ev)
 {
         CORBA_char *objref = NULL;
-
-	/* write objref to file */
-	
-        <command>objref = CORBA_ORB_object_to_string (orb, servant, ev);</command>
-	if (raised_exception(ev)) return;
-
+        FILE       *file   = NULL;
+ 
+        /* write objref to file */
+         
+        <command>objref = CORBA_ORB_object_to_string (orb, service, ev);</command>
+        if (raised_exception(ev)) return;
+ 
+        if ((file=fopen(filename, "w"))==NULL)
+                g_error ("could not open %s\n", filename);
+         
         /* print ior to terminal */
-	<command>fprintf (stream, "%s\n", objref);</command>
-	fflush (stream);
-
+        fprintf (file, "%s\n", objref);
+        fflush (file);
+        fclose (file);
+         
         CORBA_free (objref);
 }
 
@@ -2010,7 +2231,7 @@ calculator_server_export_service_to_stream (CORBA_ORB          orb,
  */
 static 
 void 
-calculator_server_run (CORBA_ORB          orb,
+server_run (CORBA_ORB          orb,
 		       CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
@@ -2026,7 +2247,7 @@ calculator_server_run (CORBA_ORB          orb,
  * occures @ev points to exception object on return.
  */
 static 
-void calculator_server_cleanup (CORBA_ORB          orb,
+void server_cleanup (CORBA_ORB          orb,
 				Calculator         servant,
 				CORBA_Environment *ev)
 {
@@ -2050,30 +2271,34 @@ void calculator_server_cleanup (CORBA_ORB          orb,
 int
 main (int argc, char *argv[])
 {
-	Calculator servant = CORBA_OBJECT_NIL;
-
-	CORBA_Environment  ev[1];
-	CORBA_exception_init(ev);
-	
-	<command>calculator_server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-	abort_if_exception(ev, "init failed");
-
-	<command>servant = calculator_server_activate_service (global_orb, ev);</command>
-	abort_if_exception(ev, "activating service failed");
-
-	<command>calculator_server_export_service_to_stream (global_orb, /* ORB    */ 
-						    servant,    /* object */ 
-						    stdout,     /* stream */ 
-						    ev);</command>   
-	abort_if_exception(ev, "exporting IOR failed");
-	
-	<command>calculator_server_run (global_orb, ev);</command>
-	abort_if_exception(ev, "entering main loop failed");
-
-	<command>calculator_server_cleanup (global_orb, servant, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
-
-	exit (0);
+        Calculator servant = CORBA_OBJECT_NIL;
+ 
+        CORBA_char filename[] = "calculator.ior";
+ 
+        CORBA_Environment  ev[1];
+        <command>CORBA_exception_init(ev);</command>
+         
+        <command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+        abort_if_exception(ev, "init failed");
+ 
+        <command>servant = server_activate_service (global_orb, ev);</command>
+        abort_if_exception(ev, "activating service failed");
+ 
+        g_print ("Writing service reference to: %s\n\n", filename);
+         
+        <command>server_export_service_to_file (global_orb, /* ORB    */
+                                       servant,    /* object */
+                                       filename,     /* stream */
+                                       ev);</command>
+        abort_if_exception(ev, "exporting IOR failed");
+         
+        <command>server_run (global_orb, ev);</command>
+        abort_if_exception(ev, "entering main loop failed");
+ 
+        <command>server_cleanup (global_orb, servant, ev);</command>
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
 }</programlisting> </example> </para> <para> I'm not
 going to explain every line of this example yet, because we want the
 server up and make our first calls to it. Though one line deserves
@@ -2089,8 +2314,7 @@ references without cutting the output of one program (the server) and
 pasting it into the commandline of another program (the client) will
 be explained later.  </para> </sect3> </sect2> 
 
-<sect2 id="calculator-compilation"> <title>Compiling and
-Running the Server and the Client</title> <para> The following
+<sect2 id="calculator-compilation"> <title>Compiling server &amp; client</title> <para> The following
 makefile can be used to compile both, the client and the server. Be
 aware of the location of ORBit : on my system it has been installed
 under /usr but it could be /usr/local if you have built it from the
@@ -2098,7 +2322,7 @@ sources, and hence the path for ORBIT variables below may
 vary. If using ORBit binary packages shipped with Linux or BSD/Unix the simple makefile below will do.
 <example> 
 <title>makefile</title>
-<programlisting role="make">PREFIX=/usr/local
+<programlisting role="make">PREFIX=/usr
 CC = gcc
 TARGETS=calculator-client calculator-server
 ORBIT_IDL=orbit-idl-2
@@ -2145,7 +2369,6 @@ If everything works, you should get the following output:
 </sect1>
 
 
-
 <!--
 /*-------------------------------------------------------------*/
 /* Added by S. Genaud, Oct 28, 1999                            */
@@ -2153,7 +2376,7 @@ If everything works, you should get the following output:
 -->
 <sect1>
 <title>
-Account Client and Server
+Account client &amp; server
 </title>
 
 <para>
@@ -2180,7 +2403,7 @@ functions and other things, useful in the client as well as in the
 server. The sequence to generate the C source files is rather
 simple.
 <computeroutput>$ <command>orbit-idl-2 --skeleton-impl
-calculator.idl</command>
+account.idl</command>
 </computeroutput>
 geenrates all the files we will use in this example.
 
@@ -2234,7 +2457,7 @@ Files remaining to write are listed in following table, starting with
 ******************************** Account client  ******************************************
 -->
 <sect2>
-<title> Account Client </title>
+<title> Account client </title>
 <para>
 There is no difficulty in setting the client (at least no more than in the previous examples).
 Only one thing has been added : we test for the availabilty of the server 
@@ -2250,6 +2473,7 @@ before invoking calls to the server.
  * &lt;F.Rehberger@xtradyne.de&gt;.  */
 
 #include &lt;assert.h&gt;
+#include &lt;signal.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;orbit/orbit.h&gt;
 
@@ -2279,72 +2503,198 @@ abort_if_exception(CORBA_Environment *ev, const char* mesg)
 	}
 }
 
+static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
+ 
+/* Is called in case of process signals. it invokes CORBA_ORB_shutdown()
+ * function, which will terminate the processes main loop.
+ */
+static
+void
+client_shutdown (int sig)
+{
+        CORBA_Environment  local_ev[1];
+        CORBA_exception_init(local_ev);
+ 
+        if (global_orb != CORBA_OBJECT_NIL)
+        {
+                <command>CORBA_ORB_shutdown (global_orb, FALSE, local_ev);</command>
+                abort_if_exception (local_ev, "caught exception");
+        }
+}
+ 
+        
+/* Inits ORB @orb using @argv arguments for configuration. For each
+ * ORBit options consumed from vector @argv the counter of @argc_ptr
+ * will be decremented. Signal handler is set to call
+ * echo_client_shutdown function in case of SIGINT and SIGTERM
+ * signals.  If error occures @ev points to exception object on
+ * return.
+ */
+static
+void
+client_init (int               *argc_ptr,
+	     char              *argv[],
+             CORBA_ORB         *orb,
+             CORBA_Environment *ev)
+{
+        /* init signal handling */
+ 
+        signal(SIGINT,  client_shutdown);
+        signal(SIGTERM, client_shutdown);
+         
+        /* create Object Request Broker (ORB) */
+         
+        <command>(*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-orb", ev);</command>
+        if (raised_exception(ev)) return;
+}
+
+/* Releases @servant object and finally destroys @orb. If error
+ * occures @ev points to exception object on return.
+ */
+static
+void
+client_cleanup (CORBA_ORB                 orb,
+                CORBA_Object              service,
+                CORBA_Environment        *ev)
+{
+        /* releasing managed object */
+        <command>CORBA_Object_release(service, ev);</command>
+        if (raised_exception(ev)) return;
+ 
+        /* tear down the ORB */
+        if (orb != CORBA_OBJECT_NIL)
+        {
+                /* going to destroy orb.. */
+                <command>CORBA_ORB_destroy(orb, ev);</command>
+                if (raised_exception(ev)) return;
+        }
+}
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_stream (CORBA_ORB          orb,
+				   FILE              *stream,
+				   CORBA_Environment *ev)
+{
+	CORBA_Object obj = CORBA_OBJECT_NIL;
+	gchar *objref=NULL;
+    
+	fscanf (stream, "%as", &amp;objref);  /* FIXME, handle input error */ 
+	
+	<command>obj = (CORBA_Object) CORBA_ORB_string_to_object (global_orb,
+							 objref, 
+							 ev);</command>
+	free (objref);
+	
+	return obj;
+}
+
+
+/**
+ *
+ */
+static
+CORBA_Object
+client_import_service_from_file (CORBA_ORB          orb,
+				 char              *filename,
+				 CORBA_Environment *ev)
+{
+        CORBA_Object  obj    = NULL;
+        FILE         *file   = NULL;
+ 
+        /* write objref to file */
+         
+        if ((file=fopen(filename, "r"))==NULL)
+                g_error ("could not open %s\n", filename);
+    
+	obj=client_import_service_from_stream (orb, file, ev);
+	
+	fclose (file);
+
+	return obj;
+}
+
+
+/**
+ *
+ */
+static
+void
+client_run (Account            service,
+	    CORBA_long         amount,
+	    CORBA_Environment *ev)
+{
+	CORBA_long balance=0;
+
+	/*
+         * use calculator server
+         */
+         
+        <command>balance = Account__get_balance (service, ev);</command>
+	if (raised_exception (ev)) return;
+         
+        g_print ("balance %5d, ", balance);
+         
+        if (amount > 0)
+        {
+                <command>Account_deposit (service, amount, ev);</command>
+                if (raised_exception (ev)) return;
+        }
+        else
+        {
+                <command>Account_withdraw (service, abs(amount), ev);</command>
+                if (raised_exception (ev)) return;
+        }
+                                                                               
+        <command>balance = Account__get_balance (service, ev);</command>
+	if (raised_exception (ev)) return;
+                                                                               
+        g_print ("new balance %5d\n", balance);
+}
+
 /*
  * main 
  */
 int
 main(int argc, char* argv[])
+         
 {
-	char*             ior=NULL;
-	CORBA_long        val=0;
-        CORBA_long        balance=0;
-	
-        CORBA_ORB         orb;
-        Account           server;
+        CORBA_char        filename[] = "account.ior";
+        CORBA_long        amount=0;
+
+	Account service = CORBA_OBJECT_NIL;
 
         CORBA_Environment ev[1];
-        CORBA_exception_init(ev);
+        <command>CORBA_exception_init(ev);</command>
 
-	/* init - ORB might 'eat' arguments from command line */
-        <command>orb = CORBA_ORB_init(&amp;argc, argv, "orbit-local-orb", ev);</command>
+	<command>client_init (&amp;argc, argv, &amp;global_orb, ev);</command>
 	abort_if_exception(ev, "init failed");
 
-	/* make sure command lines contains two arguments; IOR and
-	 * integer value  */
-	if (argc<3)
-		g_error ("usage: %s &lt;ior&gt; &lt;int&gt;", argv[0]);
-	ior = argv[1];
-	val = atoi(argv[2]);
+        if (argc<2)
+                g_error ("usage: %s %lt;amount&gt;", argv[0]);
 
-	/* establish servant connection */
-        <command>server = (Account) CORBA_ORB_string_to_object(orb, ior, ev);</command>
-	abort_if_exception(ev, "bind failed");
+        amount  = atoi(argv[1]);
 
-	/* 
-	 * use calculator server 
-	 */ 
-	
-        <command>balance = Account__get_balance (server, ev);</command>
-	abort_if_exception(ev, "service not reachable");
-	
-	g_print ("balance %5d, ", balance);
-	
-	if (val > 0)
-	{
-		<command>Account_deposit (server, val, ev);</command>
-		abort_if_exception(ev, "service not reachable");
-	}
-	else
-	{
-		<command>Account_withdraw (server, abs(val), ev);</command>
-		abort_if_exception(ev, "service not reachable");
-	}
-	
-        <command>balance = Account__get_balance (server, ev);</command>
-	abort_if_exception(ev, "service not reachable");
-	
-	g_print ("new balance %5d\n", balance);
-	
-	/* tear down object reference and ORB */
-        <command>CORBA_Object_release(server,ev);</command>
-	abort_if_exception(ev, "releasing service failed");
+	g_print ("Reading service reference from file \"%s\"\n", filename);
 
-	<command>CORBA_ORB_destroy (orb, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
+	<command>service = (Account) client_import_service_from_file (global_orb,
+							     filename,
+							     ev);</command>
+        abort_if_exception(ev, "import service failed");
 
-	/* successfull termination */
-	exit(0);
-}</programlisting>
+	<command>client_run (service, amount, ev);</command>
+        abort_if_exception(ev, "service not reachable");
+ 
+	<command>client_cleanup (global_orb, service, ev);</command>
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
+}
+
+</programlisting>
 </example>
 </para>
 </sect2>
@@ -2353,10 +2703,10 @@ main(int argc, char* argv[])
 ******************************* Account server  *****************************************
 -->
 <sect2>
-<title>Account Server</title>
+<title>Account server</title>
 
 <sect3>
-<title>Account Server Skeleton Implementation</title>
+<title>Account server Skeleton Implementation</title>
 <para>
 
 For the server, like in the previous example, we first generate the source file
@@ -2485,7 +2835,7 @@ impl_Account__create(PortableServer_POA poa, CORBA_Environment * ev)
 </sect3>
 
 <sect3>
-<title>Account Server Implementation</title>
+<title>Account server implementation</title>
 
 <para>
 Lastly, we have to write a rather generic code to set up the server.
@@ -2540,7 +2890,7 @@ static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  */
 static
 void
-account_server_shutdown (int sig)
+server_shutdown (int sig)
 {
 	CORBA_Environment  local_ev[1];
 	CORBA_exception_init(local_ev);
@@ -2555,20 +2905,20 @@ account_server_shutdown (int sig)
 /* Inits ORB @orb using @argv arguments for configuration. For each
  * consumed option from vector @argv the counter of @argc_ptr
  * will be decremented. Signal handler is set to call
- * account_server_shutdown function in case of SIGINT and SIGTERM
+ * server_shutdown function in case of SIGINT and SIGTERM
  * signals.  If error occures @ev points to exception object on
  * return.
  */static 
 void 
-account_server_init (int               *argc_ptr, 
+server_init (int               *argc_ptr, 
 		     char              *argv[],
 		     CORBA_ORB         *orb,
 		     CORBA_Environment *ev)
 {
 	/* init signal handling */
 
-	signal(SIGINT,  account_server_shutdown);
-	signal(SIGTERM, account_server_shutdown);
+	signal(SIGINT,  server_shutdown);
+	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
 	
@@ -2583,7 +2933,7 @@ account_server_init (int               *argc_ptr,
  */
 static 
 Account
-account_server_activate_service (CORBA_ORB         orb,
+server_activate_service (CORBA_ORB         orb,
 				 CORBA_Environment *ev)
 {
 	Account                    servant     = CORBA_OBJECT_NIL; 
@@ -2614,30 +2964,36 @@ account_server_activate_service (CORBA_ORB         orb,
 	return servant;
 }
 
-/* Writes stringified object reference of @servant to file-stream
- * @stream. If error occures @ev points to exception object on
+/* Writes stringified object reference of @servant to file
+ * @filename. If error occures @ev points to exception object on
  * return.
  */
-static 
-void 
-account_server_export_service_to_stream (CORBA_ORB          orb,
-					 Account            servant,
-					 FILE              *stream, 
-					 CORBA_Environment *ev)
+static
+void
+server_export_service_to_file (CORBA_ORB          orb,
+                               CORBA_Object       service,
+                               char              *filename,
+                               CORBA_Environment *ev)
 {
         CORBA_char *objref = NULL;
-
-	/* write objref to file */
-	
-        <command>objref = CORBA_ORB_object_to_string (orb, servant, ev);</command>
-	if (raised_exception(ev)) return;
-
+        FILE       *file   = NULL;
+ 
+        /* write objref to file */
+         
+        <command>objref = CORBA_ORB_object_to_string (orb, service, ev);</command>
+        if (raised_exception(ev)) return;
+ 
+        if ((file=fopen(filename, "w"))==NULL)
+                g_error ("could not open %s\n", filename);
+         
         /* print ior to terminal */
-	fprintf (stream, "%s\n", objref);
-	fflush (stream);
-
+        fprintf (file, "%s\n", objref);
+        fflush (file);
+        fclose (file);
+         
         CORBA_free (objref);
 }
+
 
 /* Entering main loop @orb handles incoming request and delegates to
  * servants. If error occures @ev points to exception object on
@@ -2645,7 +3001,7 @@ account_server_export_service_to_stream (CORBA_ORB          orb,
  */
 static 
 void 
-account_server_run (CORBA_ORB          orb,
+server_run (CORBA_ORB          orb,
 		    CORBA_Environment *ev)
 {
         /* enter main loop until SIGINT or SIGTERM */
@@ -2661,7 +3017,7 @@ account_server_run (CORBA_ORB          orb,
  * occures @ev points to exception object on return.
  */
 static 
-void account_server_cleanup (CORBA_ORB          orb,
+void server_cleanup (CORBA_ORB          orb,
 			     Account            servant,
 			     CORBA_Environment *ev)
 {
@@ -2685,30 +3041,35 @@ void account_server_cleanup (CORBA_ORB          orb,
 int
 main (int argc, char *argv[])
 {
-	Account servant = CORBA_OBJECT_NIL;
-
-	CORBA_Environment  ev[1];
-	CORBA_exception_init(ev);
-	
-	<command>account_server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
-	abort_if_exception(ev, "init failed");
-
-	<command>servant = account_server_activate_service (global_orb, ev);</command>
-	abort_if_exception(ev, "activating service failed");
-
-	<command>account_server_export_service_to_stream (global_orb, /* ORB    */ 
-						 servant,    /* object */ 
-						 stdout,     /* stream */ 
-						 ev);       </command>
-	abort_if_exception(ev, "exporting IOR failed");
-	
-	<command>account_server_run (global_orb, ev);</command>
-	abort_if_exception(ev, "entering main loop failed");
-
-	<command>account_server_cleanup (global_orb, servant, ev);</command>
-	abort_if_exception(ev, "cleanup failed");
-
-	exit (0);
+        Account servant = CORBA_OBJECT_NIL;
+ 
+        CORBA_char filename[] = "account.ior";
+ 
+        CORBA_Environment  ev[1];
+        <command>CORBA_exception_init(ev);</command>
+         
+        <command>server_init (&amp;argc, argv, &amp;global_orb, ev);</command>
+        abort_if_exception(ev, "init failed");
+ 
+        
+        <command>servant = server_activate_service (global_orb, ev);</command>
+        abort_if_exception(ev, "activating service failed");
+ 
+        g_print ("Writing service reference to: %s\n\n", filename);
+ 
+        <command>server_export_service_to_file (global_orb, /* ORB      */
+                                       servant,    /* object   */
+                                       filename,   /* filename */
+                                       ev);</command>
+        abort_if_exception(ev, "exporting IOR failed");
+         
+        <command>server_run (global_orb, ev);</command>
+        abort_if_exception(ev, "entering main loop failed");
+ 
+        <command>server_cleanup (global_orb, servant, ev);</command>
+        abort_if_exception(ev, "cleanup failed");
+ 
+        exit (0);
 }</programlisting>
 </example>
 
@@ -2721,7 +3082,7 @@ main (int argc, char *argv[])
 
 <sect2>
 <title>
-Compiling the Server and the Client
+Compiling server &amp; client
 </title>
 <para>
 The Makefile is the roughly the same as the one in the Calculator
@@ -2730,7 +3091,7 @@ reuse this Makefile for numerous small projects.
 <example>
 <title>Makefile for the Account example</title>
 
-<programlisting>PREFIX=/usr/local
+<programlisting>PREFIX=/usr
 CC = gcc
 TARGETS=account-client account-server
 ORBIT_IDL=orbit-idl-2
@@ -2762,7 +3123,81 @@ distclean: clean
 *************************  ORBIT and GNOME *****************************************
 -->
 </sect1>
+
+<sect1 id="byteseq">
+<title>Byte-Sequence client &amp; server</title>
+      <para>
+      to be done
+      </para>
+      <sect2>
+	<title>Byte-Sequence client</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Byte-Sequence server</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>to be done</para>
+      </sect2>
+</sect1>
+<sect1 id="badcall">
+<title>BadCall client &amp; server</title>
+      <para>
+      to be done
+      </para>
+      <sect2>
+	<title>BadCall client</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>BadCall server</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>to be done</para>
+      </sect2>
+</sect1>
+<sect1 id="nameservice">
+<title>NameService client &amp; server</title>
+      <para>
+      to be done
+      </para>
+      <sect2>
+	<title>NameService client</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>NameService server</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>to be done</para>
+      </sect2>
+</sect1>
+<sect1 id="callback">
+<title>Callback client &amp; server</title>
+      <para>
+      to be done
+      </para>
+      <sect2>
+	<title>Callback client</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Callback server</title>
+	<para>to be done</para>
+      </sect2>
+      <sect2>
+	<title>Compiling client &amp; server</title>
+	<para>to be done</para>
+      </sect2>
+</sect1>
 </chapter>
+
 
 <chapter>
 <title>How to do garbage collection under CORBA</title>
