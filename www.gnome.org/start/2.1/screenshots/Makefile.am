@@ -22,3 +22,5 @@ page_DATA=emblems-sidebar.png \
     search-tool.png \
     systray-applet.png \
     window-border-theme.png \
+	window-border-theme-thumb.png \
+	open-recent-thumb.png
