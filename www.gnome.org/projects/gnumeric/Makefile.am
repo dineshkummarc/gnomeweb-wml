@@ -95,6 +95,7 @@ page_SCRIPTS=index.shtml		\
 	    gnumeric-1.0.9		\
 	    gnumeric-1.0.10		\
 	    gnumeric-1.0.11		\
+	    gnumeric-1.0.12		\
 	    gnumeric-1.1.1		\
 	    gnumeric-1.1.2		\
 	    gnumeric-1.1.3		\
