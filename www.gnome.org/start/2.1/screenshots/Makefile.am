@@ -23,4 +23,5 @@ page_DATA=emblems-sidebar.png \
     systray-applet.png \
     window-border-theme.png \
 	window-border-theme-thumb.png \
-	open-recent-thumb.png
+	open-recent-thumb.png \
+	emblems-sidebar-thumb.png
