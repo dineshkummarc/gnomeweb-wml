@@ -106,8 +106,9 @@
     	        - <a href="index.html">home</a><br>
 	        - <a href="news.html">What's New</a><br>
 	        - <a href="structure.html">GST Structure</a><br>
-		- <a href="team.html">GST Team</a><br>
+		   - <a href="team.html">GST Team</a><br>
 	        - <a href="screenshots.html">Screenshots</a><br>
+		   - Distro Support<br>
 	        - <a href="download.html">Download</a><br>
 	        - <a href="contrib.html">Getting Involved</a><br>
 	        - <a href="contact.html">Contacting</a><br>
