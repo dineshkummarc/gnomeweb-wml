@@ -1,4 +1,4 @@
-SUBDIRS = images screenshots release_notes
+SUBDIRS = images screenshots release_notes stuff
 
 urlpath=/projects/gst
 
