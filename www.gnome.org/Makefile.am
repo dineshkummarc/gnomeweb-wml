@@ -22,6 +22,7 @@ page_SCRIPTS=index.php3		\
   pr-redhat.html \
   pr-sunjoins.html \
   pr-accessible.html \
+  pr-guadec.html \
   .htaccess \
   users
 
