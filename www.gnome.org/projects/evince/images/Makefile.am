@@ -16,7 +16,6 @@ page_SCRIPTS=					\
 	screenshot-secret_document.pdf-full.png	\
 	screenshot-secret_document.pdf.png	\
 	searching.png				\
-	thumbnail-full.png			\
 	thumbnail.png
 
 include $(top_srcdir)/rules.common
