@@ -57,6 +57,7 @@ page_SCRIPTS=bg.jpg			\
 	    gnumeric-0.59		\
 	    gnumeric-0.60		\
 	    gnumeric-0.61		\
-	    gnumeric-0.62
+	    gnumeric-0.62		\
+	    gnumeric-0.63
 
 include $(top_srcdir)/rules.common
