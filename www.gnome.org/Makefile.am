@@ -3,12 +3,15 @@ SUBDIRS = about images start projects resources developerinterviews applist lear
 urlpath =
 
 page_SCRIPTS = \
-	index.php3 \
 	seegnome.html \
 	commsupp.html \
 	speakingabout.html \
 	.htaccess \
 	users \
-	default.css
+	default.css \
+	frontpage.css
+
+page_DATA = \
+	index.html
 
 include $(top_srcdir)/rules.common
