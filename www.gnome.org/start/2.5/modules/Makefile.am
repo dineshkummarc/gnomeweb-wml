@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/start/2.3/modules
+urlpath=/start/2.5/modules
 
 page_SCRIPTS=index.html
 

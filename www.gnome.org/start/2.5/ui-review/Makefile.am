@@ -1,6 +1,6 @@
 #SUBDIRS=
 
-urlpath=/start/2.3/ui-review
+urlpath=/start/2.5/ui-review
 
 page_SCRIPTS=index.html
 
