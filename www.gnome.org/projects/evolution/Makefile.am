@@ -5,6 +5,7 @@ urlpath=/projects/evolution
 page_SCRIPTS=			\
 	go.css			\
 	arch.shtml   		\
+	bugs.shtml   		\
 	credits.shtml  		\
 	faq.shtml       	\
 	foot.shtml  		\
