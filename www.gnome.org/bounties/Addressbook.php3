@@ -6,13 +6,83 @@ include ("./util.php");
 
 <?php write_page_header ("Addressbook Bounties"); ?>
 <?php write_table_header ("no"); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
 <?php taskrow ("Addressbook/videoconferencing integration", "hidden", "500", "127515", ""); ?>
 <?php taskrow ("&quot;Me&quot;", "hidden", "300", "127517", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
+<?php taskrow ("Contact search applet", "hidden", "750", "127522", ""); ?>
 <?php taskrow ("Choice of database for contacts back-end", "hidden", "250", "127524", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", "127515"); ?>
+<?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", "http://www.chipx86.com/gevolution/"); ?>
+
+
+
+<p>Gaim should be able to synchronize its buddy lists with the
+Evolution addressbook. You will need to decide the details of this
+work and discuss them with the other Gaim and Evolution
+developers. Some beginning features:</p>
+
+<ul>
+<li>Auto-add buddies to your buddy list if their IM fields exist in  Evolution.</li>
+<li>Auto-add buddies to your addressbook when you add them to your buddy list in Gaim. 
+<li>Allow a user to select an addressbook entry that corresponds to a
+buddy, which will fill the IM field of that addressbook entry. This
+might work better if you can use the minicard widget and display a
+list of minicards.</li>
+<li>For extra credit: Allow the user to drag and drop buddies and
+contacts between Gaim and Evolution.</li>
+</ul>
+
+<p>When the user clicks on the "Add Buddy" button in Gaim, or selects
+the "Add a buddy" menu item, a dialog should appear allowing him to
+select someone from his addressbook:</p>
+
+<center>
+<img src="IM-addbuddy1.png"><br>
+</center>
+
+<p>A separate entry should appear for each IM account a contact has,
+so that the user can choose to add someone's AIM account to the buddy
+list, for example, but not his Yahoo account.</p>
+
+<p>If the user clicks on the "New Person" button, he gets prompted to
+add a new contact and buddy at the same time:</p>
+
+<center>
+<img src="IM-addbuddy2.png"><br>
+</center>
+
+<p>Entering the contact's IM account information is required.
+Entering his contact information is optional.</p>
+
+<p>This same dialog will pop up if the user hits "Select Buddy" for a
+contact whose IM information is not available in the Evolution
+addressbook.  The user will have the opportunity to fill in the IM
+information for that person, which will then be added to the Evolution
+addressbook and the buddy list at the same time.</p>
+
+<center>
+<img src="IM-addbuddy3.png"><br>
+</center>
+
+<p>When "Add Buddy" is clicked, the person's IM account name is added to
+the buddy list, and a new contact is added to the Evolution
+addressbook.</p>
+
+<?php box_sec ("Affected Modules"); ?>
+
+Both <? bonsai ("evolution"); ?> and <a href="http://gaim.sf.net/">gaim</a> are affected.
+
+<?php box_sec ("Pointers"); ?>
+
+For Evolution information, join the <a
+href="http://lists.ximian.com/mailman/listinfo/evolution-hackers">Evolution
+Hackers</a> mailing list.  You'll find Gaim resources at <a
+href="http://gaim.sf.net">the Gaim home page</a>.
+
+<?php box_end (); ?>
+<?php box_start ("Addressbook/videoconferencing integration", "Addressbook", "500", "127515", "127515", ""); ?>
 
 
 The desktop environment's central addressbook should be able to store
@@ -55,7 +125,7 @@ You'll also want to subscribe to the <a href="http://lists.ximian.com/mailman/li
 mailing list.
 
 <?php box_end (); ?>
-<?php box_start ("&quot;Me&quot;", "Addressbook", "300", "127517", "127517"); ?>
+<?php box_start ("&quot;Me&quot;", "Addressbook", "300", "127517", "127517", ""); ?>
 
 
 <p>The Evolution 2.0 addressbook will have a "me" concept that will
@@ -79,7 +149,7 @@ need.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", "127520"); ?>
+<?php box_start ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", "127520", ""); ?>
 
 
 <p>There are lots of things that could be done here, though they might
@@ -110,7 +180,35 @@ this challenge.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Choice of database for contacts back-end", "Addressbook", "250", "127524", "127524"); ?>
+<?php box_start ("Contact search applet", "Addressbook", "750", "127522", "127522", ""); ?>
+
+
+<p>
+A panel applet where you can type in a search term and get matching contact cards. The
+applet should reside in its own package, not in Evolution proper.
+</p>
+
+<img src="address-applet-anim.gif">
+
+<p>
+Once the wanted person is found in the list, one can click on it and the following
+popup window is shown with the address card and some relevant action buttons.
+</p>
+
+<img src="address-applet-popup.png">
+
+<p>
+If the user is not online, one should just display the label as <b>"GFlash is not online."</b>
+</p>
+
+<?php box_sec ("How"); ?>
+
+Most of this task revolves around writing a panel applet and GUI. The rest involves contacting
+<? bonsai ("evolution-data-server"); ?>, and getting contact information from that. A useful starting point
+is <? bonsai ("evolution-data-server/addressbook/libebook"); ?>, and the interfaces you'll find there.
+
+<?php box_end (); ?>
+<?php box_start ("Choice of database for contacts back-end", "Addressbook", "250", "127524", "127524", ""); ?>
 
 
 <p>
@@ -147,7 +245,7 @@ addressbook backend.
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Advanced LDAP Configuration", "Addressbook", "250", "127525", "127525"); ?>
+<?php box_start ("Advanced LDAP Configuration", "Addressbook", "250", "127525", "127525", ""); ?>
 
 
 <p>Evolution can store contacts in an LDAP directory, but there is no way
@@ -206,7 +304,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php write_page_footer (); ?>
+
 
 </center>
 </body>

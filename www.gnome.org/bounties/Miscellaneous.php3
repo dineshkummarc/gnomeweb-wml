@@ -11,7 +11,7 @@ include ("./util.php");
 <?php taskrow ("Drag and Drop between Gnome and Mozilla", "hidden", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551"); ?>
+<?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", ""); ?>
 
 
 <p> The Nautilus file manager has a context menu item for "Send
@@ -68,7 +68,7 @@ Hackers</a>, and visit <a
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
-<?php box_start ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", "127552"); ?>
+<?php box_start ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", "127552", ""); ?>
 
 <p>
 Since the iPod supports calendars and addressbooks, it would be handy for
@@ -113,7 +113,7 @@ links:
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", "127553"); ?>
+<?php box_start ("Drag and Drop between Gnome and Mozilla", "Miscellaneous", "300", "127553", "127553", ""); ?>
 
 
 <p></p>
@@ -158,7 +158,7 @@ What we'd like to see:
   The <a href="http://mail.gnome.org/archives/desktop-devel-list/">desktop-devel-list</a> and 
 <a href="http://mail.gnome.org/archives/nautilus-list/">nautilus-list</a> are a valuable place to discuss the nautilus changes. The <a href="http://freedesktop.org/">freedesktop.org</a> site has addtional pointers to common <a href="http://freedesktop.org/Main/Draganddropwarts">drag and drop warts</a> (but ignore the parts about using XDS).  Information about Mozilla can be found at <a href="http://mozilla.org/">mozilla.org.</a>
 <?php box_end (); ?>
-<?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812"); ?>
+<?php box_start ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "127812", ""); ?>
 
 
 <p>Currently Evolution's icons are not themeable and are a mixture
@@ -180,7 +180,7 @@ href="http://freedesktop.org/Standards/icon-theme-spec/0.7/ar01s05.html">icon
 lookup section</a> may be handy.</p>
 
 <?php box_end (); ?>
-<?php write_page_footer (); ?>
+
 
 </center>
 </body>

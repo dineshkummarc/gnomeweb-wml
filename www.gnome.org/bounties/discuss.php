@@ -25,7 +25,5 @@ If you are using Mozilla, or a web browser which has a built in IRC client, you 
 
 <?php box_end (); ?>
 
-<?php write_page_footer (); ?>
-
 </body>
 </html>

@@ -9,7 +9,7 @@ include ("./util.php");
 <?php taskrow ("Outlook-Evolution dictionary", "hidden", "300", "127544", ""); ?>
 <?php taskrow ("Quick reference card", "hidden", "300", "127545", ""); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544"); ?>
+<?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544", ""); ?>
 
 
 
@@ -61,7 +61,7 @@ DocBook manual</a>.  The primary contact for this task will be <a href="mailto:a
 
 
 <?php box_end (); ?>
-<?php box_start ("Quick reference card", "Documentation", "300", "127545", "127545"); ?>
+<?php box_start ("Quick reference card", "Documentation", "300", "127545", "127545", ""); ?>
 
 
 <p>
@@ -121,7 +121,7 @@ page</a>.  Before you begin any work on the help browser, be sure to
 maintainers.</a> The primary contact for this task will be <a href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
 
 <?php box_end (); ?>
-<?php write_page_footer (); ?>
+
 
 </center>
 </body>
