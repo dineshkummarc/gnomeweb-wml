@@ -2,8 +2,7 @@ SUBDIRS = images screenshots release_notes
 
 urlpath=/projects/gst/
 
-page_SCRIPTS =	0.11.html	\
-		bugs.html	\
+page_SCRIPTS =  bugs.html	\
 		contact.html	\
 		contrib.html	\
 		download.html	\
