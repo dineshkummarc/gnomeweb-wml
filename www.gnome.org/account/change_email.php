@@ -32,7 +32,7 @@ New Email Address:
 <INPUT type="submit" name="Send Confirmation to New Address" value="Send Confirmation to New Address">
 </FORM>
 
-<P><A href="/">[Return to SourceForge]</A>
+<P><A href="/">[Return to gnome.org]</A>
 
 <?php
 site_user_footer(array());
