@@ -13,7 +13,11 @@ Quickly find the stuff you care about
 </h2>
 	<!-- Locate version 2.0!  We've combined the power of 'grep' with the snaziness of 'locate'! -->
 	<p>
-	It slices, it dices, and it may even find exactly what you're looking for.  Beagle is your one stop searching utility when it comes to quickly locating all the information you need.
+
+	Beagle is a search tool that ransacks your <i>personal
+information space</i> to find whatever you're looking for.  Beagle can
+search in many different domains:
+
 	</p>
 	<p>
 	<div class="split-tosize img-box"><a href="img/screenshot-mockup.png"><img src="img/screenshot-mockup-thumb.png" border=0"><br><string>Find everything fast</strong> (mockup)</a>
@@ -22,9 +26,9 @@ Quickly find the stuff you care about
 	<p>
 	Using Beagle, you can easily find:
 	<ul class="list-indented">
-		<li><img src="img/office-doc.png">emails</li>
 		<li><img src="img/office-doc.png">documents</li>
-		<li><img src="img/gnome-globe-16.png">web pages you've viewed</li>
+		<li><img src="img/office-doc.png">emails</li>
+		<li><img src="img/gnome-globe-16.png">web history</li>
 		<li><img src="img/office-doc.png">IM/IRC conversations</li>
 		<li><img src="img/source-doc.png">source code</li>
 		<li><img src="img/image-doc.png">images</li>
