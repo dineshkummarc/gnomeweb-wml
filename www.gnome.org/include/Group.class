@@ -490,21 +490,16 @@ class Group extends Error {
 				//	LDAP entry and membership
 				//
 				$user=&user_get_object($form_newuid,$res_newuser);
-				if (!$user->setUpUnixUID()) {
-					$this->setError('ERROR: could not set up unix_uid for user: '.$user->getErrorMessage());
+				$user->refreshUserData();
+				if (!sf_ldap_check_create_user($form_newuid)) {
+					$this->setError(sf_ldap_get_error_msg());
 					return false;
-				} else {
-					$user->refreshUserData();
-					if (!sf_ldap_check_create_user($form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
-						return false;
-					}
-						if (!sf_ldap_group_add_user($this->getGroupId(),$form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
-						return false;
-					}
-					return true;
 				}
+					if (!sf_ldap_group_add_user($this->getGroupId(),$form_newuid)) {
+					$this->setError(sf_ldap_get_error_msg());
+					return false;
+				}
+				return true;
 			}
 		} else {
 			//

@@ -146,9 +146,6 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<P>
 	<B>License: <?php echo $row_grp['license']; ?></B>
 
-	<BR><B>Home Box: <?php print $row_grp['unix_box']; ?></B>
-	<BR><B>HTTP Domain: <?php print $row_grp['http_domain']; ?></B>
-
 	<br>
 	&nbsp;
 	<?php
@@ -166,8 +163,6 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	print "<P><B>Other Information</B>";
 	print "<P>Unix Group Name: $row_grp[unix_group_name]";
-
-	print "<P>Submitted Description:<blockquote>$row_grp[register_purpose]</blockquote>";
 
 	if ($row_grp[license]=="other") {
 		print "<P>License Other: <blockquote>$row_grp[license_other]</blockquote>";
