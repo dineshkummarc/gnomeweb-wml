@@ -1,0 +1,156 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyPermissionManager</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="ch01.html" title="Epiphany"><link rel="next" href="EphyWindow.html" title="EphyWindow"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="EphyWindow.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EphyPermissionManager"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyPermissionManager</span></h2><p>EphyPermissionManager &#8212; Sets webpages' cookie, image and popup permissions.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+struct      <a href="EphyPermissionManager.html#EphyPermissionInfo">EphyPermissionInfo</a>;
+enum        <a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a>;
+void        <a href="EphyPermissionManager.html#ephy-permission-info-free">ephy_permission_info_free</a>       (<a href="EphyPermissionManager.html#EphyPermissionInfo">EphyPermissionInfo</a> *info);
+void        <a href="EphyPermissionManager.html#ephy-permission-manager-add">ephy_permission_manager_add</a>     (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type,
+                                             <a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a> permission);
+void        <a href="EphyPermissionManager.html#ephy-permission-manager-remove">ephy_permission_manager_remove</a>  (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type);
+void        <a href="EphyPermissionManager.html#ephy-permission-manager-clear">ephy_permission_manager_clear</a>   (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager);
+<a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a> <a href="EphyPermissionManager.html#ephy-permission-manager-test">ephy_permission_manager_test</a> (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type);
+GList*      <a href="EphyPermissionManager.html#ephy-permission-manager-list">ephy_permission_manager_list</a>    (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *type);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2560789"></a><h2>Description</h2><p>
+The <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a> keeps a list of websites and their permissions. For
+example, the user may want a certain website to display images but block
+cookies and popup windows; this could correspond to three entries in the
+<a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>.
+</p><p>
+Use <a href="EphyPermissionManager.html#ephy-permission-manager-add"><tt class="function">ephy_permission_manager_add()</tt></a> to set permissions for a website,
+<a href="EphyPermissionManager.html#ephy-permission-manager-remove"><tt class="function">ephy_permission_manager_remove()</tt></a> to remove the permissions, and
+<a href="EphyPermissionManager.html#ephy-permission-manager-test"><tt class="function">ephy_permission_manager_test()</tt></a> to test them. Note that
+<a href="EphyPermissionManager.html#ephy-permission-manager-test"><tt class="function">ephy_permission_manager_test()</tt></a> may return <tt class="literal">EPHY_PERMISSION_DEFAULT</tt>, which
+means the caller might need to find the default permission some other way.
+</p><p>
+The <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a> stores a list of site-specific permissions, but not
+defaults. For popups, the default permission is determined by the GConf key
+/apps/epiphany/web/allow_popups, which in turn determines Mozilla's
+dom.disable_open_during_load preference. For cookies, the GConf key
+/apps/epiphany/web/cookie_accept determines Mozilla's
+network.cookie.cookieBehavior preference. For images, the default is determined
+by Mozilla's network.image.imageBehavior preference.
+</p><p>
+The predefined permission types are EPT_COOKIE ("cookie"), EPT_IMAGE ("image")
+and EPT_POPUP ("popup"). You can also make up your own type string.
+</p><p>
+Though the word "host" is used in many function descriptions, Mozilla
+does not act as one would expect. Always pass a URL to any functions which
+need have a "host" parameter. However, the "host" in an
+<a href="EphyPermissionManager.html#EphyPermissionInfo"><span class="type">EphyPermissionInfo</span></a> is a simple DNS hostname.
+</p></div><div class="refsect1" lang="en"><a name="id2587361"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2587367"></a><h3><a name="EphyPermissionInfo"></a>struct EphyPermissionInfo</h3><a class="indexterm" name="id2587375"></a><pre class="programlisting">struct EphyPermissionInfo {
+
+	char *host;
+	GQuark qtype;
+	EphyPermission permission;
+};
+</pre><p>
+Details a specific permission of a specific website.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term">char *<i class="structfield"><tt>host</tt></i></span></td><td>The hostname of the website to which this permission applies.
+</td></tr><tr><td><span class="term">GQuark <i class="structfield"><tt>qtype</tt></i></span></td><td>
+</td></tr><tr><td><span class="term"><a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a> <i class="structfield"><tt>permission</tt></i></span></td><td>An <a href="EphyPermissionManager.html#EphyPermission"><span class="type">EphyPermission</span></a> (either allow or deny).
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2641347"></a><h3><a name="EphyPermission"></a>enum EphyPermission</h3><a class="indexterm" name="id2641355"></a><pre class="programlisting">typedef enum
+{
+	EPHY_PERMISSION_ALLOWED,
+	EPHY_PERMISSION_DENIED,
+	EPHY_PERMISSION_DEFAULT
+} EphyPermission;
+</pre><p>
+Determines whether the website is allowed or denied access.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><tt class="literal">EPHY_PERMISSION_ALLOWED</tt></span></td><td>
+	The website is unconditionally allowed to perform the desired action.
+</td></tr><tr><td><span class="term"><tt class="literal">EPHY_PERMISSION_DENIED</tt></span></td><td>
+	The website is unconditionally denied to perform the desired action.
+</td></tr><tr><td><span class="term"><tt class="literal">EPHY_PERMISSION_DEFAULT</tt></span></td><td>
+	The user has not set a preference for this particular website; the
+	caller should therefore fall back to default settings.
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2641412"></a><h3><a name="ephy-permission-info-free"></a>ephy_permission_info_free ()</h3><a class="indexterm" name="id2641422"></a><pre class="programlisting">void        ephy_permission_info_free       (<a href="EphyPermissionManager.html#EphyPermissionInfo">EphyPermissionInfo</a> *info);</pre><p>
+Frees <i class="parameter"><tt>info</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>info</tt></i> :</span></td><td> an <a href="EphyPermissionManager.html#EphyPermissionInfo"><span class="type">EphyPermissionInfo</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2641468"></a><h3><a name="ephy-permission-manager-add"></a>ephy_permission_manager_add ()</h3><a class="indexterm" name="id2641477"></a><pre class="programlisting">void        ephy_permission_manager_add     (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type,
+                                             <a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a> permission);</pre><p>
+Adds the specified permission to the permissions database.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> the <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td> a website URL
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td> a string to identify the type of the permission
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>permission</tt></i> :</span></td><td> either <tt class="literal">EPHY_PERMISSION_ALLOWED</tt> or <tt class="literal">EPHY_PERMISSION_DENIED</tt>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2561849"></a><h3><a name="ephy-permission-manager-remove"></a>ephy_permission_manager_remove ()</h3><a class="indexterm" name="id2561860"></a><pre class="programlisting">void        ephy_permission_manager_remove  (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type);</pre><p>
+Removes the specified permission from the permissions database. This implies
+that the browser should use defaults when next visiting the specified
+<i class="parameter"><tt>host</tt></i>'s web pages.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> the <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td> a website URL
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td> a string to identify the type of the permission
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2561944"></a><h3><a name="ephy-permission-manager-clear"></a>ephy_permission_manager_clear ()</h3><a class="indexterm" name="id2561956"></a><pre class="programlisting">void        ephy_permission_manager_clear   (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager);</pre><p>
+Clears the permissions database. This cannot be undone.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> the <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562000"></a><h3><a name="ephy-permission-manager-test"></a>ephy_permission_manager_test ()</h3><a class="indexterm" name="id2562012"></a><pre class="programlisting"><a href="EphyPermissionManager.html#EphyPermission">EphyPermission</a> ephy_permission_manager_test (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *host,
+                                             const char *type);</pre><p>
+Retrieves an <span class="type">EphyPermissionType</span> from the permissions database. If there is
+no entry for this <i class="parameter"><tt>type</tt></i> and <i class="parameter"><tt>host</tt></i>, it will return <tt class="literal">EPHY_PERMISSION_DEFAULT</tt>.
+In that case, the caller may need to determine the appropriate default
+behavior.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> the <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>host</tt></i> :</span></td><td> a website URL
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td> a string to identify the type of the permission
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the permission of type <a href="EphyPermissionManager.html#EphyPermission"><span class="type">EphyPermission</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2672117"></a><h3><a name="ephy-permission-manager-list"></a>ephy_permission_manager_list ()</h3><a class="indexterm" name="id2672128"></a><pre class="programlisting">GList*      ephy_permission_manager_list    (<a href="EphyPermissionManager.html" title="EphyPermissionManager">EphyPermissionManager</a> *manager,
+                                             const char *type);</pre><p>
+Lists all permission entries of type <i class="parameter"><tt>type</tt></i> in the permissions database, each
+as its own <a href="EphyPermissionManager.html#EphyPermissionInfo"><span class="type">EphyPermissionInfo</span></a>. These entries must be freed using
+<a href="EphyPermissionManager.html#ephy-permission-info-free"><tt class="function">ephy_permission_info_free()</tt></a>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> the <a href="EphyPermissionManager.html" title="EphyPermissionManager"><span class="type">EphyPermissionManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td> a string to identify the type of the permission
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the list of permission database entries
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="ch01.html"><b>&lt;&lt; Epiphany</b></a></td><td align="right"><a accesskey="n" href="EphyWindow.html"><b>EphyWindow &gt;&gt;</b></a></td></tr></table></body></html>

@@ -1,0 +1,129 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyCommandManager</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="EphyEmbed.html" title="EphyEmbed"><link rel="next" href="EphyEmbedSingle.html" title="EphyEmbedSingle"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EphyEmbed.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="EphyEmbedSingle.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EphyCommandManager"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyCommandManager</span></h2><p>EphyCommandManager &#8212; Performs commands, such as cut/copy/paste</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+struct      <a href="EphyCommandManager.html#EphyCommandManager-struct">EphyCommandManager</a>;
+struct      <a href="EphyCommandManager.html#EphyCommandManagerIface">EphyCommandManagerIface</a>;
+void        <a href="EphyCommandManager.html#ephy-command-manager-do-command">ephy_command_manager_do_command</a> (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                             const char *command);
+gboolean    <a href="EphyCommandManager.html#ephy-command-manager-can-do-command">ephy_command_manager_can_do_command</a>
+                                            (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                             const char *command);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2619235"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GInterface
+   +----EphyCommandManager
+</pre></div><div class="refsect1" lang="en"><a name="id2619250"></a><h2>Known Implementations</h2><p>
+EphyCommandManager is implemented by
+ MozillaEmbed.</p></div><div class="refsect1" lang="en"><a name="id2619265"></a><h2>Signal Prototypes</h2><pre class="synopsis">
+
+"<a href="EphyCommandManager.html#EphyCommandManager-command-changed">command-changed</a>"
+            void        user_function      (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                            gchar *command,
+                                            gpointer user_data);
+</pre></div><div class="refsect1" lang="en"><a name="id2619303"></a><h2>Description</h2><p>
+An <a href="EphyCommandManager.html" title="EphyCommandManager"><span class="type">EphyCommandManager</span></a> is an interface to an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a> which is used to perform
+commands, such as cut/copy/paste. To perform any command, use
+<a href="EphyCommandManager.html#ephy-command-manager-do-command"><tt class="function">ephy_command_manager_do_command()</tt></a>. To test the availability of a command, use
+<a href="EphyCommandManager.html#ephy-command-manager-can-do-command"><tt class="function">ephy_command_manager_can_do_command()</tt></a>. The availability of commands depends on
+the selection and actions previously performed in the <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>. For instance,
+<tt class="literal">cmd_copy</tt> is only available if text has been selected; <tt class="literal">cmd_undo</tt> is only
+available if the user has a text input focused and has typed or erased some of
+its text.
+</p><p>
+</p><div class="example"><a name="id2628263"></a><p class="title"><b>Example 1. Copying selected text in an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a></b></p><pre class="programlisting">#include &lt;ephy-embed.h&gt;
+#include &lt;ephy-command-manager.h&gt;
+
+static void
+copy_selected_text (EphyEmbed *embed)
+{
+	EphyCommandManager *manager;
+
+	manager = EPHY_COMMAND_MANAGER (embed);
+	g_return_if_fail (EPHY_IS_COMMAND_MANAGER (manager));
+
+	if (!ephy_command_manager_can_do_command (manager, "cmd_copy")) return;
+
+	ephy_command_manager_do_command (manager, "cmd_copy");
+}
+</pre></div><p>
+</p><p>
+The <a href="EphyCommandManager.html" title="EphyCommandManager"><span class="type">EphyCommandManager</span></a> interface can perform any command which is defined in
+Mozilla. However, for purposes of abstraction, only a certain subset of commands
+should be used:
+</p><div class="variablelist"><p class="title"><b>Available Commands</b></p><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term">cmd_copy</span></td><td><p>Copies selected text</p></td></tr><tr><td><span class="term">cmd_cut</span></td><td><p>Cuts selected text.</p></td></tr><tr><td><span class="term">cmd_paste</span></td><td><p>Pastes text from the clipboard (for example, into a text entry)
+</p></td></tr><tr><td><span class="term">cmd_undo</span></td><td><p>Undoes the last action (for example, typing text into a text
+entry</p></td></tr><tr><td><span class="term">cmd_redo</span></td><td><p>Redoes previously <tt class="literal">undo</tt>ne actions (for example, in a
+text entry)</p></td></tr></tbody></table></div></div><div class="refsect1" lang="en"><a name="id2628359"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2628364"></a><h3><a name="EphyCommandManager-struct"></a>struct EphyCommandManager</h3><a class="indexterm" name="id2628373"></a><pre class="programlisting">struct EphyCommandManager;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2682066"></a><h3><a name="EphyCommandManagerIface"></a>struct EphyCommandManagerIface</h3><a class="indexterm" name="id2682074"></a><pre class="programlisting">struct EphyCommandManagerIface {
+
+	GTypeInterface base_iface;
+
+	void		(* do_command)		(EphyCommandManager *manager,
+						 const char *command);
+	gboolean	(* can_do_command)	(EphyCommandManager *manager,
+						 const char *command);
+
+	/* Signals */
+
+	void		(* command_changed)	(EphyCommandManager *manager,
+						 char *command);
+};
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2682089"></a><h3><a name="ephy-command-manager-do-command"></a>ephy_command_manager_do_command ()</h3><a class="indexterm" name="id2682100"></a><pre class="programlisting">void        ephy_command_manager_do_command (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                             const char *command);</pre><p>
+Performs <i class="parameter"><tt>command</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> an <a href="EphyCommandManager.html" title="EphyCommandManager"><span class="type">EphyCommandManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>command</tt></i> :</span></td><td> the command
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2682165"></a><h3><a name="ephy-command-manager-can-do-command"></a>ephy_command_manager_can_do_command ()</h3><a class="indexterm" name="id2682177"></a><pre class="programlisting">gboolean    ephy_command_manager_can_do_command
+                                            (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                             const char *command);</pre><p>
+Returns <tt class="literal">TRUE</tt> if <i class="parameter"><tt>command</tt></i> can be performed.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td> an <a href="EphyCommandManager.html" title="EphyCommandManager"><span class="type">EphyCommandManager</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>command</tt></i> :</span></td><td> the command
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>command</tt></i> can be performed.
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2681734"></a><h2>Signals</h2><div class="refsect2" lang="en"><a name="id2681739"></a><h3><a name="EphyCommandManager-command-changed"></a>The "command-changed" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyCommandManager.html" title="EphyCommandManager">EphyCommandManager</a> *manager,
+                                            gchar *command,
+                                            gpointer user_data);</pre><p>
+The ::command-changed signal is emitted when <i class="parameter"><tt>command</tt></i> has changed from being
+available to unavailable, or vice-versa. The new availability can be tested
+with <a href="EphyCommandManager.html#ephy-command-manager-can-do-command"><tt class="function">ephy_command_manager_can_do_command()</tt></a>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>manager</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>command</tt></i> :</span></td><td> The command whose avalability has changed
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EphyEmbed.html"><b>&lt;&lt; EphyEmbed</b></a></td><td align="right"><a accesskey="n" href="EphyEmbedSingle.html"><b>EphyEmbedSingle &gt;&gt;</b></a></td></tr></table></body></html>

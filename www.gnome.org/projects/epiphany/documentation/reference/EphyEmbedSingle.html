@@ -1,0 +1,121 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyEmbedSingle</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="EphyCommandManager.html" title="EphyCommandManager"><link rel="next" href="EphyEmbedPersist.html" title="EphyEmbedPersist"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EphyCommandManager.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="EphyEmbedPersist.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EphyEmbedSingle"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyEmbedSingle</span></h2><p>EphyEmbedSingle &#8212; An interface to the global embedded browser</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+void        <a href="EphyEmbedSingle.html#ephy-embed-single-clear-cache">ephy_embed_single_clear_cache</a>   (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single);
+void        <a href="EphyEmbedSingle.html#ephy-embed-single-clear-auth-cache">ephy_embed_single_clear_auth_cache</a>
+                                            (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single);
+void        <a href="EphyEmbedSingle.html#ephy-embed-single-set-offline-mode">ephy_embed_single_set_offline_mode</a>
+                                            (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             gboolean offline);
+GList*      <a href="EphyEmbedSingle.html#ephy-embed-single-get-font-list">ephy_embed_single_get_font_list</a> (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             const char *lang_group);
+GtkWidget*  <a href="EphyEmbedSingle.html#ephy-embed-single-open-window">ephy_embed_single_open_window</a>   (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             <a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *parent,
+                                             const char *address,
+                                             const char *name,
+                                             const char *features);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2680934"></a><h2>Description</h2><p>
+While Epiphany is running, its global embed_shell variable (an <span class="type">EphyEmbedShell</span>)
+holds a reference to an <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>. The only class which implements
+<a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a> is <span class="type">MozillaEmbedSingle</span>, so the two types are interchangeable
+via casting.
+</p><p>
+</p><div class="example"><a name="id2680972"></a><p class="title"><b>Example 2. Acquiring an <span class="structname">EphyEmbedSingle</span></b></p><pre class="programlisting">#include &lt;ephy-embed-shell.h&gt;
+#include &lt;ephy-embed-single.h&gt;
+
+EphyEmbedSingle *ephy_single;
+
+/* embed_shell is a global variable, initialized as Epiphany starts */
+ephy_single = ephy_embed_shell_get_embed_single (embed_shell);
+</pre></div><p>
+</p><p>
+Since there is only one <span class="type">EphyEmbedShell</span>, there is only one <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>. It
+is used to perform browser-related actions which do not refer to an individual
+<a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>.
+</p></div><div class="refsect1" lang="en"><a name="id2662908"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2662913"></a><h3><a name="ephy-embed-single-clear-cache"></a>ephy_embed_single_clear_cache ()</h3><a class="indexterm" name="id2662924"></a><pre class="programlisting">void        ephy_embed_single_clear_cache   (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single);</pre><p>
+Clears the Mozilla cache (temporarily saved web pages).</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>single</tt></i> :</span></td><td> the <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2662969"></a><h3><a name="ephy-embed-single-clear-auth-cache"></a>ephy_embed_single_clear_auth_cache ()</h3><a class="indexterm" name="id2662980"></a><pre class="programlisting">void        ephy_embed_single_clear_auth_cache
+                                            (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single);</pre><p>
+Clears the Mozilla HTTP authentication cache.
+</p><p>
+This does not clear regular website passwords; it only clears the HTTP
+authentication cache. Websites which use HTTP authentication require the
+browser to send a password along with every HTTP request; the browser will
+ask the user for the password once and then cache the password for subsequent
+HTTP requests. This function will clear the HTTP authentication cache,
+meaning the user will have to re-enter a username and password the next time
+Epiphany requests a web page secured with HTTP authentication.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>single</tt></i> :</span></td><td> the <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2627303"></a><h3><a name="ephy-embed-single-set-offline-mode"></a>ephy_embed_single_set_offline_mode ()</h3><a class="indexterm" name="id2673189"></a><pre class="programlisting">void        ephy_embed_single_set_offline_mode
+                                            (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             gboolean offline);</pre><p>
+Sets the state of the network connection.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>single</tt></i> :</span></td><td> the <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>offline</tt></i> :</span></td><td> <tt class="literal">TRUE</tt> to disable networking
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2682332"></a><h3><a name="ephy-embed-single-get-font-list"></a>ephy_embed_single_get_font_list ()</h3><a class="indexterm" name="id2682340"></a><pre class="programlisting">GList*      ephy_embed_single_get_font_list (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             const char *lang_group);</pre><p>
+Returns the list of fonts matching <i class="parameter"><tt>lang_group</tt></i>, or all fonts if <i class="parameter"><tt>lang_group</tt></i>
+is <tt class="literal">NULL</tt>.
+</p><p>
+The available <i class="parameter"><tt>lang_group</tt></i> arguments are listed in Epiphany's Fonts and Colors
+preferences.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>single</tt></i> :</span></td><td> the <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>lang_group</tt></i> :</span></td><td> a mozilla font language group name, or <tt class="literal">NULL</tt>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a list of font names
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2682425"></a><h3><a name="ephy-embed-single-open-window"></a>ephy_embed_single_open_window ()</h3><a class="indexterm" name="id2682433"></a><pre class="programlisting">GtkWidget*  ephy_embed_single_open_window   (<a href="EphyEmbedSingle.html" title="EphyEmbedSingle">EphyEmbedSingle</a> *single,
+                                             <a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *parent,
+                                             const char *address,
+                                             const char *name,
+                                             const char *features);</pre><p>
+Opens a new window, as if it were opened in <i class="parameter"><tt>parent</tt></i> using the Javascript
+method and arguments: <tt class="code">window.open("<i class="parameter"><tt>address</tt></i>",
+"_blank", "<i class="parameter"><tt>features</tt></i>");</tt>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>single</tt></i> :</span></td><td> the <a href="EphyEmbedSingle.html" title="EphyEmbedSingle"><span class="type">EphyEmbedSingle</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td> the requested window's parent <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>address</tt></i> :</span></td><td> the URL to load
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td> a name for the window
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>features</tt></i> :</span></td><td> a Javascript features string
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the new embed. This is either a <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>, or, when <i class="parameter"><tt>features</tt></i> specified
+"chrome", a <span class="type">GtkMozEmbed</span>.
+
+NOTE: Use <a href="epiphany-ephy-shell.html#ephy-shell-new-tab"><tt class="function">ephy_shell_new_tab()</tt></a> unless this handling of the <i class="parameter"><tt>features</tt></i> string is
+required.
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EphyCommandManager.html"><b>&lt;&lt; EphyCommandManager</b></a></td><td align="right"><a accesskey="n" href="EphyEmbedPersist.html"><b>EphyEmbedPersist &gt;&gt;</b></a></td></tr></table></body></html>

@@ -1,0 +1,660 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyEmbed</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="EphyTab.html" title="EphyTab"><link rel="next" href="EphyCommandManager.html" title="EphyCommandManager"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EphyTab.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="EphyCommandManager.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EphyEmbed"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyEmbed</span></h2><p>EphyEmbed &#8212; An interface to the widget displaying web pages</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+struct      <a href="EphyEmbed.html#EphyEmbed-struct">EphyEmbed</a>;
+struct      <a href="EphyEmbed.html#EphyEmbedIface">EphyEmbedIface</a>;
+enum        <a href="EphyEmbed.html#EmbedState">EmbedState</a>;
+enum        <a href="EphyEmbed.html#EphyEmbedChrome">EphyEmbedChrome</a>;
+enum        <a href="EphyEmbed.html#EmbedPrintPreviewNavType">EmbedPrintPreviewNavType</a>;
+enum        <a href="EphyEmbed.html#EmbedSecurityLevel">EmbedSecurityLevel</a>;
+void        <a href="EphyEmbed.html#ephy-embed-load-url">ephy_embed_load_url</a>             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *url);
+void        <a href="EphyEmbed.html#ephy-embed-stop-load">ephy_embed_stop_load</a>            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-reload">ephy_embed_reload</a>               (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean force);
+char*       <a href="EphyEmbed.html#ephy-embed-get-title">ephy_embed_get_title</a>            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+char*       <a href="EphyEmbed.html#ephy-embed-get-location">ephy_embed_get_location</a>         (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean toplevel);
+char*       <a href="EphyEmbed.html#ephy-embed-get-link-message">ephy_embed_get_link_message</a>     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+char*       <a href="EphyEmbed.html#ephy-embed-get-js-status">ephy_embed_get_js_status</a>        (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+gboolean    <a href="EphyEmbed.html#ephy-embed-can-go-back">ephy_embed_can_go_back</a>          (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+gboolean    <a href="EphyEmbed.html#ephy-embed-can-go-forward">ephy_embed_can_go_forward</a>       (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+gboolean    <a href="EphyEmbed.html#ephy-embed-can-go-up">ephy_embed_can_go_up</a>            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+GSList*     <a href="EphyEmbed.html#ephy-embed-get-go-up-list">ephy_embed_get_go_up_list</a>       (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-go-back">ephy_embed_go_back</a>              (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-go-forward">ephy_embed_go_forward</a>           (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-go-up">ephy_embed_go_up</a>                (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+int         <a href="EphyEmbed.html#ephy-embed-shistory-n-items">ephy_embed_shistory_n_items</a>     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-shistory-get-nth">ephy_embed_shistory_get_nth</a>     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             int nth,
+                                             gboolean is_relative,
+                                             char **url,
+                                             char **title);
+int         <a href="EphyEmbed.html#ephy-embed-shistory-get-pos">ephy_embed_shistory_get_pos</a>     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-shistory-go-nth">ephy_embed_shistory_go_nth</a>      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             int nth);
+void        <a href="EphyEmbed.html#ephy-embed-get-security-level">ephy_embed_get_security_level</a>   (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             <a href="EphyEmbed.html#EmbedSecurityLevel">EmbedSecurityLevel</a> *level,
+                                             char **description);
+void        <a href="EphyEmbed.html#ephy-embed-set-zoom">ephy_embed_set_zoom</a>             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             float zoom);
+float       <a href="EphyEmbed.html#ephy-embed-get-zoom">ephy_embed_get_zoom</a>             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-find-set-properties">ephy_embed_find_set_properties</a>  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *search_string,
+                                             gboolean case_sensitive,
+                                             gboolean wrap_around);
+gboolean    <a href="EphyEmbed.html#ephy-embed-find-next">ephy_embed_find_next</a>            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean backwards);
+void        <a href="EphyEmbed.html#ephy-embed-set-encoding">ephy_embed_set_encoding</a>         (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *encoding);
+void        <a href="EphyEmbed.html#ephy-embed-print">ephy_embed_print</a>                (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+int         <a href="EphyEmbed.html#ephy-embed-print-preview-n-pages">ephy_embed_print_preview_n_pages</a>
+                                            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+void        <a href="EphyEmbed.html#ephy-embed-print-preview-navigate">ephy_embed_print_preview_navigate</a>
+                                            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             <a href="EphyEmbed.html#EmbedPrintPreviewNavType">EmbedPrintPreviewNavType</a> type,
+                                             int page);
+void        <a href="EphyEmbed.html#ephy-embed-activate">ephy_embed_activate</a>             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+gboolean    <a href="EphyEmbed.html#ephy-embed-has-modified-forms">ephy_embed_has_modified_forms</a>   (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2560246"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GInterface
+   +----EphyEmbed
+</pre></div><div class="refsect1" lang="en"><a name="id2560261"></a><h2>Known Implementations</h2><p>
+EphyEmbed is implemented by
+ MozillaEmbed.</p></div><div class="refsect1" lang="en"><a name="id2560276"></a><h2>Signal Prototypes</h2><pre class="synopsis">
+
+"<a href="EphyEmbed.html#EphyEmbed-ge-content-change">ge-content-change</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *uri,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-context-menu">ge-context-menu</a>"
+            gboolean    user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-dom-mouse-click">ge-dom-mouse-click</a>"
+            gboolean    user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-dom-mouse-down">ge-dom-mouse-down</a>"
+            gboolean    user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-favicon">ge-favicon</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *address,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-location">ge-location</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *address,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-modal-alert">ge-modal-alert</a>"
+            gboolean    user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-modal-alert-closed">ge-modal-alert-closed</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-net-state">ge-net-state</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *uri,
+                                            gint state,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-new-window">ge-new-window</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer new_embed,
+                                            gint mask,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-popup-blocked">ge-popup-blocked</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer address,
+                                            gpointer features,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-security-change">ge-security-change</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gint level,
+                                            gpointer user_data);
+"<a href="EphyEmbed.html#EphyEmbed-ge-zoom-change">ge-zoom-change</a>"
+            void        user_function      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gfloat zoom,
+                                            gpointer user_data);
+</pre></div><div class="refsect1" lang="en"><a name="id2683185"></a><h2>Description</h2><p>
+Each <a href="EphyTab.html" title="EphyTab"><span class="type">EphyTab</span></a> contains an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>. An <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a> is an interface; right now
+it is only implemented by <span class="type">MozillaEmbed</span>, but whenever possible, <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s
+functions should be used instead of their <span class="type">MozillaEmbed</span> equivalents.
+</p><p>
+<a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s most important functions can be divided into sets:
+</p><div class="itemizedlist"><ul type="disc"><li>Functions which affect navigation</li><li>Functions which return information about the displayed web
+page</li><li>Functions which manipulate the session history</li></ul></div><p>The first two sets of functions are self-explanitory.</p><p>The session history functions are used to traverse the embedded browser's
+history. Each <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a> remembers a history of the web pages it has visited.
+There can be a maximum limit, however; for <span class="type">MozillaEmbed</span>, this limit is
+determined by Mozilla's browser.sessionhistory.max_entries preference. Because
+of this limit, <a href="EphyEmbed.html#ephy-embed-shistory-n-items"><tt class="function">ephy_embed_shistory_n_items()</tt></a> will not necessarily return the
+number of web pages visited in the embed's lifetime; likewise,
+<a href="EphyEmbed.html#ephy-embed-shistory-go-nth"><tt class="function">ephy_embed_shistory_go_nth()</tt></a> will not always return to the user's home page
+when called with a 0 argument.</p></div><div class="refsect1" lang="en"><a name="id2683302"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2683308"></a><h3><a name="EphyEmbed-struct"></a>struct EphyEmbed</h3><a class="indexterm" name="id2683316"></a><pre class="programlisting">struct EphyEmbed;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2683326"></a><h3><a name="EphyEmbedIface"></a>struct EphyEmbedIface</h3><a class="indexterm" name="id2683334"></a><pre class="programlisting">struct EphyEmbedIface {
+
+	GTypeInterface base_iface;
+
+	/* Signals that we inherit from gtkmozembed
+	 *
+	 * void (* net_stop)     (GtkMozEmbed *embed);
+	 * void (* title)        (EphyEmbed *embed);
+	 * void (* visibility)   (EphyEmbed *embed,
+	 *			  gboolean visibility);
+	 * void (* destroy_brsr) (EphyEmbed *embed);
+	 * void (* size_to)      (EphyEmbed *embed,
+	 *			  int width,
+	 *			  int height);
+	 * gint (* open_uri)	 (EphyEmbed *embed,
+	 *			  const char *url);
+	 */	
+
+	int	 (* context_menu)	(EphyEmbed *embed,
+					 EphyEmbedEvent *event);
+	void	 (* favicon)		(EphyEmbed *embed,
+					 const char *location);
+	void	 (* location)		(EphyEmbed *embed,
+					 const char *location);
+	void	 (* net_state)		(EphyEmbed *embed,
+					 const char *uri,
+					 EmbedState state);
+	void	 (* new_window)		(EphyEmbed *embed,
+					 EphyEmbed **new_embed,
+					 EphyEmbedChrome chromemask);
+	gboolean (* dom_mouse_click)	(EphyEmbed *embed,
+					 EphyEmbedEvent *event);
+	gboolean (* dom_mouse_down)	(EphyEmbed *embed,
+					 EphyEmbedEvent *event);
+	void	 (* popup_blocked)	(EphyEmbed *embed,
+					 const char *address,
+					 const char *features);
+	void	 (* security_change)	(EphyEmbed *embed,
+					 EmbedSecurityLevel level);
+	void	 (* zoom_change)	(EphyEmbed *embed,
+					 float new_zoom);
+	void	 (* content_change)	(EphyEmbed *embed,
+					 const char *uri);
+	gboolean (* modal_alert)	(EphyEmbed *embed);
+	void	 (* modal_alert_closed)	(EphyEmbed *embed);
+
+	/* Methods  */
+	void		   (* load_url)			(EphyEmbed *embed,
+							 const char *url);
+	void		   (* stop_load)		(EphyEmbed *embed);
+	void		   (* reload)			(EphyEmbed *embed,
+							 gboolean force);
+	gboolean	   (* can_go_back)		(EphyEmbed *embed);
+	gboolean	   (* can_go_forward)		(EphyEmbed *embed);
+	gboolean	   (* can_go_up)		(EphyEmbed *embed);
+	GSList *	   (* get_go_up_list)		(EphyEmbed *embed);
+	void		   (* go_back)			(EphyEmbed *embed);
+	void		   (* go_forward)		(EphyEmbed *embed);
+	void		   (* go_up)			(EphyEmbed *embed);
+
+	char *		   (* get_title)		(EphyEmbed *embed);
+	char *		   (* get_location)		(EphyEmbed *embed,
+							 gboolean toplevel);
+	char *		   (* get_link_message)		(EphyEmbed *embed);
+	char *		   (* get_js_status)		(EphyEmbed *embed);
+	int		   (* shistory_n_items)		(EphyEmbed *embed);
+	void		   (* shistory_get_nth)		(EphyEmbed *embed,
+							 int nth,
+							 gboolean is_relative,
+							 char **url,
+							 char **title);
+	int		   (* shistory_get_pos)		(EphyEmbed *embed);
+	void		   (* shistory_go_nth)		(EphyEmbed *embed,
+							 int nth);
+	void		   (* get_security_level)	(EphyEmbed *embed,
+						  	 EmbedSecurityLevel *level,
+						  	 char **description);
+	void		   (* set_zoom)			(EphyEmbed *embed,
+							 float zoom);
+	float		   (* get_zoom)			(EphyEmbed *embed);
+	void		   (* find_set_properties)	(EphyEmbed *embed,
+							 const char *search_string,
+							 gboolean case_sensitive,
+							 gboolean wrap_around);
+	gboolean	   (* find_next)		(EphyEmbed *embed,
+							 gboolean backwards);
+	char *		   (* get_encoding)		(EphyEmbed *embed);
+	gboolean	   (* has_automatic_encoding)	(EphyEmbed *embed);
+	void		   (* set_encoding)		(EphyEmbed *embed,
+							 const char *encoding);
+	void		   (* print)			(EphyEmbed *embed);
+	void		   (* set_print_preview_mode)	(EphyEmbed *embed,
+							 gboolean mode);
+	int		   (* print_preview_n_pages)	(EphyEmbed *embed);
+	void		   (* print_preview_navigate)	(EphyEmbed *embed,
+							 EmbedPrintPreviewNavType type,
+							 int page);
+	void		   (* activate)			(EphyEmbed *embed);
+	gboolean	   (* has_modified_forms)	(EphyEmbed *embed);
+};
+</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2621655"></a><h3><a name="EmbedState"></a>enum EmbedState</h3><a class="indexterm" name="id2632239"></a><pre class="programlisting">typedef enum
+{
+	EMBED_STATE_UNKNOWN		= 0,
+	EMBED_STATE_START		= 1 &lt;&lt; 0,
+	EMBED_STATE_REDIRECTING		= 1 &lt;&lt; 1,
+	EMBED_STATE_TRANSFERRING	= 1 &lt;&lt; 2,
+	EMBED_STATE_NEGOTIATING		= 1 &lt;&lt; 3,
+	EMBED_STATE_STOP		= 1 &lt;&lt; 4,
+
+	EMBED_STATE_IS_REQUEST		= 1 &lt;&lt; 5,
+	EMBED_STATE_IS_DOCUMENT		= 1 &lt;&lt; 6,
+	EMBED_STATE_IS_NETWORK		= 1 &lt;&lt; 7,
+	EMBED_STATE_IS_WINDOW		= 1 &lt;&lt; 8
+} EmbedState;
+</pre><p>
+Represents the state of an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a> with regards to networking negotiations.
+</p></div><hr><div class="refsect2" lang="en"><a name="id2633212"></a><h3><a name="EphyEmbedChrome"></a>enum EphyEmbedChrome</h3><a class="indexterm" name="id2652979"></a><pre class="programlisting">typedef enum
+{
+	EPHY_EMBED_CHROME_MENUBAR	= 1 &lt;&lt; 0,
+	EPHY_EMBED_CHROME_TOOLBAR	= 1 &lt;&lt; 1,
+	EPHY_EMBED_CHROME_STATUSBAR	= 1 &lt;&lt; 2,
+	EPHY_EMBED_CHROME_BOOKMARKSBAR	= 1 &lt;&lt; 3
+} EphyEmbedChrome;
+</pre><p>
+Determines which aspects of the user interface should be displayed. Most of the
+time, an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s chrome will simply be <tt class="literal">EPHY_EMBED_CHROME_DEFAULT</tt>. However,
+windows opened with JavaScript often use a nonstandard chrome.
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><tt class="literal">EPHY_EMBED_CHROME_MENUBAR</tt></span></td><td><tt class="literal">TRUE</tt> for the <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s containing <a href="EphyWindow.html" title="EphyWindow"><span class="type">EphyWindow</span></a>
+			    to display its menubar.
+</td></tr><tr><td><span class="term"><tt class="literal">EPHY_EMBED_CHROME_TOOLBAR</tt></span></td><td><tt class="literal">TRUE</tt> for the <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s containing <a href="EphyWindow.html" title="EphyWindow"><span class="type">EphyWindow</span></a>
+			    to display its toolbars.
+</td></tr><tr><td><span class="term"><tt class="literal">EPHY_EMBED_CHROME_STATUSBAR</tt></span></td><td><tt class="literal">TRUE</tt> for the <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>'s containing <a href="EphyWindow.html" title="EphyWindow"><span class="type">EphyWindow</span></a>
+			      to display its statusbar.
+</td></tr><tr><td><span class="term"><tt class="literal">EPHY_EMBED_CHROME_BOOKMARKSBAR</tt></span></td><td>
+
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683515"></a><h3><a name="EmbedPrintPreviewNavType"></a>enum EmbedPrintPreviewNavType</h3><a class="indexterm" name="id2683522"></a><pre class="programlisting">typedef enum
+{
+	PRINTPREVIEW_GOTO_PAGENUM	= 0,
+	PRINTPREVIEW_PREV_PAGE		= 1,
+	PRINTPREVIEW_NEXT_PAGE		= 2,
+	PRINTPREVIEW_HOME		= 3,
+	PRINTPREVIEW_END		= 4
+} EmbedPrintPreviewNavType;
+</pre><p>
+Specifies the action to perform in <a href="EphyEmbed.html#ephy-embed-print-preview-navigate"><tt class="function">ephy_embed_print_preview_navigate()</tt></a>.
+</p></div><hr><div class="refsect2" lang="en"><a name="id2683541"></a><h3><a name="EmbedSecurityLevel"></a>enum EmbedSecurityLevel</h3><a class="indexterm" name="id2683548"></a><pre class="programlisting">typedef enum
+{
+	STATE_IS_UNKNOWN,
+	STATE_IS_INSECURE,
+	STATE_IS_BROKEN,
+	STATE_IS_SECURE_MED,
+	STATE_IS_SECURE_LOW,
+	STATE_IS_SECURE_HIGH
+} EmbedSecurityLevel;
+</pre><p>
+Represents the security status of an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>. For example, a page with an
+invalid SSL certificate will have an <a href="EphyEmbed.html#EmbedSecurityLevel"><span class="type">EmbedSecurityLevel</span></a> of <tt class="literal">STATE_IS_BROKEN</tt>.
+</p></div><hr><div class="refsect2" lang="en"><a name="id2683576"></a><h3><a name="ephy-embed-load-url"></a>ephy_embed_load_url ()</h3><a class="indexterm" name="id2683583"></a><pre class="programlisting">void        ephy_embed_load_url             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *url);</pre><p>
+Loads a new web page in <i class="parameter"><tt>embed</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>url</tt></i> :</span></td><td> a URL
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683642"></a><h3><a name="ephy-embed-stop-load"></a>ephy_embed_stop_load ()</h3><a class="indexterm" name="id2683649"></a><pre class="programlisting">void        ephy_embed_stop_load            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+If <i class="parameter"><tt>embed</tt></i> is loading, stops it from continuing.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683693"></a><h3><a name="ephy-embed-reload"></a>ephy_embed_reload ()</h3><a class="indexterm" name="id2683701"></a><pre class="programlisting">void        ephy_embed_reload               (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean force);</pre><p>
+Reloads the web page being displayed in <i class="parameter"><tt>embed</tt></i>.
+</p><p>
+If <i class="parameter"><tt>force</tt></i> is <tt class="literal">TRUE</tt>, cache and proxy will be bypassed when
+reloading the page.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>force</tt></i> :</span></td><td> <tt class="literal">TRUE</tt> to bypass cache
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683778"></a><h3><a name="ephy-embed-get-title"></a>ephy_embed_get_title ()</h3><a class="indexterm" name="id2683787"></a><pre class="programlisting">char*       ephy_embed_get_title            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the title of the web page displayed in <i class="parameter"><tt>embed</tt></i>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683843"></a><h3><a name="ephy-embed-get-location"></a>ephy_embed_get_location ()</h3><a class="indexterm" name="id2683851"></a><pre class="programlisting">char*       ephy_embed_get_location         (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean toplevel);</pre><p>
+Returns the URL of the web page displayed in <i class="parameter"><tt>embed</tt></i>.
+</p><p>
+If the web page contains frames, <i class="parameter"><tt>toplevel</tt></i> will determine which location to
+retrieve. If <i class="parameter"><tt>toplevel</tt></i> is <tt class="literal">TRUE</tt>, the return value will be the location of the
+frameset document. If <i class="parameter"><tt>toplevel</tt></i> is <tt class="literal">FALSE</tt>, the return value will be the
+location of the currently-focused frame.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>toplevel</tt></i> :</span></td><td> <tt class="literal">FALSE</tt> to return the location of the focused frame only
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the URL of the web page displayed in <i class="parameter"><tt>embed</tt></i>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2683955"></a><h3><a name="ephy-embed-get-link-message"></a>ephy_embed_get_link_message ()</h3><a class="indexterm" name="id2683964"></a><pre class="programlisting">char*       ephy_embed_get_link_message     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+When the user is hovering the mouse over a hyperlink, returns the URL of the
+hyperlink.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the URL of the link over which the mouse is hovering
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684019"></a><h3><a name="ephy-embed-get-js-status"></a>ephy_embed_get_js_status ()</h3><a class="indexterm" name="id2684028"></a><pre class="programlisting">char*       ephy_embed_get_js_status        (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Displays the message JavaScript is attempting to display in the statusbar.
+</p><p>
+Note that Epiphany does not display JavaScript statusbar messages.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a message from JavaScript meant to be displayed in the
+              statusbar
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684088"></a><h3><a name="ephy-embed-can-go-back"></a>ephy_embed_can_go_back ()</h3><a class="indexterm" name="id2684096"></a><pre class="programlisting">gboolean    ephy_embed_can_go_back          (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>embed</tt></i> can return to a previously-visited location
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684156"></a><h3><a name="ephy-embed-can-go-forward"></a>ephy_embed_can_go_forward ()</h3><a class="indexterm" name="id2684165"></a><pre class="programlisting">gboolean    ephy_embed_can_go_forward       (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>embed</tt></i> has gone back, and can thus go forward again
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684225"></a><h3><a name="ephy-embed-can-go-up"></a>ephy_embed_can_go_up ()</h3><a class="indexterm" name="id2684233"></a><pre class="programlisting">gboolean    ephy_embed_can_go_up            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns whether <i class="parameter"><tt>embed</tt></i> can travel to a higher-level directory on the server.
+For example, for http://www.example.com/subdir/index.html, returns <tt class="literal">TRUE</tt>; for
+http://www.example.com/index.html, returns <tt class="literal">FALSE</tt>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>embed</tt></i> can browse to a higher-level directory
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684305"></a><h3><a name="ephy-embed-get-go-up-list"></a>ephy_embed_get_go_up_list ()</h3><a class="indexterm" name="id2684313"></a><pre class="programlisting">GSList*     ephy_embed_get_go_up_list       (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns a list of (<tt class="literal">char</tt> *) URLs to higher-level directories on the same
+server, in order of deepest to shallowest. For example, given
+"http://www.example.com/dir/subdir/file.html", will return a list containing
+"http://www.example.com/dir/subdir/", "http://www.example.com/dir/" and
+"http://www.example.com/".</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a list of URLs higher up in <i class="parameter"><tt>embed</tt></i>'s web page's directory
+hierarchy
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684378"></a><h3><a name="ephy-embed-go-back"></a>ephy_embed_go_back ()</h3><a class="indexterm" name="id2684386"></a><pre class="programlisting">void        ephy_embed_go_back              (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Causes <i class="parameter"><tt>embed</tt></i> to return to the previously-visited web page.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684433"></a><h3><a name="ephy-embed-go-forward"></a>ephy_embed_go_forward ()</h3><a class="indexterm" name="id2684442"></a><pre class="programlisting">void        ephy_embed_go_forward           (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+If <i class="parameter"><tt>embed</tt></i> has returned to a previously-visited web page, proceed forward to
+the next page.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684490"></a><h3><a name="ephy-embed-go-up"></a>ephy_embed_go_up ()</h3><a class="indexterm" name="id2684498"></a><pre class="programlisting">void        ephy_embed_go_up                (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Moves <i class="parameter"><tt>embed</tt></i> one level up in its web page's directory hierarchy.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684545"></a><h3><a name="ephy-embed-shistory-n-items"></a>ephy_embed_shistory_n_items ()</h3><a class="indexterm" name="id2684554"></a><pre class="programlisting">int         ephy_embed_shistory_n_items     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns the number of items in <i class="parameter"><tt>embed</tt></i>'s history. In other words, returns the
+number of pages <i class="parameter"><tt>embed</tt></i> has visited.
+</p><p>
+The number is upper-bound by Mozilla's browser.sessionhistory.max_entries
+preference.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the number of items in <i class="parameter"><tt>embed</tt></i>'s history
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684622"></a><h3><a name="ephy-embed-shistory-get-nth"></a>ephy_embed_shistory_get_nth ()</h3><a class="indexterm" name="id2684630"></a><pre class="programlisting">void        ephy_embed_shistory_get_nth     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             int nth,
+                                             gboolean is_relative,
+                                             char **url,
+                                             char **title);</pre><p>
+Fetches the <i class="parameter"><tt>url</tt></i> and <i class="parameter"><tt>title</tt></i> of the <i class="parameter"><tt>nth</tt></i> item in <i class="parameter"><tt>embed</tt></i>'s session history.
+If <i class="parameter"><tt>is_relative</tt></i> is <tt class="literal">TRUE</tt>, <i class="parameter"><tt>nth</tt></i> is an offset from the browser's current
+history position. For example, calling this function with <i class="parameter"><tt>is_relative</tt></i> <tt class="literal">TRUE</tt>
+and <i class="parameter"><tt>nth</tt></i> <tt class="literal">0</tt> will return the URL and title of the current page.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>nth</tt></i> :</span></td><td> index of the desired page in <i class="parameter"><tt>embed</tt></i>'s browser history
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>is_relative</tt></i> :</span></td><td> if <tt class="literal">TRUE</tt>, add <i class="parameter"><tt>embed</tt></i>'s current history position to <i class="parameter"><tt>nth</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>url</tt></i> :</span></td><td> returned value of the history entry's URL
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>title</tt></i> :</span></td><td> returned value of the history entry's title
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684793"></a><h3><a name="ephy-embed-shistory-get-pos"></a>ephy_embed_shistory_get_pos ()</h3><a class="indexterm" name="id2684801"></a><pre class="programlisting">int         ephy_embed_shistory_get_pos     (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns <i class="parameter"><tt>embed</tt></i>'s current position in its history. If the user never uses the
+"Back" button, this number will be the same as the return value of
+<a href="EphyEmbed.html#ephy-embed-shistory-n-items"><tt class="function">ephy_embed_shistory_n_items()</tt></a>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <i class="parameter"><tt>embed</tt></i>'s current position in its history
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684869"></a><h3><a name="ephy-embed-shistory-go-nth"></a>ephy_embed_shistory_go_nth ()</h3><a class="indexterm" name="id2684877"></a><pre class="programlisting">void        ephy_embed_shistory_go_nth      (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             int nth);</pre><p>
+Opens the webpage at location <i class="parameter"><tt>nth</tt></i> in <i class="parameter"><tt>embed</tt></i>'s history.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>nth</tt></i> :</span></td><td> desired history index
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2684944"></a><h3><a name="ephy-embed-get-security-level"></a>ephy_embed_get_security_level ()</h3><a class="indexterm" name="id2684952"></a><pre class="programlisting">void        ephy_embed_get_security_level   (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             <a href="EphyEmbed.html#EmbedSecurityLevel">EmbedSecurityLevel</a> *level,
+                                             char **description);</pre><p>
+Fetches the <a href="EphyEmbed.html#EmbedSecurityLevel"><span class="type">EmbedSecurityLevel</span></a> and a newly-allocated string description
+of the security state of <i class="parameter"><tt>embed</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>level</tt></i> :</span></td><td> return value of security level
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>description</tt></i> :</span></td><td> return value of the description of the security level
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685041"></a><h3><a name="ephy-embed-set-zoom"></a>ephy_embed_set_zoom ()</h3><a class="indexterm" name="id2685050"></a><pre class="programlisting">void        ephy_embed_set_zoom             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             float zoom);</pre><p>
+Sets the zoom level for a web page.
+</p><p>
+Zoom is normally controlled by the Epiphany itself and remembered in
+Epiphany's history data. Be very careful not to break this behavior if using
+this function; better yet, don't use this function at all.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>zoom</tt></i> :</span></td><td> the new zoom level
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685116"></a><h3><a name="ephy-embed-get-zoom"></a>ephy_embed_get_zoom ()</h3><a class="indexterm" name="id2685125"></a><pre class="programlisting">float       ephy_embed_get_zoom             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns the zoom level of <i class="parameter"><tt>embed</tt></i>. A zoom of 1.0 corresponds to 100% (normal
+size).</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the zoom level of <i class="parameter"><tt>embed</tt></i>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685185"></a><h3><a name="ephy-embed-find-set-properties"></a>ephy_embed_find_set_properties ()</h3><a class="indexterm" name="id2685193"></a><pre class="programlisting">void        ephy_embed_find_set_properties  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *search_string,
+                                             gboolean case_sensitive,
+                                             gboolean wrap_around);</pre><p>
+Sets the properties of <i class="parameter"><tt>embed</tt></i>'s "Find" dialog.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>search_string</tt></i> :</span></td><td> the desired search string
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>case_sensitive</tt></i> :</span></td><td> <tt class="literal">TRUE</tt> for "case sensitive" to be set
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>wrap_around</tt></i> :</span></td><td> <tt class="literal">TRUE</tt> for "wrap around" to be set
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685297"></a><h3><a name="ephy-embed-find-next"></a>ephy_embed_find_next ()</h3><a class="indexterm" name="id2685306"></a><pre class="programlisting">gboolean    ephy_embed_find_next            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             gboolean backwards);</pre><p>
+Equivalent to pressing "Next" in <i class="parameter"><tt>embed</tt></i>'s Find dialog.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>backwards</tt></i> :</span></td><td> <tt class="literal">FALSE</tt> to search forwards in the document
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if a next match was found
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685385"></a><h3><a name="ephy-embed-set-encoding"></a>ephy_embed_set_encoding ()</h3><a class="indexterm" name="id2685394"></a><pre class="programlisting">void        ephy_embed_set_encoding         (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             const char *encoding);</pre><p>
+Sets <i class="parameter"><tt>embed</tt></i>'s character encoding to <i class="parameter"><tt>encoding</tt></i>. These cryptic encoding
+strings are listed in <tt class="filename">embed/ephy-encodings.c</tt>.
+</p><p>
+Pass an empty string (not NULL) in <i class="parameter"><tt>encoding</tt></i> to reset <i class="parameter"><tt>embed</tt></i> to use the
+document-specified encoding.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>encoding</tt></i> :</span></td><td> the desired encoding
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685474"></a><h3><a name="ephy-embed-print"></a>ephy_embed_print ()</h3><a class="indexterm" name="id2685482"></a><pre class="programlisting">void        ephy_embed_print                (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Sends a document to the printer.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685526"></a><h3><a name="ephy-embed-print-preview-n-pages"></a>ephy_embed_print_preview_n_pages ()</h3><a class="indexterm" name="id2685534"></a><pre class="programlisting">int         ephy_embed_print_preview_n_pages
+                                            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns the number of pages which would appear in <i class="parameter"><tt>embed</tt></i>'s loaded document
+if it were to be printed.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the number of pages in <i class="parameter"><tt>embed</tt></i>'s loaded document
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685597"></a><h3><a name="ephy-embed-print-preview-navigate"></a>ephy_embed_print_preview_navigate ()</h3><a class="indexterm" name="id2685606"></a><pre class="programlisting">void        ephy_embed_print_preview_navigate
+                                            (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                             <a href="EphyEmbed.html#EmbedPrintPreviewNavType">EmbedPrintPreviewNavType</a> type,
+                                             int page);</pre><p>
+Navigates <i class="parameter"><tt>embed</tt></i>'s print preview.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td> an <span class="type">EphyPrintPreviewNavType</span> which determines where to navigate
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>page</tt></i> :</span></td><td> if <i class="parameter"><tt>type</tt></i> is <tt class="literal">PRINTPREVIEW_GOTO_PAGENUM</tt>, the desired page number
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685701"></a><h3><a name="ephy-embed-activate"></a>ephy_embed_activate ()</h3><a class="indexterm" name="id2685709"></a><pre class="programlisting">void        ephy_embed_activate             (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Gives focus to <i class="parameter"><tt>embed</tt></i> (i.e., Mozilla).</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685756"></a><h3><a name="ephy-embed-has-modified-forms"></a>ephy_embed_has_modified_forms ()</h3><a class="indexterm" name="id2685768"></a><pre class="programlisting">gboolean    ephy_embed_has_modified_forms   (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed);</pre><p>
+Returns <tt class="literal">TRUE</tt> if the user has modified &lt;input&gt; or &lt;textarea&gt;
+values in <i class="parameter"><tt>embed</tt></i>'s loaded document.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td> an <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>embed</tt></i> has user-modified forms
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2685837"></a><h2>Signals</h2><div class="refsect2" lang="en"><a name="id2685842"></a><h3><a name="EphyEmbed-ge-content-change"></a>The "ge-content-change" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *uri,
+                                            gpointer user_data);</pre><p>
+The ::ge_content_change signal is emitted when a new page content
+is being loadedinto the browser. It's a good place to do view
+related changes, for example to restore the zoom level of a page
+or to set an user style sheet.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>uri</tt></i> :</span></td><td> URI of the new content
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2685922"></a><h3><a name="EphyEmbed-ge-context-menu"></a>The "ge-context-menu" signal</h3><pre class="programlisting">gboolean    user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);</pre><p>
+The ::ge_context_menu signal is emitted when a context menu is to be
+displayed. This will usually happen when the user right-clicks on a part of
+<i class="parameter"><tt>embed</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>event</tt></i> :</span></td><td> the <span class="type">EphyEmbedEvent</span> which triggered this signal
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686012"></a><h3><a name="EphyEmbed-ge-dom-mouse-click"></a>The "ge-dom-mouse-click" signal</h3><pre class="programlisting">gboolean    user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);</pre><p>
+The ::ge_dom_mouse_click signal is emitted when the user clicks in <i class="parameter"><tt>embed</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>event</tt></i> :</span></td><td> the <span class="type">EphyEmbedEvent</span> which triggered this signal
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686121"></a><h3><a name="EphyEmbed-ge-dom-mouse-down"></a>The "ge-dom-mouse-down" signal</h3><pre class="programlisting">gboolean    user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            GObject *event,
+                                            gpointer user_data);</pre><p>
+The ::ge_dom_mouse_down signal is emitted when the user depresses a mouse
+button.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>event</tt></i> :</span></td><td> the <span class="type">EphyEmbedEvent</span> which triggered this signal
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686227"></a><h3><a name="EphyEmbed-ge-favicon"></a>The "ge-favicon" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *address,
+                                            gpointer user_data);</pre><p>
+The ::ge_favicon signal is emitted when <i class="parameter"><tt>embed</tt></i> discovers that a favourite
+icon (favicon) is available for the site it is visiting.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>address</tt></i> :</span></td><td> the URL to <i class="parameter"><tt>embed</tt></i>'s web site's favicon
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686332"></a><h3><a name="EphyEmbed-ge-location"></a>The "ge-location" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *address,
+                                            gpointer user_data);</pre><p>
+The ::ge_location signal is emitted when <i class="parameter"><tt>embed</tt></i> begins to load a new web
+page. For example, if the user clicks on a link or enters an address or if
+the previous web page had JavaScript or a META REFRESH tag.
+</p><p>
+The ::ge_location signal will be emitted even when <i class="parameter"><tt>embed</tt></i> is simply
+refreshing the same web page.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>address</tt></i> :</span></td><td> the new URL <i class="parameter"><tt>embed</tt></i> is visiting
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686449"></a><h3><a name="EphyEmbed-ge-modal-alert"></a>The "ge-modal-alert" signal</h3><pre class="programlisting">gboolean    user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer user_data);</pre><p>
+The ::ge-modal-alert signal is emitted when a DOM event will open a
+modal alert.
+</p><p>
+Return <tt class="literal">TRUE</tt> to prevent the dialog from being opened.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686534"></a><h3><a name="EphyEmbed-ge-modal-alert-closed"></a>The "ge-modal-alert-closed" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer user_data);</pre><p>
+The ::ge-modal-alert-closed signal is emitted when a modal alert put up by a
+DOM event was closed.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686610"></a><h3><a name="EphyEmbed-ge-net-state"></a>The "ge-net-state" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gchar *uri,
+                                            gint state,
+                                            gpointer user_data);</pre><p>
+The ::ge_net_state signal is emitted when <i class="parameter"><tt>embed</tt></i>'s network negotiation state
+changes. For example, this will indicate when page loading is complete or
+cancelled.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>uri</tt></i> :</span></td><td> the URI <i class="parameter"><tt>embed</tt></i> is loading
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td> the <a href="EphyEmbed.html#EmbedState"><span class="type">EmbedState</span></a> of <i class="parameter"><tt>embed</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686749"></a><h3><a name="EphyEmbed-ge-new-window"></a>The "ge-new-window" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer new_embed,
+                                            gint mask,
+                                            gpointer user_data);</pre><p>
+The ::ge_new_window signal is emitted when a new window has been opened by
+the embed. For example, when a JavaScript popup window is opened.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>new_embed</tt></i> :</span></td><td> a newly-generated child <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>mask</tt></i> :</span></td><td> <i class="parameter"><tt>new_embed</tt></i>'s <span class="type">EphyChromeMask</span>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2686888"></a><h3><a name="EphyEmbed-ge-popup-blocked"></a>The "ge-popup-blocked" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gpointer address,
+                                            gpointer features,
+                                            gpointer user_data);</pre><p>
+The ::ge_popup_blocked signal is emitted when the viewed web page requests
+a popup window (with javascript:<tt class="function">open()</tt>) but popup windows are not allowed.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>address</tt></i> :</span></td><td> The requested URL
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>features</tt></i> :</span></td><td> The requested features: for example, "height=400,width=200"
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2687016"></a><h3><a name="EphyEmbed-ge-security-change"></a>The "ge-security-change" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gint level,
+                                            gpointer user_data);</pre><p>
+The ::ge_security_change signal is emitted when the security level of <i class="parameter"><tt>embed</tt></i>
+changes. For example, this will happen when the user browses from an
+insecure website to an SSL-secured one.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>level</tt></i> :</span></td><td> <i class="parameter"><tt>embed</tt></i>'s new <a href="EphyEmbed.html#EmbedSecurityLevel"><span class="type">EmbedSecurityLevel</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2687131"></a><h3><a name="EphyEmbed-ge-zoom-change"></a>The "ge-zoom-change" signal</h3><pre class="programlisting">void        user_function                  (<a href="EphyEmbed.html" title="EphyEmbed">EphyEmbed</a> *embed,
+                                            gfloat zoom,
+                                            gpointer user_data);</pre><p>
+The ::ge_zoom_change signal is emitted when <i class="parameter"><tt>embed</tt></i>'s zoom changes. This can
+be manual (the user modified the zoom level) or automatic (<i class="parameter"><tt>embed</tt></i>'s zoom is
+automatically changed when browsing to a new site for which the user
+previously specified a zoom level).
+</p><p>
+A <i class="parameter"><tt>zoom</tt></i> value of 1.0 indicates 100% (normal zoom).</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>embed</tt></i> :</span></td><td>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>zoom</tt></i> :</span></td><td> <i class="parameter"><tt>embed</tt></i>'s new zoom level
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2687254"></a><h2>See Also</h2><p>
+Using <a href="EphyEmbed.html" title="EphyEmbed"><span class="type">EphyEmbed</span></a> instead of <span class="type">MozillaEmbed</span> is good practice. However, using a
+<span class="type">MozillaEmbed</span> or even a <span class="type">GtkMozEmbed</span> may be necessary in certain cases (this can
+be done by casting).
+</p></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EphyTab.html"><b>&lt;&lt; EphyTab</b></a></td><td align="right"><a accesskey="n" href="EphyCommandManager.html"><b>EphyCommandManager &gt;&gt;</b></a></td></tr></table></body></html>

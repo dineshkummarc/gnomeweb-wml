@@ -1,0 +1,171 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyNodeDb</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="epiphany-EphyEmbedFactory.html" title="EphyEmbedFactory"><link rel="next" href="epiphany-EphyGlade.html" title="EphyGlade"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="epiphany-EphyEmbedFactory.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="epiphany-EphyGlade.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EphyNodeDb"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyNodeDb</span></h2><p>EphyNodeDb &#8212; Data tree</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+struct      <a href="EphyNodeDb.html#EphyNodeDb-struct">EphyNodeDb</a>;
+<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a>* <a href="EphyNodeDb.html#ephy-node-db-get-by-name">ephy_node_db_get_by_name</a>        (const char *name);
+<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a>* <a href="EphyNodeDb.html#ephy-node-db-new">ephy_node_db_new</a>                (const char *name);
+gboolean    <a href="EphyNodeDb.html#ephy-node-db-load-from-file">ephy_node_db_load_from_file</a>     (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             const char *xml_file,
+                                             const xmlChar *xml_root,
+                                             const xmlChar *xml_version);
+int         <a href="EphyNodeDb.html#ephy-node-db-write-to-xml-safe">ephy_node_db_write_to_xml_safe</a>  (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             const xmlChar *filename,
+                                             const xmlChar *root,
+                                             const xmlChar *version,
+                                             const xmlChar *comment,
+                                             EphyNode *node,
+                                             ...);
+const char* <a href="EphyNodeDb.html#ephy-node-db-get-name">ephy_node_db_get_name</a>           (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db);
+gboolean    <a href="EphyNodeDb.html#ephy-node-db-is-immutable">ephy_node_db_is_immutable</a>       (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db);
+void        <a href="EphyNodeDb.html#ephy-node-db-set-immutable">ephy_node_db_set_immutable</a>      (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             gboolean immutable);
+EphyNode*   <a href="EphyNodeDb.html#ephy-node-db-get-node-from-id">ephy_node_db_get_node_from_id</a>   (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             guint id);
+
+</pre></div><div class="refsect1" lang="en"><a name="id2642649"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+
+  GObject
+   +----EphyNodeDb
+</pre></div><div class="refsect1" lang="en"><a name="id2642664"></a><h2>Properties</h2><pre class="synopsis">
+
+  "<a href="EphyNodeDb.html#EphyNodeDb--immutable">immutable</a>"            gboolean             : Read / Write
+  "<a href="EphyNodeDb.html#EphyNodeDb--name">name</a>"                 gchararray           : Read / Write
+</pre></div><div class="refsect1" lang="en"><a name="id2642694"></a><h2>Description</h2><p>
+An <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a> is a database for arbitrary data organized in a tree.
+</p><p>
+Each database is stored along with its name in a global set of databases.
+Databases can be created using <a href="EphyNodeDb.html#ephy-node-db-new"><tt class="function">ephy_node_db_new()</tt></a> and retrieved using
+<a href="EphyNodeDb.html#ephy-node-db-get-by-name"><tt class="function">ephy_node_db_get_by_name()</tt></a>.
+</p><p>
+Each <span class="type">EphyNode</span> inside an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a> is identified by a unique node ID. By
+keeping a handle on the ID, one can use <a href="EphyNodeDb.html#ephy-node-db-get-node-from-id"><tt class="function">ephy_node_db_get_node_from_id()</tt></a> to
+retrieve its corresponding <span class="type">EphyNode</span>.
+</p><p>
+<a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>s can be saved to disk using <a href="EphyNodeDb.html#ephy-node-db-write-to-xml-safe"><tt class="function">ephy_node_db_write_to_xml_safe()</tt></a>
+and restored using <a href="EphyNodeDb.html#ephy-node-db-load-from-file"><tt class="function">ephy_node_db_load_from_file()</tt></a>.
+</p></div><div class="refsect1" lang="en"><a name="id2678190"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2678195"></a><h3><a name="EphyNodeDb-struct"></a>struct EphyNodeDb</h3><a class="indexterm" name="id2678204"></a><pre class="programlisting">struct EphyNodeDb;</pre><p>
+
+</p></div><hr><div class="refsect2" lang="en"><a name="id2678213"></a><h3><a name="ephy-node-db-get-by-name"></a>ephy_node_db_get_by_name ()</h3><a class="indexterm" name="id2678222"></a><pre class="programlisting"><a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a>* ephy_node_db_get_by_name        (const char *name);</pre><p>
+Returns the <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a> named <i class="parameter"><tt>name</tt></i>, or <tt class="literal">NULL</tt> if no such database exists.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td> the name of the desired <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2678294"></a><h3><a name="ephy-node-db-new"></a>ephy_node_db_new ()</h3><a class="indexterm" name="id2678302"></a><pre class="programlisting"><a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a>* ephy_node_db_new                (const char *name);</pre><p>
+Creates and returns a new <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>, named <i class="parameter"><tt>name</tt></i>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td> the name of the new <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the new <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2678371"></a><h3><a name="ephy-node-db-load-from-file"></a>ephy_node_db_load_from_file ()</h3><a class="indexterm" name="id2678380"></a><pre class="programlisting">gboolean    ephy_node_db_load_from_file     (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             const char *xml_file,
+                                             const xmlChar *xml_root,
+                                             const xmlChar *xml_version);</pre><p>
+Populates <i class="parameter"><tt>db</tt></i> with data from <i class="parameter"><tt>xml_file</tt></i>. The node database will be populated
+with everything inside of the <i class="parameter"><tt>xml_root</tt></i> tag from <i class="parameter"><tt>xml_file</tt></i>. If <i class="parameter"><tt>xml_version</tt></i>
+is different from the version attribute of the <i class="parameter"><tt>xml_root</tt></i> element, this
+function will fail.
+</p><p>
+The data will most probably have been stored using
+<a href="EphyNodeDb.html#ephy-node-db-write-to-xml-safe"><tt class="function">ephy_node_db_write_to_xml_safe()</tt></a>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> a new <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>xml_file</tt></i> :</span></td><td> the filename from which <i class="parameter"><tt>db</tt></i> will be populated
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>xml_root</tt></i> :</span></td><td> the root element in <i class="parameter"><tt>xml_file</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>xml_version</tt></i> :</span></td><td> the required version attribute in the <i class="parameter"><tt>xml_root</tt></i>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if successful
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2659855"></a><h3><a name="ephy-node-db-write-to-xml-safe"></a>ephy_node_db_write_to_xml_safe ()</h3><a class="indexterm" name="id2659866"></a><pre class="programlisting">int         ephy_node_db_write_to_xml_safe  (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             const xmlChar *filename,
+                                             const xmlChar *root,
+                                             const xmlChar *version,
+                                             const xmlChar *comment,
+                                             EphyNode *node,
+                                             ...);</pre><p>
+Writes <i class="parameter"><tt>db</tt></i>'s data to an XML file for storage. The data can be retrieved in
+the future using <a href="EphyNodeDb.html#ephy-node-db-load-from-file"><tt class="function">ephy_node_db_load_from_file()</tt></a>.
+</p><p>
+The function arguments are straightforward until <i class="parameter"><tt>node</tt></i>, at which point some
+explanation is necessary.
+</p><p>
+The variable argument list starts at <i class="parameter"><tt>node</tt></i>, which is an <span class="type">EphyNode</span> containing
+data to write to <i class="parameter"><tt>filename</tt></i>. The next argument is an integer specifying the
+number of &#8220;<span class="quote">exception</span>&#8221; nodes. After this integer, that number of
+<span class="type">EphyNode</span> arguments should be given. Each of these &#8220;<span class="quote">exception</span>&#8221;
+nodes determines which data out of <i class="parameter"><tt>node</tt></i> will <span class="emphasis"><em>not</em></span> be
+written to <i class="parameter"><tt>filename</tt></i>.
+</p><p>
+To insert all of an <span class="type">EphyNode</span>'s contents without exception, simply give the
+integer <tt class="literal">0</tt> after <i class="parameter"><tt>node</tt></i>.
+</p><p>
+The remainder of this function's arguments will be groups of such <span class="type">EphyNode</span> -
+integer - (list of <span class="type">EphyNode</span>s). Finally, the last argument must be
+<tt class="literal">NULL</tt>.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i> :</span></td><td> the XML file in which <i class="parameter"><tt>db</tt></i>'s data will be stored
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>root</tt></i> :</span></td><td> the desired root element in <i class="parameter"><tt>filename</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>version</tt></i> :</span></td><td> the version attribute to the <i class="parameter"><tt>root</tt></i> element
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>comment</tt></i> :</span></td><td> a comment to place directly inside the <i class="parameter"><tt>root</tt></i> element of <i class="parameter"><tt>filename</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>node</tt></i> :</span></td><td> The first node of data to write
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>...</tt></i> :</span></td><td> number of exceptions, list of their <span class="type">EphyNodes</span>, and more such
+	     sequences, followed by <tt class="literal">NULL</tt>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">0</tt> on success or a negative number on failure
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2690204"></a><h3><a name="ephy-node-db-get-name"></a>ephy_node_db_get_name ()</h3><a class="indexterm" name="id2690213"></a><pre class="programlisting">const char* ephy_node_db_get_name           (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the name of <i class="parameter"><tt>db</tt></i>
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2690270"></a><h3><a name="ephy-node-db-is-immutable"></a>ephy_node_db_is_immutable ()</h3><a class="indexterm" name="id2690279"></a><pre class="programlisting">gboolean    ephy_node_db_is_immutable       (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db);</pre><p>
+</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <tt class="literal">TRUE</tt> if <i class="parameter"><tt>db</tt></i> is immutable
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2690339"></a><h3><a name="ephy-node-db-set-immutable"></a>ephy_node_db_set_immutable ()</h3><a class="indexterm" name="id2690348"></a><pre class="programlisting">void        ephy_node_db_set_immutable      (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             gboolean immutable);</pre><p>
+If <i class="parameter"><tt>immutable</tt></i> is <tt class="literal">TRUE</tt>, sets <i class="parameter"><tt>db</tt></i> immutable (read-only). Otherwise, sets <i class="parameter"><tt>db</tt></i>
+to be read-write.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>immutable</tt></i> :</span></td><td> <tt class="literal">TRUE</tt> to make <i class="parameter"><tt>db</tt></i> immutable
+</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2690398"></a><h3><a name="ephy-node-db-get-node-from-id"></a>ephy_node_db_get_node_from_id ()</h3><a class="indexterm" name="id2690405"></a><pre class="programlisting">EphyNode*   ephy_node_db_get_node_from_id   (<a href="EphyNodeDb.html" title="EphyNodeDb">EphyNodeDb</a> *db,
+                                             guint id);</pre><p>
+Returns the <span class="type">EphyNode</span> with id <i class="parameter"><tt>id</tt></i> from <i class="parameter"><tt>db</tt></i>, or <tt class="literal">NULL</tt> if no such id exists.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>db</tt></i> :</span></td><td> an <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>id</tt></i> :</span></td><td> an id specifying an <span class="type">EphyNode</span> in <i class="parameter"><tt>db</tt></i>
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> an <span class="type">EphyNode</span>
+</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2690499"></a><h2>Properties</h2><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><a name="EphyNodeDb--immutable"></a>"<tt class="literal">immutable</tt>" (gboolean : Read / Write)</span></td><td><p>
+<tt class="literal">TRUE</tt> if no <span class="type">EphyNode</span>s can be added, removed or modified from this
+<a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</p></td></tr><tr><td><span class="term"><a name="EphyNodeDb--name"></a>"<tt class="literal">name</tt>" (gchararray : Read / Write)</span></td><td><p>
+A string identifier unique to this <a href="EphyNodeDb.html" title="EphyNodeDb"><span class="type">EphyNodeDb</span></a>
+</p></td></tr></tbody></table></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="epiphany-EphyEmbedFactory.html"><b>&lt;&lt; EphyEmbedFactory</b></a></td><td align="right"><a accesskey="n" href="epiphany-EphyGlade.html"><b>EphyGlade &gt;&gt;</b></a></td></tr></table></body></html>

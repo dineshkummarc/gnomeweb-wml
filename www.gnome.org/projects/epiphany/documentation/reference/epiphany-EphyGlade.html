@@ -1,0 +1,68 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EphyGlade</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Epiphany Reference Manual"><link rel="up" href="ch01.html" title="Epiphany"><link rel="previous" href="EphyNodeDb.html" title="EphyNodeDb"><link rel="next" href="ch02.html" title="Incomplete"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><style type="text/css">
+        .synopsis, .classsynopsis {
+            background: #eeeeee;
+            border: solid 1px #aaaaaa;
+            padding: 0.5em;
+        }
+        .programlisting {
+            background: #eeeeff;
+            border: solid 1px #aaaaff;
+            padding: 0.5em;
+        }
+        .variablelist {
+            padding: 4px;
+            margin-left: 3em;
+        }
+        .navigation {
+            background: #ffeeee;
+            border: solid 1px #ffaaaa;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+        .navigation a {
+            color: #770000;
+        }
+        .navigation a:visited {
+            color: #550000;
+        }
+        .navigation .title {
+            font-size: 200%;
+        }
+      </style></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="EphyNodeDb.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Epiphany Reference Manual</th><td><a accesskey="n" href="ch02.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="epiphany-EphyGlade"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EphyGlade</span></h2><p>EphyGlade &#8212; Load a glade XML definition</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+
+
+
+GladeXML*   <a href="epiphany-EphyGlade.html#ephy-glade-widget-new">ephy_glade_widget_new</a>           (const char *file,
+                                             const char *widget_name,
+                                             GtkWidget **root,
+                                             gpointer data,
+                                             const char *domain);
+</pre></div><div class="refsect1" lang="en"><a name="id2619923"></a><h2>Description</h2><p>
+Epiphany has its own convenience wrapper around <tt class="function">glade_xml_new()</tt> which will
+automatically connect all a widget's signals and return the <span class="type">GtkWidget</span> root
+object.
+</p><p>
+After retrieving a <span class="type">GladeXML</span> object from <a href="epiphany-EphyGlade.html#ephy-glade-widget-new"><tt class="function">ephy_glade_widget_new()</tt></a>, regular
+<span class="type">GladeXML</span> functions can be called on that object.
+</p></div><div class="refsect1" lang="en"><a name="id2687712"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2687717"></a><h3><a name="ephy-glade-widget-new"></a>ephy_glade_widget_new ()</h3><a class="indexterm" name="id2687726"></a><pre class="programlisting">GladeXML*   ephy_glade_widget_new           (const char *file,
+                                             const char *widget_name,
+                                             GtkWidget **root,
+                                             gpointer data,
+                                             const char *domain);</pre><p>
+Builds a new <span class="type">GladeXML</span> object from the given <i class="parameter"><tt>file</tt></i> with root widget
+<i class="parameter"><tt>widget_name</tt></i>. The widget can also be aquired by passing <i class="parameter"><tt>root</tt></i>, a pointer
+to a <span class="type">GtkWidget</span> pointer.
+</p><p>
+The signal callbacks underneath the desired root widget in <i class="parameter"><tt>file</tt></i> will all be
+automatically connected; the callback data will be <i class="parameter"><tt>data</tt></i>.
+</p><p>
+Libglade automatically caches <i class="parameter"><tt>file</tt></i>; it is not inefficient to call
+<a href="epiphany-EphyGlade.html#ephy-glade-widget-new"><tt class="function">ephy_glade_widget_new()</tt></a> several times on the same XML file.</p><p>
+
+</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>file</tt></i> :</span></td><td> a Glade XML file
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>widget_name</tt></i> :</span></td><td> the name of a widget within <i class="parameter"><tt>file</tt></i>
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>root</tt></i> :</span></td><td> the returned root <span class="type">GtkWidget</span> pointer, or <tt class="literal">NULL</tt> if not wanted
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td> callback data to connect to all <i class="parameter"><tt>root</tt></i>'s signal callbacks
+</td></tr><tr><td><span class="term"><i class="parameter"><tt>domain</tt></i> :</span></td><td> the translation domain for the XML file (or <tt class="literal">NULL</tt> for default)
+</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the desired <span class="type">GladeXML</span> object, or <tt class="literal">NULL</tt> on failure
+</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="EphyNodeDb.html"><b>&lt;&lt; EphyNodeDb</b></a></td><td align="right"><a accesskey="n" href="ch02.html"><b>Incomplete &gt;&gt;</b></a></td></tr></table></body></html>
