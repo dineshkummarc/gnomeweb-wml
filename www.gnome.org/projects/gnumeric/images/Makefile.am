@@ -2,8 +2,7 @@ SUBDIRS=
 
 urlpath=/projects/gnumeric/images
 
-page_SCRIPTS=bg.jpg			\
-		abacus.png		\
+page_SCRIPTS=	abacus.png		\
 		foot-transparent.png	\
 		gnumericlogo.png	\
 		spacer.png		
