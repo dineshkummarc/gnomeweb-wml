@@ -4,6 +4,6 @@ urlpath = /about
 
 page_SCRIPTS = \
 	index.html
-	about.html
+	why.html
 
 include $(top_srcdir)/rules.common
