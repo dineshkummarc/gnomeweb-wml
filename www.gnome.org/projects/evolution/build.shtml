@@ -1,0 +1,73 @@
+<!--#set var="title" value="Evolution" -->
+<!--#include virtual="head.shtml" -->
+
+<p><h1>Building Evolution</h1>
+
+<p><h2>Building against packaged GNOME</h2>
+
+Build the relevant modules and install.  If you use a prefix different
+from where the rest of GNOME is installed (recommended), you will need
+to update the bonobo-activation configuration file, which will be:<br><br>
+
+&lt;gnome prefix&gt/etc/bonobo-activation/bonobo-activation-config.xml<br>
+or<br>
+/etc/bonobo-activation/bonobo-activation-config.xml<br><br>
+
+usually.  Between the <searchpath></searchpath> markers add:<br><br>
+
+&lt;item&gt*evolution prefix*/lib/bonobo/servers&lt/item&gt
+
+<p><h2>Build with jhbuild</h2>
+
+If you set your moduleset to 26 and do jhbuild evolution it should
+build.  Some common problems are:
+
+<ul>
+<li><b>Build fails in fontconfig</b><br><br>
+
+<blockquote>
+docbook2txt local-fontconfig-user.sgml<br>
+Using catalogs: /etc/sgml/sgml-docbook-3.1-1.0-17.cat<br>
+Using stylesheet: /usr/share/sgml/docbook/utils-0.6.12/docbook-utils.dsl#html<br>
+Working on: /home/jpr/src/jhbuild-evo/fontconfig/doc/local-fontconfig-user.sgml<br>
+No way to convert HTML to text found.<br>
+</blockquote>
+
+Solution: Install lynx<br><br>
+
+<li><b>Build fails in Xrender</b><br>
+
+<blockquote>
+./configure: line 18388: syntax error near unexpected token `X,'<br>
+./configure: line 18388: `PKG_CHECK_MODULES(X, x11,'<br>
+</blockquote>
+
+Solution: Install pkg-config during jhbuild bootstap<br><br>
+
+<li><b>gnome-vfs compilation fails</b>
+
+<blockquote>
+In file included from /usr/include/openssl/ssl.h:179,<br>
+                 from gnome-vfs-ssl.c:41:<br>
+/usr/include/openssl/kssl.h:72:18: krb5.h: No such file or directory<br>
+In file included from /usr/include/openssl/ssl.h:179,<br>
+                 from gnome-vfs-ssl.c:41:<br>
+/usr/include/openssl/kssl.h:134: parse error before "krb5_enctype"<br>
+/usr/include/openssl/kssl.h:136: parse error before '*' token<br>
+/usr/include/openssl/kssl.h:137: parse error before '}' token<br>
+/usr/include/openssl/kssl.h:149: parse error before "kssl_ctx_setstring"<br>
+</blockquote>
+
+Solution: Soft link (ln -s) openssl.pc to <jhbuild-prefix>/lib/pkg-config<br><br>
+
+<li><b>Build fails in libgnomeui</b>
+
+<blockquote>
+In libgnomeui<br>
+failed to load "./stock_attach.png": Couldn't recognize the image file<br>
+format for file './stock_attach.png'<br>
+</blockquote>
+
+Solution: Try rebuild gdk-pixbuf, your loaders file is empty.<br><br>
+
+<!--#include virtual="foot.shtml"-->
