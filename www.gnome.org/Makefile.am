@@ -6,6 +6,7 @@ page_SCRIPTS = \
 	seegnome.html \
 	commsupp.html \
 	speakingabout.html \
+	contact.html \
 	.htaccess \
 	users \
 	default.css \
