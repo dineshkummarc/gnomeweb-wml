@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnome-db/doc/
+urlpath=/projects/gnome-db/doc
 
 page_SCRIPTS=
 

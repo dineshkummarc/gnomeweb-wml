@@ -1,6 +1,6 @@
 SUBDIRS= new-pics doc images
 
-urlpath=/projects/gnumeric/
+urlpath=/projects/gnumeric
 
 page_SCRIPTS=index.shtml		\
 		credits.shtml		\

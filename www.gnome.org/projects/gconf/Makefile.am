@@ -1,4 +1,4 @@
-urlpath = /projects/gconf/
+urlpath = /projects/gconf
 
 page_SCRIPTS = index.html
 

@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /projects/mc/
+urlpath = /projects/mc
 
 page_SCRIPTS = index.html
 

@@ -1,5 +1,4 @@
-SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn i18n press faqs account export include people register admin my project softwaremap friends summit guadec fonts
-include $(top_srcdir)/rules.common
+SUBDIRS=images intro start mirrors projects resources developerinterviews applist developers learn i18n press faqs account export include people register admin my project softwaremap friends summit guadec fonts img
 
 urlpath=
 
@@ -31,8 +30,9 @@ page_SCRIPTS=index.php3		\
   pr-guadec4.html \
   pr-linuxatwork.html \
   .htaccess \
-  users
+  users \
+  default.css
 
 #page_DATA=menucontrol.js
 
-
+include $(top_srcdir)/rules.common

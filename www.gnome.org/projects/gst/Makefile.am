@@ -1,6 +1,6 @@
 SUBDIRS = images screenshots release_notes
 
-urlpath=/projects/gst/
+urlpath=/projects/gst
 
 page_SCRIPTS =  bugs.html	\
 		contact.html	\
