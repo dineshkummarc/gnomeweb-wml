@@ -1,4 +1,4 @@
-SUBDIRS=screenshots images
+SUBDIRS=images
 
 urlpath=/projects/agnubis/
 
