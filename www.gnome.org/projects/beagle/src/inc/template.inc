@@ -31,7 +31,12 @@ function template_header($option="") {
 			<h1><a href="">Beagle</a></h1>
 
 			<div id="tagline">
+			<?
+			/*
 				&ldquo;Unearthing the porn you thought was gone... In front of your boss.&rdquo;
+				*/
+				?>
+				&ldquo;Tagline here!&rdquo;
 			</div>
 		</div>
 		<hr class="clear spacing-2">
