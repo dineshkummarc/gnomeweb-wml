@@ -1,12 +1,10 @@
 PREFIX ?= /usr
 CC = gcc
-TARGETS=factory-client factory-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
-CFLAGS=-g -DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
-         -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
-         -I$(PREFIX)/lib/glib-2.0/include 
-LDFLAGS= -Wl,--export-dynamic  -L$(PREFIX)/lib -lORBitCosNaming-2 -lORBit-2 -llinc -lgmodule-2.0 \
-             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm
+CFLAGS=$(shell pkg-config ORBit-2.0 ORBit-CosNaming-2.0 --cflags)
+LDFLAGS=$(shell pkg-config ORBit-2.0 ORBit-CosNaming-2.0 --libs)
+
+TARGETS=factory-client factory-server
 IDLOUT=factory-common.c factory-stubs.c factory-skels.c factory.h
 
 all: $(IDLOUT) factory-client factory-server

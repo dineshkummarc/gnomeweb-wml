@@ -1,14 +1,11 @@
+TARGETS=name-resolve-client name-resolve-server
+IDLOUT=name-resolve-common.c name-resolve-stubs.c name-resolve-skels.c name-resolve.h
+
 PREFIX ?= /usr
 CC = gcc
-TARGETS=name-resolve-client name-resolve-server
 ORBIT_IDL=$(PREFIX)/bin/orbit-idl-2
-CFLAGS=-DORBIT2=1 -D_REENTRANT -I$(PREFIX)/include/orbit-2.0 \
-       -I$(PREFIX)/include/linc-1.0 -I$(PREFIX)/include/glib-2.0 \
-       -I$(PREFIX)/lib/glib-2.0/include -g
-LDFLAGS= -Wl,--export-dynamic -L$(PREFIX)/lib -lORBit-2 -llinc -lgmodule-2.0 \
-             -ldl -lgobject-2.0 -lgthread-2.0 -lpthread -lglib-2.0 -lm       \
-             -lORBitCosNaming-2 
-IDLOUT=name-resolve-common.c name-resolve-stubs.c name-resolve-skels.c name-resolve.h
+CFLAGS=$(shell pkg-config ORBit-2.0 ORBit-CosNaming-2.0 --cflags)
+LDFLAGS=$(shell pkg-config ORBit-2.0 ORBit-CosNaming-2.0 --libs)
 
 all: $(IDLOUT) name-resolve-client name-resolve-server
 
