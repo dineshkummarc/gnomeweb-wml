@@ -1,4 +1,4 @@
-SUBDIRSs
+SUBDIRS=
 
 urlpath=/projects/nautilus/
 
