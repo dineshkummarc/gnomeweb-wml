@@ -33,7 +33,7 @@ page_SCRIPTS= 	\
     \
     home.png								\
     left.png								\
-    right.png
+    right.png								\
     up.png
 
 include $(top_srcdir)/rules.common
