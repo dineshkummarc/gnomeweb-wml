@@ -298,6 +298,70 @@ myexample_applet_properties_dialog (BonoboUIComponent *uic,
 </programlisting>
 </sect1>
 
+<sect1><title>Following the panel size</title>
+<para>The size of the Gnome panel can be changed by the user, so the applets must adapt to follow these modifications. For most applets, this will be automatic : the panel will give the applet the available size, and the applet will resize accordingly. However, in some cases, the applet will need to know the actual exact panel size, in pixels (for example if the applet draws its own content with non-standard widgets). Unfortunately, the way to do this is not obvious. If we look at the panel API, the following function seems to be exactly what we need :</para>
+<programlisting>
+<![CDATA[
+guint       panel_applet_get_size           (PanelApplet *applet);
+]]>
+</programlisting>
+<para>However, as the note that immediately follows specifies, the size returned by this function is not the exact panel size in pixels. This function returns the current applet "size hint" - i.e. the panel size rounded up to the next "standard" size. These standard sizes are 12, 24, 36, 48, 64, 80 and 128. That means that if the real panel size is 25 pixels, this function will return 36. The associated "change-size" signal follows the same behavior : it is only triggered when a "standard" size is reached.</para>
+<para>This rather peculiar behavior is often misunderstood, and is the cause of a lot of display bugs in applets. See for example bugs <ulink type="http" url="http://bugzilla.gnome.org/show_bug.cgi?id=135269">135269</ulink>, <ulink type="http" url="http://bugzilla.gnome.org/show_bug.cgi?id=123094">123094</ulink> or <ulink type="http" url="http://bugzilla.gnome.org/show_bug.cgi?id=129124">129124</ulink>. The function panel_applet_get_size should in fact only be called at the applet initialization, to get a rough idea of the panel size, but not anymore after that. The correct way to follow the panel size is twofold.</para>
+<para>First, you have to set the EXPAND_MINOR flag for the applet, so the panel knows it has to give the applet all the space available :</para>
+<programlisting>
+<![CDATA[
+panel_applet_set_flags (applet, PANEL_APPLET_EXPAND_MINOR);
+]]>
+</programlisting>
+<para>The second step is to connect the applet to the signal "size-allocate", which is triggered every time a new size is allocated to your panel applet (we will see below that this can have side effects). The callback function you will define for this signal will be given the actual panel size in pixels. For example :</para>
+<programlisting>
+<![CDATA[
+static void size_allocate_cb (PanelApplet *applet, GtkAllocation *allocation, gpointer data)
+{
+  MyApplet *my_applet = (MyApplet *) data;
+  PanelAppletOrient orient;
+
+       orient = panel_applet_get_orient (applet);
+
+       if (orient == PANEL_APPLET_ORIENT_UP || orient == PANEL_APPLET_ORIENT_DOWN)
+       {
+             /* for horizontal panels */
+             my_applet->size = allocation->height;
+       } else {
+             /* for vertical panels */
+	     my_applet->size = allocation->width;
+       }
+}
+
+void applet_init (...)
+{
+   /* your applet initialization code goes here ... */
+
+   g_signal_connect (G_OBJECT (my_applet->applet),
+                          "size_allocate",
+                          G_CALLBACK (size_allocate_cb),
+			  my_applet);
+}
+
+]]>
+</programlisting>
+<para>However, there's a catch : the "size_allocate" signal is also called each time you redraw your applet widgets. So if you use the panel size information to redraw your applet at the right size in the function size_allocate_cb, it will trigger the signal again, which will lead to new redraw, a new signal, again and again, and your applet will enter a infinite loop. Breaking this loop is actually very simple : just compare the new allocated size with the previous one, and only ask for a redraw if there was a change. For example, in the function size_allocate_cb :</para>
+<programlisting>
+<![CDATA[
+        if (orient == PANEL_APPLET_ORIENT_UP || orient == PANEL_APPLET_ORIENT_DOWN)
+        {
+              if (my_applet->size == allocation->height) 
+		   return;
+	      my_applet->size = allocation->width;
+	} else {
+	      if (my_applet->size == allocation->width)
+		   return;
+	      my_applet->size = allocation->height;
+	}
+]]>
+</programlisting>
+</sect1>
+
 <sect1><title>Common Questions</title>
 <qandaset>
 <qandaentry>
