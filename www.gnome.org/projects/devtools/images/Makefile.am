@@ -7,7 +7,7 @@ page_SCRIPTS=\
 	devtools-top.gif\
         dryad-shot.jpg\
         dryad-shot-thumb.jpg\
-	gidelogo.png\	
+	gidelogo.png\
 	gladelogo.png\
 	glimmerlogo.png\
  	devtools-header4.png\
