@@ -191,9 +191,9 @@ mailing list.
 			<div id="sidebar">
 				<h2><img src="img/news.png">Newsletters</h2>
 				<ul id="newsletters">
+					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%208">Monday March 28th</a></li>
 					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%207">Tuesday February 22nd</a></li>
 					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%206">Monday January 24th</a></li>
-					<li><a href="http://beaglewiki.org/index.php/Beagle%20Newsletter%20Issue%205">Monday January 3rd</a></li>
 					<li><a href="http://beaglewiki.org/index.php/Newsletters">Archives</a></li>
 					</ul>
 				<h2><img src="img/example.png">Documentation</h2>
