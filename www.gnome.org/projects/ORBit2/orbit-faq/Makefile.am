@@ -2,10 +2,14 @@ SUBDIRS=
 
 urlpath=/projects/ORBit2/orbit-faq
 
-page_SCRIPTS=faq.ps faq/* faq/stylesheet-images/*
+PKG_FILES=$(shell tar tzf faq.tar.gz)
+
+page_SCRIPTS=faq.ps $(PKG_FILES)
 
 include $(top_srcdir)/rules.common
 
-faq.ps: faq.xml 
-	db2ps   faq.xml
-	db2html faq.xml
+$(PKG_FILES): faq/faq.html
+
+faq/faq.html: faq.tar.gz
+	tar xzf faq.tar.gz
+

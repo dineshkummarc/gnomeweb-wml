@@ -2,10 +2,15 @@ SUBDIRS=
 
 urlpath=/projects/ORBit2/orbit-docs
 
-page_SCRIPTS=orbit.ps orbit/* orbit/stylesheet-images/*
+PKG_FILES=$(shell tar tzf orbit.tar.gz)
+
+page_SCRIPTS=orbit.ps $(PKG_FILES)
+
+$(PKG_FILES): orbit/book1.html
+
+orbit/book1.html: orbit.tar.gz
+	tar xzf orbit.tar.gz
 
 include $(top_srcdir)/rules.common
 
-orbit.ps: orbit.xml 
-	db2ps   orbit.xml
-	db2html orbit.xml
+

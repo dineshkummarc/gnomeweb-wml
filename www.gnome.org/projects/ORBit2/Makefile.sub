@@ -1,0 +1,11 @@
+
+all:
+	$(MAKE) -C orbit-faq  -f Makefile.sub
+	$(MAKE) -C orbit-docs -f Makefile.sub
+	$(MAKE)               -f Makefile.sub orbit-docs.tar.gz
+  
+orbit-docs.tar.gz: orbit-docs/orbit.xml orbit-docs/examples/*/*
+	$(MAKE) -C orbit-docs orbit.ps
+	$(MAKE) -C orbit-docs/examples distclean
+	rm -rf  orbit-docs/*.junk orbit-docs/*~
+	tar czf orbit-docs.tar.gz --exclude CVS --exclude orbit.tar.gz orbit-docs/ 
