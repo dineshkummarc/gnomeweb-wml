@@ -39,8 +39,8 @@ page_SCRIPTS=index.html			\
 	tr.shtml			\
 	uk.shtml			\
 	wa.shtml			\
-	ch_CN.shtml			\
-	ch_TW.shtml
+	zh_CN.shtml			\
+	zh_TW.shtml
 	
 include $(top_srcdir)/rules.common
 
