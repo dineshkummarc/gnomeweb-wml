@@ -1,0 +1,13 @@
+SUBDIRS= 
+
+urlpath=/projects/guppi/images
+
+page_SCRIPTS =  3h.gif  		\	 
+		3w.gif			\
+		foot-transparent.gif	\
+		guppi-icon.png		\
+		guppi-logo.png		\
+		small-fish.png		\
+		small-gnome-foot.png	
+
+include $(top_srcdir)/rules.common
