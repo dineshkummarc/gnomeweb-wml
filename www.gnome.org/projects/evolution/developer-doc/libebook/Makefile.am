@@ -12,6 +12,8 @@ page_DATA = 				\
 	EBookView.html			\
 	EContact.html			\
 	index.html			\
+	libebook-EAddressWestern.html	\
+	libebook-ENameWestern.html	\
 	libebook-e-book-async.html	\
 	libebook-e-book-types.html	\
 	home.png  			\
