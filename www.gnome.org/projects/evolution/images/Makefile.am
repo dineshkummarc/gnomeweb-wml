@@ -1,4 +1,4 @@
-SUBDIRS= screenshots
+SUBDIRS= screenshots 16 32 48
 
 urlpath=/projects/evolution/images
 
