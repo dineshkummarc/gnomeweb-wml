@@ -8,6 +8,11 @@ page_SCRIPTS=			\
 	index.html		\
 	testing.html		\
 	developing.html		\
-	helping.html
+	helping.html		\
+	brownbar.jpg		\
+	brownbarTop.jpg		\
+	shadow.gif		\
+	title01.jpg		\
+	title02.jpg
 
 include $(top_srcdir)/rules.common
