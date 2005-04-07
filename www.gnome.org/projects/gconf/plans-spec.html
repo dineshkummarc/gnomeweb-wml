@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Future Configuration System Spec</title>
+</head>
+
+<body>
+  <h1>Sketchy Specification for a Future Configuration System</h1>
+
+  <p>This specification is intended to cover the existing functionality of gconf plus
+  the delta described in <a href="plans.html">these notes</a>.</p>
+
+  <h2>Big Picture Concepts</h2>
+
+  <p>
+  The core concept of the configuration system is a global, hierarchical tree 
+  of key-value pairs, similar to a filesystem. "Global" means that each tree is 
+  shared across multiple processes. However, there are multiple trees and trees
+  can be combined to get a "search path" effect where values are looked for 
+  in multiple places.
+  </p>
+
+  <p>
+  By default, there are two systemwide trees and a tree for each user. The
+  systemwide trees are a set of <i>default</i> settings and a tree of
+  <i>mandatory</i> settings. System daemons not associated with a user session 
+  will look up values in these two trees. A program in a user session will 
+  look up values first in the mandatory tree, then in the user's tree, then 
+  in the default tree.
+  </p>
+
+  <p>
+  Local sites may add additional trees of values, for example one associated
+  with a workgroup or geographical region of the company.
+  </p>
+
+  <h2>Application Developer API</h2>
+
+  <p>
+  The first step in adding configuration to an application is to create 
+  <i>schemas</i> for the application's settings. Schemas are XML files 
+  describing configuration keys. Each schemas file may describe multiple
+  keys, and the information for each key should include:
+  </p>
+
+  <ul>
+  <li>
+  The type of the key's value in D-BUS type signature format.
+  </li>
+  <li>
+  A relative-to-some-root name for the key. All keys in a schemas file
+  should assume the same root. For example a schemas file may describe the 
+  keys that make up a "panel applet", and the schema can be instantiated under
+  distinct roots for each applet.
+  </li>
+  <li>
+  Localized short and long descriptions of the setting.
+  </li>
+  <li>
+  A default value for the setting.
+  </li>
+  </ul>
+
+  <p>
+  In addition to the per-key information, the schemas file should somehow
+  indicate which roots are expected to be used. For example, it might say that
+  "any subdirectory of /org/gnome/panel/applets/ gets these schemas" or for the
+  global panel settings "these schemas apply to the root /org/gnome/panel" - the
+  exact syntax here doesn't matter, I think only the two cases of "any subroot
+  of /foo..."  and "exactly the root /foo" are interesting. Arbitrary globbing
+  could be allowed but I don't know the use case. The purpose of this feature
+  is to support a gconf-editor type thing.
+  </p>
+
+  <p>
+  Unlike gconf, in this new configuration system the schemas are not stored in
+  the configuration tree itself; schemas are instead a property of the
+  application. Applications install their XML files to a global schemas
+  directory, and installed schemas can be referenced by a URI identifier.  In
+  other words there's a sort of catalog mapping unique URIs to schemas files.
+  gconf-editor would want to list all the URIs and look up the schemas for 
+  each; individual applications probably use only a few of the schemas files.
+  The URIs here would use a domain owned by the schemas file author, as with 
+  XML DTDs.
+  </p>
+
+  <p>
+  The schemas directory should really be multiple directories following the 
+  basedir specification.
+  </p>
+
+  <p>
+  The API for apps should involve creating a settings object, with some 
+  schemas URI, at some root in the configuration hierarchy. The app should 
+  also specify whether the per-user settings should be included.
+  </p>
+  <pre>
+  class Settings
+  {
+    enum { SCOPE_SYSTEM, SCOPE_USER } Scope;
+ 
+    Settings (Scope scope, String schemas_uri_identifier, 
+              String root_directory);
+
+    Variant Get (String relative_key);
+    void    Set (String relative_key, Variant value);
+  }
+  </pre>
+
+  <p>
+  The settings object should also have a way to subscribe to change 
+  notifications below the given root_directory. There probably is not 
+  a use case for subscribing to changes in more detail than that.
+  </p>
+
+  <p>
+  The change notification should include the relative name of the changed key,
+  its new value, whether the key is currently set (or just derived from 
+  the schemas), and whether the key is currently writable. This should 
+  be done by passing an object to the change notification that includes 
+  all of this information (so the change notification callback just has 
+  one "entry" object as argument). This lets us add more fields to an 
+  "entry" in the future.
+  </p>
+
+  <p>
+  The Settings object should automatically force conformance to the schemas:
+  </p>
+  <ul>
+  <li>Keys not found in the schemas should be hidden.</li>
+  <li>Keys set to a different type than found in the schemas should be treated
+  as unset.</li>
+  <li>Unset keys should behave as if set to the default found in the schema.</li>
+  </ul>
+
+  <p>
+  It's an essential optimization for apps to avoid loading the localized short
+  and long descriptions, as these are huge and used only by gconf-editor style
+  tools.  An mmap() cache of schemas used by apps is one approach. I think
+  putting descriptions in separate files manually is a bad idea since it will
+  lead to developers not keeping them updated.
+  </p>
+ 
+  <p>
+   gconf-editor/regedit sort of tools would not use the same API as
+   applications.  They would have a "no schemas" or "raw" mode of loading
+   configuration settings, an API for listing and loading schemas, and a way to
+   edit config trees or parts of trees other than the current user's
+   tree. API for all this should probably be kept clearly separate from 
+   the normal application API.
+  </p>
+
+  <h2>Implementation</h2> 
+
+  <p>
+
+  The implementation should be a daemon that implements interfaces provided via
+  D-BUS. The daemon should be able to run either systemwide or in a user session and 
+  should thus be written in paranoid/untrusting style.
+
+  </p>
+  
+  <p>
+  
+  The only really hard question about the D-BUS interface is how to do
+  notifications such that apps only hear about the changes that matter to 
+  them. Otherwise each setting change wakes up all apps. The two approaches
+  are to map each key in the configuration hierarchy to a D-BUS object path 
+  so D-BUS signals can be filtered by source object; or to have apps 
+  tell the conf daemon which signals to emit, and adjust dbus to support
+  multicast (vs. broadcast) signals.
+  
+  </p>
+
+  <p>
+
+  It's critical that the conf daemon have no state. If the daemon goes down, 
+  apps should re-establish their state with the daemon, rather than the daemon
+  restoring its own state.  
+
+  </p>
+
+  <p>
+
+  The daemon should store data in a nice XML format, it need not be the same as
+  the current one. Can't be in fact due to using dbus types.
+
+  </p>
+  
+  <p>
+  The daemon should have an extensible configuration file. This would allow
+  among other things dynamically constructing a configuration tree based on 
+  the context (e.g. hostname) of the particular user session.
+  </p>
+
+  <h2>Transition/back-compat with respect to GConf</h2> 
+
+  <p>
+  One option is that the new daemon has an alternate backend that reads settings
+  from the current gconf database, especially ~/.gconf. If this database is
+  present, then settings from it would be read in. The pain in this case is 
+  writing this backend and mapping old gconf settings to the new system.
+  </p>
+
+  <p>
+  The second option is a framework allowing apps to provide a one-time
+  upgrade/migration script. The framework would deal with running this 
+ once for each app, when appropriate, and have features to make it easy 
+ to write the script (e.g. quickly say "old key foo goes to new key bar")
+  </p>
+
+  <h2>Stuff to Punt</h2>
+
+  <p>
+  Some notable things that don't need to be in 1.0.
+  </p>
+
+  <ul>
+  <li>Transactions. Nice in theory, but we've been fine without them 
+  in gconf, and supporting complex types already helps a lot.
+  </li>
+  <li>Most of the GConf API can die. We don't need a GConfValue, 
+  the split between Engine/Client is pointless, GConfSchema goes away 
+  except in the gconf-editor oriented "load all schemas" type of API,
+  GConfChangeSet goes away since we're not doing transactions.
+  </li>
+  <li>
+  "Direct" (no daemon) access can go away, its use case is covered by 
+  the systemwide daemon or worst case by a private API used only by the 
+  official command line tool coming with the config system. Maybe 
+  eventually we also want this for some "one-time" apps that don't persist 
+  and thus don't need notifications, but since dbus is starting pretty early 
+  in boot it's unclear this is genuinely useful. Just use some simple
+  existing config files for early boot stuff.
+  </li>
+  </ul>
+
+</body>
+</html>
