@@ -42,14 +42,18 @@ search in many different domains:
 
 <h2 id="running">Running Beagle</h2>
 <p>
-The most recent version of Beagle is <b>0.0.8.1</b>, which
-was released on March 24, 2005.  You can
-<a href="http://ftp.gnome.org/pub/GNOME/sources/beagle/0.0/beagle-0.0.8.1.tar.gz">
-download the 0.0.8.1 tarball here</a>.
+The most recent version of Beagle is <b>0.0.9</b>, which
+was released on April 7, 2005.  You can
+<a href="http://ftp.gnome.org/pub/GNOME/sources/beagle/0.0/beagle-0.0.9.tar.gz">
+download the 0.0.9 tarball here</a>.
 </p>
 
 <p>
-The <a href="http://www.beaglewiki.org/index.php/Installing%20Beagle">Beagle project wiki</a> outlines where to get and install the software requirements.
+The <a href="http://www.beaglewiki.org/index.php/Installing%20Beagle">Beagle
+project wiki</a> outlines where to get and install the software requirements.
+The <a href="http://www.beaglewiki.org">wiki</a> is full of useful
+information for people who want to compile
+Beagle themselves.
 </p>
 <p>
 <a href="http://ftp.gnome.org/pub/GNOME/sources/beagle/0.0/">Older versions</a>
