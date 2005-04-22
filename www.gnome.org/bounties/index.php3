@@ -119,7 +119,6 @@ collect the bounty.
 <?php write_table_header ("yes"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
-<?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", ""); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
@@ -145,6 +144,7 @@ collect the bounty.
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 <?php taskrow ("Addressbook/GnomeMeeting integration", "Addressbook", "500", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
 <?php taskrow ("Set wallpaper from mailer", "Mailer", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
+<?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
 <?php taskrow ("Mailing list actions", "Mailer", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
 <?php taskrow ("Finish NNTP support in Evolution", "Mailer", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Custom mail headers display", "Mailer", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>

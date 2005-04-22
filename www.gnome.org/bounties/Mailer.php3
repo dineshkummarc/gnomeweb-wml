@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Mailer Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
-<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", ""); ?>
+<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
 <?php taskrow ("Mailing list actions", "hidden", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
 <?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
 <?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
@@ -65,7 +65,7 @@ GNOME Desktop programming and mailing list information is available on
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516", ""); ?>
+<?php box_start ("Implement a panel notification applet for new mail", "Mailer", "400", "127516", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
 
 
 <p>
