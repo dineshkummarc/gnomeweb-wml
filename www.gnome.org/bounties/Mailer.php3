@@ -17,7 +17,7 @@ include ("./util.php");
 <?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "hidden", "400", "127530", ""); ?>
 <?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533", "http://bugzilla.gnome.org/attachment.cgi?id=21716&action=view"); ?>
-<?php taskrow ("Message receipts", "hidden", "500", "127534", ""); ?>
+<?php taskrow ("Message receipts", "hidden", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
 <?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
@@ -602,7 +602,7 @@ is no easy way to reverse the substitution.  Modify the behavior such
 that if the user hits backspace while the cursor is on a smiley the 
 first time the substitution is undone, but the smiley text remains.</p>
 <?php box_end (); ?>
-<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534", ""); ?>
+<?php box_start ("Message receipts", "Mailer", "500", "127534", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
 
 
 <p><?php rfc(2298); ?> describes a standard method for clients to

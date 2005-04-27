@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("IM Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "hidden", "2000", "127546", ""); ?>
-<?php taskrow ("Gaim drag and drop file transfer", "hidden", "400", "127547", ""); ?>
+<?php taskrow ("Gaim drag and drop file transfer", "hidden", "400", "127547", "http://sourceforge.net/tracker/index.php?func=detail&aid=1062630&group_id=235&atid=300235"); ?>
 <?php taskrow ("Gaim drag and drop of links", "hidden", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "hidden", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 <?php write_table_footer (); ?>
@@ -160,7 +160,7 @@ Some fun presence-related links, for your amusement:
 </ul>
 
 <?php box_end (); ?>
-<?php box_start ("Gaim drag and drop file transfer", "IM", "400", "127547", "127547", ""); ?>
+<?php box_start ("Gaim drag and drop file transfer", "IM", "400", "127547", "127547", "http://sourceforge.net/tracker/index.php?func=detail&aid=1062630&group_id=235&atid=300235"); ?>
 
 
 <p>For those protocols that support it, Gaim allows you to send and

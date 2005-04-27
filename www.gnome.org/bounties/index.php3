@@ -120,18 +120,14 @@ collect the bounty.
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "2000", "127546", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "300", "127520", ""); ?>
 <?php taskrow ("Inline PGP support for evolution", "Mailer", "250", "127521", ""); ?>
-<?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "Tasks", "500", "127558", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "300", "127544", ""); ?>
 <?php taskrow ("Publish your calendar", "Calendar", "2000", "127538", ""); ?>
 <?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", ""); ?>
-<?php taskrow ("OO.o slide view performance", "OpenOffice.org", "500", "127554", ""); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "400", "127530", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "300", "127553", ""); ?>
-<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", ""); ?>
-<?php taskrow ("Message receipts", "Mailer", "500", "127534", ""); ?>
 <?php taskrow ("Add image data to the icon cache", "Memory", "100", "169344", ""); ?>
 <?php taskrow ("Use a mmap'able cache for fontconfig", "Memory", "200", "169345", ""); ?>
 <?php taskrow ("Create a test suite for browsing in Nautilus", "Memory", "200", "169346", ""); ?>
@@ -151,6 +147,7 @@ collect the bounty.
 <?php taskrow ("Contact search applet", "Addressbook", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Support export of tasks to CSV spreadsheet
 files", "Tasks", "300", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=34391"); ?>
+<?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
 <?php taskrow ("Weather calendar backend", "Calendar", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
 <?php taskrow ("Quick reference card", "Documentation", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
@@ -160,8 +157,10 @@ files", "Tasks", "300", "127557", "http://bugzilla.gnome.org/attachment.cgi?id=3
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "Mailer", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Better smiley substitution in the composer", "Mailer", "200", "127533", "http://bugzilla.gnome.org/attachment.cgi?id=21716&action=view"); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "Miscellaneous", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
+<?php taskrow ("Gaim drag and drop file transfer", "IM", "400", "127547", "http://sourceforge.net/tracker/index.php?func=detail&aid=1062630&group_id=235&atid=300235"); ?>
 <?php taskrow ("Gaim drag and drop of links", "IM", "250", "127548", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=23279"); ?>
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
+<?php taskrow ("Message receipts", "Mailer", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 <?php write_table_footer (); ?>

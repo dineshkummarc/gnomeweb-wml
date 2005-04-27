@@ -6,25 +6,9 @@ include ("./util.php");
 
 <?php write_page_header ("OpenOffice.org Bounties"); ?>
 <?php write_table_header ("no"); ?>
-<?php taskrow ("OO.o slide view performance", "hidden", "500", "127554", ""); ?>
 <?php taskrow ("OO.o Image Save", "hidden", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
 <?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php write_table_footer (); ?>
-<?php box_start ("OO.o slide view performance", "OpenOffice.org", "500", "127554", "127554", ""); ?>
-
-<p>The slides view in impress suffers some from seriously slow,
-un-cached slide thumbnailing, this makes scrolling the slide
-list unacceptably slow.</p>
-
-<?php box_sec ("How"); ?>
-<p>Either profile and accelerate the thumbnail rendering to an
-acceptable level, or render slides to a bitmap that can be
-rendered more quickly subsequently.</p>
-
-<?php box_sec ("Acceptance Criteria"); ?>
-<p>The solution providing the greatest speedup, and ergonomic 
-improvement in this area wins</p>
-<?php box_end (); ?>
 <?php box_start ("OO.o Image Save", "OpenOffice.org", "300", "127556", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
  
 <p> 
