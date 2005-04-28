@@ -7,7 +7,7 @@ include ("./util.php");
 <?php write_page_header ("Miscellaneous Bounties"); ?>
 <?php write_table_header ("no"); ?>
 <?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
-<?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", ""); ?>
+<?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "300", "127553", ""); ?>
 <?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
 <?php write_table_footer (); ?>
@@ -67,7 +67,7 @@ Hackers</a>, and visit <a STYLE="text-decoration:none"
 href="http://gaim.sf.net">the Gaim home page</a>.
 
 <?php box_end (); ?>
-<?php box_start ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", "127552", ""); ?>
+<?php box_start ("Evolution/iPod synchronization", "Miscellaneous", "500", "127552", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
 
 <p>
 Since the iPod supports calendars and addressbooks, it would be handy for

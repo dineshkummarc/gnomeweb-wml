@@ -236,9 +236,6 @@ href="mailto:toshok@ximian.com">toshok@ximian.com</a>&gt; and Hans Petter Jansso
 will be the primary contacts on the list.
 </p>
 
-<p>
-<em>Note: We are currently moving from using URIs to using ESources to communicate with the backends.  This bounty should probably block on the completion of that work.</em>
-</p>
 
 <?php box_end (); ?>
 <?php write_page_footer (); ?>
