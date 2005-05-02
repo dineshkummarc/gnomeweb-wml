@@ -20,6 +20,7 @@ page_DATA = \
 	summit_mit_2004.png \
 	forum_gnome_2004.png \
 	hey_kids.png \
-	two-ten-folder.jpg
+	two-ten-folder.jpg \
+	guadec_stuttgart_splash.png
 
 include $(top_srcdir)/rules.common
