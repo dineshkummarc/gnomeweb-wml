@@ -1,0 +1,484 @@
+**** BEGIN LOGGING AT Wed May  4 19:29:27 2005
+
+May 04 19:29:27 *	Now talking on #evolution-meet
+May 04 19:29:29 *	tml (~tml@MMCCCXLIII.tun.saunalahti.fi) has joined #evolution-meet
+May 04 19:29:47 *	rodrigo (~rodrigo@202.144.86.147) has joined #evolution-meet
+May 04 19:31:48 *	surf (~surf@202.144.86.147) has joined #evolution-meet
+May 04 19:31:56 *	guenther (~guenther@IP-213188108016.dialin.heagmedianet.de) has joined #evolution-meet
+May 04 19:32:26 *	sush (~Sushma@202.144.86.147) has joined #evolution-meet
+May 04 19:32:32 NotZed	what is poornima's email address?
+May 04 19:32:56 harish	pnayak@novell.com
+May 04 19:33:00 surf	pnayak@novell.com
+May 04 19:33:08 NotZed	thanks
+May 04 19:33:10 *	rodo (~rodo@202.144.86.147) has joined #evolution-meet
+May 04 19:33:14 rodo	hola
+May 04 19:33:15 rodrigo	harish: are you going to log the meeting, or should I?
+May 04 19:33:18 *	shaheed_ (~shaheed@202.144.86.147) has joined #evolution-meet
+May 04 19:33:29 *	vivek (~vivek@202.144.86.147) has joined #evolution-meet
+May 04 19:33:37 harish	rodrigo: yes, i can do that
+May 04 19:33:53 rodrigo	ok
+May 04 19:35:15 *	roozbeh (~roozbeh@tameshk.bamdad.org) has joined #evolution-meet
+May 04 19:35:20 *	nags_ (~nags@202.144.86.147) has joined #evolution-meet
+May 04 19:35:32 *	shres (~shreyas@202.144.86.147) has joined #evolution-meet
+May 04 19:35:45 jpr	one more minute
+May 04 19:35:53 *	seb128 (~seb128@ANancy-151-1-32-67.w83-196.abo.wanadoo.fr) has joined #evolution-meet
+May 04 19:36:41 *	gekker (~gekker@camus.provo.novell.com) has joined #evolution-meet
+May 04 19:37:44 jpr	ok
+May 04 19:37:59 jpr	i just wanted to introduce harish 
+May 04 19:38:15 jpr	who you probably all know by now is the maintainer of evolution
+May 04 19:38:26 jpr	for head and shortly for stable
+May 04 19:38:41 jpr	most of you have probably seen harish in these meetings
+May 04 19:38:51 jpr	before and know he's a good evo hacker
+May 04 19:39:04 jpr	so without further ado, i'll turn the meeting over to harish to lead
+May 04 19:39:28 NotZed	in the dark
+May 04 19:39:28 harish	thanks jpr :-).  Hi all
+May 04 19:39:53 shres	hey harish 
+May 04 19:39:57 surf	hi :)
+May 04 19:40:05 gekker	vanakkam harish
+May 04 19:40:11 haip	hi
+May 04 19:40:16 chen	hi harish 
+May 04 19:40:17 dhm_home	hi!
+May 04 19:40:19 harish	hooo...gekker - where did you learn that ?
+May 04 19:40:22 partha	hi harish 
+May 04 19:40:38 nags_	Hi all
+May 04 19:40:41 sush	hey harish
+May 04 19:40:43 gekker	varadhan taught me :)
+May 04 19:40:46 nags_	Today I get some time to demo LDTP + Evolution sanity test-scripts to jpr and also got some good feedback
+May 04 19:40:46 andre_	also "hi harish." ;-)
+May 04 19:40:49 harish	so...lets get started for the day's agenda ..and we have the light back :)
+May 04 19:41:01 NotZed	dawn of a new age?
+May 04 19:41:11 surf	:)
+May 04 19:41:12 rodrigo	:)
+May 04 19:41:46 harish	so on the main agenda..- i hope all of you have been tracking the 2.4 task list
+May 04 19:41:47 nags_	thanks to NotZed, he gave me Xvfb idea to integrate with LDTP
+May 04 19:41:49 harish	on the wiki
+May 04 19:42:01 harish	http://go-evolution.org/TwoFourTaskList
+May 04 19:42:32 *	andre_ has quit (Remote closed the connection)
+May 04 19:42:33 harish	i would like to gently invite you all to go through that again and add in your comments
+May 04 19:43:15 harish	and you would have also noticed those beautiful design documentations from jpr, rodrigo and shortly from 
+May 04 19:43:21 harish	NotZed too, i guess
+May 04 19:43:36 *	andre_ (~y0020796@rzlx0002.rz.tu-bs.de) has joined #evolution-meet
+May 04 19:43:41 NotZed	i put up some stuff on threading in mail at least
+May 04 19:44:01 harish	oh yes...
+May 04 19:44:44 harish	The CVS Head would be open for commits now ..
+May 04 19:45:09 harish	though the patch review mode would continue on the 2.2 branch
+May 04 19:45:49 harish	The 2.2.x release shows about 4 showstoppers right now.. is that right nags_ ?
+May 04 19:46:01 nags_	harish: Yes
+May 04 19:46:14 rodrigo	harish: I just rescheduled all < 2.2.x milestones bugs, so there might be more
+May 04 19:46:38 rodrigo	not sure if there were showstoppers though
+May 04 19:47:23 harish	oh.. ok. if any of how have issues to report that you feel must be fixed in 2.2.4 - kindly make sure..
+May 04 19:47:49 harish	you report the bug or bump up the criticality for existing ones.
+May 04 19:48:16 rodrigo	no bug report for it, but the migration patch that davE_largo reported needs to go to 2.2.4
+May 04 19:48:21 partha	harish: since the head is open, is the ABI freeze removed. can structures be modified on head??
+May 04 19:48:26 harish	ah..i almost forgot.. nags_ (Nagappan) would be our new Bug Master and the lead QA guy for evolution
+May 04 19:48:49 nags_	As of now 1 critical bug and 3 blockers in 2.2.x
+May 04 19:48:55 harish	partha, no. we would continue to maintain the ABI compatibility in the 2.3 dev cycle
+May 04 19:48:58 NotZed	i think 273375 can be downgraded, it is only from one reporter and maybe one os anyway
+May 04 19:49:00 nags_	:)
+May 04 19:49:32 partha	harish: ok
+May 04 19:49:54 *	varadhan (~varadhan@202.144.86.147) has joined #evolution-meet
+May 04 19:49:55 nags_	NotZed: I guess there are some similar bugs....
+May 04 19:50:05 NotZed	harish: really?  that may be difficult
+May 04 19:50:13 *	nags_ checking similar bugs in bgo
+May 04 19:50:46 harish	NotZed, it is a tough ask.. but we would give it a try.. we may have to allow APIs to be extended (not modified though)
+May 04 19:51:03 NotZed	depends on what constitutes public apis
+May 04 19:51:05 NotZed	i guess
+May 04 19:51:16 harish	yes..mostly
+May 04 19:51:58 partha	it should hold good for structures that are not public/exposed.
+May 04 19:52:16 harish	ok.. lets go around the room and get the status. new guys can also a give brief intro and the new roles that they are taking up
+May 04 19:52:25 partha	structures used internally can be modified can they??
+May 04 19:52:29 harish	for the benefit of all
+May 04 19:52:45 harish	partha, after a good impact analysis :-)
+May 04 19:52:53 partha	Ah!
+May 04 19:53:09 *	fejj_ (~fejj@c-66-30-106-142.hsd1.ma.comcast.net) has joined #evolution-meet
+May 04 19:53:10 *	andre_ has quit (Remote closed the connection)
+May 04 19:53:17 fejj_	forgot about the meeting
+May 04 19:53:31 harish	jpr is on the top of the list :-) ..  a busy week full of meetings ?? ;-)
+May 04 19:53:35 harish	hi fejj_ 
+May 04 19:53:37 jpr	some shell cleanups, writing architecture docs and giving talks on evolution here in india
+May 04 19:54:09 jpr	thats about it
+May 04 19:54:13 jpr	(many, many meetings)
+May 04 19:54:23 harish	evo is going to miss you the most..
+May 04 19:54:27 *	andre_ (~y0020796@rzlx0006.rz.tu-bs.de) has joined #evolution-meet
+May 04 19:54:37 harish	hi andre_ 
+May 04 19:54:50 harish	chen ?
+May 04 19:55:05 *	andre_ hates those X crashes on the university machines
+May 04 19:55:11 chen	harish, planning the features to be done fr 2.4 in calendar
+May 04 19:55:19 *	Nat (~Nat_@c-24-34-186-89.hsd1.ma.comcast.net) has joined #evolution-meet
+May 04 19:55:33 harish	hi Nat 
+May 04 19:55:48 chen	harish, reviewed some patches, working with rodrigo and learning the calendar architecture 
+May 04 19:56:06 chen	harish, thats all
+May 04 19:56:08 harish	chen would also be taking up the responsibilities of being evo's build buddy :)
+May 04 19:56:27 harish	dhm_home ?
+May 04 19:56:38 dhm_home	http://live.gnome.org/Evolution_2fGConfTools
+May 04 19:56:39 chen	yes :)
+May 04 19:56:44 dhm_home	http://live.gnome.org/Evolution_2fGConfLDAPBackend
+May 04 19:57:13 dhm_home	plus I'll resend my printing i18n patch now that 2.3 is open
+May 04 19:57:28 harish	dhm_home, thanks.
+May 04 19:58:04 harish	yes. we need to relook at all the patches that were held up and get them in asap
+May 04 19:58:09 harish	fejj_, ?
+May 04 19:58:34 fejj_	yea?
+May 04 19:58:46 fejj_	oh
+May 04 19:58:48 fejj_	heh
+May 04 19:58:59 fejj_	been working on trying to get gtk-doc in place for camel
+May 04 19:59:07 fejj_	turning out to be a bigger pita than expected
+May 04 19:59:13 fejj_	gtk-doc is god aweful
+May 04 19:59:31 rodrigo	yeah, /me has lots of problems to make it generate the templates
+May 04 19:59:43 fejj_	yea, and it wants to do a recursive scan
+May 04 19:59:51 fejj_	even tho for camel, that's not really desirable
+May 04 20:00:26 fejj_	also, it can't handle #ifdef's
+May 04 20:00:38 jpr	oh, it wants to scan the providers as well?
+May 04 20:00:41 fejj_	yea
+May 04 20:00:54 rodrigo	if you don't tell to ignore the dirs, it does yeah
+May 04 20:00:59 fejj_	and it also barfs on enum's that aren't typedef'd
+May 04 20:01:00 *	ganesh_ (~ganesh@220.226.20.35) has joined #evolution-meet
+May 04 20:01:12 harish	hi ganesh_ 
+May 04 20:01:18 fejj_	oh, I can tell it to ignore dirs? thought I had to specify files
+May 04 20:01:30 ganesh_	hi..there was not power at home..just logged in..How r things ?
+May 04 20:01:42 harish	would you like to introduce yourself and about ur new role 
+May 04 20:01:49 rodo	hi ganesh_ 
+May 04 20:01:57 rodrigo	fejj_: I think if you put the dir names in IGNORE_HFILESit should work
+May 04 20:01:59 ganesh_	Hi rodo..
+May 04 20:02:00 fejj_	anyways, huge pain
+May 04 20:02:02 rodrigo	that is, dir/*.h
+May 04 20:02:07 rodrigo	yeah, pain
+May 04 20:02:11 fejj_	rodrigo: ok, I'll try
+May 04 20:02:15 fejj_	oh
+May 04 20:02:19 ganesh_	I am going to maintain GTKHTMl taking over from rodo..
+May 04 20:02:24 fejj_	wasn't sure the wildcard would work
+May 04 20:02:41 rodrigo	fejj_: not sure, so try
+May 04 20:02:55 harish	guenther, have anything for us ?
+May 04 20:02:57 roozbeh	has libical changed maintainers also?
+May 04 20:03:12 fejj_	the fact that it doesn't autogen the class tree sucks too
+May 04 20:03:18 fejj_	I have to write that out manually
+May 04 20:03:29 harish	roozbeh, not really.. chen and I would continue to look at the calendar modules
+May 04 20:03:43 guenther	harish: I'm officially the Evo maintainer for GARNOME.
+May 04 20:03:46 NotZed	fejj: you could query camel for it
+May 04 20:03:48 guenther	No news apart from that.
+May 04 20:03:54 harish	guenther, :)
+May 04 20:04:01 fejj_	NotZed: what do you mean?
+May 04 20:04:12 harish	haip, ?
+May 04 20:04:19 NotZed	instantiate every object, then dump the class tree
+May 04 20:04:23 nags_	NotZed: Bug #273375 - Possible duplicate of bug# 272807 or
+May 04 20:04:23 nags_	http://bugzilla.ximian.com/show_bug.cgi?id=18830
+May 04 20:04:31 haip	nothing special, in holidays
+May 04 20:04:42 harish	haip, oh yes..saw your mail
+May 04 20:04:49 fejj_	eh, I guess
+May 04 20:04:51 haip	ok
+May 04 20:05:04 fejj_	I already wrote out the class tree so it's not a huge deal
+May 04 20:05:15 harish	haip: the gal patches would be  committed in after review
+May 04 20:05:17 fejj_	now I just need to write it out again in sgml format :\
+May 04 20:05:28 haip	harish, ok, thanks :)
+May 04 20:05:42 NotZed	ok
+May 04 20:06:10 roozbeh	i also have a bug which i personally consider serious, because it bites people without them knowing: http://bugzilla.gnome.org/show_bug.cgi?id=301363 . this post from my blog should enlighten you: http://www.advogato.org/person/roozbeh/diary.html?start=23
+May 04 20:06:17 fejj_	I'm honestly shocked that gtk-doc can't convert camel.hierarchy into class_tree.sgml
+May 04 20:06:19 harish	its my turn - i have mostly been attending talks by jpr and michael and understanding more about my responsibilities
+May 04 20:06:22 fejj_	on its own
+May 04 20:06:29 nags_	harish: may be I need to talk to guenther to integrate Evolution sanity test-scripts with build system ?
+May 04 20:06:37 fejj_	especially since gtk-doc is what wants both those files
+May 04 20:06:42 jpr	nags_: gekker 
+May 04 20:06:42 NotZed	nags: i dont think so
+May 04 20:06:49 nags_	jpr: okay
+May 04 20:06:49 *	fejj_ boggles at the shittiness of gtk-doc
+May 04 20:07:10 harish	NotZed, you want to add a bit about last week ?
+May 04 20:07:11 *	rodrigo shares the pain with fejj_ 
+May 04 20:07:22 NotZed	my status?
+May 04 20:07:24 NotZed	report
+May 04 20:07:51 harish	yes pl. :-)
+May 04 20:07:53 NotZed	some talks/discussions: camel overview, mail threading, and overall evolution mail overview
+May 04 20:07:59 NotZed	implemented a profiling hook and plugin for profiling interactive tasks, and some small tools to visualise the data with some test profiling points.
+May 04 20:08:00 fejj_	rodrigo: it's like calling autobuild...auto
+May 04 20:08:01 fejj_	:p
+May 04 20:08:03 *	ghj (~ghj@202-63-162-234.exatt.net) has joined #evolution-meet
+May 04 20:08:06 NotZed	looked into remote mail api/sending.  basic api started, but not working.  bonobo-activation issue - will probably write ior to disk.  going to implement it as a plugin to start with
+May 04 20:08:10 NotZed	lots of small discussions about specific problems, like offline mode, various design issues, future ideas, etc.
+May 04 20:08:24 harish	NotZed, thanks
+May 04 20:08:43 harish	partha, ?
+May 04 20:09:08 partha	fixed a few issue with the groupwise provider
+May 04 20:09:26 harish	nice.
+May 04 20:09:30 NotZed	oh and various discussions on mailing lists, reviewing patches/etc/ as usual
+May 04 20:09:41 harish	rodo,
+May 04 20:09:43 partha	had a few discussion-sessions with michael regarding camel and other mailer aspects 
+May 04 20:09:59 partha	nothing much apart from that.
+May 04 20:10:18 harish	rodrigo, ?
+May 04 20:10:25 rodo	spent most of time talking with ganesh about gtkhtml design, fixed few more memory leaks
+May 04 20:10:40 rodrigo	been writing API docs, trying to get gtk-doc to work with the new ones
+May 04 20:10:41 rodo	trying to fix some evo's usage of low level apis
+May 04 20:10:50 rodrigo	wrote design docs of calendar
+May 04 20:10:58 rodo	meetings, patch review, ...
+May 04 20:11:19 rodrigo	started list of tasks for 2.6 calendar
+May 04 20:11:28 harish	rodo, we are also trying to do cut down on the public apis on gtkhtml , right ?
+May 04 20:11:29 rodrigo	and reviewed patches
+May 04 20:11:43 rodo	ah, and also writting architecture doc
+May 04 20:11:58 rodo	harish: yes, that's part of it
+May 04 20:12:18 harish	rodrigo, thanks
+May 04 20:12:34 harish	roozbeh, ?
+May 04 20:12:45 roozbeh	ok
+May 04 20:13:00 roozbeh	the thing is that i am playing with timezone data, taking the legacy from damon,
+May 04 20:13:24 roozbeh	and that we should either break Outlook 2000 compatiblity, or provide very bad data.
+May 04 20:13:43 roozbeh	i can't decide what to do, and we can't have both.
+May 04 20:14:03 roozbeh	http://www.advogato.org/person/roozbeh/diary.html?start=23 should be enlightening.
+May 04 20:14:22 harish	yes.. i noticed the conversation on #evolution too
+May 04 20:14:22 rodrigo	roozbeh: btw, maybe you want to add something to http://go-evolution.org/Evo_Future#Simplified_date_management
+May 04 20:14:30 roozbeh	it has bitten me personally two times.
+May 04 20:14:54 roozbeh	this is the bug: http://bugzilla.gnome.org/show_bug.cgi?id=301363
+May 04 20:15:26 harish	roozbeh, maybe we should discuss this right after the meeting, along with surf perhaps
+May 04 20:15:38 roozbeh	harish: ok
+May 04 20:15:44 harish	seb128, anything for us ?
+May 04 20:16:11 seb128	not really
+May 04 20:16:20 harish	ok
+May 04 20:16:24 harish	shaheed_, ?
+May 04 20:16:28 seb128	I've started to package 2.3 for ubuntu but I'm stuck with gal2.6 which contains libgal2.4
+May 04 20:16:35 shaheed_	hi all
+May 04 20:16:47 shaheed_	i am one of the QA team member from india
+May 04 20:16:49 rodrigo	seb128: this should be fixed now in HEAD and 2.2 branch
+May 04 20:16:58 harish	seb128, i committed the fix a few hours ago
+May 04 20:17:08 seb128	k, waiting for the next tarball, there is no hurry
+May 04 20:17:13 seb128	thanks guys
+May 04 20:17:14 harish	on the HEAD
+May 04 20:17:17 jpr	rodrigo: 2.2 branch?
+May 04 20:17:27 rodo	seb128: do you also make ubuntu packages for ppc?
+May 04 20:17:31 rodrigo	gnome-2-10-branch
+May 04 20:17:36 rodrigo	didn't harish commit it there too?
+May 04 20:17:44 jpr	why did i need fixing there?
+May 04 20:17:47 harish	rodrigo, no
+May 04 20:17:51 rodrigo	right, sorry
+May 04 20:17:56 shaheed_	harish: i am writing test cases for mailer component and also automating them using LDTP
+May 04 20:18:03 seb128	rodo: I make my package on i386, the build machines do amd64/ppc/...
+May 04 20:18:05 seb128	why ?
+May 04 20:18:26 rodo	seb128: just wonder if there will be 2.3 packages for me :)
+May 04 20:18:27 harish	shaheed_, some of us watched a demo of your work too.. nice
+May 04 20:18:35 harish	shres, ? 
+May 04 20:18:37 shaheed_	harish: thanks
+May 04 20:19:00 seb128	rodo: right, ppc packages for everything :)
+May 04 20:19:01 nags_	LDTP - http://gnomebangalore.org/ldtp (GNU/Linux Desktop Testing Project)
+May 04 20:19:06 shaheed_	and also modifying the recording feature
+May 04 20:19:15 rodo	seb128: cool!
+May 04 20:19:20 harish	shres joins partha and sankar on the mailer 
+May 04 20:19:29 shres	hey guys, My name is shreyas i will be working on Mailer and the Mac Build. I come from the rough neighbourhoods of OOo into evolution ;)
+May 04 20:19:35 shaheed_	to record test scripts in pyldtp format which was originally written by nags_
+May 04 20:19:55 harish	cool
+May 04 20:20:00 shres	harish: I got some initial work done on the MAC OSX build much thanks to hpj for the nice tutorial
+May 04 20:20:19 harish	and some hard disk upgrades too, i guess. surf ?
+May 04 20:20:28 rodo	shres: rough neighbourhood, interesting ;-)
+May 04 20:20:55 shres	harish: also got down to narrowing down a few offline issues with help from NotZed and hopefully a nice patch should be on its way soon 
+May 04 20:21:14 surf	created a branch to move exchange server communicating code to eds, working on making authentication possible from all components for exchange, attending some arch talks, some more meetings with new team , sp and varadhan
+May 04 20:21:16 harish	shres, great..and welcome to evolution
+May 04 20:21:23 shres	harish: thanks 
+May 04 20:21:34 harish	thanks, surf
+May 04 20:21:37 harish	sush, ?
+May 04 20:21:43 sush	Fixed some address book bugs
+May 04 20:21:48 sush	Spent some time on Exchange GAL query issue.
+May 04 20:21:58 sush	updated wiki with address book features for 2.4..
+May 04 20:22:08 sush	will be putting up address book design docs soon.
+May 04 20:22:12 *	bandini (~Arturo@nat.xsec.it) has joined #evolution-meet
+May 04 20:22:13 harish	cool.
+May 04 20:22:17 shres	rodo: heh, oh well the age old saying goes "when the going gets tough the tough get going" ;)
+May 04 20:22:45 rodo	:)
+May 04 20:22:53 harish	btw, sush who had been working on the exchange connector for more than a year now would be hacking on the 
+May 04 20:23:28 harish	..address book along with Srinivasa Raghavan (srag) who also is from OO
+May 04 20:23:39 harish	hi tml
+May 04 20:23:47 harish	any updates for us ?
+May 04 20:23:52 tml	yes, been looking at e-d-s, doing basic win32 portability work in it. also some bug fixes and enhancements in gtk+/pango/glib on win32 
+May 04 20:24:38 harish	great. do you have anything pending on gal ?
+May 04 20:24:50 tml	not really at the moment
+May 04 20:24:58 *	pvanhoof (~pvanhoof@cvs.maia-scientific.com) has joined #evolution-meet
+May 04 20:25:08 tml	but stuff no doubt come up later
+May 04 20:25:43 harish	tml : ok. gal on cvs is likely to be closed for commits as part of its movement into evolution
+May 04 20:26:00 harish	i would request kaushal to keep  you posted on his plans
+May 04 20:26:09 tml	ok. what's the history of it, btw?
+May 04 20:26:30 tml	has is originally been separate, or was it first part of evo, then split out, and now going back?
+May 04 20:26:53 harish	tml, kind of. is that right, jpr ?
+May 04 20:27:07 jpr	i'm not sure where etable came from
+May 04 20:27:12 jpr	but it was dumped in there
+May 04 20:27:17 ganesh_	harish, rodo, I will have to sign-off now..
+May 04 20:27:20 jpr	along with some stuff common to gnumeric
+May 04 20:27:23 harish	uneumann, ??
+May 04 20:27:32 jpr	(gnumeric no longer uses it)
+May 04 20:27:48 harish	varadhan, ??
+May 04 20:27:51 NotZed	i thought it was mostly always separate
+May 04 20:28:13 NotZed	hmm, etable ... maybe since we're going to root up the ui we could through gtktreeview at it too
+May 04 20:28:21 varadhan	Hi All.  I am Varadhan and will be handling evo-conduits
+May 04 20:28:22 uneumann	Hi harish.
+May 04 20:28:30 uneumann	I'm new here :-)
+May 04 20:28:36 harish	uneumann, welcome
+May 04 20:28:52 harish	vivek, ?
+May 04 20:28:52 varadhan	I am coming from Beagle. 
+May 04 20:29:27 varadhan	as for the status, well... attended evo talks/presentations by jpr.  
+May 04 20:29:28 vivek	identified "common" user actions and collected some profiling data for the time taken by each of them, put some of them on wiki, had started with putting GTimer, and now using NotZed's plugin to get the data for mailer related actions (pretty helpful)
+May 04 20:30:11 vivek	still have to update wiki with the more data
+May 04 20:30:14 harish	thanks vivek 
+May 04 20:30:22 gekker	evolution was updated to 2.0.4 for BETA3 of NLD9-SP2, so for anyone testing, watch for that in the May 13 build
+May 04 20:30:31 gekker	since you skipped me earlier ;)
+May 04 20:30:40 NotZed	vivek: the plugin can be used in all components, any profiling stuff you do can then be patched into the tree too
+May 04 20:30:41 varadhan	and attended a nice-detailed-code-walk-through by jpr on gnome-pilot and evo-conduits.
+May 04 20:30:43 harish	gekker, oh sorry ! thanks
+May 04 20:31:12 rodo	gekker: 2.0.4? not 2.2.x?
+May 04 20:31:13 vivek	NotZed, yea i am planning to do that, just that started with mailer :)
+May 04 20:31:34 harish	i also had two other agenda items - the first on a rethink about our patch review process
+May 04 20:31:34 gekker	rodo: yes 2.0.4
+May 04 20:31:35 jpr	rodo: correct 2.0.4
+May 04 20:31:37 dhm_home	varadhan, jpr: any notes on this postable publically?
+May 04 20:31:53 rodo	ok
+May 04 20:31:57 varadhan	dhm_home: gnome-pilot or evo-conduits?
+May 04 20:32:02 NotZed	good-o :)
+May 04 20:32:06 nags_	gekker: yes we are testing it in Bangalore
+May 04 20:32:07 dhm_home	(gnome-pilot/conduits that is)
+May 04 20:32:21 nags_	NLD-SP2, Beta3
+May 04 20:32:43 harish	jpr has suggested that we deprecate e-p and align to the gnome bugzilla way
+May 04 20:32:53 gekker	nags_: let me know if there are any problems, take a quick look at the apps that consume e-d-s to make sure that works if you can
+May 04 20:33:03 jpr	not just for the sake of doing it the gnome way
+May 04 20:33:14 nags_	gekker: Ya sure
+May 04 20:33:15 jpr	but we have a tendency to "lose" patches in the mailing list
+May 04 20:33:24 jpr	its also easier for downstream packagers
+May 04 20:33:28 jpr	to release updates
+May 04 20:33:37 NotZed	and easier for contributors
+May 04 20:33:38 jpr	if the patch is on the bug
+May 04 20:33:40 jpr	yes
+May 04 20:33:44 harish	yes
+May 04 20:33:55 jpr	my main concern is visibility of the patches
+May 04 20:33:57 jpr	for review
+May 04 20:34:06 varadhan	dhm_home: I don't think anything is *readily* available. ;)
+May 04 20:34:07 jpr	but there are some  b.g.o reports related to patches
+May 04 20:34:09 rodrigo	yeah, some patches would be lost
+May 04 20:34:18 jpr	so those might help
+May 04 20:34:20 rodo	might be good to have page summarizing patches as we had for milestones
+May 04 20:34:34 guenther	jpr: I'm concerned about noticing the relevant patches, too.
+May 04 20:34:40 jpr	they should have the PATCH keyword
+May 04 20:34:45 dhm_home	varadhan: http://live.gnome.org/GnomePanel is all I know about
+May 04 20:34:46 jpr	as per usual
+May 04 20:35:00 *	varadhan checks
+May 04 20:35:12 guenther	well, monitoring a mailing list vs. monitoring a whole bugzilla... ;)
+May 04 20:35:28 jpr	i don't think its much harder
+May 04 20:35:30 andre_	almost all patches that were posted to *bugzilla* should have patch keyword enabled
+May 04 20:35:38 surf	the concerned maintainers would be notified by mails .. so thats a good thing
+May 04 20:35:41 harish	bugzilla makes it easier to query unreviewed patches better though
+May 04 20:35:42 NotZed	jpr: not according to the keyword help page
+May 04 20:35:45 dhm_home	varadhan: oops, wrong link. sorry.  shpuld have been http://live.gnome.org/GnomePilot
+May 04 20:35:56 jpr	NotZed: no?
+May 04 20:36:03 varadhan	dhm_home: no probs.. ;-)
+May 04 20:36:04 nags_	jpr: but patch keyword in description page is something like this...
+May 04 20:36:06 nags_	jpr: This keyword is deprecated and will be removed at a future date. It is also useless since many patches do not have this keyword set at all. Patches should now be found by querying bugzilla for attachment statuses.
+May 04 20:36:19 jpr	well, there you go :-)
+May 04 20:36:25 jpr	there is still a way to do it
+May 04 20:36:31 jpr	we don't have to change right away, but i think it should definitely be considered
+May 04 20:36:46 nags_	okay
+May 04 20:37:23 varadhan	dhm_home: hmm.. that gives the Headlines ;)
+May 04 20:37:33 pvanhoof	perhaps some guidelines on the wiki about sending patches?
+May 04 20:37:33 harish	that also reminds us to relook at patches pending for reviews and clearing off the backlog
+May 04 20:37:51 jpr	pvanhoof: they are on the existing site
+May 04 20:37:51 NotZed	it is going to be painful because bgo is so much slower than reading mails, and you must be online to do it
+May 04 20:38:04 jpr	good point
+May 04 20:38:06 rodrigo	yeah, that's another problem I see
+May 04 20:38:41 jpr	maybe we should discuss on e-h
+May 04 20:39:07 harish	yes. i suggest we thrash this out on e-h or the wiki 
+May 04 20:39:16 *	ganesh_ has quit (Ping timeout: 600 seconds)
+May 04 20:39:34 harish	and gather more views on this
+May 04 20:40:11 harish	The second point I wanted to discuss was about a rethink on the timing of this meeting..
+May 04 20:40:25 *	guenther definitely prefers mailing lists over wikis
+May 04 20:40:39 nags_	jpr: maybe one of us in QA team can collect the patches in bgo and sent them to hackers mailing list ?
+May 04 20:40:50 NotZed	guenther: well it was bugzilla over mailing list (patch)
+May 04 20:40:51 harish	every week - so as to make it comfortable for most of the attendees.. i invite suggestions on this 
+May 04 20:41:02 rodrigo	10 am india time :)
+May 04 20:41:04 pvanhoof	(about timing for this meeting: for me personally it's a difficult timing because at this hour I'm doing my professional tasks: non free time. Not impossible)
+May 04 20:41:20 guenther	NotZed: for discussing the e-p deprecation
+May 04 20:41:32 NotZed	guenther: oh yeah, agreed
+May 04 20:41:45 ghj	harish, I was the one t post to you regarding the timing, against my inital request, after I recalculated I am comfertable with this time.
+May 04 20:42:31 andre_	nags_: as already said, i've put the "patch" keyword on nearly every patch attached in bugzilla about two months ago, shouldn't be too hard
+May 04 20:42:45 nags_	andre_: Okay
+May 04 20:42:52 harish	around 1500 india time makes it easier on Australia, India and Europe , i guess
+May 04 20:43:15 jpr	(its 8:45pm in india right now)
+May 04 20:44:07 harish	jpr, yes..and it shows.. none of the guys in india have spoken so far on this ;-)
+May 04 20:44:17 nags_	:)
+May 04 20:44:36 haip	it is 11:15 pm in China :)
+May 04 20:44:38 NotZed	what about 13:30 indian time?
+May 04 20:44:39 varadhan	anything after 2:00 PM India time is good.
+May 04 20:44:41 rodrigo	harish: because they're hungry now, and want to go for dinner :)
+May 04 20:45:01 ghj	harish, Coming from Onward Novell, development for Evolution is a personal hobby, it will be difficult for non-IDC members to attend the meet.
+May 04 20:45:06 jpr	north america is the issue for either
+May 04 20:45:30 surf	yeah 13:30 to 15:00 sometime seems to be a good time
+May 04 20:45:32 harish	haip, 3pm India should be late evening in China - i guess 
+May 04 20:45:35 harish	is that good time
+May 04 20:45:48 haip	I guess it is 6pm, it is ok for me.
+May 04 20:45:49 ghj	current timing is good for me, since I am either working in office or at home. Both places I can attend the meet.
+May 04 20:46:07 tml	fine with me
+May 04 20:46:49 jpr	mmm
+May 04 20:46:50 jpr	beer
+May 04 20:46:51 harish	jpr, almost any of these times is difficult for ppl on NA
+May 04 20:46:54 ghj	if everyone is fine with 1500 hrs IST (India Standard Time) I can live with it.
+May 04 20:46:56 jpr	yep
+May 04 20:47:03 NotZed	i suppose 6:30 is ok, i'd rather earlier.
+May 04 20:47:18 chen	would like it to be at 1500
+May 04 20:47:26 dhm_home	would 1500 IST be 5am EST  ?
+May 04 20:47:27 NotZed	6:30 'home time'
+May 04 20:47:42 partha	13:30 - 14:00 IST sounds good enough
+May 04 20:47:51 jpr	dhm_home: 5:30am
+May 04 20:47:55 jpr	EDT
+May 04 20:47:59 tml	what's that in UTC?
+May 04 20:48:12 rodrigo	tml: now -5 hours
+May 04 20:48:21 harish	dhm_home, 1500 IST would be 0930 GMT
+May 04 20:48:34 rodrigo	right, 5.30
+May 04 20:48:52 harish	IST is UTC +0530  (and no daylight savings corrections ever)
+May 04 20:48:52 dhm_home	so 5.30am Eastern time in uSA
+May 04 20:48:54 Nat	930 GMT is 3:30am in EST?
+May 04 20:49:01 Nat	oh 5:30am EST?
+May 04 20:49:06 jpr	yes
+May 04 20:49:07 Nat	good god
+May 04 20:49:45 jpr	as noted, pick a good time for NA, europe, india, china, and .au :-)
+May 04 20:49:45 andre_	Nat: move to europe ;-p
+May 04 20:49:53 jpr	we're listening :-)
+May 04 20:50:33 *	dhm_home adds "work on time machine" to http://go-evolution.org/TwoFourTaskList
+May 04 20:51:12 harish	ok...prolly this too can go on to the e-h list now
+May 04 20:51:21 guenther	one timezone all over the world would be so much easier...
+May 04 20:51:22 tml	dhm_home: there is already a bug open for that
+May 04 20:51:31 harish	its been a very long meeting today :-)
+May 04 20:51:35 roozbeh	jpr: well, it's easy to pick a good time to meet those zones, the problem is making sure every hacker is up at the time general public is awake at the time ;)
+May 04 20:51:56 NotZed	its not really easy to pick a good time
+May 04 20:52:42 harish	thank you guys.. see you next week and hopefully we have concurred on the timing then
+May 04 20:52:44 tml	dhm_home: #171940
+May 04 20:52:49 harish	thanks all
+May 04 20:53:00 partha	yea.
+May 04 20:53:05 nags_	bye
+May 04 20:53:07 tml	bye all
+May 04 20:53:07 ghj	thanks harish. Bye
+May 04 20:53:18 harish	bye
+May 04 20:53:25 rodo	bye
+May 04 20:53:27 shaheed_	bye all
+May 04 20:53:31 jpr	bye
+May 04 20:53:31 *	fejj_ (~fejj@c-66-30-106-142.hsd1.ma.comcast.net) has left #evolution-meet
+May 04 20:53:32 *	jpr (~jpr@202.144.86.147) has left #evolution-meet
+May 04 20:53:34 surf	bye
+May 04 20:53:34 chen	bye all
+May 04 20:53:37 uneumann	bye
+May 04 20:53:39 *	nags_ (~nags@202.144.86.147) has left #evolution-meet
+May 04 20:53:40 *	surf (~surf@202.144.86.147) has left #evolution-meet
+May 04 20:53:43 dhm_home	tml: thanks!
+May 04 20:53:49 *	andre_ (~y0020796@rzlx0006.rz.tu-bs.de) has left #evolution-meet
+May 04 20:53:51 *	shaheed_ (~shaheed@202.144.86.147) has left #evolution-meet
+May 04 20:53:53 *	sush (~Sushma@202.144.86.147) has left #evolution-meet
+May 04 20:54:01 *	rodrigo (~rodrigo@202.144.86.147) has left #evolution-meet
+May 04 20:54:04 *	rodo (~rodo@202.144.86.147) has left #evolution-meet
+May 04 20:54:11 *	haip (~haip@221.217.24.152) has left #evolution-meet
+May 04 20:54:15 *	tml (~tml@MMCCCXLIII.tun.saunalahti.fi) has left #evolution-meet
+May 04 20:54:18 *	uneumann (~uli@213.83.32.16) has left #evolution-meet
+May 04 20:54:19 *	ghj has quit (Leaving)
+May 04 20:54:30 *	chen is now known as chen_home
+May 04 20:54:34 *	dhm_home (~david@c-66-30-211-145.hsd1.ma.comcast.net) has left #evolution-meet
+May 04 20:54:37 shres	Bye people
+May 04 20:54:40 *	shres (~shreyas@202.144.86.147) has left #evolution-meet
+May 04 20:55:24 *	gekker (~gekker@camus.provo.novell.com) has left #evolution-meet
+May 04 20:55:48 *	NotZed (~notzed@202.144.86.147) has left #evolution-meet
+May 04 20:56:29 *	guenther (~guenther@IP-213188108016.dialin.heagmedianet.de) has left #evolution-meet
+May 04 20:56:37 *	seb128 (~seb128@ANancy-151-1-32-67.w83-196.abo.wanadoo.fr) has left #evolution-meet
+May 04 20:58:05 *	partha (~partha@202.144.86.147) has left #evolution-meet
+May 04 21:00:55 varadhan	Bye every1
+May 04 21:01:05 *	varadhan (~varadhan@202.144.86.147) has left #evolution-meet
+May 04 21:01:06 *	You are now known as harish_home
+May 05 08:39:55 *	Nat (~Nat_@c-24-34-186-89.hsd1.ma.comcast.net) has left #evolution-meet
+May 05 08:40:01 *	Disconnected (Connection reset by peer).
+**** ENDING LOGGING AT Thu May  5 08:40:01 2005
+
+**** BEGIN LOGGING AT Thu May  5 08:40:55 2005
+
+May 05 08:40:55 *	Now talking on #evolution-meet
+May 05 09:35:45 *	You are now known as harish
