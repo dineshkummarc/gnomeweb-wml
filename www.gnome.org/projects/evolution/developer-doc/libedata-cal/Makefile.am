@@ -1,4 +1,4 @@
-urlpath=/projects/evolution/developer-doc/libecal
+urlpath=/projects/evolution/developer-doc/libedata-cal
 
 page_DATA = 					\
 	ECalBackend.html			\

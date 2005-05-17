@@ -1,4 +1,4 @@
-SUBDIRS = eplugin libebook libecal
+SUBDIRS = eplugin libebook libecal libedata-cal
 
 urlpath=/projects/evolution/developer-doc
 
