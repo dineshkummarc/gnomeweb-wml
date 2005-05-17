@@ -18,6 +18,7 @@ page_DATA = 				\
 	home.png  			\
 	left.png			\
 	right.png			\
+	style.css			\
 	up.png
 
 include $(top_srcdir)/rules.common

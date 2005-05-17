@@ -15,6 +15,7 @@ page_DATA = 					\
 	libedata-cal-EDataCalFactory.html	\
 	libedata-cal-e-cal-backend-util.html	\
 	right.png				\
+	style.css				\
 	up.png
 
 include $(top_srcdir)/rules.common
