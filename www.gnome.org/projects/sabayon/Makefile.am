@@ -9,6 +9,8 @@ page_SCRIPTS=			\
 	testing.html		\
 	developing.html		\
 	helping.html		\
+	config.html		\
+	format.html		\
 	brownbar.jpg		\
 	brownbarTop.jpg		\
 	shadow.gif		\

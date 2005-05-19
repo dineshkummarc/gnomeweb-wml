@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><link rel="stylesheet" type="text/css" href="sabayon.css" /><title> The profile files format </title></head><body><div id="main"><div id="top"><img src="title01.jpg" border="0" height="229" width="432" alt="Sabayon: user profiles made simple" /><img src="title02.jpg" border="0" height="229" alt="Small screenshot of sabayon" /></div><div id="left"><div class="box"><h2 class="box_title">Download</h2><h4 class="box_header">RPMs</h4><ul><li>RPMs for Fedora Core 4 are available from <a href="http://download.fedora.redhat.com/pub/fedora/linux/extras/">Fedora Extras</a></li></ul><h4 class="box_header">Source</h4><ul><li><a href="http://ftp.gnome.org/pub/GNOME/sources/sabayon/">tarball</a></li><li><a href="http://cvs.gnome.org/viewcvs/sabayon/">CVS Repository</a></li></ul></div><div class="box"><h2 class="box_title">Contribute</h2><p>There are several ways to contribute to the Sabayon project.</p><p><a href="testing.html">Testing</a>, go here if you want to install sabayon and try it out.</p><p><a href="developing.html">Developing</a>, get the code and try to fix errors and send patches to the maintainers.</p><p><a href="helping.html">Helping out</a> on the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">mailing list</a> and <a href="irc://irc.gnome.org/sabayon">IRC</a> for people having problems, letting them know where to go and what to do.</p></div><div class="box"><h2 class="box_title">Contact</h2><p>You can contact developers <a href="mailto:sabayon-list@gnome.org">sending a mail</a> to the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">Sabayon mailing list</a>. You do not need to be subscribed.</p><p>We are also often available to <a href="irc://irc.gnome.org/sabayon">chat on IRC</a>.</p><p><strong>Server:</strong> irc.gnome.org<br /><strong>Channel:</strong> #sabayon</p></div><div class="box"><h2 class="box_title">Documentation</h2><p>Format and deployement of the <a href="config.html">config
+         files</a></p><p>Technical informations on the <a href="format.html">profile
+         format</a></p></div></div><div id="right"><p> The following is a description of the requirement and the choices
+    made when designing the user profile files. The existing format may
+    change in the future but unless some of the requirement were missing
+    it seems the existing choice is simple and flexible enough that no
+    big change should be needed in the future.</p><h4>Format requirements</h4><ul>
+      <li> incremental update</li>
+      <li> container for sets of settings of different apps</li>
+      <li> associate apps with settings</li>
+      <li> independent update of one set of settings</li>
+      <li> ability to store full file</li>
+      <li> ability to save path with the content</li>
+      <li> provide metadata for the whole set and for each apps settings</li>
+      <li> possibility to merge and detect potential clashes on merges</li>
+      <li> possibility to extract or remove a simple set of data</li>
+      <li> allow to process with as standard tools as possible </li>
+    </ul><h4>Design choices</h4><p>Use ZIP for the container format:</p><ul>
+      <li> platform ubiquity Linux/Windows/Mac...</li>
+      <li> free software tools and libraries</li>
+      <li> compressed</li>
+      <li> allows to access a single stream without exploding everything like a compressed tar or cpio requires</li>
+      <li> allow to store name/paths</li>
+    </ul><p>Add an XML metadata section as the first entry:</p><ul>
+      <li> classic design (jar)</li>
+      <li> allow to store all metadata informations associated</li>
+      <li> easy to extend in a backward and forward compatible way</li>
+      <li> open source tools and local knowledge</li>
+      <li> a lot of configuration data already require XML handling so this doesn't add an extra dependancy</li>
+      <li> load/modify subpart/save operations are easy on an XML tree</li>
+    </ul><h4>Internal structure</h4><p> The container is a Zip, its content can be viewed using the command
+    <b>unzip -l /etc/desktop-profiles/test.zip</b></p><p> The first entry is the metadata part, it is an XML file describing the
+    content of the archive. It can be viewed using the command
+    <b>unzip -p /etc/desktop-profiles/test.zip metadata</b>:</p><ul>
+      <li> versionning informations</li>
+      <li> general description for the whole set of settings e.g. "Configuration for developers in project foo":
+        <ul>
+	  <li> administrative informations</li>
+	  <li> last change timestamp</li>
+	  <li> contact</li>
+	  <li> changelog</li>
+	</ul>
+      </li>
+      <li> per stream description
+        <ul>
+	  <li>  name of the stream in the archive</li>
+	  <li> associated application</li>
+	  <li> versionning informations</li>
+	  <li> description for settings e.g. "Mozilla starts full screen"</li>
+	  <li> administrative info</li>
+	  <li> type of stream (rawfile/xml/.ini etc.)</li>
+	</ul>
+      </li>
+    </ul><p> Then in the ZIP, each update has its own stream, the format is left to
+    the corresponding user profile writer module. It can potentially be a
+    full raw file, or a more synthetic description recognized by the specific
+    profile module.</p><p> Note that an application can have one
+    stream per different configuration file for example
+    .rhopenoffice1.1/user/registry/data/org/openoffice/Inet.xcu and
+    .rhopenoffice1.1/user/registry/data/org/openoffice/Office/Common.xcu
+    would be 2 different streams maintained by the OpenOffice reader
+    writer module. An application may have both raw configuration files
+    and digested name/values pairs, but in different files. </p></div><div id="copyright"></div></div></body></html>

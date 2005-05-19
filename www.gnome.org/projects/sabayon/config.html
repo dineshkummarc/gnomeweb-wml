@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><link rel="stylesheet" type="text/css" href="sabayon.css" /><title> The configuration files </title></head><body><div id="main"><div id="top"><img src="title01.jpg" border="0" height="229" width="432" alt="Sabayon: user profiles made simple" /><img src="title02.jpg" border="0" height="229" alt="Small screenshot of sabayon" /></div><div id="left"><div class="box"><h2 class="box_title">Download</h2><h4 class="box_header">RPMs</h4><ul><li>RPMs for Fedora Core 4 are available from <a href="http://download.fedora.redhat.com/pub/fedora/linux/extras/">Fedora Extras</a></li></ul><h4 class="box_header">Source</h4><ul><li><a href="http://ftp.gnome.org/pub/GNOME/sources/sabayon/">tarball</a></li><li><a href="http://cvs.gnome.org/viewcvs/sabayon/">CVS Repository</a></li></ul></div><div class="box"><h2 class="box_title">Contribute</h2><p>There are several ways to contribute to the Sabayon project.</p><p><a href="testing.html">Testing</a>, go here if you want to install sabayon and try it out.</p><p><a href="developing.html">Developing</a>, get the code and try to fix errors and send patches to the maintainers.</p><p><a href="helping.html">Helping out</a> on the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">mailing list</a> and <a href="irc://irc.gnome.org/sabayon">IRC</a> for people having problems, letting them know where to go and what to do.</p></div><div class="box"><h2 class="box_title">Contact</h2><p>You can contact developers <a href="mailto:sabayon-list@gnome.org">sending a mail</a> to the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">Sabayon mailing list</a>. You do not need to be subscribed.</p><p>We are also often available to <a href="irc://irc.gnome.org/sabayon">chat on IRC</a>.</p><p><strong>Server:</strong> irc.gnome.org<br /><strong>Channel:</strong> #sabayon</p></div><div class="box"><h2 class="box_title">Documentation</h2><p>Format and deployement of the <a href="config.html">config
+         files</a></p><p>Technical informations on the <a href="format.html">profile
+         format</a></p></div></div><div id="right"><p> This page details the format of the user configuration file,
+        where to store and access them.</p><h4>The user database</h4><p> This file is located under <b>/etc/desktop-profiles/users.xml</b>
+    (see PROFILESDIR in the config.py file to change the prefix), as the name
+    makes clear it is an XML file and usually look like:</p><pre>
+      &lt;profiles&gt;
+        &lt;user name="titeuf" profile="developper"/&gt;
+        &lt;user name="fab" profile="developper"/&gt;
+        &lt;user name="bianca" profile="secretary"/&gt;
+	...
+        &lt;default profile="default"/&gt;
+      &lt;/profiles&gt;
+    </pre><p> It contains a list of named users, and their associated profile.
+    The profile in that case are aliases, for example <b>developper</b>
+    is a shortcut for <b>developper.zip</b> in the same directory.</p><p> The default profile will be applied for any login not listed 
+    explicitely in the set of users. At this point there is no support
+    for grouping user definitions in the format, this may be added later
+    if there is an unambiguous way to do it.</p><h4>Centralized user databases and profiles</h4><p> For large and automated deployement, maintaining copies of the user
+    database and profiles on all machines does not really make sense. To 
+    avoid the problem, the profile values can be an URI - preferably using
+    HTTP - to reference a remote resource like:</p><pre>        ...
+        &lt;user name="titeuf"
+	            profile="http://server.corp.com/prof/developers.zip"/&gt;
+        &lt;user name="fab"
+	            profile="http://server.corp.com/prof/developers.zip"/&gt;
+	...
+    </pre><p> The profiles should then be maintained on a separate machine and
+    copied over to the server when updated.</p><p> The user database can also be centralized, using the
+    <a href="http://www.w3.org/TR/xinclude/">XInclude</a> mechanism for XML.
+    For example the following assume there is a developer list maintained
+    separately on the server, and defining the profiles for
+    them:</p><pre>
+      &lt;profiles&gt;
+        &lt;xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+	      href="http://server.corp.com/user/devel.xml#xpointer(//user)"/&gt;
+	...
+        &lt;default profile="default"/&gt;
+      &lt;/profiles&gt;
+    </pre><p> This XInclude will just collect all user definitions in the developper
+    list at <b>http://server.corp.com/user/devel.xml</b> and replace the 
+    include statement with that list, and process the XML as usual. The only
+    difference is that the profile values are then assumed to be URI-References
+    and for example if the <b>devel.xml</b> contains</p><pre>        ...
+        &lt;user name="titeuf" profile="../prof/developers.zip"/&gt;
+	...
+    </pre><p> then sabayon will fetch the profile relative to the location of
+    devel.xml, that is it will lookup the profiles relative to the base
+    of where the fragment was defined and use
+    <b>http://server.corp.com/prof/developers.zip</b>. Also note that
+    shortcut are not allowed there, the trailing <b>.zip</b> is needed.</p><p> The last point about the centralized support is that sabayon will
+    use a cache located in the user home directory under <b>.profile_cache</b>
+    to keep a copy of the non-local files, this allows profile to function
+    normally in disconnected operations or in case of server failures.</p></div><div id="copyright"></div></div></body></html>
