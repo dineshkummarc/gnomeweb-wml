@@ -46,6 +46,7 @@ page_SCRIPTS = \
 	gnome210_press_release.th.html \
 	gnome210_press_release.html \
 	guadec6-speakers.html \
-	osc-europe.html
+	osc-europe.html \
+	guadec6-media.html
 
 include $(top_srcdir)/rules.common
