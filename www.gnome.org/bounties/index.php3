@@ -69,11 +69,11 @@ collect the bounty.
 <?php taskrow ("Templates for new messages and replies", "Mailer", "Novell", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "Novell", "400", "127530", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "Novell", "300", "127553", ""); ?>
-<?php taskrow ("Add image data to the icon cache", "Memory", "Novell", "100", "169344", ""); ?>
-<?php taskrow ("Create a test suite for browsing in Nautilus", "Memory", "Novell", "200", "169346", ""); ?>
-<?php taskrow ("Reduce login speed", "Optimization", "Google", "4500", "1475708214", ""); ?>
-<?php taskrow ("Reduce Evolution memory usage", "Optimization", "Google", "4500", "496424513", ""); ?>
-<?php taskrow ("Global memory analysis tool", "Optimization", "Google", "4500", "585862214", ""); ?>
+<?php taskrow ("Add image data to the icon cache", "Optimization", "Novell", "100", "169344", ""); ?>
+<?php taskrow ("Create a test suite for browsing in Nautilus", "Optimization", "Novell", "200", "169346", ""); ?>
+<?php taskrow ("Improve login time", "Optimization", "Google", "4500", "306042", ""); ?>
+<?php taskrow ("Reduce Evolution memory usage", "Optimization", "Google", "4500", "306043", ""); ?>
+<?php taskrow ("Global memory analysis tool", "Optimization", "Google", "4500", "306044", ""); ?>
 <?php taskrow ("Use a mmap'able cache for
 fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "608633374", ""); ?>
@@ -117,7 +117,7 @@ files", "Tasks", "Novell", "300", "127557", "http://bugzilla.gnome.org/attachmen
 <?php taskrow ("Handle <tt>aim:</tt> links in Firefox", "IM", "Novell", "100", "127549", "http://bugzilla.gnome.org/attachment.cgi?id=30442"); ?>
 <?php taskrow ("Message receipts", "Mailer", "Novell", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "Novell", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
-<?php taskrow ("Remove duplication of desktop backgrounds", "Memory", "Novell", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
+<?php taskrow ("Remove duplication of desktop backgrounds", "Optimization", "Novell", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 <?php write_table_footer (); ?>
 </div>
 

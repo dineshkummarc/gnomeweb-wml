@@ -128,11 +128,11 @@ maintainers.</a> The primary contact for this task will be <a STYLE="text-decora
 
 
 Implement a live web-based wiki-like editor that allows generation of
-DocBook that can be rolled back into our documentation. Allows users
+content that can be rolled back into our documentation. Allows users
 to contribute annotations and additions to documentation (e.g. can add
 documentation to an undocumented function), save it. Other people
 visiting the page will see your additions to the documentation, and
-the maintainer of the module can extract the addition as docbook and
+the maintainer of the module can extract the addition and
 trivially roll it into the official documentation source.
    
 <?php box_end (); ?>
