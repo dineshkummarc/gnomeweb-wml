@@ -24,6 +24,7 @@ page_SCRIPTS = \
 	mandrakesoftjoins.html \
 	newcommitments.html \
 	ney_execdir.html \
+	nokiadonation.html \
 	redflagjoins.html \
 	redhat.html \
 	sunjoins.html \
