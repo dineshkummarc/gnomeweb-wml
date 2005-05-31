@@ -5,13 +5,13 @@ include ("./util.php");
 ?>
 
 <?php write_page_header ("Calendar Bounties"); ?>
-<?php write_table_header ("no"); ?>
-<?php taskrow ("Panel clock/calendar integration", "hidden", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
-<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
-<?php taskrow ("Weather calendar backend", "hidden", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
-<?php taskrow ("Publish your calendar", "hidden", "2000", "127538", ""); ?>
-<?php taskrow ("Publish free/busy information", "hidden", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
-<?php taskrow ("Default free/busy URI", "hidden", "300", "127541", "http://bugzilla.gnome.org/attachment.cgi?id=34969&action=view"); ?>
+<?php write_table_header ("no", "yes"); ?>
+<?php taskrow ("Panel clock/calendar integration", "hidden", "Novell", "1000", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
+<?php taskrow ("Birthday and anniversary calendar backend", "hidden", "Novell", "500", "127535", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004082.html"); ?>
+<?php taskrow ("Weather calendar backend", "hidden", "Novell", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
+<?php taskrow ("Publish your calendar", "hidden", "Novell", "2000", "127538", ""); ?>
+<?php taskrow ("Publish free/busy information", "hidden", "Novell", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
+<?php taskrow ("Default free/busy URI", "hidden", "Novell", "300", "127541", "http://bugzilla.gnome.org/attachment.cgi?id=34969&action=view"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Panel clock/calendar integration", "Calendar", "1000", "127532", "127532", "http://www.gnome.org/~markmc/clock-evo-integration.diff"); ?>
 

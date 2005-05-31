@@ -5,12 +5,12 @@ include ("./util.php");
 ?>
 
 <?php write_page_header ("Addressbook Bounties"); ?>
-<?php write_table_header ("no"); ?>
-<?php taskrow ("Gaim/addressbook identity integration", "hidden", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
-<?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "500", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
-<?php taskrow ("Planner (formerly MrProject) integration", "hidden", "300", "127520", ""); ?>
-<?php taskrow ("Contact search applet", "hidden", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
-<?php taskrow ("Advanced LDAP Configuration", "hidden", "250", "127525", ""); ?>
+<?php write_table_header ("no", "yes"); ?>
+<?php taskrow ("Gaim/addressbook identity integration", "hidden", "Novell", "2500", "127513", "http://www.chipx86.com/gevolution/"); ?>
+<?php taskrow ("Addressbook/GnomeMeeting integration", "hidden", "Novell", "500", "127515", "http://cvs.gnome.org/viewcvs/gnomemeeting/src"); ?>
+<?php taskrow ("Planner (formerly MrProject) integration", "hidden", "Novell", "300", "127520", ""); ?>
+<?php taskrow ("Contact search applet", "hidden", "Novell", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
+<?php taskrow ("Advanced LDAP Configuration", "hidden", "Novell", "250", "127525", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Gaim/addressbook identity integration", "Addressbook", "2500", "127513", "127513", "http://www.chipx86.com/gevolution/"); ?>
 

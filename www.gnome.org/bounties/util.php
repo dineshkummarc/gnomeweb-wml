@@ -1,6 +1,6 @@
 <?php
 
-function write_table_header ($show_category)
+function write_table_header ($show_category, $show_funded_by)
 {
 ?>
 <table class="table-tasks" cellspacing=2 border=0>
@@ -12,22 +12,35 @@ if ($show_category == "yes") {
 <? } ?>
     <th style="text-decoration:none" class="category">Task Name</th>
     <th style="text-decoration:none" class="column-category" style=onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Money')">Bounty</th>
+<?php
+if ($show_funded_by == "yes") {
+?>
+    <th style="text-decoration:none" class="column-category" style=onMouseOver="ul(this)" onMouseOut="noul(this)" onClick="tableSort (this, 'Money')">Funded By</th>
+<?php
+}
+?>
 </tr></thead>
 <?php
 }
 
-function taskrow ($title, $category, $amount, $id, $solution = "")
+function taskrow ($title, $category, $funder, $amount, $id, $solution = "")
 {
 ?>
 <tr class="taskrow">
 <?php
 if ($category != "hidden") { ?>
-    <td><?php print $category; ?></td>
+    <td><a href="<?php print $category; ?>.html"><?php print $category; ?></a></td>
     <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<span class=\"solved\">Solved:</span>"; ?><a STYLE="text-decoration:none" href="<?php print $category; ?>.html#<?php print $id; ?>"><?php if ($solution) {print "<span class=\"solved-strike\">" . $title . "</span>";} else {print $title;} ?></a></td>
 <?php } else { ?>
     <td style=onMouseOver="ul(this)" onMouseOut="noul(this)"><?php if ($solution) print "<span class=\"solved\">Solved: </span>"; ?><a STYLE="text-decoration:none" href="#<?php print $id; ?>"><?php if ($solution) {print "<span class=\"solved-strike\">" . $title . "</span>";} else {print $title;} ?></a></td>
 <?php } ?>
     <td bgcolor="#d0d0ff" >$<?php print $amount; ?></td>
+<?php
+    if ($funder != "hidden") { ?>
+    <td bgcolor="#d0d0ff" ><a href="<?php print $funder; ?>.html"><?php print $funder; ?></a></td>
+<?php
+    }
+?>    
 </tr>
 
 <?php

@@ -5,20 +5,20 @@ include ("./util.php");
 ?>
 
 <?php write_page_header ("Mailer Bounties"); ?>
-<?php write_table_header ("no"); ?>
-<?php taskrow ("Set wallpaper from mailer", "hidden", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
-<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
-<?php taskrow ("Mailing list actions", "hidden", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
-<?php taskrow ("Finish NNTP support in Evolution", "hidden", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
-<?php taskrow ("Inline PGP support for evolution", "hidden", "250", "127521", ""); ?>
-<?php taskrow ("Custom mail headers display", "hidden", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "100", "127526", ""); ?>
-<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
-<?php taskrow ("Templates for new messages and replies", "hidden", "500", "127529", ""); ?>
-<?php taskrow ("Language selection in composer", "hidden", "400", "127530", ""); ?>
-<?php taskrow ("Better smiley substitution in the composer", "hidden", "200", "127533", "http://bugzilla.gnome.org/attachment.cgi?id=21716&action=view"); ?>
-<?php taskrow ("Message receipts", "hidden", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
-<?php taskrow ("Link URLs in the status bar", "hidden", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
+<?php write_table_header ("no", "yes"); ?>
+<?php taskrow ("Set wallpaper from mailer", "hidden", "Novell", "100", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
+<?php taskrow ("Implement a panel notification applet for new mail", "hidden", "Novell", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
+<?php taskrow ("Mailing list actions", "hidden", "Novell", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
+<?php taskrow ("Finish NNTP support in Evolution", "hidden", "Novell", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
+<?php taskrow ("Inline PGP support for evolution", "hidden", "Novell", "250", "127521", ""); ?>
+<?php taskrow ("Custom mail headers display", "hidden", "Novell", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
+<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "Novell", "100", "127526", ""); ?>
+<?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "Novell", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
+<?php taskrow ("Templates for new messages and replies", "hidden", "Novell", "500", "127529", ""); ?>
+<?php taskrow ("Language selection in composer", "hidden", "Novell", "400", "127530", ""); ?>
+<?php taskrow ("Better smiley substitution in the composer", "hidden", "Novell", "200", "127533", "http://bugzilla.gnome.org/attachment.cgi?id=21716&action=view"); ?>
+<?php taskrow ("Message receipts", "hidden", "Novell", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
+<?php taskrow ("Link URLs in the status bar", "hidden", "Novell", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Set wallpaper from mailer", "Mailer", "100", "127514", "127514", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22642"); ?>
 

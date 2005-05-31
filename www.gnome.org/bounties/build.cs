@@ -10,10 +10,18 @@ class Category {
 	public ArrayList bounties;
 }
 
+class Funder {
+	public string name;
+	public string path;
+	public StreamWriter sw;
+	public ArrayList bounties;
+}
+
 class Bounty {
 	public string title;
 	public string amount;
 	public string category;
+	public string funder;
 	public string html;
 	public string solved;
         public int    bug;
@@ -44,6 +52,7 @@ class DoIt {
 			b.title      = GetXmlNodeText (bounty_xml, "title");
 			b.amount     = GetXmlNodeText (bounty_xml, "amount");
 			b.category   = GetXmlNodeText (bounty_xml, "category");
+			b.funder     = GetXmlNodeText (bounty_xml, "funder");
 			b.html       = GetXmlNodeText (bounty_xml, "html");
 			b.solved     = GetXmlNodeText (bounty_xml, "solved");			
 
@@ -106,6 +115,38 @@ class DoIt {
 		return cats;
 	}
 
+
+	static Funder GetFunder (ArrayList funders, string name)
+	{
+		foreach (Funder f in funders) {
+			if (f.name == name)
+				return f;
+		}
+
+		Funder funder = new Funder ();
+		funder.name = name;
+		funder.path = name + ".php3";
+		funder.bounties = new ArrayList ();
+
+		funders.Add (funder);
+
+		return funder;
+	}
+
+	static ArrayList GetFunders (ArrayList bounties)
+	{
+		ArrayList funders = new ArrayList ();
+
+		foreach (Bounty b in bounties) {
+			Funder funder;
+			funder = GetFunder (funders, b.funder);
+
+			funder.bounties.Add (b);
+		}
+
+		return funders;
+	}
+
 	static ArrayList GetSolved (ArrayList bounties)
 	{
 		ArrayList solved = new ArrayList ();
@@ -137,12 +178,13 @@ class DoIt {
 		sr.Close ();
 	}
 
-	static void OutputTable (ArrayList bounties, StreamWriter sw, bool show_category, bool show_solved)
+	static void OutputTable (ArrayList bounties, StreamWriter sw, bool show_category, bool show_funded_by,
+				 bool show_solved)
 	{
-		if (show_category)
-			sw.WriteLine ("<?php write_table_header (\"yes\"); ?>");
-		else
-			sw.WriteLine ("<?php write_table_header (\"no\"); ?>");
+		string show_cat_yesno = show_category ? "yes" : "no";
+		string show_funder_yesno = show_funded_by ? "yes" : "no";
+		sw.WriteLine (String.Format ("<?php write_table_header (\"{0}\", \"{1}\"); ?>",
+					     show_cat_yesno, show_funder_yesno));
 
 		foreach (Bounty b in bounties) {
 			string cat = b.category;
@@ -156,8 +198,12 @@ class DoIt {
 			if (! show_solved && (b.solved != null && b.solved.Length > 0))
 				continue;
 
-			sw.WriteLine ("<?php taskrow (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"); ?>",
-					   b.title, cat, b.amount, b.id, b.solved);
+			string funder = b.funder;
+			if (! show_funded_by)
+				funder = "hidden";
+
+			sw.WriteLine ("<?php taskrow (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\"); ?>",
+					   b.title, cat, funder, b.amount, b.id, b.solved);
 		}
 		sw.WriteLine ("<?php write_table_footer (); ?>");
 	}
@@ -193,13 +239,43 @@ class DoIt {
 
 		c.sw.WriteLine ("<?php write_page_header (\"{0}\"); ?>", c.name + " Bounties");
 
-		OutputTable (c.bounties, c.sw, false, true);
+		OutputTable (c.bounties, c.sw, false, true, true);
 		OutputBounties (c.bounties, c.sw);
 		
 		PasteFile ("cat-footer.php", c.sw);
 
 		c.sw.Flush ();
 		c.sw.Close ();
+	}
+
+	static void OutputFunderFile (Funder funder)
+	{
+		FileStream f;
+
+		if (funder.name == "Ignore")
+			return;
+
+		try {
+			f = File.Open (funder.path, FileMode.Create);
+		} catch (Exception e) {
+			Console.WriteLine ("Error opening file: {0}", funder.path);
+			Console.WriteLine ("Exception: {0}", e);
+			return;
+		}
+
+		funder.sw = new StreamWriter (f);
+
+		PasteFile ("cat-header.php", funder.sw);
+
+		funder.sw.WriteLine ("<?php write_page_header (\"{0}\"); ?>", "Bounties funded by " + funder.name);
+
+		OutputTable (funder.bounties, funder.sw, true, false, true);
+		OutputBounties (funder.bounties, funder.sw);
+		
+		PasteFile ("cat-footer.php", funder.sw);
+
+		funder.sw.Flush ();
+		funder.sw.Close ();
 	}
 
 	static void PrintGlobalTable (ArrayList bounties)
@@ -221,11 +297,11 @@ class DoIt {
 		sw.WriteLine ("<a STYLE=\"text-decoration:none\" name=\"table\">");
 
 		sw.WriteLine ("<a name=\"unclaimed\"></a><h2>Unclaimed Bounties</h2>");
-		OutputTable (bounties, sw, true, false);
+		OutputTable (bounties, sw, true, true, false);
 
 		sw.WriteLine ("<a name=\"claimed\"></a><h2>Already Claimed Bounties</h2>");
 		ArrayList solved = GetSolved (bounties);
-		OutputTable (solved, sw, true, true);
+		OutputTable (solved, sw, true, true, true);
 		
 		PasteFile ("footer.php", sw);
 
@@ -275,10 +351,14 @@ class DoIt {
 		ArrayList bounties = LoadBounties ("./bounties.xml");
 
 		ArrayList cats = GetCategories (bounties);
+		ArrayList funders = GetFunders (bounties);
 
 		foreach (Category c in cats)
 			OutputCategoryFile (c);
-		
+
+		foreach (Funder f in funders)
+			OutputFunderFile (f);
+
 		PrintGlobalTable (bounties);
 
 		PrintTotalBountyExposure (bounties);

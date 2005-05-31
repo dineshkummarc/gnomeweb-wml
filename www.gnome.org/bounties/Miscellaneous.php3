@@ -5,11 +5,11 @@ include ("./util.php");
 ?>
 
 <?php write_page_header ("Miscellaneous Bounties"); ?>
-<?php write_table_header ("no"); ?>
-<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
-<?php taskrow ("Evolution/iPod synchronization", "hidden", "500", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
-<?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "300", "127553", ""); ?>
-<?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
+<?php write_table_header ("no", "yes"); ?>
+<?php taskrow ("Improve Nautilus &quot;Send to...&quot; feature", "hidden", "Novell", "1500", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
+<?php taskrow ("Evolution/iPod synchronization", "hidden", "Novell", "500", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
+<?php taskrow ("Drag and Drop between Gnome and Firefox", "hidden", "Novell", "300", "127553", ""); ?>
+<?php taskrow ("Make Evolution Use the gnome-icon-theme", "hidden", "Novell", "500", "127812", "http://bugzilla.gnome.org/showattachment.cgi?attach_id=22699"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Improve Nautilus &quot;Send to...&quot; feature", "Miscellaneous", "1500", "127551", "127551", "www.es.gnome.org/~telemaco/nautilus-sendto-0.1-1.tar.gz"); ?>
 

@@ -5,9 +5,9 @@ include ("./util.php");
 ?>
 
 <?php write_page_header ("OpenOffice.org Bounties"); ?>
-<?php write_table_header ("no"); ?>
-<?php taskrow ("OO.o Image Save", "hidden", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
-<?php taskrow ("OO.o Calc - function precision", "hidden", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
+<?php write_table_header ("no", "yes"); ?>
+<?php taskrow ("OO.o Image Save", "hidden", "Novell", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
+<?php taskrow ("OO.o Calc - function precision", "hidden", "Novell", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("OO.o Image Save", "OpenOffice.org", "300", "127556", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
  
