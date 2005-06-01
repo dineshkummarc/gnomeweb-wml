@@ -85,7 +85,6 @@ fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Paste by example", "Features", "Google", "4500", "14277010", ""); ?>
 <?php taskrow ("Search party", "Features", "Google", "4500", "1179645298", ""); ?>
 <?php taskrow ("Shared music spaces", "Features", "Google", "4500", "2131844675", ""); ?>
-<?php taskrow ("Conference content", "Evangelism", "Google", "4500", "1469647467", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes", "yes"); ?>
