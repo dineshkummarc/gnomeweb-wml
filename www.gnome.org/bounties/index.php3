@@ -76,15 +76,15 @@ collect the bounty.
 <?php taskrow ("Global memory analysis tool", "Optimization", "Google", "4500", "306044", ""); ?>
 <?php taskrow ("Use a mmap'able cache for
 fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
-<?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "608633374", ""); ?>
-<?php taskrow ("Gnome architecture overview", "Documentation", "Google", "4500", "1148087962", ""); ?>
-<?php taskrow ("library.gnome.org", "Documentation", "Google", "4500", "1827682685", ""); ?>
-<?php taskrow ("Most unprecedented application", "Features", "Google", "4500", "438844197", ""); ?>
-<?php taskrow ("Panel applet bundle system", "Features", "Google", "4500", "1844467459", ""); ?>
-<?php taskrow ("Group mails by conversations in Evolution", "Features", "Google", "4500", "358624404", ""); ?>
-<?php taskrow ("Paste by example", "Features", "Google", "4500", "14277010", ""); ?>
-<?php taskrow ("Search party", "Features", "Google", "4500", "1179645298", ""); ?>
-<?php taskrow ("Shared music spaces", "Features", "Google", "4500", "2131844675", ""); ?>
+<?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "306308", ""); ?>
+<?php taskrow ("Gnome architecture overview", "Documentation", "Google", "4500", "306309", ""); ?>
+<?php taskrow ("library.gnome.org", "Documentation", "Google", "4500", "306311", ""); ?>
+<?php taskrow ("Most unprecedented application", "Features", "Google", "4500", "306312", ""); ?>
+<?php taskrow ("Panel applet bundle system", "Features", "Google", "4500", "306314", ""); ?>
+<?php taskrow ("Group mails by conversations in Evolution", "Features", "Google", "4500", "306315", ""); ?>
+<?php taskrow ("Paste by example", "Features", "Google", "4500", "306316", ""); ?>
+<?php taskrow ("Search party", "Features", "Google", "4500", "306179", ""); ?>
+<?php taskrow ("Shared music spaces", "Features", "Google", "4500", "306317", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes", "yes"); ?>

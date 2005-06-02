@@ -8,9 +8,9 @@ include ("./util.php");
 <?php write_table_header ("no", "yes"); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "hidden", "Novell", "300", "127544", ""); ?>
 <?php taskrow ("Quick reference card", "hidden", "Novell", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
-<?php taskrow ("Live documentation editing", "hidden", "Google", "4500", "608633374", ""); ?>
-<?php taskrow ("Gnome architecture overview", "hidden", "Google", "4500", "1148087962", ""); ?>
-<?php taskrow ("library.gnome.org", "hidden", "Google", "4500", "1827682685", ""); ?>
+<?php taskrow ("Live documentation editing", "hidden", "Google", "4500", "306308", ""); ?>
+<?php taskrow ("Gnome architecture overview", "hidden", "Google", "4500", "306309", ""); ?>
+<?php taskrow ("library.gnome.org", "hidden", "Google", "4500", "306311", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544", ""); ?>
 
@@ -124,7 +124,7 @@ page</a>.  Before you begin any work on the help browser, be sure to
 maintainers.</a> The primary contact for this task will be <a STYLE="text-decoration:none" href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
 
 <?php box_end (); ?>
-<?php box_start ("Live documentation editing", "Documentation", "4500", "608633374", "0", ""); ?>
+<?php box_start ("Live documentation editing", "Documentation", "4500", "306308", "306308", ""); ?>
 
 
 Implement a live web-based wiki-like editor that allows generation of
@@ -136,7 +136,7 @@ the maintainer of the module can extract the addition and
 trivially roll it into the official documentation source.
    
 <?php box_end (); ?>
-<?php box_start ("Gnome architecture overview", "Documentation", "4500", "1148087962", "0", ""); ?>
+<?php box_start ("Gnome architecture overview", "Documentation", "4500", "306309", "306309", ""); ?>
 
 
 Write a document giving an overview of the GNOME development
@@ -147,7 +147,7 @@ administrators who want a better understanding of how the pieces fit
 together.  This bounty will go to the authors of the best paper.
    
 <?php box_end (); ?>
-<?php box_start ("library.gnome.org", "Documentation", "4500", "1827682685", "0", ""); ?>
+<?php box_start ("library.gnome.org", "Documentation", "4500", "306311", "306311", ""); ?>
 
 
 Implement "library.gnome.org" which aggregates documentation
