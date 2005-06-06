@@ -77,7 +77,6 @@ collect the bounty.
 <?php taskrow ("Use a mmap'able cache for
 fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "306308", ""); ?>
-<?php taskrow ("Gnome architecture overview", "Documentation", "Google", "4500", "306309", ""); ?>
 <?php taskrow ("library.gnome.org", "Documentation", "Google", "4500", "306311", ""); ?>
 <?php taskrow ("Most unprecedented application", "Features", "Google", "4500", "306312", ""); ?>
 <?php taskrow ("Panel applet bundle system", "Features", "Google", "4500", "306314", ""); ?>

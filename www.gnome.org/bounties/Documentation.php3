@@ -9,7 +9,6 @@ include ("./util.php");
 <?php taskrow ("Outlook-Evolution dictionary", "hidden", "Novell", "300", "127544", ""); ?>
 <?php taskrow ("Quick reference card", "hidden", "Novell", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
 <?php taskrow ("Live documentation editing", "hidden", "Google", "4500", "306308", ""); ?>
-<?php taskrow ("Gnome architecture overview", "hidden", "Google", "4500", "306309", ""); ?>
 <?php taskrow ("library.gnome.org", "hidden", "Google", "4500", "306311", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544", ""); ?>
@@ -134,17 +133,6 @@ documentation to an undocumented function), save it. Other people
 visiting the page will see your additions to the documentation, and
 the maintainer of the module can extract the addition and
 trivially roll it into the official documentation source.
-   
-<?php box_end (); ?>
-<?php box_start ("Gnome architecture overview", "Documentation", "4500", "306309", "306309", ""); ?>
-
-
-Write a document giving an overview of the GNOME development
-platform's architecture.  The target audience for this document
-includes developers who want to begin developing software on GNOME,
-people who want to begin contributing to GNOME, or system
-administrators who want a better understanding of how the pieces fit
-together.  This bounty will go to the authors of the best paper.
    
 <?php box_end (); ?>
 <?php box_start ("library.gnome.org", "Documentation", "4500", "306311", "306311", ""); ?>

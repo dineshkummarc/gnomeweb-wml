@@ -211,6 +211,11 @@ class DoIt {
 	static void OutputBounties (ArrayList bounties, StreamWriter sw)
 	{
 		foreach (Bounty b in bounties) {
+			string cat = b.category;
+
+			if (cat == "Ignore")
+				continue;
+			
 			sw.WriteLine ("<?php box_start (\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\"); ?>",
 					   b.title, b.category, b.amount, b.id, b.bug, b.solved);
 			sw.Write (b.html);
