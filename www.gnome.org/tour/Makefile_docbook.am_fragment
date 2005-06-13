@@ -1,0 +1,37 @@
+# Before including this fragment,
+# set docbook_path to, for instance, docbook/C/
+# set html_path to, for instance, C/
+ 
+VERSION = 2.10
+ROOTDOC = tour.xml
+STYLE_PATH = ../../docbook_html_style/
+
+docbook_sources = $(docbook_path)$(ROOTDOC) $(docbook_path)rnapplets.xml $(docbook_path)rnapplications.xml $(docbook_path)rnthemes.xml \
+                  $(docbook_path)rncontrolcenter.xml $(docbook_path)rndesktop.xml $(docbook_path)rndocs.xml $(docbook_path)rnsysadmin.xml \
+                  $(docbook_path)rni18n.xml $(docbook_path)rngames.xml $(docbook_path)rnutilities.xml \
+                  $(docbook_path)rninstallation.xml $(docbook_path)rnplatform.xml $(docbook_path)rnstandards.xml \
+                  $(docbook_path)rntoc.xml $(docbook_path)rnwhy.xml
+
+html: $(html_path)index.html
+
+$(html_path)index.html: $(docbook_sources)
+	-rm -rf $(html_path)
+	mkdir $(html_path)
+	-xsltproc --xinclude -o $(html_path) \
+		--param yelp_max_chunk_depth 1 \
+		--stringparam admon.graphics.path ./images/ \
+		--stringparam http_root http://www.gnome.org \
+		--stringparam http_prefix /tour/ \
+		$(STYLE_PATH)db2html.xsl $(docbook_path)$(ROOTDOC)
+	cp -R $(STYLE_PATH)images $(docbook_path)figures $(html_path)
+	for i in $(html_path)*.html; do \
+		perl -p -i -e 's,<p class="section"></p>,<p class="section">Sections</p>,g' $$i; \
+	done
+
+clean:
+	-rm -rf $(html_path)
+
+validate: $(docbook_sources)
+	xmllint --xinclude --valid --noout --noent --catalogs $<
+
+.PHONY: clean
