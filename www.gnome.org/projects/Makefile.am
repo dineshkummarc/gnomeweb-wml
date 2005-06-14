@@ -26,6 +26,7 @@ SUBDIRS = \
 	evince			\
 	sabayon			\
 	totem			\
+	rhythmbox               \
 	gwget
 
 urlpath = /projects
