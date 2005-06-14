@@ -8,13 +8,17 @@ include ("./util.php");
 
 <?php box_start ("Bounty Discussion"); ?>
 
+<p align="center">Bounties mailing list</p>
+
+<p>
+For questions about how the bounties work, send email to the <a href="http://mail.gnome.org/mailman/listinfo/bounties-list">bounties mailing list</a> (<a href="http://mail.gnome.org/archives/bounties-list/">archives</a>).
+<p>
+
 <p align="center">Join the discussion on gimpnet (irc.gnome.org) in #gnome-love</p>
 
 <p>
-
-If you are using Ximian Desktop 2, you can join by selecting: <tt>Programs -> Internet -> IRC Client</tt><br>
-Type: <tt>/server irc.gnome.org</tt><br>
-Then type: <tt>/join #gnome-love</tt>
+server: irc.gnome.org<br>
+channel: #gnome-love
 <p>
 
 If you are using Mozilla, or a web browser which has a built in IRC client, you can join by clicking below:
