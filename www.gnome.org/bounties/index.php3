@@ -84,6 +84,8 @@ fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Paste by example", "Features", "Google", "4500", "306316", ""); ?>
 <?php taskrow ("Search party", "Features", "Google", "4500", "306179", ""); ?>
 <?php taskrow ("Shared music spaces", "Features", "Google", "4500", "306317", ""); ?>
+<?php taskrow ("The GIMP resource distribution system", "GIMP", "Google", "4500", "1416047717", ""); ?>
+<?php taskrow ("The GIMP vector based shapes tool", "GIMP", "Google", "4500", "2024720472", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes", "yes"); ?>
