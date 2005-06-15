@@ -1,3 +1,5 @@
+SUBDIRS = screenshots
+
 urlpath = /projects/rhythmbox
 
 EXTRA_DIST = mkpage.xsl
