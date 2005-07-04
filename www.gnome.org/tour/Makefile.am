@@ -20,9 +20,6 @@ STYLE_PATH = ../../docbook_html_style/
 
 DOC_LINGUAS_PLUS_ORIGINAL = C $(DOC_LINGUAS) 
 
-listlangs:
-	echo $(DOC_LINGUAS_PLUS_ORIGINAL)
-
 #This is voodoo, but it seems to work.
 #I really have no idea how to do this loop stuff in a Makefile.
 #And this would be easier if I could define some variables inside the @for loop.
@@ -45,3 +42,12 @@ html:
 	    perl -p -i -e 's,<p class="section"></p>,<p class="section">Sections</p>,g' $$i; \
 	  done \
 	done
+
+all-local: html
+
+clean: 
+	@for docbookdir in $(DOC_LINGUAS_PLUS_ORIGINAL); do \
+	  echo "Removing html for language: " $$docbookdir; \
+	  rm -rf $$docbookdir; \
+	done
+
