@@ -1,6 +1,5 @@
 
-
-SUBDIRS = 
+SUBDIRS = docbook
 
 urlpath = /tour
 
