@@ -43,7 +43,8 @@ html:
 	  done \
 	done
 
-all-local: html
+#Comment-out, because it might be breaking the build. murrayc.
+#all-local: html
 
 clean: 
 	@for docbookdir in $(DOC_LINGUAS_PLUS_ORIGINAL); do \
