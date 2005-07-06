@@ -49,15 +49,15 @@ page_SCRIPTS = \
 	guadec6-speakers.html \
 	osc-europe.html \
 	guadec6-media.html \
-	guadec2006-location.wml \
-	guadec2006-location.ca.wml \
-	guadec2006-location.es.wml \
-	guadec2006-location.fi.wml \
-	guadec2006-location.fr.wml \
-	guadec2006-location.id.wml \
-	guadec2006-location.pt_BR.wml \
-	guadec2006-location.sr.wml \
-	guadec2006-location.vi.wml
+	guadec2006-location.html \
+	guadec2006-location.ca.html \
+	guadec2006-location.es.html \
+	guadec2006-location.fi.html \
+	guadec2006-location.fr.html \
+	guadec2006-location.id.html \
+	guadec2006-location.pt_BR.html \
+	guadec2006-location.sr.html \
+	guadec2006-location.vi.html
 
 
 include $(top_srcdir)/rules.common
