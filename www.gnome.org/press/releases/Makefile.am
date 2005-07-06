@@ -55,6 +55,7 @@ page_SCRIPTS = \
 	guadec2006-location.et.html \
 	guadec2006-location.fi.html \
 	guadec2006-location.fr.html \
+	guadec2006-location.de.html \
 	guadec2006-location.id.html \
 	guadec2006-location.pt_BR.html \
 	guadec2006-location.sr.html \
