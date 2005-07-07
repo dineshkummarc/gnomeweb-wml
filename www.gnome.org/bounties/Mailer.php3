@@ -10,9 +10,9 @@ include ("./util.php");
 <?php taskrow ("Implement a panel notification applet for new mail", "hidden", "Novell", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
 <?php taskrow ("Mailing list actions", "hidden", "Novell", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
 <?php taskrow ("Finish NNTP support in Evolution", "hidden", "Novell", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
-<?php taskrow ("Inline PGP support for evolution", "hidden", "Novell", "250", "127521", ""); ?>
+<?php taskrow ("Inline PGP support for evolution", "hidden", "Novell", "250", "127521", "http://www.mattb.net.nz/patches/evolution/"); ?>
 <?php taskrow ("Custom mail headers display", "hidden", "Novell", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
-<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "Novell", "100", "127526", ""); ?>
+<?php taskrow ("Ask user to make Evolution default mail app", "hidden", "Novell", "100", "127526", "http://cvs.gnome.org/viewcvs/evolution"); ?>
 <?php taskrow ("Attachment bar and drag-and-drop in the composer", "hidden", "Novell", "500", "127527", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/004052.html"); ?>
 <?php taskrow ("Templates for new messages and replies", "hidden", "Novell", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "hidden", "Novell", "400", "127530", ""); ?>
@@ -241,7 +241,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521", ""); ?>
+<?php box_start ("Inline PGP support for evolution", "Mailer", "250", "127521", "127521", "http://www.mattb.net.nz/patches/evolution/"); ?>
 
 
 <p>
@@ -377,7 +377,7 @@ will be the primary contacts on the list.
 </p>
 
 <?php box_end (); ?>
-<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526", ""); ?>
+<?php box_start ("Ask user to make Evolution default mail app", "Mailer", "100", "127526", "127526", "http://cvs.gnome.org/viewcvs/evolution"); ?>
 
 <p>It would be nice if Evolution would prompt the user if he or she would like to set
 Evolution as the default "mailto:" handler for GNOME if:</p>

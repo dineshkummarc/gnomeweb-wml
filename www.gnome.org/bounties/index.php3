@@ -60,12 +60,10 @@ collect the bounty.
 <?php write_table_header ("yes", "yes"); ?>
 <?php taskrow ("Gaim/Evolution presence integration", "IM", "Novell", "2000", "127546", ""); ?>
 <?php taskrow ("Planner (formerly MrProject) integration", "Addressbook", "Novell", "300", "127520", ""); ?>
-<?php taskrow ("Inline PGP support for evolution", "Mailer", "Novell", "250", "127521", ""); ?>
 <?php taskrow ("Bugzilla tasks backend", "Tasks", "Novell", "500", "127558", ""); ?>
 <?php taskrow ("Advanced LDAP Configuration", "Addressbook", "Novell", "250", "127525", ""); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "Documentation", "Novell", "300", "127544", ""); ?>
 <?php taskrow ("Publish your calendar", "Calendar", "Novell", "2000", "127538", ""); ?>
-<?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "Novell", "100", "127526", ""); ?>
 <?php taskrow ("Templates for new messages and replies", "Mailer", "Novell", "500", "127529", ""); ?>
 <?php taskrow ("Language selection in composer", "Mailer", "Novell", "400", "127530", ""); ?>
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "Novell", "300", "127553", ""); ?>
@@ -98,6 +96,7 @@ fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Implement a panel notification applet for new mail", "Mailer", "Novell", "400", "127516", "http://cvs.gnome.org/viewcvs/evolution/plugins/new-mail-notify/"); ?>
 <?php taskrow ("Mailing list actions", "Mailer", "Novell", "500", "127518", "http://cvs.gnome.org/viewcvs/evolution/plugins/mailing-list-actions/"); ?>
 <?php taskrow ("Finish NNTP support in Evolution", "Mailer", "Novell", "750", "127519", "http://home.wanadoo.nl/meilof/evolution-nntp-patch-17"); ?>
+<?php taskrow ("Inline PGP support for evolution", "Mailer", "Novell", "250", "127521", "http://www.mattb.net.nz/patches/evolution/"); ?>
 <?php taskrow ("Custom mail headers display", "Mailer", "Novell", "200", "127523", "http://lists.ximian.com/archives/public/evolution-patches/2003-December/003697.html"); ?>
 <?php taskrow ("Contact search applet", "Addressbook", "Novell", "750", "127522", "http://www.burtonini.com/computing/contact-lookup-applet-0.4.tar.gz"); ?>
 <?php taskrow ("Support export of tasks to CSV spreadsheet
@@ -105,6 +104,7 @@ files", "Tasks", "Novell", "300", "127557", "http://bugzilla.gnome.org/attachmen
 <?php taskrow ("Evolution/iPod synchronization", "Miscellaneous", "Novell", "500", "127552", "http://members.iinet.net.au/~wakes/evolution-ipod-sync-0.2.tar.bz2"); ?>
 <?php taskrow ("Weather calendar backend", "Calendar", "Novell", "750", "127537", "http://cvs.gnome.org/viewcvs/evolution-data-server/calendar/backends/weather/"); ?>
 <?php taskrow ("Quick reference card", "Documentation", "Novell", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
+<?php taskrow ("Ask user to make Evolution default mail app", "Mailer", "Novell", "100", "127526", "http://cvs.gnome.org/viewcvs/evolution"); ?>
 <?php taskrow ("OO.o Image Save", "OpenOffice.org", "Novell", "300", "127556", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/sd-save-image-context-menu.diff"); ?>
 <?php taskrow ("OO.o Calc - function precision", "OpenOffice.org", "Novell", "500", "127771", "http://ooo.ximian.com/ooo-build/patches/OOO_1_1/"); ?>
 <?php taskrow ("Publish free/busy information", "Calendar", "Novell", "500", "127539", "http://cvs.gnome.org/bonsai/cvslog.cgi?file=evolution%2Fcalendar/ChangeLog&rev=1.2066&root=/cvs/gnome#1.2066"); ?>
