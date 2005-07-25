@@ -27,6 +27,7 @@ SUBDIRS = \
 	sabayon			\
 	totem			\
 	rhythmbox               \
+	livecd			\
 	gwget
 
 urlpath = /projects
