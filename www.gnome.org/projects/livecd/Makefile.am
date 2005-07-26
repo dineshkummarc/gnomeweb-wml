@@ -1,13 +1,11 @@
 SUBDIRS=images 
 
-urlpath=/projects/nautilus/
+urlpath=/projects/livecd/
 
 page_SCRIPTS= index.html	\
-		about.html \
-		developers.html \
-		screenshots.html \
-		scripts.html \
-		nautilus.css
+		mission.html \
+		software.html \
+		materials.html
 
 
 include $(top_srcdir)/rules.common
