@@ -1,5 +1,3 @@
-SUBDIRS=images 
-
 urlpath=/projects/livecd/
 
 page_SCRIPTS= index.html	\
