@@ -28,7 +28,8 @@ SUBDIRS = \
 	totem			\
 	rhythmbox               \
 	livecd			\
-	gwget
+	gwget			\
+	desktopwiki
 
 urlpath = /projects
 
