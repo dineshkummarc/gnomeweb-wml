@@ -8,6 +8,7 @@ SUBDIRS = \
 	f-spot			\
 	gedit			\
 	gconf			\
+	gdm			\
 	gnome-core		\
 	gnome-games		\
 	gnome-libs		\
