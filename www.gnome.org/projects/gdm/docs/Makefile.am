@@ -14,6 +14,6 @@ page_SCRIPTS= accessibility.html \
 	overview.html \
 	preface.html \
 	sbindir_binaries.html \
-	thememanual.html \
+	thememanual.html
 
 include $(top_srcdir)/rules.common
