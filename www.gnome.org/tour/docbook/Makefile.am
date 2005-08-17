@@ -1,5 +1,7 @@
 
 #Comment-out, because it might be breaking the build. murrayc.
+
+#Comment-out, because it might be breaking the build. murrayc.
 #PKG_CONFIG=pkg-config
 #include $(top_srcdir)/www.gnome.org/tour/docbook/gnome-doc-utils.make
 #dist-hook: doc-dist-hook
