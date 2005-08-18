@@ -1,5 +1,4 @@
-SUBDIRS =
-#SUBDIRS = notes
+SUBDIRS = notes
 
 urlpath = /start/2.12
 
