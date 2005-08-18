@@ -202,6 +202,7 @@ _DOC_OMF_DB = $(if $(_DOC_OMF_IN),						\
 
 $(_DOC_OMF_DB) : $(_DOC_OMF_IN)
 $(_DOC_OMF_DB) : $(DOC_MODULE)-%.omf : %/$(DOC_MODULE).xml
+	export PKG_CONFIG_PATH=/usr/share/pkgconfig:$PKG_CONFIG_PATH; \
 	xsltproc -o $@ $(call db2omf_args,$@,$<,'docbook')
 
 ## @ _DOC_OMF_HTML
