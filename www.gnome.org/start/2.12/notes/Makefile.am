@@ -43,7 +43,7 @@ html:
 	  done \
 	done
 
-#Comment-out, because it might be breaking the build. murrayc.
+
 all-local: html
 
 clean: 
@@ -51,4 +51,18 @@ clean:
 	  echo "Removing html for language: " $$docbookdir; \
 	  rm -rf $$docbookdir; \
 	done
+
+
+install-data-local:
+	@for docbookdir in $(DOC_LINGUAS_PLUS_ORIGINAL); do \
+	  echo "Installing generated html"; \
+	  $(INSTALL) -d $(pagedir)/$$docbookdir; \
+	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/*.html $(pagedir)/$$docbookdir/; \
+	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
+	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
+	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
+	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+	done
+
+
 
