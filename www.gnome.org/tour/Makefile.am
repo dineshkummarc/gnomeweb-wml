@@ -2,7 +2,7 @@ SUBDIRS = docbook
 
 urlpath = /tour
 
-page_SCRIPTS=
+page_SCRIPTS= index.html
 page_DATA =
 
 include $(top_srcdir)/rules.common
