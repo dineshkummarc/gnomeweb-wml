@@ -114,7 +114,12 @@ XSLDOC_DIRS ?=
 _xml2po ?= `which xml2po`
 
 _db2html ?= `$(PKG_CONFIG) --variable db2html gnome-doc-utils`
-_db2omf  ?= `$(PKG_CONFIG) --variable db2omf gnome-doc-utils`
+
+# gnome-doc-utils is not properly installed on www.gnome.org yet (Needs RHEL 4),
+# so we use a copy of this. murrayc
+#_db2omf  ?= `$(PKG_CONFIG) --variable db2omf gnome-doc-utils`
+_db2omf  ?= /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+
 _rngdoc  ?= `$(PKG_CONFIG) --variable rngdoc gnome-doc-utils`
 _xsldoc  ?= `$(PKG_CONFIG) --variable xsldoc gnome-doc-utils`
 _chunks  ?= `$(PKG_CONFIG) --variable xmldir gnome-doc-utils`/gnome/xslt/docbook/utils/chunks.xsl
