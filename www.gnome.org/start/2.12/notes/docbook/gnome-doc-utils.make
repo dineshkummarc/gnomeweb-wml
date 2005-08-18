@@ -422,7 +422,7 @@ _DOC_LC_FIGURES = $(foreach lc,$(DOC_LINGUAS),					\
 $(_DOC_POFILES): $(_DOC_C_DOCS)
 	if ! test -d $(dir $@); then mkdir $(dir $@); fi
 	if test -f "$(_DOC_C_MODULE)"; then d="../"; else d="../$(srcdir)/"; fi; \
-	export PYTHONPATH=$(top_srcdir)/www.gnome.org/start/2.12/notes;\
+	export PYTHONPATH=$(top_srcdir)/www.gnome.org/start/2.12/notes; \
 	if ! test -f $@; then \
 	  (cd $(dir $@) && \
 	    $(_xml2po) -e $(_DOC_C_DOCS_NOENT:%=$${d}%) > $(notdir $@)); \
@@ -437,6 +437,7 @@ $(_DOC_LC_DOCS) : $(_DOC_POFILES)
 $(_DOC_LC_DOCS) : $(_DOC_C_DOCS)
 	if test -f "$(_DOC_C_MODULE)"; then d="../C/"; else d="../$(srcdir)/C/"; fi; \
 	(cd $(dir $@) && \
+	  export PYTHONPATH=$(top_srcdir)/www.gnome.org/start/2.12/notes; \
 	  $(_xml2po) -e -p $(patsubst %/$(notdir $@),%,$@).po $${d}$(notdir $@) > $(notdir $@))
 
 
