@@ -44,7 +44,6 @@ html:
 	  done \
 	done
 
-#Comment-out, because it might be breaking the build. murrayc.
 all-local: html
 
 clean: 
