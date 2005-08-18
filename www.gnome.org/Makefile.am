@@ -1,4 +1,4 @@
-SUBDIRS = about images start projects resources learn i18n press faqs include friends fonts img contact bounties roadmap softwaremap
+SUBDIRS = about images start projects resources learn i18n press faqs include friends fonts img contact bounties roadmap softwaremap tour
 
 urlpath =
 
