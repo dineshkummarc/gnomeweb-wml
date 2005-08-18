@@ -26,7 +26,6 @@ DOC_LINGUAS_PLUS_ORIGINAL = C $(DOC_LINGUAS)
 html:
 	@for docbookdir in $(DOC_LINGUAS_PLUS_ORIGINAL); do \
 	  echo "Generating html for language: " $$docbookdir; \
-	  export PYTHONPATH=/home/users/murrayc/cvs/gnomeweb-wml/www.gnome.org/tour \
 	  rm -rf $$docbookdir; \
 	  mkdir $$docbookdir; \
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
