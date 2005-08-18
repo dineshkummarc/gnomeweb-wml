@@ -417,12 +417,9 @@ _DOC_LC_FIGURES = $(foreach lc,$(DOC_LINGUAS),					\
 	$(foreach fig,$(DOC_FIGURES),$(lc)/$(fig)),				\
 	$(patsubst $(srcdir)/%,%,$(wildcard $(srcdir)/$(lc)/figures/*.png)) ))
 
-# Note: Exporting PYTHONPATH, to use a local gettext.py, is a hack that should 
-# be removed when we have python >2.2 on the server. murrayc.
 $(_DOC_POFILES): $(_DOC_C_DOCS)
 	if ! test -d $(dir $@); then mkdir $(dir $@); fi
 	if test -f "$(_DOC_C_MODULE)"; then d="../"; else d="../$(srcdir)/"; fi; \
-	export PYTHONPATH=$(top_srcdir)/www.gnome.org/tour;\
 	if ! test -f $@; then \
 	  (cd $(dir $@) && \
 	    $(_xml2po) -e $(_DOC_C_DOCS_NOENT:%=$${d}%) > $(notdir $@)); \
@@ -431,13 +428,15 @@ $(_DOC_POFILES): $(_DOC_C_DOCS)
 	    $(_xml2po) -e -u $(basename $(notdir $@)) $(_DOC_C_DOCS_NOENT:%=$${d}%)); \
 	fi
 
+# Note: Exporting PYTHONPATH, to use a local gettext.py, is a hack that should
+# be removed when we have python >2.2 on the server. murrayc.
 # FIXME: fix the dependancy
 # FIXME: hook xml2po up
 $(_DOC_LC_DOCS) : $(_DOC_POFILES)
 $(_DOC_LC_DOCS) : $(_DOC_C_DOCS)
 	if test -f "$(_DOC_C_MODULE)"; then d="../C/"; else d="../$(srcdir)/C/"; fi; \
 	(cd $(dir $@) && \
-          export PYTHONPATH=$(top_srcdir)/www.gnome.org/tour;\
+          export PYTHONPATH=@abs_top_srcdir@/www.gnome.org/tour;\
 	  $(_xml2po) -e -p $(patsubst %/$(notdir $@),%,$@).po $${d}$(notdir $@) > $(notdir $@))
 
 
