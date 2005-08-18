@@ -557,11 +557,11 @@ check-omf: $(_DOC_OMF_ALL)
 
 
 .PHONY: install-doc install-html install-fig install-omf install-dsk
-install-data-local:					\
-	$(if $(DOC_MODULE),install-doc)			\
-	$(if $(_DOC_HTML_ALL),install-html)		\
-	$(if $(DOC_FIGURES),install-fig)		\
-	$(if $(_DOC_OMF_IN),install-omf)
+#install-data-local:					\
+#	$(if $(DOC_MODULE),install-doc)			\
+#	$(if $(_DOC_HTML_ALL),install-html)		\
+#	$(if $(DOC_FIGURES),install-fig)		\
+#	$(if $(_DOC_OMF_IN),install-omf)
 #	$(if $(_DOC_DSK_IN),install-dsk)
 
 install-doc:
