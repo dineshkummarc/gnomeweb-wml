@@ -30,11 +30,11 @@ html:
 	  rm -rf $$docbookdir; \
 	  mkdir $$docbookdir; \
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
-	  xsltproc --xinclude -o $$docbookdir/index.html \
+	  xsltproc --xinclude -o $$docbookdir/ \
 	    --param yelp_max_chunk_depth 1 \
  	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
-	    --stringparam http_prefix /tour/ \
+	    --stringparam http_prefix /start/2.12/notes \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
 	  echo "  xlstproc finished"; \
 	  cp -R $(STYLE_PATH)images docbook/$$docbookdir/figures $$docbookdir; \
