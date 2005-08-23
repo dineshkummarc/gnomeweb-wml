@@ -60,7 +60,8 @@ page_DATA=\
 	sandy-stripes.png 			\
 	security.png 				\
 	smartbookmarks.png 			\
-	epiphany-download.png
+	epiphany-download.png	\
+	epiphany-88x31.png
 
 include $(top_srcdir)/rules.common
 
