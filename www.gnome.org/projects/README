@@ -1,11 +1,53 @@
-One subdirectory per project, either an actual module in CVS or a
-project that encompasses
+README's README
+===============
 
-Just something to keep in mind for each project's pages: Each project
-should have a section for users and developers. Users would be people who
-make use of the results of this project, and developers would be people
-who help create the results. This means that for libraries etc., users are
-application developers, and developers are the people who hack on
-gnome-libs.
+Yeah, so, you've decided to add a project to gnome.org/projects/! I'm
+sorry. I apologize. This README is what passes for a modern CMS in
+GNOME, circa late 2005. Yes, embarassing, no? Don't worry, we'll have
+a CMS soon, or so Jeff has been telling us since 2002. In the
+meantime, well, let's have a look at what you can do instead. It's not
+that bad, really, if you follow every step exactly to the
+letter. Sacrifice of a virgin goat is also suggested.
 
--- Elliot
+PREREQ
+======
+
+This assumes you know CVS and have gnome CVS access. If you don't know
+CVS, you probably want to find a developer on the relevant project and
+have them do the commit-y bits. If you don't have permissions, ping
+gnome-web-list@gnome.org and gmarketing-list@gnome.org and ask someone
+there to commit.
+
+ADDING A PROJECT
+================
+
+1. Create the site. (Duh. ;) You should ideally copy the 'template'
+subdirectory in this directory as a starting point; it has a basic
+index.html that follows the style of gnome.org, some sample other
+pages, etc.
+
+2. Having created the website, create an appropriate Makefile.am for
+each subdirectory, including the top-level one. There is an example
+you can copy in template/Makefile.am. Make sure to:
+
+  i. list any subdirectories under SUBDIRS. This list is just space
+separated- 'SUBDIRS=foo bar baz' for multiple SUBDIRS.
+  ii. edit 'urlpath' to be 'projects/yourprojectname/'
+  iii. add all your files (pages and images) to page_SCRIPTS. DO NOT
+put trailing spaces after the \s here, or add a \ after the last entry
+in this list. Auto* is a fickle goddess.
+
+3. cvs add and cvs commit your project directory to:
+
+gnomeweb-wml/www.gnome.org/projects/
+
+4. check out:
+ 
+gnomeweb-wml/configure.in
+
+and add your project's Makefile into AC_OUTPUT. Commit that.
+
+5. Sit back, relax, have a beer, and reload the project page in 5-10
+minutes. It should be up. If not, email gnome-web-list@gnome.org,
+explain what you've done and what is wrong, and if you're bold, point
+out to them that it is embarassing we don't have a CMS yet. :)
