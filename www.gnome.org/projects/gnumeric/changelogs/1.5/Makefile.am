@@ -5,6 +5,7 @@ page_SCRIPTS= 		\
     changelog-1.5.1.txt	\
     changelog-1.5.2.txt	\
     changelog-1.5.3.txt	\
+    changelog-1.5.4.txt	\
     index.shtml
 
 include $(top_srcdir)/rules.common
