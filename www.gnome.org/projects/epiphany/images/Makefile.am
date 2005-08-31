@@ -55,7 +55,7 @@ page_DATA=\
 	spacer.png				\
 	wheat.png 				\
 	customizable.png 			\
-	esa_portal.png 				\
+	screenshot1.8.png			\
 	extensions.png 				\
 	sandy-stripes.png 			\
 	security.png 				\
