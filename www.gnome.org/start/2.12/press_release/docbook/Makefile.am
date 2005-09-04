@@ -7,4 +7,4 @@ DOC_MODULE = press_release
 # Get DOC_INCLUDES and DOC_LINGUAS
 include $(top_srcdir)/www.gnome.org/start/2.12/press_release/docbook/Makefile_shared.am_fragment
 
-SUBDIRS = es 
+SUBDIRS = 
