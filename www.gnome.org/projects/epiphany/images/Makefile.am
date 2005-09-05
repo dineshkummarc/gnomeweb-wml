@@ -61,7 +61,8 @@ page_DATA=\
 	security.png 				\
 	smartbookmarks.png 			\
 	epiphany-download.png	\
-	epiphany-88x31.png
+	epiphany-88x31.png	\
+	Lookup-extension.png
 
 include $(top_srcdir)/rules.common
 
