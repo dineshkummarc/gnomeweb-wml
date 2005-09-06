@@ -22,6 +22,7 @@ page_DATA =			\
 	2.0.0.shtml		\
 	2.0.1.shtml		\
 	2.0.2.shtml		\
+	2.4.shtml		\
 	head.shtml		\
 	foot.shtml
 
