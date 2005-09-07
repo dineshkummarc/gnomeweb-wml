@@ -45,7 +45,7 @@ if test -z "$*"; then
 fi
 
 aclocal
-automake --add-missing
+automake --copy --add-missing
 autoconf
 
 cd $ORIGDIR

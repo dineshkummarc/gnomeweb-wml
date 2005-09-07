@@ -22,7 +22,8 @@ page_DATA = \
 	hey_kids.png \
 	two-ten-folder.jpg \
 	guadec_stuttgart_splash.png \
-        gmt-spreadtheword2.png \
-        wgosplash-gnomejournal-alt.png
+	gmt-spreadtheword2.png \
+	wgosplash-gnomejournal-alt.png \
+	two-twelve.jpg
 
 include $(top_srcdir)/rules.common
