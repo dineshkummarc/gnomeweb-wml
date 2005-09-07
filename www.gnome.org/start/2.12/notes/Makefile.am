@@ -32,7 +32,7 @@ html:
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
 	  xsltproc --xinclude -o $$docbookdir/ \
 	    --param yelp_max_chunk_depth 1 \
- 	    --stringparam admon.graphics.path ./images/ \
+	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
 	    --stringparam http_prefix /start/2.12/notes \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
@@ -62,6 +62,12 @@ install-data-local:
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+	  (cd $(srcdir)/C && \
+	  for figure in figures/*.png; do \
+	    if [ ! -f $(pagedir)/$$docbookdir/$$figure ]; then \
+	      $(INSTALL_DATA) $$figure $(pagedir)/$$docbookdir/figures/; \
+	    fi; \
+	  done); \
 	done
 
 
