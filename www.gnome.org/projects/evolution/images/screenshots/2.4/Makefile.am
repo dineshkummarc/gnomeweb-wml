@@ -9,6 +9,16 @@ page_DATA=					\
 	junk-mail.png				\
 	pgp.png					\
 	read-mail.png				\
+	evo-perms.png				\
+	evo-proxy.png				\
+	evo-proxy-cal.png			\
+	sub-others-folder.png			\
+	sub-pub-fold.png			\
+	small-evo-perms.png                     \
+        small-evo-proxy.png                     \
+        small-evo-proxy-cal.png                 \
+        small-sub-others.png                    \
+        small-sub-pub.png        		\
 	small-compose-mail.png			\
 	small-contact-info.png			\
 	small-contact-list.png			\
