@@ -16,6 +16,7 @@ SUBDIRS = \
 	guppi			\
 	gb			\
 	nautilus		\
+	nautilus-locked-folder \
 	ooo			\
 	ORBit2			\
 	gnome-print		\
