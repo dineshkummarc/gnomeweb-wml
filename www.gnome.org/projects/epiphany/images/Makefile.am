@@ -62,7 +62,9 @@ page_DATA=\
 	smartbookmarks.png 			\
 	epiphany-download.png	\
 	epiphany-88x31.png	\
-	Lookup-extension.png
+	Lookup-extension.png \
+	contrib-mystilleef.png \
+	contrib-mystilleef-180.png
 
 include $(top_srcdir)/rules.common
 
