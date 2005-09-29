@@ -24,6 +24,7 @@ page_DATA = \
 	guadec_stuttgart_splash.png \
 	gmt-spreadtheword2.png \
 	wgosplash-gnomejournal-alt.png \
-	two-twelve.jpg
+	two-twelve.jpg \
+	summit-mit-2005.png
 
 include $(top_srcdir)/rules.common
