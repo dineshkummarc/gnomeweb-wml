@@ -30,7 +30,7 @@ html:
 	  rm -rf $$docbookdir; \
 	  mkdir $$docbookdir; \
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
-	  xsltproc --xinclude -o $$docbookdir/ \
+	  xsltproc --xinclude -o $$docbookdir/index.html \
 	    --param yelp_max_chunk_depth 1 \
  	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
