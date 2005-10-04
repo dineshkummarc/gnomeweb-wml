@@ -60,6 +60,10 @@
     }
     pre[class~="linenumbering"] {
       
+      padding-top: 6px;
+      padding-bottom: 6px;
+      -moz-border-radius: 8px;
+      border: solid 1px black;
       margin-top: 0px;
       margin-left: 0.8em;
       background-color: black;
@@ -222,7 +226,7 @@
       You can control GDM behavior during runtime in several different ways.
       You can either run certain commands, or you can talk to GDM using either
       a unix socket protocol, or a FIFO protocol.
-    </p><div class="sect2"><a name="commands"/><h2 class="sect2 title"><span class="title"><span class="label"/>Commands</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p><div class="sect2"><a name="commands"/><h2 class="sect2 title"><span class="title"><span class="label">4.1. </span>Commands</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         To stop GDM, you can either send the TERM signal to the main daemon or
         run the <span class="filename" style="font-family: monospace; ">gdm-stop</span> command which is in the
         <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;/</span> directory.  To restart GDM, you can
@@ -243,7 +247,7 @@
         same virtual terminal (if your operating system supports it), after the
         new session has ended, so this should work quite transparently to the
         users.
-      </p></div><div class="sect2"><a name="fifoprot"/><h2 class="sect2 title"><span class="title"><span class="label"/>The FIFO protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="fifoprot"/><h2 class="sect2 title"><span class="title"><span class="label">4.2. </span>The FIFO protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM also provides a FIFO called <span class="filename" style="font-family: monospace; ">.gdmfifo</span> in the
         <span class="filename" style="font-family: monospace; ">ServAuthDir</span> directory
         (usually <span class="filename" style="font-family: monospace; ">&lt;var&gt;/gdm/.gdmfifo</span>).  You must be
@@ -260,7 +264,7 @@
         pid of the slave as an argument are the ones that are really used for
         internal communication of the slave with the master and should not be
         used.
-      </p></div><div class="sect2"><a name="socketprot"/><h2 class="sect2 title"><span class="title"><span class="label"/>Socket Protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="socketprot"/><h2 class="sect2 title"><span class="title"><span class="label">4.3. </span>Socket Protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM provides a unix domain socket for communication at
         <span class="filename" style="font-family: monospace; ">/tmp/.gdm_socket</span>.  Using this you can check if
         GDM is running, the version of the daemon, the current servers that are
@@ -291,7 +295,7 @@ CLOSE
       </pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
        These are described in detail below, including required arguments,
        response format, and return codes.
-      </p><div class="sect3"><a name="queryversion"/><h3 class="sect3 title"><span class="title"><span class="label"/>VERSION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">VERSION: Query version
+      </p><div class="sect3"><a name="queryversion"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.1. </span>VERSION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">VERSION: Query version
 Supported since: 2.2.4.0
 Arguments:  None
 Answers:
@@ -299,7 +303,7 @@ Answers:
   ERROR &lt;err number&gt; &lt;english error description&gt;
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="authlocal"/><h3 class="sect3 title"><span class="title"><span class="label"/>AUTH_LOCAL</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">AUTH_LOCAL: Setup this connection as authenticated for
+      </pre></div></div><div class="sect3"><a name="authlocal"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.2. </span>AUTH_LOCAL</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">AUTH_LOCAL: Setup this connection as authenticated for
             FLEXI_SERVER Because all full blown (non-Xnest)
             servers can be started only from users logged in
             locally, and here GDM assumes only users logged
@@ -319,7 +323,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="flexixserver"/><h3 class="sect3 title"><span class="title"><span class="label"/>FLEXI_XSERVER</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XSERVER: Start a new X flexible server
+      </pre></div></div><div class="sect3"><a name="flexixserver"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.3. </span>FLEXI_XSERVER</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XSERVER: Start a new X flexible server
 Only supported on connection that passed AUTH_LOCAL
 Supported since: 2.2.4.0
 Arguments:  &lt;xserver type&gt;
@@ -336,7 +340,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="flexixnest"/><h3 class="sect3 title"><span class="title"><span class="label"/>FLEXI_XNEST</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XNEXT: Start a new flexible Xnest server
+      </pre></div></div><div class="sect3"><a name="flexixnest"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.4. </span>FLEXI_XNEST</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XNEXT: Start a new flexible Xnest server
 Note:        Supported an older version from 2.2.4.0, later
              2.2.4.2, but since 2.3.90.4 you must supply 4
              arguments or ERROR 100 will be returned.  This
@@ -369,7 +373,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="adddynamic"/><h3 class="sect3 title"><span class="title"><span class="label"/>ADD_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ADD_DYNAMIC_DISPLAY: Create a new server definition that will run on the
+      </pre></div></div><div class="sect3"><a name="adddynamic"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.5. </span>ADD_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ADD_DYNAMIC_DISPLAY: Create a new server definition that will run on the
                      specified display leaving, it in DISPLAY_CONFIG state.
 Supported since: 2.8.0.0
 Arguments:  &lt;display to run on&gt;=&lt;server&gt;
@@ -385,7 +389,7 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="releasedynamic"/><h3 class="sect3 title"><span class="title"><span class="label"/>RELEASE_DYNAMIC_DISPLAYS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">RELEASE_DYNAMIC_DISPLAYS: Release dynamic displays currently in DISPLAY_CONFIG
+      </pre></div></div><div class="sect3"><a name="releasedynamic"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.6. </span>RELEASE_DYNAMIC_DISPLAYS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">RELEASE_DYNAMIC_DISPLAYS: Release dynamic displays currently in DISPLAY_CONFIG
                           state
 Supported since: 2.8.0.0
 Arguments:  None
@@ -396,7 +400,7 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="removedynamic"/><h3 class="sect3 title"><span class="title"><span class="label"/>REMOVE_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">REMOVE_DYNAMIC_DISPLAY: Remove a dynamic display, killing the server and purging
+      </pre></div></div><div class="sect3"><a name="removedynamic"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.7. </span>REMOVE_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">REMOVE_DYNAMIC_DISPLAY: Remove a dynamic display, killing the server and purging
                         the display configuration
 Supported since: 2.8.0.0
 Arguments:  &lt;display to remove&gt;
@@ -408,7 +412,7 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="attachedservers"/><h3 class="sect3 title"><span class="title"><span class="label"/>ATTACHED_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ATTACHED_SERVERS: List all attached servers.  Doesn't list XDMCP and xnest
+      </pre></div></div><div class="sect3"><a name="attachedservers"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.8. </span>ATTACHED_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ATTACHED_SERVERS: List all attached servers.  Doesn't list XDMCP and xnest
                   non-attached servers
 Supported since: 2.2.4.0
 Note: This command used to be named CONSOLE_SERVERS, which is still recognized
@@ -434,7 +438,7 @@ Answers:
      1 = Not implemented
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="allservers"/><h3 class="sect3 title"><span class="title"><span class="label"/>ALL_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ALL_SERVERS: List all servers, including console, remote, xnest.
+      </pre></div></div><div class="sect3"><a name="allservers"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.9. </span>ALL_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ALL_SERVERS: List all servers, including console, remote, xnest.
              This can, for example, be useful to figure out if
              the server you are on is managed by the gdm daemon,
              by seeing if it is in the list.  It is also somewhat
@@ -452,7 +456,7 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="getconfig"/><h3 class="sect3 title"><span class="title"><span class="label"/>GET_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG:  Get configuration value for key.  Useful so
+      </pre></div></div><div class="sect3"><a name="getconfig"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.10. </span>GET_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG:  Get configuration value for key.  Useful so
              that other applications can request configuration
              information from GDM.  Any key defined as GDM_KEY_*
              in gdm.h is supported.
@@ -465,7 +469,7 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="getconfigfile"/><h3 class="sect3 title"><span class="title"><span class="label"/>GET_CONFIG_FILE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG_FILE:  Get config file location being used by
+      </pre></div></div><div class="sect3"><a name="getconfigfile"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.11. </span>GET_CONFIG_FILE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG_FILE:  Get config file location being used by
                   the daemon.
 Supported since: 2.8.0.2
 Arguments:  None
@@ -475,7 +479,7 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="updateconfig"/><h3 class="sect3 title"><span class="title"><span class="label"/>UPDATE_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">UPDATE_CONFIG: Tell the daemon to update config of some key.
+      </pre></div></div><div class="sect3"><a name="updateconfig"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.12. </span>UPDATE_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">UPDATE_CONFIG: Tell the daemon to update config of some key.
                Any user can really request that values are
                re-read but the daemon caches the last date
                of the config file so a user can't actually
@@ -520,7 +524,7 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="greeterpids"/><h3 class="sect3 title"><span class="title"><span class="label"/>GREETERPIDS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GREETERPIDS: List all greeter pids so that one can send HUP
+      </pre></div></div><div class="sect3"><a name="greeterpids"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.13. </span>GREETERPIDS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GREETERPIDS: List all greeter pids so that one can send HUP
              to them for config rereading.  Of course one
              must be root to do that.
 Supported since: 2.3.90.2
@@ -531,7 +535,7 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="querylogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label"/>QUERY_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_LOGOUT_ACTION: Query which logout actions are possible
+      </pre></div></div><div class="sect3"><a name="querylogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.14. </span>QUERY_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_LOGOUT_ACTION: Query which logout actions are possible
 Only supported on connections that passed AUTH_LOCAL.
 Supported since: 2.5.90.0
 Answers:
@@ -547,7 +551,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="setlogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label"/>SET_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_LOGOUT_ACTION:  Tell the daemon to halt/reboot/suspend
+      </pre></div></div><div class="sect3"><a name="setlogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.15. </span>SET_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_LOGOUT_ACTION:  Tell the daemon to halt/reboot/suspend
                     after slave process exits. 
 Only supported on connections that passed AUTH_LOCAL.
 Supported since: 2.5.90.0
@@ -565,7 +569,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="setsafelogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label"/>SET_SAFE_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_SAFE_LOGOUT_ACTION:  Tell the daemon to halt/reboot/suspend
+      </pre></div></div><div class="sect3"><a name="setsafelogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.16. </span>SET_SAFE_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_SAFE_LOGOUT_ACTION:  Tell the daemon to halt/reboot/suspend
                          after everybody logs out.  If only
                          one person logs out, then this is
                          obviously the same as the
@@ -591,7 +595,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="queryvt"/><h3 class="sect3 title"><span class="title"><span class="label"/>QUERY_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_VT:  Ask the daemon about which VT we are currently on.
+      </pre></div></div><div class="sect3"><a name="queryvt"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.17. </span>QUERY_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_VT:  Ask the daemon about which VT we are currently on.
            This is useful for logins which don't own
            /dev/console but are still console logins.  Only
            supported on Linux currently, other places will
@@ -609,7 +613,7 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="setvt"/><h3 class="sect3 title"><span class="title"><span class="label"/>SET_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_VT:  Change to the specified virtual terminal.
+      </pre></div></div><div class="sect3"><a name="setvt"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.18. </span>SET_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_VT:  Change to the specified virtual terminal.
          This is useful for logins which don't own /dev/console
          but are still console logins.  Only supported on Linux
          currently, other places will just get ERROR 8.
@@ -625,6 +629,6 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-      </pre></div></div><div class="sect3"><a name="close"/><h3 class="sect3 title"><span class="title"><span class="label"/>CLOSE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">CLOSE Answers: None
+      </pre></div></div><div class="sect3"><a name="close"/><h3 class="sect3 title"><span class="title"><span class="label">4.3.19. </span>CLOSE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">CLOSE Answers: None
 Supported since: 2.2.4.0
       </pre></div></div></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="configuration.html" title="Configuration">Configuration</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="bindir_binaries.html" title="GDM Commands in EXPANDED_BINDIR">GDM Commands in EXPANDED_BINDIR</a></span></div></div></body></html>
