@@ -1,0 +1,45 @@
+SUBDIRS=
+
+urlpath=/projects/chronojump/images
+
+page_SCRIPTS=
+
+include $(top_srcdir)/rules.common
+
+misc_images=\
+	chronojump33.png \
+	chronojump_add_persons_multiple_preferences_spanish.png \
+	chronojump_add_persons_multiple_preferences_spanish_small.png \
+	chronojump_esquema.png \
+	chronojump_esquema_two_platforms.png \
+	chronojump_graphs.jpg \
+	chronojump_graphs_reactive.png \
+	chronojump_graphs_reactive_small.png \
+	chronojump_graphs_small.png \
+	chronojump_graphs_volei.png \
+	chronojump_graphs_volei_small.png \
+	chronojump_logo_small.png \
+	chronojump_new_run_type_spanish.png \
+	chronojump_new_run_type_spanish_small.png \
+	chronopic_foto.jpg \
+	chronopic_foto_small.png \
+	crl_logo_88.png \
+	deporteyciencia.png \
+	plataforma_contactos_cinta_adhesiva_plastico.jpg \
+	plataforma_contactos_cinta_varillas.jpg \
+	plataforma_contactos_cortar_varillas.jpg \
+	plataforma_contactos_final.jpg \
+	plataforma_contactos_final_small.png \
+	plataforma_contactos_joraike.jpg \
+	plataforma_contactos_juntar_varillas.jpg \
+	plataforma_contactos_marcar_cortar_cable.jpg \
+	plataforma_contactos_material.jpg \
+	plataforma_contactos_pegar_cinta_entre_varillas.jpg \
+	plataforma_contactos_pegar_varillas_plastico.jpg \
+	plataforma_contactos_perforar_varillas.jpg \
+	plataforma_contactos_puerto_paralelo.jpg \
+	plataforma_contactos_remaches.jpg \
+	plataforma_contactos_taladrar_varillas.jpg \
+	plataforma_contactos_unir_conjuntos_varilla.jpg
+
+page_DATA=$(misc_images)
