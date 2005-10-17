@@ -40,6 +40,6 @@ page_SCRIPTS= index.html	\
 	screenshots_ca.html \
 	screenshots_es.html \
 	screenshots.html \
-	screenshots_pt.html \
+	screenshots_pt.html 
 
 include $(top_srcdir)/rules.common
