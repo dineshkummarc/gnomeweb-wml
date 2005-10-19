@@ -31,7 +31,8 @@ SUBDIRS = \
 	rhythmbox               \
 	livecd			\
 	gwget			\
-	desktopwiki
+	desktopwiki             \
+	baobab
 
 urlpath = /projects
 
