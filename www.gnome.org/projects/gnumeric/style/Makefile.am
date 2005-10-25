@@ -9,3 +9,6 @@ page_SCRIPTS = \
     index.css
 
 include $(top_srcdir)/rules.common
+
+install-exec-hook:
+	chmod a+rw $(pagedir)/function.css
