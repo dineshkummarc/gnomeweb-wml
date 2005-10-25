@@ -86,6 +86,7 @@ page_SCRIPTS= \
 	gnumeric-AMORLINC.shtml		\
 	gnumeric-AND.shtml		\
 	gnumeric-AREAS.shtml		\
+	gnumeric-ASC.shtml		\
 	gnumeric-ASINH.shtml		\
 	gnumeric-ASIN.shtml		\
 	gnumeric-ATAN2.shtml		\
@@ -95,6 +96,7 @@ page_SCRIPTS= \
 	gnumeric-AVEDEV.shtml		\
 	gnumeric-AVERAGEA.shtml		\
 	gnumeric-AVERAGE.shtml		\
+	gnumeric-BASE.shtml		\
 	gnumeric-BERNOULLI.shtml	\
 	gnumeric-BESSELI.shtml		\
 	gnumeric-BESSELJ.shtml		\
@@ -165,6 +167,7 @@ page_SCRIPTS= \
 	gnumeric-DEC2BIN.shtml		\
 	gnumeric-DEC2HEX.shtml		\
 	gnumeric-DEC2OCT.shtml		\
+	gnumeric-DECIMAL.shtml		\
 	gnumeric-DEGREES.shtml		\
 	gnumeric-DELTA.shtml		\
 	gnumeric-DEVSQ.shtml		\
@@ -379,7 +382,7 @@ page_SCRIPTS= \
 	gnumeric-OPT_AMER_EXCHANGE.shtml	\
 	gnumeric-OPT_BAW_AMER.shtml	\
 	gnumeric-OPT_BINOMIAL.shtml	\
-	gnumeric-OPT_BJERSTENS.shtml	\
+	gnumeric-OPT_BJER_STENS.shtml	\
 	gnumeric-OPT_BS_CARRYCOST.shtml	\
 	gnumeric-OPT_BS_DELTA.shtml	\
 	gnumeric-OPT_BS_GAMMA.shtml	\
@@ -425,6 +428,51 @@ page_SCRIPTS= \
 	gnumeric-PV.shtml		\
 	gnumeric-QUARTILE.shtml		\
 	gnumeric-QUOTIENT.shtml		\
+	gnumeric-R.DBETA.shtml		\
+	gnumeric-R.DBINOM.shtml		\
+	gnumeric-R.DCAUCHY.shtml	\
+	gnumeric-R.DCHISQ.shtml		\
+	gnumeric-R.DEXP.shtml		\
+	gnumeric-R.DF.shtml		\
+	gnumeric-R.DGAMMA.shtml		\
+	gnumeric-R.DGEOM.shtml		\
+	gnumeric-R.DHYPER.shtml		\
+	gnumeric-R.DLNORM.shtml		\
+	gnumeric-R.DNBINOM.shtml	\
+	gnumeric-R.DNORM.shtml		\
+	gnumeric-R.DPOIS.shtml		\
+	gnumeric-R.DT.shtml		\
+	gnumeric-R.DWEIBULL.shtml	\
+	gnumeric-R.PBETA.shtml		\
+	gnumeric-R.PBINOM.shtml		\
+	gnumeric-R.PCAUCHY.shtml	\
+	gnumeric-R.PCHISQ.shtml		\
+	gnumeric-R.PEXP.shtml		\
+	gnumeric-R.PF.shtml		\
+	gnumeric-R.PGAMMA.shtml		\
+	gnumeric-R.PGEOM.shtml		\
+	gnumeric-R.PHYPER.shtml		\
+	gnumeric-R.PLNORM.shtml		\
+	gnumeric-R.PNBINOM.shtml	\
+	gnumeric-R.PNORM.shtml		\
+	gnumeric-R.PPOIS.shtml		\
+	gnumeric-R.PT.shtml		\
+	gnumeric-R.PWEIBULL.shtml	\
+	gnumeric-R.QBETA.shtml		\
+	gnumeric-R.QBINOM.shtml		\
+	gnumeric-R.QCAUCHY.shtml	\
+	gnumeric-R.QCHISQ.shtml		\
+	gnumeric-R.QEXP.shtml		\
+	gnumeric-R.QF.shtml		\
+	gnumeric-R.QGAMMA.shtml		\
+	gnumeric-R.QGEOM.shtml		\
+	gnumeric-R.QHYPER.shtml		\
+	gnumeric-R.QLNORM.shtml		\
+	gnumeric-R.QNBINOM.shtml	\
+	gnumeric-R.QNORM.shtml		\
+	gnumeric-R.QPOIS.shtml		\
+	gnumeric-R.QT.shtml		\
+	gnumeric-R.QWEIBULL.shtml	\
 	gnumeric-RADIANS.shtml		\
 	gnumeric-RANDBERNOULLI.shtml	\
 	gnumeric-RANDBETA.shtml		\
