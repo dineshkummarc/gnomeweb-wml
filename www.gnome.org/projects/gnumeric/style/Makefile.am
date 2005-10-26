@@ -10,5 +10,5 @@ page_SCRIPTS = \
 
 include $(top_srcdir)/rules.common
 
-install-exec-hook:
-	chmod a+rw $(pagedir)/function.css
+# install-exec-hook:
+#	chmod a+rw $(pagedir)/function.css
