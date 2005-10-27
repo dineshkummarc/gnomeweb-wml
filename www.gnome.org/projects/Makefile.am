@@ -17,6 +17,7 @@ SUBDIRS = \
 	gb			\
 	nautilus		\
 	nautilus-locked-folders \
+	NetworkManager		\
 	ooo			\
 	ORBit2			\
 	gnome-print		\
