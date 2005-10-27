@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>NetworkManager - Developers</title>
+<link rel="stylesheet" type="text/css" href="../styles/default.css">
+</head>
+<body>
+<div class="developer content">
+	<div id="banner">
+		<div id="navbar">
+			<img src="../images/banners/developers.png">
+			<div id="links">
+				<a href="../" id="main">main</a> | <a href="../users/" id="users">users</a> | <a href="../admins/" id="admins">admins</a> | <a id="developers">developers</a>
+			</div>
+		</div>
+	</div>
+
+	<h2>So you want to hack on NetworkManager?</h2>
+	<p>First, join the mailing lists: <a href="http://mail.gnome.org/mailman/listinfo/networkmanager-list">http://mail.gnome.org/mailman/listinfo/networkmanager-list</a>.</p>
+	<p>Second, read the <a href="design_goals.html">Design Goals</a> of NetworkManager to get an idea of why things work the way they do.</p>
+	<p>Next, grab NetworkManager from CVS HEAD.  To checkout and build from CVS HEAD:<br>
+	<code>
+		<kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome login</kbd><br><kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome co NetworkManager</kbd><br><kbd>./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var</kbd><br><kbd>make</kbd><br><kbd>make install</kbd>
+	</code>
+	</p>
+
+	<h2>Actually hacking on it</h2>
+	<p>If you make changes to NetworkManager, create the patch using a Unified diff format (ie, diff -u) and mail the patch to the NetworkManager list.  Others on the list may make suggestions, please take these into consideration.  Eventually, your patch can be checked into NetworkManager CVS.</p>
+
+	<h2>Stuff to work on</h2>
+	<p>
+	<ul>
+	<li><b>WPA support:</b> please see <a href="http://mail.gnome.org/archives/networkmanager-list/2005-September/msg00073.html">this message</a> from the mailing list for a general idea of how WPA support should get integrated.  The general idea first to simply spawn a new instance of wpa_supplicant when NM connects to an AP that needs WPA, generating a config file on-the-fly.  Normal WEP should still be done by NM.  Eventually, we want to talk to wpa_supplicant over its control socket like the wpa_cli program does.</li>
+	<li><b>libnl support:</b> Check out <a href="http://people.suug.ch/~tgr/libnl/">libnl</a>.  Using it rather than callouts to /sbin/ip would allow us to get rid of most of the code in the system-specific backends.  Some of this has already been prototyped, and it works just fine.  This should be pretty easy.</li>
+	<li><b>Devices as GObjects:</b> though NetworkManager is written in C, it could benefit from some object-oriented features that glib provides.  The code would be a lot cleaner and more exentsible to things like Bluetooth devices if the NMDevice object was GObject-derived.  Specific features of wireless, wired, etc devices could be exposed through subclasses of a GObject-derived NMDevice.</li>
+	</ul>
+	</p>
+
+<!---
+	<p>
+	We need content about <em>interfacing with NetworkManager</em>
+	</p>
+-->
+</div>
+<div id="copyright">
+	NetworkManager is distributed under the GNU General Public License v.2, and is Copyright &copy; 2004-2005 by <a href="http://www.redhat.com/">Red Hat, Inc.</a> and many others.
+</div>
+</body>
+</html>
