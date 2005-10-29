@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/chronojump/
+urlpath=/projects/chronojump
 
 page_SCRIPTS= index.html	\
 	construction_ca.html \
