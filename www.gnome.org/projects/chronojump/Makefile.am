@@ -1,4 +1,4 @@
-SUBDIRS=images 
+SUBDIRS= images articles 
 
 urlpath=/projects/chronojump
 
@@ -40,6 +40,7 @@ page_SCRIPTS= index.html	\
 	screenshots_ca.html \
 	screenshots_es.html \
 	screenshots.html \
-	screenshots_pt.html 
+	screenshots_pt.html \
+	style.css
 
 include $(top_srcdir)/rules.common
