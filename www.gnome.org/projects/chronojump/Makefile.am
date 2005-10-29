@@ -1,4 +1,4 @@
-SUBDIRS= images articles 
+SUBDIRS= images articles print 
 
 urlpath=/projects/chronojump
 
@@ -23,6 +23,7 @@ page_SCRIPTS= index.html	\
 	documents_es.html \
 	documents.html \
 	documents_pt.html \
+	faq_es.html \
 	features_ca.html \
 	features_de.html \
 	features_es.html \
