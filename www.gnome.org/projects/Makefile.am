@@ -21,6 +21,7 @@ SUBDIRS = \
 	NetworkManager		\
 	ooo			\
 	ORBit2			\
+	gnome-power-manager	\
 	gnome-print		\
 	agnubis			\
 	gst			\
