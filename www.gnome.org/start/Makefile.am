@@ -8,6 +8,6 @@ page_SCRIPTS= \
 	helping.html
 
 page_DATA = \
-	unstable-schedule.ics
+	schedule-unstable.ics
 
 include $(top_srcdir)/rules.common
