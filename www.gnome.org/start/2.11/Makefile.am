@@ -1,6 +1,6 @@
 SUBDIRS = platform desktop bindings
 
-urlpath = /start/2.9
+urlpath = /start/2.11
 
 page_SCRIPTS = \
 	index.html
