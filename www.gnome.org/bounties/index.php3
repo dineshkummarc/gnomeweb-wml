@@ -72,8 +72,6 @@ collect the bounty.
 <?php taskrow ("Improve login time", "Optimization", "Google", "4500", "306042", ""); ?>
 <?php taskrow ("Reduce Evolution memory usage", "Optimization", "Google", "4500", "306043", ""); ?>
 <?php taskrow ("Global memory analysis tool", "Optimization", "Google", "4500", "306044", ""); ?>
-<?php taskrow ("Use a mmap'able cache for
-fontconfig", "Optimization", "Google", "4500", "169345", ""); ?>
 <?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "306308", ""); ?>
 <?php taskrow ("library.gnome.org", "Documentation", "Google", "4500", "306311", ""); ?>
 <?php taskrow ("Most unprecedented application", "Features", "Google", "4500", "306312", ""); ?>
@@ -118,6 +116,8 @@ files", "Tasks", "Novell", "300", "127557", "http://bugzilla.gnome.org/attachmen
 <?php taskrow ("Message receipts", "Mailer", "Novell", "500", "127534", "http://lists.ximian.com/archives/public/evolution-patches/2005-April/010399.html"); ?>
 <?php taskrow ("Link URLs in the status bar", "Mailer", "Novell", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php taskrow ("Remove duplication of desktop backgrounds", "Optimization", "Novell", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
+<?php taskrow ("Use a mmap'able cache for
+fontconfig", "Optimization", "Google", "4500", "169345", "http://cvs.freedesktop.org/fontconfig/fontconfig/"); ?>
 <?php write_table_footer (); ?>
 </div>
 
