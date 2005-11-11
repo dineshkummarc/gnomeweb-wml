@@ -10,6 +10,7 @@ page_SCRIPTS=			\
 	developing.html		\
 	helping.html		\
 	config.html		\
+	ldap.html		\
 	format.html		\
 	brownbar.jpg		\
 	brownbarTop.jpg		\

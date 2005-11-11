@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><link rel="stylesheet" type="text/css" href="sabayon.css" /><title>LDAP support</title></head><body><div id="main"><div id="top"><img src="title01.jpg" border="0" height="229" width="432" alt="Sabayon: user profiles made simple" /><img src="title02.jpg" border="0" height="229" alt="Small screenshot of sabayon" /></div><div id="left"><div class="box"><h2 class="box_title">Download</h2><h4 class="box_header">RPMs</h4><ul><li>RPMs for Fedora Core 4 are available from <a href="http://download.fedora.redhat.com/pub/fedora/linux/extras/">Fedora Extras</a></li></ul><h4 class="box_header">Source</h4><ul><li><a href="http://ftp.gnome.org/pub/GNOME/sources/sabayon/">tarball</a></li><li><a href="http://cvs.gnome.org/viewcvs/sabayon/">CVS Repository</a></li></ul></div><div class="box"><h2 class="box_title">Contribute</h2><p>There are several ways to contribute to the Sabayon project.</p><p><a href="testing.html">Testing</a>, go here if you want to install sabayon and try it out.</p><p><a href="developing.html">Developing</a>, get the code and try to fix errors and send patches to the maintainers.</p><p><a href="helping.html">Helping out</a> on the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">mailing list</a> and <a href="irc://irc.gnome.org/sabayon">IRC</a> for people having problems, letting them know where to go and what to do.</p></div><div class="box"><h2 class="box_title">Contact</h2><p>You can contact developers <a href="mailto:sabayon-list@gnome.org">sending a mail</a> to the <a href="http://mail.gnome.org/mailman/listinfo/sabayon-list/">Sabayon mailing list</a>. You do not need to be subscribed.</p><p>We are also often available to <a href="irc://irc.gnome.org/sabayon">chat on IRC</a>.</p><p><strong>Server:</strong> irc.gnome.org<br /><strong>Channel:</strong> #sabayon</p></div><div class="box"><h2 class="box_title">Documentation</h2><p>Format and deployement of the <a href="config.html">config
+         files</a></p><p>Technical informations on the <a href="format.html">profile
+         format</a></p></div></div><div id="right"><p> Sabayon supports using LDAP to get profiles in a very flexible way.
+    By defining server settings and queries in the
+    <b>/etc/desktop-profiles/users.xml</b> file it can do the mapping from user
+     to profile file using LDAP queries. An example setup can look like:</p><pre>
+      &lt;profiles&gt;
+       &lt;ldap server="ldap.example.com"&gt;
+        &lt;profilemap search_base="ou=People,dc=example,dc=com"
+                 scope="one"
+                 query_filter="(uid=%u)"
+                 result_attribute="sabayonProfileURL"/&gt;
+        &lt;/ldap&gt;
+        &lt;default profile="default"/&gt;
+      &lt;/profiles&gt;
+    </pre><h4>LDAP server configuration</h4><p>The toplevel ldap tag sets up the server connection. Availible
+    attributes are:</p><ul>
+      <li>server (default: localhost): The address of the ldap server</li>
+      <li>port (default: 389): The port of the ldap server</li>
+      <li>version (default: 3): The ldap version to use</li>
+      <li>timeout (default: 10): Timeout to use for ldap operations, 0 to disable</li>
+      <li>bind_dn: dn to bind as, or leave out to run queries without binding</li>
+      <li>bind_pw: password used when binding</li>
+    </ul><h4>LDAP queries</h4><p>Inside the ldap tag you can define the two queries used by sabayon. The
+    first is the profilemap query, which maps from the username to the profile
+    name to use for the user. The profile name is just a string, and it can be
+    either an absolute URI, a URI relative to the config file, or just a name.
+    If it is a name it will be looked up in the locationmap LDAP query (if specified)
+    and if that didn't match, it will be converted to a filename in /etc/desktop-profiles
+    by appending ".zip".</p><p>The locationmap query specifies the mapping from profile name to profile
+    URI. This can optinally be used instead of storing the profile URI directly
+    in the LDAP user object, to allow more flexibility in changing the URI.</p><p>Both queries support these attributes:</p><ul>
+     <li>search_base: The search base of the query</li>
+     <li>query_filter: the LDAP filter to use</li>
+     <li>result_attribute: The name of the attribute to look at in the query result</li>
+     <li>scope (default "sub"): The search scope. Can be sub, base or one.</li>
+     <li>multiple_result (default "first"): How to handle multiple values in the
+     resulting attribute. Can be "first", use the first attribute or "random", pick
+     a random one (for e.g. load balancing).</li>
+    </ul><p>Both search_base and query_filter are expanded. In profilemap %u expands to the username
+    and in locationmap %p expands to the profile name. In both maps %h expands to the full
+    hostname of the client, and %% expands to %.</p><h4>Examples</h4><p>There are many way to set up the sabayon LDAP integration. Here are some examples,
+    all using the sabayon LDAP schema that comes in the sabayon package.</p><h5>Store profile URL in the user</h5><p>This is the simplest setup. Add a sabayonProfileURLObject to your user objects
+    and set the sabayonProfileURL property for each user to a URI of the profile.</p><pre>
+  ...    
+  &lt;ldap server="..."&gt;
+     &lt;profilemap search_base="ou=People,dc=example,dc=com"
+                 scope="one"
+                 query_filter="(uid=%u)"
+                 result_attribute="sabayonProfileURL"/&gt;
+  &lt;/ldap&gt;
+  ...
+    </pre><h5>Store profile as a separate entity in ldap</h5><p>Store the name of the profile for each user (using a
+    sabayonProfileNameObject object), and store the actual URI in
+    a sabayonProfile object. This gives a lot of flexibility to change
+    the URI of the profile, without having to update each user.</p><pre>
+  ...    
+  &lt;ldap server="..."&gt;
+     &lt;profilemap search_base="ou=People,dc=example,dc=com"
+                 scope="one"
+                 query_filter="(uid=%u)"
+                 result_attribute="sabayonProfileName"/&gt;
+     &lt;locationmap search_base="ou=Profiles,dc=example,dc=com"
+                  scope="one"
+                  query_filter="(cn=%p)"
+                  result_attribute="sabayonProfileURL"/&gt;
+  &lt;/ldap&gt;
+  ...
+    </pre><h5>Pick profile based on group membership</h5><p>This lets you pick a profile based on what group the user
+    is part of by adding the sabayonProfileURL attribute to the
+    group object.</p><pre>
+  ...    
+  &lt;ldap server="..."&gt;
+     &lt;profilemap search_base="ou=Group,dc=example,dc=com"
+                 scope="one"
+                 query_filter="(memberUid=%u)"
+                 result_attribute="sabayonProfileURL"/&gt;
+  &lt;/ldap&gt;
+  ...
+    </pre><h5>others</h5><p>There are countless other ways, for example you could combine the
+    group example and the separate profile object example. If you come up
+    with an interesting way, please tell us on the mailing list.</p></div><div id="copyright"></div></div></body></html>
