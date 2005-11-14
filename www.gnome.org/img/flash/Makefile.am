@@ -26,6 +26,7 @@ page_DATA = \
 	wgosplash-gnomejournal-alt.png \
 	two-twelve.jpg \
 	summit-mit-2005.png \
-	agobanner.png
+	agobanner.png \
+	forum-gnome-2005.png
 
 include $(top_srcdir)/rules.common
