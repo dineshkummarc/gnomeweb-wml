@@ -117,7 +117,7 @@ files", "Tasks", "Novell", "300", "127557", "http://bugzilla.gnome.org/attachmen
 <?php taskrow ("Link URLs in the status bar", "Mailer", "Novell", "200", "127536", "http://lists.ximian.com/archives/public/evolution-patches/2004-January/003949.html"); ?>
 <?php taskrow ("Remove duplication of desktop backgrounds", "Optimization", "Novell", "200", "169347", "http://bugzilla.gnome.org/attachment.cgi?id=38926"); ?>
 <?php taskrow ("Use a mmap'able cache for
-fontconfig", "Optimization", "Google", "4500", "169345", "http://cvs.freedesktop.org/fontconfig/fontconfig/"); ?>
+fontconfig", "Optimization", "Novell", "4500", "169345", "http://cvs.freedesktop.org/fontconfig/fontconfig/"); ?>
 <?php write_table_footer (); ?>
 </div>
 
