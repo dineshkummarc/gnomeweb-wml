@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/garnome
+urlpath=/projects/garnome/
 
 page_SCRIPTS=						\
 			contact.html			\
