@@ -7,6 +7,7 @@ SUBDIRS = \
 	dia			\
 	evolution		\
 	f-spot			\
+	garnome			\
 	gedit			\
 	gconf			\
 	gdm			\
