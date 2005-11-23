@@ -3,11 +3,11 @@ SUBDIRS=images docs
 urlpath=/projects/gdm/
 
 page_SCRIPTS= index.html	\
-		about.html \
+		about.html	\
 		developers.html \
+		docs.html	\
 		screenshots.html \
-		gdm.css \
-		gdmtalk.pdf
+		gdm.css
 
 
 include $(top_srcdir)/rules.common

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>GDM Commands in EXPANDED_LIBEXECDIR</title><link rel="previous" href="sbindir_binaries.html" title="GDM Commands in EXPANDED_SBINDIR"/><link rel="next" href="thememanual.html" title="Themed Greeter"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Solaris Specific Features</title><link rel="previous" href="accessibility.html" title="Accessibility"/><link rel="next" href="exampleconf.html" title="Example Configurations"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
     div[class~="caution"] {
       background-image: url("caution.png");
     }
@@ -60,10 +60,6 @@
     }
     pre[class~="linenumbering"] {
       
-      padding-top: 6px;
-      padding-bottom: 6px;
-      -moz-border-radius: 8px;
-      border: solid 1px black;
       margin-top: 0px;
       margin-left: 0.8em;
       background-color: black;
@@ -222,35 +218,22 @@
     p &gt; div { margin-top: 1em; margin-bottom: 1em; }
     p &gt; div + div { margin-top: 0em; }
     p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="libexecdir_binaries"/><h1 class="sect1 title"><span class="title">GDM Commands in EXPANDED_LIBEXECDIR</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-      The GDM package provides the following different commands in
-      EXPANDED_LIBEXECDIR intended to be used by the gdm daemon process.
-    </p><div class="sect2"><a name="gdmgreeterlogincommandline"/><h2 class="sect2 title"><span class="title"><span class="label">7.1. </span><span class="filename" style="font-family: monospace; ">gdmchooser</span> and <span class="filename" style="font-family: monospace; ">gdmlogin</span>
-             Command Line Options</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The <span class="filename" style="font-family: monospace; ">gdmgreeter</span> and <span class="filename" style="font-family: monospace; ">gdmlogin</span>
-        are two different login applications, either can be used by GDM.  
-        <span class="filename" style="font-family: monospace; ">gdmgreeter</span> is themeable with GDM themes while
-        <span class="filename" style="font-family: monospace; ">gdmlogin</span> is themable with GTK+ themes.  These
-        applications are normally executed by the GDM daemon.  Both commands
-        support standard GNOME options. 
-      </p></div><div class="sect2"><a name="gdmchoosercommandline"/><h2 class="sect2 title"><span class="title"><span class="label">7.2. </span><span class="filename" style="font-family: monospace; ">gdmchooser</span> Command Line Options</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The <span class="filename" style="font-family: monospace; ">gdmchooser</span> is the XDMCP chooser application.  
-        The <span class="filename" style="font-family: monospace; ">gdmchooser</span> is normally executed by the GDM
-        daemon.  It supports the following options for XDM compatibility.
-        This command supports standard GNOME options and is found in
-        support standard GNOME options.
-      </p><div class="list"><div class="variablelist"><div class="title"><span class="title"><b><span class="filename" style="font-family: monospace; ">gdmchooser</span> Command Line Options</b></span></div><dl><dt><span class="term">-xdmaddress=SOCKET</span></dt><dd>
-           <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-               Socket for XDM communication.
-           </p>
-          </dd><dt><span class="term">--clientaddress=ADDRESS</span></dt><dd>
-           <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-             Client address to return in response to XDM.  This option is for
-             running gdmchooser with XDM, and is not used within GDM.
-           </p>
-          </dd><dt><span class="term">-connectionType=TYPE</span></dt><dd>
-           <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-             Connection type to return in response to XDM.  This option is for
-             running gdmchooser with XDM, and is not used within GDM.
-           </p>
-          </dd></dl></div></div></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="sbindir_binaries.html" title="GDM Commands in EXPANDED_SBINDIR">GDM Commands in EXPANDED_SBINDIR</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></span></div></div></body></html>
+    </style></head><body><div class="body"><div class="sect1"><a name="solaris"/><h1 class="sect1 title"><span class="title">Solaris Specific Features</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM supports a few features specific to Solaris, as follows:
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM supports Solaris Auditing if running on Solaris 10 or higher.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM supports a security feature which causes the Xserver to run as
+        the user instead of as the root user.  GDM must be using PAM for
+        this feature to be enabled, which is the normal case for Solaris.
+        This second feature has the side-effect of causing the Xserver to
+        always restart between sessions, which disables the
+        AlwaysRestartServer gdm.conf configuration option.  
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        Solaris supports the <span class="filename" style="font-family: monospace; ">/etc/default/login</span>
+        interface, which affects the <span class="filename" style="font-family: monospace; ">DefaultPath</span>,
+        <span class="filename" style="font-family: monospace; ">RootPath</span>,
+        <span class="filename" style="font-family: monospace; ">PasswordRequired</span>, and
+        <span class="filename" style="font-family: monospace; ">AllowRemoteRoot</span> options as described in the
+        Configuration section.
+    </p></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="accessibility.html" title="Accessibility">Accessibility</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="exampleconf.html" title="Example Configurations">Example Configurations</a></span></div></div></body></html>
