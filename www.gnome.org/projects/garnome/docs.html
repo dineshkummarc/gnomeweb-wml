@@ -15,8 +15,6 @@
 
 	<p>GARNOME is more than just the basic GNOME desktop. The developers have built a fully configurable, customisable and usable desktop environment that can be installed directly into a users home directory. This allows people who are running older distributions, or who are using corporate desktops to use an interface that is both attractive and current, while not affecting the underlying operation of their existing desktop.</p>
 
-	<a name="1"></a>
-
 	<h2>Components</h2>
 
 	<p>There is a lot of packages included in GARNOME that is not built as part of
@@ -26,45 +24,43 @@
 
 	<table>
 	    <tr>
-	      <th class="package">Garball</th>
-	      <th>Includes</th>
+	      <th bgcolor="#9db8d2" align="center">Garball</th>
+	      <th bgcolor="#9db8d2" align="center">Includes</th>
 	    </tr>
 
 	    <tr>
-	      <td class="package">bindings/</td>
+	      <td bgcolor="#c5d2c8" align="center">bindings/</td>
 	      <td>GNOME platform bindings collection</td>
 	    </tr>
 
 	    <tr>
-	      <td class="package">fifth-toe/</td>
+	      <td bgcolor="#c5d2c8" align="center">fifth-toe/</td>
 	      <td>A collection of high quality third-party programs designed for your desktop, 
 		including Multimedia, Graphics and Internet applications.</td>
 	    </tr>
 
 	    <tr>
-	      <td class="package">geektoys/</td>
+	      <td bgcolor="#c5d2c8" align="center">geektoys/</td>
 	      <td>Various extensions to GARNOME that can enhance the usability of your desktop,    
 		including new desktop themes and applets that fit into an existing installation.</td>
 	    </tr>
 
 	    <tr>
-	      <td class="package">hacker-tools/</td>
+	      <td bgcolor="#c5d2c8" align="center">hacker-tools/</td>
 	      <td>Debuggers, Interface Designers and Hex Editors</td>
 	    </tr>
 
 	    <tr>
-	      <td class="package">mono/</td>
+	      <td bgcolor="#c5d2c8" align="center">mono/</td>
 	      <td>Mono(tm)</td>
 	    </tr>
 
 	    <tr>
-	      <td class="package">office/</td>
+	      <td bgcolor="#c5d2c8" align="center">office/</td>
 	      <td>Parts of the proposed 'GNOME Office' suite, including a spreadsheet application, 
 		word processor and the Evolution PIM / Groupware suite.</td>
 	    </tr>
 	</table>
-	
-	<a name="2"></a>
 
 	<h2>Build Requirements</h2>
 
@@ -98,19 +94,21 @@
 	  required to compile GARNOME can be found in the <strong>README</strong> file in the 
 	  GARNOME tarball.</p>
 
-	<a name="3"></a>
-
 	<h2>Building GARNOME</h2>
 
 	<p>Once you have the required packages installed, you might like to open the <tt>gar.conf.mk</tt> file with a text editor and configure the settings for your installation. Most of the defaults are fine, but if you would like to optimize your build, or take advantage of <a href="http://ccache.samba.org">ccache</a> to speed up your GARNOME compile, you may want to refer to the <a href="faq.html">FAQ pages</a>.</p>
 
 	<p>After everything has been tweaked to suit your environment and you have installed all of the required packages to build GARNOME, start your build by typing:</p>
 	
-	<div class="code">cd desktop/<br />make paranoid-install<br /></div>
+	<table id="t1">
+	    <tr><td>
+		<pre>
+cd desktop
+make paranoid-install</pre>
+</td></tr>
+</table>
 
 	<p>That's all there is to it! GARNOME will begin to build and install the GNOME Desktop release, and everything it needs immediately.</p>
-
-	<a name="4"></a>
 
 	<h2>Starting / Using GARNOME</h2>
 
@@ -118,20 +116,25 @@
 
 	<p>An example startup script would look like:</p>
 
-	<div class="code">
-	  #!/bin/sh
-	  GARNOME=$HOME/garnome
-	  PATH=$GARNOME/bin:$GARNOME/sbin:$PATH
-	  LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
-	  PYTHONPATH=$GARNOME/lib/python2.3/site-packages
-	  PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
-	  XDG_DATA_DIRS=$GARNOME/share
-	  XDG_CONFIG_DIRS=$GARNOME/etc/xdg
-	  GDK_USE_XFT=1
-	  export PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH 
-	  export GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS
-	  exec $GARNOME/bin/gnome-session
-	</div>
+	<table id="t1">
+	    <tr><td>
+		<pre>
+GARNOME=$HOME/garnome
+
+PATH=$GARNOME/bin:$PATH
+LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
+PYTHONPATH=$GARNOME/lib/python2.4/site-packages:$GARNOME/lib/python2.4/site-packages/gtk-2.0
+PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
+GDK_USE_XFT=1
+XDG_DATA_DIRS=$GARNOME/share
+XDG_CONFIG_DIRS=$GARNOME/etc/xdg
+
+export  PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH \
+        GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS
+
+exec $GARNOME/bin/gnome-session</pre>
+</td></tr>
+</table>
 	
 	<p>You can then use the standard method your distribution provides to launch it when you start X.</p> 
 
@@ -140,21 +143,29 @@
 	<p>If you start X with the <tt>startx</tt> command you should launch this in <em>~/.xinitrc</em>. If you use the <tt>Xsession</tt> menu choice in GDM, you should
 	  launch this in <em>~/.xsession</em>. Assuming the garnome-session script is in your path, both files should look like this:</p>
 
-	<div class="code">
-	  #!/bin/sh
-	  exec garnome-session
-	</div>
+	<table id="t1">
+	    <tr><td>
+		<pre>
+#!/bin/sh
+exec garnome-session</pre>
+</td></tr>
+</table>
+	
 
 	<p>If you would also like <strong>GARNOME</strong> to take advantage of the new improvements in hardware detection and configuration on the desktop, you should make a script that will execute the DBus and HAL daemons that have been built for GNOME. On a relatively new box, this script would look similar to:</p>
 
-	<div class="code">
-	  #!/bin/sh
-	  sudo pkill hald
-	  rm $GARNOME/var/run/messagebus.pid
-	  sudo $GARNOME/bin/dbus-daemon --system
-	  sudo $GARNOME/sbin/hald
-	  exec garnome-session
-	</div>
+	<table id="t1">
+	    <tr><td>
+		<pre>
+#!/bin/sh
+sudo pkill hald
+rm -rf $GARNOME/var/run/messagebus.pid
+sudo $GARNOME/bin/dbus-daemon --system
+sudo $GARNOME/sbin/hald --retain-privileges
+exec garnome-session</pre>
+</td></tr>
+</table>
+	
 
 	<p>At this point, you should be able to start X and your newly created GARNOME desktop should appear.</p>
 
