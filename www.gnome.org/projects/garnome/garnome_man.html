@@ -1,0 +1,199 @@
+<HTML><HEAD><TITLE>Manpage of GARNOME</TITLE>
+</HEAD><BODY>
+<H1>GARNOME</H1>
+<HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+GARNOME Build System
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>make</B> [command]
+<BR>
+<B>make</B> [option]-[command]
+<P>
+Commands must be run inside of the garnome directory.
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+GARNOME is a build system for the GNOME Desktop Envirnoment.
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>paranoid</B><DD>
+Force [command] recursively in all subdirectories. Useful for building all modules in a main directory (i.e. desktop/).
+<P>
+<DT><B>deep</B><DD>
+Forcefully follow all dependencies for each module recursively.
+<P>
+<DT><B>pre</B><DD>
+Execute before [command].
+<BR>
+Useful in GAR Makefiles.
+<P>
+<DT><B>post</B><DD>
+Execute after [command].
+<BR>
+Useful in GAR Makefiles.
+<P>
+<DT><B>log</B><DD>
+Create log file for later viewing in &lt;module-name&gt;/log.
+<BR>
+Useful if things are failing to build/install.
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>COMMANDS</H2>
+
+<DL COMPACT>
+<DT><B>install</B><DD>
+Execute all of the necssary stages for building a module.
+<BR>
+Similar to a traditional 'make install'.
+<BR>
+Stages: fetch, checksum, extract, patch, configure, build, install
+<P>
+<DT><B>build</B><DD>
+Execute up to and including the build stage.
+<BR>
+Similar to a traditional 'make'.
+<BR>
+Stages: fetch, checksum, extract, patch, configure, build
+<P>
+<DT><B>configure</B><DD>
+Execute up to and including the configure stage.
+<BR>
+Similar to a traditional 'configure'.
+<BR>
+Stages: fetch, checksum, extract, patch, configure
+<P>
+<DT><B>patch</B><DD>
+Execute up to and including the patch stage.
+<BR>
+Patch the extracted tarball with the patch files found in the &lt;module-name&gt;/files directory.
+<BR>
+Stages: fetch, checksum, extract, patch
+<P>
+<DT><B>extract</B><DD>
+Execute up to and including the extract stage.
+<BR>
+Extract the tarball into the WORKSRC directory.
+<BR>
+Stages: fetch, checksum, extract
+<P>
+<DT><B>checksum</B><DD>
+Execute up to and including the checksum stage.
+<BR>
+Check the checksum for the tarball and all files in &lt;module-name&gt;/files.
+<BR>
+Stages: fetch, checksum
+<P>
+<DT><B>fetch</B><DD>
+Execute up to and including the fetch stage.
+<BR>
+Grab the tarball from the url or garchive directory.
+<BR>
+Stages: fetch
+<P>
+<DT><B>clean</B><DD>
+Clean out the module directory. Usually involves deleting the following directories in the module directory: cookies, download and work.
+<P>
+<DT><B>cookieclean</B><DD>
+Delete the cookie directory only. The  cookie  directory  keeps track of the stages that have been completed.
+<P>
+<DT><B>garchive</B><DD>
+Download tarballs and place them in the GARCHIVEDIR if GARCHIVEDIR is specified in the gar.conf.mk file.
+<P>
+<DT><B>makesum</B><DD>
+Create a new checksum file for the tarball and all files in &lt;module-name&gt;/files.
+<P>
+<DT><B>showdeps</B><DD>
+Show the dependencies for a module in a tree structure.
+</DL>
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>EXAMPLES</H2>
+cd garnome-x.x.x/desktop
+<BR>
+<B>make paranoid-install</B>
+<P>
+
+<A NAME="lbAH">&nbsp;</A>
+<H2>FILES</H2>
+
+<PRE>
+gar.conf.mk
+gar.gnome.mk
+gar.mk
+gar.lib.mk
+Makefile
+</PRE>
+
+<A NAME="lbAI">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<I>make (8)</I>
+<P>
+
+<A NAME="lbAJ">&nbsp;</A>
+<H2>MAINTAINERS</H2>
+
+<PRE>
+Bobk Kashani &lt;<A HREF="mailto:bobk ocf berkeley edu">bobk ocf berkeley edu</A>&gt;
+oseph E. Sacco, PhD &lt;<A HREF="mailto:joseph_sacco comcast net">joseph_sacco comcast net</A>&gt;
+Karsten 'guenther' Bräckelmann &lt;<A HREF="mailto:guenther rudersport de">guenther rudersport de</A>&gt;
+</PRE>
+
+<A NAME="lbAK">&nbsp;</A>
+<H2>OLD MAINTAINERS</H2>
+
+<PRE>
+Paul Drain &lt;<A HREF="mailto:pd cipherfunk org">pd cipherfunk org</A>&gt;
+Jeff Waugh &lt;<A HREF="mailto:jdub perkypants org">jdub perkypants org</A>&gt;
+</PRE>
+
+<A NAME="lbAL">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+<PRE>
+GARNOME - Jeff Waugh &lt;<A HREF="mailto:jdub perkypants org">jdub perkypants org</A>&gt;
+GAR - Nick Moffitt &lt;<A HREF="mailto:nick zork net">nick zork net</A>&gt;
+</PRE>
+
+<A NAME="lbAM">&nbsp;</A>
+<H2>BUGS</H2>
+
+<PRE>
+Any bugs and/or questions should be reported to the mailing list:
+<A HREF="mailto:garnome-list@gnome.org">garnome-list@gnome.org</A>
+</PRE>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">COMMANDS</A><DD>
+<DT><A HREF="#lbAG">EXAMPLES</A><DD>
+<DT><A HREF="#lbAH">FILES</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+<DT><A HREF="#lbAJ">MAINTAINERS</A><DD>
+<DT><A HREF="#lbAK">OLD MAINTAINERS</A><DD>
+<DT><A HREF="#lbAL">AUTHORS</A><DD>
+<DT><A HREF="#lbAM">BUGS</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:06:52 GMT, January 29, 2005
+</BODY>
+</HTML>
