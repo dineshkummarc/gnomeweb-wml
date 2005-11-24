@@ -10,6 +10,7 @@ page_SCRIPTS=						\
 			devel.html				\
 			docs.html				\
 			faq.html				\
+			garnome_man.html		\
 			index.html				\
 			resources.html
 
