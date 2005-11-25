@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/images/16
 
+page_SCRIPTS =
+
 page_DATA =		\
 	about.png \
 	addressbook.png \

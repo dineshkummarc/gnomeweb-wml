@@ -1,5 +1,7 @@
 urlpath=/projects/garnome/images
 
+page_SCRIPTS=
+
 page_DATA=							\
 		background-01.jpg			\
 		gnome-16.png				\

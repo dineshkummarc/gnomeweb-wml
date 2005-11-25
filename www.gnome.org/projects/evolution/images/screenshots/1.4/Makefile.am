@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/images/screenshots/1.4
 
+page_SCRIPTS =
+
 page_DATA=					\
 	evolution-contacts.png 			\
 	evolution-ical-attachment.png 		\

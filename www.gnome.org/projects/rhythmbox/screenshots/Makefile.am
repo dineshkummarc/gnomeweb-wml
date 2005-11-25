@@ -1,5 +1,7 @@
 urlpath = /projects/rhythmbox/screenshots
 
+page_SCRIPTS=
+
 page_DATA = rb-iradio.png \
 		rb-iradio-small.png \
 		rb-minimode.png \

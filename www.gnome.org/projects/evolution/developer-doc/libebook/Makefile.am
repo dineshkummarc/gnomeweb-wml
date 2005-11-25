@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/developer-doc/libebook
 
+page_SCRIPTS=
+
 page_DATA = 				\
 	ch01.html 			\
 	EBookListener.html		\

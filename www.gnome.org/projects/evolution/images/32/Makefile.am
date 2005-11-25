@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/images/32
 
+page_SCRIPTS =
+
 page_DATA =		\
 	chat.png \
 	globe.png \

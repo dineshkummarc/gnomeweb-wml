@@ -1,5 +1,7 @@
 urlpath=/projects/f-spot/images
 
+page_SCRIPTS=
+
 page_DATA = 	\
 	f-spot-logo.png		\
 	f-spot.png		\

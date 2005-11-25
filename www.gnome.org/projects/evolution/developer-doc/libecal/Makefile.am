@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/developer-doc/libecal
 
+page_SCRIPTS=
+
 page_DATA = 				\
 	ch01.html 			\
 	ECal.html			\

@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/developer-doc/eplugin
 
+page_SCRIPTS=
+
 page_DATA =	\
   ch01.html	\
   ch01s01.html	\

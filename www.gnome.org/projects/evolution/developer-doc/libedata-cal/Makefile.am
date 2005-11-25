@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/developer-doc/libedata-cal
 
+page_SCRIPTS=
+
 page_DATA = 					\
 	ECalBackend.html			\
 	ECalBackendSExp.html			\

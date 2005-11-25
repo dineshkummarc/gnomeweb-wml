@@ -2,6 +2,8 @@ SUBDIRS= screenshots 16 32 48
 
 urlpath=/projects/evolution/images
 
+page_SCRIPTS =
+
 page_DATA =		\
 	bg-header.png \
 	button-bg-hov.png \

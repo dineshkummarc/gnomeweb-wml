@@ -2,6 +2,8 @@ SUBDIRS=
 
 urlpath=/projects/epiphany/images
 
+page_SCRIPTS=
+
 page_DATA=\
 	1.0-bookmarks-180.png			\
 	1.0-bookmarks.png			\

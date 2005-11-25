@@ -2,6 +2,8 @@ SUBDIRS= figures stylesheet-images
 
 urlpath=/projects/evolution/doc
 
+page_SCRIPTS=
+
 page_DATA=			\
 	a3895.html \
 	a4319.html \

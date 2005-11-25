@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/doc/figures
 
+page_SCRIPTS=
+
 page_DATA=			\
 	calendar.png \
 	config-cal.png \

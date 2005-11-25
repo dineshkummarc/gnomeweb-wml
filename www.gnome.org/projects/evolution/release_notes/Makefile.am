@@ -2,6 +2,8 @@ SUBDIRS =
 
 urlpath=/projects/evolution/release_notes
 
+page_SCRIPTS =
+
 page_DATA =			\
 	1.0.8.shtml		\
 	1.1.1_beta1.shtml	\

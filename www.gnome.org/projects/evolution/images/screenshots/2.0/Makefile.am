@@ -1,5 +1,7 @@
 urlpath=/projects/evolution/images/screenshots/2.0
 
+page_SCRIPTS=
+
 page_DATA=					\
 	evo-compose.png \
 	evo-contactlist.png \

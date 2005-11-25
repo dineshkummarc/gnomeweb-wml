@@ -2,6 +2,8 @@ SUBDIRS = screenshots
 
 urlpath = /projects/rhythmbox
 
+page_SCRIPTS=
+
 EXTRA_DIST = mkpage.xsl
 
 HTML_FILES = index.html screenshots.html download.html development.html feedback.html news.html faq.html translation.html utils.html

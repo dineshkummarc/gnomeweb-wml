@@ -1,11 +1,13 @@
-SUBDIRS = 
+SUBDIRS =
 
 urlpath = /start/2.10/notes
+
+page_SCRIPTS =
 
 # r! find -type f | sed 's,\./,,;s,^,\t,;s,$, \\,'
 # also, delete Makefile.am* from this list
 # couldn't be arsed fixing that above atm
-nobase_page_DATA = \
+page_DATA = \
 	es/rnlookingahead.html \
 	es/index.html \
 	es/rnknownissues.html \

@@ -2,6 +2,8 @@ SUBDIRS = developer-doc doc images meeting-logs release_notes
 
 urlpath=/projects/evolution
 
+page_SCRIPTS =
+
 page_DATA =			\
 	go.css \
 	pngbehavior.htc \

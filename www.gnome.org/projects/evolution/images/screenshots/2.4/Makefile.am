@@ -1,5 +1,7 @@
 urlpath = /projects/evolution/images/screenshots/2.4
 
+page_SCRIPTS=
+
 page_DATA = \
 	compose-mail.png \
 	contact-info.png \
