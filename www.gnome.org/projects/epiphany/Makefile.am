@@ -11,7 +11,6 @@ page_DATA=\
 	epiphany.css		\
 	epiphany-old.css	\
 	index.html		\
-	news.html		\
 	resources.html		\
 	extensions.html		\
 	extensions.xhtml	\
