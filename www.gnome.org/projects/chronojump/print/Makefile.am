@@ -10,6 +10,7 @@ page_SCRIPTS= index.html	\
 	construction_contact_platform_es.html \
 	construction_contact_platform_parallel_port_ca.html \
 	construction_contact_platform_parallel_port_es.html \
+	construction_contact_platform_comments_pt.html \
 	construction_es.html \
 	construction.html \
 	construction_pt.html \
