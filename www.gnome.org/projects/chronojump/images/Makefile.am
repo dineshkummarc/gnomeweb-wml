@@ -8,6 +8,7 @@ include $(top_srcdir)/rules.common
 
 misc_images=\
 	chronojump33.png \
+	chronojump_32x32.png \
 	chronojump_add_persons_multiple_preferences_spanish.png \
 	chronojump_add_persons_multiple_preferences_spanish_small.png \
 	chronojump_esquema.png \
