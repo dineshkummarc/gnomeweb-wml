@@ -4,6 +4,7 @@ urlpath=/projects/chronojump/print
 
 page_SCRIPTS= index.html	\
 	construction_ca.html \
+	construction_contact_platform.html \
 	construction_contact_platform_ca.html \
 	construction_contact_platform_comments_ca.html \
 	construction_contact_platform_comments_es.html \
@@ -24,6 +25,7 @@ page_SCRIPTS= index.html	\
 	documents_es.html \
 	documents.html \
 	documents_pt.html \
+	faq.html \
 	faq_es.html \
 	features_ca.html \
 	features_de.html \
