@@ -8,8 +8,6 @@ include ("./util.php");
 <?php write_table_header ("no", "yes"); ?>
 <?php taskrow ("Outlook-Evolution dictionary", "hidden", "Novell", "300", "127544", ""); ?>
 <?php taskrow ("Quick reference card", "hidden", "Novell", "300", "127545", "http://cvs.gnome.org/viewcvs/evolution/help/quickref/"); ?>
-<?php taskrow ("Live documentation editing", "hidden", "Google", "4500", "306308", ""); ?>
-<?php taskrow ("library.gnome.org", "hidden", "Google", "4500", "306311", ""); ?>
 <?php write_table_footer (); ?>
 <?php box_start ("Outlook-Evolution dictionary", "Documentation", "300", "127544", "127544", ""); ?>
 
@@ -122,26 +120,6 @@ page</a>.  Before you begin any work on the help browser, be sure to
 <a STYLE="text-decoration:none" href="http://www.gnome.org/~shaunm/yelp/">check with the
 maintainers.</a> The primary contact for this task will be <a STYLE="text-decoration:none" href="mailto:aaron@ximian.com">Aaron Weber</a>. </p>
 
-<?php box_end (); ?>
-<?php box_start ("Live documentation editing", "Documentation", "4500", "306308", "306308", ""); ?>
-
-
-Implement a live web-based wiki-like editor that allows generation of
-content that can be rolled back into our documentation. Allows users
-to contribute annotations and additions to documentation (e.g. can add
-documentation to an undocumented function), save it. Other people
-visiting the page will see your additions to the documentation, and
-the maintainer of the module can extract the addition and
-trivially roll it into the official documentation source.
-   
-<?php box_end (); ?>
-<?php box_start ("library.gnome.org", "Documentation", "4500", "306311", "306311", ""); ?>
-
-
-Implement "library.gnome.org" which aggregates documentation
-from releases of GNOME platform libraries into a searchable,
-readable, consultable form.
-        
 <?php box_end (); ?>
 <?php write_page_footer (); ?>
 

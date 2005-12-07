@@ -69,19 +69,7 @@ collect the bounty.
 <?php taskrow ("Drag and Drop between Gnome and Firefox", "Miscellaneous", "Novell", "300", "127553", ""); ?>
 <?php taskrow ("Add image data to the icon cache", "Optimization", "Novell", "100", "169344", ""); ?>
 <?php taskrow ("Create a test suite for browsing in Nautilus", "Optimization", "Novell", "200", "169346", ""); ?>
-<?php taskrow ("Improve login time", "Optimization", "Google", "4500", "306042", ""); ?>
-<?php taskrow ("Reduce Evolution memory usage", "Optimization", "Google", "4500", "306043", ""); ?>
-<?php taskrow ("Global memory analysis tool", "Optimization", "Google", "4500", "306044", ""); ?>
-<?php taskrow ("Live documentation editing", "Documentation", "Google", "4500", "306308", ""); ?>
-<?php taskrow ("library.gnome.org", "Documentation", "Google", "4500", "306311", ""); ?>
-<?php taskrow ("Most unprecedented application", "Features", "Google", "4500", "306312", ""); ?>
-<?php taskrow ("Panel applet bundle system", "Features", "Google", "4500", "306314", ""); ?>
-<?php taskrow ("Group mails by conversations in Evolution", "Features", "Google", "4500", "306315", ""); ?>
-<?php taskrow ("Paste by example", "Features", "Google", "4500", "306316", ""); ?>
-<?php taskrow ("Search party", "Features", "Google", "4500", "306179", ""); ?>
-<?php taskrow ("Shared music spaces", "Features", "Google", "4500", "306317", ""); ?>
-<?php taskrow ("The GIMP resource distribution system", "GIMP", "Google", "4500", "306713", ""); ?>
-<?php taskrow ("The GIMP vector based shapes tool", "GIMP", "Google", "4500", "65197", ""); ?>
+<?php taskrow ("Global memory analysis tool", "Optimization", "Novell", "4500", "306044", ""); ?>
 <?php write_table_footer (); ?>
 <a name="claimed"></a><h2>Already Claimed Bounties</h2>
 <?php write_table_header ("yes", "yes"); ?>
