@@ -21,6 +21,19 @@ page_DATA = \
 	LoadScreenreaderAtStartup.png \
 	mlaughton1.png \
 	mlaughton2.png \
-	ms.png
+	ms.png \
+	bn-Screen_desktop.jpg \
+	bn-Screen_epiphany.jpg \
+	bn-Screen_file_roller_file_select_search.jpg \
+	bn-Screen_games.jpg \
+	bn-Screen_GPDF.jpg \
+	bn-Screen_Nautilus_About.jpg \
+	bn-Screen_Nautilus.jpg \
+	bn-Screen_Totem.jpg \
+	bn-Screen_yelp_terminal.jpg \
+	gnomemeeting-1.jpg \
+	gnomemeeting-2.jpg \
+	gnomemeeting-3.jpg \
+	goessen2.jpg
 
 include $(top_srcdir)/rules.common
