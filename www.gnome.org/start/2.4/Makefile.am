@@ -1,4 +1,4 @@
-SUBDIRS = notes
+SUBDIRS = notes large small
 
 urlpath = /start/2.4
 
