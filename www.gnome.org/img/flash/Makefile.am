@@ -27,6 +27,7 @@ page_DATA = \
 	two-twelve.jpg \
 	summit-mit-2005.png \
 	agobanner.png \
-	forum-gnome-2005.png
+	forum-gnome-2005.png \
+	bug-hunt-wgo.png
 
 include $(top_srcdir)/rules.common
