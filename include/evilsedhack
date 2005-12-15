@@ -1,6 +1,7 @@
 #!/bin/sh
 PAGE=$1
 ROOT=$2
+URLPATH=$3
 
 sed "s,<head>,<head><link rel=\"stylesheet\" type=\"text/css\" href=\"/default.css\" /><link rel=\"icon\" type=\"image/png\" href=\"/img/logo/foot-16.png\" />,i;s,<body[^>]*>,<body><div id=\"body\">,i;/<\/body>/,//d" $PAGE
 
@@ -34,14 +35,42 @@ cat <<-FOOT
 	<div id="banner"><img src="/img/spacer" alt="" /></div>
 	<p class="none"></p>
 	<div id="hdrNav">
+FOOT
+
+LINKS='
 		<a href="/about/">About GNOME</a> &middot;
 		<a href="/start/stable/">Download</a> &middot;
-		<!--<a href="/start/"><i>Get Involved!</i></a> &middot;-->
-		<a href="/support">Support</a> &middot;
+		<a href="/support/">Support</a> &middot;
 		<a href="http://art.gnome.org/">Art &amp; Themes</a> &middot;
 		<a href="http://developer.gnome.org/">Developers</a> &middot;
 		<a href="http://foundation.gnome.org/">Foundation</a> &middot;
 		<a href="/contact/">Contact</a>
+'
+
+
+echo $URLPATH | grep -E 'support|learn|tour' > /dev/null
+SUPPORT=$?
+echo $URLPATH | grep -E 'start' > /dev/null
+DOWNLOAD=$?
+echo $URLPATH | grep -E 'contact|press' > /dev/null
+CONTACT=$?
+echo $URLPATH | grep -E 'about' > /dev/null
+ABOUT=$?
+
+
+if [ $SUPPORT == 0 ]; then
+	LINKS=`echo $LINKS | sed 's/Support/<b>Support<\/b>/'`
+elif [ $DOWNLOAD == 0 ]; then
+	LINKS=`echo $LINKS | sed 's/Download/<b>Download<\/b>/'`
+elif [ $CONTACT == 0 ]; then
+	LINKS=`echo $LINKS | sed 's/Contact/<b>Contact<\/b>/'`
+elif [ $ABOUT == 0 ]; then
+	LINKS=`echo $LINKS | sed 's/About GNOME/<b>About GNOME<\/b>/'`
+fi
+
+echo $LINKS
+
+cat <<-FOOT
 	</div>
 </div>
 
@@ -56,3 +85,4 @@ Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
 
 </html>
 FOOT
+
