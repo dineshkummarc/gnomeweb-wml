@@ -34,9 +34,19 @@
 	    </tr>
 
 	    <tr>
+	      <td bgcolor="#c5d2c8" align="center">bootstrap/</td>
+	      <td>Bootstrap related</td>
+	    </tr>
+
+	    <tr>
 	      <td bgcolor="#c5d2c8" align="center">fifth-toe/</td>
 	      <td>A collection of high quality third-party programs designed for your desktop, 
 		including Multimedia, Graphics and Internet applications.</td>
+	    </tr>
+
+	    <tr>
+	      <td bgcolor="#c5d2c8" align="center">freedesktop/</td>
+	      <td>Freedesktop.org projects</td>
 	    </tr>
 
 	    <tr>
@@ -64,35 +74,7 @@
 
 	<h2>Build Requirements</h2>
 
-	<p>In order to successfully build a basic GNOME desktop using GARNOME, you will need to 
-	  have the following basic tools installed on your machine:</p>
-
-	<ul>
-	  <li> a shell (preferably bash) </li>
-	  <li> wget (required to download the tarballs) </li>
-	  <li> gzip and bzip2 (required to extract the tarballs) </li>
-	  <li> binutils, gcc, g++, make (required to compile) </li>
-	  <li> bison, flex, gettext, diff, patch </li>
-	  <li> autoconf, automake, libtool </li>
-	</ul>
-
-	<p>Depending on what sections of GARNOME you are interested in, you may also need 
-	  the following additional packages:</p>
-
-	<ul>
-	  <li> fam (required to compile gnome-vfs) </li>
-	  <li> bzip2-devel (required to compile gnome-vfs) </li>
-	  <li> samba (required to compile gnome-vfs) </li>
-	  <li> libpng, libjpeg, libtiff (required to compile nautilus) </li>
-	  <li> db4-devel (required to compile evolution) </li>
-	  <li> krb5-devel (required to compile evolution) </li>
-	  <li> openldap-devel (required to compile evolution) </li>
-	  <li> gnutls (required to compile vino) </li>
-	</ul>
-
-	<p>A full list of packages for both Debian-style and Red Hat-style systems 
-	  required to compile GARNOME can be found in the <strong>README</strong> file in the 
-	  GARNOME tarball.</p>
+	<p>In order to successfully build the GNOME Desktop and Developer Platform you will need to have the following <a href="deps-list.html">dependencies installed</a>.</p>
 
 	<h2>Building GARNOME</h2>
 
@@ -102,9 +84,8 @@
 	
 	<table id="t1">
 	    <tr><td>
-		<pre>
 cd desktop
-make paranoid-install</pre>
+<br>make paranoid-install
 	      </td></tr>
 	</table>
 
@@ -118,21 +99,20 @@ make paranoid-install</pre>
 
 	<table id="t1">
 	    <tr><td>
-		<pre>
 GARNOME=$HOME/garnome
-
-PATH=$GARNOME/bin:$PATH
-LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
-PYTHONPATH=$GARNOME/lib/python2.4/site-packages:$GARNOME/lib/python2.4/site-packages/gtk-2.0
-PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
-GDK_USE_XFT=1
-XDG_DATA_DIRS=$GARNOME/share
-XDG_CONFIG_DIRS=$GARNOME/etc/xdg
-
-export  PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH \
-        GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS
-
-exec $GARNOME/bin/gnome-session</pre>
+<br>
+<br>PATH=$GARNOME/bin:$PATH
+<br>LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
+<br>PYTHONPATH=$GARNOME/lib/python2.4/site-packages:$GARNOME/lib/python2.4/site-packages/gtk-2.0
+<br>PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
+<br>GDK_USE_XFT=1
+<br>XDG_DATA_DIRS=$GARNOME/share
+<br>XDG_CONFIG_DIRS=$GARNOME/etc/xdg
+<br>
+<br>export  PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH \
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS
+<br>
+<br>exec $GARNOME/bin/gnome-session</pre>
 	      </td></tr>
 	</table>
 	
@@ -145,9 +125,8 @@ exec $GARNOME/bin/gnome-session</pre>
 
 	<table id="t1">
 	    <tr><td>
-		<pre>
 #!/bin/sh
-exec garnome-session</pre>
+<br>exec garnome-session
 	      </td></tr>
 	</table>
 	
@@ -156,17 +135,21 @@ exec garnome-session</pre>
 
 	<table id="t1">
 	    <tr><td>
-		<pre>
-#!/bin/sh
-sudo pkill hald
-rm -rf $GARNOME/var/run/messagebus.pid
-sudo $GARNOME/bin/dbus-daemon --system
-sudo $GARNOME/sbin/hald --retain-privileges
-exec garnome-session</pre>
+#!/bin/bash
+<br>
+<br>GARNOME=$HOME/garnome
+<br>
+<br>## Use GARNOME's dbus and hal
+<br>
+<br>su -c "pkill dbus; \
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill hald; \
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/messagebus.pid; \
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/bin/dbus-daemon --system; \
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/hald --retain-privileges"
 	      </td></tr>
 	</table>
 	
-
+	<p>Fedora users should use this <a href="http://www.ocf.berkeley.edu/~bobk/garnome/faq.html">script</a> instead.</p>
 	<p>At this point, you should be able to start X and your newly created GARNOME desktop should appear.</p>
 
       </table>
@@ -213,7 +196,7 @@ exec garnome-session</pre>
 
 	<!-- Created: Thu Sep 16 21:00:52 PDT 2004 -->
 	<!-- hhmts start -->
-Last modified: Thu Nov 24 09:33:03 PST 2005
+Last modified: Fri Dec 16 20:46:57 PST 2005
 <!-- hhmts end -->
 	<br>Copyright &copy; 2005 GARNOME Team
       </div>
