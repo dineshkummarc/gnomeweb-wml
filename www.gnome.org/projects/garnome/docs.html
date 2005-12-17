@@ -135,11 +135,19 @@ GARNOME=$HOME/garnome
 
 	<table id="t1">
 	    <tr><td>
+
 #!/bin/bash
 <br>
 <br>GARNOME=$HOME/garnome
 <br>
 <br>## Use GARNOME's dbus and hal
+<br>
+<br>## Fedora users should uncomment this section
+<br>#if [ `grep "<user>messagebus</user>" $GARNOME/etc/dbus-1/system.conf` ]; then
+<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;more $GARNOME/etc/dbus-1/system.conf | \
+<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sed 's,<user>messagebus</user>,<user>dbus</user>,' > \
+<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/etc/dbus-1/system.conf;
+<br>#fi
 <br>
 <br>su -c "pkill dbus; \
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill hald; \
@@ -148,8 +156,7 @@ GARNOME=$HOME/garnome
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/hald --retain-privileges"
 	      </td></tr>
 	</table>
-	
-	<p>Fedora users should use this <a href="http://www.ocf.berkeley.edu/~bobk/garnome/faq.html">script</a> instead.</p>
+
 	<p>At this point, you should be able to start X and your newly created GARNOME desktop should appear.</p>
 
       </table>
@@ -196,7 +203,7 @@ GARNOME=$HOME/garnome
 
 	<!-- Created: Thu Sep 16 21:00:52 PDT 2004 -->
 	<!-- hhmts start -->
-Last modified: Fri Dec 16 20:46:57 PST 2005
+Last modified: Fri Dec 16 21:18:39 PST 2005
 <!-- hhmts end -->
 	<br>Copyright &copy; 2005 GARNOME Team
       </div>
