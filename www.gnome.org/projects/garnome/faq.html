@@ -16,677 +16,613 @@
 
 	<h2>1. General Information</h2>
 
-	<div class="faqitem">
-	  <h3>1.1 Can I install GARNOME without breaking my current GNOME setup?</h3>
+	<h3>1.1 Can I install GARNOME without breaking my current GNOME setup?</h3>
 
-	  <p>Sure, that's part of what GARNOME is for! By default, it will
-	    install to <em>~/garnome/</em> and not effect any of your existing GNOME
-	    packages. It may affect your configuration files though, so you
-	    ought to back them up or use a totally different user to run
-	    GARNOME.  <em>(Paul Drain)</em></p>
-	</div>
+	<p>Sure, that's part of what GARNOME is for! By default, it will
+	  install to <em>~/garnome/</em> and not effect any of your existing GNOME
+	  packages. It may affect your configuration files though, so you
+	  ought to back them up or use a totally different user to run
+	  GARNOME.  <em>(Paul Drain)</em></p>
 
-	<div class="faqitem">
-	  <h3>1.2 Can I install GARNOME over the top of my existing GNOME setup?</h3>
+	<h3>1.2 Can I install GARNOME over the top of my existing GNOME setup?</h3>
 
-	  <p>You could, but you <strong>shouldn't!</strong> <em>(and we won't support you if you do)</em></p>
-	  
-	  <p>GARNOME isn't a package based setup, it installs from GNOME tarballs
-	    with patches. If you install GARNOME into /usr (for example), you will
-	    overwrite your system setup with the software we provide.</p>
-	  
-	  <p>All of your configuration will be overwritten, all of your settings
-	    could vanish, all of the development libraries will be installed and
-	    you will destroy any knowledge your packaging software (RPM, dpkg, etc)
-	    has about your setup.</p>
-	</div>
+	<p>You could, but you <strong>shouldn't!</strong> <em>(and we won't support you if you do)</em></p>
+	
+	<p>GARNOME isn't a package based setup, it installs from GNOME tarballs
+	  with patches. If you install GARNOME into /usr (for example), you will
+	  overwrite your system setup with the software we provide.</p>
+	
+	<p>All of your configuration will be overwritten, all of your settings
+	  could vanish, all of the development libraries will be installed and
+	  you will destroy any knowledge your packaging software (RPM, dpkg, etc)
+	  has about your setup.</p>
 
 	<a name="2"></a>
 
 	<h2>2. Pre-Installation</h2>
 
-	<div class="faqitem">
-	  <h3>2.1 How long does GARNOME take to build?</h3>
+	<h3>2.1 How long does GARNOME take to build?</h3>
 
-	  <p>That really depends on your system configuration. On a Celeron 666Mhz with
-	    128M of RAM, building the basic GARNOME install takes about 7 hours, whereas
-	    the same build only takes 30-45 minutes on a Dual Xeon based Intel System.</p>
-	</div>
+	<p>That really depends on your system configuration. On a Celeron 666Mhz with
+	  128M of RAM, building the basic GARNOME install takes about 7 hours, whereas
+	  the same build only takes 30-45 minutes on a Dual Xeon based Intel System.</p>
 
-	<div class="faqitem">
-	  <h3>2.2 How much space does GARNOME require to build?</h3>
+	<h3>2.2 How much space does GARNOME require to build?</h3>
 
-	  <p>On an x86 system, GARNOME 2.12.0 (desktop category and its dependencies)
-	    requires 1.75GB as build space (plus an additional 1GB if you are
-	    building bootstrap/), however it only occupies around 600MB once installed.</p>
-	</div>
+	<p>On an x86 system, GARNOME 2.12.0 (desktop category and its dependencies)
+	  requires 1.75GB as build space (plus an additional 1GB if you are
+	  building bootstrap/), however it only occupies around 600MB once installed.</p>
 
-	<div class="faqitem">
-	  <h3>2.3 Can I download all the GARNOME components at once?</h3>
+	<h3>2.3 Can I download all the GARNOME components at once?</h3>
 
-	  <p>Yes, Open the <tt>gar.conf.mk</tt> file in the main GARNOME directory and
-	    look for the <strong>GARCHIVEDIR</strong> line -- uncomment it and
-	    specify a directory that you have write permissions to.</p>
+	<p>Yes, Open the <tt>gar.conf.mk</tt> file in the main GARNOME directory and
+	  look for the <strong>GARCHIVEDIR</strong> line -- uncomment it and
+	  specify a directory that you have write permissions to.</p>
 
-	  <p>If you type:</p>
+	<p>If you type:</p>
 
-	  <p>
-	    <tt>make garchive</tt>
-	  </p>
+	<table id="t1">
+	    <tr><td>
+		make garchive
+	      </td></tr>
+	</table>
 
-	  <p>From your base GARNOME directory (eg. <em>garnome-2.12.0/</em>), the installer
-	    will attempt to download all of the packages required to build a complete desktop
-	    installation</p>
-	</div>
+	<p>From your base GARNOME directory (eg. <em>garnome-2.12.0/</em>), the installer
+	  will attempt to download all of the packages required to build a complete desktop
+	  installation</p>
 
+	<h3>2.4 Can I optimize my GARNOME build?</h3>
 
-	<div class="faqitem">
-	  <h3>2.4 Can I optimize my GARNOME build?</h3>
+	<p>Open the <tt>gar.conf.mk</tt> file in the main GARNOME directory and
+	  look for the <strong>CC</strong>, <strong>CXX</strong> and <strong>CFLAGS</strong> 
+	  lines -- uncomment these and specify the flags that you need.</p>
+	
+	<p><em>note:</em> the best way to get a set of <strong>CFLAGS</strong> that will 
+	  work with your configuration is to use the 
+	  <a href="http://members.jcom.home.ne.jp/jacobi/linux/softwares.html">cpucaps</a>
+	  program from the prompt, you should see a line that says:</p>
+	
+	<p><em>"Recommended gcc (version) target"</em></p>
+	
+	<p>Uncomment and replace the <strong>CFLAGS</strong> line with the suggestions 
+	  from that line and restart your GARNOME build.</p>
 
-	  <p>Open the <tt>gar.conf.mk</tt> file in the main GARNOME directory and
-	    look for the <strong>CC</strong>, <strong>CXX</strong> and <strong>CFLAGS</strong> 
-	    lines -- uncomment these and specify the flags that you need.</p>
-	  
-	  <p><em>note:</em> the best way to get a set of <strong>CFLAGS</strong> that will 
-	    work with your configuration is to use the 
-	    <a href="http://members.jcom.home.ne.jp/jacobi/linux/softwares.html">cpucaps</a>
-	    program from the prompt, you should see a line that says:</p>
-	  
-	  <p><em>"Recommended gcc (version) target"</em></p>
-	  
-	  <p>Uncomment and replace the <strong>CFLAGS</strong> line with the suggestions 
-	    from that line and restart your GARNOME build.</p>
-	</div>
+	<h3>2.5 Can I speed up my GARNOME build?</h3>
 
-	<div class="faqitem">
-	  <h3>2.5 Can I speed up my GARNOME build?</h3>
+	<p>Yes, you can use <em>ccache</em> to speed up your GARNOME builds, although 
+	  this procedure requires <em>additional</em> disc space in your GARNOME build 
+	  directory.</p>
 
-	  <p>Yes, you can use <em>ccache</em> to speed up your GARNOME builds, although 
-	    this procedure requires <em>additional</em> disc space in your GARNOME build 
-	    directory.</p>
+	<p>Using ccache is a three step task, first you need to install 
+	  <tt>bootstrap/ccache</tt>, then set your cache sizes, then configure your 
+	  <tt>gar.conf.mk</tt> file to use the cache.</p>
 
-	  <p>Using ccache is a three step task, first you need to install 
-	    <tt>bootstrap/ccache</tt>, then set your cache sizes, then configure your 
-	    <tt>gar.conf.mk</tt> file to use the cache.</p>
+	<p>GARNOME will require a different size cache depending on what parts of it you 
+	  choose to build. However, for best results -- setting your cache size to 
+	  <strong>2GB</strong> by typing:</p>
 
-	  <p>GARNOME will require a different size cache depending on what parts of it you 
-	    choose to build. However, for best results -- setting your cache size to 
-	    <strong>2GB</strong> by typing:</p>
+	<table id="t1">
+	    <tr><td>
+		ccache -M 2G	
+	      </td></tr>
+	</table>
 
-	  <p>
-	    <tt>
-	      ccache -M 2G
-	    </tt>
-	  </p>
+	<p>Will be sufficently large to build all of the standard platform/ and desktop/ 
+	  garballs.</p>
 
-	  <p>Will be sufficently large to build all of the standard platform/ and desktop/ 
-	    garballs.</p>
+	<p>Once you have installed the software and set your cache size correctly, open the 
+	  <tt>gar.conf.mk</tt> file in the main GARNOME directory and uncomment the lines 
+	  relating to building with <em>ccache</em>.</p>
 
-	  <p>Once you have installed the software and set your cache size correctly, open the 
-	    <tt>gar.conf.mk</tt> file in the main GARNOME directory and uncomment the lines 
-	    relating to building with <em>ccache</em>.</p>
-
-	  <p><strong>note:</strong> If you are building <tt>bootstrap/firefox</tt>, we 
-	    recommend you make your cache size to <strong>3GB</strong> -- otherwise, your cache may 
-	    resize itself during the build, which may evict some of the more important components 
-	    of your cache, slowing your build down.</p>
-	</div>
+	<p><strong>note:</strong> If you are building <tt>bootstrap/firefox</tt>, we 
+	  recommend you make your cache size to <strong>3GB</strong> -- otherwise, your cache may 
+	  resize itself during the build, which may evict some of the more important components 
+	  of your cache, slowing your build down.</p>
 
 	<a name="3"></a>
 
 	<h2>3. Installation</h2>
 
-	<div class="faqitem">
-	  <h3>3.1 GARNOME always says the downloaded files have bad checksums, are my tarballs broken?</h3>
+	<h3>3.1 GARNOME always says the downloaded files have bad checksums, are my tarballs broken?</h3>
 
-	  <p>Are you using the GNU MD5 tools? Some earlier versions the Sun md5sum tool don't 
-	    agree with the GARNOME generated checksums.</p>
+	<p>Are you using the GNU MD5 tools? Some earlier versions the Sun md5sum tool don't 
+	  agree with the GARNOME generated checksums.</p>
 
-	  <p>If you are not using a GNU based system, you can open your <tt>gar.conf.mk</tt> file
-	    and edit the <strong>MD5</strong> variable to point to a more appropriate binary.</p>
+	<p>If you are not using a GNU based system, you can open your <tt>gar.conf.mk</tt> file
+	  and edit the <strong>MD5</strong> variable to point to a more appropriate binary.</p>
 
-	</div>
+	<h3>3.2 GARNOME has issues with Explicit Congestion Notification Support</h3>
 
-	<div class="faqitem">
-	  <h3>3.2 GARNOME has issues with Explicit Congestion Notification Support</h3>
+	<p>You may find that some packages will not download for third-party sites
+	  (<em>bootstrap/docbook-xml</em>, <em>fifth-toe/bluefish</em>, etc).</p>
 
-	  <p>You may find that some packages will not download for third-party sites
-	    (<em>bootstrap/docbook-xml</em>, <em>fifth-toe/bluefish</em>, etc).</p>
+	<p>These sites are affected by the Explicit Congestion Notification (ECN)
+	  code that is present in a number of operating system kernels. The most frequently
+	  reported symptom of this issue is that package downloads will time out after 30 
+	  attempts and halt your build.</p>
 
-	  <p>These sites are affected by the Explicit Congestion Notification (ECN)
-	    code that is present in a number of operating system kernels. The most frequently
-	    reported symptom of this issue is that package downloads will time out after 30 
-	    attempts and halt your build.</p>
+	<p>This is <strong>not</strong> a GARNOME bug, and should not be reported as such.</p>
 
-	  <p>This is <strong>not</strong> a GARNOME bug, and should not be reported as such.</p>
+	<p>The easiest workaround to this issue, is to temporarily disable ECN support in your
+	  kernel. If you have root priviledges on your machine, you can type:</p>
 
-	  <p>The easiest workaround to this issue, is to temporarily disable ECN support in your
-	    kernel. If you have root priviledges on your machine, you can type:</p>
+	<table id="t1">
+	    <tr><td>
+		echo 0 > /proc/sys/net/ipv4/tcp_ecn
+	      </td></tr>
+	</table>
 
-	  <p>
-	    <tt>
-	      echo 0 > /proc/sys/net/ipv4/tcp_ecn
-	    </tt>
-	  </p>
+	<p>Then you can resume your GARNOME build and things should proceed normally.</p>
 
-	  <p>Then you can resume your GARNOME build and things should proceed normally.</p>
-	</div>
+	<h3>3.3 What is the <tt>bootstrap</tt> directory for?</h3>
 
-	<div class="faqitem">
-	  <h3>3.3 What is the <tt>bootstrap</tt> directory for?</h3>
+	<p>The <tt>bootstrap</tt> directory stores meta-information for programs you <em>may</em>
+	  need to get a current version of GARNOME up and running correctly, including build tools
+	  (like the autotools set), libraries, a <em>recommended</em> version of Mozilla and various
+	  platform dependant utilities.</p>
 
-	  <p>The <tt>bootstrap</tt> directory stores meta-information for programs you <em>may</em>
-	    need to get a current version of GARNOME up and running correctly, including build tools
-	    (like the autotools set), libraries, a <em>recommended</em> version of Mozilla and various
-	    platform dependant utilities.</p>
+	<p>Most users will <strong>never</strong> need to build anything from the <tt>bootstrap</tt>
+	  directory, however you should consult the README file in your GARNOME distribution just to
+	  make sure.</p>
 
-	  <p>Most users will <strong>never</strong> need to build anything from the <tt>bootstrap</tt>
-	    directory, however you should consult the README file in your GARNOME distribution just to
-	    make sure.</p>
-	</div>
+	<h3>3.4 GARNOME fails with an error in <tt>bootstrap/dlcompat</tt>?</h3>
+	
+	<p>If you are not trying to compile GARNOME on an Apple system, and get an error similar to the following:</p>
+	
+	<p>
+	<blockquote>
+	  checking mach-o/dyld.h usability... no 
+	  checking mach-o/dyld.h presence... no 
+	  checking for mach-o/dyld.h... no 
 
-	<div class="faqitem">
-	  <h3>3.4 GARNOME fails with an error in <tt>bootstrap/dlcompat</tt>?</h3>
-	  
-	  <p>If you are not trying to compile GARNOME on an Apple system, and get an error similar to the following:</p>
-	  
-	  <p>
-	  <blockquote>
-	    checking mach-o/dyld.h usability... no 
-	    checking mach-o/dyld.h presence... no 
-	    checking for mach-o/dyld.h... no 
+	  configure: error: No dyld.h found, can not continue
+	  make[1]: *** [configure-work/main.d/dlcompat-20030629/configure] Error 1
+	</blockquote>
+      </p>
+	
+	<p>You are trying to compile <tt>bootstrap/dlcompat</tt> when you shouldn't be.</p>
+	
+	<p>See the question regarding the <tt>bootstrap</tt> directory and it's uses, then restart your compile from the <strong>desktop</strong> directory, as 
+	  suggested in the <a href="docs.html">documentation</a>.</p>
 
-	    configure: error: No dyld.h found, can not continue
-	    make[1]: *** [configure-work/main.d/dlcompat-20030629/configure] Error 1
-	  </blockquote>
-	</p>
-	  
-	  <p>You are trying to compile <tt>bootstrap/dlcompat</tt> when you shouldn't be.</p>
-	  
-	  <p>See the question regarding the <tt>bootstrap</tt> directory and it's uses, then restart your compile from the <strong>desktop</strong> directory, as 
-	    suggested in the <a href="documentation.html">documentation</a>.</p>
-	</div>
+	<h3>3.5 GARNOME fails with an error in <tt>platform/glib</tt>?</h3>
 
-	<div class="faqitem">
-	  <h3>3.5 GARNOME fails with an error in <tt>platform/glib</tt>?</h3>
+	<p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
+	
+	<p>
+	<blockquote>
+	  gconvert.c:47:2: #error GNU libiconv not in use but included iconv.h 
+	  is from libiconv
+	</blockquote>
+      </p>
 
-	  <p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
-	  
-	  <p>
-	  <blockquote>
-	    gconvert.c:47:2: #error GNU libiconv not in use but included iconv.h 
-	    is from libiconv
-	  </blockquote>
-	</p>
+	<p>You have tried to compile <tt>bootstrap/libiconv</tt> when you shouldn't have.</p>
 
-	  <p>You have tried to compile <tt>bootstrap/libiconv</tt> when you shouldn't have.</p>
+	<p>To fix this problem, you will either need to:</p>
+	
+	<ul>
+	  <li>remove the <dfn="the hash character">comment</dfn> from the <tt>--with-libiconv</tt> portion of <strong>CONFIGURE_ARGS</strong> in the platform/glib Makefile.</li>
+	  <li>remove the <tt>iconv.h</tt> file from your system prefix
+	</ul>
+	
+	<p>Then restart your GARNOME build.</p>
+	
+	<p>See the question regarding the <tt>bootstrap</tt> directory and it's uses, then restart your compile from the <strong>desktop</strong> directory, as 
+	  suggested in the <a href="docs.html">documentation</a>.</p>
 
-	  <p>To fix this problem, you will either need to:</p>
-	  
-	  <ul>
-	    <li>remove the <dfn="the hash character">comment</dfn> from the <tt>--with-libiconv</tt> portion of <strong>CONFIGURE_ARGS</strong> in the platform/glib Makefile.</li>
-	    <li>remove the <tt>iconv.h</tt> file from your system prefix
-	  </ul>
-	  
-	  <p>Then restart your GARNOME build.</p>
-	  
-	  <p>See the question regarding the <tt>bootstrap</tt> directory and it's uses, then restart your compile from the <strong>desktop</strong> directory, as 
-	    suggested in the <a href="documentation.html">documentation</a>.</p>
-	</div>
+	<h3>3.6 GARNOME fails with an error in <tt>desktop/gnome-doc-utils</tt>?</h3>
 
-	<div class="faqitem">
-	  <h3>3.6 GARNOME fails with an error in <tt>desktop/gnome-doc-utils</tt>?</h3>
+	<p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
+	
+	<p>
+	<blockquote>
+	  xsltproc: Content HTTP/1.0 200 OK
+	</blockquote>
+      </p>
 
-	  <p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
-	  
-	  <p>
-	  <blockquote>
-	    xsltproc: Content HTTP/1.0 200 OK
-	  </blockquote>
-	</p>
+	<p>Please see the answer to Question 3.2</p>
 
-	  <p>Please see the answer to Question 3.2</p>
-	</div>
+	<h3>3.7 GARNOME fails with an error in <tt>desktop/control-center</tt>?</h3>
+	
+	<p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
+	
+	<p>
+	<blockquote>
+	  "/home/ubuntu/garnome/lib/libgtk-x11-2.0.so: undefined reference to `g_key_file_get_integer'
+	  /home/ubuntu/garnome/lib/libgnomevfs-2.so: undefined reference to `g_key_file_load_from_file'
+	  /home/ubuntu/garnome/lib/libgtk-x11-2.0.so: undefined reference to `g_file_set_contents'"
+	</blockquote>
+      </p>
 
-	<div class="faqitem">
-	  <h3>3.7 GARNOME fails with an error in <tt>desktop/control-center</tt>?</h3>
-	  
-	  <p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
-	  
-	  <p>
-	  <blockquote>
-	    "/home/ubuntu/garnome/lib/libgtk-x11-2.0.so: undefined reference to `g_key_file_get_integer'
-	    /home/ubuntu/garnome/lib/libgnomevfs-2.so: undefined reference to `g_key_file_load_from_file'
-	    /home/ubuntu/garnome/lib/libgtk-x11-2.0.so: undefined reference to `g_file_set_contents'"
-	  </blockquote>
+	<p>You are trying to compile on a system that includes pesky .la files.</p>
+
+	<p>
+	  Some distributions install helper files with their development packages (Debian, Ubuntu, Arch Linux, earlier Slackware's) that have hardcoded references to libraries in system directories.
 	</p>
 
-	  <p>You are trying to compile on a system that includes pesky .la files.</p>
-
-	  <p>
-	    Some distributions install helper files with their development packages (Debian, Ubuntu, Arch Linux, earlier Slackware's) that have hardcoded references to libraries in system directories.
-	  </p>
-
-	  <p>
-	    Libtool then may choose to use the information from these files instead of probing your system for the correct location of your files, which can cause some parts of the GNOME build to link against libraries that have been supplied with your system, rather than those that work with GARNOME.
-	  </p>
-
-	  <p>
-	    A workaround for this issue has been included with 2.12.0, however -- if you find that the problem still comes up, please report it as a bug to the maintainers of your distribution.
-	  </p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>3.8 GARNOME fails with an error in <tt>desktop/gnome-games</tt>?</h3>
-
-	  <p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
-
-	  <p>
-	  <blockquote>
-	    "/usr/bin/ld: cannot find -lguile-ltdl
-	    collect2: ld returned 1 exit status"
-	  </blockquote>
+	<p>
+	  Libtool then may choose to use the information from these files instead of probing your system for the correct location of your files, which can cause some parts of the GNOME build to link against libraries that have been supplied with your system, rather than those that work with GARNOME.
 	</p>
 
-	  <p>or:</p>
-
-	  <p>
-	  <blockquote>
-	    "cscmi.o(.text+0x2b8): In function `add_slot':
-	    : undefined reference to `SCM_CHARS'
-	    cscmi.o(.text+0x2de): In function `add_slot':
-	    : undefined reference to `SCM_CHARS'
-	    collect2: ld returned 1 exit status"
-	  </blockquote>
+	<p>
+	  A workaround for this issue has been included with 2.12.0, however -- if you find that the problem still comes up, please report it as a bug to the maintainers of your distribution.
 	</p>
 
-	  <p>You are probably trying to compile gnome-games with either a 1.7.x 'preview release' version of guile, or a version of 1.6.x that has been compiled with the '--disable-depreciated' flag.</p>
-	  
-	  <p>As stated by the upstream <a href="http://bugzilla.gnome.org/show_bug.cgi?id=164522">bug</a>, to fix this, you will either need to obtain a fixed version of guile from your upstream vendor, or download and compile guile from CVS yourself.</p>
-	</div>
+	<h3>3.8 GARNOME fails with an error in <tt>desktop/gnome-games</tt>?</h3>
 
-	<div class="faqitem">
-	  <h3>3.9 Scrollkeeper seems to hang when running scrollkeeper-update?</h3>
+	<p>If you are trying to compile GARNOME on an Linux or BSD system, and get an error similar to the following:</p>
 
-	  <p>Scrollkeeper takes a while to re-index everything in your local directory, it
-	    hasn't hung -- it just takes a long time.</p>
-	</div>
+	<p>
+	<blockquote>
+	  "/usr/bin/ld: cannot find -lguile-ltdl
+	  collect2: ld returned 1 exit status"
+	</blockquote>
+      </p>
 
-	<div class="faqitem">
-	  <h3>3.10 GARNOME installs a package I don't want, can I get rid of it?</h3>
+	<p>or:</p>
 
-	  <p>Occasionally, a package is released that will not build on some systems, 
-	    this can be due to a number of factors -- including:</p>
+	<p>
+	<blockquote>
+	  "cscmi.o(.text+0x2b8): In function `add_slot':
+	  : undefined reference to `SCM_CHARS'
+	  cscmi.o(.text+0x2de): In function `add_slot':
+	  : undefined reference to `SCM_CHARS'
+	  collect2: ld returned 1 exit status"
+	</blockquote>
+      </p>
 
-	  <ul>
-	    <li>Your system may lack the tools to compile a package</li>
-	    <li>Your system may be too old to compile a package</li>
-	    <li>The package conflicts with a library already on your system</li>
-	    <li>There is a maintainer bug in the package</li>
-	  </ul>
+	<p>You are probably trying to compile gnome-games with either a 1.7.x 'preview release' version of guile, or a version of 1.6.x that has been compiled with the '--disable-depreciated' flag.</p>
+	
+	<p>As stated by the upstream <a href="http://bugzilla.gnome.org/show_bug.cgi?id=164522">bug</a>, to fix this, you will either need to obtain a fixed version of guile from your upstream vendor, or download and compile guile from CVS yourself.</p>
 
-	  <p>The easiest solution to this problem is to remove the package directory
-	    from it's meta-repository, eg:</p>
-	  
-	  <p><tt>rm -rf fifth-toe/rhythmbox</tt></p>
+	<h3>3.9 Scrollkeeper seems to hang when running scrollkeeper-update?</h3>
 
-	  <p>Would remove the <tt>Rhythmbox</tt> package from the optional <em>fifth-toe</em> repository</p>
+	<p>Scrollkeeper takes a while to re-index everything in your local directory, it
+	  hasn't hung -- it just takes a long time.</p>
 
-	  <p><strong>caution:</strong> If a package located in the platform/ or desktop/ directory 
-	    will not compile, please consult the mailing list archives for a possible solution BEFORE 
-	    removing it -- as this action will probably damage the dependency checking that GARNOME 
-	    uses to build a working installation.</p>
-	</div>
+	<h3>3.10 GARNOME installs a package I don't want, can I get rid of it?</h3>
+
+	<p>Occasionally, a package is released that will not build on some systems, 
+	  this can be due to a number of factors -- including:</p>
+
+	<ul>
+	  <li>Your system may lack the tools to compile a package</li>
+	  <li>Your system may be too old to compile a package</li>
+	  <li>The package conflicts with a library already on your system</li>
+	  <li>There is a maintainer bug in the package</li>
+	</ul>
+
+	<p>The easiest solution to this problem is to remove the package directory
+	  from it's meta-repository, eg:</p>
+
+	<table id="t1">
+	    <tr><td>
+		rm -rf fifth-toe/rhythmbox
+	      </td></tr>
+	</table>
+
+	<p>Would remove the <tt>Rhythmbox</tt> package from the optional <em>fifth-toe</em> repository</p>
+
+	<p><strong>caution:</strong> If a package located in the platform/ or desktop/ directory 
+	  will not compile, please consult the mailing list archives for a possible solution BEFORE 
+	  removing it -- as this action will probably damage the dependency checking that GARNOME 
+	  uses to build a working installation.</p>
 
 	<a name="4"></a>
 
 	<h2>4. Post-Installation</h2>
 
-	<div class="faqitem">
-	  <h3>4.1 How do I start GARNOME after i've built it?</h3>
+	<h3>4.1 How do I start GARNOME after i've built it?</h3>
 
-	  <p>The <strong>first</strong> thing you should do, is to kill a redundant <em>gconfd</em>
-	    process -- which probably exists if your machine runs an earlier release of GNOME -- so
-	    that system-dependant processes, like ORBit, gconf and the GNOME Panel itself can work
-	    correctly. To do this, you should find and kill gconf by typing:</p>
+	<p>The <strong>first</strong> thing you should do, is to kill a redundant <em>gconfd</em>
+	  process -- which probably exists if your machine runs an earlier release of GNOME -- so
+	  that system-dependant processes, like ORBit, gconf and the GNOME Panel itself can work
+	  correctly. To do this, you should find and kill gconf by typing:</p>
 
-	  <p><tt>gconftool-2 --shutdown</tt> (which will <em>find</em> and <em>kill</em> the gconfd process)</p>
+	<table id="t1">
+	    <tr><td>
+		gconftool-2 --shutdown
+	      </td></tr>
+	</table>
 
-	  <p>The <strong>second</strong> thing you should do, depends on how you would usually start the GUI on your system:</p>
+	<p>The <strong>second</strong> thing you should do, depends on how you would usually start the GUI on your system:</p>
 
-	  <p>If you start X using the <abbr title="command line interface / prompt">CLI</abbr> and 
-	    have used the <em>.xinitrc</em> session script as documented in the
-	    README file, you should be able to type <tt>startx</tt> from the prompt to begin
-	    using your new GARNOME desktop.</p>
+	<p>If you start X using the <abbr title="command line interface / prompt">CLI</abbr> and 
+	  have used the <em>.xinitrc</em> session script as documented in the
+	  README file, you should be able to type <tt>startx</tt> from the prompt to begin
+	  using your new GARNOME desktop.</p>
 
-	  <p>If X starts when your machine starts, you should see the threads 
-	    <a href="http://mail.gnome.org/archives/garnome-list/2003-February/thread.html#00350">here</a>
-	    or
-	    <a href="http://mail.gnome.org/archives/garnome-list/2004-May/thread.html#00111">here</a>
-	    for some well written documentation on the subject from the GARNOME mailing lists.</p>
-	</div>
+	<p>If X starts when your machine starts, you should see the threads 
+	  <a href="http://mail.gnome.org/archives/garnome-list/2003-February/thread.html#00350">here</a>
+	  or
+	  <a href="http://mail.gnome.org/archives/garnome-list/2004-May/thread.html#00111">here</a>
+	  for some well written documentation on the subject from the GARNOME mailing lists.</p>
 
-	<div class="faqitem">
-	  <h3>4.2 I can see <em>icons</em> on my desktop, but no <em>fonts</em>?</h3>
+	<h3>4.2 I can see <em>icons</em> on my desktop, but no <em>fonts</em>?</h3>
 
-	  <p>You will need to build <em>freetype</em>, <em>xrender</em> and <em>xft</em> from the 
-	    <tt>bootstrap/</tt> directory. Enter each directory and type <tt>make install</tt>, after
-	    these have built successfully, restart your GARNOME session to have fonts displayed 
-	    correctly.</p>
-	</div>
+	<p>You will need to build <em>freetype</em>, <em>xrender</em> and <em>xft</em> from the 
+	  <tt>bootstrap/</tt> directory. Enter each directory and type <tt>make install</tt>, after
+	  these have built successfully, restart your GARNOME session to have fonts displayed 
+	  correctly.</p>
 
-	<div class="faqitem">
-	  <h3>4.3 I can see <em>fonts</em> on my desktop, but no <em>icons</em>?</h3>
+	<h3>4.3 I can see <em>fonts</em> on my desktop, but no <em>icons</em>?</h3>
 
-	  <p>You need to build <em>hicolor-icon-theme</em> and <em>shared-mime-info</em> from the
-	    <tt>bootstrap/</tt> directory and add (if it doesn't exist) the <tt>XDG_DATA_DIRS</tt>
-	    line to your GARNOME startup script.</p>
+	<p>You need to build <em>hicolor-icon-theme</em> and <em>shared-mime-info</em> from the
+	  <tt>bootstrap/</tt> directory and add (if it doesn't exist) the <tt>XDG_DATA_DIRS</tt>
+	  line to your GARNOME startup script.</p>
 
-	  <p><strong>Note:</strong> as of GARNOME 2.10, you need to run some additional 
-	    commands to get this to work as expected -- after adding the required lines,
-	    run (from the prompt):</p>
+	<p><strong>Note:</strong> as of GARNOME 2.10, you need to run some additional 
+	  commands to get this to work as expected -- after adding the required lines,
+	  run (from the prompt):</p>
 
-	  <p>
-	    <tt>$GARNOME/bin/update-desktop-database</tt>
-	  </p>
+	<table id="t1">
+	    <tr><td>
+		$GARNOME/bin/update-desktop-database
+	      </td></tr>
+	</table>
 
-	  <p>and then:</p>
+	<p>and then:</p>
 
-	  <p>
-	    <tt>$GARNOME/bin/update-mime-database $GARNOME/share/mime</tt>
-	  </p>
+	<table id="t1">
+	    <tr><td>
+		$GARNOME/bin/update-mime-database $GARNOME/share/mime
+	      </td></tr>
+	</table>
 
-	  <p>Then restart your GARNOME session to get your icons and associations back on track.</p>
-	</div>
+	<p>Then restart your GARNOME session to get your icons and associations back on track.</p>
 
-	<div class="faqitem">
-	  <h3>4.4 How do I use anti-aliased fonts?</h3>
+	<h3>4.4 How do I use anti-aliased fonts?</h3>
 
-	  <p>Set the <strong>GDK_USE_XFT</strong> environment variable by typing <tt>export GDK_USE_XFT=1</tt></p>
-	</div>
+	<p>Set the <strong>GDK_USE_XFT</strong> environment variable by typing:</p>
 
-	<div class="faqitem">
-	  <h3>4.5 How do I see the hardware on my desktop? (iPod's / Cameras)</h3>
+	<table id="t1">
+	    <tr><td>
+		export GDK_USE_XFT=1
+	      </td></tr>
+	</table>
 
-	  <p>To use the Hardware Abstraction Layer (HAL) on your desktop to detect things like an iPod, a Laptop Battery or a Camera, you will need to make sure that <tt>freedesktop/hal</tt> and <tt>freedesktop/dbus</tt> have been installed on your system, then make a script that correctly kills your system HAL daemon (if applicable) and starts the GARNOME version.</p>
+	<h3>4.5 How do I see the hardware on my desktop? (iPod's / Cameras)</h3>
 
-	  <p>An example script would look similar to the following:</p>
-	  <p>
-	  <blockquote>
-	    #!/bin/sh
-	    sudo pkill hald
-	    rm /opt/garnome/var/run/messagebus.pid
-	    sudo /opt/garnome/bin/dbus-daemon --system
-	    sudo /opt/garnome/sbin/hald
-	  </blockquote>
-	</p>
+	<p>To use the Hardware Abstraction Layer (HAL) on your desktop to detect things like an iPod, a Laptop Battery or a Camera, you will need to make sure that <tt>freedesktop/hal</tt> and <tt>freedesktop/dbus</tt> have been installed on your system, then make a script that correctly kills your system HAL daemon (if applicable) and starts the GARNOME version.</p>
 
-	  <p>You would then run the script from within your GARNOME startup script, preferably before the <tt>gnome-session</tt> binary starts, to make sure everything starts in the correct order.</p>
-	</div>
+	<p>An example script is on the <a href="docs.html">documentation</a> page.</p>
+
+	<p>You would then run the script from within your GARNOME startup script, preferably before the <tt>gnome-session</tt> binary starts, to make sure everything starts in the correct order.</p>
 
 	<a name="5"></a>
 
 	<h2>5. Configuration</h2>
 
-	<div class="faqitem">
-	  <h3>5.1 I can't browse with Epiphany, my proxy settings are wrong?</h3>
+	<h3>5.1 I can't browse with Epiphany, my proxy settings are wrong?</h3>
 
-	  <p>Epiphany uses the GNOME default proxies. They can be modified (session wide) by using <tt>gnome-network-preferences</tt>. The corresponding gconf keys are <tt>/system/http_proxy/host</tt>, <tt>/system/http_proxy/port</tt> and <tt>/system/http_proxy/use_http_proxy</tt>.</p>
-	</div>
+	<p>Epiphany uses the GNOME default proxies. They can be modified (session wide) by using <tt>gnome-network-preferences</tt>. The corresponding gconf keys are <tt>/system/http_proxy/host</tt>, <tt>/system/http_proxy/port</tt> and <tt>/system/http_proxy/use_http_proxy</tt>.</p>
 
-	<div class="faqitem">
-	  <h3>5.2 Where did my evolution/ directory go?</h3>
+	<h3>5.2 Where did my evolution/ directory go?</h3>
 
-	  <p>As part of the upgrade to Evolution 2.0 or 2.2, the import wizard will copy
-	    your Evolution directory to <tt>~/.evolution</tt>.</p>
-	  
-	  <p>The GARNOME maintainers recommend you keep a copy of your existing
-	    <tt>~/evolution</tt> directory (if it exists), until you decide that you
-	    no longer need it.</p>
-	</div>
+	<p>As part of the upgrade to Evolution 2.0 or 2.2, the import wizard will copy
+	  your Evolution directory to <tt>~/.evolution</tt>.</p>
+	
+	<p>The GARNOME maintainers recommend you keep a copy of your existing
+	  <tt>~/evolution</tt> directory (if it exists), until you decide that you
+	  no longer need it.</p>
 
 	<a name="6"></a>
 
 	<h2>6. Distribution Specific Issues</h2>
 
-	<div class="faqitem">
-	  <h3>6.1 Mandrake / Mandriva and the GNU iconv libraries</h3>
-	  
-	  <p>You may find that the <tt>platform/glib</tt> package will not build.</p>
-	  
-	  <p>This package is affected because the distributions listed above use the GNU iconv
-	    libraries, which need to be manually enabled to be used under GARNOME</p>
-	  
-	  <p>Building the <tt>libiconv</tt> package from the bootstrap directory, then
-	    removing the comment in the <strong>CONFIGURE_ARGS</strong> line in <tt>platform/glib</tt>
-	    is the easiest fix for this issue.</p>
-	</div>
+	<h3>6.1 Mandrake / Mandriva and the GNU iconv libraries</h3>
+	
+	<p>You may find that the <tt>platform/glib</tt> package will not build.</p>
+	
+	<p>This package is affected because the distributions listed above use the GNU iconv
+	  libraries, which need to be manually enabled to be used under GARNOME</p>
+	
+	<p>Building the <tt>libiconv</tt> package from the bootstrap directory, then
+	  removing the comment in the <strong>CONFIGURE_ARGS</strong> line in <tt>platform/glib</tt>
+	  is the easiest fix for this issue.</p>
 
-	<div class="faqitem">
-	  <h3>6.2 Fedora Core 4 / Rawhide and the pilot-link libraries</h3>
-	  
-	  <p>You may find that the <tt>desktop/evolution</tt> package will not build.</p>
-	  
-	  <p>This package is affected because the distributions listed above use the pilot-link
-	    0.12 libraries, while Evolution only supports the 0.11.x versions by default.</p>
-	  
-	  <p>GARNOME now includes a patch to update the pilot code in desktop/evolution and related 
-	    packages. To use these patches, you must manually enable them by opening the Makefile
-	    uncommenting the <strong>PATCHFILES</strong>
-	    lines in the <tt>desktop/evolution</tt>, <tt>office/gnome-pilot</tt> and <tt>office/gnome-pilot-conduits</tt> packages
-	    <strong>before</strong> beginning your GARNOME installation.</p>
-	  
-	  <p>If you have already started your GARNOME install, you must clean the packages first
-	    by using the <em>make clean</em> command in the relevant directories, then you may resume
-	    your build by running <em>make install</em> again.</p>
-	</div>
+	<h3>6.2 Fedora Core 4 / Rawhide and the pilot-link libraries</h3>
+	
+	<p>You may find that the <tt>desktop/evolution</tt> package will not build.</p>
+	
+	<p>This package is affected because the distributions listed above use the pilot-link
+	  0.12 libraries, while Evolution only supports the 0.11.x versions by default.</p>
+	
+	<p>GARNOME now includes a patch to update the pilot code in desktop/evolution and related 
+	  packages. To use these patches, you must manually enable them by opening the Makefile
+	  uncommenting the <strong>PATCHFILES</strong>
+	  lines in the <tt>desktop/evolution</tt>, <tt>office/gnome-pilot</tt> and <tt>office/gnome-pilot-conduits</tt> packages
+	  <strong>before</strong> beginning your GARNOME installation.</p>
+	
+	<p>If you have already started your GARNOME install, you must clean the packages first
+	  by using the <em>make clean</em> command in the relevant directories, then you may resume
+	  your build by running <em>make install</em> again.</p>
 
-	<div class="faqitem">
-	  <h3>6.3 <em>All</em> pre-2004 distributions and wireless-tools</h3>
+	<h3>6.3 <em>All</em> pre-2004 distributions and wireless-tools</h3>
 
-	  <p>You may find that the <tt>geektoys/netapplet</tt> package will not build.</p>
+	<p>You may find that the <tt>geektoys/netapplet</tt> package will not build.</p>
 
-	  <p>This package is affected because the gnome-system-tools package thought
-	    your <em>wireless-tools</em> package was too old.</p>
+	<p>This package is affected because the gnome-system-tools package thought
+	  your <em>wireless-tools</em> package was too old.</p>
 
-	  <p>Because the netapplet package is really experimental, it requires a version
-	    of <em>wireless-tools</em> greater than <strong>0.27</strong> to work correctly.</p>
+	<p>Because the netapplet package is really experimental, it requires a version
+	  of <em>wireless-tools</em> greater than <strong>0.27</strong> to work correctly.</p>
 
-	  <p>Finding and installing a package specifically built for your distribution is the
-	    only supported fix for this issue.</p> 
-	</div>
+	<p>Finding and installing a package specifically built for your distribution is the
+	  only supported fix for this issue.</p> 
 
 	<a name="7"></a>
 
 	<h2>7. Previous Release Distribution Specific Issues</h2>
 
-	<div class="faqitem">
-	  <h3>7.1 Debian Testing and esound</h3>
+	<h3>7.1 Debian Testing and esound</h3>
 
-	  <p>You may find that the <tt>desktop/gnome-games</tt> package will not build.</p>
+	<p>You may find that the <tt>desktop/gnome-games</tt> package will not build.</p>
 
-	  <p>This package is affected because the esound libraries in your distribution
-	    are broken. This is a known bug and has been fixed in the unstable branch.</p>
+	<p>This package is affected because the esound libraries in your distribution
+	  are broken. This is a known bug and has been fixed in the unstable branch.</p>
 
-	  <p>Simply compiling <tt>platform/esound</tt> is the easiest fix for this issue.</p>
+	<p>Simply compiling <tt>platform/esound</tt> is the easiest fix for this issue.</p>
+
+	<h3>7.2 Red Hat Linux 7.3/8/9 and OpenSSL / Kerberos</h3>
+
+	<p>You may find that the <tt>fifth-toe/gaim</tt>, <tt>desktop/evolution</tt> or
+	  <tt>desktop/ximian-connector</tt> packages will not build.</p>
+
+	<p>These packages are both affected by Red Hat's packaging of OpenSSL and the
+	  Kerberos 5 libraries. According to <a href="http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=82369">this post</a>
+	  -- Red Hat's opinion seems to be a need to have these packages require pkg-config. 
+	  Unfortunately, some earlier OpenSSL installations don't have the .pc support for
+	  pkg-config niceness, so hacking the GARNOME makefiles to support .pc files
+	  _might_ work, but you may need to do post-OpenSSL-buggery if your
+	  distribution is RH7.3, 8 or an unpatched version of 9.</p>
+
+	<p>The easiest <em>workaround</em> for problems with OpenSSL or Kerberos is edit to
+	  edit the affected makefiles and add:</p>
+
+	<p><tt>--with-krb5=/usr/kerberos</tt></p>
+
+	<p>to the <strong>CONFIGURE_ARGS</strong> line, then re-run <tt>make clean</tt> and
+	  <tt>make install</tt> from the prompt.</p>
+
+	<h3>7.3 Slackware 9.x and XFree86 4.x</h3>
+
+	<p>You may find that the <tt>desktop/libxklavier</tt> package will not build.</p>
+
+	<p>This package is affected because Slackware places their xkb libraries in a
+	  non-standard directory.</p>
+
+	<p>The easiest <em>workaround</em> for this issue is to edit the Makefile in
+	  the <tt>desktop/libxlavier</tt> directory and add:</p>
+
+	<p><tt>--with-xkb-base=/usr/X11/lib/X11/xkb</tt></p>
+
+	<p>to the <strong>CONFIGURE_ARGS</strong> line, then re-run <tt>make clean</tt> and
+	  <tt>make install</tt> from the prompt.</p>
+
+	<h3>7.4 SuSE 9.x or Novell Linux Desktop and heimdal</h3>
+
+	<p>You may find that the <tt>bootstrap/mozilla</tt> package will not build.</p>
+
+	<p>This package is affected because the SuSE packaging of the heimdal 
+	  libraries is rather broken. These distributions use an unsupported directory
+	  prefix that the Mozilla makefiles do not understand.</p>
+
+	<p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.8.x/mozilla-suse9x-heimdal.patch">here</a>. 
+	  Download the patch to your GARNOME directory and type <tt>patch -p1 < mozilla-suse9x-heimdal.patch</tt>, then re-run
+	  <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
+
+	<h3>7.5 Debian Unstable, Fedora Core 2 or 3, Mandrake Cooker and libexif</h3>
+
+	<p>You may find that the <tt>desktop/nautilus</tt> package will not build.</p>
+
+	<p>This package is affected because the distributions above ship <em>libexif</em> 0.6
+	  while everyone else, including several third-party repositories ship 0.5.x</p>
+
+	<p>There is already a patch included in GARNOME to resolve this issue, but it
+	  is not built by default. To use the patch, you should edit the Makefile in the
+	  <tt>desktop/nautilus</tt> directory and uncomment the <strong>PATCHFILES</strong>
+	  line, then re-run <tt>make clean</tt> and <tt>make install</tt> from the prompt.</p>
+
+	<h3>7.6 Debian Potato/Woody and pkgconfig</h3>
+
+	<p>You may find that the <tt>platform/pango</tt> package will not build.</p>
+
+	<p>This package is affected because the distributions listed above seem not to
+	  have a <em>pkgconfig</em> that GARNOME can grok correctly.</p>
+
+	<p>Building the <tt>pkgconfig</tt> and associated packages from the bootstrap/ 
+	  directory is the easiest fix for this issue.</p>
+
+	<h3>7.7 Debian Potato/Woody, Mandrake 8/9, Red Hat 7.3/8/9, SuSE 9.x and fontconfig</h3>
+
+	<p>You may find that the <tt>platform/vte</tt> package will not build.</p>
+
+	<p>This package is affected because the distributions listed above lack
+	  a <em>fontconfig</em> package with support for recent versions of Pango</p>
+
+	<p>Building the <tt>fontconfig</tt> and associated packages from the bootstrap/ 
+	  directory is the easiest fix for this issue.</p>
+
+	<h3>7.8 SuSE 9.x or Novell Linux Desktop and heimdal</h3>
+
+	<p>You may find that the <tt>bootstrap/firefox</tt> package will not build.</p>
+
+	<p>This package is affected because the SuSE packaging of the heimdal 
+	  libraries is rather broken. These distributions use an unsupported directory
+	  prefix that the Mozilla makefiles do not understand.</p>
+
+	<p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.10.x/firefox-suse9x-heimdal.patch">here</a>. 
+	  Download the patch to your GARNOME directory and type <tt>patch -p1 < firefox-suse9x-heimdal.patch</tt>, then re-run
+	  <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
+
+	<h3>7.9 Slackware and rotten kernel include files</h3>
+
+	<p>You may find that the <tt>bootstrap/hal</tt> package will not build.</p>
+
+	<p>This package is affected because the location of the standard kernel include files
+	  on your distribution is not in the standard path for the HAL configure test.</p>
+
+	<p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.10.x/hal-slackware-kernel-includes.patch">here</a>. 
+	  Download the patch to your GARNOME directory and type <tt>patch -p1 < hal-slackware-kernel-includes.patch</tt>, then re-run
+	  <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
+
+	<h3>7.10 Red Hat 9 and binutils</h3>
+
+	<p>You may find that the <tt>hacker-tools/ghex</tt> package will not build.</p>
+
+	<p>This package is affected because the ghex makefiles don't recognize
+	  <tt>libbfd-2.13.90.0.18.so</tt> as a valid linkable library.</p>
+
+	<p>Adding a symlink from <tt>/usr/lib/libbfd-2.13.90.0.18.so</tt> to 
+	  <tt>/usr/lib/libbfd.so</tt> is the easiest fix for this issue.</p>
+
+      </div>
+
+      <div id="sidebar">
+	<p class="section">Navigation</p>
+
+	<ul>
+	  <li><a href="./">Home</a></li>
+	  <li><a href="docs.html">Documentation</a></li>
+	  <li><a href="deps-list.html">Dependency List</a></li>
+	  <li><a href="devel.html">Development</a></li>
+	  <li><a href="faq.html">FAQ</a></li>
+	  <li><a href="garnome_man.html">GARNOME Manual</a></li>
+	  <li><a href="resources.html">External Resources</a></li>
+	</ul>
+
+	<p class="none">&nbsp;</p>
+
+	<p class="section">Contact</p>
+
+	<p class="contact">If you have questions regarding GARNOME please direct them to the <a href="http://mail.gnome.org/mailman/listinfo/garnome-list/">GARNOME mailing list</a>.</p>
+
+	<p class="contact">We are also often available to <a href="irc://irc.gnome.org:6667/garnome">chat on IRC</a>.<br />
+
+	  <strong>Server:</strong> irc.gnome.org<br />
+	  <strong>Channel:</strong> #garnome</p>
+      </div>
+      <div id="hdr">
+	<a href="http://www.gnome.org/"><img src="images/gnome-64.png" id="logo" alt="Home" title="GARNOME Extras" /></a>
+
+	<p class="none">&nbsp;</p>
+	<div id="hdrNav">
+	  <a href="http://www.gnome.org/about/">About GNOME</a> &middot;
+	  <a href="http://bugzilla.gnome.org/">Bugzilla</a> &middot;
+	  <a href="http://developer.gnome.org/">Developers</a> &middot;
+	  <a href="http://planet.gnome.org/">Planet GNOME</a> &middot;
+	  <a href="http://gnomesupport.org/">GNOME Support</a> &middot;
+	  <a href="contact.html">Contact</a>
 	</div>
+      </div>
+      <div id="copyright">
 
-	<div class="faqitem">
-	  <h3>7.2 Red Hat Linux 7.3/8/9 and OpenSSL / Kerberos</h3>
-
-	  <p>You may find that the <tt>fifth-toe/gaim</tt>, <tt>desktop/evolution</tt> or
-	    <tt>desktop/ximian-connector</tt> packages will not build.</p>
-
-	  <p>These packages are both affected by Red Hat's packaging of OpenSSL and the
-	    Kerberos 5 libraries. According to <a href="http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=82369">this post</a>
-	    -- Red Hat's opinion seems to be a need to have these packages require pkg-config. 
-	    Unfortunately, some earlier OpenSSL installations don't have the .pc support for
-	    pkg-config niceness, so hacking the GARNOME makefiles to support .pc files
-	    _might_ work, but you may need to do post-OpenSSL-buggery if your
-	    distribution is RH7.3, 8 or an unpatched version of 9.</p>
-
-	  <p>The easiest <em>workaround</em> for problems with OpenSSL or Kerberos is edit to
-	    edit the affected makefiles and add:</p>
-
-	  <p><tt>--with-krb5=/usr/kerberos</tt></p>
-
-	  <p>to the <strong>CONFIGURE_ARGS</strong> line, then re-run <tt>make clean</tt> and
-	    <tt>make install</tt> from the prompt.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.3 Slackware 9.x and XFree86 4.x</h3>
-
-	  <p>You may find that the <tt>desktop/libxklavier</tt> package will not build.</p>
-
-	  <p>This package is affected because Slackware places their xkb libraries in a
-	    non-standard directory.</p>
-
-	  <p>The easiest <em>workaround</em> for this issue is to edit the Makefile in
-	    the <tt>desktop/libxlavier</tt> directory and add:</p>
-
-	  <p><tt>--with-xkb-base=/usr/X11/lib/X11/xkb</tt></p>
-
-	  <p>to the <strong>CONFIGURE_ARGS</strong> line, then re-run <tt>make clean</tt> and
-	    <tt>make install</tt> from the prompt.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.4 SuSE 9.x or Novell Linux Desktop and heimdal</h3>
-
-	  <p>You may find that the <tt>bootstrap/mozilla</tt> package will not build.</p>
-
-	  <p>This package is affected because the SuSE packaging of the heimdal 
-	    libraries is rather broken. These distributions use an unsupported directory
-	    prefix that the Mozilla makefiles do not understand.</p>
-
-	  <p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.8.x/mozilla-suse9x-heimdal.patch">here</a>. 
-	    Download the patch to your GARNOME directory and type <tt>patch -p1 < mozilla-suse9x-heimdal.patch</tt>, then re-run
-	    <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.5 Debian Unstable, Fedora Core 2 or 3, Mandrake Cooker and libexif</h3>
-
-	  <p>You may find that the <tt>desktop/nautilus</tt> package will not build.</p>
-
-	  <p>This package is affected because the distributions above ship <em>libexif</em> 0.6
-	    while everyone else, including several third-party repositories ship 0.5.x</p>
-
-	  <p>There is already a patch included in GARNOME to resolve this issue, but it
-	    is not built by default. To use the patch, you should edit the Makefile in the
-	    <tt>desktop/nautilus</tt> directory and uncomment the <strong>PATCHFILES</strong>
-	    line, then re-run <tt>make clean</tt> and <tt>make install</tt> from the prompt.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.6 Debian Potato/Woody and pkgconfig</h3>
-
-	  <p>You may find that the <tt>platform/pango</tt> package will not build.</p>
-
-	  <p>This package is affected because the distributions listed above seem not to
-	    have a <em>pkgconfig</em> that GARNOME can grok correctly.</p>
-
-	  <p>Building the <tt>pkgconfig</tt> and associated packages from the bootstrap/ 
-	    directory is the easiest fix for this issue.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.7 Debian Potato/Woody, Mandrake 8/9, Red Hat 7.3/8/9, SuSE 9.x and fontconfig</h3>
-
-	  <p>You may find that the <tt>platform/vte</tt> package will not build.</p>
-
-	  <p>This package is affected because the distributions listed above lack
-	    a <em>fontconfig</em> package with support for recent versions of Pango</p>
-
-	  <p>Building the <tt>fontconfig</tt> and associated packages from the bootstrap/ 
-	    directory is the easiest fix for this issue.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.8 SuSE 9.x or Novell Linux Desktop and heimdal</h3>
-
-	  <p>You may find that the <tt>bootstrap/firefox</tt> package will not build.</p>
-
-	  <p>This package is affected because the SuSE packaging of the heimdal 
-	    libraries is rather broken. These distributions use an unsupported directory
-	    prefix that the Mozilla makefiles do not understand.</p>
-
-	  <p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.10.x/firefox-suse9x-heimdal.patch">here</a>. 
-	    Download the patch to your GARNOME directory and type <tt>patch -p1 < firefox-suse9x-heimdal.patch</tt>, then re-run
-	    <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.9 Slackware and rotten kernel include files</h3>
-
-	  <p>You may find that the <tt>bootstrap/hal</tt> package will not build.</p>
-
-	  <p>This package is affected because the location of the standard kernel include files
-	    on your distribution is not in the standard path for the HAL configure test.</p>
-
-	  <p>There is an unsupported patch for this problem <a href="ftp://cipherfunk.org/pub/patches/garnome/unsupported_patches/2.10.x/hal-slackware-kernel-includes.patch">here</a>. 
-	    Download the patch to your GARNOME directory and type <tt>patch -p1 < hal-slackware-kernel-includes.patch</tt>, then re-run
-	    <tt>make clean</tt> and <tt>make install</tt> from the prompt to restart the build.</p>
-	</div>
-
-	<div class="faqitem">
-	  <h3>7.10 Red Hat 9 and binutils</h3>
-
-	  <p>You may find that the <tt>hacker-tools/ghex</tt> package will not build.</p>
-
-	  <p>This package is affected because the ghex makefiles don't recognize
-	    <tt>libbfd-2.13.90.0.18.so</tt> as a valid linkable library.</p>
-
-	  <p>Adding a symlink from <tt>/usr/lib/libbfd-2.13.90.0.18.so</tt> to 
-	    <tt>/usr/lib/libbfd.so</tt> is the easiest fix for this issue.</p>
-
-	</div>
-
-	<div id="sidebar">
-	  <p class="section">Navigation</p>
-
-	  <ul>
-	    <li><a href="./">Home</a></li>
-	    <li><a href="docs.html">Documentation</a></li>
-	    <li><a href="deps-list.html">Dependency List</a></li>
-	    <li><a href="devel.html">Development</a></li>
-	    <li><a href="faq.html">FAQ</a></li>
-	    <li><a href="garnome_man.html">GARNOME Manual</a></li>
-	    <li><a href="resources.html">External Resources</a></li>
-	  </ul>
-
-	  <p class="none">&nbsp;</p>
-
-	  <p class="section">Contact</p>
-
-	  <p class="contact">If you have questions regarding GARNOME please direct them to the <a href="http://mail.gnome.org/mailman/listinfo/garnome-list/">GARNOME mailing list</a>.</p>
-
-	  <p class="contact">We are also often available to <a href="irc://irc.gnome.org:6667/garnome">chat on IRC</a>.<br />
-
-	    <strong>Server:</strong> irc.gnome.org<br />
-	    <strong>Channel:</strong> #garnome</p>
-	</div>
-	<div id="hdr">
-	  <a href="http://www.gnome.org/"><img src="images/gnome-64.png" id="logo" alt="Home" title="GARNOME Extras" /></a>
-
-	  <p class="none">&nbsp;</p>
-	  <div id="hdrNav">
-	    <a href="http://www.gnome.org/about/">About GNOME</a> &middot;
-	    <a href="http://bugzilla.gnome.org/">Bugzilla</a> &middot;
-	    <a href="http://developer.gnome.org/">Developers</a> &middot;
-	    <a href="http://planet.gnome.org/">Planet GNOME</a> &middot;
-	    <a href="http://gnomesupport.org/">GNOME Support</a> &middot;
-	    <a href="contact.html">Contact</a>
-	  </div>
-	</div>
-	<div id="copyright">
-
-	  <!-- Created: Thu Sep 16 21:00:52 PDT 2004 -->
-	  <!-- hhmts start -->
-Last modified: Tue Nov 22 22:37:52 PST 2005
+	<!-- Created: Thu Sep 16 21:00:52 PDT 2004 -->
+	<!-- hhmts start -->
+Last modified: Wed Dec 28 20:56:00 PST 2005
 <!-- hhmts end -->
-	  <br>Copyright &copy; 2005 GARNOME Team
-	</div>
+	<br>Copyright &copy; 2005 GARNOME Team
+      </div>
     </body>
 </html>
