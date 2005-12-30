@@ -41,7 +41,7 @@ LINKS='
 		<a href="/about/">About GNOME</a> &middot;
 		<a href="/start/stable/">Download</a> &middot;
 		<a href="/support/">Support</a> &middot;
-		<a href="http://art.gnome.org/">Art &amp; Themes</a> &middot;
+		<a href="/community/">Community</a> &middot;
 		<a href="http://developer.gnome.org/">Developers</a> &middot;
 		<a href="http://foundation.gnome.org/">Foundation</a> &middot;
 		<a href="/contact/">Contact</a>
@@ -56,6 +56,9 @@ echo $URLPATH | grep -E 'contact|press' > /dev/null
 CONTACT=$?
 echo $URLPATH | grep -E 'about' > /dev/null
 ABOUT=$?
+echo $URLPATH | grep -E 'community' > /dev/null
+COMMUNITY=$?
+
 
 
 if [ $SUPPORT == 0 ]; then
@@ -66,6 +69,8 @@ elif [ $CONTACT == 0 ]; then
 	LINKS=`echo $LINKS | sed 's/Contact/<b>Contact<\/b>/'`
 elif [ $ABOUT == 0 ]; then
 	LINKS=`echo $LINKS | sed 's/About GNOME/<b>About GNOME<\/b>/'`
+elif [ $COMMUNITY == 0 ]; then
+	LINKS=`echo $LINKS | sed 's/Community/<b>Community<\/b>/'`
 fi
 
 echo $LINKS
