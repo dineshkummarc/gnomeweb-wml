@@ -61,11 +61,16 @@ page_SCRIPTS=\
 	fondband.jpg \
 	fondbas.jpg \
 	fonddrt.jpg \
+	group_props.png \
 	links.jpg \
 	mainwin.gif \
 	mainwin2.gif \
 	mirrorf.jpg \
 	news.jpg \
+	pydiadoc.dia \
+	pydiadoc.png \
+	pydiadoc.svg \
+	pydiadoc-33.png \
 	python.png \
 	python.xcf \
 	right-mouse-screen.png \
