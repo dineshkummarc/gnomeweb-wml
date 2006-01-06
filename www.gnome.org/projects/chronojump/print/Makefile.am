@@ -26,6 +26,7 @@ page_SCRIPTS= index.html	\
 	documents.html \
 	documents_pt.html \
 	faq.html \
+	faq_ca.html \
 	faq_es.html \
 	features_ca.html \
 	features_de.html \
