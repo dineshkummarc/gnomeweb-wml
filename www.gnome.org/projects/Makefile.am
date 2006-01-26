@@ -36,7 +36,8 @@ SUBDIRS = \
 	livecd			\
 	gwget			\
 	desktopwiki             \
-	baobab
+	baobab                  \
+	straw
 
 urlpath = /projects
 
