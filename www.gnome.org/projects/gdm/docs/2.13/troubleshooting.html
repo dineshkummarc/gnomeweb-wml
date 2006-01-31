@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Solaris Specific Features</title><link rel="previous" href="accessibility.html" title="Accessibility"/><link rel="next" href="exampleconf.html" title="Example Configurations"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Troubleshooting</title><link rel="previous" href="exampleconf.html" title="Example Configurations"/><link rel="next" href="license.html" title="License"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
     div[class~="caution"] {
       background-image: url("caution.png");
     }
@@ -222,22 +222,64 @@
     p &gt; div { margin-top: 1em; margin-bottom: 1em; }
     p &gt; div + div { margin-top: 0em; }
     p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="solaris"/><h1 class="sect1 title"><span class="title">Solaris Specific Features</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM supports a few features specific to Solaris, as follows:
-    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM supports Solaris Auditing if running on Solaris 10 or higher.
-    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM supports a security feature which causes the X server to run as
-        the user instead of as the root user.  GDM must be using PAM for
-        this feature to be enabled, which is the normal case for Solaris.
-        This second feature has the side-effect of causing the X server to
-        always restart between sessions, which disables the
-        AlwaysRestartServer configuration option.  
-    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        Solaris supports the <span class="filename" style="font-family: monospace; ">/etc/default/login</span>
-        interface, which affects the <span class="filename" style="font-family: monospace; ">DefaultPath</span>,
-        <span class="filename" style="font-family: monospace; ">RootPath</span>,
-        <span class="filename" style="font-family: monospace; ">PasswordRequired</span>, and
-        <span class="filename" style="font-family: monospace; ">AllowRemoteRoot</span> options as described in the
-        Configuration section.
-    </p></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="accessibility.html" title="Accessibility">Accessibility</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="exampleconf.html" title="Example Configurations">Example Configurations</a></span></div></div></body></html>
+    </style></head><body><div class="body"><div class="sect1"><a name="troubleshooting"/><h1 class="sect1 title"><span class="title">Troubleshooting</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      This section discusses helpful tips for getting GDM working.  In general,
+      if you have a problem using GDM, you can submit a bug to the
+      "gdm" category in
+      <a class="ulink" href="http://bugzilla.gnome.org/" title="http://bugzilla.gnome.org/">bugzilla.gnome.org</a>
+      or send an email to the
+      <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail alias.  If GDM
+      is failing to work properly, it is always a good idea to include debug
+      information.  Use the <span class="command" style="font-family: monospace; ">gdmsetup</span> command to turn on
+      debug ("Enable debug messages to system log" checkbox in the
+      "Security" tab), then use GDM to the point where it fails, and
+      include the GDM output sent to your system log
+      (<span class="filename" style="font-family: monospace; ">/var/log/messages</span> or
+      <span class="filename" style="font-family: monospace; ">/var/adm/messages</span> depending on your operating
+      system).  Since the system log can be large, please only include the GDM
+      debug information and do not sent the entire file.
+    </p><div class="sect2"><a name="wontstart"/><h2 class="sect2 title"><span class="title"><span class="label">11.1.</span> GDM Will Not Start</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+         There are a many problems that can cause GDM to fail to start, but
+         this section will discuss a few common problems and how to approach
+         tracking down a problem with GDM starting.   Some problems will 
+         cause GDM to respond with an error message or dialog when it tries
+         to start, but it can be difficult to track down problems when GDM
+         fails silently.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+         First make sure that the Xserver is configured properly.  The 
+         GDM configuration file contains a command in the [server-Standard]
+         section that is used for starting the Xserver.  Verify that this
+         command works on your system.  Running this command from the 
+         console should start the Xserver.  If it fails, then the problem
+         is likely with your Xserver configuration.  Refer to your Xserver
+         error log for an idea of what the problem may be.  The problem may
+         also be that your Xserver requires different command-line options.
+         If so, then modify the Xserver command in the GDM configuration file
+         so that it is correct for your system.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+         Another common problem is that the GDM greeter program is having
+         trouble starting.  This can happen, for example, if GDM cannot find
+         a needed library or other resource.  Try starting the Xserver and
+         a terminal program, set the shell environment variable 
+         DOING_GDM_DEVELOPMENT=1 and run <span class="command" style="font-family: monospace; ">/usr/lib/gdmlogin</span>
+         or <span class="command" style="font-family: monospace; ">/usr/lib/gdmgreeter</span>.  Any error messages
+         echoed to the terminal will likely highlight the problem.  Also,
+         turning on debug and checking the output sent to the system log 
+         will often highlight the problem.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+         Also make sure that the <span class="filename" style="font-family: monospace; ">/tmp</span> directory has
+         reasonable ownership and permissions, and that the machine's file
+         system is not full.  These problems will cause GDM to fail to start.
+      </p></div><div class="sect2"><a name="notaccessfile"/><h2 class="sect2 title"><span class="title"><span class="label">11.2.</span> GDM Will Not Access User Settings</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+         GDM saves user settings, such as your default session and default
+         language, in the <span class="filename" style="font-family: monospace; ">~/.dmrc</span>.  Other files, such
+         as the user's <span class="filename" style="font-family: monospace; ">~/.Xauthority</span> file will also
+         affect login.  GDM, by default, is strict about how it tries to
+         access files in the users home directory, and will ignore the file if
+         they do not conform to certain rules.  You can use the 
+         <span class="filename" style="font-family: monospace; ">RelaxPermissions</span> configuration option to
+         make GDM less strict about how it accesses files in the user's
+         home directory, or correct the permissions issues that cause GDM
+         to ignore the file.  This is discussed in detail described in the
+         "File Access" section of the "Overview". 
+      </p></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="exampleconf.html" title="Example Configurations">Example Configurations</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="license.html" title="License">License</a></span></div></div></body></html>

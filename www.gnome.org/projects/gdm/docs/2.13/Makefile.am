@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gdm/docs/2.8
+urlpath=/projects/gdm/docs/2.13
 
 page_SCRIPTS= accessibility.html \
 	binaries.html \
@@ -12,7 +12,9 @@ page_SCRIPTS= accessibility.html \
 	license.html \
 	overview.html \
 	preface.html \
+	security.html \
 	solaris.html \
-	thememanual.html
+	thememanual.html \
+	troubleshooting.html
 
 include $(top_srcdir)/rules.common
