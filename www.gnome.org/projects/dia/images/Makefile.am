@@ -92,6 +92,8 @@ page_SCRIPTS=\
 	jackson.png jackson-sm.png \
 	kaos.png kaos-sm.png \
 	render-test.png render-test-sm.png \
+	sadt.png sadt-sm.png \
+	uml-demo.png uml-demo-sm.png \
 	\
 	dia-core.png dia-core-sm.png \
 	dia-renderer.png dia-renderer-sm.png \
