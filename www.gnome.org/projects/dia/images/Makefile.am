@@ -84,5 +84,18 @@ page_SCRIPTS=\
 	zig3.png \
 	zig4.png \
 	zig5.png
+	\
+	chronograms.png chronograms-sm.png \
+	er-demo.png er-demo-sm.png \
+	grafcet.png grafcet-sm.png \
+	istar.png istar-sm.png \
+	jackson.png jackson-sm.png \
+	kaos.png kaos-sm.png \
+	render-test.png render-test-sm.png \
+	\
+	dia-core.png dia-core-sm.png \
+	dia-renderer.png dia-renderer-sm.png \
+	dia-objects.png dia-objects-sm.png \
+	umlclass.png umlclass-sm.png
 
 include $(top_srcdir)/rules.common
