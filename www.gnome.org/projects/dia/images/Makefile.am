@@ -83,7 +83,7 @@ page_SCRIPTS=\
 	zig2.png \
 	zig3.png \
 	zig4.png \
-	zig5.png
+	zig5.png \
 	\
 	chronograms.png chronograms-sm.png \
 	er-demo.png er-demo-sm.png \
