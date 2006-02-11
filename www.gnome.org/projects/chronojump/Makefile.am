@@ -28,6 +28,7 @@ page_SCRIPTS= index.html	\
 	faq.html \
 	faq_ca.html \
 	faq_es.html \
+	faq_pt.html \
 	features_ca.html \
 	features_de.html \
 	features_es.html \
