@@ -22,6 +22,7 @@ misc_images=\
 	icon-gentoo.png		\
 	icon-redhat.png		\
 	icon-suse.png		\
+	icon-debian.png		\
 	icon-ubuntu.png		\
 	logo.png		\
 	nothing-libnotify.png	\

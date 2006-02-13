@@ -38,6 +38,8 @@
 
 <ul>
 <li>
+  <a href="#ubuntulibforeground" class="faqtable">Why using Ubuntu (Dapper) do I get the warning "A security policy in place prevents...."?</a>
+</li><li>
   <a href="#dpms" class="faqtable">Why doesn't DPMS work when I've enabled it in XScreenSaver?</a>
 </li><li>
   <a href="#whynobattery" class="faqtable">GNOME Power Manager doesn't spin down my hard-drive!</a>
@@ -73,6 +75,24 @@
 </ul>
 <br/>
 <br/>
+
+<a name="ubuntulibforeground"></a><hr/>
+<p class="faqquestion">
+Why using Ubuntu (Dapper) do I get the error
+<pre>
+WARNING **: gpm_hal_suspend: A security policy in place prevents this sender
+from sending this message to this recepient, see message bus configuration 
+(rejected message had interface
+"org.freedesktop.Hal.Device.SystemPowerManagement" member "Suspend" error name
+"(unset)" destination "org.freedesktop.Hal")
+WARNING **: org.freedesktop.Hal.Device.SystemPowerManagement.Suspend failed (HAL error)
+</pre>
+</p>
+<p class="faqanswer">
+Ubuntu ships a locked down DBUS by default for Dapper which prevents non-root from issuing methods to HAL.
+To allow the current logged in user to use these methods, just install the <b>libpam-foreground</b> package.
+See <a href="http://bugzilla.gnome.org/show_bug.cgi?id=330889">bug (#330889)</a> for more details.
+</p>
 
 <a name="dpms"></a><hr/>
 <p class="faqquestion">
@@ -231,7 +251,8 @@ aborting...
 </pre>
 <p class="faqanswer">
 Most distro's set up the dbus session daemon when you log in to X, or when running GNOME.
-If your distro does not do this you will have to manually run:
+For Fedora, you just have to install dbus-x11.
+If your distro does not do this, you will have to manually run:
 </p>
 <pre>
 eval `dbus-launch --auto-syntax`
@@ -282,7 +303,6 @@ Can I get updates to the progress of GNOME Power Manager? Do you have an RSS fee
 </p>
 <p class="faqanswer">
 You can get CVS updates from <a href="http://cia.navi.cx/stats/project/gnome/gnome-power-manager/.rss">navi.cx</a> in RSS format.
-There are also project statistics and access graphs provided by <a href="http://sourceforge.net/project/stats/?group_id=133929&amp;ugn=gnome-power">Sourceforge</a>.
 </p>
 
 <a name="debian_unstable"></a><hr/>
@@ -290,8 +310,7 @@ There are also project statistics and access graphs provided by <a href="http://
 I run Debian stable/unstable. Can I run GNOME Power Manager?
 </p>
 <p class="faqanswer">
-No. Debian do not follow new HAL and DBUS releases like other bleeding-edge distros do.
-Ubuntu is the only Debian based distro that I know that follows upstream so closely.
+No, unless you are using etch.
 </p>
 
 <a name="update_dbus"></a><hr/>
@@ -330,9 +349,9 @@ See <a href="data/video.txt">this document</a> for more details, or to see if yo
 Why doesn't GNOME Power manager autostart?
 </p>
 <p class="faqanswer">
-For the moment, you will have to run GNOME Power Manager from a terminal (it will not autostart).
-It will hopefully be either patched into the default upstream startup, or will use gnome-services when it arrives in mainline.
-You can also use gnome-session (this is what I do) to launch GNOME Power Manager for each session.
+This works automatically using GNOME 2.14, using the new autostart functionality of gnome-session.
+See <a href="http://bugzilla.gnome.org/show_bug.cgi?id=328801">(#328801)</a> for more details.
+For older versions of GNOME, you will have to run GNOME Power Manager from a terminal or use gnome-session (this is what I do) to launch GNOME Power Manager for each session.
 </p>
 <center>
 <img src="images/gnome-session.png" alt="[img]"/>
