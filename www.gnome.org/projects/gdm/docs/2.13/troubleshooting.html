@@ -228,17 +228,23 @@
       "gdm" category in
       <a class="ulink" href="http://bugzilla.gnome.org/" title="http://bugzilla.gnome.org/">bugzilla.gnome.org</a>
       or send an email to the
-      <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail alias.  If GDM
-      is failing to work properly, it is always a good idea to include debug
-      information.  Use the <span class="command" style="font-family: monospace; ">gdmsetup</span> command to turn on
-      debug ("Enable debug messages to system log" checkbox in the
+      <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail list.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      If GDM is failing to work properly, it is always a good idea to include
+      debug information.  Use the <span class="command" style="font-family: monospace; ">gdmsetup</span> command to turn
+      on debug ("Enable debug messages to system log" checkbox in the
       "Security" tab), then use GDM to the point where it fails, and
       include the GDM output sent to your system log
-      (<span class="filename" style="font-family: monospace; ">/var/log/messages</span> or
-      <span class="filename" style="font-family: monospace; ">/var/adm/messages</span> depending on your operating
+      (<span class="filename" style="font-family: monospace; ">&lt;var&gt;/log/messages</span> or
+      <span class="filename" style="font-family: monospace; ">&lt;var&gt;/adm/messages</span> depending on your operating
       system).  Since the system log can be large, please only include the GDM
-      debug information and do not sent the entire file.
-    </p><div class="sect2"><a name="wontstart"/><h2 class="sect2 title"><span class="title"><span class="label">11.1.</span> GDM Will Not Start</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      debug information and do not sent the entire file.  If you do not see any
+      GDM syslog output, you may need to configure syslog (see syslog.3c man
+      page).
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      You should not leave debug on after collecting data.  It will clutter your
+      syslog and slow system performance.
+    </p><div class="sect2"><a name="wontstart"/><h2 class="sect2 title"><span class="title"><span class="label">11.1. </span>GDM Will Not Start</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
          There are a many problems that can cause GDM to fail to start, but
          this section will discuss a few common problems and how to approach
          tracking down a problem with GDM starting.   Some problems will 
@@ -261,8 +267,9 @@
          trouble starting.  This can happen, for example, if GDM cannot find
          a needed library or other resource.  Try starting the Xserver and
          a terminal program, set the shell environment variable 
-         DOING_GDM_DEVELOPMENT=1 and run <span class="command" style="font-family: monospace; ">/usr/lib/gdmlogin</span>
-         or <span class="command" style="font-family: monospace; ">/usr/lib/gdmgreeter</span>.  Any error messages
+         DOING_GDM_DEVELOPMENT=1 and run
+         <span class="command" style="font-family: monospace; ">&lt;lib&gt;/gdmlogin</span>
+         or <span class="command" style="font-family: monospace; ">&lt;lib&gt;/gdmgreeter</span>.  Any error messages
          echoed to the terminal will likely highlight the problem.  Also,
          turning on debug and checking the output sent to the system log 
          will often highlight the problem.
@@ -270,7 +277,7 @@
          Also make sure that the <span class="filename" style="font-family: monospace; ">/tmp</span> directory has
          reasonable ownership and permissions, and that the machine's file
          system is not full.  These problems will cause GDM to fail to start.
-      </p></div><div class="sect2"><a name="notaccessfile"/><h2 class="sect2 title"><span class="title"><span class="label">11.2.</span> GDM Will Not Access User Settings</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="notaccessfile"/><h2 class="sect2 title"><span class="title"><span class="label">11.2. </span>GDM Will Not Access User Settings</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
          GDM saves user settings, such as your default session and default
          language, in the <span class="filename" style="font-family: monospace; ">~/.dmrc</span>.  Other files, such
          as the user's <span class="filename" style="font-family: monospace; ">~/.Xauthority</span> file will also

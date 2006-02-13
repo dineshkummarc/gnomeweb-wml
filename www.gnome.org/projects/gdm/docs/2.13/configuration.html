@@ -226,12 +226,35 @@
       This section will cover the configuration of GDM and the format of the
       GDM configuration files.  You can use the <span class="command" style="font-family: monospace; ">gdmsetup</span>
       command to configure GDM, but the configuration application does not
-      let you configure every aspect of GDM.  The information in this
-      section explains how to further configure GDM.
+      let you configure every aspect of GDM.  
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-      The configuration files (especially the <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-      and <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> files) contains useful
-      comments and examples, so read this for more information about
+      You can either run <span class="command" style="font-family: monospace; ">gdmsetup</span> as root or turn on the GDM
+      configuration feature that allows you to run <span class="command" style="font-family: monospace; ">gdmsetup</span>
+      from the login screen (where it will run as root).  If you believe
+      running root owned GUI's is a security risk, then you would want to edit
+      the files by hand.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      If you are a distribution and want to set machine defaults, you should 
+      edit the <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file rather
+      than editing the <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>
+      file, so the distribution changes are preserved as defaults.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      If you want to change configuration by hand, edit the
+      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> file and make
+      sure the keyname=value pair you want is included in the appropriate
+      section.  For example, to change the "Greeter" key in the
+      "daemon" section, make sure the daemon section of the
+      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> file has the value
+      like in this example.  The modified option does not have to come anywhere
+      in the section.  The <span class="command" style="font-family: monospace; ">gdmsetup</span> program manages editing
+      these files for you.
+    </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">[daemon]
+Greeter=/usr/lib/gdmgreeter
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The configuration files (especially the
+      <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> and
+      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> files) contains
+      useful comments and examples, so read these for more information about
       changing your setup.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
       Some keys in the configuration file as shipped are commented out while
@@ -240,36 +263,37 @@
       "#" character a comment, and these lines will be ignored by
       GDM.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"> 
-      The <span class="filename" style="font-family: monospace; ">gdm.conf</span> file contains the default
-      configuration choices for GDM, and should not be modified by the
-      user.  The <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file is where users
-      may specify their custom configuration choices.  Configuration options
-      specified in the <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file override
-      the values in the main <span class="filename" style="font-family: monospace; ">gdm.conf</span> file.   Running 
-      the <span class="command" style="font-family: monospace; ">gdmsetup</span> command will cause the
-      <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> to be modified with the
-      user's configuration choices and will cause any running GDM GUI 
+      The <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file contains
+      the default configuration choices for GDM, and should not be modified by
+      the user.  The <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> file
+      is where users may specify their custom configuration choices.
+      Configuration options specified in the
+      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> file override the
+      values in the main <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span>
+      file.   Running the <span class="command" style="font-family: monospace; ">gdmsetup</span> command will cause the
+      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> to be modified with
+      the user's configuration choices and will cause any running GDM GUI 
       programs to automatically update.  Previous to version 2.13.0.4
-      GDM only supported the <span class="filename" style="font-family: monospace; ">gdm.conf</span> file, so if
-      using an older version of GDM just edit that file directly.
+      GDM only supported the <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/gdm.conf</span>
+      file, so if using an older version of GDM just edit that file directly.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-      GDM may be configured to support system-wide configuration if
-      built with the <span class="command" style="font-family: monospace; ">--with-configdir</span> option.  This
-      allows the gdm.conf file to be installed to a directory that can
-      be mounted across multiple-systems.  The GDM --config option may
-      also be used to specify the configuration file location.  The GDM2
-      daemon must be restarted to change the configuration file being
-      used.
+      The location of the configuration files may be controlled via the
+      <span class="command" style="font-family: monospace; ">--with-defaults-conf</span> and
+      <span class="command" style="font-family: monospace; ">--with-custom-conf</span> configuration options.  The GDM
+      daemon --config option may also be used to specify the configuration
+      file location.  The GDM daemon must be restarted to change the
+      configuration file being used.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"> 
-      <span class="filename" style="font-family: monospace; ">factory-gdm.conf</span> is the configuration file as
-      shipped with the daemon.  This can be useful if you wish to revert to
-      the default configuration.
+      <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/factory-defaults.conf</span> is the
+      configuration file as shipped with the daemon.  This can be useful for
+      to see if the <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file
+      has been changed.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
       The other GDM configuration files are located, by default, in the
       <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/</span> folder or its subdirectories.
-      However, the location of all configuration files can be defined in 
-      the <span class="filename" style="font-family: monospace; ">gdm.conf</span> file, so the sysadmin may choose
-      to locate these files in any location. 
+      However, the location of all configuration files are defined in 
+      the GDM configuration files, so the sysadmin may choose to locate these
+      files in any location. 
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
       This is a listing of the config directory contents:
     </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">locale.alias
@@ -280,7 +304,7 @@ Init/
 PostLogin/
 PreSession/
 PostSession/
-    </pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"> 
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"> 
       <span class="filename" style="font-family: monospace; ">locale.alias</span> is a file which looks much like the
       system locale alias but in fact it is not the same.  These are the
       languages that are available on your system.  All the languages are
@@ -318,7 +342,7 @@ PostSession/
       GDM specific built-in sessions (KDM hardcodes these at time of
       this writing).  Lastly the default setup will also read
       <span class="filename" style="font-family: monospace; ">&lt;share&gt;/xsessions/</span> (which should be
-      <span class="filename" style="font-family: monospace; ">/usr/share/xsessions/</span> if you really wish to
+      <span class="filename" style="font-family: monospace; ">&lt;share&gt;/xsessions/</span> if you really wish to
       cooperate with KDM) where desktop packages can install their session
       files.  The directories under the <span class="filename" style="font-family: monospace; ">&lt;etc&gt;</span> should
       be reserved for configuration.  The desktop file specification approach
@@ -331,11 +355,11 @@ PostSession/
       <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/dm/Sessions/</span> was being read.
     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
       A session can be disabled (if it was installed in
-      <span class="filename" style="font-family: monospace; ">/usr/share/xsessions/</span>) by adding an identically
+      <span class="filename" style="font-family: monospace; ">&lt;share&gt;/xsessions/</span>) by adding an identically
       named <span class="filename" style="font-family: monospace; ">.desktop</span> to one of the directories earlier in
       the path (likely <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/X11/sessions</span>) and using
       <span class="filename" style="font-family: monospace; ">Hidden=true</span> in that file.
-    </p><div class="sect2"><a name="scriptdirs"/><h2 class="sect2 title"><span class="title"><span class="label">4.1.</span> The Script Directories</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p><div class="sect2"><a name="scriptdirs"/><h2 class="sect2 title"><span class="title"><span class="label">4.1. </span>The Script Directories</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         In this section we will explain the <span class="filename" style="font-family: monospace; ">Init</span>,
         <span class="filename" style="font-family: monospace; ">PostLogin</span>, <span class="filename" style="font-family: monospace; ">PreSession</span> and
         <span class="filename" style="font-family: monospace; ">PostSession</span> directories as they are very similar.
@@ -440,56 +464,59 @@ PostSession/
         <span class="filename" style="font-family: monospace; ">PostSession</span> scripts are necessary and can be left
         out.  The <span class="filename" style="font-family: monospace; ">Xsession</span> script is however required as
         well as at least one session <span class="filename" style="font-family: monospace; ">.desktop</span> file.
-      </p></div><div class="sect2"><a name="configfile"/><h2 class="sect2 title"><span class="title"><span class="label">4.2.</span> The Configuration File - <span class="filename" style="font-family: monospace; ">gdm.conf</span> and
-             <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span></span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM uses two configuration files: <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-        and <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span>.  The
-        <span class="filename" style="font-family: monospace; ">gdm.conf</span> file contains the default
-        configuration choices for GDM, and should not be modified by the
-        user.  The <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file is where
-        users may specify their custom configuration choices.  
+      </p></div><div class="sect2"><a name="configfile"/><h2 class="sect2 title"><span class="title"><span class="label">4.2. </span>The Configuration Files - <span class="filename" style="font-family: monospace; ">defaults.conf</span> and
+             <span class="filename" style="font-family: monospace; ">custom.conf</span></span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM uses two configuration files:
+        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span>
+        and <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>.  The
+        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file contains the
+        default configuration choices for GDM, and should not be modified by
+        the user.  The <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>
+        file is where users may specify their custom configuration choices.  
         Configuration options specified in the
-        <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file override the values in
-        the main <span class="filename" style="font-family: monospace; ">gdm.conf</span> file.  If a configuration
-        option is not defined in either file, GDM will default to the
-        value described in the comments in the
-        <span class="filename" style="font-family: monospace; ">gdm.conf</span> file.
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> file override the
+        values in the <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span>
+        file.  If a configuration option is not defined in either file, GDM
+        will default to the value described in the comments in the
+        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Running the <span class="command" style="font-family: monospace; ">gdmsetup</span> command will cause the 
-        <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> to be modified with the
-        user's configuration choices.
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> to be modified
+        with the user's configuration choices.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        Previous to GDM 2.13.0.4 only the <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-        existed.  If upgrading to the new version of GDM, install will
-        check to see if your <span class="filename" style="font-family: monospace; ">gdm.conf</span> file is
-        different than your <span class="filename" style="font-family: monospace; ">factory-gdm.conf</span> file.
-        If so, your <span class="filename" style="font-family: monospace; ">gdm.conf</span> file will be 
-        automatically copied to <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span>
-        to preserve your configuration changes.
+        Previous to GDM 2.13.0.4 only the
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/gdm.conf</span> existed.  If upgrading
+        to the new version of GDM, install will check to see if your
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/gdm.conf</span> file is different than
+        your <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/factory-gdm.conf</span> file.
+        If so, your <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/gdm.conf</span> file will be 
+        automatically copied to
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> to preserve any
+        configuration changes.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM may be configured to support system-wide configuration if
-        built with the <span class="command" style="font-family: monospace; ">--with-configdir</span> option.  This
-        allows the <span class="filename" style="font-family: monospace; ">gdm.conf</span> file to be installed to
-        a directory that can be mounted across multiple-systems.  The
-        GDM --config option may instead be used to specify a configuration
-        file installed to another location.  The GDM2 daemon must be
-        restarted to change the configuration file being used.
+        The location of the configuration files may be controlled via the
+        <span class="command" style="font-family: monospace; ">--with-defaults-conf</span> and
+        <span class="command" style="font-family: monospace; ">--with-custom-conf</span> configuration options.  The
+        GDM daemon --config option may instead be used to specify the
+        configuration file location.  The GDM daemon must be restarted to
+        change the configuration file being used.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Both configuration files are divided into sections each containing
         variables that define the behavior for a specific part of the GDM
-        suite.  Refer to the comments in the <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-        file for additional information about each configuration setting.
+        suite.  Refer to the comments in the
+        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file for
+        additional information about each configuration setting.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The <span class="filename" style="font-family: monospace; ">gdm.conf</span> and
-        <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> files follow the standard
-        <span class="filename" style="font-family: monospace; ">.ini</span> style configuration file syntax.  Keywords
-        in brackets define sections, strings before an equal sign (=) are
-        variables and the data after equal sign represents their value.  Empty
-        lines or lines starting with the hash mark (#) are ignored.  The
+        The <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> and
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> files follow the
+        standard <span class="filename" style="font-family: monospace; ">.ini</span> style configuration file syntax.
+        Keywords in brackets define sections, strings before an equal sign (=)
+        are variables and the data after equal sign represents their value.
+        Empty lines or lines starting with the hash mark (#) are ignored.  The
         graphical configurator will try to preserve both comments (lines with
         a hash mark) and the overall structure of the file so you can intermix
         using the GUI or hand editing the configuration file.
-      </p><div class="sect3"><a name="daemonsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.1.</span> Daemon Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[daemon]</b></span></div><dl><dt><span class="term">AddGtkModules</span></dt><dd>
+      </p><div class="sect3"><a name="daemonsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.1. </span>Daemon Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[daemon]</b></span></div><dl><dt><span class="term">AddGtkModules</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">AddGtkModules=false</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If true, then enables <span class="command" style="font-family: monospace; ">gdmgreeter</span> or
@@ -625,14 +652,15 @@ PostSession/
                 console when an error happens.
               </p>
             </dd><dt><span class="term">DefaultPath</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">DefaultPath=/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">DefaultPath=defaultpath (value set by configure)</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Specifies the path which will be set in the user's session.
                 This value will be overridden with the value from
-                /etc/default/login if it contains
-                "ROOT=&lt;pathname&gt;".  If the /etc/default/login
-                file exists, but contains no value for ROOT, the value as
-                defined in the GDM configuration will be be used.
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> if it contains
+                "ROOT=&lt;pathname&gt;".  If the
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> file exists, but
+                contains no value for ROOT, the value as defined in the GDM
+                configuration will be be used.
               </p>
             </dd><dt><span class="term">DefaultSession</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">DefaultSession=gnome.desktop</pre></div>
@@ -753,13 +781,14 @@ PostSession/
                 interface.
               </p>
             </dd><dt><span class="term">HaltCommand</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">HaltCommand=/sbin/shutdown -h now</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">HaltCommand=&lt;sbin&gt;/shutdown -h now</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Full path and arguments to command to be executed when user
-                selects "Shut Down" from the Actions menu.  This can be a ';'
-                separated list of commands to try.  If a value is missing, the
-                shut down command is not available.  Note that the default for
-                this value is not empty, so to disable "Shut Down" it must be
+                selects "Shut Down" from the Actions menu.  This can
+                be a ';' separated list of commands to try.  If a value is
+                missing, the shut down command is not available.  Note that the
+                default for this value is not empty, so to disable
+                "Shut Down" it must be
 		set to an empty value.
               </p>
             </dd><dt><span class="term">KillInitClients</span></dt><dd>
@@ -814,7 +843,7 @@ PostSession/
                 See the ``The Script Directories'' section for more info.
               </p>
             </dd><dt><span class="term">RebootCommand</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RebootCommand=/sbin/shutdown -r now</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RebootCommand=&lt;sbin&gt;/shutdown -r now</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Full path and optional arguments to the command to be
                 executed when user selects Restart from the Actions menu.  This
@@ -833,16 +862,16 @@ PostSession/
                 greeter.  See also the <span class="filename" style="font-family: monospace; ">Greeter</span> key.
               </p>
             </dd><dt><span class="term">RootPath</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RootPath=/sbin:/usr/sbin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RootPath=defaultpath (value set by configure)</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Specifies the path which will be set in the root's
                 session and the {Init,PostLogin,PreSession,PostSession} scripts
                 executed by GDM.  This value will be overridden with the value
-                from /etc/default/login if it contains
-                "SUROOT=&lt;pathname&gt;".  If the /etc/default/login
-                file exists, but contains no value for SUROOT, the value as
-                defined in the GDM configuration will
-                be used.
+                from <span class="filename" style="font-family: monospace; ">/etc/default/login</span> if it
+                contains "SUROOT=&lt;pathname&gt;".  If the
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> file exists, but
+                contains no value for SUROOT, the value as defined in the GDM
+                configuration will be used.
               </p>
             </dd><dt><span class="term">ServAuthDir</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">ServAuthDir=&lt;var&gt;/gdm</pre></div>
@@ -865,7 +894,7 @@ PostSession/
                 can connect to any display on this computer.
               </p>
             </dd><dt><span class="term">SessionDesktopDir</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SessionDesktopDir=&lt;etc&gt;/X11/sessions/:&lt;etc&gt;/dm/Sessions/:&lt;/usr/share&gt;/xsessions/</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SessionDesktopDir=&lt;etc&gt;/X11/sessions/:&lt;etc&gt;/dm/Sessions/:&lt;share&gt;/xsessions/</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Directory containing the <span class="filename" style="font-family: monospace; ">.desktop</span> files
                 which are the available sessions on the system.  Since 2.4.4.2
@@ -873,7 +902,7 @@ PostSession/
                 found is used.
               </p>
             </dd><dt><span class="term">SoundProgram</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SoundProgram=/usr/bin/play</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SoundProgram=<span class="filename" style="font-family: monospace; ">&lt;bin&gt;/play</span> (or <span class="filename" style="font-family: monospace; ">&lt;bin&gt;/audioplay</span> on Solaris)</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Application to use when playing a sound.  Currently used for
                 playing the login sound, see the
@@ -881,7 +910,7 @@ PostSession/
                 2.5.90.0.
               </p>
             </dd><dt><span class="term">StandardXServer</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">StandardXServer=/usr/X11R6/bin/X</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">StandardXServer=/dir/to/X (value assigned by configuration file)</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Full path and arguments to the standard X server command.
                 This is used when gdm cannot find any other definition,
@@ -1012,7 +1041,7 @@ PostSession/
                 that X server keeps crashing.
               </p>
             </dd><dt><span class="term">Xnest</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">Xnest=/usr/bin/X11/Xnest (/usr/openwin/bin/Xnest on Solaris)</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">Xnest=&lt;bin&gt;/X11/Xnest (/usr/openwin/bin/Xnest on Solaris)</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 The full path and arguments to the Xnest command.  This is used
                 for the flexible Xnest displays.  This way the user can start
@@ -1020,7 +1049,7 @@ PostSession/
                 the Xnest display from your X server packages installed for
                 this to work.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="securitysection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.2.</span> Security Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[security]</b></span></div><dl><dt><span class="term">AllowRoot</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="securitysection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.2. </span>Security Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[security]</b></span></div><dl><dt><span class="term">AllowRoot</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">AllowRoot=true</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Allow root (privileged user) to log in through GDM.  Set this
@@ -1046,10 +1075,10 @@ PostSession/
               </p>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 This value will be overridden and set to false if the
-                /etc/default/login file exists and contains
-                "CONSOLE=/dev/login", and set to true if the
-                /etc/default/login file exists and contains any other
-                value or no value for CONSOLE.
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> file exists and
+                contains "CONSOLE=/dev/login", and set to true if the
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> file exists and
+                contains any other value or no value for CONSOLE.
               </p>
             </dd><dt><span class="term">AllowRemoteAutoLogin</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">AllowRemoteAutoLogin=false</pre></div>
@@ -1105,11 +1134,12 @@ PostSession/
                 passed as a flag to pam_authenticate and pam_acct_mgmt,
                 disallowing NULL password.  This setting will only take
                 effect if PAM is being used by GDM.  This value will be
-                overridden with the value from /etc/default/login if it
-                contains "PASSREQ=[YES|NO]".  If the
-                /etc/default/login file exists, but contains no value for
-                PASSREQ, the value as defined in the GDM configuration will be
-                used.
+                overridden with the value from
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> if it contains
+                "PASSREQ=[YES|NO]".  If the
+                <span class="filename" style="font-family: monospace; ">/etc/default/login</span> file exists, but
+                contains no value for PASSREQ, the value as defined in the GDM
+                configuration will be used.
               </p>
             </dd><dt><span class="term">RelaxPermissions</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RelaxPermissions=0</pre></div>
@@ -1153,7 +1183,7 @@ PostSession/
                 directories writable by other than the owner. See the
                 <span class="filename" style="font-family: monospace; ">RelaxPermissions</span> option for more info.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="xdmcpsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.3.</span> XDCMP Support</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[xdmcp]</b></span></div><dl><dt><span class="term">DisplaysPerHost</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="xdmcpsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.3. </span>XDCMP Support</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[xdmcp]</b></span></div><dl><dt><span class="term">DisplaysPerHost</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">DisplaysPerHost=1</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 To prevent attackers from filling up the pending queue, GDM
@@ -1187,9 +1217,10 @@ PostSession/
               
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 You should add 
-              <div class="screen block-indent"><pre class="screen">gdm:.my.domain</pre></div>
-                to your <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.allow</span>, depending on your
-                TCP Wrappers configuration.  See the
+<div class="screen block-indent"><pre class="screen">gdm:.my.domain
+</pre></div>
+                to your <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.allow</span>, depending
+                on your TCP Wrappers configuration.  See the
                 <a class="ulink" href="man:hosts.allow" title="man:hosts.allow">hosts.allow(5)</a>
                 man page for details.
               </p>
@@ -1348,7 +1379,7 @@ PostSession/
                 possible denial of service by flooding the machine with QUERY
                 packets.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="commonguioptions"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.4.</span> Common GUI Configuration Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[gui]</b></span></div><dl><dt><span class="term">AllowGtkThemeChange</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="commonguioptions"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.4. </span>Common GUI Configuration Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[gui]</b></span></div><dl><dt><span class="term">AllowGtkThemeChange</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">AllowGtkThemeChange=true</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If to allow changing the GTK+ (widget) theme from the greeter.
@@ -1396,7 +1427,7 @@ PostSession/
                 browser will display. Icons larger than this will be scaled.
                 This also affects icons in the XDMCP chooser.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="greetersection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.5.</span> Greeter Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[greeter]</b></span></div><dl><dt><span class="term">BackgroundColor</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="greetersection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.5. </span>Greeter Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[greeter]</b></span></div><dl><dt><span class="term">BackgroundColor</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">BackgroundColor=#76848F</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If the BackgroundType is 2, use this color in the background
@@ -1408,8 +1439,8 @@ PostSession/
             </dd><dt><span class="term">BackgroundProgramInitialDelay</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">BackgroundProgramInitialDelay=30</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                The background application will be started after at least that many 
-                seconds of inactivity.
+                The background application will be started after at least that
+                many seconds of inactivity.
               </p>
             </dd><dt><span class="term">RestartBackgroundProgram</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">RestartBackgroundProgram=true</pre></div>
@@ -1433,7 +1464,7 @@ PostSession/
                 Greeter.
               </p>
             </dd><dt><span class="term">BackgroundProgram</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">BackgroundProgram=/usr/bin/xeyes</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">BackgroundProgram=&lt;bin&gt;/xeyes</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If set this command will be run in the background while
                 the login window is being displayed.  Note that not all
@@ -1502,8 +1533,8 @@ PostSession/
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">Include=</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Comma separated list of users to be included in the face
-                browser and in the <span class="command" style="font-family: monospace; ">gdmsetup</span> selection list for
-                Automatic/Timed login. 
+                browser and in the <span class="command" style="font-family: monospace; ">gdmsetup</span> selection list
+                for Automatic/Timed login. 
                 See also <span class="filename" style="font-family: monospace; ">Exclude</span>,
                 <span class="filename" style="font-family: monospace; ">IncludeAll</span>, and
                 <span class="filename" style="font-family: monospace; ">MinimalUID</span>.
@@ -1599,10 +1630,10 @@ PostSession/
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">InfoMsgFile=/path/to/infofile</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If present and /path/to/infofile specifies an existing and
-                readable text file (e.g. &lt;etc&gt;/infomsg.txt) the contents of the
-                file will be displayed in a modal dialog box before the user
-                is allowed to login.
-                This works both with the standard and the themable greeters.
+                readable text file (e.g. &lt;etc&gt;/infomsg.txt) the contents
+                of the file will be displayed in a modal dialog box before the
+                user is allowed to login.  This works both with the standard
+                and the themable greeters.
               </p>
             </dd><dt><span class="term">InfoMsgFont</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">InfoMsgFont=fontspec</pre></div>
@@ -1759,30 +1790,31 @@ PostSession/
             </dd><dt><span class="term">SoundOnLoginFile</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SoundOnLoginFile=/path/to/sound.wav</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                The file that will be played using the specified sound application
-                (by default that is <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) instead
-                of a beep when the greeter is ready for a login.  See also the
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) instead of a beep when the
+                greeter is ready for a login.  See also the
                 <span class="filename" style="font-family: monospace; ">SoundOnLogin</span> key and the
-                <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.
-                Supported since 2.5.90.0.
+                <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.  Supported since
+                2.5.90.0.
               </p>
             </dd><dt><span class="term">SoundOnLoginSuccessFile</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SoundOnLoginSuccessFile=/path/to/sound.wav</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                The file that will be played using the specified sound application
-                (by default that is <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) after
-                a successful login attempt.  See also the
-                <span class="filename" style="font-family: monospace; ">SoundOnLoginSuccess</span> key and the
-                <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) after a successful login
+                attempt.  See also the <span class="filename" style="font-family: monospace; ">SoundOnLoginSuccess</span>
+                key and the <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.
               </p>
             </dd><dt><span class="term">SoundOnLoginFailureFile</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SoundOnLoginFailureFile=/path/to/sound.wav</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                The file that will be played using the specified sound application
-                (by default that is <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) after
-                a failed login attempt.  See also the
-                <span class="filename" style="font-family: monospace; ">SoundOnLoginFailure</span> key and the
-                <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename" style="font-family: monospace; ">/usr/bin/play</span>) after a failed login 
+                attempt.  See also the <span class="filename" style="font-family: monospace; ">SoundOnLoginFailure</span>
+                key and the <span class="filename" style="font-family: monospace; ">SoundProgram</span> key.
               </p>
             </dd><dt><span class="term">SystemMenu</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">SystemMenu=true</pre></div>
@@ -1906,7 +1938,7 @@ PostSession/
                 centered on this physical screen (use 0 for the first screen,
                 1 for the second...).
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="choosersection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.6.</span> XDCMP Chooser Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[chooser]</b></span></div><dl><dt><span class="term">AllowAdd</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="choosersection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.6. </span>XDCMP Chooser Options</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[chooser]</b></span></div><dl><dt><span class="term">AllowAdd</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">AllowAdd=true</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 If true, allow the user to add arbitrary hosts to the chooser.
@@ -1978,7 +2010,7 @@ PostSession/
                 in which we expect a reply.  We will still add hosts to the
                 list even if they reply after this time.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="debugsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.7.</span> Debug Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[debug]</b></span></div><dl><dt><span class="term">Enable</span></dt><dd>
+            </dd></dl></div></div></div><div class="sect3"><a name="debugsection"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.7. </span>Debug Configuration</span></h3><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[debug]</b></span></div><dl><dt><span class="term">Enable</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">Enable=false</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Setting to true sends debug ouput to the syslog.  This can be 
@@ -1990,11 +2022,12 @@ PostSession/
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">Gestures=false</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 Setting to true sends debug ouput concerning the accessibility
-                gesture listeners to the syslog.  This can be useful for tracking
-                down problems with them not working properly.  This output tends
-                to be verbose so should not be turned on for general use.
+                gesture listeners to the syslog.  This can be useful for
+                tracking down problems with them not working properly.  This
+                output tends to be verbose so should not be turned on for
+                general use.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="serverdefs"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.8.</span> X Server Definitions</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+            </dd></dl></div></div></div><div class="sect3"><a name="serverdefs"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.8. </span>X Server Definitions</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
           To set up X servers, you need to provide GDM with information about
           the installed X servers.  You can have as many different definitions
           as you wish, each identified with a unique name.  The name
@@ -2010,19 +2043,21 @@ PostSession/
           users to edit the servers defined in the GDM configuration files
           but currently does not allow adding or deleting entries.  Like
           normal configuration options, <span class="filename" style="font-family: monospace; ">server-</span>
-          sections in the <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file 
-          override values in the <span class="filename" style="font-family: monospace; ">gdm.conf</span> file.  In
-          other words, if a <span class="filename" style="font-family: monospace; ">server-Standard</span> section is
-          defined in <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span>, then that will
-          be used and the section in the <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-          file will be ignored.
+          sections in the <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>
+          file override values in the
+          <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file.  In other
+          words, if a <span class="filename" style="font-family: monospace; ">server-Standard</span> section is defined
+          in <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>, then that
+          will be used and the section in the
+          <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file will be
+          ignored.
         </p><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[server-Standard]</b></span></div><dl><dt><span class="term">name</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">name=Standard server</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 The name that will be displayed to the user.
               </p>
             </dd><dt><span class="term">command</span></dt><dd>
-              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">command=/usr/bin/X11/X</pre></div>
+              <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">command=/path/to/X</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
                 The command to execute, with full path to the binary of the X
                 server, and any extra arguments needed.
@@ -2054,7 +2089,7 @@ PostSession/
                 chooser on this window and allow the user to choose which
                 server to log into.
               </p>
-            </dd></dl></div></div></div><div class="sect3"><a name="localservers"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.9.</span> Local Static X Display Configuration</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+            </dd></dl></div></div></div><div class="sect3"><a name="localservers"/><h3 class="sect3 title"><span class="title"><span class="label">4.2.9. </span>Local Static X Display Configuration</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
           The static display configuration specifies what displays should be
           always managed by GDM.  GDM will restart the X server on the display
           if it dies, for example.  There may be as many static displays that
@@ -2072,8 +2107,9 @@ PostSession/
           display configuration defined in the GDM configuration files 
           and allows the user to add or delete entries.  Like normal
           configuration options, the <span class="filename" style="font-family: monospace; ">[servers]</span>
-          section in the <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> file 
-          overrides values in the <span class="filename" style="font-family: monospace; ">gdm.conf</span> file.
+          section in the <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span>
+          file overrides values in the
+          <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file.
         </p><div class="list"><div class="variablelist"><div class="title"><span class="title"><b>[servers]</b></span></div><dl><dt><span class="term">&lt;display number&gt;</span></dt><dd>
               <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis">0=Standard</pre></div>
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
@@ -2090,9 +2126,10 @@ PostSession/
                 for them to be "packed".  They keyword
                 "inactive" can be used instead of a command to
                 specify that the display should be not managed.  This can be
-                used in the <span class="filename" style="font-family: monospace; ">gdm.conf-custom</span> to turn off a
-                display that is defined in the <span class="filename" style="font-family: monospace; ">gdm.conf</span>
-                file.
+                used in the
+                <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/custom.conf</span> to turn
+                off a display that is defined in the
+                <span class="filename" style="font-family: monospace; ">&lt;share&gt;/gdm/defaults.conf</span> file.
               </p>
               
               <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
@@ -2128,7 +2165,7 @@ PostSession/
                 responsiveness.  The default value is 0 and the 
                 setpriority function is not called if the value is 0.
               </p>
-            </dd></dl></div></div></div></div><div class="sect2"><a name="userconfig"/><h2 class="sect2 title"><span class="title"><span class="label">4.3.</span> Per User Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+            </dd></dl></div></div></div></div><div class="sect2"><a name="userconfig"/><h2 class="sect2 title"><span class="title"><span class="label">4.3. </span>Per User Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         There are some per user configuration settings that control how GDM
         behaves.  GDM is picky about the file ownership and permissions of 
         the user files it will access, and will ignore files if they are not
@@ -2148,16 +2185,17 @@ PostSession/
         called <span class="filename" style="font-family: monospace; ">[Desktop]</span> which has two keys:
         <span class="filename" style="font-family: monospace; ">Session</span> and <span class="filename" style="font-family: monospace; ">Language</span>.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The <span class="filename" style="font-family: monospace; ">Session</span> key specifies the basename of the session
-        <span class="filename" style="font-family: monospace; ">.desktop</span> file that the user wishes to normally use
-        (without the <span class="filename" style="font-family: monospace; ">.desktop</span> extension, in other words).
-        The <span class="filename" style="font-family: monospace; ">Language</span> key specifies the language that the
-        user wishes to use by default.  If either of these keys is missing, the
-        system default is used.  The file would normally look as follows:
+        The <span class="filename" style="font-family: monospace; ">Session</span> key specifies the basename of the
+        session <span class="filename" style="font-family: monospace; ">.desktop</span> file that the user wishes to
+        normally use (without the <span class="filename" style="font-family: monospace; ">.desktop</span> extension, in
+        other words).  The <span class="filename" style="font-family: monospace; ">Language</span> key specifies the
+        language that the user wishes to use by default.  If either of these
+        keys is missing, the system default is used.  The file would normally
+        look as follows:
       </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">[Desktop]
 Session=gnome
 Language=cs_CZ.UTF-8
-      </pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Normally GDM will write this file when the user logs in for the first
         time, and rewrite it if the user chooses to change their default values
         on a subsequent login. 
@@ -2169,8 +2207,8 @@ Language=cs_CZ.UTF-8
         <span class="filename" style="font-family: monospace; ">MaxIconHeight</span> values defined in the GDM
         configuration or it will be ignored.  Users can run the
         <span class="command" style="font-family: monospace; ">gdmphotosetup</span> program to specify a face image
-        and it will copy the file to the $HOME/.face location and scale it
-        so its longest dimension is not larger than the 
+        and it will copy the file to the <span class="filename" style="font-family: monospace; ">$HOME/.face</span>
+        location and scale it so its longest dimension is not larger than the 
         <span class="filename" style="font-family: monospace; ">MaxIconWidth</span> or <span class="filename" style="font-family: monospace; ">MaxIconHeight</span>
         values.  <span class="command" style="font-family: monospace; ">gdmphotosetup</span> takes care to not change
         the aspect ratio of the image.

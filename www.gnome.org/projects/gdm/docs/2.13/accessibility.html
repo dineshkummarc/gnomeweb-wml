@@ -223,18 +223,23 @@
     p &gt; div + div { margin-top: 0em; }
     p { text-align: justify; }
     </style></head><body><div class="body"><div class="sect1"><a name="accessibility"/><h1 class="sect1 title"><span class="title">Accessibility</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-       GDM supports "Accessible Login" to allow users to log in to
-       their desktop session even if they cannot easily use the screen, mouse,
-       or keyboard in the usual way.  This feature allows the user to launch
-       assistive technologies at login time by means of special
-       "gestures" from the standard keyboard and from a keyboard,
-       pointing device, or switch device attached to the USB or PS/2 mouse
-       port.  It also allows the user to change the visual appearance of the
-       login UI before logging in, for instance to use a higher-contrast color
-       scheme for better visibility.  GDM only supports accessibility with
-       the GTK+ Greeter, so the "Greeter" parameter in the GDM
-       configuration must be set to the GTK+ Greeter "gdmlogin"
-       </p><div class="sect2"><a name="accessibilityconfig"/><h2 class="sect2 title"><span class="title"><span class="label">8.1.</span> Accessibility Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM supports "Accessible Login" to allow users to log in to
+        their desktop session even if they cannot easily use the screen, mouse,
+        or keyboard in the usual way.  Only the "Standard Greeter"
+        supports accessibility, so use this login GUI for accessibility
+        support.  This is done by specifying the "Standard Greeter"
+        in the "Local" tab for the console display and specifying
+        the "Standard Greeter" in the "Remote" tab for 
+        remote displays.  Or you can modify the <span class="filename" style="font-family: monospace; ">Greeter</span>
+        configuration option by hand to be <span class="command" style="font-family: monospace; ">gdmlogin</span>.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The Standard Greeter supports the ability to launch assistive
+        technologies at login time via configurable "gestures" from
+        the standard keyboard, pointing device, or switch device attached to
+        the USB or PS/2 mouse port.  Also the user can change the visual
+        appearance of the login UI before logging in, for instance to use a
+        higher-contrast color scheme for better visibility.  
+      </p><div class="sect2"><a name="accessibilityconfig"/><h2 class="sect2 title"><span class="title"><span class="label">8.1. </span>Accessibility Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
              In order to enable Accessible Login, the system administrator must
              make some changes to the default login configuration by manually
              modifying three human-readable configuration files, stored in
@@ -250,14 +255,16 @@
              available themes, the <span class="filename" style="font-family: monospace; ">GtkThemesToAllow</span>
              parameter in the GDM configuration can be set to a list of
              acceptable themes separated by commas.  For example:
-             </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GtkThemesToAllow=HighContrast,HighContrastInverse</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+             </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GtkThemesToAllow=HighContrast,HighContrastInverse
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
              To enable the use of assistive technologies such as the Onscreen
              Keyboard, Screen Reader, or Magnifier, the
              <span class="filename" style="font-family: monospace; ">AddGtkModules</span> parameter in the GDM
              configuration must be uncommented and set to "true".
              Also the <span class="filename" style="font-family: monospace; ">GtkModulesList</span> parameter must be
              uncommented and set as follows:
-             </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GtkModulesList=gail:atk-bridge:dwellmouselistener:keymouselistener</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+             </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GtkModulesList=gail:atk-bridge:dwellmouselistener:keymouselistener
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
              System administrators may wish to load only the minimum subset of
              these modules which is required to support their user base.
              Depending on the end-user needs, not all of the above GtkModules
@@ -287,7 +294,10 @@
              or XInput device sequences that can be used to launch applications
              needed for accessibility.  In order to reduce the likelihood of
              unintentional launch, these "gestures" may be associated
-             with multiple switch presses and/or minimum durations.
+             with multiple switch presses and/or minimum durations.  Note that
+             the XKB extension is needed for key gestures to work, so you may
+             need to add +xkb to your Xserver command line for gestures to
+             work properly.
              </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
              The DwellKeyMouseEvents file controls the dwellmouselistner and
              supports gestures that involve only motion of a pointing device
@@ -335,13 +345,13 @@
              program if you encounter this problem.  Also note that some input
              devices require X server configuration before GDM will recognize
              them.
-             </p></div><div class="sect2"><a name="accessibilitysound"/><h2 class="sect2 title"><span class="title"><span class="label">8.2.</span> Accessibility Login Sound Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+             </p></div><div class="sect2"><a name="accessibilitysound"/><h2 class="sect2 title"><span class="title"><span class="label">8.2. </span>Accessibility Login Sound Configuration</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
              By default, GDM requires a media application such as
              "sox" to be present to play sounds for successful or
              failed login.  GDM defaults
              the location of this application to
-             <span class="filename" style="font-family: monospace; ">/usr/bin/play</span> (or
-             <span class="filename" style="font-family: monospace; ">/usr/bin/audioplay</span> on Solaris.  This can
+             <span class="filename" style="font-family: monospace; ">&lt;bin&gt;/play</span> (or
+             <span class="filename" style="font-family: monospace; ">&lt;bin&gt;/audioplay</span> on Solaris.  This can
              be changed via the SoundProgram GDM configuration option.  
              Typically most text-to-speech programs (such as ORCA or 
              Gnopernicus) use a separate mechanism to play audio.

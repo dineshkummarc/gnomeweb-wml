@@ -222,31 +222,85 @@
     p &gt; div { margin-top: 1em; margin-bottom: 1em; }
     p &gt; div + div { margin-top: 0em; }
     p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="security"/><h1 class="sect1 title"><span class="title">Security</span></h1><div class="sect2"><a name="gdmuser"/><h2 class="sect2 title"><span class="title"><span class="label">3.1.</span> The GDM User</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </style></head><body><div class="body"><div class="sect1"><a name="security"/><h1 class="sect1 title"><span class="title">Security</span></h1><div class="sect2"><a name="PAM"/><h2 class="sect2 title"><span class="title"><span class="label">3.1. </span>
+        PAM
+      </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        GDM uses PAM for username/authentication, though if your machine
+        does not support PAM you can build GDM to work with shadow
+        passwords and crypt.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        PAM stands for Pluggable Authentication Module, and is used by
+        most programs that request username/password authentication on
+        your computer.  It allows the user to configure different
+        authentication behavior for different programs.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        Some GDM features (like turning on automatic login) may require that
+        you update your PAM configuration.  PAM has different, but similar,
+        interfaces on different operating systems, so check your pam.d or
+        pam.conf man page for details about how to configure it.  Make sure to
+        read the PAM documentation (e.g. pam.d/pam.conf man page) and
+        be comfortable with the security implications of any changes
+        you intend to make to your configuration.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        If there is no entry for GDM in your system's PAM configuration
+        file, then features like tomatic login may not work.  Not having an
+        entry will causes GDM to use default behavior, conservative settings
+        are recommended and probably shipped with your distribution.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        If you wish to make GDM work with other types of authentication 
+        mechanisms (such as a SmartCard), then you should implement this by
+        writing a PAM module rather than by trying to modify the GDM
+        code directly.  Refer to the PAM documentation on your system.  This
+        issue has been discussed on the 
+        <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail list,
+        so you can refer to the list archives for more information.
+      </p></div><div class="sect2"><a name="gdmuser"/><h2 class="sect2 title"><span class="title"><span class="label">3.2. </span>The GDM User</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        For security reasons a dedicated user and group id are required for
+        proper operation!  The need to be able to write Xauth files is why
+        user "nobody" is not appropriate for gdm.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The GDM daemon normally runs as root, as does the slave.  However GDM
         should also have a dedicated user id and a group id which it uses for
         its graphical interfaces such as <span class="command" style="font-family: monospace; ">gdmgreeter</span> and
-        <span class="command" style="font-family: monospace; ">gdmlogin</span>.  You can choose the name of this user
-        and group in the <span class="filename" style="font-family: monospace; ">[daemon]</span> section of the
-        configuration file.
+        <span class="command" style="font-family: monospace; ">gdmlogin</span>.  These are configured via the
+        <span class="filename" style="font-family: monospace; ">User</span> and <span class="filename" style="font-family: monospace; ">Group</span>
+        configuration options in the GDM configuration files.  The user and
+        group should be created before running "make install".  By
+        default GDM assumes the user and the group are called "gdm". 
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The GDM user, and group, which are normally just
-        <span class="command" style="font-family: monospace; ">gdm</span> should not be user or group of any particular
-        privilege.  The reason for using them is to have the user interface
-        run as a user without privileges so that in the unlikely case that
-        someone finds a weakness in the GUI, they cannot access root on the
-        computer.
+        This userid is used to run the GDM GUI programs required for login.
+        All functionality that requires root authority is done by the GDM
+        daemon process.  This design ensures that if the GUI programs are
+        somehow exploited, only the dedicated user privileges are available.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         It should however be noted that the GDM user and group have some
-        privileges that make them somewhat dangerous.  For one they have
-        access to the X server authorization directory (the
-        <span class="filename" style="font-family: monospace; ">ServAuthDir</span>), which contains all the X server
-        authorization files and other private information.  This means that
-        someone who gains the GDM user/group privileges can then connect to
-        any session.  So you should not, under any circumstances, make this
-        some user/group which may be easy to get access to, such as the
-        user <span class="filename" style="font-family: monospace; ">nobody</span>.
-      </p></div><div class="sect2"><a name="xauth"/><h2 class="sect2 title"><span class="title"><span class="label">3.2.</span> X Server Authentication Scheme</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        privileges that make them somewhat dangerous.  For one, they have
+        access to the X server authorization directory.  It must be able
+        to read and write Xauth keys to
+        <span class="filename" style="font-family: monospace; ">&lt;var&gt;/lib/gdm</span>.  This directory should
+        have root:gdm ownership and 1770 permissions.  Running
+        "make install" will set this directory to these values.
+        The GDM daemon process will reset this directory to proper
+        ownership/permissions if it is somehow not set properly.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The danger is that someone who gains the GDM user/group privileges
+        can then connect to any session.  So you should not, under any
+        circumstances, make this some user/group which may be easy to get
+        access to, such as the user <span class="filename" style="font-family: monospace; ">nobody</span>.
+        Users who gain access to the "gdm" user could also 
+        modify the Xauth keys causing Denial-Of-Service attacks.  Also
+        if a person gains the ability to run programs as the user
+        "gdm", it would be possible to snoop on running GDM
+        processes, including usernames and passwords as they are being
+        typed in.  
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        Distributions and system administrators using GDM are expected to
+        setup the dedicated user properly.  It is recommended that this
+        userid be configured to disallow login and to not have a default
+        shell.  Distributions and system administrators should set up
+        the filesystem to ensure that the GDM user does not have read or
+        write access to sensitive files.
+      </p></div><div class="sect2"><a name="xauth"/><h2 class="sect2 title"><span class="title"><span class="label">3.3. </span>X Server Authentication Scheme</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The X server authorization directory (the
         <span class="filename" style="font-family: monospace; ">ServAuthDir</span>) is used for a host of random
         internal data in addition to the X server authorization files, and the
@@ -287,7 +341,7 @@
         network or store it on an NFS directory (see
         <span class="filename" style="font-family: monospace; ">UserAuthDir</span> configuration key).  So be careful
         about where you use remote X display.
-      </p></div><div class="sect2"><a name="firewall"/><h2 class="sect2 title"><span class="title"><span class="label">3.3.</span> Firewall Security</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="firewall"/><h2 class="sect2 title"><span class="title"><span class="label">3.4. </span>Firewall Security</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Even though GDM tries to outsmart potential attackers trying to take
         advantage of XDMCP, it is still advised that you block the XDMCP port
         (normally UDP port 177) on your firewall unless you really need it.
@@ -303,16 +357,17 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
          X is not a very safe protocol for leaving on the net, and XDMCP is
          even less safe.  
-      </p></div><div class="sect2"><a name="nfssecurity"/><h2 class="sect2 title"><span class="title"><span class="label">3.4.</span> GDM Security With NFS</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="nfssecurity"/><h2 class="sect2 title"><span class="title"><span class="label">3.5. </span>GDM Security With NFS</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Note that NFS traffic really goes "over the wire" and thus
         can be snooped.  When accessing the user's X authorization file
-        (~/.Xauthority), GDM will try to open the file for reading as root.
-        If it fails, GDM will conclude that it is on an NFS mount and it will
-        automatically use <span class="filename" style="font-family: monospace; ">UserAuthFBDir</span>, which by default
-        is set to <span class="filename" style="font-family: monospace; ">/tmp</span>.  This behavior can be changed by
-        setting the <span class="filename" style="font-family: monospace; ">NeverPlaceCookiesOnNFS</span> in the
+        (<span class="filename" style="font-family: monospace; ">~/.Xauthority</span>), GDM will try to open the file
+        for reading as root.  If it fails, GDM will conclude that it is on an
+        NFS mount and it will automatically use
+        <span class="filename" style="font-family: monospace; ">UserAuthFBDir</span>, which by default is set to
+        <span class="filename" style="font-family: monospace; ">/tmp</span>.  This behavior can be changed by setting the
+        <span class="filename" style="font-family: monospace; ">NeverPlaceCookiesOnNFS</span> in the
         <span class="filename" style="font-family: monospace; ">[security]</span> section to false.
-      </p></div><div class="sect2"><a name="xdmcpsecurity"/><h2 class="sect2 title"><span class="title"><span class="label">3.5.</span> XDMCP Security</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="xdmcpsecurity"/><h2 class="sect2 title"><span class="title"><span class="label">3.6. </span>XDMCP Security</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Even though your display is protected by cookies, XEvents and thus
         keystrokes typed when entering passwords will still go over the wire in
         clear text.  It is trivial to capture these.
@@ -329,21 +384,25 @@
         using XDMCP securely.  The next section also discusses how to set up
         XDMCP access control.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        To workaround the inherent insecurity of XDMCP, gdm proposes a default built-in session that uses SSH to encrypt the remote connection. See the section "Securing remote connection through SSH" above.
-      </p></div><div class="sect2"><a name="xdmcpaccess"/><h2 class="sect2 title"><span class="title"><span class="label">3.6.</span> XDMCP Access Control</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        To workaround the inherent insecurity of XDMCP, gdm proposes a default
+        built-in session that uses SSH to encrypt the remote connection.  See
+        the section "Securing remote connection through SSH" above.
+      </p></div><div class="sect2"><a name="xdmcpaccess"/><h2 class="sect2 title"><span class="title"><span class="label">3.7. </span>XDMCP Access Control</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         XDMCP access control is done using TCP wrappers.  It is possible to
         compile GDM without TCP wrappers however, so you should test your
         configuration and verify that they work.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         You should use the daemon name <span class="command" style="font-family: monospace; ">gdm</span> in the
         <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.allow</span> and
-        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;hosts.deny</span> files.  For example to 
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.deny</span> files.  For example to 
         deny computers from <span class="filename" style="font-family: monospace; ">.evil.domain</span> from logging in,
         then add
-      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">gdm: .evil.domain</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">gdm: .evil.domain
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         to <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.deny</span>.  You may also need
         to add
-      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">gdm: .your.domain</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">gdm: .your.domain
+</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         to your <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/hosts.allow</span> if you normally
         disallow all services from all hosts.  See the
         <a class="ulink" href="man:hosts.allow" title="man:hosts.allow">hosts.allow(5)</a> man

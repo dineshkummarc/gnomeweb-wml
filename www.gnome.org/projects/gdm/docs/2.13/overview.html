@@ -222,13 +222,13 @@
     p &gt; div { margin-top: 1em; margin-bottom: 1em; }
     p &gt; div + div { margin-top: 0em; }
     p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="overview"/><h1 class="sect1 title"><span class="title">Overview</span></h1><div class="sect2"><a name="introduction"/><h2 class="sect2 title"><span class="title"><span class="label">2.1.</span>
+    </style></head><body><div class="body"><div class="sect1"><a name="overview"/><h1 class="sect1 title"><span class="title">Overview</span></h1><div class="sect2"><a name="introduction"/><h2 class="sect2 title"><span class="title"><span class="label">2.1. </span>
         Introduction
       </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"> 
-        GDM was written with simplicity and security in mind.  GDM is a
-        replacement for XDM, the X Display Manager.  Unlike its competitors
-        (X3DM, KDM, WDM) GDM was written from scratch and does not contain any
-        XDM / X Consortium code. 
+        The Gnome Display Manager (GDM) is a display manager that
+        implements all significant features required for managing
+        local and remote displays.   GDM was written from scratch and
+	does not contain any XDM / X Consortium code.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         For further information about GDM, see the
         <a class="ulink" href="http://www.gnome.org/projects/gdm/" title="http://www.gnome.org/projects/gdm/">
@@ -236,9 +236,32 @@
         enhancement requests to the "gdm" category in
         <a class="ulink" href="http://bugzilla.gnome.org/" title="http://bugzilla.gnome.org/">bugzilla.gnome.org</a>.
         You can also send a message to the 
-        <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail alias to
+        <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;gdm-list@gnome.org&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail list to
         discuss any issues or concerns with the GDM program.
-      </p></div><div class="sect2"><a name="daemonov"/><h2 class="sect2 title"><span class="title"><span class="label">2.2.</span> The GDM Daemon</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="stability"/><h2 class="sect2 title"><span class="title"><span class="label">2.2. </span>
+        Interface Stability
+      </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The key/value pairs defined in the GDM configuration files and
+        the location of these files are considered "stable" interfaces
+        and should only change in ways that are backwards compatible.  Note that
+        this includes functionality like the GDM scripts (Init, PreSession,
+        PostSession, PostLogin, XKeepsCrashing, etc.); directory locations
+        (ServAuthDir, PidFile, etc.), system applications (SoundProgram), etc.
+        Some configuration values depend on OS interfaces may need to be
+        modified to work on a given OS.  Typical examples are HaltCommand,
+        RebootCommand, SuspendCommand, StandardXServer, Xnest, SoundProgram,
+        and the "command" value for each "server-foo".
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        Note: distributions often change the default values of keys to support
+        their platform.  Command-line interfaces for GDM programs installed to
+        <span class="filename" style="font-family: monospace; ">&lt;bin&gt;</span> and <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;</span>
+        are considered stable.  Refer to your distribution documentation to see
+        if there are any distribution-specific changes to these GDM interfaces
+        and what support exists for them.
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        If issues are discovered that break compatibility, please file a bug
+        with an "urgent" priority.
+      </p></div><div class="sect2"><a name="daemonov"/><h2 class="sect2 title"><span class="title"><span class="label">2.3. </span>The GDM Daemon</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The GDM daemon is responsible for managing displays on the system.
         This includes authenticating users, starting the user session, and
         terminating the user session.  GDM is configurable and the ways it can
@@ -255,11 +278,13 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM can be asked to manage a display a number of ways.  Local displays
         are always managed when GDM starts and will be restarted when a user's
-        session is finished.  Displays can also be requested via XDMCP and
-        flexible displays can be requested by running the
-        <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command, and such displays are not
-        restarted on session exit.  These display types are discussed in the
-        next section.  
+        session is finished.  Displays can be requested via XDMCP, flexible
+        displays can be requested by running the
+        <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command.  Displays that are started
+        on request are not restarted on session exit.  GDM also provides the
+        <span class="command" style="font-family: monospace; ">gdmdynamic</span> command to allow easier management of
+        displays on a multi-user server.  These display types are discussed
+        further in the next section.  
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         When the GDM daemon is asked to manage a display, it will fork an
         X server process, then run the <span class="filename" style="font-family: monospace; ">Init</span> script as the
@@ -269,12 +294,12 @@
         <span class="command" style="font-family: monospace; ">gdmlogin</span> as the GUI dialog program.  The
         <span class="command" style="font-family: monospace; ">gdmlogin</span> program supports accessibility while the
         <span class="command" style="font-family: monospace; ">gdmgreeter</span> program supports greater themeability.
-        The GUI dialog is run as an unpriviledged user/group which is
-        described in the "Security" section below.  The GUI dialog
-        communicates with the daemon via a sockets protocol and via standard
-        input/output.  The slave, for example passes the username and password
-        information to the GDM daemon via standard input/output so the daemon
-        can handle the actual authentication.
+        The GUI dialog is run as the unpriviledged "gdm" user/group
+        which is described in the "Security" section below.  The GUI
+        dialog communicates with the daemon via a sockets protocol and via
+        standard input/output.  The slave, for example passes the username and
+        password information to the GDM daemon via standard input/output so
+        the daemon can handle the actual authentication.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The login GUI dialog screen allows the user to select which session
         they wish to start and which language they wish to use.  Sessions are
@@ -303,7 +328,7 @@
         authentication to tell the X server to be restarted as the user instead
         of as root for added security.  When the users session exits, the GDM
         daemon will run the <span class="filename" style="font-family: monospace; ">PostSession</span> script as root.
-      </p></div><div class="sect2"><a name="displaytypes"/><h2 class="sect2 title"><span class="title"><span class="label">2.3.</span> Different Display Types</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="displaytypes"/><h2 class="sect2 title"><span class="title"><span class="label">2.4. </span>Different Display Types</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM supports three different display types: static (local) displays,
         flexible (on-demand) displays, and XDMCP (remote) displays.  The
         "X Server Definitions" and the "Local Static X Display
@@ -330,7 +355,7 @@
         launched in a window in the user's current session.  Nested displays
         can be started even if not logged into the console and are started by 
         running the <span class="command" style="font-family: monospace; ">gdmflexiserver -n</span> command.  Flexible
-        displays are not restarted when the user session ends.   Flexbile
+        displays are not restarted when the user session ends.  Flexible
         displays require virtual terminal (VT) support in the kernel, and will
         not be available if not supported (such as on Solaris).  Nested
         displays require that the X server supports Xnest.
@@ -340,7 +365,13 @@
         login screen if this is enabled.  Some things are different for
         remote sessions.  For example, the Actions menu which allows you to
         shut down, restart, suspend, or configure GDM are not shown.
-      </p></div><div class="sect2"><a name="xdmcp"/><h2 class="sect2 title"><span class="title"><span class="label">2.4.</span>
+      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        Displays started via the <span class="command" style="font-family: monospace; ">gdmdynamic</span> command are
+        treated as local displays, so they are restarted automatically on
+        when the session exits.  This command is intended to more effectively
+        manage the displays on a multi-user server (many displays connected
+        to a single server).
+      </p></div><div class="sect2"><a name="xdmcp"/><h2 class="sect2 title"><span class="title"><span class="label">2.5. </span>
         XDMCP
       </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The GDM daemon can be configured to listen for and manage X Display
@@ -369,7 +400,7 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Refer to the "Security" section for information about
         security concerns when using XDMCP.
-      </p></div><div class="sect2"><a name="secureremote"/><h2 class="sect2 title"><span class="title"><span class="label">2.5.</span>
+      </p></div><div class="sect2"><a name="secureremote"/><h2 class="sect2 title"><span class="title"><span class="label">2.6. </span>
         Securing Remote Connection Through SSH
       </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         As explained in the "Security" section, XDMCP does not use
@@ -379,18 +410,20 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         To remedy this problem, gdm can be configured at compilation-time with
         the option --enable-secureremote, in which case gdm proposes as a
-        built-in session a session called "Secure Remote Connection".  Starting
-        such a session allows the user to enter the name or the address of the
-        host on which to connect; provided the said host runs an SSH server,
-        the user then gets connected to the server on which the default X
-        session is started and displayed on the local host.
+        built-in session a session called "Secure Remote Connection".
+        Starting such a session allows the user to enter the name or the
+        address of the host on which to connect; provided the said host runs an
+        SSH server, the user then gets connected to the server on which the
+        default X session is started and displayed on the local host.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Using this session allows a much more secure network connection and
         only necessitates to have an SSH server running on the remote host.
-      </p></div><div class="sect2"><a name="gtkgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.6.</span> The GTK+ Greeter</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="gtkgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.7. </span>The GTK+ Greeter</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The GTK+ Greeter is the default graphical user interface that is
         presented to the user. The greeter contains a menu at the top, an
         optional face browser, an optional logo and a text entry widget.
+        This greeter has full accessibility support, and should be used
+        by users with accessibility needs.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The text entry field is used for entering logins, passwords,
         passphrases etc. <span class="command" style="font-family: monospace; ">gdmlogin</span> is controlled by the
@@ -411,7 +444,7 @@
         JPG, PNG, TIFF, XPM and possibly others), and it must be readable to
         the GDM user. See the <span class="filename" style="font-family: monospace; ">Logo</span> option in the
         reference section below for details.
-      </p></div><div class="sect2"><a name="themedgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.7.</span> The Themed Greeter</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="themedgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.8. </span>The Themed Greeter</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The Themed Greeter is a greeter interface that takes up the whole
         screen and is very themable.  Themes can be selected and new themes
         can be installed by the configuration application or by setting the
@@ -430,8 +463,8 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         You can always get a menu of available actions by pressing the F10 key.
         This can be useful if the theme doesn't provide certain buttons when
-        you really wish to do some action.
-      </p></div><div class="sect2"><a name="facebrowser"/><h2 class="sect2 title"><span class="title"><span class="label">2.8.</span> The GDM Face Browser</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        you wish to do some action allowed by the GDM configuration.
+      </p></div><div class="sect2"><a name="facebrowser"/><h2 class="sect2 title"><span class="title"><span class="label">2.9. </span>The GDM Face Browser</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM supports a face browser which will display a list of users who
         can login and an icon for each user.  This feature can be used with
         the GTK+ Greeter if the <span class="filename" style="font-family: monospace; ">Browser</span> configuration
@@ -441,10 +474,10 @@
         "happygnome-list"
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         By default, the face browser is disabled since revealing usernames on
-        the login screen is not appropriate on many systems for security
-        reasons and because GDM requires some setup to specify which users
-        should be visible.  Setup can be done on the "Users" tab
-        in <span class="command" style="font-family: monospace; ">gdmsetup</span>.  This feature is most practical to use
+        the login screen is not appropriate on many systems for security 
+        reasons.  Also GDM requires some setup to specify which users should
+        be visible.  Setup can be done on the "Users" tab in
+        <span class="command" style="font-family: monospace; ">gdmsetup</span>.  This feature is most practical to use
         on a system with a smaller number of users.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         The icons used by GDM can be installed globally by the sysadmin or can
@@ -455,8 +488,8 @@
         filename should be the name of the user, optionally with a
         <span class="filename" style="font-family: monospace; ">.png</span> appended.  Face icons placed in the global
         face directory must be readable to the GDM user.  However, the daemon,
-        proxies user pictures to the greeter and thus those don't have be be
-        readable by the GDM user, but root.
+        proxies user pictures to the greeter and thus those do not have be be
+        readable by the "gdm" user, but root.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Users may run the <span class="command" style="font-family: monospace; ">gdmphotosetup</span> command to 
         configure the image to use for their userid.  This program properly
@@ -479,12 +512,12 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         If a user has no defined face image, GDM will use the
         "stock_person" icon defined in the current GTK+ theme.  If no
-        such image is defined, it will fallback to the iamge specified in the
+        such image is defined, it will fallback to the image specified in the
         <span class="filename" style="font-family: monospace; ">DefaultFace</span> configuration option, normally
-        /usr/share/pixmaps/nobody.png.
+        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/pixmaps/nobody.png</span>.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Please note that loading and scaling face icons located in user home
-        directories can be a very time consuming task.  Since it not 
+        directories can be a very time-consuming task.  Since it not 
         practical to load images over NIS or NFS, GDM does not attempt to
         load face images from remote home directories.  Furthermore, GDM will
         give up loading face images after 5 seconds of activity and will
@@ -493,7 +526,7 @@
         specify a set of users who should appear on the face browser.  As
         long as the users to include is of a reasonable size, there should
         not be a problem with GDM being unable to access the face images.
-        To work around these problems, it is recommended to place face images
+        To work around such problems, it is recommended to place face images
         in the directory specified by the <span class="filename" style="font-family: monospace; ">GlobalFaceDir</span>
         configuration option.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
@@ -514,9 +547,9 @@
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         When the browser is turned on, valid usernames on the computer are
         inherently exposed to a potential intruder.  This may be a bad idea if
-        you don't know who can get to a login screen.  This is especially true
-        if you run XDMCP (turned off by default).
-      </p></div><div class="sect2"><a name="logging"/><h2 class="sect2 title"><span class="title"><span class="label">2.9.</span> Logging</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        you do not know who can get to a login screen.  This is especially
+        true if you run XDMCP (turned off by default).
+      </p></div><div class="sect2"><a name="logging"/><h2 class="sect2 title"><span class="title"><span class="label">2.10. </span>Logging</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         GDM itself will use syslog to log errors or status.  It can also log
         debugging information, which can be useful for tracking down problems
         if GDM is not working properly.  This can be enabled in the 
@@ -583,20 +616,22 @@
         <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span> in the
         <span class="filename" style="font-family: monospace; ">PostSession</span> script.  Such that this log file
         doesn't unnecessarily stay around.
-      </p></div><div class="sect2"><a name="fileaccess"/><h2 class="sect2 title"><span class="title"><span class="label">2.10.</span> Accessing Files</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="fileaccess"/><h2 class="sect2 title"><span class="title"><span class="label">2.11. </span>Accessing Files</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         In general GDM is very reluctant regarding reading/writing of user
-        files (such as the ~/.dmrc, ~/.face, ~/.xsession-errors, and
-        ~/.Xauthority files).  For instance it refuses to access anything but
-        regular files.  Links, sockets and devices are ignored.  The value of
-        the <span class="filename" style="font-family: monospace; ">RelaxPermissions</span> parameter determines whether
-        GDM should accept files writable by the user's group or others.  These
-        are ignored by default.
+        files (such as the <span class="filename" style="font-family: monospace; ">~/.dmrc</span>,
+        <span class="filename" style="font-family: monospace; ">~/.face</span>,
+        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span>, and
+        <span class="filename" style="font-family: monospace; ">~/.Xauthority</span> files).  For instance it refuses to
+        access anything but regular files.  Links, sockets and devices are
+        ignored.  The value of the <span class="filename" style="font-family: monospace; ">RelaxPermissions</span>
+        parameter determines whether GDM should accept files writable by the
+        user's group or others.  These are ignored by default.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         All operations on user files are done with the effective user id of the
         user.  If the sanity check fails on the user's
         <span class="filename" style="font-family: monospace; ">.Xauthority</span> file, a fallback cookie is created in
         the directory specified by the <span class="filename" style="font-family: monospace; ">UserAuthFBDir</span>
-        configuration setting (/tmp by default).
+        configuration setting (<span class="filename" style="font-family: monospace; ">/tmp</span> by default).
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         Finally, the sysadmin can specify the maximum file size GDM should
         accept, and, if the face browser is enabled, a tunable maximum icon
@@ -604,19 +639,23 @@
         off the face browser for performance reasons.  Looking up icons in
         home directories, scaling and rendering face icons can take a long
         time.
-      </p></div><div class="sect2"><a name="performance"/><h2 class="sect2 title"><span class="title"><span class="label">2.11.</span> GDM Performance</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p></div><div class="sect2"><a name="performance"/><h2 class="sect2 title"><span class="title"><span class="label">2.12. </span>GDM Performance</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
         To speed performance it is possible to build GDM so that it will
         preload libraries when GDM first displays a greeter program.  This
         has been shown to speed first time login since these libraries can
         be loaded into memory while the user types in their username and
         password.
       </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        To use this feature, configure GDM with the --with-prefetch option.
-        This will cause GDM to install the gdmprefetch program to the
-        EXPANDED_LIBEXEC directory, install the gdmprefetchlist to the
-        &lt;etc&gt;/gdm directory, and set the PreFetchProgram configuration
-        variable so that the gdmprefetch program is called with the default
-        gdmprefetchlist file.  The default gdmprefetchlist file was optimized
+        To use this feature, configure GDM with the
+        <span class="command" style="font-family: monospace; ">--with-prefetch</span> option.  This will cause GDM to
+        install the <span class="command" style="font-family: monospace; ">gdmprefetch</span> program to the
+        EXPANDED_LIBEXEC directory, install the
+        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> to the
+        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm</span> directory, and set the
+        <span class="filename" style="font-family: monospace; ">PreFetchProgram</span> configuration variable so that the
+        <span class="command" style="font-family: monospace; ">gdmprefetch</span> program is called with the default
+        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> file.  The default
+        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> file was optimized
         for a GNOME desktop running on Solaris, so may need fine-tuning on
         other systems.  Alternative prefetchlist files can be contributed
         to the "gdm" category in
