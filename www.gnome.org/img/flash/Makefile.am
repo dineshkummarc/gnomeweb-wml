@@ -24,6 +24,7 @@ page_DATA = \
 	guadec_stuttgart_splash.png \
 	gmt-spreadtheword2.png \
 	wgosplash-gnomejournal-alt.png \
+	wgosplash-gnomejournal-new.png \
 	two-twelve.jpg \
 	summit-mit-2005.png \
 	agobanner.png \
