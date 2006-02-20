@@ -28,10 +28,10 @@
 	      <th bgcolor="#9db8d2" align="center">Includes</th>
 	    </tr>
 
-		<tr>
-		  <td bgcolor="#c5d2c8" align="center">admin/</td>
-		  <td>Administrative Tools</td>
-		</tr>
+	    <tr>
+	      <td bgcolor="#c5d2c8" align="center">admin/</td>
+	      <td>Administrative Tools</td>
+	    </tr>
 
 	    <tr>
 	      <td bgcolor="#c5d2c8" align="center">bindings/</td>
@@ -89,84 +89,79 @@
 	
 	<table id="t1">
 	    <tr><td>
-cd desktop
-<br>make paranoid-install
+		cd desktop
+		<br>make paranoid-install
 	      </td></tr>
 	</table>
 
 	<p>That's all there is to it! GARNOME will begin to build and install the GNOME Desktop release, and everything it needs immediately.</p>
 
-	<h2>Starting / Using GARNOME</h2>
+	<h2>Starting GARNOME</h2>
 
-	<p>After you have installed the relevant packages you will need to create a garnome-session script to use your new desktop.</p>
-
-	<p>An example startup script would look like:</p>
+	<p>To use GARNOME you will first need to start the DBUS and HAL daemons. You can use the script below to do this:</p>
 
 	<table id="t1">
 	    <tr><td>
-GARNOME=$HOME/garnome
-<br>
-<br>PATH=$GARNOME/bin:$PATH
-<br>LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
-<br>PYTHONPATH=$GARNOME/lib/python2.4/site-packages:$GARNOME/lib/python2.4/site-packages/gtk-2.0
-<br>PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
-<br>GDK_USE_XFT=1
-<br>XDG_DATA_DIRS=$GARNOME/share
-<br>XDG_CONFIG_DIRS=$GARNOME/etc/xdg
-<br>MANPATH=$GARNOME/man:$MANPATH
-<br>DBUS-LAUNCH="$GARNOME/bin/dbus-launch --exit-with-session"
-<br>
-<br>export  PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH \
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS MANPATH DBUS-LAUNCH
-<br>
-<br>exec $DBUS-LAUNCH $GARNOME/bin/gnome-session</pre>
+
+		#!/bin/bash
+		<br>
+		<br>GARNOME=$HOME/garnome
+		<br>
+		<br>## Use GARNOME's dbus and hal
+		<br>
+		<br>## Fedora users should uncomment this section
+		<br>#if [ `grep "&lt;user&gt;messagebus&lt;/user&gt;" $GARNOME/etc/dbus-1/system.conf` ]; then
+		<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat $GARNOME/etc/dbus-1/system.conf | \
+		<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sed 's,&lt;user&gt;messagebus&lt;/user&gt;,&lt;user&gt;dbus&lt;/user&gt;,' &gt; \
+
+		<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/etc/dbus-1/system.conf;
+		<br>#fi
+		<br>
+		<br>su -c "pkill dbus; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill hald; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/messagebus.pid; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/bin/dbus-daemon --system > /dev/null 2>&1; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/hald --retain-privileges"
+	      </td></tr>
+	</table>
+
+	<p>Once the DBUS and HAL daemons are running you must create a <tt>garnome-session</tt> script to start GARNOME. An example startup script would look like:</p>
+
+	<table id="t1">
+	    <tr><td>
+		GARNOME=$HOME/garnome
+		<br>
+		<br>PATH=$GARNOME/bin:$PATH
+		<br>LD_LIBRARY_PATH=$GARNOME/lib:$LD_LIBRARY_PATH
+		<br>PYTHONPATH=$GARNOME/lib/python2.4/site-packages:$GARNOME/lib/python2.4/site-packages/gtk-2.0
+		<br>PKG_CONFIG_PATH=$GARNOME/lib/pkgconfig:/usr/lib/pkgconfig
+		<br>GDK_USE_XFT=1
+		<br>XDG_DATA_DIRS=$GARNOME/share
+		<br>XDG_CONFIG_DIRS=$GARNOME/etc/xdg
+		<br>MANPATH=$GARNOME/man:$MANPATH
+		<br>DBUS-LAUNCH="$GARNOME/bin/dbus-launch --exit-with-session"
+		<br>
+		<br>export  PATH LD_LIBRARY_PATH PYTHONPATH PKG_CONFIG_PATH \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDK_USE_XFT XDG_DATA_DIRS XDG_CONFIG_DIRS MANPATH DBUS-LAUNCH
+		<br>
+		<br>exec $DBUS-LAUNCH $GARNOME/bin/gnome-session</pre>
 	      </td></tr>
 	</table>
 	
 	<p>You can then use the standard method your distribution provides to launch it when you start X.</p> 
 
-	<p><strong>note:</strong> If you have altered the install path in <tt>gar.conf.mk</tt>, remember to set the <strong>GARNOME</strong> variable at the top of your script to point to the correct directory.</p>
+	<p><strong>Note:</strong> If you have altered the install path in <tt>gar.conf.mk</tt>, remember to set the <strong>GARNOME</strong> variable at the top of your script to point to the correct directory.</p>
 
 	<p>If you start X with the <tt>startx</tt> command you should launch this in <em>~/.xinitrc</em>. If you use the <tt>Xsession</tt> menu choice in GDM, you should
 	  launch this in <em>~/.xsession</em>. Assuming the garnome-session script is in your path, both files should look like this:</p>
 
 	<table id="t1">
 	    <tr><td>
-#!/bin/sh
-<br>exec garnome-session
-	      </td></tr>
-	</table>
-	
-
-	<p>If you would also like <strong>GARNOME</strong> to take advantage of the new improvements in hardware detection and configuration on the desktop, you should make a script that will execute the DBus and HAL daemons that have been built for GNOME. On a relatively new box, this script would look similar to:</p>
-
-	<table id="t1">
-	    <tr><td>
-
-#!/bin/bash
-<br>
-<br>GARNOME=$HOME/garnome
-<br>
-<br>## Use GARNOME's dbus and hal
-<br>
-<br>## Fedora users should uncomment this section
-<br>#if [ `grep "&lt;user&gt;messagebus&lt;/user&gt;" $GARNOME/etc/dbus-1/system.conf` ]; then
-<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat $GARNOME/etc/dbus-1/system.conf | \
-<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sed 's,&lt;user&gt;messagebus&lt;/user&gt;,&lt;user&gt;dbus&lt;/user&gt;,' &gt; \
-<br>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/etc/dbus-1/system.conf;
-<br>#fi
-<br>
-<br>su -c "pkill dbus; \
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill hald; \
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/messagebus.pid; \
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/bin/dbus-daemon --system > /dev/null 2>&1; \
-<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/hald --retain-privileges"
+		#!/bin/sh
+		<br>exec garnome-session
 	      </td></tr>
 	</table>
 
-	<p>At this point, you should be able to start X and your newly created GARNOME desktop should appear.</p>
-
-      </table>
       </div>
 
       <div id="sidebar">
@@ -210,7 +205,7 @@ GARNOME=$HOME/garnome
 
 	<!-- Created: Thu Sep 16 21:00:52 PDT 2004 -->
 	<!-- hhmts start -->
-Last modified: Fri Dec 16 21:18:39 PST 2005
+Last modified: Sun Feb 19 16:50:57 PST 2006
 <!-- hhmts end -->
 	<br>Copyright &copy; 2005 GARNOME Team
       </div>
