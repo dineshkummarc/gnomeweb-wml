@@ -3,7 +3,6 @@ SUBDIRS=images
 urlpath=/projects/garnome/
 
 page_SCRIPTS=						\
-			contact.html			\
 			deps-list-fc.html		\
 			deps-list.html			\
 			deps-list-ubuntu.html	\
@@ -12,7 +11,7 @@ page_SCRIPTS=						\
 			faq.html				\
 			garnome_man.html		\
 			index.html				\
-			resources.html
+			scripts.html
 
 page_DATA=							\
 			default.css				\
