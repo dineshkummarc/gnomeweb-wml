@@ -27,9 +27,9 @@ misc_images=\
 	logo.png		\
 	nothing-libnotify.png	\
 	plan.png		\
-	pref-advanced.png	\
-	pref-main.png		\
-	pref-options.png	\
+	gpm-prefs-ac.png	\
+	gpm-prefs-battery.png	\
+	gpm-prefs-options.png	\
 	thumb-screenshot.png
 
 page_DATA=$(misc_images)

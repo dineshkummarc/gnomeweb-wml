@@ -38,6 +38,8 @@
 
 <ul>
 <li>
+  <a href="#actionsmenu" class="faqtable">Why don't I see the actions menu like I used to?</a>
+</li><li>
   <a href="#ubuntulibforeground" class="faqtable">Why using Ubuntu (Dapper) do I get the warning "A security policy in place prevents...."?</a>
 </li><li>
   <a href="#dpms" class="faqtable">Why doesn't DPMS work when I've enabled it in XScreenSaver?</a>
@@ -75,6 +77,21 @@
 </ul>
 <br/>
 <br/>
+
+<a name="actionsmenu"></a><hr/>
+<p class="faqquestion">
+Why don't I see the actions menu like I used to?
+</p>
+<p class="faqanswer">
+First, if you are using Fedora Code 5, then the menu has been disabled as g-p-m has been
+integrated into the gnome panel, just look under "System" for the functionality.
+If you compiled from source yourself, make sure you added the gconf schema correctly. As root do this:
+</p>
+<pre>
+export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
+gconftool-2 --makefile-install-rule data/gnome-power-manager.schemas
+killall -HUP gconfd-2
+</pre>
 
 <a name="ubuntulibforeground"></a><hr/>
 <p class="faqquestion">
@@ -341,7 +358,7 @@ Why doesn't my video adaptor come back after a suspend? It just displays black.
 </p>
 <p class="faqanswer">
 You may need to add a s3 command to your kernel boot string so that the kernel can re-initialise your video card.
-See <a href="data/video.txt">this document</a> for more details, or to see if your system has been identified as needing the switch.
+See <a href="http://gnome-power.sourceforge.net/data/video.txt">this document</a> for more details, or to see if your system has been identified as needing the switch.
 </p>
 
 <a name="autostart"></a><hr/>
