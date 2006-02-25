@@ -1,6 +1,6 @@
 SUBDIRS=							\
 		images						\
-		scripts
+		files
 
 urlpath=/projects/garnome/
 
