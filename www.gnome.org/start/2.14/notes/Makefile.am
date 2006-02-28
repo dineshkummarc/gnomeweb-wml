@@ -10,10 +10,10 @@ include $(top_srcdir)/rules.common
 
 
 # Get DOC_INCLUDES and DOC_LINGUAS
-include $(top_srcdir)/www.gnome.org/start/2.12/notes/docbook/Makefile_shared.am_fragment
+include $(top_srcdir)/www.gnome.org/start/2.14/notes/docbook/Makefile_shared.am_fragment
 
 
-VERSION = 2.12
+VERSION = 2.14
 ROOTDOC = release-notes.xml
 STYLE_PATH = ../../../../docbook_html_style/
 
