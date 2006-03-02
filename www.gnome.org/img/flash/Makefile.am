@@ -29,6 +29,7 @@ page_DATA = \
 	summit-mit-2005.png \
 	agobanner.png \
 	forum-gnome-2005.png \
-	bug-hunt-wgo.png
+	bug-hunt-wgo.png \
+	power-combined.png
 
 include $(top_srcdir)/rules.common
