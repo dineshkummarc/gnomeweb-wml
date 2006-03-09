@@ -118,10 +118,15 @@
 		<br>#fi
 		<br>
 		<br>su -c "pkill dbus; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill avahi-daemon; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill avahi-dnsconfd; \
 		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pkill hald; \
 		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/messagebus.pid; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/avahi-daemon/pid; \
 		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rm -rf $GARNOME/var/run/haldaemon.pid; \
 		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/bin/dbus-daemon --system; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/avahi-daemon -D; \
+		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/avahi-dnsconfd -D; \
 		<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$GARNOME/sbin/hald"
 	      </td></tr>
 	</table>
