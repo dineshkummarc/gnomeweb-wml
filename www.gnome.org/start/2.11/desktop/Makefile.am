@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /start/2.9/desktop
+urlpath = /start/2.11/desktop
 
 page_SCRIPTS = index.html
 

@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /start/2.9/bindings
+urlpath = /start/2.11/bindings
 
 page_SCRIPTS = \
 	index.html
