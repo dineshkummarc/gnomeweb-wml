@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: el 2.16\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-15 14:19+0100\n"
-"PO-Revision-Date: 2006-03-16 02:31+0200\n"
+"PO-Revision-Date: 2006-03-16 10:03+0200\n"
 "Last-Translator: Nikos Charonitakis <nikosx@gmail.com>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
@@ -544,22 +544,32 @@ msgid ""
 "of the locking overhead of GMemChunk, which makes it much faster in "
 "multithreaded applications."
 msgstr ""
+"Με την GLib 2.10, ο GSlice allocator αντικαθιστά τα παλαιότερα GMemChunk και "
+"GTrashStacks APIs που ήταν διαθέσιμα στη GLib. Το GSlice μοιάζει πολύ στο kernel "
+"slab allocator και επιτρέπει τη γρήγορη και αποτελεσματική σε σχέση με τη μνήμη διάθεση "
+"μικρών δομών (π.χ. στοιχεία GList, δομές GtkWindow). Ακόμα, το GSlice δεν έχει το "
+"locking overhead του GMemChunk, με αποτέλεσμα να είναι πολύ πιο γρήγορο σε πολυνηματικές "
+"εφαρμογές."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:38(title)
 msgid ""
 "Memory allocator performance allocating and freeing 1 million GList elements "
 "in 1 (red), 5 (yellow), 10 (green) and 20 (blue) threads."
 msgstr ""
+"Ταχύτητα ανάθεσης μνήμης και απελευθέρωσης 1 εκατομμυρίου στοιχείων GList "
+"σε 1 (κόκκινο), 5 (κίτρινο), 10 (πράσινο) και 20 (μπλέ) διεργασίες."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:48(phrase)
 msgid "GSlice performance improvements over other memory allocators"
-msgstr ""
+msgstr "Βελτιώσεις ταχύτητας GSlice σε σύγκριση με άλλους memory allocators"
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:54(para)
 msgid ""
 "GMemChunk has been reimplemented to transparently use GSlice, but the "
 "GMemChunk API is considered deprecated."
 msgstr ""
+"Το GMemChunk έχει σχεδιαστεί ξανά για να χρησιμοποιείτο GSlice, ενώ το "
+"GMemChunk API θεωρείται πια ξεπερασμένο."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:59(para)
 msgid ""
@@ -568,6 +578,10 @@ msgid ""
 "(ptr). To free memory allocated with GSlice, use the function "
 "<function>g_slice_free (MyStructure, ptr);</function>."
 msgstr ""
+"Για να διαθέσετε μνήμη με τον GSlice allocator, χρησιμοποιήστε την κλήση "
+"<function>g_slice_new (MyStructure);</function>, η οποία θα επιστρέψει έναν "
+"pointer (ptr). Για να ελευθερώσετε μνήμη με με τον GSlice  χρησιμοποιήστε την "
+"<function>g_slice_free (MyStructure, ptr);</function>."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:66(para)
 msgid ""
@@ -576,6 +590,9 @@ msgid ""
 "the <function>g_malloc</function> allocator for you, so developers do not "
 "have to choose the most efficient allocator themselves."
 msgstr ""
+"Το Gslice χρησιμοποιεί μια κλιμακούμενη, με τοπικές διεργασίες λανθάνουσα μνήμη από κομμάτια διαφορετικών "
+"μεγεθών. Για μεγάλες απαιτήσεις μνήμης, το Gslice χρησιμοποιεί αυτόματα τον <function>g_malloc</function> allocator,"
+"και έτσι οι προγραμματιστές δεν χρειάζεται να επιλέγουν τον πιο αποτελεσματικό allocator."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:76(title)
 #, fuzzy
@@ -592,10 +609,17 @@ msgid ""
 "install a service, but disable it by default, you can add the property "
 "<property>X-GNOME-autostart-enabled = False</property>."
 msgstr ""
+"Η τελευταία έκδοση του GNOME προσφέρει στους προγραμματιστές έναν εύκολο "
+"τρόπο να δηλώνουν τις εφαρμογές τους έτσι ώστε να ξεκινούν μαζί με το GNOME. "
+"Για να γίνει αυτό, χρειάζεστε μόνο να εγκαταστήσετε το <filename>.desktop</filename> αρχείο στο <filename>"
+"$prefix/share/gnome/autostart/</filename>, <filename>/etc/xdg/autostart/</"
+"filename> ή <filename>~/.config/autostart/</filename>. Αν θέλετε να εγκαταστήσετε μια "
+"υπηρεσία, αλλά να την έχετε απενεργοποιημένη, μπορείτε να προσθέσετε την ιδιότητα "
+"<property>X-GNOME-autostart-enabled = False</property>."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:89(para)
 msgid "There are some caveats to registering services in this way:"
-msgstr ""
+msgstr "Υπάρχουν όμως ορισμένοι περιορισμοί αν δηλώσετε τις υπηρεσίες με αυτό τον τρόπο:"
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:93(para)
 msgid ""
@@ -603,6 +627,8 @@ msgid ""
 "g. nautilus, gnome-panel, vino) should not also register themselves in this "
 "way."
 msgstr ""
+"Οι εφαρμογές που δηλώνονται στη συνεδρία με κάποιον άλλο τρόπο ("
+"π.χ. nautilus, gnome-panel, vino) δεν θα πρέπει να δηλώνονται με αυτό τον τρόπο."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rndevelopers.xml:98(para)
 msgid ""
@@ -610,6 +636,8 @@ msgid ""
 "pass the <option>--sm-disable</option> flag on your <option>Exec</option> "
 "line."
 msgstr ""
+"Τις εφαρμογές που διαχειρίζεται η συνεδρία, δεν θα τις χειρίζεται σωστά, και έτσι θα πρέπει "
+"να βεβαιωθείτε ότι περάσατε την επιλογή <option>--sm-disable</option> στη γραμμή <option>Exec</option>."
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -729,6 +757,12 @@ msgid ""
 "needed based on user feedback and since they are in a centralized location, "
 "allow for easy maintenance and deployment."
 msgstr ""
+"Μέσα σε ένα ενσωματωμένο παράθυρο, ο διαχειριστής συστήματος μπορεί να δημιουργήσει "
+"προσωπικά προφίλ βασισμένα στην περιγραφή της δουλειάς του χρήστη, (π.χ. ρεσεπτιονίστ, "
+"γραμματέας, προγραμματιστής, κτλ) Αυτά τα προφίλ μπορούν να αποθηκευτούν και να χρησιμοποιηθούν "
+"με ευκολία σε διάφορα μηχανήματα, εξοικονομώντας πολύτιμο χρόνο για το διαχειριστή. Τα προφίλ "
+"μπορούν ακόμα να τροποποιηθούν, να βελτιωθούν όπως πρέπει και να είναι διαθέσιμα για εύκολη συντήρηση, "
+"μιας και θα είναι τοποθετημένα σε μια κεντρική τοποθεσία."
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
@@ -922,6 +956,11 @@ msgid ""
 "rendering and memory allocation benefit all GNOME and GTK+ based "
 "applications without the need for recompilation."
 msgstr ""
+"Όπως μπορείτε να βελτιστοποιήσετε τις ρυθμίσεις του αυτοκίνητου σας, έτσι "
+"προσπάθησαν και οι προγραμματιστές μας να βελτιώσουν αρκετά κομμάτια του GNOME, "
+"για να γίνουν πολύ πιο γρήγορα, όπως η εμφάνιση κειμένου, η διάθεση μνήμης και πολλές "
+"άλλες εφαρμογές. Η γρηγορότερη απεικόνιση γραμματοσειρών και η διάθεση μνήμης βελτιώνουν "
+"όλες τις εφαρμογές που βασίζονται το GNOME and GTK+ χωρίς να υπάρχει η ανάγκη να ξαναγίνουν compile."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:30(para)
 msgid ""
@@ -1110,6 +1149,10 @@ msgid ""
 "improved in Metacity. Metacity will now attempt to displace windows that "
 "want to appear across a monitor boundary onto one monitor or the other."
 msgstr ""
+"Στο Metacity έχουν προστεθεί αρκετές νέες λειτουργίες για την βελτίωση της διαχείρισης παραθύρων. "
+"Οι γωνίες των παραθύρων έχουν τώρα μια μαγνητική έλξη, κάνοντας ευκολότερο το \"κλικ\" σε πολλαπλά "
+"παράθυρα. Ακόμα βελτιώθηκε η διαχείριση πολλαπλών οθονών στο Metacity. Το Metacity τώρα μπορεί "
+"να τοποθετεί παράθυρα που θέλουν να εμφανιστούν πέρα από το όριο μιας οθόνης, σε άλλη οθόνη."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:207(para)
 msgid ""
@@ -1179,6 +1222,13 @@ msgid ""
 "server securely and easily. The look of the login greeter has also improved "
 "by allowing for more user customization."
 msgstr ""
+"Έγιναν πολλές βελτιώσεις στο σύστημα εισόδου (GDM). Η βελτιστοποίηση της "
+"απόδοσης που είναι ορατή σε όλη την επιφάνεια εργασίας υπάρχει και στο σύστημα "
+"εισόδου. Υπάρχει ένα νέο κουμπί βελτιωμένων \"Επιλογών\" που επιτρέπει τη γρήγορη πρόσβαση "
+"στις διάφορες λειτουργίες της εισόδου. Μια νέα λειτουργία \"ασφαλούς απομακρυσμένης\" εισόδου "
+"έχει προστεθεί για να μπορούν οι χρήστες να συνδέονται με τον εξυπηρετητή X εύκολα και με "
+"ασφάλεια. Η όψη του χαιρετιστή εισόδου έχει βελτιωθεί αρκετά και επιτρέπει περισσότερη παραμετροποίηση "
+"από τους χρήστες."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:281(title)
 msgid ""
@@ -1215,6 +1265,10 @@ msgid ""
 "another user. A menu can also be added to the panel allowing quick access to "
 "user switching."
 msgstr ""
+"Το GNOME 2.14 περιλαμβάνει υποστήριξη για γρήγορη εναλλαγή χρηστών μέσω της "
+"επιφάνειας εργασίας. Το κουμπί της αποσύνδεσης, όπως και το κουμπί του ξεκλειδώματος "
+"οθόνης προσφέρουν την επιλογή αλλαγής χρήστη. Ακόμα είναι δυνατή  προσθήκη ενός μενού "
+"στο πίνακα εφαρμογών που θα επιτρέπει τη γρήγορη πρόσβαση στην εναλλαγή χρηστών. "
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:315(title)
 msgid "Fast user switching from the panel"
@@ -1357,7 +1411,7 @@ msgstr ""
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:452(title)
 msgid "Plugins dialog showing the properties for the External Commands plugin"
-msgstr ""
+msgstr "Ο διάλογος πρόσθετων λειτουργιών που δείχνει τις ιδιότητες για τις Εξωτερικές Εντολές"
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:461(phrase)
 msgid ""
@@ -1403,6 +1457,15 @@ msgid ""
 "of the ongoing accessibility improvements being made to the entire GNOME "
 "Desktop."
 msgstr ""
+"Το GNOME τώρα έχει μια ενσωματωμένη εφαρμογή προφύλαξης οθόνης. Η προφύλαξη "
+"οθόνης του GNOME είναι συμβατή με το Xscreensaver, και έχει πολλές ακόμα νέες λειτουργίες "
+"που δεν ήταν διαθέσιμες στον Xscreensaver. Οι εφαρμογές που γνωρίζουν την  προφύλαξη "
+"οθόνης του GNOME, μπορούν να επικοινωνούν μαζί της και να ρυθμίσουν τις ιδιότητες της μέσω ενός "
+"σταθερού περιβάλλοντος χρήσης. Οι διάλογοι όπως  ο διάλογος ξεκλειδώματος της οθόνης, μπορούν τώρα"
+"να μεταφραστούν σε πολλές γλώσσες και να είναι προσβάσιμοι σε ανθρώπους με ειδικές ανάγκες. "
+"Αυτές οι βελτιώσεις προσιτότητας, επιτρέπουν στους χρήστες να ξεκλειδώνουν εύκολα τις οθόνες τους, "
+"και είναι μέρος της συνεχιζόμενης βελτίωσης προσιτότητας που γίνεται σε όλη την επιφάνεια εργασίας του "
+"GNOME."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:511(title)
 msgid "Configuring GNOME Screensaver properties"
@@ -1437,6 +1500,13 @@ msgid ""
 "GStreamer from the <ulink url=\"http://www.gstreamer.org/\">GStreamer "
 "website</ulink>."
 msgstr ""
+"Το GNOME 2.14 χρησιμοποιεί την τεχνολογία του of <application>GStreamer 0.10</"
+"application>. Το περιβάλλον πολυμέσων GStreamer  είναι ένα πανίσχυρο παραμετροποιήσιμο "
+"περιβάλλον ήχου και βίντεο που χρησιμοποιείται στο UNIX και στο LINUX όπως και σε φορητές "
+"συσκευές. Η τελευταία του έκδοση είναι πιο γρήγορη και σταθερή από τις προηγούμενες. "
+"Έχουν επιλυθεί προβλήματα όπως ο συγχρονισμός ήχου και βίντεο μεταξύ συσκευών και ο δυναμικός "
+"χειρισμός προσθέτων λειτουργιών πολυμέσων Μπορειτε να βρείτε περισσότερα για το GStreamer "
+"από την <ulink url=\"http://www.gstreamer.org/\">ιστοσελίδα του GStreamer</ulink>."
 
 #: /tmp/doc-l10n/cvs/release-notes.HEAD/C/rnusers.xml:545(para)
 msgid ""
