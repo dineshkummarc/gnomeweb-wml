@@ -30,6 +30,7 @@ page_DATA = \
 	agobanner.png \
 	forum-gnome-2005.png \
 	bug-hunt-wgo.png \
-	power-combined.png
+	power-combined.png \
+	two-fourteen.png
 
 include $(top_srcdir)/rules.common
