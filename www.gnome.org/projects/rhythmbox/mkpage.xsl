@@ -55,7 +55,7 @@
       <div id="sidebar">
 	<p>Navigation</p>
 	<ul>
-	  <li><a href="/">Home</a></li>
+	  <li><a href="index.html">Home</a></li>
 	  <li><a href="news.html">News</a></li>
 	  <li><a href="screenshots.html">Screenshots</a></li>
 	  <li><a href="download.html">Download</a></li>
