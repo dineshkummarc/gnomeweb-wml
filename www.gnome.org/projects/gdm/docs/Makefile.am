@@ -1,4 +1,4 @@
-SUBDIRS=2.8 2.13
+SUBDIRS=2.8 2.13 2.14
 
 urlpath=/projects/gdm/docs
 
