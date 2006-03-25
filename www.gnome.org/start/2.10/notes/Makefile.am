@@ -36,9 +36,6 @@ page_DATA = \
 	es/figures/figure-soundjuicer.png \
 	es/figures/figure-game-nibbles.png \
 	es/figures/figure-gedit.png \
-	es/figures/CVS/Root \
-	es/figures/CVS/Entries \
-	es/figures/CVS/Repository \
 	es/rninstallation.html \
 	es/rnwhatsnew.html \
 	es/images/next.png \
@@ -51,9 +48,6 @@ page_DATA = \
 	es/images/tip.png \
 	es/images/home.png \
 	es/images/blank.png \
-	es/images/CVS/Root \
-	es/images/CVS/Entries \
-	es/images/CVS/Repository \
 	es/rngettinginvolved.html \
 	es/rnstandards.html \
 	es/rncredits.html \
@@ -87,9 +81,6 @@ page_DATA = \
 	id/figures/figure-soundjuicer.png \
 	id/figures/figure-game-nibbles.png \
 	id/figures/figure-gedit.png \
-	id/figures/CVS/Root \
-	id/figures/CVS/Entries \
-	id/figures/CVS/Repository \
 	id/rninstallation.html \
 	id/rnwhatsnew.html \
 	id/images/next.png \
@@ -102,9 +93,6 @@ page_DATA = \
 	id/images/tip.png \
 	id/images/home.png \
 	id/images/blank.png \
-	id/images/CVS/Root \
-	id/images/CVS/Entries \
-	id/images/CVS/Repository \
 	id/rngettinginvolved.html \
 	id/rnstandards.html \
 	id/rncredits.html \
@@ -150,9 +138,6 @@ page_DATA = \
 	ja/images/tip.png \
 	ja/images/home.png \
 	ja/images/blank.png \
-	ja/images/CVS/Root \
-	ja/images/CVS/Entries \
-	ja/images/CVS/Repository \
 	ja/rngettinginvolved.html \
 	ja/rnstandards.html \
 	ja/rncredits.html \
@@ -198,9 +183,6 @@ page_DATA = \
 	sq/images/tip.png \
 	sq/images/home.png \
 	sq/images/blank.png \
-	sq/images/CVS/Root \
-	sq/images/CVS/Entries \
-	sq/images/CVS/Repository \
 	sq/rngettinginvolved.html \
 	sq/rnstandards.html \
 	sq/rncredits.html \
@@ -235,9 +217,6 @@ page_DATA = \
 	th/figures/figure-soundjuicer.png \
 	th/figures/figure-game-nibbles.png \
 	th/figures/figure-gedit.png \
-	th/figures/CVS/Root \
-	th/figures/CVS/Entries \
-	th/figures/CVS/Repository \
 	th/rninstallation.html \
 	th/rnwhatsnew.html \
 	th/images/next.png \
@@ -250,9 +229,6 @@ page_DATA = \
 	th/images/tip.png \
 	th/images/home.png \
 	th/images/blank.png \
-	th/images/CVS/Root \
-	th/images/CVS/Entries \
-	th/images/CVS/Repository \
 	th/rngettinginvolved.html \
 	th/rnstandards.html \
 	th/rncredits.html \
@@ -286,9 +262,6 @@ page_DATA = \
 	de/figures/figure-soundjuicer.png \
 	de/figures/figure-game-nibbles.png \
 	de/figures/figure-gedit.png \
-	de/figures/CVS/Root \
-	de/figures/CVS/Entries \
-	de/figures/CVS/Repository \
 	de/rninstallation.html \
 	de/rnwhatsnew.html \
 	de/images/next.png \
@@ -301,9 +274,6 @@ page_DATA = \
 	de/images/tip.png \
 	de/images/home.png \
 	de/images/blank.png \
-	de/images/CVS/Root \
-	de/images/CVS/Entries \
-	de/images/CVS/Repository \
 	de/rngettinginvolved.html \
 	de/rnstandards.html \
 	de/rncredits.html \
@@ -349,9 +319,6 @@ page_DATA = \
 	sr/images/tip.png \
 	sr/images/home.png \
 	sr/images/blank.png \
-	sr/images/CVS/Root \
-	sr/images/CVS/Entries \
-	sr/images/CVS/Repository \
 	sr/rngettinginvolved.html \
 	sr/rnstandards.html \
 	sr/rncredits.html \
@@ -397,9 +364,6 @@ page_DATA = \
 	pa/images/tip.png \
 	pa/images/home.png \
 	pa/images/blank.png \
-	pa/images/CVS/Root \
-	pa/images/CVS/Entries \
-	pa/images/CVS/Repository \
 	pa/rngettinginvolved.html \
 	pa/rnstandards.html \
 	pa/rncredits.html \
@@ -432,9 +396,6 @@ page_DATA = \
 	figures/figure-soundjuicer.png \
 	figures/figure-game-nibbles.png \
 	figures/figure-gedit.png \
-	figures/CVS/Root \
-	figures/CVS/Entries \
-	figures/CVS/Repository \
 	rninstallation.html \
 	et/rnlookingahead.html \
 	et/index.html \
@@ -476,9 +437,6 @@ page_DATA = \
 	et/images/tip.png \
 	et/images/home.png \
 	et/images/blank.png \
-	et/images/CVS/Root \
-	et/images/CVS/Entries \
-	et/images/CVS/Repository \
 	et/rngettinginvolved.html \
 	et/rnstandards.html \
 	et/rncredits.html \
@@ -524,9 +482,6 @@ page_DATA = \
 	zh_TW/images/tip.png \
 	zh_TW/images/home.png \
 	zh_TW/images/blank.png \
-	zh_TW/images/CVS/Root \
-	zh_TW/images/CVS/Entries \
-	zh_TW/images/CVS/Repository \
 	zh_TW/rngettinginvolved.html \
 	zh_TW/rnstandards.html \
 	zh_TW/rncredits.html \
@@ -572,9 +527,6 @@ page_DATA = \
 	zh_CN/images/tip.png \
 	zh_CN/images/home.png \
 	zh_CN/images/blank.png \
-	zh_CN/images/CVS/Root \
-	zh_CN/images/CVS/Entries \
-	zh_CN/images/CVS/Repository \
 	zh_CN/rngettinginvolved.html \
 	zh_CN/rnstandards.html \
 	zh_CN/rncredits.html \
@@ -620,9 +572,6 @@ page_DATA = \
 	sv/images/tip.png \
 	sv/images/home.png \
 	sv/images/blank.png \
-	sv/images/CVS/Root \
-	sv/images/CVS/Entries \
-	sv/images/CVS/Repository \
 	sv/rngettinginvolved.html \
 	sv/rnstandards.html \
 	sv/rncredits.html \
@@ -657,9 +606,6 @@ page_DATA = \
 	el/figures/figure-soundjuicer.png \
 	el/figures/figure-game-nibbles.png \
 	el/figures/figure-gedit.png \
-	el/figures/CVS/Root \
-	el/figures/CVS/Entries \
-	el/figures/CVS/Repository \
 	el/rninstallation.html \
 	el/rnwhatsnew.html \
 	el/images/next.png \
@@ -672,9 +618,6 @@ page_DATA = \
 	el/images/tip.png \
 	el/images/home.png \
 	el/images/blank.png \
-	el/images/CVS/Root \
-	el/images/CVS/Entries \
-	el/images/CVS/Repository \
 	el/rngettinginvolved.html \
 	el/rnstandards.html \
 	el/rncredits.html \
@@ -720,9 +663,6 @@ page_DATA = \
 	nb/images/tip.png \
 	nb/images/home.png \
 	nb/images/blank.png \
-	nb/images/CVS/Root \
-	nb/images/CVS/Entries \
-	nb/images/CVS/Repository \
 	nb/rngettinginvolved.html \
 	nb/rnstandards.html \
 	nb/rncredits.html \
@@ -756,9 +696,6 @@ page_DATA = \
 	fr/figures/figure-soundjuicer.png \
 	fr/figures/figure-game-nibbles.png \
 	fr/figures/figure-gedit.png \
-	fr/figures/CVS/Root \
-	fr/figures/CVS/Entries \
-	fr/figures/CVS/Repository \
 	fr/rninstallation.html \
 	fr/rnwhatsnew.html \
 	fr/images/next.png \
@@ -771,9 +708,6 @@ page_DATA = \
 	fr/images/tip.png \
 	fr/images/home.png \
 	fr/images/blank.png \
-	fr/images/CVS/Root \
-	fr/images/CVS/Entries \
-	fr/images/CVS/Repository \
 	fr/rngettinginvolved.html \
 	fr/rnstandards.html \
 	fr/rncredits.html \
@@ -790,9 +724,6 @@ page_DATA = \
 	images/tip.png \
 	images/home.png \
 	images/blank.png \
-	images/CVS/Root \
-	images/CVS/Entries \
-	images/CVS/Repository \
 	it/rnlookingahead.html \
 	it/index.html \
 	it/rnknownissues.html \
@@ -821,9 +752,6 @@ page_DATA = \
 	it/figures/figure-soundjuicer.png \
 	it/figures/figure-game-nibbles.png \
 	it/figures/figure-gedit.png \
-	it/figures/CVS/Root \
-	it/figures/CVS/Entries \
-	it/figures/CVS/Repository \
 	it/rninstallation.html \
 	it/rnwhatsnew.html \
 	it/images/next.png \
@@ -836,9 +764,6 @@ page_DATA = \
 	it/images/tip.png \
 	it/images/home.png \
 	it/images/blank.png \
-	it/images/CVS/Root \
-	it/images/CVS/Entries \
-	it/images/CVS/Repository \
 	it/rngettinginvolved.html \
 	it/rnstandards.html \
 	it/rncredits.html \
@@ -877,9 +802,6 @@ page_DATA = \
 	nl/figures/figure-soundjuicer.png \
 	nl/figures/figure-game-nibbles.png \
 	nl/figures/figure-gedit.png \
-	nl/figures/CVS/Root \
-	nl/figures/CVS/Entries \
-	nl/figures/CVS/Repository \
 	nl/rninstallation.html \
 	nl/rnwhatsnew.html \
 	nl/images/next.png \
@@ -892,9 +814,6 @@ page_DATA = \
 	nl/images/tip.png \
 	nl/images/home.png \
 	nl/images/blank.png \
-	nl/images/CVS/Root \
-	nl/images/CVS/Entries \
-	nl/images/CVS/Repository \
 	nl/rngettinginvolved.html \
 	nl/rnstandards.html \
 	nl/rncredits.html \
@@ -940,9 +859,6 @@ page_DATA = \
 	uk/images/tip.png \
 	uk/images/home.png \
 	uk/images/blank.png \
-	uk/images/CVS/Root \
-	uk/images/CVS/Entries \
-	uk/images/CVS/Repository \
 	uk/rngettinginvolved.html \
 	uk/rnstandards.html \
 	uk/rncredits.html \
@@ -976,9 +892,6 @@ page_DATA = \
 	da/figures/figure-soundjuicer.png \
 	da/figures/figure-game-nibbles.png \
 	da/figures/figure-gedit.png \
-	da/figures/CVS/Root \
-	da/figures/CVS/Entries \
-	da/figures/CVS/Repository \
 	da/rninstallation.html \
 	da/rnwhatsnew.html \
 	da/images/next.png \
@@ -991,9 +904,6 @@ page_DATA = \
 	da/images/tip.png \
 	da/images/home.png \
 	da/images/blank.png \
-	da/images/CVS/Root \
-	da/images/CVS/Entries \
-	da/images/CVS/Repository \
 	da/rngettinginvolved.html \
 	da/rnstandards.html \
 	da/rncredits.html \
@@ -1039,9 +949,6 @@ page_DATA = \
 	pt_BR/images/tip.png \
 	pt_BR/images/home.png \
 	pt_BR/images/blank.png \
-	pt_BR/images/CVS/Root \
-	pt_BR/images/CVS/Entries \
-	pt_BR/images/CVS/Repository \
 	pt_BR/rngettinginvolved.html \
 	pt_BR/rnstandards.html \
 	pt_BR/rncredits.html \
