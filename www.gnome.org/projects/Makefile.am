@@ -37,7 +37,8 @@ SUBDIRS = \
 	gwget			\
 	desktopwiki             \
 	baobab                  \
-	straw
+	straw			\
+	orca
 
 urlpath = /projects
 
