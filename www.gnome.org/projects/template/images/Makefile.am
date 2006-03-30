@@ -1,14 +1,13 @@
 SUBDIRS=
 
-urlpath=/projects/orca/images/
+urlpath=/projects/template/images
 
 page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
 
 misc_images=\
-	gnome-fs-regular.png \
-	orca2-sm.jpg \
-	orca2-lg.jpg
+	list-things-here.png \
+	list-more-here.png
 
 page_DATA=$(misc_images)
