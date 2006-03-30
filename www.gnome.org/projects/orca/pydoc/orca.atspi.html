@@ -1,0 +1,419 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module orca.atspi</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.atspi</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/atspi.py">/usr/lib/python2.4/site-packages/orca/atspi.py</a></font></td></tr></table>
+    <p><tt>Provides&nbsp;the&nbsp;interface&nbsp;to&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Registry">Registry</a>.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Accessibility.html">Accessibility</a><br>
+<a href="Accessibility__POA.html">Accessibility__POA</a><br>
+</td><td width="25%" valign=top><a href="ORBit.html">ORBit</a><br>
+<a href="bonobo.html">bonobo</a><br>
+</td><td width="25%" valign=top><a href="orca.debug.html">orca.debug</a><br>
+<a href="orca.rolenames.html">orca.rolenames</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="orca.atspi.html#Accessible">Accessible</a>
+</font></dt><dt><font face="helvetica, arial">DeviceEventListener(<a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="orca.atspi.html#KeystrokeListener">KeystrokeListener</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="orca.atspi.html#Event">Event</a>
+</font></dt><dt><font face="helvetica, arial">EventListener(<a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="orca.atspi.html#EventListener">EventListener</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="orca.atspi.html#Registry">Registry</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Accessible">class <strong>Accessible</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Wraps&nbsp;AT-SPI&nbsp;<a href="#Accessible">Accessible</a>&nbsp;objects&nbsp;and&nbsp;caches&nbsp;properties&nbsp;such&nbsp;as<br>
+name,&nbsp;description,&nbsp;and&nbsp;parent.<br>
+&nbsp;<br>
+It&nbsp;also&nbsp;adds&nbsp;some&nbsp;properties&nbsp;to&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Accessible">Accessible</a>&nbsp;including<br>
+the&nbsp;Application&nbsp;to&nbsp;which&nbsp;the&nbsp;object&nbsp;belongs.<br>
+&nbsp;<br>
+For&nbsp;efficiency&nbsp;purposes,&nbsp;this&nbsp;class&nbsp;also&nbsp;maintains&nbsp;a&nbsp;cache&nbsp;of&nbsp;all<br>
+<a href="#Accessible">Accessible</a>&nbsp;objects&nbsp;obtained&nbsp;so&nbsp;far,&nbsp;and&nbsp;will&nbsp;return&nbsp;an&nbsp;element<br>
+from&nbsp;that&nbsp;cache&nbsp;instead&nbsp;of&nbsp;creating&nbsp;a&nbsp;duplicate&nbsp;object.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Accessible-__del__"><strong>__del__</strong></a>(self)</dt><dd><tt>Unrefs&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Accessible">Accessible</a>&nbsp;associated&nbsp;with&nbsp;this&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-__getattr__"><strong>__getattr__</strong></a>(self, attr)</dt><dd><tt>Created&nbsp;virtual&nbsp;attributes&nbsp;for&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;to&nbsp;make<br>
+the&nbsp;syntax&nbsp;a&nbsp;bit&nbsp;nicer&nbsp;(e.g.,&nbsp;acc.name&nbsp;rather&nbsp;than&nbsp;acc.name()).<br>
+This&nbsp;method&nbsp;is&nbsp;also&nbsp;called&nbsp;if&nbsp;and&nbsp;only&nbsp;if&nbsp;the&nbsp;given&nbsp;attribute<br>
+does&nbsp;not&nbsp;exist&nbsp;in&nbsp;the&nbsp;object.&nbsp;&nbsp;Thus,&nbsp;we're&nbsp;effectively&nbsp;lazily<br>
+building&nbsp;a&nbsp;cache&nbsp;to&nbsp;the&nbsp;remote&nbsp;object&nbsp;attributes&nbsp;here.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;attr:&nbsp;a&nbsp;string&nbsp;indicating&nbsp;the&nbsp;attribute&nbsp;name&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;given&nbsp;attribute.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-__init__"><strong>__init__</strong></a>(self, acc)</dt><dd><tt>Obtains,&nbsp;and&nbsp;creates&nbsp;if&nbsp;necessary,&nbsp;a&nbsp;Python&nbsp;<a href="#Accessible">Accessible</a>&nbsp;from<br>
+an&nbsp;AT-SPI&nbsp;Accessibility_Accessible.&nbsp;&nbsp;Applications&nbsp;should&nbsp;not<br>
+call&nbsp;this&nbsp;method,&nbsp;but&nbsp;should&nbsp;instead&nbsp;call&nbsp;makeAccessible.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;acc:&nbsp;the&nbsp;AT-SPI&nbsp;Accessibility_Accessible&nbsp;to&nbsp;back&nbsp;this&nbsp;object<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;associated&nbsp;Python&nbsp;<a href="#Accessible">Accessible</a>.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-accessibleNameToString"><strong>accessibleNameToString</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;accessible's&nbsp;name&nbsp;in&nbsp;single&nbsp;quotes&nbsp;or<br>
+the&nbsp;string&nbsp;None&nbsp;if&nbsp;the&nbsp;accessible&nbsp;does&nbsp;not&nbsp;have&nbsp;a&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-child"><strong>child</strong></a>(self, index)</dt><dd><tt>Returns&nbsp;the&nbsp;specified&nbsp;child&nbsp;of&nbsp;this&nbsp;object.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;index:&nbsp;an&nbsp;integer&nbsp;specifying&nbsp;which&nbsp;child&nbsp;to&nbsp;obtain<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;child&nbsp;at&nbsp;the&nbsp;given&nbsp;index.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;what&nbsp;to&nbsp;do<br>
+when&nbsp;an&nbsp;index&nbsp;out&nbsp;of&nbsp;bounds&nbsp;occurs?&nbsp;&nbsp;Logged&nbsp;as&nbsp;bugzilla&nbsp;bug&nbsp;319738.]]]</tt></dd></dl>
+
+<dl><dt><a name="Accessible-getStateString"><strong>getStateString</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;space-delimited&nbsp;string&nbsp;composed&nbsp;of&nbsp;the&nbsp;given&nbsp;object's<br>
+<a href="#Accessible">Accessible</a>&nbsp;state&nbsp;attribute.&nbsp;&nbsp;This&nbsp;is&nbsp;for&nbsp;debug&nbsp;purposes.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-toString"><strong>toString</strong></a>(self, indent<font color="#909090">=''</font>, includeApp<font color="#909090">=True</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;string,&nbsp;suitable&nbsp;for&nbsp;printing,&nbsp;that&nbsp;describes&nbsp;the<br>
+given&nbsp;accessible.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;indent:&nbsp;A&nbsp;string&nbsp;to&nbsp;prefix&nbsp;the&nbsp;output&nbsp;with<br>
+-&nbsp;includeApp:&nbsp;If&nbsp;True,&nbsp;include&nbsp;information&nbsp;about&nbsp;the&nbsp;app<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;this&nbsp;accessible.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Accessible-deleteAccessible"><strong>deleteAccessible</strong></a>(acc)</dt><dd><tt>Delete&nbsp;an&nbsp;<a href="#Accessible">Accessible</a>&nbsp;from&nbsp;the&nbsp;cache&nbsp;if&nbsp;it&nbsp;exists.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;acc:&nbsp;the&nbsp;AT-SPI&nbsp;Accessibility_Accessible</tt></dd></dl>
+
+<dl><dt><a name="Accessible-init"><strong>init</strong></a>(registry)</dt><dd><tt>Registers&nbsp;various&nbsp;event&nbsp;listeners&nbsp;with&nbsp;the&nbsp;<a href="#Registry">Registry</a>&nbsp;to&nbsp;keep<br>
+the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;cache&nbsp;up&nbsp;to&nbsp;date.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;registry:&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#Registry">Registry</a></tt></dd></dl>
+
+<dl><dt><a name="Accessible-makeAccessible"><strong>makeAccessible</strong></a>(acc)</dt><dd><tt>Make&nbsp;an&nbsp;<a href="#Accessible">Accessible</a>.&nbsp;&nbsp;This&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;a&nbsp;simple&nbsp;calls&nbsp;to<br>
+<a href="#Accessible">Accessible</a>'s&nbsp;constructor&nbsp;because&nbsp;the&nbsp;object&nbsp;may&nbsp;already&nbsp;be&nbsp;in&nbsp;the<br>
+cache.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;acc:&nbsp;the&nbsp;AT-SPI&nbsp;Accessibility_Accessible<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;Python&nbsp;<a href="#Accessible">Accessible</a>.</tt></dd></dl>
+
+<dl><dt><a name="Accessible-shutdown"><strong>shutdown</strong></a>(registry)</dt><dd><tt>Unregisters&nbsp;the&nbsp;event&nbsp;listeners&nbsp;that&nbsp;were&nbsp;registered&nbsp;in&nbsp;the<br>
+init&nbsp;method.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;registry:&nbsp;an&nbsp;instance&nbsp;of&nbsp;<a href="#Registry">Registry</a></tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Event">class <strong>Event</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Converts&nbsp;the&nbsp;source&nbsp;of&nbsp;an&nbsp;event&nbsp;to&nbsp;an&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object.&nbsp;&nbsp;We<br>
+need&nbsp;this&nbsp;since&nbsp;the&nbsp;event&nbsp;object&nbsp;we&nbsp;get&nbsp;from&nbsp;the&nbsp;atspi&nbsp;is<br>
+read-only.&nbsp;&nbsp;So,&nbsp;we&nbsp;create&nbsp;this&nbsp;dummy&nbsp;event&nbsp;object&nbsp;to&nbsp;contain&nbsp;a&nbsp;copy<br>
+of&nbsp;all&nbsp;the&nbsp;event&nbsp;members&nbsp;with&nbsp;the&nbsp;source&nbsp;converted&nbsp;to&nbsp;an<br>
+<a href="#Accessible">Accessible</a>.&nbsp;&nbsp;It&nbsp;is&nbsp;perfectly&nbsp;OK&nbsp;for&nbsp;event&nbsp;handlers&nbsp;to&nbsp;annotate&nbsp;this<br>
+object&nbsp;with&nbsp;their&nbsp;own&nbsp;attributes.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Event-__init__"><strong>__init__</strong></a>(self, e<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Event-getAnyData"><strong>getAnyData</strong></a>(e)</dt><dd><tt>Returns&nbsp;the&nbsp;any_data&nbsp;field,&nbsp;compensating&nbsp;for&nbsp;any<br>
+differences&nbsp;between&nbsp;pre-1.7.0&nbsp;and&nbsp;post-1.7.0&nbsp;implementations<br>
+of&nbsp;the&nbsp;AT-SPI.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EventListener">class <strong>EventListener</strong></a>(EventListener)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Registers&nbsp;a&nbsp;callback&nbsp;directly&nbsp;with&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Registry">Registry</a>&nbsp;for&nbsp;the<br>
+given&nbsp;event&nbsp;type.&nbsp;&nbsp;Most&nbsp;users&nbsp;of&nbsp;this&nbsp;module&nbsp;will&nbsp;not&nbsp;use&nbsp;this<br>
+class&nbsp;directly,&nbsp;but&nbsp;will&nbsp;instead&nbsp;use&nbsp;the&nbsp;registerEventListener&nbsp;method<br>
+of&nbsp;the&nbsp;<a href="#Registry">Registry</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="orca.atspi.html#EventListener">EventListener</a></dd>
+<dd>EventListener</dd>
+<dd><a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EventListener-__del__"><strong>__del__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EventListener-__init__"><strong>__init__</strong></a>(self, registry, callback, eventType)</dt></dl>
+
+<dl><dt><a name="EventListener-deregister"><strong>deregister</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EventListener-notifyEvent"><strong>notifyEvent</strong></a>(self, event)</dt></dl>
+
+<dl><dt><a name="EventListener-queryInterface"><strong>queryInterface</strong></a>(self, repo_id)</dt></dl>
+
+<dl><dt><a name="EventListener-ref"><strong>ref</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EventListener-register"><strong>register</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EventListener-unref"><strong>unref</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from EventListener:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__interface_info__</strong> = &lt;PyCObject object&gt;</dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'EventListener' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#EventListener-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="KeystrokeListener">class <strong>KeystrokeListener</strong></a>(DeviceEventListener)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Registers&nbsp;a&nbsp;callback&nbsp;directly&nbsp;with&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Registry">Registry</a>&nbsp;for&nbsp;the<br>
+given&nbsp;keystroke.&nbsp;&nbsp;Most&nbsp;users&nbsp;of&nbsp;this&nbsp;module&nbsp;will&nbsp;not&nbsp;use&nbsp;this<br>
+class&nbsp;directly,&nbsp;but&nbsp;will&nbsp;instead&nbsp;use&nbsp;the&nbsp;registerKeystrokeListeners<br>
+method&nbsp;of&nbsp;the&nbsp;<a href="#Registry">Registry</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="orca.atspi.html#KeystrokeListener">KeystrokeListener</a></dd>
+<dd>DeviceEventListener</dd>
+<dd><a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="KeystrokeListener-__del__"><strong>__del__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-__init__"><strong>__init__</strong></a>(self, registry, callback, keyset, mask, type, synchronous, preemptive, isGlobal)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-deregister"><strong>deregister</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-notifyEvent"><strong>notifyEvent</strong></a>(self, event)</dt><dd><tt>Called&nbsp;by&nbsp;the&nbsp;at-spi&nbsp;registry&nbsp;when&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;or&nbsp;released.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;an&nbsp;at-spi&nbsp;DeviceEvent<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
+
+<dl><dt><a name="KeystrokeListener-queryInterface"><strong>queryInterface</strong></a>(self, repo_id)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-ref"><strong>ref</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-register"><strong>register</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="KeystrokeListener-unref"><strong>unref</strong></a>(self)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="KeystrokeListener-keyEventToString"><strong>keyEventToString</strong></a>(event)</dt></dl>
+
+<hr>
+Data and other attributes inherited from DeviceEventListener:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__interface_info__</strong> = &lt;PyCObject object&gt;</dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'DeviceEventListener' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="ORBit.PortableServer.html#Servant">PortableServer.Servant</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#KeystrokeListener-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Registry">class <strong>Registry</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Delegates&nbsp;to&nbsp;the&nbsp;actual&nbsp;AT-SPI&nbsp;Regisitry.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Registry-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Registry-deregisterEventListener"><strong>deregisterEventListener</strong></a>(self, callback, eventType)</dt><dd><tt>Unregisters&nbsp;the&nbsp;given&nbsp;eventType&nbsp;and&nbsp;callback&nbsp;with&nbsp;the&nbsp;<a href="#Registry">Registry</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;callback:&nbsp;function&nbsp;to&nbsp;call&nbsp;with&nbsp;an&nbsp;AT-SPI&nbsp;event&nbsp;instance<br>
+-&nbsp;eventType:&nbsp;string&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;event</tt></dd></dl>
+
+<dl><dt><a name="Registry-registerEventListener"><strong>registerEventListener</strong></a>(self, callback, eventType)</dt><dd><tt>Registers&nbsp;the&nbsp;given&nbsp;eventType&nbsp;and&nbsp;callback&nbsp;with&nbsp;the&nbsp;<a href="#Registry">Registry</a>.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;callback:&nbsp;function&nbsp;to&nbsp;call&nbsp;with&nbsp;an&nbsp;AT-SPI&nbsp;event&nbsp;instance<br>
+-&nbsp;eventType:&nbsp;string&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;event</tt></dd></dl>
+
+<dl><dt><a name="Registry-registerKeystrokeListeners"><strong>registerKeystrokeListeners</strong></a>(self, callback)</dt><dd><tt>Registers&nbsp;a&nbsp;single&nbsp;callback&nbsp;for&nbsp;all&nbsp;possible&nbsp;keystrokes.</tt></dd></dl>
+
+<dl><dt><a name="Registry-start"><strong>start</strong></a>(self)</dt><dd><tt>Starts&nbsp;event&nbsp;notification&nbsp;with&nbsp;the&nbsp;AT-SPI&nbsp;<a href="#Registry">Registry</a>.&nbsp;&nbsp;This&nbsp;method<br>
+only&nbsp;returns&nbsp;after&nbsp;'stop'&nbsp;has&nbsp;been&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="Registry-stop"><strong>stop</strong></a>(self)</dt><dd><tt>Unregisters&nbsp;any&nbsp;event&nbsp;or&nbsp;keystroke&nbsp;listeners&nbsp;registered&nbsp;with<br>
+the&nbsp;AT-SPI&nbsp;<a href="#Registry">Registry</a>&nbsp;and&nbsp;then&nbsp;stops&nbsp;event&nbsp;notification&nbsp;with&nbsp;the<br>
+AT-SPI&nbsp;<a href="#Registry">Registry</a>.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-findByName"><strong>findByName</strong></a>(root, name)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;beneath&nbsp;the&nbsp;specified&nbsp;object&nbsp;with<br>
+the&nbsp;specified&nbsp;name.&nbsp;&nbsp;[[[TODO:&nbsp;MM&nbsp;-&nbsp;This&nbsp;is&nbsp;very&nbsp;inefficient&nbsp;-&nbsp;this<br>
+should&nbsp;do&nbsp;it's&nbsp;own&nbsp;traversal&nbsp;and&nbsp;not&nbsp;add&nbsp;objects&nbsp;to&nbsp;the&nbsp;list&nbsp;that<br>
+don't&nbsp;have&nbsp;the&nbsp;specified&nbsp;name.&nbsp;&nbsp;Instead&nbsp;it&nbsp;uses&nbsp;the&nbsp;traversal&nbsp;from<br>
+getObjects&nbsp;and&nbsp;then&nbsp;deletes&nbsp;objects&nbsp;from&nbsp;the&nbsp;list&nbsp;that&nbsp;don't&nbsp;have<br>
+the&nbsp;specified&nbsp;name.&nbsp;Logged&nbsp;as&nbsp;bugzilla&nbsp;bug&nbsp;319740.]]]<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;to&nbsp;traverse<br>
+-&nbsp;name&nbsp;the&nbsp;string&nbsp;containing&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;name&nbsp;of&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;descendants&nbsp;of&nbsp;the&nbsp;root&nbsp;that&nbsp;are&nbsp;of&nbsp;the&nbsp;given&nbsp;role.</tt></dd></dl>
+ <dl><dt><a name="-findByRole"><strong>findByRole</strong></a>(root, role)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;of&nbsp;a&nbsp;specific&nbsp;role&nbsp;beneath&nbsp;the<br>
+given&nbsp;root.&nbsp;&nbsp;[[[TODO:&nbsp;MM&nbsp;-&nbsp;This&nbsp;is&nbsp;very&nbsp;inefficient&nbsp;-&nbsp;this&nbsp;should<br>
+do&nbsp;it's&nbsp;own&nbsp;traversal&nbsp;and&nbsp;not&nbsp;add&nbsp;objects&nbsp;to&nbsp;the&nbsp;list&nbsp;that&nbsp;aren't<br>
+of&nbsp;the&nbsp;specified&nbsp;role.&nbsp;&nbsp;Instead&nbsp;it&nbsp;uses&nbsp;the&nbsp;traversal&nbsp;from<br>
+getObjects&nbsp;and&nbsp;then&nbsp;deletes&nbsp;objects&nbsp;from&nbsp;the&nbsp;list&nbsp;that&nbsp;aren't&nbsp;of<br>
+the&nbsp;specified&nbsp;role.&nbsp;&nbsp;Logged&nbsp;as&nbsp;bugzilla&nbsp;bug&nbsp;319740.]]]<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;to&nbsp;traverse<br>
+-&nbsp;role&nbsp;the&nbsp;string&nbsp;describing&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;role&nbsp;of&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;descendants&nbsp;of&nbsp;the&nbsp;root&nbsp;that&nbsp;are&nbsp;of&nbsp;the&nbsp;given&nbsp;role.</tt></dd></dl>
+ <dl><dt><a name="-findUnrelatedLabels"><strong>findUnrelatedLabels</strong></a>(root)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;containing&nbsp;all&nbsp;the&nbsp;unrelated&nbsp;(i.e.,&nbsp;have&nbsp;no<br>
+relations&nbsp;to&nbsp;anything&nbsp;and&nbsp;are&nbsp;not&nbsp;a&nbsp;fundamental&nbsp;element&nbsp;of&nbsp;a<br>
+more&nbsp;atomic&nbsp;component&nbsp;like&nbsp;a&nbsp;combo&nbsp;box)&nbsp;labels&nbsp;under&nbsp;the&nbsp;given<br>
+root.&nbsp;&nbsp;Note&nbsp;that&nbsp;the&nbsp;labels&nbsp;must&nbsp;also&nbsp;be&nbsp;showing&nbsp;on&nbsp;the&nbsp;display.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;to&nbsp;traverse<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;unrelated&nbsp;labels&nbsp;under&nbsp;the&nbsp;given&nbsp;root.</tt></dd></dl>
+ <dl><dt><a name="-getAcceleratorAndShortcut"><strong>getAcceleratorAndShortcut</strong></a>(obj)</dt><dd><tt>Gets&nbsp;the&nbsp;accelerator&nbsp;string&nbsp;(and&nbsp;possibly&nbsp;shortcut)&nbsp;for&nbsp;the&nbsp;given<br>
+object.<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object<br>
+&nbsp;<br>
+A&nbsp;list&nbsp;containing&nbsp;the&nbsp;accelerator&nbsp;and&nbsp;shortcut&nbsp;for&nbsp;the&nbsp;given&nbsp;object,<br>
+where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;accelerator&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is<br>
+the&nbsp;shortcut.</tt></dd></dl>
+ <dl><dt><a name="-getFrame"><strong>getFrame</strong></a>(obj)</dt><dd><tt>Returns&nbsp;the&nbsp;frame&nbsp;containing&nbsp;this&nbsp;object,&nbsp;or&nbsp;None&nbsp;if&nbsp;this&nbsp;object<br>
+is&nbsp;not&nbsp;inside&nbsp;a&nbsp;frame.<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-getNodeLevel"><strong>getNodeLevel</strong></a>(obj)</dt><dd><tt>Determines&nbsp;the&nbsp;node&nbsp;level&nbsp;of&nbsp;this&nbsp;object&nbsp;if&nbsp;it&nbsp;is&nbsp;in&nbsp;a&nbsp;tree<br>
+relation,&nbsp;with&nbsp;0&nbsp;being&nbsp;the&nbsp;top&nbsp;level&nbsp;node.&nbsp;&nbsp;If&nbsp;this&nbsp;object&nbsp;is<br>
+not&nbsp;in&nbsp;a&nbsp;tree&nbsp;relation,&nbsp;then&nbsp;-1&nbsp;will&nbsp;be&nbsp;returned.<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-getObjects"><strong>getObjects</strong></a>(root)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp;given&nbsp;root.&nbsp;&nbsp;Objects<br>
+are&nbsp;returned&nbsp;in&nbsp;no&nbsp;particular&nbsp;order&nbsp;-&nbsp;this&nbsp;function&nbsp;does&nbsp;a&nbsp;simple<br>
+tree&nbsp;traversal,&nbsp;ignoring&nbsp;the&nbsp;children&nbsp;of&nbsp;objects&nbsp;which&nbsp;report&nbsp;the<br>
+MANAGES_DESCENDANTS&nbsp;state&nbsp;is&nbsp;active.<br>
+&nbsp;<br>
+NOTE:&nbsp;this&nbsp;will&nbsp;throw&nbsp;an&nbsp;InvalidObjectError&nbsp;exception&nbsp;if&nbsp;the<br>
+AT-SPI&nbsp;Accessibility_Accessible&nbsp;can&nbsp;no&nbsp;longer&nbsp;be&nbsp;reached&nbsp;via<br>
+CORBA.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root:&nbsp;the&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;to&nbsp;traverse<br>
+&nbsp;<br>
+Returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp;specified&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-getTextLineAtCaret"><strong>getTextLineAtCaret</strong></a>(obj)</dt><dd><tt>Gets&nbsp;the&nbsp;line&nbsp;of&nbsp;text&nbsp;where&nbsp;the&nbsp;caret&nbsp;is.<br>
+&nbsp;<br>
+Argument:<br>
+-&nbsp;obj:&nbsp;an&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface<br>
+&nbsp;<br>
+Returns&nbsp;the&nbsp;line&nbsp;of&nbsp;text&nbsp;where&nbsp;the&nbsp;caret&nbsp;is.</tt></dd></dl>
+ <dl><dt><a name="-printAncestry"><strong>printAncestry</strong></a>(child)</dt><dd><tt>Prints&nbsp;a&nbsp;hierarchical&nbsp;view&nbsp;of&nbsp;a&nbsp;child's&nbsp;ancestry.</tt></dd></dl>
+ <dl><dt><a name="-printHierarchy"><strong>printHierarchy</strong></a>(root, ooi, indent<font color="#909090">=''</font>, onlyShowing<font color="#909090">=True</font>, omitManaged<font color="#909090">=True</font>)</dt><dd><tt>Prints&nbsp;the&nbsp;accessible&nbsp;hierarchy&nbsp;of&nbsp;all&nbsp;children<br>
+&nbsp;<br>
+Arguments:<br>
+-indent:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indentation&nbsp;string<br>
+-root:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Accessible">Accessible</a>&nbsp;where&nbsp;to&nbsp;start<br>
+-ooi:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Accessible">Accessible</a>&nbsp;object&nbsp;of&nbsp;interest<br>
+-onlyShowing:&nbsp;If&nbsp;True,&nbsp;only&nbsp;show&nbsp;children&nbsp;painted&nbsp;on&nbsp;the&nbsp;screen<br>
+-omitManaged:&nbsp;If&nbsp;True,&nbsp;omit&nbsp;children&nbsp;that&nbsp;are&nbsp;managed&nbsp;descendants</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CACHE_VALUES</strong> = True</td></tr></table>
+</body></html>

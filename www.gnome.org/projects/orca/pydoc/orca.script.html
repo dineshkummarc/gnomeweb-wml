@@ -1,0 +1,175 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module orca.script</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.script</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/script.py">/usr/lib/python2.4/site-packages/orca/script.py</a></font></td></tr></table>
+    <p><tt>Each&nbsp;script&nbsp;maintains&nbsp;a&nbsp;set&nbsp;of&nbsp;key&nbsp;bindings,&nbsp;braille&nbsp;bindings,&nbsp;and<br>
+AT-SPI&nbsp;event&nbsp;listeners.&nbsp;&nbsp;The&nbsp;key&nbsp;bindings&nbsp;are&nbsp;an&nbsp;instance&nbsp;of<br>
+KeyBindings.&nbsp;&nbsp;The&nbsp;braille&nbsp;bindings&nbsp;are&nbsp;also&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;the<br>
+keys&nbsp;are&nbsp;BrlTTY&nbsp;command&nbsp;integers&nbsp;and&nbsp;the&nbsp;values&nbsp;are&nbsp;instances&nbsp;of<br>
+InputEventHandler.&nbsp;&nbsp;The&nbsp;listeners&nbsp;field&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;where&nbsp;the&nbsp;keys<br>
+are&nbsp;AT-SPI&nbsp;event&nbsp;names&nbsp;and&nbsp;the&nbsp;values&nbsp;are&nbsp;function&nbsp;pointers.<br>
+&nbsp;<br>
+Instances&nbsp;of&nbsp;scripts&nbsp;are&nbsp;intended&nbsp;to&nbsp;be&nbsp;created&nbsp;solely&nbsp;by&nbsp;the<br>
+focus_tracking_presenter,&nbsp;which&nbsp;will&nbsp;call&nbsp;the&nbsp;main&nbsp;entry&nbsp;points&nbsp;of&nbsp;a<br>
+script&nbsp;instance:&nbsp;processObjectEvent,&nbsp;processKeyboardEvent,&nbsp;and<br>
+processBrailleEvent,&nbsp;locusOfFocusChanged,&nbsp;and&nbsp;visualAppearanceChanged.<br>
+&nbsp;<br>
+This&nbsp;<a href="#Script">Script</a>&nbsp;class&nbsp;is&nbsp;not&nbsp;intended&nbsp;to&nbsp;be&nbsp;instantiated&nbsp;directly.<br>
+Instead,&nbsp;it&nbsp;is&nbsp;expected&nbsp;that&nbsp;subclasses&nbsp;of&nbsp;the&nbsp;<a href="#Script">Script</a>&nbsp;class&nbsp;will&nbsp;be<br>
+created&nbsp;in&nbsp;their&nbsp;own&nbsp;module.&nbsp;&nbsp;The&nbsp;module&nbsp;defining&nbsp;the&nbsp;<a href="#Script">Script</a>&nbsp;subclass<br>
+is&nbsp;also&nbsp;required&nbsp;to&nbsp;have&nbsp;a&nbsp;'getScript(app)'&nbsp;method&nbsp;that&nbsp;returns&nbsp;an<br>
+instance&nbsp;of&nbsp;the&nbsp;<a href="#Script">Script</a>&nbsp;subclass.&nbsp;&nbsp;See&nbsp;default.py&nbsp;for&nbsp;an&nbsp;example.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.debug.html">orca.debug</a><br>
+</td><td width="25%" valign=top><a href="orca.keybindings.html">orca.keybindings</a><br>
+</td><td width="25%" valign=top><a href="orca.settings.html">orca.settings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="orca.script.html#Script">Script</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Script">class <strong>Script</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;specific&nbsp;focus&nbsp;tracking&nbsp;scripts&nbsp;for&nbsp;applications.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Script-__init__"><strong>__init__</strong></a>(self, app)</dt><dd><tt>Creates&nbsp;a&nbsp;script&nbsp;for&nbsp;the&nbsp;given&nbsp;application,&nbsp;if&nbsp;necessary.<br>
+This&nbsp;method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;by&nbsp;anyone&nbsp;except&nbsp;the<br>
+focus_tracking_presenter.&nbsp;&nbsp;The&nbsp;main&nbsp;responsibilities&nbsp;of<br>
+this&nbsp;constructor&nbsp;are&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+&nbsp;&nbsp;1)&nbsp;Set&nbsp;the&nbsp;app&nbsp;field&nbsp;of&nbsp;the&nbsp;instance&nbsp;to&nbsp;the&nbsp;app&nbsp;object&nbsp;that<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;was&nbsp;passed&nbsp;in.&nbsp;&nbsp;It&nbsp;is&nbsp;OK&nbsp;to&nbsp;have&nbsp;a&nbsp;None&nbsp;app.<br>
+&nbsp;<br>
+&nbsp;&nbsp;2)&nbsp;Set&nbsp;the&nbsp;name&nbsp;field&nbsp;of&nbsp;the&nbsp;instance&nbsp;to&nbsp;a&nbsp;meaningful&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(e.g.,&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;app&nbsp;if&nbsp;app&nbsp;is&nbsp;not&nbsp;None).&nbsp;&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;field&nbsp;is&nbsp;useful&nbsp;primarily&nbsp;for&nbsp;debugging&nbsp;purposes.<br>
+&nbsp;<br>
+&nbsp;&nbsp;3)&nbsp;Set&nbsp;up&nbsp;with&nbsp;listeners&nbsp;field,&nbsp;which&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;where<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;keys&nbsp;are&nbsp;AT-SPI&nbsp;event&nbsp;type&nbsp;strings&nbsp;(e.g.,&nbsp;'focus:')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;the&nbsp;values&nbsp;are&nbsp;methods&nbsp;whose&nbsp;parameters&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(self,event).<br>
+&nbsp;<br>
+&nbsp;&nbsp;4)&nbsp;Set&nbsp;up&nbsp;the&nbsp;braillebindings&nbsp;field,&nbsp;which&nbsp;is&nbsp;a&nbsp;dictionary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;the&nbsp;keys&nbsp;are&nbsp;BrlTTY&nbsp;commands&nbsp;(e.g.,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;braille.CMD_FWINLT])&nbsp;and&nbsp;the&nbsp;values&nbsp;are&nbsp;InputEventHandler<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instances&nbsp;(see&nbsp;input_event.py).<br>
+&nbsp;<br>
+&nbsp;&nbsp;5)&nbsp;Set&nbsp;up&nbsp;the&nbsp;keybindings&nbsp;field,&nbsp;which&nbsp;is&nbsp;an&nbsp;instance&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;KeyBindings&nbsp;class&nbsp;(see&nbsp;keybindings.py).&nbsp;&nbsp;Scripts&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add&nbsp;keybindings&nbsp;to&nbsp;the&nbsp;keybindings&nbsp;field&nbsp;by&nbsp;using&nbsp;its<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'add'&nbsp;method&nbsp;to&nbsp;add&nbsp;an&nbsp;instance&nbsp;of&nbsp;a&nbsp;KeyBinding&nbsp;(see&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keybindings.py).<br>
+&nbsp;<br>
+See&nbsp;default.py&nbsp;for&nbsp;an&nbsp;example.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;app:&nbsp;the&nbsp;Python&nbsp;Accessible&nbsp;application&nbsp;to&nbsp;create&nbsp;a&nbsp;script&nbsp;for</tt></dd></dl>
+
+<dl><dt><a name="Script-locusOfFocusChanged"><strong>locusOfFocusChanged</strong></a>(self, event, oldLocusOfFocus, newLocusOfFocus)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;object&nbsp;with&nbsp;focus&nbsp;changes.<br>
+&nbsp;<br>
+The&nbsp;primary&nbsp;purpose&nbsp;of&nbsp;this&nbsp;method&nbsp;is&nbsp;to&nbsp;present&nbsp;locus&nbsp;of&nbsp;focus<br>
+information&nbsp;to&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+NOTE:&nbsp;scripts&nbsp;should&nbsp;not&nbsp;call&nbsp;this&nbsp;method&nbsp;directly.&nbsp;&nbsp;Instead,<br>
+a&nbsp;script&nbsp;should&nbsp;call&nbsp;orca.setLocusOfFocus,&nbsp;which&nbsp;will&nbsp;eventually<br>
+result&nbsp;in&nbsp;this&nbsp;method&nbsp;being&nbsp;called.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;the&nbsp;change<br>
+-&nbsp;oldLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;locus&nbsp;of&nbsp;focus<br>
+-&nbsp;newLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;new&nbsp;locus&nbsp;of&nbsp;focus</tt></dd></dl>
+
+<dl><dt><a name="Script-processBrailleEvent"><strong>processBrailleEvent</strong></a>(self, brailleEvent)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;on&nbsp;the&nbsp;Braille&nbsp;display.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;will&nbsp;primarily&nbsp;use&nbsp;the&nbsp;braillebindings&nbsp;field&nbsp;of<br>
+this&nbsp;script&nbsp;instance&nbsp;see&nbsp;if&nbsp;this&nbsp;script&nbsp;has&nbsp;an&nbsp;interest&nbsp;in&nbsp;the<br>
+event.<br>
+&nbsp;<br>
+NOTE:&nbsp;there&nbsp;is&nbsp;latent,&nbsp;but&nbsp;unsupported,&nbsp;logic&nbsp;for&nbsp;allowing<br>
+the&nbsp;user's&nbsp;user-settings.py&nbsp;file&nbsp;to&nbsp;extend&nbsp;and/or&nbsp;override<br>
+the&nbsp;braillebindings&nbsp;for&nbsp;a&nbsp;script.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;brailleEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.BrailleEvent<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;was&nbsp;consumed;&nbsp;otherwise&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;This&nbsp;method&nbsp;is&nbsp;called<br>
+synchronously&nbsp;from&nbsp;the&nbsp;AT-SPI&nbsp;registry&nbsp;and&nbsp;should&nbsp;be<br>
+performant.&nbsp;&nbsp;In&nbsp;addition,&nbsp;it&nbsp;must&nbsp;return&nbsp;True&nbsp;if&nbsp;it&nbsp;has<br>
+consumed&nbsp;the&nbsp;event&nbsp;(and&nbsp;False&nbsp;if&nbsp;not).<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;will&nbsp;primarily&nbsp;use&nbsp;the&nbsp;keybindings&nbsp;field&nbsp;of&nbsp;this<br>
+script&nbsp;instance&nbsp;see&nbsp;if&nbsp;this&nbsp;script&nbsp;has&nbsp;an&nbsp;interest&nbsp;in&nbsp;the<br>
+event.<br>
+&nbsp;<br>
+NOTE:&nbsp;there&nbsp;is&nbsp;latent,&nbsp;but&nbsp;unsupported,&nbsp;logic&nbsp;for&nbsp;allowing<br>
+the&nbsp;user's&nbsp;user-settings.py&nbsp;file&nbsp;to&nbsp;extend&nbsp;and/or&nbsp;override<br>
+the&nbsp;keybindings&nbsp;for&nbsp;a&nbsp;script.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;was&nbsp;consumed;&nbsp;otherwise&nbsp;False</tt></dd></dl>
+
+<dl><dt><a name="Script-processObjectEvent"><strong>processObjectEvent</strong></a>(self, event)</dt><dd><tt>Processes&nbsp;all&nbsp;AT-SPI&nbsp;object&nbsp;events&nbsp;of&nbsp;interest&nbsp;to&nbsp;this<br>
+script.&nbsp;&nbsp;The&nbsp;interest&nbsp;in&nbsp;events&nbsp;is&nbsp;specified&nbsp;via&nbsp;the<br>
+'listeners'&nbsp;field&nbsp;that&nbsp;was&nbsp;defined&nbsp;during&nbsp;the&nbsp;construction&nbsp;of<br>
+this&nbsp;script.<br>
+&nbsp;<br>
+In&nbsp;general,&nbsp;the&nbsp;primary&nbsp;purpose&nbsp;of&nbsp;handling&nbsp;object&nbsp;events&nbsp;is&nbsp;to<br>
+keep&nbsp;track&nbsp;of&nbsp;changes&nbsp;to&nbsp;the&nbsp;locus&nbsp;of&nbsp;focus&nbsp;and&nbsp;notify&nbsp;the<br>
+orca&nbsp;module&nbsp;of&nbsp;these&nbsp;changes&nbsp;via&nbsp;orca.setLocusOfFocus&nbsp;and<br>
+orca.visualAppearanceChanged.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;this&nbsp;script&nbsp;may&nbsp;be&nbsp;passed&nbsp;events&nbsp;it&nbsp;doesn't&nbsp;care<br>
+about,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(self, event, obj)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object&nbsp;changes.<br>
+This&nbsp;method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual<br>
+appearance&nbsp;changes&nbsp;solely&nbsp;because&nbsp;of&nbsp;focus&nbsp;--&nbsp;setLocusOfFocus<br>
+is&nbsp;used&nbsp;for&nbsp;that.&nbsp;&nbsp;Instead,&nbsp;it&nbsp;is&nbsp;intended&nbsp;mostly&nbsp;for&nbsp;objects<br>
+whose&nbsp;notional&nbsp;'value'&nbsp;has&nbsp;changed,&nbsp;such&nbsp;as&nbsp;a&nbsp;checkbox<br>
+changing&nbsp;state,&nbsp;a&nbsp;progress&nbsp;bar&nbsp;advancing,&nbsp;a&nbsp;slider&nbsp;moving,<br>
+text&nbsp;inserted,&nbsp;caret&nbsp;moved,&nbsp;etc.<br>
+&nbsp;<br>
+The&nbsp;primary&nbsp;purpose&nbsp;of&nbsp;this&nbsp;method&nbsp;is&nbsp;to&nbsp;present&nbsp;the&nbsp;changed<br>
+information&nbsp;to&nbsp;the&nbsp;user.<br>
+&nbsp;<br>
+NOTE:&nbsp;scripts&nbsp;should&nbsp;not&nbsp;call&nbsp;this&nbsp;method&nbsp;directly.&nbsp;&nbsp;Instead,<br>
+a&nbsp;script&nbsp;should&nbsp;call&nbsp;orca.visualAppearanceChanged,&nbsp;which&nbsp;will<br>
+eventually&nbsp;result&nbsp;in&nbsp;this&nbsp;method&nbsp;being&nbsp;called.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
+-&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>
