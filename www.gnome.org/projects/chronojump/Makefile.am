@@ -38,6 +38,7 @@ page_SCRIPTS= index.html	\
 	features_ca.html \
 	features_de.html \
 	features_es.html \
+	features_gl.html \
 	features_pt.html \
 	index_ca.html \
 	index_de.html \
