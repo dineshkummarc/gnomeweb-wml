@@ -6,10 +6,19 @@
                 extension-element-prefixes="func exsl"
                 version='1.0'>
 
-<!-- 
-<xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/html/docbook.xsl"/>
+
+<!--
+<xsl:import href="/home/smitten/1.65.1/html/docbook.xsl"/>
 -->
+<!--
 <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
+-->
+
+<!-- target a specific version of Norman Walsh's stylesheets as the newer stylesheets
+     are missing certain templates that we depend on (admon.graphics.width)
+-->
+<xsl:import href="http://docbook.sourceforge.net/release/xsl/1.64.1/html/docbook.xsl"/>
+
 <xsl:include href="yelp-custom.xsl"/>
 <xsl:include href="yelp-functions.xsl"/>
 
@@ -350,6 +359,7 @@
 	</td>
 </xsl:template>
 
+<!--
 <xsl:template name="yelp.navbar">
 	<xsl:param name="node" select="."/>
 	<xsl:param name="prev" select="yelp:get-prev($node)"/>
@@ -382,6 +392,7 @@
 	</tr></table>
 	</xsl:if>
 </xsl:template>
+-->
 
 <xsl:template name="yelp.navbar.top">
 	<xsl:param name="node" select="."/>
@@ -631,6 +642,7 @@
 					<xsl:with-param name="node" select="."/>
 					<xsl:with-param name="prev" select="$prev"/>
 					<xsl:with-param name="next" select="$next"/>
+					<xsl:with-param name="up" select="true()"/>
 				</xsl:call-template>
 			</xsl:with-param>
 		</xsl:call-template>
