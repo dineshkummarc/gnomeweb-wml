@@ -30,8 +30,8 @@ misc_images=\
 	chronojump_new_run_type_spanish_small.png \
 	chronopic_foto.jpg \
 	chronopic_foto_small.png \
-	crl_logo_88.png \
-	deporteyciencia.png \
+	deporteyciencia_blues.png \
+	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
 	plataforma_contactos_cinta_varillas.jpg \
 	plataforma_contactos_cortar_varillas.jpg \
