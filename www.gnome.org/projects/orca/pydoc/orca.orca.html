@@ -37,16 +37,21 @@
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.atspi.html">orca.atspi</a><br>
 <a href="orca.braille.html">orca.braille</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
+<a href="getopt.html">getopt</a><br>
 <a href="gtk.html">gtk</a><br>
 </td><td width="25%" valign=top><a href="orca.keybindings.html">orca.keybindings</a><br>
 <a href="orca.keynames.html">orca.keynames</a><br>
+<a href="orca.mag.html">orca.mag</a><br>
 <a href="os.html">os</a><br>
+<a href="orca.platform.html">orca.platform</a><br>
+</td><td width="25%" valign=top><a href="orca.rolenames.html">orca.rolenames</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
-</td><td width="25%" valign=top><a href="signal.html">signal</a><br>
+<a href="signal.html">signal</a><br>
 <a href="orca.speech.html">orca.speech</a><br>
-<a href="sys.html">sys</a><br>
+<a href="string.html">string</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
 <a href="threading.html">threading</a><br>
-</td><td width="25%" valign=top><a href="time.html">time</a><br>
+<a href="time.html">time</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -82,6 +87,10 @@ currently&nbsp;has&nbsp;keyboard&nbsp;focus.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object</tt></dd></dl>
+ <dl><dt><a name="-loadUserSettings"><strong>loadUserSettings</strong></a>(script<font color="#909090">=None</font>, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Loads&nbsp;(and&nbsp;reloads)&nbsp;the&nbsp;user&nbsp;settings&nbsp;module,&nbsp;reinitializing<br>
+things&nbsp;such&nbsp;as&nbsp;speech&nbsp;if&nbsp;necessary.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
  <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
  <dl><dt><a name="-outlineAccessible"><strong>outlineAccessible</strong></a>(accessible, erasePrevious<font color="#909090">=True</font>)</dt><dd><tt>Draws&nbsp;a&nbsp;rectangular&nbsp;outline&nbsp;around&nbsp;the&nbsp;accessible,&nbsp;erasing&nbsp;the<br>
 last&nbsp;drawn&nbsp;rectangle&nbsp;in&nbsp;the&nbsp;process.</tt></dd></dl>
@@ -99,8 +108,6 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;indicating&nbsp;the&nbsp;event&nbsp;should&nbsp;be&nbsp;consumed.</tt></dd></dl>
  <dl><dt><a name="-printHierarchy"><strong>printHierarchy</strong></a>(script<font color="#909090">=None</font>, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Prints&nbsp;the&nbsp;application&nbsp;for&nbsp;the&nbsp;current&nbsp;locusOfFocus</tt></dd></dl>
- <dl><dt><a name="-resetSpeech"><strong>resetSpeech</strong></a>(script<font color="#909090">=None</font>, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Kicks&nbsp;the&nbsp;speech&nbsp;server&nbsp;in&nbsp;the&nbsp;pants&nbsp;and&nbsp;re-establishes&nbsp;a<br>
-connection&nbsp;to&nbsp;it.</tt></dd></dl>
  <dl><dt><a name="-setLocusOfFocus"><strong>setLocusOfFocus</strong></a>(event, obj, notifyPresentationManager<font color="#909090">=True</font>)</dt><dd><tt>Sets&nbsp;the&nbsp;locus&nbsp;of&nbsp;focus&nbsp;(i.e.,&nbsp;the&nbsp;object&nbsp;with&nbsp;visual&nbsp;focus)&nbsp;and<br>
 notifies&nbsp;the&nbsp;current&nbsp;presentation&nbsp;manager&nbsp;of&nbsp;the&nbsp;change.<br>
 &nbsp;<br>
@@ -131,6 +138,7 @@ Arguments:<br>
 -&nbsp;inputEvent:&nbsp;the&nbsp;key&nbsp;event&nbsp;(if&nbsp;any)&nbsp;which&nbsp;caused&nbsp;this&nbsp;to&nbsp;be&nbsp;called.<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;indicating&nbsp;the&nbsp;event&nbsp;should&nbsp;be&nbsp;consumed.</tt></dd></dl>
+ <dl><dt><a name="-usage"><strong>usage</strong></a>()</dt><dd><tt>Prints&nbsp;out&nbsp;usage&nbsp;information.</tt></dd></dl>
  <dl><dt><a name="-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(event, obj)</dt><dd><tt>Called&nbsp;(typically&nbsp;by&nbsp;scripts)&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object<br>
 changes&nbsp;and&nbsp;notifies&nbsp;the&nbsp;current&nbsp;presentation&nbsp;manager&nbsp;of&nbsp;the&nbsp;change.&nbsp;&nbsp;This<br>
 method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changes<br>
@@ -150,8 +158,8 @@ Arguments:<br>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>MODIFIER_ORCA</strong> = 8<br>
-<strong>apps</strong> = []<br>
 <strong>exitCount</strong> = 0<br>
 <strong>lastInputEvent</strong> = None<br>
+<strong>lastKeyEchoTime</strong> = None<br>
 <strong>locusOfFocus</strong> = None</td></tr></table>
 </body></html>

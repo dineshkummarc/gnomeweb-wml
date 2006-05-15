@@ -127,10 +127,7 @@ Arguments:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;augment/override&nbsp;the&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voice&nbsp;settings.<br>
 -&nbsp;interrupt:&nbsp;if&nbsp;True,&nbsp;stops&nbsp;any&nbsp;speech&nbsp;in&nbsp;progress&nbsp;before<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speaking&nbsp;the&nbsp;text<br>
-&nbsp;<br>
-Returns&nbsp;an&nbsp;id&nbsp;of&nbsp;the&nbsp;thing&nbsp;being&nbsp;spoken&nbsp;or&nbsp;-1&nbsp;if&nbsp;nothing&nbsp;is&nbsp;to<br>
-be&nbsp;spoken.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speaking&nbsp;the&nbsp;text</tt></dd></dl>
 
 <dl><dt><a name="SpeechServer-speakCharacter"><strong>speakCharacter</strong></a>(self, character, acss<font color="#909090">=None</font>)</dt><dd><tt>Speaks&nbsp;a&nbsp;single&nbsp;character&nbsp;immediately.<br>
 &nbsp;<br>
@@ -142,15 +139,16 @@ Arguments:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;augment/override&nbsp;the&nbsp;default<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voice&nbsp;settings.</tt></dd></dl>
 
-<dl><dt><a name="SpeechServer-speakUtterances"><strong>speakUtterances</strong></a>(self, list, acss<font color="#909090">=None</font>)</dt><dd><tt>Speaks&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;utterances&nbsp;immediately.<br>
+<dl><dt><a name="SpeechServer-speakUtterances"><strong>speakUtterances</strong></a>(self, list, acss<font color="#909090">=None</font>, interrupt<font color="#909090">=True</font>)</dt><dd><tt>Speaks&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;utterances&nbsp;immediately.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;list:&nbsp;list&nbsp;of&nbsp;strings&nbsp;to&nbsp;be&nbsp;spoken<br>
--&nbsp;acss:&nbsp;acss.ACSS&nbsp;instance;&nbsp;if&nbsp;None,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;voice&nbsp;settings&nbsp;will&nbsp;be&nbsp;used.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise,&nbsp;the&nbsp;acss&nbsp;settings&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;augment/override&nbsp;the&nbsp;default<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voice&nbsp;settings.</tt></dd></dl>
+-&nbsp;list:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;strings&nbsp;to&nbsp;be&nbsp;spoken<br>
+-&nbsp;acss:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acss.ACSS&nbsp;instance;&nbsp;if&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;default&nbsp;voice&nbsp;settings&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise,&nbsp;the&nbsp;acss&nbsp;settings&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;augment/override&nbsp;the&nbsp;default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;voice&nbsp;settings.<br>
+-&nbsp;interrupt:&nbsp;if&nbsp;True,&nbsp;stop&nbsp;any&nbsp;speech&nbsp;currently&nbsp;in&nbsp;progress.</tt></dd></dl>
 
 <dl><dt><a name="SpeechServer-stop"><strong>stop</strong></a>(self)</dt><dd><tt>Stops&nbsp;ongoing&nbsp;speech&nbsp;and&nbsp;flushes&nbsp;the&nbsp;queue.</tt></dd></dl>
 
@@ -158,14 +156,14 @@ Arguments:<br>
 Static methods defined here:<br>
 <dl><dt><a name="SpeechServer-getFactoryName"><strong>getFactoryName</strong></a>()</dt><dd><tt>Returns&nbsp;a&nbsp;localized&nbsp;name&nbsp;describing&nbsp;this&nbsp;factory.</tt></dd></dl>
 
-<dl><dt><a name="SpeechServer-getSpeechServer"><strong>getSpeechServer</strong></a>(info<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="SpeechServer-getSpeechServer"><strong>getSpeechServer</strong></a>(info<font color="#909090">=None</font>)</dt><dd><tt>Gets&nbsp;a&nbsp;given&nbsp;<a href="#SpeechServer">SpeechServer</a>&nbsp;based&nbsp;upon&nbsp;the&nbsp;info.<br>
+See&nbsp;<a href="#SpeechServer">SpeechServer</a>.<a href="#SpeechServer-getInfo">getInfo</a>()&nbsp;for&nbsp;more&nbsp;info.</tt></dd></dl>
 
-<dl><dt><a name="SpeechServer-getSpeechServerInfos"><strong>getSpeechServerInfos</strong></a>()</dt><dd><tt>Enumerate&nbsp;available&nbsp;speech&nbsp;servers.<br>
-&nbsp;<br>
-Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;[name,&nbsp;id]&nbsp;values&nbsp;identifying&nbsp;the&nbsp;available<br>
-speech&nbsp;servers.&nbsp;&nbsp;The&nbsp;name&nbsp;is&nbsp;a&nbsp;human&nbsp;consumable&nbsp;string&nbsp;and&nbsp;the<br>
-id&nbsp;is&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;create&nbsp;a&nbsp;speech&nbsp;server<br>
-via&nbsp;the&nbsp;getSpeechServer&nbsp;method.</tt></dd></dl>
+<dl><dt><a name="SpeechServer-getSpeechServers"><strong>getSpeechServers</strong></a>()</dt><dd><tt>Gets&nbsp;available&nbsp;speech&nbsp;servers&nbsp;as&nbsp;a&nbsp;list.&nbsp;&nbsp;The&nbsp;caller<br>
+is&nbsp;responsible&nbsp;for&nbsp;calling&nbsp;the&nbsp;<a href="#SpeechServer-shutdown">shutdown</a>()&nbsp;method&nbsp;of&nbsp;each<br>
+speech&nbsp;server&nbsp;returned.</tt></dd></dl>
+
+<dl><dt><a name="SpeechServer-shutdownActiveServers"><strong>shutdownActiveServers</strong></a>()</dt><dd><tt>Cleans&nbsp;up&nbsp;and&nbsp;shuts&nbsp;down&nbsp;this&nbsp;factory.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
