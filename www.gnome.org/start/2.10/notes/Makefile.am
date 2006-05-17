@@ -7,7 +7,7 @@ page_SCRIPTS =
 # r! find -type f | sed 's,\./,,;s,^,\t,;s,$, \\,'
 # also, delete Makefile.am* from this list
 # couldn't be arsed fixing that above atm
-page_DATA = \
+nobase_page_DATA = \
 	es/rnlookingahead.html \
 	es/index.html \
 	es/rnknownissues.html \
