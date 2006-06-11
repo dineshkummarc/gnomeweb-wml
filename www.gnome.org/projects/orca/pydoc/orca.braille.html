@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.braille</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.braille</strong></big></big> (version 1.55, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/braille.py">/usr/lib/python2.4/site-packages/orca/braille.py</a></font></td></tr></table>
     <p><tt>A&nbsp;very&nbsp;experimental&nbsp;approach&nbsp;to&nbsp;the&nbsp;refreshable&nbsp;Braille&nbsp;display.&nbsp;&nbsp;This<br>
@@ -14,36 +14,7 @@ module&nbsp;treats&nbsp;each&nbsp;line&nbsp;of&nbsp;the&nbsp;display&nbsp;as&nbs
 each&nbsp;region&nbsp;can&nbsp;potentially&nbsp;backed&nbsp;by&nbsp;an&nbsp;Accessible&nbsp;object.&nbsp;&nbsp;Depending&nbsp;upon<br>
 the&nbsp;Accessible&nbsp;object,&nbsp;the&nbsp;cursor&nbsp;routing&nbsp;keys&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;perform<br>
 operations&nbsp;on&nbsp;the&nbsp;Accessible&nbsp;object,&nbsp;such&nbsp;as&nbsp;invoking&nbsp;default&nbsp;actions&nbsp;or<br>
-moving&nbsp;the&nbsp;text&nbsp;caret.<br>
-&nbsp;<br>
-The&nbsp;logical&nbsp;structure&nbsp;maintained&nbsp;by&nbsp;this&nbsp;module&nbsp;is&nbsp;a&nbsp;potentially&nbsp;a&nbsp;very&nbsp;large<br>
-2&nbsp;dimensional&nbsp;text&nbsp;area.&nbsp;&nbsp;For&nbsp;each&nbsp;line,&nbsp;the&nbsp;text&nbsp;for&nbsp;each&nbsp;region&nbsp;is&nbsp;merely<br>
-concatenated&nbsp;together,&nbsp;possibly&nbsp;creating&nbsp;a&nbsp;line&nbsp;that&nbsp;is&nbsp;longer&nbsp;than&nbsp;the<br>
-physical&nbsp;display.&nbsp;&nbsp;In&nbsp;addition,&nbsp;there&nbsp;may&nbsp;be&nbsp;any&nbsp;number&nbsp;of&nbsp;lines.&nbsp;&nbsp;This&nbsp;module<br>
-uses&nbsp;the&nbsp;physical&nbsp;display&nbsp;as&nbsp;a&nbsp;viewport&nbsp;into&nbsp;this&nbsp;large&nbsp;area,&nbsp;and&nbsp;provides<br>
-support&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;press&nbsp;BrlTTY&nbsp;command&nbsp;keys&nbsp;to&nbsp;scroll&nbsp;this&nbsp;viewport&nbsp;to<br>
-view&nbsp;all&nbsp;the&nbsp;content.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;the&nbsp;goal&nbsp;is&nbsp;to&nbsp;support&nbsp;multi-line<br>
-displays,&nbsp;but&nbsp;I've&nbsp;only&nbsp;really&nbsp;built&nbsp;in&nbsp;support&nbsp;for&nbsp;a&nbsp;single&nbsp;line&nbsp;display.<br>
-Logged&nbsp;as&nbsp;bugzilla&nbsp;bug&nbsp;319752.]]]<br>
-&nbsp;<br>
-As&nbsp;a&nbsp;means&nbsp;to&nbsp;keep&nbsp;things&nbsp;simple&nbsp;for&nbsp;now,&nbsp;regions&nbsp;can&nbsp;only&nbsp;exist&nbsp;on&nbsp;a&nbsp;single<br>
-line.&nbsp;&nbsp;That&nbsp;is,&nbsp;a&nbsp;region&nbsp;cannot&nbsp;cross&nbsp;line&nbsp;boundaries.<br>
-&nbsp;<br>
-After&nbsp;initialization,&nbsp;a&nbsp;typical&nbsp;use&nbsp;of&nbsp;this&nbsp;module&nbsp;would&nbsp;be&nbsp;as&nbsp;follows:<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;braille.<a href="#-clear">clear</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;line&nbsp;=&nbsp;braille.<a href="#Line">Line</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;line.addRegion(braille.<a href="#Region">Region</a>(...))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;line.addRegion(braille.<a href="#Component">Component</a>(...))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;textRegion&nbsp;=&nbsp;braille.<a href="#Text">Text</a>(...)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;line.addRegion(textRegion)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;braille.<a href="#-addLine">addLine</a>(line)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;braille.<a href="#-setFocus">setFocus</a>(textRegion)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;braille.<a href="#-refresh">refresh</a>()<br>
-&nbsp;<br>
-NOTE:&nbsp;for&nbsp;the&nbsp;most&nbsp;part,&nbsp;this&nbsp;module&nbsp;will&nbsp;happily&nbsp;do&nbsp;as&nbsp;requested&nbsp;if&nbsp;it&nbsp;isn't<br>
-initialized.&nbsp;&nbsp;The&nbsp;only&nbsp;impact&nbsp;will&nbsp;be&nbsp;that&nbsp;nothing&nbsp;will&nbsp;be&nbsp;displayed&nbsp;on&nbsp;the<br>
-Braille&nbsp;display.</tt></p>
+moving&nbsp;the&nbsp;text&nbsp;caret.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -57,7 +28,8 @@ Braille&nbsp;display.</tt></p>
 <a href="orca.debug.html">orca.debug</a><br>
 </td><td width="25%" valign=top><a href="orca.eventsynthesizer.html">orca.eventsynthesizer</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="orca.util.html">orca.util</a><br>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -425,6 +397,11 @@ was&nbsp;run&nbsp;or&nbsp;False&nbsp;if&nbsp;this&nbsp;module&nbsp;has&nbsp;not&
 <strong>CMD_TUNES</strong> = 45<br>
 <strong>CMD_WINDN</strong> = 4<br>
 <strong>CMD_WINUP</strong> = 3<br>
+<strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
+<strong>__date__</strong> = '$Date$'<br>
+<strong>__id__</strong> = '$Id$'<br>
+<strong>__license__</strong> = 'LGPL'<br>
+<strong>__version__</strong> = '$Revision$'<br>
 <strong>beginningIsShowing</strong> = False<br>
 <strong>cursorCell</strong> = 0<br>
 <strong>endIsShowing</strong> = False<br>

@@ -6,27 +6,10 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.gcalctool</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.gcalctool</strong></big></big> (version 1.10, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/gcalctool.py">/usr/lib/python2.4/site-packages/orca/scripts/gcalctool.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;Orca<br>
-#<br>
-#&nbsp;Copyright&nbsp;2004-2006&nbsp;Sun&nbsp;Microsystems&nbsp;Inc.<br>
-#<br>
-#&nbsp;This&nbsp;library&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or<br>
-#&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;Library&nbsp;General&nbsp;Public<br>
-#&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either<br>
-#&nbsp;version&nbsp;2&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
-#<br>
-#&nbsp;This&nbsp;library&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-#&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-#&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU<br>
-#&nbsp;Library&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
-#<br>
-#&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;Library&nbsp;General&nbsp;Public<br>
-#&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;library;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the<br>
-#&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;59&nbsp;Temple&nbsp;Place&nbsp;-&nbsp;Suite&nbsp;330,<br>
-#&nbsp;Boston,&nbsp;MA&nbsp;02111-1307,&nbsp;USA.</tt></p>
+    <p><tt>Provides&nbsp;a&nbsp;custom&nbsp;script&nbsp;for&nbsp;gcalctool.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -178,11 +161,6 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onMouseButton"><strong>onMouseButton</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;mouse&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;released.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
 <dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -263,6 +241,9 @@ a&nbsp;certain&nbsp;set&nbsp;of&nbsp;attributes&nbsp;will&nbsp;be&nbsp;spoken.&n
 then&nbsp;individual&nbsp;application&nbsp;scripts&nbsp;should&nbsp;override&nbsp;this&nbsp;method&nbsp;to<br>
 only&nbsp;speak&nbsp;the&nbsp;subset&nbsp;required.</tt></dd></dl>
 
+<dl><dt><a name="Script-reportScriptInfo"><strong>reportScriptInfo</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Output&nbsp;useful&nbsp;information&nbsp;on&nbsp;the&nbsp;current&nbsp;script&nbsp;via&nbsp;speech<br>
+and&nbsp;braille.&nbsp;&nbsp;This&nbsp;information&nbsp;will&nbsp;be&nbsp;helpful&nbsp;to&nbsp;script&nbsp;writers.</tt></dd></dl>
+
 <dl><dt><a name="Script-reviewAbove"><strong>reviewAbove</strong></a>(self, inputEvent)</dt><dd><tt>Moves&nbsp;the&nbsp;flat&nbsp;review&nbsp;context&nbsp;to&nbsp;the&nbsp;character&nbsp;most&nbsp;directly<br>
 above&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;cursor.&nbsp;&nbsp;Places&nbsp;the&nbsp;flat&nbsp;review<br>
 cursor&nbsp;at&nbsp;character.</tt></dd></dl>
@@ -329,6 +310,15 @@ caret,&nbsp;unless&nbsp;the&nbsp;line&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp
 Arguments:<br>
 -&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface</tt></dd></dl>
+
+<dl><dt><a name="Script-sayPhrase"><strong>sayPhrase</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;text&nbsp;of&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;between&nbsp;the&nbsp;start&nbsp;and<br>
+end&nbsp;offsets,&nbsp;unless&nbsp;the&nbsp;phrase&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp;case&nbsp;it's&nbsp;ignored.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface<br>
+-&nbsp;startOffset:&nbsp;the&nbsp;start&nbsp;text&nbsp;offset.<br>
+-&nbsp;endOffset:&nbsp;the&nbsp;end&nbsp;text&nbsp;offset.</tt></dd></dl>
 
 <dl><dt><a name="Script-sayWord"><strong>sayWord</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;at&nbsp;the&nbsp;caret.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;what&nbsp;if&nbsp;there&nbsp;is&nbsp;no<br>
 word&nbsp;at&nbsp;the&nbsp;caret?]]]<br>
@@ -423,5 +413,16 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;was&nbsp;consumed;&nbsp;otherwise&nbsp;False</tt></dd></dl>
 
-</td></tr></table></td></tr></table>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
+<strong>__date__</strong> = '$Date$'<br>
+<strong>__id__</strong> = '$Id$'<br>
+<strong>__license__</strong> = 'LGPL'<br>
+<strong>__version__</strong> = '$Revision$'</td></tr></table>
 </body></html>

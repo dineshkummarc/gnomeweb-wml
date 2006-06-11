@@ -6,19 +6,10 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.gedit</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.gedit</strong></big></big> (version 1.15, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/gedit.py">/usr/lib/python2.4/site-packages/orca/scripts/gedit.py</a></font></td></tr></table>
-    <p><tt>Custom&nbsp;script&nbsp;for&nbsp;gedit.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;HACK&nbsp;because&nbsp;tickling&nbsp;gedit<br>
-when&nbsp;it&nbsp;is&nbsp;starting&nbsp;can&nbsp;cause&nbsp;gedit&nbsp;to&nbsp;issue&nbsp;the&nbsp;following&nbsp;message:<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(gedit:31434):&nbsp;GLib-GObject-WARNING&nbsp;**:&nbsp;invalid&nbsp;cast&nbsp;from&nbsp;`SpiAccessible'&nbsp;to&nbsp;`BonoboControlAccessible'<br>
-&nbsp;<br>
-It&nbsp;seems&nbsp;as&nbsp;though&nbsp;whenever&nbsp;this&nbsp;message&nbsp;is&nbsp;issued,&nbsp;gedit&nbsp;will&nbsp;hang&nbsp;when<br>
-you&nbsp;try&nbsp;to&nbsp;exit&nbsp;it.&nbsp;&nbsp;Debugging&nbsp;has&nbsp;shown&nbsp;that&nbsp;the&nbsp;iconfied&nbsp;state&nbsp;in<br>
-particular&nbsp;seems&nbsp;to&nbsp;indicate&nbsp;that&nbsp;an&nbsp;object&nbsp;is&nbsp;telling&nbsp;all&nbsp;assistive<br>
-technologies&nbsp;to&nbsp;just&nbsp;leave&nbsp;it&nbsp;alone&nbsp;or&nbsp;it&nbsp;will&nbsp;pull&nbsp;the&nbsp;trigger&nbsp;on&nbsp;the<br>
-application.]]]</tt></p>
+    <p><tt>Custom&nbsp;script&nbsp;for&nbsp;gedit.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -77,10 +68,12 @@ Arguments:<br>
 
 <dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
-<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
+<dl><dt><a name="Script-locusOfFocusChanged"><strong>locusOfFocusChanged</strong></a>(self, event, oldLocusOfFocus, newLocusOfFocus)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;object&nbsp;with&nbsp;focus&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+-&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;the&nbsp;change<br>
+-&nbsp;oldLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;locus&nbsp;of&nbsp;focus<br>
+-&nbsp;newLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;new&nbsp;locus&nbsp;of&nbsp;focus</tt></dd></dl>
 
 <dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
 &nbsp;<br>
@@ -155,13 +148,6 @@ Returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp
 
 <dl><dt><a name="Script-leftClickReviewItem"><strong>leftClickReviewItem</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;a&nbsp;left&nbsp;mouse&nbsp;button&nbsp;click&nbsp;on&nbsp;the&nbsp;current&nbsp;item.</tt></dd></dl>
 
-<dl><dt><a name="Script-locusOfFocusChanged"><strong>locusOfFocusChanged</strong></a>(self, event, oldLocusOfFocus, newLocusOfFocus)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;object&nbsp;with&nbsp;focus&nbsp;changes.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;the&nbsp;change<br>
--&nbsp;oldLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;locus&nbsp;of&nbsp;focus<br>
--&nbsp;newLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;new&nbsp;locus&nbsp;of&nbsp;focus</tt></dd></dl>
-
 <dl><dt><a name="Script-noOp"><strong>noOp</strong></a>(self, event)</dt><dd><tt>Just&nbsp;here&nbsp;to&nbsp;capture&nbsp;events.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -178,12 +164,12 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;hyperlink&nbsp;is&nbsp;selected&nbsp;in&nbsp;a&nbsp;text&nbsp;area.<br>
+<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onMouseButton"><strong>onMouseButton</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;mouse&nbsp;button&nbsp;is&nbsp;pressed&nbsp;or&nbsp;released.<br>
+<dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;hyperlink&nbsp;is&nbsp;selected&nbsp;in&nbsp;a&nbsp;text&nbsp;area.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
@@ -273,6 +259,9 @@ a&nbsp;certain&nbsp;set&nbsp;of&nbsp;attributes&nbsp;will&nbsp;be&nbsp;spoken.&n
 then&nbsp;individual&nbsp;application&nbsp;scripts&nbsp;should&nbsp;override&nbsp;this&nbsp;method&nbsp;to<br>
 only&nbsp;speak&nbsp;the&nbsp;subset&nbsp;required.</tt></dd></dl>
 
+<dl><dt><a name="Script-reportScriptInfo"><strong>reportScriptInfo</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Output&nbsp;useful&nbsp;information&nbsp;on&nbsp;the&nbsp;current&nbsp;script&nbsp;via&nbsp;speech<br>
+and&nbsp;braille.&nbsp;&nbsp;This&nbsp;information&nbsp;will&nbsp;be&nbsp;helpful&nbsp;to&nbsp;script&nbsp;writers.</tt></dd></dl>
+
 <dl><dt><a name="Script-reviewAbove"><strong>reviewAbove</strong></a>(self, inputEvent)</dt><dd><tt>Moves&nbsp;the&nbsp;flat&nbsp;review&nbsp;context&nbsp;to&nbsp;the&nbsp;character&nbsp;most&nbsp;directly<br>
 above&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;cursor.&nbsp;&nbsp;Places&nbsp;the&nbsp;flat&nbsp;review<br>
 cursor&nbsp;at&nbsp;character.</tt></dd></dl>
@@ -339,6 +328,15 @@ caret,&nbsp;unless&nbsp;the&nbsp;line&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp
 Arguments:<br>
 -&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface</tt></dd></dl>
+
+<dl><dt><a name="Script-sayPhrase"><strong>sayPhrase</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;text&nbsp;of&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;between&nbsp;the&nbsp;start&nbsp;and<br>
+end&nbsp;offsets,&nbsp;unless&nbsp;the&nbsp;phrase&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp;case&nbsp;it's&nbsp;ignored.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface<br>
+-&nbsp;startOffset:&nbsp;the&nbsp;start&nbsp;text&nbsp;offset.<br>
+-&nbsp;endOffset:&nbsp;the&nbsp;end&nbsp;text&nbsp;offset.</tt></dd></dl>
 
 <dl><dt><a name="Script-sayWord"><strong>sayWord</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;at&nbsp;the&nbsp;caret.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;what&nbsp;if&nbsp;there&nbsp;is&nbsp;no<br>
 word&nbsp;at&nbsp;the&nbsp;caret?]]]<br>
@@ -466,5 +464,16 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</tt></dd></dl>
 
-</td></tr></table></td></tr></table>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
+<strong>__date__</strong> = '$Date$'<br>
+<strong>__id__</strong> = '$Id$'<br>
+<strong>__license__</strong> = 'LGPL'<br>
+<strong>__version__</strong> = '$Revision$'</td></tr></table>
 </body></html>
