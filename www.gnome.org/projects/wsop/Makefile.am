@@ -6,6 +6,7 @@ page_SCRIPTS = \
 	apply.html
 page_DATA = \
 	poster.pdf \
-	poster.png
+	poster.png \
+	poster.svg
 
 include $(top_srcdir)/rules.common
