@@ -1,11 +1,11 @@
 SUBDIRS = 
 urlpath = /outreach
 
-page_DATA = \
+page_SCRIPTS = \
 	index.html \
-	apply.html \
+	apply.html
+page_DATA = \
 	poster.pdf \
 	poster.png
-page_SCRIPTS =
 
 include $(top_srcdir)/rules.common
