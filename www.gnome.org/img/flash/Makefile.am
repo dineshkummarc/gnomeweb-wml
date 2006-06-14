@@ -31,6 +31,7 @@ page_DATA = \
 	forum-gnome-2005.png \
 	bug-hunt-wgo.png \
 	power-combined.png \
-	two-fourteen.png
+	two-fourteen.png \
+	summeroutreachbanner.jpg
 
 include $(top_srcdir)/rules.common
