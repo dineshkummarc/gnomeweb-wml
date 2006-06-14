@@ -1,5 +1,5 @@
 SUBDIRS = 
-urlpath = /outreach
+urlpath = /projects/wsop
 
 page_SCRIPTS = \
 	index.html \
