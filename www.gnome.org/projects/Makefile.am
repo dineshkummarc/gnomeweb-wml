@@ -38,7 +38,8 @@ SUBDIRS = \
 	desktopwiki             \
 	baobab                  \
 	straw			\
-	orca
+	orca                    \
+	wsop
 
 urlpath = /projects
 
