@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.J2SE-access-bridge</strong></big></big> (version 1.2, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.J2SE-access-bridge</strong></big></big> (version 1.6, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/J2SE-access-bridge.py">/usr/lib/python2.4/site-packages/orca/J2SE-access-bridge.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Orca<br>
@@ -34,13 +34,17 @@
 <font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.atspi.html">orca.atspi</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Accessibility.html">Accessibility</a><br>
+<a href="orca.atspi.html">orca.atspi</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
 </td><td width="25%" valign=top><a href="orca.default.html">orca.default</a><br>
 <a href="orca.keybindings.html">orca.keybindings</a><br>
-</td><td width="25%" valign=top><a href="orca.orca.html">orca.orca</a><br>
+<a href="orca.orca.html">orca.orca</a><br>
+</td><td width="25%" valign=top><a href="orca.orca_state.html">orca.orca_state</a><br>
+<a href="orca.rolenames.html">orca.rolenames</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
 </td><td width="25%" valign=top><a href="orca.speech.html">orca.speech</a><br>
+<a href="orca.speechgenerator.html">orca.speechgenerator</a><br>
 <a href="orca.util.html">orca.util</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -54,6 +58,12 @@
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="orca.J2SE-access-bridge.html#Script">Script</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="orca.J2SE-access-bridge.html#SpeechGenerator">SpeechGenerator</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -83,10 +93,34 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
 
-<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object's&nbsp;state&nbsp;changes.<br>
+<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
+
+<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onSelectionChanged"><strong>onSelectionChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;an&nbsp;object's&nbsp;selection&nbsp;changes.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object's&nbsp;state&nbsp;changes.&nbsp;&nbsp;Currently,&nbsp;the<br>
+state&nbsp;changes&nbsp;for&nbsp;non-focused&nbsp;objects&nbsp;are&nbsp;ignored.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(self, event, obj)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object&nbsp;changes.&nbsp;&nbsp;This<br>
+method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual&nbsp;appearance<br>
+changes&nbsp;solely&nbsp;because&nbsp;of&nbsp;focus&nbsp;--&nbsp;setLocusOfFocus&nbsp;is&nbsp;used&nbsp;for&nbsp;that.<br>
+Instead,&nbsp;it&nbsp;is&nbsp;intended&nbsp;mostly&nbsp;for&nbsp;objects&nbsp;whose&nbsp;notional&nbsp;'value'&nbsp;has<br>
+changed,&nbsp;such&nbsp;as&nbsp;a&nbsp;checkbox&nbsp;changing&nbsp;state,&nbsp;a&nbsp;progress&nbsp;bar&nbsp;advancing,<br>
+a&nbsp;slider&nbsp;moving,&nbsp;text&nbsp;inserted,&nbsp;caret&nbsp;moved,&nbsp;etc.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
+-&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="orca.default.html#Script">orca.default.Script</a>:<br>
@@ -107,6 +141,15 @@ place.<br>
 Arguments:<br>
 -&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface.</tt></dd></dl>
+
+<dl><dt><a name="Script-enterLearnMode"><strong>enterLearnMode</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Turns&nbsp;learn&nbsp;mode&nbsp;on.&nbsp;&nbsp;The&nbsp;user&nbsp;must&nbsp;press&nbsp;the&nbsp;escape&nbsp;key&nbsp;to&nbsp;exit<br>
+learn&nbsp;mode.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
+
+<dl><dt><a name="Script-exitLearnMode"><strong>exitLearnMode</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Turns&nbsp;learn&nbsp;mode&nbsp;off.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
 
 <dl><dt><a name="Script-findCommonAncestor"><strong>findCommonAncestor</strong></a>(self, a, b)</dt><dd><tt>Finds&nbsp;the&nbsp;common&nbsp;ancestor&nbsp;between&nbsp;Accessible&nbsp;a&nbsp;and&nbsp;Accessible&nbsp;b.<br>
 &nbsp;<br>
@@ -167,22 +210,12 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
 <dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;hyperlink&nbsp;is&nbsp;selected&nbsp;in&nbsp;a&nbsp;text&nbsp;area.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
 <dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
-<dl><dt><a name="Script-onSelectionChanged"><strong>onSelectionChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;an&nbsp;object's&nbsp;selection&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
@@ -248,12 +281,12 @@ In&nbsp;focus&nbsp;tracking&nbsp;mode,&nbsp;the&nbsp;cursor&nbsp;stays&nbsp;at&n
 In&nbsp;flat&nbsp;review&nbsp;mode,&nbsp;the&nbsp;review&nbsp;cursor&nbsp;moves&nbsp;to&nbsp;character<br>
 associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
 
-<dl><dt><a name="Script-processObjectEvent"><strong>processObjectEvent</strong></a>(self, event)</dt><dd><tt>Processes&nbsp;all&nbsp;object&nbsp;events&nbsp;of&nbsp;interest&nbsp;to&nbsp;this&nbsp;script.&nbsp;&nbsp;Note<br>
-that&nbsp;this&nbsp;script&nbsp;may&nbsp;be&nbsp;passed&nbsp;events&nbsp;it&nbsp;doesn't&nbsp;care&nbsp;about,&nbsp;so<br>
-it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
+<dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;It&nbsp;uses&nbsp;the&nbsp;super<br>
+class&nbsp;equivalent&nbsp;to&nbsp;do&nbsp;most&nbsp;of&nbsp;the&nbsp;work.&nbsp;The&nbsp;only&nbsp;thing&nbsp;done&nbsp;here<br>
+is&nbsp;to&nbsp;detect&nbsp;when&nbsp;the&nbsp;user&nbsp;is&nbsp;trying&nbsp;to&nbsp;get&nbsp;out&nbsp;of&nbsp;learn&nbsp;mode.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+-&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent</tt></dd></dl>
 
 <dl><dt><a name="Script-readCharAttributes"><strong>readCharAttributes</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Reads&nbsp;the&nbsp;attributes&nbsp;associated&nbsp;with&nbsp;the&nbsp;current&nbsp;text&nbsp;character.<br>
 Calls&nbsp;outCharAttributes&nbsp;to&nbsp;speak&nbsp;a&nbsp;list&nbsp;of&nbsp;attributes.&nbsp;By&nbsp;default,<br>
@@ -280,7 +313,8 @@ the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;line.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentCharacter"><strong>reviewCurrentCharacter</strong></a>(self, inputEvent)</dt></dl>
 
-<dl><dt><a name="Script-reviewCurrentItem"><strong>reviewCurrentItem</strong></a>(self, inputEvent, targetCursorCell<font color="#909090">=0</font>)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;item&nbsp;to&nbsp;the&nbsp;user.</tt></dd></dl>
+<dl><dt><a name="Script-reviewCurrentItem"><strong>reviewCurrentItem</strong></a>(self, inputEvent, targetCursorCell<font color="#909090">=0</font>)</dt><dd><tt>Speak/Braille&nbsp;the&nbsp;current&nbsp;item&nbsp;to&nbsp;the&nbsp;user.&nbsp;A&nbsp;"double-click"<br>
+of&nbsp;this&nbsp;key&nbsp;will&nbsp;cause&nbsp;the&nbsp;word&nbsp;to&nbsp;be&nbsp;spelt.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentLine"><strong>reviewCurrentLine</strong></a>(self, inputEvent)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;line&nbsp;via&nbsp;braille&nbsp;and&nbsp;speech.</tt></dd></dl>
 
@@ -354,12 +388,17 @@ called&nbsp;by&nbsp;the&nbsp;key&nbsp;and&nbsp;braille&nbsp;bindings.</tt></dd><
 interesting&nbsp;(e.g.,&nbsp;text)&nbsp;&nbsp;zones&nbsp;in&nbsp;the&nbsp;active&nbsp;window&nbsp;for<br>
 this&nbsp;application.</tt></dd></dl>
 
-<dl><dt><a name="Script-speakTextIndentation"><strong>speakTextIndentation</strong></a>(self, obj, line)</dt><dd><tt>Speaks&nbsp;a&nbsp;summary&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;spaces&nbsp;and/or&nbsp;tabs&nbsp;at&nbsp;the&nbsp;<br>
+<dl><dt><a name="Script-speakTextIndentation"><strong>speakTextIndentation</strong></a>(self, obj, line)</dt><dd><tt>Speaks&nbsp;a&nbsp;summary&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;spaces&nbsp;and/or&nbsp;tabs&nbsp;at&nbsp;the<br>
 beginning&nbsp;of&nbsp;the&nbsp;given&nbsp;line.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;obj:&nbsp;the&nbsp;text&nbsp;object.<br>
 -&nbsp;line:&nbsp;the&nbsp;string&nbsp;to&nbsp;check&nbsp;for&nbsp;spaces&nbsp;and&nbsp;tabs.</tt></dd></dl>
+
+<dl><dt><a name="Script-spellCurrentItem"><strong>spellCurrentItem</strong></a>(self, string)</dt><dd><tt>Spell&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;word&nbsp;or&nbsp;line.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;string:&nbsp;the&nbsp;string&nbsp;to&nbsp;spell.</tt></dd></dl>
 
 <dl><dt><a name="Script-textAttrsToDictionary"><strong>textAttrsToDictionary</strong></a>(self, str)</dt><dd><tt>Converts&nbsp;a&nbsp;string&nbsp;of&nbsp;text&nbsp;attribute&nbsp;tokens&nbsp;of&nbsp;the&nbsp;form<br>
 &lt;key&gt;:&lt;value&gt;;&nbsp;into&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;keys&nbsp;and&nbsp;values.<br>
@@ -388,17 +427,6 @@ is&nbsp;non-0,&nbsp;then&nbsp;an&nbsp;attempt&nbsp;will&nbsp;be&nbsp;made&nbsp;t
 at&nbsp;that&nbsp;cell.&nbsp;&nbsp;Otherwise,&nbsp;we&nbsp;will&nbsp;pan&nbsp;in&nbsp;display-sized&nbsp;increments<br>
 to&nbsp;show&nbsp;the&nbsp;review&nbsp;cursor.</tt></dd></dl>
 
-<dl><dt><a name="Script-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(self, event, obj)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object&nbsp;changes.&nbsp;&nbsp;This<br>
-method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual&nbsp;appearance<br>
-changes&nbsp;solely&nbsp;because&nbsp;of&nbsp;focus&nbsp;--&nbsp;setLocusOfFocus&nbsp;is&nbsp;used&nbsp;for&nbsp;that.<br>
-Instead,&nbsp;it&nbsp;is&nbsp;intended&nbsp;mostly&nbsp;for&nbsp;objects&nbsp;whose&nbsp;notional&nbsp;'value'&nbsp;has<br>
-changed,&nbsp;such&nbsp;as&nbsp;a&nbsp;checkbox&nbsp;changing&nbsp;state,&nbsp;a&nbsp;progress&nbsp;bar&nbsp;advancing,<br>
-a&nbsp;slider&nbsp;moving,&nbsp;text&nbsp;inserted,&nbsp;caret&nbsp;moved,&nbsp;etc.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
--&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
-
 <dl><dt><a name="Script-whereAmI"><strong>whereAmI</strong></a>(self, inputEvent)</dt></dl>
 
 <hr>
@@ -411,8 +439,6 @@ Arguments:<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
 
 <dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
-
-<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
 <dl><dt><a name="Script-processBrailleEvent"><strong>processBrailleEvent</strong></a>(self, brailleEvent)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;on&nbsp;the&nbsp;Braille&nbsp;display.<br>
 &nbsp;<br>
@@ -427,18 +453,55 @@ the&nbsp;brailleBindings&nbsp;for&nbsp;a&nbsp;script.<br>
 Arguments:<br>
 -&nbsp;brailleEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.BrailleEvent</tt></dd></dl>
 
-<dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.<br>
+<dl><dt><a name="Script-processObjectEvent"><strong>processObjectEvent</strong></a>(self, event)</dt><dd><tt>Processes&nbsp;all&nbsp;AT-SPI&nbsp;object&nbsp;events&nbsp;of&nbsp;interest&nbsp;to&nbsp;this<br>
+script.&nbsp;&nbsp;The&nbsp;interest&nbsp;in&nbsp;events&nbsp;is&nbsp;specified&nbsp;via&nbsp;the<br>
+'listeners'&nbsp;field&nbsp;that&nbsp;was&nbsp;defined&nbsp;during&nbsp;the&nbsp;construction&nbsp;of<br>
+this&nbsp;script.<br>
 &nbsp;<br>
-This&nbsp;method&nbsp;will&nbsp;primarily&nbsp;use&nbsp;the&nbsp;keybindings&nbsp;field&nbsp;of&nbsp;this<br>
-script&nbsp;instance&nbsp;see&nbsp;if&nbsp;this&nbsp;script&nbsp;has&nbsp;an&nbsp;interest&nbsp;in&nbsp;the<br>
-event.<br>
+In&nbsp;general,&nbsp;the&nbsp;primary&nbsp;purpose&nbsp;of&nbsp;handling&nbsp;object&nbsp;events&nbsp;is&nbsp;to<br>
+keep&nbsp;track&nbsp;of&nbsp;changes&nbsp;to&nbsp;the&nbsp;locus&nbsp;of&nbsp;focus&nbsp;and&nbsp;notify&nbsp;the<br>
+orca&nbsp;module&nbsp;of&nbsp;these&nbsp;changes&nbsp;via&nbsp;orca.setLocusOfFocus&nbsp;and<br>
+orca.visualAppearanceChanged.<br>
 &nbsp;<br>
-NOTE:&nbsp;there&nbsp;is&nbsp;latent,&nbsp;but&nbsp;unsupported,&nbsp;logic&nbsp;for&nbsp;allowing<br>
-the&nbsp;user's&nbsp;user-settings.py&nbsp;file&nbsp;to&nbsp;extend&nbsp;and/or&nbsp;override<br>
-the&nbsp;keybindings&nbsp;for&nbsp;a&nbsp;script.<br>
+Note&nbsp;that&nbsp;this&nbsp;script&nbsp;may&nbsp;be&nbsp;passed&nbsp;events&nbsp;it&nbsp;doesn't&nbsp;care<br>
+about,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent</tt></dd></dl>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpeechGenerator">class <strong>SpeechGenerator</strong></a>(<a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Overrides&nbsp;_getSpeechForLabel<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods inherited from <a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>:<br>
+<dl><dt><a name="SpeechGenerator-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpeechGenerator-getSpeech"><strong>getSpeech</strong></a>(self, obj, already_focused)</dt><dd><tt>Get&nbsp;the&nbsp;speech&nbsp;for&nbsp;an&nbsp;Accessible&nbsp;object.&nbsp;&nbsp;This&nbsp;will&nbsp;look<br>
+first&nbsp;to&nbsp;the&nbsp;specific&nbsp;speech&nbsp;generators&nbsp;and&nbsp;then&nbsp;to&nbsp;the<br>
+default&nbsp;speech&nbsp;generator.&nbsp;&nbsp;This&nbsp;method&nbsp;is&nbsp;the&nbsp;primary&nbsp;method<br>
+that&nbsp;external&nbsp;callers&nbsp;of&nbsp;this&nbsp;class&nbsp;should&nbsp;use.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+-&nbsp;already_focused:&nbsp;False&nbsp;if&nbsp;object&nbsp;just&nbsp;received&nbsp;focus<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</tt></dd></dl>
+
+<dl><dt><a name="SpeechGenerator-getSpeechContext"><strong>getSpeechContext</strong></a>(self, obj, stopAncestor<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;the&nbsp;speech&nbsp;that&nbsp;describes&nbsp;the&nbsp;names&nbsp;and&nbsp;role&nbsp;of<br>
+the&nbsp;container&nbsp;hierarchy&nbsp;of&nbsp;the&nbsp;object,&nbsp;stopping&nbsp;at&nbsp;and<br>
+not&nbsp;including&nbsp;the&nbsp;stopAncestor.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+-&nbsp;stopAncestor:&nbsp;the&nbsp;anscestor&nbsp;to&nbsp;stop&nbsp;at&nbsp;and&nbsp;not&nbsp;include&nbsp;(None<br>
+&nbsp;&nbsp;means&nbsp;include&nbsp;all&nbsp;ancestors)<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

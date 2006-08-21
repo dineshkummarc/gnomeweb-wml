@@ -134,6 +134,15 @@ Arguments:<br>
 -&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface.</tt></dd></dl>
 
+<dl><dt><a name="Script-enterLearnMode"><strong>enterLearnMode</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Turns&nbsp;learn&nbsp;mode&nbsp;on.&nbsp;&nbsp;The&nbsp;user&nbsp;must&nbsp;press&nbsp;the&nbsp;escape&nbsp;key&nbsp;to&nbsp;exit<br>
+learn&nbsp;mode.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
+
+<dl><dt><a name="Script-exitLearnMode"><strong>exitLearnMode</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Turns&nbsp;learn&nbsp;mode&nbsp;off.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
+
 <dl><dt><a name="Script-findCommonAncestor"><strong>findCommonAncestor</strong></a>(self, a, b)</dt><dd><tt>Finds&nbsp;the&nbsp;common&nbsp;ancestor&nbsp;between&nbsp;Accessible&nbsp;a&nbsp;and&nbsp;Accessible&nbsp;b.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -213,8 +222,7 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object's&nbsp;state&nbsp;changes.&nbsp;&nbsp;Currently,&nbsp;the<br>
-state&nbsp;changes&nbsp;for&nbsp;non-focused&nbsp;objects&nbsp;are&nbsp;ignored.<br>
+<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object's&nbsp;state&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
@@ -280,12 +288,12 @@ In&nbsp;focus&nbsp;tracking&nbsp;mode,&nbsp;the&nbsp;cursor&nbsp;stays&nbsp;at&n
 In&nbsp;flat&nbsp;review&nbsp;mode,&nbsp;the&nbsp;review&nbsp;cursor&nbsp;moves&nbsp;to&nbsp;character<br>
 associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
 
-<dl><dt><a name="Script-processObjectEvent"><strong>processObjectEvent</strong></a>(self, event)</dt><dd><tt>Processes&nbsp;all&nbsp;object&nbsp;events&nbsp;of&nbsp;interest&nbsp;to&nbsp;this&nbsp;script.&nbsp;&nbsp;Note<br>
-that&nbsp;this&nbsp;script&nbsp;may&nbsp;be&nbsp;passed&nbsp;events&nbsp;it&nbsp;doesn't&nbsp;care&nbsp;about,&nbsp;so<br>
-it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
+<dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;It&nbsp;uses&nbsp;the&nbsp;super<br>
+class&nbsp;equivalent&nbsp;to&nbsp;do&nbsp;most&nbsp;of&nbsp;the&nbsp;work.&nbsp;The&nbsp;only&nbsp;thing&nbsp;done&nbsp;here<br>
+is&nbsp;to&nbsp;detect&nbsp;when&nbsp;the&nbsp;user&nbsp;is&nbsp;trying&nbsp;to&nbsp;get&nbsp;out&nbsp;of&nbsp;learn&nbsp;mode.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+-&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent</tt></dd></dl>
 
 <dl><dt><a name="Script-readCharAttributes"><strong>readCharAttributes</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Reads&nbsp;the&nbsp;attributes&nbsp;associated&nbsp;with&nbsp;the&nbsp;current&nbsp;text&nbsp;character.<br>
 Calls&nbsp;outCharAttributes&nbsp;to&nbsp;speak&nbsp;a&nbsp;list&nbsp;of&nbsp;attributes.&nbsp;By&nbsp;default,<br>
@@ -312,7 +320,8 @@ the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;line.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentCharacter"><strong>reviewCurrentCharacter</strong></a>(self, inputEvent)</dt></dl>
 
-<dl><dt><a name="Script-reviewCurrentItem"><strong>reviewCurrentItem</strong></a>(self, inputEvent, targetCursorCell<font color="#909090">=0</font>)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;item&nbsp;to&nbsp;the&nbsp;user.</tt></dd></dl>
+<dl><dt><a name="Script-reviewCurrentItem"><strong>reviewCurrentItem</strong></a>(self, inputEvent, targetCursorCell<font color="#909090">=0</font>)</dt><dd><tt>Speak/Braille&nbsp;the&nbsp;current&nbsp;item&nbsp;to&nbsp;the&nbsp;user.&nbsp;A&nbsp;"double-click"<br>
+of&nbsp;this&nbsp;key&nbsp;will&nbsp;cause&nbsp;the&nbsp;word&nbsp;to&nbsp;be&nbsp;spelt.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentLine"><strong>reviewCurrentLine</strong></a>(self, inputEvent)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;line&nbsp;via&nbsp;braille&nbsp;and&nbsp;speech.</tt></dd></dl>
 
@@ -386,12 +395,17 @@ called&nbsp;by&nbsp;the&nbsp;key&nbsp;and&nbsp;braille&nbsp;bindings.</tt></dd><
 interesting&nbsp;(e.g.,&nbsp;text)&nbsp;&nbsp;zones&nbsp;in&nbsp;the&nbsp;active&nbsp;window&nbsp;for<br>
 this&nbsp;application.</tt></dd></dl>
 
-<dl><dt><a name="Script-speakTextIndentation"><strong>speakTextIndentation</strong></a>(self, obj, line)</dt><dd><tt>Speaks&nbsp;a&nbsp;summary&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;spaces&nbsp;and/or&nbsp;tabs&nbsp;at&nbsp;the&nbsp;<br>
+<dl><dt><a name="Script-speakTextIndentation"><strong>speakTextIndentation</strong></a>(self, obj, line)</dt><dd><tt>Speaks&nbsp;a&nbsp;summary&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;spaces&nbsp;and/or&nbsp;tabs&nbsp;at&nbsp;the<br>
 beginning&nbsp;of&nbsp;the&nbsp;given&nbsp;line.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;obj:&nbsp;the&nbsp;text&nbsp;object.<br>
 -&nbsp;line:&nbsp;the&nbsp;string&nbsp;to&nbsp;check&nbsp;for&nbsp;spaces&nbsp;and&nbsp;tabs.</tt></dd></dl>
+
+<dl><dt><a name="Script-spellCurrentItem"><strong>spellCurrentItem</strong></a>(self, string)</dt><dd><tt>Spell&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;word&nbsp;or&nbsp;line.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;string:&nbsp;the&nbsp;string&nbsp;to&nbsp;spell.</tt></dd></dl>
 
 <dl><dt><a name="Script-textAttrsToDictionary"><strong>textAttrsToDictionary</strong></a>(self, str)</dt><dd><tt>Converts&nbsp;a&nbsp;string&nbsp;of&nbsp;text&nbsp;attribute&nbsp;tokens&nbsp;of&nbsp;the&nbsp;form<br>
 &lt;key&gt;:&lt;value&gt;;&nbsp;into&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;keys&nbsp;and&nbsp;values.<br>
@@ -462,18 +476,21 @@ the&nbsp;brailleBindings&nbsp;for&nbsp;a&nbsp;script.<br>
 Arguments:<br>
 -&nbsp;brailleEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.BrailleEvent</tt></dd></dl>
 
-<dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.<br>
+<dl><dt><a name="Script-processObjectEvent"><strong>processObjectEvent</strong></a>(self, event)</dt><dd><tt>Processes&nbsp;all&nbsp;AT-SPI&nbsp;object&nbsp;events&nbsp;of&nbsp;interest&nbsp;to&nbsp;this<br>
+script.&nbsp;&nbsp;The&nbsp;interest&nbsp;in&nbsp;events&nbsp;is&nbsp;specified&nbsp;via&nbsp;the<br>
+'listeners'&nbsp;field&nbsp;that&nbsp;was&nbsp;defined&nbsp;during&nbsp;the&nbsp;construction&nbsp;of<br>
+this&nbsp;script.<br>
 &nbsp;<br>
-This&nbsp;method&nbsp;will&nbsp;primarily&nbsp;use&nbsp;the&nbsp;keybindings&nbsp;field&nbsp;of&nbsp;this<br>
-script&nbsp;instance&nbsp;see&nbsp;if&nbsp;this&nbsp;script&nbsp;has&nbsp;an&nbsp;interest&nbsp;in&nbsp;the<br>
-event.<br>
+In&nbsp;general,&nbsp;the&nbsp;primary&nbsp;purpose&nbsp;of&nbsp;handling&nbsp;object&nbsp;events&nbsp;is&nbsp;to<br>
+keep&nbsp;track&nbsp;of&nbsp;changes&nbsp;to&nbsp;the&nbsp;locus&nbsp;of&nbsp;focus&nbsp;and&nbsp;notify&nbsp;the<br>
+orca&nbsp;module&nbsp;of&nbsp;these&nbsp;changes&nbsp;via&nbsp;orca.setLocusOfFocus&nbsp;and<br>
+orca.visualAppearanceChanged.<br>
 &nbsp;<br>
-NOTE:&nbsp;there&nbsp;is&nbsp;latent,&nbsp;but&nbsp;unsupported,&nbsp;logic&nbsp;for&nbsp;allowing<br>
-the&nbsp;user's&nbsp;user-settings.py&nbsp;file&nbsp;to&nbsp;extend&nbsp;and/or&nbsp;override<br>
-the&nbsp;keybindings&nbsp;for&nbsp;a&nbsp;script.<br>
+Note&nbsp;that&nbsp;this&nbsp;script&nbsp;may&nbsp;be&nbsp;passed&nbsp;events&nbsp;it&nbsp;doesn't&nbsp;care<br>
+about,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent</tt></dd></dl>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
