@@ -236,12 +236,10 @@
 				<xsl:with-param name="prev" select="false()"/>
 				<xsl:with-param name="next" select="$next"/>
 			</xsl:call-template>
-			<div class="abstract">
-				<xsl:apply-templates select="/book/bookinfo/abstract"/>
-			</div>
+			<xsl:call-template name="yelp.title"/>
 			<xsl:apply-templates select="yelp:get-content(.)"/>
-			<div class="titlepage">
-				<xsl:call-template name="book.titlepage"/>
+			<div class="abstract">
+				<xsl:apply-templates select="/article/articleinfo/abstract"/>
 			</div>
 			<xsl:call-template name="yelp.navbar.bottom">
 				<xsl:with-param name="node" select="."/>
@@ -278,7 +276,7 @@
 				<xsl:attribute name="href">
 					<xsl:call-template name="yelp.toc.ref"/>
 				</xsl:attribute>
-				<xsl:value-of select="yelp:get-title-text(/book)"/>
+				<xsl:value-of select="yelp:get-title-text(/article/articleinfo/abstract)"/>
 			</a></td>
 		</xsl:if>
 		<xsl:call-template name="yelp.navbar.cell">
