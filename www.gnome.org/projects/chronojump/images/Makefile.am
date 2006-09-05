@@ -30,6 +30,9 @@ misc_images=\
 	chronojump_new_run_type_spanish_small.png \
 	chronopic_foto.jpg \
 	chronopic_foto_small.png \
+	chronopic_juanfer_back.jpg \
+	chronopic_juanfer_front.jpg \
+	chronopic_juanfer_schema.jpg \
 	deporteyciencia_blues.png \
 	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
