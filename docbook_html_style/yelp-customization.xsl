@@ -6,18 +6,18 @@
                 extension-element-prefixes="func exsl"
                 version='1.0'>
 
+<!-- use version 1.65.1 from my home directory -->
+<xsl:import href="/home/users/bmsmith/1.65.1/html/docbook.xsl"/>
 
-<!--
-<xsl:import href="/home/smitten/1.65.1/html/docbook.xsl"/>
--->
-<!--
-<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
--->
+<!-- 
+target a specific version of Norman Walsh's stylesheets as the newer stylesheets
+are missing certain templates that we depend on (admon.graphics.width)
 
-<!-- target a specific version of Norman Walsh's stylesheets as the newer stylesheets
-     are missing certain templates that we depend on (admon.graphics.width)
--->
+Don't uncomment this, or window.gnome.org will download the stylesheets whenever it builds the
+release notes, which is sloooowww!
+
 <xsl:import href="http://docbook.sourceforge.net/release/xsl/1.64.1/html/docbook.xsl"/>
+-->
 
 <xsl:include href="yelp-custom.xsl"/>
 <xsl:include href="yelp-functions.xsl"/>
