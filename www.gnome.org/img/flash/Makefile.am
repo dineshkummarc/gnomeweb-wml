@@ -32,6 +32,7 @@ page_DATA = \
 	bug-hunt-wgo.png \
 	power-combined.png \
 	two-fourteen.png \
-	summeroutreachbanner.jpg
+	summeroutreachbanner.jpg \
+	two-sixteen.png
 
 include $(top_srcdir)/rules.common
