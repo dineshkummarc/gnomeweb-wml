@@ -31,7 +31,7 @@ html:
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
 	  xsltproc --xinclude -o $$docbookdir/unused.html.ignore \
 	    --param yelp_max_chunk_depth 1 \
- 	    --stringparam admon.graphics.path ./images/ \
+	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
 	    --stringparam http_prefix /tour/ \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
@@ -56,10 +56,19 @@ install-data-local:
 	  $(INSTALL) -d $(pagedir)/$$docbookdir; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/*.html $(pagedir)/$$docbookdir/; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
+	  if test "`echo $(srcdir)/$$docbookdir/images/*.png`" = $(srcdir)/$$docbookdir/images/'*.png' ; then \
+	    echo "WARNING: missing images/ subdir in $$docbookdir" ; \
+	  else \
+	    $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
+	  fi ; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+	  if test "`echo $(srcdir)/$$docbookdir/figures/*.png`" = $(srcdir)/$$docbookdir/figures/'*.png' ; then \
+	    echo "WARNING: missing figures/ subdir in $$docbookdir" ; \
+	  else \
+	    $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+	  fi ; \
 	done
+
 
 
 
