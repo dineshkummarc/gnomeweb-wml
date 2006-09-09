@@ -31,6 +31,7 @@ SUBDIRS = \
 	libgsf			\
 	evince			\
 	sabayon			\
+	seahorse		\
 	totem			\
 	rhythmbox               \
 	livecd			\
