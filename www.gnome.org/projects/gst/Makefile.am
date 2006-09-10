@@ -1,18 +1,9 @@
-SUBDIRS = images screenshots release_notes stuff
+SUBDIRS = images
 
 urlpath=/projects/gst
 
-page_SCRIPTS =  bugs.html	\
-		contact.html	\
-		contrib.html	\
-		distros.php     \
-		download.html	\
-		gst.css		\
-		index.html	\
-		news.html	\
-		screenshots.html\
-		structure.html  \
-		team.html
+page_SCRIPTS =  index.html	\
+		default.css
 
 include $(top_srcdir)/rules.common
 
