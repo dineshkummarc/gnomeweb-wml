@@ -8,6 +8,6 @@ page_SCRIPTS= index.html	\
 		list.html \
 		screenshots.html \
 		seahorse.css \
-		seahorse-0.9.4-notes.txt
+		RELEASE-NOTES-HEAD.txt
 
 include $(top_srcdir)/rules.common
