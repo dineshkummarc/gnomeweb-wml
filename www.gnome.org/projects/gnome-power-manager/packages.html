@@ -23,7 +23,7 @@
  <a href="gpm.html">Notification Icon</a> &middot;
  <a href="gpp.html">Preferences</a> &middot;
  <a href="packages.html"><b>Download</b></a> &middot;
- <a href="http://live.gnome.org/GnomePowerManager/Faq">FAQ</a> &middot;
+ <a href="http://cvs.gnome.org/viewcvs/*checkout*/gnome-power-manager/docs/faq.html">FAQ</a> &middot;
  <a href="bugs.html">Reporting Bugs</a> &middot;
  <a href="http://live.gnome.org/GnomePowerManager">Wiki</a>
  </div>
@@ -42,50 +42,23 @@
   <td valign="top"><img src="images/icon-redhat.png" alt="[img]"/></td>
   <td>
    <p>
-    YUM Repo by me for <a href="http://people.freedesktop.org/~hughsient/fedora/utopia.repo">Fedora Core 5</a>
+    Fedora Core (5 and above) has the gnome-power-manager package in core and
+    it should be installed by default.
+    If it is not installed, just do:
    </p>
-   <p>
-    It is recommended that you use my yum repo - just copy 
-    <a href="http://people.freedesktop.org/~hughsient/fedora/utopia.repo">this file</a> to <b>/etc/yum.repos.d/</b>:
-    And do:
-   </p>
-<pre>
-yum -y install gnome-power-manager
-</pre>
+   <pre>yum -y install gnome-power-manager</pre>
   </td>
  </tr>
  <tr>
   <td valign="top"><img src="images/icon-ubuntu.png" alt="[img]"/></td>
   <td>
    <p>
-    Packages by Oliver Grawert for 
-    <a href="http://packages.ubuntu.com/dapper/gnome/gnome-power-manager">Ubuntu Dapper</a>
+    Ubuntu Dapper and Edgy have the gnome-power-manager package in main and
+    it should be installed by default.
+    If it is not installed, just do:
    </p>
-   <pre>apt-get -y install gnome-power-manager libnotify notification-daemon</pre>
-   <p>
-    The standard HAL installed by Ubuntu on Breezy runs as a standard user (i.e. not as root)
-    and as such cannot work with the newer functionality such as hibernation and
-    suspend. Most distros run hald as the root user.
-   </p>
-   <p>
-    To get GNOME Power Manager working with ubuntu you will need to edit the file
-    /etc/defaults/hal and change:
-   </p>
-<pre>
-# This will run the hal daemon as normal user 'hal'
-DAEMON_OPTS=
-# This will run the hal daemon as user root 
-#DAEMON_OPTS=--retain-privileges
-</pre>
-   <p>
-    to:
-   </p>
-<pre>
-# This will run the hal daemon as normal user 'hal'
-#DAEMON_OPTS=
-# This will run the hal daemon as user root 
-DAEMON_OPTS=--retain-privileges
-</pre>
+   <pre>apt-get -y install gnome-power-manager</pre>
+    </p>
   </td>
  </tr>
  <tr>
@@ -139,19 +112,8 @@ libtool: link: cannot find the library `/usr/lib/libgobject-2.0.la'
   <td valign="top"><img src="images/icon-gentoo.png" alt="[img]"/></td>
   <td>
    <p>
-    ebuild by Steev Klimaszewski for 
-    <a href="http://gentopia.gentooexperimental.org/">Gentoo Linux</a>
+    An ebuild is available in portage. You know what to do.
    </p>
-<pre>
-emerge subversion
-cd /usr/local/
-svn co https://gentopia.gentooexperimental.org/svn/overlay/ gentopia
-edit /etc/make.conf
-set PORTDIR_OVERLAY="/usr/local/gentopia"
-# If you already have an overlay then do this
-PORTDIR_OVERLAY="/usr/local/portage /usr/local/gentopia"
-emerge -av dbus hal pmount gnome-power-manager udev
-</pre>
   </td>
  </tr>
  <tr>
@@ -182,19 +144,10 @@ To compile and make, I use the following procedure:
 </p>
 <pre>
 cd gnome-power-manager
-./autogen.sh --prefix=/home/hughsie/root --with-gconf-source=xml::/home/hughsie/.gconf --enable-libnotify
+./autogen.sh --prefix=/home/hughsie/root --with-gconf-source=xml::/home/hughsie/.gconf
 make
 make install
-su
-cp ~/root/etc/dbus-1/system.d/gnome-power-manager.conf /etc/dbus-1/system.d/
-/sbin/service messagebus restart
-exit
 </pre>
-<p>
-NB: Your command for restarting dbus maybe different to the above.
-It may be easier to reboot your computer instead of restarting messagebus.
-</p>
-
 </div>
 
 <!-- sidebar -->
@@ -217,7 +170,7 @@ It may be easier to reboot your computer instead of restarting messagebus.
   GNOME Bug Tracking System</a>.
  </p>
  <p>
-  Please read the <a href="http://live.gnome.org/GnomePowerManager/Faq">FAQ</a> and the 
+  Please read the <a href="http://cvs.gnome.org/viewcvs/*checkout*/gnome-power-manager/docs/faq.html">FAQ</a> and the 
   <a href="bugs.html">bug reporting guidelines</a> before creating a new bug.
  </p>
  <p>
