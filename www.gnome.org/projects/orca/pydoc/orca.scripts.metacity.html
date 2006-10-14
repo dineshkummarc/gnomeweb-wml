@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.metacity</strong></big></big> (version 1.15, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.metacity</strong></big></big> (version 1.16, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/metacity.py">/usr/lib/python2.4/site-packages/orca/scripts/metacity.py</a></font></td></tr></table>
     <p><tt>Custom&nbsp;script&nbsp;for&nbsp;metacity.</tt></p>
@@ -147,7 +147,19 @@ Arguments:<br>
 &nbsp;<br>
 Returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp;specified&nbsp;object</tt></dd></dl>
 
+<dl><dt><a name="Script-getText"><strong>getText</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;the&nbsp;substring&nbsp;of&nbsp;the&nbsp;given&nbsp;object's&nbsp;text&nbsp;specialization.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;an&nbsp;accessible&nbsp;supporting&nbsp;the&nbsp;accessible&nbsp;text&nbsp;specialization<br>
+-&nbsp;startOffset:&nbsp;the&nbsp;starting&nbsp;character&nbsp;position<br>
+-&nbsp;endOffset:&nbsp;the&nbsp;ending&nbsp;character&nbsp;position</tt></dd></dl>
+
 <dl><dt><a name="Script-goBrailleHome"><strong>goBrailleHome</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;to&nbsp;the&nbsp;component&nbsp;with&nbsp;focus.</tt></dd></dl>
+
+<dl><dt><a name="Script-isTextArea"><strong>isTextArea</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;obj&nbsp;is&nbsp;a&nbsp;GUI&nbsp;component&nbsp;that&nbsp;is&nbsp;for&nbsp;entering&nbsp;text.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;an&nbsp;accessible</tt></dd></dl>
 
 <dl><dt><a name="Script-leftClickReviewItem"><strong>leftClickReviewItem</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Performs&nbsp;a&nbsp;left&nbsp;mouse&nbsp;button&nbsp;click&nbsp;on&nbsp;the&nbsp;current&nbsp;item.</tt></dd></dl>
 
@@ -235,6 +247,11 @@ In&nbsp;focus&nbsp;tracking&nbsp;mode,&nbsp;the&nbsp;cursor&nbsp;stays&nbsp;at&n
 In&nbsp;flat&nbsp;review&nbsp;mode,&nbsp;the&nbsp;review&nbsp;cursor&nbsp;moves&nbsp;to&nbsp;character<br>
 associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
 
+<dl><dt><a name="Script-phoneticSpellCurrentItem"><strong>phoneticSpellCurrentItem</strong></a>(self, string)</dt><dd><tt>Phonetically&nbsp;spell&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;word&nbsp;or&nbsp;line.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;string:&nbsp;the&nbsp;string&nbsp;to&nbsp;phonetically&nbsp;spell.</tt></dd></dl>
+
 <dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;It&nbsp;uses&nbsp;the&nbsp;super<br>
 class&nbsp;equivalent&nbsp;to&nbsp;do&nbsp;most&nbsp;of&nbsp;the&nbsp;work.&nbsp;The&nbsp;only&nbsp;thing&nbsp;done&nbsp;here<br>
 is&nbsp;to&nbsp;detect&nbsp;when&nbsp;the&nbsp;user&nbsp;is&nbsp;trying&nbsp;to&nbsp;get&nbsp;out&nbsp;of&nbsp;learn&nbsp;mode.<br>
@@ -265,10 +282,11 @@ the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;line.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentAccessible"><strong>reviewCurrentAccessible</strong></a>(self, inputEvent)</dt></dl>
 
-<dl><dt><a name="Script-reviewCurrentCharacter"><strong>reviewCurrentCharacter</strong></a>(self, inputEvent)</dt></dl>
+<dl><dt><a name="Script-reviewCurrentCharacter"><strong>reviewCurrentCharacter</strong></a>(self, inputEvent)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;character&nbsp;via&nbsp;braille&nbsp;and&nbsp;speech.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentItem"><strong>reviewCurrentItem</strong></a>(self, inputEvent, targetCursorCell<font color="#909090">=0</font>)</dt><dd><tt>Speak/Braille&nbsp;the&nbsp;current&nbsp;item&nbsp;to&nbsp;the&nbsp;user.&nbsp;A&nbsp;"double-click"<br>
-of&nbsp;this&nbsp;key&nbsp;will&nbsp;cause&nbsp;the&nbsp;word&nbsp;to&nbsp;be&nbsp;spelt.</tt></dd></dl>
+of&nbsp;this&nbsp;key&nbsp;will&nbsp;cause&nbsp;the&nbsp;word&nbsp;to&nbsp;be&nbsp;spelt.&nbsp;A&nbsp;"triple-click"<br>
+will&nbsp;cause&nbsp;the&nbsp;word&nbsp;to&nbsp;be&nbsp;phonetically&nbsp;spelt.</tt></dd></dl>
 
 <dl><dt><a name="Script-reviewCurrentLine"><strong>reviewCurrentLine</strong></a>(self, inputEvent)</dt><dd><tt>Presents&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;line&nbsp;via&nbsp;braille&nbsp;and&nbsp;speech.</tt></dd></dl>
 
@@ -410,7 +428,26 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
 
+<dl><dt><a name="Script-getBrailleCommandsForInputHandler"><strong>getBrailleCommandsForInputHandler</strong></a>(self, inputEventHandler)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;BrlTTY&nbsp;commands&nbsp;(they're&nbsp;in&nbsp;braille.py)&nbsp;that<br>
+match&nbsp;the&nbsp;given&nbsp;inputEventHandler&nbsp;passed&nbsp;as&nbsp;argument.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;inputEventHandler:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.InputEventHandler<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;(possibly&nbsp;empty)&nbsp;of&nbsp;BrlTTY&nbsp;commands&nbsp;(they're&nbsp;in<br>
+braille.py)&nbsp;that&nbsp;match&nbsp;the&nbsp;given&nbsp;inputEventHandler&nbsp;passed.</tt></dd></dl>
+
 <dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
+
+<dl><dt><a name="Script-getKeyBindingsForInputHandler"><strong>getKeyBindingsForInputHandler</strong></a>(self, inputEventHandler)</dt><dd><tt>Returns&nbsp;a&nbsp;KeyBindings&nbsp;object&nbsp;with&nbsp;the&nbsp;list&nbsp;of&nbsp;KeyBindings&nbsp;that<br>
+matche&nbsp;the&nbsp;passed&nbsp;inputEventHandler&nbsp;as&nbsp;argument&nbsp;(at&nbsp;least&nbsp;the<br>
+inputEventHandler&nbsp;that&nbsp;has&nbsp;the&nbsp;same&nbsp;handler&nbsp;function)<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;inputEventHandler:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.InputEventHandler<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings&nbsp;populated&nbsp;with<br>
+keybindings.KeyBinding&nbsp;instances&nbsp;that&nbsp;match&nbsp;the&nbsp;inputEventHandler.</tt></dd></dl>
 
 <dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 

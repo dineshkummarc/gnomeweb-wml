@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.util</strong></big></big> (version 1.38, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.util</strong></big></big> (version 1.45, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/util.py">/usr/lib/python2.4/site-packages/orca/util.py</a></font></td></tr></table>
     <p><tt>Provides&nbsp;various&nbsp;utility&nbsp;functions&nbsp;for&nbsp;Orca.</tt></p>
@@ -18,16 +18,18 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.atspi.html">orca.atspi</a><br>
+<a href="orca.chnames.html">orca.chnames</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
 <a href="gtk.html">gtk</a><br>
 </td><td width="25%" valign=top><a href="orca.input_event.html">orca.input_event</a><br>
 <a href="linecache.html">linecache</a><br>
 <a href="orca.orca_state.html">orca.orca_state</a><br>
+<a href="orca.punctuation_settings.html">orca.punctuation_settings</a><br>
 </td><td width="25%" valign=top><a href="orca.rolenames.html">orca.rolenames</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
 <a href="orca.speech.html">orca.speech</a><br>
-</td><td width="25%" valign=top><a href="orca.speechserver.html">orca.speechserver</a><br>
-<a href="string.html">string</a><br>
+<a href="orca.speechserver.html">orca.speechserver</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -35,7 +37,24 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-appendString"><strong>appendString</strong></a>(text, newText, delimiter<font color="#909090">=' '</font>)</dt><dd><tt>Appends&nbsp;the&nbsp;newText&nbsp;to&nbsp;the&nbsp;given&nbsp;text&nbsp;with&nbsp;the&nbsp;delimiter&nbsp;in&nbsp;between<br>
+<td width="100%"><dl><dt><a name="-adjustForRepeats"><strong>adjustForRepeats</strong></a>(line)</dt><dd><tt>Adjust&nbsp;line&nbsp;to&nbsp;include&nbsp;repeat&nbsp;character&nbsp;counts.<br>
+As&nbsp;some&nbsp;people&nbsp;will&nbsp;want&nbsp;this&nbsp;and&nbsp;others&nbsp;might&nbsp;not,<br>
+there&nbsp;is&nbsp;a&nbsp;setting&nbsp;in&nbsp;settings.py&nbsp;that&nbsp;determines<br>
+whether&nbsp;this&nbsp;functionality&nbsp;is&nbsp;enabled.<br>
+&nbsp;<br>
+repeatCharacterLimit&nbsp;=&nbsp;&lt;n&gt;<br>
+&nbsp;<br>
+If&nbsp;&lt;n&gt;&nbsp;is&nbsp;0,&nbsp;then&nbsp;there&nbsp;would&nbsp;be&nbsp;no&nbsp;repeat&nbsp;characters.<br>
+Otherwise&nbsp;&lt;n&gt;&nbsp;would&nbsp;be&nbsp;the&nbsp;number&nbsp;of&nbsp;same&nbsp;characters&nbsp;(or&nbsp;more)<br>
+in&nbsp;a&nbsp;row&nbsp;that&nbsp;cause&nbsp;the&nbsp;repeat&nbsp;character&nbsp;count&nbsp;output.<br>
+If&nbsp;the&nbsp;value&nbsp;is&nbsp;set&nbsp;to&nbsp;1,&nbsp;2&nbsp;or&nbsp;3&nbsp;then&nbsp;it's&nbsp;treated&nbsp;as&nbsp;if&nbsp;it&nbsp;was<br>
+zero.&nbsp;In&nbsp;other&nbsp;words,&nbsp;no&nbsp;repeat&nbsp;character&nbsp;count&nbsp;is&nbsp;given.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;line:&nbsp;the&nbsp;string&nbsp;to&nbsp;adjust&nbsp;for&nbsp;repeat&nbsp;character&nbsp;counts.<br>
+&nbsp;<br>
+Returns:&nbsp;a&nbsp;new&nbsp;line&nbsp;adjusted&nbsp;for&nbsp;repeat&nbsp;character&nbsp;counts&nbsp;(if&nbsp;enabled).</tt></dd></dl>
+ <dl><dt><a name="-appendString"><strong>appendString</strong></a>(text, newText, delimiter<font color="#909090">=' '</font>)</dt><dd><tt>Appends&nbsp;the&nbsp;newText&nbsp;to&nbsp;the&nbsp;given&nbsp;text&nbsp;with&nbsp;the&nbsp;delimiter&nbsp;in&nbsp;between<br>
 and&nbsp;returns&nbsp;the&nbsp;new&nbsp;string.&nbsp;&nbsp;Edge&nbsp;cases,&nbsp;such&nbsp;as&nbsp;no&nbsp;initial&nbsp;text&nbsp;or<br>
 no&nbsp;newText,&nbsp;are&nbsp;handled&nbsp;gracefully.</tt></dd></dl>
  <dl><dt><a name="-drawOutline"><strong>drawOutline</strong></a>(x, y, width, height, erasePrevious<font color="#909090">=True</font>)</dt><dd><tt>Draws&nbsp;a&nbsp;rectangular&nbsp;outline&nbsp;around&nbsp;the&nbsp;accessible,&nbsp;erasing&nbsp;the<br>
@@ -89,6 +108,12 @@ Arguments:<br>
 A&nbsp;list&nbsp;containing&nbsp;the&nbsp;accelerator&nbsp;and&nbsp;shortcut&nbsp;for&nbsp;the&nbsp;given&nbsp;object,<br>
 where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;accelerator&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is<br>
 the&nbsp;shortcut.</tt></dd></dl>
+ <dl><dt><a name="-getClickCount"><strong>getClickCount</strong></a>(lastInputEvent, inputEvent)</dt><dd><tt>Return&nbsp;the&nbsp;count&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;clicks&nbsp;a&nbsp;user&nbsp;has&nbsp;made&nbsp;to&nbsp;one&nbsp;of&nbsp;the<br>
+keys&nbsp;on&nbsp;the&nbsp;keyboard.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;lastInputEvent:&nbsp;the&nbsp;last&nbsp;input&nbsp;event.<br>
+-&nbsp;inputEvent:&nbsp;the&nbsp;current&nbsp;input&nbsp;event.</tt></dd></dl>
  <dl><dt><a name="-getDisplayedLabel"><strong>getDisplayedLabel</strong></a>(object)</dt><dd><tt>If&nbsp;there&nbsp;is&nbsp;an&nbsp;object&nbsp;labelling&nbsp;the&nbsp;given&nbsp;object,&nbsp;return&nbsp;the<br>
 text&nbsp;being&nbsp;displayed&nbsp;for&nbsp;the&nbsp;object&nbsp;labelling&nbsp;this&nbsp;object.<br>
 Otherwise,&nbsp;return&nbsp;None.<br>
@@ -159,12 +184,6 @@ Arguments:<br>
 &nbsp;&nbsp;hierarchy&nbsp;of&nbsp;its&nbsp;parents.<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;all&nbsp;roles&nbsp;match.</tt></dd></dl>
- <dl><dt><a name="-isDoubleClick"><strong>isDoubleClick</strong></a>(lastInputEvent, inputEvent)</dt><dd><tt>Return&nbsp;an&nbsp;indication&nbsp;of&nbsp;whether&nbsp;the&nbsp;user&nbsp;has&nbsp;double-clicked&nbsp;a<br>
-one&nbsp;of&nbsp;the&nbsp;keys&nbsp;on&nbsp;the&nbsp;keyboard.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;lastInputEvent:&nbsp;the&nbsp;last&nbsp;input&nbsp;event.<br>
--&nbsp;inputEvent:&nbsp;the&nbsp;current&nbsp;input&nbsp;event.</tt></dd></dl>
  <dl><dt><a name="-isInActiveApp"><strong>isInActiveApp</strong></a>(obj)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;given&nbsp;object&nbsp;is&nbsp;from&nbsp;the&nbsp;same&nbsp;application&nbsp;that<br>
 currently&nbsp;has&nbsp;keyboard&nbsp;focus.<br>
 &nbsp;<br>
