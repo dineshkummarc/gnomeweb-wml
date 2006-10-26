@@ -1,0 +1,830 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Importing Text Files</title><link rel="previous" href="sect-file-open.shtml" title="Opening Files"/><link rel="next" href="sect-file-save.shtml" title="Saving Files"/><link rel="top" href="index.shtml" title="The Gnumeric Manual, version 1.4"/><link rel="stylesheet" type="text/css" href="gnumeric-doc.css"/></head><body><div class="body"><div class="sect1"><a name="sect-file-textImport"/><h1 class="sect1 title"><span class="title">Importing Text Files</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    <span class="application" style="font-style: italic; ">Gnumeric</span> can import data which is organized as text fields
+    structured in some systematic fashion either from a file or from
+    the clipboard. Importing structured text may require extensive
+    intervention on the part of the user so <span class="application" style="font-style: italic; ">Gnumeric</span> provides a
+    <span class="interface" style="font-weight: bold; ">Text Import</span> druid, which is a three paneled
+    dialog with configuration options. For text imported from files,
+    this druid appears after the file has been opened, using the file
+    format named "Text Import (configurable)" in the <span class="interface" style="font-weight: bold; ">File
+    Open</span> dialog, as is explained in <a class="xref" href="sect-file-open.shtml" title="Opening Files">Section 9.3 ― Opening Files</a>. For text imported from the clipboard,
+    the druid appears when a user attempts to paste the text into a
+    worksheet, as is explained in <a class="xref" href="sect-movecopy.shtml#sect-movecopy-xclipboard" title="Cut and Paste Between Gnumeric and Other Applications">Section 5.7.4 ― Cut and Paste Between Gnumeric and Other Applications</a>.
+  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    The text import druid contains three panels but the middle panel
+    differs depending on the structuring system used, either with data
+    fields separated by a special character or with data fields
+    occurring at equally spaced intervals in each line. The first
+    panel allows the user to configure the character encoding, line
+    break characters, structuring system, and line range. The second
+    panel allows the user to define the columns by either, for
+    separated data, setting the separating character and text
+    delimiting character, or, for fixed space data, by setting the
+    column spacing. The third panel allows the user to select which
+    columns to import and define their data types.
+  </p><div class="admonition block-indent tip">
+    <div class="title"><span class="title"><b>The steps involved in the text import druid.</b></span></div>
+
+    <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"/>
+
+
+    <div class="list"><div class="orderedlist"><ol><li>
+        <span class="para">
+	  Launch the  <span class="interface" style="font-weight: bold; ">Text Import</span> druid using,
+	  in the <span class="guimenu" style="font-weight: bold; ">File</span>, the
+	  <span class="guimenuitem" style="font-weight: bold; ">Open</span> and selecting the "Text import
+	  (configurable)" file format type.
+	</span>
+      </li><li>
+        <span class="para">
+	  Define the character encoding of the text block.
+	</span>
+      </li><li>
+        <span class="para">
+	  Define the characters indicating the breaks between the lines.
+	</span>
+      </li><li>
+        <span class="para">
+	  Select the line range from the text block to be imported.
+	</span>
+      </li><li>
+        <span class="para">
+	  Go to the second panel, which will be different for data
+	  structured by separating characters and data structured by
+	  fixed spacing.
+	</span>
+      </li><li>
+        <span class="para">
+	  (For separated data) Define the separating character.
+	</span>
+      </li><li>
+        <span class="para">
+	  (For separated data) Define the character grouping a text field.
+	</span>
+      </li><li>
+        <span class="para">
+	  (For fixed width data) Define the field widths.
+	</span>
+      </li><li>
+        <span class="para">
+	  Go to the third panel.
+	</span>
+      </li><li>
+        <span class="para">
+	  Configure the inclusion of empty outside columns.
+	</span>
+      </li><li>
+        <span class="para">
+	  Select the locale that will influence the formatting of the
+	  numerical elements in each column.
+	</span>
+      </li><li>
+        <span class="para">
+	  Select the numerical formats for the data in each columns.
+	</span>
+      </li><li>
+        <span class="para">
+	  Select the columns to be included in the imported block.
+	</span>
+      </li><li>
+        <span class="para">
+	  Click on the <span class="guibutton" style="font-weight: bold; ">Finish</span> button.
+	</span>
+      </li></ol></div></div>
+
+  </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    This explanation of the <span class="interface" style="font-weight: bold; ">Text Import</span> druid
+    will first start with a discussion of text files including
+    character encodings and line break delimiters. The explanation
+    will then cover the various strategies used to structure numeric
+    data in text files. Following these discussions, the components of
+    the druid will be presented and, finally, a detailed explanation
+    of each step in the use of the druid will be presented.
+  </p><div class="sect2"><a name="sect-file-textImport-complex"/><h2 class="sect2 title"><span class="title"><span class="label">9.4.1. </span>The complexities of text format files</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The use of text format files to store and transmit data for use
+      in a spreadsheet involves three somewhat complex decisions which
+      determine how the file expresses and separates each data
+      value. These complexities must be understood for a user to be
+      able to use the <span class="interface" style="font-weight: bold; ">Text Import</span> druid
+      effectively. These complexities exist because of the limitations
+      of early computers and because or the historical development of
+      computer systems by different manufacturers and programmers, in
+      different countries, targeting different types of users,
+      speaking different languages.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The first complexity involves the different systems which relate
+      the contents of a computer file to the characters in a written
+      language. All text files on a computer consist of a long
+      sequence of binary digits. Text files are files in which these
+      digits are used to indicate different textual
+      characters. Character 'encodings' are standardized systems which
+      relate the binary digits in a computer file to a formal system
+      of characters which includes both text glyphs (shapes) and
+      formatting indicators. Each encoding defines a way to interpret
+      the binary digits and uses the characters from a particular
+      character set. The alternative character encoding strategies are
+      explained in greater detail in <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-encoding" title="Character Encodings">Section 9.4.1.1 ― Character Encodings</a>, below.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The second complexity involves the decision of how to separate
+      the characters in a file into different lines. Text files
+      explicitly determine the end of each line of a file with a
+      specific character or sequence of characters. The complexity
+      involves the particular character sequence used to determine the
+      end of each line. Different conventions have been used in
+      different computer systems. The alternative line breaking
+      strategies are explained in greater detail in <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-lineBreak" title="Line break delimiters">Section 9.4.1.2 ― Line break delimiters</a>, below.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The third complexity involves the decision of how to separate
+      the characters in each line into separate value fields. Again,
+      different strategies exist. These can be separated into two
+      broad categories: strategies which use a character or sequence
+      of characters to separate the values, so called 'delimited' or
+      'separated' strategies, and strategies which use the position of
+      the character in the line to separate the values, so called
+      'fixed-width' strategies. The alternative data structuring
+      strategies are explained in greater detail in <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-dataStruct" title="Data Structuring Strategies">Section 9.4.1.3 ― Data Structuring Strategies</a>, below.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      Fortunately, the <span class="application" style="font-style: italic; ">Gnumeric</span> <span class="interface" style="font-weight: bold; ">Text Import</span> druid
+      provides users with a way to preview the information in a text
+      file. This enables users to change the settings which determine
+      each of these three conventions until the text in the preview
+      correctly shows the contents of the data file. Therefore, while
+      the details of these three steps are complex, the practical
+      impact on users is minimal. Users can simply experiment until
+      the file appears correct without having to understand each of
+      these complexities in detail.
+    </p><div class="sect3"><a name="sect-file-textImport-complex-encoding"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.1.1. </span>Character Encodings</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The use of text files to store data in a structured fashion for
+      use by spreadsheet programs, and more generally all text files,
+      require some scheme to relate the binary number in the computer
+      file itself to the characters of a written language. Such
+      schemes are called <span class="wordasword" style="font-style: italic; ">'encodings'</span>.
+
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The origin of computers led to the invention of a number of
+      different encoding schemes. Due to the limitation of early
+      computer hardware, these encoding schemes all restricted
+      themselves to character sets which contained only the most
+      essential characters of the English language. The desire to
+      support characters which were not in this basic set of
+      characters led to the creation of new encoding schemes,
+      many of which restricted themselves to the characters in
+      specific languages. One encoding scheme, called UTF-8, has now
+      emerged as the best encoding scheme for the future for a
+      multitude of reasons including its ability to co-exist with
+      current operating systems and its ability to encode all of the
+      characters in the largest set of characters which has been
+      consistently defined, the Universal Character Set. However, the
+      existence of the diversity of encoding schemes means that for
+      the foreseeable future, files will be created and distributed
+      using several different schemes. This is especially true for
+      files containing text in languages other than English.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      This complex situation generally does not impact users.  <span class="application" style="font-style: italic; ">Gnumeric</span>
+      has been designed to deal with most of the complexity. Many
+      kinds of flies, such as the <span class="application" style="font-style: italic; ">Gnumeric</span> file format itself, describe
+      their encoding scheme internally in such a way that it can be
+      easily recognized. <span class="application" style="font-style: italic; ">Gnumeric</span> also provides an easy approach to
+      changing the encoding scheme in case this proves necessary.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      Encoding schemes merely prove a hindrance to users when opening
+      files. There is no danger that data be lost or that any other
+      serious problem arise by selecting the wrong scheme. If the
+      wrong scheme is selected, either the file will contain
+      characters which are nonsensical and <span class="application" style="font-style: italic; ">Gnumeric</span> will open an error
+      dialog asking the user to select a different encoding scheme, or
+      the preview area will display nonsensical characters. These
+      nonsensical characters may simply be characters grouped
+      together which do not occur in any language, such as
+      "åÕÛÛÞ", or may be characters for which
+      a graphical representation (a glyph) does not exist in the font
+      being used and is therefore displayed using a small box with
+      four numbers inside, such as  and . Each of
+      these errors indicates that the encoding scheme used to read the
+      file was not the same encoding scheme as was used to create the
+      file. The difficulty is then to determine what encoding scheme
+      to use. A simple process of trial and error should lead to
+      picking the right scheme.
+   </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      A basic strategy to find the right encoding for a file being
+      imported into <span class="application" style="font-style: italic; ">Gnumeric</span> is, first, to use the scheme proposed by
+      <span class="application" style="font-style: italic; ">Gnumeric</span> and, then, to hunt for the correct encoding. The default
+      encoding scheme is the one defined by the locale setting of the
+      user and this is also the default scheme <span class="application" style="font-style: italic; ">Gnumeric</span> uses to create
+      text files.
+
+
+      If the default encoding is incorrect, the correct encoding must
+      be found by trial and error. One strategy to use is to examine
+      the major western encodings and then the major regional
+      encodings. The major western encoding schemes are ASCII,
+      ISO-8859-1, and UTF-8, but ASCII is a subset of the other two so
+      it does not need to be tried on its own. The major regional
+      encodings are the IS0-8859-x schemes since these have become
+      quite popular in GNU operating systems. Alternatively, the
+      various character sets used by the Microsoft operating systems
+      can be attempted. The encoding schemes are listed under
+      "Western", "Unicode", and the alphabet names. 
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The World Wide Web has many resources dedicated to explaining
+      encoding systems and other related information. One of the best
+      sites discussing UTF-8 and Unicode is the <a class="ulink" href="http://www.cl.cam.ac.uk/~mgk25/unicode.html" title="http://www.cl.cam.ac.uk/~mgk25/unicode.html">UTF-8 and
+      Unicode FAQ for UNIX/Linux</a> page maintained by Markus
+      Kuhn. 
+
+      The Unicode project has a <a class="ulink" href="http://www.unicode.org" title="http://www.unicode.org">web site</a> which includes an
+      online copy of their standard character set. 
+
+      A discussion of the ISO-8859 family of encodings can be found at
+      a page titled: "<a class="ulink" href="http://czyborra.com/charsets/iso8859.html" title="http://czyborra.com/charsets/iso8859.html">The ISO-8859
+      Alphabet Soup</a>", which may alternatively be found <a class="ulink" href="http://www.unicodecharacter.com/charsets/iso8859.html" title="http://www.unicodecharacter.com/charsets/iso8859.html">here</a>. A similar discussion on Wikipedia, focusing on
+      the western alphabets, can be found <a class="ulink" href="http://en.wikipedia.org/wiki/ISO_8859-1" title="http://en.wikipedia.org/wiki/ISO_8859-1">here</a>.
+
+    </p></div><div class="sect3"><a name="sect-file-textImport-complex-lineBreak"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.1.2. </span>Line break delimiters</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The use of text files to store data in a structured fashion
+        for use by spreadsheet programs requires a scheme to separate
+        each line of the file. Structured text files rely on the files
+        having explicitly defined rows within the file as one
+        component in the structuring system. Each of these rows is
+        defined by a character sequence indicating the end of a row.
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       Two characters that are part of the ASCII code, an early
+       encoding that became a widely followed standard, were included
+       to help define the end of the line. These are the 'linefeed'
+       character and the 'carriage return' character, named after the
+       two processes which occur when a typewriter starts a new line:
+       first the typewriter barrel rolls - the linefeed - then the
+       whole carriage with the sheet of paper moves back to the
+       starting point -the carriage return. In the same way that
+       different computing systems have used different encoding
+       schemes,  three different approaches became common for defining
+       the end of the line.
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       In GNU operating systems and other systems that inherit from
+       the UNIX legacy, the end of a line was defined simply using the
+       'linefeed' character. The Macintosh operating system chose
+       instead to use only the 'carriage return' character. The
+       Windows operating system uses both characters in the sequence
+       'carriage return' then 'linefeed'. 
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       A user opening a file into <span class="application" style="font-style: italic; ">Gnumeric</span> will see, in the preview area
+       of the <span class="interface" style="font-weight: bold; ">Text Import</span> druid, whether or not
+       the line breaks have been recognized correctly and will be able
+       to alter the recognition settings. An incompatible setup will
+       either yield a single unbroken line of text, lines of text with
+       extra, empty rows between them, or lines of text with extra
+       symbols at the start or end of each line.
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       The correct line break delimiters can be established by
+       checking or unchecking the alternatives. The preview area will
+       then show the result of the file interpreted with these
+       settings. 
+     </p></div><div class="sect3"><a name="sect-file-textImport-complex-dataStruct"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.1.3. </span>Data Structuring Strategies</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       The use of text files to store data in a structured fashion for
+       use by spreadsheet programs also requires some scheme to
+       separate each value within every line. Two different approaches
+       are used to separate these values. The first strategy, uses a
+       particular character or character sequence to denote the start
+       and end of each value. Such strategies are called 'Separated
+       Value' or 'Delimited Value' systems. The second strategy places
+       each value stating at a specified position in the line. Such
+       strategies are called 'Fixed Width' strategies because they
+       inherently require that each value have a pre-determined size.
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       Separated Value structuring systems distinguish the contents of
+       each value using pre-determined characters to separate the
+       values. Certain characters have become common in such schemes,
+       for-example 'Comma Separated Value' files use a comma character
+       to separate values while 'Tab Separated Value' files use a tab
+       character. <span class="application" style="font-style: italic; ">Gnumeric</span> allows the user to define the value separator
+       to be any one of several common characters or a specific
+       sequence of characters, either on their own or in
+       combination. For example, a file could use both space
+       characters and tab characters to separate values. Similarly, a
+       file could be read which used the entire word 'STOP' to separate
+       values like the common scheme to separate sentences in a
+       telegram.
+     </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       Separate Value structuring systems often also include a method
+       to surround a single text value which may itself contain the
+       character used to separate values. The quote character is often
+       used in this role but <span class="application" style="font-style: italic; ">Gnumeric</span> allows users to configure any
+       character in this role. For example, a file which used the
+       comma to separate values could nonetheless contain a value like
+       "Zoe, Sally, Dodji" if this value had appropriate text
+       indicating characters at either end.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      Fixed Width structuring systems are common formats for the
+      output of database tables since the contents of these tables
+      have often been defined as variables of a particular size.
+
+      To import these files, users must specify exactly the start of
+      each column so that the importer can separate the values on each
+      row. 
+
+    </p></div></div><div class="sect2"><a name="note-file-textImport-druid"/><h2 class="sect2 title"><span class="title"><span class="label">9.4.2. </span>
+      The Components of the <span class="interface" style="font-weight: bold; ">Text Import</span> Druid
+    </span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The <span class="interface" style="font-weight: bold; ">Text Import</span> druid consists of three
+      panels with the middle panel differing according to the type of
+      data structuring used. 
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      The first panel allows users to configure the character encoding
+      used by the file, to determine the character sequences used to
+      separate lines, configure the type of structuring being used and
+      select the lines of the file to import.  The second column allows
+      the user to define the separation strategy used for each
+      value. For separated value files this involves defining the
+      separating character sequences and the text indicating
+      character. For fixed width files, this involves defining the
+      width of each column.  The third panel allows the user to select
+      the columns to be included during the import and to select the
+      format of the values in each column.
+    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      Users navigate the <span class="interface" style="font-weight: bold; ">Text Import</span> druid by
+      clicking on the <span class="guibutton" style="font-weight: bold; ">Forward</span> button on each
+      panel after they have configured the settings properly. The
+      third panel contains a <span class="guibutton" style="font-weight: bold; ">Finish</span> which
+      causes the file to be imported to a workbook using all the
+      settings as they are configured.
+    </p><div class="sect3"><a name="sect-file-textImport-druid-panel1"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.2.1. </span>
+        The first panel of the <span class="interface" style="font-weight: bold; ">Text Import</span> Druid.
+      </span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The first panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+        Druid allows users to set the file encoding, to determine the
+        character sequences used to separate lines, configure the type
+        of structuring being used and select the lines of the file to
+        import.
+      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="figure block-indent"><a name="fig-file-textImport-druid-panel1"/>
+        <div class="title"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 9-2</span> </span>
+	  The first panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+	  druid with the component areas labeled with callouts.
+	</span></div>
+	<div class="screenshot">
+          <div class="mediaobject"><img src="figures/textguru-import-panel1-withTags.png"/><div class="caption">
+              <p class="para">
+	        The different components of the first panel of the
+	        <span class="interface" style="font-weight: bold; ">Text Import</span> druid with each component
+	        labeled with a callout.
+              </p>
+	    </div></div>
+	</div>
+      </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The purpose of each labeled component in <a class="xref" href="sect-file-textImport.shtml#fig-file-textImport-druid-panel1" title="&#10;&#9;  The first panel of the Text Import&#10;&#9;  druid with the component areas labeled with callouts.&#10;&#9;">Figure 9-2</a> is
+        explained below:
+
+
+
+
+	<div class="list"><div class="variablelist"><div class="title"><span class="title"><b>The components of the first panel</b></span></div><dl><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">1</span> - The file encoding
+	      selection menu.
+	    </span></dt><dd>
+	      <p class="para">
+	        This drop down menu provides a list of encoding
+	        schemes for the characters in the text file.  By
+	        default, <span class="application" style="font-style: italic; ">Gnumeric</span> selects the encoding scheme used by
+	        the locale of the user.  See <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-encoding" title="Character Encodings">Section 9.4.1.1 ― Character Encodings</a> for more
+	        details.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">2</span> - The line break
+	      character selector.
+	    </span></dt><dd>
+	      <p class="para">
+	        These three check boxes can be selected individually
+	        or together to define the sequences which will be
+	        interpreted as line break indicators. Generally,
+	        selecting all three boxes will produce the correct
+	        results. 
+
+	      </p>
+	      <p class="para">
+	        The errors produced if the wrong combination of boxes
+	        is selected will include the entire file being placed
+	        on a single line, empty lines appearing between the
+	        lines of the file, or undefined symbols appearing at
+	        the beginning or end of almost every line. See <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-lineBreak" title="Line break delimiters">Section 9.4.1.2 ― Line break delimiters</a> for more
+	        details.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">3</span> - The data
+	      structuring system selector.
+	    </span></dt><dd>
+	      <p class="para">
+	        These two push buttons allow the choice between the
+	        two different structuring schemes, data structured by
+	        placing a separating character between the data values
+	        and data organized in fixed width columns. Note that
+	        this choice will determine which panel will be shown
+	        as the second panel of the druid. See <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-dataStruct" title="Data Structuring Strategies">Section 9.4.1.3 ― Data Structuring Strategies</a> for more
+	        details. 
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">4</span> - The line range spinboxes.
+	    </span></dt><dd>
+	      <p class="para">
+	        These two spin buttons allow the user to select the
+	        start and end rows for the data import. The spin boxes
+	        can be used either by typing a new value in the text
+	        entry area where the numbers are displayed, or by
+	        using the mouse button to click on the up arrow to
+	        increase the number and the down arrow to decrease the
+	        number.
+	      </p>
+	      <p class="para">
+	        For instance, if the text file contained a large
+	        header area with meta information, this header could
+	        be excluded from the data imported to the <span class="application" style="font-style: italic; ">Gnumeric</span>
+	        worksheet by increasing the number of the starting,
+	        "From", line.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">5</span> - The preview area.
+	    </span></dt><dd>
+	      <p class="para">
+	        This area displays a preview of the file as it will be
+	        interpreted when the the settings that are currently
+	        selected in this first panel are applied.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">6</span> - The button area.
+	    </span></dt><dd>
+	      <p class="para">
+	        These four buttons allow the user to navigate the
+	        druid. The <span class="guibutton" style="font-weight: bold; ">Help</span> button should
+	        open the <span class="application" style="font-style: italic; ">Gnumeric</span> manual to this section. The
+	        <span class="guibutton" style="font-weight: bold; ">Cancel</span> button will dismiss the
+	        dialog and return the user to the worksheet. The
+	        <span class="guibutton" style="font-weight: bold; ">Back</span> button is disabled since
+	        this is the first panel of the druid and the
+	        <span class="guibutton" style="font-weight: bold; ">Forward</span> button will bring up
+	        the next panel in the druid.
+	      </p>
+	    </dd></dl></div></div>
+
+      </p></div><div class="sect3"><a name="sect-file-textImport-druid-panel2separated"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.2.2. </span>
+        The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+        Druid used for separated data
+      </span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+        Druid used for separated data allows the user to configure the
+        character sequences used to separate the values in each row
+        and to configure the text delimiting characters. <span class="application" style="font-style: italic; ">Gnumeric</span>, by
+        default, guesses which characters are being used to separate
+        values and pre-sets those characters. The user can, however,
+        reconfigure these characters.  </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="figure block-indent"><a name="fig-file-textImport-druid-panel2a"/>
+        <div class="title"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 9-3</span> </span>
+	  The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+	  druid for separated data with
+	  the component areas labeled with callouts. 
+	</span></div>
+	<div class="screenshot">
+          <div class="mediaobject"><img src="figures/textguru-import-panel2a-withTags.png"/><div class="caption">
+              <p class="para">
+	        The different components of the second panel of the
+	        <span class="interface" style="font-weight: bold; ">Text Import</span> druid for separated data
+	        with each component labeled with a callout.
+              </p>
+	    </div></div>
+	</div>
+      </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The purpose of each labeled component in <a class="xref" href="sect-file-textImport.shtml#fig-file-textImport-druid-panel2a" title="&#10;&#9;  The second panel of the Text Import&#10;&#9;  druid for separated data with&#10;&#9;  the component areas labeled with callouts. &#10;&#9;">Figure 9-3</a> is
+        explained below:
+
+	<div class="list"><div class="variablelist"><div class="title"><span class="title"><b>The components of the second panel for structured data</b></span></div><dl><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">1</span> - The separator
+	    definition area.
+	    </span></dt><dd>
+	      <p class="para">
+
+	        This are allows the user to define the characters used
+	        to separate data value fields within each
+	        row. The checkboxes can be pressed to add or remove
+	        characters from those treated as
+	        separators. Additionally, the 'custom' type allows the
+	        user to define either other single characters, or a
+	        particular character sequence used to separate
+	        values. The preview area in the panel will show the
+	        file processed with the rules which have already been
+	        applied.
+	      </p>
+
+	      <p class="para">
+	        Generally, this type of file structuring uses a single
+	        character to separate fields but it is possible to use
+	        either several different characters or to use a
+	        sequence of characters. For example, it would be
+	        possible to use the old telegraphic convention of
+	        separating phrases with the word 'STOP' by selecting
+	        the 'custom' separator type and entering the character
+	        sequence 'STOP' in the text field.
+	      </p>
+
+	      <p class="para">
+	        This area also includes a checkbox enabling two
+	        separator sequences that immediately follow one
+	        another, to be treated as a single separator. This
+	        option will only be useful where data is imported with
+	        one or more completely empty columns and no partially
+	        filled columns. If this option is checked and the data
+	        file has partially filled columns of data, the columns
+	        will be jumbled during the text import operation.
+	      </p>
+
+	      <p class="para">
+	        See <a class="xref" href="sect-file-textImport.shtml#sect-file-textImport-complex-dataStruct" title="Data Structuring Strategies">Section 9.4.1.3 ― Data Structuring Strategies</a>
+	        for more details.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">2</span> - The text indicating
+	      character area.
+	    </span></dt><dd>
+	      <p class="para">
+	        Separated value files often additionally define a
+	        character used to indicate the start and end of a data
+	        element which should be considered a single text
+	        entry. This strategy allows the inclusion of text
+	        entries which include the value separator.
+	      </p>
+
+	      <p class="para">
+	        For example, a file which is structured as a comma
+	        separated value file, could use the double quotation
+	        mark to delimit text values and would then be able to
+	        include text values such as: 'Zoe, Mark, Sally'.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">3</span> - The preview area.
+	    </span></dt><dd>
+	      <p class="para">
+	        This area displays a preview of the file as it will be
+	        interpreted when the the settings that are currently
+	        selected in the first and second panels are applied.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">4</span> - The button area.
+	    </span></dt><dd>
+	      <p class="para">
+	        These four buttons allow the user to navigate the
+	        druid. The <span class="guibutton" style="font-weight: bold; ">Help</span> button should
+	        open the <span class="application" style="font-style: italic; ">Gnumeric</span> manual to this section. The
+	        <span class="guibutton" style="font-weight: bold; ">Cancel</span> button will dismiss the
+	        dialog and return the user to the worksheet. The
+	        <span class="guibutton" style="font-weight: bold; ">Back</span> button will take the user
+	        back to the first panel, without, however, changing
+	        the settings in this second panel. The
+	        <span class="guibutton" style="font-weight: bold; ">Forward</span> button will bring up
+	        the next panel in the druid.
+	      </p>
+	    </dd></dl></div></div>
+
+      </p></div><div class="sect3"><a name="sect-file-textImport-druid-panel2fixed"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.2.3. </span>
+        The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+        Druid used for fixed width data
+      </span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+        Druid used for fixed width data allows the user to define the
+        widths of each column to be imported. <span class="application" style="font-style: italic; ">Gnumeric</span> provides a
+        mechanism to automatically guess the widths of the columns and
+        allows the user, using the mouse, to define the widths of the
+        columns.
+      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="figure block-indent"><a name="fig-file-textImport-druid-panel2b"/>
+        <div class="title"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 9-4</span> </span>
+	  The second panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+	  druid for fixed width data with the component areas labeled
+	  with callouts. 
+	</span></div>
+	<div class="screenshot">
+          <div class="mediaobject"><img src="figures/textguru-import-panel2b-withTags.png"/><div class="caption">
+              <p class="para">
+	        The different components of the second panel of the
+	        <span class="interface" style="font-weight: bold; ">Text Import</span> druid for fixed width
+	        data with each component labeled with a callout.
+              </p>
+	    </div></div>
+	</div>
+      </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The purpose of each labeled component in <a class="xref" href="sect-file-textImport.shtml#fig-file-textImport-druid-panel2b" title="&#10;&#9;  The second panel of the Text Import&#10;&#9;  druid for fixed width data with the component areas labeled&#10;&#9;  with callouts. &#10;&#9;">Figure 9-4</a> is
+        explained below:
+
+	<div class="list"><div class="variablelist"><div class="title"><span class="title"><b>
+	    The components of the second panel for fixed width data
+	  </b></span></div><dl><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">1</span> - The automatic
+	      column discovery button.
+	    </span></dt><dd>
+	      <p class="para">
+	        This left most button, named <span class="guibutton" style="font-weight: bold; ">Auto Column
+	        Discovery</span>, will cause <span class="application" style="font-style: italic; ">Gnumeric</span> to scan the
+	        file an attempt to assign the columns
+	        automatically. The example presented in <a class="xref" href="sect-file-textImport.shtml#fig-file-textImport-druid-panel2b" title="&#10;&#9;  The second panel of the Text Import&#10;&#9;  druid for fixed width data with the component areas labeled&#10;&#9;  with callouts. &#10;&#9;">Figure 9-4</a> shows
+	        one result after this button has been pressed: many of
+	        the columns were discovered automatically, but the
+	        second and third columns were
+	        misidentified. Nonetheless, the automatic mechanism
+	        provides a useful starting point. The definition of
+	        the columns can be refined using the methods described
+	        below.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">2</span> - The column
+	      definition clearing button.
+	    </span></dt><dd>
+	      <p class="para">
+
+	        This right most button, named
+	        <span class="guibutton" style="font-weight: bold; ">Clear</span>, will clear all the
+	        column definitions and reset the file to a single
+	        column. This button should be used cautiously since
+	        there is no way to reverse its action and any
+	        carefully prepared column definition layout will be
+	        irretrievably lost.
+
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">3</span> - The preview and
+	    column width definition area.
+	    </span></dt><dd>
+	      <p class="para">
+	        This area acts as both a preview area and an area
+	        where users can define the columns widths.
+	      </p>
+	      <p class="para">
+		As a preview area, this area
+	        displays a preview of the file as it will be
+	        interpreted when the the settings that are currently
+	        selected in this first panel are applied.
+	      </p>
+	      <p class="para">
+	        This area can also be used to define column
+	        widths. When the panel first appears, a single column
+	        will be defined. The automatic column discovery
+	        mechanism may split this single column into many more
+	        columns. The mouse can then be used to further divide
+	        columns or to join previously separate columns.
+	      </p>
+	      <p class="para">
+	        A new column can be defined by placing the mouse
+	        pointer where the column should start and
+	        double-clicking with the primary mouse button. This
+	        will split the column which used to contain this
+	        position and add a new column starting at this
+	        location.
+	      </p>
+	      <p class="para">
+	        To remove the definition of a column which already
+	        exists or to alter the ending position of a column,
+	        the context menu must be used. The context menu
+	        appears by clicking with one of the secondary mouse
+	        buttons. A column which has already been defined can
+	        be merged with the column on the left or right using
+	        the <span class="guimenuitem" style="font-weight: bold; ">Delete and Merge Left</span>
+	        or <span class="guimenuitem" style="font-weight: bold; ">Delete and Merge right</span>
+	        menu items. The size of a column can be increased by
+	        placing the mouse pointer inside the column area or
+	        header and using the <span class="guimenuitem" style="font-weight: bold; ">Widen</span>
+	        or <span class="guimenuitem" style="font-weight: bold; ">Narrow</span> menu items,
+	        respectively. Either of these will change the width of
+	        the column by changing the right hand end of the
+	        column.
+	      </p>
+	      <p class="para">
+	        The context menu can also be used to define new
+	        columns using the <span class="guimenuitem" style="font-weight: bold; ">Split</span> menu
+	        item but the double-click approach described above
+	        should be easier.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">4</span> - The button area.
+	    </span></dt><dd>
+	      <p class="para">
+	        These four buttons allow the user to navigate the
+	        druid. The <span class="guibutton" style="font-weight: bold; ">Help</span> button should
+	        open the <span class="application" style="font-style: italic; ">Gnumeric</span> manual to this section. The
+	        <span class="guibutton" style="font-weight: bold; ">Cancel</span> button will dismiss the
+	        dialog and return the user to the worksheet. The
+	        <span class="guibutton" style="font-weight: bold; ">Back</span> button will take the user
+	        back to the first panel, without, however, changing
+	        the settings in this second panel. The
+	        <span class="guibutton" style="font-weight: bold; ">Forward</span> button will bring up
+	        the next panel in the druid.
+	      </p>
+	    </dd></dl></div></div>
+
+      </p></div><div class="sect3"><a name="sect-file-textImport-druid-panel3"/><h3 class="sect3 title"><span class="title"><span class="label">9.4.2.4. </span>
+        The third panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+      Druid
+      </span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        This panel allows users to select and format the columns to be
+        imported to the <span class="application" style="font-style: italic; ">Gnumeric</span> workbook. The first button allows the
+        exclusion of empty columns on either of the outer sides of the
+        columns with data. The second button allows the user to define
+        the locale used to interpret the values in the file. The
+        remaining area allows the user to predefine the data format to
+        be used for all the values in each column. This area also
+        allows the users to select which columns in the file will be
+        imported to the <span class="application" style="font-style: italic; ">Gnumeric</span> worksheet. Finally, this panel provides
+        the <span class="guibutton" style="font-weight: bold; ">Finish</span> which is used to dismiss the
+        dialog and import the file.
+      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="figure block-indent"><a name="fig-file-textImport-druid-panel3"/>
+        <div class="title"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 9-5</span> </span>
+	  The third panel of the <span class="interface" style="font-weight: bold; ">Text Import</span>
+	  druid with the component areas labeled with callouts.
+	</span></div>
+	<div class="screenshot">
+          <div class="mediaobject"><img src="figures/textguru-import-panel3-withTags.png"/><div class="caption">
+              <p class="para">
+	        The different components of the third panel of the
+	        <span class="interface" style="font-weight: bold; ">Text Import</span> druid with each component
+	        labeled with a callout.
+              </p>
+	    </div></div>
+	</div>
+      </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+        The purpose of each labeled component in <a class="xref" href="sect-file-textImport.shtml#fig-file-textImport-druid-panel3" title="&#10;&#9;  The third panel of the Text Import&#10;&#9;  druid with the component areas labeled with callouts.&#10;&#9;">Figure 9-5</a> is
+        explained below:
+
+	<div class="list"><div class="variablelist"><div class="title"><span class="title"><b>The components of the third panel</b></span></div><dl><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">1</span> - The trim of empty
+	    outer columns drop down list button.
+	    </span></dt><dd>
+	      <p class="para">
+	        This button provides a list allowing the user to
+	        select whether to trim any outer columns which are
+	        completely empty. The choices are to delete the
+	        columns on both sides, on neither side, or on one side
+	        only. This will only affect columns which have been
+	        previously defined but which contain no data values at
+	        all. 
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">2</span> - Locale definition
+	      for import drop down menu button.
+	    </span></dt><dd>
+	      <p class="para">
+	        This button provides a list of locales which can be
+	        set. The chosen locale will affect how numeric values
+	        are interpreted when then are imported. For instance,
+	        the locale will define the character expected as the
+	        decimal separator which is the period character (.) in
+	        some locales, and the comma character (,) in
+	        others. These locales generally then use the other
+	        character as the spacer grouping the digits in
+	        thousands. 
+
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">3</span> - The column data
+	      format selection list.
+	    </span></dt><dd>
+	      <p class="para">
+	        This list allows predetermining the format which
+	      <span class="application" style="font-style: italic; ">Gnumeric</span> will assign to each of the values in the columns
+	      selected below. Cell data formats are explained in <a class="xref" href="sect-data-format.shtml" title="Formatting Cells">Section 5.10 ― Formatting Cells</a>.
+	      </p>
+	      <p class="para">
+	        To use this list, first, one or more columns must be
+	        selected in the preview area below, then, a data
+	        format in this list can be selected, and finally any
+	        details of the format can be configured. Number
+	        formats for instance allow the user to force numbers
+	        to contain fixed number of digits after the decimal
+	        point.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">4</span> - The column
+	      selection, inclusion, and file preview area.
+	    </span></dt><dd>
+	      <p class="para">
+	        This area allows users to select columns which will be
+	        preformatted, to select which columns to include in
+	        the import and to preview the file. Each single column
+	        can be selected by clicking with the mouse pointer on
+	        the column header. Any single column can be excluded
+	        from the data imported to the <span class="application" style="font-style: italic; ">Gnumeric</span> worksheet by
+	        clicking in the checkbox in the column header to
+	        remove the check mark. The area also provides a
+	        preview of the data in the text file showing the
+	        effect of the with the current configuration.
+	      </p>
+	    </dd><dt><span class="term">
+	      <span class="emphasis" style="font-weight: bold; ">5</span> - The button area.
+	    </span></dt><dd>
+	      <p class="para">
+	        These four buttons allow the user to navigate the
+	        druid. The <span class="guibutton" style="font-weight: bold; ">Help</span> button should
+	        open the <span class="application" style="font-style: italic; ">Gnumeric</span> manual to this section. The
+	        <span class="guibutton" style="font-weight: bold; ">Cancel</span> button will dismiss the
+	        dialog and return the user to the worksheet. The
+	        <span class="guibutton" style="font-weight: bold; ">Back</span> button will take the user
+	        back to the second panel, without, however, changing
+	        the settings in this third panel. The
+	        <span class="guibutton" style="font-weight: bold; ">Finish</span> button will dismiss the
+	        druid and cause the file to be imported into a new
+	        worksheet using the selected configuration parameters.
+	      </p>
+	    </dd></dl></div></div>
+
+      </p></div></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="sect-file-open.shtml" title="Opening Files">Opening Files</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="sect-file-save.shtml" title="Saving Files">Saving Files</a></span></div></div></body></html>
