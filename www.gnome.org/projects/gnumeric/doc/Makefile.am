@@ -116,5 +116,5 @@ page_SCRIPTS= \
 
 include $(top_srcdir)/rules.common
 
-install-exec-hook:
-	-rm $(pagedir)/*.html
+# install-exec-hook:
+#	-rm $(pagedir)/*.html
