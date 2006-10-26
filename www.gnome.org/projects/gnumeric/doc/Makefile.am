@@ -115,3 +115,6 @@ page_SCRIPTS= \
 	sect-quick-starting-gnumeric.shtml
 
 include $(top_srcdir)/rules.common
+
+install-exec-hook:
+	-rm $(pagedir)/*.html
