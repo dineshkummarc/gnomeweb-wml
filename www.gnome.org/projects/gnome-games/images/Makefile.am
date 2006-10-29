@@ -10,6 +10,8 @@ page_SCRIPTS= \
 	gataxx-ss.png \
 	ggbanner.png \
 	gnometris-ss.png \
+	glchess-ss.png \
+	gnome-sudoku-ss.png \
 	gtali-ss.png \
 	iagno-ss.png \
 	klotski-ss.png \
