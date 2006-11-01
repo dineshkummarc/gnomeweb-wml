@@ -1,6 +1,7 @@
 SUBDIRS = \
 	application-framework	\
-	beagle \
+	beagle 			\
+	chronojump		\
 	desktop			\
 	devtools		\
 	dia			\
