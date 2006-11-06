@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Writing your own Python functions</title><link rel="previous" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions"/><link rel="next" href="extending-python-upgrading.shtml" title="Upgrading"/><link rel="top" href="index.shtml" title="The Gnumeric Manual, version 1.7"/><link rel="stylesheet" type="text/css" href="gnumeric-doc.css"/></head><body><div class="body"><div class="sect2"><a name="sect-extending-python-writing"/><h1 class="sect2 title"><span class="title">Writing your own Python functions</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">To scribe new magic you must write your spells in places where
+	  Gnumeric will find them. That place is in folders under:
+	  <span class="literal" style="font-family: monospace; ">~/.gnumeric/&lt;version&gt;/plugins/</span>
+	  Each folder under here is one "spellbook" of new plugin
+	  functions. You may put all your spells in one spellbook, or group
+	  them neatly depending on your tastes. Each spellbook must have two
+	  files. We'll create a spellbook called "myfuncs". A pedestrian name
+	  for pedestrian spells. When I have more skill, perhaps I'll make
+	  some with better names. Several suggest themselves:
+	  <div class="list"><div class="itemizedlist"><ul><li><span class="para">Transformations: of obvious value for a spreadsheet</span></li><li><span class="para">Illusions: statistical functions, clearly</span></li><li><span class="para">Charms: presentation graphics</span></li><li><span class="para">Necromancy: file repair and missing values?</span></li><li><span class="para">Divination: data mining!</span></li></ul></div></div>
+	</p><div class="sect3"><a name="sect-extending-python-writing-prepare"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.1. </span>Prepare the spellbook</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">In many ways it would be easier to start by copying the
+	  py_func spellbook to your local .gnumeric folder, and just adding a
+	  function to that. But in general it will be more useful to be
+	  able to write your own separate spellbooks, so here we go.</p><div class="list"><div class="procedure"><ol><li>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			<span class="emphasis" style="font-weight: bold; ">Make the folder: </span>
+			First we make the folders and get into the right one. As noted
+			above, we'll call our folder (spellbook) myfuncs.
+		  </p>
+		  <div class="substeps"><ol type="a">
+			<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">If they don't already exist:</p>
+			  <div class="substeps"><ol type="i">
+				<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">mkdir ~/.gnumeric</span></p></li>
+				<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">mkdir ~/.gnumeric/&lt;version&gt;</span></p></li>
+			  </ol></div>
+			</li>
+			<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">mkdir ~/.gnumeric/&lt;version&gt;/myfuncs/</span></p></li>
+			<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">cd ~/.gnumeric/&lt;version&gt;/myfuncs/</span></p></li>
+		  </ol></div>
+		</li><li>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			<span class="emphasis" style="font-weight: bold; ">Make the files:</span>
+			A spellbook has two files. The first is the python file
+			with the functions. The second is the XML file "plugin.xml". The
+			XML file holds that master spells that tell Gnumeric what
+			functions we've defined, and what the name of the python file
+			<span class="emphasis" style="font-style: italic; ">is</span>, and one other important item. We'll create these as
+			blank files.
+		  </p>
+		  <div class="substeps"><ol type="a">
+			<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">touch my-func.py</span></p></li>
+			<li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">touch plugin.xml</span></p></li>
+		  </ol></div>
+		</li><li>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			<span class="emphasis" style="font-weight: bold; ">Write the master spells</span>
+			The good news is that you only need to do this once per
+			spellbook. After that you just add spells to it.
+		  </p>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Your XML file must tell Gnumeric about your plugin. Here is a
+			simple template. (If you want to learn about internationalization,
+			see the example in the system's py-func spellbook.) Open up
+			plugin.xml and insert the following lines:
+		  </p>
+
+		  <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;plugin id="Gnumeric_MyFuncPlugin"&gt;
+	&lt;information&gt;
+		&lt;name&gt;Other Python functions from HOWTO&lt;/name&gt;
+		&lt;description&gt;A few extra python functions demonstrating the API.&lt;/description&gt;
+	&lt;/information&gt;
+	&lt;loader type="Gnumeric_PythonLoader:python"&gt;
+		&lt;attribute name="module_name" value="<span class="emphasis" style="font-weight: bold; ">my-func</span>"/&gt; <span class="co">3</span>
+	&lt;/loader&gt;
+	&lt;services&gt;
+		&lt;service type="function_group" id="<span class="emphasis" style="font-weight: bold; ">example</span>"&gt; <span class="co">4</span>
+			&lt;category&gt;Local Python&lt;/category&gt;
+			&lt;functions&gt;
+			&lt;/functions&gt;
+		&lt;/service&gt;
+	&lt;/services&gt;
+&lt;/plugin&gt;
+		  </pre></div>
+
+                  
+		  
+			<p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			  The value of "name" determines the name of your python
+			  script (file). In this case, it must be "my-func.py"
+			</p>
+		  
+
+		  
+			<p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			  The value of "id" here determines the name of the
+			  function dictionary in your python script. In this case,
+			  it must be "example_functions" because here the value is
+			  "example".
+			</p>
+		  
+                  
+		</li><li>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			<span class="emphasis" style="font-weight: bold; ">Prepare to write the
+			spells:</span> Next we'll create a minimal python
+			file. As noted above, we must name the file
+			<span class="emphasis" style="font-weight: bold; ">my-func</span>.py and it must have a dictionary
+			called <span class="emphasis" style="font-weight: bold; ">example</span>_functions.
+			So open up my-func.py and insert the following lines.
+		  </p>
+		  <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting"># my-func.py
+#
+
+from Gnumeric import GnumericError GnumericErrorVALUE
+import Gnumeric
+import string
+	
+example_functions = {
+}
+		  </pre></div>
+		</li></ol></div></div></div><div class="sect3"><a name="sect-extending-python-writing-newspells"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.2. </span>Writing new spells</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">To add new functions to Python, you now must do five things
+		(three sir!):</p><div class="list"><div class="procedure"><ol><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Write the python function in your copy of
+		  <span class="literal" style="font-family: monospace; ">my-func.py</span>.</p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Insert the function info into the <span class="literal" style="font-family: monospace; ">example_functions</span>
+		  dictionary at the end of <span class="literal" style="font-family: monospace; ">my_func.py</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Insert the function name into the functions list at the end of
+		  <span class="literal" style="font-family: monospace; ">plugin.xml</span>.</p></li></ol></div></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+		<span class="emphasis" style="font-weight: bold; ">Writing a simple script:</span>
+		Let's do something very simple: add two numbers
+		together. First, edit my-func.py.</p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">	<span class="emphasis" style="font-style: italic; "># Add two numbers together</span>
+    def func_add(num1, num2):
+        return num1 + num2
+
+    <span class="emphasis" style="font-style: italic; "># Translate the func_add python function to a gnumeric function and register it</span>
+    example_functions = {
+        'py_add': func_add
+    }
+	  </pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Then let the plugin-loader(?) know about your function. Add the
+	following line near the end of plugin.xml (between
+	  &lt;functions&gt; and &lt;/functions&gt;).</p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">                 &lt;function name="py_add"/&gt;
+	</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Now start Gnumeric and type <span class="literal" style="font-family: monospace; ">py_add(2,3)</span> into a
+	  cell. You should get "5". You can also use cell references. If
+	  that was in cell A1, go to cell A2 and type
+	  <span class="literal" style="font-family: monospace; ">py_add(A1,3)</span> and you will get "8".  But your
+	  function won't show up in the GUI list yet.</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+		<span class="emphasis" style="font-weight: bold; ">Tell the GUI:</span>
+		To make your function show up in the GUI, you have to tell
+		Gnumeric some things about it via a standard header, like
+		this:</p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">	<span class="emphasis" style="font-style: italic; "># Add two numbers together</span>
+	def func_add(num1, num2):
+        '@FUNCTION=PY_ADD\n'\
+        '@SYNTAX=py_add(num1, num2)\n'\
+        '@DESCRIPTION=Adds two numbers together.\n'\
+        'Look, the description can go onto other lines.\n\n'\
+        '@EXAMPLES=To add two constants, just type them in: py_add(2,3)\n'\
+        'To add two cells, use the cell addresses: py_add(A1,A2)\n\n'\
+        '@SEEALSO='
+
+        return num1 + num2
+	  </pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">The text after '@DESCRIPTION=' is the description that shows up
+		in the function GUI. You can make it as simple or detailed as you
+		want. I'm not sure how many other fields get used right now, as I
+		haven't seen the EXAMPLES show up anywhere.</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">But this still isn't quite right. Gnumeric doesn't know how
+		many arguments the function can handle, nor of what type. So the
+		function GUI will prompt for the two values it knows about (as
+		type "Any") and then keep prompting for more. But py_add cannot
+		accept all types, nor can it handle more than two arguments, so
+		unless you give it precisely 2 numbers, you will get an error when
+		you click "OK".</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+		<span class="emphasis" style="font-weight: bold; ">Know your limits...</span>
+		We got away last time just because Gnumeric was forgiving. Now
+		we need to say that we can accept only 2 values, of type
+		floating-point (which will also handle ints).</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Where before we had: <span class="literal" style="font-family: monospace; ">'py_add': func_add</span>, 
+		we should now put: <span class="literal" style="font-family: monospace; ">'py_add': ('ff','num1,num2',func_add)</span>
+		This says that Gnumeric should expect two floating-point numbers
+		('ff') with names 'num1' and 'num2', and pass them to func_add.</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+		<span class="emphasis" style="font-weight: bold; ">...and surpass them</span>
+		Of course, there is no reason an add function shouldn't be able
+		to handle a range. The simplest way to do that is to accept a
+		range, and then call Gnumeric's own SUM function on it! All of
+		Gnumeric's functions are available to you in the dictionary
+		Gnumeric.functions, keyed by name. So here is how to write py_sum.
+	  </p><div class="list"><div class="procedure"><ol><li>
+		  <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">First, define func_sum (in my-func.py):</p>
+		  
+		  <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">def func_sum(gRange):
+	'@FUNCTION=PY_SUM\n'\
+	'@SYNTAX=PY_SUM(range)\n'\
+	'@DESCRIPTION=Adds a range of numbers together.'\
+	'Just like built-in SUM.\n\n'\
+	'@EXAMPLES=To add values in A1 to A5, just type them in:\n'\
+	'    py_sum(a1:a5)\n'\
+	'@SEEALSO='
+	try:
+		sum = Gnumeric.functions['sum']
+		val = sum(gRange)
+		#  val = reduce(lambda a,b: a+b, vals)
+	except TypeError:
+		raise GnumericError, GnumericErrorVALUE
+	else:
+		return val
+		  </pre></div>
+		</li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Then insert it into your functions dictionary. That
+		dictionary now looks like this (with 'r' denoting a range type):</p>
+
+		  <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">example_functions = {
+	'py_add': ('ff','num1,num2',func_add),
+	'py_sum': ('r', 'values', func_sum)
+}
+		  </pre></div>
+		</li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Finally, make an entry in the XML list, so that it now looks
+		  like:</p>
+		  <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="programlisting block-indent"><pre class="programlisting">			&lt;functions&gt;
+				&lt;function name="py_add"/&gt;
+				&lt;function name="py_sum"/&gt;
+			&lt;/functions&gt;
+		  </pre></div>
+		</li></ol></div></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">I told you this was the easy way to do it. Obviously it's not
+		very useful to just duplicate Gnumeric functions. But that's as
+		far as I've made it. From what can tell, range objects are
+		packaged as opaque pointers of type RangeRefObject. There seems
+		to be no way to work with them from within Python, so we must
+		rely on the Gnumeric functions.</p></div><div class="sect3"><a name="sect-extending-python-writing-newspells2"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.3. </span>Do it yourself (mostly)</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">All is not lost, despite the opaque pointers. For in Gnumeric
+    we can read about all the functions that have been defined. Some
+    of those take references (including RangeRefs) and return useful
+    information. For example, under "Lookup" we find "Column" and
+    "Row" which return arrays of all the column (or row) indices in
+    the range. So we can redo the sum function.</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Presume we can convert our RangeRef to a start tuple and and
+    end tuple. Then we can write sum2:
+		<div class="programlisting block-indent"><pre class="programlisting">def func_sum2(gRange):
+	'@FUNCTION=PY_SUM2\n'\
+	'@SYNTAX=PY_SUM2(range)\n'\
+	'@DESCRIPTION=Adds a range of numbers together,'\
+	'without calling built-in SUM.\n\n'\
+	'@EXAMPLES=To add values in A1 to A5, just type them in:\n'\
+	'    py_sum(a1:a5)\n'\
+	'@SEEALSO='
+	try:
+		[r_begin, r_end] = range_ref_to_tuples(gRange)
+		wb=Gnumeric.Workbooks()[0]   # Careful! This is WRONG! It doesn't
+		s=wb.sheets()[0]             # use the ACTUAL workbook or sheet.
+
+		val = 0
+		for col in range(r_begin[0], r_end[0]):
+			for row in range(r_begin[1], r_end[1]):
+				cell = s[col, row]
+				val = val + cell.get_value()
+				# Note: this doesn't skip blank cells etc.
+
+	except TypeError:
+		raise GnumericError,GnumericErrorVALUE
+	else:
+		return val
+		</pre></div>
+	  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">That's fine as far as it goes, but we need to define the helper
+    function "range_ref_to_tuples". Although I'm rather ashamed to
+    show this ugly literal, here's how I did it (someone suggest a
+    better way, please!):
+		<div class="programlisting block-indent"><pre class="programlisting">def range_ref_to_tuples(range_ref):
+	'''I need a function to find the bounds of a RangeRef. This one
+	extracts them from the Gnumeric "column" and "row" commands, and
+	returns them as a pair of tuples. Surely there is a better way?
+	For example, return a list of cells??'''
+
+	col  = Gnumeric.functions['column']   
+	row  = Gnumeric.functions['row']
+
+	# "column" and "row" take references and return an array of col or row
+	# nums for each cell in the reference. For example, [[1, 1, 1], [2, 2, 2]]
+	# for columns and [[2, 3, 4], [2, 3, 4]] for rows.
+
+	try:
+		columns = col(range_ref)
+		rows    = row(range_ref)
+
+		begin_col = columns[0][0] - 1  
+		begin_row = rows[0][0] - 1     
+
+		end_col = columns[-1][-1]
+		end_row = rows[-1][-1]
+
+		# We subtracted 1 from the begin values because in the API,
+		# indexing begins at 0, while "column" and "row" begin at 1.
+		# We did NOT subtract 1 from the end values, in order to make
+		# them suitable for Python's range(begin, end) paradigm.
+		
+	except TypeError:
+		raise GnumericError,GnumericErrorVALUE
+	except NameError:                     # right name?
+		raise GnumericError,Gnumeric.GnumericErrorNAME
+	except RefError:                     # right name?
+		raise GnumericError,Gnumeric.GnumericErrorREF
+	except NumError:                     # right name?
+		raise GnumericError,Gnumeric.GnumericErrorNUM
+
+
+	return [ (begin_col, begin_row), (end_col, end_row) ]
+		</pre></div>
+	  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">From there, insert the function into the dictionary, and insert
+		its name into <span class="literal" style="font-family: monospace; ">plugin.xml</span>. I leave these as exercises
+		to the reader (answers in the sample files -- no
+		peeking!). Restart Gnumeric and you should be able to use
+		py_sum2!</p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">There are a couple of glitches:</p><div class="list"><div class="itemizedlist"><ul><li><span class="para">It fails the first time with "could not import
+		  gobject". Just run again, I don't know what that's about.</span></li><li><span class="para">It will only work for Workbook 1 and Sheet 1. JK thinks that
+		  there may be no way to get the current Workbook/Sheet in the
+		  Python API. Hrm....</span></li><li><span class="para">As noted, it should do some simple trapping to skip blank or
+      text-filled cells. That <span class="emphasis" style="font-style: italic; ">can</span> be done! I just didn't. It's
+      late.</span></li></ul></div></div></div><div class="sect3"><a name="extending-python-writing-help"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.4. </span>More help</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Relative to the source tree:</p><div class="list"><div class="itemizedlist"><ul><li><span class="para">The Python interface is defined in: <span class="literal" style="font-family: monospace; ">plugins/python-loader/py-gnumeric.c</span>
+		  That file also has good notes at the beginning.</span></li><li><span class="para">There are interesting things about the way it used to be in:
+		  <span class="literal" style="font-family: monospace; ">doc/developer/python-gnumeric.txt</span>.</span></li></ul></div></div></div><div class="sect3"><a name="extending-python-writing-programs"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.5. </span>Program Listings</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">You can see my examples in full, with more comments:
+		<div class="list"><div class="itemizedlist"><ul><li><span class="para"><a class="ulink" href="myfuncs/my-func.py" title="myfuncs/my-func.py"><span class="literal" style="font-family: monospace; ">my-func.py</span></a></span></li><li><span class="para"><a class="ulink" href="myfuncs/plugin.xml" title="myfuncs/plugin.xml"><span class="literal" style="font-family: monospace; ">plugin.xml</span></a></span></li></ul></div></div>
+	  </p></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">Using the built-in Python functions</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="extending-python-upgrading.shtml" title="Upgrading">Upgrading</a></span></div></div></body></html>

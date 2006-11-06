@@ -4,22 +4,34 @@ urlpath=/projects/gnumeric/doc
 
 page_SCRIPTS= \
 	gnumeric-doc.css			\
-	CATEGORY_Bitwise_Operations.shtml	\
-	CATEGORY_Complex.shtml			\
-	CATEGORY_Database.shtml			\
-	CATEGORY_DateTime.shtml			\
+	CATEGORY_Bitwise_Operations.shtml		\
+	CATEGORY_Complex.shtml		\
+	CATEGORY_Database.shtml		\
+	CATEGORY_DateTime.shtml		\
 	CATEGORY_Engineering.shtml		\
-	CATEGORY_Erlang.shtml			\
-	CATEGORY_Finance.shtml			\
-	CATEGORY_Gnumeric.shtml			\
+	CATEGORY_Erlang.shtml		\
+	CATEGORY_Finance.shtml		\
+	CATEGORY_Gnumeric.shtml		\
 	CATEGORY_Information.shtml		\
-	CATEGORY_Logic.shtml			\
-	CATEGORY_Lookup.shtml			\
+	CATEGORY_Logic.shtml		\
+	CATEGORY_Lookup.shtml		\
 	CATEGORY_Mathematics.shtml		\
 	CATEGORY_Number_Theory.shtml		\
 	CATEGORY_Random_Numbers.shtml		\
 	CATEGORY_Statistics.shtml		\
-	CATEGORY_String.shtml			\
+	CATEGORY_String.shtml		\
+	Data-Menu.shtml		\
+	Edit-Menu.shtml		\
+	File-Menu.shtml		\
+	Format-Menu.shtml		\
+	Help-Menu.shtml		\
+	Insert-Menu.shtml		\
+	Tools-Menu.shtml		\
+	View-Menu.shtml		\
+	alignmentandothertabs.shtml		\
+	anova.shtml		\
+	cell-grid-scrollbars.shtml		\
+	cell-grid-tabs.shtml		\
 	cell-grid.shtml		\
 	chapter-advanced-analysis.shtml		\
 	chapter-bugs.shtml		\
@@ -34,69 +46,752 @@ page_SCRIPTS= \
 	chapter-printing.shtml		\
 	chapter-quick-start.shtml		\
 	chapter-welcome.shtml		\
+	col-row-headers.shtml		\
 	context-menu.shtml		\
+	correlation-tool.shtml		\
+	covariance-tool.shtml		\
+	data-entry-cancel.shtml		\
+	data-entry-confirm.shtml		\
+	data-entry-currentcell.shtml		\
+	data-entry-equals.shtml		\
 	data-entry.shtml		\
+	data-selections-advanced.shtml		\
+	descriptive-statistics-tool.shtml		\
+	exp-smoothing-tool.shtml		\
+	extending-python-upgrading.shtml		\
+	file-format-applix.shtml		\
+	file-format-csv.shtml		\
+	file-format-dif.shtml		\
+	file-format-excel.shtml		\
+	file-format-gnumeric.shtml		\
+	file-format-html.shtml		\
+	file-format-latex.shtml		\
+	file-format-lotus.shtml		\
+	file-format-mps.shtml		\
+	file-format-multiplan.shtml		\
+	file-format-oleo.shtml		\
+	file-format-ooo.shtml		\
+	file-format-pdf.shtml		\
+	file-format-planperfect.shtml		\
+	file-format-ps.shtml		\
+	file-format-qpro.shtml		\
+	file-format-save-formats.shtml		\
+	file-format-sc.shtml		\
+	file-format-tab.shtml		\
+	file-format-text.shtml		\
+	file-format-troff.shtml		\
+	file-format-xbase.shtml		\
+	file-format-xhtml.shtml		\
+	file-open-dialog.shtml		\
+	fmt-toolbar.shtml		\
+	fourier-analysis-tool.shtml		\
+	ftest-two-sample-for-variances-tool.shtml		\
 	function-reference.shtml		\
+	gnumeric-ABS.shtml		\
+	gnumeric-ACCRINT.shtml		\
+	gnumeric-ACCRINTM.shtml		\
+	gnumeric-ACOS.shtml		\
+	gnumeric-ACOSH.shtml		\
+	gnumeric-ADDRESS.shtml		\
+	gnumeric-AMORDEGRC.shtml		\
+	gnumeric-AMORLINC.shtml		\
+	gnumeric-AND.shtml		\
+	gnumeric-AREAS.shtml		\
+	gnumeric-ASC.shtml		\
+	gnumeric-ASIN.shtml		\
+	gnumeric-ASINH.shtml		\
+	gnumeric-ATAN.shtml		\
+	gnumeric-ATAN2.shtml		\
+	gnumeric-ATANH.shtml		\
+	gnumeric-AVEDEV.shtml		\
+	gnumeric-AVERAGE.shtml		\
+	gnumeric-AVERAGEA.shtml		\
+	gnumeric-BASE.shtml		\
+	gnumeric-BERNOULLI.shtml		\
+	gnumeric-BESSELI.shtml		\
+	gnumeric-BESSELJ.shtml		\
+	gnumeric-BESSELK.shtml		\
+	gnumeric-BESSELY.shtml		\
+	gnumeric-BETA.shtml		\
+	gnumeric-BETADIST.shtml		\
+	gnumeric-BETAINV.shtml		\
+	gnumeric-BETALN.shtml		\
+	gnumeric-BIN2DEC.shtml		\
+	gnumeric-BIN2HEX.shtml		\
+	gnumeric-BIN2OCT.shtml		\
+	gnumeric-BINOMDIST.shtml		\
+	gnumeric-BITAND.shtml		\
+	gnumeric-BITLSHIFT.shtml		\
+	gnumeric-BITOR.shtml		\
+	gnumeric-BITRSHIFT.shtml		\
+	gnumeric-BITXOR.shtml		\
+	gnumeric-CAUCHY.shtml		\
+	gnumeric-CEIL.shtml		\
+	gnumeric-CEILING.shtml		\
+	gnumeric-CELL.shtml		\
+	gnumeric-CHAR.shtml		\
+	gnumeric-CHIDIST.shtml		\
+	gnumeric-CHIINV.shtml		\
+	gnumeric-CHITEST.shtml		\
+	gnumeric-CHOOSE.shtml		\
+	gnumeric-CLEAN.shtml		\
+	gnumeric-CODE.shtml		\
+	gnumeric-COLUMN.shtml		\
+	gnumeric-COLUMNNUMBER.shtml		\
+	gnumeric-COLUMNS.shtml		\
+	gnumeric-COMBIN.shtml		\
+	gnumeric-COMPLEX.shtml		\
+	gnumeric-CONCATENATE.shtml		\
+	gnumeric-CONFIDENCE.shtml		\
+	gnumeric-CONVERT.shtml		\
+	gnumeric-CORREL.shtml		\
+	gnumeric-COS.shtml		\
+	gnumeric-COSH.shtml		\
+	gnumeric-COUNT.shtml		\
+	gnumeric-COUNTA.shtml		\
+	gnumeric-COUNTBLANK.shtml		\
+	gnumeric-COUNTIF.shtml		\
+	gnumeric-COUPDAYBS.shtml		\
+	gnumeric-COUPDAYS.shtml		\
+	gnumeric-COUPDAYSNC.shtml		\
+	gnumeric-COUPNCD.shtml		\
+	gnumeric-COUPNUM.shtml		\
+	gnumeric-COUPPCD.shtml		\
+	gnumeric-COVAR.shtml		\
+	gnumeric-CRITBINOM.shtml		\
+	gnumeric-CRONBACH.shtml		\
+	gnumeric-CUMIPMT.shtml		\
+	gnumeric-CUMPRINC.shtml		\
+	gnumeric-CUM_BIV_NORM_DIST.shtml		\
+	gnumeric-DATE.shtml		\
+	gnumeric-DATE2UNIX.shtml		\
+	gnumeric-DATEDIF.shtml		\
+	gnumeric-DATEVALUE.shtml		\
+	gnumeric-DAVERAGE.shtml		\
+	gnumeric-DAY.shtml		\
+	gnumeric-DAYS360.shtml		\
+	gnumeric-DB.shtml		\
+	gnumeric-DCOUNT.shtml		\
+	gnumeric-DCOUNTA.shtml		\
+	gnumeric-DDB.shtml		\
+	gnumeric-DEC2BIN.shtml		\
+	gnumeric-DEC2HEX.shtml		\
+	gnumeric-DEC2OCT.shtml		\
+	gnumeric-DECIMAL.shtml		\
+	gnumeric-DEGREES.shtml		\
+	gnumeric-DELTA.shtml		\
+	gnumeric-DEVSQ.shtml		\
+	gnumeric-DGET.shtml		\
+	gnumeric-DIMCIRC.shtml		\
+	gnumeric-DISC.shtml		\
+	gnumeric-DMAX.shtml		\
+	gnumeric-DMIN.shtml		\
+	gnumeric-DOLLAR.shtml		\
+	gnumeric-DOLLARDE.shtml		\
+	gnumeric-DOLLARFR.shtml		\
+	gnumeric-DPRODUCT.shtml		\
+	gnumeric-DSTDEV.shtml		\
+	gnumeric-DSTDEVP.shtml		\
+	gnumeric-DSUM.shtml		\
+	gnumeric-DURATION.shtml		\
+	gnumeric-DVAR.shtml		\
+	gnumeric-DVARP.shtml		\
+	gnumeric-EDATE.shtml		\
+	gnumeric-EFFECT.shtml		\
+	gnumeric-EOMONTH.shtml		\
+	gnumeric-ERF.shtml		\
+	gnumeric-ERFC.shtml		\
+	gnumeric-ERROR.TYPE.shtml		\
+	gnumeric-ERROR.shtml		\
+	gnumeric-EURO.shtml		\
+	gnumeric-EUROCONVERT.shtml		\
+	gnumeric-EVEN.shtml		\
+	gnumeric-EXACT.shtml		\
+	gnumeric-EXP.shtml		\
+	gnumeric-EXPM1.shtml		\
+	gnumeric-EXPONDIST.shtml		\
+	gnumeric-EXPPOWDIST.shtml		\
+	gnumeric-EXPRESSION.shtml		\
+	gnumeric-FACT.shtml		\
+	gnumeric-FACTDOUBLE.shtml		\
+	gnumeric-FALSE.shtml		\
+	gnumeric-FDIST.shtml		\
+	gnumeric-FIB.shtml		\
+	gnumeric-FIND.shtml		\
+	gnumeric-FINV.shtml		\
+	gnumeric-FISHER.shtml		\
+	gnumeric-FISHERINV.shtml		\
+	gnumeric-FIXED.shtml		\
+	gnumeric-FLOOR.shtml		\
+	gnumeric-FORECAST.shtml		\
+	gnumeric-FREQUENCY.shtml		\
+	gnumeric-FTEST.shtml		\
+	gnumeric-FV.shtml		\
+	gnumeric-FVSCHEDULE.shtml		\
+	gnumeric-GAMMADIST.shtml		\
+	gnumeric-GAMMAINV.shtml		\
+	gnumeric-GAMMALN.shtml		\
+	gnumeric-GCD.shtml		\
+	gnumeric-GEOMDIST.shtml		\
+	gnumeric-GEOMEAN.shtml		\
+	gnumeric-GESTEP.shtml		\
+	gnumeric-GETENV.shtml		\
+	gnumeric-GETPIVOTDATA.shtml		\
+	gnumeric-GNUMERIC_VERSION.shtml		\
+	gnumeric-GROWTH.shtml		\
+	gnumeric-G_DURATION.shtml		\
+	gnumeric-G_PRODUCT.shtml		\
+	gnumeric-HARMEAN.shtml		\
+	gnumeric-HEX2BIN.shtml		\
+	gnumeric-HEX2DEC.shtml		\
+	gnumeric-HEX2OCT.shtml		\
+	gnumeric-HLOOKUP.shtml		\
+	gnumeric-HOUR.shtml		\
+	gnumeric-HYPERLINK.shtml		\
+	gnumeric-HYPGEOMDIST.shtml		\
+	gnumeric-HYPOT.shtml		\
+	gnumeric-IF.shtml		\
+	gnumeric-IMABS.shtml		\
+	gnumeric-IMAGINARY.shtml		\
+	gnumeric-IMARCCOS.shtml		\
+	gnumeric-IMARCCOSH.shtml		\
+	gnumeric-IMARCCOT.shtml		\
+	gnumeric-IMARCCOTH.shtml		\
+	gnumeric-IMARCCSC.shtml		\
+	gnumeric-IMARCCSCH.shtml		\
+	gnumeric-IMARCSEC.shtml		\
+	gnumeric-IMARCSECH.shtml		\
+	gnumeric-IMARCSIN.shtml		\
+	gnumeric-IMARCSINH.shtml		\
+	gnumeric-IMARCTAN.shtml		\
+	gnumeric-IMARCTANH.shtml		\
+	gnumeric-IMARGUMENT.shtml		\
+	gnumeric-IMCONJUGATE.shtml		\
+	gnumeric-IMCOS.shtml		\
+	gnumeric-IMCOSH.shtml		\
+	gnumeric-IMCOT.shtml		\
+	gnumeric-IMCOTH.shtml		\
+	gnumeric-IMCSC.shtml		\
+	gnumeric-IMCSCH.shtml		\
+	gnumeric-IMDIV.shtml		\
+	gnumeric-IMEXP.shtml		\
+	gnumeric-IMINV.shtml		\
+	gnumeric-IMLN.shtml		\
+	gnumeric-IMLOG10.shtml		\
+	gnumeric-IMLOG2.shtml		\
+	gnumeric-IMNEG.shtml		\
+	gnumeric-IMPOWER.shtml		\
+	gnumeric-IMPRODUCT.shtml		\
+	gnumeric-IMREAL.shtml		\
+	gnumeric-IMSEC.shtml		\
+	gnumeric-IMSECH.shtml		\
+	gnumeric-IMSIN.shtml		\
+	gnumeric-IMSINH.shtml		\
+	gnumeric-IMSQRT.shtml		\
+	gnumeric-IMSUB.shtml		\
+	gnumeric-IMSUM.shtml		\
+	gnumeric-IMTAN.shtml		\
+	gnumeric-IMTANH.shtml		\
+	gnumeric-INDEX.shtml		\
+	gnumeric-INDIRECT.shtml		\
+	gnumeric-INFO.shtml		\
+	gnumeric-INT.shtml		\
+	gnumeric-INTERCEPT.shtml		\
+	gnumeric-INTRATE.shtml		\
+	gnumeric-INVSUMINV.shtml		\
+	gnumeric-IPMT.shtml		\
+	gnumeric-IRR.shtml		\
+	gnumeric-ISBLANK.shtml		\
+	gnumeric-ISERR.shtml		\
+	gnumeric-ISERROR.shtml		\
+	gnumeric-ISEVEN.shtml		\
+	gnumeric-ISLOGICAL.shtml		\
+	gnumeric-ISNA.shtml		\
+	gnumeric-ISNONTEXT.shtml		\
+	gnumeric-ISNUMBER.shtml		\
+	gnumeric-ISODD.shtml		\
+	gnumeric-ISOWEEKNUM.shtml		\
+	gnumeric-ISOYEAR.shtml		\
+	gnumeric-ISPMT.shtml		\
+	gnumeric-ISPRIME.shtml		\
+	gnumeric-ISREF.shtml		\
+	gnumeric-ISTEXT.shtml		\
+	gnumeric-ITHPRIME.shtml		\
+	gnumeric-KURT.shtml		\
+	gnumeric-KURTP.shtml		\
+	gnumeric-LANDAU.shtml		\
+	gnumeric-LAPLACE.shtml		\
+	gnumeric-LARGE.shtml		\
+	gnumeric-LCM.shtml		\
+	gnumeric-LEFT.shtml		\
+	gnumeric-LEN.shtml		\
+	gnumeric-LENB.shtml		\
+	gnumeric-LINEST.shtml		\
+	gnumeric-LN.shtml		\
+	gnumeric-LN1P.shtml		\
+	gnumeric-LOG.shtml		\
+	gnumeric-LOG10.shtml		\
+	gnumeric-LOG2.shtml		\
+	gnumeric-LOGEST.shtml		\
+	gnumeric-LOGFIT.shtml		\
+	gnumeric-LOGINV.shtml		\
+	gnumeric-LOGISTIC.shtml		\
+	gnumeric-LOGNORMDIST.shtml		\
+	gnumeric-LOGREG.shtml		\
+	gnumeric-LOOKUP.shtml		\
+	gnumeric-LOWER.shtml		\
+	gnumeric-MATCH.shtml		\
+	gnumeric-MAX.shtml		\
+	gnumeric-MAXA.shtml		\
+	gnumeric-MDETERM.shtml		\
+	gnumeric-MDURATION.shtml		\
+	gnumeric-MEDIAN.shtml		\
+	gnumeric-MID.shtml		\
+	gnumeric-MIN.shtml		\
+	gnumeric-MINA.shtml		\
+	gnumeric-MINUTE.shtml		\
+	gnumeric-MINVERSE.shtml		\
+	gnumeric-MIRR.shtml		\
+	gnumeric-MMULT.shtml		\
+	gnumeric-MOD.shtml		\
+	gnumeric-MODE.shtml		\
+	gnumeric-MONTH.shtml		\
+	gnumeric-MROUND.shtml		\
+	gnumeric-MULTINOMIAL.shtml		\
+	gnumeric-N.shtml		\
+	gnumeric-NA.shtml		\
+	gnumeric-NEGBINOMDIST.shtml		\
+	gnumeric-NETWORKDAYS.shtml		\
+	gnumeric-NOMINAL.shtml		\
+	gnumeric-NORMDIST.shtml		\
+	gnumeric-NORMINV.shtml		\
+	gnumeric-NORMSDIST.shtml		\
+	gnumeric-NORMSINV.shtml		\
+	gnumeric-NOT.shtml		\
+	gnumeric-NOW.shtml		\
+	gnumeric-NPER.shtml		\
+	gnumeric-NPV.shtml		\
+	gnumeric-NT_D.shtml		\
+	gnumeric-NT_MU.shtml		\
+	gnumeric-NT_PHI.shtml		\
+	gnumeric-NT_PI.shtml		\
+	gnumeric-NT_SIGMA.shtml		\
+	gnumeric-OCT2BIN.shtml		\
+	gnumeric-OCT2DEC.shtml		\
+	gnumeric-OCT2HEX.shtml		\
+	gnumeric-ODD.shtml		\
+	gnumeric-ODDFPRICE.shtml		\
+	gnumeric-ODDFYIELD.shtml		\
+	gnumeric-ODDLPRICE.shtml		\
+	gnumeric-ODDLYIELD.shtml		\
+	gnumeric-OFFCAP.shtml		\
+	gnumeric-OFFSET.shtml		\
+	gnumeric-OFFTRAF.shtml		\
+	gnumeric-OPT_2_ASSET_CORRELATION.shtml		\
+	gnumeric-OPT_AMER_EXCHANGE.shtml		\
+	gnumeric-OPT_BAW_AMER.shtml		\
+	gnumeric-OPT_BINOMIAL.shtml		\
+	gnumeric-OPT_BJER_STENS.shtml		\
+	gnumeric-OPT_BS.shtml		\
+	gnumeric-OPT_BS_CARRYCOST.shtml		\
+	gnumeric-OPT_BS_DELTA.shtml		\
+	gnumeric-OPT_BS_GAMMA.shtml		\
+	gnumeric-OPT_BS_RHO.shtml		\
+	gnumeric-OPT_BS_THETA.shtml		\
+	gnumeric-OPT_BS_VEGA.shtml		\
+	gnumeric-OPT_COMPLEX_CHOOSER.shtml		\
+	gnumeric-OPT_EURO_EXCHANGE.shtml		\
+	gnumeric-OPT_EXEC.shtml		\
+	gnumeric-OPT_EXTENDIBLE_WRITER.shtml		\
+	gnumeric-OPT_FIXED_STRK_LKBK.shtml		\
+	gnumeric-OPT_FLOAT_STRK_LKBK.shtml		\
+	gnumeric-OPT_FORWARD_START.shtml		\
+	gnumeric-OPT_FRENCH.shtml		\
+	gnumeric-OPT_GARMAN_KOHLHAGEN.shtml		\
+	gnumeric-OPT_JUMP_DIFF.shtml		\
+	gnumeric-OPT_MILTERSEN_SCHWARTZ.shtml		\
+	gnumeric-OPT_ON_OPTIONS.shtml		\
+	gnumeric-OPT_RGW.shtml		\
+	gnumeric-OPT_SIMPLE_CHOOSER.shtml		\
+	gnumeric-OPT_SPREAD_APPROX.shtml		\
+	gnumeric-OPT_TIME_SWITCH.shtml		\
+	gnumeric-OR.shtml		\
+	gnumeric-PARETO.shtml		\
+	gnumeric-PEARSON.shtml		\
+	gnumeric-PERCENTILE.shtml		\
+	gnumeric-PERCENTRANK.shtml		\
+	gnumeric-PERMUT.shtml		\
+	gnumeric-PFACTOR.shtml		\
+	gnumeric-PI.shtml		\
+	gnumeric-PMT.shtml		\
+	gnumeric-POISSON.shtml		\
+	gnumeric-POWER.shtml		\
+	gnumeric-PPMT.shtml		\
+	gnumeric-PRICE.shtml		\
+	gnumeric-PRICEDISC.shtml		\
+	gnumeric-PRICEMAT.shtml		\
+	gnumeric-PROB.shtml		\
+	gnumeric-PROBBLOCK.shtml		\
+	gnumeric-PRODUCT.shtml		\
+	gnumeric-PROPER.shtml		\
+	gnumeric-PV.shtml		\
+	gnumeric-QUARTILE.shtml		\
+	gnumeric-QUOTIENT.shtml		\
+	gnumeric-R.DBETA.shtml		\
+	gnumeric-R.DBINOM.shtml		\
+	gnumeric-R.DCAUCHY.shtml		\
+	gnumeric-R.DCHISQ.shtml		\
+	gnumeric-R.DEXP.shtml		\
+	gnumeric-R.DF.shtml		\
+	gnumeric-R.DGAMMA.shtml		\
+	gnumeric-R.DGEOM.shtml		\
+	gnumeric-R.DHYPER.shtml		\
+	gnumeric-R.DLNORM.shtml		\
+	gnumeric-R.DNBINOM.shtml		\
+	gnumeric-R.DNORM.shtml		\
+	gnumeric-R.DPOIS.shtml		\
+	gnumeric-R.DT.shtml		\
+	gnumeric-R.DWEIBULL.shtml		\
+	gnumeric-R.PBETA.shtml		\
+	gnumeric-R.PBINOM.shtml		\
+	gnumeric-R.PCAUCHY.shtml		\
+	gnumeric-R.PCHISQ.shtml		\
+	gnumeric-R.PEXP.shtml		\
+	gnumeric-R.PF.shtml		\
+	gnumeric-R.PGAMMA.shtml		\
+	gnumeric-R.PGEOM.shtml		\
+	gnumeric-R.PHYPER.shtml		\
+	gnumeric-R.PLNORM.shtml		\
+	gnumeric-R.PNBINOM.shtml		\
+	gnumeric-R.PNORM.shtml		\
+	gnumeric-R.PPOIS.shtml		\
+	gnumeric-R.PT.shtml		\
+	gnumeric-R.PWEIBULL.shtml		\
+	gnumeric-R.QBETA.shtml		\
+	gnumeric-R.QBINOM.shtml		\
+	gnumeric-R.QCAUCHY.shtml		\
+	gnumeric-R.QCHISQ.shtml		\
+	gnumeric-R.QEXP.shtml		\
+	gnumeric-R.QF.shtml		\
+	gnumeric-R.QGAMMA.shtml		\
+	gnumeric-R.QGEOM.shtml		\
+	gnumeric-R.QHYPER.shtml		\
+	gnumeric-R.QLNORM.shtml		\
+	gnumeric-R.QNBINOM.shtml		\
+	gnumeric-R.QNORM.shtml		\
+	gnumeric-R.QPOIS.shtml		\
+	gnumeric-R.QT.shtml		\
+	gnumeric-R.QWEIBULL.shtml		\
+	gnumeric-RADIANS.shtml		\
+	gnumeric-RAND.shtml		\
+	gnumeric-RANDBERNOULLI.shtml		\
+	gnumeric-RANDBETA.shtml		\
+	gnumeric-RANDBETWEEN.shtml		\
+	gnumeric-RANDBINOM.shtml		\
+	gnumeric-RANDCAUCHY.shtml		\
+	gnumeric-RANDCHISQ.shtml		\
+	gnumeric-RANDDISCRETE.shtml		\
+	gnumeric-RANDEXP.shtml		\
+	gnumeric-RANDEXPPOW.shtml		\
+	gnumeric-RANDFDIST.shtml		\
+	gnumeric-RANDGAMMA.shtml		\
+	gnumeric-RANDGEOM.shtml		\
+	gnumeric-RANDGUMBEL.shtml		\
+	gnumeric-RANDHYPERG.shtml		\
+	gnumeric-RANDLANDAU.shtml		\
+	gnumeric-RANDLAPLACE.shtml		\
+	gnumeric-RANDLEVY.shtml		\
+	gnumeric-RANDLOG.shtml		\
+	gnumeric-RANDLOGISTIC.shtml		\
+	gnumeric-RANDLOGNORM.shtml		\
+	gnumeric-RANDNEGBINOM.shtml		\
+	gnumeric-RANDNORM.shtml		\
+	gnumeric-RANDNORMTAIL.shtml		\
+	gnumeric-RANDPARETO.shtml		\
+	gnumeric-RANDPOISSON.shtml		\
+	gnumeric-RANDRAYLEIGH.shtml		\
+	gnumeric-RANDRAYLEIGHTAIL.shtml		\
+	gnumeric-RANDTDIST.shtml		\
+	gnumeric-RANDUNIFORM.shtml		\
+	gnumeric-RANDWEIBULL.shtml		\
+	gnumeric-RANK.shtml		\
+	gnumeric-RATE.shtml		\
+	gnumeric-RAYLEIGH.shtml		\
+	gnumeric-RAYLEIGHTAIL.shtml		\
+	gnumeric-RECEIVED.shtml		\
+	gnumeric-REPLACE.shtml		\
+	gnumeric-REPT.shtml		\
+	gnumeric-RIGHT.shtml		\
+	gnumeric-ROMAN.shtml		\
+	gnumeric-ROUND.shtml		\
+	gnumeric-ROUNDDOWN.shtml		\
+	gnumeric-ROUNDUP.shtml		\
+	gnumeric-ROW.shtml		\
+	gnumeric-ROWS.shtml		\
+	gnumeric-RSQ.shtml		\
+	gnumeric-SEARCH.shtml		\
+	gnumeric-SECOND.shtml		\
+	gnumeric-SERIESSUM.shtml		\
+	gnumeric-SIGN.shtml		\
+	gnumeric-SIMTABLE.shtml		\
+	gnumeric-SIN.shtml		\
+	gnumeric-SINH.shtml		\
+	gnumeric-SKEW.shtml		\
+	gnumeric-SKEWP.shtml		\
+	gnumeric-SLN.shtml		\
+	gnumeric-SLOPE.shtml		\
+	gnumeric-SMALL.shtml		\
+	gnumeric-SQRT.shtml		\
+	gnumeric-SQRTPI.shtml		\
+	gnumeric-SSMEDIAN.shtml		\
+	gnumeric-STANDARDIZE.shtml		\
+	gnumeric-STDEV.shtml		\
+	gnumeric-STDEVA.shtml		\
+	gnumeric-STDEVP.shtml		\
+	gnumeric-STDEVPA.shtml		\
+	gnumeric-STEYX.shtml		\
+	gnumeric-SUBSTITUTE.shtml		\
+	gnumeric-SUBTOTAL.shtml		\
+	gnumeric-SUM.shtml		\
+	gnumeric-SUMA.shtml		\
+	gnumeric-SUMIF.shtml		\
+	gnumeric-SUMPRODUCT.shtml		\
+	gnumeric-SUMSQ.shtml		\
+	gnumeric-SUMX2MY2.shtml		\
+	gnumeric-SUMX2PY2.shtml		\
+	gnumeric-SUMXMY2.shtml		\
+	gnumeric-SYD.shtml		\
+	gnumeric-T.shtml		\
+	gnumeric-TAN.shtml		\
+	gnumeric-TANH.shtml		\
+	gnumeric-TBILLEQ.shtml		\
+	gnumeric-TBILLPRICE.shtml		\
+	gnumeric-TBILLYIELD.shtml		\
+	gnumeric-TDIST.shtml		\
+	gnumeric-TEXT.shtml		\
+	gnumeric-TIME.shtml		\
+	gnumeric-TIMEVALUE.shtml		\
+	gnumeric-TINV.shtml		\
+	gnumeric-TODAY.shtml		\
+	gnumeric-TRANSPOSE.shtml		\
+	gnumeric-TREND.shtml		\
+	gnumeric-TRIM.shtml		\
+	gnumeric-TRIMMEAN.shtml		\
+	gnumeric-TRUE.shtml		\
+	gnumeric-TRUNC.shtml		\
+	gnumeric-TTEST.shtml		\
+	gnumeric-TYPE.shtml		\
+	gnumeric-UNICHAR.shtml		\
+	gnumeric-UNICODE.shtml		\
+	gnumeric-UNIX2DATE.shtml		\
+	gnumeric-UPPER.shtml		\
+	gnumeric-VALUE.shtml		\
+	gnumeric-VAR.shtml		\
+	gnumeric-VARA.shtml		\
+	gnumeric-VARP.shtml		\
+	gnumeric-VARPA.shtml		\
+	gnumeric-VDB.shtml		\
+	gnumeric-VLOOKUP.shtml		\
+	gnumeric-WEEKDAY.shtml		\
+	gnumeric-WEEKNUM.shtml		\
+	gnumeric-WEIBULL.shtml		\
+	gnumeric-WORKDAY.shtml		\
+	gnumeric-XIRR.shtml		\
+	gnumeric-XNPV.shtml		\
+	gnumeric-XOR.shtml		\
+	gnumeric-YEAR.shtml		\
+	gnumeric-YEARFRAC.shtml		\
+	gnumeric-YIELD.shtml		\
+	gnumeric-YIELDDISC.shtml		\
+	gnumeric-YIELDMAT.shtml		\
+	gnumeric-ZTEST.shtml		\
 	gnumeric-info.shtml		\
 	gnumeric.shtml		\
+	histogram-tool.shtml		\
+	info-area-calc.shtml		\
+	info-area-file.shtml		\
+	info-area-hint.shtml		\
 	info-area.shtml		\
 	keybinding.shtml		\
+	menu-bars.shtml		\
+	menu-context-col-row-header.shtml		\
+	menu-context-grid.shtml		\
+	menu-context-object.shtml		\
+	menu-context-tabs.shtml		\
+	moving-average-tool.shtml		\
+	note-file-textExport-druid.shtml		\
+	note-file-textImport-druid.shtml		\
+	number-formatting-overview.shtml		\
+	obj-toolbar.shtml		\
+	print-setup-header-config.shtml		\
+	print-setup-header.shtml		\
+	print-setup-page.shtml		\
+	print-setup-sheet.shtml		\
 	quick-closing-gnumeric.shtml		\
+	quick-commands-context.shtml		\
+	quick-commands-keyboard.shtml		\
+	quick-commands-menu.shtml		\
+	quick-commands-toolbar.shtml		\
 	quick-commands.shtml		\
 	quick-complex-select.shtml		\
+	quick-cut-n-paste-insdel.shtml		\
+	quick-cut-n-paste-movecontents.shtml		\
 	quick-cut-n-paste.shtml		\
+	quick-data-datatypes.shtml		\
+	quick-data-input.shtml		\
 	quick-data.shtml		\
 	quick-files.shtml		\
+	quick-format-simple.shtml		\
 	quick-format.shtml		\
+	quick-graphing-anExample.shtml		\
 	quick-graphing.shtml		\
 	quick-parts-of-gnumeric.shtml		\
 	quick-printing.shtml		\
 	quick-sheets.shtml		\
+	quick-start-by-file.shtml		\
+	quick-start-other.shtml		\
+	rank-and-percentile-tool.shtml		\
+	regression-tool.shtml		\
+	sampling-tool.shtml		\
 	sect-advanced-analysis-complexNumbers.shtml		\
+	sect-advanced-analysis-goalseek-range.shtml		\
+	sect-advanced-analysis-goalseek-results.shtml		\
+	sect-advanced-analysis-goalseek-tool.shtml		\
 	sect-advanced-analysis-goalseek.shtml		\
+	sect-advanced-analysis-scenarios-adding.shtml		\
+	sect-advanced-analysis-scenarios-viewing.shtml		\
 	sect-advanced-analysis-scenarios.shtml		\
 	sect-advanced-analysis-simulation.shtml		\
+	sect-advanced-analysis-solver-intprog.shtml		\
+	sect-advanced-analysis-solver-linearprog.shtml		\
+	sect-advanced-analysis-solver-modeling.shtml		\
+	sect-advanced-analysis-solver-reports.shtml		\
+	sect-advanced-analysis-solver-using.shtml		\
 	sect-advanced-analysis-solver.shtml		\
 	sect-analysis-overview.shtml		\
 	sect-analysis-statistical.shtml		\
+	sect-bugs-bugzilla_access.shtml		\
+	sect-bugs-bugzilla_account-create.shtml		\
+	sect-bugs-bugzilla_account-login.shtml		\
 	sect-bugs-bugzilla_account.shtml		\
+	sect-bugs-report-commit.shtml		\
+	sect-bugs-report-description.shtml		\
+	sect-bugs-report-os.shtml		\
+	sect-bugs-report-other.shtml		\
+	sect-bugs-report-product.shtml		\
+	sect-bugs-report-severity.shtml		\
+	sect-bugs-report-template.shtml		\
+	sect-bugs-report-version.shtml		\
 	sect-bugs-report.shtml		\
 	sect-bugs-understand.shtml		\
 	sect-bugs.shtml		\
 	sect-configuration-localization.shtml		\
 	sect-configuration-overview.shtml		\
 	sect-configuration-plugins.shtml		\
+	sect-configuration-preferences-copypaste.shtml		\
+	sect-configuration-preferences-files.shtml		\
+	sect-configuration-preferences-font.shtml		\
+	sect-configuration-preferences-tools.shtml		\
+	sect-configuration-preferences-undo.shtml		\
+	sect-configuration-preferences-usage.shtml		\
+	sect-configuration-preferences-windows.shtml		\
 	sect-configuration-preferences.shtml		\
 	sect-configuration-toolbars.shtml		\
+	sect-data-boolean.shtml		\
 	sect-data-comment.shtml		\
 	sect-data-delete.shtml		\
+	sect-data-entry-booleans.shtml		\
+	sect-data-entry-errors.shtml		\
+	sect-data-entry-formulas.shtml		\
+	sect-data-entry-numbers.shtml		\
+	sect-data-entry-simple.shtml		\
+	sect-data-entry-text.shtml		\
 	sect-data-entry.shtml		\
+	sect-data-errors.shtml		\
+	sect-data-format-protectionandvalidation.shtml		\
 	sect-data-format.shtml		\
+	sect-data-formulas.shtml		\
+	sect-data-generate-consolidate.shtml		\
+	sect-data-generate-fillmerge.shtml		\
+	sect-data-generate-filltabulate.shtml		\
 	sect-data-generate.shtml		\
 	sect-data-insert.shtml		\
 	sect-data-link.shtml		\
+	sect-data-modify-filter.shtml		\
+	sect-data-modify-search.shtml		\
+	sect-data-modify-searchreplace.shtml		\
+	sect-data-modify-shuffle.shtml		\
+	sect-data-modify-sorting.shtml		\
 	sect-data-modify.shtml		\
+	sect-data-numbers.shtml		\
 	sect-data-overview.shtml		\
 	sect-data-selections.shtml		\
+	sect-data-text.shtml		\
 	sect-data-types.shtml		\
+	sect-dataentryadv-autocorrect.shtml		\
+	sect-dataentryadv-large.shtml		\
+	sect-dataentryadv-random.shtml		\
+	sect-dataentryadv-series.shtml		\
+	sect-dataentryadv-templates.shtml		\
 	sect-dataentryadv.shtml		\
+	sect-dataentryextern-cutnpaste.shtml		\
+	sect-dataentryextern-files.shtml		\
 	sect-dataentryextern.shtml		\
+	sect-datasource-database.shtml		\
+	sect-datasource-stream.shtml		\
 	sect-extending-functions.shtml		\
 	sect-extending-overview.shtml		\
 	sect-extending-plugins.shtml		\
+	sect-extending-python-builtins.shtml		\
+	sect-extending-python-console.shtml		\
+	sect-extending-python-fancy.shtml		\
+	sect-extending-python-install.shtml		\
+	sect-extending-python-questions.shtml		\
+	sect-extending-python-writing.shtml		\
 	sect-extending-python.shtml		\
 	sect-file-formats.shtml		\
+	sect-file-open-formats.shtml		\
 	sect-file-open.shtml		\
+	sect-file-save-dialog.shtml		\
 	sect-file-save.shtml		\
 	sect-file-textExport.shtml		\
+	sect-file-textImport-complex.shtml		\
 	sect-file-textImport.shtml		\
 	sect-files-email.shtml		\
 	sect-files-overview.shtml		\
 	sect-files-ssconvert.shtml		\
+	sect-graphical-overview-adding.shtml		\
+	sect-graphical-overview-contextmenu.shtml		\
+	sect-graphical-overview-deleting.shtml		\
+	sect-graphical-overview-modifing.shtml		\
+	sect-graphical-overview-moveNresize.shtml		\
+	sect-graphical-overview-restacking.shtml		\
+	sect-graphical-overview-saving.shtml		\
+	sect-graphical-overview-selecting.shtml		\
 	sect-graphical-overview.shtml		\
+	sect-graphics-drawings-arrow.shtml		\
+	sect-graphics-drawings-line.shtml		\
+	sect-graphics-drawings-oval.shtml		\
+	sect-graphics-drawings-rectangle.shtml		\
 	sect-graphics-drawings.shtml		\
+	sect-graphics-images-delete.shtml		\
+	sect-graphics-images-insert.shtml		\
+	sect-graphics-images-save.shtml		\
 	sect-graphics-images.shtml		\
+	sect-graphics-plots-elementProperties.shtml		\
+	sect-graphics-plots-graphguru.shtml		\
+	sect-graphics-plots-overview-types.shtml		\
+	sect-graphics-plots-overview.shtml		\
+	sect-graphics-plots-preselect.shtml		\
 	sect-graphics-plots.shtml		\
+	sect-graphics-widgets-checkbox.shtml		\
+	sect-graphics-widgets-combobox.shtml		\
+	sect-graphics-widgets-frame.shtml		\
+	sect-graphics-widgets-label.shtml		\
+	sect-graphics-widgets-list.shtml		\
+	sect-graphics-widgets-scrollbar.shtml		\
+	sect-graphics-widgets-slider.shtml		\
+	sect-graphics-widgets-spinbutton.shtml		\
 	sect-graphics-widgets.shtml		\
 	sect-gui-menus.shtml		\
 	sect-gui-mouse.shtml		\
@@ -105,16 +800,33 @@ page_SCRIPTS= \
 	sect-morehelp-books.shtml		\
 	sect-morehelp-irc.shtml		\
 	sect-morehelp-maillist.shtml		\
+	sect-morehelp-web-gnumericSite.shtml		\
 	sect-morehelp-web.shtml		\
 	sect-morehelp.shtml		\
+	sect-movecopy-cutandpaste.shtml		\
+	sect-movecopy-pastespecial.shtml		\
+	sect-movecopy-simple.shtml		\
+	sect-movecopy-xclipboard.shtml		\
 	sect-movecopy.shtml		\
+	sect-printing-menubar.shtml		\
 	sect-printing-preview.shtml		\
 	sect-printing-setup.shtml		\
+	sect-printing-toolbar.shtml		\
 	sect-printing.shtml		\
+	sect-quick-format-number.shtml		\
 	sect-quick-start-top.shtml		\
-	sect-quick-starting-gnumeric.shtml
+	sect-quick-starting-gnumeric-doze.shtml		\
+	sect-quick-starting-gnumeric-gnome.shtml		\
+	sect-quick-starting-gnumeric-unixdesktop.shtml		\
+	sect-quick-starting-gnumeric-unixshell.shtml		\
+	sect-quick-starting-gnumeric.shtml		\
+	selecting-multiple-cells.shtml		\
+	simple-selections.shtml		\
+	std-toolbar.shtml		\
+	t-test.shtml		\
+	toolbar-use.shtml
 
 include $(top_srcdir)/rules.common
 
-# install-exec-hook:
+#install-exec-hook:
 #	-rm $(pagedir)/*.html
