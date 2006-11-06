@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.Gecko</strong></big></big> (version 1.16, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.Gecko</strong></big></big> (version 1.31, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/Gecko.py">/usr/lib/python2.4/site-packages/orca/Gecko.py</a></font></td></tr></table>
     <p><tt>Custom&nbsp;script&nbsp;for&nbsp;Gecko&nbsp;toolkit.&nbsp;&nbsp;NOT&nbsp;WORKING&nbsp;WELL&nbsp;AT&nbsp;THE&nbsp;MOMENT.</tt></p>
@@ -65,12 +65,12 @@
 <font color="#000000" face="helvetica, arial"><a name="BrailleGenerator">class <strong>BrailleGenerator</strong></a>(<a href="orca.braillegenerator.html#BrailleGenerator">orca.braillegenerator.BrailleGenerator</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Handle&nbsp;Gecko's&nbsp;unique&nbsp;hiearchical&nbsp;representation,&nbsp;such&nbsp;as&nbsp;menus<br>
-duplicating&nbsp;themselves&nbsp;in&nbsp;the&nbsp;hierarchy&nbsp;and&nbsp;tables&nbsp;used&nbsp;for&nbsp;layout<br>
-and&nbsp;indentation&nbsp;purposes.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Provides&nbsp;a&nbsp;braille&nbsp;generator&nbsp;specific&nbsp;to&nbsp;Gecko.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="BrailleGenerator-__init__"><strong>__init__</strong></a>(self, script)</dt></dl>
+
+<dl><dt><a name="BrailleGenerator-getBrailleRegions"><strong>getBrailleRegions</strong></a>(self, obj, groupChildren<font color="#909090">=True</font>)</dt></dl>
 
 <hr>
 Methods inherited from <a href="orca.braillegenerator.html#BrailleGenerator">orca.braillegenerator.BrailleGenerator</a>:<br>
@@ -81,24 +81,6 @@ Arguments:<br>
 -&nbsp;obj:&nbsp;the&nbsp;object<br>
 &nbsp;<br>
 Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;Regions&nbsp;to&nbsp;display.</tt></dd></dl>
-
-<dl><dt><a name="BrailleGenerator-getBrailleRegions"><strong>getBrailleRegions</strong></a>(self, obj, groupChildren<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;braille&nbsp;regions&nbsp;for&nbsp;an&nbsp;Accessible&nbsp;object.&nbsp;&nbsp;This<br>
-will&nbsp;look&nbsp;first&nbsp;to&nbsp;the&nbsp;specific&nbsp;braille&nbsp;generators&nbsp;and&nbsp;then&nbsp;to<br>
-the&nbsp;default&nbsp;braille&nbsp;generator.&nbsp;&nbsp;This&nbsp;method&nbsp;is&nbsp;the&nbsp;primary<br>
-method&nbsp;that&nbsp;external&nbsp;callers&nbsp;of&nbsp;this&nbsp;class&nbsp;should&nbsp;use.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;obj:&nbsp;the&nbsp;object<br>
--&nbsp;groupChildren:&nbsp;if&nbsp;True,&nbsp;children&nbsp;of&nbsp;an&nbsp;object&nbsp;should&nbsp;be&nbsp;displayed<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;together&nbsp;with&nbsp;their&nbsp;parent,&nbsp;where&nbsp;each&nbsp;child&nbsp;is<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;_&nbsp;and&nbsp;the&nbsp;selected&nbsp;child&nbsp;is&nbsp;the&nbsp;Region<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;should&nbsp;get&nbsp;focus.&nbsp;&nbsp;The&nbsp;default&nbsp;here&nbsp;is&nbsp;True,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;this&nbsp;also&nbsp;is&nbsp;used&nbsp;in&nbsp;conjunction&nbsp;with<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.enableBrailleGrouping.<br>
-&nbsp;<br>
-Returns&nbsp;a&nbsp;list&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;Regions&nbsp;to<br>
-display&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is&nbsp;the&nbsp;Region&nbsp;which&nbsp;should&nbsp;get<br>
-focus.</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -121,15 +103,202 @@ ACCESS&nbsp;TO&nbsp;FIREFOX&nbsp;AT&nbsp;THIS&nbsp;POINT.<br>&nbsp;</tt></td></t
 Methods defined here:<br>
 <dl><dt><a name="Script-__init__"><strong>__init__</strong></a>(self, app)</dt></dl>
 
+<dl><dt><a name="Script-consumesKeyboardEvent"><strong>consumesKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;on&nbsp;the&nbsp;keyboard.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
+
+<dl><dt><a name="Script-dumpContent"><strong>dumpContent</strong></a>(self, inputEvent, contents<font color="#909090">=None</font>)</dt><dd><tt>Dumps&nbsp;the&nbsp;document&nbsp;frame&nbsp;content&nbsp;to&nbsp;stdout.<br>
+&nbsp;<br>
+Arguments:<br>
+-inputEvent:&nbsp;the&nbsp;input&nbsp;event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;be&nbsp;called<br>
+-contents:&nbsp;an&nbsp;ordered&nbsp;list&nbsp;of&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples</tt></dd></dl>
+
+<dl><dt><a name="Script-dumpInfo"><strong>dumpInfo</strong></a>(self, obj)</dt><dd><tt>Dumps&nbsp;the&nbsp;parental&nbsp;hierachy&nbsp;info&nbsp;of&nbsp;obj&nbsp;to&nbsp;stdout.</tt></dd></dl>
+
+<dl><dt><a name="Script-findCaretContext"><strong>findCaretContext</strong></a>(self, obj, characterOffset)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;and&nbsp;a&nbsp;character&nbsp;offset,&nbsp;find&nbsp;the&nbsp;first<br>
+[obj,&nbsp;characterOffset]&nbsp;that&nbsp;is&nbsp;actually&nbsp;presenting&nbsp;something<br>
+on&nbsp;the&nbsp;display.&nbsp;&nbsp;The&nbsp;reason&nbsp;we&nbsp;do&nbsp;this&nbsp;is&nbsp;that&nbsp;the<br>
+[obj,&nbsp;characterOffset]&nbsp;passed&nbsp;in&nbsp;may&nbsp;actually&nbsp;be&nbsp;pointing<br>
+to&nbsp;an&nbsp;embedded&nbsp;object&nbsp;character.&nbsp;&nbsp;In&nbsp;those&nbsp;cases,&nbsp;we&nbsp;dig<br>
+into&nbsp;the&nbsp;hierarchy&nbsp;to&nbsp;find&nbsp;the&nbsp;'real'&nbsp;thing.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;an&nbsp;accessible&nbsp;object<br>
+-characterOffset:&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;character&nbsp;where&nbsp;to&nbsp;start<br>
+looking&nbsp;for&nbsp;real&nbsp;rext<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;that&nbsp;points&nbsp;to&nbsp;real&nbsp;content.</tt></dd></dl>
+
+<dl><dt><a name="Script-getBoundary"><strong>getBoundary</strong></a>(self, a, b)</dt><dd><tt>Returns&nbsp;the&nbsp;smallest&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]&nbsp;that&nbsp;encompasses<br>
+both&nbsp;extents&nbsp;a&nbsp;and&nbsp;b.<br>
+&nbsp;<br>
+Arguments:<br>
+-a:&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]<br>
+-b:&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]</tt></dd></dl>
+
 <dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
+<dl><dt><a name="Script-getCaretContext"><strong>getCaretContext</strong></a>(self, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;current&nbsp;[obj,&nbsp;caretOffset]&nbsp;if&nbsp;defined.&nbsp;&nbsp;If&nbsp;not,<br>
+it&nbsp;returns&nbsp;the&nbsp;first&nbsp;[obj,&nbsp;caretOffset]&nbsp;found&nbsp;by&nbsp;an&nbsp;in&nbsp;order<br>
+traversal&nbsp;from&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;document.</tt></dd></dl>
+
+<dl><dt><a name="Script-getCharacterAtOffset"><strong>getCharacterAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;given&nbsp;characterOffset&nbsp;in&nbsp;the<br>
+given&nbsp;object&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;object&nbsp;does&nbsp;not&nbsp;implement&nbsp;the<br>
+accessible&nbsp;text&nbsp;specialization.</tt></dd></dl>
+
+<dl><dt><a name="Script-getCharacterOffsetInParent"><strong>getCharacterOffsetInParent</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;the&nbsp;character&nbsp;offset&nbsp;of&nbsp;the&nbsp;embedded&nbsp;object<br>
+character&nbsp;for&nbsp;this&nbsp;object&nbsp;in&nbsp;its&nbsp;parent's&nbsp;accessible&nbsp;text.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;that&nbsp;should&nbsp;implement&nbsp;the&nbsp;accessible&nbsp;hyperlink<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specialization.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;integer&nbsp;representing&nbsp;the&nbsp;character&nbsp;offset&nbsp;of&nbsp;the<br>
+embedded&nbsp;object&nbsp;character&nbsp;for&nbsp;this&nbsp;hyperlink&nbsp;in&nbsp;its&nbsp;parent's<br>
+accessible&nbsp;text,&nbsp;or&nbsp;-1&nbsp;something&nbsp;was&nbsp;amuck.</tt></dd></dl>
+
+<dl><dt><a name="Script-getChildIndex"><strong>getChildIndex</strong></a>(self, obj, characterOffset)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;that&nbsp;implements&nbsp;accessible&nbsp;text,&nbsp;determine<br>
+the&nbsp;index&nbsp;of&nbsp;the&nbsp;child&nbsp;that&nbsp;is&nbsp;represented&nbsp;by&nbsp;an<br>
+EMBEDDED_OBJECT_CHARACTER&nbsp;at&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;object's<br>
+accessible&nbsp;text.</tt></dd></dl>
+
+<dl><dt><a name="Script-getContents"><strong>getContents</strong></a>(self)</dt><dd><tt>Trivial&nbsp;debug&nbsp;utility&nbsp;to&nbsp;stringify&nbsp;the&nbsp;document&nbsp;contents<br>
+showing&nbsp;on&nbsp;the&nbsp;screen.</tt></dd></dl>
+
 <dl><dt><a name="Script-getDocumentFrame"><strong>getDocumentFrame</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;document&nbsp;frame&nbsp;that&nbsp;holds&nbsp;the&nbsp;content&nbsp;being&nbsp;shown.</tt></dd></dl>
+
+<dl><dt><a name="Script-getExtents"><strong>getExtents</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]&nbsp;of&nbsp;the&nbsp;text&nbsp;at&nbsp;the&nbsp;given&nbsp;offsets<br>
+if&nbsp;the&nbsp;object&nbsp;implements&nbsp;accessible&nbsp;text,&nbsp;or&nbsp;just&nbsp;the&nbsp;extents&nbsp;of<br>
+the&nbsp;object&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;implement&nbsp;accessible&nbsp;text.</tt></dd></dl>
 
 <dl><dt><a name="Script-getKeyBindings"><strong>getKeyBindings</strong></a>(self)</dt><dd><tt>Defines&nbsp;the&nbsp;key&nbsp;bindings&nbsp;for&nbsp;this&nbsp;script.<br>
 &nbsp;<br>
 Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings.</tt></dd></dl>
 
+<dl><dt><a name="Script-getLineAtOffset"><strong>getLineAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
+via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
+the&nbsp;given&nbsp;object&nbsp;and&nbsp;characterOffset.&nbsp;&nbsp;The&nbsp;first&nbsp;element&nbsp;in<br>
+the&nbsp;list&nbsp;represents&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;line.&nbsp;&nbsp;The&nbsp;last<br>
+element&nbsp;in&nbsp;the&nbsp;list&nbsp;represents&nbsp;the&nbsp;character&nbsp;just&nbsp;before&nbsp;the<br>
+beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;line.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;the&nbsp;object&nbsp;to&nbsp;start&nbsp;at<br>
+-characterOffset:&nbsp;the&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Script-getLinearizedContents"><strong>getLinearizedContents</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
+via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
+the&nbsp;current&nbsp;caret&nbsp;context&nbsp;(or&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;document&nbsp;if<br>
+there&nbsp;is&nbsp;no&nbsp;caret&nbsp;context).<br>
+&nbsp;<br>
+WARNING:&nbsp;THIS&nbsp;TRAVERSES&nbsp;A&nbsp;LARGE&nbsp;PART&nbsp;OF&nbsp;THE&nbsp;DOCUMENT&nbsp;AND&nbsp;IS<br>
+INTENDED&nbsp;PRIMARILY&nbsp;FOR&nbsp;DEBUGGING&nbsp;PURPOSES&nbsp;ONLY.</tt></dd></dl>
+
+<dl><dt><a name="Script-getNextInOrder"><strong>getNextInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;an&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;next<br>
+caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in&nbsp;order&nbsp;traversal&nbsp;rule.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
+document&nbsp;frame.<br>
+-&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
+(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
+start&nbsp;at&nbsp;the&nbsp;beginning&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;next&nbsp;character&nbsp;is&nbsp;the<br>
+first&nbsp;character&nbsp;in&nbsp;the&nbsp;object.<br>
+-&nbsp;includeNonText:&nbsp;If&nbsp;False,&nbsp;only&nbsp;land&nbsp;on&nbsp;objects&nbsp;that&nbsp;support&nbsp;the<br>
+accessible&nbsp;text&nbsp;interface;&nbsp;otherwise,&nbsp;include&nbsp;logical&nbsp;leaf<br>
+nodes&nbsp;like&nbsp;check&nbsp;boxes,&nbsp;combo&nbsp;boxes,&nbsp;etc.<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]<br>
+&nbsp;<br>
+DETAIL:&nbsp;If&nbsp;an&nbsp;object&nbsp;presents&nbsp;text,&nbsp;it&nbsp;implements&nbsp;the<br>
+accessible&nbsp;text&nbsp;interface.&nbsp;&nbsp;If&nbsp;an&nbsp;object&nbsp;has&nbsp;children&nbsp;that<br>
+also&nbsp;present&nbsp;text,&nbsp;then&nbsp;the&nbsp;accessible&nbsp;text&nbsp;for&nbsp;the&nbsp;object<br>
+contains&nbsp;one&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;for&nbsp;each&nbsp;child,&nbsp;where<br>
+the&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;the&nbsp;position&nbsp;of&nbsp;the<br>
+child's&nbsp;text&nbsp;in&nbsp;the&nbsp;object&nbsp;and&nbsp;the&nbsp;order&nbsp;of&nbsp;the<br>
+EMBEDDED_OBJECT_CHARACTERs&nbsp;represent&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;children<br>
+(i.e.,&nbsp;the&nbsp;first&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;child&nbsp;0,<br>
+the&nbsp;next&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;child&nbsp;1,&nbsp;and&nbsp;so<br>
+on.)<br>
+&nbsp;<br>
+So...we&nbsp;keep&nbsp;track&nbsp;of&nbsp;our&nbsp;current&nbsp;position&nbsp;in&nbsp;a&nbsp;page&nbsp;by<br>
+managing&nbsp;a&nbsp;caret&nbsp;context,&nbsp;which&nbsp;is&nbsp;tuple&nbsp;that&nbsp;consists&nbsp;of&nbsp;an<br>
+Accessible&nbsp;object&nbsp;in&nbsp;the&nbsp;document&nbsp;frame&nbsp;and&nbsp;our&nbsp;caret&nbsp;offset<br>
+in&nbsp;that&nbsp;object.&nbsp;&nbsp;If&nbsp;an&nbsp;object&nbsp;does&nbsp;not&nbsp;support&nbsp;the&nbsp;accessible<br>
+text&nbsp;specialization,&nbsp;the&nbsp;meaning&nbsp;of&nbsp;caret&nbsp;offset&nbsp;value&nbsp;is<br>
+undefined&nbsp;(but&nbsp;is&nbsp;typically&nbsp;-1).</tt></dd></dl>
+
+<dl><dt><a name="Script-getPreviousInOrder"><strong>getPreviousInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;an&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;previous<br>
+caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in&nbsp;order&nbsp;traversal&nbsp;rule.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
+document&nbsp;frame.<br>
+-&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
+(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
+start&nbsp;at&nbsp;the&nbsp;end&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;previous&nbsp;character&nbsp;is&nbsp;the<br>
+last&nbsp;character&nbsp;of&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]<br>
+&nbsp;<br>
+DETAIL:&nbsp;If&nbsp;an&nbsp;object&nbsp;presents&nbsp;text,&nbsp;it&nbsp;implements&nbsp;the<br>
+accessible&nbsp;text&nbsp;interface.&nbsp;&nbsp;If&nbsp;an&nbsp;object&nbsp;has&nbsp;children&nbsp;that<br>
+also&nbsp;present&nbsp;text,&nbsp;then&nbsp;the&nbsp;accessible&nbsp;text&nbsp;for&nbsp;the&nbsp;object<br>
+contains&nbsp;one&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;for&nbsp;each&nbsp;child,&nbsp;where<br>
+the&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;the&nbsp;position&nbsp;of&nbsp;the<br>
+child's&nbsp;text&nbsp;in&nbsp;the&nbsp;object&nbsp;and&nbsp;the&nbsp;order&nbsp;of&nbsp;the<br>
+EMBEDDED_OBJECT_CHARACTERs&nbsp;represent&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;children<br>
+(i.e.,&nbsp;the&nbsp;first&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;child&nbsp;0,<br>
+the&nbsp;next&nbsp;EMBEDDED_OBJECT_CHARACTER&nbsp;represents&nbsp;child&nbsp;1,&nbsp;and&nbsp;so<br>
+on.)<br>
+&nbsp;<br>
+So...we&nbsp;keep&nbsp;track&nbsp;of&nbsp;our&nbsp;current&nbsp;position&nbsp;in&nbsp;a&nbsp;page&nbsp;by<br>
+managing&nbsp;a&nbsp;caret&nbsp;context,&nbsp;which&nbsp;is&nbsp;tuple&nbsp;that&nbsp;consists&nbsp;of&nbsp;an<br>
+Accessible&nbsp;object&nbsp;in&nbsp;the&nbsp;document&nbsp;frame&nbsp;and&nbsp;our&nbsp;caret&nbsp;offset<br>
+in&nbsp;that&nbsp;object.&nbsp;&nbsp;If&nbsp;an&nbsp;object&nbsp;does&nbsp;not&nbsp;support&nbsp;the&nbsp;accessible<br>
+text&nbsp;specialization,&nbsp;the&nbsp;meaning&nbsp;of&nbsp;caret&nbsp;offset&nbsp;value&nbsp;is<br>
+undefined&nbsp;(but&nbsp;is&nbsp;typically&nbsp;-1).</tt></dd></dl>
+
 <dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
+
+<dl><dt><a name="Script-getUnicodeText"><strong>getUnicodeText</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;the&nbsp;unicode&nbsp;text&nbsp;for&nbsp;an&nbsp;object&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;object<br>
+doesn't&nbsp;implement&nbsp;the&nbsp;accessible&nbsp;text&nbsp;specialization.</tt></dd></dl>
+
+<dl><dt><a name="Script-getWordAtOffset"><strong>getWordAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
+via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
+the&nbsp;given&nbsp;object&nbsp;and&nbsp;characterOffset.&nbsp;&nbsp;The&nbsp;first&nbsp;element&nbsp;in<br>
+the&nbsp;list&nbsp;represents&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;word.&nbsp;&nbsp;The&nbsp;last<br>
+element&nbsp;in&nbsp;the&nbsp;list&nbsp;represents&nbsp;the&nbsp;character&nbsp;just&nbsp;before&nbsp;the<br>
+beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;word.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;the&nbsp;object&nbsp;to&nbsp;start&nbsp;at<br>
+-characterOffset:&nbsp;the&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Script-goNextCharacter"><strong>goNextCharacter</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;the&nbsp;next&nbsp;character&nbsp;or&nbsp;object<br>
+in&nbsp;the&nbsp;document&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="Script-goNextLine"><strong>goNextLine</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;the&nbsp;previous&nbsp;line&nbsp;in&nbsp;the<br>
+document&nbsp;window,&nbsp;attempting&nbsp;to&nbsp;preserve&nbsp;horizontal&nbsp;caret<br>
+position.</tt></dd></dl>
+
+<dl><dt><a name="Script-goNextWord"><strong>goNextWord</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;next&nbsp;word&nbsp;or&nbsp;object<br>
+in&nbsp;the&nbsp;document&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="Script-goPreviousCharacter"><strong>goPreviousCharacter</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;the&nbsp;previous&nbsp;character&nbsp;or&nbsp;object<br>
+in&nbsp;the&nbsp;document&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="Script-goPreviousLine"><strong>goPreviousLine</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;the&nbsp;next&nbsp;line&nbsp;in&nbsp;the&nbsp;document<br>
+window,&nbsp;attempting&nbsp;to&nbsp;preserve&nbsp;horizontal&nbsp;caret&nbsp;position.</tt></dd></dl>
+
+<dl><dt><a name="Script-goPreviousWord"><strong>goPreviousWord</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;beginning&nbsp;of&nbsp;the&nbsp;previous<br>
+word&nbsp;or&nbsp;object&nbsp;in&nbsp;the&nbsp;document&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="Script-locusOfFocusChanged"><strong>locusOfFocusChanged</strong></a>(self, event, oldLocusOfFocus, newLocusOfFocus)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;object&nbsp;with&nbsp;focus&nbsp;changes.<br>
 &nbsp;<br>
@@ -138,33 +307,67 @@ Arguments:<br>
 -&nbsp;oldLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;locus&nbsp;of&nbsp;focus<br>
 -&nbsp;newLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;new&nbsp;locus&nbsp;of&nbsp;focus</tt></dd></dl>
 
-<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt></dl>
+<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt><dd><tt>Caret&nbsp;movement&nbsp;in&nbsp;Gecko&nbsp;is&nbsp;somewhat&nbsp;unreliable&nbsp;and<br>
+unpredictable,&nbsp;but&nbsp;we&nbsp;need&nbsp;to&nbsp;handle&nbsp;it.&nbsp;&nbsp;When&nbsp;we&nbsp;detect&nbsp;caret<br>
+movement,&nbsp;we&nbsp;make&nbsp;sure&nbsp;we&nbsp;update&nbsp;our&nbsp;own&nbsp;notion&nbsp;of&nbsp;the&nbsp;caret<br>
+position:&nbsp;our&nbsp;caretContext&nbsp;is&nbsp;an&nbsp;[obj,&nbsp;characterOffset]&nbsp;that<br>
+points&nbsp;to&nbsp;our&nbsp;current&nbsp;item&nbsp;and&nbsp;character&nbsp;(if&nbsp;applicable)&nbsp;of<br>
+interest.&nbsp;&nbsp;If&nbsp;our&nbsp;current&nbsp;item&nbsp;doesn't&nbsp;implement&nbsp;the<br>
+accessible&nbsp;text&nbsp;specialization,&nbsp;the&nbsp;characterOffset&nbsp;value<br>
+is&nbsp;meaningless.</tt></dd></dl>
 
-<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>#&nbsp;This&nbsp;function&nbsp;is&nbsp;called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;within&nbsp;Gecko&nbsp;receives<br>
-#&nbsp;focus</tt></dd></dl>
+<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt></dl>
 
-<dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt><dd><tt>#&nbsp;This&nbsp;function&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;hyperlink&nbsp;is&nbsp;selected&nbsp;-&nbsp;This&nbsp;happens<br>
-#&nbsp;when&nbsp;a&nbsp;link&nbsp;is&nbsp;navigated&nbsp;to&nbsp;using&nbsp;tab/shift-tab</tt></dd></dl>
+<dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt></dl>
 
 <dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
+<dl><dt><a name="Script-onSameLine"><strong>onSameLine</strong></a>(self, a, b, pixelDelta<font color="#909090">=5</font>)</dt><dd><tt>Determine&nbsp;if&nbsp;extents&nbsp;a&nbsp;and&nbsp;b&nbsp;are&nbsp;on&nbsp;the&nbsp;same&nbsp;line.<br>
+&nbsp;<br>
+Arguments:<br>
+-a:&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]<br>
+-b:&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;a&nbsp;and&nbsp;b&nbsp;are&nbsp;on&nbsp;the&nbsp;same&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Script-outlineExtents"><strong>outlineExtents</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Draws&nbsp;an&nbsp;outline&nbsp;around&nbsp;the&nbsp;given&nbsp;text&nbsp;for&nbsp;the&nbsp;object&nbsp;or&nbsp;the&nbsp;entire<br>
+object&nbsp;if&nbsp;it&nbsp;has&nbsp;no&nbsp;text.&nbsp;&nbsp;This&nbsp;is&nbsp;for&nbsp;debug&nbsp;purposes&nbsp;only.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;the&nbsp;object<br>
+-startOffset:&nbsp;character&nbsp;offset&nbsp;to&nbsp;start&nbsp;at<br>
+-endOffset:&nbsp;character&nbsp;offset&nbsp;just&nbsp;after&nbsp;last&nbsp;character&nbsp;to&nbsp;end&nbsp;at</tt></dd></dl>
+
+<dl><dt><a name="Script-presentCharacterAtOffset"><strong>presentCharacterAtOffset</strong></a>(self, obj, characterOffset)</dt></dl>
+
+<dl><dt><a name="Script-presentLineAtOffset"><strong>presentLineAtOffset</strong></a>(self, obj, characterOffset)</dt></dl>
+
+<dl><dt><a name="Script-presentString"><strong>presentString</strong></a>(self, obj, string, presentRole<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="Script-presentWordAtOffset"><strong>presentWordAtOffset</strong></a>(self, obj, characterOffset)</dt></dl>
+
+<dl><dt><a name="Script-sayCharacter"><strong>sayCharacter</strong></a>(self, obj)</dt></dl>
+
+<dl><dt><a name="Script-sayLine"><strong>sayLine</strong></a>(self, obj)</dt></dl>
+
+<dl><dt><a name="Script-sayWord"><strong>sayWord</strong></a>(self, obj)</dt></dl>
+
+<dl><dt><a name="Script-setCaretPosition"><strong>setCaretPosition</strong></a>(self, obj, characterOffset)</dt><dd><tt>Sets&nbsp;the&nbsp;caret&nbsp;position&nbsp;to&nbsp;the&nbsp;given&nbsp;character&nbsp;offset&nbsp;in&nbsp;the<br>
+given&nbsp;object.</tt></dd></dl>
+
 <dl><dt><a name="Script-setupInputEventHandlers"><strong>setupInputEventHandlers</strong></a>(self)</dt><dd><tt>Defines&nbsp;InputEventHandler&nbsp;fields&nbsp;for&nbsp;this&nbsp;script&nbsp;that&nbsp;can&nbsp;be<br>
 called&nbsp;by&nbsp;the&nbsp;key&nbsp;and&nbsp;braille&nbsp;bindings.</tt></dd></dl>
 
-<dl><dt><a name="Script-traverseContent"><strong>traverseContent</strong></a>(self, inputEvent)</dt></dl>
-
-<dl><dt><a name="Script-walkContent"><strong>walkContent</strong></a>(self, root, accumulated<font color="#909090">=''</font>, indent<font color="#909090">=''</font>)</dt></dl>
+<dl><dt><a name="Script-useOwnNavigationModel"><strong>useOwnNavigationModel</strong></a>(self)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;current&nbsp;locus&nbsp;of&nbsp;focus&nbsp;is&nbsp;in&nbsp;the<br>
+document&nbsp;content.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;this&nbsp;should&nbsp;return&nbsp;False&nbsp;if<br>
+we're&nbsp;in&nbsp;something&nbsp;like&nbsp;an&nbsp;entry&nbsp;area&nbsp;or&nbsp;a&nbsp;list&nbsp;because&nbsp;we<br>
+want&nbsp;their&nbsp;keyboard&nbsp;navigation&nbsp;stuff&nbsp;to&nbsp;work.]]]</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="orca.default.html#Script">orca.default.Script</a>:<br>
-<dl><dt><a name="Script-clusterZonesByLine"><strong>clusterZonesByLine</strong></a>(self, zones)</dt><dd><tt>Given&nbsp;a&nbsp;list&nbsp;of&nbsp;interesting&nbsp;accessible&nbsp;objects&nbsp;(the&nbsp;zones),<br>
-returns&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;in&nbsp;order&nbsp;from&nbsp;the&nbsp;top&nbsp;to&nbsp;bottom,&nbsp;where<br>
-each&nbsp;line&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;accessible&nbsp;objects&nbsp;in&nbsp;order&nbsp;from&nbsp;left<br>
-to&nbsp;right.</tt></dd></dl>
-
 <dl><dt><a name="Script-echoPreviousWord"><strong>echoPreviousWord</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;prior&nbsp;to&nbsp;the&nbsp;caret,&nbsp;as&nbsp;long&nbsp;as&nbsp;there&nbsp;is<br>
 a&nbsp;word&nbsp;prior&nbsp;to&nbsp;the&nbsp;caret&nbsp;and&nbsp;there&nbsp;is&nbsp;no&nbsp;intervening&nbsp;word<br>
 delimiter&nbsp;between&nbsp;the&nbsp;caret&nbsp;and&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;word.<br>
@@ -201,19 +404,6 @@ values&nbsp;are&nbsp;InputEventHandler&nbsp;instances.</tt></dd></dl>
 <dl><dt><a name="Script-getFlatReviewContext"><strong>getFlatReviewContext</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;flat&nbsp;review&nbsp;context,&nbsp;creating&nbsp;one&nbsp;if&nbsp;necessary.</tt></dd></dl>
 
 <dl><dt><a name="Script-getListeners"><strong>getListeners</strong></a>(self)</dt><dd><tt>Sets&nbsp;up&nbsp;the&nbsp;AT-SPI&nbsp;event&nbsp;listeners&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
-
-<dl><dt><a name="Script-getShowingZones"><strong>getShowingZones</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;interesting,&nbsp;non-intersecting,<br>
-regions&nbsp;that&nbsp;are&nbsp;drawn&nbsp;in&nbsp;the&nbsp;currently&nbsp;active&nbsp;window.&nbsp;&nbsp;Each<br>
-element&nbsp;of&nbsp;the&nbsp;list&nbsp;is&nbsp;the&nbsp;Accessible&nbsp;object&nbsp;associated&nbsp;with&nbsp;a<br>
-given&nbsp;region.&nbsp;&nbsp;The&nbsp;term&nbsp;'zone'&nbsp;here&nbsp;is&nbsp;inherited&nbsp;from&nbsp;OCR<br>
-algorithms&nbsp;and&nbsp;techniques.<br>
-&nbsp;<br>
-The&nbsp;objects&nbsp;are&nbsp;returned&nbsp;in&nbsp;no&nbsp;particular&nbsp;order.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;object&nbsp;to&nbsp;traverse<br>
-&nbsp;<br>
-Returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp;specified&nbsp;object</tt></dd></dl>
 
 <dl><dt><a name="Script-getText"><strong>getText</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;the&nbsp;substring&nbsp;of&nbsp;the&nbsp;given&nbsp;object's&nbsp;text&nbsp;specialization.<br>
 &nbsp;<br>
@@ -313,11 +503,6 @@ In&nbsp;focus&nbsp;tracking&nbsp;mode,&nbsp;the&nbsp;cursor&nbsp;stays&nbsp;at&n
 In&nbsp;flat&nbsp;review&nbsp;mode,&nbsp;the&nbsp;review&nbsp;cursor&nbsp;moves&nbsp;to&nbsp;character<br>
 associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
 
-<dl><dt><a name="Script-phoneticSpellCurrentItem"><strong>phoneticSpellCurrentItem</strong></a>(self, string)</dt><dd><tt>Phonetically&nbsp;spell&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;word&nbsp;or&nbsp;line.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;string:&nbsp;the&nbsp;string&nbsp;to&nbsp;phonetically&nbsp;spell.</tt></dd></dl>
-
 <dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;It&nbsp;uses&nbsp;the&nbsp;super<br>
 class&nbsp;equivalent&nbsp;to&nbsp;do&nbsp;most&nbsp;of&nbsp;the&nbsp;work.&nbsp;The&nbsp;only&nbsp;thing&nbsp;done&nbsp;here<br>
 is&nbsp;to&nbsp;detect&nbsp;when&nbsp;the&nbsp;user&nbsp;is&nbsp;trying&nbsp;to&nbsp;get&nbsp;out&nbsp;of&nbsp;learn&nbsp;mode.<br>
@@ -389,20 +574,6 @@ previous&nbsp;line.</tt></dd></dl>
 
 <dl><dt><a name="Script-sayAll"><strong>sayAll</strong></a>(self, inputEvent)</dt></dl>
 
-<dl><dt><a name="Script-sayCharacter"><strong>sayCharacter</strong></a>(self, obj)</dt><dd><tt>Speak&nbsp;the&nbsp;character&nbsp;under&nbsp;the&nbsp;caret.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;isn't&nbsp;the<br>
-caret&nbsp;between&nbsp;characters?]]]<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface</tt></dd></dl>
-
-<dl><dt><a name="Script-sayLine"><strong>sayLine</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;line&nbsp;of&nbsp;an&nbsp;AccessibleText&nbsp;object&nbsp;that&nbsp;contains&nbsp;the<br>
-caret,&nbsp;unless&nbsp;the&nbsp;line&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp;case&nbsp;it's&nbsp;ignored.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface</tt></dd></dl>
-
 <dl><dt><a name="Script-sayPhrase"><strong>sayPhrase</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;text&nbsp;of&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;between&nbsp;the&nbsp;start&nbsp;and<br>
 end&nbsp;offsets,&nbsp;unless&nbsp;the&nbsp;phrase&nbsp;is&nbsp;empty&nbsp;in&nbsp;which&nbsp;case&nbsp;it's&nbsp;ignored.<br>
 &nbsp;<br>
@@ -411,13 +582,6 @@ Arguments:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface<br>
 -&nbsp;startOffset:&nbsp;the&nbsp;start&nbsp;text&nbsp;offset.<br>
 -&nbsp;endOffset:&nbsp;the&nbsp;end&nbsp;text&nbsp;offset.</tt></dd></dl>
-
-<dl><dt><a name="Script-sayWord"><strong>sayWord</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;at&nbsp;the&nbsp;caret.&nbsp;&nbsp;[[[TODO:&nbsp;WDW&nbsp;-&nbsp;what&nbsp;if&nbsp;there&nbsp;is&nbsp;no<br>
-word&nbsp;at&nbsp;the&nbsp;caret?]]]<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;obj:&nbsp;an&nbsp;Accessible&nbsp;object&nbsp;that&nbsp;implements&nbsp;the&nbsp;AccessibleText<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interface</tt></dd></dl>
 
 <dl><dt><a name="Script-showZones"><strong>showZones</strong></a>(self, inputEvent)</dt><dd><tt>Debug&nbsp;routine&nbsp;to&nbsp;paint&nbsp;rectangles&nbsp;around&nbsp;the&nbsp;discrete<br>
 interesting&nbsp;(e.g.,&nbsp;text)&nbsp;&nbsp;zones&nbsp;in&nbsp;the&nbsp;active&nbsp;window&nbsp;for<br>
@@ -484,13 +648,6 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
 
-<dl><dt><a name="Script-consumesKeyboardEvent"><strong>consumesKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;on&nbsp;the&nbsp;keyboard.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;keyboardEvent:&nbsp;an&nbsp;instance&nbsp;of&nbsp;input_event.KeyboardEvent<br>
-&nbsp;<br>
-Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
-
 <dl><dt><a name="Script-getBrailleCommandsForInputHandler"><strong>getBrailleCommandsForInputHandler</strong></a>(self, inputEventHandler)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;BrlTTY&nbsp;commands&nbsp;(they're&nbsp;in&nbsp;braille.py)&nbsp;that<br>
 match&nbsp;the&nbsp;given&nbsp;inputEventHandler&nbsp;passed&nbsp;as&nbsp;argument.<br>
 &nbsp;<br>
@@ -546,9 +703,7 @@ Arguments:<br>
 <font color="#000000" face="helvetica, arial"><a name="SpeechGenerator">class <strong>SpeechGenerator</strong></a>(<a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Handle&nbsp;Gecko's&nbsp;unique&nbsp;hiearchical&nbsp;representation,&nbsp;such&nbsp;as&nbsp;menus<br>
-duplicating&nbsp;themselves&nbsp;in&nbsp;the&nbsp;hierarchy&nbsp;and&nbsp;tables&nbsp;used&nbsp;for&nbsp;layout<br>
-and&nbsp;indentation&nbsp;purposes.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>Provides&nbsp;a&nbsp;speech&nbsp;generator&nbsp;specific&nbsp;to&nbsp;Gecko.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="SpeechGenerator-__init__"><strong>__init__</strong></a>(self, script)</dt></dl>
@@ -585,6 +740,7 @@ Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</t
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>EMBEDDED_OBJECT_CHARACTER</strong> = u'<font color="#c040c0">\ufffc</font>'<br>
+<strong>NEWLINE_ROLES</strong> = ['paragraph', 'separator', 'list item', 'heading']<br>
 <strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
 <strong>__date__</strong> = '$Date$'<br>
 <strong>__id__</strong> = '$Id$'<br>

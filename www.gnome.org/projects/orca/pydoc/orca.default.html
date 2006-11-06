@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.default</strong></big></big> (version 1.216, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.default</strong></big></big> (version 1.235, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/default.py">/usr/lib/python2.4/site-packages/orca/default.py</a></font></td></tr></table>
     <p><tt>The&nbsp;default&nbsp;<a href="#Script">Script</a>&nbsp;for&nbsp;presenting&nbsp;information&nbsp;to&nbsp;the&nbsp;user&nbsp;using<br>
@@ -22,14 +22,14 @@ for&nbsp;GTK.</tt></p>
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.atspi.html">orca.atspi</a><br>
 <a href="orca.braille.html">orca.braille</a><br>
+<a href="orca.chnames.html">orca.chnames</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
 <a href="orca.flat_review.html">orca.flat_review</a><br>
-<a href="orca.input_event.html">orca.input_event</a><br>
-</td><td width="25%" valign=top><a href="orca.keybindings.html">orca.keybindings</a><br>
+</td><td width="25%" valign=top><a href="orca.input_event.html">orca.input_event</a><br>
+<a href="orca.keybindings.html">orca.keybindings</a><br>
 <a href="orca.mag.html">orca.mag</a><br>
 <a href="orca.orca.html">orca.orca</a><br>
 <a href="orca.orca_state.html">orca.orca_state</a><br>
-<a href="orca.phonnames.html">orca.phonnames</a><br>
 </td><td width="25%" valign=top><a href="orca.rolenames.html">orca.rolenames</a><br>
 <a href="orca.script.html">orca.script</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
@@ -65,11 +65,6 @@ for&nbsp;GTK.</tt></p>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;app:&nbsp;the&nbsp;application&nbsp;to&nbsp;create&nbsp;a&nbsp;script&nbsp;for.</tt></dd></dl>
-
-<dl><dt><a name="Script-clusterZonesByLine"><strong>clusterZonesByLine</strong></a>(self, zones)</dt><dd><tt>Given&nbsp;a&nbsp;list&nbsp;of&nbsp;interesting&nbsp;accessible&nbsp;objects&nbsp;(the&nbsp;zones),<br>
-returns&nbsp;a&nbsp;list&nbsp;of&nbsp;lines&nbsp;in&nbsp;order&nbsp;from&nbsp;the&nbsp;top&nbsp;to&nbsp;bottom,&nbsp;where<br>
-each&nbsp;line&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;accessible&nbsp;objects&nbsp;in&nbsp;order&nbsp;from&nbsp;left<br>
-to&nbsp;right.</tt></dd></dl>
 
 <dl><dt><a name="Script-echoPreviousWord"><strong>echoPreviousWord</strong></a>(self, obj)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;prior&nbsp;to&nbsp;the&nbsp;caret,&nbsp;as&nbsp;long&nbsp;as&nbsp;there&nbsp;is<br>
 a&nbsp;word&nbsp;prior&nbsp;to&nbsp;the&nbsp;caret&nbsp;and&nbsp;there&nbsp;is&nbsp;no&nbsp;intervening&nbsp;word<br>
@@ -111,19 +106,6 @@ values&nbsp;are&nbsp;InputEventHandler&nbsp;instances.</tt></dd></dl>
 Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings.</tt></dd></dl>
 
 <dl><dt><a name="Script-getListeners"><strong>getListeners</strong></a>(self)</dt><dd><tt>Sets&nbsp;up&nbsp;the&nbsp;AT-SPI&nbsp;event&nbsp;listeners&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
-
-<dl><dt><a name="Script-getShowingZones"><strong>getShowingZones</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;interesting,&nbsp;non-intersecting,<br>
-regions&nbsp;that&nbsp;are&nbsp;drawn&nbsp;in&nbsp;the&nbsp;currently&nbsp;active&nbsp;window.&nbsp;&nbsp;Each<br>
-element&nbsp;of&nbsp;the&nbsp;list&nbsp;is&nbsp;the&nbsp;Accessible&nbsp;object&nbsp;associated&nbsp;with&nbsp;a<br>
-given&nbsp;region.&nbsp;&nbsp;The&nbsp;term&nbsp;'zone'&nbsp;here&nbsp;is&nbsp;inherited&nbsp;from&nbsp;OCR<br>
-algorithms&nbsp;and&nbsp;techniques.<br>
-&nbsp;<br>
-The&nbsp;objects&nbsp;are&nbsp;returned&nbsp;in&nbsp;no&nbsp;particular&nbsp;order.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;object&nbsp;to&nbsp;traverse<br>
-&nbsp;<br>
-Returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;objects&nbsp;under&nbsp;the&nbsp;specified&nbsp;object</tt></dd></dl>
 
 <dl><dt><a name="Script-getText"><strong>getText</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;the&nbsp;substring&nbsp;of&nbsp;the&nbsp;given&nbsp;object's&nbsp;text&nbsp;specialization.<br>
 &nbsp;<br>
@@ -249,11 +231,6 @@ associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
 In&nbsp;focus&nbsp;tracking&nbsp;mode,&nbsp;the&nbsp;cursor&nbsp;stays&nbsp;at&nbsp;its&nbsp;logical&nbsp;position.<br>
 In&nbsp;flat&nbsp;review&nbsp;mode,&nbsp;the&nbsp;review&nbsp;cursor&nbsp;moves&nbsp;to&nbsp;character<br>
 associated&nbsp;with&nbsp;cell&nbsp;0.</tt></dd></dl>
-
-<dl><dt><a name="Script-phoneticSpellCurrentItem"><strong>phoneticSpellCurrentItem</strong></a>(self, string)</dt><dd><tt>Phonetically&nbsp;spell&nbsp;the&nbsp;current&nbsp;flat&nbsp;review&nbsp;word&nbsp;or&nbsp;line.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;string:&nbsp;the&nbsp;string&nbsp;to&nbsp;phonetically&nbsp;spell.</tt></dd></dl>
 
 <dl><dt><a name="Script-processKeyboardEvent"><strong>processKeyboardEvent</strong></a>(self, keyboardEvent)</dt><dd><tt>Processes&nbsp;the&nbsp;given&nbsp;keyboard&nbsp;event.&nbsp;It&nbsp;uses&nbsp;the&nbsp;super<br>
 class&nbsp;equivalent&nbsp;to&nbsp;do&nbsp;most&nbsp;of&nbsp;the&nbsp;work.&nbsp;The&nbsp;only&nbsp;thing&nbsp;done&nbsp;here<br>
