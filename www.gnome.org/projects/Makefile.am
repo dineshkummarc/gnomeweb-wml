@@ -6,6 +6,7 @@ SUBDIRS = \
 	devtools		\
 	dia			\
 	evolution		\
+	fantasdic		\
 	f-spot			\
 	garnome			\
 	gedit			\
