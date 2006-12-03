@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.StarOffice</strong></big></big> (version 1.62, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.StarOffice</strong></big></big> (version 1.66, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/StarOffice.py">/usr/lib/python2.4/site-packages/orca/scripts/StarOffice.py</a></font></td></tr></table>
     <p><tt>Custom&nbsp;script&nbsp;for&nbsp;StarOffice&nbsp;and&nbsp;OpenOffice.</tt></p>
@@ -20,16 +20,18 @@
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.atspi.html">orca.atspi</a><br>
 <a href="orca.braille.html">orca.braille</a><br>
 <a href="orca.braillegenerator.html">orca.braillegenerator</a><br>
-<a href="orca.debug.html">orca.debug</a><br>
-</td><td width="25%" valign=top><a href="orca.default.html">orca.default</a><br>
+<a href="orca.chnames.html">orca.chnames</a><br>
+</td><td width="25%" valign=top><a href="orca.debug.html">orca.debug</a><br>
+<a href="orca.default.html">orca.default</a><br>
 <a href="orca.input_event.html">orca.input_event</a><br>
 <a href="orca.keybindings.html">orca.keybindings</a><br>
+</td><td width="25%" valign=top><a href="orca.orca.html">orca.orca</a><br>
 <a href="orca.orca_state.html">orca.orca_state</a><br>
-</td><td width="25%" valign=top><a href="orca.rolenames.html">orca.rolenames</a><br>
+<a href="orca.rolenames.html">orca.rolenames</a><br>
 <a href="orca.settings.html">orca.settings</a><br>
-<a href="orca.speech.html">orca.speech</a><br>
+</td><td width="25%" valign=top><a href="orca.speech.html">orca.speech</a><br>
 <a href="orca.speechgenerator.html">orca.speechgenerator</a><br>
-</td><td width="25%" valign=top><a href="orca.util.html">orca.util</a><br>
+<a href="orca.util.html">orca.util</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -203,6 +205,20 @@ Arguments:<br>
 -&nbsp;oldLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;old&nbsp;locus&nbsp;of&nbsp;focus<br>
 -&nbsp;newLocusOfFocus:&nbsp;Accessible&nbsp;that&nbsp;is&nbsp;the&nbsp;new&nbsp;locus&nbsp;of&nbsp;focus</tt></dd></dl>
 
+<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;the&nbsp;caret&nbsp;moves.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.&nbsp;Overridden&nbsp;in&nbsp;this&nbsp;script&nbsp;<br>
+so&nbsp;that&nbsp;we&nbsp;can&nbsp;adjust&nbsp;"focus:"&nbsp;events&nbsp;for&nbsp;children&nbsp;of&nbsp;a&nbsp;combo-box&nbsp;<br>
+to&nbsp;just&nbsp;set&nbsp;the&nbsp;focus&nbsp;to&nbsp;the&nbsp;combo&nbsp;box.&nbsp;This&nbsp;is&nbsp;needed&nbsp;to&nbsp;help&nbsp;<br>
+reduce&nbsp;the&nbsp;verbosity&nbsp;of&nbsp;focusing&nbsp;on&nbsp;the&nbsp;Calc&nbsp;Name&nbsp;combo&nbsp;box&nbsp;(see&nbsp;<br>
+bug&nbsp;#364407).<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
 <dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -245,7 +261,7 @@ Arguments:<br>
 -&nbsp;startOffset:&nbsp;the&nbsp;start&nbsp;offset&nbsp;for&nbsp;this&nbsp;word<br>
 -&nbsp;endOffset:&nbsp;the&nbsp;end&nbsp;offset&nbsp;for&nbsp;this&nbsp;word</tt></dd></dl>
 
-<dl><dt><a name="Script-setDynamicColumnHeaders"><strong>setDynamicColumnHeaders</strong></a>(self, inputEvent)</dt><dd><tt>Set&nbsp;the&nbsp;row&nbsp;for&nbsp;the&nbsp;dynamic&nbsp;header&nbsp;columns&nbsp;to&nbsp;use&nbsp;when&nbsp;speaking&nbsp;<br>
+<dl><dt><a name="Script-setDynamicColumnHeaders"><strong>setDynamicColumnHeaders</strong></a>(self, inputEvent)</dt><dd><tt>Set&nbsp;the&nbsp;row&nbsp;for&nbsp;the&nbsp;dynamic&nbsp;header&nbsp;columns&nbsp;to&nbsp;use&nbsp;when&nbsp;speaking<br>
 calc&nbsp;cell&nbsp;entries.&nbsp;In&nbsp;order&nbsp;to&nbsp;set&nbsp;the&nbsp;row,&nbsp;the&nbsp;user&nbsp;should&nbsp;first&nbsp;set<br>
 focus&nbsp;to&nbsp;the&nbsp;row&nbsp;that&nbsp;they&nbsp;wish&nbsp;to&nbsp;define&nbsp;and&nbsp;then&nbsp;press&nbsp;Insert-r.<br>
 &nbsp;<br>
@@ -258,9 +274,9 @@ header&nbsp;column.<br>
 Arguments:<br>
 -&nbsp;inputEvent:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;input&nbsp;event&nbsp;that&nbsp;caused&nbsp;this&nbsp;action.</tt></dd></dl>
 
-<dl><dt><a name="Script-setDynamicRowHeaders"><strong>setDynamicRowHeaders</strong></a>(self, inputEvent)</dt><dd><tt>Set&nbsp;the&nbsp;column&nbsp;for&nbsp;the&nbsp;dynamic&nbsp;header&nbsp;rows&nbsp;to&nbsp;use&nbsp;when&nbsp;speaking&nbsp;<br>
-calc&nbsp;cell&nbsp;entries.&nbsp;In&nbsp;order&nbsp;to&nbsp;set&nbsp;the&nbsp;column,&nbsp;the&nbsp;user&nbsp;should&nbsp;first&nbsp;<br>
-set&nbsp;focus&nbsp;to&nbsp;the&nbsp;column&nbsp;that&nbsp;they&nbsp;wish&nbsp;to&nbsp;define&nbsp;and&nbsp;then&nbsp;press&nbsp;<br>
+<dl><dt><a name="Script-setDynamicRowHeaders"><strong>setDynamicRowHeaders</strong></a>(self, inputEvent)</dt><dd><tt>Set&nbsp;the&nbsp;column&nbsp;for&nbsp;the&nbsp;dynamic&nbsp;header&nbsp;rows&nbsp;to&nbsp;use&nbsp;when&nbsp;speaking<br>
+calc&nbsp;cell&nbsp;entries.&nbsp;In&nbsp;order&nbsp;to&nbsp;set&nbsp;the&nbsp;column,&nbsp;the&nbsp;user&nbsp;should&nbsp;first<br>
+set&nbsp;focus&nbsp;to&nbsp;the&nbsp;column&nbsp;that&nbsp;they&nbsp;wish&nbsp;to&nbsp;define&nbsp;and&nbsp;then&nbsp;press<br>
 Insert-c.<br>
 &nbsp;<br>
 Once&nbsp;the&nbsp;user&nbsp;has&nbsp;defined&nbsp;the&nbsp;column,&nbsp;it&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;first&nbsp;speak<br>
@@ -277,6 +293,9 @@ called&nbsp;by&nbsp;the&nbsp;key&nbsp;and&nbsp;braille&nbsp;bindings.&nbsp;In&nb
 we&nbsp;just&nbsp;want&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;add&nbsp;a&nbsp;handler&nbsp;to&nbsp;return&nbsp;the&nbsp;contents&nbsp;of<br>
 the&nbsp;input&nbsp;line.</tt></dd></dl>
 
+<dl><dt><a name="Script-speakBlankLine"><strong>speakBlankLine</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;a&nbsp;blank&nbsp;line&nbsp;should&nbsp;be&nbsp;spoken.<br>
+Otherwise,&nbsp;returns&nbsp;False.</tt></dd></dl>
+
 <dl><dt><a name="Script-speakInputLine"><strong>speakInputLine</strong></a>(self, inputEvent)</dt><dd><tt>Speak&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;spread&nbsp;sheet&nbsp;input&nbsp;line&nbsp;(assuming&nbsp;we<br>
 have&nbsp;a&nbsp;handle&nbsp;to&nbsp;it&nbsp;-&nbsp;generated&nbsp;when&nbsp;we&nbsp;first&nbsp;focus&nbsp;on&nbsp;a&nbsp;spread<br>
 sheet&nbsp;table&nbsp;cell.<br>
@@ -286,6 +305,9 @@ or&nbsp;the&nbsp;formula&nbsp;associated&nbsp;with&nbsp;it.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;inputEvent:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;input&nbsp;event&nbsp;that&nbsp;caused&nbsp;this&nbsp;action.</tt></dd></dl>
+
+<dl><dt><a name="Script-speakNewLine"><strong>speakNewLine</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;a&nbsp;newline&nbsp;should&nbsp;be&nbsp;spoken.<br>
+Otherwise,&nbsp;returns&nbsp;False.</tt></dd></dl>
 
 <dl><dt><a name="Script-speakSetupLabel"><strong>speakSetupLabel</strong></a>(self, label)</dt><dd><tt>Speak&nbsp;this&nbsp;Setup&nbsp;dialog&nbsp;label.<br>
 &nbsp;<br>
@@ -316,11 +338,29 @@ Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&
 &nbsp;<br>
 Returns&nbsp;True&nbsp;to&nbsp;indicate&nbsp;the&nbsp;input&nbsp;event&nbsp;has&nbsp;been&nbsp;consumed.</tt></dd></dl>
 
+<dl><dt><a name="Script-find"><strong>find</strong></a>(self, query<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;for&nbsp;the&nbsp;specified&nbsp;query.&nbsp;&nbsp;If&nbsp;no&nbsp;query&nbsp;is&nbsp;specified,<br>
+it&nbsp;searches&nbsp;for&nbsp;the&nbsp;query&nbsp;specified&nbsp;in&nbsp;the&nbsp;Orca&nbsp;Find&nbsp;dialog.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;query:&nbsp;The&nbsp;search&nbsp;query&nbsp;to&nbsp;find.</tt></dd></dl>
+
 <dl><dt><a name="Script-findCommonAncestor"><strong>findCommonAncestor</strong></a>(self, a, b)</dt><dd><tt>Finds&nbsp;the&nbsp;common&nbsp;ancestor&nbsp;between&nbsp;Accessible&nbsp;a&nbsp;and&nbsp;Accessible&nbsp;b.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;a:&nbsp;Accessible<br>
 -&nbsp;b:&nbsp;Accessible</tt></dd></dl>
+
+<dl><dt><a name="Script-findNext"><strong>findNext</strong></a>(self, inputEvent)</dt><dd><tt>Searches&nbsp;forward&nbsp;for&nbsp;the&nbsp;next&nbsp;instance&nbsp;of&nbsp;the&nbsp;string<br>
+searched&nbsp;for&nbsp;via&nbsp;the&nbsp;Orca&nbsp;Find&nbsp;dialog.&nbsp;&nbsp;Other&nbsp;than&nbsp;direction<br>
+and&nbsp;the&nbsp;starting&nbsp;point,&nbsp;the&nbsp;search&nbsp;options&nbsp;initially&nbsp;specified<br>
+(case&nbsp;sensitivity,&nbsp;window&nbsp;wrap,&nbsp;and&nbsp;full/partial&nbsp;match)&nbsp;are<br>
+preserved.</tt></dd></dl>
+
+<dl><dt><a name="Script-findPrevious"><strong>findPrevious</strong></a>(self, inputEvent)</dt><dd><tt>Searches&nbsp;backwards&nbsp;for&nbsp;the&nbsp;next&nbsp;instance&nbsp;of&nbsp;the&nbsp;string<br>
+searched&nbsp;for&nbsp;via&nbsp;the&nbsp;Orca&nbsp;Find&nbsp;dialog.&nbsp;&nbsp;Other&nbsp;than&nbsp;direction<br>
+and&nbsp;the&nbsp;starting&nbsp;point,&nbsp;the&nbsp;search&nbsp;options&nbsp;initially&nbsp;specified<br>
+(case&nbsp;sensitivity,&nbsp;window&nbsp;wrap,&nbsp;and&nbsp;full/partial&nbsp;match)&nbsp;are<br>
+preserved.</tt></dd></dl>
 
 <dl><dt><a name="Script-getBrailleBindings"><strong>getBrailleBindings</strong></a>(self)</dt><dd><tt>Defines&nbsp;the&nbsp;braille&nbsp;bindings&nbsp;for&nbsp;this&nbsp;script.<br>
 &nbsp;<br>
@@ -351,16 +391,6 @@ change&nbsp;in&nbsp;one&nbsp;of&nbsp;its&nbsp;children.<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;the&nbsp;caret&nbsp;moves.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
-<dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
 <dl><dt><a name="Script-onLinkSelected"><strong>onLinkSelected</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;a&nbsp;hyperlink&nbsp;is&nbsp;selected&nbsp;in&nbsp;a&nbsp;text&nbsp;area.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -387,7 +417,7 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
-<dl><dt><a name="Script-outputCharAttributes"><strong>outputCharAttributes</strong></a>(self, attributes)</dt><dd><tt>Speak&nbsp;each&nbsp;of&nbsp;the&nbsp;text&nbsp;attributes&nbsp;given&nbsp;dictionary.<br>
+<dl><dt><a name="Script-outputCharAttributes"><strong>outputCharAttributes</strong></a>(self, keys, attributes)</dt><dd><tt>Speak&nbsp;each&nbsp;of&nbsp;the&nbsp;text&nbsp;attributes&nbsp;given&nbsp;dictionary.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;attributes:&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;text&nbsp;attributes&nbsp;to&nbsp;speak.</tt></dd></dl>
@@ -547,7 +577,9 @@ value.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;final&nbsp;semi-colon,&nbsp;then&n
 Arguments:<br>
 -&nbsp;str:&nbsp;the&nbsp;string&nbsp;of&nbsp;tokens&nbsp;containing&nbsp;&lt;key&gt;:&lt;value&gt;;&nbsp;pairs.<br>
 &nbsp;<br>
-Returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;key/value&nbsp;items.</tt></dd></dl>
+Returns&nbsp;a&nbsp;list&nbsp;containing&nbsp;two&nbsp;items:<br>
+A&nbsp;list&nbsp;of&nbsp;the&nbsp;keys&nbsp;in&nbsp;the&nbsp;order&nbsp;they&nbsp;were&nbsp;extracted&nbsp;from&nbsp;the<br>
+text&nbsp;attribute&nbsp;string&nbsp;and&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;key/value&nbsp;items.</tt></dd></dl>
 
 <dl><dt><a name="Script-toggleFlatReviewMode"><strong>toggleFlatReviewMode</strong></a>(self, inputEvent<font color="#909090">=None</font>)</dt><dd><tt>Toggles&nbsp;between&nbsp;flat&nbsp;review&nbsp;mode&nbsp;and&nbsp;focus&nbsp;tracking&nbsp;mode.</tt></dd></dl>
 
@@ -577,7 +609,7 @@ Arguments:<br>
 -&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
 -&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
 
-<dl><dt><a name="Script-whereAmI"><strong>whereAmI</strong></a>(self, inputEvent)</dt></dl>
+<dl><dt><a name="Script-whereAmI"><strong>whereAmI</strong></a>(self, inputEvent)</dt><dd><tt>Speaks&nbsp;information&nbsp;about&nbsp;the&nbsp;current&nbsp;object&nbsp;of&nbsp;interest.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="orca.script.html#Script">orca.script.Script</a>:<br>
@@ -650,7 +682,9 @@ Arguments:<br>
 <font color="#000000" face="helvetica, arial"><a name="SpeechGenerator">class <strong>SpeechGenerator</strong></a>(<a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Overrides&nbsp;_getSpeechForTableCellRow&nbsp;so&nbsp;that&nbsp;,&nbsp;when&nbsp;we&nbsp;are&nbsp;in&nbsp;a<br>
+<td colspan=2><tt>Overrides&nbsp;_getSpeechForComboBox&nbsp;so&nbsp;that&nbsp;we&nbsp;can&nbsp;provide&nbsp;a&nbsp;name&nbsp;for<br>
+the&nbsp;Calc&nbsp;Name&nbsp;combo&nbsp;box.<br>
+Overrides&nbsp;_getSpeechForTableCellRow&nbsp;so&nbsp;that&nbsp;,&nbsp;when&nbsp;we&nbsp;are&nbsp;in&nbsp;a<br>
 spread&nbsp;sheet,&nbsp;we&nbsp;can&nbsp;speak&nbsp;the&nbsp;dynamic&nbsp;row&nbsp;and&nbsp;column&nbsp;headers<br>
 (assuming&nbsp;they&nbsp;are&nbsp;set).<br>
 Overrides&nbsp;_getSpeechForTableCell&nbsp;so&nbsp;that,&nbsp;when&nbsp;we&nbsp;are&nbsp;in&nbsp;a&nbsp;spread<br>

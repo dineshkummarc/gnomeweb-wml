@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.orca_gui_prefs</strong></big></big> (version 1.58, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.orca_gui_prefs</strong></big></big> (version 1.62, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/orca_gui_prefs.py">/usr/lib/python2.4/site-packages/orca/orca_gui_prefs.py</a></font></td></tr></table>
     <p><tt>Displays&nbsp;a&nbsp;GUI&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;set&nbsp;Orca&nbsp;preferences.</tt></p>
@@ -19,17 +19,21 @@
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.acss.html">orca.acss</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
+<a href="orca.default.html">orca.default</a><br>
 <a href="gettext.html">gettext</a><br>
-<a href="gtk.html">gtk</a><br>
-</td><td width="25%" valign=top><a href="locale.html">locale</a><br>
+<a href="gobject.html">gobject</a><br>
+</td><td width="25%" valign=top><a href="gtk.html">gtk</a><br>
+<a href="orca.keybindings.html">orca.keybindings</a><br>
+<a href="locale.html">locale</a><br>
 <a href="orca.orca.html">orca.orca</a><br>
 <a href="orca.orca_glade.html">orca.orca_glade</a><br>
-<a href="orca.orca_prefs.html">orca.orca_prefs</a><br>
-</td><td width="25%" valign=top><a href="orca.orca_state.html">orca.orca_state</a><br>
+</td><td width="25%" valign=top><a href="orca.orca_prefs.html">orca.orca_prefs</a><br>
+<a href="orca.orca_state.html">orca.orca_state</a><br>
 <a href="os.html">os</a><br>
+<a href="pango.html">pango</a><br>
 <a href="orca.platform.html">orca.platform</a><br>
-<a href="orca.settings.html">orca.settings</a><br>
-</td><td width="25%" valign=top><a href="orca.speech.html">orca.speech</a><br>
+</td><td width="25%" valign=top><a href="orca.settings.html">orca.settings</a><br>
+<a href="orca.speech.html">orca.speech</a><br>
 <a href="orca.speechserver.html">orca.speechserver</a><br>
 <a href="sys.html">sys</a><br>
 </td></tr></table></td></tr></table><p>
@@ -77,7 +81,7 @@ Arguments:<br>
 &nbsp;&nbsp;&nbsp;previously&nbsp;been&nbsp;enabled,&nbsp;warn&nbsp;the&nbsp;user&nbsp;that&nbsp;they&nbsp;will&nbsp;need&nbsp;to<br>
 &nbsp;&nbsp;&nbsp;log&nbsp;out.&nbsp;Shut&nbsp;down&nbsp;any&nbsp;active&nbsp;speech&nbsp;servers&nbsp;that&nbsp;were&nbsp;started.<br>
 &nbsp;&nbsp;&nbsp;Reload&nbsp;the&nbsp;users&nbsp;preferences&nbsp;to&nbsp;get&nbsp;the&nbsp;new&nbsp;speech,&nbsp;braille&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;key&nbsp;echo&nbsp;value&nbsp;to&nbsp;take&nbsp;effect.&nbsp;Do&nbsp;not&nbsp;dismiss&nbsp;the&nbsp;configuration&nbsp;<br>
+&nbsp;&nbsp;&nbsp;key&nbsp;echo&nbsp;value&nbsp;to&nbsp;take&nbsp;effect.&nbsp;Do&nbsp;not&nbsp;dismiss&nbsp;the&nbsp;configuration<br>
 &nbsp;&nbsp;&nbsp;window.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -111,7 +115,7 @@ Arguments:<br>
 
 <dl><dt><a name="orcaSetupGUI-cancelButtonClicked"><strong>cancelButtonClicked</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"clicked"&nbsp;signal&nbsp;for&nbsp;the&nbsp;cancelButton<br>
 &nbsp;&nbsp;&nbsp;GtkButton&nbsp;widget.&nbsp;The&nbsp;user&nbsp;has&nbsp;clicked&nbsp;the&nbsp;Cancel&nbsp;button.<br>
-&nbsp;&nbsp;&nbsp;Don't&nbsp;write&nbsp;out&nbsp;the&nbsp;preferences.&nbsp;Hide&nbsp;the&nbsp;configuration&nbsp;window.<br>
+&nbsp;&nbsp;&nbsp;Don't&nbsp;write&nbsp;out&nbsp;the&nbsp;preferences.&nbsp;Destroy&nbsp;the&nbsp;configuration&nbsp;window.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
@@ -144,6 +148,17 @@ Arguments:<br>
 &nbsp;&nbsp;&nbsp;'enableKeyEcho'&nbsp;preference&nbsp;to&nbsp;the&nbsp;new&nbsp;value.&nbsp;[In]sensitize<br>
 &nbsp;&nbsp;&nbsp;the&nbsp;checkboxes&nbsp;for&nbsp;the&nbsp;various&nbsp;types&nbsp;of&nbsp;key&nbsp;echo,&nbsp;depending<br>
 &nbsp;&nbsp;&nbsp;upon&nbsp;whether&nbsp;this&nbsp;value&nbsp;is&nbsp;checked&nbsp;or&nbsp;unchecked.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
+
+<dl><dt><a name="orcaSetupGUI-keyboardLayoutChanged"><strong>keyboardLayoutChanged</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"toggled"&nbsp;signal&nbsp;for&nbsp;the&nbsp;generalDesktopButton,<br>
+&nbsp;&nbsp;&nbsp;or&nbsp;generalLaptopButton&nbsp;GtkRadioButton&nbsp;widgets.&nbsp;The&nbsp;user&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;toggled&nbsp;the&nbsp;keyboard&nbsp;layout&nbsp;value.&nbsp;If&nbsp;this&nbsp;signal&nbsp;was<br>
+&nbsp;&nbsp;&nbsp;generated&nbsp;as&nbsp;the&nbsp;result&nbsp;of&nbsp;a&nbsp;radio&nbsp;button&nbsp;getting&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;(as&nbsp;opposed&nbsp;to&nbsp;a&nbsp;radio&nbsp;button&nbsp;losing&nbsp;the&nbsp;selection),&nbsp;set&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;'keyboardLayout'&nbsp;preference&nbsp;to&nbsp;the&nbsp;new&nbsp;value.&nbsp;Also&nbsp;set&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;matching&nbsp;list&nbsp;of&nbsp;Orca&nbsp;modifier&nbsp;keys<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
@@ -382,6 +397,14 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
 
+<dl><dt><a name="orcaSetupGUI-speakBlankLinesChecked"><strong>speakBlankLinesChecked</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"toggled"&nbsp;signal&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;speakBlankLinesCheckButton&nbsp;GtkCheckButton&nbsp;widget.&nbsp;The&nbsp;user&nbsp;has<br>
+&nbsp;&nbsp;&nbsp;[un]checked&nbsp;the&nbsp;'Speak&nbsp;blank&nbsp;lines'&nbsp;checkbox.<br>
+&nbsp;&nbsp;&nbsp;Set&nbsp;the&nbsp;'speakBlankLines'&nbsp;preference&nbsp;to&nbsp;the&nbsp;new&nbsp;value.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
+
 <dl><dt><a name="orcaSetupGUI-speechIndentationChecked"><strong>speechIndentationChecked</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"toggled"&nbsp;signal&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;speechIndentationCheckbutton&nbsp;GtkCheckButton&nbsp;widget.&nbsp;The&nbsp;user&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;[un]checked&nbsp;the&nbsp;'Speak&nbsp;indentation&nbsp;and&nbsp;justification'&nbsp;checkbox.<br>
@@ -489,7 +512,19 @@ Methods inherited from <a href="orca.orca_glade.html#GladeWrapper">orca.orca_gla
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>OS</strong> = None<br>
+<td width="100%"><strong>DEFAULT_KEY</strong> = 2<br>
+<strong>DESCRIP</strong> = 1<br>
+<strong>HANDLER</strong> = 0<br>
+<strong>KEY1</strong> = 5<br>
+<strong>KEY2</strong> = 9<br>
+<strong>MODIF</strong> = 11<br>
+<strong>MOD_MASK1</strong> = 3<br>
+<strong>MOD_MASK2</strong> = 7<br>
+<strong>MOD_USED1</strong> = 4<br>
+<strong>MOD_USED2</strong> = 8<br>
+<strong>OS</strong> = None<br>
+<strong>TEXT1</strong> = 6<br>
+<strong>TEXT2</strong> = 10<br>
 <strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
 <strong>__date__</strong> = '$Date$'<br>
 <strong>__id__</strong> = '$Id$'<br>

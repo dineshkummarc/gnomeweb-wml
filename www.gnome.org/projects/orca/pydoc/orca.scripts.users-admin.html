@@ -1,15 +1,15 @@
 
 <!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module orca.scripts.metacity</title>
+<html><head><title>Python: module orca.scripts.users-admin</title>
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.metacity</strong></big></big> (version 1.18, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.users-admin</strong></big></big> (version 1.3, $Date$)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/metacity.py">/usr/lib/python2.4/site-packages/orca/scripts/metacity.py</a></font></td></tr></table>
-    <p><tt>Custom&nbsp;script&nbsp;for&nbsp;metacity.</tt></p>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/users-admin.py">/usr/lib/python2.4/site-packages/orca/scripts/users-admin.py</a></font></td></tr></table>
+    <p><tt>Custom&nbsp;script&nbsp;for&nbsp;users-admin</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -18,11 +18,10 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.braille.html">orca.braille</a><br>
-<a href="orca.default.html">orca.default</a><br>
-</td><td width="25%" valign=top><a href="orca.orca.html">orca.orca</a><br>
-<a href="orca.rolenames.html">orca.rolenames</a><br>
-</td><td width="25%" valign=top><a href="orca.speech.html">orca.speech</a><br>
-<a href="orca.util.html">orca.util</a><br>
+<a href="orca.braillegenerator.html">orca.braillegenerator</a><br>
+</td><td width="25%" valign=top><a href="orca.default.html">orca.default</a><br>
+<a href="orca.speechgenerator.html">orca.speechgenerator</a><br>
+</td><td width="25%" valign=top><a href="orca.util.html">orca.util</a><br>
 </td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -31,10 +30,22 @@
     
 <tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="orca.braillegenerator.html#BrailleGenerator">orca.braillegenerator.BrailleGenerator</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="orca.scripts.users-admin.html#BrailleGenerator">BrailleGenerator</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="orca.default.html#Script">orca.default.Script</a>(<a href="orca.script.html#Script">orca.script.Script</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="orca.scripts.metacity.html#Script">Script</a>
+<dt><font face="helvetica, arial"><a href="orca.scripts.users-admin.html#Script">Script</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="orca.scripts.users-admin.html#SpeechGenerator">SpeechGenerator</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -42,11 +53,56 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BrailleGenerator">class <strong>BrailleGenerator</strong></a>(<a href="orca.braillegenerator.html#BrailleGenerator">orca.braillegenerator.BrailleGenerator</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Overrides&nbsp;_getBrailleRegionsForTableCellRow&nbsp;to&nbsp;ignore&nbsp;the&nbsp;value&nbsp;of&nbsp;<br>
+settings.readTableCellRow&nbsp;and&nbsp;always&nbsp;get&nbsp;the&nbsp;braille&nbsp;for&nbsp;a&nbsp;single&nbsp;table&nbsp;<br>
+cell.<br>
+Overrides&nbsp;_getBrailleRegionsForTableCell&nbsp;so&nbsp;that,&nbsp;we&nbsp;can&nbsp;properly&nbsp;<br>
+handle&nbsp;the&nbsp;table&nbsp;cells&nbsp;on&nbsp;the&nbsp;User&nbsp;Privileges&nbsp;pane&nbsp;(which&nbsp;contains&nbsp;two&nbsp;<br>
+more&nbsp;table&nbsp;cells).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BrailleGenerator-__init__"><strong>__init__</strong></a>(self, script)</dt></dl>
+
+<hr>
+Methods inherited from <a href="orca.braillegenerator.html#BrailleGenerator">orca.braillegenerator.BrailleGenerator</a>:<br>
+<dl><dt><a name="BrailleGenerator-getBrailleContext"><strong>getBrailleContext</strong></a>(self, obj)</dt><dd><tt>Get&nbsp;the&nbsp;braille&nbsp;regions&nbsp;that&nbsp;describe&nbsp;the&nbsp;context&nbsp;(i.e.,<br>
+names/roles&nbsp;of&nbsp;the&nbsp;container&nbsp;hierarchy)&nbsp;of&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;Regions&nbsp;to&nbsp;display.</tt></dd></dl>
+
+<dl><dt><a name="BrailleGenerator-getBrailleRegions"><strong>getBrailleRegions</strong></a>(self, obj, groupChildren<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;braille&nbsp;regions&nbsp;for&nbsp;an&nbsp;Accessible&nbsp;object.&nbsp;&nbsp;This<br>
+will&nbsp;look&nbsp;first&nbsp;to&nbsp;the&nbsp;specific&nbsp;braille&nbsp;generators&nbsp;and&nbsp;then&nbsp;to<br>
+the&nbsp;default&nbsp;braille&nbsp;generator.&nbsp;&nbsp;This&nbsp;method&nbsp;is&nbsp;the&nbsp;primary<br>
+method&nbsp;that&nbsp;external&nbsp;callers&nbsp;of&nbsp;this&nbsp;class&nbsp;should&nbsp;use.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+-&nbsp;groupChildren:&nbsp;if&nbsp;True,&nbsp;children&nbsp;of&nbsp;an&nbsp;object&nbsp;should&nbsp;be&nbsp;displayed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;together&nbsp;with&nbsp;their&nbsp;parent,&nbsp;where&nbsp;each&nbsp;child&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separated&nbsp;by&nbsp;_&nbsp;and&nbsp;the&nbsp;selected&nbsp;child&nbsp;is&nbsp;the&nbsp;Region<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;should&nbsp;get&nbsp;focus.&nbsp;&nbsp;The&nbsp;default&nbsp;here&nbsp;is&nbsp;True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;this&nbsp;also&nbsp;is&nbsp;used&nbsp;in&nbsp;conjunction&nbsp;with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;settings.enableBrailleGrouping.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;where&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;Regions&nbsp;to<br>
+display&nbsp;and&nbsp;the&nbsp;second&nbsp;element&nbsp;is&nbsp;the&nbsp;Region&nbsp;which&nbsp;should&nbsp;get<br>
+focus.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Script">class <strong>Script</strong></a>(<a href="orca.default.html#Script">orca.default.Script</a>)</font></td></tr>
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="orca.scripts.metacity.html#Script">Script</a></dd>
+<dd><a href="orca.scripts.users-admin.html#Script">Script</a></dd>
 <dd><a href="orca.default.html#Script">orca.default.Script</a></dd>
 <dd><a href="orca.script.html#Script">orca.script.Script</a></dd>
 </dl>
@@ -57,34 +113,9 @@ Methods defined here:<br>
 Arguments:<br>
 -&nbsp;app:&nbsp;the&nbsp;application&nbsp;to&nbsp;create&nbsp;a&nbsp;script&nbsp;for.</tt></dd></dl>
 
-<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;the&nbsp;caret&nbsp;moves.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+<dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
-<dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>The&nbsp;status&nbsp;bar&nbsp;in&nbsp;metacity&nbsp;tells&nbsp;us&nbsp;what&nbsp;toplevel&nbsp;window&nbsp;will&nbsp;be<br>
-activated&nbsp;when&nbsp;tab&nbsp;is&nbsp;released.&nbsp;&nbsp;We&nbsp;will&nbsp;key&nbsp;off&nbsp;the&nbsp;name&nbsp;changed<br>
-event&nbsp;to&nbsp;determine&nbsp;when&nbsp;to&nbsp;say&nbsp;something,&nbsp;as&nbsp;it&nbsp;seems&nbsp;to&nbsp;be&nbsp;the<br>
-more&nbsp;reliable&nbsp;event.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;name&nbsp;changed&nbsp;Event</tt></dd></dl>
-
-<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>The&nbsp;status&nbsp;bar&nbsp;in&nbsp;metacity&nbsp;tells&nbsp;us&nbsp;what&nbsp;toplevel&nbsp;window&nbsp;will&nbsp;be<br>
-activated&nbsp;when&nbsp;tab&nbsp;is&nbsp;released.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;object:state-changed:&nbsp;Event</tt></dd></dl>
-
-<dl><dt><a name="Script-onTextDeleted"><strong>onTextDeleted</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;text&nbsp;is&nbsp;deleted&nbsp;from&nbsp;an&nbsp;object.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
-
-<dl><dt><a name="Script-onTextInserted"><strong>onTextInserted</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;text&nbsp;is&nbsp;inserted&nbsp;into&nbsp;an&nbsp;object.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="orca.default.html#Script">orca.default.Script</a>:<br>
@@ -181,6 +212,11 @@ change&nbsp;in&nbsp;one&nbsp;of&nbsp;its&nbsp;children.<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
+<dl><dt><a name="Script-onCaretMoved"><strong>onCaretMoved</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;the&nbsp;caret&nbsp;moves.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
 <dl><dt><a name="Script-onFocus"><strong>onFocus</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object&nbsp;gets&nbsp;focus.<br>
 &nbsp;<br>
 Arguments:<br>
@@ -191,7 +227,27 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
 
+<dl><dt><a name="Script-onNameChanged"><strong>onNameChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;property&nbsp;on&nbsp;an&nbsp;object&nbsp;changes.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
 <dl><dt><a name="Script-onSelectionChanged"><strong>onSelectionChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;when&nbsp;an&nbsp;object's&nbsp;selection&nbsp;changes.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onStateChanged"><strong>onStateChanged</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;an&nbsp;object's&nbsp;state&nbsp;changes.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onTextDeleted"><strong>onTextDeleted</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;text&nbsp;is&nbsp;deleted&nbsp;from&nbsp;an&nbsp;object.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+<dl><dt><a name="Script-onTextInserted"><strong>onTextInserted</strong></a>(self, event)</dt><dd><tt>Called&nbsp;whenever&nbsp;text&nbsp;is&nbsp;inserted&nbsp;into&nbsp;an&nbsp;object.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
@@ -434,8 +490,6 @@ Arguments:<br>
 Returns&nbsp;a&nbsp;list&nbsp;(possibly&nbsp;empty)&nbsp;of&nbsp;BrlTTY&nbsp;commands&nbsp;(they're&nbsp;in<br>
 braille.py)&nbsp;that&nbsp;match&nbsp;the&nbsp;given&nbsp;inputEventHandler&nbsp;passed.</tt></dd></dl>
 
-<dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
-
 <dl><dt><a name="Script-getKeyBindingsForInputHandler"><strong>getKeyBindingsForInputHandler</strong></a>(self, inputEventHandler)</dt><dd><tt>Returns&nbsp;a&nbsp;KeyBindings&nbsp;object&nbsp;with&nbsp;the&nbsp;list&nbsp;of&nbsp;KeyBindings&nbsp;that<br>
 matche&nbsp;the&nbsp;passed&nbsp;inputEventHandler&nbsp;as&nbsp;argument&nbsp;(at&nbsp;least&nbsp;the<br>
 inputEventHandler&nbsp;that&nbsp;has&nbsp;the&nbsp;same&nbsp;handler&nbsp;function)<br>
@@ -445,8 +499,6 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings&nbsp;populated&nbsp;with<br>
 keybindings.KeyBinding&nbsp;instances&nbsp;that&nbsp;match&nbsp;the&nbsp;inputEventHandler.</tt></dd></dl>
-
-<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
 <dl><dt><a name="Script-processBrailleEvent"><strong>processBrailleEvent</strong></a>(self, brailleEvent)</dt><dd><tt>Called&nbsp;whenever&nbsp;a&nbsp;key&nbsp;is&nbsp;pressed&nbsp;on&nbsp;the&nbsp;Braille&nbsp;display.<br>
 &nbsp;<br>
@@ -476,6 +528,44 @@ about,&nbsp;so&nbsp;it&nbsp;needs&nbsp;to&nbsp;react&nbsp;accordingly.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;event:&nbsp;the&nbsp;Event</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpeechGenerator">class <strong>SpeechGenerator</strong></a>(<a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Overrides&nbsp;_getSpeechForTableCell&nbsp;so&nbsp;that,&nbsp;we&nbsp;can&nbsp;properly&nbsp;handle<br>
+the&nbsp;table&nbsp;cells&nbsp;on&nbsp;the&nbsp;User&nbsp;Privileges&nbsp;pane&nbsp;(which&nbsp;contains&nbsp;two&nbsp;more<br>
+table&nbsp;cells).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SpeechGenerator-__init__"><strong>__init__</strong></a>(self, script)</dt></dl>
+
+<hr>
+Methods inherited from <a href="orca.speechgenerator.html#SpeechGenerator">orca.speechgenerator.SpeechGenerator</a>:<br>
+<dl><dt><a name="SpeechGenerator-getSpeech"><strong>getSpeech</strong></a>(self, obj, already_focused)</dt><dd><tt>Get&nbsp;the&nbsp;speech&nbsp;for&nbsp;an&nbsp;Accessible&nbsp;object.&nbsp;&nbsp;This&nbsp;will&nbsp;look<br>
+first&nbsp;to&nbsp;the&nbsp;specific&nbsp;speech&nbsp;generators&nbsp;and&nbsp;then&nbsp;to&nbsp;the<br>
+default&nbsp;speech&nbsp;generator.&nbsp;&nbsp;This&nbsp;method&nbsp;is&nbsp;the&nbsp;primary&nbsp;method<br>
+that&nbsp;external&nbsp;callers&nbsp;of&nbsp;this&nbsp;class&nbsp;should&nbsp;use.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+-&nbsp;already_focused:&nbsp;False&nbsp;if&nbsp;object&nbsp;just&nbsp;received&nbsp;focus<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</tt></dd></dl>
+
+<dl><dt><a name="SpeechGenerator-getSpeechContext"><strong>getSpeechContext</strong></a>(self, obj, stopAncestor<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;the&nbsp;speech&nbsp;that&nbsp;describes&nbsp;the&nbsp;names&nbsp;and&nbsp;role&nbsp;of<br>
+the&nbsp;container&nbsp;hierarchy&nbsp;of&nbsp;the&nbsp;object,&nbsp;stopping&nbsp;at&nbsp;and<br>
+not&nbsp;including&nbsp;the&nbsp;stopAncestor.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;object<br>
+-&nbsp;stopAncestor:&nbsp;the&nbsp;anscestor&nbsp;to&nbsp;stop&nbsp;at&nbsp;and&nbsp;not&nbsp;include&nbsp;(None<br>
+&nbsp;&nbsp;means&nbsp;include&nbsp;all&nbsp;ancestors)<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
