@@ -6,7 +6,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.orca_gui_prefs</strong></big></big> (version 1.62, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.orca_gui_prefs</strong></big></big> (version 1.63, $Date$)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/orca_gui_prefs.py">/usr/lib/python2.4/site-packages/orca/orca_gui_prefs.py</a></font></td></tr></table>
     <p><tt>Displays&nbsp;a&nbsp;GUI&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;set&nbsp;Orca&nbsp;preferences.</tt></p>
@@ -18,21 +18,25 @@
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="orca.acss.html">orca.acss</a><br>
+<a href="orca.atspi.html">orca.atspi</a><br>
+<a href="orca.braille.html">orca.braille</a><br>
 <a href="orca.debug.html">orca.debug</a><br>
 <a href="orca.default.html">orca.default</a><br>
 <a href="gettext.html">gettext</a><br>
-<a href="gobject.html">gobject</a><br>
-</td><td width="25%" valign=top><a href="gtk.html">gtk</a><br>
+</td><td width="25%" valign=top><a href="gobject.html">gobject</a><br>
+<a href="gtk.html">gtk</a><br>
+<a href="orca.input_event.html">orca.input_event</a><br>
 <a href="orca.keybindings.html">orca.keybindings</a><br>
 <a href="locale.html">locale</a><br>
 <a href="orca.orca.html">orca.orca</a><br>
-<a href="orca.orca_glade.html">orca.orca_glade</a><br>
-</td><td width="25%" valign=top><a href="orca.orca_prefs.html">orca.orca_prefs</a><br>
+</td><td width="25%" valign=top><a href="orca.orca_glade.html">orca.orca_glade</a><br>
+<a href="orca.orca_prefs.html">orca.orca_prefs</a><br>
 <a href="orca.orca_state.html">orca.orca_state</a><br>
 <a href="os.html">os</a><br>
 <a href="pango.html">pango</a><br>
 <a href="orca.platform.html">orca.platform</a><br>
-</td><td width="25%" valign=top><a href="orca.settings.html">orca.settings</a><br>
+</td><td width="25%" valign=top><a href="orca.script.html">orca.script</a><br>
+<a href="orca.settings.html">orca.settings</a><br>
 <a href="orca.speech.html">orca.speech</a><br>
 <a href="orca.speechserver.html">orca.speechserver</a><br>
 <a href="sys.html">sys</a><br>
@@ -128,6 +132,11 @@ Arguments:<br>
 Arguments:<br>
 -&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
 
+<dl><dt><a name="orcaSetupGUI-editedKey"><strong>editedKey</strong></a>(self, cell, path, new_text, treeModel, modMask, modUsed, key, text)</dt><dd><tt>The&nbsp;user&nbsp;changes&nbsp;the&nbsp;key&nbsp;for&nbsp;a&nbsp;Keybinding:<br>
+update&nbsp;the&nbsp;model&nbsp;of&nbsp;the&nbsp;treeview</tt></dd></dl>
+
+<dl><dt><a name="orcaSetupGUI-editingKey"><strong>editingKey</strong></a>(self, cell, editable, path, treeModel)</dt><dd><tt>Starts&nbsp;user&nbsp;input&nbsp;of&nbsp;a&nbsp;Key&nbsp;for&nbsp;a&nbsp;selected&nbsp;key&nbsp;binding</tt></dd></dl>
+
 <dl><dt><a name="orcaSetupGUI-functionKeysChecked"><strong>functionKeysChecked</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"toggled"&nbsp;signal&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;&nbsp;functionCheckbutton&nbsp;GtkCheckButton&nbsp;widget.&nbsp;The&nbsp;user&nbsp;has<br>
 &nbsp;&nbsp;&nbsp;[un]checked&nbsp;the&nbsp;'Enable&nbsp;locking&nbsp;keys"&nbsp;checkbox.&nbsp;Set&nbsp;the<br>
@@ -151,6 +160,8 @@ Arguments:<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;widget:&nbsp;the&nbsp;component&nbsp;that&nbsp;generated&nbsp;the&nbsp;signal.</tt></dd></dl>
+
+<dl><dt><a name="orcaSetupGUI-keyModifiedToggle"><strong>keyModifiedToggle</strong></a>(self, cell, path, model, col)</dt><dd><tt>When&nbsp;the&nbsp;user&nbsp;changes&nbsp;a&nbsp;checkbox&nbsp;field&nbsp;(boolean&nbsp;field)</tt></dd></dl>
 
 <dl><dt><a name="orcaSetupGUI-keyboardLayoutChanged"><strong>keyboardLayoutChanged</strong></a>(self, widget)</dt><dd><tt>Signal&nbsp;handler&nbsp;for&nbsp;the&nbsp;"toggled"&nbsp;signal&nbsp;for&nbsp;the&nbsp;generalDesktopButton,<br>
 &nbsp;&nbsp;&nbsp;or&nbsp;generalLaptopButton&nbsp;GtkRadioButton&nbsp;widgets.&nbsp;The&nbsp;user&nbsp;has<br>
@@ -512,19 +523,19 @@ Methods inherited from <a href="orca.orca_glade.html#GladeWrapper">orca.orca_gla
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>DEFAULT_KEY</strong> = 2<br>
-<strong>DESCRIP</strong> = 1<br>
+<td width="100%"><strong>DESCRIP</strong> = 1<br>
+<strong>EDITABLE</strong> = 11<br>
 <strong>HANDLER</strong> = 0<br>
-<strong>KEY1</strong> = 5<br>
-<strong>KEY2</strong> = 9<br>
-<strong>MODIF</strong> = 11<br>
-<strong>MOD_MASK1</strong> = 3<br>
-<strong>MOD_MASK2</strong> = 7<br>
-<strong>MOD_USED1</strong> = 4<br>
-<strong>MOD_USED2</strong> = 8<br>
+<strong>KEY1</strong> = 4<br>
+<strong>KEY2</strong> = 8<br>
+<strong>MODIF</strong> = 10<br>
+<strong>MOD_MASK1</strong> = 2<br>
+<strong>MOD_MASK2</strong> = 6<br>
+<strong>MOD_USED1</strong> = 3<br>
+<strong>MOD_USED2</strong> = 7<br>
 <strong>OS</strong> = None<br>
-<strong>TEXT1</strong> = 6<br>
-<strong>TEXT2</strong> = 10<br>
+<strong>TEXT1</strong> = 5<br>
+<strong>TEXT2</strong> = 9<br>
 <strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
 <strong>__date__</strong> = '$Date$'<br>
 <strong>__id__</strong> = '$Id$'<br>
