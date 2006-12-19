@@ -11,35 +11,42 @@ Current work on seahorse is going into making encryption easier for end
 users to use and (where needed) comprehend.
 
 
-Changes between 0.9.7 and 0.9.8:
+Important Note:
+================
+
+The GPG and SSH agent code now runs in the 'seahorse-agent' process. 
+This is similar to how it used to work in Seahorse 0.8.x. 
+
+If you've been running development versions (ie: 0.9.x) and have been 
+starting 'seahorse-daemon' in your session, you'll need to change that 
+to 'seahorse-agent' after installing this release.
+
+Documentation on the nitty-gritty of properly starting seahorse-agent can be found here: 
+
+http://live.gnome.org/Seahorse/SessionIntegration
+
+
+Changes between 0.9.8 and 0.9.9:
 =================================
 
-    * Tons of Manual and Documentation updates by
-      <milo_casagrande@yahoo.it>
-    * Work out how seahorse-daemon should be started properly.
-      See: http://live.gnome.org/Seahorse/SessionIntegration
-    * GUI fixes:
-      * Generate dialogs are now more consistent.
-      * Make passphrase prompts more consistent.
-      * Hook up help button in SSH generate dialog.
-      * Better describe what part of key is being exported.
-    * Cleaner SSH proxy initialization.
-    * Don't prompt for each public key deleted.
-    * Show GPG 'valid' keys on the trusted tab.
-    * Fix unneeded syncing error messages.
-    * Show all key names properly in recipient selection dialog.
-    * Fixed crashers to do with secure memory.
-    * Don't set daemon setuid when not needed for secure memory.
-    * Fix problems when built without LDAP support.
+    * Documentation fixes by <milo_casagrande@yahoo.it>
+    * Split agent and DBus daemon into separate processes
+      for security and stability reasons.
+    * Fix crasher when selecting and filtering keys. 
+    * Fix crashes in the agent, and handling of invalid 
+      protocol data. 
+    * Ability to hide tray icon for cached secrets.
+    * Fix crash when typing passwords. 
+    * Better configuration for agent, now sets 'use-agent'
+      in configuration file.
+    * Fix crash when closing window or deleting keys.
+    * Add Subkey dialog now works properly.
 
 
 Updated Translations:
 ======================
 
-    * Djihed Afifi (ar)
     * Francisco Javier F. Serrador (es)
-    * Gabor Kelemen (hu)
-    * milo_casagrande@yahoo.it (it)
     * Daniel Nylander (sv)
 
 
@@ -47,8 +54,8 @@ Downloads:
 ===========
 
 Source code:
-http://download.gnome.org/sources/seahorse/0.9/seahorse-0.9.8.tar.gz
-[MD5 sum: bee9abd92910c1d1736c572af84e277c]
+http://download.gnome.org/sources/seahorse/0.9/seahorse-0.9.9.tar.gz
+[MD5 sum: 412ee5c4b6e36b765db8fd27d1ec360a]
 
 
 Notes:
