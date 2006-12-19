@@ -7,6 +7,7 @@ page_SCRIPTS= 			\
 	changelog-1.7.3.txt	\
 	changelog-1.7.4.txt	\
 	changelog-1.7.5.txt	\
+	changelog-1.7.6.txt	\
 	index.shtml
 
 include $(top_srcdir)/rules.common
