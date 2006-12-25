@@ -33,6 +33,7 @@ SUBDIRS = \
 	evince			\
 	sabayon			\
 	seahorse		\
+	tracker			\
 	totem			\
 	rhythmbox               \
 	livecd			\
