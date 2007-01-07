@@ -6,9 +6,9 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.Gecko</strong></big></big> (version 1.49, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.Gecko</strong></big></big> (version 1883, $Date$)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/Gecko.py">/usr/lib/python2.4/site-packages/orca/Gecko.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.4/site-packages/orca/Gecko.py">/usr/local/lib/python2.4/site-packages/orca/Gecko.py</a></font></td></tr></table>
     <p><tt>Custom&nbsp;script&nbsp;for&nbsp;Gecko&nbsp;toolkit.&nbsp;&nbsp;NOT&nbsp;WORKING&nbsp;WELL&nbsp;AT&nbsp;THE&nbsp;MOMENT.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -110,13 +110,74 @@ Arguments:<br>
 &nbsp;<br>
 Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;event&nbsp;is&nbsp;of&nbsp;interest.</tt></dd></dl>
 
-<dl><dt><a name="Script-dumpContent"><strong>dumpContent</strong></a>(self, inputEvent, contents<font color="#909090">=None</font>)</dt><dd><tt>Dumps&nbsp;the&nbsp;document&nbsp;frame&nbsp;content&nbsp;to&nbsp;stdout.<br>
+<dl><dt><a name="Script-dumpContents"><strong>dumpContents</strong></a>(self, inputEvent, contents<font color="#909090">=None</font>)</dt><dd><tt>Dumps&nbsp;the&nbsp;document&nbsp;frame&nbsp;content&nbsp;to&nbsp;stdout.<br>
 &nbsp;<br>
 Arguments:<br>
 -inputEvent:&nbsp;the&nbsp;input&nbsp;event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;be&nbsp;called<br>
 -contents:&nbsp;an&nbsp;ordered&nbsp;list&nbsp;of&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples</tt></dd></dl>
 
 <dl><dt><a name="Script-dumpInfo"><strong>dumpInfo</strong></a>(self, obj)</dt><dd><tt>Dumps&nbsp;the&nbsp;parental&nbsp;hierachy&nbsp;info&nbsp;of&nbsp;obj&nbsp;to&nbsp;stdout.</tt></dd></dl>
+
+<dl><dt><a name="Script-findFirstCaretContext"><strong>findFirstCaretContext</strong></a>(self, obj, characterOffset)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;and&nbsp;a&nbsp;character&nbsp;offset,&nbsp;find&nbsp;the&nbsp;first<br>
+[obj,&nbsp;characterOffset]&nbsp;that&nbsp;is&nbsp;actually&nbsp;presenting&nbsp;something<br>
+on&nbsp;the&nbsp;display.&nbsp;&nbsp;The&nbsp;reason&nbsp;we&nbsp;do&nbsp;this&nbsp;is&nbsp;that&nbsp;the<br>
+[obj,&nbsp;characterOffset]&nbsp;passed&nbsp;in&nbsp;may&nbsp;actually&nbsp;be&nbsp;pointing<br>
+to&nbsp;an&nbsp;embedded&nbsp;object&nbsp;character.&nbsp;&nbsp;In&nbsp;those&nbsp;cases,&nbsp;we&nbsp;dig<br>
+into&nbsp;the&nbsp;hierarchy&nbsp;to&nbsp;find&nbsp;the&nbsp;'real'&nbsp;thing.<br>
+&nbsp;<br>
+Arguments:<br>
+-obj:&nbsp;an&nbsp;accessible&nbsp;object<br>
+-characterOffset:&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;character&nbsp;where&nbsp;to&nbsp;start<br>
+looking&nbsp;for&nbsp;real&nbsp;rext<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;that&nbsp;points&nbsp;to&nbsp;real&nbsp;content.</tt></dd></dl>
+
+<dl><dt><a name="Script-findNextCaretInOrder"><strong>findNextCaretInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;at&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;next<br>
+caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;rule.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
+document&nbsp;frame.<br>
+-&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
+(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
+start&nbsp;at&nbsp;the&nbsp;beginning&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;next&nbsp;character&nbsp;is&nbsp;the<br>
+first&nbsp;character&nbsp;in&nbsp;the&nbsp;object.<br>
+-&nbsp;includeNonText:&nbsp;If&nbsp;False,&nbsp;only&nbsp;land&nbsp;on&nbsp;objects&nbsp;that&nbsp;support&nbsp;the<br>
+accessible&nbsp;text&nbsp;interface;&nbsp;otherwise,&nbsp;include&nbsp;logical&nbsp;leaf<br>
+nodes&nbsp;like&nbsp;check&nbsp;boxes,&nbsp;combo&nbsp;boxes,&nbsp;etc.<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]</tt></dd></dl>
+
+<dl><dt><a name="Script-findNextRole"><strong>findNextRole</strong></a>(self, roles, match<font color="#909090">=True</font>)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;object<br>
+using&nbsp;the&nbsp;given&nbsp;roles&nbsp;list&nbsp;as&nbsp;a&nbsp;pattern&nbsp;to&nbsp;match&nbsp;or&nbsp;not&nbsp;match.<br>
+&nbsp;<br>
+Arguments:<br>
+-roles:&nbsp;a&nbsp;list&nbsp;of&nbsp;roles&nbsp;from&nbsp;rolenames.py<br>
+-match:&nbsp;if&nbsp;True,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;False,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;not&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles</tt></dd></dl>
+
+<dl><dt><a name="Script-findPreviousCaretInOrder"><strong>findPreviousCaretInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;an&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;previous<br>
+caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in&nbsp;order&nbsp;traversal&nbsp;rule.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
+document&nbsp;frame.<br>
+-&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
+(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
+start&nbsp;at&nbsp;the&nbsp;end&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;previous&nbsp;character&nbsp;is&nbsp;the<br>
+last&nbsp;character&nbsp;of&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]</tt></dd></dl>
+
+<dl><dt><a name="Script-findPreviousRole"><strong>findPreviousRole</strong></a>(self, roles, match<font color="#909090">=True</font>)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;object<br>
+using&nbsp;the&nbsp;given&nbsp;roles&nbsp;list&nbsp;as&nbsp;a&nbsp;pattern&nbsp;to&nbsp;match&nbsp;or&nbsp;not&nbsp;match.<br>
+&nbsp;<br>
+Arguments:<br>
+-roles:&nbsp;a&nbsp;list&nbsp;of&nbsp;roles&nbsp;from&nbsp;rolenames.py<br>
+-match:&nbsp;if&nbsp;True,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;False,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;not&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles</tt></dd></dl>
+
+<dl><dt><a name="Script-getACSS"><strong>getACSS</strong></a>(self, obj, string)</dt><dd><tt>Returns&nbsp;the&nbsp;ACSS&nbsp;to&nbsp;speak&nbsp;anything&nbsp;for&nbsp;the&nbsp;given&nbsp;obj.</tt></dd></dl>
 
 <dl><dt><a name="Script-getAutocompleteEntry"><strong>getAutocompleteEntry</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;the&nbsp;ROLE_ENTRY&nbsp;object&nbsp;of&nbsp;a&nbsp;ROLE_AUTOCOMPLETE&nbsp;object&nbsp;or<br>
 None&nbsp;if&nbsp;the&nbsp;entry&nbsp;cannot&nbsp;be&nbsp;found.</tt></dd></dl>
@@ -160,39 +221,29 @@ the&nbsp;index&nbsp;of&nbsp;the&nbsp;child&nbsp;that&nbsp;is&nbsp;represented&nb
 EMBEDDED_OBJECT_CHARACTER&nbsp;at&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;object's<br>
 accessible&nbsp;text.</tt></dd></dl>
 
-<dl><dt><a name="Script-getContents"><strong>getContents</strong></a>(self)</dt><dd><tt>Trivial&nbsp;debug&nbsp;utility&nbsp;to&nbsp;stringify&nbsp;the&nbsp;document&nbsp;contents<br>
-showing&nbsp;on&nbsp;the&nbsp;screen.</tt></dd></dl>
-
-<dl><dt><a name="Script-getContentsAtOffset"><strong>getContentsAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+<dl><dt><a name="Script-getDocumentContents"><strong>getDocumentContents</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
 an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
-via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;and<br>
-stopping&nbsp;at&nbsp;the&nbsp;given&nbsp;object.</tt></dd></dl>
+via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
+the&nbsp;current&nbsp;caret&nbsp;context&nbsp;(or&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;document&nbsp;if<br>
+there&nbsp;is&nbsp;no&nbsp;caret&nbsp;context).<br>
+&nbsp;<br>
+WARNING:&nbsp;THIS&nbsp;TRAVERSES&nbsp;A&nbsp;LARGE&nbsp;PART&nbsp;OF&nbsp;THE&nbsp;DOCUMENT&nbsp;AND&nbsp;IS<br>
+INTENDED&nbsp;PRIMARILY&nbsp;FOR&nbsp;DEBUGGING&nbsp;PURPOSES&nbsp;ONLY.</tt></dd></dl>
 
 <dl><dt><a name="Script-getDocumentFrame"><strong>getDocumentFrame</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;document&nbsp;frame&nbsp;that&nbsp;holds&nbsp;the&nbsp;content&nbsp;being&nbsp;shown.</tt></dd></dl>
+
+<dl><dt><a name="Script-getDocumentString"><strong>getDocumentString</strong></a>(self)</dt><dd><tt>Trivial&nbsp;debug&nbsp;utility&nbsp;to&nbsp;stringify&nbsp;the&nbsp;document&nbsp;contents<br>
+showing&nbsp;on&nbsp;the&nbsp;screen.</tt></dd></dl>
 
 <dl><dt><a name="Script-getExtents"><strong>getExtents</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;[x,&nbsp;y,&nbsp;width,&nbsp;height]&nbsp;of&nbsp;the&nbsp;text&nbsp;at&nbsp;the&nbsp;given&nbsp;offsets<br>
 if&nbsp;the&nbsp;object&nbsp;implements&nbsp;accessible&nbsp;text,&nbsp;or&nbsp;just&nbsp;the&nbsp;extents&nbsp;of<br>
 the&nbsp;object&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;implement&nbsp;accessible&nbsp;text.</tt></dd></dl>
 
-<dl><dt><a name="Script-getFirstCaretContext"><strong>getFirstCaretContext</strong></a>(self, obj, characterOffset)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;and&nbsp;a&nbsp;character&nbsp;offset,&nbsp;find&nbsp;the&nbsp;first<br>
-[obj,&nbsp;characterOffset]&nbsp;that&nbsp;is&nbsp;actually&nbsp;presenting&nbsp;something<br>
-on&nbsp;the&nbsp;display.&nbsp;&nbsp;The&nbsp;reason&nbsp;we&nbsp;do&nbsp;this&nbsp;is&nbsp;that&nbsp;the<br>
-[obj,&nbsp;characterOffset]&nbsp;passed&nbsp;in&nbsp;may&nbsp;actually&nbsp;be&nbsp;pointing<br>
-to&nbsp;an&nbsp;embedded&nbsp;object&nbsp;character.&nbsp;&nbsp;In&nbsp;those&nbsp;cases,&nbsp;we&nbsp;dig<br>
-into&nbsp;the&nbsp;hierarchy&nbsp;to&nbsp;find&nbsp;the&nbsp;'real'&nbsp;thing.<br>
-&nbsp;<br>
-Arguments:<br>
--obj:&nbsp;an&nbsp;accessible&nbsp;object<br>
--characterOffset:&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;character&nbsp;where&nbsp;to&nbsp;start<br>
-looking&nbsp;for&nbsp;real&nbsp;rext<br>
-&nbsp;<br>
-Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;that&nbsp;points&nbsp;to&nbsp;real&nbsp;content.</tt></dd></dl>
-
 <dl><dt><a name="Script-getKeyBindings"><strong>getKeyBindings</strong></a>(self)</dt><dd><tt>Defines&nbsp;the&nbsp;key&nbsp;bindings&nbsp;for&nbsp;this&nbsp;script.<br>
 &nbsp;<br>
 Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings.</tt></dd></dl>
 
-<dl><dt><a name="Script-getLineAtOffset"><strong>getLineAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+<dl><dt><a name="Script-getLineContentsAtOffset"><strong>getLineContentsAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
 an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
 via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
 the&nbsp;given&nbsp;object&nbsp;and&nbsp;characterOffset.&nbsp;&nbsp;The&nbsp;first&nbsp;element&nbsp;in<br>
@@ -204,59 +255,10 @@ Arguments:<br>
 -obj:&nbsp;the&nbsp;object&nbsp;to&nbsp;start&nbsp;at<br>
 -characterOffset:&nbsp;the&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;object</tt></dd></dl>
 
-<dl><dt><a name="Script-getLinearizedContents"><strong>getLinearizedContents</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+<dl><dt><a name="Script-getObjectContentsAtOffset"><strong>getObjectContentsAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
 an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
-via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
-the&nbsp;current&nbsp;caret&nbsp;context&nbsp;(or&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;document&nbsp;if<br>
-there&nbsp;is&nbsp;no&nbsp;caret&nbsp;context).<br>
-&nbsp;<br>
-WARNING:&nbsp;THIS&nbsp;TRAVERSES&nbsp;A&nbsp;LARGE&nbsp;PART&nbsp;OF&nbsp;THE&nbsp;DOCUMENT&nbsp;AND&nbsp;IS<br>
-INTENDED&nbsp;PRIMARILY&nbsp;FOR&nbsp;DEBUGGING&nbsp;PURPOSES&nbsp;ONLY.</tt></dd></dl>
-
-<dl><dt><a name="Script-getNextCaretInOrder"><strong>getNextCaretInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;at&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;next<br>
-caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;rule.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
-document&nbsp;frame.<br>
--&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
-(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
-start&nbsp;at&nbsp;the&nbsp;beginning&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;next&nbsp;character&nbsp;is&nbsp;the<br>
-first&nbsp;character&nbsp;in&nbsp;the&nbsp;object.<br>
--&nbsp;includeNonText:&nbsp;If&nbsp;False,&nbsp;only&nbsp;land&nbsp;on&nbsp;objects&nbsp;that&nbsp;support&nbsp;the<br>
-accessible&nbsp;text&nbsp;interface;&nbsp;otherwise,&nbsp;include&nbsp;logical&nbsp;leaf<br>
-nodes&nbsp;like&nbsp;check&nbsp;boxes,&nbsp;combo&nbsp;boxes,&nbsp;etc.<br>
-&nbsp;<br>
-Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]</tt></dd></dl>
-
-<dl><dt><a name="Script-getNextRole"><strong>getNextRole</strong></a>(self, roles, match<font color="#909090">=True</font>)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;object<br>
-using&nbsp;the&nbsp;given&nbsp;roles&nbsp;list&nbsp;as&nbsp;a&nbsp;pattern&nbsp;to&nbsp;match&nbsp;or&nbsp;not&nbsp;match.<br>
-&nbsp;<br>
-Arguments:<br>
--roles:&nbsp;a&nbsp;list&nbsp;of&nbsp;roles&nbsp;from&nbsp;rolenames.py<br>
--match:&nbsp;if&nbsp;True,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;False,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;not&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles</tt></dd></dl>
-
-<dl><dt><a name="Script-getPreviousCaretInOrder"><strong>getPreviousCaretInOrder</strong></a>(self, obj<font color="#909090">=None</font>, startOffset<font color="#909090">=-1</font>, includeNonText<font color="#909090">=True</font>)</dt><dd><tt>Given&nbsp;an&nbsp;object&nbsp;an&nbsp;a&nbsp;character&nbsp;offset,&nbsp;return&nbsp;the&nbsp;previous<br>
-caret&nbsp;context&nbsp;following&nbsp;an&nbsp;in&nbsp;order&nbsp;traversal&nbsp;rule.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;root:&nbsp;the&nbsp;Accessible&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;If&nbsp;None,&nbsp;starts&nbsp;at&nbsp;the<br>
-document&nbsp;frame.<br>
--&nbsp;startOffset:&nbsp;character&nbsp;position&nbsp;in&nbsp;the&nbsp;object&nbsp;text&nbsp;field<br>
-(if&nbsp;it&nbsp;exists)&nbsp;to&nbsp;start&nbsp;at.&nbsp;&nbsp;Defaults&nbsp;to&nbsp;-1,&nbsp;which&nbsp;means<br>
-start&nbsp;at&nbsp;the&nbsp;end&nbsp;-&nbsp;that&nbsp;is,&nbsp;the&nbsp;previous&nbsp;character&nbsp;is&nbsp;the<br>
-last&nbsp;character&nbsp;of&nbsp;the&nbsp;object.<br>
-&nbsp;<br>
-Returns&nbsp;[obj,&nbsp;characterOffset]&nbsp;or&nbsp;[None,&nbsp;-1]</tt></dd></dl>
-
-<dl><dt><a name="Script-getPreviousRole"><strong>getPreviousRole</strong></a>(self, roles, match<font color="#909090">=True</font>)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;at&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;next&nbsp;object<br>
-using&nbsp;the&nbsp;given&nbsp;roles&nbsp;list&nbsp;as&nbsp;a&nbsp;pattern&nbsp;to&nbsp;match&nbsp;or&nbsp;not&nbsp;match.<br>
-&nbsp;<br>
-Arguments:<br>
--roles:&nbsp;a&nbsp;list&nbsp;of&nbsp;roles&nbsp;from&nbsp;rolenames.py<br>
--match:&nbsp;if&nbsp;True,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;False,&nbsp;the&nbsp;found&nbsp;object&nbsp;will&nbsp;not&nbsp;have&nbsp;a&nbsp;role&nbsp;from&nbsp;roles</tt></dd></dl>
+via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;and<br>
+stopping&nbsp;at&nbsp;the&nbsp;given&nbsp;object.</tt></dd></dl>
 
 <dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
@@ -266,7 +268,14 @@ if&nbsp;the&nbsp;caption&nbsp;cannot&nbsp;be&nbsp;found.</tt></dd></dl>
 <dl><dt><a name="Script-getUnicodeText"><strong>getUnicodeText</strong></a>(self, obj)</dt><dd><tt>Returns&nbsp;the&nbsp;unicode&nbsp;text&nbsp;for&nbsp;an&nbsp;object&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;object<br>
 doesn't&nbsp;implement&nbsp;the&nbsp;accessible&nbsp;text&nbsp;specialization.</tt></dd></dl>
 
-<dl><dt><a name="Script-getWordAtOffset"><strong>getWordAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
+<dl><dt><a name="Script-getUtterancesFromContents"><strong>getUtterancesFromContents</strong></a>(self, contents, speakRole<font color="#909090">=True</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;[text,&nbsp;acss]&nbsp;tuples&nbsp;based&nbsp;upon&nbsp;the<br>
+list&nbsp;of&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Arguments:<br>
+-contents:&nbsp;a&nbsp;list&nbsp;of&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples<br>
+-speakRole:&nbsp;if&nbsp;True,&nbsp;speak&nbsp;the&nbsp;roles&nbsp;of&nbsp;objects</tt></dd></dl>
+
+<dl><dt><a name="Script-getWordContentsAtOffset"><strong>getWordContentsAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Returns&nbsp;an&nbsp;ordered&nbsp;list&nbsp;where&nbsp;each&nbsp;element&nbsp;is&nbsp;composed&nbsp;of<br>
 an&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuple.&nbsp;&nbsp;The&nbsp;list&nbsp;is&nbsp;created<br>
 via&nbsp;an&nbsp;in-order&nbsp;traversal&nbsp;of&nbsp;the&nbsp;document&nbsp;contents&nbsp;starting&nbsp;at<br>
 the&nbsp;given&nbsp;object&nbsp;and&nbsp;characterOffset.&nbsp;&nbsp;The&nbsp;first&nbsp;element&nbsp;in<br>
@@ -305,8 +314,11 @@ position.</tt></dd></dl>
 <dl><dt><a name="Script-goPreviousWord"><strong>goPreviousWord</strong></a>(self, inputEvent)</dt><dd><tt>Positions&nbsp;the&nbsp;caret&nbsp;offset&nbsp;to&nbsp;beginning&nbsp;of&nbsp;the&nbsp;previous<br>
 word&nbsp;or&nbsp;object&nbsp;in&nbsp;the&nbsp;document&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="Script-inDocumentContent"><strong>inDocumentContent</strong></a>(self)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;current&nbsp;locus&nbsp;of&nbsp;focus&nbsp;is&nbsp;in&nbsp;the<br>
-document&nbsp;content.</tt></dd></dl>
+<dl><dt><a name="Script-inDocumentContent"><strong>inDocumentContent</strong></a>(self, obj<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;given&nbsp;object&nbsp;(defaults&nbsp;to&nbsp;the&nbsp;current<br>
+locus&nbsp;of&nbsp;focus&nbsp;is&nbsp;in&nbsp;the&nbsp;document&nbsp;content).</tt></dd></dl>
+
+<dl><dt><a name="Script-isLabellingContents"><strong>isLabellingContents</strong></a>(self, obj, contents)</dt><dd><tt>Given&nbsp;and&nbsp;obj&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples,<br>
+determine&nbsp;if&nbsp;obj&nbsp;is&nbsp;labelling&nbsp;anything&nbsp;in&nbsp;the&nbsp;tuples.</tt></dd></dl>
 
 <dl><dt><a name="Script-locusOfFocusChanged"><strong>locusOfFocusChanged</strong></a>(self, event, oldLocusOfFocus, newLocusOfFocus)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;object&nbsp;with&nbsp;focus&nbsp;changes.<br>
 &nbsp;<br>
@@ -364,17 +376,7 @@ called&nbsp;by&nbsp;the&nbsp;key&nbsp;and&nbsp;braille&nbsp;bindings.</tt></dd><
 <dl><dt><a name="Script-speakCharacterAtOffset"><strong>speakCharacterAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;given&nbsp;characterOffset&nbsp;in&nbsp;the<br>
 given&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="Script-speakContents"><strong>speakContents</strong></a>(self, contents)</dt><dd><tt>Speaks&nbsp;the&nbsp;given&nbsp;contents,&nbsp;which&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-[obj,&nbsp;startOffset,&nbsp;endOffset]&nbsp;tuples.</tt></dd></dl>
-
-<dl><dt><a name="Script-speakContentsAtOffset"><strong>speakContentsAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;entire&nbsp;subtree&nbsp;for&nbsp;the&nbsp;given&nbsp;object.</tt></dd></dl>
-
-<dl><dt><a name="Script-speakLineAtOffset"><strong>speakLineAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;line&nbsp;that&nbsp;holds&nbsp;the&nbsp;given&nbsp;characterOffset&nbsp;for&nbsp;the<br>
-given&nbsp;object.</tt></dd></dl>
-
-<dl><dt><a name="Script-speakString"><strong>speakString</strong></a>(self, obj, string, speakRole<font color="#909090">=False</font>)</dt><dd><tt>Speaks&nbsp;the&nbsp;given&nbsp;string&nbsp;for&nbsp;the&nbsp;given&nbsp;object.</tt></dd></dl>
-
-<dl><dt><a name="Script-speakWordAtOffset"><strong>speakWordAtOffset</strong></a>(self, obj, characterOffset)</dt><dd><tt>Speaks&nbsp;the&nbsp;word&nbsp;at&nbsp;the&nbsp;given&nbsp;characterOffset&nbsp;in&nbsp;the&nbsp;given&nbsp;object.</tt></dd></dl>
+<dl><dt><a name="Script-speakContents"><strong>speakContents</strong></a>(self, contents)</dt></dl>
 
 <dl><dt><a name="Script-updateBraille"><strong>updateBraille</strong></a>(self, obj, extraRegion<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;the&nbsp;braille&nbsp;display&nbsp;to&nbsp;show&nbsp;the&nbsp;give&nbsp;object.<br>
 &nbsp;<br>
@@ -388,6 +390,17 @@ Arguments:<br>
 [[[TODO:&nbsp;WDW&nbsp;-&nbsp;this&nbsp;should&nbsp;return&nbsp;False&nbsp;if&nbsp;we're&nbsp;in&nbsp;something<br>
 like&nbsp;an&nbsp;entry&nbsp;area&nbsp;or&nbsp;a&nbsp;list&nbsp;because&nbsp;we&nbsp;want&nbsp;their&nbsp;keyboard<br>
 navigation&nbsp;stuff&nbsp;to&nbsp;work.]]]</tt></dd></dl>
+
+<dl><dt><a name="Script-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(self, event, obj)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object&nbsp;changes.&nbsp;&nbsp;This<br>
+method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual&nbsp;appearance<br>
+changes&nbsp;solely&nbsp;because&nbsp;of&nbsp;focus&nbsp;--&nbsp;setLocusOfFocus&nbsp;is&nbsp;used&nbsp;for&nbsp;that.<br>
+Instead,&nbsp;it&nbsp;is&nbsp;intended&nbsp;mostly&nbsp;for&nbsp;objects&nbsp;whose&nbsp;notional&nbsp;'value'&nbsp;has<br>
+changed,&nbsp;such&nbsp;as&nbsp;a&nbsp;checkbox&nbsp;changing&nbsp;state,&nbsp;a&nbsp;progress&nbsp;bar&nbsp;advancing,<br>
+a&nbsp;slider&nbsp;moving,&nbsp;text&nbsp;inserted,&nbsp;caret&nbsp;moved,&nbsp;etc.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
+-&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="orca.default.html#Script">orca.default.Script</a>:<br>
@@ -666,17 +679,6 @@ is&nbsp;non-0,&nbsp;then&nbsp;an&nbsp;attempt&nbsp;will&nbsp;be&nbsp;made&nbsp;t
 at&nbsp;that&nbsp;cell.&nbsp;&nbsp;Otherwise,&nbsp;we&nbsp;will&nbsp;pan&nbsp;in&nbsp;display-sized&nbsp;increments<br>
 to&nbsp;show&nbsp;the&nbsp;review&nbsp;cursor.</tt></dd></dl>
 
-<dl><dt><a name="Script-visualAppearanceChanged"><strong>visualAppearanceChanged</strong></a>(self, event, obj)</dt><dd><tt>Called&nbsp;when&nbsp;the&nbsp;visual&nbsp;appearance&nbsp;of&nbsp;an&nbsp;object&nbsp;changes.&nbsp;&nbsp;This<br>
-method&nbsp;should&nbsp;not&nbsp;be&nbsp;called&nbsp;for&nbsp;objects&nbsp;whose&nbsp;visual&nbsp;appearance<br>
-changes&nbsp;solely&nbsp;because&nbsp;of&nbsp;focus&nbsp;--&nbsp;setLocusOfFocus&nbsp;is&nbsp;used&nbsp;for&nbsp;that.<br>
-Instead,&nbsp;it&nbsp;is&nbsp;intended&nbsp;mostly&nbsp;for&nbsp;objects&nbsp;whose&nbsp;notional&nbsp;'value'&nbsp;has<br>
-changed,&nbsp;such&nbsp;as&nbsp;a&nbsp;checkbox&nbsp;changing&nbsp;state,&nbsp;a&nbsp;progress&nbsp;bar&nbsp;advancing,<br>
-a&nbsp;slider&nbsp;moving,&nbsp;text&nbsp;inserted,&nbsp;caret&nbsp;moved,&nbsp;etc.<br>
-&nbsp;<br>
-Arguments:<br>
--&nbsp;event:&nbsp;if&nbsp;not&nbsp;None,&nbsp;the&nbsp;Event&nbsp;that&nbsp;caused&nbsp;this&nbsp;to&nbsp;happen<br>
--&nbsp;obj:&nbsp;the&nbsp;Accessible&nbsp;whose&nbsp;visual&nbsp;appearance&nbsp;changed.</tt></dd></dl>
-
 <dl><dt><a name="Script-whereAmI"><strong>whereAmI</strong></a>(self, inputEvent)</dt><dd><tt>Speaks&nbsp;information&nbsp;about&nbsp;the&nbsp;current&nbsp;object&nbsp;of&nbsp;interest.</tt></dd></dl>
 
 <hr>
@@ -779,8 +781,7 @@ Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</t
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>EMBEDDED_OBJECT_CHARACTER</strong> = u'<font color="#c040c0">\ufffc</font>'<br>
-<strong>NEWLINE_ROLES</strong> = ['paragraph', 'separator', 'list item', 'heading']<br>
+<td width="100%"><strong>NEWLINE_ROLES</strong> = ['paragraph', 'separator', 'list item', 'heading']<br>
 <strong>OBJECT_ROLES</strong> = ['check box', 'column header', 'combo box', 'dial', 'entry', 'heading', 'icon', 'image', 'label', 'list item', 'menu', 'menu item', 'page tab', 'paragraph', 'password text', 'progress bar', 'push button', 'radio button', 'radio menu item', 'radio menu', ...]<br>
 <strong>__copyright__</strong> = 'Copyright (c) 2005-2006 Sun Microsystems Inc.'<br>
 <strong>__date__</strong> = '$Date$'<br>

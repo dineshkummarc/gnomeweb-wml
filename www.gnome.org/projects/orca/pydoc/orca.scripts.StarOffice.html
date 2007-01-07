@@ -6,9 +6,9 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.StarOffice</strong></big></big> (version 1.73, $Date$)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="orca.html"><font color="#ffffff">orca</font></a>.<a href="orca.scripts.html"><font color="#ffffff">scripts</font></a>.StarOffice</strong></big></big> (version 1882, $Date$)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python2.4/site-packages/orca/scripts/StarOffice.py">/usr/lib/python2.4/site-packages/orca/scripts/StarOffice.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python2.4/site-packages/orca/scripts/StarOffice.py">/usr/local/lib/python2.4/site-packages/orca/scripts/StarOffice.py</a></font></td></tr></table>
     <p><tt>Custom&nbsp;script&nbsp;for&nbsp;StarOffice&nbsp;and&nbsp;OpenOffice.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -152,7 +152,14 @@ Returns&nbsp;True&nbsp;if&nbsp;this&nbsp;word&nbsp;contains&nbsp;the&nbsp;end&nb
 
 <dl><dt><a name="Script-getBrailleGenerator"><strong>getBrailleGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;braille&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
-<dl><dt><a name="Script-getCalcColumn"><strong>getCalcColumn</strong></a>(self, cell)</dt><dd><tt>Get&nbsp;the&nbsp;column&nbsp;number&nbsp;in&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on.<br>
+<dl><dt><a name="Script-getKeyBindings"><strong>getKeyBindings</strong></a>(self)</dt><dd><tt>Defines&nbsp;the&nbsp;key&nbsp;bindings&nbsp;for&nbsp;this&nbsp;script.&nbsp;Setup&nbsp;the&nbsp;default<br>
+key&nbsp;bindings,&nbsp;then&nbsp;add&nbsp;one&nbsp;in&nbsp;for&nbsp;reading&nbsp;the&nbsp;input&nbsp;line.<br>
+&nbsp;<br>
+Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings.</tt></dd></dl>
+
+<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
+
+<dl><dt><a name="Script-getTableColumn"><strong>getTableColumn</strong></a>(self, cell)</dt><dd><tt>Get&nbsp;the&nbsp;column&nbsp;number&nbsp;in&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;cell:&nbsp;the&nbsp;table&nbsp;cell&nbsp;to&nbsp;get&nbsp;the&nbsp;column&nbsp;number&nbsp;for.<br>
@@ -160,20 +167,13 @@ Arguments:<br>
 Return&nbsp;the&nbsp;column&nbsp;number&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on,&nbsp;or&nbsp;None&nbsp;if<br>
 this&nbsp;isn't&nbsp;a&nbsp;table&nbsp;cell.</tt></dd></dl>
 
-<dl><dt><a name="Script-getCalcRow"><strong>getCalcRow</strong></a>(self, cell)</dt><dd><tt>Get&nbsp;the&nbsp;row&nbsp;number&nbsp;in&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on.<br>
+<dl><dt><a name="Script-getTableRow"><strong>getTableRow</strong></a>(self, cell)</dt><dd><tt>Get&nbsp;the&nbsp;row&nbsp;number&nbsp;in&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on.<br>
 &nbsp;<br>
 Arguments:<br>
 -&nbsp;cell:&nbsp;the&nbsp;table&nbsp;cell&nbsp;to&nbsp;get&nbsp;the&nbsp;row&nbsp;number&nbsp;for.<br>
 &nbsp;<br>
 Return&nbsp;the&nbsp;row&nbsp;number&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;on,&nbsp;or&nbsp;None&nbsp;if<br>
 this&nbsp;isn't&nbsp;a&nbsp;table&nbsp;cell.</tt></dd></dl>
-
-<dl><dt><a name="Script-getKeyBindings"><strong>getKeyBindings</strong></a>(self)</dt><dd><tt>Defines&nbsp;the&nbsp;key&nbsp;bindings&nbsp;for&nbsp;this&nbsp;script.&nbsp;Setup&nbsp;the&nbsp;default<br>
-key&nbsp;bindings,&nbsp;then&nbsp;add&nbsp;one&nbsp;in&nbsp;for&nbsp;reading&nbsp;the&nbsp;input&nbsp;line.<br>
-&nbsp;<br>
-Returns&nbsp;an&nbsp;instance&nbsp;of&nbsp;keybindings.KeyBindings.</tt></dd></dl>
-
-<dl><dt><a name="Script-getSpeechGenerator"><strong>getSpeechGenerator</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;speech&nbsp;generator&nbsp;for&nbsp;this&nbsp;script.</tt></dd></dl>
 
 <dl><dt><a name="Script-getText"><strong>getText</strong></a>(self, obj, startOffset, endOffset)</dt><dd><tt>Returns&nbsp;the&nbsp;substring&nbsp;of&nbsp;the&nbsp;given&nbsp;object's&nbsp;text&nbsp;specialization.<br>
 &nbsp;<br>
@@ -741,13 +741,14 @@ Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;utterances&nbsp;to&nbsp;be&nbsp;spoken.</t
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-getCalcTable"><strong>getCalcTable</strong></a>(obj)</dt><dd><tt>Get&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;in.<br>
+<td width="100%"><dl><dt><a name="-adjustForWriterTable"><strong>adjustForWriterTable</strong></a>(obj)</dt><dd><tt>Check&nbsp;to&nbsp;see&nbsp;if&nbsp;we&nbsp;are&nbsp;in&nbsp;Writer,&nbsp;where&nbsp;the&nbsp;object&nbsp;with&nbsp;focus&nbsp;is&nbsp;a<br>
+paragraph,&nbsp;and&nbsp;the&nbsp;parent&nbsp;is&nbsp;the&nbsp;table&nbsp;cell.&nbsp;If&nbsp;it&nbsp;is,&nbsp;then,&nbsp;return&nbsp;the<br>
+parent&nbsp;table&nbsp;cell&nbsp;otherwise&nbsp;return&nbsp;the&nbsp;current&nbsp;object.<br>
 &nbsp;<br>
 Arguments:<br>
--&nbsp;obj:&nbsp;the&nbsp;table&nbsp;cell.<br>
+-&nbsp;obj:&nbsp;the&nbsp;accessible&nbsp;object&nbsp;to&nbsp;check.<br>
 &nbsp;<br>
-Return&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;in,&nbsp;or&nbsp;None&nbsp;if&nbsp;this&nbsp;object<br>
-isn't&nbsp;in&nbsp;a&nbsp;table.</tt></dd></dl>
+Returns&nbsp;parent&nbsp;table&nbsp;cell&nbsp;(if&nbsp;in&nbsp;a&nbsp;Writer&nbsp;table&nbsp;)&nbsp;or&nbsp;the&nbsp;current&nbsp;object.</tt></dd></dl>
  <dl><dt><a name="-getDynamicColumnHeaderCell"><strong>getDynamicColumnHeaderCell</strong></a>(obj, column)</dt><dd><tt>Given&nbsp;a&nbsp;table&nbsp;cell,&nbsp;return&nbsp;the&nbsp;dynamic&nbsp;column&nbsp;header&nbsp;cell&nbsp;associated<br>
 with&nbsp;it.<br>
 &nbsp;<br>
@@ -764,6 +765,13 @@ Arguments:<br>
 -&nbsp;row:&nbsp;the&nbsp;row&nbsp;that&nbsp;this&nbsp;dynamic&nbsp;header&nbsp;is&nbsp;on.<br>
 &nbsp;<br>
 Return&nbsp;the&nbsp;dynamic&nbsp;row&nbsp;header&nbsp;cell&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;table&nbsp;cell.</tt></dd></dl>
+ <dl><dt><a name="-getTable"><strong>getTable</strong></a>(obj)</dt><dd><tt>Get&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;in.<br>
+&nbsp;<br>
+Arguments:<br>
+-&nbsp;obj:&nbsp;the&nbsp;table&nbsp;cell.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;table&nbsp;that&nbsp;this&nbsp;table&nbsp;cell&nbsp;is&nbsp;in,&nbsp;or&nbsp;None&nbsp;if&nbsp;this&nbsp;object<br>
+isn't&nbsp;in&nbsp;a&nbsp;table.</tt></dd></dl>
  <dl><dt><a name="-isSpreadSheetCell"><strong>isSpreadSheetCell</strong></a>(obj)</dt><dd><tt>Return&nbsp;an&nbsp;indication&nbsp;of&nbsp;whether&nbsp;the&nbsp;given&nbsp;obj&nbsp;is&nbsp;a&nbsp;spread&nbsp;sheet<br>
 table&nbsp;cell.<br>
 &nbsp;<br>
