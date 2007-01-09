@@ -5,6 +5,7 @@ SUBDIRS = \
 	desktop			\
 	devtools		\
 	dia			\
+	eog			\
 	evolution		\
 	fantasdic		\
 	f-spot			\
