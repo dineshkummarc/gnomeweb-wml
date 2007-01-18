@@ -1,0 +1,12 @@
+urlpath=/projects/tomboy/images
+
+page_DATA = \
+	applet-small.png	\
+	bulletpoint.gif		\
+	pinned-notes.png	\
+	search-small.png	\
+	tomboy.png			\
+	tomboy-128.png		\
+	windows-small.png
+
+include $(top_srcdir)/rules.common
