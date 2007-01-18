@@ -28,12 +28,13 @@ misc_images=\
 	x-office-spreadsheet.png	\
 	t-s-t.png \
 	screenshot-search_for_technologies.png \
-	screenshot-search_for_search.png \
-	screenshot-system_monitor-trackerd.png \
-	screenshot-time-tracker-search.png \
 	screenshot-search_for_technologies_thumbnail.png \
-	screenshot-search_for_search_thumbnail.png \
+	screenshot-search_for_test_thumbnail.png \
+	screenshot-search_for_test.png \
+	screenshot-system_monitor-trackerd.png \
 	screenshot-system_monitor-trackerd_thumbnail.png \
-	screenshot-time-tracker-search_thumbnail.png  
+	screenshot-time-tracker-search.png \
+	screenshot-time-tracker-search_thumbnail.png
+
 
 page_DATA=$(misc_images)
