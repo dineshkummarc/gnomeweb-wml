@@ -35,6 +35,7 @@ SUBDIRS = \
 	sabayon			\
 	seahorse		\
 	tracker			\
+	tomboy			\
 	totem			\
 	rhythmbox               \
 	livecd			\
