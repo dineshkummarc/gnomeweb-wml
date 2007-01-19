@@ -44,7 +44,8 @@ SUBDIRS = \
 	baobab                  \
 	straw			\
 	orca                    \
-	wsop
+	wsop			\
+	hipo
 
 urlpath = /projects
 
