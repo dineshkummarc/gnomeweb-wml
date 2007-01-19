@@ -7,6 +7,7 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=				\
+	eog-start.png			\
 	eog-banner.png			\
 	eog-collection-screenshot.png	\
 	eog-collection-screenshot-small.png \
