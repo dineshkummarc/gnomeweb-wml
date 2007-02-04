@@ -18,6 +18,7 @@ SUBDIRS = \
 	gnome-libs		\
 	gnumeric		\
 	guppi			\
+	gyrus			\
 	gb			\
 	nautilus		\
 	nautilus-locked-folders \
