@@ -1,4 +1,4 @@
-SUBDIRS=images
+SUBDIRS=images js
 
 urlpath=/projects/tracker/
 
@@ -12,6 +12,5 @@ page_SCRIPTS=		\
 	screenshots.html	\
 	start.html	\
 	style.css \
-	js/datemod.js
 
 include $(top_srcdir)/rules.common
