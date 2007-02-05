@@ -44,7 +44,7 @@ misc_images=\
  tasks.png \ 
  text.png \ 
  videos.png \ 
- x-office-spreadsheet.png \ 
+ x-office-spreadsheet.png
 
 
 

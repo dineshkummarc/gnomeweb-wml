@@ -11,6 +11,6 @@ page_SCRIPTS=		\
 	index.html	\
 	screenshots.html	\
 	start.html	\
-	style.css \
+	style.css
 
 include $(top_srcdir)/rules.common
