@@ -6,7 +6,7 @@ page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
 
-misc_images=\
+misc_images= \
 	app.png \ 
  appointments.png \ 
  bookmark.png \ 
