@@ -5,7 +5,6 @@ use warnings;
 use Cwd;
 
 my $dir = getcwd;
-
 opendir(DIRHANDLE, $dir);
 
 my @files_names = readdir(DIRHANDLE);
