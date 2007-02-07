@@ -15,7 +15,7 @@ foreach (@files_names) {
  
 	next if (substr($_,0,1) eq '.');
 	if( $_ =~ m/\w+.png/ ) {
-		print "\t$_ \\ \n";
+		print "\t$_ \\\n";
 	}
 	
 }
