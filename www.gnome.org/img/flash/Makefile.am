@@ -15,6 +15,7 @@ page_DATA = \
 	official-gnome-2-developers-guide.png \
 	guadec-2004.png \
 	guadec-2004-end.png \
+	guadec-callforpapers.png \
 	gnome_tshirts.png \
 	gnome28.png \
 	summit_mit_2004.png \
