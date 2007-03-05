@@ -7,6 +7,10 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
+	chronojump_esquema_jump_300.png \
+	chronojump_esquema_pulse_300.png \
+	chronojump_esquema_reaction_time_300.png \
+	chronojump_esquema_run_300.png \
 	chronojump_main_047.png \
 	chronojump_main_047_small.png \
 	chronojump_windows.png \
