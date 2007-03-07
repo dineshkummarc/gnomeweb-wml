@@ -1,8 +1,10 @@
 urlpath=/projects/tomboy/images
 
 page_DATA = \
+	applet-plugins.png	\
 	applet-small.png	\
 	bulletpoint.gif		\
+	package-x-generic.png \
 	pinned-notes.png	\
 	search-small.png	\
 	tomboy.png			\
