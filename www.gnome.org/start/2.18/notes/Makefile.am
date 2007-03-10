@@ -58,17 +58,17 @@ install-data-local:
 	  echo "Installing generated html"; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/*.html $(pagedir)/$$docbookdir/; \
-	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
-	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
-	  (cd $(srcdir)/C && \
-	  for figure in figures/*.png; do \
-	    if [ ! -f $(pagedir)/$$docbookdir/$$figure ]; then \
-	      $(INSTALL_DATA) $$figure $(pagedir)/$$docbookdir/figures/; \
-	    fi; \
-	  done); \
 	done
 
 
+#	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
+#	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
+#	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
+#	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+#	  (cd $(srcdir)/C && \
+#	  for figure in figures/*.png; do \
+#	    if [ ! -f $(pagedir)/$$docbookdir/$$figure ]; then \
+#	      $(INSTALL_DATA) $$figure $(pagedir)/$$docbookdir/figures/; \
+#	    fi; \
+#	  done); \
 
