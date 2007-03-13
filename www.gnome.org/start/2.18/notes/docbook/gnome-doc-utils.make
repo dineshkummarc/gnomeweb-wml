@@ -437,7 +437,7 @@ $(_DOC_LC_DOCS) : $(_DOC_POFILES)
 $(_DOC_LC_DOCS) : $(_DOC_C_DOCS)
 	if test -f "$(_DOC_C_MODULE)"; then d="../C/"; else d="../$(srcdir)/C/"; fi; \
 	(cd $(dir $@) && \
-	  export PYTHONPATH=@abs_top_srcdir@/www.gnome.org/start/2.14/notes; \
+	  export PYTHONPATH=@abs_top_srcdir@/www.gnome.org/start/2.18/notes; \
 	  $(_xml2po) -e -p $(patsubst %/$(notdir $@),%,$@).po $${d}$(notdir $@) > $(notdir $@))
 
 
