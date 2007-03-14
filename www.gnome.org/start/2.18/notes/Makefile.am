@@ -29,9 +29,12 @@ html:
 	  echo "Generating html for language: " $$docbookdir; \
 	  rm -rf $$docbookdir; \
 	  mkdir $$docbookdir; \
+	  if [ "$$docbookdir" = "ar" -o "$$docbookdir" = "he" ]; then \
+	    direction="rtl"; else direction="ltr"; fi; \
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
 	  xsltproc --xinclude -o $$docbookdir/unused.html.ignore \
 	    --param yelp_max_chunk_depth 1 \
+	    --stringparam direction "$$direction" \
 	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
 	    --stringparam http_prefix /start/2.18/notes \
