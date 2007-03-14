@@ -37,6 +37,7 @@ html:
 	    --stringparam http_prefix /start/2.18/notes \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
 	  echo "  xlstproc finished"; \
+	  cp -R docbook/C/figures $$docbookdir; \
 	  cp -R $(STYLE_PATH)images docbook/$$docbookdir/figures $$docbookdir; \
 	  for i in $$docbookdir/*.html; do \
 	    perl -p -i -e 's,<p class="section"></p>,<p class="section">Sections</p>,g' $$i; \
@@ -61,6 +62,7 @@ install-data-local:
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
+	  $(INSTALL_DATA) $(srcdir)/C/figures/*.png $(pagedir)/C/figures/; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
 	  (cd $(srcdir)/C && \
 	  for figure in figures/*.png; do \
