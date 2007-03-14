@@ -11,6 +11,7 @@
 <xsl:include href="l10n.xsl"/>
 
 <xsl:param name="lang" select="'C'"/>
+<xsl:param name="direction" select="'ltr'"/>
 
 <xsl:param name="yelp_max_chunk_depth" select="2" />
 <xsl:param name="yelp_generate_navbar" select="true()"/>
@@ -84,6 +85,35 @@
 			<xsl:with-param name="content" select="$content"/>
 		</xsl:apply-templates>
 	</xsl:copy>
+</xsl:template>
+
+<xsl:template match="body" mode="template-mode">
+	<xsl:param name="node"/>
+	<xsl:param name="id"/>
+	<xsl:param name="content"/>
+  <body dir="{$direction}">
+		<xsl:apply-templates select="node() | @*" mode="template-mode">
+			<xsl:with-param name="node" select="$node"/>
+			<xsl:with-param name="id" select="$id"/>
+			<xsl:with-param name="content" select="$content"/>
+		</xsl:apply-templates>
+  </body>
+</xsl:template>
+
+<xsl:template match="style" mode="template-mode">
+	<xsl:param name="node"/>
+	<xsl:param name="id"/>
+	<xsl:param name="content"/>
+  <style dir="{$direction}">
+    <xsl:text>direction: </xsl:text>
+    <xsl:value-of select="$direction"/>
+    <xsl:text>; </xsl:text>
+		<xsl:apply-templates select="node() | @*" mode="template-mode">
+			<xsl:with-param name="node" select="$node"/>
+			<xsl:with-param name="id" select="$id"/>
+			<xsl:with-param name="content" select="$content"/>
+		</xsl:apply-templates>
+  </style>
 </xsl:template>
 
 <xsl:template match="title" mode="template-mode">
