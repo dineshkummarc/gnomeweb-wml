@@ -34,6 +34,7 @@ page_DATA = \
 	power-combined.png \
 	two-fourteen.png \
 	summeroutreachbanner.jpg \
-	two-sixteen.png
+	two-sixteen.png \
+	two-eighteen.png
 
 include $(top_srcdir)/rules.common
