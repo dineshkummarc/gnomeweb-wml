@@ -7,7 +7,8 @@
                 version='1.0'>
 
 <!-- use version 1.65.1 from my home directory -->
-<xsl:import href="/home/users/bmsmith/1.65.1/html/docbook.xsl"/>
+<!-- <xsl:import href="/home/users/bmsmith/1.65.1/html/docbook.xsl"/>-->
+<xsl:import href="/usr/share/xml/docbook/stylesheet/nwalsh/html/docbook.xsl"/>
 
 <!-- 
 target a specific version of Norman Walsh's stylesheets as the newer stylesheets
