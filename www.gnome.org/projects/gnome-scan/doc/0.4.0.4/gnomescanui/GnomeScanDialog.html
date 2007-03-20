@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GnomeScanDialog</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<link rel="start" href="index.html" title="GNOME Scan UI Reference Manual">
+<link rel="up" href="ch04.html" title="Scan Dialogs">
+<link rel="prev" href="ch04.html" title="Scan Dialogs">
+<link rel="next" href="GnomeScanAcquisitionDialog.html" title="GnomeScanAcquisitionDialog">
+<meta name="generator" content="GTK-Doc V1.7 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Widget Hierarchy">
+<link rel="chapter" href="ch02.html" title="Widget Gallery">
+<link rel="chapter" href="ch03.html" title="Common">
+<link rel="chapter" href="ch04.html" title="Scan Dialogs">
+<link rel="chapter" href="ch05.html" title="Scan Preview">
+<link rel="chapter" href="ch06.html" title="Options Widgets">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch04.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch04.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME Scan UI Reference Manual</th>
+<td><a accesskey="n" href="GnomeScanAcquisitionDialog.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2533067" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2530095" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id2529978" class="shortcut">Object Hierarchy</a>
+                  &#160;|&#160;
+                  <a href="#id2530044" class="shortcut">Implemented Interfaces</a>
+                  &#160;|&#160;
+                  <a href="#id2530065" class="shortcut">Properties</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeScanDialog"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2533067"></a><span class="refentrytitle">GnomeScanDialog</span>
+</h2>
+<p>GnomeScanDialog &#8212; A scan configuration UI container</p>
+</td>
+<td valign="top" align="right"><img src="GnomeScanDialog.png"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+            <a href="GnomeScanDialog.html#GnomeScanDialog-struct">GnomeScanDialog</a>;
+GtkWidget*  <a href="GnomeScanDialog.html#gnome-scan-dialog-new">gnome_scan_dialog_new</a>           (<a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a> *context,
+                                             GtkWindow *parent);
+void        <a href="GnomeScanDialog.html#gnome-scan-dialog-run">gnome_scan_dialog_run</a>           (<a href="GnomeScanDialog.html" title="GnomeScanDialog">GnomeScanDialog</a> *dialog);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2529978"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  GObject
+   +----GInitiallyUnowned
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBin
+                                 +----GtkWindow
+                                       +----GtkDialog
+                                             +----GnomeScanDialog
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2530044"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeScanDialog implements
+ AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2530065"></a><h2>Properties</h2>
+<pre class="synopsis">
+
+  "<a href="GnomeScanDialog.html#GnomeScanDialog--context">context</a>"              <a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a>      : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2530095"></a><h2>Description</h2>
+<p>
+The <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a> widget allow the application to compose a scan
+configuration UI. This way, each application has the power to
+choose what they want the user to configure and what they don't
+want to. This is a key feature since scanner has a lot of use from
+simple picture scan to OCR.
+</p>
+<p>
+Application first instanciate the <a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a>. Preconfigure
+it as wanted. Then build the scan configuration UI passing the
+<a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a> to each GnomeScan widget. Then pass the UI to a
+<a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a> and run the <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a> using
+<a href="GnomeScanDialog.html#gnome-scan-dialog-run"><code class="function">gnome_scan_dialog_run()</code></a>. When user has finished to configure the
+scan, he just validate the scan configuration and then, the
+acquisition start. See <a href="GnomeScanAcquisitionDialog.html" title="GnomeScanAcquisitionDialog"><span class="type">GnomeScanAcquisitionDialog</span></a> for further
+information on the second step.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2529776"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2529787"></a><h3>
+<a name="GnomeScanDialog-struct"></a>GnomeScanDialog</h3>
+<a class="indexterm" name="id2529799"></a><pre class="programlisting">typedef struct {
+  GnomeScanContext*		context;
+} GnomeScanDialog;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2529814"></a><h3>
+<a name="gnome-scan-dialog-new"></a>gnome_scan_dialog_new ()</h3>
+<a class="indexterm" name="id2529825"></a><pre class="programlisting">GtkWidget*  gnome_scan_dialog_new           (<a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a> *context,
+                                             GtkWindow *parent);</pre>
+<p>
+Create a new <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a> connnected to <em class="parameter"><code>context</code></em>. If <em class="parameter"><code>parent</code></em> is
+not NULL, then the new dialog will be transient for <em class="parameter"><code>parent</code></em>. <em class="parameter"><code>ui</code></em> is
+the widget tree containing configuration widget showed in the body
+of the <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>context</code></em>&#160;:</span></td>
+<td> a <a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>parent</code></em>&#160;:</span></td>
+<td> a <span class="type">GtkWidget</span> or NULL
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2531956"></a><h3>
+<a name="gnome-scan-dialog-run"></a>gnome_scan_dialog_run ()</h3>
+<a class="indexterm" name="id2531968"></a><pre class="programlisting">void        gnome_scan_dialog_run           (<a href="GnomeScanDialog.html" title="GnomeScanDialog">GnomeScanDialog</a> *dialog);</pre>
+<p>
+Run the dialog waiting for the use to configure the scan and
+trigger acquisition.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>dialog</code></em>&#160;:</span></td>
+<td> a <a href="GnomeScanDialog.html" title="GnomeScanDialog"><span class="type">GnomeScanDialog</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2532026"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2532037"></a><h3>
+<a name="GnomeScanDialog--context"></a>The "<code class="literal">context</code>" property</h3>
+<a class="indexterm" name="id2532051"></a><pre class="programlisting">  "context"              <a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a>      : Read / Write</pre>
+<p>A GnomeScanContext the widget is connected to.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -47,7 +47,8 @@ SUBDIRS = \
 	orca                    \
 	wsop			\
 	hipo			\
-	brasero
+	brasero			\
+	gnome-scan
 
 urlpath = /projects
 

@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>GnomeScanPreviewArea</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.68.1">
+<link rel="start" href="index.html" title="GNOME Scan UI Reference Manual">
+<link rel="up" href="ch05.html" title="Scan Preview">
+<link rel="prev" href="gnomescanui-GnomeScanAdvancedPreview.html" title="GnomeScanAdvancedPreview">
+<link rel="next" href="ch06.html" title="Options Widgets">
+<meta name="generator" content="GTK-Doc V1.7 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Widget Hierarchy">
+<link rel="chapter" href="ch02.html" title="Widget Gallery">
+<link rel="chapter" href="ch03.html" title="Common">
+<link rel="chapter" href="ch04.html" title="Scan Dialogs">
+<link rel="chapter" href="ch05.html" title="Scan Preview">
+<link rel="chapter" href="ch06.html" title="Options Widgets">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gnomescanui-GnomeScanAdvancedPreview.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch05.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME Scan UI Reference Manual</th>
+<td><a accesskey="n" href="ch06.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2538373" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2538885" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id2538774" class="shortcut">Object Hierarchy</a>
+                  &#160;|&#160;
+                  <a href="#id2538833" class="shortcut">Implemented Interfaces</a>
+                  &#160;|&#160;
+                  <a href="#id2538855" class="shortcut">Properties</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeScanPreviewArea"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2538373"></a><span class="refentrytitle">GnomeScanPreviewArea</span>
+</h2>
+<p>GnomeScanPreviewArea &#8212; A scan area selector</p>
+</td>
+<td valign="top" align="right"><img src="GnomeScanPreviewArea.png"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+            <a href="GnomeScanPreviewArea.html#GnomeScanPreviewArea-struct">GnomeScanPreviewArea</a>;
+GtkWidget*  <a href="GnomeScanPreviewArea.html#gnome-scan-preview-area-new">gnome_scan_preview_area_new</a>     (<a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a> *context);
+void        <a href="GnomeScanPreviewArea.html#gnome-scan-preview-area-refresh">gnome_scan_preview_area_refresh</a> (<a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea">GnomeScanPreviewArea</a> *area);
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2538774"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  GObject
+   +----GInitiallyUnowned
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBin
+                                 +----GtkScrolledWindow
+                                       +----GnomeScanPreviewArea
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2538833"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeScanPreviewArea implements
+ AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2538855"></a><h2>Properties</h2>
+<pre class="synopsis">
+
+  "<a href="GnomeScanPreviewArea.html#GnomeScanPreviewArea--context">context</a>"              <a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a>      : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2538885"></a><h2>Description</h2>
+<p>
+This widget is primarily intended to be reused by <span class="type">GnomeScanPreview</span>
+and <span class="type">GnomeScanAdvancedPreview</span>. <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a> shows a
+<span class="type">GtkScrolledWindow</span> containing a scan preview. The preview image has
+a selectable rectangle the user can move an resize. When the user
+resize the area, the widget sent to the connected context the
+selected area. <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a> is connected to the
+<span class="type">GnomeScanContext::</span>"preview-received" signal in order to update the
+preview. However, <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a> does not ask for a preview,
+so application should use <span class="type">GnomeScanPreview</span> and
+<span class="type">GnomeScanAdvancedPreview</span> which have a "Refresh" button, unless the
+application implements its own preview widget.</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2524834"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2524845"></a><h3>
+<a name="GnomeScanPreviewArea-struct"></a>GnomeScanPreviewArea</h3>
+<a class="indexterm" name="id2524856"></a><pre class="programlisting">typedef struct {
+  GnomeScanContext	*context;
+  GtkWidget		*drawing_area;
+  /* Current preview resolution */
+  gdouble		resolution;
+} GnomeScanPreviewArea;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2524874"></a><h3>
+<a name="gnome-scan-preview-area-new"></a>gnome_scan_preview_area_new ()</h3>
+<a class="indexterm" name="id2524886"></a><pre class="programlisting">GtkWidget*  gnome_scan_preview_area_new     (<a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a> *context);</pre>
+<p>
+Create a new <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a> and connect it to <em class="parameter"><code>context</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><em class="parameter"><code>context</code></em>&#160;:</span></td>
+<td> a <a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a>
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
+<td> a new <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2499973"></a><h3>
+<a name="gnome-scan-preview-area-refresh"></a>gnome_scan_preview_area_refresh ()</h3>
+<a class="indexterm" name="id2499987"></a><pre class="programlisting">void        gnome_scan_preview_area_refresh (<a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea">GnomeScanPreviewArea</a> *area);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scan_preview_area_refresh</code> is deprecated and should not be used in newly-written code. application must directly ask the <a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a> for
+a preview.</p>
+</div>
+<p>
+Query the <a
+href="../gnomescan/GnomeScanContext.html"
+><span class="type">GnomeScanContext</span></a> to acquire a fresh scan review.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td>
+<span class="term"><em class="parameter"><code>area</code></em>&#160;:</span></td>
+<td> a <a href="GnomeScanPreviewArea.html" title="GnomeScanPreviewArea"><span class="type">GnomeScanPreviewArea</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2500070"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2500080"></a><h3>
+<a name="GnomeScanPreviewArea--context"></a>The "<code class="literal">context</code>" property</h3>
+<a class="indexterm" name="id2500096"></a><pre class="programlisting">  "context"              <a
+href="../gnomescan/GnomeScanContext.html"
+>GnomeScanContext</a>      : Read / Write</pre>
+<p>The GnomeScanContext the widget is connected to.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
