@@ -60,7 +60,7 @@
 	  <li><a href="screenshots.html">Screenshots</a></li>
 	  <li><a href="download.html">Download</a></li>
 	  <li><a href="utils.html">Related tools</a></li>
-	  <li><a href="faq.html">F.A.Q.</a></li>
+	  <li><a href="http://live.gnome.org/Rhythmbox/FAQ">F.A.Q.</a></li>
 	  <li><a href="development.html">Development</a></li>
 	  <li><a href="translation.html">Translation</a></li>
 	  <li><a href="feedback.html">Feedback</a></li>
