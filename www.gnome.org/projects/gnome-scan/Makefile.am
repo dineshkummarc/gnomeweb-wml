@@ -95,13 +95,6 @@ page_SCRIPTS= \
 	data/themes/gnome/images/title.png \
 	data/themes/gnome/images/gnome.png \
 	data/themes/gnome/images/top-bg.png \
-	images/translation.png \
-	images/graphics.png \
-	images/gfoobar-banner.png \
-	images/debugger.png \
-	images/nautilus-banner.png \
-	images/documentation.png \
-	images/gnome-fs-regular.png \
 	doc/0.4.0.4/gnomescan/home.png \
         doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \	
 	doc/0.4.0.4/gnomescan/right.png \
