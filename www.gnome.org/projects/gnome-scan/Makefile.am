@@ -4,10 +4,26 @@ SUBDIRS=
 urlpath=/projects/gnome-scan/
 
 page_SCRIPTS= \
-	screenshots.html \
+	documentation.html \
+	documentation.ca.html \
+	documentation.de.html \
+	documentation.fr.html \
+	documentation.sv.html \
+	download.html \
+	download.ca.html \
+	download.de.html \
+	download.fr.html \
+	download.sv.html \
 	index.html \
-	developers.html \
-	about.html \
+	index.ca.html \
+	index.de.html \
+	index.fr.html \
+	index.sv.html \
+	screenshots.html \
+	screenshots.ca.html \
+	screenshots.de.html \
+	screenshots.fr.html \
+	screenshots.sv.html \
 	doc/0.2.2/gnomescanui/GnomeScanDialog.html \
 	doc/0.2.2/gnomescanui/ch01.html \
 	doc/0.2.2/gnomescanui/ch03.html \
@@ -125,25 +141,6 @@ page_SCRIPTS= \
 	doc/0.4.0.4/gnomescanui/ch06.html \
 	doc/0.4.0.4/gnomescanui/ix01.html \
 	doc/0.4.0.4/gnomescanui/index.html \
-	documentation.ca.html \
-	documentation.de.html \
-	documentation.fr.html \
-	documentation.html \
-	documentation.sv.html \
-	download.ca.html \
-	download.de.html \
-	download.fr.html \
-	download.html \
-	download.sv.html \
-	index.html \
-	index.ca.html \
-	index.de.html \
-	index.fr.html \
-	index.sv.html \
-	screenshots.ca.html \
-	screenshots.de.html \
-	screenshots.fr.html \
-	screenshots.sv.html \
 	data/themes/gnome/screenshots.screen.css \
 	data/themes/gnome/default.css \
 	data/themes/gnome/document.all.css \
