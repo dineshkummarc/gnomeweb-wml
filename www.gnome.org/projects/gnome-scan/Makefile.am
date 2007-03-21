@@ -2,7 +2,11 @@
 
 urlpath=/projects/gnome-scan/
 
+mrproper:
+	rm -rf *
+
 page_SCRIPTS= \
+	mrproper \
 	documentation.html \
 	documentation.en.html \
 	documentation.ca.html \
