@@ -24,93 +24,6 @@ page_SCRIPTS= \
 	screenshots.de.html \
 	screenshots.fr.html \
 	screenshots.sv.html \
-	doc/0.2.2/gnomescanui/GnomeScanDialog.html \
-	doc/0.2.2/gnomescanui/ch01.html \
-	doc/0.2.2/gnomescanui/ch03.html \
-	doc/0.2.2/gnomescanui/ch05.html \
-	doc/0.2.2/gnomescanui/ix01.html \
-	doc/0.2.2/gnomescanui/GnomeScanAcquisitionDialog.html \
-	doc/0.2.2/gnomescanui/GnomeScanPreview.html \
-	doc/0.2.2/gnomescanui/gnomescanui-gnomescanui.html \
-	doc/0.2.2/gnomescanui/GnomeScanResolutionSelector.html \
-	doc/0.2.2/gnomescanui/GnomeScannerSelector.html \
-	doc/0.2.2/gnomescanui/ch02.html \
-	doc/0.2.2/gnomescanui/GnomeScanSourceSelector.html \
-	doc/0.2.2/gnomescanui/ch04.html \
-	doc/0.2.2/gnomescanui/ch06.html \
-	doc/0.2.2/gnomescanui/index.html \
-	doc/0.2.2/gnomescanui/GnomeScanAdvancedPreview.html \
-	doc/0.2.2/gnomescanui/GnomeScanPreviewArea.html \
-	doc/0.2.2/gnomescanui/GnomeScanOptionWidget.html \
-	doc/0.2.2/gnomescan/GnomeScanContext.html \
-	doc/0.2.2/gnomescan/GnomeScanner.html \
-	doc/0.2.2/gnomescan/ix01.html \
-	doc/0.2.2/gnomescan/GnomeScanBackend.html \
-	doc/0.2.2/gnomescan/ch01.html \
-	doc/0.2.2/gnomescan/ch02.html \
-	doc/0.2.2/gnomescan/ch03.html \
-	doc/0.2.2/gnomescan/index.html \
-	doc/0.2.2/gnomescan/gnomescan-gnomescanutils.html \
-	doc/0.2.2/gnomescan/gnomescan-gnomescantypes.html \
-	doc/0.2.2/gnomescan/GnomeScannerOption.html \
-	doc/0.3/gnomescanui/GnomeScanDialog.html \
-	doc/0.3/gnomescanui/ch01.html \
-	doc/0.3/gnomescanui/ch03.html \
-	doc/0.3/gnomescanui/ch05.html \
-	doc/0.3/gnomescanui/ix01.html \
-	doc/0.3/gnomescanui/GnomeScanAcquisitionDialog.html \
-	doc/0.3/gnomescanui/GnomeScanPreview.html \
-	doc/0.3/gnomescanui/gnomescanui-gnomescanui.html \
-	doc/0.3/gnomescanui/GnomeScanResolutionSelector.html \
-	doc/0.3/gnomescanui/GnomeScannerSelector.html \
-	doc/0.3/gnomescanui/ch02.html \
-	doc/0.3/gnomescanui/GnomeScanSourceSelector.html \
-	doc/0.3/gnomescanui/ch04.html \
-	doc/0.3/gnomescanui/ch06.html \
-	doc/0.3/gnomescanui/index.html \
-	doc/0.3/gnomescanui/GnomeScanAdvancedPreview.html \
-	doc/0.3/gnomescanui/GnomeScanPreviewArea.html \
-	doc/0.3/gnomescanui/GnomeScanOptionWidget.html \
-	doc/0.3/gnomescan/GnomeScanContext.html \
-	doc/0.3/gnomescan/GnomeScanner.html \
-	doc/0.3/gnomescan/ix01.html \
-	doc/0.3/gnomescan/GnomeScanBackend.html \
-	doc/0.3/gnomescan/ch01.html \
-	doc/0.3/gnomescan/ch02.html \
-	doc/0.3/gnomescan/ch03.html \
-	doc/0.3/gnomescan/index.html \
-	doc/0.3/gnomescan/gnomescan-gnomescanutils.html \
-	doc/0.3/gnomescan/gnomescan-gnomescantypes.html \
-	doc/0.3/gnomescan/GnomeScannerOption.html \
-	doc/0.2.1/gnomescanui/GnomeScanDialog.html \
-	doc/0.2.1/gnomescanui/ch01.html \
-	doc/0.2.1/gnomescanui/ch03.html \
-	doc/0.2.1/gnomescanui/ch05.html \
-	doc/0.2.1/gnomescanui/ix01.html \
-	doc/0.2.1/gnomescanui/GnomeScanAcquisitionDialog.html \
-	doc/0.2.1/gnomescanui/GnomeScanPreview.html \
-	doc/0.2.1/gnomescanui/gnomescanui-gnomescanui.html \
-	doc/0.2.1/gnomescanui/GnomeScanResolutionSelector.html \
-	doc/0.2.1/gnomescanui/GnomeScannerSelector.html \
-	doc/0.2.1/gnomescanui/ch02.html \
-	doc/0.2.1/gnomescanui/GnomeScanSourceSelector.html \
-	doc/0.2.1/gnomescanui/ch04.html \
-	doc/0.2.1/gnomescanui/ch06.html \
-	doc/0.2.1/gnomescanui/index.html \
-	doc/0.2.1/gnomescanui/GnomeScanAdvancedPreview.html \
-	doc/0.2.1/gnomescanui/GnomeScanPreviewArea.html \
-	doc/0.2.1/gnomescanui/GnomeScanOptionWidget.html \
-	doc/0.2.1/gnomescan/GnomeScanContext.html \
-	doc/0.2.1/gnomescan/GnomeScanner.html \
-	doc/0.2.1/gnomescan/ix01.html \
-	doc/0.2.1/gnomescan/GnomeScanBackend.html \
-	doc/0.2.1/gnomescan/ch01.html \
-	doc/0.2.1/gnomescan/ch02.html \
-	doc/0.2.1/gnomescan/ch03.html \
-	doc/0.2.1/gnomescan/index.html \
-	doc/0.2.1/gnomescan/gnomescan-gnomescanutils.html \
-	doc/0.2.1/gnomescan/gnomescan-gnomescantypes.html \
-	doc/0.2.1/gnomescan/GnomeScannerOption.html \
 	doc/0.4.0.4/gnomescan/ch01.html \
 	doc/0.4.0.4/gnomescan/gnomescan-gnomescantypes.html \
 	doc/0.4.0.4/gnomescan/gnomescan-gnomescanutils.html \
@@ -147,14 +60,6 @@ page_SCRIPTS= \
 	data/themes/gnome/frontpage.css \
 	data/themes/gnome/document.print.css \
 	data/themes/gnome/document.screen.css \
-	doc/0.2.2/gnomescanui/style.css \
-	doc/0.2.2/gnomescan/style.css \
-	doc/0.3/gnomescanui/style.css \
-	doc/0.3/gnomescan/style.css \
-	doc/0.2.1/gnomescanui/style.css \
-	doc/0.2.1/gnomescan/style.css \
-	doc/0.4.0.4/gnomescan/style.css \
-	doc/0.4.0.4/gnomescanui/style.css \
 	data/screenshots/0.3/multipage-pdf.png \
 	data/screenshots/0.3/multipage-pdf-mini.png \
 	data/screenshots/0.3/apropos-mini.png \
@@ -197,69 +102,10 @@ page_SCRIPTS= \
 	images/nautilus-banner.png \
 	images/documentation.png \
 	images/gnome-fs-regular.png \
-	doc/0.2.2/gnomescanui/GnomeScanAcquisitionDialog.png \
-	doc/0.2.2/gnomescanui/GnomeScanSourceSelector.png \
-	doc/0.2.2/gnomescanui/GnomeScanAdvancedPreview.png \
-	doc/0.2.2/gnomescanui/rotate-270.png \
-	doc/0.2.2/gnomescanui/rotate-90.png \
-	doc/0.2.2/gnomescanui/scan.png \
-	doc/0.2.2/gnomescanui/left.png \
-	doc/0.2.2/gnomescanui/GnomeScanDialog.png \
-	doc/0.2.2/gnomescanui/GnomeScanResolutionSelector.png \
-	doc/0.2.2/gnomescanui/GnomeScanPreviewArea.png \
-	doc/0.2.2/gnomescanui/GnomeScanOptionWidget.png \
-	doc/0.2.2/gnomescanui/GnomeScanPreview.png \
-	doc/0.2.2/gnomescanui/right.png \
-	doc/0.2.2/gnomescanui/up.png \
-	doc/0.2.2/gnomescanui/GnomeScannerSelector.png \
-	doc/0.2.2/gnomescanui/home.png \
-	doc/0.2.2/gnomescan/up.png \
-	doc/0.2.2/gnomescan/right.png \
-	doc/0.2.2/gnomescan/home.png \
-	doc/0.2.2/gnomescan/left.png \
-	doc/0.3/gnomescanui/GnomeScanAcquisitionDialog.png \
-	doc/0.3/gnomescanui/GnomeScanSourceSelector.png \
-	doc/0.3/gnomescanui/GnomeScanAdvancedPreview.png \
-	doc/0.3/gnomescanui/rotate-270.png \
-	doc/0.3/gnomescanui/rotate-90.png \
-	doc/0.3/gnomescanui/scan.png \
-	doc/0.3/gnomescanui/left.png \
-	doc/0.3/gnomescanui/GnomeScanDialog.png \
-	doc/0.3/gnomescanui/GnomeScanResolutionSelector.png \
-	doc/0.3/gnomescanui/GnomeScanPreviewArea.png \
-	doc/0.3/gnomescanui/GnomeScanOptionWidget.png \
-	doc/0.3/gnomescanui/GnomeScanPreview.png \
-	doc/0.3/gnomescanui/right.png \
-	doc/0.3/gnomescanui/up.png \
-	doc/0.3/gnomescanui/GnomeScannerSelector.png \
-	doc/0.3/gnomescanui/home.png \
-	doc/0.3/gnomescan/up.png \
-	doc/0.3/gnomescan/right.png \
-	doc/0.3/gnomescan/home.png \
-	doc/0.3/gnomescan/left.png \
-	doc/0.2.1/gnomescanui/GnomeScanAcquisitionDialog.png \
-	doc/0.2.1/gnomescanui/GnomeScanSourceSelector.png \
-	doc/0.2.1/gnomescanui/GnomeScanAdvancedPreview.png \
-	doc/0.2.1/gnomescanui/rotate-270.png \
-	doc/0.2.1/gnomescanui/rotate-90.png \
-	doc/0.2.1/gnomescanui/scan.png \
-	doc/0.2.1/gnomescanui/left.png \
-	doc/0.2.1/gnomescanui/GnomeScanDialog.png \
-	doc/0.2.1/gnomescanui/GnomeScanResolutionSelector.png \
-	doc/0.2.1/gnomescanui/GnomeScanPreviewArea.png \
-	doc/0.2.1/gnomescanui/GnomeScanOptionWidget.png \
-	doc/0.2.1/gnomescanui/GnomeScanPreview.png \
-	doc/0.2.1/gnomescanui/right.png \
-	doc/0.2.1/gnomescanui/up.png \
-	doc/0.2.1/gnomescanui/GnomeScannerSelector.png \
-	doc/0.2.1/gnomescanui/home.png \
-	doc/0.2.1/gnomescan/up.png \
-	doc/0.2.1/gnomescan/right.png \
-	doc/0.2.1/gnomescan/home.png \
-	doc/0.2.1/gnomescan/left.png \
 	doc/0.4.0.4/gnomescan/home.png \
-	doc/0.4.0.4/gnomescan/left.png \
+        doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \	
 	doc/0.4.0.4/gnomescan/right.png \
+	doc/0.4.0.4/gnomescan/left.png \
 	doc/0.4.0.4/gnomescan/up.png \
 	doc/0.4.0.4/gnomescanui/home.png \
 	doc/0.4.0.4/gnomescanui/left.png \
@@ -277,9 +123,6 @@ page_SCRIPTS= \
 	doc/0.4.0.4/gnomescanui/rotate-90.png \
 	doc/0.4.0.4/gnomescanui/rotate-270.png \
 	doc/0.4.0.4/gnomescanui/scan.png \
-	doc/0.3/gnomescanui-doc-0.3.tar.gz \
-	doc/0.3/gnomescan-doc-0.3.tar.gz \
-	doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \
 	doc/0.4.0.4/gnomescanui-doc-0.4.0.4.tar.gz
 
 
