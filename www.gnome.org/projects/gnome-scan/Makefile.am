@@ -47,7 +47,7 @@ themeimg_DATA = \
 	data/themes/gnome/images/top-bg.png \
 	$(NULL)
 
-screenshotsdir = $(pagedir)/data/screenhots
+screenshotsdir = $(pagedir)/data/screenshots
 
 ss03dir = $(screenshotsdir)/0.3
 ss03_DATA = \
