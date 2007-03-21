@@ -4,21 +4,25 @@ urlpath=/projects/gnome-scan/
 
 page_SCRIPTS= \
 	documentation.html \
+	documentation.en.html \
 	documentation.ca.html \
 	documentation.de.html \
 	documentation.fr.html \
 	documentation.sv.html \
 	download.html \
+	download.en.html \
 	download.ca.html \
 	download.de.html \
 	download.fr.html \
 	download.sv.html \
 	index.html \
+	index.en.html \
 	index.ca.html \
 	index.de.html \
 	index.fr.html \
 	index.sv.html \
 	screenshots.html \
+	screenshots.en.html \
 	screenshots.ca.html \
 	screenshots.de.html \
 	screenshots.fr.html \
