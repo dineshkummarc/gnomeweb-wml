@@ -1,4 +1,4 @@
-SUBDIRS=doc data
+#SUBDIRS=doc data
 
 urlpath=/projects/gnome-scan/
 
