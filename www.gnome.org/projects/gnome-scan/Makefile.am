@@ -1,5 +1,5 @@
 SUBDIRS=
-#doc data 
+#doc data
 
 urlpath=/projects/gnome-scan/
 
@@ -96,7 +96,7 @@ page_SCRIPTS= \
 	data/themes/gnome/images/gnome.png \
 	data/themes/gnome/images/top-bg.png \
 	doc/0.4.0.4/gnomescan/home.png \
-        doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \	
+	doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \
 	doc/0.4.0.4/gnomescan/right.png \
 	doc/0.4.0.4/gnomescan/left.png \
 	doc/0.4.0.4/gnomescan/up.png \
