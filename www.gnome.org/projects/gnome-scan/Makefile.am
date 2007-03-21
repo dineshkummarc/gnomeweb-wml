@@ -28,7 +28,6 @@ page_SCRIPTS= \
 themedir=$(pagedir)/data/themes/gnome
 theme_DATA = \
 	data/themes/gnome/screenshots.screen.css \
-	data/themes/gnome/default.css \
 	data/themes/gnome/document.all.css \
 	data/themes/gnome/frontpage.css \
 	data/themes/gnome/document.print.css \
@@ -36,7 +35,7 @@ theme_DATA = \
 	$(NULL)
 
 themeimgdir = $(themedir)/images
-themeimgdir_DATA = \
+themeimg_DATA = \
 	data/themes/gnome/images/multi-function.png \
 	data/themes/gnome/images/flatbed.png \
 	data/themes/gnome/images/title.png \
