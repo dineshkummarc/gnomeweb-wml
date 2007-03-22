@@ -6,12 +6,6 @@ mrproper:
 	rm -rf *;
 
 page_SCRIPTS= \
-	documentation.html \
-	documentation.en.html \
-	documentation.ca.html \
-	documentation.de.html \
-	documentation.fr.html \
-	documentation.sv.html \
 	download.html \
 	download.en.html \
 	download.ca.html \
