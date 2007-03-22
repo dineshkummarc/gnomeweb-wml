@@ -98,49 +98,4 @@ images_DATA =\
 	data/images/gnome-favicon.png \
 	$(NULL)
 
-docdir = $(pagedir)/doc/0.4.0.4
-doc_DATA = \
-	doc/0.4.0.4/gnomescan-doc-0.4.0.4.tar.gz \
-	doc/0.4.0.4/gnomescanui-doc-0.4.0.4.tar.gz \
-	$(NULL)
-
-gsdocdir = $(docdir)/gnomescan
-gsdoc_DATA = \
-	doc/0.4.0.4/gnomescan/home.png \
-	doc/0.4.0.4/gnomescan/right.png \
-	doc/0.4.0.4/gnomescan/left.png \
-	doc/0.4.0.4/gnomescan/up.png \
-	doc/0.4.0.4/gnomescan/GnomeScanner.html
-	doc/0.4.0.4/gnomescan/GnomeScanContext.html
-	doc/0.4.0.4/gnomescan/ix01.html
-	doc/0.4.0.4/gnomescan/GnomeScanBackend.html
-	doc/0.4.0.4/gnomescan/ch01.html
-	doc/0.4.0.4/gnomescan/ch02.html
-	doc/0.4.0.4/gnomescan/ch03.html
-	doc/0.4.0.4/gnomescan/gnomescan-gnomescanutils.html
-	doc/0.4.0.4/gnomescan/index.html
-	doc/0.4.0.4/gnomescan/gnomescan-gnomescantypes.html
-	doc/0.4.0.4/gnomescan/GnomeScannerOption.html
-
-gsuidocdir = $(docdir)/gnomescanui
-gsuidoc_DATA = \
-	doc/0.4.0.4/gnomescanui/home.png \
-	doc/0.4.0.4/gnomescanui/left.png \
-	doc/0.4.0.4/gnomescanui/right.png \
-	doc/0.4.0.4/gnomescanui/up.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanAcquisitionDialog.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanAdvancedPreview.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanDialog.png \
-	doc/0.4.0.4/gnomescanui/GnomeScannerSelector.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanOptionWidget.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanPreviewArea.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanPreview.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanResolutionSelector.png \
-	doc/0.4.0.4/gnomescanui/GnomeScanSourceSelector.png \
-	doc/0.4.0.4/gnomescanui/rotate-90.png \
-	doc/0.4.0.4/gnomescanui/rotate-270.png \
-	doc/0.4.0.4/gnomescanui/scan.png \
-
-
-
 include $(top_srcdir)/rules.common
