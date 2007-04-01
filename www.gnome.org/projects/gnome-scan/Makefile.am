@@ -6,12 +6,6 @@ mrproper:
 	rm -rf *;
 
 page_SCRIPTS= \
-	download.html \
-	download.en.html \
-	download.ca.html \
-	download.de.html \
-	download.fr.html \
-	download.sv.html \
 	index.html \
 	index.en.html \
 	index.ca.html \
@@ -24,6 +18,16 @@ page_SCRIPTS= \
 	screenshots.de.html \
 	screenshots.fr.html \
 	screenshots.sv.html \
+	development.html \
+	development.fr.html \
+	contribute.html \
+	contribute.fr.html \
+	download.html \
+	download.en.html \
+	download.ca.html \
+	download.de.html \
+	download.fr.html \
+	download.sv.html \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/gnome
