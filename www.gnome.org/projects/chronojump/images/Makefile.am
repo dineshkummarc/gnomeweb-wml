@@ -37,7 +37,7 @@ misc_images=\
 	chronopic_juanfer_back.jpg \
 	chronopic_juanfer_front.jpg \
 	chronopic_juanfer_schema.jpg \
-	deporteyciencia_blues.png \
+	deporteyciencia_blues.gif \
 	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
 	plataforma_contactos_cinta_varillas.jpg \
