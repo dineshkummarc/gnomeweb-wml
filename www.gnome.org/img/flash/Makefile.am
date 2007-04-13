@@ -37,6 +37,7 @@ page_DATA = \
 	two-sixteen.png \
 	two-eighteen.png \
 	bugday.png \
-	two-eighteen-small.png
+	two-eighteen-small.png \
+	gmae-web-teaser.jpg
 
 include $(top_srcdir)/rules.common
