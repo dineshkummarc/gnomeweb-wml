@@ -63,7 +63,8 @@ page_SCRIPTS = \
 	guadec2006-location.vi.html \
 	new-advisory-members-2005.html \
 	summit2005.html \
-	wsop.html
+	wsop.html \
+	canonicaljoins.html
 
 
 include $(top_srcdir)/rules.common
