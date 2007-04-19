@@ -1,4 +1,4 @@
-SUBDIRS = about community images start support projects resources learn i18n press faqs include friends fonts img contact roadmap softwaremap
+SUBDIRS = about community images start support projects resources learn i18n press faqs include friends fonts img contact roadmap softwaremap mobile
 #vuntz: disable the tour subdir for now since it breaks the build and we need an urgent fix for 2.16
 #tour
 

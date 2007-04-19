@@ -64,7 +64,9 @@ page_SCRIPTS = \
 	new-advisory-members-2005.html \
 	summit2005.html \
 	wsop.html \
-	canonicaljoins.html
+	canonicaljoins.html \
+	gmae.html \
+	gmae-quotesheet.html
 
 
 include $(top_srcdir)/rules.common
