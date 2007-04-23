@@ -10,6 +10,7 @@ page_SCRIPTS = \
 	nokia-n800.jpg \
 	olpc-xo.jpg \
 	products.css \
-	vernier-labquest.jpg
+	vernier-labquest.jpg \
+	gmae-icons.jpg
 
 include $(top_srcdir)/rules.common
