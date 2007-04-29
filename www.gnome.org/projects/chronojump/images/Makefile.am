@@ -37,6 +37,7 @@ misc_images=\
 	chronopic_juanfer_back.jpg \
 	chronopic_juanfer_front.jpg \
 	chronopic_juanfer_schema.jpg \
+	chronopic_juanfer_1-1_schema.jpg \
 	deporteyciencia_blues.gif \
 	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
@@ -55,5 +56,3 @@ misc_images=\
 	plataforma_contactos_remaches.jpg \
 	plataforma_contactos_taladrar_varillas.jpg \
 	plataforma_contactos_unir_conjuntos_varilla.jpg
-
-page_DATA=$(misc_images)
