@@ -57,4 +57,4 @@ misc_images=\
 	plataforma_contactos_taladrar_varillas.jpg \
 	plataforma_contactos_unir_conjuntos_varilla.jpg \
 	test_png.png \
-	test_jpg.jpg \
+	test_jpg.jpg 
