@@ -14,6 +14,7 @@ page_SCRIPTS= index.html	\
 	construction_contact_platform_parallel_port_es.html \
 	construction_chronopic_juanfer.html \
 	construction_chronopic_juanfer_es.html \
+	construction_chronopic_juanfer_gl.html \
 	construction.html \
 	construction_ca.html \
 	construction_es.html \
