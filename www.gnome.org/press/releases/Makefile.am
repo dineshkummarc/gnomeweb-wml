@@ -66,7 +66,8 @@ page_SCRIPTS = \
 	wsop.html \
 	canonicaljoins.html \
 	gmae.html \
-	gmae-quotesheet.html
+	gmae-quotesheet.html \
+	guadec2007.html
 
 
 include $(top_srcdir)/rules.common
