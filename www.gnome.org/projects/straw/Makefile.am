@@ -2,10 +2,10 @@ SUBDIRS=images
 
 urlpath=/projects/straw/
 
-page_SCRIPTS= index.html \
-		news.html \
-		news.rss \
+page_SCRIPTS= index.html	\
+		download.html 	\
 		participate.html \
+		news.rss \
 		style.css
 
 
