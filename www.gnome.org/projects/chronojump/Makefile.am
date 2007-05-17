@@ -55,6 +55,7 @@ page_SCRIPTS= index.html	\
 	installation_es.html \
 	installation_gl.html \
 	installation_pt.html \
+	photocells_es.html \
 	screenshots.html \
 	screenshots_ca.html \
 	screenshots_es.html \
