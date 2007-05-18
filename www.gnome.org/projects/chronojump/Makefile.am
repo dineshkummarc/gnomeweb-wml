@@ -61,6 +61,8 @@ page_SCRIPTS= index.html	\
 	screenshots_es.html \
 	screenshots_gl.html \
 	screenshots_pt.html \
+	test_png.png \
+	test_jpg.jpg \
 	style.css
 
 include $(top_srcdir)/rules.common
