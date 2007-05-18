@@ -61,6 +61,11 @@ page_SCRIPTS= index.html	\
 	screenshots_es.html \
 	screenshots_gl.html \
 	screenshots_pt.html \
+	chronojump_esquema_jump_250.png \
+	chronojump_esquema_pulse_250.png \
+	chronojump_esquema_reaction_time_250.png \
+	chronojump_esquema_run_250.png \
+	chronopic_juanfer_1_1_schema.jpg \
 	test_png.png \
 	test_jpg.jpg \
 	style.css

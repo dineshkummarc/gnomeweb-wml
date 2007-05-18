@@ -7,10 +7,6 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
-	chronojump_esquema_jump_300.png \
-	chronojump_esquema_pulse_300.png \
-	chronojump_esquema_reaction_time_300.png \
-	chronojump_esquema_run_300.png \
 	chronojump_main_047.png \
 	chronojump_main_047_small.png \
 	chronojump_windows.png \
@@ -37,7 +33,6 @@ misc_images=\
 	chronopic_juanfer_back.jpg \
 	chronopic_juanfer_front.jpg \
 	chronopic_juanfer_schema.jpg \
-	chronopic_juanfer_1_1_schema.jpg \
 	deporteyciencia_blues.gif \
 	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
