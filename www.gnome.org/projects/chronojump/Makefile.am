@@ -27,6 +27,8 @@ page_SCRIPTS= index.html	\
 	contact_fr.html \
 	contact_gl.html \
 	contact_pt.html \
+	courses_ca.html \
+	courses_es.html \
 	documents.html \
 	documents_ca.html \
 	documents_es.html \
