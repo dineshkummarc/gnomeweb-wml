@@ -16,12 +16,12 @@
 	</div>
 
 	<h2>So you want to hack on NetworkManager?</h2>
-	<p>First, join the mailing lists: <a href="http://mail.gnome.org/mailman/listinfo/networkmanager-list">http://mail.gnome.org/mailman/listinfo/networkmanager-list</a>.</p>
+	<p>First, you should probably consider joining the mailing list as there is a lot of useful information there from other NM hackers: <a 
+href="http://mail.gnome.org/mailman/listinfo/networkmanager-list">http://mail.gnome.org/mailman/listinfo/networkmanager-list</a>.</p>
 	<p>Second, read the <a href="design_goals.html">Design Goals</a> of NetworkManager to get an idea of why things work the way they do.</p>
-	<p>NetworkManager requires the GNOME gnome-autogen.sh script, found in the 'gnome-common' CVS module.  Grab that and install it, if you don't have it already:<br>
+	<p>NetworkManager requires the GNOME gnome-autogen.sh script, found in the 'gnome-common' SVN module.  Grab that and install it, if you don't have it already:<br>
 	<code>
-		<kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome login</kbd><br>
-		<kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome co gnome-common</kbd><br>
+		<kbd>svn co svn://svn.gnome.org/svn/gnome-common/trunk gnome-common</kbd><br>
 		<kbd>cd gnome-common</kbd><br/>
 		<kbd>./autogen.sh --prefix=/usr</kbd><br>
 		<kbd>cd macros2</kbd><br>
@@ -29,10 +29,18 @@
 		<kbd>sudo make install</kbd>
 	</code>
 	</p>
-	<p>Next, grab NetworkManager from CVS HEAD.  To checkout and build from CVS HEAD:<br>
+	<p>Next, grab NetworkManager from SVN HEAD.  To checkout and build from SVN HEAD:<br>
 	<code>
-		<kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome login</kbd><br>
-		<kbd>cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome co NetworkManager</kbd><br>
+		<kbd>svn co svn://svn.gnome.org/svn/NetworkManager/trunk NetworkManager</kbd><br>
+		<kbd>cd NetworkManager</kbd><br/>
+		<kbd>./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var</kbd><br>
+		<kbd>make</kbd><br>
+		<kbd>sudo make install</kbd>
+	</code>
+	</p>
+	<p>And if you want to play with the applet, you need network-manager-applet, too:<br>
+	<code>
+		<kbd>svn co svn://svn.gnome.org/svn/network-manager-applet/trunk network-manager-applet</kbd><br>
 		<kbd>cd NetworkManager</kbd><br/>
 		<kbd>./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var</kbd><br>
 		<kbd>make</kbd><br>
@@ -41,7 +49,7 @@
 	</p>
 
 	<h2>Actually hacking on it</h2>
-	<p>If you make changes to NetworkManager, create the patch using a Unified diff format (ie, diff -u) and mail the patch to the NetworkManager list.  Others on the list may make suggestions, please take these into consideration.  Eventually, your patch can be checked into NetworkManager CVS.</p>
+	<p>If you make changes to NetworkManager, create the patch using a Unified diff format (ie, diff -u) and mail the patch to the NetworkManager list.  Others on the list may make suggestions, please take these into consideration.  Eventually, your patch can be checked into NetworkManager SVN.</p>
 
 	<h2>Stuff to work on</h2>
 	<p>The most up-to-date list of work items is kept at the live.gnome.org Wiki <a href="http://live.gnome.org/NetworkManagerToDo">here</a>.</p>
