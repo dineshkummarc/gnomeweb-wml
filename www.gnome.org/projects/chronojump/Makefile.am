@@ -70,6 +70,14 @@ page_SCRIPTS= index.html	\
 	chronopic_juanfer_1_1_schema.jpg \
 	test_png.png \
 	test_jpg.jpg \
+	chronopic_2_0_serial_back.jpg \
+	chronopic_2_0_serial_back_mini.jpg \
+	chronopic_2_0_serial_front.jpg \
+	chronopic_2_0_serial_front_mini.jpg \
+	chronopic_2_0_usb_back.jpg \
+	chronopic_2_0_usb_back_mini.jpg \
+	chronopic_2_0_usb_front.jpg \
+	chronopic_2_0_usb_front_mini.jpg \
 	style.css
 
 include $(top_srcdir)/rules.common
