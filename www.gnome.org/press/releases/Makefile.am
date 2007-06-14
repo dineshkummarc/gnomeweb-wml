@@ -67,7 +67,8 @@ page_SCRIPTS = \
 	canonicaljoins.html \
 	gmae.html \
 	gmae-quotesheet.html \
-	guadec2007.html
+	guadec2007.html \
+	igaliajoins.html
 
 
 include $(top_srcdir)/rules.common
