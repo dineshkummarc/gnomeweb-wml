@@ -6,7 +6,7 @@ page_SCRIPTS=
 
 EXTRA_DIST = mkpage.xsl
 
-HTML_FILES = index.html screenshots.html download.html development.html feedback.html news.html faq.html translation.html utils.html
+HTML_FILES = index.html screenshots.html download.html development.html feedback.html news.html translation.html utils.html
 
 page_DATA = $(HTML_FILES) rb.css gstfamily2.png rhythmbox-16.png valid-xhtml10.png header.png
 
