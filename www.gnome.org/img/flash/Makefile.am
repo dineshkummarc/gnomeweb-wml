@@ -40,6 +40,7 @@ page_DATA = \
 	two-eighteen-small.png \
 	gmae-web-teaser.jpg \
 	gmae-launch.jpg \
-	guadec2007-splash.png
+	guadec2007-splash.png \
+	gnome10years.png
 
 include $(top_srcdir)/rules.common
