@@ -68,7 +68,8 @@ page_SCRIPTS = \
 	gmae.html \
 	gmae-quotesheet.html \
 	guadec2007.html \
-	igaliajoins.html
+	igaliajoins.html \
+	gnome10years.html
 
 
 include $(top_srcdir)/rules.common
