@@ -1,23 +1,827 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>BINOMDIST</title><link rel="previous" href="gnumeric-BETAINV.shtml" title="&#10;          BETAINV&#10;        "/><link rel="next" href="gnumeric-CAUCHY.shtml" title="&#10;          CAUCHY&#10;        "/><link rel="top" href="index.shtml" title="The Gnumeric Manual, version 1.7"/><link rel="stylesheet" type="text/css" href="gnumeric-doc.css"/></head><body><div class="body"><div class="refentry"><h1 class="refentry title"><span class="title">
-          <span class="function" style="font-family: monospace; ">BINOMDIST</span>
-        </span></h1><div class="refnamedivs"><h2 class="refnamediv title"><span class="title">Name</span></h2><div class="refnamediv"><span class="refname">
-          <span class="function" style="font-family: monospace; ">BINOMDIST</span>
-        </span> — <span class="refpurpose"/></div></div><div class="refsynopsisdiv"><h2 class="refsynopsisdiv title"><span class="title">Synopsis</span></h2>
-        <div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="synopsis block-indent"><pre class="synopsis"><span class="function" style="font-family: monospace; ">BINOMDIST</span>(<span class="parameter" style="font-family: monospace; ">n</span>,<span class="parameter" style="font-family: monospace; ">trials</span>,<span class="parameter" style="font-family: monospace; ">p</span>,<span class="parameter" style="font-family: monospace; ">cumulative</span>)</pre></div>
-      </div><div class="refsect1"><h2 class="refsect1 title"><span class="title">Description</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="function" style="font-family: monospace; ">BINOMDIST</span> function returns the binomial distribution. <span class="parameter" style="font-family: monospace; ">n</span> is the number of successes, <span class="parameter" style="font-family: monospace; ">trials</span> is the total number of independent trials, <span class="parameter" style="font-family: monospace; ">p</span> is the probability of success in trials, and <span class="parameter" style="font-family: monospace; ">cumulative</span> describes whether to return the sum of the binomial function from 0 to <span class="parameter" style="font-family: monospace; ">n</span>.</p><div class="list"><div class="itemizedlist"><ul><li>
-            <span class="para">If <span class="parameter" style="font-family: monospace; ">n</span> or <span class="parameter" style="font-family: monospace; ">trials</span> are non-integer they are truncated.</span>
-          </li><li>
-            <span class="para">If <span class="parameter" style="font-family: monospace; ">n</span> &lt; 0 or <span class="parameter" style="font-family: monospace; ">trials</span> &lt; 0 <span class="function" style="font-family: monospace; ">BINOMDIST</span> returns #NUM! error.</span>
-          </li><li>
-            <span class="para">If <span class="parameter" style="font-family: monospace; ">n</span> &gt; <span class="parameter" style="font-family: monospace; ">trials</span> <span class="function" style="font-family: monospace; ">BINOMDIST</span> returns #NUM! error.</span>
-          </li><li>
-            <span class="para">If <span class="parameter" style="font-family: monospace; ">p</span> &lt; 0 or <span class="parameter" style="font-family: monospace; ">p</span> &gt; 1 <span class="function" style="font-family: monospace; ">BINOMDIST</span> returns #NUM! error.</span>
-          </li><li>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BINOMDIST</title>
+<link rel="previous" href="gnumeric-BETAINV.shtml" title="
+          BETAINV
+        ">
+<link rel="next" href="gnumeric-CAUCHY.shtml" title="
+          CAUCHY
+        ">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">
+<link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gnumeric-BETAINV.shtml" title="
+          BETAINV
+        ">
+          <span class="function">BETAINV</span>
+        </a></td>
+<td class="navbar-next"><a class="navbar-next" href="gnumeric-CAUCHY.shtml" title="
+          CAUCHY
+        ">
+          <span class="function">CAUCHY</span>
+        </a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a><div class="autotoc"><ul>
+<li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
+<li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
+<li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
+<li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
+<li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
+<li><a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
+<li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
+<li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
+<li><a class="xref" href="chapter-morehelp.shtml" title="Getting More Help">Getting More Help</a></li>
+<li><a class="xref" href="chapter-bugs.shtml" title="Reporting a Problem">Reporting a Problem</a></li>
+<li><a class="xref" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
+<li>
+<a class="xref" href="function-reference.shtml" title="Function Reference">Function Reference</a><div class="autotoc"><ul>
+<li><a class="xref" href="CATEGORY_Bitwise_Operations.shtml" title="Bitwise Operations">Bitwise Operations</a></li>
+<li><a class="xref" href="CATEGORY_Complex.shtml" title="Complex">Complex</a></li>
+<li><a class="xref" href="CATEGORY_Database.shtml" title="Database">Database</a></li>
+<li><a class="xref" href="CATEGORY_DateTime.shtml" title="Date/Time">Date/Time</a></li>
+<li><a class="xref" href="CATEGORY_Engineering.shtml" title="Engineering">Engineering</a></li>
+<li><a class="xref" href="CATEGORY_Erlang.shtml" title="Erlang">Erlang</a></li>
+<li><a class="xref" href="CATEGORY_Finance.shtml" title="Finance">Finance</a></li>
+<li><a class="xref" href="CATEGORY_Gnumeric.shtml" title="Gnumeric">Gnumeric</a></li>
+<li><a class="xref" href="CATEGORY_Information.shtml" title="Information">Information</a></li>
+<li><a class="xref" href="CATEGORY_Logic.shtml" title="Logic">Logic</a></li>
+<li><a class="xref" href="CATEGORY_Lookup.shtml" title="Lookup">Lookup</a></li>
+<li><a class="xref" href="CATEGORY_Mathematics.shtml" title="Mathematics">Mathematics</a></li>
+<li><a class="xref" href="CATEGORY_Number_Theory.shtml" title="Number Theory">Number Theory</a></li>
+<li><a class="xref" href="CATEGORY_Random_Numbers.shtml" title="Random Numbers">Random Numbers</a></li>
+<li>
+<a class="xref" href="CATEGORY_Statistics.shtml" title="Statistics">Statistics</a><div class="autotoc"><ul>
+<li><a class="xref" href="gnumeric-AVEDEV.shtml" title="
+          AVEDEV
+        ">
+          <span class="function">AVEDEV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-AVERAGE.shtml" title="
+          AVERAGE
+        ">
+          <span class="function">AVERAGE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-AVERAGEA.shtml" title="
+          AVERAGEA
+        ">
+          <span class="function">AVERAGEA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-BERNOULLI.shtml" title="
+          BERNOULLI
+        ">
+          <span class="function">BERNOULLI</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-BETADIST.shtml" title="
+          BETADIST
+        ">
+          <span class="function">BETADIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-BETAINV.shtml" title="
+          BETAINV
+        ">
+          <span class="function">BETAINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-BINOMDIST.shtml" title="
+          BINOMDIST
+        ">
+          <span class="function">BINOMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CAUCHY.shtml" title="
+          CAUCHY
+        ">
+          <span class="function">CAUCHY</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CHIDIST.shtml" title="
+          CHIDIST
+        ">
+          <span class="function">CHIDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CHIINV.shtml" title="
+          CHIINV
+        ">
+          <span class="function">CHIINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CHITEST.shtml" title="
+          CHITEST
+        ">
+          <span class="function">CHITEST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CONFIDENCE.shtml" title="
+          CONFIDENCE
+        ">
+          <span class="function">CONFIDENCE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CORREL.shtml" title="
+          CORREL
+        ">
+          <span class="function">CORREL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-COUNT.shtml" title="
+          COUNT
+        ">
+          <span class="function">COUNT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-COUNTA.shtml" title="
+          COUNTA
+        ">
+          <span class="function">COUNTA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-COVAR.shtml" title="
+          COVAR
+        ">
+          <span class="function">COVAR</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CRITBINOM.shtml" title="
+          CRITBINOM
+        ">
+          <span class="function">CRITBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-CRONBACH.shtml" title="
+          CRONBACH
+        ">
+          <span class="function">CRONBACH</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-DEVSQ.shtml" title="
+          DEVSQ
+        ">
+          <span class="function">DEVSQ</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-EXPONDIST.shtml" title="
+          EXPONDIST
+        ">
+          <span class="function">EXPONDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-EXPPOWDIST.shtml" title="
+          EXPPOWDIST
+        ">
+          <span class="function">EXPPOWDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FDIST.shtml" title="
+          FDIST
+        ">
+          <span class="function">FDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FINV.shtml" title="
+          FINV
+        ">
+          <span class="function">FINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FISHER.shtml" title="
+          FISHER
+        ">
+          <span class="function">FISHER</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FISHERINV.shtml" title="
+          FISHERINV
+        ">
+          <span class="function">FISHERINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FORECAST.shtml" title="
+          FORECAST
+        ">
+          <span class="function">FORECAST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FREQUENCY.shtml" title="
+          FREQUENCY
+        ">
+          <span class="function">FREQUENCY</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-FTEST.shtml" title="
+          FTEST
+        ">
+          <span class="function">FTEST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GAMMADIST.shtml" title="
+          GAMMADIST
+        ">
+          <span class="function">GAMMADIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GAMMAINV.shtml" title="
+          GAMMAINV
+        ">
+          <span class="function">GAMMAINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GAMMALN.shtml" title="
+          GAMMALN
+        ">
+          <span class="function">GAMMALN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GEOMDIST.shtml" title="
+          GEOMDIST
+        ">
+          <span class="function">GEOMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GEOMEAN.shtml" title="
+          GEOMEAN
+        ">
+          <span class="function">GEOMEAN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-GROWTH.shtml" title="
+          GROWTH
+        ">
+          <span class="function">GROWTH</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-HARMEAN.shtml" title="
+          HARMEAN
+        ">
+          <span class="function">HARMEAN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-HYPGEOMDIST.shtml" title="
+          HYPGEOMDIST
+        ">
+          <span class="function">HYPGEOMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-INTERCEPT.shtml" title="
+          INTERCEPT
+        ">
+          <span class="function">INTERCEPT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-KURT.shtml" title="
+          KURT
+        ">
+          <span class="function">KURT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-KURTP.shtml" title="
+          KURTP
+        ">
+          <span class="function">KURTP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LANDAU.shtml" title="
+          LANDAU
+        ">
+          <span class="function">LANDAU</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LAPLACE.shtml" title="
+          LAPLACE
+        ">
+          <span class="function">LAPLACE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LARGE.shtml" title="
+          LARGE
+        ">
+          <span class="function">LARGE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LINEST.shtml" title="
+          LINEST
+        ">
+          <span class="function">LINEST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGEST.shtml" title="
+          LOGEST
+        ">
+          <span class="function">LOGEST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGFIT.shtml" title="
+          LOGFIT
+        ">
+          <span class="function">LOGFIT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGINV.shtml" title="
+          LOGINV
+        ">
+          <span class="function">LOGINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGISTIC.shtml" title="
+          LOGISTIC
+        ">
+          <span class="function">LOGISTIC</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGNORMDIST.shtml" title="
+          LOGNORMDIST
+        ">
+          <span class="function">LOGNORMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-LOGREG.shtml" title="
+          LOGREG
+        ">
+          <span class="function">LOGREG</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MAX.shtml" title="
+          MAX
+        ">
+          <span class="function">MAX</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MAXA.shtml" title="
+          MAXA
+        ">
+          <span class="function">MAXA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MEDIAN.shtml" title="
+          MEDIAN
+        ">
+          <span class="function">MEDIAN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MIN.shtml" title="
+          MIN
+        ">
+          <span class="function">MIN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MINA.shtml" title="
+          MINA
+        ">
+          <span class="function">MINA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-MODE.shtml" title="
+          MODE
+        ">
+          <span class="function">MODE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-NEGBINOMDIST.shtml" title="
+          NEGBINOMDIST
+        ">
+          <span class="function">NEGBINOMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-NORMDIST.shtml" title="
+          NORMDIST
+        ">
+          <span class="function">NORMDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-NORMINV.shtml" title="
+          NORMINV
+        ">
+          <span class="function">NORMINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-NORMSDIST.shtml" title="
+          NORMSDIST
+        ">
+          <span class="function">NORMSDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-NORMSINV.shtml" title="
+          NORMSINV
+        ">
+          <span class="function">NORMSINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PARETO.shtml" title="
+          PARETO
+        ">
+          <span class="function">PARETO</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PEARSON.shtml" title="
+          PEARSON
+        ">
+          <span class="function">PEARSON</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PERCENTILE.shtml" title="
+          PERCENTILE
+        ">
+          <span class="function">PERCENTILE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PERCENTRANK.shtml" title="
+          PERCENTRANK
+        ">
+          <span class="function">PERCENTRANK</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PERMUT.shtml" title="
+          PERMUT
+        ">
+          <span class="function">PERMUT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-POISSON.shtml" title="
+          POISSON
+        ">
+          <span class="function">POISSON</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-PROB.shtml" title="
+          PROB
+        ">
+          <span class="function">PROB</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-QUARTILE.shtml" title="
+          QUARTILE
+        ">
+          <span class="function">QUARTILE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DBETA.shtml" title="
+          R.DBETA
+        ">
+          <span class="function">R.DBETA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DBINOM.shtml" title="
+          R.DBINOM
+        ">
+          <span class="function">R.DBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DCAUCHY.shtml" title="
+          R.DCAUCHY
+        ">
+          <span class="function">R.DCAUCHY</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DCHISQ.shtml" title="
+          R.DCHISQ
+        ">
+          <span class="function">R.DCHISQ</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DEXP.shtml" title="
+          R.DEXP
+        ">
+          <span class="function">R.DEXP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DF.shtml" title="
+          R.DF
+        ">
+          <span class="function">R.DF</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DGAMMA.shtml" title="
+          R.DGAMMA
+        ">
+          <span class="function">R.DGAMMA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DGEOM.shtml" title="
+          R.DGEOM
+        ">
+          <span class="function">R.DGEOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DHYPER.shtml" title="
+          R.DHYPER
+        ">
+          <span class="function">R.DHYPER</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DLNORM.shtml" title="
+          R.DLNORM
+        ">
+          <span class="function">R.DLNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DNBINOM.shtml" title="
+          R.DNBINOM
+        ">
+          <span class="function">R.DNBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DNORM.shtml" title="
+          R.DNORM
+        ">
+          <span class="function">R.DNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DPOIS.shtml" title="
+          R.DPOIS
+        ">
+          <span class="function">R.DPOIS</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DT.shtml" title="
+          R.DT
+        ">
+          <span class="function">R.DT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.DWEIBULL.shtml" title="
+          R.DWEIBULL
+        ">
+          <span class="function">R.DWEIBULL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PBETA.shtml" title="
+          R.PBETA
+        ">
+          <span class="function">R.PBETA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PBINOM.shtml" title="
+          R.PBINOM
+        ">
+          <span class="function">R.PBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PCAUCHY.shtml" title="
+          R.PCAUCHY
+        ">
+          <span class="function">R.PCAUCHY</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PCHISQ.shtml" title="
+          R.PCHISQ
+        ">
+          <span class="function">R.PCHISQ</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PEXP.shtml" title="
+          R.PEXP
+        ">
+          <span class="function">R.PEXP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PF.shtml" title="
+          R.PF
+        ">
+          <span class="function">R.PF</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PGAMMA.shtml" title="
+          R.PGAMMA
+        ">
+          <span class="function">R.PGAMMA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PGEOM.shtml" title="
+          R.PGEOM
+        ">
+          <span class="function">R.PGEOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PHYPER.shtml" title="
+          R.PHYPER
+        ">
+          <span class="function">R.PHYPER</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PLNORM.shtml" title="
+          R.PLNORM
+        ">
+          <span class="function">R.PLNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PNBINOM.shtml" title="
+          R.PNBINOM
+        ">
+          <span class="function">R.PNBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PNORM.shtml" title="
+          R.PNORM
+        ">
+          <span class="function">R.PNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PPOIS.shtml" title="
+          R.PPOIS
+        ">
+          <span class="function">R.PPOIS</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PT.shtml" title="
+          R.PT
+        ">
+          <span class="function">R.PT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.PWEIBULL.shtml" title="
+          R.PWEIBULL
+        ">
+          <span class="function">R.PWEIBULL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QBETA.shtml" title="
+          R.QBETA
+        ">
+          <span class="function">R.QBETA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QBINOM.shtml" title="
+          R.QBINOM
+        ">
+          <span class="function">R.QBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QCAUCHY.shtml" title="
+          R.QCAUCHY
+        ">
+          <span class="function">R.QCAUCHY</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QCHISQ.shtml" title="
+          R.QCHISQ
+        ">
+          <span class="function">R.QCHISQ</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QEXP.shtml" title="
+          R.QEXP
+        ">
+          <span class="function">R.QEXP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QF.shtml" title="
+          R.QF
+        ">
+          <span class="function">R.QF</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QGAMMA.shtml" title="
+          R.QGAMMA
+        ">
+          <span class="function">R.QGAMMA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QGEOM.shtml" title="
+          R.QGEOM
+        ">
+          <span class="function">R.QGEOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QHYPER.shtml" title="
+          R.QHYPER
+        ">
+          <span class="function">R.QHYPER</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QLNORM.shtml" title="
+          R.QLNORM
+        ">
+          <span class="function">R.QLNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QNBINOM.shtml" title="
+          R.QNBINOM
+        ">
+          <span class="function">R.QNBINOM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QNORM.shtml" title="
+          R.QNORM
+        ">
+          <span class="function">R.QNORM</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QPOIS.shtml" title="
+          R.QPOIS
+        ">
+          <span class="function">R.QPOIS</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QT.shtml" title="
+          R.QT
+        ">
+          <span class="function">R.QT</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-R.QWEIBULL.shtml" title="
+          R.QWEIBULL
+        ">
+          <span class="function">R.QWEIBULL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-RANK.shtml" title="
+          RANK
+        ">
+          <span class="function">RANK</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-RAYLEIGH.shtml" title="
+          RAYLEIGH
+        ">
+          <span class="function">RAYLEIGH</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-RAYLEIGHTAIL.shtml" title="
+          RAYLEIGHTAIL
+        ">
+          <span class="function">RAYLEIGHTAIL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-RSQ.shtml" title="
+          RSQ
+        ">
+          <span class="function">RSQ</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SKEW.shtml" title="
+          SKEW
+        ">
+          <span class="function">SKEW</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SKEWP.shtml" title="
+          SKEWP
+        ">
+          <span class="function">SKEWP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SLOPE.shtml" title="
+          SLOPE
+        ">
+          <span class="function">SLOPE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SMALL.shtml" title="
+          SMALL
+        ">
+          <span class="function">SMALL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SSMEDIAN.shtml" title="
+          SSMEDIAN
+        ">
+          <span class="function">SSMEDIAN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STANDARDIZE.shtml" title="
+          STANDARDIZE
+        ">
+          <span class="function">STANDARDIZE</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STDEV.shtml" title="
+          STDEV
+        ">
+          <span class="function">STDEV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STDEVA.shtml" title="
+          STDEVA
+        ">
+          <span class="function">STDEVA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STDEVP.shtml" title="
+          STDEVP
+        ">
+          <span class="function">STDEVP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STDEVPA.shtml" title="
+          STDEVPA
+        ">
+          <span class="function">STDEVPA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-STEYX.shtml" title="
+          STEYX
+        ">
+          <span class="function">STEYX</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-SUBTOTAL.shtml" title="
+          SUBTOTAL
+        ">
+          <span class="function">SUBTOTAL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-TDIST.shtml" title="
+          TDIST
+        ">
+          <span class="function">TDIST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-TINV.shtml" title="
+          TINV
+        ">
+          <span class="function">TINV</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-TREND.shtml" title="
+          TREND
+        ">
+          <span class="function">TREND</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-TRIMMEAN.shtml" title="
+          TRIMMEAN
+        ">
+          <span class="function">TRIMMEAN</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-TTEST.shtml" title="
+          TTEST
+        ">
+          <span class="function">TTEST</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-VAR.shtml" title="
+          VAR
+        ">
+          <span class="function">VAR</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-VARA.shtml" title="
+          VARA
+        ">
+          <span class="function">VARA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-VARP.shtml" title="
+          VARP
+        ">
+          <span class="function">VARP</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-VARPA.shtml" title="
+          VARPA
+        ">
+          <span class="function">VARPA</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-WEIBULL.shtml" title="
+          WEIBULL
+        ">
+          <span class="function">WEIBULL</span>
+        </a></li>
+<li><a class="xref" href="gnumeric-ZTEST.shtml" title="
+          ZTEST
+        ">
+          <span class="function">ZTEST</span>
+        </a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="CATEGORY_String.shtml" title="String">String</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="keybinding.shtml" title="Keybinding Reference">Keybinding Reference</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="refentry">
+<div class="refnamedivs"><div class="refnamediv">
+<span class="refname">
+          <span class="function">BINOMDIST</span>
+        </span> — <span class="refpurpose"></span>
+</div></div>
+<div class="refsynopsisdiv">
+        <div class="synopsis block block-first"><pre class="synopsis"><span class="function">BINOMDIST</span>(<span class="parameter">n</span>,<span class="parameter">trials</span>,<span class="parameter">p</span>,<span class="parameter">cumulative</span>)</pre></div>
+      </div>
+<div class="division refsect1">
+<div class="header"><h2 class="refsect1 title"><span class="title"><span class="label">1. </span>Description</span></h2></div>
+<p class="para block block-first"><span class="function">BINOMDIST</span> function returns the binomial distribution. <span class="parameter">n</span> is the number of successes, <span class="parameter">trials</span> is the total number of independent trials, <span class="parameter">p</span> is the probability of success in trials, and <span class="parameter">cumulative</span> describes whether to return the sum of the binomial function from 0 to <span class="parameter">n</span>.</p>
+<div class="block list"><div class="itemizedlist"><ul>
+<li class="li-first">
+            <span class="para">If <span class="parameter">n</span> or <span class="parameter">trials</span> are non-integer they are truncated.</span>
+          </li>
+<li>
+            <span class="para">If <span class="parameter">n</span> &lt; 0 or <span class="parameter">trials</span> &lt; 0 <span class="function">BINOMDIST</span> returns #NUM! error.</span>
+          </li>
+<li>
+            <span class="para">If <span class="parameter">n</span> &gt; <span class="parameter">trials</span> <span class="function">BINOMDIST</span> returns #NUM! error.</span>
+          </li>
+<li>
+            <span class="para">If <span class="parameter">p</span> &lt; 0 or <span class="parameter">p</span> &gt; 1 <span class="function">BINOMDIST</span> returns #NUM! error.</span>
+          </li>
+<li>
             <span class="para">This function is Excel compatible.</span>
-          </li></ul></div></div></div><div class="refsect1"><h2 class="refsect1 title"><span class="title">Examples</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"/><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="function" style="font-family: monospace; ">BINOMDIST</span>(3,5,0.8,0) equals 0.2048.</p></div><div class="refsect1"><h2 class="refsect1 title"><span class="title">See also</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><a class="link" href="gnumeric-POISSON.shtml" title="&#10;          POISSON&#10;        "><span class="function" style="font-family: monospace; ">POISSON</span></a>.
-      </p></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="gnumeric-BETAINV.shtml" title="&#10;          BETAINV&#10;        ">
-          <span class="function" style="font-family: monospace; ">BETAINV</span>
-        </a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="gnumeric-CAUCHY.shtml" title="&#10;          CAUCHY&#10;        ">
-          <span class="function" style="font-family: monospace; ">CAUCHY</span>
-        </a></span></div></div></body></html>
+          </li>
+</ul></div></div>
+</div>
+<div class="division refsect1">
+<div class="header"><h2 class="refsect1 title"><span class="title"><span class="label">2. </span>Examples</span></h2></div>
+<p class="para block block-first"></p>
+<p class="para block"><span class="function">BINOMDIST</span>(3,5,0.8,0) equals 0.2048.</p>
+</div>
+<div class="division refsect1">
+<div class="header"><h2 class="refsect1 title"><span class="title"><span class="label">3. </span>See also</span></h2></div>
+<p class="para block block-first"><a class="link" href="gnumeric-POISSON.shtml" title="
+          POISSON
+        "><span class="function">POISSON</span></a>.
+      </p>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gnumeric-BETAINV.shtml" title="
+          BETAINV
+        ">
+          <span class="function">BETAINV</span>
+        </a></td>
+<td class="navbar-next"><a class="navbar-next" href="gnumeric-CAUCHY.shtml" title="
+          CAUCHY
+        ">
+          <span class="function">CAUCHY</span>
+        </a></td>
+</tr></table></div>
+</body>
+</html>

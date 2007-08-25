@@ -1,195 +1,363 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Installing and Building Gnumeric for Python</title><link rel="previous" href="sect-extending-python.shtml" title="Programming Gnumeric using Python"/><link rel="next" href="sect-extending-python-console.shtml" title="The Python Console"/><link rel="top" href="index.shtml" title="The Gnumeric Manual, version 1.7"/><link rel="stylesheet" type="text/css" href="gnumeric-doc.css"/></head><body><div class="body"><div class="sect2"><a name="sect-extending-python-install"/><h1 class="sect2 title"><span class="title">Installing and Building Gnumeric for Python</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Installing and Building Gnumeric for Python</title>
+<link rel="previous" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">
+<link rel="next" href="sect-extending-python-console.shtml" title="The Python Console">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">
+<link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a><div class="autotoc"><ul>
+<li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
+<li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
+<li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
+<li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
+<li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
+<li><a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
+<li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
+<li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
+<li><a class="xref" href="chapter-morehelp.shtml" title="Getting More Help">Getting More Help</a></li>
+<li><a class="xref" href="chapter-bugs.shtml" title="Reporting a Problem">Reporting a Problem</a></li>
+<li>
+<a class="xref" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-extending-overview.shtml" title="The Approaches to Extending Gnumeric">The Approaches to Extending Gnumeric</a></li>
+<li><a class="xref" href="sect-extending-functions.shtml" title="Defining New Functions">Defining New Functions</a></li>
+<li>
+<a class="xref" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a><div class="autotoc"><ul>
+<li>Installing and Building Gnumeric for Python</li>
+<li><a class="xref" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></li>
+<li><a class="xref" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">Using the built-in Python functions</a></li>
+<li><a class="xref" href="sect-extending-python-writing.shtml" title="Writing your own Python functions">Writing your own Python functions</a></li>
+<li><a class="xref" href="extending-python-upgrading.shtml" title="Upgrading">Upgrading</a></li>
+<li><a class="xref" href="sect-extending-python-fancy.shtml" title="Fancy tricks">Fancy tricks</a></li>
+<li><a class="xref" href="sect-extending-python-questions.shtml" title="Features wanted, and Questions">Features wanted, and Questions</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="sect-extending-plugins.shtml" title="Writing New Plugins">Writing New Plugins</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="function-reference.shtml" title="Function Reference">Function Reference</a></li>
+<li><a class="xref" href="keybinding.shtml" title="Keybinding Reference">Keybinding Reference</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect2">
+<a name="sect-extending-python-install"></a><div class="header"><h1 class="sect2 title"><span class="title">Installing and Building Gnumeric for Python</span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a></li>
+<li class="linktrail"><a class="linktrail" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></li>
+</ul>
+<p class="para block block-first">
       This section describes how to obtain the
-      <span class="application" style="font-style: italic; ">Gnumeric</span> source code, configure it
+      <span class="application">Gnumeric</span> source code, configure it
       for Python and build it. This section will eventually be
       removed as Python becomes supported by default.
-    </p><div class="sect3"><a name="sect-extending-python-install-prelim"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.1. </span>Preliminaries</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">13.3.1.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-prelim" title="Preliminaries">Preliminaries</a>
+</li>
+<li>
+<span class="label">13.3.1.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-build" title="In the Beginning (Installing and Building)">In the Beginning (Installing and Building)</a>
+</li>
+</ul></div>
+<div class="division sect3">
+<a name="sect-extending-python-install-prelim"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.1. </span>Preliminaries</span></h2></div>
+<p class="para block block-first">
       I'm going to define some variables here so that you can insert
       the appropriate command or item for your system when they
       occur. I'll prefix them all with '$'.
-    </p><div class="list"><div class="itemizedlist"><ul><li>
+    </p>
+<div class="block list"><div class="itemizedlist"><ul>
+<li class="li-first">
         <span class="para">
-        <span class="emphasis" style="font-style: italic; ">$root</span>: Do whatever you do to become
+        <span class="emphasis">$root</span>: Do whatever you do to become
         root. The usual options are:
 
-        <div class="list"><div class="itemizedlist"><ul><li>
+        <div class="block list"><div class="itemizedlist"><ul>
+<li class="li-first">
             <span class="para">
-              <span class="literal" style="font-family: monospace; ">su -</span> and hit <span class="keycap" style="font-weight: bold; ">Enter</span>
+              <span class="literal">su -</span> and hit <span class="keycap">Enter</span>
             </span>
-          </li><li>
+          </li>
+<li>
             <span class="para">
-            <span class="literal" style="font-family: monospace; ">sudo</span>
+            <span class="literal">sudo</span>
             </span>
-          </li><li>
+          </li>
+<li>
             <span class="para">
-            <span class="literal" style="font-family: monospace; ">fakeroot</span> (works in some situations, but
+            <span class="literal">fakeroot</span> (works in some situations, but
             not all)
             </span>
-          </li></ul></div></div>
+          </li>
+</ul></div></div>
         </span>
-      </li><li>
+      </li>
+<li>
          <span class="para">
-           <span class="emphasis" style="font-style: italic; ">$version</span>: Whatever your current
+           <span class="emphasis">$version</span>: Whatever your current
            Gnumeric version is. Some examples:
 
-           <div class="list"><div class="itemizedlist"><ul><li><span class="para">1.1.20</span></li><li><span class="para">1.1.20-bonobo</span></li><li><span class="para">1.1.90</span></li></ul></div></div>
+           <div class="block list"><div class="itemizedlist"><ul>
+<li class="li-first"><span class="para">1.4.20</span></li>
+<li><span class="para">1.6.20</span></li>
+<li><span class="para">1.7.90</span></li>
+</ul></div></div>
          </span>
-       </li></ul></div></div></div><div class="sect3"><a name="sect-extending-python-install-build"/><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.2. </span>In the Beginning (Installing and Building)</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+       </li>
+</ul></div></div>
+</div>
+<div class="division sect3">
+<a name="sect-extending-python-install-build"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.2. </span>In the Beginning (Installing and Building)</span></h2></div>
+<p class="para block block-first">
       You need to get Python and Gnumeric, and the Python plugin for
       Gnumeric. You can get the binaries, the packaged source, or the
       developing edge CVS.
-    </p><div class="sect4"><a name="sect-extending-python-install-binaries"/><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.1. </span>Getting the binaries (Debian)</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">13.3.1.2.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-binaries" title="Getting the binaries (Debian)">Getting the binaries (Debian)</a>
+</li>
+<li>
+<span class="label">13.3.1.2.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-debsource" title="
+        Getting and building the current Debianized source
+      ">
+        Getting and building the current Debianized source
+      </a>
+</li>
+<li>
+<span class="label">13.3.1.2.3. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-cvs" title="Getting and building the source from CVS-HEAD">Getting and building the source from CVS-HEAD</a>
+</li>
+</ul></div>
+<div class="division sect4">
+<a name="sect-extending-python-install-binaries"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.1. </span>Getting the binaries (Debian)</span></h3></div>
+<p class="para block block-first">
         I've only tested this on sid (unstable). The version you get
         from stable (woody) may not act quite the same.
-      </p><div class="list"><div class="procedure"><ul><li>
-          <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-            <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">apt-get install
+      </p>
+<div class="block list"><div class="procedure"><ul><li class="li-first">
+          <p class="para block block-first">
+            <span class="emphasis">$root</span> <span class="literal">apt-get install
             gnumeric gnumeric-python python</span>
           </p>
-        </li></ul></div></div></div><div class="sect4"><a name="sect-extending-python-install-debsource"/><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.2. </span>
+        </li></ul></div></div>
+</div>
+<div class="division sect4">
+<a name="sect-extending-python-install-debsource"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.2. </span>
         Getting and building the current Debianized source
-      </span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </span></h3></div>
+<p class="para block block-first">
         If you have Debian, and don't need the bleeding edge, this is
-        <span class="emphasis" style="font-style: italic; ">by far</span> the easiest way to get and build
+        <span class="emphasis">by far</span> the easiest way to get and build
         the source.
-      </p><div class="list"><div class="procedure"><ol><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<div class="block list"><div class="procedure"><ol>
+<li class="li-first">
+            <p class="para block block-first">
               Change to a directory where you want to hang the source
               directory.
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">apt-get build-dep
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="emphasis">$root</span> <span class="literal">apt-get build-dep
 			  gnumeric</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="literal" style="font-family: monospace; ">apt-get source gnumeric</span>
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="literal">apt-get source gnumeric</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="literal" style="font-family: monospace; ">cd gnumeric-</span><span class="emphasis" style="font-style: italic; ">$version</span>
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="literal">cd gnumeric-</span><span class="emphasis">$version</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="literal" style="font-family: monospace; ">debian/rules build</span>
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="literal">debian/rules build</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              To make the .deb packages: <span class="emphasis" style="font-style: italic; ">$root</span>
-            <span class="literal" style="font-family: monospace; ">./debian/rules binary</span>
+          </li>
+<li>
+            <p class="para block block-first">
+              To make the .deb packages: <span class="emphasis">$root</span>
+            <span class="literal">./debian/rules binary</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+          </li>
+<li>
+            <p class="para block block-first">
               To install those .deb packages:
             </p>
-            <div class="list"><div class="procedure"><ol><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  <span class="literal" style="font-family: monospace; ">cd ..</span> to change to that directory.
+            <div class="block list"><div class="procedure"><ol>
+<li class="li-first">
+                <p class="para block block-first">
+                  <span class="literal">cd ..</span> to change to that directory.
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">dpkg -i
+              </li>
+<li>
+                <p class="para block block-first">
+                  <span class="emphasis">$root</span> <span class="literal">dpkg -i
                   gnum*deb</span> (presuming you don't have other
                   .deb packages beginning with "gnum" lying around
                   here.
                 </p>
-              </li></ol></div></div>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+              </li>
+</ol></div></div>
+          </li>
+<li>
+            <p class="para block block-first">
               You may or may not want to remove those .deb files now:
-              <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">rm
+              <span class="emphasis">$root</span> <span class="literal">rm
               gnum*deb</span>)
             </p>
-           </li></ol></div></div></div><div class="sect4"><a name="sect-extending-python-install-cvs"/><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.3. </span>Getting and building the source from CVS-HEAD</span></h3><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+           </li>
+</ol></div></div>
+</div>
+<div class="division sect4">
+<a name="sect-extending-python-install-cvs"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.3. </span>Getting and building the source from CVS-HEAD</span></h3></div>
+<p class="para block block-first">
         Remember that this is the developing edge. Things may not
         work. Generally don't do this unless you are subscribed to the
         mail list and possibly also on the IRC channel.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         You will need a few things for this to work at all:
-      </p><div class="list"><div class="procedure"><ol><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">gnome-common</p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">libgsf (see below)</p></li><li>
-             <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<div class="block list"><div class="procedure"><ol>
+<li class="li-first"><p class="para block block-first">gnome-common</p></li>
+<li><p class="para block block-first">libgsf (see below)</p></li>
+<li>
+             <p class="para block block-first">
                pygtk2 (On Debian, make sure to get python-gtk2 and
                python-gtk2-dev)
              </p>
-           </li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">gnumeric (see below, obviously)</p></li></ol></div></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+           </li>
+<li><p class="para block block-first">gnumeric (see below, obviously)</p></li>
+</ol></div></div>
+<p class="para block">
         And although the following will build in the main build space,
         it's probably better to build in a temporary space. But I
         can't be bothered to learn how to fiddle the build pathways.
-      </p><div class="list"><div class="procedure"><ol><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<div class="block list"><div class="procedure"><ol>
+<li class="li-first">
+            <p class="para block block-first">
               Change to a directory where you want to hang the source
               directory for Gnumeric and a few other Gnome things.
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="literal" style="font-family: monospace; ">export
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="literal">export
               CVSROOT=:pserver:anonymous@anoncvs.gnome.org:/cvs/gnome</span>
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-              <span class="literal" style="font-family: monospace; ">cvs login</span> (No password -- hit
+          </li>
+<li>
+            <p class="para block block-first">
+              <span class="literal">cvs login</span> (No password -- hit
               RETURN.)
             </p>
-          </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+          </li>
+<li>
+            <p class="para block block-first">
               Getting and building libgsf:
             </p>
 
-            <div class="list"><div class="procedure"><ol><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+            <div class="block list"><div class="procedure"><ol>
+<li class="li-first">
+                <p class="para block block-first">
                   cvs co libgsf
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+              </li>
+<li>
+                <p class="para block block-first">
                   cd libgsf
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  Red Hat: <span class="literal" style="font-family: monospace; ">./autogen.sh</span>
+              </li>
+<li>
+                <p class="para block block-first">
+                  Red Hat: <span class="literal">./autogen.sh</span>
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  Debian: <span class="literal" style="font-family: monospace; ">./autogen.sh --prefix=/usr
+              </li>
+<li>
+                <p class="para block block-first">
+                  Debian: <span class="literal">./autogen.sh --prefix=/usr
                 --with-gconf-schema-file-dir=/etc/gconf/schemas</span>
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  <span class="literal" style="font-family: monospace; ">make</span>
+              </li>
+<li>
+                <p class="para block block-first">
+                  <span class="literal">make</span>
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">make install</span>
+              </li>
+<li>
+                <p class="para block block-first">
+                  <span class="emphasis">$root</span> <span class="literal">make install</span>
                 </p>
-              </li><li>
-                <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-                  If you find that this didn't work, try <span class="literal" style="font-family: monospace; ">make
+              </li>
+<li>
+                <p class="para block block-first">
+                  If you find that this didn't work, try <span class="literal">make
                   clean</span> and then repeat from the autogen
                   step.
                 </p>
-              </li></ol></div></div>
+              </li>
+</ol></div></div>
 
-          </li><li>
-             <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-               Getting and building libgal <span class="emphasis" style="font-weight: bold; ">No longer necessary! (13 June
+          </li>
+<li>
+             <p class="para block block-first">
+               Getting and building libgal <span class="emphasis emphasis-bold">No longer necessary! (13 June
                2003)</span>
              </p>
-	  </li><li>
-            <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+	  </li>
+<li>
+            <p class="para block block-first">
               Getting and building gnumeric:
             </p>
-		  <div class="list"><div class="procedure"><ol><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">cvs -z3 checkout gnumeric -d
-				gnumeric-head</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">cd gnumeric-head</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Red Hat: <span class="literal" style="font-family: monospace; ">./autogen.sh</span> and wait while it
-			  compiles</p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">Debian: <span class="literal" style="font-family: monospace; ">./autogen.sh --prefix=/usr --with-gconf-schema-file-dir=/etc/gconf/schemas</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="literal" style="font-family: monospace; ">make</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para"><span class="emphasis" style="font-weight: bold; ">Optional:</span> <span class="emphasis" style="font-style: italic; ">$root</span> <span class="literal" style="font-family: monospace; ">make install</span></p></li><li><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">If you find that this didn't work, try <span class="literal" style="font-family: monospace; ">make clean</span> and
+		  <div class="block list"><div class="procedure"><ol>
+<li class="li-first"><p class="para block block-first"><span class="literal">cvs -z3 checkout gnumeric -d
+				gnumeric-head</span></p></li>
+<li><p class="para block block-first"><span class="literal">cd gnumeric-head</span></p></li>
+<li><p class="para block block-first">Red Hat: <span class="literal">./autogen.sh</span> and wait while it
+			  compiles</p></li>
+<li><p class="para block block-first">Debian: <span class="literal">./autogen.sh --prefix=/usr --with-gconf-schema-file-dir=/etc/gconf/schemas</span></p></li>
+<li><p class="para block block-first"><span class="literal">make</span></p></li>
+<li><p class="para block block-first"><span class="emphasis emphasis-bold">Optional:</span> <span class="emphasis">$root</span> <span class="literal">make install</span></p></li>
+<li><p class="para block block-first">If you find that this didn't work, try <span class="literal">make clean</span> and
 			  then repeat from the autogen step. For example,
-			  sometimes I've had it not create the python-loader.</p></li></ol></div></div>
-	   </li></ol></div></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+			  sometimes I've had it not create the python-loader.</p></li>
+</ol></div></div>
+	   </li>
+</ol></div></div>
+<p class="para block">
           OK, you should now have gnumeric! Test it! If you installed
           the Debianized version via apt-get, or did "make install",
           it should be installed to /usr/bin (or /usr/local/bin on
           Red Hat?)  and you can just type
-          <span class="literal" style="font-family: monospace; ">gnumeric</span>. Otherwise you will find it in
-          <span class="literal" style="font-family: monospace; ">gnumeric-head/src/</span> and you will have to
+          <span class="literal">gnumeric</span>. Otherwise you will find it in
+          <span class="literal">gnumeric-head/src/</span> and you will have to
           run it from there. 
-        </p></div></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></span></div></div></body></html>
+        </p>
+</div>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></td>
+</tr></table></div>
+</body>
+</html>

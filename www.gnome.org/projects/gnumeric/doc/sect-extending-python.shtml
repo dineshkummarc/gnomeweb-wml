@@ -1,66 +1,133 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Programming Gnumeric using Python</title><link rel="previous" href="sect-extending-functions.shtml" title="Defining New Functions"/><link rel="next" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python"/><link rel="top" href="index.shtml" title="The Gnumeric Manual, version 1.7"/><link rel="stylesheet" type="text/css" href="gnumeric-doc.css"/></head><body><div class="body"><div class="sect1"><a name="sect-extending-python"/><h1 class="sect1 title"><span class="title">Programming Gnumeric using Python</span></h1><div class="autotoc"><ul><li><span class="label">13.3.1. </span><a class="xref" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a></li><li><span class="label">13.3.2. </span><a class="xref" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></li><li><span class="label">13.3.3. </span><a class="xref" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">Using the built-in Python functions</a></li><li><span class="label">13.3.4. </span><a class="xref" href="sect-extending-python-writing.shtml" title="Writing your own Python functions">Writing your own Python functions</a></li><li><span class="label">13.3.5. </span><a class="xref" href="extending-python-upgrading.shtml" title="Upgrading">Upgrading</a></li><li><span class="label">13.3.6. </span><a class="xref" href="sect-extending-python-fancy.shtml" title="Fancy tricks">Fancy tricks</a></li><li><span class="label">13.3.7. </span><a class="xref" href="sect-extending-python-questions.shtml" title="Features wanted, and Questions">Features wanted, and Questions</a></li></ul></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Programming Gnumeric using Python</title>
+<link rel="previous" href="sect-extending-functions.shtml" title="Defining New Functions">
+<link rel="next" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">
+<link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-extending-functions.shtml" title="Defining New Functions">Defining New Functions</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a><div class="autotoc"><ul>
+<li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
+<li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
+<li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
+<li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
+<li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
+<li><a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
+<li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
+<li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
+<li><a class="xref" href="chapter-morehelp.shtml" title="Getting More Help">Getting More Help</a></li>
+<li><a class="xref" href="chapter-bugs.shtml" title="Reporting a Problem">Reporting a Problem</a></li>
+<li>
+<a class="xref" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-extending-overview.shtml" title="The Approaches to Extending Gnumeric">The Approaches to Extending Gnumeric</a></li>
+<li><a class="xref" href="sect-extending-functions.shtml" title="Defining New Functions">Defining New Functions</a></li>
+<li>Programming Gnumeric using Python<div class="autotoc"><ul>
+<li><a class="xref" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a></li>
+<li><a class="xref" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a></li>
+<li><a class="xref" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">Using the built-in Python functions</a></li>
+<li><a class="xref" href="sect-extending-python-writing.shtml" title="Writing your own Python functions">Writing your own Python functions</a></li>
+<li><a class="xref" href="extending-python-upgrading.shtml" title="Upgrading">Upgrading</a></li>
+<li><a class="xref" href="sect-extending-python-fancy.shtml" title="Fancy tricks">Fancy tricks</a></li>
+<li><a class="xref" href="sect-extending-python-questions.shtml" title="Features wanted, and Questions">Features wanted, and Questions</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="sect-extending-plugins.shtml" title="Writing New Plugins">Writing New Plugins</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="function-reference.shtml" title="Function Reference">Function Reference</a></li>
+<li><a class="xref" href="keybinding.shtml" title="Keybinding Reference">Keybinding Reference</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="sect-extending-python"></a><div class="header"><h1 class="sect1 title"><span class="title">Programming Gnumeric using Python</span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
+</ul>
+<p class="para block block-first">
     A powerful way to access and manipulate data in
-    <span class="application" style="font-style: italic; ">Gnumeric</span> involves using the Python
-    programming language. As <span class="application" style="font-style: italic; ">Gnumeric</span>
+    <span class="application">Gnumeric</span> involves using the Python
+    programming language. As <span class="application">Gnumeric</span>
     develops from version 1.2, the scripting methods will become
-    increasingly powerful. Since <span class="application" style="font-style: italic; ">Gnumeric</span>
+    increasingly powerful. Since <span class="application">Gnumeric</span>
     is free software, you could extend it directly using the source
     code and adding C language functions to the code. Python offers a
     higher level abstraction through which to interact with the
     spreadsheet.
-  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-    Python and <span class="application" style="font-style: italic; ">Gnumeric</span> can be used in
+  </p>
+<p class="para block">
+    Python and <span class="application">Gnumeric</span> can be used in
     several ways. This section will describe how to obtain
-    <span class="application" style="font-style: italic; ">Gnumeric</span>, install it and get things
+    <span class="application">Gnumeric</span>, install it and get things
     configured correctly for access with Python. If you already have
     the pieces in place, you can skip the section <a class="xref" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Section 13.3.1 ― Installing and Building Gnumeric for Python</a>.
-  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+  </p>
+<p class="para block">
     This section was written by Charles Twardy. It owes a great deal
     to the nice guide Travis Whitton wrote: <a class="ulink" href="http://grub.ath.cx/gnumeric-python/" title="http://grub.ath.cx/gnumeric-python/">Python/Gnumeric guide
     for the old API in Gnumeric 1.0.</a> Jon Käre Hellan
     contributed most of the code to enable Python in
-    <span class="application" style="font-style: italic; ">Gnumeric</span> and wrote the file
-    <span class="literal" style="font-family: monospace; ">python-gnumeric.txt</span> in the source
+    <span class="application">Gnumeric</span> and wrote the file
+    <span class="literal">python-gnumeric.txt</span> in the source
     tree. Nathan Hurst provided the idea and support.
-  </p><div class="admonition block-indent warning">
-    <p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+  </p>
+<div class="admonition block warning block-indent">
+    <p class="para block block-first">
       The Python API, that is the list of methods available in Python,
       is still experimental and may change!
     </p>
-  </div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+  </div>
+<p class="para block">
     For further information, the web page maintained by Jon Käre
     Hellan's has some python plugins and other useful
     information. That page can be found through <a class="ulink" href="http://domen.uninett.no/~jk/gnumeric/" title="http://domen.uninett.no/~jk/gnumeric/">this link</a>. The
     main <a class="ulink" href="http://www.gnome.org/projects/gnumeric/" title="http://www.gnome.org/projects/gnumeric/">Gnumeric
     page</a> may also have useful information.
-  </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+  </p>
+<p class="para block">
     If you need help online, you may want to check out:
 
-      <div class="list"><div class="itemizedlist"><ul><li>
+      <div class="block list"><div class="itemizedlist"><ul>
+<li class="li-first">
           <span class="para">
             The Gnumeric Function-Writer's Guide. Until I write one
             for Python, you'll have to settle for
-            <span class="literal" style="font-family: monospace; ">doc/developer/writing-functions.sgml</span> in
+            <span class="literal">doc/developer/writing-functions.sgml</span> in
             the Gnumeric source tree.
           </span>
-        </li><li>
+        </li>
+<li>
           <span class="para">
             The files that actually define the Python interface. In
             particular,
-            <span class="literal" style="font-family: monospace; ">plugins/python-loader/py-gnumeric.c</span> has
+            <span class="literal">plugins/python-loader/py-gnumeric.c</span> has
             good comments at the beginning.
           </span>
-        </li><li>
+        </li>
+<li>
           <span class="para">
             The instructions on how to use GNOME CVS can be found <a class="ulink" href="http://developer.gnome.org/tools/cvs.html" title="http://developer.gnome.org/tools/cvs.html">here</a>.
           </span>
-        </li><li>
+        </li>
+<li>
           <span class="para">
             The gnumeric discussion list:
-            <span class="literal" style="font-family: monospace; ">&lt;gnumeric-list@gnome.org&gt;</span>
+            <span class="literal">&lt;gnumeric-list@gnome.org&gt;</span>
           </span>
-        </li><li>
+        </li>
+<li>
           <span class="para">
             The IRC channel #gnumeric on the GIMPnet server.  Right
             now, the project leader is Jody Goldberg (jody) and the
@@ -68,6 +135,37 @@
             and Zbigniew Chyla appear prominently in the Python
             ChangeLog.
           </span>
-        </li></ul></div></div>
+        </li>
+</ul></div></div>
 
-  </p></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="sect-extending-functions.shtml" title="Defining New Functions">Defining New Functions</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a></span></div></div></body></html>
+  </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">13.3.1. </span><a class="xref" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a>
+</li>
+<li>
+<span class="label">13.3.2. </span><a class="xref" href="sect-extending-python-console.shtml" title="The Python Console">The Python Console</a>
+</li>
+<li>
+<span class="label">13.3.3. </span><a class="xref" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">Using the built-in Python functions</a>
+</li>
+<li>
+<span class="label">13.3.4. </span><a class="xref" href="sect-extending-python-writing.shtml" title="Writing your own Python functions">Writing your own Python functions</a>
+</li>
+<li>
+<span class="label">13.3.5. </span><a class="xref" href="extending-python-upgrading.shtml" title="Upgrading">Upgrading</a>
+</li>
+<li>
+<span class="label">13.3.6. </span><a class="xref" href="sect-extending-python-fancy.shtml" title="Fancy tricks">Fancy tricks</a>
+</li>
+<li>
+<span class="label">13.3.7. </span><a class="xref" href="sect-extending-python-questions.shtml" title="Features wanted, and Questions">Features wanted, and Questions</a>
+</li>
+</ul></div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-extending-functions.shtml" title="Defining New Functions">Defining New Functions</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">Installing and Building Gnumeric for Python</a></td>
+</tr></table></div>
+</body>
+</html>
