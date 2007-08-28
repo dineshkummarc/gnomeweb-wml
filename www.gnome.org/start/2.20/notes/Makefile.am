@@ -15,7 +15,7 @@ include $(top_srcdir)/www.gnome.org/start/2.20/notes/docbook/Makefile_shared.am_
 
 VERSION = 2.20
 ROOTDOC = release-notes.xml
-STYLE_PATH = ../../../../docbook_html_style/
+STYLE_PATH = ./
 
 
 DOC_LINGUAS_PLUS_ORIGINAL = C $(DOC_LINGUAS) 
@@ -30,11 +30,8 @@ html:
 	  rm -rf $$docbookdir; \
 	  mkdir $$docbookdir; \
 	  echo "Running xlstproc on: " docbook/$$docbookdir/$(ROOTDOC); \
-	  xsltproc --xinclude -o $$docbookdir/unused.html.ignore \
+	  xsltproc --xinclude -o $$docbookdir/index.html \
 	    --param yelp_max_chunk_depth 1 \
-	    --stringparam admon.graphics.path ./images/ \
-	    --stringparam http_root http://www.gnome.org \
-	    --stringparam http_prefix /start/2.20/notes \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
 	  echo "  xlstproc finished"; \
 	  cp -R $(STYLE_PATH)images docbook/$$docbookdir/figures $$docbookdir; \
