@@ -21,88 +21,117 @@
 		not have this guarantee, but most remain consistent from release to release.
 	</para>
 
-	<sect2 id="rndevelopers-gslice">
-		<title>GSlice</title>
+    <sect2>
+      <title>GTK+</title>
+      <para>GNOME &gnomeversion; uses version 2.12. of the GTK+ UI toolkit API, which adds new features and important bug-fixes. The largest changes are: </para>
+      <itemizedlist>
+        <listitem><para>A new <ulink url="/GtkVolumeButton">GtkVolumeButton</ulink> widget, for use by media players.</para></listitem>
+        <listitem><para>A new <ulink url="/GtkRecentAction">GtkRecentAction</ulink> class to provide recent-files menu items.</para></listitem>
+        <listitem><para>An improved <ulink url="/GtkTooltip">GtkTooltip</ulink> API, which is much more convenient and powerful than the now-deprecated old <ulink url="/GtkTooltips">GtkTooltips</ulink> API. For instance, this allows tooltips in <ulink url="/GtkTreeViews">GtkTreeViews</ulink>, and on insensitive widgets.</para></listitem>
+        <listitem><para>The new <ulink url="/GtkBuilder">GtkBuilder</ulink> API, which can build user interfaces from XML descriptions, intended to replace libglade soon.</para></listitem>
+        <listitem>Support for some simple graphical effects, where the hardware and drivers support them, via functions such as gdk_window_set_composited() and gdk_window_set_opacity().</listitem>
+        <listitem>New input methods for the Thai and Lao languages, plus a mobile-phone-style multipress input method for embedded devices.</listitem>
+        <listitem>The built-in stock icons were updated to comply with the Tango freedesktop specification, so the appearance of GNOME applications is even more consistent with other toolkits and desktops.</listitem>
+        <listitem><para>The <ulink url="/GtkFileChooser">GtkFileChooser</ulink> now shows the recent files list, and can be integrated with desktop search systems such as Beagle and Tracker, as mentioned above in the File Management section.</para></listitem>
+      </itemizedlist>
 
-		<para>
-			As of GLib 2.10,
-			the GSlice allocator replaces the older GMemChunk and GTrashStacks APIs
-			available in GLib. GSlice is very similar to the kernel slab allocator and
-			allows for fast, memory-efficient allocation of small structures (e.g.
-			GList
-			elements, GtkWindow structures). GSlice also has none of the locking
-			overhead of GMemChunk, which makes it much faster in multithreaded
-			applications.
-		</para>
+      <para>See also the list of <ulink url="http://library.gnome.org/devel/gtk/2.11/ix08.html">new functions in GTK+ 2.12</ulink>. Full details are in a series (see <ulink url="http://mail.gnome.org/archives/devel-announce-list/2007-June/msg00006.html">1</ulink>, <ulink url="http://mail.gnome.org/archives/devel-announce-list/2007-June/msg00003.html">2</ulink>, <ulink url="http://mail.gnome.org/archives/devel-announce-list/2007-June/msg00004.html">3</ulink>, <ulink url="http://mail.gnome.org/archives/devel-announce-list/2007-June/msg00005.html">4</ulink>) of emails from Matthias Clasen, and in the GTK+ 2.12 release announcement. TODO: Link to the announcement when it happens.</para>
+    </sect2>
 
-		<figure id="rndevelopers-gslice-graph">
-			<title>
-				Memory allocator performance allocating and freeing 1 million GList
-				elements in 1 (red), 5 (yellow), 10 (green) and 20 (blue) threads.
-			</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata
-						fileref="&urlfiguresbase;figure-gslice-graph.png"
-						format="PNG"/>
-				</imageobject>
-				<textobject><phrase>
-					GSlice performance improvements over other memory allocators
-				</phrase></textobject>
-			</mediaobject>
-		</figure>
+    <sect2>
+      <title>Glib</title>
+      <para>The Glib utility library now has a g_get_user_special_dir() that provides the path to special folders defined by <ulink url="/FreeDesktop">FreeDesktop</ulink>.org's <ulink url="http://www.freedesktop.org/wiki/Software/xdg-user-dirs">xdg-user-dirs</ulink> specification and tool.</para>
+      <para>And for text processing, the new GRegex API provides regular expression string matching without the need for an additional library.</para>
+    </sect2>
 
-		<para>
-			GMemChunk has been reimplemented to transparently use GSlice, but the
-			GMemChunk API is considered deprecated.
-		</para>
+    <sect2>
+      <title>Pango</title>
+      <para>The Pango text rendering system has several improvements.</para>
+      <para>For instance, it has a new shaping engine for the <ulink url="http://en.wikipedia.org/wiki/N%27ko">N'Ko</ulink> script used by the minority Mande languages in West Africa. These languages have not been well served by computer systems until now.</para>
 
-		<para>
-			To allocate memory with the GSlice allocator, use the call
-			<function>g_slice_new (MyStructure);</function>, which will return a
-			pointer (ptr). To free memory allocated with GSlice, use the function
-			<function>g_slice_free (MyStructure, ptr);</function>.
-		</para>
+			<figure>
+				<title>An example from the N'Ko shaping engine.</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/rndevelopers-pango-nko-part.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
 
-		<para>
-			GSlice uses a scalable, thread-local cache of slices of different sizes.
-			For large memory requirements, GSlice will transparently and automatically
-			use the <function>g_malloc</function> allocator for you, so developers do
-			not have to choose the most efficient allocator themselves.
-		</para>
+      <para>The improved <ulink url="/OpenType">OpenType</ulink> Layout engine helps Pango to select the correct Glyph depending on the current language.</para>
 
-	</sect2>
+			<figure>
+				<title>Pango's OpenType layout engine choosing the correct glyph.</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/rndevelopers-pango-opentype-language.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
 
-	<sect2 id="rndevelopers-services">
-		<title>Service Registration</title>
+      <para>In addition, the new version of Pango has:</para>
+      <itemizedlist>
+        <listitem>Support for specifying multiple preferred languages.</listitem>
+        <listitem>Vertical text shaping that uses vertical variants of punctuation marks.</listitem>
+        <listitem>New pango_cairo functions, allowing simpler use of Pango with Cairo.</listitem>
+      </itemizedlist>
+    </sect2>
 
-		<para>
-			The latest GNOME now offers a way for developers to register their
-			applications to be started up automatically when GNOME starts. To do this,
-			you only need to install a <filename>.desktop</filename> file in
-			<filename>$prefix/share/gnome/autostart/</filename>,
-			<filename>/etc/xdg/autostart/</filename> or
-			<filename>~/.config/autostart/</filename>. If you want to install a
-			service, but disable it by default, you can add the property
-			<property>X-GNOME-autostart-enabled = False</property>.
-		</para>
+    <sect2>
+      <title>Glade</title>
+      <para>The Glade user interface designer is much improved, adding user interface and architectural improvements.  </para>
+      <para>For instance, tool windows, such as the editor, the inspector, and the palette, are now dockable.</para>
 
-		<para>
-			There are some caveats to registering services in this way:
-		</para>
-		<itemizedlist>
-			<listitem><para>
-				Applications that register themselves with the session in some other way
-				(e.g. nautilus, gnome-panel, vino) should not also register themselves
-				in this way.
-			</para></listitem>
-			<listitem><para>
-				Session managed applications will not be handled cleanly, so ensure that
-				you pass the <option>--sm-disable</option> flag on your
-				<option>Exec</option> line.
-			</para></listitem>
-		</itemizedlist>
-	</sect2>
+			<figure>
+				<title>Glade, with an undocked window.</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/rndevelopers-glade-dockable.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+
+      <para>And you can now right-click on widgets to conveniently make some of these changes: </para>
+      <itemizedlist>
+        <listitem>Add or remove the parent widget.</listitem>
+        <listitem><para>Insert or remove a placeholder before or after the selected widget in a <ulink url="/GtkBox">GtkBox</ulink>.</para></listitem>
+        <listitem><para>Insert or remove a page before or after the selected page in a <ulink url="/GtkNotebook">GtkNotebook</ulink>.</para></listitem>
+        <listitem><para>Insert or remove a row or column in a <ulink url="/GtkTable">GtkTable</ulink>.</para></listitem>
+      </itemizedlist>
+
+      <para>Library authors will be pleased to see that new widgets may be declared in the catalog without the need to write supporting source code, allowing developers to use your extra widgets in Glade.</para>
+    </sect2>
+
+    <sect2>
+      <title>Accerciser</title>
+      <para>The new accerciser Accessibility Explorer allows you to check whether your application provides the information needed by accessibility tools such as GNOME's Orca screenreader.</para>
+
+			<figure>
+				<title>The Accerciser utility examining an application's user interface.</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/rndevelopers-accerciser.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+    </sect2>
+
+    <sect2>
+      <title>Developer Documentation</title>
+      <para>GNOME's new documentation website, <ulink url="http://library.gnome.org">library.gnome.org</ulink>, lists all the latest tutorials, manuals and API references. It's the result of a Google Summer Of Code project which ensures that the online documentation stays up-to-date, even showing several versions of the same documents, in multiple languages too.</para>
+      <para>This includes the new <ulink url="http://library.gnome.org/devel/platform-overview/unstable/">Overview of the GNOME Platform</ulink> document, which is now an official part of GNOME's software releases, in the gnome-devel-docs module. It's a good place for new GNOME developers to start.</para>
+      
+			<figure>
+				<title>GNOME's new online library of developer documentation.</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/rndevelopers-library-gnome-org.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+
+      <para>For offline documentation, we strongly encourage the use of the <ulink url="/DevHelp">DevHelp</ulink> utility, particularly when searching for function or class names, though you must remember to install the relevant documentation packages from your distribution. <ulink url="/DevHelp">DevHelp</ulink> is also now part of GNOME's official Developer Tools release.</para>
+    </sect2>
 
 </sect1>
 <!-- vi:set tw=80 ts=2: -->
