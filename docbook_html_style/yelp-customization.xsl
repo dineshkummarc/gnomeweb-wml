@@ -7,7 +7,10 @@
                 version='1.0'>
 
 <!-- use version 1.65.1 from my home directory -->
-<xsl:import href="/home/users/bmsmith/1.65.1/html/docbook.xsl"/>
+<!-- TODO: Think of a better solution, 
+     because this is deleted from his home directory every now and then. -->
+
+<!-- <xsl:import href="/home/users/bmsmith/1.65.1/html/docbook.xsl"/> -->
 
 <!-- 
 target a specific version of Norman Walsh's stylesheets as the newer stylesheets
@@ -15,9 +18,9 @@ are missing certain templates that we depend on (admon.graphics.width)
 
 Don't uncomment this, or window.gnome.org will download the stylesheets whenever it builds the
 release notes, which is sloooowww!
-
-<xsl:import href="http://docbook.sourceforge.net/release/xsl/1.64.1/html/docbook.xsl"/>
 -->
+
+<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
 
 <xsl:include href="yelp-custom.xsl"/>
 <xsl:include href="yelp-functions.xsl"/>

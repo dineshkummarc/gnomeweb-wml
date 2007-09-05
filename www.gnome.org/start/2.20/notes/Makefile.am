@@ -1,4 +1,3 @@
-
 SUBDIRS = docbook
 
 urlpath = /start/2.20/notes
