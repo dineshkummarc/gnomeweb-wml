@@ -34,7 +34,7 @@ html:
 	    --param yelp_max_chunk_depth 1 \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
 	  echo "  xlstproc finished"; \
-	  cp -R $(STYLE_PATH)images docbook/$$docbookdir/figures $$docbookdir; \
+	  cp -R docbook/$$docbookdir/figures $$docbookdir; \
 	  for i in $$docbookdir/*.html; do \
 	    perl -p -i -e 's,<p class="section"></p>,<p class="section">Sections</p>,g' $$i; \
 	  done \
@@ -55,8 +55,6 @@ install-data-local:
 	  echo "Installing generated html"; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/*.html $(pagedir)/$$docbookdir/; \
-	  $(INSTALL) -d $(pagedir)/$$docbookdir/images; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/images/*.png $(pagedir)/$$docbookdir/images/; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
 	  (cd $(srcdir)/C && \
