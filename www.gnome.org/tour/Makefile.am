@@ -55,7 +55,11 @@ install-data-local:
 	  $(INSTALL) -d $(pagedir)/$$docbookdir; \
 	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/*.html $(pagedir)/$$docbookdir/; \
 	  $(INSTALL) -d $(pagedir)/$$docbookdir/figures; \
-	  $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+	  if test "`echo $(srcdir)/$$docbookdir/figures/*.png`" = $(srcdir)/$$docbookdir/figures/'*.png' ; then \
+	    echo "WARNING: missing figures/ subdir in $$docbookdir" ; \
+	  else \
+	    $(INSTALL_DATA) $(srcdir)/$$docbookdir/figures/*.png $(pagedir)/$$docbookdir/figures/; \
+ 	  fi ; \
 	  (cd $(srcdir)/C && \
 	  for figure in figures/*.png; do \
 	    if [ ! -f $(pagedir)/$$docbookdir/$$figure ]; then \
