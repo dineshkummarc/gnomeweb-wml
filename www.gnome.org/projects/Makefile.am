@@ -48,7 +48,8 @@ SUBDIRS = \
 	wsop			\
 	hipo			\
 	brasero			\
-	gnome-scan
+	gnome-scan		\
+	vinagre
 
 urlpath = /projects
 
