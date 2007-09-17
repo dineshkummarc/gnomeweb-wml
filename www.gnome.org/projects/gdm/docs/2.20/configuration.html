@@ -1,0 +1,3186 @@
+<html xmlns:set="http://exslt.org/sets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Configuration</title>
+<link rel="previous" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">
+<link rel="next" href="controlling.html" title="Controlling GDM">
+<link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<style type="text/css">
+
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
+  
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  
+  margin-left: 1.72em;
+  
+  margin-right: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  
+  margin-left: 2.4em;
+  
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 1em 0.5em 1em;
+  
+  padding-left: 60px;
+  min-height: 48px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+  
+  background-position: 6px 0.5em;
+  background-repeat: no-repeat;
+}
+div.caution {
+  background-image: url("admon-caution.png");
+}
+div.important {
+  background-image: url("admon-important.png");
+}
+div.note {
+  background-image: url("admon-note.png");
+}
+div.note-bug {
+  background-image: url("admon-bug.png");
+}
+div.tip {
+  background-image: url("admon-tip.png");
+}
+div.warning {
+  background-image: url("admon-warning.png");
+}
+div.blockquote {
+  
+  background-image: url('../../../data/icons/yelp-watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  
+  background-position: top left;
+  padding: 0.5em;
+  
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  
+  text-align: right;
+  
+  margin-left: 20%;
+  
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  
+  padding-right: 1em;
+  
+  float: left;
+  
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  
+  padding-left: 0;
+  
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
+div.footnotes { font-style: italic; font-size: 0.8em; }
+div.footnote { margin-top: 1.44em; }
+span.footnote-number { display: inline; padding-right: 0.83em; }
+span.footnote-number + p { display: inline; }
+a.footnote { text-decoration: none; font-size: 0.8em; }
+a.footnote-ref { text-decoration: none; }
+
+span.co {
+  margin-left: 0.2em; margin-right: 0.2em;
+  padding-left: 0.4em; padding-right: 0.4em;
+  border: solid 1px #000000;
+  -moz-border-radius: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 8px;
+}
+span.co:hover {
+  border-color: #333333;
+  background-color: #333333;
+  color: #FFFFFF;
+}
+span.co a { text-decoration: none; }
+span.co a:hover { text-decoration: none; }
+
+div.cmdsynopsis { font-family: monospace; }
+
+dt.question { margin-left: 0em; }
+dt.question div.label { float: left; }
+dd + dt.question { margin-top: 1em; }
+dd.answer {
+  margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+dd.answer div.label { float: left; }
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></td>
+<td class="navbar-next"><a class="navbar-next" href="controlling.html" title="Controlling GDM">Controlling GDM</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gdm-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul>
+<li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li>
+<li><a class="xref" href="overview.html" title="Overview">Overview</a></li>
+<li><a class="xref" href="security.html" title="Security">Security</a></li>
+<li><a class="xref" href="consolekit.html" title="Support for ConsoleKit">Support for ConsoleKit</a></li>
+<li><a class="xref" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></li>
+<li>Configuration</li>
+<li><a class="xref" href="controlling.html" title="Controlling GDM">Controlling GDM</a></li>
+<li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li>
+<li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li>
+<li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li>
+<li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li>
+<li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li>
+<li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="xref" href="license.html" title="License">License</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="configuration"></a><div class="header"><h1 class="sect1 title"><span class="title">Configuration</span></h1></div>
+<ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul>
+<p class="para block block-first"> 
+      GDM has powerful configuration management.  System default configuration
+      is stored in the GDM System Defaults Configuration File and user changes
+      to the default configuration are stored in the GDM Custom Configuration
+      File.  This allows sysadmins to store the GDM System Defaults
+      Configuration File on a shared filesystem, so a single file can be used
+      to control configuration for multiple machines.  GDM also supports
+      per-display configuration for GUI-related keys.
+    </p>
+<p class="para block">
+      The <span class="command">gdmsetup</span> is a GUI program you can use to edit the
+      GDM configuration.  This program may also be launched directly from the
+      login screen if the greeter/ConfigAvailable key is set to "true"
+      Not all keys in the GDM configuration file are supported in the GUI, so
+      you may need to edit the configuration files by hand to edit these keys.
+      If you believe running root-owned GUI's causes security risk, then you
+      would want to always edit the files by hand.  This program does not
+      support setting per-display configuration, so per-display configuration
+      files must be set up by hand.
+    </p>
+<p class="para block">
+      Aside from the GDM System Defaults Configuration File, the other GDM
+      configuration files are located, by default, in the
+      <span class="filename">&lt;etc&gt;/gdm/</span> folder or its subdirectories.
+      Note that the location of many configuration files are defined in the
+      GDM configuration files, so check the GDM System Defaults Configuration
+      File and the GDM Custom Configuration File if the files are not in the
+      locations specified in this document.
+    </p>
+<p class="para block">
+      Listing of the config directory contents:
+    </p>
+<div class=" block screen block-indent"><pre class="screen">custom.conf
+locale.alias
+Xsession
+XKeepsCrashing
+modules/
+Init/
+PostLogin/
+PreSession/
+PostSession/
+</pre></div>
+<p class="para block"> 
+      <span class="filename">locale.alias</span> is a file which looks much like the
+      system locale alias but, in fact, is not the same.  This is a list
+      of all languages that may be on your system.  All languages are
+      checked to see if they exist before displaying them in the Language
+      Selection dialog in the login GUI.  Only those that exist are displayed.
+    </p>
+<p class="para block"> 
+      <span class="filename">Xsession</span> is a script which sets up a user session
+      and then executes the user's choice of session.  Note that the session
+      script is typically started via the <span class="filename">desktop</span>
+      file associated with the session the user has picked.  Some 
+      sessions may start the user's session via a different mechanism than
+      the <span class="filename">Xsession</span> script, so please check the
+      appropriate <span class="filename">desktop</span> before assuming a session
+      startup issue is being caused by this file.
+    </p>
+<p class="para block"> 
+      <span class="filename">XKeepsCrashing</span> is a script which gets run when the
+      X server keeps crashing and we cannot recover.  The shipped default
+      script will work with most Linux distributions and can run the X
+      configuration application provided the person on the console knows the
+      root password.
+    </p>
+<p class="para block">
+      Accessibility modules are configured in the <span class="filename">modules/</span>
+      subdirectory, and are a separate topic.  Read the default files provided,
+      they have adequate documentation.  Again normally the default install
+      is given in the files with <span class="filename">factory</span> in their name,
+      and those files are not read, they are just there for you so you can
+      always revert to default config.
+    </p>
+<p class="para block">
+      Files describing available GDM session follow the freedesktop.org
+      desktop file specification.  The <span class="filename">.desktop</span>-style
+      files are installed to <span class="filename">&lt;etc&gt;/X11/sessions/</span>.
+      This directory is also read by the KDE desktop manager (KDM) for common
+      configuration.  Next the directory
+      <span class="filename">&lt;share&gt;/gdm/BuiltInSessions/</span> is read for
+      GDM specific built-in sessions (KDM hardcodes these at time of
+      this writing).  Lastly the default setup will also read
+      <span class="filename">&lt;share&gt;/xsessions/</span> (which should be
+      <span class="filename">&lt;share&gt;/xsessions/</span> if you really wish to
+      cooperate with KDM) where desktop packages can install their session
+      files.  The directories under the <span class="filename">&lt;etc&gt;</span> should
+      be reserved for configuration.  The desktop file specification approach
+      makes it easy for package management systems to install window managers
+      and different session types without requiring the sysadmin to edit files.
+      See the <span class="filename">SessionDesktopDir</span> configuration key for
+      changing the paths.  It used to be that GDM stored its built in
+      sessions in <span class="filename">&lt;etc&gt;/dm/Sessions/</span> but this is
+      deprecated as of 2.5.90.0.  Note that prior to version 2.4.4.2 only the
+      <span class="filename">&lt;etc&gt;/dm/Sessions/</span> was being read.
+    </p>
+<p class="para block">
+      A session can be disabled (if it was installed in
+      <span class="filename">&lt;share&gt;/xsessions/</span>) by adding an identically
+      named <span class="filename">.desktop</span> to one of the directories earlier in
+      the path (likely <span class="filename">&lt;etc&gt;/X11/sessions</span>) and using
+      <span class="filename">Hidden=true</span> in that file.
+    </p>
+<p class="para block">
+      GDM uses the optional key <span class="filename">X-Gdm-XserverArgs</span> in
+      session files to specify additional arguments to be passed to the
+      X server.  For example, the entry
+      <span class="filename">X-Gdm-XserverArgs=-depth 16</span> will start the
+      X server with a color depth of 16 bits.  Any such additional arguments
+      are ignored when using a Nested display (when GDM is launched in a
+      window).
+    </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">6.1. </span><a class="xref" href="configuration.html#scriptdirs" title="The Script Directories">The Script Directories</a>
+</li>
+<li>
+<span class="label">6.2. </span><a class="xref" href="configuration.html#configfile" title="The Configuration Files - GDM System Defaults Configuration File
+             and GDM Custom Configuraiton File">The Configuration Files - GDM System Defaults Configuration File
+             and GDM Custom Configuraiton File</a>
+</li>
+<li>
+<span class="label">6.3. </span><a class="xref" href="configuration.html#userconfig" title="Per User Configuration">Per User Configuration</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="scriptdirs"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">6.1. </span>The Script Directories</span></h2></div>
+<p class="para block block-first">
+        In this section we will explain the <span class="filename">Init</span>,
+        <span class="filename">PostLogin</span>, <span class="filename">PreSession</span> and
+        <span class="filename">PostSession</span> directories as they are very similar.
+      </p>
+<p class="para block">
+        When the X server has been successfully started, GDM will try to run
+        the script called <span class="filename">Init/&lt;displayname&gt;</span>. I.e.
+        <span class="filename">Init/:0</span> for the first attached display.  If this
+        file is not found, GDM will attempt to to run
+        <span class="filename">Init/&lt;hostname&gt;</span>. I.e.
+        <span class="filename">Init/somehost</span>.
+        If this still is not found, GDM will try
+        <span class="filename">Init/XDMCP</span> for all XDMCP logins or
+        <span class="filename">Init/Flexi</span> for all on demand flexible
+        displays.  If none of the above were found, GDM will run
+        <span class="filename">Init/Default</span>. The script will be run as root and
+        GDM blocks until it terminates. Use the <span class="filename">Init/*</span>
+        script for applications that are supposed to run alongside with the GDM
+        login window. xconsole for instance.  Commands to set the background
+        etc. go in this file too.
+      </p>
+<p class="para block"> 
+        It is up to the sysadmin to decide whether clients started by the Init
+        script should be killed before starting the user session. This is
+        controlled with the <span class="filename">KillInitClients</span> configuration
+        option.
+      </p>
+<p class="para block">
+        When the user has been successfully authenticated GDM tries the
+        scripts in the <span class="filename">PostLogin</span> directory in the same
+        manner as for the <span class="filename">Init</span> directory.  This is done
+        before any session setup is done, and so this would be the script where
+        you might setup the home directory if you need to (though you should
+        use the <span class="filename">pam_mount</span> module if you can for this).
+        You have the <span class="filename">$USER</span> and
+        <span class="filename">$DISPLAY</span> environment variables set for this
+        script, and again it is run as root.  The script should return 0 on
+        success as otherwise the user won't be logged in.  This is not true for
+        failsafe session however.
+      </p>
+<p class="para block">
+        After the user session has been setup from the GDM side of things, GDM
+        will run the scripts in the <span class="filename">PreSession</span> directory,
+        again in the same manner as the <span class="filename">Init</span> directory.
+        This script can be used for session management or accounting, for
+        example.  The <span class="filename">$USER</span> environment variable contains
+        the login of the authenticated user and <span class="filename">$DISPLAY</span>
+        is set to the current display.  The script should return 0 on success.
+        Any other value will cause GDM to terminate the current login process.
+        This is not true for failsafe sessions however.  Also
+        <span class="filename">$X_SERVERS</span> environmental variable is set and this
+        points to a fake generated X servers file for use with the sessreg
+        accounting application.
+      </p>
+<p class="para block">
+        After this the base <span class="filename">Xsession</span> script is run with
+        the selected session executable as the first argument.  This is run as
+        the user, and really this is the user session.  The available session
+        executables are taken from the <span class="filename">Exec=</span> line in the
+        <span class="filename">.desktop</span> files in the path specified by
+        <span class="filename">SessionDesktopDir</span>.  Usually this path is
+        <span class="filename">&lt;etc&gt;/X11/sessions/:&lt;etc&gt;/dm/Sessions:/usr/share/xsessions/</span>.
+        The first found file is used.  The user either picks from these
+        sessions or GDM will look inside the file <span class="filename">~/.dmrc</span>
+        for the stored preference.
+      </p>
+<p class="para block">
+        This script should really load the user's profile and generally do all
+        the voodoo that is needed to launch a session.  Since many systems
+        reset the language selections done by GDM, GDM will also set the
+        <span class="filename">$GDM_LANG</span> variable to the selected language.  You
+        can use this to reset the language environmental variables after you
+        run the user's profile.  If the user elected to use the system language,
+        then <span class="filename">$GDM_LANG</span> is not set. 
+      </p>
+<p class="para block"> 
+        When the user terminates his session, the
+        <span class="filename">PostSession</span> script will be run. Again operation
+        is similar to <span class="filename">Init</span>, <span class="filename">PostLogin</span>
+        and <span class="filename">PreSession</span>.  Again the script will be run with
+        root privileges, the slave daemon will block and the
+        <span class="filename">$USER</span> environment variable will contain the name
+        of the user who just logged out and <span class="filename">$DISPLAY</span> will
+        be set to the display the user used, however note that the X server for
+        this display may already be dead and so you shouldn't try to access it.
+        Also <span class="filename">$X_SERVERS</span> environmental variable is set and
+        this points to a fake generated X servers file for use with the sessreg
+        accounting application.
+      </p>
+<p class="para block">
+        Note that the <span class="filename">PostSession</span> script will be run
+        even when the display fails to respond due to an I/O error or
+        similar. Thus, there is no guarantee that X applications will work
+        during script execution.
+      </p>
+<p class="para block">
+        Except for the <span class="filename">Xsession</span> script all of these
+        scripts will also have the environment variable
+        <span class="filename">$RUNNING_UNDER_GDM</span> set to
+        <span class="filename">yes</span>, so that you could perhaps use similar
+        scripts for different display managers.  The
+        <span class="filename">Xsession</span> will always have the
+        <span class="filename">$GDMSESSION</span> set to the basename of the
+        session that the user chose to run without the
+        <span class="filename">.desktop</span> extension.  In addition
+        <span class="filename">$DESKTOP_SESSION</span> is also set to the same value
+        and in fact this will also be set by KDM in future versions.
+      </p>
+<p class="para block"> 
+        Neither of the <span class="filename">Init</span>,
+        <span class="filename">PostLogin</span>, <span class="filename">PreSession</span> or
+        <span class="filename">PostSession</span> scripts are necessary and can be left
+        out.  The <span class="filename">Xsession</span> script is however required as
+        well as at least one session <span class="filename">.desktop</span> file.
+      </p>
+</div>
+<div class="division sect2">
+<a name="configfile"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">6.2. </span>The Configuration Files - GDM System Defaults Configuration File
+             and GDM Custom Configuraiton File</span></h2></div>
+<p class="para block block-first">
+        GDM uses two configuration files: the GDM System Defaults Configuration
+        File (<span class="filename">&lt;share&gt;/gdm/defaults.conf</span>) and the
+        GDM Custom Configuration File
+        (<span class="filename">&lt;etc&gt;/gdm/custom.conf</span>).  The GDM System
+        Defaults File contains the default configuration choices for GDM, and
+        should not be modified by the user.  The GDM Custom Configuration File
+        is where users may specify their custom configuration choices.  
+        If a configuration option is not defined in either file, GDM will
+        default to the value described in the comments in the GDM System
+        Defaults Configuration File. 
+      </p>
+<p class="para block">
+        Both configuration files are divided into sections each containing
+        variables that define the behavior for a specific part of the GDM
+        suite.  Refer to the comments in the GDM System Defaults Configuration
+        File for additional information about each configuration setting.
+      </p>
+<p class="para block">
+        GDM also supports per-display configuration for parameters in the
+        "gui", "greeter" sections of the configuration file
+        Also the security/PamStack key may be customized per-display.
+        Per-display configuration is specified by creating a file named
+        <span class="filename">&lt;etc&gt;/gdm/custom.conf&lt;display num&gt;</span>.
+        In this file the section and keys to use on this display can be 
+        specified.  For example, configuration overrides for display
+        ":103" would be stored in the file
+        <span class="filename">&lt;etc&gt;/gdm/custom.conf:0</span>.  Per-display
+        configuration is supported in GDM 2.14.6 and later.
+      </p>
+<p class="para block">
+        To change configuration by hand, edit the GDM Custom Configuration File
+        or per-display configuration file and make sure the keyname=value
+        pair you want is included in the appropriate section.  For example,
+        to change the value for the "Greeter" key in the
+        "daemon" section, make sure the daemon section of the GDM
+        Custom Configuration File or per-display configuration file includes
+        the "[daemon]" section followed by the key and value 
+        change desired.  As in this example:
+      </p>
+<div class=" block screen block-indent"><pre class="screen">[daemon]
+Greeter=/usr/lib/gdmgreeter
+</pre></div>
+<p class="para block">
+        The <span class="command">gdmsetup</span> command can be used to modify the GDM
+        Custom Configuration File.  Note the <span class="command">gdmsetup</span> is
+        intended to be run as root, so users who feel it is insecure to run
+        GUI programs as root should edit the configuration files by hand.
+      </p>
+<p class="para block">
+        The GDM daemon <span class="command">--config</span> argument may instead be used
+        to specify a different configuration file location.  The GDM daemon
+        must be restarted to change the configuration file being used.  Also
+        when building GDM, the location of the configuration files may be
+        specified via the <span class="command">--with-defaults-conf</span> and
+        <span class="command">--with-custom-conf</span> configuration options.
+      </p>
+<p class="para block">
+        Previous to GDM 2.13.0.4 only the
+        <span class="filename">&lt;etc&gt;/gdm/gdm.conf</span> existed.  For best
+        backwards compatibility, this file will be used instead of the GDM
+        Custom Configuration File if it exists on your system.  If upgrading
+        to the new version of GDM, "make install" will check to see
+        if the <span class="filename">&lt;etc&gt;/gdm/gdm.conf</span> file is different
+        than the <span class="filename">&lt;etc&gt;/gdm/factory-gdm.conf</span> file.
+        If so, the <span class="filename">&lt;etc&gt;/gdm/gdm.conf</span> file will be 
+        automatically copied to
+        <span class="filename">&lt;etc&gt;/gdm/custom.conf</span> to preserve any
+        configuration changes.
+      </p>
+<p class="para block">
+        Distributions should edit the GDM System Defaults Configuration File to
+        establish default configuration values, so that they are preserved as
+        defaults and not modified by users modifying the GDM Custom
+        Configuration File.  Note that distributions may modify the GDM System
+        Defaults Configuration File on update to improve usability, security,
+        etc.  So any changes made to this file may be lost.
+      </p>
+<p class="para block">
+        The GDM System Defaults Configuration File and the GDM Custom
+        Configuration File follow the standard <span class="filename">.ini</span> style
+        configuration file syntax.  Keywords in brackets define sections,
+        strings before an equal sign (=) are variables and the data after
+        equal sign represents their value.  Empty lines or lines starting with
+        the hash mark (#) are ignored.  The graphical configurator will try to
+        preserve both comments (lines with a hash mark) and the overall
+        structure of the file so you can intermix using the GUI or hand
+        editing the configuration file.
+      </p>
+<p class="para block">
+        The following configuration keys are supported in GDM:
+      </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">6.2.1. </span><a class="xref" href="configuration.html#daemonsection" title="Daemon Configuration">Daemon Configuration</a>
+</li>
+<li>
+<span class="label">6.2.2. </span><a class="xref" href="configuration.html#securitysection" title="Security Options">Security Options</a>
+</li>
+<li>
+<span class="label">6.2.3. </span><a class="xref" href="configuration.html#xdmcpsection" title="XDCMP Support">XDCMP Support</a>
+</li>
+<li>
+<span class="label">6.2.4. </span><a class="xref" href="configuration.html#commonguioptions" title="Common GUI Configuration Options">Common GUI Configuration Options</a>
+</li>
+<li>
+<span class="label">6.2.5. </span><a class="xref" href="configuration.html#greetersection" title="Greeter Configuration">Greeter Configuration</a>
+</li>
+<li>
+<span class="label">6.2.6. </span><a class="xref" href="configuration.html#choosersection" title="XDCMP Chooser Options">XDCMP Chooser Options</a>
+</li>
+<li>
+<span class="label">6.2.7. </span><a class="xref" href="configuration.html#debugsection" title="Debug Configuration">Debug Configuration</a>
+</li>
+<li>
+<span class="label">6.2.8. </span><a class="xref" href="configuration.html#customcmdsection" title="Custom Commands">Custom Commands</a>
+</li>
+<li>
+<span class="label">6.2.9. </span><a class="xref" href="configuration.html#xserverdefs" title="X Server Definitions">X Server Definitions</a>
+</li>
+<li>
+<span class="label">6.2.10. </span><a class="xref" href="configuration.html#attacheddisplayconfig" title="Attached DISPLAY Configuration">Attached DISPLAY Configuration</a>
+</li>
+</ul></div>
+<div class="division sect3">
+<a name="daemonsection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.1. </span>Daemon Configuration</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[daemon]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">AddGtkModules</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AddGtkModules=false</pre></div>
+              <p class="para block">
+                If true, then enables <span class="command">gdmgreeter</span> or
+                <span class="command">gdmlogin</span> to be launched with additional
+                Gtk+ modules. This is useful when extra features are required
+                such as accessible login. Note that only "trusted"
+                modules should be used to minimize security issues.
+              </p>
+              <p class="para block">
+                If true, then the registry daemon
+                <span class="command">at-spi-registryd</span>
+                will be launched by <span class="command">gdmgreeter</span> or
+                <span class="command">gdmlogin</span> starting with version GDM 2.17.
+              </p>
+              <p class="para block">
+                Usually this is used for accessibility modules.  The modules
+                which are loaded are specified with the
+                <span class="filename">GtkModulesList</span> key.
+              </p>
+            </dd>
+<dt class="term">AllowLogoutActions</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowLogoutActions=HALT;REBOOT;SHUTDOWN;SUSPEND;CUSTOM_CMD</pre></div>
+              <p class="para block">
+                 Specify which actions are supported by the QUERY_LOGOUT_ACTION,
+                 SET_LOGOUT_ACTION, and SET_SAFE_LOGOUT_ACTION
+                 <span class="command">gdmflexiserver</span> commands.  Valid values are 
+                 HALT, REBOOT, SHUTDOWN, SUSPEND, and CUSTOM_CMD and these
+                 should be separated by semicolons.  This allows certain
+                 options to be disabled  if desired.  Refer to the related
+                 <span class="filename">SystemCommandsInMenu</span> and
+                 <span class="filename">RBACSystemCommandKeys</span> configuration
+                 options.
+              </p>
+            </dd>
+<dt class="term">AlwaysLoginCurrentSession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AlwaysLoginCurrentSession=true</pre></div>
+              <p class="para block">
+                If true, then when the user logs in and already has an
+                existing session, then they are connected to that session
+                rather than starting a new session.  This only works for
+                sessions running on VTs (Virtual Terminals) started with
+                gdmflexiserver, and not with XDMCP.  Note that VTs are not
+                supported on all operating systems.
+              </p>
+            </dd>
+<dt class="term">AutomaticLoginEnable</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AutomaticLoginEnable=false</pre></div>
+              <p class="para block">
+                If the user given in AutomaticLogin should be logged in upon
+                first bootup.  No password will be asked.  This is useful
+                for single user workstations where console security is not an
+                issue and also could be useful for public terminals.  Refer
+                also to <span class="filename">TimedLogin</span>.
+              </p>
+            </dd>
+<dt class="term">AutomaticLogin</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AutomaticLogin=</pre></div>
+              <p class="para block">
+                This user should be automatically logged in on first bootup.
+                AutomaticLoginEnable must be true and this must be
+                a valid user for this to happen.  "root" can never be
+                autologged in however and gdm will just refuse to do it even
+                if you set it up.
+              </p>
+
+              <p class="para block">
+                The following control chars are recognized within the
+                specified name:
+              </p>
+
+              <p class="para block">
+                %% — the `%' character
+              </p>
+
+              <p class="para block">
+                %d — display's name
+              </p>
+
+              <p class="para block">
+                %h — display's hostname
+              </p>
+
+              <p class="para block">
+                Alternatively, the name may end with a vertical bar |, the
+                pipe symbol.  The name is then used as a application to execute
+                which returns the desired username on standard output. If an
+                empty or otherwise invalid username is returned, automatic
+                login is not performed. This feature is typically used when
+                several remote displays are used as internet kiosks, with a
+                specific user to automatically login for each display.
+              </p>
+            </dd>
+<dt class="term">BaseXsession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BaseXsession=&lt;etc&gt;/gdm/Xsession</pre></div>
+              <p class="para block">
+                This is the base X session file.  When a user logs in, this
+                script will be run with the selected session as the first
+                argument.  The selected session will be the
+                <span class="filename">Exec=</span> from the
+                <span class="filename">.desktop</span> file of the session.
+              </p>
+
+              <p class="para block">
+                If you wish to use the same script for several different
+                display managers, and wish to have some of the script run only
+                for GDM, then you can check the presence of the
+                <span class="filename">GDMSESSION</span> environmental variable.  This
+                will always be set to the basename of
+                <span class="filename">.desktop</span> (without the extension) file that
+                is being used for this session, and will only be set for GDM
+                sessions.  Previously some scripts were checking for
+                <span class="filename">GDM_LANG</span>, but that is only set when the
+                user picks a non-system default language.
+              </p>
+
+              <p class="para block">
+                This script should take care of doing the "login" for
+                the user and so it should source the
+                <span class="filename">&lt;etc&gt;/profile</span> and friends.  The
+                standard script shipped with GDM sources the files in this
+                order: <span class="filename">&lt;etc&gt;/profile</span> then
+                <span class="filename">~/.profile</span> then
+                <span class="filename">&lt;etc&gt;/xprofile</span> and finally
+                <span class="filename">~/.xprofile</span>.  Note that different
+                distributions may change this however.  Sometimes users
+                personal setup will be in <span class="filename">~/.bash_profile</span>,
+                however broken that is.
+              </p>
+            </dd>
+<dt class="term">Chooser</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Chooser=&lt;bin&gt;/gdmchooser</pre></div>
+              <p class="para block">
+                Full path and name of the chooser executable followed by
+                optional arguments.
+              </p>
+            </dd>
+<dt class="term">Configurator</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Configurator=&lt;bin&gt;/gdmsetup --disable-sound --disable-crash-dialog</pre></div>
+              <p class="para block">
+                The pathname to the configurator binary.  If the greeter
+                <span class="filename">ConfigAvailable</span> option is set to true then
+                run this binary when somebody chooses Configuration from the
+                Actions menu.  Of course GDM will first ask for root password
+                however.  And it will never allow this to happen from a remote
+                display.
+              </p>
+            </dd>
+<dt class="term">ConsoleCannotHandle</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ConsoleCannotHandle=am,ar,az,bn,el,fa,gu,hi,ja,ko,ml,mr,pa,ta,zh</pre></div>
+              <p class="para block">
+                These are the languages that the console cannot handle because
+                of font issues.  Here we mean the text console, not X.  This
+                is only used when there are errors to report and we cannot
+                start X.
+              </p>
+            </dd>
+<dt class="term">ConsoleNotify</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ConsoleNotify=true</pre></div>
+              <p class="para block">
+                If false, gdm will not display a message dialog on the
+                console when an error happens.
+              </p>
+            </dd>
+<dt class="term">DefaultPath</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultPath=defaultpath (value set by configure)</pre></div>
+              <p class="para block">
+                Specifies the path which will be set in the user's session.
+                This value will be overridden with the value from
+                <span class="filename">/etc/default/login</span> if it contains
+                "ROOT=&lt;pathname&gt;".  If the
+                <span class="filename">/etc/default/login</span> file exists, but
+                contains no value for ROOT, the value as defined in the GDM
+                configuration will be be used.
+              </p>
+            </dd>
+<dt class="term">DefaultSession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultSession=gnome.desktop</pre></div>
+              <p class="para block">
+                The session that is used by default if the user does not have
+                a saved preference and has picked 'Last' from the list of
+                sessions.  Note that 'Last' need not be displayed, see
+                the <span class="filename">ShowLastSession</span> key.
+              </p>
+            </dd>
+<dt class="term">DisplayInitDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DisplayInitDir=&lt;etc&gt;/gdm/Init</pre></div>
+              <p class="para block">
+                Directory containing the display init scripts. See the
+                ``The Script Directories'' section for more info.
+              </p>
+            </dd>
+<dt class="term">DisplayLastLogin</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DisplayLastLogin=true</pre></div>
+              <p class="para block">
+                If true then the last login information is printed to the user
+                before being prompted for password.  While this gives away some
+                info on what users are on a system, it on the other hand should
+                give the user an idea of when they logged in and if it doesn't
+                seem kosher to them, they can just abort the login and contact
+                the sysadmin (avoids running malicious startup scripts).
+                This was added in version 2.5.90.0.
+              </p>
+              <p class="para block">
+                This is for making GDM conformant to CSC-STD-002-85, although
+                that is purely theoretical now.  Someone should read that spec
+                and ensure that this actually conforms (in addition to other
+                places in GDM).  See
+                <span class="filename">http://www.radium.ncsc.mil/tpep/library/rainbow/CSC-STD-002-85.html</span>
+                for more info.
+              </p>
+            </dd>
+<dt class="term">DoubleLoginWarning</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DoubleLoginWarning=true</pre></div>
+              <p class="para block">
+                If true, GDM will warn the user if they are already logged in
+                on another virtual terminal.  On systems where GDM supports
+                checking the X virtual terminals, GDM will let the user switch
+                to the previous login virtual terminal instead of logging in.
+              </p>
+            </dd>
+<dt class="term">DynamicXServers</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DynamicXServers=false</pre></div>
+              <p class="para block">
+                If true, the GDM daemon will honor requests to manage
+                displays via the <span class="filename">/tmp/.gdm_socket</span>
+                socket connection. Displays can be created, started,
+                and deleted with the appropriate commands. The
+                <span class="filename">gdmdynamic</span> command is a convenient
+                method to send these messages.
+              </p>
+            </dd>
+<dt class="term">FailsafeXServer</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">FailsafeXServer=</pre></div>
+              <p class="para block">
+                An X command line in case we can't start the normal X server.
+                should probably be some sort of a script that runs an
+                appropriate low resolution X server that will just work.
+                This is tried before the <span class="filename">XKeepsCrashing</span>
+                script is run.
+              </p>
+            </dd>
+<dt class="term">FirstVT</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">FirstVT=7</pre></div>
+              <p class="para block">
+                On systems where GDM supports automatic VT (virtual terminal)
+                allocation, this is the first vt to try.  Usually standard text
+                logins are run on the lower vts.  See also
+                <span class="filename">VTAllocation</span>.
+              </p>
+            </dd>
+<dt class="term">FlexibleXServers</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">FlexibleXServers=5</pre></div>
+              <p class="para block">
+                The maximum number of allowed flexible displays.  These are
+                displays that can be run using the
+                <span class="filename">/tmp/.gdm_socket</span> socket connection.
+                This is used for both full flexible displays and for nested
+                displays (refer to the <span class="filename">Xnest</span> configuration
+                option).
+              </p>
+            </dd>
+<dt class="term">FlexiReapDelayMinutes</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">FlexiReapDelayMinutes=5</pre></div>
+              <p class="para block">
+                After how many minutes of inactivity at the login screen
+                should a flexi display be reaped.  This is only in effect
+                before a user logs in.  Also it does not affect nested displays
+                (refer to the <span class="filename">Xnest</span> configuration
+                option).  To turn off this behavior set this value to 0.  This
+                was added in version 2.5.90.0.
+              </p>
+            </dd>
+<dt class="term">Greeter</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Greeter=&lt;bin&gt;/gdmlogin</pre></div>
+              <p class="para block">
+                Full path and name of the greeter executable followed by
+                optional arguments.  This is the greeter used for all displays
+                except for the XDMCP remote displays.  See also
+                <span class="filename">RemoteGreeter</span>
+              </p>
+            </dd>
+<dt class="term">Group</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Group=gdm</pre></div>
+              <p class="para block">
+                The group name under which <span class="command">gdmlogin</span>,
+                <span class="command">gdmgreeter</span>,
+                <span class="command">gdmchooser</span> and the internal
+                failsafe GTK+ dialogs are run.  Also see
+                <span class="filename">User</span>.  This user will have access to all
+                the X authorization files, and perhaps to other internal GDM
+                data and it should not therefore be a user such as nobody, but
+                rather a dedicated user.  The <span class="filename">ServAuthDir</span>
+                is owned by this group.  The ownership and permissions of
+                <span class="filename">ServAuthDir</span> should be
+                <span class="filename">root.gdm</span> and 1770.
+              </p>
+            </dd>
+<dt class="term">GtkModulesList</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GtkModulesList=module-1:module-2:...</pre></div>
+              <p class="para block">
+                A colon separated list of Gtk+ modules that
+                <span class="command">gdmgreeter</span> or <span class="command">gdmlogin</span>
+                will be invoked with if <span class="filename">AddGtkModules</span> is
+                true.  The format is the same as the standard Gtk+ module
+                interface.
+              </p>
+            </dd>
+<dt class="term">HaltCommand</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">HaltCommand=&lt;sbin&gt;/shutdown -h now</pre></div>
+              <p class="para block">
+                Full path and arguments to command to be executed when user
+                selects "Shut Down" from the Actions menu.  This can
+                be a ';' separated list of commands to try.  If a value is
+                missing, the shut down command is not available.  Note that the
+                default for this value is not empty, so to disable
+                "Shut Down" it must be
+                set to an empty value.
+              </p>
+            </dd>
+<dt class="term">KillInitClients</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">KillInitClients=true</pre></div>
+              <p class="para block">
+                Determines whether GDM should kill X clients started by the
+                init scripts when the user logs in.
+              </p>
+            </dd>
+<dt class="term">LogDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">LogDir=&lt;var&gt;/log/gdm</pre></div>
+              <p class="para block">
+                Directory containing the log files for the individual displays.
+                By default this is the same as the ServAuthDir.
+              </p>
+            </dd>
+<dt class="term">PreFetchProgram</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PreFetchProgram=command</pre></div>
+              <p class="para block">
+                Program to be run by the GDM greeter/login program when the
+                initial screen is displayed.  The  purpose is to provide a hook
+                where files which will be used after login can be preloaded to
+                speed performance for the user.  The program will be called
+                once only, the first time a greeter is displayed.  The
+                gdmprefetch command may be used.  This utility will load any
+                libraries passed in on the command line, or if the argument
+                starts with a "@" character, it will process the file
+                assuming it is an ASCII file containing a list of libraries,
+                one per line, and load each library in the file.
+              </p>
+            </dd>
+<dt class="term">PostLoginScriptDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PostLoginScriptDir=&lt;etc&gt;/gdm/PostLogin</pre></div>
+              <p class="para block">
+                Directory containing the scripts run right after the user logs
+                in, but before any session setup is done.  See the
+                ``The Script Directories'' section for more info.
+              </p>
+            </dd>
+<dt class="term">PostSessionScriptDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PostSessionScriptDir=&lt;etc&gt;/gdm/PostSession</pre></div>
+              <p class="para block">
+                Directory containing the scripts run after the user logs out.
+                See the ``The Script Directories'' section for more info.
+              </p>
+            </dd>
+<dt class="term">PreSessionScriptDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PreSessionScriptDir=&lt;etc&gt;/gdm/PreSession</pre></div>
+              <p class="para block">
+                Directory containing the scripts run before the user logs in.
+                See the ``The Script Directories'' section for more info.
+              </p>
+            </dd>
+<dt class="term">RBACSystemCommandKeys</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RBACSystemCommandKeys</pre></div>
+              <p class="para block">
+                 Support RBAC (Role Based Access Control) for system commands 
+                 (Shutdown, Reboot, Suspend, etc.).  This feature is only
+                 functional if GDM is compiled with RBAC support.  Specify the
+                 RBAC key used to determine if the user has permission to use
+                 the action via the QUERY_LOGOUT_ACTION, SET_LOGOUT_ACTION, and
+                 SET_SAFE_LOGOUT_ACTION <span class="command">gdmflexiserver</span>
+                 commands.  Valid actions are HALT, REBOOT, SUSPEND, and
+                 CUSTOM_CMD.  The greeter will only display the command if the
+                 gdm user (<span class="filename">User</span> configuration key) has
+                 RBAC permissions to use the action.  RBAC keys for multiple
+                 actions can be specified by separating them with semicolons.
+                 The format for each is "Action:RBAC key".  If an action is not
+                 specified, it is assumed that all users have permission to use
+                 this action.  For example, a valid value for this
+                 configuration option would be
+                 "HALT:key.for.halt;REBOOT:key.for.reboot".  Refer to
+                 the related <span class="filename">AllowLogoutActions</span> and
+                 <span class="filename">SystemCommandsInMenu</span> configuration
+                 options.
+              </p>
+            </dd>
+<dt class="term">RebootCommand</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RebootCommand=&lt;sbin&gt;/shutdown -r now</pre></div>
+              <p class="para block">
+                Full path and optional arguments to the command to be
+                executed when user selects Restart from the Actions menu.  This
+                can be a ';' separated list of commands to try.  If missing,
+                the restart command is not available.  Note that the default 
+                for this value is not empty so to disable restart you must set
+                this explicitly to an empty value.
+              </p>
+            </dd>
+<dt class="term">RemoteGreeter</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RemoteGreeter=&lt;bin&gt;/gdmlogin</pre></div>
+              <p class="para block">
+                Full path and name of the greeter executable followed by
+                optional arguments.  This is used for all remote XDMCP
+                sessions.  It is useful to have the less graphically demanding
+                greeter here if you use the Themed Greeter for your main
+                greeter.  See also the <span class="filename">Greeter</span> key.
+              </p>
+            </dd>
+<dt class="term">RootPath</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RootPath=defaultpath (value set by configure)</pre></div>
+              <p class="para block">
+                Specifies the path which will be set in the root's
+                session and the {Init,PostLogin,PreSession,PostSession} scripts
+                executed by GDM.  This value will be overridden with the value
+                from <span class="filename">/etc/default/login</span> if it
+                contains "SUROOT=&lt;pathname&gt;".  If the
+                <span class="filename">/etc/default/login</span> file exists, but
+                contains no value for SUROOT, the value as defined in the GDM
+                configuration will be used.
+              </p>
+            </dd>
+<dt class="term">ServAuthDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ServAuthDir=&lt;var&gt;/gdm</pre></div>
+              <p class="para block">
+                Directory containing the X authentication files for the
+                individual displays.  Should be owned by
+                <span class="filename">root.gdm</span> with permissions 1770, where
+                <span class="filename">gdm</span> is the GDM group as defined by the
+                <span class="filename">Group</span> option.  That is should be owned by
+                root, with <span class="filename">gdm</span> group having full write
+                permissions and the directory should be sticky and others
+                should have no permission to the directory.  This way the GDM
+                user can't remove files owned by root in that directory, while
+                still being able to write its own files there.  GDM will
+                attempt to change permissions for you when it's first run if
+                the permissions are not the above.  This directory is also used
+                for other private files that the daemon needs to store.  Other
+                users should not have any way to get into this directory and
+                read/change it's contents.  Anybody who can read this directory
+                can connect to any display on this computer.
+              </p>
+            </dd>
+<dt class="term">SessionDesktopDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SessionDesktopDir=&lt;etc&gt;/X11/sessions/:&lt;etc&gt;/dm/Sessions/:&lt;share&gt;/xsessions/</pre></div>
+              <p class="para block">
+                Directory containing the <span class="filename">.desktop</span> files
+                which are the available sessions on the system.  Since 2.4.4.2
+                this is treated like a PATH type variable and the first file
+                found is used.
+              </p>
+            </dd>
+<dt class="term">SoundProgram</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundProgram=<span class="filename">&lt;bin&gt;/play</span> (or <span class="filename">&lt;bin&gt;/audioplay</span> on Solaris)</pre></div>
+              <p class="para block">
+                Application to use when playing a sound.  Currently used for
+                playing the login sound, see the
+                <span class="filename">SoundOnLoginFile</span> key.  Supported since
+                2.5.90.0.
+              </p>
+            </dd>
+<dt class="term">StandardXServer</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">StandardXServer=/dir/to/X (value assigned by configuration file)</pre></div>
+              <p class="para block">
+                Full path and arguments to the standard X server command.
+                This is used when gdm cannot find any other definition,
+                and it's used as the default and failsafe fallback in a
+                number of places.  This should be able to run some sort
+                of X server.
+              </p>
+            </dd>
+<dt class="term">SuspendCommand</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SuspendCommand=</pre></div>
+              <p class="para block">
+                Full path and arguments to command to be executed when
+                user selects Suspend from the Actions menu.  If empty
+                there is no such menu item.  Note that the default for this
+                value is not empty so to disable suspend you must set this
+                explicitly to an empty value.
+              </p>
+            </dd>
+<dt class="term">SystemCommandsInMenu</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SuspendCommand=HALT;REBOOT;SHUTDOWN;SUSPEND;CUSTOM_CMD</pre></div>
+              <p class="para block">
+                 Specify which system commands are available in the greeter
+                 menu. Valid values are HALT, REBOOT, SHUTDOWN, SUSPEND, and
+                 CUSTOM_CMD and these should be separated by semicolons.  This
+                 can be useful if you want to disable some options in the menu,
+                 but still have them available to authenticated users via the
+                 SET_LOGOUT_ACTION or SET_SAFE_LOGOUT_ACTION
+                 <span class="command">gdmflexiserver</span> commands.  For example, the
+                 GNOME panel uses these commands to provide Shutdown, Reboot,
+                 and Suspend in the application menu.  Therefore if you turn
+                 off these options in the greeter, these options can still be
+                 available to users who have authenticated via the GNOME panel.
+                 Refer to the related
+                 <span class="filename">AllowLogoutActions</span> and
+                 <span class="filename">RBACSystemCommandKeys</span> configuration
+                 options.
+              </p>
+            </dd>
+<dt class="term">TimedLoginEnable</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">TimedLoginEnable=false</pre></div>
+              <p class="para block">
+                 If the user given in <span class="filename">TimedLogin</span> should be
+                logged in after a number of seconds (set with
+                <span class="filename">TimedLoginDelay</span>) of inactivity on the
+                login screen.  This is useful for public access terminals or
+                perhaps even home use.  If the user uses the keyboard or
+                browses the menus, the timeout will be reset to 
+                <span class="filename">TimedLoginDelay</span> or 30 seconds, whichever 
+                is higher.   If the user does not enter a username but just
+                hits the ENTER key while the login program is requesting the
+                username, then GDM will assume the user wants to login
+                immediately as the timed user.  Note that no password will be
+                asked for this user so you should be careful, although if using
+                PAM it can be configured to require password entry before
+                allowing login.
+              </p>
+            </dd>
+<dt class="term">TimedLogin</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">TimedLogin=</pre></div>
+              <p class="para block">
+                This is the user that should be logged in after a specified
+                number of seconds of inactivity.  This can never be
+                "root" and gdm will refuse to log in root this way.
+                The same features as for <span class="filename">AutomaticLogin</span>
+                are supported.  The same control chars and piping to a
+                application are supported.
+              </p>
+            </dd>
+<dt class="term">TimedLoginDelay</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">TimedLoginDelay=30</pre></div>
+              <p class="para block">
+                Delay in seconds before the <span class="filename">TimedLogin</span>
+                user will be logged in.  It must be greater then or equal to 10.
+              </p>
+            </dd>
+<dt class="term">User</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">User=gdm</pre></div>
+              <p class="para block">
+                The username under which <span class="command">gdmlogin</span>,
+                <span class="command">gdmgreeter</span>,
+                <span class="command">gdmchooser</span> and the internal
+                failsafe GTK+ dialogs are run.  Also see
+                <span class="filename">Group</span>.  This user will have access to all
+                the X authorization files, and perhaps to other internal GDM
+                data and it should not therefore be a user such as nobody, but
+                rather a dedicated user.
+              </p>
+            </dd>
+<dt class="term">UserAuthDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UserAuthDir=</pre></div>
+              <p class="para block">
+                The directory where user's <span class="filename">.Xauthority</span>
+                file should be saved.  When nothing is specified the user's
+                home directory is used.  This is tilde expanded so you
+                can set it to things like: <span class="filename">~/authdir/</span>.
+              </p>
+
+              <p class="para block">
+                If you do not use the tilde expansion, then the filename
+                created will be random, like in
+                <span class="filename">UserAuthFBDir</span>.  This way many users can
+                have the same authentication directory.  For example you might
+                want to set this to <span class="filename">/tmp</span> when user has the
+                home directory on NFS, since you really don't want cookie files
+                to go over the wire.  The users should really have write
+                privileges to this directory, and this directory should really
+                be sticky and all that, just like the <span class="filename">/tmp</span>
+                directory.
+              </p>
+
+              <p class="para block">
+                Normally if this is the user's home directory GDM will still
+                refuse to put cookies there if it thinks it is NFS (by testing
+                root-squashing).  This can be changed by setting
+                <span class="filename">NeverPlaceCookiesOnNFS</span> in the
+                <span class="filename">[security]</span> section to false.
+              </p>
+            </dd>
+<dt class="term">UserAuthFBDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UserAuthFBDir=/tmp</pre></div>
+              <p class="para block">
+                If GDM fails to update the user's
+                <span class="filename">.Xauthority</span> file a fallback cookie is
+                created in this directory.
+              </p>
+            </dd>
+<dt class="term">UserAuthFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UserAuthFile=.Xauthority</pre></div>
+              <p class="para block">
+                Name of the file used for storing user cookies.  
+              </p>
+            </dd>
+<dt class="term">VTAllocation</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">VTAllocation=true</pre></div>
+              <p class="para block">
+                On systems where GDM supports automatic VT (virtual terminal)
+                allocation (currently Linux and FreeBSD only), you can have
+                GDM automatically append the vt argument to the X server
+                executable.  This way races that come up from each X server
+                managing it's own vt allocation can be avoided.  See also
+                <span class="filename">FirstVT</span>.
+              </p>
+            </dd>
+<dt class="term">XKeepsCrashing</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">XKeepsCrashing=&lt;etc&gt;/gdm/XKeepsCrashing</pre></div>
+              <p class="para block">
+                A script to run in case X keeps crashing.  This is for running
+                An X configuration or whatever else to make the X configuration
+                work.  See the script that came with the distribution for an
+                example.  The distributed <span class="filename">XKeepsCrashing</span>
+                script is tested on Red Hat, but may work elsewhere.  Your
+                system integrator should make sure this script is up to date
+                for your particular system.
+              </p>
+              <p class="para block">
+                In case <span class="filename">FailsafeXServer</span> is setup, that
+                will be tried first.  and this only used as a backup if even
+                that X server keeps crashing.
+              </p>
+            </dd>
+<dt class="term">Xnest</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Xnest=&lt;bin&gt;/X11/Xephyr -audit 0</pre></div>
+              <p class="para block">
+                The full path and arguments to the nested X server command, 
+                which can be Xephyr, Xnest, or similar program.  This command
+                is used for starting nested displays allowing the user
+                to start new login screens in a nested window.  Xephyr is
+                recommended since it works best and better supports modern
+                X server extensions.  Therefore GDM will set the default
+                configuration to use Xephyr if available.  If Xephyr is not
+                available, then Xnest will be used if it is available.
+              </p>
+            </dd>
+<dt class="term">XnestUnscaledFontPath</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">XnestUnscaledFontPath=true</pre></div>
+              <p class="para block">
+                Set to true if the nested X server command program supports the
+                ":unscaled" suffix in the FontPath (passed to nested X server
+                command via the -fp argument).  Some Xnest (e.g. Xsun Xnest)
+                programs do not, and it is necessary to set this to false for
+                such nested X server commands to work with GDM.  Refer to the
+                <span class="filename">Xnest</span> configuration option.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="securitysection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.2. </span>Security Options</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[security]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">AllowRoot</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowRoot=true</pre></div>
+              <p class="para block">
+                Allow root (privileged user) to log in through GDM.  Set this
+                to false if you want to disallow such logins.
+              </p>
+              <p class="para block">
+                On systems that support PAM, this parameter is not as useful
+                as you can use PAM to do the same thing, and in fact do even
+                more.  However it is still followed, so you should probably
+                leave it true for PAM systems.
+              </p>
+            </dd>
+<dt class="term">AllowRemoteRoot</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowRemoteRoot=false</pre></div>
+              <p class="para block">
+                Allow root (privileged user) to log in remotely through GDM.
+                This value should be set to true to allow such logins.
+                Remote logins are any logins that come in through the XDMCP.
+              </p>
+              <p class="para block">
+                On systems that support PAM, this parameter is not as useful
+                since you can use PAM to do the same thing, and do even
+                more.
+              </p>
+              <p class="para block">
+                This value will be overridden and set to false if the
+                <span class="filename">/etc/default/login</span> file exists and
+                contains "CONSOLE=/dev/login", and set to true if the
+                <span class="filename">/etc/default/login</span> file exists and
+                contains any other value or no value for CONSOLE.
+              </p>
+            </dd>
+<dt class="term">AllowRemoteAutoLogin</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowRemoteAutoLogin=false</pre></div>
+              <p class="para block">
+                Allow the timed login feature to work for remote displays.
+                In other words, remote connections via XDMCP will be allowed to
+                log into the "TimedLogin" user after the delay
+                defined by <span class="filename">TimedLoginDelay</span>.
+              </p>
+              <p class="para block">
+                Note that this can make a system quite insecure, and thus is
+                off by default.
+              </p>
+            </dd>
+<dt class="term">CheckDirOwner</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CheckDirOwner=true</pre></div>
+              <p class="para block">
+                By default GDM checks the ownership of the home directories
+                before writing to them, this prevents security issues in case
+                of bad setup.  However in some instances home directories will
+                be owned by a different user and in this case it is necessary
+                to turn this option on.  You will also most likely have to
+                turn the <span class="filename">RelaxPermissions</span> key to at least
+                value 1 since in such a scenario home directories are likely
+                to be group writable.  Supported since 2.6.0.4.
+              </p>
+            </dd>
+<dt class="term">SupportAutomount</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SupportAutomount=false</pre></div>
+              <p class="para block">
+                By default GDM checks the ownership of the home directories
+                before writing to them, this prevents security issues in case
+                of bad setup.  However, when home directories are managed by
+                automounter, they are often not mounted before they are 
+                accessed. This option works around subtleties of Linux
+                automounter.
+              </p>
+            </dd>
+<dt class="term">DisallowTCP</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DisallowTCP=true</pre></div>
+              <p class="para block">
+                If true, then always append <span class="filename">-nolisten tcp</span>
+                to the command line when starting attached X servers, thus
+                disallowing TCP connection.  This is a more secure
+                configuration if not using remote connections.
+              </p>
+            </dd>
+<dt class="term">NeverPlaceCookiesOnNFS</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">NeverPlaceCookiesOnNFS=true</pre></div>
+              <p class="para block">
+                Normally if this is true (which is by default), GDM will not
+                place cookies into the user's home directory if this directory
+                is on NFS.  Well, GDM will consider any filesystem with
+                root-squashing an NFS filesystem.  Sometimes however the remote
+                file system can have root squashing and be safe (perhaps by
+                using encryption).  In this case set this to 'false'.  Note
+                that this option appeared in version 2.4.4.4 and is ignored in
+                previous versions.
+              </p>
+            </dd>
+<dt class="term">PasswordRequired</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PasswordRequired=false</pre></div>
+              <p class="para block">
+                If true, this will cause PAM_DISALLOW_NULL_AUTHTOK to be
+                passed as a flag to pam_authenticate and pam_acct_mgmt,
+                disallowing NULL password.  This setting will only take
+                effect if PAM is being used by GDM.  This value will be
+                overridden with the value from
+                <span class="filename">/etc/default/login</span> if it contains
+                "PASSREQ=[YES|NO]".  If the
+                <span class="filename">/etc/default/login</span> file exists, but
+                contains no value for PASSREQ, the value as defined in the GDM
+                configuration will be used.
+              </p>
+            </dd>
+<dt class="term">RelaxPermissions</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RelaxPermissions=0</pre></div>
+              <p class="para block">
+                By default GDM ignores files and directories writable to
+                other users than the owner. 
+              </p> 
+              
+              <p class="para block"> 
+                Changing the value of RelaxPermissions makes it possible to
+                alter this behavior:
+              </p>
+              
+              <p class="para block">
+                0 - Paranoia option. Only accepts user owned files and
+                directories.
+              </p>
+              <p class="para block">
+                1 - Allow group writable files and directories.
+              </p>
+              <p class="para block">
+                2 - Allow world writable files and directories.
+              </p>
+            </dd>
+<dt class="term">RetryDelay</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RetryDelay=1</pre></div>
+              <p class="para block">
+                The number of seconds GDM should wait before reactivating the
+                entry field after a failed login.
+              </p>
+            </dd>
+<dt class="term">UserMaxFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UserMaxFile=65536</pre></div>
+              <p class="para block">
+                GDM will refuse to read/write files bigger than this number
+                (specified in bytes).
+              </p>
+              
+              <p class="para block">
+                In addition to the size check GDM is extremely picky about
+                accessing files in user directories.  It will not follow
+                symlinks and can optionally refuse to read files and
+                directories writable by other than the owner. See the
+                <span class="filename">RelaxPermissions</span> option for more info.
+              </p>
+            </dd>
+<dt class="term">UtmpLineAttached</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UtmpLineAttached=/dev/console (or /dev/dtlocal on Solaris)</pre></div>
+              <p class="para block">
+                When doing Utmp processing for attached displays, GDM sets the
+                ut_line to the device associated with the Virtual Terminal (VT)
+                if it is being used.  Otherwise, it will use the value
+                specified with the display in the
+                <span class="filename">[servers]</span> section if a value is provided.
+                If not, then the default value specified in UtmpLineAttached is
+                used for attached displays.  The value can contain
+                "%d" which is translated to the DISPLAY value or
+                "%h" which is translated to the hostname.  This value
+                must begin with <span class="filename">/dev/</span>.
+              </p>
+            </dd>
+<dt class="term">UtmpLineRemote</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UtmpLineRemote= (or /dev/dtremote on Solaris)</pre></div>
+              <p class="para block">
+                When doing Utmp processing, GDM sets the ut_line to this value
+                for remote displays.  The value can contain "%d"
+                which is translated to the DISPLAY value or "%h"
+                which is translated to the hostname.  This value must begin
+                with <span class="filename">/dev/</span>.
+              </p>
+            </dd>
+<dt class="term">UtmpPseudoDevice</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PseudoDevice=false (or true on Solaris)</pre></div>
+              <p class="para block">
+                If the device associated with a display does not exist, then
+                GDM will create a symlink to <span class="filename">/dev/null</span>, or
+                touch it if it is a symlink to <span class="filename">/dev/null</span>.
+                Some programs such as <span class="command">last</span>,
+                <span class="command">finger</span>, or <span class="command">who</span> access the
+                utmp database and may assume that the device points to an
+                actual file.  Creating such symlinks ensures that such programs
+                work properly.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="xdmcpsection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.3. </span>XDCMP Support</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[xdmcp]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">DisplaysPerHost</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DisplaysPerHost=1</pre></div>
+              <p class="para block">
+                To prevent attackers from filling up the pending queue, GDM
+                will only allow one connection for each remote computer.  If
+                you want to provide display services to computers with more
+                than one screen, you should increase the
+                <span class="filename">DisplaysPerHost</span> value accordingly.
+              </p>
+
+              <p class="para block">
+                Note that the number of attached DISPLAYS allowed is not 
+                limited.  Only remote connections via XDMCP are limited by
+                this configuration option.
+              </p>
+            </dd>
+<dt class="term">Enable</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Enable=false</pre></div>
+              <p class="para block">
+                Setting this to true enables XDMCP support allowing remote
+                displays/X terminals to be managed by GDM.
+              </p>
+              
+              <p class="para block">
+                <span class="filename">gdm</span> listens for requests on UDP port 177.
+                See the Port option for more information.
+              </p>
+              
+              <p class="para block">
+                If GDM is compiled to support it, access from remote displays
+                can be controlled using the TCP Wrappers library. The service
+                name is <span class="filename">gdm</span>
+              </p>
+              
+              <p class="para block">
+                You should add 
+<div class=" block screen block-indent block-first"><pre class="screen">gdm:.my.domain
+</pre></div>
+                to your <span class="filename">&lt;etc&gt;/hosts.allow</span>, depending
+                on your TCP Wrappers configuration.  See the
+                <a class="ulink" href="man:hosts.allow" title="man:hosts.allow">hosts.allow(5)</a>
+                man page for details.
+              </p>
+              
+              <p class="para block">
+                Please note that XDMCP is not a particularly secure protocol
+                and that it is a good idea to block UDP port 177 on your
+                firewall unless you really need it.
+              </p>
+            </dd>
+<dt class="term">EnableProxy</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">EnableProxy=false</pre></div>
+              <p class="para block">
+                Setting this to true enables support for running XDMCP sessions
+                on a local proxy X server. This may improve the performance of
+                XDMCP sessions, especially on high latency networks, as many
+                X protocol operations can be completed without going over the
+                network.
+              </p>
+              <p class="para block">
+                Note, however, that this mode will significantly increase the
+                burden on the machine hosting the XDMCP sessions
+              </p>
+              <p class="para block">
+                See the <span class="filename">FlexiProxy</span> and
+                <span class="filename">FlexiProxyDisconnect</span> options for further
+                 details on how to configure support for this feature.
+              </p>
+            </dd>
+<dt class="term">HonorIndirect</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">HonorIndirect=true</pre></div>
+              <p class="para block">
+                Enables XDMCP INDIRECT choosing (i.e. remote execution of
+                <span class="filename">gdmchooser</span>) for X-terminals which don't
+                supply their own display browser.
+              </p>
+            </dd>
+<dt class="term">MaxPending</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxPending=4</pre></div>
+              <p class="para block">
+                To avoid denial of service attacks, GDM has fixed size queue
+                of pending connections. Only MaxPending displays can start at
+                the same time.
+              </p>
+              
+              <p class="para block">
+                Please note that this parameter does *not* limit the number of
+                remote displays which can be managed. It only limits the number
+                of displays initiating a connection simultaneously.
+              </p>
+            </dd>
+<dt class="term">MaxPendingIndirect</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxPendingIndirect=4</pre></div>
+              <p class="para block">
+                GDM will only provide <span class="filename">MaxPendingIndirect</span>
+                displays with host choosers simultaneously.  If more queries
+                from different hosts come in, the oldest ones will be
+                forgotten.
+              </p>
+            </dd>
+<dt class="term">MaxSessions</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxSessions=16</pre></div>
+              <p class="para block">
+                Determines the maximum number of remote display connections
+                which will be managed simultaneously. I.e. the total number of
+                remote displays that can use your host.
+              </p>
+            </dd>
+<dt class="term">MaxWait</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxWait=30</pre></div>
+              <p class="para block">
+                When GDM is ready to manage a display an ACCEPT packet is sent
+                to it containing a unique session id which will be used in
+                future XDMCP conversations.
+              </p>
+              
+              <p class="para block">
+                GDM will then place the session id in the pending queue
+                waiting for the display to respond with a MANAGE request.
+              </p>
+              
+              <p class="para block">
+                If no response is received within MaxWait seconds, GDM will
+                declare the display dead and erase it from the pending queue
+                freeing up the slot for other displays.
+              </p>
+            </dd>
+<dt class="term">MaxWaitIndirect</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxWaitIndirect=30</pre></div>
+              <p class="para block">
+                The MaxWaitIndirect parameter determines the maximum number of
+                seconds between the time where a user chooses a host and the
+                subsequent indirect query where the user is connected to the
+                host.  When the timeout is exceeded, the information about the
+                chosen host is forgotten and the indirect slot freed up for
+                other displays.  The information may be forgotten earlier if
+                there are more hosts trying to send indirect queries then
+                <span class="filename">MaxPendingIndirect</span>.
+              </p>
+            </dd>
+<dt class="term">Port</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Port=177</pre></div>
+              <p class="para block">
+                The UDP port number <span class="filename">gdm</span> should listen to
+                for XDMCP requests. Don't change this unless you know what
+                you are doing.
+              </p>
+            </dd>
+<dt class="term">PingIntervalSeconds</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PingIntervalSeconds=15</pre></div>
+              <p class="para block">
+                Interval in which to ping the X server in seconds.  If the X
+                server doesn't return before the next time we ping it, the
+                connection is stopped and the session ended.  This is a
+                combination of the XDM PingInterval and PingTimeout, but in
+                seconds.
+              </p>
+
+              <p class="para block">
+                Note that GDM in the past used to have a
+                <span class="filename">PingInterval</span> configuration key which was
+                also in minutes.  For most purposes you'd want this setting
+                to be lower then one minute however since in most cases where
+                XDMCP would be used (such as terminal labs), a lag of more
+                than 15 or so seconds would really mean that the terminal was
+                turned off or restarted and you would want to end the session.
+              </p>
+            </dd>
+<dt class="term">ProxyReconnect</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">FlexiProxyReconnect=</pre></div>
+              <p class="para block">
+                Setting this option enables experimental support for session
+                migration with XDMCP sessions. This enables users to disconnect
+                from their session and later reconnect to that same session,
+                possibly from a different terminal.
+              </p>
+              <p class="para block">
+                In order to use this feature, you must have a nested X server
+                available which supports disconnecting from its parent X server
+                and reconnecting to another X server. Currently, the Distributed
+                Multihead X (DMX) server supports this feature to some extent
+                and other projects like NoMachine NX are busy implementing it.
+              </p>
+              <p class="para block">
+                This option should be set to the path of a command which will
+                handle reconnecting the XDMCP proxy to another backend display.
+                A sample implementation for use with DMX is supplied.
+              </p>
+            </dd>
+<dt class="term">ProxyXServer</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ProxyXServer=</pre></div>
+              <p class="para block">
+                The X server command line for a XDMCP proxy. Any nested X
+                server like Xnest, Xephyr or Xdmx should work fairly well.
+              </p>
+            </dd>
+<dt class="term">Willing</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Willing=&lt;etc&gt;/gdm/Xwilling</pre></div>
+              <p class="para block">
+                When the machine sends a WILLING packet back after a QUERY it
+                sends a string that gives the current status of this server.
+                The default message is the system ID, but it is possible to
+                create a script that displays customized message.  If this
+                script doesn't exist or this key is empty the default message
+                is sent.  If this script succeeds and produces some output,
+                the first line of it's output is sent (and only the first
+                line).  It runs at most once every 3 seconds to prevent
+                possible denial of service by flooding the machine with QUERY
+                packets.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="commonguioptions"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.4. </span>Common GUI Configuration Options</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[gui]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">AllowGtkThemeChange</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowGtkThemeChange=true</pre></div>
+              <p class="para block">
+                If to allow changing the GTK+ (widget) theme from the greeter.
+                Currently this only affects the standard greeter as the
+                graphical greeter does not yet have this ability.
+                The theme will stay in effect on this display until changed
+                and will affect all the other windows that are put up by GDM.
+                Supported since 2.5.90.2.
+              </p>
+            </dd>
+<dt class="term">GtkRC</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GtkRC=</pre></div>
+              <p class="para block">
+                Path to a <span class="filename">gtkrc</span> to read when GDM puts up
+                a window.  You should really now use the
+                <span class="filename">GtkTheme</span> key for just setting a theme.
+              </p>
+            </dd>
+<dt class="term">GtkTheme</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GtkTheme=Default</pre></div>
+              <p class="para block">
+                A name of an installed theme to use by default.  It will be
+                used in the greeter, chooser and all other GUI windows put up
+                by GDM.  Supported since 2.5.90.2.
+              </p>
+            </dd>
+<dt class="term">GtkThemesToAllow</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GtkThemesToAllow=all</pre></div>
+              <p class="para block">
+                Comma separated list of themes to allow.  These must be the
+                names of the themes installed in the standard locations for
+                GTK+ themes.  You can also specify 'all' to allow all installed
+                themes.  This is related to the
+                <span class="filename">AllowGtkThemeChange</span> key.  Supported since
+                2.5.90.2.
+              </p>
+            </dd>
+<dt class="term">MaxIconWidth</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxIconWidth=128</pre></div>
+              <p class="para block">
+                Specifies the maximum icon width (in pixels) that the face
+                browser will display. Icons larger than this will be scaled.
+                This also affects icons in the XDMCP chooser.
+              </p>
+            </dd>
+<dt class="term">MaxIconHeight</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MaxIconHeight=128</pre></div>
+              <p class="para block">
+                Specifies the maximum icon height (in pixels) that the face
+                browser will display. Icons larger than this will be scaled.
+                This also affects icons in the XDMCP chooser.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="greetersection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.5. </span>Greeter Configuration</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[greeter]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">BackgroundColor</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundColor=#76848F</pre></div>
+              <p class="para block">
+                If the BackgroundType is 2, use this color in the background
+                of the greeter.  Also use it as the back of transparent images
+                set on the background and if the BackgroundRemoteOnlyColor
+                is set and this is a remote display.
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">BackgroundProgramInitialDelay</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundProgramInitialDelay=30</pre></div>
+              <p class="para block">
+                The background application will be started after at least that
+                many seconds of inactivity.
+              </p>
+            </dd>
+<dt class="term">RestartBackgroundProgram</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RestartBackgroundProgram=true</pre></div>
+              <p class="para block">
+                If set the background application will be restarted when it has
+                exited, after the delay described below has elapsed.  This
+                option can be useful when you wish to run a screen saver 
+                application when no user is using the computer.
+              </p>
+            </dd>
+<dt class="term">BackgroundProgramRestartDelay</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundProgramRestartDelay=30</pre></div>
+              <p class="para block">
+                The background application will be restarted after at least that 
+                many seconds of inactivity.
+              </p>
+            </dd>
+<dt class="term">BackgroundImage</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundImage=somefile.png</pre></div>
+              <p class="para block">
+                If the BackgroundType is 1, then display this file as the
+                background in the greeter.  This only affects the GTK+
+                Greeter.
+              </p>
+            </dd>
+<dt class="term">BackgroundProgram</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundProgram=&lt;bin&gt;/xeyes</pre></div>
+              <p class="para block">
+                If set this command will be run in the background while
+                the login window is being displayed.  Note that not all
+                applications will run this way, since GDM does not usually have
+                a home directory.  You could set up home directory for the
+                GDM user if you wish to run applications which require it.
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">BackgroundRemoteOnlyColor</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundRemoteOnlyColor=true</pre></div>
+              <p class="para block">
+                On remote displays only set the color background.  This is to
+                make network load lighter.  The
+                <span class="filename">BackgroundProgram</span> is also not run.  This
+                only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">BackgroundScaleToFit</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundScaleToFit=true</pre></div>
+              <p class="para block">
+                Scale background image to fit the screen.  This only affects
+                the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">BackgroundType</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">BackgroundType=2</pre></div>
+              <p class="para block">
+                The type of background to set.  0 is none, 1 is image and color,
+                2 is color and 3 is image.  This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">Browser</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Browser=true</pre></div>
+              <p class="para block">
+                Set to true to enable the face browser. See the
+                ``The GTK+ Greeter'' section for more information on the
+                face browser.  This option only works for the GTK+ Greeter.
+                For the Themed Greeter, the face browser is enabled by
+                choosing a theme which includes a face browser
+              </p>
+            </dd>
+<dt class="term">ChooserButton</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ChooserButton=true</pre></div>
+              <p class="para block">
+                If true, add a chooser button to the Actions menu that will
+                restart the current X server with a chooser.  XDMCP does not
+                need to be enabled on the local computer for this to work.
+              </p>
+            </dd>
+<dt class="term">ConfigAvailable</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ConfigAvailable=false</pre></div>
+              <p class="para block">
+                If true, allows the configurator to be run from the greeter.
+                Note that the user will need to type in the root password
+                before the configurator will be started.  This is set to 
+                false by default for additional security.  See the
+                <span class="filename">Configurator</span> option in the daemon
+                section.
+              </p>
+            </dd>
+<dt class="term">DefaultFace</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultFace=&lt;share&gt;/pixmaps/nophoto.png</pre></div>
+              <p class="para block">
+                If a user has no defined face image, GDM will use the
+                "stock_person" icon defined in the current GTK+
+                theme.  If no such image is defined, the image specified by 
+                <span class="filename">DefaultFace</span> will be used.  The image must
+                be in a gdk-pixbuf supported format and the file must be
+                readable to the GDM user.
+              </p>
+            </dd>
+<dt class="term">Include</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Include=</pre></div>
+              <p class="para block">
+                Comma separated list of users to be included in the face
+                browser and in the <span class="command">gdmsetup</span> selection list
+                for Automatic/Timed login. 
+                See also <span class="filename">Exclude</span>,
+                <span class="filename">IncludeAll</span>, and
+                <span class="filename">MinimalUID</span>.
+              </p>
+            </dd>
+<dt class="term">Exclude</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Exclude=bin,daemon,adm,lp,sync,shutdown,halt,mail,...</pre></div>
+              <p class="para block">
+                Comma separated list of users to be excluded from the face
+                browser and from the <span class="command">gdmsetup</span> selection list
+                for Automatic/Timed login.  Excluded users will still be able to
+                log in, but will have to type their username.
+                See also <span class="filename">Include</span>,
+                <span class="filename">IncludeAll</span>, and
+                <span class="filename">MinimalUID</span>.
+              </p>
+            </dd>
+<dt class="term">IncludeAll</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">IncludeAll=false</pre></div>
+              <p class="para block">
+                By default, an empty include list means display no users.
+                By setting IncludeAll to true, the password file will be
+                scanned and all users will be displayed aside from users
+                excluded via the Exclude setting and user ID's less than
+                MinimalUID.  Scanning the password file can be slow on
+                systems with large numbers of users and this feature should
+                not be used in such environments.
+                See also <span class="filename">Include</span>,
+                <span class="filename">Exclude</span>, and
+                <span class="filename">MinimalUID</span>.
+              </p>
+            </dd>
+<dt class="term">GlobalFaceDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GlobalFaceDir=&lt;share&gt;/pixmaps/faces/</pre></div>
+              <p class="para block">
+                Systemwide directory for face files. The sysadmin can place
+                icons for users here without touching their homedirs. Faces are
+                named after their users' logins.
+              </p>
+              
+              <p class="para block">
+                I.e. <span class="filename">&lt;GlobalFaceDir&gt;/johndoe</span> would
+                contain the face icon for the user ``johndoe''. No image format
+                extension should be specified. 
+              </p>
+              
+              <p class="para block">
+                The face images must be stored in gdk-pixbuf supported formats
+                and they must be readable for the GDM user.
+              </p>
+              
+              <p class="para block">
+                A user's own icon file will always take precedence over the
+                sysadmin provided one.
+              </p>
+            </dd>
+<dt class="term">GraphicalTheme</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GraphicalTheme=circles</pre></div>
+              <p class="para block">
+                The graphical theme that the Themed Greeter should use.  it
+                should refer to a directory in the theme directory set by
+                <span class="filename">GraphicalThemeDir</span>.
+              </p>
+            </dd>
+<dt class="term">GraphicalThemes</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GraphicalThemes=circles</pre></div>
+              <p class="para block">
+                The graphical themes that the Themed Greeter should use is the
+                Mode is set on Random Themes.  This is a "/:"
+                delimited list.  It should refer to a directory in the theme
+                directory set by <span class="filename">GraphicalThemeDir</span>.  This
+                is only used if <span class="filename">GraphicalThemeRand</span> is set
+                to true.
+              </p>
+            </dd>
+<dt class="term">GraphicalThemeRand</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GraphicalThemeRand=false</pre></div>
+              <p class="para block">
+                Whether the graphical greeter will use Only One Theme or Random
+                Theme mode.  Only One Theme mode uses themes listed by
+                <span class="filename">GraphicalTheme</span>, Random Themes mode uses
+                themes listed by <span class="filename">GraphicalThemes</span>.  A value
+                of false sets greeter to use Only One Theme mode, a value of
+                true sets the greeter to use Random Theme mode.
+              </p>
+            </dd>
+<dt class="term">GraphicalThemeDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GraphicalThemeDir=&lt;share&gt;/gdm/themes/</pre></div>
+              <p class="para block">
+                The directory where themes for the Themed Greeter are
+                installed.
+              </p>
+            </dd>
+<dt class="term">GraphicalThemedColor</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">GraphicalThemedColor=#76848F</pre></div>
+              <p class="para block">
+                Use this color in the background of the Themed Greeter.  
+                This only affects the Themed Greeter.
+              </p>
+            </dd>
+<dt class="term">InfoMsgFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">InfoMsgFile=/path/to/infofile</pre></div>
+              <p class="para block">
+                If present and /path/to/infofile specifies an existing and
+                readable text file (e.g. &lt;etc&gt;/infomsg.txt) the contents
+                of the file will be displayed in a modal dialog box before the
+                user is allowed to login.  This works both with the standard
+                and the themable greeters.
+              </p>
+            </dd>
+<dt class="term">InfoMsgFont</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">InfoMsgFont=fontspec</pre></div>
+              <p class="para block">
+                If present and InfoMsgFile (see above) is used, this specifies
+                the font to use when displaying the contents of the InfoMsgFile
+                text file.  For example fontspec could be Sans 24 to get a
+                sans serif font of size 24 points.
+                This works both with the standard and the themable greeters.
+              </p>
+            </dd>
+<dt class="term">LocaleFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">LocaleFile=&lt;etc&gt;/gdm/locale.alias</pre></div>
+              <p class="para block">
+                File in format similar to the GNU locale format with entries
+                for all supported languages on the system.  The format is
+                described above or in a comment inside that file.
+              </p>
+            </dd>
+<dt class="term">LockPosition</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">LockPosition=true</pre></div>
+              <p class="para block">
+                If true the position of the login window of the GTK+
+                Greeter cannot be changed even if the title bar is turned on.
+              </p>
+            </dd>
+<dt class="term">Logo</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Logo=&lt;share&gt;/pixmaps/gnome-logo-large.png</pre></div>
+              <p class="para block">
+                Image file to display in the logo box. The file must be
+                in a gdk-pixbuf supported format and it must be readable by
+                the GDM user. If no file is specified the logo feature
+                is disabled.
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">ChooserButtonLogo</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ChooserButtonLogo=&lt;share&gt;/pixmaps/gnome-logo-large.png</pre></div>
+              <p class="para block">
+                Image file to display in the file chooser button in
+                <span class="command">gdmsetup</span>.  This key is modified by
+                <span class="command">gdmsetup</span> and should not be manually
+                modified by the user.  This only affects the Login Window
+                Preferences (<span class="command">gdmsetup</span>).
+              </p>
+            </dd>
+<dt class="term">MinimalUID</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MinimalUID=100</pre></div>
+              <p class="para block">
+                The minimal UID that GDM should consider a user.  All
+                users with a lower UID will be excluded from the face browser.
+                See also <span class="filename">Include</span>,
+                <span class="filename">Exclude</span>, and
+                <span class="filename">IncludeAll</span>.
+              </p>
+            </dd>
+<dt class="term">PositionX</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PositionX=200</pre></div>
+              <p class="para block">
+                The horizontal position of the login window of the GTK+
+                Greeter.
+              </p>
+            </dd>
+<dt class="term">PositionY</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">PositionY=100</pre></div>
+              <p class="para block">
+                The vertical position of the login window of the GTK+
+                Greeter.
+              </p>
+            </dd>
+<dt class="term">Quiver</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Quiver=true</pre></div>
+              <p class="para block">
+                Controls whether <span class="command">gdmlogin</span> should
+                shake the display when an incorrect username/password is
+                entered.
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">DefaultRemoteWelcome</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultRemoteWelcome=true</pre></div>
+              <p class="para block">
+                If set to true, the value "Welcome to %n" is used for
+                the <span class="filename">RemoteWelcome</span>.  This value is
+                translated into the appropriate language for the user.  If set
+                to false, the <span class="filename">RemoteWelcome</span> setting is
+                used.  This string can use the same special character sequences
+                as explained in the "Text Node" section of the
+                "Themed Greeter" chapter.  This explains the meaning
+                of "%n".
+              </p>
+            </dd>
+<dt class="term">RemoteWelcome</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RemoteWelcome=Welcome to %n</pre></div>
+              <p class="para block">
+                Controls which text to display next to the logo image in the
+                greeter for remote XDMCP sessions.  The same expansion is
+                done here as in the <span class="filename">Welcome</span> string.
+                This string can use the same special character sequences as
+                explained in the "Text Node" section of the
+                "Themed Greeter" chapter.
+                chapter.
+              </p>
+            </dd>
+<dt class="term">RunBackgroundProgramAlways</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">RunBackgroundProgramAlways=false</pre></div>
+              <p class="para block">
+                If this is true then the background application is run always,
+                otherwise it is only run when the
+                <span class="filename">BackgroundType</span> is 0 (None)
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">SetPosition</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SetPosition=true</pre></div>
+              <p class="para block">
+                If true the position of the login window of the GTK+ Greeter
+                is determined by <span class="filename">PositionX</span> 
+                / <span class="filename">PositionY</span>.
+              </p>
+            </dd>
+<dt class="term">ShowGnomeFailsafeSession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ShowGnomeFailsafeSession=true</pre></div>
+              <p class="para block">
+                Should the greeter show the Gnome Failsafe session in th
+                sessions list.
+              </p>
+            </dd>
+<dt class="term">ShowLastSession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ShowLastSession=true</pre></div>
+              <p class="para block">
+                Should the greeter show the 'Last' session in the session list.
+                If this is off, then GDM is in the so called 'switchdesk' mode
+                which for example Red Hat uses.  That is, the users can't pick
+                the last session and will just then get the default session
+                (see <span class="filename">DefaultSession</span>) unless then pick
+                something else for this session only.  So if this is off, this
+                really circumvents saving of the last session.
+              </p>
+            </dd>
+<dt class="term">ShowXtermFailsafeSession</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ShowXtermFailsafeSession=true</pre></div>
+              <p class="para block">
+                Should the greeter show the Xterm Failsafe session in the
+                sessions list.
+              </p>
+            </dd>
+<dt class="term">SoundOnLogin</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLogin=true</pre></div>
+              <p class="para block">
+                If true, the greeter will play a sound or beep when it is
+                ready for a login.  See also the
+                <span class="filename">SoundOnLoginFile</span> key.
+                Supported since 2.5.90.0.
+              </p>
+            </dd>
+<dt class="term">SoundOnLoginSuccess</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLoginSuccess=true</pre></div>
+              <p class="para block">
+                If true, the greeter will play a sound after a successful login
+                attempt.  See also the
+                <span class="filename">SoundOnLoginSuccessFile</span> key.
+              </p>
+            </dd>
+<dt class="term">SoundOnLoginFailure</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLoginFailure=true</pre></div>
+              <p class="para block">
+                If true, the greeter will play a sound after a failed login
+                attempt.  See also the
+                <span class="filename">SoundOnLoginFailureFile</span> key.
+              </p>
+            </dd>
+<dt class="term">SoundOnLoginFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLoginFile=/path/to/sound.wav</pre></div>
+              <p class="para block">
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename">/usr/bin/play</span>) instead of a beep when the
+                greeter is ready for a login.  See also the
+                <span class="filename">SoundOnLogin</span> key and the
+                <span class="filename">SoundProgram</span> key.  Supported since
+                2.5.90.0.
+              </p>
+            </dd>
+<dt class="term">SoundOnLoginSuccessFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLoginSuccessFile=/path/to/sound.wav</pre></div>
+              <p class="para block">
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename">/usr/bin/play</span>) after a successful login
+                attempt.  See also the <span class="filename">SoundOnLoginSuccess</span>
+                key and the <span class="filename">SoundProgram</span> key.
+              </p>
+            </dd>
+<dt class="term">SoundOnLoginFailureFile</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SoundOnLoginFailureFile=/path/to/sound.wav</pre></div>
+              <p class="para block">
+                The file that will be played using the specified sound
+                application (by default that is
+                <span class="filename">/usr/bin/play</span>) after a failed login 
+                attempt.  See also the <span class="filename">SoundOnLoginFailure</span>
+                key and the <span class="filename">SoundProgram</span> key.
+              </p>
+            </dd>
+<dt class="term">SystemMenu</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">SystemMenu=true</pre></div>
+              <p class="para block">
+                Turns the Actions menu (which used to be called System menu) on
+                or off.  If this is off then one of the actions will be
+                available anywhere.  These actions include Shutdown, Restart,
+                Configure, XDMCP chooser and such.  All of those can however
+                be turned off individually.  Shutdown, Restart and Suspend can
+                be turned off by just setting the corresponding keys to empty.
+                Note that the actions menu is only shown on attached displays.
+                It would not be safe or even desirable on remote logins, so you
+                do not have to worry about remote users having these privileges.
+              </p>
+
+              <p class="para block">
+                Note that if this is off none of the actions will be available
+                even if a theme for a graphical greeter mistakenly shows them.
+                Also note that sometimes a graphical theme may not show all
+                the available actions as buttons and you may have to press
+                F10 to see the menu.
+              </p>
+            </dd>
+<dt class="term">TitleBar</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">TitleBar=true</pre></div>
+              <p class="para block">
+                Display the title bar in the greeter.
+                This only affects the GTK+ Greeter.
+              </p>
+            </dd>
+<dt class="term">Use24Clock</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Use24Clock=auto</pre></div>
+              <p class="para block">
+                Select the use of 24 hour clock.  Some locales do not
+                support 12 hour format (like Finnish, that is
+                <span class="filename">fi_FI</span>), and in those locales this
+                setting has no effect at all.
+              </p>
+              <p class="para block">
+                Possible values are "auto" (default),
+                "true", and "false". If this is set to
+                "auto" or left empty, then time format is chosen from
+                locale settings. Locale settings are based on the language in
+                use, thus it is changed by setting environment variables
+                LANGUAGE (GNU extension), LANG, LC_MESSAGES or LC_ALL in the
+                GDM's runtime environment. Priorities between the mentioned
+                environment variables can be found from your system's
+                C library manual.
+              </p>
+            </dd>
+<dt class="term">UseCirclesInEntry</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UseCirclesInEntry=false</pre></div>
+              <p class="para block">
+                Use circles instead of asterisks in the password entry.
+                This may not work with all fonts however.
+              </p>
+            </dd>
+<dt class="term">UseInvisibleInEntry</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">UseInvisibleInEntry=false</pre></div>
+              <p class="para block">
+                Do not show any visual feedback is the password entry.
+                This is the standard in console and xdm. Settings this
+                option discards the <span class="filename">UseCirclesInEntry</span>
+                option.
+              </p>
+            </dd>
+<dt class="term">DefaultWelcome</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultWelcome=true</pre></div>
+              <p class="para block">
+                If set to true, the value "Welcome" is used for the
+                <span class="filename">Welcome</span>.  This value is translated
+                into the appropriate language for the user.  If set to
+                false, the <span class="filename">Welcome</span> setting is used.
+              </p>
+            </dd>
+<dt class="term">Welcome</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Welcome=Welcome</pre></div>
+              <p class="para block">
+                Controls which text to display next to the logo image in the
+                standard greeter. The following control chars are supported:
+              </p>
+              
+              <p class="para block">
+                %% — the `%' character
+              </p>
+              
+              <p class="para block">
+                %d — display's hostname
+              </p>
+              
+              <p class="para block">
+                %h — Fully qualified hostname
+              </p>
+
+              <p class="para block">
+                %m — machine (processor type)
+              </p>
+
+              <p class="para block">
+                %n — Nodename (i.e. hostname without .domain)
+              </p>
+              
+              <p class="para block">
+                %r — release (OS version)
+              </p>
+              
+              <p class="para block">
+                %s — sysname (i.e. OS)
+              </p>
+
+              <p class="para block">
+                This string is only used for attached displays.  For remote
+                XDMCP displays we use <span class="filename">RemoteWelcome</span>.
+              </p>
+
+              <p class="para block">
+                In the Themed Greeter the location of this text depends on
+                the theme.  Unless the theme uses the stock welcome string
+                somewhere this string will not be displayed at all.
+              </p>
+                            
+            </dd>
+<dt class="term">XineramaScreen</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">XineramaScreen=0</pre></div>
+              <p class="para block">
+                If the Xinerama extension is active the login window will be
+                centered on this physical screen (use 0 for the first screen,
+                1 for the second...).
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="choosersection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.6. </span>XDCMP Chooser Options</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[chooser]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">AllowAdd</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">AllowAdd=true</pre></div>
+              <p class="para block">
+                If true, allow the user to add arbitrary hosts to the chooser.
+                This way the user could connect to any host that responds to
+                XDMCP queries from the chooser.
+              </p>
+            </dd>
+<dt class="term">Broadcast</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Broadcast=true</pre></div>
+              <p class="para block">
+                If true, the chooser will broadcast a query to the local
+                network and collect responses.  This way the chooser will
+                always show all available managers on the network.  If you
+                need to add some hosts not local to this network, or if you
+                don't want to use a broadcast, you can list them explicitly
+                in the <span class="filename">Hosts</span> key.
+              </p>
+            </dd>
+<dt class="term">Multicast</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Multicast=true</pre></div>
+              <p class="para block">
+                If true and IPv6 is enabled, the chooser will send a multicast
+                query to the local network and collect responses from the hosts
+                who have joined multicast group. If you don't want to send a
+                multicast, you can specify IPv6 address in the <span class="filename">Hosts
+                </span> key. The host will respond if it is listening to
+                XDMCP requests and IPv6 is enabled there.
+              </p>
+            </dd>
+<dt class="term">MulticastAddr</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">MulticastAddr=ff02::1</pre></div>
+              <p class="para block">
+                This is the Link-local Multicast address and is hardcoded here.
+              </p>
+            </dd>
+<dt class="term">DefaultHostImage</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">DefaultHostImage=&lt;share&gt;/pixmaps/nohost.png</pre></div>
+              <p class="para block">
+                File name for the default host icon. This image will be
+                displayed if no icon is specified for a given host. The
+                file must be in a gdk-pixbuf supported format and it must be
+                readable for the GDM user.
+              </p>
+            </dd>
+<dt class="term">HostImageDir</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">HostImageDir=&lt;share&gt;/hosts</pre></div>
+              <p class="para block">
+                Repository for host icon files. The sysadmin can place icons
+                for remote hosts here and they will appear in
+                <span class="filename">gdmchooser</span>.
+              </p>
+              
+              <p class="para block">
+                The file name must match the fully qualified name (FQDN) for
+                the host.  The icons must be stored in gdk-pixbuf supported
+                formats and they must be readable to the GDM user.
+              </p>
+              
+            </dd>
+<dt class="term">Hosts</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Hosts=host1,host2</pre></div>
+              <p class="para block">
+                The hosts which should be listed in the chooser.  The chooser
+                will only list them if they respond.  This is done in addition
+                to broadcast (if <span class="filename">Broadcast</span> is set), so you
+                need not list hosts on the local network.  This is useful if
+                your networking setup doesn't allow all hosts to be reachable
+                by a broadcast packet.
+              </p>
+            </dd>
+<dt class="term">ScanTime</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">ScanTime=4</pre></div>
+              <p class="para block">
+                Specifies how many seconds the chooser should wait for
+                replies to its BROADCAST_QUERY.  Really this is only the time
+                in which we expect a reply.  We will still add hosts to the
+                list even if they reply after this time.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="debugsection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.7. </span>Debug Configuration</span></h3></div>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[debug]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">Enable</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Enable=false</pre></div>
+              <p class="para block">
+                Setting to true sends debug ouput to the syslog.  This can be 
+                useful for tracking down problems with GDM.  This output 
+                tends to be verbose so should not be turned on for general
+                use.
+              </p>
+            </dd>
+<dt class="term">Gestures</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">Gestures=false</pre></div>
+              <p class="para block">
+                Setting to true sends debug ouput concerning the accessibility
+                gesture listeners to the syslog.  This can be useful for
+                tracking down problems with them not working properly.  This
+                output tends to be verbose so should not be turned on for
+                general use.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="customcmdsection"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.8. </span>Custom Commands</span></h3></div>
+<p class="para block block-first">
+          You can create up to 10 different commands. Gaps between command
+          numbers are allowed and their relative positioning within the
+          section and with respect to each other is not important as long as
+          they conform to the permitted range of [0-9].
+          
+        </p>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[customcommand]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">CustomCommand[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommand[0-9]=</pre></div>
+              <p class="para block">
+                Full path and arguments to command to be executed when user
+                selects <span class="filename">n-th</span> "Custom Command"
+                from the Actions menu.  This can be a ';' separated list of
+                commands to try.  If the value is empty or missing, then the
+                custom command is not available.  By default this value is not
+                enabled, so to enable "Custom Command" it must be
+                set to a nonempty value.  [0-9] represents the
+                <span class="filename">CustomCommand</span> suffix and can be an
+                integer between 0 and 9. 
+              </p>
+            </dd>
+<dt class="term">CustomCommandIsPersistent[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandIsPersistent[0-9]=</pre></div>
+              <p class="para block">
+                Specifies if <span class="filename">n-th</span> "Custom
+                Command" will appear outside the login manager, for
+                example on the desktop through the Log Out/Shut Down dialogs.
+                If not specified the default value is "false". This
+                option is only valid if corresponding
+                <span class="filename">CustomCommand</span> is defined. [0-9] represents
+                <span class="filename">CustomCommand</span> suffix and can be an integer
+                between 0 and 9.
+              </p>
+            </dd>
+<dt class="term">CustomCommandLabel[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandLabel[0-9]=</pre></div>
+              <p class="para block">
+                Specifies the stock label that will be displayed on the
+                <span class="filename">n-th</span> "Custom Command"
+                buttons and menu items. If not specified the default value is
+                "Custom_[0-9]". This option is only valid if
+                corresponding <span class="filename">CustomCommand</span> is defined. 
+                [0-9] represents <span class="filename">CustomCommand</span> suffix
+                and can be an integer between 0 and 9. This option can't contain
+                any semicolon characters (i.e. ";").
+              </p>
+            </dd>
+<dt class="term">CustomCommandLRLabel[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandLRLabel[0-9]=</pre></div>
+              <p class="para block">
+                Specifies the stock label that will be displayed on the
+                <span class="filename">n-th</span> "Custom Command"
+                list items and radio buttons.  If not specified the default
+                value is  "Execute custom command _[0-9]". This 
+                option is only valid if corresponding
+                <span class="filename">CustomCommand</span> is defined.  [0-9]
+                represents <span class="filename">CustomCommand</span> suffix and
+                can be an integer between 0 and 9.
+              </p>
+            </dd>
+<dt class="term">CustomCommandNoRestart[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandNoRestart[0-9]=</pre></div>
+              <p class="para block">
+                Specifies if gdm will be stopped/restarted once
+                <span class="filename">n-th</span> "Custom Command"
+                has been executed. If not specified the default value is
+                "false". This option is only valid if corresponding
+                <span class="filename">CustomCommand</span> is defined.  [0-9]
+                represents <span class="filename">CustomCommand</span> suffix and
+                can be an integer between 0 and 9. In addition when
+                corresponding <span class="filename">CustomCommandIsPersistent</span> 
+                is set to true,  setting CustomCommandNoRestart to false will
+                place corresponding <span class="filename">CustomCommand</span> in the 
+                Shut Down dialog set of actions, setting it to true will place
+                corresponding 
+                <span class="filename">CustomCommand</span> in the Log Out dialog set of
+                actions.
+              </p>
+            </dd>
+<dt class="term">CustomCommandText[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandText[0-9]=</pre></div>
+              <p class="para block">
+                Specifies the message that will be displayed on the warning
+                dialog box once <span class="filename">n-th</span>
+                "Custom Command" button/menu item/radio button/list
+                item has been activated.  If not specified the default value is
+                "Are you sure?". This option is only valid if
+                corresponding <span class="filename">CustomCommand</span> is defined.
+                [0-9] represents <span class="filename">CustomCommand</span> suffix and
+                can be an integer between 0 and 9.
+              </p>
+            </dd>
+<dt class="term">CustomCommandTooltip[0-9]</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">CustomCommandTooltip[0-9]=</pre></div>
+              <p class="para block">
+                Specifies the message that will be displayed on tooltips for
+                <span class="filename">n-th</span> "Custom Command"
+                entries. If not specified the default value is  "Execute
+                custom command [0-9]". This option is only valid if
+                corresponding <span class="filename">CustomCommand</span> is defined.
+                [0-9] represents <span class="filename">CustomCommand</span> suffix and
+                can be an integer between 0 and 9.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="xserverdefs"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.9. </span>X Server Definitions</span></h3></div>
+<p class="para block block-first">
+          GDM needs to be provided with information about each X servers that
+          will be used.  You can have as many different definitions as you wish,
+          each identified with a unique name.  The name
+          <span class="filename">Standard</span> is required.  If you do not specify
+          this server, GDM will assume default values for a 'Standard' server
+          and the path given by <span class="filename">daemon/StandardXServer</span>.
+          <span class="filename">Standard</span> is used as the default,
+          in situations when no other server has been defined.
+        </p>
+<p class="para block">
+          Servers are defined by sections named <span class="filename">server-</span>
+          followed by the identifier of this server.  This should be a simple
+          ASCII string with no spaces.  The GUI configuration program allows
+          users to edit the servers defined in the GDM configuration files
+          but currently does not allow adding or deleting entries.  Like
+          normal configuration options, <span class="filename">server-</span>
+          sections in the <span class="filename">&lt;etc&gt;/gdm/custom.conf</span>
+          file override values in the
+          <span class="filename">&lt;share&gt;/gdm/defaults.conf</span> file.  In other
+          words, if a <span class="filename">server-Standard</span> section is defined
+          in <span class="filename">&lt;etc&gt;/gdm/custom.conf</span>, then that
+          will be used and the section in the
+          <span class="filename">&lt;share&gt;/gdm/defaults.conf</span> file will be
+          ignored.
+        </p>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[server-Standard]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">name</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">name=Standard server</pre></div>
+              <p class="para block">
+                The name that will be displayed to the user.
+              </p>
+            </dd>
+<dt class="term">command</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">command=/path/to/X</pre></div>
+              <p class="para block">
+                The command to execute, with full path to the binary of the X
+                server, and any extra arguments needed.  Normally it is not
+                necessary to add a <span class="filename">-nolisten tcp</span> argument
+                since the addition of this argument is controlled by the
+                <span class="filename">DisallowTCP</span> GDM configuration option.
+              </p>
+            </dd>
+<dt class="term">flexible</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">flexible=true</pre></div>
+              <p class="para block">
+                Indicates if this server is available as a choice when a
+                user wishes to run a flexible, on demand server.
+              </p>
+            </dd>
+<dt class="term">handled</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">handled=true</pre></div>
+              <p class="para block">
+                Indicates that GDM should run the login window on this server
+                and allow a user to log in.  If set to false, then GDM will
+                just run this server and wait for it to terminate.  This can be
+                useful to run an X terminal using GDM.  When this is done you
+                should normally also add <span class="filename">-terminate</span> to the
+                command line of the server to make the server terminate after
+                each session.  Otherwise the control of the slave will never
+                come back to GDM and, for example, soft restarts won't work.
+                This is because GDM assumes there is a login in progress for
+                the entire time this server is active.
+              </p>
+            </dd>
+<dt class="term">chooser</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">chooser=false</pre></div>
+              <p class="para block">
+                Indicates that GDM should instead of a login window run a
+                chooser on this window and allow the user to choose which
+                server to log into.
+              </p>
+            </dd>
+<dt class="term">priority</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">priority=0</pre></div>
+              <p class="para block">
+                Indicates that the X server should be started at a
+                different process priority.  Values can be any integer
+                value accepted by the setpriority C library function
+                (normally between -20 and 20) with 0 being the default.
+                For highly interactive applications, -5 yields good
+                responsiveness.  The default value is 0 and the 
+                setpriority function is not called if the value is 0.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+<div class="division sect3">
+<a name="attacheddisplayconfig"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">6.2.10. </span>Attached DISPLAY Configuration</span></h3></div>
+<p class="para block block-first">
+          The attached (also known as local or static) display configuration
+          specifies what displays should be always managed by GDM.  GDM will
+          restart the X server on the display if it dies, for example.  There
+          may be as many attached displays that are managed as you wish.
+          Typically each display is associated with a real display.  On a
+          typical single-display machine this section would only contain one
+          key <span class="filename">0</span> that corresponds to DISPLAY
+          <span class="filename">:0</span>.
+        </p>
+<p class="para block">
+          The GUI configuration program allows users to edit the attached
+          display configuration defined in the GDM configuration files
+          and allows the user to add or delete entries.  Like normal
+          configuration options, the <span class="filename">[servers]</span>
+          section in the <span class="filename">&lt;etc&gt;/gdm/custom.conf</span>
+          file overrides values in the
+          <span class="filename">&lt;share&gt;/gdm/defaults.conf</span> file.
+        </p>
+<div class="block list variablelist">
+<div class="block block-first title title-formal"><span class="title"><span class="label"></span>[servers]</span></div>
+<dl class="variablelist">
+<dt class="term dt-first">&lt;display number&gt;</dt>
+<dd>
+              <div class=" block synopsis block-first"><pre class="synopsis">0=Standard [device=/dev/foo]</pre></div>
+
+              <p class="para block">
+                The key cooresponds to the DISPLAY to be managed, so that
+                key <span class="filename">0</span> cooresponds to DISPLAY
+                <span class="filename">:0</span>.  On a multi-display machine you
+                can configure GDM to manage a login program on other displays
+                by adding additional keys.  For example, adding key
+                <span class="filename">1</span> would cause GDM to manage DISPLAY
+                <span class="filename">:1</span>.
+              </p>
+
+              <p class="para block">
+                The first word of the value corresponds to a X server
+                definition in the "X Server Definitions" section
+                of the configuration file.  For example, the following entry
+                means that DISPLAY <span class="filename">:0</span> will start an X
+                server as defined in the
+                <span class="filename">[server-Standard]</span> section:
+              </p>
+
+<div class=" block screen block-indent"><pre class="screen">[servers]
+0=Standard
+</pre></div>
+
+              <p class="para block">
+                The first word of the value can also be set to the string
+                "inactive" to indicate that this DISPLAY should not 
+                be managed.  This can be used in the GDM Custom Configuration
+                File to turn off a DISPLAY that is defined in the GDM System
+                Defaults Configuration File.
+              </p>
+
+              <p class="para block">
+                The optional device argument is used to specify the device that
+                is associated with the DISPLAY.  When using Virtual Terminals
+                (VT), this value is ignored and GDM will use the correct
+                device name associated with the VT.  If not using VT, then GDM
+                will use the value specified by this optional argument.  If
+                the device argument is not defined, then GDM will use the
+                default setting for attached displays defined in the
+                <span class="filename">UtmpLineAttached</span> configuration section.
+                For the main display (typically DISPLAY
+                <span class="filename">:0</span>), <span class="filename">/dev/console</span> is
+                a reasonable value.  For other displays it is probably best
+                to not include this argument unless you know the specific
+                device associated with the DISPLAY.  The device value can
+                contain "%d" which is translated to the DISPLAY value
+                or "%h" which is translated to the hostname.
+              </p>
+            </dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="division sect2">
+<a name="userconfig"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">6.3. </span>Per User Configuration</span></h2></div>
+<p class="para block block-first">
+        There are some per user configuration settings that control how GDM
+        behaves.  GDM is picky about the file ownership and permissions of 
+        the user files it will access, and will ignore files if they are not
+        owned by the user or files that have group/world write permission.
+        It will also ignore the user if the user's $HOME directory is not
+        owned by the user or if the user's $HOME directory has group/world
+        write permission.  files must also be smaller than the
+        <span class="filename">UserMaxFile</span> value as defined in the GDM
+        configuration.  If it seems that GDM is not properly accessing 
+        user configuration settings, the problem is most likely 
+        caused by one of these checks failing.
+      </p>
+<p class="para block">
+        First there is the <span class="filename">~/.dmrc</span> file.  In
+        theory this file should be shared between GDM and KDM, so users only
+        have to configure things once.  This is a standard
+        <span class="filename">.ini</span> style configuration file.  It has one section
+        called <span class="filename">[Desktop]</span> which has two keys:
+        <span class="filename">Session</span> and <span class="filename">Language</span>.
+      </p>
+<p class="para block">
+        The <span class="filename">Session</span> key specifies the basename of the
+        session <span class="filename">.desktop</span> file that the user wishes to
+        normally use (without the <span class="filename">.desktop</span> extension, in
+        other words).  The <span class="filename">Language</span> key specifies the
+        language that the user wishes to use by default.  If either of these
+        keys is missing, the system default is used.  The file would normally
+        look as follows:
+      </p>
+<div class=" block screen block-indent"><pre class="screen">[Desktop]
+Session=gnome
+Language=cs_CZ.UTF-8
+</pre></div>
+<p class="para block">
+        Normally GDM will write this file when the user logs in for the first
+        time, and rewrite it if the user chooses to change their default values
+        on a subsequent login. 
+      </p>
+<p class="para block">
+        If the GDM Face Browser is turned on, then the file
+        <span class="filename">$HOME/.face</span> is accessed.  This file should be a 
+        standard image that GTK+ can read, such as PNG or JPEG.  It also must
+        be smaller than the <span class="filename">MaxIconWidth</span> and 
+        <span class="filename">MaxIconHeight</span> values defined in the GDM
+        configuration or it will be ignored.  Users can run the
+        <span class="command">gdmphotosetup</span> program to specify a face image
+        and it will copy the file to the <span class="filename">$HOME/.face</span>
+        location and scale it so its longest dimension is not larger than the 
+        <span class="filename">MaxIconWidth</span> or <span class="filename">MaxIconHeight</span>
+        values.  <span class="command">gdmphotosetup</span> takes care to not change
+        the aspect ratio of the image.
+      </p>
+<p class="para block">
+        Face images can also be placed in the global face directory, which is
+        specified by the <span class="filename">GlobalFaceDir</span> configuration 
+        option ( normally <span class="filename">&lt;share&gt;/pixmaps/faces/</span>)
+        and the filename should be the name of the user, optionally with a
+        <span class="filename">.png</span>, <span class="filename">.jpg</span>, etc. appended.
+      </p>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></td>
+<td class="navbar-next"><a class="navbar-next" href="controlling.html" title="Controlling GDM">Controlling GDM</a></td>
+</tr></table></div>
+</body>
+</html>

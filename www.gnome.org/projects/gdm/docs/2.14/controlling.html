@@ -1,307 +1,555 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Controlling GDM</title><link rel="previous" href="configuration.html" title="Configuration"/><link rel="next" href="binaries.html" title="GDM Commands"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
-    div[class~="footnotes"] {
-      font-style: italic;
-      font-size: 0.8em;
-    }
-    div[class~="footnote"] {
-      margin-top: 1.44em;
-    }
-    span[class~="footnote-number"] {
-      display: inline;
-      padding-right: 0.83em;
-    }
-    span[class~="footnote-number"] + p {
-      display: inline;
-    }
-    a[class~="footnote"] {
-      text-decoration: none;
-      font-size: 0.8em;
-    }
-    a[class~="footnote-ref"] {
-      text-decoration: none;
-    }
-  
-    div[class~="caution"] {
-      background-image: url("caution.png");
-    }
-    div[class~="important"] {
-      background-image: url("important.png");
-    }
-    div[class~="note"] {
-      background-image: url("note.png");
-    }
-    div[class~="tip"] {
-      background-image: url("tip.png");
-    }
-    div[class~="warning"] {
-      background-image: url("warning.png");
-    }
-    div[class~="admonition"] {
-      padding-top: 4px;
-      padding-bottom: 4px;
-      padding-left: 56px;
-      padding-right: 8px;
-      min-height: 52px;
-      border: dotted #D1940C 1px;
-      background-position: 4px 4px;
-      background-repeat: no-repeat;
-    }
-  
-    div[class~="autotoc"] { margin-left: 2em; padding: 0em; }
-    div[class~="autotoc"] ul { margin-left: 0em; padding-left: 0em; }
-    div[class~="autotoc"] ul li {
-      margin-right: 0em;
-      padding: 0em;
-      list-style-type: none;
-    }
-  
-    * + div[class~="biblioentry"] { margin-top: 1.2em; }
-    * + div[class~="bibliomixed"] { margin-top: 1.2em; }
-  
-    *[class~="block-indent"] {
-      margin-left: 1.72em;
-      margin-right: 1em;
-    }
-    *[class~="block-indent"] *[class~="block-indent"] {
-      margin-left: 0em;
-      margin-right: 0em;
-    }
-    *[class~="block-verbatim"] {
-      white-space: pre;
-    }
-    pre[class~="programlisting"] {
-      padding: 6px;
-      -moz-border-radius: 8px;
-      overflow: auto;background-color: #EEEEEE;border: solid 1px #DDDDDD
-    }
-    pre[class~="screen"] {
-      padding: 6px;
-      -moz-border-radius: 8px;
-      overflow: auto;background-color: #EEEEEE;border: solid 1px #DDDDDD
-    }
-    pre[class~="synopsis"] {
-      overflow: auto;
-    }
-    pre[class~="linenumbering"] {
-      
-      padding-top: 6px;
-      padding-bottom: 6px;
-      -moz-border-radius: 8px;
-      border: solid 1px black;
-      margin-top: 0px;
-      margin-left: 0.83em;
-      background-color: black;
-      color: white;
-      -moz-opacity: .3;
-      padding-right: 0.4em;
-      padding-left: 0.4em;
-    }
-    dt[class~="glossterm"] { margin-left: 0em; }
-    dd + dt[class~="glossterm"] { margin-top: 2em; }
-    dd[class~="glossdef"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-    dd[class~="glosssee"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-    dd[class~="glossseealso"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-  
-    span[class~="co"] {
-      font-size: 8px;
-      padding-left:  0.4em;
-      padding-right: 0.4em;
-      margin-left:   0.2em;
-      margin-right:  0.2em;
-      border: solid 1px;
-      -moz-border-radius: 8px;
-      color: #FFFFFF;
-      background-color: #000000;
-      border-color: #000000;
-    }
-    span[class~="co"]:hover {
-      color: #FFFFFF;
-      background-color: #333333;
-      border-color: #333333;
-    }
-    span[class~="co"] a { text-decoration: none; }
-    span[class~="co"] a:hover { text-decoration: none; }
-  
-    div[class~="cmdsynopsis"] { font-family: monospace; }
-  
-    div[class~="list"] { margin-left: 0px; padding: 0px; margin-bottom: 1em; }
-    div[class~="list"] dl dt { margin-left: 0em; }
-    div[class~="list"] dl dd + dt { margin-top: 1em; }
-    div[class~="list"] dl dd {
-      margin-top: 0.69em;
-      margin-left: 1.72em;
-      margin-right: 1em;
-    }
-    div[class~="list"] ul { margin-left: 1.72em; padding-left: 0em; }
-    div[class~="list"] ol { margin-left: 1.72em; padding-left: 0em; }
-    div[class~="list"] ul li { margin-right: 1em; padding: 0em; }
-    div[class~="list"] ol li { margin-right: 1em; padding: 0em; }
-    div[class~="list"] li + li { margin-top: 0.69em; }
-    div[class~="simplelist"] &gt; table { border: none; }
-  
-    dt[class~="question"] { margin-left: 0em; }
-    dt[class~="question"] div[class~="label"] { float: left; }
-    dd + dt[class~="question"] { margin-top: 1em; }
-    dd[class~="answer"] {
-      margin-top: 1em;
-      margin-left: 2em;
-      margin-right: 1em;
-    }
-    dd[class~="answer"] div[class~="label"] { float: left; }
-  
-    div[class~="refentry"] h2[class~="refentry"] {
-      border: none;
-      margin-top: 1em;
-    }
-    div[class~="refentry"] + div[class~="refentry"] {
-      border-top: dashed black 1px;
-    }
-  
-    table {
-      border-collapse: collapse;
-      border: solid 1px;
-      -moz-border-radius: 5px;
-    }
-  tr[class~="odd"] { background-color: #F0F0F0 }
-    td {
-      padding-left: 0.83em;
-      padding-right: 0.83em;
-      padding-top: 4px;
-      padding-bottom: 4px;
-    }
-    th { padding-left: 0.8em; padding-right: 0.83em; }
-    thead {
-      border-top: solid 2px;
-      border-bottom: solid 2px;
-    }
-    tfoot {
-      border-top: solid 2px;
-      border-bottom: solid 2px;
-    }
-    td + td {
-      border-left: solid 1px;
-    }
-    tbody {
-      border: solid 1px;
-      -moz-border-radius: 5px;
-    }
-  
-    h1 { font-size: 1.72em; margin-top: 0em; }
-    h2 { font-size: 1.44em; }
-    h2[class~="title"] { margin-top: 1.72em; border-bottom: solid 1px; }
+<html xmlns:set="http://exslt.org/sets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Controlling GDM</title>
+<link rel="previous" href="configuration.html" title="Configuration">
+<link rel="next" href="binaries.html" title="GDM Commands">
+<link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<style type="text/css">
 
-    h3                      { font-size: 1.2em; }
-    h3[class~="title"]      { margin-top: 1.72em; }
-    h3 span[class~="title"] { border-bottom: solid 1px; }
-
-    h4                      { font-size: 1.0em; }
-    h4[class~="title"]      { margin-top: 1.44em; }
-    h4 span[class~="title"] { border-bottom: solid 1px; }
-
-    h5 { font-size: 1em; margin-top: 1em; }
-    h6 { font-size: 1em; margin-top: 1em; }
-    h7 { font-size: 1em; margin-top: 1em; }
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
   
-    body {
-      margin: 0px;
-      direction: ltr;
-    }
-    div[class ~= "body"] {
-      padding: 12px;
-    }
-    div[class ~= "navbar"] {
-      margin-left: 12px;
-      margin-right: 12px;
-      margin-bottom: 12px;
-      padding: 6px;
-      border: solid 1px;
-    }
-    div[class ~= "navbar-prev"] {
-      margin: 0px;
-      padding: 0px;
-      float: left;
-    }
-    div[class ~= "navbar-prev-sans-next"] {
-      float: none;
-    }
-    div[class ~= "navbar-next"] {
-      margin: 0px;
-      padding: 0px;
-      text-align: right;
-    }
-    div {
-      margin-top: 0em;  margin-bottom: 0em;
-      padding-top: 0em; padding-bottom: 0em;
-    }
-    p {
-      margin-top: 0em;  margin-bottom: 0em;
-      padding-top: 0em; padding-bottom: 0em;
-    }
-    div + * { margin-top: 1em; }
-    p   + * { margin-top: 1em; }
-    p &gt; div { margin-top: 1em; margin-bottom: 1em; }
-    p &gt; div + div { margin-top: 0em; }
-    p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="controlling"/><h1 class="sect1 title"><span class="title">Controlling GDM</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  
+  margin-left: 1.72em;
+  
+  margin-right: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  
+  margin-left: 2.4em;
+  
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 1em 0.5em 1em;
+  
+  padding-left: 60px;
+  min-height: 48px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+  
+  background-position: 6px 0.5em;
+  background-repeat: no-repeat;
+}
+div.caution {
+  background-image: url("admon-caution.png");
+}
+div.important {
+  background-image: url("admon-important.png");
+}
+div.note {
+  background-image: url("admon-note.png");
+}
+div.note-bug {
+  background-image: url("admon-bug.png");
+}
+div.tip {
+  background-image: url("admon-tip.png");
+}
+div.warning {
+  background-image: url("admon-warning.png");
+}
+div.blockquote {
+  
+  background-image: url('../../../data/icons/yelp-watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  
+  background-position: top left;
+  padding: 0.5em;
+  
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  
+  text-align: right;
+  
+  margin-left: 20%;
+  
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  
+  padding-right: 1em;
+  
+  float: left;
+  
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  
+  padding-left: 0;
+  
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
+div.footnotes { font-style: italic; font-size: 0.8em; }
+div.footnote { margin-top: 1.44em; }
+span.footnote-number { display: inline; padding-right: 0.83em; }
+span.footnote-number + p { display: inline; }
+a.footnote { text-decoration: none; font-size: 0.8em; }
+a.footnote-ref { text-decoration: none; }
+
+span.co {
+  margin-left: 0.2em; margin-right: 0.2em;
+  padding-left: 0.4em; padding-right: 0.4em;
+  border: solid 1px #000000;
+  -moz-border-radius: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 8px;
+}
+span.co:hover {
+  border-color: #333333;
+  background-color: #333333;
+  color: #FFFFFF;
+}
+span.co a { text-decoration: none; }
+span.co a:hover { text-decoration: none; }
+
+div.cmdsynopsis { font-family: monospace; }
+
+dt.question { margin-left: 0em; }
+dt.question div.label { float: left; }
+dd + dt.question { margin-top: 1em; }
+dd.answer {
+  margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+dd.answer div.label { float: left; }
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="configuration.html" title="Configuration">Configuration</a></td>
+<td class="navbar-next"><a class="navbar-next" href="binaries.html" title="GDM Commands">GDM Commands</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gdm-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul>
+<li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li>
+<li><a class="xref" href="overview.html" title="Overview">Overview</a></li>
+<li><a class="xref" href="security.html" title="Security">Security</a></li>
+<li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li>
+<li>Controlling GDM</li>
+<li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li>
+<li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li>
+<li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li>
+<li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li>
+<li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li>
+<li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="xref" href="license.html" title="License">License</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="controlling"></a><div class="header"><h1 class="sect1 title"><span class="title">Controlling GDM</span></h1></div>
+<ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul>
+<p class="para block block-first">
       You can control GDM behavior during runtime in several different ways.
       You can either run certain commands, or you can talk to GDM using either
       a unix socket protocol, or a FIFO protocol.
-    </p><div class="sect2"><a name="commands"/><h2 class="sect2 title"><span class="title"><span class="label">5.1. </span>Commands</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">5.1. </span><a class="xref" href="controlling.html#commands" title="Commands">Commands</a>
+</li>
+<li>
+<span class="label">5.2. </span><a class="xref" href="controlling.html#fifoprot" title="The FIFO protocol">The FIFO protocol</a>
+</li>
+<li>
+<span class="label">5.3. </span><a class="xref" href="controlling.html#socketprot" title="Socket Protocol">Socket Protocol</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="commands"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">5.1. </span>Commands</span></h2></div>
+<p class="para block block-first">
         To stop GDM, you can either send the TERM signal to the main daemon or
-        run the <span class="command" style="font-family: monospace; ">gdm-stop</span> command which is in the
-        <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;/</span> directory.  To restart GDM, you can
+        run the <span class="command">gdm-stop</span> command which is in the
+        <span class="filename">&lt;sbin&gt;/</span> directory.  To restart GDM, you can
         either send the HUP signal to the main daemon or run the
-        <span class="command" style="font-family: monospace; ">gdm-restart</span> command which is also in the
-        <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;/</span> directory.  To restart GDM but only
+        <span class="command">gdm-restart</span> command which is also in the
+        <span class="filename">&lt;sbin&gt;/</span> directory.  To restart GDM but only
         after all the users have logged out, you can either send the USR1
         signal to the main daemon or run the
-        <span class="command" style="font-family: monospace; ">gdm-safe-restart</span> command which is in the
-        <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;/</span> directory as well.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        The <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command can be used to start
+        <span class="command">gdm-safe-restart</span> command which is in the
+        <span class="filename">&lt;sbin&gt;/</span> directory as well.
+      </p>
+<p class="para block">
+        The <span class="command">gdmflexiserver</span> command can be used to start
         new flexible (on demand) displays if your system supports virtual
         terminals.  This command will normally lock the current session with a
         screensaver so that the user can safely walk away from the computer and
         let someone else log in.  If more that two flexible displays have 
-        started <span class="command" style="font-family: monospace; ">gdmflexiserver</span> will display a pop-up dialog
+        started <span class="command">gdmflexiserver</span> will display a pop-up dialog
         allowing the user to select which session to continue.  The user will
         normally have to enter a password to return to the session.  On session
         exit the system will return to the previous virtual terminal.  Run
-        <span class="command" style="font-family: monospace; ">gdmflexiserver --help</span> to get a listing of possible
+        <span class="command">gdmflexiserver --help</span> to get a listing of possible
         options.  
-      </p></div><div class="sect2"><a name="fifoprot"/><h2 class="sect2 title"><span class="title"><span class="label">5.2. </span>The FIFO protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-        GDM also provides a FIFO called <span class="filename" style="font-family: monospace; ">.gdmfifo</span> in the
-        <span class="filename" style="font-family: monospace; ">ServAuthDir</span> directory
-        (usually <span class="filename" style="font-family: monospace; ">&lt;var&gt;/gdm/.gdmfifo</span>).  You must be
+      </p>
+</div>
+<div class="division sect2">
+<a name="fifoprot"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">5.2. </span>The FIFO protocol</span></h2></div>
+<p class="para block block-first">
+        GDM also provides a FIFO called <span class="filename">.gdmfifo</span> in the
+        <span class="filename">ServAuthDir</span> directory
+        (usually <span class="filename">&lt;var&gt;/gdm/.gdmfifo</span>).  You must be
         root to use this protocol, and it is mostly used for internal GDM
         chatter.  It is a very simple protocol where you just echo a command on
         a single line to this file.  It can be used to tell GDM things such as
         restart, suspend the computer, or restart all X servers next time it has
         a chance (which would be useful from an X configuration application).
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         Full and up to date documentation of the commands and their use is
         contained in the GDM source tree in the file
-        <span class="filename" style="font-family: monospace; ">daemon/gdm.h</span>.  Look for the defines starting with
-        <span class="filename" style="font-family: monospace; ">GDM_SOP_</span>.  The commands which require the
+        <span class="filename">daemon/gdm.h</span>.  Look for the defines starting with
+        <span class="filename">GDM_SOP_</span>.  The commands which require the
         pid of the slave as an argument are the ones that are really used for
         internal communication of the slave with the master and should not be
         used.
-      </p></div><div class="sect2"><a name="socketprot"/><h2 class="sect2 title"><span class="title"><span class="label">5.3. </span>Socket Protocol</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="socketprot"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">5.3. </span>Socket Protocol</span></h2></div>
+<p class="para block block-first">
         GDM provides a unix domain socket for communication at
-        <span class="filename" style="font-family: monospace; ">/tmp/.gdm_socket</span>.  Using this you can check if
+        <span class="filename">/tmp/.gdm_socket</span>.  Using this you can check if
         GDM is running, the version of the daemon, the current displays that
         are running and who is logged in on them, and if GDM supports it on
         your operating system, also the virtual terminals of all the console
-        logins.  The <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command uses this
+        logins.  The <span class="command">gdmflexiserver</span> command uses this
         protocol, for example, to launch flexible (on-demand) displays.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         gdmflexiserver accepts the following commands with the --command
         option:
-      </p><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ADD_DYNAMIC_DISPLAY
+      </p>
+<div class=" block screen block-indent"><pre class="screen">ADD_DYNAMIC_DISPLAY
 ALL_SERVERS
 ATTACHED_SERVERS
 AUTH_LOCAL
@@ -323,10 +571,82 @@ SET_SAFE_LOGOUT_ACTION
 SET_VT
 UPDATE_CONFIG
 VERSION
-</pre></div><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+</pre></div>
+<p class="para block">
        These are described in detail below, including required arguments,
        response format, and return codes.
-      </p><div class="sect3"><a name="adddynamic"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.1. </span>ADD_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ADD_DYNAMIC_DISPLAY: Create a new server definition that will
+      </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">5.3.1. </span><a class="xref" href="controlling.html#adddynamic" title="ADD_DYNAMIC_DISPLAY">ADD_DYNAMIC_DISPLAY</a>
+</li>
+<li>
+<span class="label">5.3.2. </span><a class="xref" href="controlling.html#allservers" title="ALL_SERVERS">ALL_SERVERS</a>
+</li>
+<li>
+<span class="label">5.3.3. </span><a class="xref" href="controlling.html#attachedservers" title="ATTACHED_SERVERS">ATTACHED_SERVERS</a>
+</li>
+<li>
+<span class="label">5.3.4. </span><a class="xref" href="controlling.html#authlocal" title="AUTH_LOCAL">AUTH_LOCAL</a>
+</li>
+<li>
+<span class="label">5.3.5. </span><a class="xref" href="controlling.html#close" title="CLOSE">CLOSE</a>
+</li>
+<li>
+<span class="label">5.3.6. </span><a class="xref" href="controlling.html#flexixnest" title="FLEXI_XNEST">FLEXI_XNEST</a>
+</li>
+<li>
+<span class="label">5.3.7. </span><a class="xref" href="controlling.html#flexixserver" title="FLEXI_XSERVER">FLEXI_XSERVER</a>
+</li>
+<li>
+<span class="label">5.3.8. </span><a class="xref" href="controlling.html#getconfig" title="GET_CONFIG">GET_CONFIG</a>
+</li>
+<li>
+<span class="label">5.3.9. </span><a class="xref" href="controlling.html#getconfigfile" title="GET_CONFIG_FILE">GET_CONFIG_FILE</a>
+</li>
+<li>
+<span class="label">5.3.10. </span><a class="xref" href="controlling.html#getserverdetails" title="GET_SERVER_DETAILS">GET_SERVER_DETAILS</a>
+</li>
+<li>
+<span class="label">5.3.11. </span><a class="xref" href="controlling.html#getserverlist" title="GET_SERVER_LIST">GET_SERVER_LIST</a>
+</li>
+<li>
+<span class="label">5.3.12. </span><a class="xref" href="controlling.html#greeterpids" title="GREETERPIDS">GREETERPIDS</a>
+</li>
+<li>
+<span class="label">5.3.13. </span><a class="xref" href="controlling.html#querylogoutaction" title="QUERY_LOGOUT_ACTION">QUERY_LOGOUT_ACTION</a>
+</li>
+<li>
+<span class="label">5.3.14. </span><a class="xref" href="controlling.html#queryvt" title="QUERY_VT">QUERY_VT</a>
+</li>
+<li>
+<span class="label">5.3.15. </span><a class="xref" href="controlling.html#releasedynamic" title="RELEASE_DYNAMIC_DISPLAYS">RELEASE_DYNAMIC_DISPLAYS</a>
+</li>
+<li>
+<span class="label">5.3.16. </span><a class="xref" href="controlling.html#removedynamic" title="REMOVE_DYNAMIC_DISPLAY">REMOVE_DYNAMIC_DISPLAY</a>
+</li>
+<li>
+<span class="label">5.3.17. </span><a class="xref" href="controlling.html#serverbusy" title="SERVER_BUSY">SERVER_BUSY</a>
+</li>
+<li>
+<span class="label">5.3.18. </span><a class="xref" href="controlling.html#setlogoutaction" title="SET_LOGOUT_ACTION">SET_LOGOUT_ACTION</a>
+</li>
+<li>
+<span class="label">5.3.19. </span><a class="xref" href="controlling.html#setsafelogoutaction" title="SET_SAFE_LOGOUT_ACTION">SET_SAFE_LOGOUT_ACTION</a>
+</li>
+<li>
+<span class="label">5.3.20. </span><a class="xref" href="controlling.html#setvt" title="SET_VT">SET_VT</a>
+</li>
+<li>
+<span class="label">5.3.21. </span><a class="xref" href="controlling.html#updateconfig" title="UPDATE_CONFIG">UPDATE_CONFIG</a>
+</li>
+<li>
+<span class="label">5.3.22. </span><a class="xref" href="controlling.html#queryversion" title="VERSION">VERSION</a>
+</li>
+</ul></div>
+<div class="division sect3">
+<a name="adddynamic"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.1. </span>ADD_DYNAMIC_DISPLAY</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">ADD_DYNAMIC_DISPLAY: Create a new server definition that will
                      run on the specified display leaving, it
                      in DISPLAY_CONFIG state.
 Supported since: 2.8.0.0
@@ -343,7 +663,11 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="allservers"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.2. </span>ALL_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ALL_SERVERS: List all displays, including console, remote, xnest.
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="allservers"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.2. </span>ALL_SERVERS</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">ALL_SERVERS: List all displays, including console, remote, xnest.
              This can, for example, be useful to figure out if
              the display you are on is managed by the gdm daemon,
              by seeing if it is in the list.  It is also somewhat
@@ -361,7 +685,11 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="attachedservers"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.3. </span>ATTACHED_SERVERS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">ATTACHED_SERVERS: List all attached displays.  Doesn't list XDMCP
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="attachedservers"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.3. </span>ATTACHED_SERVERS</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">ATTACHED_SERVERS: List all attached displays.  Doesn't list XDMCP
                   and xnest non-attached displays.
 Note:             This command used to be named CONSOLE_SERVERS,
                   which is still recognized for backwards
@@ -388,7 +716,11 @@ Answers:
      1 = Not implemented
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="authlocal"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.4. </span>AUTH_LOCAL</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">AUTH_LOCAL: Setup this connection as authenticated for
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="authlocal"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.4. </span>AUTH_LOCAL</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">AUTH_LOCAL: Setup this connection as authenticated for
             FLEXI_SERVER.  Because all full blown (non-Xnest)
             displays can be started only from users logged in
             locally, and here GDM assumes only users logged
@@ -413,11 +745,19 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="close"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.5. </span>CLOSE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">CLOSE: Close sockets connection
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="close"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.5. </span>CLOSE</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">CLOSE: Close sockets connection
 Supported since: 2.2.4.0
 Arguments: None
 Answers: None
-</pre></div></div><div class="sect3"><a name="flexixnest"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.6. </span>FLEXI_XNEST</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XNEXT: Start a new flexible Xnest display.
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="flexixnest"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.6. </span>FLEXI_XNEST</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">FLEXI_XNEXT: Start a new flexible Xnest display.
 Note:        Supported on older version from 2.2.4.0, later
              2.2.4.2, but since 2.3.90.4 you must supply 4
              arguments or ERROR 100 will be returned.  This
@@ -450,7 +790,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="flexixserver"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.7. </span>FLEXI_XSERVER</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">FLEXI_XSERVER: Start a new X flexible display.  Only supported on
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="flexixserver"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.7. </span>FLEXI_XSERVER</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">FLEXI_XSERVER: Start a new X flexible display.  Only supported on
                connection that passed AUTH_LOCAL
 Supported since: 2.2.4.0
 Arguments: &lt;xserver type&gt;
@@ -467,7 +811,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="getconfig"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.8. </span>GET_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG:  Get configuration value for key.  Useful so
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="getconfig"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.8. </span>GET_CONFIG</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">GET_CONFIG:  Get configuration value for key.  Useful so
              that other applications can request configuration
              information from GDM.  Any key defined as GDM_KEY_*
              in gdm.h is supported.  Starting with version 2.13.0.2
@@ -485,7 +833,11 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="getconfigfile"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.9. </span>GET_CONFIG_FILE</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_CONFIG_FILE:  Get config file location being used by
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="getconfigfile"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.9. </span>GET_CONFIG_FILE</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">GET_CONFIG_FILE:  Get config file location being used by
                   the daemon.  If the GDM daemon was started
                   with the --config option, it will return
                   the value passed in via the argument.
@@ -497,7 +849,11 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="getserverdetails"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.10. </span>GET_SERVER_DETAILS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_SERVER_DETAILS:  Get detail information for a specific server.
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="getserverdetails"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.10. </span>GET_SERVER_DETAILS</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">GET_SERVER_DETAILS:  Get detail information for a specific server.
 Supported since: 2.13.0.4
 Arguments: &lt;server&gt; &lt;key&gt;
   Key values include:
@@ -521,7 +877,11 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="getserverlist"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.11. </span>GET_SERVER_LIST</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GET_SERVER_LIST:  Get a list of the server sections from
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="getserverlist"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.11. </span>GET_SERVER_LIST</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">GET_SERVER_LIST:  Get a list of the server sections from
                   the configuration file.
 Supported since: 2.13.0.4
 Arguments: None
@@ -533,7 +893,11 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="greeterpids"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.12. </span>GREETERPIDS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">GREETERPIDS: List all greeter pids so that one can send HUP
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="greeterpids"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.12. </span>GREETERPIDS</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">GREETERPIDS: List all greeter pids so that one can send HUP
              to them for config rereading.  Of course one
              must be root to do that.
 Supported since: 2.3.90.2
@@ -544,7 +908,11 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="querylogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.13. </span>QUERY_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_LOGOUT_ACTION: Query which logout actions are possible
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="querylogoutaction"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.13. </span>QUERY_LOGOUT_ACTION</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">QUERY_LOGOUT_ACTION: Query which logout actions are possible
                      Only supported on connections that passed
                      AUTH_LOCAL.
 Supported since: 2.5.90.0
@@ -561,7 +929,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="queryvt"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.14. </span>QUERY_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">QUERY_VT:  Ask the daemon about which VT we are currently on.
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="queryvt"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.14. </span>QUERY_VT</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">QUERY_VT:  Ask the daemon about which VT we are currently on.
            This is useful for logins which don't own
            /dev/console but are still console logins.  Only
            supported on Linux currently, other places will
@@ -579,7 +951,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="releasedynamic"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.15. </span>RELEASE_DYNAMIC_DISPLAYS</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">RELEASE_DYNAMIC_DISPLAYS: Release dynamic displays currently in 
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="releasedynamic"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.15. </span>RELEASE_DYNAMIC_DISPLAYS</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">RELEASE_DYNAMIC_DISPLAYS: Release dynamic displays currently in 
                           DISPLAY_CONFIG state
 Supported since: 2.8.0.0
 Arguments: None
@@ -590,7 +966,11 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="removedynamic"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.16. </span>REMOVE_DYNAMIC_DISPLAY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">REMOVE_DYNAMIC_DISPLAY: Remove a dynamic display, killing the server
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="removedynamic"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.16. </span>REMOVE_DYNAMIC_DISPLAY</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">REMOVE_DYNAMIC_DISPLAY: Remove a dynamic display, killing the server
                         and purging the display configuration
 Supported since: 2.8.0.0
 Arguments: &lt;display to remove&gt;
@@ -602,7 +982,11 @@ Answers:
      100 = Not authenticated
      200 = Dynamic Displays not allowed
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="serverbusy"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.17. </span>SERVER_BUSY</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SERVER_BUSY:  Returns true if half or more of the daemon's sockets
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="serverbusy"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.17. </span>SERVER_BUSY</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">SERVER_BUSY:  Returns true if half or more of the daemon's sockets
               are busy, false otherwise.  Used by slave programs
               which want to ensure they do not overwhelm the 
               sever.
@@ -614,7 +998,11 @@ Answers:
      0 = Not implemented
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="setlogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.18. </span>SET_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_LOGOUT_ACTION: Tell the daemon to halt/restart/suspend after
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="setlogoutaction"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.18. </span>SET_LOGOUT_ACTION</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">SET_LOGOUT_ACTION: Tell the daemon to halt/restart/suspend after
                    slave process exits.  Only supported on
                    connections that passed AUTH_LOCAL.
 Supported since: 2.5.90.0
@@ -631,7 +1019,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="setsafelogoutaction"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.19. </span>SET_SAFE_LOGOUT_ACTION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_SAFE_LOGOUT_ACTION:  Tell the daemon to halt/restart/suspend
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="setsafelogoutaction"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.19. </span>SET_SAFE_LOGOUT_ACTION</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">SET_SAFE_LOGOUT_ACTION:  Tell the daemon to halt/restart/suspend
                          after everybody logs out.  If only one
                          person logs out, then this is obviously
                          the same as the SET_LOGOUT_ACTION.  Note
@@ -655,7 +1047,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="setvt"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.20. </span>SET_VT</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">SET_VT:  Change to the specified virtual terminal.
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="setvt"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.20. </span>SET_VT</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">SET_VT:  Change to the specified virtual terminal.
          This is useful for logins which don't own /dev/console
          but are still console logins.  Only supported on Linux
          currently, other places will just get ERROR 8.
@@ -671,7 +1067,11 @@ Answers:
      100 = Not authenticated
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="updateconfig"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.21. </span>UPDATE_CONFIG</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">UPDATE_CONFIG: Tell the daemon to re-read a key from the 
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="updateconfig"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.21. </span>UPDATE_CONFIG</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">UPDATE_CONFIG: Tell the daemon to re-read a key from the 
                GDM configuration file.   Any user can request
                that values are re-read but the daemon will
                only do so if the file has been modified
@@ -742,7 +1142,11 @@ Answers:
      50 = Unsupported key
      200 = Too many messages
      999 = Unknown error
-</pre></div></div><div class="sect3"><a name="queryversion"/><h3 class="sect3 title"><span class="title"><span class="label">5.3.22. </span>VERSION</span></h3><div xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="screen block-indent"><pre class="screen">VERSION: Query GDM version
+</pre></div>
+</div>
+<div class="division sect3">
+<a name="queryversion"></a><div class="header"><h3 class="sect3 title"><span class="title"><span class="label">5.3.22. </span>VERSION</span></h3></div>
+<div class=" block screen block-indent block-first"><pre class="screen">VERSION: Query GDM version
 Supported since: 2.2.4.0
 Arguments: None
 Answers:
@@ -750,4 +1154,13 @@ Answers:
   ERROR &lt;err number&gt; &lt;english error description&gt;
      200 = Too many messages
      999 = Unknown error
-</pre></div></div></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="configuration.html" title="Configuration">Configuration</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="binaries.html" title="GDM Commands">GDM Commands</a></span></div></div></body></html>
+</pre></div>
+</div>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="configuration.html" title="Configuration">Configuration</a></td>
+<td class="navbar-next"><a class="navbar-next" href="binaries.html" title="GDM Commands">GDM Commands</a></td>
+</tr></table></div>
+</body>
+</html>

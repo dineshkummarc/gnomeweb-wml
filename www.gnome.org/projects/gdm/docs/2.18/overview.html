@@ -1,80 +1,415 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Overview</title><link rel="previous" href="preface.html" title="Terms and Conventions Used in This Manual"/><link rel="next" href="security.html" title="Security"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style type="text/css">
+<html xmlns:set="http://exslt.org/sets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Overview</title>
+<link rel="previous" href="preface.html" title="Terms and Conventions Used in This Manual">
+<link rel="next" href="security.html" title="Security">
+<link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<style type="text/css">
+
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
+  
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  
+  margin-left: 1.72em;
+  
+  margin-right: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  
+  margin-left: 2.4em;
+  
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 1em 0.5em 1em;
+  
+  padding-left: 60px;
+  min-height: 48px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+  
+  background-position: 6px 0.5em;
+  background-repeat: no-repeat;
+}
+div.caution {
+  background-image: url("admon-caution.png");
+}
+div.important {
+  background-image: url("admon-important.png");
+}
+div.note {
+  background-image: url("admon-note.png");
+}
+div.note-bug {
+  background-image: url("admon-bug.png");
+}
+div.tip {
+  background-image: url("admon-tip.png");
+}
+div.warning {
+  background-image: url("admon-warning.png");
+}
+div.blockquote {
+  
+  background-image: url('../../../data/icons/yelp-watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  
+  background-position: top left;
+  padding: 0.5em;
+  
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  
+  text-align: right;
+  
+  margin-left: 20%;
+  
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  
+  padding-right: 1em;
+  
+  float: left;
+  
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  
+  padding-left: 0;
+  
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
 div.footnotes { font-style: italic; font-size: 0.8em; }
 div.footnote { margin-top: 1.44em; }
 span.footnote-number { display: inline; padding-right: 0.83em; }
 span.footnote-number + p { display: inline; }
 a.footnote { text-decoration: none; font-size: 0.8em; }
 a.footnote-ref { text-decoration: none; }
-
-div.admonition {
-  padding: 4px 8px 4px 56px;
-  min-height: 52px;
-  border: solid 1px #D1940C;
-  background-position: 4px 4px;
-  background-repeat: no-repeat;
-}
-div.caution {
-  background-image: url("caution.png");
-}
-div.important {
-  background-image: url("important.png");
-}
-div.note {
-  background-image: url("note.png");
-}
-div.tip {
-  background-image: url("tip.png");
-}
-div.warning {
-  background-image: url("warning.png");
-}
-
-div.autotoc { margin-left: 2em; padding: 0em; }
-div.autotoc ul { margin-left: 0em; padding-left: 0em; }
-div.autotoc ul li {
-  margin-right: 0em; padding: 0em;
-  list-style-type: none;
-}
-
-* + div.biblioentry { margin-top: 1.2em; }
-* + div.bibliomixed { margin-top: 1.2em; }
-
-.block-indent { margin-left: 1.72em; margin-right: 1em; }
-.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
-.block-verbatim { white-space: pre; }
-pre.programlisting {
-  padding: 6px;
-  -moz-border-radius: 8px;
-  overflow: auto;
-  background-color: #EEEEEE;
-  border: solid 1px #DDDDDD;
-}
-pre.screen {
-  padding: 6px;
-  -moz-border-radius: 8px;
-  overflow: auto;
-  background-color: #EEEEEE;
-  border: solid 1px #DDDDDD;
-}
-pre.synopsis { overflow: auto; }
-pre.linenumbering {
-  
-  margin-top: 0px;
-  margin-left: 0.83em;
-  padding: 6px 0.4em 6px 0.4em;
-  border: solid 1px black;
-  -moz-border-radius: 8px;
-  background-color: black;
-  color: white;
-  -moz-opacity: .3;
-  float: left;
-  text-align: right;
-}
-dt.glossterm { margin-left: 0em; }
-dd + dt.glossterm { margin-top: 2em; }
-dd.glossdef, dd.glosssee, dd.glossseealso
-  { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
 
 span.co {
   margin-left: 0.2em; margin-right: 0.2em;
@@ -95,21 +430,6 @@ span.co a:hover { text-decoration: none; }
 
 div.cmdsynopsis { font-family: monospace; }
 
-div.list { margin-left: 0px; margin-bottom: 1em; padding: 0px; }
-div.list dl dt { margin-left: 0em; }
-div.list dl dd + dt { margin-top: 1em; }
-div.list dl dd {
-  margin-top: 0.69em;
-  margin-left: 1.72em;
-  margin-right: 1em;
-}
-div.list ul { margin-left: 1.72em; padding-left: 0em; }
-div.list ol { margin-left: 1.72em; padding-left: 0em; }
-div.list ul li { margin-right: 1em; padding: 0em; }
-div.list ol li { margin-right: 1em; padding: 0em; }
-div.list li + li { margin-top: 0.69em; }
-div.simplelist &gt; table { border: none; }
-
 dt.question { margin-left: 0em; }
 dt.question div.label { float: left; }
 dd + dt.question { margin-top: 1em; }
@@ -119,98 +439,117 @@ dd.answer {
   margin-right: 1em;
 }
 dd.answer div.label { float: left; }
-
-div.refentry h2.refentry {
-  border: none;
-  margin-top: 1em;
-}
-div.refentry + div.refentry {
-
-  border-top: dashed black 1px;
-}
-
-table {
-  border-collapse: collapse;
-  border: solid 1px;
-  -moz-border-radius: 5px;
-}
-tr.odd { background-color: #F0F0F0 }
-td { padding: 4px 0.83em 4px 0.83em; }
-th { padding-left: 0.8em; padding-right: 0.83em; }
-thead {
-  border-top: solid 2px;
-  border-bottom: solid 2px;
-}
-tfoot {
-  border-top: solid 2px;
-  border-bottom: solid 2px;
-}
-td + td {
-  border-left: solid 1px;
-}
-tbody {
-  border: solid 1px;
-  -moz-border-radius: 5px;
-}
-
-h1 { font-size: 1.72em; margin-top: 0em; }
-h2 { font-size: 1.44em; }
-h2.title { margin-top: 1.72em; border-bottom: solid 1px; }
-h3 { font-size: 1.2em; }
-h3.title { margin-top: 1.72em; }
-h3 span.title { border-bottom: solid 1px; }
-h4 { font-size: 1.0em; }
-h4.title { margin-top: 1.44em; }
-h4 span.title { border-bottom: solid 1px; }
-h5 { font-size: 1em; margin-top: 1em; }
-h6 { font-size: 1em; margin-top: 1em; }
-h7 { font-size: 1em; margin-top: 1em; }
-
-body {
-  margin: 0px;
-  direction: ltr;
-}
-div.body { padding: 12px; }
-div.navbar {
-  margin-left: 12px; margin-right: 12px; margin-bottom: 12px;
-  padding: 6px;
-  border: solid 1px;
-}
-div.navbar-prev { margin: 0px; padding: 0px; float: left; }
-div.navbar-prev-sans-next { float: none; }
-div.navbar-next { margin: 0px; padding: 0px; text-align: right; }
-div {
-  margin-top: 0em;  margin-bottom: 0em;
-  padding-top: 0em; padding-bottom: 0em;
-}
-p {
-  margin-top: 0em;  margin-bottom: 0em;
-  padding-top: 0em; padding-bottom: 0em;
-}
-div + * { margin-top: 1em; }
-p   + * { margin-top: 1em; }
-p &gt; div { margin-top: 1em; margin-bottom: 1em; }
-p &gt; div + div { margin-top: 0em; }
-p { text-align: justify; }
-</style></head><body><div class="body"><div class="sect1"><a name="overview"/><h1 class="sect1 title"><span class="title">Overview</span></h1><div class="sect2"><a name="introduction"/><h2 class="sect2 title"><span class="title"><span class="label">2.1. </span>
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></td>
+<td class="navbar-next"><a class="navbar-next" href="security.html" title="Security">Security</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gdm-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul>
+<li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li>
+<li>Overview</li>
+<li><a class="xref" href="security.html" title="Security">Security</a></li>
+<li><a class="xref" href="consolekit.html" title="Support for ConsoleKit">Support for ConsoleKit</a></li>
+<li><a class="xref" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></li>
+<li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li>
+<li><a class="xref" href="controlling.html" title="Controlling GDM">Controlling GDM</a></li>
+<li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li>
+<li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li>
+<li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li>
+<li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li>
+<li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li>
+<li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="xref" href="license.html" title="License">License</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="overview"></a><div class="header"><h1 class="sect1 title"><span class="title">Overview</span></h1></div>
+<ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul>
+<div class="autotoc"><ul>
+<li>
+<span class="label">2.1. </span><a class="xref" href="overview.html#introduction" title="
         Introduction
-      </span></h2><p class="para"> 
+      ">
+        Introduction
+      </a>
+</li>
+<li>
+<span class="label">2.2. </span><a class="xref" href="overview.html#stability" title="
+        Interface Stability
+      ">
+        Interface Stability
+      </a>
+</li>
+<li>
+<span class="label">2.3. </span><a class="xref" href="overview.html#daemonov" title="The GDM Daemon">The GDM Daemon</a>
+</li>
+<li>
+<span class="label">2.4. </span><a class="xref" href="overview.html#displaytypes" title="Different Display Types">Different Display Types</a>
+</li>
+<li>
+<span class="label">2.5. </span><a class="xref" href="overview.html#xdmcp" title="
+        XDMCP
+      ">
+        XDMCP
+      </a>
+</li>
+<li>
+<span class="label">2.6. </span><a class="xref" href="overview.html#secureremote" title="
+        Securing Remote Connection Through SSH
+      ">
+        Securing Remote Connection Through SSH
+      </a>
+</li>
+<li>
+<span class="label">2.7. </span><a class="xref" href="overview.html#gtkgreeter" title="The GTK+ Greeter">The GTK+ Greeter</a>
+</li>
+<li>
+<span class="label">2.8. </span><a class="xref" href="overview.html#themedgreeter" title="The Themed Greeter">The Themed Greeter</a>
+</li>
+<li>
+<span class="label">2.9. </span><a class="xref" href="overview.html#facebrowser" title="The GDM Face Browser">The GDM Face Browser</a>
+</li>
+<li>
+<span class="label">2.10. </span><a class="xref" href="overview.html#logging" title="Logging">Logging</a>
+</li>
+<li>
+<span class="label">2.11. </span><a class="xref" href="overview.html#fileaccess" title="Accessing Files">Accessing Files</a>
+</li>
+<li>
+<span class="label">2.12. </span><a class="xref" href="overview.html#performance" title="GDM Performance">GDM Performance</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="introduction"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.1. </span>
+        Introduction
+      </span></h2></div>
+<p class="para block block-first"> 
         The Gnome Display Manager (GDM) is a display manager that
         implements all significant features required for managing
         local and remote displays.   GDM was written from scratch and
         does not contain any XDM / X Consortium code.
-      </p><p class="para">
+      </p>
+<p class="para block">
         For further information about GDM, see the
         <a class="ulink" href="http://www.gnome.org/projects/gdm/" title="http://www.gnome.org/projects/gdm/">
         the GDM project website</a>.  Please submit any bug reports or
         enhancement requests to the "gdm" category in
         <a class="ulink" href="http://bugzilla.gnome.org/" title="http://bugzilla.gnome.org/">bugzilla.gnome.org</a>.
         You can also send a message to the 
-        <div class="address block-verbatim"><span class="email-punc"><tt>&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to &#x2018;&#x2019;."><span class="email">gdm-list@gnome.org</span></a>&gt;</tt></span></div> mail list to
+        <div class=" block address block-verbatim"><span class="email">&lt;<a href="mailto:gdm-list@gnome.org" title="Send email to ‘gdm-list@gnome.org’.">gdm-list@gnome.org</a>&gt;</span></div> mail list to
         discuss any issues or concerns with the GDM program.
-      </p></div><div class="sect2"><a name="stability"/><h2 class="sect2 title"><span class="title"><span class="label">2.2. </span>
+      </p>
+</div>
+<div class="division sect2">
+<a name="stability"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.2. </span>
         Interface Stability
-      </span></h2><p class="para">
+      </span></h2></div>
+<p class="para block block-first">
         The key/value pairs defined in the GDM configuration files and
         the location of these files are considered "stable" interfaces
         and should only change in ways that are backwards compatible.  Note that
@@ -222,62 +561,73 @@ p { text-align: justify; }
         RebootCommand, CustomCommands, SuspendCommand, StandardXServer, Xnest,
         SoundProgram, and the "command" value for each
         "server-foo".
-      </p><p class="para">
+      </p>
+<p class="para block">
         Note: distributions often change the default values of keys to support
         their platform.  Command-line interfaces for GDM programs installed to
-        <span class="filename" style="font-family: monospace; ">&lt;bin&gt;</span> and <span class="filename" style="font-family: monospace; ">&lt;sbin&gt;</span>
+        <span class="filename">&lt;bin&gt;</span> and <span class="filename">&lt;sbin&gt;</span>
         are considered stable.  Refer to your distribution documentation to see
         if there are any distribution-specific changes to these GDM interfaces
         and what support exists for them.
-      </p><p class="para">
+      </p>
+<p class="para block">
         As of the GDM 2.15 development series, some one-dash arguments are no
         longer supported.  This includes the "-xdmaddress",
         "-clientaddress", and "-connectionType" arguments
-        used by <span class="command" style="font-family: monospace; ">gdmchooser</span>.  These arguments have been
+        used by <span class="command">gdmchooser</span>.  These arguments have been
         changed to now use two dashes.
-      </p><p class="para">
+      </p>
+<p class="para block">
         If issues are discovered that break compatibility, please file a bug
         with an "urgent" priority.
-      </p></div><div class="sect2"><a name="daemonov"/><h2 class="sect2 title"><span class="title"><span class="label">2.3. </span>The GDM Daemon</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="daemonov"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.3. </span>The GDM Daemon</span></h2></div>
+<p class="para block block-first">
         The GDM daemon is responsible for managing displays on the system.
         This includes authenticating users, starting the user session, and
         terminating the user session.  GDM is configurable and the ways it can
         be configured are described in the "Configuring GDM" section
-        of this document.  The <span class="filename" style="font-family: monospace; ">Init</span>,
-        <span class="filename" style="font-family: monospace; ">PostLogin</span>, <span class="filename" style="font-family: monospace; ">PreSession</span>, 
-        and <span class="filename" style="font-family: monospace; ">PostSession</span> scripts discussed below are 
+        of this document.  The <span class="filename">Init</span>,
+        <span class="filename">PostLogin</span>, <span class="filename">PreSession</span>, 
+        and <span class="filename">PostSession</span> scripts discussed below are 
         discussed in this "Configuring GDM section".
-      </p><p class="para">
+      </p>
+<p class="para block">
         The GDM daemon supports a UNIX domain socket protocol which can be used
         to control aspects of its behavior and to query information.  This
         protocol is described in the "Controlling GDM" section of
         this document.  
-      </p><p class="para">
+      </p>
+<p class="para block">
         GDM can be asked to manage a display a number of ways.  Local displays
         are always managed when GDM starts and will be restarted when a user's
         session is finished.  Displays can be requested via XDMCP, flexible
         displays can be requested by running the
-        <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command.  Displays that are started
+        <span class="command">gdmflexiserver</span> command.  Displays that are started
         on request are not restarted on session exit.  GDM also provides the
-        <span class="command" style="font-family: monospace; ">gdmdynamic</span> command to allow easier management of
+        <span class="command">gdmdynamic</span> command to allow easier management of
         displays on a multi-user server.  These display types are discussed
         further in the next section.  
-      </p><p class="para">
+      </p>
+<p class="para block">
         When the GDM daemon is asked to manage a display, it will fork an
-        X server process, then run the <span class="filename" style="font-family: monospace; ">Init</span> script as the
+        X server process, then run the <span class="filename">Init</span> script as the
         root user, and start the login GUI dialog as a slave process on the
         display.  GDM can be configured to use either
-        <span class="command" style="font-family: monospace; ">gdmgreeter</span> (the default) or
-        <span class="command" style="font-family: monospace; ">gdmlogin</span> as the GUI dialog program.  The
-        <span class="command" style="font-family: monospace; ">gdmlogin</span> program supports accessibility while the
-        <span class="command" style="font-family: monospace; ">gdmgreeter</span> program supports greater themeability.
+        <span class="command">gdmgreeter</span> (the default) or
+        <span class="command">gdmlogin</span> as the GUI dialog program.  The
+        <span class="command">gdmlogin</span> program supports accessibility while the
+        <span class="command">gdmgreeter</span> program supports greater themeability.
         The GUI dialog is run as the unpriviledged "gdm" user/group
         which is described in the "Security" section below.  The GUI
         dialog communicates with the daemon via a sockets protocol and via
         standard input/output.  The slave, for example passes the username and
         password information to the GDM daemon via standard input/output so
         the daemon can handle the actual authentication.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The login GUI dialog screen allows the user to select which session
         they wish to start and which language they wish to use.  Sessions are
         defined by files that end in the .desktop extension and more
@@ -290,95 +640,113 @@ p { text-align: justify; }
         configured to provide additional features to the user, such as the
         Face Browser; the ability to halt, restart, or suspend the system;
         and/or edit the login configuration (after entering the root password).
-      </p><p class="para"> 
+      </p>
+<p class="para block"> 
         GDM, by default, will use Pluggable Authentication Modules (PAM) for
         authentication, but can also support regular crypt and shadow passwords
         on legacy systems.  After authenticating a user, the daemon runs the
-        <span class="filename" style="font-family: monospace; ">PostLogin</span> script as root, and forks a slave
+        <span class="filename">PostLogin</span> script as root, and forks a slave
         process to start the requested session.  This slave process runs the
-        <span class="filename" style="font-family: monospace; ">PreSession</span> script as root, sets up the user's
+        <span class="filename">PreSession</span> script as root, sets up the user's
         environment, and starts the requested session.  GDM keeps track of the
         user's default session and language in the user's
-        <span class="filename" style="font-family: monospace; ">~/.dmrc</span> and will use these defaults if the user
+        <span class="filename">~/.dmrc</span> and will use these defaults if the user
         did not pick a session or language in the login GUI.  On Solaris, GDM
         (since version 2.8.0.3) uses the SDTLOGIN interface after user
         authentication to tell the X server to be restarted as the user instead
         of as root for added security.  When the user's session exits, the GDM
-        daemon will run the <span class="filename" style="font-family: monospace; ">PostSession</span> script as root.
-      </p><p class="para">
+        daemon will run the <span class="filename">PostSession</span> script as root.
+      </p>
+<p class="para block">
         Note that, by default, GDM uses the "gdm" service name for
         normal login and the "gdm-autologin" service name for
-        automatic login.  The <span class="filename" style="font-family: monospace; ">PamStack</span> configuration
+        automatic login.  The <span class="filename">PamStack</span> configuration
         option can be used to specify a different service name.  For example,
         if "foo" is specified, then GDM will use the "foo"
         service name for normal login and "foo-autologin" for
         automatic login. 
-      </p><p class="para">
+      </p>
+<p class="para block">
         For those looking at the code, the gdm_verify_user function in 
-        <span class="filename" style="font-family: monospace; ">daemon/verify-pam.c</span> is used for normal login
+        <span class="filename">daemon/verify-pam.c</span> is used for normal login
         and the gdm_verify_setup_user function is used for automatic login.
-      </p></div><div class="sect2"><a name="displaytypes"/><h2 class="sect2 title"><span class="title"><span class="label">2.4. </span>Different Display Types</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="displaytypes"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.4. </span>Different Display Types</span></h2></div>
+<p class="para block block-first">
         GDM supports three different display types: static (local) displays,
         flexible (on-demand) displays, and XDMCP (remote) displays.  The
         "X Server Definitions" and the "Local Static X Display
         Configuration" subsections of the "Configuration"
         section explains how these various types of displays are defined in
         the GDM configuration file.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Local static displays are always started by the daemon, and when they
         die or are killed, they are restarted.  GDM can run as many of these
         as needed.  GDM can also manage displays on which it does not manage a
         GUI login, thus GDM can be used for supporting X terminals.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Flexible, or on demand displays, are started via the socket protocol
-        with the <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command.  This feature is
+        with the <span class="command">gdmflexiserver</span> command.  This feature is
         only available to users logged in on the console and will display a new
         login screen.  If a flexible display has previously been started on
-        the console, running <span class="command" style="font-family: monospace; ">gdmflexiserver</span> again will
+        the console, running <span class="command">gdmflexiserver</span> again will
         display a menu allowing users to switch back to a previous session
-        or start a new flexible session.  The <span class="command" style="font-family: monospace; ">gdmflexiserver</span>
+        or start a new flexible session.  The <span class="command">gdmflexiserver</span>
         locks the current session before starting a new flexible display, so
         the user's password must be entered before returning to an existing
-        session.  The <span class="command" style="font-family: monospace; ">gdmflexiserver</span> command can also be
-        used to launch nested <span class="command" style="font-family: monospace; ">Xnest</span> display.  These are
+        session.  The <span class="command">gdmflexiserver</span> command can also be
+        used to launch nested <span class="command">Xnest</span> display.  These are
         launched in a window in the user's current session.  Nested displays
         can be started even if not logged into the console and are started by 
-        running the <span class="command" style="font-family: monospace; ">gdmflexiserver -n</span> command.  Flexible
+        running the <span class="command">gdmflexiserver -n</span> command.  Flexible
         displays are not restarted when the user session ends.  Flexible
         displays require virtual terminal (VT) support in the kernel, and will
         not be available if not supported (such as on Solaris).  Nested
         displays require that the X server supports Xnest.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The last display type is the XDMCP remote displays which are described
         in the next section.  Remote hosts can connect to GDM and present the
         login screen if this is enabled.  Some things are different for
         remote sessions.  For example, the Actions menu which allows you to
         shut down, restart, suspend, or configure GDM are not shown.
-      </p><p class="para">
-        Displays started via the <span class="command" style="font-family: monospace; ">gdmdynamic</span> command are
+      </p>
+<p class="para block">
+        Displays started via the <span class="command">gdmdynamic</span> command are
         treated as local displays, so they are restarted automatically on
         when the session exits.  This command is intended to more effectively
         manage the displays on a multi-user server (many displays connected
         to a single server).
-      </p></div><div class="sect2"><a name="xdmcp"/><h2 class="sect2 title"><span class="title"><span class="label">2.5. </span>
+      </p>
+</div>
+<div class="division sect2">
+<a name="xdmcp"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.5. </span>
         XDMCP
-      </span></h2><p class="para">
+      </span></h2></div>
+<p class="para block block-first">
         The GDM daemon can be configured to listen for and manage X Display
         Manage Protocol (XDMCP) requests from remote displays.  By default
         XDMCP support is turned off, but can be enabled if desired.  If GDM is
         built with TCP Wrapper support, then the daemon will only grant access
         to hosts specified in the GDM service section in the TCP Wrappers
         configuration file.
-      </p><p class="para">
+      </p>
+<p class="para block">
         GDM includes several measures making it more resistant to denial of
         service attacks on the XDMCP service.  A lot of the protocol
         parameters, handshaking timeouts etc. can be fine tuned. The defaults
         should work for most systems, however.  Do not change them unless you
         know what you are doing.
-      </p><p class="para">
+      </p>
+<p class="para block">
         GDM listens to UDP port 177 and will respond to QUERY and
         BROADCAST_QUERY requests by sending a WILLING packet to the originator.
-      </p><p class="para">
+      </p>
+<p class="para block">
         GDM can also be configured to honor INDIRECT queries and present a
         host chooser to the remote display.  GDM will remember the user's
         choice and forward subsequent requests to the chosen manager.  GDM
@@ -386,17 +754,23 @@ p { text-align: justify; }
         the redirection once the user's connection succeeds.  This extension
         is only supported if both daemons are GDM.  It is transparent and
         will be ignored by XDM or other daemons that implement XDMCP.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Refer to the "Security" section for information about
         security concerns when using XDMCP.
-      </p></div><div class="sect2"><a name="secureremote"/><h2 class="sect2 title"><span class="title"><span class="label">2.6. </span>
+      </p>
+</div>
+<div class="division sect2">
+<a name="secureremote"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.6. </span>
         Securing Remote Connection Through SSH
-      </span></h2><p class="para">
+      </span></h2></div>
+<p class="para block block-first">
         As explained in the "Security" section, XDMCP does not use
         any kind of encryption and as such is inherently insecure.  As XDMCP
         uses UDP as a network transport layer, it is not possible to simply
         secure it through an SSH tunnel.
-      </p><p class="para">
+      </p>
+<p class="para block">
         To remedy this problem, gdm can be configured at compilation-time with
         the option --enable-secureremote, in which case gdm proposes as a
         built-in session a session called "Secure Remote Connection".
@@ -404,44 +778,57 @@ p { text-align: justify; }
         address of the host on which to connect; provided the said host runs an
         SSH server, the user then gets connected to the server on which the
         default X session is started and displayed on the local host.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Using this session allows a much more secure network connection and
         only necessitates to have an SSH server running on the remote host.
-      </p></div><div class="sect2"><a name="gtkgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.7. </span>The GTK+ Greeter</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="gtkgreeter"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.7. </span>The GTK+ Greeter</span></h2></div>
+<p class="para block block-first">
         The GTK+ Greeter is the default graphical user interface that is
         presented to the user. The greeter contains a menu at the top, an
         optional face browser, an optional logo and a text entry widget.
         This greeter has full accessibility support, and should be used
         by users with accessibility needs.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The text entry field is used for entering logins, passwords,
-        passphrases etc. <span class="command" style="font-family: monospace; ">gdmlogin</span> is controlled by the
+        passphrases etc. <span class="command">gdmlogin</span> is controlled by the
         underlying daemon and is basically stateless. The daemon controls the
         greeter through a simple protocol where it can ask the greeter for a
         text string with echo turned on or off. Similarly, the daemon can
         change the label above the text entry widget to correspond to the
         value the authentication system wants the user to enter.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The menu bar in the top of the greeter enables the user to select the
         requested session type/desktop environment, select an appropriate
         locale/language, halt/restart/suspend the computer, configure GDM
         (given the user knows the root password), change the GTK+ theme, or
         start an XDMCP chooser.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The greeter can optionally display a logo in the login window.  The
         image must be in a format readable to the gdk-pixbuf library (GIF,
         JPG, PNG, TIFF, XPM and possibly others), and it must be readable to
-        the GDM user. See the <span class="filename" style="font-family: monospace; ">Logo</span> option in the
+        the GDM user. See the <span class="filename">Logo</span> option in the
         reference section below for details.
-      </p></div><div class="sect2"><a name="themedgreeter"/><h2 class="sect2 title"><span class="title"><span class="label">2.8. </span>The Themed Greeter</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="themedgreeter"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.8. </span>The Themed Greeter</span></h2></div>
+<p class="para block block-first">
         The Themed Greeter is a greeter interface that takes up the whole
         screen and is very themable.  Themes can be selected and new themes
         can be installed by the configuration application or by setting the
-        <span class="filename" style="font-family: monospace; ">GraphicalTheme</span> configuration key.  The Themed
+        <span class="filename">GraphicalTheme</span> configuration key.  The Themed
         Greeter is much like the GTK+ Greeter in that it is controlled by
         the underlying daemon, is stateless, and is controlled by the
         daemon using the same simple protocol.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The look and feel of this greeter is really controlled by the theme and
         so the user interface elements that are present may be different.  The
         only thing that must always be present is the text entry field as
@@ -449,131 +836,152 @@ p { text-align: justify; }
         that allow the user to select an appropriate locale/language,
         halt/restart/suspend the computer, configure GDM (given the user
         knows the root password), or start an XDMCP chooser.
-      </p><p class="para">
+      </p>
+<p class="para block">
         You can always get a menu of available actions by pressing the F10 key.
         This can be useful if the theme doesn't provide certain buttons when
         you wish to do some action allowed by the GDM configuration.
-      </p></div><div class="sect2"><a name="facebrowser"/><h2 class="sect2 title"><span class="title"><span class="label">2.9. </span>The GDM Face Browser</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="facebrowser"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.9. </span>The GDM Face Browser</span></h2></div>
+<p class="para block block-first">
         GDM supports a face browser which will display a list of users who
         can login and an icon for each user.  This feature can be used with
-        the GTK+ Greeter if the <span class="filename" style="font-family: monospace; ">Browser</span> configuration
+        the GTK+ Greeter if the <span class="filename">Browser</span> configuration
         option is set to "true".  This feature can be used with
         the Themed Greeter if using a GDM theme which includes a
         "userlist" item type is defined, such as
         "happygnome-list"
-      </p><p class="para">
+      </p>
+<p class="para block">
         By default, the face browser is disabled since revealing usernames on
         the login screen is not appropriate on many systems for security 
         reasons.  Also GDM requires some setup to specify which users should
         be visible.  Setup can be done on the "Users" tab in
-        <span class="command" style="font-family: monospace; ">gdmsetup</span>.  This feature is most practical to use
+        <span class="command">gdmsetup</span>.  This feature is most practical to use
         on a system with a smaller number of users.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The icons used by GDM can be installed globally by the sysadmin or can
         be located in the users' home directories.  If installed globally
-        they should be in the <span class="filename" style="font-family: monospace; ">&lt;share&gt;/pixmaps/faces/</span>
+        they should be in the <span class="filename">&lt;share&gt;/pixmaps/faces/</span>
         directory (though this can be configured with the
-        <span class="filename" style="font-family: monospace; ">GlobalFaceDir</span> configuration option) and the
+        <span class="filename">GlobalFaceDir</span> configuration option) and the
         filename should be the name of the user, optionally with a
-        <span class="filename" style="font-family: monospace; ">.png</span> appended.  Face icons placed in the global
+        <span class="filename">.png</span> appended.  Face icons placed in the global
         face directory must be readable to the GDM user.  However, the daemon,
         proxies user pictures to the greeter and thus those do not have be be
         readable by the "gdm" user, but root.
-      </p><p class="para">
-        Users may run the <span class="command" style="font-family: monospace; ">gdmphotosetup</span> command to 
+      </p>
+<p class="para block">
+        Users may run the <span class="command">gdmphotosetup</span> command to 
         configure the image to use for their userid.  This program properly
         scales the file down if it is larger than the
-        <span class="filename" style="font-family: monospace; ">MaxIconWidth</span> or 
-        <span class="filename" style="font-family: monospace; ">MaxIconHeight</span> configuration options and places the
-        icon in a file called <span class="filename" style="font-family: monospace; ">~/.face</span>.  Although
-        <span class="command" style="font-family: monospace; ">gdmphotosetup</span> scales user images automatically,
+        <span class="filename">MaxIconWidth</span> or 
+        <span class="filename">MaxIconHeight</span> configuration options and places the
+        icon in a file called <span class="filename">~/.face</span>.  Although
+        <span class="command">gdmphotosetup</span> scales user images automatically,
         this does not guarantee that user images are properly scaled since
-        a user may create their <span class="filename" style="font-family: monospace; ">~/.face</span> file by hand.
-      </p><p class="para">
+        a user may create their <span class="filename">~/.face</span> file by hand.
+      </p>
+<p class="para block">
         GDM will first look for the user's face image in
-        <span class="filename" style="font-family: monospace; ">~/.face</span>.  If not found, it will try 
-        <span class="filename" style="font-family: monospace; ">~/.face.icon</span>.  If still not found, it will
+        <span class="filename">~/.face</span>.  If not found, it will try 
+        <span class="filename">~/.face.icon</span>.  If still not found, it will
         use the value defined for "face/picture=" in the 
-        <span class="filename" style="font-family: monospace; ">~/.gnome2/gdm</span> file.  Lastly, it will try
-        <span class="filename" style="font-family: monospace; ">~/.gnome2/photo</span> and 
-        <span class="filename" style="font-family: monospace; ">~/.gnome/photo</span> which are deprecated and
+        <span class="filename">~/.gnome2/gdm</span> file.  Lastly, it will try
+        <span class="filename">~/.gnome2/photo</span> and 
+        <span class="filename">~/.gnome/photo</span> which are deprecated and
         supported for backwards compatibility.
-      </p><p class="para">
+      </p>
+<p class="para block">
         If a user has no defined face image, GDM will use the
         "stock_person" icon defined in the current GTK+ theme.  If no
         such image is defined, it will fallback to the image specified in the
-        <span class="filename" style="font-family: monospace; ">DefaultFace</span> configuration option, normally
-        <span class="filename" style="font-family: monospace; ">&lt;share&gt;/pixmaps/nobody.png</span>.
-      </p><p class="para">
+        <span class="filename">DefaultFace</span> configuration option, normally
+        <span class="filename">&lt;share&gt;/pixmaps/nobody.png</span>.
+      </p>
+<p class="para block">
         Please note that loading and scaling face icons located in user home
         directories can be a very time-consuming task.  Since it not 
         practical to load images over NIS or NFS, GDM does not attempt to
         load face images from remote home directories.  Furthermore, GDM will
         give up loading face images after 5 seconds of activity and will
         only display the users whose pictures it has gotten so far.  The
-        <span class="filename" style="font-family: monospace; ">Include</span> configuration option can be used to
+        <span class="filename">Include</span> configuration option can be used to
         specify a set of users who should appear on the face browser.  As
         long as the users to include is of a reasonable size, there should
         not be a problem with GDM being unable to access the face images.
         To work around such problems, it is recommended to place face images
-        in the directory specified by the <span class="filename" style="font-family: monospace; ">GlobalFaceDir</span>
+        in the directory specified by the <span class="filename">GlobalFaceDir</span>
         configuration option.
-      </p><p class="para">
+      </p>
+<p class="para block">
         To control the users who get displayed in the face browser, there are
         a number of configuration options that can be used.  If the
-        <span class="filename" style="font-family: monospace; ">IncludeAll</span> option is set to true, then the
+        <span class="filename">IncludeAll</span> option is set to true, then the
         password file will be scanned and all users will be displayed.  If
-        <span class="filename" style="font-family: monospace; ">IncludeAll</span> option is set to false, then the
-        <span class="filename" style="font-family: monospace; ">Include</span> option should contain a list of users
+        <span class="filename">IncludeAll</span> option is set to false, then the
+        <span class="filename">Include</span> option should contain a list of users
         separated by commas.  Only the users specified will be displayed.
-        Any user listed in the <span class="filename" style="font-family: monospace; ">Exclude</span> option and users
-        whose UID's is lower than <span class="filename" style="font-family: monospace; ">MinimalUID</span> will be
-        filtered out regardless of the <span class="filename" style="font-family: monospace; ">IncludeAll</span>
-        setting.  <span class="filename" style="font-family: monospace; ">IncludeAll</span> is not recommended
+        Any user listed in the <span class="filename">Exclude</span> option and users
+        whose UID's is lower than <span class="filename">MinimalUID</span> will be
+        filtered out regardless of the <span class="filename">IncludeAll</span>
+        setting.  <span class="filename">IncludeAll</span> is not recommended
         for systems where the passwords are loaded over a network (such as
         when NIS is used), since it can be very slow to load more than a
         small number of users over the network..
-      </p><p class="para">
+      </p>
+<p class="para block">
         When the browser is turned on, valid usernames on the computer are
         inherently exposed to a potential intruder.  This may be a bad idea if
         you do not know who can get to a login screen.  This is especially
         true if you run XDMCP (turned off by default).
-      </p></div><div class="sect2"><a name="logging"/><h2 class="sect2 title"><span class="title"><span class="label">2.10. </span>Logging</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="logging"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.10. </span>Logging</span></h2></div>
+<p class="para block block-first">
         GDM itself will use syslog to log errors or status.  It can also log
         debugging information, which can be useful for tracking down problems
         if GDM is not working properly.  This can be enabled in the 
         configuration file.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Output from the various X servers is stored in the GDM log directory,
         which is configurable, but is usually
-        <span class="filename" style="font-family: monospace; ">&lt;var&gt;/log/gdm/</span>.  The output from the
+        <span class="filename">&lt;var&gt;/log/gdm/</span>.  The output from the
         session can be found in a file called
-        <span class="filename" style="font-family: monospace; ">&lt;display&gt;.log</span>.  Four older files are also
-        stored with <span class="filename" style="font-family: monospace; ">.1</span> through 
-        <span class="filename" style="font-family: monospace; ">.4</span> appended.  These will be rotated as new
+        <span class="filename">&lt;display&gt;.log</span>.  Four older files are also
+        stored with <span class="filename">.1</span> through 
+        <span class="filename">.4</span> appended.  These will be rotated as new
         sessions on that display are started.  You can use these logs to view
         what the X server said when it started up.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The output from the user session is redirected to
-        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span>
-        before even the <span class="filename" style="font-family: monospace; ">PreSession</span> script is started.  So
+        <span class="filename">~/.xsession-errors</span>
+        before even the <span class="filename">PreSession</span> script is started.  So
         it is not really necessary to redirect this again in the session setup
         script.  As is usually done.  If the user session lasted less then
         10 seconds, GDM assumes that the session crashed and allows the user to
         view this file in a dialog before returning to the login screen.
         This way the user can view the session errors from the last session
         and correct the problem this way.
-      </p><p class="para">
+      </p>
+<p class="para block">
         You can suppress the 10 second warning by returning code 66 from the
-        <span class="filename" style="font-family: monospace; ">Xsession</span>script or from your session binary (the
-        default <span class="filename" style="font-family: monospace; ">Xsession</span> script propagates those codes
+        <span class="filename">Xsession</span>script or from your session binary (the
+        default <span class="filename">Xsession</span> script propagates those codes
         back).  This is useful if you have some sort of special logins for
         which it is not an error to return less then 10 seconds later, or if
         you setup the session to already display some error message and the
         GDM message would be confusing and redundant.
-      </p><p class="para">
+      </p>
+<p class="para block">
         The session output is piped through the GDM daemon and so the
-        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span> file is capped at about
+        <span class="filename">~/.xsession-errors</span> file is capped at about
         200 kilobytes by GDM to prevent a possible denial of service attack
         on the session.  An app could perhaps on reading some wrong data print
         out warnings or errors on the stderr or stdout.  This could perhaps
@@ -582,72 +990,94 @@ p { text-align: justify; }
         are set.  GDM also correctly traps the XFSZ signal and stops writing
         the file, which would lead to killed sessions if the file was
         redirected in the old fashioned way from the script.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Note that some distributors seem to override the
-        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span> redirection and do it
+        <span class="filename">~/.xsession-errors</span> redirection and do it
         themselves in their own Xsession script (set by the
-        <span class="filename" style="font-family: monospace; ">BaseXsession</span> configuration key) which means that
+        <span class="filename">BaseXsession</span> configuration key) which means that
         GDM will not be able to trap the output and cap this file.  You also
-        lose output from the <span class="filename" style="font-family: monospace; ">PreSession</span> script which can
+        lose output from the <span class="filename">PreSession</span> script which can
         make debugging things harder to figure out as perhaps useful output
         of what is wrong will not be printed out.  See the description of the
-        <span class="filename" style="font-family: monospace; ">BaseXsession</span> configuration key for more
+        <span class="filename">BaseXsession</span> configuration key for more
         information, especially on how to handle multiple display managers
         using the same script.
-      </p><p class="para">
+      </p>
+<p class="para block">
         Note that if the session is a failsafe session, or if GDM can't open
         this file for some reason, then a fallback file will be created in the
-        <span class="filename" style="font-family: monospace; ">/tmp</span> directory named
-        <span class="filename" style="font-family: monospace; ">/tmp/xses-&lt;user&gt;.XXXXXX</span> where the
-        <span class="filename" style="font-family: monospace; ">XXXXXX</span> are some random characters.
-      </p><p class="para">
+        <span class="filename">/tmp</span> directory named
+        <span class="filename">/tmp/xses-&lt;user&gt;.XXXXXX</span> where the
+        <span class="filename">XXXXXX</span> are some random characters.
+      </p>
+<p class="para block">
         If you run a system with quotas set, it would be good to delete the
-        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span> in the
-        <span class="filename" style="font-family: monospace; ">PostSession</span> script.  Such that this log file
+        <span class="filename">~/.xsession-errors</span> in the
+        <span class="filename">PostSession</span> script.  Such that this log file
         doesn't unnecessarily stay around.
-      </p></div><div class="sect2"><a name="fileaccess"/><h2 class="sect2 title"><span class="title"><span class="label">2.11. </span>Accessing Files</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="fileaccess"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.11. </span>Accessing Files</span></h2></div>
+<p class="para block block-first">
         In general GDM is very reluctant regarding reading/writing of user
-        files (such as the <span class="filename" style="font-family: monospace; ">~/.dmrc</span>,
-        <span class="filename" style="font-family: monospace; ">~/.face</span>,
-        <span class="filename" style="font-family: monospace; ">~/.xsession-errors</span>, and
-        <span class="filename" style="font-family: monospace; ">~/.Xauthority</span> files).  For instance it refuses to
+        files (such as the <span class="filename">~/.dmrc</span>,
+        <span class="filename">~/.face</span>,
+        <span class="filename">~/.xsession-errors</span>, and
+        <span class="filename">~/.Xauthority</span> files).  For instance it refuses to
         access anything but regular files.  Links, sockets and devices are
-        ignored.  The value of the <span class="filename" style="font-family: monospace; ">RelaxPermissions</span>
+        ignored.  The value of the <span class="filename">RelaxPermissions</span>
         parameter determines whether GDM should accept files writable by the
         user's group or others.  These are ignored by default.
-      </p><p class="para">
+      </p>
+<p class="para block">
         All operations on user files are done with the effective user id of the
         user.  If the sanity check fails on the user's
-        <span class="filename" style="font-family: monospace; ">.Xauthority</span> file, a fallback cookie is created in
-        the directory specified by the <span class="filename" style="font-family: monospace; ">UserAuthFBDir</span>
-        configuration setting (<span class="filename" style="font-family: monospace; ">/tmp</span> by default).
-      </p><p class="para">
+        <span class="filename">.Xauthority</span> file, a fallback cookie is created in
+        the directory specified by the <span class="filename">UserAuthFBDir</span>
+        configuration setting (<span class="filename">/tmp</span> by default).
+      </p>
+<p class="para block">
         Finally, the sysadmin can specify the maximum file size GDM should
         accept, and, if the face browser is enabled, a tunable maximum icon
         size is also enforced.  On large systems it is still advised to turn
         off the face browser for performance reasons.  Looking up icons in
         home directories, scaling and rendering face icons can take a long
         time.
-      </p></div><div class="sect2"><a name="performance"/><h2 class="sect2 title"><span class="title"><span class="label">2.12. </span>GDM Performance</span></h2><p class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="performance"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">2.12. </span>GDM Performance</span></h2></div>
+<p class="para block block-first">
         To speed performance it is possible to build GDM so that it will
         preload libraries when GDM first displays a greeter program.  This
         has been shown to speed first time login since these libraries can
         be loaded into memory while the user types in their username and
         password.
-      </p><p class="para">
+      </p>
+<p class="para block">
         To use this feature, configure GDM with the
-        <span class="command" style="font-family: monospace; ">--with-prefetch</span> option.  This will cause GDM to
-        install the <span class="command" style="font-family: monospace; ">gdmprefetch</span> program to the
-        <span class="filename" style="font-family: monospace; ">libexecdir</span> directory, install the
-        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> to the
-        <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm</span> directory, and set the
-        <span class="filename" style="font-family: monospace; ">PreFetchProgram</span> configuration variable so that the
-        <span class="command" style="font-family: monospace; ">gdmprefetch</span> program is called with the default
-        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> file.  The default
-        <span class="filename" style="font-family: monospace; ">gdmprefetchlist</span> file was optimized
+        <span class="command">--with-prefetch</span> option.  This will cause GDM to
+        install the <span class="command">gdmprefetch</span> program to the
+        <span class="filename">libexecdir</span> directory, install the
+        <span class="filename">gdmprefetchlist</span> to the
+        <span class="filename">&lt;etc&gt;/gdm</span> directory, and set the
+        <span class="filename">PreFetchProgram</span> configuration variable so that the
+        <span class="command">gdmprefetch</span> program is called with the default
+        <span class="filename">gdmprefetchlist</span> file.  The default
+        <span class="filename">gdmprefetchlist</span> file was optimized
         for a GNOME desktop running on Solaris, so may need fine-tuning on
         other systems.  Alternative prefetchlist files can be contributed
         to the "gdm" category in
         <a class="ulink" href="http://bugzilla.gnome.org/" title="http://bugzilla.gnome.org/">bugzilla.gnome.org</a>,
         so that they can be included in future GDM releases.
-      </p></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="security.html" title="Security">Security</a></span></div></div></body></html>
+      </p>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></td>
+<td class="navbar-next"><a class="navbar-next" href="security.html" title="Security">Security</a></td>
+</tr></table></div>
+</body>
+</html>

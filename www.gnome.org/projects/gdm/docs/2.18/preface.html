@@ -1,80 +1,415 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Terms and Conventions Used in This Manual</title><link rel="previous" href="index.html" title="Gnome Display Manager Reference Manual"/><link rel="next" href="overview.html" title="Overview"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style type="text/css">
+<html xmlns:set="http://exslt.org/sets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Terms and Conventions Used in This Manual</title>
+<link rel="previous" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<link rel="next" href="overview.html" title="Overview">
+<link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<style type="text/css">
+
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
+  
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  
+  margin-left: 1.72em;
+  
+  margin-right: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  
+  margin-left: 2.4em;
+  
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 1em 0.5em 1em;
+  
+  padding-left: 60px;
+  min-height: 48px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+  
+  background-position: 6px 0.5em;
+  background-repeat: no-repeat;
+}
+div.caution {
+  background-image: url("admon-caution.png");
+}
+div.important {
+  background-image: url("admon-important.png");
+}
+div.note {
+  background-image: url("admon-note.png");
+}
+div.note-bug {
+  background-image: url("admon-bug.png");
+}
+div.tip {
+  background-image: url("admon-tip.png");
+}
+div.warning {
+  background-image: url("admon-warning.png");
+}
+div.blockquote {
+  
+  background-image: url('../../../data/icons/yelp-watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  
+  background-position: top left;
+  padding: 0.5em;
+  
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  
+  text-align: right;
+  
+  margin-left: 20%;
+  
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  
+  padding-right: 1em;
+  
+  float: left;
+  
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  
+  padding-left: 0;
+  
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
 div.footnotes { font-style: italic; font-size: 0.8em; }
 div.footnote { margin-top: 1.44em; }
 span.footnote-number { display: inline; padding-right: 0.83em; }
 span.footnote-number + p { display: inline; }
 a.footnote { text-decoration: none; font-size: 0.8em; }
 a.footnote-ref { text-decoration: none; }
-
-div.admonition {
-  padding: 4px 8px 4px 56px;
-  min-height: 52px;
-  border: solid 1px #D1940C;
-  background-position: 4px 4px;
-  background-repeat: no-repeat;
-}
-div.caution {
-  background-image: url("caution.png");
-}
-div.important {
-  background-image: url("important.png");
-}
-div.note {
-  background-image: url("note.png");
-}
-div.tip {
-  background-image: url("tip.png");
-}
-div.warning {
-  background-image: url("warning.png");
-}
-
-div.autotoc { margin-left: 2em; padding: 0em; }
-div.autotoc ul { margin-left: 0em; padding-left: 0em; }
-div.autotoc ul li {
-  margin-right: 0em; padding: 0em;
-  list-style-type: none;
-}
-
-* + div.biblioentry { margin-top: 1.2em; }
-* + div.bibliomixed { margin-top: 1.2em; }
-
-.block-indent { margin-left: 1.72em; margin-right: 1em; }
-.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
-.block-verbatim { white-space: pre; }
-pre.programlisting {
-  padding: 6px;
-  -moz-border-radius: 8px;
-  overflow: auto;
-  background-color: #EEEEEE;
-  border: solid 1px #DDDDDD;
-}
-pre.screen {
-  padding: 6px;
-  -moz-border-radius: 8px;
-  overflow: auto;
-  background-color: #EEEEEE;
-  border: solid 1px #DDDDDD;
-}
-pre.synopsis { overflow: auto; }
-pre.linenumbering {
-  
-  margin-top: 0px;
-  margin-left: 0.83em;
-  padding: 6px 0.4em 6px 0.4em;
-  border: solid 1px black;
-  -moz-border-radius: 8px;
-  background-color: black;
-  color: white;
-  -moz-opacity: .3;
-  float: left;
-  text-align: right;
-}
-dt.glossterm { margin-left: 0em; }
-dd + dt.glossterm { margin-top: 2em; }
-dd.glossdef, dd.glosssee, dd.glossseealso
-  { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
 
 span.co {
   margin-left: 0.2em; margin-right: 0.2em;
@@ -95,21 +430,6 @@ span.co a:hover { text-decoration: none; }
 
 div.cmdsynopsis { font-family: monospace; }
 
-div.list { margin-left: 0px; margin-bottom: 1em; padding: 0px; }
-div.list dl dt { margin-left: 0em; }
-div.list dl dd + dt { margin-top: 1em; }
-div.list dl dd {
-  margin-top: 0.69em;
-  margin-left: 1.72em;
-  margin-right: 1em;
-}
-div.list ul { margin-left: 1.72em; padding-left: 0em; }
-div.list ol { margin-left: 1.72em; padding-left: 0em; }
-div.list ul li { margin-right: 1em; padding: 0em; }
-div.list ol li { margin-right: 1em; padding: 0em; }
-div.list li + li { margin-top: 0.69em; }
-div.simplelist &gt; table { border: none; }
-
 dt.question { margin-left: 0em; }
 dt.question div.label { float: left; }
 dd + dt.question { margin-top: 1em; }
@@ -119,115 +439,90 @@ dd.answer {
   margin-right: 1em;
 }
 dd.answer div.label { float: left; }
-
-div.refentry h2.refentry {
-  border: none;
-  margin-top: 1em;
-}
-div.refentry + div.refentry {
-
-  border-top: dashed black 1px;
-}
-
-table {
-  border-collapse: collapse;
-  border: solid 1px;
-  -moz-border-radius: 5px;
-}
-tr.odd { background-color: #F0F0F0 }
-td { padding: 4px 0.83em 4px 0.83em; }
-th { padding-left: 0.8em; padding-right: 0.83em; }
-thead {
-  border-top: solid 2px;
-  border-bottom: solid 2px;
-}
-tfoot {
-  border-top: solid 2px;
-  border-bottom: solid 2px;
-}
-td + td {
-  border-left: solid 1px;
-}
-tbody {
-  border: solid 1px;
-  -moz-border-radius: 5px;
-}
-
-h1 { font-size: 1.72em; margin-top: 0em; }
-h2 { font-size: 1.44em; }
-h2.title { margin-top: 1.72em; border-bottom: solid 1px; }
-h3 { font-size: 1.2em; }
-h3.title { margin-top: 1.72em; }
-h3 span.title { border-bottom: solid 1px; }
-h4 { font-size: 1.0em; }
-h4.title { margin-top: 1.44em; }
-h4 span.title { border-bottom: solid 1px; }
-h5 { font-size: 1em; margin-top: 1em; }
-h6 { font-size: 1em; margin-top: 1em; }
-h7 { font-size: 1em; margin-top: 1em; }
-
-body {
-  margin: 0px;
-  direction: ltr;
-}
-div.body { padding: 12px; }
-div.navbar {
-  margin-left: 12px; margin-right: 12px; margin-bottom: 12px;
-  padding: 6px;
-  border: solid 1px;
-}
-div.navbar-prev { margin: 0px; padding: 0px; float: left; }
-div.navbar-prev-sans-next { float: none; }
-div.navbar-next { margin: 0px; padding: 0px; text-align: right; }
-div {
-  margin-top: 0em;  margin-bottom: 0em;
-  padding-top: 0em; padding-bottom: 0em;
-}
-p {
-  margin-top: 0em;  margin-bottom: 0em;
-  padding-top: 0em; padding-bottom: 0em;
-}
-div + * { margin-top: 1em; }
-p   + * { margin-top: 1em; }
-p &gt; div { margin-top: 1em; margin-bottom: 1em; }
-p &gt; div + div { margin-top: 0em; }
-p { text-align: justify; }
-</style></head><body><div class="body"><div class="sect1"><a name="preface"/><h1 class="sect1 title"><span class="title">Terms and Conventions Used in This Manual</span></h1><p class="para">
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></td>
+<td class="navbar-next"><a class="navbar-next" href="overview.html" title="Overview">Overview</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gdm-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul>
+<li>Terms and Conventions Used in This Manual</li>
+<li><a class="xref" href="overview.html" title="Overview">Overview</a></li>
+<li><a class="xref" href="security.html" title="Security">Security</a></li>
+<li><a class="xref" href="consolekit.html" title="Support for ConsoleKit">Support for ConsoleKit</a></li>
+<li><a class="xref" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></li>
+<li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li>
+<li><a class="xref" href="controlling.html" title="Controlling GDM">Controlling GDM</a></li>
+<li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li>
+<li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li>
+<li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li>
+<li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li>
+<li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li>
+<li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="xref" href="license.html" title="License">License</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="preface"></a><div class="header"><h1 class="sect1 title"><span class="title">Terms and Conventions Used in This Manual</span></h1></div>
+<ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul>
+<p class="para block block-first">
       This manual describes version 2.18.0 of the GNOME Display Manager.
       It was last updated on 03/12/2007.
-    </p><p class="para">
+    </p>
+<p class="para block">
       Chooser - A program used to select a remote host for managing a
-      display remotely on the local display (<span class="command" style="font-family: monospace; ">gdmchooser</span>).
-    </p><p class="para">
+      display remotely on the local display (<span class="command">gdmchooser</span>).
+    </p>
+<p class="para block">
       Configurator - The configuration application
-      (<span class="command" style="font-family: monospace; ">gdmsetup</span>).
-    </p><p class="para">
+      (<span class="command">gdmsetup</span>).
+    </p>
+<p class="para block">
       GDM - Gnome Display Manager. Used to describe the software package as a
       whole.  Sometimes also referred to as GDM2.
-    </p><p class="para">
-      gdm - The Gnome Display Manager daemon (<span class="command" style="font-family: monospace; ">gdm</span>).
-    </p><p class="para">
-      Greeter - The graphical login window (<span class="command" style="font-family: monospace; ">gdmlogin</span> or
-      <span class="command" style="font-family: monospace; ">gdmgreeter</span>).
-    </p><p class="para">
-      GTK+ Greeter - The standard login window (<span class="command" style="font-family: monospace; ">gdmlogin</span>).
-    </p><p class="para">
+    </p>
+<p class="para block">
+      gdm - The Gnome Display Manager daemon (<span class="command">gdm</span>).
+    </p>
+<p class="para block">
+      Greeter - The graphical login window (<span class="command">gdmlogin</span> or
+      <span class="command">gdmgreeter</span>).
+    </p>
+<p class="para block">
+      GTK+ Greeter - The standard login window (<span class="command">gdmlogin</span>).
+    </p>
+<p class="para block">
       PAM - Pluggable Authentication Mechanism
-    </p><p class="para">
+    </p>
+<p class="para block">
       Themed Greeter - The themable login window (
-      <span class="command" style="font-family: monospace; ">gdmgreeter</span>).
-    </p><p class="para">
+      <span class="command">gdmgreeter</span>).
+    </p>
+<p class="para block">
       XDMCP - X Display Manage Protocol
-    </p><p class="para">
+    </p>
+<p class="para block">
       Paths that start with a word in angle brackets are relative to the
-      installation prefix. I.e. <span class="filename" style="font-family: monospace; ">&lt;share&gt;/pixmaps/</span>
-      refers to <span class="filename" style="font-family: monospace; ">&lt;share&gt;/pixmaps</span> if GDM was configured
-      with <span class="command" style="font-family: monospace; ">--prefix=/usr</span>.  Normally also note that
-      GDM is installed with <span class="command" style="font-family: monospace; ">--sysconfigdir=&lt;etc&gt;/X11</span>,
+      installation prefix. I.e. <span class="filename">&lt;share&gt;/pixmaps/</span>
+      refers to <span class="filename">&lt;share&gt;/pixmaps</span> if GDM was configured
+      with <span class="command">--prefix=/usr</span>.  Normally also note that
+      GDM is installed with <span class="command">--sysconfigdir=&lt;etc&gt;/X11</span>,
       meaning any path to which we refer to as
-      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/gdm/PreSession</span> usually means
-      <span class="filename" style="font-family: monospace; ">&lt;etc/X11&gt;/gdm/PreSession</span>.  Note that for
+      <span class="filename">&lt;etc&gt;/gdm/PreSession</span> usually means
+      <span class="filename">&lt;etc/X11&gt;/gdm/PreSession</span>.  Note that for
       interoperability it is recommended that you use a --prefix of
-      <span class="filename" style="font-family: monospace; ">/usr</span> and a --sysconfdir of
-      <span class="filename" style="font-family: monospace; ">&lt;etc&gt;/X11</span>.
-    </p></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="index.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="overview.html" title="Overview">Overview</a></span></div></div></body></html>
+      <span class="filename">/usr</span> and a --sysconfdir of
+      <span class="filename">&lt;etc&gt;/X11</span>.
+    </p>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></td>
+<td class="navbar-next"><a class="navbar-next" href="overview.html" title="Overview">Overview</a></td>
+</tr></table></div>
+</body>
+</html>

@@ -1,268 +1,512 @@
-<?xml version="1.0"?>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Using gdmsetup To Configure GDM</title><link rel="previous" href="security.html" title="Security"/><link rel="next" href="configuration.html" title="Configuration"/><link rel="top" href="index.html" title="Gnome Display Manager Reference Manual"/><style>
-    div[class~="footnotes"] {
-      font-style: italic;
-      font-size: 0.8em;
-    }
-    div[class~="footnote"] {
-      margin-top: 1.44em;
-    }
-    span[class~="footnote-number"] {
-      display: inline;
-      padding-right: 0.83em;
-    }
-    span[class~="footnote-number"] + p {
-      display: inline;
-    }
-    a[class~="footnote"] {
-      text-decoration: none;
-      font-size: 0.8em;
-    }
-    a[class~="footnote-ref"] {
-      text-decoration: none;
-    }
-  
-    div[class~="caution"] {
-      background-image: url("caution.png");
-    }
-    div[class~="important"] {
-      background-image: url("important.png");
-    }
-    div[class~="note"] {
-      background-image: url("note.png");
-    }
-    div[class~="tip"] {
-      background-image: url("tip.png");
-    }
-    div[class~="warning"] {
-      background-image: url("warning.png");
-    }
-    div[class~="admonition"] {
-      padding-top: 4px;
-      padding-bottom: 4px;
-      padding-left: 56px;
-      padding-right: 8px;
-      min-height: 52px;
-      border: dotted #D1940C 1px;
-      background-position: 4px 4px;
-      background-repeat: no-repeat;
-    }
-  
-    div[class~="autotoc"] { margin-left: 2em; padding: 0em; }
-    div[class~="autotoc"] ul { margin-left: 0em; padding-left: 0em; }
-    div[class~="autotoc"] ul li {
-      margin-right: 0em;
-      padding: 0em;
-      list-style-type: none;
-    }
-  
-    * + div[class~="biblioentry"] { margin-top: 1.2em; }
-    * + div[class~="bibliomixed"] { margin-top: 1.2em; }
-  
-    *[class~="block-indent"] {
-      margin-left: 1.72em;
-      margin-right: 1em;
-    }
-    *[class~="block-indent"] *[class~="block-indent"] {
-      margin-left: 0em;
-      margin-right: 0em;
-    }
-    *[class~="block-verbatim"] {
-      white-space: pre;
-    }
-    pre[class~="programlisting"] {
-      padding: 6px;
-      -moz-border-radius: 8px;
-      overflow: auto;background-color: #EEEEEE;border: solid 1px #DDDDDD
-    }
-    pre[class~="screen"] {
-      padding: 6px;
-      -moz-border-radius: 8px;
-      overflow: auto;background-color: #EEEEEE;border: solid 1px #DDDDDD
-    }
-    pre[class~="synopsis"] {
-      overflow: auto;
-    }
-    pre[class~="linenumbering"] {
-      
-      padding-top: 6px;
-      padding-bottom: 6px;
-      -moz-border-radius: 8px;
-      border: solid 1px black;
-      margin-top: 0px;
-      margin-left: 0.83em;
-      background-color: black;
-      color: white;
-      -moz-opacity: .3;
-      padding-right: 0.4em;
-      padding-left: 0.4em;
-    }
-    dt[class~="glossterm"] { margin-left: 0em; }
-    dd + dt[class~="glossterm"] { margin-top: 2em; }
-    dd[class~="glossdef"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-    dd[class~="glosssee"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-    dd[class~="glossseealso"]
-      { margin-top: 1em; margin-left: 2em; margin-right: 1em; }
-  
-    span[class~="co"] {
-      font-size: 8px;
-      padding-left:  0.4em;
-      padding-right: 0.4em;
-      margin-left:   0.2em;
-      margin-right:  0.2em;
-      border: solid 1px;
-      -moz-border-radius: 8px;
-      color: #FFFFFF;
-      background-color: #000000;
-      border-color: #000000;
-    }
-    span[class~="co"]:hover {
-      color: #FFFFFF;
-      background-color: #333333;
-      border-color: #333333;
-    }
-    span[class~="co"] a { text-decoration: none; }
-    span[class~="co"] a:hover { text-decoration: none; }
-  
-    div[class~="cmdsynopsis"] { font-family: monospace; }
-  
-    div[class~="list"] { margin-left: 0px; padding: 0px; margin-bottom: 1em; }
-    div[class~="list"] dl dt { margin-left: 0em; }
-    div[class~="list"] dl dd + dt { margin-top: 1em; }
-    div[class~="list"] dl dd {
-      margin-top: 0.69em;
-      margin-left: 1.72em;
-      margin-right: 1em;
-    }
-    div[class~="list"] ul { margin-left: 1.72em; padding-left: 0em; }
-    div[class~="list"] ol { margin-left: 1.72em; padding-left: 0em; }
-    div[class~="list"] ul li { margin-right: 1em; padding: 0em; }
-    div[class~="list"] ol li { margin-right: 1em; padding: 0em; }
-    div[class~="list"] li + li { margin-top: 0.69em; }
-    div[class~="simplelist"] &gt; table { border: none; }
-  
-    dt[class~="question"] { margin-left: 0em; }
-    dt[class~="question"] div[class~="label"] { float: left; }
-    dd + dt[class~="question"] { margin-top: 1em; }
-    dd[class~="answer"] {
-      margin-top: 1em;
-      margin-left: 2em;
-      margin-right: 1em;
-    }
-    dd[class~="answer"] div[class~="label"] { float: left; }
-  
-    div[class~="refentry"] h2[class~="refentry"] {
-      border: none;
-      margin-top: 1em;
-    }
-    div[class~="refentry"] + div[class~="refentry"] {
-      border-top: dashed black 1px;
-    }
-  
-    table {
-      border-collapse: collapse;
-      border: solid 1px;
-      -moz-border-radius: 5px;
-    }
-  tr[class~="odd"] { background-color: #F0F0F0 }
-    td {
-      padding-left: 0.83em;
-      padding-right: 0.83em;
-      padding-top: 4px;
-      padding-bottom: 4px;
-    }
-    th { padding-left: 0.8em; padding-right: 0.83em; }
-    thead {
-      border-top: solid 2px;
-      border-bottom: solid 2px;
-    }
-    tfoot {
-      border-top: solid 2px;
-      border-bottom: solid 2px;
-    }
-    td + td {
-      border-left: solid 1px;
-    }
-    tbody {
-      border: solid 1px;
-      -moz-border-radius: 5px;
-    }
-  
-    h1 { font-size: 1.72em; margin-top: 0em; }
-    h2 { font-size: 1.44em; }
-    h2[class~="title"] { margin-top: 1.72em; border-bottom: solid 1px; }
+<html xmlns:set="http://exslt.org/sets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Using gdmsetup To Configure GDM</title>
+<link rel="previous" href="security.html" title="Security">
+<link rel="next" href="configuration.html" title="Configuration">
+<link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual">
+<style type="text/css">
 
-    h3                      { font-size: 1.2em; }
-    h3[class~="title"]      { margin-top: 1.72em; }
-    h3 span[class~="title"] { border-bottom: solid 1px; }
-
-    h4                      { font-size: 1.0em; }
-    h4[class~="title"]      { margin-top: 1.44em; }
-    h4 span[class~="title"] { border-bottom: solid 1px; }
-
-    h5 { font-size: 1em; margin-top: 1em; }
-    h6 { font-size: 1em; margin-top: 1em; }
-    h7 { font-size: 1em; margin-top: 1em; }
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
   
-    body {
-      margin: 0px;
-      direction: ltr;
-    }
-    div[class ~= "body"] {
-      padding: 12px;
-    }
-    div[class ~= "navbar"] {
-      margin-left: 12px;
-      margin-right: 12px;
-      margin-bottom: 12px;
-      padding: 6px;
-      border: solid 1px;
-    }
-    div[class ~= "navbar-prev"] {
-      margin: 0px;
-      padding: 0px;
-      float: left;
-    }
-    div[class ~= "navbar-prev-sans-next"] {
-      float: none;
-    }
-    div[class ~= "navbar-next"] {
-      margin: 0px;
-      padding: 0px;
-      text-align: right;
-    }
-    div {
-      margin-top: 0em;  margin-bottom: 0em;
-      padding-top: 0em; padding-bottom: 0em;
-    }
-    p {
-      margin-top: 0em;  margin-bottom: 0em;
-      padding-top: 0em; padding-bottom: 0em;
-    }
-    div + * { margin-top: 1em; }
-    p   + * { margin-top: 1em; }
-    p &gt; div { margin-top: 1em; margin-bottom: 1em; }
-    p &gt; div + div { margin-top: 0em; }
-    p { text-align: justify; }
-    </style></head><body><div class="body"><div class="sect1"><a name="gdmsetupusage"/><h1 class="sect1 title"><span class="title">Using gdmsetup To Configure GDM</span></h1><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-      The <span class="command" style="font-family: monospace; ">gdmsetup</span> application can be used to configure GDM.
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  
+  margin-left: 1.72em;
+  
+  margin-right: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  
+  margin-left: 2.4em;
+  
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 1em 0.5em 1em;
+  
+  padding-left: 60px;
+  min-height: 48px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+  
+  background-position: 6px 0.5em;
+  background-repeat: no-repeat;
+}
+div.caution {
+  background-image: url("admon-caution.png");
+}
+div.important {
+  background-image: url("admon-important.png");
+}
+div.note {
+  background-image: url("admon-note.png");
+}
+div.note-bug {
+  background-image: url("admon-bug.png");
+}
+div.tip {
+  background-image: url("admon-tip.png");
+}
+div.warning {
+  background-image: url("admon-warning.png");
+}
+div.blockquote {
+  
+  background-image: url('../../../data/icons/yelp-watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  
+  background-position: top left;
+  padding: 0.5em;
+  
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  
+  text-align: right;
+  
+  margin-left: 20%;
+  
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  
+  padding-right: 1em;
+  
+  float: left;
+  
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  
+  padding-left: 0;
+  
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
+div.footnotes { font-style: italic; font-size: 0.8em; }
+div.footnote { margin-top: 1.44em; }
+span.footnote-number { display: inline; padding-right: 0.83em; }
+span.footnote-number + p { display: inline; }
+a.footnote { text-decoration: none; font-size: 0.8em; }
+a.footnote-ref { text-decoration: none; }
+
+span.co {
+  margin-left: 0.2em; margin-right: 0.2em;
+  padding-left: 0.4em; padding-right: 0.4em;
+  border: solid 1px #000000;
+  -moz-border-radius: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 8px;
+}
+span.co:hover {
+  border-color: #333333;
+  background-color: #333333;
+  color: #FFFFFF;
+}
+span.co a { text-decoration: none; }
+span.co a:hover { text-decoration: none; }
+
+div.cmdsynopsis { font-family: monospace; }
+
+dt.question { margin-left: 0em; }
+dt.question div.label { float: left; }
+dd + dt.question { margin-top: 1em; }
+dd.answer {
+  margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+dd.answer div.label { float: left; }
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="security.html" title="Security">Security</a></td>
+<td class="navbar-next"><a class="navbar-next" href="configuration.html" title="Configuration">Configuration</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gdm-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul>
+<li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li>
+<li><a class="xref" href="overview.html" title="Overview">Overview</a></li>
+<li><a class="xref" href="security.html" title="Security">Security</a></li>
+<li>Using gdmsetup To Configure GDM</li>
+<li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li>
+<li><a class="xref" href="controlling.html" title="Controlling GDM">Controlling GDM</a></li>
+<li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li>
+<li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li>
+<li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li>
+<li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li>
+<li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li>
+<li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="xref" href="license.html" title="License">License</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="gdmsetupusage"></a><div class="header"><h1 class="sect1 title"><span class="title">Using gdmsetup To Configure GDM</span></h1></div>
+<ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul>
+<p class="para block block-first">
+      The <span class="command">gdmsetup</span> application can be used to configure GDM.
       If you believe running root-owned GUI's causes security risk, then you
       would want to always edit the files by hand and not use
-      <span class="command" style="font-family: monospace; ">gdmsetup</span>.  Editing the files by hand is explained in
+      <span class="command">gdmsetup</span>.  Editing the files by hand is explained in
       the "Configuration" section of this document.  Note that 
-      <span class="command" style="font-family: monospace; ">gdmsetup</span> does not support changing of all
+      <span class="command">gdmsetup</span> does not support changing of all
       configuration variables, so it may be necessary to edit the files by
       hand for some configurations.
-    </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
-      The <span class="command" style="font-family: monospace; ">gdmsetup</span> program has five tabs: Local, Remote,
+    </p>
+<p class="para block">
+      The <span class="command">gdmsetup</span> program has five tabs: Local, Remote,
       Accessibility, Security, and Users, described below.  In parenthesis is
       information about which GDM configuration key is affected by each GUI
       choice.  Refer to the "Configuration" section of this manual
       and the comments in the &lt;share&gt;/gdm/defaults.conf file for
       additional details about each key.
-    </p><div class="sect2"><a name="gdmsetuplocaltab"/><h2 class="sect2 title"><span class="title"><span class="label">4.1. </span>Local Tab</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+    </p>
+<div class="autotoc"><ul>
+<li>
+<span class="label">4.1. </span><a class="xref" href="gdmsetupusage.html#gdmsetuplocaltab" title="Local Tab">Local Tab</a>
+</li>
+<li>
+<span class="label">4.2. </span><a class="xref" href="gdmsetupusage.html#gdmsetupremotetab" title="Remote Tab">Remote Tab</a>
+</li>
+<li>
+<span class="label">4.3. </span><a class="xref" href="gdmsetupusage.html#gdmsetupaccessibilitytab" title="Accessibility Tab">Accessibility Tab</a>
+</li>
+<li>
+<span class="label">4.4. </span><a class="xref" href="gdmsetupusage.html#gdmsetupsecuritytab" title="Security Tab">Security Tab</a>
+</li>
+<li>
+<span class="label">4.5. </span><a class="xref" href="gdmsetupusage.html#gdmsetupuserstab" title="Users Tab">Users Tab</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="gdmsetuplocaltab"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">4.1. </span>Local Tab</span></h2></div>
+<p class="para block block-first">
         The Local tab is used for controlling the appearance of GDM for
         local/static displays (non-XDMCP remote connections).  The choices
         available in this tab depend on the setting of the "Style"
@@ -270,11 +514,12 @@
         "Plain" or "Themed" greeter GUI is used.  The
         differences between these greeter programs are explained in the
         "Overview" section of this document.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If the "Style" choice is "Plain", then GDM will
-        use the <span class="command" style="font-family: monospace; ">gdmlogin</span> program as the GUI
+        use the <span class="command">gdmlogin</span> program as the GUI
         (daemon/Greeter).  When this choice is selected,
-        <span class="command" style="font-family: monospace; ">gdmsetup</span> allows the user to select whether the
+        <span class="command">gdmsetup</span> allows the user to select whether the
         background is an image or solid color (greeter/BackgroundType).  If
         image is selected, there is a file selection button to pick the image
         file (greeter/BackgroundImage) and a checkbox to scale the image to fit
@@ -282,19 +527,21 @@
         selected, there is a button available to allow the color selection
         (greeter/BackgroundColor).  Also, the user may select the logo image
         that appears in gdmlogin (greeter/Logo).
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If the "Style" choice is "Plain with face browser",
-        then the <span class="command" style="font-family: monospace; ">gdmlogin</span> program is used as the GUI
+        then the <span class="command">gdmlogin</span> program is used as the GUI
         (daemon/Greeter) and the face browser is turned on (greeter/Browser).
         The Face Browser is explained in the Overview section.  Otherwise,
         the choices are the same as when the "Style" choice is
         "Plain".  Additional setup in the Users tab may be 
         necessary to choose which users appear in the Face Browser.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If the "Style" choice is "Themed", then the 
-        <span class="command" style="font-family: monospace; ">gdmgreeter</span> program is used as the GUI
+        <span class="command">gdmgreeter</span> program is used as the GUI
         (daemon/Greeter).  When this choice is selected,
-        <span class="command" style="font-family: monospace; ">gdmsetup</span> allows the user to select the theme to be
+        <span class="command">gdmsetup</span> allows the user to select the theme to be
         used (greeter/GraphicalTheme).  Note that the checkbox to the left
         of the theme's name must be checked for a theme to be selected.
         Clicking on the theme, but not selecting the checkbox will highlight
@@ -312,20 +559,25 @@
         you wish to be used.  By default this combobox is set to
         "Selected only", so that only a single theme can be selected
         and be used.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         Regardless of the "Style" choice, the user may also select
         whether the Actions menu is visible (greeter/SystemMenu), whether the
-        Actions menu includes the choice to start <span class="command" style="font-family: monospace; ">gdmsetup</span>
+        Actions menu includes the choice to start <span class="command">gdmsetup</span>
         (greeter/ConfigAvailable), and whether the Action menu includes the
-        choice to start <span class="command" style="font-family: monospace; ">gdmchooser</span> to run a remote XDMCP
+        choice to start <span class="command">gdmchooser</span> to run a remote XDMCP
         login session (greeter/ChooserButton).  Note that the root password
-        must be entered to start <span class="command" style="font-family: monospace; ">gdmsetup</span> from the login
+        must be entered to start <span class="command">gdmsetup</span> from the login
         screen if it is enabled.   Also the Welcome message displayed for local
         sessions may be selected (greeter/DefaultWelcome and greeter/Welcome). 
         The Welcome message can contain the character sequences described in
         the "Text Node" section of the "Themed Greeter"
         section of this manual.
-      </p></div><div class="sect2"><a name="gdmsetupremotetab"/><h2 class="sect2 title"><span class="title"><span class="label">4.2. </span>Remote Tab</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="gdmsetupremotetab"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">4.2. </span>Remote Tab</span></h2></div>
+<p class="para block block-first">
         The Remote tab controls the appearance of the GDM for users logging
         in via XDMCP.  By default XDMCP is disabled, and users should be 
         comfortable with the XDMCP-related sections of the Security section
@@ -341,7 +593,8 @@
         recommended that the "Plain" GUI be used for remote
         connections since it is more lightweight and tends to have better
         performance across a network.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If Remote login is enabled, then the user can specify the remote
         Welcome Message to be displayed (greeter/DefaultRemoteWelcome and 
         greeter/RemoteWelcome).  This welcome message is separate from the
@@ -349,19 +602,22 @@
         message can contain the character sequences described in the
         "Text Node" section of the "Themed Greeter"
         section of this manual.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If the "Style" choice is "Same as Local" and the
         local selection is "Plain" or "Plain with face
         browser", then the user may select whether background images
         should be displayed for remote logins
         (greeter/BackgroundRemoteOnlyColor).
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If the "Style" choice is enabled and set to a different
         value than the Local tab, then the user has the same configuration
         choices as found on the Local tab except that the System Menu 
         choices are not available since this is never available for remote
         logins for security purposes.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         If Remote login is enabled, there is a "Configure XDMCP"
         button which displays a dialog allowing the user to set XDMCP 
         configuration, including whether indirect requests are honored
@@ -373,7 +629,11 @@
         (xdmcp/DisplaysPerHost), and ping interval (xdmcp/PingIntervalSeconds).
         The default settings are standard settings and should only be changed
         by someone who understands the ramifications of the change.
-      </p></div><div class="sect2"><a name="gdmsetupaccessibilitytab"/><h2 class="sect2 title"><span class="title"><span class="label">4.3. </span>Accessibility Tab</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="gdmsetupaccessibilitytab"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">4.3. </span>Accessibility Tab</span></h2></div>
+<p class="para block block-first">
         The Accessibility tab is used to turn on Accessibility features in GDM.
         "Enable accessible login" (daemon/AddGtkModules and
         daemon/GtkModulesList) turns on GDM's gesture listeners which are
@@ -386,7 +646,11 @@
         failed.  File chooser buttons are used to select the sound file to be
         played, and the "Play" button can be used to sample the
         sound.
-      </p></div><div class="sect2"><a name="gdmsetupsecuritytab"/><h2 class="sect2 title"><span class="title"><span class="label">4.4. </span>Security Tab</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="gdmsetupsecuritytab"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">4.4. </span>Security Tab</span></h2></div>
+<p class="para block block-first">
         The Security tab allows the user to turn on Automatic and Timed login,
         which user is logged in via an automatic or timed login, and the
         timed login delay (daemon/AutomaticLoginEnable, daemon/AutomaticLogin,
@@ -399,7 +663,8 @@
         seconds.  The user may enable Timed Login for remote (XDMCP)
         connections by checking the "Allow remote timed logins"
         checkbox.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
         On this tab, the user may select whether the system administrator user
         can log in, and whether the system administrator user can log in
         via remote (XDMCP) connections (security/AllowRoot and
@@ -410,14 +675,16 @@
         Xserver" choice will disable X forwarding if selected
         (security/DisallowTCP).  A login retry delay (security/RetryDelay) can
         be set to cause GDM to wait a number of seconds after a failed login.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
          The "Configure X Server" button can be used to specify how
          GDM manages each display.  The "Servers" combobox shows what
          server definitions are available (Standard, Terminal, and Chooser by
          default).  Refer to the "X Server Definitions" section of
          the "Configuration" section for more information about how 
          to create new Server Definitions.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
          For any server type, the user may modify the "Server Name"
          (server/name), the "Command" (server/command) to be used to
          launch the Xserver, whether the server type will "Launch"
@@ -425,7 +692,8 @@
          Xserver, whether GDM handles this type (normally only set to false
          when logging into a Terminal session type), and whether the session
          type supports "Flexible" (server/flexible) sessions.
-      </p><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+<p class="para block">
          The "Servers To Start" section shows what server type is
          displayed for each display on the machine.  Users may click on the
          "Add/Modify" button to add a new display to the list or to
@@ -433,7 +701,11 @@
          display with the Server Definition to be used for managing that
          display.  The "Remove" button may be used to remove a
          display from the list.
-      </p></div><div class="sect2"><a name="gdmsetupuserstab"/><h2 class="sect2 title"><span class="title"><span class="label">4.5. </span>Users Tab</span></h2><p xmlns:msg="http://www.gnome.org/~shaunm/gnome-doc-utils/l10n" class="para">
+      </p>
+</div>
+<div class="division sect2">
+<a name="gdmsetupuserstab"></a><div class="header"><h2 class="sect2 title"><span class="title"><span class="label">4.5. </span>Users Tab</span></h2></div>
+<p class="para block block-first">
          The Users tab controls which users appear in the Face Browser.  If the
          "Include all users from /etc/password" checkbox is selected,
          then all users (with a userid above greeter/MinimalUID and not in the
@@ -446,4 +718,12 @@
          "Exclude" lists have been modified.  The left and right
          arrow buttons between the "Include" and "Exclude"
          lists can be used to move a selected user from one list to the other.
-      </p></div></div></div><div class="navbar"><div class="navbar-prev"><span class="navbar-prev"><a class="navbar navbar-prev" href="security.html" title="Security">Security</a></span></div><div class="navbar-next"><span class="navbar-next"><a class="navbar navbar-next" href="configuration.html" title="Configuration">Configuration</a></span></div></div></body></html>
+      </p>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="security.html" title="Security">Security</a></td>
+<td class="navbar-next"><a class="navbar-next" href="configuration.html" title="Configuration">Configuration</a></td>
+</tr></table></div>
+</body>
+</html>
