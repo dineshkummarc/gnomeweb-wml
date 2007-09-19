@@ -9,7 +9,7 @@ SUBDIRS = 2.18 2.20
 urlpath = /start
 
 page_SCRIPTS= \
-	index.html \
+	index.shtml \
 	getstable.html \
 	helping.html
 
