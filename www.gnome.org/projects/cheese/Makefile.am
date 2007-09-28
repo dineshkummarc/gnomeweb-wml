@@ -6,7 +6,7 @@ mrproper:
 	rm -rf *;
 
 page_SCRIPTS= \
-	index.html \
+	index.shtml \
 	screenshots.html \
 	appendix.shtml \
 	$(NULL)
