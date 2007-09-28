@@ -8,7 +8,7 @@ mrproper:
 page_SCRIPTS= \
 	index.html \
 	screenshots.html \
-	faq.html \
+	appendix.shtml \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/gnome
