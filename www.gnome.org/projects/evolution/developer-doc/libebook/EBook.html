@@ -1,274 +1,1742 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EBook</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="up" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="previous" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="next" href="libebook-e-book-query.html" title="e-book-query"><link rel="chapter" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library"><link rel="refentry" href="EBook.html" title="EBook"><link rel="refentry" href="libebook-e-book-query.html" title="e-book-query"><link rel="refentry" href="EContact.html" title="EContact"><link rel="refentry" href="EVCard.html" title="EVCard"><link rel="refentry" href="EBookListener.html" title="EBookListener"><link rel="refentry" href="EBookView.html" title="EBookView"><link rel="refentry" href="EBookViewListener.html" title="EBookViewListener"><link rel="refentry" href="libebook-e-book-async.html" title="e-book-async"><link rel="refentry" href="libebook-e-book-types.html" title="e-book-types"><link rel="refentry" href="libebook-EAddressWestern.html" title="e-address-western"><link rel="refentry" href="libebook-ENameWestern.html" title="e-name-western"><link rel="section" href="EBook.html#id2448451" title="Object Hierarchy"><link rel="section" href="EBook.html#id2448466" title="Signal Prototypes"><link rel="section" href="EBook.html#id2448526" title="Description"><link rel="section" href="EBook.html#id2448550" title="Details"><link rel="section" href="EBook.html#id2564162" title="Signals"><link rel="section" href="EBook.html#id2564301" title="See Also"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Evolution API Reference: libebook, the Addressbook Library</th><td><a accesskey="n" href="libebook-e-book-query.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EBook"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">EBook</span></h2><p>EBook &#8212; The primary Evolution addressbook client object.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>EBook</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="Evolution API Reference: libebook, the Addressbook Library">
+<link rel="up" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library">
+<link rel="prev" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library">
+<link rel="next" href="EBookListener.html" title="EBookListener">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution API Reference: libebook, the Addressbook Library">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution API Reference: libebook, the Addressbook Library</th>
+<td><a accesskey="n" href="EBookListener.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id3034336" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id3071711" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id3071650" class="shortcut">Object Hierarchy</a>
+                  &#160;|&#160;
+                  <a href="#id3071671" class="shortcut">Signals</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="EBook"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id3034336"></a><span class="refentrytitle">EBook</span>
+</h2>
+<p>EBook &#8212; The primary Evolution addressbook client object.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
 
 
 
-struct      <a href="EBook.html#EBook-struct">EBook</a>;
-<a href="EBook.html" title="EBook">EBook</a>*      <a href="EBook.html#e-book-new">e_book_new</a>                      (ESource *source,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-remove">e_book_remove</a>                   (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-supported-fields">e_book_get_supported_fields</a>     (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList **fields,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-supported-auth-methods">e_book_get_supported_auth_methods</a>
-                                            (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList **auth_methods,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-authenticate-user">e_book_authenticate_user</a>        (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *user,
-                                             const char *passwd,
-                                             const char *auth_method,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-contact">e_book_get_contact</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *id,
-                                             <a href="EContact.html" title="EContact">EContact</a> **contact,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-remove-contact">e_book_remove_contact</a>           (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *id,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-remove-contacts">e_book_remove_contacts</a>          (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList *ids,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-add-contact">e_book_add_contact</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-commit-contact">e_book_commit_contact</a>           (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-book-view">e_book_get_book_view</a>            (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             EBookQuery *query,
-                                             GList *requested_fields,
-                                             int max_results,
-                                             <a href="EBookView.html" title="EBookView">EBookView</a> **book_view,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-contacts">e_book_get_contacts</a>             (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             EBookQuery *query,
-                                             GList **contacts,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-changes">e_book_get_changes</a>              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             char *changeid,
-                                             GList **changes,
-                                             GError **error);
-void        <a href="EBook.html#e-book-free-change-list">e_book_free_change_list</a>         (GList *change_list);
-const char* <a href="EBook.html#e-book-get-uri">e_book_get_uri</a>                  (<a href="EBook.html" title="EBook">EBook</a> *book);
-const char* <a href="EBook.html#e-book-get-static-capabilities">e_book_get_static_capabilities</a>  (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-check-static-capability">e_book_check_static_capability</a>  (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *cap);
-gboolean    <a href="EBook.html#e-book-is-writable">e_book_is_writable</a>              (<a href="EBook.html" title="EBook">EBook</a> *book);
-gboolean    <a href="EBook.html#e-book-cancel">e_book_cancel</a>                   (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-get-self">e_book_get_self</a>                 (<a href="EContact.html" title="EContact">EContact</a> **contact,
-                                             <a href="EBook.html" title="EBook">EBook</a> **book,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-set-self">e_book_set_self</a>                 (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);
-gboolean    <a href="EBook.html#e-book-is-self">e_book_is_self</a>                  (<a href="EContact.html" title="EContact">EContact</a> *contact);
-gboolean    <a href="EBook.html#e-book-get-addressbooks">e_book_get_addressbooks</a>         (ESourceList **addressbook_sources,
-                                             GError **error);
+                    <a class="link" href="EBook.html#EBook-struct">EBook</a>;
+<a class="link" href="EBook.html" title="EBook">EBook</a>*              <a class="link" href="EBook.html#e-book-new">e_book_new</a>                          (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a>*              <a class="link" href="EBook.html#e-book-new-default-addressbook">e_book_new_default_addressbook</a>      (<a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a>*              <a class="link" href="EBook.html#e-book-new-from-uri">e_book_new_from_uri</a>                 (const char *uri,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a>*              <a class="link" href="EBook.html#e-book-new-system-addressbook">e_book_new_system_addressbook</a>       (<a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-default-addressbook">e_book_set_default_addressbook</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-default-source">e_book_set_default_source</a>           (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove">e_book_remove</a>                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-open">e_book_open</a>                         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-supported-fields">e_book_get_supported_fields</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-supported-auth-methods">e_book_get_supported_auth_methods</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **auth_methods,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-required-fields">e_book_get_required_fields</a>          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a>*            <a class="link" href="EBook.html#e-book-get-source">e_book_get_source</a>                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-online">e_book_is_online</a>                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-opened">e_book_is_opened</a>                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-authenticate-user">e_book_authenticate_user</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *user,
+                                                         const char *passwd,
+                                                         const char *auth_method,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-contact">e_book_get_contact</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove-contact">e_book_remove_contact</a>               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove-contacts">e_book_remove_contacts</a>              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-add-contact">e_book_add_contact</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-commit-contact">e_book_commit_contact</a>               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-book-view">e_book_get_book_view</a>                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         int max_results,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-contacts">e_book_get_contacts</a>                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **contacts,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-changes">e_book_get_changes</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         char *changeid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **changes,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+void                <a class="link" href="EBook.html#e-book-free-change-list">e_book_free_change_list</a>             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *change_list);
+const char*         <a class="link" href="EBook.html#e-book-get-uri">e_book_get_uri</a>                      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+const char*         <a class="link" href="EBook.html#e-book-get-static-capabilities">e_book_get_static_capabilities</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-check-static-capability">e_book_check_static_capability</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *cap);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-writable">e_book_is_writable</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-cancel">e_book_cancel</a>                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-self">e_book_get_self</a>                     (<a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a class="link" href="EBook.html" title="EBook">EBook</a> **book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-self">e_book_set_self</a>                     (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-self">e_book_is_self</a>                      (<a class="link" href="EContact.html" title="EContact">EContact</a> *contact);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-addressbooks">e_book_get_addressbooks</a>             (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESourceList.html"
+>ESourceList</a> **addressbook_sources,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+void                (<a class="link" href="EBook.html#EBookCallback">*EBookCallback</a>)                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookOpenProgressCallback">*EBookOpenProgressCallback</a>)        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *status_message,
+                                                         short percent ,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookIdCallback">*EBookIdCallback</a>)                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookEListCallback">*EBookEListCallback</a>)               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/libedataserver/EList.html"
+>EList</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookListCallback">*EBookListCallback</a>)                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookContactCallback">*EBookContactCallback</a>)             (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookBookViewCallback">*EBookBookViewCallback</a>)            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> *book_view,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-open">e_book_async_open</a>                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> open_response,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove">e_book_async_remove</a>                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-supported-fields">e_book_async_get_supported_fields</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-supported-auth-methods">e_book_async_get_supported_auth_methods</a>
+                                                        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-authenticate-user">e_book_async_authenticate_user</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *user,
+                                                         const char *passwd,
+                                                         const char *auth_method,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-contact">e_book_async_get_contact</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EBook.html#EBookContactCallback">EBookContactCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-contacts">e_book_async_get_contacts</a>           (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a class="link" href="EBook.html#EBookListCallback">EBookListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contact">e_book_async_remove_contact</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contact-by-id">e_book_async_remove_contact_by_id</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contacts">e_book_async_remove_contacts</a>        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-async-add-contact">e_book_async_add_contact</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookIdCallback">EBookIdCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-commit-contact">e_book_async_commit_contact</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-book-view">e_book_async_get_book_view</a>          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         int max_results,
+                                                         <a class="link" href="EBook.html#EBookBookViewCallback">EBookBookViewCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-changes">e_book_async_get_changes</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         char *changeid,
+                                                         <a class="link" href="EBook.html#EBookListCallback">EBookListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-required-fields">e_book_async_get_required_fields</a>    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
 
 
-</pre></div><div class="refsect1" lang="en"><a name="id2448451"></a><h2>Object Hierarchy</h2><pre class="synopsis">
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3071650"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
 
-  GObject
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
    +----EBook
-</pre></div><div class="refsect1" lang="en"><a name="id2448466"></a><h2>Signal Prototypes</h2><pre class="synopsis">
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3071671"></a><h2>Signals</h2>
+<pre class="synopsis">
 
-"<a href="EBook.html#EBook-backend-died">backend-died</a>"
-            void        user_function      (<a href="EBook.html" title="EBook">EBook</a> *ebook,
-                                            gpointer user_data);
-"<a href="EBook.html#EBook-writable-status">writable-status</a>"
-            void        user_function      (<a href="EBook.html" title="EBook">EBook</a> *ebook,
-                                            gboolean arg1,
-                                            gpointer user_data);
-</pre></div><div class="refsect1" lang="en"><a name="id2448526"></a><h2>Description</h2><p>
+  "<a class="link" href="EBook.html#EBook-auth-required">auth-required</a>"                                  : Run Last
+  "<a class="link" href="EBook.html#EBook-backend-died">backend-died</a>"                                   : Run Last
+  "<a class="link" href="EBook.html#EBook-connection-status">connection-status</a>"                              : Run Last
+  "<a class="link" href="EBook.html#EBook-writable-status">writable-status</a>"                                : Run Last
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3071711"></a><h2>Description</h2>
+<p>
 Represents a complete addressbook. Event notifications and callbacks go to the
-<span class="type">e-book-listener</span>. Contrast with <span class="type">e-book-view</span>, which represents a search of the addressbook.
-</p></div><div class="refsect1" lang="en"><a name="id2448550"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2448555"></a><h3><a name="EBook-struct"></a>struct EBook</h3><a class="indexterm" name="id2448564"></a><pre class="programlisting">struct EBook;</pre><p>
-<a href="EBook.html" title="EBook"><span class="type">EBook</span></a> has no publicly available members.
-</p></div><hr><div class="refsect2" lang="en"><a name="id2448580"></a><h3><a name="e-book-new"></a>e_book_new ()</h3><a class="indexterm" name="id2448588"></a><pre class="programlisting"><a href="EBook.html" title="EBook">EBook</a>*      e_book_new                      (ESource *source,
-                                             GError **error);</pre><p>
-<i class="parameter"><tt>source</tt></i>: An <span class="type">ESource</span> pointer
-<i class="parameter"><tt>error</tt></i>: A <span class="type">GError</span> pointer
-</p><p>
-Creates a new <a href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the given source.  There are
+<a class="link" href="EBookListener.html" title="EBookListener"><span class="type">EBookListener</span></a>. Contrast with <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a>, which represents a search of the addressbook.
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3071740"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id3071749"></a><h3>
+<a name="EBook-struct"></a>EBook</h3>
+<a class="indexterm" name="id3071760"></a><pre class="programlisting">typedef struct _EBook EBook;</pre>
+<p>
+<a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> has no publicly available members.
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3071781"></a><h3>
+<a name="e-book-new"></a>e_book_new ()</h3>
+<a class="indexterm" name="id3071791"></a><pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a>*              e_book_new                          (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the given source.  There are
 only two operations that are valid on this book at this point:
-<tt class="function">e_book_open()</tt>, and <a href="EBook.html#e-book-remove"><tt class="function">e_book_remove()</tt></a>.</p><p>
+<a class="link" href="EBook.html#e-book-open"><code class="function">e_book_open()</code></a>, and <a class="link" href="EBook.html#e-book-remove"><code class="function">e_book_remove()</code></a>.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>source</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> a new but unopened <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2561731"></a><h3><a name="e-book-remove"></a>e_book_remove ()</h3><a class="indexterm" name="id2561739"></a><pre class="programlisting">gboolean    e_book_remove                   (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);</pre><p>
-Remove the backing data for this <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>. For example, with the file backend this
-deletes the database file. You cannot get it back!</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em>&#160;:</span></p></td>
+<td> An <a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+><span class="type">ESource</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3071908"></a><h3>
+<a name="e-book-new-default-addressbook"></a>e_book_new_default_addressbook ()</h3>
+<a class="indexterm" name="id3071920"></a><pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a>*              e_book_new_default_addressbook      (<a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the user's default
+addressbook.  See the documentation for e_book_new for further
+information.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> on success, <span class="type">FALSE</span> on failure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2561836"></a><h3><a name="e-book-get-supported-fields"></a>e_book_get_supported_fields ()</h3><a class="indexterm" name="id2561844"></a><pre class="programlisting">gboolean    e_book_get_supported_fields     (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList **fields,
-                                             GError **error);</pre><p>
-Queries <i class="parameter"><tt>book</tt></i> for the list of fields it supports. Mostly for use
-by the contact editor so it knows what fields to sensitize.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3071995"></a><h3>
+<a name="e-book-new-from-uri"></a>e_book_new_from_uri ()</h3>
+<a class="indexterm" name="id3072006"></a><pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a>*              e_book_new_from_uri                 (const char *uri,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the given uri.  See the
+documentation for e_book_new for further information.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>fields</tt></i> :</span></td><td> a <span class="type">GList</span>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2561961"></a><h3><a name="e-book-get-supported-auth-methods"></a>e_book_get_supported_auth_methods ()</h3><a class="indexterm" name="id2561971"></a><pre class="programlisting">gboolean    e_book_get_supported_auth_methods
-                                            (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList **auth_methods,
-                                             GError **error);</pre><p>
-Queries <i class="parameter"><tt>book</tt></i> for the list of authentication methods it supports.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uri</code></em>&#160;:</span></p></td>
+<td> the URI to load
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072099"></a><h3>
+<a name="e-book-new-system-addressbook"></a>e_book_new_system_addressbook ()</h3>
+<a class="indexterm" name="id3072111"></a><pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a>*              e_book_new_system_addressbook       (<a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the user's system
+addressbook.  See the documentation for e_book_new for further
+information.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>auth_methods</tt></i> :</span></td><td> a <span class="type">GList</span>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562089"></a><h3><a name="e-book-authenticate-user"></a>e_book_authenticate_user ()</h3><a class="indexterm" name="id2562097"></a><pre class="programlisting">gboolean    e_book_authenticate_user        (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *user,
-                                             const char *passwd,
-                                             const char *auth_method,
-                                             GError **error);</pre><p>
-Authenticates <i class="parameter"><tt>user</tt></i> with <i class="parameter"><tt>passwd</tt></i>, using the auth method
-<i class="parameter"><tt>auth_method</tt></i>.  <i class="parameter"><tt>auth_method</tt></i> must be one of the authentication
-methods returned using e_book_get_supported_auth_methods.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072186"></a><h3>
+<a name="e-book-set-default-addressbook"></a>e_book_set_default_addressbook ()</h3>
+<a class="indexterm" name="id3072199"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_default_addressbook      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+sets the <a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+><span class="type">ESource</span></a> of the <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> as the "default" addressbook.  This is the source
+that will be loaded in the e_book_get_default_addressbook call.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>user</tt></i> :</span></td><td> a string
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>passwd</tt></i> :</span></td><td> a string
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>auth_method</tt></i> :</span></td><td> a string
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562252"></a><h3><a name="e-book-get-contact"></a>e_book_get_contact ()</h3><a class="indexterm" name="id2562260"></a><pre class="programlisting">gboolean    e_book_get_contact              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *id,
-                                             <a href="EContact.html" title="EContact">EContact</a> **contact,
-                                             GError **error);</pre><p>
-Fills in <i class="parameter"><tt>contact</tt></i> with the contents of the vcard in <i class="parameter"><tt>book</tt></i>
-corresponding to <i class="parameter"><tt>id</tt></i>.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> An <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the setting was stored in libebook's ESourceList, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072317"></a><h3>
+<a name="e-book-set-default-source"></a>e_book_set_default_source ()</h3>
+<a class="indexterm" name="id3072328"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_default_source           (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+sets <em class="parameter"><code>source</code></em> as the "default" addressbook.  This is the source that
+will be loaded in the e_book_get_default_addressbook call.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>id</tt></i> :</span></td><td> a string
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td> an <a href="EContact.html" title="EContact"><span class="type">EContact</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562400"></a><h3><a name="e-book-remove-contact"></a>e_book_remove_contact ()</h3><a class="indexterm" name="id2562408"></a><pre class="programlisting">gboolean    e_book_remove_contact           (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *id,
-                                             GError **error);</pre><p>
-Removes the contact with id <i class="parameter"><tt>id</tt></i> from <i class="parameter"><tt>book</tt></i>.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em>&#160;:</span></p></td>
+<td> An <a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+><span class="type">ESource</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the setting was stored in libebook's ESourceList, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072438"></a><h3>
+<a name="e-book-remove"></a>e_book_remove ()</h3>
+<a class="indexterm" name="id3072448"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the backing data for this <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>. For example, with the file backend this
+deletes the database file. You cannot get it back!</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>id</tt></i> :</span></td><td> a string
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562522"></a><h3><a name="e-book-remove-contacts"></a>e_book_remove_contacts ()</h3><a class="indexterm" name="id2562530"></a><pre class="programlisting">gboolean    e_book_remove_contacts          (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GList *ids,
-                                             GError **error);</pre><p>
-Removes the contacts with ids from the list <i class="parameter"><tt>ids</tt></i> from <i class="parameter"><tt>book</tt></i>.  This is
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> on failure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072558"></a><h3>
+<a name="e-book-open"></a>e_book_open ()</h3>
+<a class="indexterm" name="id3072569"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_open                         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Opens the addressbook, making it ready for queries and other operations.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em>&#160;:</span></p></td>
+<td> if <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a>, fail if this book doesn't already exist, otherwise create it first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the book was successfully opened, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072701"></a><h3>
+<a name="e-book-get-supported-fields"></a>e_book_get_supported_fields ()</h3>
+<a class="indexterm" name="id3072712"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_supported_fields         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Gets a list of fields that can be stored for contacts
+in this <em class="parameter"><code>book</code></em>. Other fields may be discarded. The list
+will contain pointers to allocated strings, and both the
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings must be freed by the caller.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of fields to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3072855"></a><h3>
+<a name="e-book-get-supported-auth-methods"></a>e_book_get_supported_auth_methods ()</h3>
+<a class="indexterm" name="id3072869"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_supported_auth_methods   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **auth_methods,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Queries <em class="parameter"><code>book</code></em> for the list of authentication methods it supports.
+The list will contain pointers to allocated strings, and both the
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings must be freed by the caller.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_methods</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of auth methods to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073011"></a><h3>
+<a name="e-book-get-required-fields"></a>e_book_get_required_fields ()</h3>
+<a class="indexterm" name="id3073022"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_required_fields          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Gets a list of fields that are required to be filled in for
+all contacts in this <em class="parameter"><code>book</code></em>. The list will contain pointers
+to allocated strings, and both the <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings
+must be freed by the caller.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of fields to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073165"></a><h3>
+<a name="e-book-get-source"></a>e_book_get_source ()</h3>
+<a class="indexterm" name="id3073175"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+>ESource</a>*            e_book_get_source                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Get the <a
+href="/usr/share/gtk-doc/html/libedataserver/ESource.html"
+><span class="type">ESource</span></a> that this book has loaded.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> The source.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073241"></a><h3>
+<a name="e-book-is-online"></a>e_book_is_online ()</h3>
+<a class="indexterm" name="id3073252"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_online                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book is connected.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if this book is connected, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073329"></a><h3>
+<a name="e-book-is-opened"></a>e_book_is_opened ()</h3>
+<a class="indexterm" name="id3073340"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_opened                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book has been opened.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> and <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if this book has been opened, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073418"></a><h3>
+<a name="e-book-authenticate-user"></a>e_book_authenticate_user ()</h3>
+<a class="indexterm" name="id3073428"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_authenticate_user            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *user,
+                                                         const char *passwd,
+                                                         const char *auth_method,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Authenticates <em class="parameter"><code>user</code></em> with <em class="parameter"><code>passwd</code></em>, using the auth method
+<em class="parameter"><code>auth_method</code></em>.  <em class="parameter"><code>auth_method</code></em> must be one of the authentication
+methods returned using e_book_get_supported_auth_methods.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user</code></em>&#160;:</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>passwd</code></em>&#160;:</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_method</code></em>&#160;:</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073610"></a><h3>
+<a name="e-book-get-contact"></a>e_book_get_contact ()</h3>
+<a class="indexterm" name="id3073620"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_contact                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Fills in <em class="parameter"><code>contact</code></em> with the contents of the vcard in <em class="parameter"><code>book</code></em>
+corresponding to <em class="parameter"><code>id</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td> a unique string ID specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073784"></a><h3>
+<a name="e-book-remove-contact"></a>e_book_remove_contact ()</h3>
+<a class="indexterm" name="id3073794"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove_contact               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the contact with id <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3073940"></a><h3>
+<a name="e-book-remove-contacts"></a>e_book_remove_contacts ()</h3>
+<a class="indexterm" name="id3073954"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove_contacts              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the contacts with ids from the list <em class="parameter"><code>ids</code></em> from <em class="parameter"><code>book</code></em>.  This is
 always more efficient than calling e_book_remove_contact_by_id if you
 have more than one id to remove, as some backends can implement it
-as a batch request.</p><p>
+as a batch request.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>ids</tt></i> :</span></td><td> an <span class="type">GList</span> of const char *id's
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562653"></a><h3><a name="e-book-add-contact"></a>e_book_add_contact ()</h3><a class="indexterm" name="id2562661"></a><pre class="programlisting">gboolean    e_book_add_contact              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);</pre><p>
-adds <i class="parameter"><tt>contact</tt></i> to <i class="parameter"><tt>book</tt></i>.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em>&#160;:</span></p></td>
+<td> an <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of const char *id's
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3074112"></a><h3>
+<a name="e-book-add-contact"></a>e_book_add_contact ()</h3>
+<a class="indexterm" name="id3074126"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_add_contact                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Adds <em class="parameter"><code>contact</code></em> to <em class="parameter"><code>book</code></em>.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td> an <a href="EContact.html" title="EContact"><span class="type">EContact</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562780"></a><h3><a name="e-book-commit-contact"></a>e_book_commit_contact ()</h3><a class="indexterm" name="id2562788"></a><pre class="programlisting">gboolean    e_book_commit_contact           (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);</pre><p>
-applies the changes made to <i class="parameter"><tt>contact</tt></i> to the stored version in
-<i class="parameter"><tt>book</tt></i>.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3074281"></a><h3>
+<a name="e-book-commit-contact"></a>e_book_commit_contact ()</h3>
+<a class="indexterm" name="id3074294"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_commit_contact               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Applies the changes made to <em class="parameter"><code>contact</code></em> to the stored version in
+<em class="parameter"><code>book</code></em>.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td> an <a href="EContact.html" title="EContact"><span class="type">EContact</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2562908"></a><h3><a name="e-book-get-book-view"></a>e_book_get_book_view ()</h3><a class="indexterm" name="id2562916"></a><pre class="programlisting">gboolean    e_book_get_book_view            (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             EBookQuery *query,
-                                             GList *requested_fields,
-                                             int max_results,
-                                             <a href="EBookView.html" title="EBookView">EBookView</a> **book_view,
-                                             GError **error);</pre><p>
-Query <i class="parameter"><tt>book</tt></i> with <i class="parameter"><tt>query</tt></i>, creating a <a href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> in <i class="parameter"><tt>book_view</tt></i> with the fields
-specified by <i class="parameter"><tt>requested_fields</tt></i> and limited at <i class="parameter"><tt>max_results</tt></i> records. On an
-error, <i class="parameter"><tt>error</tt></i> is set and <span class="type">FALSE</span> returned.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3074450"></a><h3>
+<a name="e-book-get-book-view"></a>e_book_get_book_view ()</h3>
+<a class="indexterm" name="id3074463"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_book_view                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         int max_results,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, creating a <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> in <em class="parameter"><code>book_view</code></em> with the fields
+specified by <em class="parameter"><code>requested_fields</code></em> and limited at <em class="parameter"><code>max_results</code></em> records. On an
+error, <em class="parameter"><code>error</code></em> is set and <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> returned.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>query</tt></i> :</span></td><td> an <span class="type">EBookQuery</span>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>requested_fields</tt></i> :</span></td><td> a <span class="type">GList</span> containing the names of fields to return, or NULL for all
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>max_results</tt></i> :</span></td><td> the maximum number of contacts to show (or 0 for all)
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>book_view</tt></i> :</span></td><td> A <a href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> pointer, will be set to the view
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if successful, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563128"></a><h3><a name="e-book-get-contacts"></a>e_book_get_contacts ()</h3><a class="indexterm" name="id2563136"></a><pre class="programlisting">gboolean    e_book_get_contacts             (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             EBookQuery *query,
-                                             GList **contacts,
-                                             GError **error);</pre><p>
-Query <i class="parameter"><tt>book</tt></i> with <i class="parameter"><tt>query</tt></i>, setting <i class="parameter"><tt>contacts</tt></i> to the list of contacts which
-matched. On failed, <i class="parameter"><tt>error</tt></i> will be set and <span class="type">FALSE</span> returned.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>requested_fields</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> containing the names of fields to return, or NULL for all
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_results</code></em>&#160;:</span></p></td>
+<td> the maximum number of contacts to show (or 0 for all)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_view</code></em>&#160;:</span></p></td>
+<td> A <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> pointer, will be set to the view
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3074740"></a><h3>
+<a name="e-book-get-contacts"></a>e_book_get_contacts ()</h3>
+<a class="indexterm" name="id3074754"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_contacts                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **contacts,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, setting <em class="parameter"><code>contacts</code></em> to the list of contacts which
+matched. On failed, <em class="parameter"><code>error</code></em> will be set and <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> returned.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>query</tt></i> :</span></td><td> an <span class="type">EBookQuery</span>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>contacts</tt></i> :</span></td><td> a <span class="type">GList</span> pointer, will be set to the list of contacts
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> on success, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563293"></a><h3><a name="e-book-get-changes"></a>e_book_get_changes ()</h3><a class="indexterm" name="id2563301"></a><pre class="programlisting">gboolean    e_book_get_changes              (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             char *changeid,
-                                             GList **changes,
-                                             GError **error);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contacts</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> pointer, will be set to the list of contacts
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3074959"></a><h3>
+<a name="e-book-get-changes"></a>e_book_get_changes ()</h3>
+<a class="indexterm" name="id3074973"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_changes                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         char *changeid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **changes,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Get the set of changes since the previous call to <a class="link" href="EBook.html#e-book-get-changes"><span class="type">e_book_get_changes</span></a> for a
+given change ID.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>changeid</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>changes</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changeid</code></em>&#160;:</span></p></td>
+<td>  the change ID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changes</code></em>&#160;:</span></p></td>
+<td> return location for a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of <a class="link" href="libebook-e-book-types.html#EBookChange"><span class="type">EBookChange</span></a> items
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> TRUE on success, FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075134"></a><h3>
+<a name="e-book-free-change-list"></a>e_book_free_change_list ()</h3>
+<a class="indexterm" name="id3075148"></a><pre class="programlisting">void                e_book_free_change_list             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *change_list);</pre>
+<p>
+Free the contents of <span class="type">change_list</span>, and the list itself.</p>
+<p>
 
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>change_list</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of <a class="link" href="libebook-e-book-types.html#EBookChange"><span class="type">EBookChange</span></a> items
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075220"></a><h3>
+<a name="e-book-get-uri"></a>e_book_get_uri ()</h3>
+<a class="indexterm" name="id3075233"></a><pre class="programlisting">const char*         e_book_get_uri                      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Get the URI that this book has loaded. This string should not be freed.</p>
+<p>
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563396"></a><h3><a name="e-book-free-change-list"></a>e_book_free_change_list ()</h3><a class="indexterm" name="id2563404"></a><pre class="programlisting">void        e_book_free_change_list         (GList *change_list);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>change_list</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563439"></a><h3><a name="e-book-get-uri"></a>e_book_get_uri ()</h3><a class="indexterm" name="id2563447"></a><pre class="programlisting">const char* e_book_get_uri                  (<a href="EBook.html" title="EBook">EBook</a> *book);</pre><p>
-Get the URI that this book has loaded. This string should not be freed.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The URI.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2536660"></a><h3><a name="e-book-get-static-capabilities"></a>e_book_get_static_capabilities ()</h3><a class="indexterm" name="id2563486"></a><pre class="programlisting">const char* e_book_get_static_capabilities  (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> The URI.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075303"></a><h3>
+<a name="e-book-get-static-capabilities"></a>e_book_get_static_capabilities ()</h3>
+<a class="indexterm" name="id3075317"></a><pre class="programlisting">const char*         e_book_get_static_capabilities      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
 Get the list of capabilities which the backend for this address book
-supports. This string should not be freed.</p><p>
+supports. This string should not be freed.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> an <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The capabilities list
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563560"></a><h3><a name="e-book-check-static-capability"></a>e_book_check_static_capability ()</h3><a class="indexterm" name="id2563567"></a><pre class="programlisting">gboolean    e_book_check_static_capability  (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             const char *cap);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> an <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> The capabilities list
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075416"></a><h3>
+<a name="e-book-check-static-capability"></a>e_book_check_static_capability ()</h3>
+<a class="indexterm" name="id3075430"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_check_static_capability      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *cap);</pre>
+<p>
 Check to see if the backend for this address book supports the capability
-<i class="parameter"><tt>cap</tt></i>.</p><p>
+<em class="parameter"><code>cap</code></em>.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>cap</tt></i> :</span></td><td> A capability string
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if the backend supports <i class="parameter"><tt>cap</tt></i>, <span class="type">FALSE</span> otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563657"></a><h3><a name="e-book-is-writable"></a>e_book_is_writable ()</h3><a class="indexterm" name="id2563666"></a><pre class="programlisting">gboolean    e_book_is_writable              (<a href="EBook.html" title="EBook">EBook</a> *book);</pre><p>
-Check if this book is writable.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cap</code></em>&#160;:</span></p></td>
+<td> A capability string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the backend supports <em class="parameter"><code>cap</code></em>, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075551"></a><h3>
+<a name="e-book-is-writable"></a>e_book_is_writable ()</h3>
+<a class="indexterm" name="id3075565"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_writable                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book is writable.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if this book is writable, otherwise <span class="type">FALSE</span>.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563733"></a><h3><a name="e-book-cancel"></a>e_book_cancel ()</h3><a class="indexterm" name="id2563742"></a><pre class="programlisting">gboolean    e_book_cancel                   (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             GError **error);</pre><p>
-Used to cancel an already running operation on <i class="parameter"><tt>book</tt></i>.  This
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if this book is writable, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075652"></a><h3>
+<a name="e-book-cancel"></a>e_book_cancel ()</h3>
+<a class="indexterm" name="id3075665"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_cancel                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Used to cancel an already running operation on <em class="parameter"><code>book</code></em>.  This
 function makes a synchronous CORBA to the backend telling it to
 cancel the operation.  If the operation wasn't cancellable (either
 transiently or permanently) or had already comopleted on the server
@@ -276,55 +1744,1443 @@ side, this function will return E_BOOK_STATUS_COULD_NOT_CANCEL, and
 the operation will continue uncancelled.  If the operation could be
 cancelled, this function will return E_BOOK_ERROR_OK, and the
 blocked e_book function corresponding to current operation will
-return with a status of E_BOOK_STATUS_CANCELLED.</p><p>
+return with a status of E_BOOK_STATUS_CANCELLED.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td> an <a href="EBook.html" title="EBook"><span class="type">EBook</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span> to set on failure
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> on success, <span class="type">FALSE</span> otherwise
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563844"></a><h3><a name="e-book-get-self"></a>e_book_get_self ()</h3><a class="indexterm" name="id2563852"></a><pre class="programlisting">gboolean    e_book_get_self                 (<a href="EContact.html" title="EContact">EContact</a> **contact,
-                                             <a href="EBook.html" title="EBook">EBook</a> **book,
-                                             GError **error);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075795"></a><h3>
+<a name="e-book-get-self"></a>e_book_get_self ()</h3>
+<a class="indexterm" name="id3075808"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_self                     (<a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a class="link" href="EBook.html" title="EBook">EBook</a> **book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Get the <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> referring to the user of the address book
+and set it in <em class="parameter"><code>contact</code></em> and <em class="parameter"><code>book</code></em>.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> pointer to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> pointer to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3075971"></a><h3>
+<a name="e-book-set-self"></a>e_book_set_self ()</h3>
+<a class="indexterm" name="id3075984"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_self                     (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Specify that <em class="parameter"><code>contact</code></em> residing in <em class="parameter"><code>book</code></em> is the <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> that
+refers to the user of the address book.</p>
+<p>
 
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076147"></a><h3>
+<a name="e-book-is-self"></a>e_book_is_self ()</h3>
+<a class="indexterm" name="id3076160"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_self                      (<a class="link" href="EContact.html" title="EContact">EContact</a> *contact);</pre>
+<p>
+Check if <em class="parameter"><code>contact</code></em> is the user of the address book.</p>
+<p>
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2563930"></a><h3><a name="e-book-set-self"></a>e_book_set_self ()</h3><a class="indexterm" name="id2563939"></a><pre class="programlisting">gboolean    e_book_set_self                 (<a href="EBook.html" title="EBook">EBook</a> *book,
-                                             <a href="EContact.html" title="EContact">EContact</a> *contact,
-                                             GError **error);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>book</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2564017"></a><h3><a name="e-book-is-self"></a>e_book_is_self ()</h3><a class="indexterm" name="id2564025"></a><pre class="programlisting">gboolean    e_book_is_self                  (<a href="EContact.html" title="EContact">EContact</a> *contact);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>contact</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2564069"></a><h3><a name="e-book-get-addressbooks"></a>e_book_get_addressbooks ()</h3><a class="indexterm" name="id2564078"></a><pre class="programlisting">gboolean    e_book_get_addressbooks         (ESourceList **addressbook_sources,
-                                             GError **error);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if <em class="parameter"><code>contact</code></em> is the user, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076259"></a><h3>
+<a name="e-book-get-addressbooks"></a>e_book_get_addressbooks ()</h3>
+<a class="indexterm" name="id3076272"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_addressbooks             (<a
+href="/usr/share/gtk-doc/html/libedataserver/ESourceList.html"
+>ESourceList</a> **addressbook_sources,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
 Populate *addressbook_sources with the list of all sources which have been
-added to Evolution.</p><p>
+added to Evolution.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>addressbook_sources</tt></i> :</span></td><td> A pointer to a ESourceList* to set
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> A pointer to a GError* to set on error
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> <span class="type">TRUE</span> if <i class="parameter"><tt>addressbook_sources</tt></i> was set, otherwise <span class="type">FALSE</span>.
-</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2564162"></a><h2>Signals</h2><div class="refsect2" lang="en"><a name="id2564168"></a><h3><a name="EBook-backend-died"></a>The "backend-died" signal</h3><pre class="programlisting">void        user_function                  (<a href="EBook.html" title="EBook">EBook</a> *ebook,
-                                            gpointer user_data);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>addressbook_sources</code></em>&#160;:</span></p></td>
+<td> A pointer to a ESourceList* to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>&#160;:</span></p></td>
+<td> A pointer to a GError* to set on error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if <em class="parameter"><code>addressbook_sources</code></em> was set, otherwise <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076382"></a><h3>
+<a name="EBookCallback"></a>EBookCallback ()</h3>
+<a class="indexterm" name="id3076395"></a><pre class="programlisting">void                (*EBookCallback)                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076483"></a><h3>
+<a name="EBookOpenProgressCallback"></a>EBookOpenProgressCallback ()</h3>
+<a class="indexterm" name="id3076497"></a><pre class="programlisting">void                (*EBookOpenProgressCallback)        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *status_message,
+                                                         short percent ,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status_message</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param3</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076607"></a><h3>
+<a name="EBookIdCallback"></a>EBookIdCallback ()</h3>
+<a class="indexterm" name="id3076620"></a><pre class="programlisting">void                (*EBookIdCallback)                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076730"></a><h3>
+<a name="EBookEListCallback"></a>EBookEListCallback ()</h3>
+<a class="indexterm" name="id3076744"></a><pre class="programlisting">void                (*EBookEListCallback)               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/libedataserver/EList.html"
+>EList</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076853"></a><h3>
+<a name="EBookListCallback"></a>EBookListCallback ()</h3>
+<a class="indexterm" name="id3076867"></a><pre class="programlisting">void                (*EBookListCallback)                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3076976"></a><h3>
+<a name="EBookContactCallback"></a>EBookContactCallback ()</h3>
+<a class="indexterm" name="id3076990"></a><pre class="programlisting">void                (*EBookContactCallback)             (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077100"></a><h3>
+<a name="EBookBookViewCallback"></a>EBookBookViewCallback ()</h3>
+<a class="indexterm" name="id3077113"></a><pre class="programlisting">void                (*EBookBookViewCallback)            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> *book_view,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_view</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077223"></a><h3>
+<a name="e-book-async-open"></a>e_book_async_open ()</h3>
+<a class="indexterm" name="id3077237"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_open                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> open_response,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Opens the addressbook, making it ready for queries and other operations.
+This function does not block.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em>&#160;:</span></p></td>
+<td> if <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a>, fail if this book doesn't already exist, otherwise create it first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>open_response</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077400"></a><h3>
+<a name="e-book-async-remove"></a>e_book_async_remove ()</h3>
+<a class="indexterm" name="id3077414"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Remove the backing data for this <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>. For example, with the file backend this
+deletes the database file. You cannot get it back!</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077553"></a><h3>
+<a name="e-book-async-get-supported-fields"></a>e_book_async_get_supported_fields ()</h3>
+<a class="indexterm" name="id3077567"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_supported_fields   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Gets a list of fields that can be stored for contacts
+in this <em class="parameter"><code>book</code></em>. Other fields may be discarded. This
+function does not block.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077705"></a><h3>
+<a name="e-book-async-get-supported-auth-methods"></a>e_book_async_get_supported_auth_methods ()</h3>
+<a class="indexterm" name="id3077719"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_supported_auth_methods
+                                                        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Queries <em class="parameter"><code>book</code></em> for the list of authentication methods it supports.
+This function does not block.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3077858"></a><h3>
+<a name="e-book-async-authenticate-user"></a>e_book_async_authenticate_user ()</h3>
+<a class="indexterm" name="id3077872"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_authenticate_user      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *user,
+                                                         const char *passwd,
+                                                         const char *auth_method,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Authenticate <em class="parameter"><code>user</code></em> with <em class="parameter"><code>passwd</code></em>, using the auth method
+<em class="parameter"><code>auth_method</code></em>. <em class="parameter"><code>auth_method</code></em> must be one of the authentication
+methods returned using e_book_get_supported_auth_methods.
+This function does not block.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user</code></em>&#160;:</span></p></td>
+<td> user name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>passwd</code></em>&#160;:</span></p></td>
+<td> password
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_method</code></em>&#160;:</span></p></td>
+<td> string indicating authentication method
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3078093"></a><h3>
+<a name="e-book-async-get-contact"></a>e_book_async_get_contact ()</h3>
+<a class="indexterm" name="id3078107"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_contact            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EBook.html#EBookContactCallback">EBookContactCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Retrieves a contact specified by <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td> a unique string ID specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3078272"></a><h3>
+<a name="e-book-async-get-contacts"></a>e_book_async_get_contacts ()</h3>
+<a class="indexterm" name="id3078286"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_contacts           (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a class="link" href="EBook.html#EBookListCallback">EBookListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3078456"></a><h3>
+<a name="e-book-async-remove-contact"></a>e_book_async_remove_contact ()</h3>
+<a class="indexterm" name="id3078470"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contact         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes <em class="parameter"><code>contact</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3078640"></a><h3>
+<a name="e-book-async-remove-contact-by-id"></a>e_book_async_remove_contact_by_id ()</h3>
+<a class="indexterm" name="id3078654"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contact_by_id   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const char *id,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes the contact with id <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td> a unique ID string specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3078818"></a><h3>
+<a name="e-book-async-remove-contacts"></a>e_book_async_remove_contacts ()</h3>
+<a class="indexterm" name="id3078832"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contacts        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes the contacts with ids from the list <em class="parameter"><code>ids</code></em> from <em class="parameter"><code>book</code></em>.  This is
+always more efficient than calling <code class="function">e_book_remove_contact_by_id()</code> if you
+have more than one id to remove, as some backends can implement it
+as a batch request.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of const char *id's
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3079016"></a><h3>
+<a name="e-book-async-add-contact"></a>e_book_async_add_contact ()</h3>
+<a class="indexterm" name="id3079029"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_async_add_contact            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookIdCallback">EBookIdCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Adds <em class="parameter"><code>contact</code></em> to <em class="parameter"><code>book</code></em> without blocking.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the operation was started, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3079200"></a><h3>
+<a name="e-book-async-commit-contact"></a>e_book_async_commit_contact ()</h3>
+<a class="indexterm" name="id3079214"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_commit_contact         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback">EBookCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Applies the changes made to <em class="parameter"><code>contact</code></em> to the stored version in
+<em class="parameter"><code>book</code></em> without blocking.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the operation was started, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3079386"></a><h3>
+<a name="e-book-async-get-book-view"></a>e_book_async_get_book_view ()</h3>
+<a class="indexterm" name="id3079400"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_book_view          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         int max_results,
+                                                         <a class="link" href="EBook.html#EBookBookViewCallback">EBookBookViewCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, creating a <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> with the fields
+specified by <em class="parameter"><code>requested_fields</code></em> and limited at <em class="parameter"><code>max_results</code></em> records.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>requested_fields</code></em>&#160;:</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> containing the names of fields to return, or NULL for all
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_results</code></em>&#160;:</span></p></td>
+<td> the maximum number of contacts to show (or 0 for all)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3079641"></a><h3>
+<a name="e-book-async-get-changes"></a>e_book_async_get_changes ()</h3>
+<a class="indexterm" name="id3079655"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_changes            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         char *changeid,
+                                                         <a class="link" href="EBook.html#EBookListCallback">EBookListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Get the set of changes since the previous call to <a class="link" href="EBook.html#e-book-async-get-changes"><span class="type">e_book_async_get_changes</span></a>
+for a given change ID.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changeid</code></em>&#160;:</span></p></td>
+<td>  the change ID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> TRUE on success, FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3079796"></a><h3>
+<a name="e-book-async-get-required-fields"></a>e_book_async_get_required_fields ()</h3>
+<a class="indexterm" name="id3079810"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_required_fields    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback">EBookEListCallback</a> cb,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Gets a list of fields that are required to be filled in for
+all contacts in this <em class="parameter"><code>book</code></em>. This function does not block.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em>&#160;:</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em>&#160;:</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em>&#160;:</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the operation was started, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3079950"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="id3079961"></a><h3>
+<a name="EBook-auth-required"></a>The "auth-required" signal</h3>
+<a class="indexterm" name="id3079971"></a><pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+Authentication is required to access this source.  You should call
+<a class="link" href="EBook.html#e-book-authenticate-user"><span class="type">e_book_authenticate_user</span></a> or <a class="link" href="EBook.html#e-book-async-authenticate-user"><span class="type">e_book_async_authenticate_user</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em>&#160;:</span></p></td>
+<td>the object which received the signal.
+
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3080054"></a><h3>
+<a name="EBook-backend-died"></a>The "backend-died" signal</h3>
+<a class="indexterm" name="id3080065"></a><pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
 The backend for this address book has died.
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ebook</tt></i> :</span></td><td>the object which received the signal.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em>&#160;:</span></p></td>
+<td>the object which received the signal.
 
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2564225"></a><h3><a name="EBook-writable-status"></a>The "writable-status" signal</h3><pre class="programlisting">void        user_function                  (<a href="EBook.html" title="EBook">EBook</a> *ebook,
-                                            gboolean arg1,
-                                            gpointer user_data);</pre><p>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3080133"></a><h3>
+<a name="EBook-connection-status"></a>The "connection-status" signal</h3>
+<a class="indexterm" name="id3080143"></a><pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+The connection status for this book is being reported.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em>&#160;:</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></p></td>
+<td>
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><span class="type">TRUE</span></a> if the connection is online, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><span class="type">FALSE</span></a> otherwise.
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ebook</tt></i> :</span></td><td>the object which received the signal.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>arg1</tt></i> :</span></td><td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id3080246"></a><h3>
+<a name="EBook-writable-status"></a>The "writable-status" signal</h3>
+<a class="indexterm" name="id3080256"></a><pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+The writable status for this book is being reported.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em>&#160;:</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em>&#160;:</span></p></td>
+<td>
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><span class="type">TRUE</span></a> if the book is writable, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><span class="type">FALSE</span></a> otherwise.
 
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i> :</span></td><td>user data set when the signal handler was connected.</td></tr></tbody></table></div></div></div><div class="refsect1" lang="en"><a name="id2564301"></a><h2>See Also</h2><p>
-<span class="type">e-book-listener</span>, <span class="type">e-book-view</span>
-</p></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="ch01.html"><b>&lt;&lt; Evolution API Reference: libebook, the Addressbook Library</b></a></td><td align="right"><a accesskey="n" href="libebook-e-book-query.html"><b>e-book-query &gt;&gt;</b></a></td></tr></table></body></html>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em>&#160;:</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id3080361"></a><h2>See Also</h2>
+<p>
+<a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a>
+</p>
+</div>
+</div>
+</body>
+</html>

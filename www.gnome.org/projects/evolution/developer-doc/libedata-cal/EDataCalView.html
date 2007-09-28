@@ -1,209 +1,663 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EDataCalView</title><meta name="generator" content="DocBook XSL Stylesheets V1.68.1"><link rel="start" href="index.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library"><link rel="up" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library"><link rel="prev" href="libedata-cal-EDataCalFactory.html" title="EDataCalFactory"><link rel="next" href="EDataCal.html" title="EDataCal"><meta name="generator" content="GTK-Doc V1.3 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"><link rel="chapter" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="libedata-cal-EDataCalFactory.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">Evolution API Reference: libedata-cal, the Calendar Backend Library</th><td><a accesskey="n" href="EDataCal.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="EDataCalView"></a><div class="titlepage"></div><div class="refnamediv"><table width="100%"><tr><td valign="top"><h2><span class="refentrytitle">EDataCalView</span></h2><p>EDataCalView &#8212; Implementation of the calendar CORBA search interface.</p></td><td valign="top" align="right"></td></tr></table></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>EDataCalView</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="up" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="prev" href="EDataCalFactory.html" title="EDataCalFactory">
+<link rel="next" href="ix01.html" title="Index">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="EDataCalFactory.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution API Reference: libedata-cal, the Calendar Backend Library</th>
+<td><a accesskey="n" href="ix01.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2696375" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2718670" class="shortcut">Description</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="EDataCalView"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2696375"></a><span class="refentrytitle">EDataCalView</span>
+</h2>
+<p>EDataCalView &#8212; Implementation of the calendar CORBA search interface.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
 
 
 
-#define     <a href="EDataCalView.html#E-DATA-CAL-VIEW-TYPE:CAPS">E_DATA_CAL_VIEW_TYPE</a>
-#define     <a href="EDataCalView.html#QUERY:CAPS">QUERY</a>                           (obj)
-#define     <a href="EDataCalView.html#E-DATA-CAL-VIEW-CLASS:CAPS">E_DATA_CAL_VIEW_CLASS</a>           (klass)
-#define     <a href="EDataCalView.html#IS-QUERY:CAPS">IS_QUERY</a>                        (obj)
-#define     <a href="EDataCalView.html#IS-E-DATA-CAL-VIEW-CLASS:CAPS">IS_E_DATA_CAL_VIEW_CLASS</a>        (klass)
-            <a href="EDataCalView.html#EDataCalViewPrivate">EDataCalViewPrivate</a>;
-GType       <a href="EDataCalView.html#e-data-cal-view-get-type">e_data_cal_view_get_type</a>        (void);
-<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a>* <a href="EDataCalView.html#e-data-cal-view-new">e_data_cal_view_new</a>           (<a href="ECalBackend.html" title="ECalBackend">ECalBackend</a> *backend,
-                                             GNOME_Evolution_Calendar_CalViewListener ql,
-                                             <a href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a> *sexp);
-void        <a href="EDataCalView.html#e-data-cal-view-add-listener">e_data_cal_view_add_listener</a>    (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             GNOME_Evolution_Calendar_CalViewListener ql);
-const char* <a href="EDataCalView.html#e-data-cal-view-get-text">e_data_cal_view_get_text</a>        (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-<a href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a>* <a href="EDataCalView.html#e-data-cal-view-get-object-sexp">e_data_cal_view_get_object_sexp</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-gboolean    <a href="EDataCalView.html#e-data-cal-view-object-matches">e_data_cal_view_object_matches</a>  (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);
-GList*      <a href="EDataCalView.html#e-data-cal-view-get-matched-objects">e_data_cal_view_get_matched_objects</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-gboolean    <a href="EDataCalView.html#e-data-cal-view-is-started">e_data_cal_view_is_started</a>      (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-gboolean    <a href="EDataCalView.html#e-data-cal-view-is-done">e_data_cal_view_is_done</a>         (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-GNOME_Evolution_Calendar_CallStatus <a href="EDataCalView.html#e-data-cal-view-get-done-status">e_data_cal_view_get_done_status</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-added">e_data_cal_view_notify_objects_added</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *objects);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-added-1">e_data_cal_view_notify_objects_added_1</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-modified">e_data_cal_view_notify_objects_modified</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *objects);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-modified-1">e_data_cal_view_notify_objects_modified_1</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-removed">e_data_cal_view_notify_objects_removed</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *uids);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-objects-removed-1">e_data_cal_view_notify_objects_removed_1</a>
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *uid);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-progress">e_data_cal_view_notify_progress</a> (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *message,
-                                             int percent);
-void        <a href="EDataCalView.html#e-data-cal-view-notify-done">e_data_cal_view_notify_done</a>     (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             GNOME_Evolution_Calendar_CallStatus status);
-</pre></div><div class="refsect1" lang="en"><a name="id2589634"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2589643"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2589649"></a><h3><a name="E-DATA-CAL-VIEW-TYPE:CAPS"></a>E_DATA_CAL_VIEW_TYPE</h3><a class="indexterm" name="id2589657"></a><pre class="programlisting">#define E_DATA_CAL_VIEW_TYPE            (e_data_cal_view_get_type ())
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2589668"></a><h3><a name="QUERY:CAPS"></a>QUERY()</h3><a class="indexterm" name="id2589676"></a><pre class="programlisting">#define QUERY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), E_DATA_CAL_VIEW_TYPE, EDataCalView))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>obj</code></em> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2589703"></a><h3><a name="E-DATA-CAL-VIEW-CLASS:CAPS"></a>E_DATA_CAL_VIEW_CLASS()</h3><a class="indexterm" name="id2589711"></a><pre class="programlisting">#define E_DATA_CAL_VIEW_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), E_DATA_CAL_VIEW_TYPE, EDataCalViewClass))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>klass</code></em> :</span></td><td>
+#define             <a class="link" href="EDataCalView.html#QUERY:CAPS">QUERY</a>                               (obj)
+#define             <a class="link" href="EDataCalView.html#IS-QUERY:CAPS">IS_QUERY</a>                            (obj)
+<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a>*       <a class="link" href="EDataCalView.html#e-data-cal-view-new">e_data_cal_view_new</a>                 (<a class="link" href="ECalBackend.html" title="ECalBackend">ECalBackend</a> *backend,
+                                                         GNOME_Evolution_Calendar_CalViewListener ql,
+                                                         <a class="link" href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a> *sexp);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-add-listener">e_data_cal_view_add_listener</a>        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         GNOME_Evolution_Calendar_CalViewListener ql);
+const char*         <a class="link" href="EDataCalView.html#e-data-cal-view-get-text">e_data_cal_view_get_text</a>            (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+<a class="link" href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a>*    <a class="link" href="EDataCalView.html#e-data-cal-view-get-object-sexp">e_data_cal_view_get_object_sexp</a>     (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EDataCalView.html#e-data-cal-view-object-matches">e_data_cal_view_object_matches</a>      (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a>*              <a class="link" href="EDataCalView.html#e-data-cal-view-get-matched-objects">e_data_cal_view_get_matched_objects</a> (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EDataCalView.html#e-data-cal-view-is-started">e_data_cal_view_is_started</a>          (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EDataCalView.html#e-data-cal-view-is-done">e_data_cal_view_is_done</a>             (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+GNOME_Evolution_Calendar_CallStatus <a class="link" href="EDataCalView.html#e-data-cal-view-get-done-status">e_data_cal_view_get_done_status</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-added">e_data_cal_view_notify_objects_added</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *objects);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-added-1">e_data_cal_view_notify_objects_added_1</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-modified">e_data_cal_view_notify_objects_modified</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *objects);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-modified-1">e_data_cal_view_notify_objects_modified_1</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-removed">e_data_cal_view_notify_objects_removed</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-objects-removed-1">e_data_cal_view_notify_objects_removed_1</a>
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/libecal/ECalComponent.html#ECalComponentId"
+>ECalComponentId</a> *id);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-progress">e_data_cal_view_notify_progress</a>     (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *message,
+                                                         int percent);
+void                <a class="link" href="EDataCalView.html#e-data-cal-view-notify-done">e_data_cal_view_notify_done</a>         (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         GNOME_Evolution_Calendar_CallStatus status);
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2589738"></a><h3><a name="IS-QUERY:CAPS"></a>IS_QUERY()</h3><a class="indexterm" name="id2589746"></a><pre class="programlisting">#define IS_QUERY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), E_DATA_CAL_VIEW_TYPE))
-</pre><p>
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2718670"></a><h2>Description</h2>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>obj</code></em> :</span></td><td>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2714051"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2714062"></a><h3>
+<a name="QUERY:CAPS"></a>QUERY()</h3>
+<a class="indexterm" name="id2714074"></a><pre class="programlisting">#define QUERY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), E_DATA_CAL_VIEW_TYPE, EDataCalView))
+</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></p></td>
+<td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2589772"></a><h3><a name="IS-E-DATA-CAL-VIEW-CLASS:CAPS"></a>IS_E_DATA_CAL_VIEW_CLASS()</h3><a class="indexterm" name="id2530964"></a><pre class="programlisting">#define IS_E_DATA_CAL_VIEW_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), E_DATA_CAL_VIEW_TYPE))
-</pre><p>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714110"></a><h3>
+<a name="IS-QUERY:CAPS"></a>IS_QUERY()</h3>
+<a class="indexterm" name="id2714122"></a><pre class="programlisting">#define IS_QUERY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), E_DATA_CAL_VIEW_TYPE))
+</pre>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>klass</code></em> :</span></td><td>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em>&#160;:</span></p></td>
+<td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2530990"></a><h3><a name="EDataCalViewPrivate"></a>EDataCalViewPrivate</h3><a class="indexterm" name="id2530998"></a><pre class="programlisting">typedef struct _EDataCalViewPrivate EDataCalViewPrivate;</pre><p>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714158"></a><h3>
+<a name="e-data-cal-view-new"></a>e_data_cal_view_new ()</h3>
+<a class="indexterm" name="id2714170"></a><pre class="programlisting"><a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a>*       e_data_cal_view_new                 (<a class="link" href="ECalBackend.html" title="ECalBackend">ECalBackend</a> *backend,
+                                                         GNOME_Evolution_Calendar_CalViewListener ql,
+                                                         <a class="link" href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a> *sexp);</pre>
+<p>
+Creates a new query engine object that monitors a calendar backend.</p>
+<p>
 
-</p></div><hr><div class="refsect2" lang="en"><a name="id2531009"></a><h3><a name="e-data-cal-view-get-type"></a>e_data_cal_view_get_type ()</h3><a class="indexterm" name="id2531017"></a><pre class="programlisting">GType       e_data_cal_view_get_type        (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2531046"></a><h3><a name="e-data-cal-view-new"></a>e_data_cal_view_new ()</h3><a class="indexterm" name="id2531054"></a><pre class="programlisting"><a href="EDataCalView.html" title="EDataCalView">EDataCalView</a>* e_data_cal_view_new           (<a href="ECalBackend.html" title="ECalBackend">ECalBackend</a> *backend,
-                                             GNOME_Evolution_Calendar_CalViewListener ql,
-                                             <a href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a> *sexp);</pre><p>
-Creates a new query engine object that monitors a calendar backend.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>backend</code></em> :</span></td><td> Calendar backend that the query object will monitor.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>ql</code></em> :</span></td><td> Listener for query results.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>sexp</code></em> :</span></td><td> Sexp that defines the query.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A newly-created query object, or NULL on failure.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2531141"></a><h3><a name="e-data-cal-view-add-listener"></a>e_data_cal_view_add_listener ()</h3><a class="indexterm" name="id2531152"></a><pre class="programlisting">void        e_data_cal_view_add_listener    (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             GNOME_Evolution_Calendar_CalViewListener ql);</pre><p>
-Adds the given CORBA listener to a <a href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object. This makes the view
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> Calendar backend that the query object will monitor.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ql</code></em>&#160;:</span></p></td>
+<td> Listener for query results.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sexp</code></em>&#160;:</span></p></td>
+<td> Sexp that defines the query.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> A newly-created query object, or NULL on failure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714276"></a><h3>
+<a name="e-data-cal-view-add-listener"></a>e_data_cal_view_add_listener ()</h3>
+<a class="indexterm" name="id2714290"></a><pre class="programlisting">void                e_data_cal_view_add_listener        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         GNOME_Evolution_Calendar_CalViewListener ql);</pre>
+<p>
+Adds the given CORBA listener to a <a class="link" href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object. This makes the view
 object notify that listener when notifying the other listeners already attached
-to the view.</p><p>
+to the view.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A <a href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>ql</code></em> :</span></td><td> A CORBA query listener to add to the list of listeners.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2531225"></a><h3><a name="e-data-cal-view-get-text"></a>e_data_cal_view_get_text ()</h3><a class="indexterm" name="id2595868"></a><pre class="programlisting">const char* e_data_cal_view_get_text        (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
-Get the expression used for the given query.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A <a class="link" href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ql</code></em>&#160;:</span></p></td>
+<td> A CORBA query listener to add to the list of listeners.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714380"></a><h3>
+<a name="e-data-cal-view-get-text"></a>e_data_cal_view_get_text ()</h3>
+<a class="indexterm" name="id2714391"></a><pre class="programlisting">const char*         e_data_cal_view_get_text            (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
+Get the expression used for the given query.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A <a href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> the query expression used to search.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2595923"></a><h3><a name="e-data-cal-view-get-object-sexp"></a>e_data_cal_view_get_object_sexp ()</h3><a class="indexterm" name="id2595934"></a><pre class="programlisting"><a href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a>* e_data_cal_view_get_object_sexp
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
-Get the <a href="ECalBackendSExp.html" title="ECalBackendSExp"><span class="type">ECalBackendSExp</span></a> object used for the given query.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A <a class="link" href="EDataCalView.html" title="EDataCalView"><span class="type">EDataCalView</span></a> object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> the query expression used to search.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714462"></a><h3>
+<a name="e-data-cal-view-get-object-sexp"></a>e_data_cal_view_get_object_sexp ()</h3>
+<a class="indexterm" name="id2722332"></a><pre class="programlisting"><a class="link" href="ECalBackendSExp.html" title="ECalBackendSExp">ECalBackendSExp</a>*    e_data_cal_view_get_object_sexp     (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
+Get the <a class="link" href="ECalBackendSExp.html" title="ECalBackendSExp"><span class="type">ECalBackendSExp</span></a> object used for the given query.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The expression object used to search.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2595991"></a><h3><a name="e-data-cal-view-object-matches"></a>e_data_cal_view_object_matches ()</h3><a class="indexterm" name="id2596002"></a><pre class="programlisting">gboolean    e_data_cal_view_object_matches  (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> The expression object used to search.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722393"></a><h3>
+<a name="e-data-cal-view-object-matches"></a>e_data_cal_view_object_matches ()</h3>
+<a class="indexterm" name="id2722406"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_data_cal_view_object_matches      (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);</pre>
+<p>
 Compares the given <em class="parameter"><code>object</code></em> to the regular expression used for the
-given query.</p><p>
+given query.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>object</code></em> :</span></td><td> Object to match.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the object matches the expression, FALSE if not.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596072"></a><h3><a name="e-data-cal-view-get-matched-objects"></a>e_data_cal_view_get_matched_objects ()</h3><a class="indexterm" name="id2596084"></a><pre class="programlisting">GList*      e_data_cal_view_get_matched_objects
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
-Gets the list of objects already matched for the given query.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> Object to match.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> TRUE if the object matches the expression, FALSE if not.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722492"></a><h3>
+<a name="e-data-cal-view-get-matched-objects"></a>e_data_cal_view_get_matched_objects ()</h3>
+<a class="indexterm" name="id2722506"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a>*              e_data_cal_view_get_matched_objects (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
+Gets the list of objects already matched for the given query.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A list of matched objects.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596134"></a><h3><a name="e-data-cal-view-is-started"></a>e_data_cal_view_is_started ()</h3><a class="indexterm" name="id2596143"></a><pre class="programlisting">gboolean    e_data_cal_view_is_started      (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
-Checks whether the given query has already been started.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> A list of matched objects.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722568"></a><h3>
+<a name="e-data-cal-view-is-started"></a>e_data_cal_view_is_started ()</h3>
+<a class="indexterm" name="id2722579"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_data_cal_view_is_started          (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
+Checks whether the given query has already been started.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the query has already been started, FALSE otherwise.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596193"></a><h3><a name="e-data-cal-view-is-done"></a>e_data_cal_view_is_done ()</h3><a class="indexterm" name="id2596201"></a><pre class="programlisting">gboolean    e_data_cal_view_is_done         (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> TRUE if the query has already been started, FALSE otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722642"></a><h3>
+<a name="e-data-cal-view-is-done"></a>e_data_cal_view_is_done ()</h3>
+<a class="indexterm" name="id2722653"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_data_cal_view_is_done             (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
 Checks whether the given query is already done. Being done means the initial
 matching of objects have been finished, not that no more notifications about
 changes will be sent. In fact, even after done, notifications will still be sent
-if there are changes in the objects matching the query search expression.</p><p>
+if there are changes in the objects matching the query search expression.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> TRUE if the query is done, FALSE if still in progress.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596255"></a><h3><a name="e-data-cal-view-get-done-status"></a>e_data_cal_view_get_done_status ()</h3><a class="indexterm" name="id2596266"></a><pre class="programlisting">GNOME_Evolution_Calendar_CallStatus e_data_cal_view_get_done_status
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> TRUE if the query is done, FALSE if still in progress.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722719"></a><h3>
+<a name="e-data-cal-view-get-done-status"></a>e_data_cal_view_get_done_status ()</h3>
+<a class="indexterm" name="id2722732"></a><pre class="programlisting">GNOME_Evolution_Calendar_CallStatus e_data_cal_view_get_done_status
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query);</pre>
+<p>
 Gets the status code obtained when the initial matching of objects was done
-for the given query.</p><p>
+for the given query.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The query status.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596318"></a><h3><a name="e-data-cal-view-notify-objects-added"></a>e_data_cal_view_notify_objects_added ()</h3><a class="indexterm" name="id2596329"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_added
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *objects);</pre><p>
-Notifies all query listeners of the addition of a list of objects.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> The query status.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722796"></a><h3>
+<a name="e-data-cal-view-notify-objects-added"></a>e_data_cal_view_notify_objects_added ()</h3>
+<a class="indexterm" name="id2722810"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_added
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *objects);</pre>
+<p>
+Notifies all query listeners of the addition of a list of objects.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>objects</code></em> :</span></td><td> List of objects that have been added.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596388"></a><h3><a name="e-data-cal-view-notify-objects-added-1"></a>e_data_cal_view_notify_objects_added_1 ()</h3><a class="indexterm" name="id2596399"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_added_1
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);</pre><p>
-Notifies all the query listeners of the addition of a single object.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>objects</code></em>&#160;:</span></p></td>
+<td> List of objects that have been added.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722884"></a><h3>
+<a name="e-data-cal-view-notify-objects-added-1"></a>e_data_cal_view_notify_objects_added_1 ()</h3>
+<a class="indexterm" name="id2722898"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_added_1
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);</pre>
+<p>
+Notifies all the query listeners of the addition of a single object.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>object</code></em> :</span></td><td> The object that has been added.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596458"></a><h3><a name="e-data-cal-view-notify-objects-modified"></a>e_data_cal_view_notify_objects_modified ()</h3><a class="indexterm" name="id2596470"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_modified
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *objects);</pre><p>
-Notifies all query listeners of the modification of a list of objects.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> The object that has been added.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2722972"></a><h3>
+<a name="e-data-cal-view-notify-objects-modified"></a>e_data_cal_view_notify_objects_modified ()</h3>
+<a class="indexterm" name="id2722986"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_modified
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *objects);</pre>
+<p>
+Notifies all query listeners of the modification of a list of objects.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>objects</code></em> :</span></td><td> List of modified objects.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596527"></a><h3><a name="e-data-cal-view-notify-objects-modified-1"></a>e_data_cal_view_notify_objects_modified_1 ()</h3><a class="indexterm" name="id2596540"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_modified_1
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *object);</pre><p>
-Notifies all query listeners of the modification of a single object.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>objects</code></em>&#160;:</span></p></td>
+<td> List of modified objects.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2723060"></a><h3>
+<a name="e-data-cal-view-notify-objects-modified-1"></a>e_data_cal_view_notify_objects_modified_1 ()</h3>
+<a class="indexterm" name="id2723074"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_modified_1
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *object);</pre>
+<p>
+Notifies all query listeners of the modification of a single object.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>object</code></em> :</span></td><td> The modified object.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596597"></a><h3><a name="e-data-cal-view-notify-objects-removed"></a>e_data_cal_view_notify_objects_removed ()</h3><a class="indexterm" name="id2596609"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_removed
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const GList *uids);</pre><p>
-Notifies all query listener of the removal of a single object.</p><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> The modified object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2723147"></a><h3>
+<a name="e-data-cal-view-notify-objects-removed"></a>e_data_cal_view_notify_objects_removed ()</h3>
+<a class="indexterm" name="id2723161"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_removed
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids);</pre>
+<p>
+Notifies all query listener of the removal of a single object.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>uids</code></em> :</span></td><td>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em>&#160;:</span></p></td>
+<td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2596666"></a><h3><a name="e-data-cal-view-notify-objects-removed-1"></a>e_data_cal_view_notify_objects_removed_1 ()</h3><a class="indexterm" name="id2596678"></a><pre class="programlisting">void        e_data_cal_view_notify_objects_removed_1
-                                            (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *uid);</pre><p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2723235"></a><h3>
+<a name="e-data-cal-view-notify-objects-removed-1"></a>e_data_cal_view_notify_objects_removed_1 ()</h3>
+<a class="indexterm" name="id2723248"></a><pre class="programlisting">void                e_data_cal_view_notify_objects_removed_1
+                                                        (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const <a
+href="/usr/share/gtk-doc/html/libecal/ECalComponent.html#ECalComponentId"
+>ECalComponentId</a> *id);</pre>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td>
-</td></tr><tr><td><span class="term"><em class="parameter"><code>uid</code></em> :</span></td><td>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em>&#160;:</span></p></td>
+<td>
 
 
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2600342"></a><h3><a name="e-data-cal-view-notify-progress"></a>e_data_cal_view_notify_progress ()</h3><a class="indexterm" name="id2600353"></a><pre class="programlisting">void        e_data_cal_view_notify_progress (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             const char *message,
-                                             int percent);</pre><p>
-Notifies all query listeners of progress messages.</p><p>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2723318"></a><h3>
+<a name="e-data-cal-view-notify-progress"></a>e_data_cal_view_notify_progress ()</h3>
+<a class="indexterm" name="id2723331"></a><pre class="programlisting">void                e_data_cal_view_notify_progress     (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         const char *message,
+                                                         int percent);</pre>
+<p>
+Notifies all query listeners of progress messages.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>message</code></em> :</span></td><td> Progress message to send to listeners.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>percent</code></em> :</span></td><td> Percentage completed.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2600427"></a><h3><a name="e-data-cal-view-notify-done"></a>e_data_cal_view_notify_done ()</h3><a class="indexterm" name="id2600436"></a><pre class="programlisting">void        e_data_cal_view_notify_done     (<a href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
-                                             GNOME_Evolution_Calendar_CallStatus status);</pre><p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em>&#160;:</span></p></td>
+<td> Progress message to send to listeners.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>percent</code></em>&#160;:</span></p></td>
+<td> Percentage completed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2723425"></a><h3>
+<a name="e-data-cal-view-notify-done"></a>e_data_cal_view_notify_done ()</h3>
+<a class="indexterm" name="id2723437"></a><pre class="programlisting">void                e_data_cal_view_notify_done         (<a class="link" href="EDataCalView.html" title="EDataCalView">EDataCalView</a> *query,
+                                                         GNOME_Evolution_Calendar_CallStatus status);</pre>
+<p>
 Notifies all query listeners of the completion of the query, including a
-status code.</p><p>
+status code.</p>
+<p>
 
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><em class="parameter"><code>query</code></em> :</span></td><td> A query object.
-</td></tr><tr><td><span class="term"><em class="parameter"><code>status</code></em> :</span></td><td> Query completion status code.
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="libedata-cal-EDataCalFactory.html"><b>&lt;&lt; EDataCalFactory</b></a></td><td align="right"><a accesskey="n" href="EDataCal.html"><b>EDataCal &gt;&gt;</b></a></td></tr></table></body></html>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em>&#160;:</span></p></td>
+<td> A query object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em>&#160;:</span></p></td>
+<td> Query completion status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>

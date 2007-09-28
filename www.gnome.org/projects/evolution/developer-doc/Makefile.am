@@ -1,4 +1,4 @@
-SUBDIRS = eplugin libebook libecal libedata-cal
+SUBDIRS = eplugin libebook libedata-book libecal libedata-cal
 
 page_SCRIPTS=
 

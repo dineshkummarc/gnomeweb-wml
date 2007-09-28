@@ -1,0 +1,1337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>ECalBackendSync</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.73.2">
+<link rel="start" href="index.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="up" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="prev" href="ECalBackendSExp.html" title="ECalBackendSExp">
+<link rel="next" href="libedata-cal-e-cal-backend-util.html" title="e-cal-backend-util">
+<meta name="generator" content="GTK-Doc V1.8 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution API Reference: libedata-cal, the Calendar Backend Library">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ECalBackendSExp.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution API Reference: libedata-cal, the Calendar Backend Library</th>
+<td><a accesskey="n" href="libedata-cal-e-cal-backend-util.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2691953" class="shortcut">Top</a>
+                  &#160;|&#160;
+                  <a href="#id2714645" class="shortcut">Description</a>
+                  &#160;|&#160;
+                  <a href="#id2714619" class="shortcut">Object Hierarchy</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="ECalBackendSync"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2>
+<a name="id2691953"></a><span class="refentrytitle">ECalBackendSync</span>
+</h2>
+<p>ECalBackendSync &#8212; Base class for synchronous backends.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Synopsis</h2>
+<pre class="synopsis">
+
+
+
+                    <a class="link" href="ECalBackendSync.html#ECalBackendSync-struct">ECalBackendSync</a>;
+typedef             <a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a>;
+<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a>*    (<a class="link" href="ECalBackendSync.html#ECalBackendSyncFactoryFn">*ECalBackendSyncFactoryFn</a>)         (void);
+void                <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-set-lock">e_cal_backend_sync_set_lock</a>         (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> lock);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-is-read-only">e_cal_backend_sync_is_read_only</a>   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> *read_only);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-cal-address">e_cal_backend_sync_get_cal_address</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **address);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-alarm-email-address">e_cal_backend_sync_get_alarm_email_address</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **address);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-ldap-attribute">e_cal_backend_sync_get_ldap_attribute</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **attribute);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-static-capabilities">e_cal_backend_sync_get_static_capabilities</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **capabiliites);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-open">e_cal_backend_sync_open</a>           (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         const char *username,
+                                                         const char *password);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-remove">e_cal_backend_sync_remove</a>         (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-create-object">e_cal_backend_sync_create_object</a>  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **calobj,
+                                                         char **uid);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-modify-object">e_cal_backend_sync_modify_object</a>  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj,
+                                                         <a
+href="/usr/share/gtk-doc/html/libecal/libecal-e-cal-util.html#CalObjModType"
+>CalObjModType</a> mod,
+                                                         char **old_object,
+                                                         char **new_object);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-remove-object">e_cal_backend_sync_remove_object</a>  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         <a
+href="/usr/share/gtk-doc/html/libecal/libecal-e-cal-util.html#CalObjModType"
+>CalObjModType</a> mod,
+                                                         char **old_object,
+                                                         char **object);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-attachment-list">e_cal_backend_sync_get_attachment_list</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> **attachments);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-discard-alarm">e_cal_backend_sync_discard_alarm</a>  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *auid);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-receive-objects">e_cal_backend_sync_receive_objects</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-send-objects">e_cal_backend_sync_send_objects</a>   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **users,
+                                                         char **modified_calobj);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-default-object">e_cal_backend_sync_get_default_object</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **object);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-object">e_cal_backend_sync_get_object</a>     (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         char **object);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-object-list">e_cal_backend_sync_get_object_list</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *sexp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **objects);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-timezone">e_cal_backend_sync_get_timezone</a>   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzid,
+                                                         char **object);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-add-timezone">e_cal_backend_sync_add_timezone</a>   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzobj);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-set-default-timezone">e_cal_backend_sync_set_default_timezone</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzid);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-set-default-zone">e_cal_backend_sync_set_default_zone</a>
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzobj);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-changes">e_cal_backend_sync_get_changes</a>    (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *change_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **adds,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **modifies,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **deletes);
+<a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> <a class="link" href="ECalBackendSync.html#e-cal-backend-sync-get-free-busy">e_cal_backend_sync_get_free_busy</a>  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *users,
+                                                         time_t start,
+                                                         time_t end,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **freebusy);
+
+
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2714619"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="ECalBackend.html" title="ECalBackend">ECalBackend</a>
+         +----ECalBackendSync
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2714645"></a><h2>Description</h2>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id2714659"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id2714670"></a><h3>
+<a name="ECalBackendSync-struct"></a>ECalBackendSync</h3>
+<a class="indexterm" name="id2714681"></a><pre class="programlisting">typedef struct _ECalBackendSync ECalBackendSync;</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714698"></a><h3>
+<a name="ECalBackendSyncStatus"></a>ECalBackendSyncStatus</h3>
+<a class="indexterm" name="id2714709"></a><pre class="programlisting">typedef GNOME_Evolution_Calendar_CallStatus ECalBackendSyncStatus;
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714725"></a><h3>
+<a name="ECalBackendSyncFactoryFn"></a>ECalBackendSyncFactoryFn ()</h3>
+<a class="indexterm" name="id2714736"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a>*    (*ECalBackendSyncFactoryFn)         (void);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714773"></a><h3>
+<a name="e-cal-backend-sync-set-lock"></a>e_cal_backend_sync_set_lock ()</h3>
+<a class="indexterm" name="id2714785"></a><pre class="programlisting">void                e_cal_backend_sync_set_lock         (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> lock);</pre>
+<p>
+Sets the lock mode on the ECalBackendSync object. If TRUE, the backend
+will create a locking mutex for every operation, so that only one can
+happen at a time. If FALSE, no lock would be done and many operations
+can happen at the same time.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lock</code></em>&#160;:</span></p></td>
+<td> Lock mode.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714860"></a><h3>
+<a name="e-cal-backend-sync-is-read-only"></a>e_cal_backend_sync_is_read_only ()</h3>
+<a class="indexterm" name="id2714873"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_is_read_only   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> *read_only);</pre>
+<p>
+Calls the is_read_only method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>read_only</code></em>&#160;:</span></p></td>
+<td> Return value for read-only status.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2714978"></a><h3>
+<a name="e-cal-backend-sync-get-cal-address"></a>e_cal_backend_sync_get_cal_address ()</h3>
+<a class="indexterm" name="id2714992"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_cal_address
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **address);</pre>
+<p>
+Calls the get_cal_address method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>address</code></em>&#160;:</span></p></td>
+<td> Return value for the address.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715096"></a><h3>
+<a name="e-cal-backend-sync-get-alarm-email-address"></a>e_cal_backend_sync_get_alarm_email_address ()</h3>
+<a class="indexterm" name="id2715111"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_alarm_email_address
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **address);</pre>
+<p>
+Calls the get_alarm_email_address method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>address</code></em>&#160;:</span></p></td>
+<td> Return value for the address.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715216"></a><h3>
+<a name="e-cal-backend-sync-get-ldap-attribute"></a>e_cal_backend_sync_get_ldap_attribute ()</h3>
+<a class="indexterm" name="id2715230"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_ldap_attribute
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **attribute);</pre>
+<p>
+Calls the get_ldap_attribute method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>attribute</code></em>&#160;:</span></p></td>
+<td> Return value for LDAP attribute.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715335"></a><h3>
+<a name="e-cal-backend-sync-get-static-capabilities"></a>e_cal_backend_sync_get_static_capabilities ()</h3>
+<a class="indexterm" name="id2715350"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_static_capabilities
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **capabiliites);</pre>
+<p>
+Calls the get_capabilities method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>capabiliites</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2696230"></a><h3>
+<a name="e-cal-backend-sync-open"></a>e_cal_backend_sync_open ()</h3>
+<a class="indexterm" name="id2715446"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_open           (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         const char *username,
+                                                         const char *password);</pre>
+<p>
+Calls the open method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em>&#160;:</span></p></td>
+<td> Whether to open the calendar if and only if it already exists
+or just create it when it does not exist.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>username</code></em>&#160;:</span></p></td>
+<td> User name to use for authentication.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>password</code></em>&#160;:</span></p></td>
+<td> Password to use for authentication.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715581"></a><h3>
+<a name="e-cal-backend-sync-remove"></a>e_cal_backend_sync_remove ()</h3>
+<a class="indexterm" name="id2715592"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_remove         (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal);</pre>
+<p>
+Calls the remove method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715666"></a><h3>
+<a name="e-cal-backend-sync-create-object"></a>e_cal_backend_sync_create_object ()</h3>
+<a class="indexterm" name="id2715679"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_create_object  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **calobj,
+                                                         char **uid);</pre>
+<p>
+Calls the create_object method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>calobj</code></em>&#160;:</span></p></td>
+<td> The object to be added.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em>&#160;:</span></p></td>
+<td> Placeholder for server-generated UID.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715793"></a><h3>
+<a name="e-cal-backend-sync-modify-object"></a>e_cal_backend_sync_modify_object ()</h3>
+<a class="indexterm" name="id2715805"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_modify_object  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj,
+                                                         <a
+href="/usr/share/gtk-doc/html/libecal/libecal-e-cal-util.html#CalObjModType"
+>CalObjModType</a> mod,
+                                                         char **old_object,
+                                                         char **new_object);</pre>
+<p>
+Calls the modify_object method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>calobj</code></em>&#160;:</span></p></td>
+<td> Object to be modified.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mod</code></em>&#160;:</span></p></td>
+<td> Type of modification to be done.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>old_object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returning the old object as it was stored on the
+backend.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>new_object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returning the new object as it has been stored
+on the backend.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2715960"></a><h3>
+<a name="e-cal-backend-sync-remove-object"></a>e_cal_backend_sync_remove_object ()</h3>
+<a class="indexterm" name="id2715973"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_remove_object  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         <a
+href="/usr/share/gtk-doc/html/libecal/libecal-e-cal-util.html#CalObjModType"
+>CalObjModType</a> mod,
+                                                         char **old_object,
+                                                         char **object);</pre>
+<p>
+Calls the remove_object method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em>&#160;:</span></p></td>
+<td> UID of the object to remove.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rid</code></em>&#160;:</span></p></td>
+<td> Recurrence ID of the instance to remove, or NULL if removing the
+whole object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mod</code></em>&#160;:</span></p></td>
+<td> Type of removal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>old_object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returning the old object as it was stored on the
+backend.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returning the object after it has been modified (when
+removing individual instances). If removing the whole object, this will be
+NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716149"></a><h3>
+<a name="e-cal-backend-sync-get-attachment-list"></a>e_cal_backend_sync_get_attachment_list ()</h3>
+<a class="indexterm" name="id2716162"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_attachment_list
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> **attachments);</pre>
+<p>
+Calls the get_attachment_list method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em>&#160;:</span></p></td>
+<td> Unique id of the calendar object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rid</code></em>&#160;:</span></p></td>
+<td> Recurrence id of the calendar object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>attachments</code></em>&#160;:</span></p></td>
+<td> Placeholder for list of returned attachment uris.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716298"></a><h3>
+<a name="e-cal-backend-sync-discard-alarm"></a>e_cal_backend_sync_discard_alarm ()</h3>
+<a class="indexterm" name="id2716310"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_discard_alarm  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *auid);</pre>
+<p>
+Calls the discard_alarm method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em>&#160;:</span></p></td>
+<td> UID of the object to discard the alarm from.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auid</code></em>&#160;:</span></p></td>
+<td> UID of the alarm to be discarded.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716425"></a><h3>
+<a name="e-cal-backend-sync-receive-objects"></a>e_cal_backend_sync_receive_objects ()</h3>
+<a class="indexterm" name="id2716439"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_receive_objects
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj);</pre>
+<p>
+Calls the receive_objects method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>calobj</code></em>&#160;:</span></p></td>
+<td> iCalendar object to receive.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716534"></a><h3>
+<a name="e-cal-backend-sync-send-objects"></a>e_cal_backend_sync_send_objects ()</h3>
+<a class="indexterm" name="id2716546"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_send_objects   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *calobj,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **users,
+                                                         char **modified_calobj);</pre>
+<p>
+Calls the send_objects method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>calobj</code></em>&#160;:</span></p></td>
+<td> The iCalendar object to send.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>users</code></em>&#160;:</span></p></td>
+<td> List of users to send notifications to.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>modified_calobj</code></em>&#160;:</span></p></td>
+<td> Placeholder for the iCalendar object after being modified.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716681"></a><h3>
+<a name="e-cal-backend-sync-get-default-object"></a>e_cal_backend_sync_get_default_object ()</h3>
+<a class="indexterm" name="id2716694"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_default_object
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         char **object);</pre>
+<p>
+Calls the get_default_object method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returned object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716790"></a><h3>
+<a name="e-cal-backend-sync-get-object"></a>e_cal_backend_sync_get_object ()</h3>
+<a class="indexterm" name="id2716802"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_object     (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *uid,
+                                                         const char *rid,
+                                                         char **object);</pre>
+<p>
+Calls the get_object method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em>&#160;:</span></p></td>
+<td> UID of the object to get.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>rid</code></em>&#160;:</span></p></td>
+<td> Recurrence ID of the specific instance to get, or NULL if getting the
+master object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> Placeholder for returned object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2716936"></a><h3>
+<a name="e-cal-backend-sync-get-object-list"></a>e_cal_backend_sync_get_object_list ()</h3>
+<a class="indexterm" name="id2716950"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_object_list
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *sexp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **objects);</pre>
+<p>
+Calls the get_object_list method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sexp</code></em>&#160;:</span></p></td>
+<td> Search query.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>objects</code></em>&#160;:</span></p></td>
+<td> Placeholder for list of returned objects.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717064"></a><h3>
+<a name="e-cal-backend-sync-get-timezone"></a>e_cal_backend_sync_get_timezone ()</h3>
+<a class="indexterm" name="id2717076"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_timezone   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzid,
+                                                         char **object);</pre>
+<p>
+Calls the get_timezone method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tzid</code></em>&#160;:</span></p></td>
+<td> ID of the timezone to retrieve.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em>&#160;:</span></p></td>
+<td> Placeholder for the returned timezone.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717191"></a><h3>
+<a name="e-cal-backend-sync-add-timezone"></a>e_cal_backend_sync_add_timezone ()</h3>
+<a class="indexterm" name="id2717203"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_add_timezone   (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzobj);</pre>
+<p>
+Calls the add_timezone method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tzobj</code></em>&#160;:</span></p></td>
+<td> VTIMEZONE object to be added.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717298"></a><h3>
+<a name="e-cal-backend-sync-set-default-timezone"></a>e_cal_backend_sync_set_default_timezone ()</h3>
+<a class="indexterm" name="id2717311"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_set_default_timezone
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzid);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tzid</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717401"></a><h3>
+<a name="e-cal-backend-sync-set-default-zone"></a>e_cal_backend_sync_set_default_zone ()</h3>
+<a class="indexterm" name="id2717414"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_set_default_zone
+                                                        (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *tzobj);</pre>
+<p>
+Calls the set_default_timezone method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tzobj</code></em>&#160;:</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717509"></a><h3>
+<a name="e-cal-backend-sync-get-changes"></a>e_cal_backend_sync_get_changes ()</h3>
+<a class="indexterm" name="id2717521"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_changes    (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         const char *change_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **adds,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **modifies,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **deletes);</pre>
+<p>
+Calls the get_changes method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>change_id</code></em>&#160;:</span></p></td>
+<td> ID of the change to use as base.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>adds</code></em>&#160;:</span></p></td>
+<td> Placeholder for list of additions.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>modifies</code></em>&#160;:</span></p></td>
+<td> Placeholder for list of modifications.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>deletes</code></em>&#160;:</span></p></td>
+<td> Placeholder for list of deletions.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2717676"></a><h3>
+<a name="e-cal-backend-sync-get-free-busy"></a>e_cal_backend_sync_get_free_busy ()</h3>
+<a class="indexterm" name="id2717688"></a><pre class="programlisting"><a class="link" href="ECalBackendSync.html#ECalBackendSyncStatus">ECalBackendSyncStatus</a> e_cal_backend_sync_get_free_busy  (<a class="link" href="ECalBackendSync.html" title="ECalBackendSync">ECalBackendSync</a> *backend,
+                                                         <a class="link" href="EDataCal.html" title="EDataCal">EDataCal</a> *cal,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *users,
+                                                         time_t start,
+                                                         time_t end,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **freebusy);</pre>
+<p>
+Calls the get_free_busy method on the given backend.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em>&#160;:</span></p></td>
+<td> An ECalBackendSync object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cal</code></em>&#160;:</span></p></td>
+<td> An EDataCal object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>users</code></em>&#160;:</span></p></td>
+<td> List of users to get F/B info from.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>start</code></em>&#160;:</span></p></td>
+<td> Time range start.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>end</code></em>&#160;:</span></p></td>
+<td> Time range end.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>freebusy</code></em>&#160;:</span></p></td>
+<td> Placeholder for F/B information.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></p></td>
+<td> Status code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</body>
+</html>
