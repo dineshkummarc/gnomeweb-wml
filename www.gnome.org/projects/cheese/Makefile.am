@@ -6,9 +6,8 @@ mrproper:
 	rm -rf *;
 
 page_SCRIPTS= \
-	index.shtml \
+	index.html \
 	screenshots.html \
-	appendix.shtml \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/gnome
