@@ -49,7 +49,8 @@ SUBDIRS = \
 	hipo			\
 	brasero			\
 	gnome-scan		\
-	vinagre
+	vinagre		\
+	cheese
 
 urlpath = /projects
 
