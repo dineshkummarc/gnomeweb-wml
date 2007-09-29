@@ -11,7 +11,7 @@ page_SCRIPTS= \
 	screenshots.html \
 	$(NULL)
 
-themedir=$(pagedir)/data/themes/gnome
+themedir=$(pagedir)/data/themes/cheese
 theme_DATA = \
 	data/themes/cheese/document.all.css \
 	data/themes/cheese/frontpage.css \
