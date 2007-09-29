@@ -21,9 +21,9 @@ theme_DATA = \
 
 themeimgdir = $(themedir)/images
 themeimg_DATA = \
-	data/themes/gnome/images/title.png \
-	data/themes/gnome/images/gnome.png \
-	data/themes/gnome/images/top-bg.png \
+	data/themes/cheese/images/title.png \
+	data/themes/cheese/images/gnome.png \
+	data/themes/cheese/images/top-bg.png \
 	$(NULL)
 
 screenshotsdir = $(pagedir)/data/screenshots
