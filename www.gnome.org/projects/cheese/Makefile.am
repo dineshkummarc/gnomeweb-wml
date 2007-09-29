@@ -7,16 +7,16 @@ mrproper:
 
 page_SCRIPTS= \
 	index.html \
+	download.html \
 	screenshots.html \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/gnome
 theme_DATA = \
-	data/themes/gnome/screenshots.screen.css \
-	data/themes/gnome/document.all.css \
-	data/themes/gnome/frontpage.css \
-	data/themes/gnome/document.print.css \
-	data/themes/gnome/document.screen.css \
+	data/themes/cheese/document.all.css \
+	data/themes/cheese/frontpage.css \
+	data/themes/cheese/document.print.css \
+	data/themes/cheese/document.screen.css \
 	$(NULL)
 
 themeimgdir = $(themedir)/images
@@ -42,6 +42,14 @@ imagesdir = $(pagedir)/data/images
 images_DATA =\
 	data/images/cheese-big.png \
 	data/images/gnome-favicon.png \
+	data/images/package-x-generic.png \
+	data/images/preferences-desktop-wallpaper.png \
+  data/images/internet-group-chat.png \
+  data/images/system-users.png \
+  data/images/video-x-generic.png \
+  data/images/applications-development.png \
+  data/images/preferences-desktop-assistive-technology.png \
+  data/images/package-x-generic.png \
 	$(NULL)
 
 include $(top_srcdir)/rules.common
