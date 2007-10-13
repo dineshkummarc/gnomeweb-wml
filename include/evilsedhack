@@ -26,6 +26,16 @@ HEADING=$(sed -e "s#\(</\?h1[^>]*>\)#\n\1\n#g" $PAGE | \
 sed -e "1,/<h1>/d" \
 	-e "/<\/h1>/,\$d")
 
+## TABS
+## FIXME: Dynamic 'selected' tab switch
+TABS='
+          <li id="portaltab-root" class="selected"><a href="/"><span>Home</span></a></li>
+          <li><a href="/about/"><span>About</span></a></li>
+          <li><a href="/start/stable/"><span>Download</span></a></li>
+          <li><a href="/support/"><span>Support</span></a></li>
+          <li><a href="/community/"><span>Contribute</span></a></li>
+          <li><a href="/contact/"><span>Contact</span></a></li>'
+
 ## END OF <HEAD> AND HEADER
 cat <<HEAD
 </head>
@@ -58,22 +68,16 @@ cat <<HEAD
     </ul>
     <div id="header">
       <h1>$HEADING</h1>
-      <!--
       <div id="tabs">
         <ul id="portal-globalnav">
-          <li id="portaltab-root" class="selected">
-            <a href="/"><span>Home</span></a>
-          </li>
-          <li><a href=""><span></span></a></li>
-          <li><a href=""><span></span></a></li>
+$TABS
         </ul>
       </div> <!-- end of #tabs -->
-      -->
     </div> <!-- end of #header -->
   </div>
 <!-- end site header -->
 
-  <div class="body">
+  <div id="body">
     <div id="content">
 HEAD
 
@@ -85,14 +89,14 @@ sed -e "1,/<body>/d" \
 
 ## END OF CONTENT AND FOOTER
 cat <<FOOT
-  </div> <!-- end of content -->
+  </div> <!-- end of div#content -->
 
   <div id="footer">
     Copyright &copy; 2005-2007 <a href="http://www.gnome.org/">The GNOME Project</a>.<br />
     <a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>. Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
   </div>
 
-  </div> <!-- end of div.body -->
+  </div> <!-- end of div#body -->
 </body>
 </html>
 FOOT
