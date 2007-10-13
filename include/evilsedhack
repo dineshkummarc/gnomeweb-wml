@@ -3,91 +3,96 @@ PAGE=$1
 ROOT=$2
 URLPATH=$3
 
-sed "s,<head>,<head><link rel=\"stylesheet\" type=\"text/css\" href=\"/default.css\" /><link rel=\"icon\" type=\"image/png\" href=\"/img/logo/foot-16.png\" />,i;s,<body[^>]*>,<body><div id=\"body\">,i;/<\/body>/,//d" $PAGE
+## we use two seds in these operations so the second
+## instance operates on the output of the first, ugh
 
-cat <<-FOOT
-</div>
+cat <<HTML
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <link href="css/layout.css" rel="stylesheet" type="text/css" media="screen">
+  <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
+  <link rel="icon" type="image/png" href="http://www.gnome.org/img/logo/foot-16.png">
+  <link rel="SHORTCUT ICON" type="image/png" href="http://www.gnome.org/img/logo/foot-16.png">
+HTML
 
-<div id="sidebar">
-	<p class="section">Users</p>
-	<ul>
-		<li><b><a href="/about/">What is GNOME?</a></b></li>
-		<li><a href="/start/stable/">Download</a></li>
-		<!--<li><a href="/start/">Get Involved!</a></li>-->
-		<li><a href="http://www.gnomedesktop.org/">Community News</a></li>
-		<li><a href="/softwaremap/">Software Map</a></li>
-		<li><a href="http://foundation.gnome.org/">Foundation</a></li>
-		<li><a href="/press/">Press</a></li>
-		<li><a href="/contact/">Contact</a></li>
-	</ul>
-	
-	<p class="section">Developers</p>
-	<ul>
-		<li><a href="http://developer.gnome.org/">Developer Site</a></li>
-		<li><a href="http://mail.gnome.org/">Mailing Lists</a></li>
-		<li><a href="http://bugzilla.gnome.org/">Bugzilla</a></li>
-		<li><a href="http://svn.gnome.org/">Subversion</a></li>
-	</ul>
-</div>
+## CONTENTS OF <HEAD>
+sed -e "s#\(</\?\(head\|body\)[^>]*>\)#\n\1\n#g" $PAGE | \
+sed -e "1,/<head>/d" \
+	-e "/<\/head>/,\$d"
 
-<div id="hdr">
-	<div id="logo"><a href="/"><img src="/img/spacer" alt="Home" /></a></div>
-	<div id="banner"><img src="/img/spacer" alt="" /></div>
-	<p class="none"></p>
-	<div id="hdrNav">
-FOOT
+## SUCK OUT H1
+HEADING=$(sed -e "s#\(</\?h1[^>]*>\)#\n\1\n#g" $PAGE | \
+sed -e "1,/<h1>/d" \
+	-e "/<\/h1>/,\$d")
 
-LINKS='
-		<a href="/about/">About GNOME</a> &middot;
-		<a href="/start/stable/">Download</a> &middot;
-		<a href="/support/">Support</a> &middot;
-		<a href="/community/">Community</a> &middot;
-		<a href="http://developer.gnome.org/">Developers</a> &middot;
-		<a href="http://foundation.gnome.org/">Foundation</a> &middot;
-		<a href="/contact/">Contact</a>
-'
+## END OF <HEAD> AND HEADER
+cat <<HEAD
+</head>
 
+<body>
+  <!-- site header -->
+  <div id="page">
+    <ul id="general">
+      <li id="siteaction-gnome_home" class="home">
+        <a href="http://www.gnome.org/" title="Home">Home</a>
+      </li>
+      <li id="siteaction-gnome_news">
+        <a href="http://news.gnome.org/" title="News">News</a>
+      </li>
+      <li id="siteaction-gnome_projects">
+        <a href="http://www.gnome.org/projects/" title="Projects">Projects</a>
+      </li>
+      <li id="siteaction-gnome_art">
+        <a href="http://art.gnome.org/" title="Art">Art</a>
+      </li>
+      <li id="siteaction-gnome_support">
+        <a href="http://www.gnome.org/support/" title="Support">Support</a>
+      </li>
+      <li id="siteaction-gnome_development">
+        <a href="http://developer.gnome.org/" title="Development">Development</a>
+      </li>
+      <li id="siteaction-gnome_community">
+        <a href="http://www.gnome.org/community/" title="Community">Community</a>
+      </li>
+    </ul>
+    <div id="header">
+      <h1>$HEADING</h1>
+      <!--
+      <div id="tabs">
+        <ul id="portal-globalnav">
+          <li id="portaltab-root" class="selected">
+            <a href="/"><span>Home</span></a>
+          </li>
+          <li><a href=""><span></span></a></li>
+          <li><a href=""><span></span></a></li>
+        </ul>
+      </div> <!-- end of #tabs -->
+      -->
+    </div> <!-- end of #header -->
+  </div>
+<!-- end site header -->
 
-echo $URLPATH | grep -E 'support|learn|tour' > /dev/null
-SUPPORT=$?
-echo $URLPATH | grep -E 'start' > /dev/null
-DOWNLOAD=$?
-echo $URLPATH | grep -E 'contact|press' > /dev/null
-CONTACT=$?
-echo $URLPATH | grep -E 'about' > /dev/null
-ABOUT=$?
-echo $URLPATH | grep -E 'community' > /dev/null
-COMMUNITY=$?
+  <div class="body">
+    <div id="content">
+HEAD
 
+## PAGE CONTENT
+sed -e "s#\(</\?\(head\|body\|h1\)[^>]*>\)#\n\1\n#g" $PAGE | \
+sed -e "1,/<body>/d" \
+	-e "/<h1>/,/<\/h1>/d" \
+	-e "/<\/body>/,//d"
 
+## END OF CONTENT AND FOOTER
+cat <<FOOT
+  </div> <!-- end of content -->
 
-if [ $SUPPORT == 0 ]; then
-	LINKS=`echo $LINKS | sed 's/Support/<b>Support<\/b>/'`
-elif [ $DOWNLOAD == 0 ]; then
-	LINKS=`echo $LINKS | sed 's/Download/<b>Download<\/b>/'`
-elif [ $CONTACT == 0 ]; then
-	LINKS=`echo $LINKS | sed 's/Contact/<b>Contact<\/b>/'`
-elif [ $ABOUT == 0 ]; then
-	LINKS=`echo $LINKS | sed 's/About GNOME/<b>About GNOME<\/b>/'`
-elif [ $COMMUNITY == 0 ]; then
-	LINKS=`echo $LINKS | sed 's/Community/<b>Community<\/b>/'`
-fi
+  <div id="footer">
+    Copyright &copy; 2005-2007 <a href="http://www.gnome.org/">The GNOME Project</a>.<br />
+    <a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>. Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
+  </div>
 
-echo $LINKS
-
-cat <<-FOOT
-	</div>
-</div>
-
-<div id="copyright">
-Copyright &copy; 2007, <a href="http://www.gnome.org/">The GNOME Project</a>.<br />
-<a href="http://validator.w3.org/check/referer">Optimised</a> for
-<a href="http://www.w3.org/">standards</a>.
-Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
-</div>
-
+  </div> <!-- end of div.body -->
 </body>
-
 </html>
 FOOT
-
