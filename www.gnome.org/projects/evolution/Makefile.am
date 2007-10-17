@@ -6,6 +6,7 @@ page_SCRIPTS =
 
 page_DATA =			\
 	go.css \
+	irclog.css \
 	pngbehavior.htc \
 	head.shtml \
 	foot.shtml \
