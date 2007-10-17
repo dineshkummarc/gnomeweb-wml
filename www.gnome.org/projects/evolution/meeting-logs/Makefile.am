@@ -5,6 +5,7 @@ urlpath=/projects/evolution/meeting-logs
 page_SCRIPTS=
 
 page_DATA =			\
+	2007-10-17.shtml	\
 	2007-10-10.shtml	\
 	2007-10-03.shtml	\
 	2007-09-26.shtml	\
@@ -28,6 +29,7 @@ page_DATA =			\
 	2005-06-29.shtml	\
 	2005-07-06.shtml	\
 	2005-07-13.shtml	\
-	2005-08-10.shtml
+	2005-08-10.shtml	\
+	irclog.css
 
 include $(top_srcdir)/rules.common
