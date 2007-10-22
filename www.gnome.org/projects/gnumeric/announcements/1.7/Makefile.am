@@ -14,6 +14,7 @@ page_SCRIPTS= \
 	gnumeric-1.7.10.html \
 	gnumeric-1.7.11.html \
 	gnumeric-1.7.12.html \
+	gnumeric-1.7.13.html \
 	index.shtml
 
 include $(top_srcdir)/rules.common
