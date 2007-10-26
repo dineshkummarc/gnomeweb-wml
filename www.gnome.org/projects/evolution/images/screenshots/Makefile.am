@@ -1,4 +1,4 @@
-SUBDIRS= 1.4 1.5 2.0 2.4
+SUBDIRS= 1.4 1.5 2.0 2.4 2.12
 
 urlpath=/projects/evolution/images/screenshots
 
