@@ -33,6 +33,7 @@ page_DATA =			\
 	keys.shtml \
 	map.shtml \
 	patch.shtml \
+	previous.shtml \
 	releasenotes.shtml \
 	screenshots14.shtml \
 	screenshots15.shtml \
