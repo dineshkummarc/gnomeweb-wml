@@ -31,7 +31,6 @@ page_DATA =			\
 	hackfest-ui.shtml \
 	information.shtml \
 	keys.shtml \
-	map.shtml \
 	patch.shtml \
 	previous.shtml \
 	releasenotes.shtml \
