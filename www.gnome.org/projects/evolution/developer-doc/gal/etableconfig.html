@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableConfig</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableSortedVariable" HREF="etablesortedvariable.html"><LINK REL="NEXT" TITLE="Core ETable" HREF="e-table-core.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etablesortedvariable.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="e-table-core.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLECONFIG"></A>ETableConfig</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN9541"></A><H2>Name</H2>ETableConfig&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN9544"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+typedef             <A HREF="etableconfig.html">ETableConfig</A>;
+#define             <A HREF="etableconfig.html#E-TABLE-CONFIG-TYPE:CAPS">E_TABLE_CONFIG_TYPE</A>
+<GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          <A HREF="etableconfig.html#E-TABLE-CONFIG-NEW">e_table_config_new</A>                  (<A HREF="etablespecification.html">ETableSpecification</A> *spec,
+                                                         <A HREF="etablestate.html">ETableState</A> *state);
+<GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          <A HREF="etableconfig.html#E-TABLE-CONFIG-CONSTRUCT">e_table_config_construct</A>            (<A HREF="etableconfig.html">ETableConfig</A> *etco,
+                                                         <A HREF="etablespecification.html">ETableSpecification</A> *spec,
+                                                         <A HREF="etablestate.html">ETableState</A> *state);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9558"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>
+         +----<GTKDOCLINK HREF="GTKCONTAINER">GtkContainer</GTKDOCLINK>
+               +----<GTKDOCLINK HREF="GTKBIN">GtkBin</GTKDOCLINK>
+                     +----<GTKDOCLINK HREF="GTKWINDOW">GtkWindow</GTKDOCLINK>
+                           +----<GTKDOCLINK HREF="GNOMEDIALOG">GnomeDialog</GTKDOCLINK>
+                                 +----ETableConfig</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9567"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9570"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN9572"></A><H3><A NAME="ETABLECONFIG"></A>ETableConfig</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GnomeDialog base;
+
+	ETableSpecification *spec;
+	ETableState         *state;
+
+	GtkWidget *sort_label;
+	GtkWidget *group_label;
+
+	GtkWidget *sort_dialog;
+	GtkWidget *group_dialog;
+
+	int sorting_changed_id;
+	int grouping_changed_id;
+} ETableConfig;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9579"></A><H3><A NAME="E-TABLE-CONFIG-TYPE:CAPS"></A>E_TABLE_CONFIG_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_CONFIG_TYPE        (e_table_config_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9586"></A><H3><A NAME="E-TABLE-CONFIG-NEW"></A>e_table_config_new ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          e_table_config_new                  (<A HREF="etablespecification.html">ETableSpecification</A> *spec,
+                                                         <A HREF="etablestate.html">ETableState</A> *state);</PRE><P>Creates a new ETable config object.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9598"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">spec</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The specification for the columns to allow.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9603"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">state</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The current state of the configuration.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9608"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The config object.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9613"></A><H3><A NAME="E-TABLE-CONFIG-CONSTRUCT"></A>e_table_config_construct ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          e_table_config_construct            (<A HREF="etableconfig.html">ETableConfig</A> *etco,
+                                                         <A HREF="etablespecification.html">ETableSpecification</A> *spec,
+                                                         <A HREF="etablestate.html">ETableState</A> *state);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9625"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etco</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9630"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">spec</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9635"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">state</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9640"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etablesortedvariable.html"><B>&lt;&lt;&lt;&nbsp;ETableSortedVariable</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="e-table-core.html"><B>Core ETable&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

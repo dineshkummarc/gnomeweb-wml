@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>PixmapCombo</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="Combo Boxes and associated utilities" HREF="combo-boxes.html"><LINK REL="PREVIOUS" TITLE="GtkComboText" HREF="gtkcombotext.html"><LINK REL="NEXT" TITLE="ColorCombo" HREF="gal-colorcombo.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="gtkcombotext.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="combo-boxes.html"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="gal-colorcombo.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="PIXMAPCOMBO"></A>PixmapCombo</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN14851"></A><H2>Name</H2>PixmapCombo&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN14854"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+typedef             <A HREF="pixmapcombo.html">PixmapCombo</A>;
+typedef             <A HREF="pixmapcombo.html#PIXMAPCOMBOELEMENT">PixmapComboElement</A>;
+<GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          <A HREF="pixmapcombo.html#PIXMAP-COMBO-NEW">pixmap_combo_new</A>                    (<A HREF="pixmapcombo.html#PIXMAPCOMBOELEMENT">PixmapComboElement</A> const *elements,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> ncols,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> nrows);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="pixmapcombo.html#PIXMAP-COMBO-SELECT-PIXMAP">pixmap_combo_select_pixmap</A>          (<A HREF="pixmapcombo.html">PixmapCombo</A> *combo,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> index);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14868"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>
+         +----<GTKDOCLINK HREF="GTKCONTAINER">GtkContainer</GTKDOCLINK>
+               +----<GTKDOCLINK HREF="GTKBOX">GtkBox</GTKDOCLINK>
+                     +----<GTKDOCLINK HREF="GTKHBOX">GtkHBox</GTKDOCLINK>
+                           +----<GTKDOCLINK HREF="MYGTKCOMBOBOX">MyGtkComboBox</GTKDOCLINK>
+                                 +----PixmapCombo</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14877"></A><H2>Signals</H2><PRE CLASS="SYNOPSIS">&#13;  &quot;<A HREF="pixmapcombo.html#PIXMAPCOMBO-CHANGED">changed</A>&quot;                                        </PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14881"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14884"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN14886"></A><H3><A NAME="PIXMAPCOMBO"></A>PixmapCombo</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GtkComboBox     combo_box;
+
+	/* Static information */
+	PixmapComboElement const *elements;
+	int cols, rows;
+	int num_elements;
+
+	/* State info */
+	int last_index;
+
+	/* Interface elements */
+	GtkWidget    *combo_table, *preview_button;
+	GtkWidget    *preview_pixmap;
+	GtkTooltips  *tool_tip;
+	GnomePixmap **pixmaps;
+} PixmapCombo;</PRE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN14892"></A><H3><A NAME="PIXMAPCOMBOELEMENT"></A>PixmapComboElement</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	char const *untranslated_tooltip;
+	char **xpm_data;
+	int  index;
+} PixmapComboElement;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN14899"></A><H3><A NAME="PIXMAP-COMBO-NEW"></A>pixmap_combo_new ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GTKWIDGET">GtkWidget</GTKDOCLINK>*          pixmap_combo_new                    (<A HREF="pixmapcombo.html#PIXMAPCOMBOELEMENT">PixmapComboElement</A> const *elements,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> ncols,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> nrows);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14911"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">elements</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14916"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">ncols</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14921"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">nrows</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14926"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN14931"></A><H3><A NAME="PIXMAP-COMBO-SELECT-PIXMAP"></A>pixmap_combo_select_pixmap ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                pixmap_combo_select_pixmap          (<A HREF="pixmapcombo.html">PixmapCombo</A> *combo,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> index);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14942"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">combo</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14947"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">index</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14952"></A><H2>Signal Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN14954"></A><H3><A NAME="PIXMAPCOMBO-CHANGED"></A>The &quot;changed&quot; signal</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                user_function                      (<A HREF="pixmapcombo.html">PixmapCombo</A> *pixmapcombo,
+                                                        <GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>         arg1,
+                                                        <GTKDOCLINK HREF="GPOINTER">gpointer</GTKDOCLINK>     user_data)</PRE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="gtkcombotext.html"><B>&lt;&lt;&lt;&nbsp;GtkComboText</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="gal-colorcombo.html"><B>ColorCombo&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableClickToAdd</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableExtras" HREF="etableextras.html"><LINK REL="NEXT" TITLE="ETableModel" HREF="etablemodel.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etableextras.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etablemodel.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLECLICKTOADD"></A>ETableClickToAdd</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN7785"></A><H2>Name</H2>ETableClickToAdd&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN7788"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etableclicktoadd.html#E-TABLE-CLICK-TO-ADD-TYPE:CAPS">E_TABLE_CLICK_TO_ADD_TYPE</A>
+typedef             <A HREF="etableclicktoadd.html">ETableClickToAdd</A>;
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etableclicktoadd.html#E-TABLE-CLICK-TO-ADD-COMMIT">e_table_click_to_add_commit</A>         (<A HREF="etableclicktoadd.html">ETableClickToAdd</A> *etcta);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN7796"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GNOMECANVASITEM">GnomeCanvasItem</GTKDOCLINK>
+         +----<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK>
+               +----ETableClickToAdd</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN7802"></A><H2>Signals</H2><PRE CLASS="SYNOPSIS">&#13;  &quot;<A HREF="etableclicktoadd.html#ETABLECLICKTOADD-CURSOR-CHANGE">cursor-change</A>&quot;                                  </PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN7806"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN7809"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN7811"></A><H3><A NAME="E-TABLE-CLICK-TO-ADD-TYPE:CAPS"></A>E_TABLE_CLICK_TO_ADD_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_CLICK_TO_ADD_TYPE        (e_table_click_to_add_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN7818"></A><H3><A NAME="ETABLECLICKTOADD"></A>ETableClickToAdd</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GnomeCanvasGroup  parent;
+
+	ETableModel      *one;    /* The ETableOne. */
+
+	ETableModel      *model;  /* The backend model. */
+	ETableHeader     *eth;    /* This is just to give to the ETableItem. */
+
+	char             *message;
+
+	GnomeCanvasItem  *row;    /* If row is NULL, we're sitting with no data and a "Click here" message. */
+	GnomeCanvasItem  *text;   /* If text is NULL, row shouldn't be. */
+	GnomeCanvasItem  *rect;   /* What the heck.  Why not. */
+	
+	gdouble           width;
+	gdouble           height;
+
+	ETableSelectionModel *selection;
+} ETableClickToAdd;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN7825"></A><H3><A NAME="E-TABLE-CLICK-TO-ADD-COMMIT"></A>e_table_click_to_add_commit ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_click_to_add_commit         (<A HREF="etableclicktoadd.html">ETableClickToAdd</A> *etcta);</PRE><P>This routine commits the current thing being edited and returns to
+just displaying the click to add message.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7836"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etcta</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etableclicktoadd.html"><TT CLASS="LITERAL">ETableClickToAdd</TT></A> to commit.</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN7843"></A><H2>Signal Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN7845"></A><H3><A NAME="ETABLECLICKTOADD-CURSOR-CHANGE"></A>The &quot;cursor-change&quot; signal</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                user_function                      (<A HREF="etableclicktoadd.html">ETableClickToAdd</A> *etableclicktoadd,
+                                                        <GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>              arg1,
+                                                        <GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>              arg2,
+                                                        <GTKDOCLINK HREF="GPOINTER">gpointer</GTKDOCLINK>          user_data)</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7858"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etableclicktoadd</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>the object which received the signal.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7863"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">arg1</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7868"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">arg2</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7873"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">user_data</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>user data set when the signal handler was connected.</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etableextras.html"><B>&lt;&lt;&lt;&nbsp;ETableExtras</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etablemodel.html"><B>ETableModel&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

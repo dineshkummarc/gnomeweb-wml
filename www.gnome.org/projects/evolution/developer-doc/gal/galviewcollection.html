@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>GalViewCollection</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="View configuration" HREF="view-configurationt.html"><LINK REL="PREVIOUS" TITLE="GalView" HREF="galview.html"><LINK REL="NEXT" TITLE="GalDefineViewsModel" HREF="galdefineviewsmodel.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="galview.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="view-configurationt.html"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="galdefineviewsmodel.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="GALVIEWCOLLECTION"></A>GalViewCollection</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN13917"></A><H2>Name</H2>GalViewCollection&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN13920"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="galviewcollection.html#GAL-VIEW-COLLECTION-TYPE:CAPS">GAL_VIEW_COLLECTION_TYPE</A>
+typedef             <A HREF="galviewcollection.html">GalViewCollection</A>;
+<A HREF="galviewcollection.html">GalViewCollection</A>*  <A HREF="galviewcollection.html#GAL-VIEW-COLLECTION-NEW">gal_view_collection_new</A>             (void);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="galviewcollection.html#GAL-VIEW-COLLECTION-SET-STORAGE-DIRECTORIES">gal_view_collection_set_storage_directories</A>
+                                                        (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *system_dir,
+                                                         <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *local_dir);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="galviewcollection.html#GAL-VIEW-COLLECTION-ADD-FACTORY">gal_view_collection_add_factory</A>     (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <A HREF="galviewfactory.html">GalViewFactory</A> *factory);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="galviewcollection.html#GAL-VIEW-COLLECTION-DISPLAY-VIEW">gal_view_collection_display_view</A>    (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <A HREF="galview.html">GalView</A> *view);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13940"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----GalViewCollection</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13944"></A><H2>Signals</H2><PRE CLASS="SYNOPSIS">&#13;  &quot;<A HREF="galviewcollection.html#GALVIEWCOLLECTION-DISPLAY-VIEW">display-view</A>&quot;                                   </PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13948"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13951"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN13953"></A><H3><A NAME="GAL-VIEW-COLLECTION-TYPE:CAPS"></A>GAL_VIEW_COLLECTION_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define GAL_VIEW_COLLECTION_TYPE        (gal_view_collection_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13960"></A><H3><A NAME="GALVIEWCOLLECTION"></A>GalViewCollection</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GtkObject base;
+
+	GList *view_list;
+	GList *factory_list;
+} GalViewCollection;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13967"></A><H3><A NAME="GAL-VIEW-COLLECTION-NEW"></A>gal_view_collection_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="galviewcollection.html">GalViewCollection</A>*  gal_view_collection_new             (void);</PRE><P>A collection of views and view factories.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN13977"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13982"></A><H3><A NAME="GAL-VIEW-COLLECTION-SET-STORAGE-DIRECTORIES"></A>gal_view_collection_set_storage_directories ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                gal_view_collection_set_storage_directories
+                                                        (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *system_dir,
+                                                         <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *local_dir);</PRE><P>Sets up the GalViewCollection.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN13995"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">collection</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The view collection to initialize</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14000"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">system_dir</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The location of the system built in views</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14005"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">local_dir</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The location to store the users set up views</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN14010"></A><H3><A NAME="GAL-VIEW-COLLECTION-ADD-FACTORY"></A>gal_view_collection_add_factory ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                gal_view_collection_add_factory     (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <A HREF="galviewfactory.html">GalViewFactory</A> *factory);</PRE><P>Adds the given factory to this collection.  This list is used both
+when loading views from their xml description as well as when the
+user tries to create a new view.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14022"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">collection</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The view collection to add a factory to</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14027"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">factory</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The factory to add.  The <CODE CLASS="PARAMETER">collection</CODE> will add a reference
+to the factory object, so you should unref it after calling this
+function if you no longer need it.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN14033"></A><H3><A NAME="GAL-VIEW-COLLECTION-DISPLAY-VIEW"></A>gal_view_collection_display_view ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                gal_view_collection_display_view    (<A HREF="galviewcollection.html">GalViewCollection</A> *collection,
+                                                         <A HREF="galview.html">GalView</A> *view);</PRE><P></P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14045"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">collection</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The GalViewCollection to send the signal on.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14050"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">view</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The view to display.</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN14055"></A><H2>Signal Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN14057"></A><H3><A NAME="GALVIEWCOLLECTION-DISPLAY-VIEW"></A>The &quot;display-view&quot; signal</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                user_function                      (<A HREF="galviewcollection.html">GalViewCollection</A> *galviewcollection,
+                                                        <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>         *arg1,
+                                                        <GTKDOCLINK HREF="GPOINTER">gpointer</GTKDOCLINK>           user_data)</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14069"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">galviewcollection</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>the object which received the signal.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14074"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">arg1</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN14079"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">user_data</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>user data set when the signal handler was connected.</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="galview.html"><B>&lt;&lt;&lt;&nbsp;GalView</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="galdefineviewsmodel.html"><B>GalDefineViewsModel&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

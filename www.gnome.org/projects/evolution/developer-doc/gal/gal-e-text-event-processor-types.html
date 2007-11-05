@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>e-text-event-processor-types</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="E-text" HREF="e-text.html"><LINK REL="PREVIOUS" TITLE="ETextEventProcessorEmacsLike" HREF="etexteventprocessoremacslike.html"><LINK REL="NEXT" TITLE="E-Font" HREF="e-font.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etexteventprocessoremacslike.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-text.html"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="e-font.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="GAL-E-TEXT-EVENT-PROCESSOR-TYPES"></A>e-text-event-processor-types</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN13131"></A><H2>Name</H2>e-text-event-processor-types&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN13134"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+typedef             <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSORCOMMAND">ETextEventProcessorCommand</A>;
+typedef             <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSOREVENTBUTTON">ETextEventProcessorEventButton</A>;
+typedef             <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSOREVENTKEY">ETextEventProcessorEventKey</A>;
+typedef             <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSOREVENTMOTION">ETextEventProcessorEventMotion</A>;
+enum                <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSORCOMMANDPOSITION">ETextEventProcessorCommandPosition</A>;
+enum                <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSORCOMMANDACTION">ETextEventProcessorCommandAction</A>;
+union               <A HREF="gal-e-text-event-processor-types.html#ETEXTEVENTPROCESSOREVENT">ETextEventProcessorEvent</A>;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13144"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN13147"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN13149"></A><H3><A NAME="ETEXTEVENTPROCESSORCOMMAND"></A>ETextEventProcessorCommand</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	ETextEventProcessorCommandPosition position;
+	ETextEventProcessorCommandAction action;
+	int value;
+	char *string;
+	guint32 time;
+} ETextEventProcessorCommand;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13156"></A><H3><A NAME="ETEXTEVENTPROCESSOREVENTBUTTON"></A>ETextEventProcessorEventButton</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GdkEventType type;
+	guint32 time;
+	guint state;
+	guint button;
+	gint position;
+} ETextEventProcessorEventButton;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13163"></A><H3><A NAME="ETEXTEVENTPROCESSOREVENTKEY"></A>ETextEventProcessorEventKey</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GdkEventType type;
+	guint32 time;
+	guint state;
+	guint keyval;
+	gint length;
+	gchar *string;
+} ETextEventProcessorEventKey;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13170"></A><H3><A NAME="ETEXTEVENTPROCESSOREVENTMOTION"></A>ETextEventProcessorEventMotion</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GdkEventType type;
+	guint32 time;
+	guint state;
+	gint position;
+} ETextEventProcessorEventMotion;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13177"></A><H3><A NAME="ETEXTEVENTPROCESSORCOMMANDPOSITION"></A>enum ETextEventProcessorCommandPosition</H3><PRE CLASS="PROGRAMLISTING">typedef enum {
+	E_TEP_VALUE,
+	E_TEP_SELECTION,
+
+	E_TEP_START_OF_BUFFER,
+	E_TEP_END_OF_BUFFER,
+
+	E_TEP_START_OF_LINE,
+	E_TEP_END_OF_LINE,
+
+	E_TEP_FORWARD_CHARACTER,
+	E_TEP_BACKWARD_CHARACTER,
+
+	E_TEP_FORWARD_WORD,
+	E_TEP_BACKWARD_WORD,
+
+	E_TEP_FORWARD_LINE,
+	E_TEP_BACKWARD_LINE,
+
+	E_TEP_FORWARD_PARAGRAPH,
+	E_TEP_BACKWARD_PARAGRAPH,
+
+	E_TEP_FORWARD_PAGE,
+	E_TEP_BACKWARD_PAGE,
+
+	E_TEP_SELECT_WORD,
+	E_TEP_SELECT_ALL
+
+} ETextEventProcessorCommandPosition;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13184"></A><H3><A NAME="ETEXTEVENTPROCESSORCOMMANDACTION"></A>enum ETextEventProcessorCommandAction</H3><PRE CLASS="PROGRAMLISTING">typedef enum {
+	E_TEP_MOVE,
+	E_TEP_SELECT,
+	E_TEP_DELETE,
+	E_TEP_INSERT,
+
+	E_TEP_COPY,
+	E_TEP_PASTE,
+	E_TEP_GET_SELECTION,
+	E_TEP_SET_SELECT_BY_WORD,
+	E_TEP_ACTIVATE,
+	
+	E_TEP_GRAB,
+	E_TEP_UNGRAB,
+
+	E_TEP_NOP
+} ETextEventProcessorCommandAction;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN13191"></A><H3><A NAME="ETEXTEVENTPROCESSOREVENT"></A>union ETextEventProcessorEvent</H3><PRE CLASS="PROGRAMLISTING">union ETextEventProcessorEvent {
+	GdkEventType type;
+	ETextEventProcessorEventButton button;
+	ETextEventProcessorEventKey key;
+	ETextEventProcessorEventMotion motion;
+};</PRE><P></P></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etexteventprocessoremacslike.html"><B>&lt;&lt;&lt;&nbsp;ETextEventProcessorEmacsLike</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="e-font.html"><B>E-Font&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

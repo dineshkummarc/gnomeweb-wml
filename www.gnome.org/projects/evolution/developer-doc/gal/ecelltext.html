@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ECellText</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="Cell renderers" HREF="cell-renderers.html"><LINK REL="PREVIOUS" TITLE="ECell" HREF="ecell.html"><LINK REL="NEXT" TITLE="ECellCheckbox" HREF="ecellcheckbox.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="ecell.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="cell-renderers.html"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="ecellcheckbox.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ECELLTEXT"></A>ECellText</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN12586"></A><H2>Name</H2>ECellText&nbsp;--&nbsp;Text Cell renderer.</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN12589"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+typedef             <A HREF="ecelltext.html">ECellText</A>;
+<GTKDOCLINK HREF="CHAR">char</GTKDOCLINK>*               (<A HREF="ecelltext.html#ECELLTEXTFILTER">*ECellTextFilter</A>)                  (const <GTKDOCLINK HREF="VOID">void</GTKDOCLINK> *);
+#define             <A HREF="ecelltext.html#E-CELL-TEXT-TYPE:CAPS">E_CELL_TEXT_TYPE</A>
+<A HREF="ecell.html">ECell</A>*              <A HREF="ecelltext.html#E-CELL-TEXT-NEW">e_cell_text_new</A>                     (const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *fontname,
+                                                         <GTKDOCLINK HREF="GTKJUSTIFICATION">GtkJustification</GTKDOCLINK> justify);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN12601"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<A HREF="ecell.html">ECell</A>
+         +----ECellText</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN12606"></A><H2>Description</H2><P>   The ECellText implements an <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A> cell renderer (of type
+   <A HREF="ecell.html"><TT CLASS="LITERAL">ECell</TT></A>).  This one in particular uses the extensible editing
+   features of <A HREF="etext.html"><TT CLASS="LITERAL">EText</TT></A> (which is a general canvas item for doing text
+   editing). </P><P>   You can use <A HREF="ecelltext.html"><TT CLASS="LITERAL">ECellText</TT></A> renderer objects when you want to display
+   strings that are in your <A HREF="etablemodel.html"><TT CLASS="LITERAL">ETableModel</TT></A>.   </P><P>   The ETable widget typically takes care of creating these rendering
+   objects for you when the type string has been specified.</P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN12621"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN12623"></A><H3><A NAME="ECELLTEXT"></A>ECellText</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	ECell parent;
+
+	GtkJustification  justify;
+	char             *font_name;
+
+	double x, y;			/* Position at anchor */
+
+	gulong pixel;			/* Fill color */
+
+	/* Clip handling */
+	char *ellipsis;                 /* The ellipsis characters.  NULL = "...". */
+
+	guint use_ellipsis : 1;         /* Whether to use the ellipsis. */
+	
+	int strikeout_column;
+	int bold_column;
+
+	/* This column in the ETable should return a string specifying a color,
+	   either a color name like "red" or a color spec like "rgb:F/0/0".
+	   See the XParseColor man page for the formats available. */
+	int color_column;
+
+	ECellTextFilter filter;
+
+	/* This stores the colors we have allocated. */
+	GHashTable *colors;
+} ECellText;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN12630"></A><H3><A NAME="ECELLTEXTFILTER"></A>ECellTextFilter ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="CHAR">char</GTKDOCLINK>*               (*ECellTextFilter)                  (const <GTKDOCLINK HREF="VOID">void</GTKDOCLINK> *);</PRE><P>   The type for a filtering function that will be invoked to provide
+   filtered data at runtime from the model. </P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN12640"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">Param1</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN12645"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN12650"></A><H3><A NAME="E-CELL-TEXT-TYPE:CAPS"></A>E_CELL_TEXT_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_CELL_TEXT_TYPE        (e_cell_text_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN12657"></A><H3><A NAME="E-CELL-TEXT-NEW"></A>e_cell_text_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="ecell.html">ECell</A>*              e_cell_text_new                     (const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *fontname,
+                                                         <GTKDOCLINK HREF="GTKJUSTIFICATION">GtkJustification</GTKDOCLINK> justify);</PRE><P>Creates a new ECell renderer that can be used to render strings that
+that come from the model.  The value returned from the model is
+interpreted as being a char *.</P><P>The ECellText object support a large set of properties that can be
+configured through the Gtk argument system and allows the user to have
+a finer control of the way the string is displayed.  The arguments supported
+allow the control of strikeout, underline, bold, and color.</P><P>The arguments "strikeout_column", "underline_column", "bold_column"
+and "color_column" set and return an integer that points to a
+column in the model that controls these settings.  So controlling
+the way things are rendered is achieved by having special columns
+in the model that will be used to flag whether the text should be
+rendered with strikeout, or bolded.  In the case of the
+"color_column" argument, the column in the model is expected to
+have a string that can be parsed by <GTKDOCLINK HREF="GDK-COLOR-PARSE"><CODE CLASS="FUNCTION">gdk_color_parse()</CODE></GTKDOCLINK>.</P><P>   Creates a new <A HREF="ecelltext.html"><TT CLASS="LITERAL">ECellText</TT></A> renderer object.</P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN12675"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">fontname</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> this param is no longer used, but left here for api stability</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN12680"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">justify</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> Justification of the string in the cell.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN12685"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> an ECell object that can be used to render strings.</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN12690"></A><H2>See Also</H2><P>  <A HREF="ecell.html"><TT CLASS="LITERAL">ECell</TT></A>, <A HREF="ecellcheckbox.html"><TT CLASS="LITERAL">ECellCheckbox</TT></A>, <A HREF="ecelltoggle.html"><TT CLASS="LITERAL">ECellToggle</TT></A>, <A HREF="ecelltree.html"><TT CLASS="LITERAL">ECellTree</TT></A>.</P></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="ecell.html"><B>&lt;&lt;&lt;&nbsp;ECell</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="ecellcheckbox.html"><B>ECellCheckbox&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

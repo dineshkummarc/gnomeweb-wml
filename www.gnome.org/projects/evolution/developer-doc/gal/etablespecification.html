@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableSpecification</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableConfigField" HREF="etableconfigfield.html"><LINK REL="NEXT" TITLE="ETableHeader" HREF="etableheader.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etableconfigfield.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etableheader.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLESPECIFICATION"></A>ETableSpecification</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN5737"></A><H2>Name</H2>ETableSpecification&nbsp;--&nbsp;Internal object to keep track of the ETable State.</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN5740"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-TYPE:CAPS">E_TABLE_SPECIFICATION_TYPE</A>
+typedef             <A HREF="etablespecification.html">ETableSpecification</A>;
+<A HREF="etablespecification.html">ETableSpecification</A>* <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-NEW">e_table_specification_new</A>          (void);
+<GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK>            <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-LOAD-FROM-FILE">e_table_specification_load_from_file</A>
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *filename);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-LOAD-FROM-STRING">e_table_specification_load_from_string</A>
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *xml);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-LOAD-FROM-NODE">e_table_specification_load_from_node</A>
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="XMLNODE">xmlNode</GTKDOCLINK> *node);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-SAVE-TO-FILE">e_table_specification_save_to_file</A>  (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *filename);
+<GTKDOCLINK HREF="CHAR">char</GTKDOCLINK>*               <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-SAVE-TO-STRING">e_table_specification_save_to_string</A>
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification);
+<GTKDOCLINK HREF="XMLNODE">xmlNode</GTKDOCLINK>*            <A HREF="etablespecification.html#E-TABLE-SPECIFICATION-SAVE-TO-NODE">e_table_specification_save_to_node</A>  (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         <GTKDOCLINK HREF="XMLDOC">xmlDoc</GTKDOCLINK> *doc);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN5770"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----ETableSpecification</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN5774"></A><H2>Description</H2><P>   This object is used to keep track of the ETableState, and it is
+   mostly an internal function.  These are used by the ETable widget
+   and its configuration engine (<A HREF="etableconfig.html"><TT CLASS="LITERAL">ETableConfig</TT></A>).  It is mostly an
+   internal object.</P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN5779"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN5781"></A><H3><A NAME="E-TABLE-SPECIFICATION-TYPE:CAPS"></A>E_TABLE_SPECIFICATION_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_SPECIFICATION_TYPE        (e_table_specification_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5788"></A><H3><A NAME="ETABLESPECIFICATION"></A>ETableSpecification</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GtkObject base;
+
+	ETableColumnSpecification **columns;
+	ETableState *state;
+
+	guint no_headers : 1;
+	guint click_to_add : 1;
+	guint draw_grid : 1;
+	ETableCursorMode cursor_mode;
+	char *click_to_add_message_;
+} ETableSpecification;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5795"></A><H3><A NAME="E-TABLE-SPECIFICATION-NEW"></A>e_table_specification_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablespecification.html">ETableSpecification</A>* e_table_specification_new          (void);</PRE><P>Creates a new <A HREF="etablespecification.html"><TT CLASS="LITERAL">ETableSpecification</TT></A> object.   This object is used to hold the
+information about the rendering information for ETable.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5807"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> a newly created <A HREF="etablespecification.html"><TT CLASS="LITERAL">ETableSpecification</TT></A> object.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5814"></A><H3><A NAME="E-TABLE-SPECIFICATION-LOAD-FROM-FILE"></A>e_table_specification_load_from_file ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK>            e_table_specification_load_from_file
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *filename);</PRE><P>This routine modifies <CODE CLASS="PARAMETER">specification</CODE> to reflect the state described
+by the file <CODE CLASS="PARAMETER">filename</CODE>.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5828"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An ETableSpecification that you want to modify</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5833"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">filename</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> a filename that contains an ETableSpecification</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5838"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> TRUE on success, FALSE on failure.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5843"></A><H3><A NAME="E-TABLE-SPECIFICATION-LOAD-FROM-STRING"></A>e_table_specification_load_from_string ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_specification_load_from_string
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *xml);</PRE><P>This routine modifies <CODE CLASS="PARAMETER">specification</CODE> to reflect the state described
+by <CODE CLASS="PARAMETER">xml</CODE>.  <CODE CLASS="PARAMETER">xml</CODE> is typically returned by e_table_specification_save_to_string
+or it can be embedded in your source code.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5858"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An ETableSpecification that you want to modify</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5863"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">xml</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> a stringified representation of an ETableSpecification description.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5868"></A><H3><A NAME="E-TABLE-SPECIFICATION-LOAD-FROM-NODE"></A>e_table_specification_load_from_node ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_specification_load_from_node
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="XMLNODE">xmlNode</GTKDOCLINK> *node);</PRE><P>This routine modifies <CODE CLASS="PARAMETER">specification</CODE> to reflect the state described
+by <CODE CLASS="PARAMETER">node</CODE>.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5882"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An ETableSpecification that you want to modify</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5887"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">node</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> an xmlNode with an XML ETableSpecification description.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5892"></A><H3><A NAME="E-TABLE-SPECIFICATION-SAVE-TO-FILE"></A>e_table_specification_save_to_file ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_specification_save_to_file  (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *filename);</PRE><P>This routine stores the <CODE CLASS="PARAMETER">specification</CODE> into <CODE CLASS="PARAMETER">filename</CODE>.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5906"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An <A HREF="etablespecification.html"><TT CLASS="LITERAL">ETableSpecification</TT></A> that you want to save</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5913"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">filename</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> a file name to store the specification.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5918"></A><H3><A NAME="E-TABLE-SPECIFICATION-SAVE-TO-STRING"></A>e_table_specification_save_to_string ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="CHAR">char</GTKDOCLINK>*               e_table_specification_save_to_string
+                                                        (<A HREF="etablespecification.html">ETableSpecification</A> *specification);</PRE><P>Saves the state of <CODE CLASS="PARAMETER">specification</CODE> to a string.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5930"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An <A HREF="etablespecification.html"><TT CLASS="LITERAL">ETableSpecification</TT></A> that you want to stringify</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5937"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> an <GTKDOCLINK HREF="G-ALLOC"><CODE CLASS="FUNCTION">g_alloc()</CODE></GTKDOCLINK> allocated string containing the stringified 
+representation of <CODE CLASS="PARAMETER">specification</CODE>.  This stringified representation
+uses XML as a convenience.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN5945"></A><H3><A NAME="E-TABLE-SPECIFICATION-SAVE-TO-NODE"></A>e_table_specification_save_to_node ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="XMLNODE">xmlNode</GTKDOCLINK>*            e_table_specification_save_to_node  (<A HREF="etablespecification.html">ETableSpecification</A> *specification,
+                                                         <GTKDOCLINK HREF="XMLDOC">xmlDoc</GTKDOCLINK> *doc);</PRE><P>This routine saves the <A HREF="etablespecification.html"><TT CLASS="LITERAL">ETableSpecification</TT></A> state in the object <CODE CLASS="PARAMETER">specification</CODE>
+into the xmlDoc represented by <CODE CLASS="PARAMETER">doc</CODE>.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5961"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">specification</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> An ETableSpecification that you want to store.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5966"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">doc</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> Node where the specification is saved</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN5971"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The node that has been attached to <CODE CLASS="PARAMETER">doc</CODE> with the contents
+of the ETableSpecification.</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN5977"></A><H2>See Also</H2><P>  <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>, <A HREF="etablecolumnspecification.html"><TT CLASS="LITERAL">ETableColumnSpecification</TT></A>, <A HREF="etableconfig.html"><TT CLASS="LITERAL">ETableConfig</TT></A>.</P></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etableconfigfield.html"><B>&lt;&lt;&lt;&nbsp;ETableConfigField</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etableheader.html"><B>ETableHeader&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

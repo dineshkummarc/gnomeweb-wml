@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableHeaderItem</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="Core ETable" HREF="e-table-core.html"><LINK REL="PREVIOUS" TITLE="ETableFieldChooserDialog" HREF="etablefieldchooserdialog.html"><LINK REL="NEXT" TITLE="ETableItem" HREF="etableitem.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etablefieldchooserdialog.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table-core.html"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etableitem.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLEHEADERITEM"></A>ETableHeaderItem</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN9765"></A><H2>Name</H2>ETableHeaderItem&nbsp;--&nbsp;Canvas Item to display the ETable header.</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN9768"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etableheaderitem.html#E-TABLE-HEADER-ITEM-TYPE:CAPS">E_TABLE_HEADER_ITEM_TYPE</A>
+typedef             <A HREF="etableheaderitem.html">ETableHeaderItem</A>;&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9773"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GNOMECANVASITEM">GnomeCanvasItem</GTKDOCLINK>
+         +----ETableHeaderItem</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9778"></A><H2>Signals</H2><PRE CLASS="SYNOPSIS">&#13;  &quot;<A HREF="etableheaderitem.html#ETABLEHEADERITEM-BUTTON-PRESSED">button-pressed</A>&quot;                                 </PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9782"></A><H2>Description</H2><P>  The <A HREF="etableheaderitem.html"><TT CLASS="LITERAL">ETableHeaderItem</TT></A> object is a <GTKDOCLINK HREF="GNOMECANVASITEM"><TT CLASS="LITERAL">GnomeCanvasItem</TT></GTKDOCLINK> item that renders
+  an <A HREF="etableheader.html"><TT CLASS="LITERAL">ETableHeader</TT></A> model into a canvas.  This canvas item takes a
+  number of argument to configure the display.  </P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9791"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN9793"></A><H3><A NAME="E-TABLE-HEADER-ITEM-TYPE:CAPS"></A>E_TABLE_HEADER_ITEM_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_HEADER_ITEM_TYPE        (e_table_header_item_get_type ())</PRE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9799"></A><H3><A NAME="ETABLEHEADERITEM"></A>ETableHeaderItem</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GnomeCanvasItem  parent;
+	ETableHeader    *eth;
+
+	GdkGC           *gc;
+	GdkCursor       *change_cursor;
+
+	short            height, width;
+	GdkFont         *font;
+
+	/*
+	 * Used during resizing;  Could be shorts
+	 */
+	int              resize_col;
+	int              resize_start_pos;
+	int              resize_min_width;
+	
+	GtkObject       *resize_guide;
+
+	int              group_indent_width;
+
+	/*
+	 * Ids
+	 */
+	int structure_change_id, dimension_change_id;
+
+	/*
+	 * For dragging columns
+	 */
+	guint            maybe_drag:1;
+	guint            dnd_ready:1;
+	int              click_x, click_y;
+	int              drag_col, drop_col, drag_mark;
+        guint            drag_motion_id, drag_end_id, drag_leave_id, drag_drop_id, drag_data_received_id, drag_data_get_id;
+	guint            sort_info_changed_id, group_info_changed_id;
+	GnomeCanvasItem *remove_item;
+	GdkBitmap       *stipple;
+
+	gchar           *dnd_code;
+
+	/*
+	 * For column sorting info
+	 */
+	ETableSortInfo  *sort_info;
+	
+	/* For adding fields. */
+	ETableHeader    *full_header;
+	ETable          *table;
+	GtkWidget       *config;
+} ETableHeaderItem;</PRE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9805"></A><H2>Signal Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN9807"></A><H3><A NAME="ETABLEHEADERITEM-BUTTON-PRESSED"></A>The &quot;button-pressed&quot; signal</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                user_function                      (<A HREF="etableheaderitem.html">ETableHeaderItem</A> *etableheaderitem,
+                                                        <GTKDOCLINK HREF="GPOINTER">gpointer</GTKDOCLINK>          arg1,
+                                                        <GTKDOCLINK HREF="GPOINTER">gpointer</GTKDOCLINK>          user_data)</PRE><P>  Emmited when a button has been pressed in the header.  This will
+  pass the GdkEvent as the argument to the signal handler.</P><P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9820"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etableheaderitem</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>the object which received the signal.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9825"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">arg1</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>The GdkEvent.</P></TD></TR></TBODY></TABLE></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9831"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">user_data</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>user data set when the signal handler was connected.</P></TD></TR></TBODY></TABLE></DIV></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9836"></A><H2>See Also</H2><P>   <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>, <A HREF="etableheader.html"><TT CLASS="LITERAL">ETableHeader</TT></A>, <A HREF="etablecol.html"><TT CLASS="LITERAL">ETableCol</TT></A>.</P></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etablefieldchooserdialog.html"><B>&lt;&lt;&lt;&nbsp;ETableFieldChooserDialog</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etableitem.html"><B>ETableItem&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

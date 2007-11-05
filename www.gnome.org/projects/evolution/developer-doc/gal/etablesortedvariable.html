@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableSortedVariable</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETreeSimple" HREF="etreesimple.html"><LINK REL="NEXT" TITLE="ETableConfig" HREF="etableconfig.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etreesimple.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etableconfig.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLESORTEDVARIABLE"></A>ETableSortedVariable</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN9465"></A><H2>Name</H2>ETableSortedVariable&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN9468"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etablesortedvariable.html#E-TABLE-SORTED-VARIABLE-TYPE:CAPS">E_TABLE_SORTED_VARIABLE_TYPE</A>
+typedef             <A HREF="etablesortedvariable.html">ETableSortedVariable</A>;
+<A HREF="etablemodel.html">ETableModel</A>*        <A HREF="etablesortedvariable.html#E-TABLE-SORTED-VARIABLE-NEW">e_table_sorted_variable_new</A>         (<A HREF="etablemodel.html">ETableModel</A> *etm,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9478"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<A HREF="etablemodel.html">ETableModel</A>
+         +----<A HREF="etablesubset.html">ETableSubset</A>
+               +----<A HREF="etablesubsetvariable.html">ETableSubsetVariable</A>
+                     +----ETableSortedVariable</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9485"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN9488"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN9490"></A><H3><A NAME="E-TABLE-SORTED-VARIABLE-TYPE:CAPS"></A>E_TABLE_SORTED_VARIABLE_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_SORTED_VARIABLE_TYPE        (e_table_sorted_variable_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9497"></A><H3><A NAME="ETABLESORTEDVARIABLE"></A>ETableSortedVariable</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	ETableSubsetVariable base;
+
+	ETableSortInfo *sort_info;
+	
+	ETableHeader *full_header;
+
+	int              table_model_changed_id;
+	int              table_model_row_changed_id;
+	int              table_model_cell_changed_id;
+	int              sort_info_changed_id;
+	int              sort_idle_id;
+	int		 insert_idle_id;
+	int		 insert_count;
+
+} ETableSortedVariable;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN9504"></A><H3><A NAME="E-TABLE-SORTED-VARIABLE-NEW"></A>e_table_sorted_variable_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablemodel.html">ETableModel</A>*        e_table_sorted_variable_new         (<A HREF="etablemodel.html">ETableModel</A> *etm,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9516"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etm</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9521"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9526"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sort_info</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN9531"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etreesimple.html"><B>&lt;&lt;&lt;&nbsp;ETreeSimple</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etableconfig.html"><B>ETableConfig&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

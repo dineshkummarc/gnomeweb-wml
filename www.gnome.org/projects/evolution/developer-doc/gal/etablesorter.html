@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableSorter</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableSimple" HREF="etablesimple.html"><LINK REL="NEXT" TITLE="ETable" HREF="etable.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etablesimple.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etable.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLESORTER"></A>ETableSorter</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN3622"></A><H2>Name</H2>ETableSorter&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN3625"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etablesorter.html#E-TABLE-SORTER-TYPE:CAPS">E_TABLE_SORTER_TYPE</A>
+typedef             <A HREF="etablesorter.html">ETableSorter</A>;
+<A HREF="etablesorter.html">ETableSorter</A>*       <A HREF="etablesorter.html#E-TABLE-SORTER-NEW">e_table_sorter_new</A>                  (<A HREF="etablemodel.html">ETableModel</A> *etm,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info);
+<GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>                <A HREF="etablesorter.html#E-TABLE-SORTER-MODEL-TO-SORTED">e_table_sorter_model_to_sorted</A>      (<A HREF="etablesorter.html">ETableSorter</A> *sorter,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> row);
+<GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>                <A HREF="etablesorter.html#E-TABLE-SORTER-SORTED-TO-MODEL">e_table_sorter_sorted_to_model</A>      (<A HREF="etablesorter.html">ETableSorter</A> *sorter,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> row);
+<GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK>            <A HREF="etablesorter.html#E-TABLE-SORTER-NEEDS-SORTING">e_table_sorter_needs_sorting</A>        (<A HREF="etablesorter.html">ETableSorter</A> *sorter);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN3646"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----ETableSorter</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN3650"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN3653"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN3655"></A><H3><A NAME="E-TABLE-SORTER-TYPE:CAPS"></A>E_TABLE_SORTER_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_SORTER_TYPE        (e_table_sorter_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN3662"></A><H3><A NAME="ETABLESORTER"></A>ETableSorter</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GtkObject base;
+
+	ETableModel    *source;
+	ETableHeader   *full_header;
+	ETableSortInfo *sort_info;
+
+	int             needs_sorting;
+
+	int            *sorted;
+	int            *backsorted;
+
+	int             table_model_changed_id;
+	int             table_model_row_changed_id;
+	int             table_model_cell_changed_id;
+	int             sort_info_changed_id;
+} ETableSorter;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN3669"></A><H3><A NAME="E-TABLE-SORTER-NEW"></A>e_table_sorter_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablesorter.html">ETableSorter</A>*       e_table_sorter_new                  (<A HREF="etablemodel.html">ETableModel</A> *etm,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3681"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etm</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3686"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">full_header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3691"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sort_info</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3696"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN3701"></A><H3><A NAME="E-TABLE-SORTER-MODEL-TO-SORTED"></A>e_table_sorter_model_to_sorted ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>                e_table_sorter_model_to_sorted      (<A HREF="etablesorter.html">ETableSorter</A> *sorter,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> row);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3712"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sorter</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3717"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">row</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3722"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN3727"></A><H3><A NAME="E-TABLE-SORTER-SORTED-TO-MODEL"></A>e_table_sorter_sorted_to_model ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GINT">gint</GTKDOCLINK>                e_table_sorter_sorted_to_model      (<A HREF="etablesorter.html">ETableSorter</A> *sorter,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> row);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3738"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sorter</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3743"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">row</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3748"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN3753"></A><H3><A NAME="E-TABLE-SORTER-NEEDS-SORTING"></A>e_table_sorter_needs_sorting ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK>            e_table_sorter_needs_sorting        (<A HREF="etablesorter.html">ETableSorter</A> *sorter);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3763"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sorter</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P></P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN3768"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etablesimple.html"><B>&lt;&lt;&lt;&nbsp;ETableSimple</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etable.html"><B>ETable&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

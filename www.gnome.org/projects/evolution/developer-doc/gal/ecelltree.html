@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ECellTree</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="E-Table and E-Tree" HREF="e-table.html"><LINK REL="NEXT" TITLE="e-tree-model" HREF="gal-e-tree-model.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="e-table.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="gal-e-tree-model.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ECELLTREE"></A>ECellTree</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN11"></A><H2>Name</H2>ECellTree&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN14"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="ecelltree.html#E-CELL-TREE-TYPE:CAPS">E_CELL_TREE_TYPE</A>
+typedef             <A HREF="ecelltree.html">ECellTree</A>;
+<A HREF="ecell.html">ECell</A>*              <A HREF="ecelltree.html#E-CELL-TREE-NEW">e_cell_tree_new</A>                     (<GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *open_pixbuf,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *closed_pixbuf,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> draw_lines,
+                                                         <A HREF="ecell.html">ECell</A> *subcell);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="ecelltree.html#E-CELL-TREE-CONSTRUCT">e_cell_tree_construct</A>               (<A HREF="ecelltree.html">ECellTree</A> *ect,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *open_pixbuf,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *closed_pixbuf,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> draw_lines,
+                                                         <A HREF="ecell.html">ECell</A> *subcell);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN32"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<A HREF="ecell.html">ECell</A>
+         +----ECellTree</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN37"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN40"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN42"></A><H3><A NAME="E-CELL-TREE-TYPE:CAPS"></A>E_CELL_TREE_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_CELL_TREE_TYPE        (e_cell_tree_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN49"></A><H3><A NAME="ECELLTREE"></A>ECellTree</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	ECell parent;
+
+	gboolean draw_lines;
+
+	GdkPixbuf   *open_pixbuf;
+	GdkPixbuf   *closed_pixbuf;
+
+	ECell *subcell;
+} ECellTree;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN56"></A><H3><A NAME="E-CELL-TREE-NEW"></A>e_cell_tree_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="ecell.html">ECell</A>*              e_cell_tree_new                     (<GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *open_pixbuf,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *closed_pixbuf,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> draw_lines,
+                                                         <A HREF="ecell.html">ECell</A> *subcell);</PRE><P>Creates a new ECell renderer that can be used to render tree
+effects that come from an ETreeModel.  Various assumptions are made
+as to the fact that the ETableModel the ETable this cell is
+associated with is in fact an ETreeModel.  The cell uses special
+columns to get at structural information (needed to draw the
+lines/icons.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN70"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">open_pixbuf</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> pixbuf to be used instead of the '-' icon.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN75"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">closed_pixbuf</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> pixbuf to be used instead of the '+' icon.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN80"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">draw_lines</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> whether or not to draw the lines between parents/children/siblings.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN85"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">subcell</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the ECell to render to the right of the tree effects.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN90"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> an ECell object that can be used to render trees.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN95"></A><H3><A NAME="E-CELL-TREE-CONSTRUCT"></A>e_cell_tree_construct ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_cell_tree_construct               (<A HREF="ecelltree.html">ECellTree</A> *ect,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *open_pixbuf,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *closed_pixbuf,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> draw_lines,
+                                                         <A HREF="ecell.html">ECell</A> *subcell);</PRE><P>Constructs an ECellTree.  used by subclasses that need to
+initialize a nested ECellTree.  See <A HREF="ecelltree.html#E-CELL-TREE-NEW"><CODE CLASS="FUNCTION">e_cell_tree_new()</CODE></A> for more info.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN112"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">ect</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the ECellTree we're constructing.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN117"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">open_pixbuf</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> pixbuf to be used instead of the '-' icon.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN122"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">closed_pixbuf</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> pixbuf to be used instead of the '+' icon.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN127"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">draw_lines</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> whether or not to draw the lines between parents/children/siblings.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN132"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">subcell</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the ECell to render to the right of the tree effects.</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="e-table.html"><B>&lt;&lt;&lt;&nbsp;E-Table and E-Tree</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="gal-e-tree-model.html"><B>e-tree-model&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

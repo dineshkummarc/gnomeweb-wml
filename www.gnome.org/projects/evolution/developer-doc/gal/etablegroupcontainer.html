@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableGroupContainer</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableHeader" HREF="etableheader.html"><LINK REL="NEXT" TITLE="ETableOne" HREF="etableone.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etableheader.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etableone.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLEGROUPCONTAINER"></A>ETableGroupContainer</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN6581"></A><H2>Name</H2>ETableGroupContainer&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN6584"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etablegroupcontainer.html#E-TABLE-GROUP-CONTAINER-TYPE:CAPS">E_TABLE_GROUP_CONTAINER_TYPE</A>
+typedef             <A HREF="etablegroupcontainer.html">ETableGroupContainer</A>;
+<A HREF="etablegroup.html">ETableGroup</A>*        <A HREF="etablegroupcontainer.html#E-TABLE-GROUP-CONTAINER-NEW">e_table_group_container_new</A>         (<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK> *parent,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablemodel.html">ETableModel</A> *model,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> n);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etablegroupcontainer.html#E-TABLE-GROUP-CONTAINER-CONSTRUCT">e_table_group_container_construct</A>   (<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK> *parent,
+                                                         <A HREF="etablegroupcontainer.html">ETableGroupContainer</A> *etgc,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablemodel.html">ETableModel</A> *model,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> n);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6606"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----<GTKDOCLINK HREF="GNOMECANVASITEM">GnomeCanvasItem</GTKDOCLINK>
+         +----<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK>
+               +----<A HREF="etablegroup.html">ETableGroup</A>
+                     +----ETableGroupContainer</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6613"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6616"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN6618"></A><H3><A NAME="E-TABLE-GROUP-CONTAINER-TYPE:CAPS"></A>E_TABLE_GROUP_CONTAINER_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_GROUP_CONTAINER_TYPE        (e_table_group_container_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6625"></A><H3><A NAME="ETABLEGROUPCONTAINER"></A>ETableGroupContainer</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	ETableGroup group;
+
+	/*
+	 * The ETableCol used to group this set
+	 */
+	ETableCol    *ecol;
+	gint          ascending;
+
+	/*
+	 * List of ETableGroups we stack
+	 */
+	GList *children;
+
+	/*
+	 * The canvas rectangle that contains the children
+	 */
+	GnomeCanvasItem *rect;
+
+	GdkFont *font;
+
+	gdouble width, height, minimum_width;
+
+	ETableSortInfo *sort_info;
+	int n;
+	int length_threshold;
+
+	ETableSelectionModel *table_selection_model;
+
+	guint draw_grid : 1;
+	guint draw_focus : 1;
+	ETableCursorMode cursor_mode;
+
+	/*
+	 * State: the ETableGroup is open or closed
+	 */
+	guint open:1;
+} ETableGroupContainer;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6632"></A><H3><A NAME="E-TABLE-GROUP-CONTAINER-NEW"></A>e_table_group_container_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablegroup.html">ETableGroup</A>*        e_table_group_container_new         (<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK> *parent,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablemodel.html">ETableModel</A> *model,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> n);</PRE><P><A HREF="etablegroupcontainer.html"><TT CLASS="LITERAL">ETableGroupContainer</TT></A> is an <A HREF="etablegroup.html"><TT CLASS="LITERAL">ETableGroup</TT></A> which groups by the nth
+grouping of the <A HREF="etablesortinfo.html"><TT CLASS="LITERAL">ETableSortInfo</TT></A>.  It creates <GTKDOCLINK HREF="ETABLEGROUPS"><TT CLASS="LITERAL">ETableGroups</TT></GTKDOCLINK> as
+children.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6656"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">parent</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <GTKDOCLINK HREF="GNOMECANVASGROUP"><TT CLASS="LITERAL">GnomeCanvasGroup</TT></GTKDOCLINK> to create a child of.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6663"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">full_header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The full header of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6670"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The current header of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6677"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">model</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etablemodel.html"><TT CLASS="LITERAL">ETableModel</TT></A> of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6686"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sort_info</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etablesortinfo.html"><TT CLASS="LITERAL">ETableSortInfo</TT></A> of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6695"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">n</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> Which grouping level this is (Starts at 0 and sends n + 1 to any child <GTKDOCLINK HREF="ETABLEGROUPS"><TT CLASS="LITERAL">ETableGroups</TT></GTKDOCLINK>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6702"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The new <A HREF="etablegroupcontainer.html"><TT CLASS="LITERAL">ETableGroupContainer</TT></A>.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6709"></A><H3><A NAME="E-TABLE-GROUP-CONTAINER-CONSTRUCT"></A>e_table_group_container_construct ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_group_container_construct   (<GTKDOCLINK HREF="GNOMECANVASGROUP">GnomeCanvasGroup</GTKDOCLINK> *parent,
+                                                         <A HREF="etablegroupcontainer.html">ETableGroupContainer</A> *etgc,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *full_header,
+                                                         <A HREF="etableheader.html">ETableHeader</A> *header,
+                                                         <A HREF="etablemodel.html">ETableModel</A> *model,
+                                                         <A HREF="etablesortinfo.html">ETableSortInfo</A> *sort_info,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> n);</PRE><P>This routine constructs the new <A HREF="etablegroupcontainer.html"><TT CLASS="LITERAL">ETableGroupContainer</TT></A>.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6728"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">parent</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <GTKDOCLINK HREF="GNOMECANVASGROUP"><TT CLASS="LITERAL">GnomeCanvasGroup</TT></GTKDOCLINK> to create a child of.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6735"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etgc</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etablegroupcontainer.html"><TT CLASS="LITERAL">ETableGroupContainer</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6742"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">full_header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The full header of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6749"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">header</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The current header of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6756"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">model</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etablemodel.html"><TT CLASS="LITERAL">ETableModel</TT></A> of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6765"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">sort_info</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> The <A HREF="etablesortinfo.html"><TT CLASS="LITERAL">ETableSortInfo</TT></A> of the <A HREF="etable.html"><TT CLASS="LITERAL">ETable</TT></A>.</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6774"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">n</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> Which grouping level this is (Starts at 0 and sends n + 1 to any child <GTKDOCLINK HREF="ETABLEGROUPS"><TT CLASS="LITERAL">ETableGroups</TT></GTKDOCLINK>.</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etableheader.html"><B>&lt;&lt;&lt;&nbsp;ETableHeader</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etableone.html"><B>ETableOne&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>ETableCol</TITLE><META NAME="GENERATOR" CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK REL="HOME" HREF="index.html"><LINK REL="UP" TITLE="The models" HREF="e-table.html#E-TABLE-MODELS"><LINK REL="PREVIOUS" TITLE="ETableOne" HREF="etableone.html"><LINK REL="NEXT" TITLE="ETableFieldChooserItem" HREF="etablefieldchooseritem.html"><META NAME="GENERATOR" CONTENT="GTK-Doc V1.8 (SGML mode)"><STYLE TYPE="text/css">.synopsis, .classsynopsis {
+    background: #eeeeee;
+    border: solid 1px #aaaaaa;
+    padding: 0.5em;
+}
+.programlisting {
+    background: #eeeeff;
+    border: solid 1px #aaaaff;
+    padding: 0.5em;
+}
+.variablelist {
+    padding: 4px;
+    margin-left: 3em;
+}
+.navigation {
+    background: #ffeeee;
+    border: solid 1px #ffaaaa;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.navigation a {
+    color: #770000;
+}
+.navigation a:visited {
+    color: #550000;
+}
+.navigation .title {
+    font-size: 200%;
+}</STYLE></HEAD><BODY CLASS="REFENTRY" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#840084" ALINK="#0000FF"><TABLE WIDTH="100%" CLASS="navigation" SUMMARY="Navigation header" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD><A ACCESSKEY="p" HREF="etableone.html"><IMG SRC="left.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Prev"></A></TD><TD><A ACCESSKEY="u" HREF="e-table.html#E-TABLE-MODELS"><IMG SRC="up.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Up"></A></TD><TD><A ACCESSKEY="h" HREF="index.html"><IMG SRC="home.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Home"></A></TD><TH WIDTH="100%" align="center"></TH><TD><A ACCESSKEY="n" HREF="etablefieldchooseritem.html"><IMG SRC="right.png" WIDTH="24" HEIGHT="24" BORDER="0" ALT="Next"></A></TD></TR></TABLE><H1><A NAME="ETABLECOL"></A>ETableCol</H1><DIV CLASS="REFNAMEDIV"><A NAME="AEN6864"></A><H2>Name</H2>ETableCol&nbsp;--&nbsp;</DIV><DIV CLASS="REFSYNOPSISDIV"><A NAME="AEN6867"></A><H2>Synopsis</H2><PRE CLASS="SYNOPSIS">&#13;
+
+#define             <A HREF="etablecol.html#E-TABLE-COL-TYPE:CAPS">E_TABLE_COL_TYPE</A>
+typedef             <A HREF="etablecol.html">ETableCol</A>;
+enum                <A HREF="etablecol.html#ETABLECOLARROW">ETableColArrow</A>;
+<A HREF="etablecol.html">ETableCol</A>*          <A HREF="etablecol.html#E-TABLE-COL-NEW">e_table_col_new</A>                     (<GTKDOCLINK HREF="INT">int</GTKDOCLINK> col_idx,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *text,
+                                                         <GTKDOCLINK HREF="DOUBLE">double</GTKDOCLINK> expansion,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> min_width,
+                                                         <A HREF="ecell.html">ECell</A> *ecell,
+                                                         <GTKDOCLINK HREF="GCOMPAREFUNC">GCompareFunc</GTKDOCLINK> compare,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> resizable);
+<A HREF="etablecol.html">ETableCol</A>*          <A HREF="etablecol.html#E-TABLE-COL-NEW-WITH-PIXBUF">e_table_col_new_with_pixbuf</A>         (<GTKDOCLINK HREF="INT">int</GTKDOCLINK> col_idx,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *pixbuf,
+                                                         <GTKDOCLINK HREF="DOUBLE">double</GTKDOCLINK> expansion,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> min_width,
+                                                         <A HREF="ecell.html">ECell</A> *ecell,
+                                                         <GTKDOCLINK HREF="GCOMPAREFUNC">GCompareFunc</GTKDOCLINK> compare,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> resizable);
+<GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                <A HREF="etablecol.html#E-TABLE-COL-DESTROY">e_table_col_destroy</A>                 (<A HREF="etablecol.html">ETableCol</A> *etc);&#13;</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6894"></A><H2>Object Hierarchy</H2><PRE CLASS="SYNOPSIS">&#13;  <GTKDOCLINK HREF="GTKOBJECT">GtkObject</GTKDOCLINK>
+   +----ETableCol</PRE></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6898"></A><H2>Description</H2><P></P></DIV><DIV CLASS="REFSECT1"><A NAME="AEN6901"></A><H2>Details</H2><DIV CLASS="REFSECT2"><A NAME="AEN6903"></A><H3><A NAME="E-TABLE-COL-TYPE:CAPS"></A>E_TABLE_COL_TYPE</H3><PRE CLASS="PROGRAMLISTING">#define E_TABLE_COL_TYPE        (e_table_col_get_type ())</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6910"></A><H3><A NAME="ETABLECOL"></A>ETableCol</H3><PRE CLASS="PROGRAMLISTING">typedef struct {
+	GtkObject    base;
+	char        *text;
+	GdkPixbuf   *pixbuf;
+	int          min_width;
+	int          width;
+	double       expansion;
+	short        x;
+	GCompareFunc compare;
+	unsigned int is_pixbuf:1;
+	unsigned int selected:1;
+	unsigned int resizeable:1;
+	unsigned int sortable:1;
+	unsigned int groupable:1;
+	int          col_idx;
+
+	GtkJustification justification;
+
+	ECell         *ecell;
+} ETableCol;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6917"></A><H3><A NAME="ETABLECOLARROW"></A>enum ETableColArrow</H3><PRE CLASS="PROGRAMLISTING">typedef enum {
+	E_TABLE_COL_ARROW_NONE = 0,
+	E_TABLE_COL_ARROW_UP,
+	E_TABLE_COL_ARROW_DOWN
+} ETableColArrow;</PRE><P></P></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6924"></A><H3><A NAME="E-TABLE-COL-NEW"></A>e_table_col_new ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablecol.html">ETableCol</A>*          e_table_col_new                     (<GTKDOCLINK HREF="INT">int</GTKDOCLINK> col_idx,
+                                                         const <GTKDOCLINK HREF="CHAR">char</GTKDOCLINK> *text,
+                                                         <GTKDOCLINK HREF="DOUBLE">double</GTKDOCLINK> expansion,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> min_width,
+                                                         <A HREF="ecell.html">ECell</A> *ecell,
+                                                         <GTKDOCLINK HREF="GCOMPAREFUNC">GCompareFunc</GTKDOCLINK> compare,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> resizable);</PRE><P>The ETableCol represents a column to be used inside an ETable.  The
+ETableCol objects are inserted inside an ETableHeader (which is just a collection
+of ETableCols).  The ETableHeader is the definition of the order in which
+columns are shown to the user. </P><P>The <CODE CLASS="PARAMETER">text</CODE> argument is the the text that will be shown as a header to the
+user. <CODE CLASS="PARAMETER">col_idx</CODE> reflects where the data for this ETableCol object will
+be fetch from an ETableModel.  So even if the user changes the order
+of the columns being viewed (the ETableCols in the ETableHeader), the
+column will always point to the same column inside the ETableModel.</P><P>The <CODE CLASS="PARAMETER">ecell</CODE> argument is an ECell object that needs to know how to render the
+data in the ETableModel for this specific row.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6946"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">col_idx</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the column we represent in the model</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6951"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">text</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> a title for this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6956"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">expansion</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> FIXME</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6961"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">min_width</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> minimum width in pixels for this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6966"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">ecell</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the renderer to be used for this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6971"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">compare</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> comparision function for the elements stored in this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6976"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">resizable</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> whether the column can be resized interactively by the user</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN6981"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the newly created ETableCol object.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN6986"></A><H3><A NAME="E-TABLE-COL-NEW-WITH-PIXBUF"></A>e_table_col_new_with_pixbuf ()</H3><PRE CLASS="PROGRAMLISTING"><A HREF="etablecol.html">ETableCol</A>*          e_table_col_new_with_pixbuf         (<GTKDOCLINK HREF="INT">int</GTKDOCLINK> col_idx,
+                                                         <GTKDOCLINK HREF="GDKPIXBUF">GdkPixbuf</GTKDOCLINK> *pixbuf,
+                                                         <GTKDOCLINK HREF="DOUBLE">double</GTKDOCLINK> expansion,
+                                                         <GTKDOCLINK HREF="INT">int</GTKDOCLINK> min_width,
+                                                         <A HREF="ecell.html">ECell</A> *ecell,
+                                                         <GTKDOCLINK HREF="GCOMPAREFUNC">GCompareFunc</GTKDOCLINK> compare,
+                                                         <GTKDOCLINK HREF="GBOOLEAN">gboolean</GTKDOCLINK> resizable);</PRE><P>The ETableCol represents a column to be used inside an ETable.  The
+ETableCol objects are inserted inside an ETableHeader (which is just a collection
+of ETableCols).  The ETableHeader is the definition of the order in which
+columns are shown to the user. </P><P>The <CODE CLASS="PARAMETER">text</CODE> argument is the the text that will be shown as a header to the
+user. <CODE CLASS="PARAMETER">col_idx</CODE> reflects where the data for this ETableCol object will
+be fetch from an ETableModel.  So even if the user changes the order
+of the columns being viewed (the ETableCols in the ETableHeader), the
+column will always point to the same column inside the ETableModel.</P><P>The <CODE CLASS="PARAMETER">ecell</CODE> argument is an ECell object that needs to know how to render the
+data in the ETableModel for this specific row.</P><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7008"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">col_idx</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the column we represent in the model</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7013"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">pixbuf</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the image to be used for the header</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7018"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">expansion</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> FIXME</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7023"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">min_width</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> minimum width in pixels for this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7028"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">ecell</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the renderer to be used for this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7033"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">compare</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> comparision function for the elements stored in this column</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7038"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">resizable</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> whether the column can be resized interactively by the user</P></TD></TR><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7043"><SPAN STYLE="white-space: nowrap"><SPAN CLASS="emphasis"><I CLASS="EMPHASIS">Returns</I></SPAN>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P> the newly created ETableCol object.</P></TD></TR></TBODY></TABLE></DIV><HR><DIV CLASS="REFSECT2"><A NAME="AEN7048"></A><H3><A NAME="E-TABLE-COL-DESTROY"></A>e_table_col_destroy ()</H3><PRE CLASS="PROGRAMLISTING"><GTKDOCLINK HREF="VOID">void</GTKDOCLINK>                e_table_col_destroy                 (<A HREF="etablecol.html">ETableCol</A> *etc);</PRE><P></P><P></P><TABLE CLASS="variablelist" BORDER="0" CELLSPACING="0" CELLPADDING="4"><TBODY><TR><TD ALIGN="LEFT" VALIGN="TOP"><A NAME="AEN7058"><SPAN STYLE="white-space: nowrap"><CODE CLASS="PARAMETER">etc</CODE>&nbsp;:</SPAN></TD><TD ALIGN="LEFT" VALIGN="TOP"><P>&#13;</P></TD></TR></TBODY></TABLE></DIV></DIV><TABLE CLASS="navigation" WIDTH="100%" SUMMARY="Navigation footer" CELLPADDING="2" CELLSPACING="2"><TR VALIGN="middle"><TD ALIGN="left"><A ACCESSKEY="p" HREF="etableone.html"><B>&lt;&lt;&lt;&nbsp;ETableOne</B></A></TD><TD ALIGN="right"><A ACCESSKEY="n" HREF="etablefieldchooseritem.html"><B>ETableFieldChooserItem&nbsp;&gt;&gt;&gt;</B></A></TD></TR></TABLE></BODY></HTML>
