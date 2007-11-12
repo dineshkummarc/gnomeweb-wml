@@ -9,6 +9,7 @@ page_SCRIPTS= \
 	index.html \
 	download.html \
 	screenshots.html \
+	detect.py \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/cheese
@@ -51,6 +52,7 @@ images_DATA =\
   data/images/package-x-generic.png \
   data/images/dialog-information.png \
   data/images/application-x-executable.png \
+  data/images/dialog-warning.png \
 	$(NULL)
 
 include $(top_srcdir)/rules.common
