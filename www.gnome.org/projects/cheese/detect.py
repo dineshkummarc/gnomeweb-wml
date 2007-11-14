@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# Changes:
+# 2007-11-14: Added support for PCI devices <patrys>
 
 import dbus
 import gst
@@ -129,8 +131,16 @@ def detect():
 				dev = dbus.Interface(dev_obj, 'org.freedesktop.Hal.Device')
 				parent_obj = bus.get_object('org.freedesktop.Hal', dev.GetProperty('info.parent'))
 				parent = dbus.Interface(parent_obj, 'org.freedesktop.Hal.Device')
-				print '    <match key="@info.parent:usb_device.vendor_id" int="0x%0xd">' % parent.GetProperty('usb_device.vendor_id')
-				print '      <match key="@info.parent:usb_device.product_id" int="0x%0xd">' % parent.GetProperty('usb_device.product_id')
+				subsystem = parent.GetProperty('info.subsystem')
+				if subsystem == 'pci':
+					print '    <match key="@info.parent:pci.vendor_id" int="0x%0xd">' % parent.GetProperty('pci.vendor_id')
+					print '      <match key="@info.parent:pci.product_id" int="0x%0xd">' % parent.GetProperty('pci.product_id')
+				elif subsystem == 'usb_device':
+					print '    <match key="@info.parent:usb_device.vendor_id" int="0x%0xd">' % parent.GetProperty('usb_device.vendor_id')
+					print '      <match key="@info.parent:usb_device.product_id" int="0x%0xd">' % parent.GetProperty('usb_device.product_id')
+				else:
+					print '    <match key="unknown" int="0">'
+					print '      <match key="%s" int="0">' % subsystem
 				(name, caps) = parse('v4l2src name=source device=%s ! fakesink' % dev.GetProperty('video4linux.device'))
 				if name:
 					print '        <merge key="gstreamer.source" type="string">v4l2src</merge>'
@@ -142,11 +152,11 @@ def detect():
 					print '        <merge key="info.product" type="string">%s</merge>' % name
 					for cap in caps:
 						print '        <append key="gstreamer.capabilities" type="strlist">%s</append>' % cap
-			print '      </match>'
-			print '    </match>'
+				print '      </match>'
+				print '    </match>'
 			print '  </device>'
 			print '</deviceinfo>'
-	except None:
+	except dbus.exceptions.DBusException:
 		print 'HAL is down'
 
 detect()
