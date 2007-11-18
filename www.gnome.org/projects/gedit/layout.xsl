@@ -15,6 +15,23 @@
   <!-- Load release data from current-release.xml -->
   <xsl:variable name="release" select="document('current-release.xml')/release"/>
 
+  <!-- current page name -->
+  <xsl:variable name="pname" select="/page/@name"/>
+
+  <!-- template to make navigation menu items -->
+  <xsl:template name="navitem">
+    <xsl:param name="target"/>
+    <xsl:param name="name"/>
+    <xsl:choose>
+      <xsl:when test="$pname=$name">
+        <a href="{$target}"><b><xsl:value-of select="$name"/></b></a>
+      </xsl:when>
+      <xsl:otherwise>
+        <a href="{$target}"><xsl:value-of select="$name"/></a>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <!-- our page layout -->
   <xsl:template match="/">
     <html>
@@ -30,15 +47,30 @@
         <div id="hdr">
           <a href="http://www.gnome.org/"><img id="logo" src="http://gnome.org/img/logo/text-64" alt="Gnome" /></a>
           <div id="hdrNav">
-            <a href="index.html"><b>Home</b></a>
+            <xsl:call-template name="navitem">
+              <xsl:with-param name="target">index.html</xsl:with-param>
+              <xsl:with-param name="name">Home</xsl:with-param>
+            </xsl:call-template>
             <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <a href="plugins.html">Plugins</a>
+            <xsl:call-template name="navitem">
+              <xsl:with-param name="target">plugins.html</xsl:with-param>
+              <xsl:with-param name="name">Plugins</xsl:with-param>
+            </xsl:call-template>
             <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <a href="screenshots.html">Screenshots</a>
+            <xsl:call-template name="navitem">
+              <xsl:with-param name="target">screenshots.html</xsl:with-param>
+              <xsl:with-param name="name">Screenshots</xsl:with-param>
+            </xsl:call-template>
             <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <a href="developers.html">Developers</a>
+            <xsl:call-template name="navitem">
+              <xsl:with-param name="target">developers.html</xsl:with-param>
+              <xsl:with-param name="name">Developers</xsl:with-param>
+            </xsl:call-template>
             <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <a href="http://live.gnome.org/Gedit">Wiki</a>
+            <xsl:call-template name="navitem">
+              <xsl:with-param name="target">http://live.gnome.org/Gedit</xsl:with-param>
+              <xsl:with-param name="name">Wiki</xsl:with-param>
+            </xsl:call-template>
           </div>
         </div>
 
