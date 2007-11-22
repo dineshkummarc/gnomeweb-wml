@@ -69,7 +69,7 @@ page_SCRIPTS = \
 	gmae-quotesheet.html \
 	guadec2007.html \
 	igaliajoins.html \
-	gnome10years.html
-
+	gnome10years.html \
+	ecma-tc45-statement.html
 
 include $(top_srcdir)/rules.common
