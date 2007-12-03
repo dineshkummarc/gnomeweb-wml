@@ -2,8 +2,9 @@ SUBDIRS=
 
 urlpath=/projects/chronojump/slides_en-fr
 
-page_SCRIPTS= 
-	
+include $(top_srcdir)/rules.common
+
+page_SCRIPTS = 
 	1.html \
 	2.html \
 	3.html \
@@ -28,7 +29,9 @@ page_SCRIPTS=
 	22.html \
 	23.html \
 	24.html \
-	25.html \
+	25.html 
+
+misc_images=\
 	1-00-chronojump.png \
 	1-01-intro_time.png \
 	1-02-intro_jump.png \
@@ -54,5 +57,3 @@ page_SCRIPTS=
 	4-00-congresses.png \
 	4-10-final_words.png \
 	5-00-acknowledgements.png 
-
-include $(top_srcdir)/rules.common
