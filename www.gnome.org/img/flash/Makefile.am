@@ -43,6 +43,7 @@ page_DATA = \
 	guadec2007-splash.png \
 	gnome10years.png \
 	gnome10years.jpg \
-	two-twenty.jpg
+	two-twenty.jpg \
+	ghop-2007.png
 
 include $(top_srcdir)/rules.common
