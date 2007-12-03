@@ -4,8 +4,8 @@ urlpath=/projects/chronojump/slides-en-fr
 
 include $(top_srcdir)/rules.common
 
-page_SCRIPTS = 
-	1.html \
+page_SCRIPTS =\
+       	1.html \
 	2.html \
 	3.html \
 	4.html \
@@ -29,9 +29,7 @@ page_SCRIPTS =
 	22.html \
 	23.html \
 	24.html \
-	25.html 
-
-misc_images=\
+	25.html \
 	1-00-chronojump.png \
 	1-01-intro_time.png \
 	1-02-intro_jump.png \
