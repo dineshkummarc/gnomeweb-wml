@@ -2,7 +2,8 @@ SUBDIRS=
 
 urlpath=/projects/chronojump/print
 
-page_SCRIPTS= index.html	\
+page_SCRIPTS= 
+	index.html	\
 	construction_contact_platform.html \
 	construction_contact_platform_ca.html \
 	construction_contact_platform_es.html \
@@ -47,6 +48,7 @@ page_SCRIPTS= index.html	\
 	features_pt.html \
 	index_ca.html \
 	index_de.html \
+	index_en.html	\
 	index_es.html \
 	index_fr.html \
 	index_gl.html \
