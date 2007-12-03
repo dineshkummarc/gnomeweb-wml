@@ -7,6 +7,8 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
+	1.png \
+	2.png \
 	chronojump_main_047.png \
 	chronojump_main_047_small.png \
 	chronojump_windows.png \
