@@ -2,7 +2,7 @@ SUBDIRS=
 
 urlpath=/projects/chronojump/images
 
-misc_images=\
+page_SCRIPTS= \
 	1.png \
 	2.png \
 	chronojump_main_047.png \
