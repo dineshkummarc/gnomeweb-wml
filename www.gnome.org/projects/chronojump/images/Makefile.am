@@ -53,6 +53,6 @@ misc_images=\
 	plataforma_contactos_remaches.jpg \
 	plataforma_contactos_taladrar_varillas.jpg \
 	plataforma_contactos_unir_conjuntos_varilla.jpg \
-	tropheesdulibre.png \
+	tropheesdulibre.jpg \
 	test_png.png \
 	test_jpg.jpg 
