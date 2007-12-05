@@ -2,10 +2,6 @@ SUBDIRS=
 
 urlpath=/projects/chronojump/images
 
-page_SCRIPTS=
-
-include $(top_srcdir)/rules.common
-
 misc_images=\
 	1.png \
 	2.png \
@@ -56,3 +52,6 @@ misc_images=\
 	tropheesdulibre.jpg \
 	test_png.png \
 	test_jpg.jpg 
+
+include $(top_srcdir)/rules.common
+
