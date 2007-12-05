@@ -2,7 +2,7 @@ SUBDIRS= images articles print slides-en-fr
 
 urlpath=/projects/chronojump
 
-page_SCRIPTS= 
+page_SCRIPTS= \
 	index.html	\
 	construction_contact_platform_en.html \
 	construction_contact_platform_ca.html \
