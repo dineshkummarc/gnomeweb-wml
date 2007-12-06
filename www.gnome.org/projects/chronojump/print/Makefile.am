@@ -13,15 +13,15 @@ page_SCRIPTS= \
 	construction_contact_platform_comments_es.html \
 	construction_contact_platform_parallel_port_ca.html \
 	construction_contact_platform_parallel_port_es.html \
-	construction_chronopic_juanfer_en.html \
+	construction_chronopic_juanfer.html \
 	construction_chronopic_juanfer_es.html \
 	construction_chronopic_juanfer_gl.html \
-	construction_en.html \
+	construction.html \
 	construction_ca.html \
 	construction_es.html \
 	construction_gl.html \
 	construction_pt.html \
-	contact_en.html \
+	contact.html \
 	contact_ca.html \
 	contact_de.html \
 	contact_es.html \
@@ -30,17 +30,17 @@ page_SCRIPTS= \
 	contact_pt.html \
 	courses_ca.html \
 	courses_es.html \
-	documents_en.html \
+	documents.html \
 	documents_ca.html \
 	documents_es.html \
 	documents_gl.html \
 	documents_pt.html \
-	faq_en.html \
+	faq.html \
 	faq_ca.html \
 	faq_es.html \
 	faq_gl.html \
 	faq_pt.html \
-	features_en.html \
+	features.html \
 	features_ca.html \
 	features_de.html \
 	features_es.html \
@@ -54,13 +54,13 @@ page_SCRIPTS= \
 	index_gl.html \
 	index_it.html \
 	index_pt.html \
-	installation_en.html \
+	installation.html \
 	installation_ca.html \
 	installation_es.html \
 	installation_gl.html \
 	installation_pt.html \
 	photocells_es.html \
-	screenshots_en.html \
+	screenshots.html \
 	screenshots_ca.html \
 	screenshots_es.html \
 	screenshots_gl.html \
