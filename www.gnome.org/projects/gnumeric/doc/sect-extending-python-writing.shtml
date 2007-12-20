@@ -1,10 +1,10 @@
-<html>
+<html xmlns:set="http://exslt.org/sets">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Writing your own Python functions</title>
 <link rel="previous" href="sect-extending-python-builtins.shtml" title="Using the built-in Python functions">
 <link rel="next" href="extending-python-upgrading.shtml" title="Upgrading">
-<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">
 <link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 <div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
 <li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
 <li>
-<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a><div class="autotoc"><ul>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a><div class="autotoc"><ul>
 <li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
 <li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
 <li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
@@ -54,7 +54,7 @@
 <div class="body body-sidebar"><div class="division sect2">
 <a name="sect-extending-python-writing"></a><div class="header"><h1 class="sect2 title"><span class="title">Writing your own Python functions</span></h1></div>
 <ul class="linktrail">
-<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.7">The Gnumeric Manual, version 1.7</a></li>
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a></li>
 <li class="linktrail"><a class="linktrail" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
 <li class="linktrail linktrail-last"><a class="linktrail" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></li>
 </ul>
@@ -67,13 +67,13 @@
 	  files. We'll create a spellbook called "myfuncs". A pedestrian name
 	  for pedestrian spells. When I have more skill, perhaps I'll make
 	  some with better names. Several suggest themselves:
-	  <div class="block list"><div class="itemizedlist"><ul>
+	  <div class="block list itemizedlist"><ul class="itemizedlist">
 <li class="li-first"><span class="para">Transformations: of obvious value for a spreadsheet</span></li>
 <li><span class="para">Illusions: statistical functions, clearly</span></li>
 <li><span class="para">Charms: presentation graphics</span></li>
 <li><span class="para">Necromancy: file repair and missing values?</span></li>
 <li><span class="para">Divination: data mining!</span></li>
-</ul></div></div>
+</ul></div>
 	</p>
 <div class="autotoc"><ul>
 <li>
@@ -98,17 +98,17 @@
 	  py_func spellbook to your local .gnumeric folder, and just adding a
 	  function to that. But in general it will be more useful to be
 	  able to write your own separate spellbooks, so here we go.</p>
-<div class="block list"><div class="procedure"><ol>
+<div class="block list procedure"><ol class="procedure">
 <li class="li-first">
 		  <p class="para block block-first">
 			<span class="emphasis emphasis-bold">Make the folder: </span>
 			First we make the folders and get into the right one. As noted
 			above, we'll call our folder (spellbook) myfuncs.
 		  </p>
-		  <div class="substeps"><ol type="a">
+		  <div class="block list substeps"><ol class="substeps" type="a">
 			<li class="li-first">
 <p class="para block block-first">If they don't already exist:</p>
-			  <div class="substeps"><ol type="i">
+			  <div class="block list substeps"><ol class="substeps" type="i">
 				<li class="li-first"><p class="para block block-first"><span class="literal">mkdir ~/.gnumeric</span></p></li>
 				<li><p class="para block block-first"><span class="literal">mkdir ~/.gnumeric/&lt;version&gt;</span></p></li>
 			  </ol></div>
@@ -127,7 +127,7 @@
 			<span class="emphasis">is</span>, and one other important item. We'll create these as
 			blank files.
 		  </p>
-		  <div class="substeps"><ol type="a">
+		  <div class="block list substeps"><ol class="substeps" type="a">
 			<li class="li-first"><p class="para block block-first"><span class="literal">touch my-func.py</span></p></li>
 			<li><p class="para block block-first"><span class="literal">touch plugin.xml</span></p></li>
 		  </ol></div>
@@ -144,7 +144,7 @@
 			plugin.xml and insert the following lines:
 		  </p>
 
-		  <div class="programlisting block block-indent"><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+		  <div class=" block programlisting block-indent"><pre class="programlisting">&lt;?xml version="1.0"?&gt;
 &lt;plugin id="Gnumeric_MyFuncPlugin"&gt;
 	&lt;information&gt;
 		&lt;name&gt;Other Python functions from HOWTO&lt;/name&gt;
@@ -190,7 +190,7 @@
 			called <span class="emphasis emphasis-bold">example</span>_functions.
 			So open up my-func.py and insert the following lines.
 		  </p>
-		  <div class="programlisting block block-indent"><pre class="programlisting"># my-func.py
+		  <div class=" block programlisting block-indent"><pre class="programlisting"># my-func.py
 #
 
 from Gnumeric import GnumericError, GnumericErrorVALUE
@@ -201,25 +201,25 @@ example_functions = {
 }
 		  </pre></div>
 		</li>
-</ol></div></div>
+</ol></div>
 </div>
 <div class="division sect3">
 <a name="sect-extending-python-writing-newspells"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.2. </span>Writing new spells</span></h2></div>
 <p class="para block block-first">To add new functions to Python, you now must do five things
 		(three sir!):</p>
-<div class="block list"><div class="procedure"><ol>
+<div class="block list procedure"><ol class="procedure">
 <li class="li-first"><p class="para block block-first">Write the python function in your copy of
 		  <span class="literal">my-func.py</span>.</p></li>
 <li><p class="para block block-first">Insert the function info into the <span class="literal">example_functions</span>
 		  dictionary at the end of <span class="literal">my_func.py</span></p></li>
 <li><p class="para block block-first">Insert the function name into the functions list at the end of
 		  <span class="literal">plugin.xml</span>.</p></li>
-</ol></div></div>
+</ol></div>
 <p class="para block">
 		<span class="emphasis emphasis-bold">Writing a simple script:</span>
 		Let's do something very simple: add two numbers
 		together. First, edit my-func.py.</p>
-<div class="programlisting block block-indent"><pre class="programlisting">	<span class="emphasis"># Add two numbers together</span>
+<div class=" block programlisting block-indent"><pre class="programlisting">	<span class="emphasis"># Add two numbers together</span>
     def func_add(num1, num2):
         return num1 + num2
 
@@ -231,7 +231,7 @@ example_functions = {
 <p class="para block">Then let the plugin-loader(?) know about your function. Add the
 	following line near the end of plugin.xml (between
 	  &lt;functions&gt; and &lt;/functions&gt;).</p>
-<div class="programlisting block block-indent"><pre class="programlisting">                 &lt;function name="py_add"/&gt;
+<div class=" block programlisting block-indent"><pre class="programlisting">                 &lt;function name="py_add"/&gt;
 	</pre></div>
 <p class="para block">Now start Gnumeric and type <span class="literal">py_add(2,3)</span> into a
 	  cell. You should get "5". You can also use cell references. If
@@ -243,7 +243,7 @@ example_functions = {
 		To make your function show up in the GUI, you have to tell
 		Gnumeric some things about it via a standard header, like
 		this:</p>
-<div class="programlisting block block-indent"><pre class="programlisting">	<span class="emphasis"># Add two numbers together</span>
+<div class=" block programlisting block-indent"><pre class="programlisting">	<span class="emphasis"># Add two numbers together</span>
 	def func_add(num1, num2):
         '@FUNCTION=PY_ADD\n'\
         '@SYNTAX=py_add(num1, num2)\n'\
@@ -283,11 +283,11 @@ example_functions = {
 		Gnumeric's functions are available to you in the dictionary
 		Gnumeric.functions, keyed by name. So here is how to write py_sum.
 	  </p>
-<div class="block list"><div class="procedure"><ol>
+<div class="block list procedure"><ol class="procedure">
 <li class="li-first">
 		  <p class="para block block-first">First, define func_sum (in my-func.py):</p>
 		  
-		  <div class="programlisting block block-indent"><pre class="programlisting">def func_sum(gRange):
+		  <div class=" block programlisting block-indent"><pre class="programlisting">def func_sum(gRange):
 	'@FUNCTION=PY_SUM\n'\
 	'@SYNTAX=PY_SUM(range)\n'\
 	'@DESCRIPTION=Adds a range of numbers together.'\
@@ -309,7 +309,7 @@ example_functions = {
 <p class="para block block-first">Then insert it into your functions dictionary. That
 		dictionary now looks like this (with 'r' denoting a range type):</p>
 
-		  <div class="programlisting block block-indent"><pre class="programlisting">example_functions = {
+		  <div class=" block programlisting block-indent"><pre class="programlisting">example_functions = {
 	'py_add': ('ff','num1,num2',func_add),
 	'py_sum': ('r', 'values', func_sum)
 }
@@ -318,13 +318,13 @@ example_functions = {
 <li>
 <p class="para block block-first">Finally, make an entry in the XML list, so that it now looks
 		  like:</p>
-		  <div class="programlisting block block-indent"><pre class="programlisting">			&lt;functions&gt;
+		  <div class=" block programlisting block-indent"><pre class="programlisting">			&lt;functions&gt;
 				&lt;function name="py_add"/&gt;
 				&lt;function name="py_sum"/&gt;
 			&lt;/functions&gt;
 		  </pre></div>
 		</li>
-</ol></div></div>
+</ol></div>
 <p class="para block">I told you this was the easy way to do it. Obviously it's not
 		very useful to just duplicate Gnumeric functions. But that's as
 		far as I've made it. From what can tell, range objects are
@@ -342,7 +342,7 @@ example_functions = {
     the range. So we can redo the sum function.</p>
 <p class="para block">Presume we can convert our RangeRef to a start tuple and and
     end tuple. Then we can write sum2:
-		<div class="programlisting block block-indent block-first"><pre class="programlisting">def func_sum2(gRange):
+		<div class=" block programlisting block-indent block-first"><pre class="programlisting">def func_sum2(gRange):
 	'@FUNCTION=PY_SUM2\n'\
 	'@SYNTAX=PY_SUM2(range)\n'\
 	'@DESCRIPTION=Adds a range of numbers together,'\
@@ -372,7 +372,7 @@ example_functions = {
     function "range_ref_to_tuples". Although I'm rather ashamed to
     show this ugly literal, here's how I did it (someone suggest a
     better way, please!):
-		<div class="programlisting block block-indent block-first"><pre class="programlisting">def range_ref_to_tuples(range_ref):
+		<div class=" block programlisting block-indent block-first"><pre class="programlisting">def range_ref_to_tuples(range_ref):
 	'''I need a function to find the bounds of a RangeRef. This one
 	extracts them from the Gnumeric "column" and "row" commands, and
 	returns them as a pair of tuples. Surely there is a better way?
@@ -419,7 +419,7 @@ example_functions = {
 		peeking!). Restart Gnumeric and you should be able to use
 		py_sum2!</p>
 <p class="para block">There are a couple of glitches:</p>
-<div class="block list"><div class="itemizedlist"><ul>
+<div class="block list itemizedlist"><ul class="itemizedlist">
 <li class="li-first"><span class="para">It fails the first time with "could not import
 		  gobject". Just run again, I don't know what that's about.</span></li>
 <li><span class="para">It will only work for Workbook 1 and Sheet 1. JK thinks that
@@ -428,25 +428,25 @@ example_functions = {
 <li><span class="para">As noted, it should do some simple trapping to skip blank or
       text-filled cells. That <span class="emphasis">can</span> be done! I just didn't. It's
       late.</span></li>
-</ul></div></div>
+</ul></div>
 </div>
 <div class="division sect3">
 <a name="extending-python-writing-help"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.4. </span>More help</span></h2></div>
 <p class="para block block-first">Relative to the source tree:</p>
-<div class="block list"><div class="itemizedlist"><ul>
+<div class="block list itemizedlist"><ul class="itemizedlist">
 <li class="li-first"><span class="para">The Python interface is defined in: <span class="literal">plugins/python-loader/py-gnumeric.c</span>
 		  That file also has good notes at the beginning.</span></li>
 <li><span class="para">There are interesting things about the way it used to be in:
 		  <span class="literal">doc/developer/python-gnumeric.txt</span>.</span></li>
-</ul></div></div>
+</ul></div>
 </div>
 <div class="division sect3">
 <a name="extending-python-writing-programs"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.4.5. </span>Program Listings</span></h2></div>
 <p class="para block block-first">You can see my examples in full, with more comments:
-		<div class="block list"><div class="itemizedlist"><ul>
+		<div class="block list itemizedlist"><ul class="itemizedlist">
 <li class="li-first"><span class="para"><a class="ulink" href="myfuncs/my-func.py" title="myfuncs/my-func.py"><span class="literal">my-func.py</span></a></span></li>
 <li><span class="para"><a class="ulink" href="myfuncs/plugin.xml" title="myfuncs/plugin.xml"><span class="literal">plugin.xml</span></a></span></li>
-</ul></div></div>
+</ul></div>
 	  </p>
 </div>
 </div></div>
