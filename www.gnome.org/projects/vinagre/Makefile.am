@@ -10,7 +10,8 @@ page_SCRIPTS= 	index.html \
 		vinagre1g.png \
 		vinagre1p.png \
 		vinagre2.png \
-		vinagre3.png
+		vinagre3.png \
+		vinagre4.png
 
 
 include $(top_srcdir)/rules.common
