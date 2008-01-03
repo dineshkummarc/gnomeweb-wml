@@ -1,11 +1,8 @@
-urlpath=/projects/gnumeric/announcements/1.6
+urlpath=/projects/gnumeric/announcements/1.8
 
 page_SCRIPTS= \
-	gnumeric-1.6.3.html \
-	gnumeric-1.6.2.html \
-	gnumeric-1.6.1.html \
-	gnumeric-1.6.0.html \
-	gnumeric-1.6.shtml \
+	gnumeric-1.8.0.html \
+	gnumeric-1.8.html \
 	index.shtml
 
 include $(top_srcdir)/rules.common
