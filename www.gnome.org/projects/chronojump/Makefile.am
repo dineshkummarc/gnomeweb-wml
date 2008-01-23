@@ -84,6 +84,10 @@ page_SCRIPTS= \
 	chronojump_main_06.png \
 	chronojump_main_06_small.png \
 	old_chronopics_ca.html \
+	old_chronopics_es.html \
+	old_chronopics_gl.html \
+	old_chronopics.html \
+	old_chronopics_pt.html \
 	style.css
 
 include $(top_srcdir)/rules.common
