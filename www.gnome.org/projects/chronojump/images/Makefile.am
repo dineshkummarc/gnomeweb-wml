@@ -50,6 +50,10 @@ page_SCRIPTS= \
 	plataforma_contactos_taladrar_varillas.jpg \
 	plataforma_contactos_unir_conjuntos_varilla.jpg \
 	tropheesdulibre.jpg \
+	Chronopic_v3.0.jpg \
+	Chronopic_v3.0_PCB.jpg \
+	Chronopic_v3.0_PCB_small.jpg \
+	Chronopic_v3.0_small.jpg \
 	test_png.png \
 	test_jpg.jpg 
 
