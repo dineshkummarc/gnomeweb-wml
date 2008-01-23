@@ -83,6 +83,7 @@ page_SCRIPTS= \
 	chronopic_2_0_usb_front_mini.jpg \
 	chronojump_main_06.png \
 	chronojump_main_06_small.png \
+	old_chronopics_ca.html \
 	style.css
 
 include $(top_srcdir)/rules.common

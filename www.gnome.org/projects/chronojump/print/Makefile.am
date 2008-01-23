@@ -59,6 +59,7 @@ page_SCRIPTS= \
 	installation_es.html \
 	installation_gl.html \
 	installation_pt.html \
+	old_chronopics_ca.html \
 	photocells_es.html \
 	screenshots.html \
 	screenshots_ca.html \
