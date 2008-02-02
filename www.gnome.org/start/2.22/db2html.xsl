@@ -53,8 +53,8 @@
 
 <!-- Stick some extra stuff in the HTML <head> element. -->
 <xsl:template name="db2html.division.head.extra">
-  <link href="/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-  <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
+  <link href="/css/layout.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
   <link rel="icon" type="image/png" href="http://www.gnome.org/img/logo/foot-16.png"/>
 </xsl:template>
 
