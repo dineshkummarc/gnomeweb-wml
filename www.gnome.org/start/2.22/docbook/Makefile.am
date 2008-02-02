@@ -3,7 +3,7 @@
 urlpath = /start/2.22/docbook
 
 PKG_CONFIG=pkg-config
-include /usr/share/gnome-doc-utils/gnome-doc-utils.make
+include $(top_srcdir)/www.gnome.org/start/2.22/docbook/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
 DOC_MODULE = release-notes
