@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gedit/images
+urlpath=/projects/gtksourceview/images
 
 page_SCRIPTS= \
 	bullet.gif \
