@@ -18,6 +18,7 @@ SUBDIRS = \
 	gnome-libs		\
 	gnumeric		\
 	guppi			\
+	gtksourceview		\
 	gyrus			\
 	gb			\
 	nautilus		\
