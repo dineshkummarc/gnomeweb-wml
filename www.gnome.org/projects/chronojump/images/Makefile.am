@@ -54,6 +54,8 @@ page_SCRIPTS= \
 	Chronopic_v3.0_PCB.jpg \
 	Chronopic_v3.0_PCB_small.jpg \
 	Chronopic_v3.0_small.jpg \
+	chronopic3-metacrilato.jpg \
+	chronopic3-metacrilato_small.jpg \
 	xaviblas-correo.png \
 	test_png.png \
 	test_jpg.jpg 
