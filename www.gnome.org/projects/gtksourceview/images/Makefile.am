@@ -3,6 +3,7 @@ SUBDIRS= screenshots
 urlpath=/projects/gtksourceview/images
 
 page_SCRIPTS= \
+	favicon.png	\
 	header-bg.png	\
 	bullet.gif	\
 	logo.png	\
