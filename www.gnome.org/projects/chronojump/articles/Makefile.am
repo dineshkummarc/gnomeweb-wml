@@ -15,6 +15,8 @@ page_SCRIPTS= article_chronojump_aloma_179349b7.gif \
 	chronojump_sistema_de_medida_congreso_gpul.pdf \
 	proyecto_final_master_chronojump.pdf \
 	chronopic_cables_es.doc \
-	record_chronopic_pic_icprog_es.doc
+	record_chronopic_pic_icprog_es.doc \
+	validacion_chronopic3_sin_condensador_contra_osciloscopio.ods \
+	validacion_chronopic3_sin_condensador_contra_osciloscopio.pdf
 
 include $(top_srcdir)/rules.common
