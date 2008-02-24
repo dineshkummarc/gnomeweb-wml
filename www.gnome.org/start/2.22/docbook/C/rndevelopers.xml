@@ -24,10 +24,94 @@
 	<sect2 id="sect:gvfs-gio">
 		<title>GVFS and GIO</title>
 
+		<!-- much of this text is stolen from
+		     http://fedoraproject.org/wiki/Features/Gvfs and the GIO API docs -->
+
 		<para>
+			GVFS is a userspace virtual filesystem with backends for things like SFTP,
+			FTP, DAV, SMB, ObexFTP, etc.
 			GVFS is the replacement for GNOME-VFS. GNOME-VFS should now be considered
 			deprecated and developers should not use it in new applications.
 		</para>
+
+		<para>
+			GVFS/GIO aims to provide a modern, easy-to-use VFS system. Its goal is to
+			provide an API that developers prefer over raw POSIX IO calls. Rather than
+			closing the POSIX IO API, it provides a higher-level, document-centric
+			interface. As well as reading and writing files, GIO provides facilities
+			for file monitoring, asynchronous IO and filename completion.
+		</para>
+
+		<para>
+			GVFS consists of two parts:
+		</para>
+		<itemizedlist>
+			<listitem><para>
+				GIO, which is a new shared library that is part of
+				<application>GLib</application> and provides
+				the API for GVFS; and
+			</para></listitem>
+			<listitem><para>
+				GVFS itself, which is a new package containing backends for various file
+				system types and protocols such as SFTP, DAV, SMB and ObexFTP.
+			</para></listitem>
+		</itemizedlist>
+
+		<para>
+			The way GVFS works is that it runs a single master daemon (gvfsd) that
+			keeps track of the current GVFS mounts. Each mount is run in a separate
+			daemon (some mounts share a daemon process, but most don't). Clients talk
+			to the mounts with a combination of D-BUS calls (on the session bus and
+			using peer-to-peer D-BUS) and a custom protocol for file contents.
+			Moving the backends out-of-process minimises dependancy bloat for
+			applications and makes the whole system more robust.
+		</para>
+
+		<para>
+			GVFS also offers a FUSE mountpoint in <filename>~/.gfvs/</filename>
+			so that GVFS mounts can be exposed to legacy applications utilising
+			standard POSIX IO.
+		</para>
+
+		<para>
+			GVFS utilises the new
+			<ulink href="http://www.freedesktop.org/wiki/Specifications/trash-spec">
+			Desktop Trash Can</ulink> specification from freedesktop.org. Unlike
+			GNOME-VFS, connections in GVFS are stateful. This means that a user only
+			needs to enter his or her password once, not over and over again for each
+			successive connection.
+		</para>
+
+		<para>
+			API documentation for using GIO is
+			<ulink href="http://library.gnome.org/devel/gio/unstable/">available
+			online</ulink> along with migration guides for moving from POSIX IO and
+			GNOME-VFS to GIO.
+		</para>
+
+		<sect3 id="sect:gvfs-regressions">
+			<title>Regressions</title>
+
+			<!-- FIXME: check we need this section -->
+			<para>
+				Although GVFS fixes a lot of problems that previously existed by using
+				GNOME-VFS there are currently some feature regressions. Most notably:
+			</para>
+			<itemizedlist>
+				<listitem><para>no FTP support;</para></listitem>
+				<listitem><para>no network://, fonts:// or themes://
+												targets; and</para></listitem>
+				<listitem><para>no <guilabel>Connect To...</guilabel>
+												dialog.</para></listitem>
+			</itemizedlist>
+			<para>
+				These issues will be fixed as soon as possible. There are also some
+				applications that still remain to be ported over to GVFS, the state of
+				this port is <ulink href="http://live.gnome.org/GioPort">documented
+				online</ulink>.
+			</para>
+		</sect3>
+
 	</sect2>
 
 	<sect2 id="sect:anjunta">
