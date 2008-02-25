@@ -47,6 +47,7 @@ SUBDIRS = \
 	straw			\
 	orca                    \
 	wsop			\
+	outreach		\
 	hipo			\
 	brasero			\
 	gnome-scan		\
