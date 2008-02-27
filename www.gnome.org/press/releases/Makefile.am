@@ -70,6 +70,7 @@ page_SCRIPTS = \
 	guadec2007.html \
 	igaliajoins.html \
 	gnome10years.html \
-	ecma-tc45-statement.html
+	ecma-tc45-statement.html \
+	gop-a11y.html
 
 include $(top_srcdir)/rules.common
