@@ -46,7 +46,6 @@ SUBDIRS = \
 	baobab                  \
 	straw			\
 	orca                    \
-	wsop			\
 	outreach		\
 	hipo			\
 	brasero			\
