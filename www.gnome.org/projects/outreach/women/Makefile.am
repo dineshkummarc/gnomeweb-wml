@@ -1,5 +1,5 @@
 SUBDIRS = 
-urlpath = /projects/wsop
+urlpath = /projects/outreach/women
 
 page_SCRIPTS = \
 	index.html \
