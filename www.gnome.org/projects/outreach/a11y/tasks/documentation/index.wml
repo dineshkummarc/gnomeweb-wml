@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";>
+<html>
+
+<head>
+  <title>GNOME Outreach Program: Accessibility - Tasks</title>
+  <meta name="description" content="GNOME Outreach Program: Accessibility 2008" />
+  <meta name="cvsdate" content="$Date: 2006-07-02 02:31:07 +0300 (Dom, 02 Jul 2008) $" />
+</head>
+
+<body>
+
+<h1>GNOME Outreach Program: Accessibility - Tasks</h1>
+
+<p>
+<a href="../">Back to Tasks page</a>
+</p>
+
+<h2>Accessibility Documentation for Users and Developers</h2>
+
+<p>
+<b>Mentor:</b> <i>To be defined.</i><br/>
+</p>
+
+<p>
+See <a href="http://bugzilla.gnome.org/show_bug.cgi?id=519067">bug 519067</a> to track this task.
+</p>
+
+<p>
+This USD$6K/6mo task is for a good writer to update/edit/develop/deliver
+documentation for each of the following areas. This task may seem huge, but
+there is a lot of existing documentation to draw from. The person working on
+this task should work with the GNOME documentation team to get the new
+documentation in the right source format (<a
+href="http://live.gnome.org/DocBook">DocBook</a>) and stored in the right spot
+(gnome-user-docs and gnome-devel-docs) and should also do a
+search/destroy/relink mission to prevent people from landing on the old
+documentation by mistake (e.g., a Google search should bring you to the right
+spot and not some old crufty documentation).
+</p>
+
+<p>
+<b>NOTE:</b> The person working on this documentation does not have to be the one to
+scour all the code. The documentation can be written by interviewing
+maintainers of various components (e.g., AT-SPI maintainer, Orca maintainer,
+GOK maintainer, etc.). The ultimate deliverables, however, are still the
+responsibility of the person working on this task. 
+</p>
+
+<h3>How to develop and test for accessibility from an application developer's
+point of view</h3>
+
+<p>
+Application developers often know very little about accessibility -- they tend
+to support accessibility accidentally because the toolkit supports it. However,
+application developers often make common mistakes, such as neglecting keyboard
+traversal, making heavy use of images that have no text equivalents, not
+honoring desktop themes, forgetting to related labels to the things they are
+labeling (e.g., "First Name:" and the text area being labeled) and making/using
+custom widgets that do not support accessibility.
+</p>
+
+<p>
+One of the first responses from an application developer to an accessibility
+bug is "What? A11y what? Whojamawitchy? Where do I start?". The goal of this
+task is to be able to point those developers to concise instructions for
+testing for accessibility and how to avoid/address common pitfalls. This should
+include using assistive technologies (Orca, GOK) as well as useful tools such
+as Accerciser. Keep in mind that approachability from a person ignorant about
+accessibility, and with likely very little time to study a thesis on the
+subject, is very important. There is some existing documentation to draw from
+for this:
+</p>
+
+<ul>
+  <li><a href="http://live.gnome.org/GAP/testing/Testing_GNOME_Applications_for_Accessibility">http://live.gnome.org/GAP/testing/Testing_GNOME_Applications_for_Accessibility</a></li>
+  <li><a href="http://live.gnome.org/GAP/testing/Testing_GNOME_Applications_for_Accessibility">http://live.gnome.org/GAP/guide/GNOME_Accessibility_for_Developers</a> (may want to find DocBook source for the original document)</li>
+  <li><a href="http://live.gnome.org/GAP/testing/Testing_GNOME_Applications_for_Accessibility">http://live.gnome.org/GAP/AtkGuide</a></li>
+  <li><a href="http://live.gnome.org/Accessibility/Developers">Developer Documentation page</a> - there's a bunch of overlapping and out of date work.</li>
+</ul>
+
+<p>
+A document that includes the following might be considered:
+</p>
+
+<ul>
+  <li>How to test for keyboard traversal - include instructions on setting up label for/by relations and mnemonics via code and via glade and pointers to docs for the general GNOME Desktop key sequences</li>
+  <li>How to test for theming - include instructions for setting (and recovering from) the high contrast large print theme and pointers to docs for how to support theming</li>
+  <li>Pointer to Accerciser and maybe a quick example of using it in the context of testing for a11y</li>
+  <li>Quick testing with Orca and GOK - typical use cases and expected behavior</li>
+  <li>Pointers to gail to give custom widget developers examples of code they can use to make their widgets accessible</li>
+</ul>
+
+<p>
+Clearer diagrams (e.g. UML sequence diagrams) of why and how the accessibility
+infrastructure (application/atk/gail/at-spi/assistive-technology) works should
+also be created. In addition, the documentation should be clearer about the
+various dependencies and the order in which things should be built/installed.
+</p>
+
+<p>
+Here's some notes on the AT-SPI IDL documentation. It has good docs in it, but they seem to be scattered about and are not always up to date:
+</p>
+
+<p>
+"The history behind this is that the "new" IDL space was created as a workspace
+for drafting and documenting some extensions/enhancements to AT-SPI several
+Gnome versions ago. In the ensuing period, Doxygen documentation of AT-SPI's
+IDL in the main source tree was substantially improved; the "new idl"
+directory, which really should be have been named something else I suppose,
+lacks most of those documentation improvements - - BUT it DOES include draft
+documentation for the proposed new APIs, including Collection whose
+implementation has not yet made it into the CVS repository.
+</p>
+
+<p>
+The rather unsatisfactory situation of AT-SPI docs being in my personal Gnome
+directory came about because of the use of Doxygen and because it was, at least
+at that time, difficult to get the gnome.org/docs autogenerated documentation
+tree extended. The ATK docs have been there, autogenerated from SVN, for a long
+time, but we didn't get the IDL-based docs there, probably in part because they
+use doxygen instead of gtk-doc as the doc-creation-tool. This latter fact is
+because gtk-doc, while the "official" source documentation generator for gnome,
+cannot parse IDL, whereas doxygen can."
+</p>
+
+<h3>How to test for accessibility from an operating system distribution point
+of view</h3>
+
+<p>
+Even if everyone on the GNOME side does their job correctly, operating system
+distributions can still make mistakes when it comes to integrating
+accessibility support. This document should provide operating system
+distributions with concise directions for testing to make sure they didn't
+screw it up. The directions should include things such as the following, as
+well as integration tips, tricks, and troubleshooting:
+</p>
+
+<ul>
+  <li>Pointers to accessibility for application developers (above)</li>
+  <li>A concise list of package/product dependencies</li>
+  <li>Testing audio</li>
+  <li>Testing speech</li>
+  <li>Testing brltty (you can use the dummy X11 driver if you don't have braille hardware)</li>
+  <li>Testing hardware switches (e.g., <a href="http://live.gnome.org/Accessibility/Developers">http://www.orin.com/access/swifty/index.htm</a>, <a href="">http://www.tashinc.com/catalog/ca_mini_click.html</a>)</li>
+  <li>Testing theming (are the accessibility inspired themes installed and usable?)</li>
+  <li>Testing keyboard accessibility (i.e., "AccessX")</li>
+  <li>Testing accessible login</li>
+  <li>"Smoke testing" with various assistive technologies</li>
+</ul>
+
+<h3>GNOME Accessibility from a user's point of view</h3>
+
+<p>
+New users coming to GNOME often do not know where to start, and they are also
+unsure if they should make the jump from their existing platform (e.g.,
+Windows, Mac OSX) to GNOME. This documentation should include what's available
+and the capabilities provided by GNOME. It should offer concise information to
+help a new user quickly understand if they should make the jump, but also
+provide thorough documentation for getting going. As part of this, one should a
+thorough review and edit of the <a
+href="http://library.gnome.org/users/gnome-access-guide/">GNOME Desktop
+Accessibility Guide</a>.
+</p>
+
+<p>
+Ideally, GNOME should be a system that provides users with the independence to
+install and configure the accessibility environment themselves. However, some
+new users may need to work with their system administrators and clinicians to
+configure the accessibility environment. As such, this documentation should be
+written with that in mind.
+</p>
+
+<p>
+Each assistive technology (e.g., GOK, Orca, Dasher) could also use improvements
+in the documentation. See the <a
+href="http://live.gnome.org/Accessibility/Users">For Users</a> page for links
+to the assistive technologies. 
+</p>
+
+</body>
+
+</html>

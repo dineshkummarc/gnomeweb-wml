@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd";>
+<html>
+
+<head>
+  <title>GNOME Outreach Program: Accessibility - Tasks</title>
+  <meta name="description" content="GNOME Outreach Program: Accessibility 2008" />
+  <meta name="cvsdate" content="$Date: 2006-07-02 02:31:07 +0300 (Dom, 02 Jul 2008) $" />
+</head>
+
+<body>
+
+<h1>GNOME Outreach Program: Accessibility - Tasks</h1>
+
+<p>
+<a href="../">Back to Tasks page</a>
+</p>
+
+<h2>Magnification</h2>
+
+<p>
+<b>Mentor:</b>: <i>To be defined.</i>
+</p>
+
+<p>
+See <a href="http://bugzilla.gnome.org/show_bug.cgi?id=519080">bug 519080</a> to track this task.
+</p>
+
+<p>
+Overall, our ultimate goal is to let us get as good as or better than <a
+href="http://www.aisquared.com/index.cfm">ZoomText</a> as well as support new
+innovative accessibility features that can be enabled by the X COMPOSITE
+Extension. This USD$6K/6mo task is to get us on the path to that goal.
+</p>
+
+<h3>Background</h3>
+
+<p>
+The gnome-mag module provides a magnification service via ORBit/Bonobo. It also
+uses the <a href="http://freedesktop.org/wiki/Software/CompositeExt">X
+COMPOSITE Extension</a> to provide smoother and full screen magnification. In
+general, it works :-), but there are some performance
+concerns and some feature enhancements that could be done.
+</p>
+
+<p>
+Coming down the pipe is potential huge conflict: window managers are becoming
+COMPOSITE managers. We see this with the sexy effects of Compiz, and Metacity
+is also becoming a COMPOSITE manager. Since there can be only one COMPOSITE
+manager, the result is that gnome-mag's current form may not work when these
+new window managers are in use. In addition, there are some emerging magnifiers
+as well, such as <a href="http://dev.beryl-project.org/~kristian/category/summer-of-code/">eZoom for Compiz</a>.
+</p>
+
+<h3>Thoughts</h3>
+
+<p>
+See the <a
+href="http://mail.gnome.org/archives/gnome-accessibility-list/2008-February/msg00066.html">recent
+GNOME accessibility community discussion</a> on this topic.
+</p>
+
+<ul>
+  <li>The COMPOSITE extension opens the world for us to do lots and lots of really cool manipulation of what's being displayed on the desktop. This goes well beyond bit zooming and lets us get into really neat and useful stuff that can benefit a larger number of disabilities.</li>
+  <li>The architecture of the COMPOSITE extension seems to be that the most effective use of it is if you are in the process of the thing acting as the COMPOSITE manager.</li>
+  <li>As we see with Compiz and Metacity, people seem to be centering on the window manager as the COMPOSITE manager.</li>
+  <li>We have a desire to for external processes (e.g., Orca) to communicate with features provided by the COMPOSITE manager, such as magnification. Other things beyond magnification include highlighting a character/word/sentence/line/object/etc. of interest, providing tools for on screen keyboard to provide better visual experiences, etc.</li>
+  <li>We may need to consider systems where COMPOSITE may not be available.</li>
+</ul>
+
+<h3>Details</h3>
+
+<p>
+This 'magnification' task is larger than magnification (maybe we need to rename
+it something like CIMSITY -- COMPOSITE Interface for Magnification Services and
+other Interesting TechnologY ;-)). The current task proposal is to create a
+growable API that starts off by supporting at least what we need for
+magnification, but which will also eventually allow us to do other really
+really cool stuff. This API (most likely DBus based?) and an implementation of
+it will need to be available for the GNOME platform (e.g., in a revised
+gnome-mag, in metacity, or in something else). In addition, it must also expose
+itself as a service so that assistive technologies such as <a href="http://live.gnome.org/Orca">Orca</a> can influence
+what is being magnified and/or highlighted and how it is being magnified and/or
+highlighted. The person doing the work should also provide a migration path
+away from the current gnome-mag solution to the new solution (e.g., "how will
+it work with Orca?") and get buy-in from at least the GNOME community that this
+will be a supported solution.
+</p>
+
+<p>
+Someone well versed in the actual use cases of magnification by people with
+visual impairments should be consulted as part of this work -- magnification is
+far more than bit zooming. Carlos Eduardo Rodrigues Diógenes (the last
+maintainer of gnome-mag) has written <a href="http://blogs.gnome.org/carlosd/">some thoughts</a> on this as a potential
+starting point. 
+</p>
+
+</body>
+
+</html>

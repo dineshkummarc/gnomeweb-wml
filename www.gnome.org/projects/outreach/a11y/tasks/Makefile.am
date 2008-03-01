@@ -1,4 +1,4 @@
-SUBDIRS = 
+SUBDIRS = documentation evince magnification testing youridea 
 urlpath = /projects/outreach/a11y/tasks
 
 page_SCRIPTS = \
