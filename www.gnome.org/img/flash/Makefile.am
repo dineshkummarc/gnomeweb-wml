@@ -45,6 +45,7 @@ page_DATA = \
 	gnome10years.jpg \
 	two-twenty.jpg \
 	ghop-2007.png \
-	gnome-equation.png
+	gnome-equation.png \
+	outreach-a11y.png
 
 include $(top_srcdir)/rules.common
