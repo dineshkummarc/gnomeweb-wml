@@ -1,4 +1,4 @@
-SUBDIRS = notes press_release
+SUBDIRS = press_release
 
 urlpath = /start/2.14
 
