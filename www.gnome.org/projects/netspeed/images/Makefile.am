@@ -7,8 +7,8 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
-	icon.png \
-	logo.png \
+	netspeed-16.png \
+	netspeed-48.png \
 	netspeed-details.png \
 	netspeed-settings.png \
 	netspeed1.png \
