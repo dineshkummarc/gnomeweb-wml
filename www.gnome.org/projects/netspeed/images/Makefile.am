@@ -14,6 +14,7 @@ misc_images=\
 	netspeed1.png \
 	netspeed2.png \
 	netspeed3.png \
-	spacer.png
+	spacer.png \
+	top-bg.png
 
 page_DATA=$(misc_images)
