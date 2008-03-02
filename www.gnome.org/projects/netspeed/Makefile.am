@@ -2,9 +2,7 @@ SUBDIRS=images
 
 urlpath=/projects/netspeed/
 
-page_SCRIPTS= index.php	\
-		counter.txt \
-		php.inc \
+page_SCRIPTS= index.html \
 		netspeed.css
 
 
