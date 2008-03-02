@@ -23,6 +23,7 @@ SUBDIRS = \
 	gb			\
 	nautilus		\
 	nautilus-locked-folders \
+	netspeed                \
 	NetworkManager		\
 	ooo			\
 	ORBit2			\
