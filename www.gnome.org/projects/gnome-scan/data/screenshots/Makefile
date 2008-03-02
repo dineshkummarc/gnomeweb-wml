@@ -15,6 +15,5 @@ all: $(MINI)
 	-resize x$(SIZE) \
 	 $@
 
-
 clean:
-	find -name "*mini*.png" -exec rm {} \;
+	find -name "*mini.png" -exec rm {} \;
