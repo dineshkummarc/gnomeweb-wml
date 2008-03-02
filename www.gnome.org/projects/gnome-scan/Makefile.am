@@ -88,7 +88,7 @@ ss0404_DATA = \
 	data/screenshots/0.4.0.4/new-preview-ubuntu-mini.png \
 	$(NULL)
 
-ss0594 = $(screenshotsdir)/0.4.0.4
+ss0594dir = $(screenshotsdir)/0.4.0.4
 ss0594_DATA = \
 	data/screenshots/0.5.94/30-acquire-preview-mini.png \
 	data/screenshots/0.5.94/30-acquire-preview.png \
