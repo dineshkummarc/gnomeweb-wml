@@ -18,8 +18,6 @@ page_SCRIPTS= \
 	screenshots.de.html \
 	screenshots.fr.html \
 	screenshots.sv.html \
-	development.html \
-	development.fr.html \
 	contribute.html \
 	contribute.fr.html \
 	download.html \
@@ -88,6 +86,20 @@ ss0404_DATA = \
 	data/screenshots/0.4.0.4/new-preview-ubuntu.png \
 	data/screenshots/0.4.0.4/pdf-multipage-bug-mini.png \
 	data/screenshots/0.4.0.4/new-preview-ubuntu-mini.png \
+	$(NULL)
+
+ss0594 = $(screenshotsdir)/0.4.0.4
+ss0594_DATA = \
+	data/screenshots/0.5.94/30-acquire-preview-mini.png \
+	data/screenshots/0.5.94/30-acquire-preview.png \
+	data/screenshots/0.5.94/50-acquire-mini.png \
+	data/screenshots/0.5.94/20-device-selected.png \
+	data/screenshots/0.5.94/40-preview-mini.png \
+	data/screenshots/0.5.94/50-acquire.png \
+	data/screenshots/0.5.94/40-preview.png \
+	data/screenshots/0.5.94/10-main-mini.png \
+	data/screenshots/0.5.94/20-device-selected-mini.png \
+	data/screenshots/0.5.94/10-main.png \
 	$(NULL)
 
 imagesdir = $(pagedir)/data/images
