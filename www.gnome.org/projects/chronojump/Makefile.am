@@ -4,6 +4,7 @@ urlpath=/projects/chronojump
 
 page_SCRIPTS= \
 	index.html	\
+	chronopic3_lista_espera_es.html \
 	construction_contact_platform.html \
 	construction_contact_platform_ca.html \
 	construction_contact_platform_es.html \
