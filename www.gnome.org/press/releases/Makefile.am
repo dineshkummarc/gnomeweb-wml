@@ -73,6 +73,6 @@ page_SCRIPTS = \
 	ecma-tc45-statement.html \
 	gop-a11y.html \
 	guadec2008.html \
-	2008-03-mofojoins.wml
+	2008-03-mofojoins.html
 
 include $(top_srcdir)/rules.common
