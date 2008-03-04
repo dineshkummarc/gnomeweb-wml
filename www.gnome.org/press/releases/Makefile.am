@@ -72,6 +72,7 @@ page_SCRIPTS = \
 	gnome10years.html \
 	ecma-tc45-statement.html \
 	gop-a11y.html \
-	guadec2008.html
+	guadec2008.html \
+	2008-03-mofojoins.wml
 
 include $(top_srcdir)/rules.common
