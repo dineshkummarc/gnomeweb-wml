@@ -70,22 +70,22 @@ ss021_DATA = \
 	data/screenshots/0.2.1/documentation.png \
 	$(NULL)
 
-ss0404dir = $(screenshotsdir)/0.4.0.4
-ss0404_DATA = \
-	data/screenshots/0.4.0.4/main-filled-mini.png \
-	data/screenshots/0.4.0.4/main-filled.png \
-	data/screenshots/0.4.0.4/preview.png \
-	data/screenshots/0.4.0.4/advanced.png \
-	data/screenshots/0.4.0.4/main.png \
-	data/screenshots/0.4.0.4/gimp-plugin.png \
-	data/screenshots/0.4.0.4/preview-mini.png \
-	data/screenshots/0.4.0.4/advanced-mini.png \
-	data/screenshots/0.4.0.4/main-mini.png \
-	data/screenshots/0.4.0.4/gimp-plugin-mini.png \
-	data/screenshots/0.4.0.4/pdf-multipage-bug.png \
-	data/screenshots/0.4.0.4/new-preview-ubuntu.png \
-	data/screenshots/0.4.0.4/pdf-multipage-bug-mini.png \
-	data/screenshots/0.4.0.4/new-preview-ubuntu-mini.png \
+ss041dir = $(screenshotsdir)/0.4.1
+ss041_DATA = \
+	data/screenshots/0.4.1/main-filled-mini.png \
+	data/screenshots/0.4.1/main-filled.png \
+	data/screenshots/0.4.1/preview.png \
+	data/screenshots/0.4.1/advanced.png \
+	data/screenshots/0.4.1/main.png \
+	data/screenshots/0.4.1/gimp-plugin.png \
+	data/screenshots/0.4.1/preview-mini.png \
+	data/screenshots/0.4.1/advanced-mini.png \
+	data/screenshots/0.4.1/main-mini.png \
+	data/screenshots/0.4.1/gimp-plugin-mini.png \
+	data/screenshots/0.4.1/pdf-multipage-bug.png \
+	data/screenshots/0.4.1/new-preview-ubuntu.png \
+	data/screenshots/0.4.1/pdf-multipage-bug-mini.png \
+	data/screenshots/0.4.1/new-preview-ubuntu-mini.png \
 	$(NULL)
 
 ss06dir = $(screenshotsdir)/0.6
