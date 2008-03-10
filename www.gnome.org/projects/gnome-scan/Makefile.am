@@ -88,18 +88,18 @@ ss0404_DATA = \
 	data/screenshots/0.4.0.4/new-preview-ubuntu-mini.png \
 	$(NULL)
 
-ss0594dir = $(screenshotsdir)/0.5.94
-ss0594_DATA = \
-	data/screenshots/0.5.94/30-acquire-preview-mini.png \
-	data/screenshots/0.5.94/30-acquire-preview.png \
-	data/screenshots/0.5.94/50-acquire-mini.png \
-	data/screenshots/0.5.94/20-device-selected.png \
-	data/screenshots/0.5.94/40-preview-mini.png \
-	data/screenshots/0.5.94/50-acquire.png \
-	data/screenshots/0.5.94/40-preview.png \
-	data/screenshots/0.5.94/10-main-mini.png \
-	data/screenshots/0.5.94/20-device-selected-mini.png \
-	data/screenshots/0.5.94/10-main.png \
+ss06dir = $(screenshotsdir)/0.6
+ss06_DATA = \
+	data/screenshots/0.6/30-acquire-preview-mini.png \
+	data/screenshots/0.6/30-acquire-preview.png \
+	data/screenshots/0.6/50-acquire-mini.png \
+	data/screenshots/0.6/20-device-selected.png \
+	data/screenshots/0.6/40-preview-mini.png \
+	data/screenshots/0.6/50-acquire.png \
+	data/screenshots/0.6/40-preview.png \
+	data/screenshots/0.6/10-main-mini.png \
+	data/screenshots/0.6/20-device-selected-mini.png \
+	data/screenshots/0.6/10-main.png \
 	$(NULL)
 
 imagesdir = $(pagedir)/data/images
