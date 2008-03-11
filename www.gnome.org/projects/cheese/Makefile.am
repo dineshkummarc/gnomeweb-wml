@@ -38,6 +38,8 @@ screenshots_DATA = \
 	data/screenshots/cheese-0.2.1.jpg \
 	data/screenshots/cheese-0.2.2.jpg \
 	data/screenshots/cheese-0.3.0.jpg \
+	data/screenshots/cheese-2.22.0.jpg \
+	data/screenshots/cheese-2.22.0_2.jpg \
 	$(NULL)
 
 imagesdir = $(pagedir)/data/images
