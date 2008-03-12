@@ -44,6 +44,7 @@ page_DATA = \
 	gnome10years.png \
 	gnome10years.jpg \
 	two-twenty.jpg \
+	two-twenty-two.png \
 	ghop-2007.png \
 	gnome-equation.png \
 	outreach-a11y.png
