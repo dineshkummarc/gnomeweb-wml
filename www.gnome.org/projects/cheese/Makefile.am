@@ -9,6 +9,7 @@ page_SCRIPTS= \
 	index.html \
 	download.html \
 	screenshots.html \
+	tour.html \
 	detect.py \
 	$(NULL)
 
@@ -56,6 +57,16 @@ images_DATA =\
   data/images/dialog-information.png \
   data/images/application-x-executable.png \
   data/images/dialog-warning.png \
+	$(NULL)
+
+tourdir = $(pagedir)/data/tour
+tour_DATA =\
+  data/tour/cheese-video.jpg \
+  data/tour/cheese-about.jpg \
+  data/tour/cheese-effects.jpg \
+  data/tour/cheese-countdown.jpg \
+  data/tour/cheese-share.jpg \
+  data/tour/cheese-main.jpg \
 	$(NULL)
 
 include $(top_srcdir)/rules.common
