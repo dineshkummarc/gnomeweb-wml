@@ -84,6 +84,7 @@ page_DATA=			\
 	evolution24.pdf \
 	evolution26.pdf \
 	evolution212.pdf \
+	evolution222.pdf \
 	quickref.txt 
 
 include $(top_srcdir)/rules.common
