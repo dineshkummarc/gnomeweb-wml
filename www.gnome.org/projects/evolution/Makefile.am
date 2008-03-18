@@ -23,7 +23,6 @@ page_DATA =			\
 	developer.shtml \
 	documentation.shtml \
 	download.shtml \
-	eplugin.shtml \
 	eplugins.shtml \
 	faq.shtml \
 	features.shtml \
