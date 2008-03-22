@@ -16,8 +16,6 @@ page_SCRIPTS= \
 themedir=$(pagedir)/data/themes/cheese
 theme_DATA = \
 	data/themes/cheese/document.all.css \
-	data/themes/cheese/frontpage.css \
-	data/themes/cheese/document.print.css \
 	data/themes/cheese/document.screen.css \
 	$(NULL)
 
