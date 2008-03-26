@@ -18,6 +18,7 @@ page_SCRIPTS= article_chronojump_aloma_179349b7.gif \
 	proyecto_final_master_chronojump.pdf \
 	chronopic_cables_es.doc \
 	record_chronopic_pic_icprog_es.doc \
+	jornada_chronojump_vic.pdf \
 	validacion_chronopic3_sin_condensador_contra_osciloscopio.ods \
 	validacion_chronopic3_sin_condensador_contra_osciloscopio.pdf
 
