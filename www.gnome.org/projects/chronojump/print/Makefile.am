@@ -47,6 +47,11 @@ page_SCRIPTS= \
 	features_es.html \
 	features_gl.html \
 	features_pt.html \
+	hardware_ca.html \
+	hardware_es.html \
+	hardware_gl.html \
+	hardware.html \
+	hardware_pt.html \
 	index_en.html \
 	index_ca.html \
 	index_de.html \
