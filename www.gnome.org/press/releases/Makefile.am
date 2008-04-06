@@ -73,6 +73,7 @@ page_SCRIPTS = \
 	ecma-tc45-statement.html \
 	gop-a11y.html \
 	guadec2008.html \
-	2008-03-mofojoins.html
+	2008-03-mofojoins.html \
+	2008-04-mobilesummit.html
 
 include $(top_srcdir)/rules.common
