@@ -5,6 +5,10 @@ urlpath=/projects/chronojump/images
 page_SCRIPTS= \
 	1.png \
 	2.png \
+	180_chronopics3.jpg \
+	180_chronopics3_small.jpg \
+	chronojump_installjammer_es.png \
+	chronojump_installjammer_es_small.png \
 	chronojump_main_047.png \
 	chronojump_main_047_small.png \
 	chronojump_windows.png \
