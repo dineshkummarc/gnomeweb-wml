@@ -30,12 +30,13 @@ page_DATA =			\
 	hackfest-ui.shtml \
 	information.shtml \
 	keys.shtml \
+	meetings.shtml \
 	patch.shtml \
 	previous.shtml \
 	releasenotes.shtml \
+	screenshots.shtml \
 	screenshots14.shtml \
 	screenshots15.shtml \
-	screenshots.shtml \
 	svn.shtml \
 	jhbuildrc
 
