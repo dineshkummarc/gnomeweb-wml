@@ -67,6 +67,7 @@ page_SCRIPTS= \
 	chronopic3-metacrilato.jpg \
 	chronopic3-metacrilato_small.jpg \
 	xaviblas-correo.png \
+	juanfer-correo.png \
 	poster_chronojump_vic-72_mini.png \
 	poster_chronojump_vic-72_nano.png \
 	poster_chronojump_vic-72.png \
