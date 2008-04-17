@@ -6,8 +6,8 @@ include $(top_srcdir)/rules.common
 
 page_SCRIPTS =\
        	1.html \
-       	1a.html \
-       	1b.html \
+       	1_a.html \
+       	1_b.html \
 	2.html \
 	3.html \
 	4.html \
