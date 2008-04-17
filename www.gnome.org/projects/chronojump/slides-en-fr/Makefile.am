@@ -6,6 +6,8 @@ include $(top_srcdir)/rules.common
 
 page_SCRIPTS =\
        	1.html \
+       	1a.html \
+       	1b.html \
 	2.html \
 	3.html \
 	4.html \
@@ -14,8 +16,10 @@ page_SCRIPTS =\
 	7.html \
 	8.html \
 	9.html \
+	9b.html \
 	10.html \
 	11.html \
+	11b.html \
 	12.html \
 	13.html \
 	14.html \
@@ -31,6 +35,8 @@ page_SCRIPTS =\
 	24.html \
 	25.html \
 	1-00-chronojump.png \
+	1-000-licenses_lang1.png \
+	1-000-licenses_lang2.png \
 	1-01-intro_time.png \
 	1-02-intro_jump.png \
 	1-03-intro_chronojump.png \
@@ -39,8 +45,10 @@ page_SCRIPTS =\
 	2-00-measurement.png \
 	2-02-measurement3_chronopic.png \
 	2-03-measurement4_chronopic.png \
+	2-03-measurement4_chronopic2.png \
 	2-04-measurement5_camera.png \
 	2-08-validation.png \
+	2-09-validation_chronopic3.png \
 	2-10-tests.png \
 	2-11-tests2_graphs.png \
 	2-20-education.png \
