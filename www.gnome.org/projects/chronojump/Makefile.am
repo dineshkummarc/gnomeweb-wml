@@ -1,4 +1,4 @@
-SUBDIRS= images articles print slides-en-fr 
+SUBDIRS= images articles print slides-en-fr slides-es-ca 
 
 urlpath=/projects/chronojump
 
