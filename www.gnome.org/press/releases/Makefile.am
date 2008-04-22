@@ -74,6 +74,7 @@ page_SCRIPTS = \
 	gop-a11y.html \
 	guadec2008.html \
 	2008-03-mofojoins.html \
-	2008-04-mobilesummit.html
+	2008-04-mobilesummit.html \
+	2008-04-22-akademy-guadec.html
 
 include $(top_srcdir)/rules.common
