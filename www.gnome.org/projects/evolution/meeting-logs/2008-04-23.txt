@@ -1,0 +1,183 @@
+Apr 23 06:49:15 <srag>	Ok, lets start and finish quickly..
+Apr 23 06:49:26 <srag>	First one announcement..
+Apr 23 06:49:29 *	srinidhi (~srinidhi@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Apr 23 06:49:38 <srag>	some who track the svn commits might have got it already...
+Apr 23 06:49:51 <srag>	Sankar would join mbarnes as a mail maintainer
+Apr 23 06:50:19 <srag>	so, feel free to ping psankar for any mailer issues/crashers/patch reviews ;-)
+Apr 23 06:50:22 <psankar>	Thanks srag. Should be interesting to work with mbarnes
+Apr 23 06:50:41 <psankar>	and continue the legacy left by the likes of  NotZed, Fejj and Partha :-)
+Apr 23 06:50:46 <srinidhi>	psankar: Congrats!! :)
+Apr 23 06:50:58 <srag>	psankar, sure
+Apr 23 06:51:18 <psankar>	Thanks srinidhi 
+Apr 23 06:51:24 <mcrha>	I think I have some work for psankar ... :)
+Apr 23 06:51:29 <srag>	I have updated psankar and mbarnes as Camel maintainers too
+Apr 23 06:51:37 <srag>	mcrha, now you got a person to review mailer patches... 
+Apr 23 06:51:38 <psankar>	mcrha, shoot :-)
+Apr 23 06:51:44 *	srag relaxes a bit now ;-)
+Apr 23 06:52:01 <mcrha>	yeah, some patches to review, psankar, only some patches
+Apr 23 06:52:03 <srinidhi>	srag: :)
+Apr 23 06:52:08 <srag>	psankar, dont say 'shoot' he will shoot more patches than the speed you can review ;-)
+Apr 23 06:52:10 *	jony (~jjohnny@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Apr 23 06:52:20 <srag>	psankar, Im already overrun
+Apr 23 06:52:21 <psankar>	mcrha, sure thing. will do :-)
+Apr 23 06:52:30 <srag>	psankar, so be cautious with mcrha ;-)
+Apr 23 06:52:34 <mcrha>	thanks psankar 
+Apr 23 06:52:42 <psankar>	srag, okay. will be careful :-)
+Apr 23 06:52:43 <mcrha>	and thanks srag ;)
+Apr 23 06:52:45 <srag>	:)
+Apr 23 06:53:17 <srag>	And officially me and psankar are starting our work on disk-summary 
+Apr 23 06:53:22 <jony>	yay ! 
+Apr 23 06:53:26 <psankar>	Right :-) 
+Apr 23 06:53:27 <srag>	so, we are prone to break more thing from now on
+Apr 23 06:53:41 <psankar>	A task that is delayed for a loooooong time
+Apr 23 06:53:42 <srag>	and so don't complain me... blame psankar ;-)
+Apr 23 06:53:48 <jony>	hehe 
+Apr 23 06:53:49 <srag>	I have got a guy for that :)
+Apr 23 06:53:58 *	mcrha wants to break something too
+Apr 23 06:54:10 <srag>	Ok, really.. You have a nice great task (UAM)
+Apr 23 06:54:13 <srag>	you can mcrha :)
+Apr 23 06:54:14 <jony>	srag, disk-summary is optional during builds ? 
+Apr 23 06:54:18 <psankar>	srag, considering that it shoudl bring down memory requirements, people will be happy to let us break things :-)
+Apr 23 06:54:31 <psankar>	jony, probably it will be a new branch
+Apr 23 06:54:34 <srag>	psankar, already you have a reason to break ;-)
+Apr 23 06:54:36 <jony>	psankar, okie
+Apr 23 06:54:38 <mcrha>	I will srag, never say twice ;)
+Apr 23 06:54:44 <srag>	:)
+Apr 23 06:55:05 <srag>	we are still under schedule planning and would say the target release, but surely for 2.23.x :)
+Apr 23 06:55:21 <mcrha>	can we do this together with a move from mbox to maildir for local stores?
+Apr 23 06:55:26 <srag>	so keep guessing or buy me a coke (Sorry I don't drink beer)
+Apr 23 06:55:39 *	psankar as well
+Apr 23 06:55:49 <srag>	mcrha, nope. this already has too many things..'
+Apr 23 06:55:59 <psankar>	mcrha, they are not related iiuc
+Apr 23 06:56:04 <srag>	I would try to keep the focus on memory and we can have people picking up side tasks from there
+Apr 23 06:56:09 <mcrha>	I thought a break with other break
+Apr 23 06:56:26 <srag>	mcrha, sure. but not part of this...
+Apr 23 06:56:38 <mcrha>	same as possible break with large file support and summary non-compatibility when we move to 64bit offsets
+Apr 23 06:56:49 <srag>	mcrha,  if you are planning for a work there, just let me know
+Apr 23 06:56:57 <srag>	mcrha, that would be kicked off
+Apr 23 06:57:01 <srag>	we would go for sqlite db
+Apr 23 06:57:15 <srag>	and we don't fopen 2gb files any more
+Apr 23 06:57:20 <psankar>	mcrha, so no need to worry of summary file length
+Apr 23 06:57:26 <mcrha>	I wrote about that to evo-hackers asking Jeff for best way, but he ddin't answer, somehow
+Apr 23 06:57:49 <srag>	that reminds me something, we need to ask for blessed dependency or something like that for sqlite
+Apr 23 06:57:53 <srag>	that I will take care
+Apr 23 06:57:56 *	knirav has quit (Ping timeout: 600 seconds)
+Apr 23 06:58:03 <srag>	mcrha, oh
+Apr 23 06:58:06 <mcrha>	psankar, the problem is the summary has stored 32 bit offsets and if you change offset byte length, then old summary will not work anymore
+Apr 23 06:58:21 <mcrha>	for 32 bit systems
+Apr 23 06:58:34 <psankar>	srag, may be the cache will still be not distributed for local (like GroupWise and Imap4rev1) so file size might matter at some stage
+Apr 23 06:58:43 <srag>	mcrha, psankar offline :)
+Apr 23 06:58:49 <mcrha>	sure
+Apr 23 06:58:52 <psankar>	srag, okay
+Apr 23 06:58:53 <srag>	we can take it after the meeting
+Apr 23 06:59:03 *	srag told that 'we will have a short meeting'
+Apr 23 06:59:10 <srag>	that is the announcement part
+Apr 23 06:59:22 <srag>	we released 2.23.1, our first unstable release
+Apr 23 07:00:02 <srag>	things are fine till now, and lets fix our broken things in 2.23.2 (reg composer). I'm sure that mbarnes has that in his prio list
+Apr 23 07:00:20 <srag>	psankar, work out with mbarnes for the composer plugin hooks
+Apr 23 07:00:26 <mbarnes>	I'm already on it
+Apr 23 07:00:34 <srag>	mbarnes, awesome :)
+Apr 23 07:00:36 <psankar>	srag, ah okay. I'll pitch in whenever needed
+Apr 23 07:00:41 <srag>	thx psankar 
+Apr 23 07:01:16 <srag>	we are also planning on the line bringing back the windows port (live)
+Apr 23 07:01:38 <srag>	some analysis being spent on effort reqd, etc, but not finally decided
+Apr 23 07:01:54 <srag>	but we are looking at supporting Evolution on windows.
+Apr 23 07:02:11 <srag>	tor did (still doing) awesome on porting the code...
+Apr 23 07:02:23 <srag>	but we never spent effort on fixing the issues
+Apr 23 07:02:41 <srag>	we would here after. (I will confirm this later and may be announce on the list)
+Apr 23 07:02:58 <srag>	but an early information to share with the team :)
+Apr 23 07:03:08 <srag>	I'm done, we can go around the channel.
+Apr 23 07:03:12 <srag>	jony, anything to share with us ?
+Apr 23 07:03:32 <jony>	srag, not much ... just included PF api in servers/mapi 
+Apr 23 07:03:53 <srag>	jony, cool. Are we getting closer to feature parity with the webdav connector ?
+Apr 23 07:04:07 <srag>	if not (%) pending...
+Apr 23 07:04:17 <jony>	srag, hmm .. not yet .. probably in a week  we shoud be in a better shape 
+Apr 23 07:04:41 <jony>	srag, i would rate that at 40 -45  % (in terms of feature / performance )
+Apr 23 07:04:49 <srag>	ok
+Apr 23 07:04:51 <jony>	also trying to get a mapi-provider build on 2.22 .. but factory is broken ..  so it is getting delayed .. 
+Apr 23 07:04:55 <srag>	lakhil, anything to share with us ?
+Apr 23 07:04:58 <srag>	jony, ok
+Apr 23 07:05:08 <srag>	lakhil, any blockers/issues you see ?
+Apr 23 07:05:11 <lakhil>	srag, 
+Apr 23 07:05:11 <lakhil>	did sanity of 2.23.1 and some testing on openSUSE 
+Apr 23 07:05:27 <lakhil>	groupwise back end is really in bad shape in trunk :(
+Apr 23 07:06:00 <srag>	lakhil, oh, any blockers/bugs ?
+Apr 23 07:06:11 <srag>	lakhil, any reason you see?
+Apr 23 07:06:28 <lakhil>	http://bugzilla.gnome.org/show_bug.cgi?id=523103 - Memory usage / leaks 
+Apr 23 07:06:33 *	psankar notes it
+Apr 23 07:06:42 <lakhil>	and GROUPWISE_DEBUG doesn't work 
+Apr 23 07:07:36 <psankar>	lakhil, the biggest leak (7MB) in the trace in that bug is alerady fixed
+Apr 23 07:07:46 <psankar>	lakhil, I remember committing it a few days back
+Apr 23 07:07:49 <lakhil>	psankar, cool ...
+Apr 23 07:07:50 <psankar>	lakhil, so that should solve ot
+Apr 23 07:07:54 <psankar>	*it
+Apr 23 07:07:58 <lakhil>	but i tried 3 days back only
+Apr 23 07:08:01 <srag>	gr8
+Apr 23 07:08:06 <srag>	mbarnes, anything to share with us ?
+Apr 23 07:08:10 <mbarnes>	I'm working on a new EPlugin hook class for GtkUIManager
+Apr 23 07:08:15 <mbarnes>	which should eventually replace EMenu/EPopup
+Apr 23 07:08:15 <lakhil>	and you forgot to commit to trunk i guess :)
+Apr 23 07:08:24 <mbarnes>	I already have the Face plugin working again with it
+Apr 23 07:08:47 <mbarnes>	once that's in place, I can begin finally dismantling BonoboUI from Evolution
+Apr 23 07:08:51 <srag>	mbarnes, wow
+Apr 23 07:08:58 <schooms>	mbarnes: awesome !
+Apr 23 07:09:00 <srag>	cool mbarnes 
+Apr 23 07:09:30 <srag>	don't tell it to andre, he will have a list of bugs (which we said can't fix becoz of bonoboui) ;-)
+Apr 23 07:09:38 <srag>	with eplugin
+Apr 23 07:09:48 <mbarnes>	all in good time  :)
+Apr 23 07:09:59 <srag>	mbarnes, that is really great. great work dude 
+Apr 23 07:10:07 <srag>	mcrha, anything to share with us ?
+Apr 23 07:10:37 <mcrha>	nothing much, srag, just fixed a bug in my gio/gvfs rewrite, and Matt fixed other one too
+Apr 23 07:10:44 <srag>	(I know andre reads the logs though)
+Apr 23 07:11:01 <mcrha>	otherwise just piling patches to all of you for a review as usual ;)
+Apr 23 07:11:18 <srag>	mcrha, cool. I have cced you on a e-d-s deadlock and I have given you a way to reproduce get_default_timezone..
+Apr 23 07:11:28 <srag>	yesterday
+Apr 23 07:11:51 <mcrha>	I reported in that part a bug few weeks ago
+Apr 23 07:12:09 <mcrha>	I was waiting for a help from chen
+Apr 23 07:12:13 <srag>	oh ok.
+Apr 23 07:12:18 <srag>	chen is on leave full of this week
+Apr 23 07:12:22 <srag>	back next week
+Apr 23 07:12:28 <mcrha>	yup, I noticed
+Apr 23 07:12:32 <srag>	I will be looking for that.. it is a killer
+Apr 23 07:12:39 <srag>	psankar, anything to share with us ?
+Apr 23 07:13:18 <psankar>	srag, nothing much from me :-)
+Apr 23 07:13:23 *	jkerihuel (~jkerihuel@whitefocus.org) has joined #evolution-meet
+Apr 23 07:13:36 <jkerihuel>	hi there
+Apr 23 07:13:37 <srag>	hey jkerihuel 
+Apr 23 07:13:55 <srag>	for every one else, jkerihuel  is the maintainer of OpenChange's libmapi
+Apr 23 07:14:05 <srag>	schooms, anything to share with us ?
+Apr 23 07:14:17 <schooms>	srag: i'm (locally) almost done with getting the mapi-cal code up-to-date.. was working on the restrictions part.. i will try to get that done by this week.. and yeah - fixed chen's break ;-)
+Apr 23 07:14:27 <jony>	hi jkerihuel 
+Apr 23 07:14:29 <schooms>	hey jkerihuel
+Apr 23 07:14:58 <srag>	schooms, ok
+Apr 23 07:15:05 <srag>	shashish, anything to share with us ?
+Apr 23 07:15:33 <shashish>	noting much from me.......worked on address book bug and play around address book code...and working on rules..
+Apr 23 07:15:41 <srag>	shashish, cool.
+Apr 23 07:15:51 <srag>	srinidhi, anything to share with us ?
+Apr 23 07:15:56 <mcrha>	rules?
+Apr 23 07:15:59 <srinidhi>	srag: nope.. :)
+Apr 23 07:16:04 <srag>	srinidhi, thx for the NEWS files in time as usual
+Apr 23 07:16:09 <srag>	mcrha, groupwise server side rules
+Apr 23 07:16:17 <mcrha>	ahh, okay
+Apr 23 07:16:17 <srinidhi>	srag: anytime.. :)
+Apr 23 07:16:34 <srag>	varadhan, anything to share with us ?
+Apr 23 07:16:48 <varadhan>	srag, nothing much.. just hanging around. :-)
+Apr 23 07:16:57 <srag>	cool
+Apr 23 07:17:07 <srag>	hey jkerihuel , welcome to Evolution team meeting
+Apr 23 07:17:15 <jkerihuel>	srag: thx ;-)
+Apr 23 07:17:26 <srag>	you have anything to share with us ?
+Apr 23 07:18:05 <jkerihuel>	nothing in particular, we are yet quite busy rewriting the mapitest unit test suite and updating the IDL and code given microsoft docs
+Apr 23 07:18:24 <srag>	jkerihuel, cool. thx
+Apr 23 07:18:33 <jony>	jkerihuel, so the docs are legaly safe ?
+Apr 23 07:19:02 <jkerihuel>	well they do not cover patents issue, but that's not mainly different from what Samba had a year ago.
+Apr 23 07:19:21 <jkerihuel>	Furthermore for the moment we only scope with safe parts of the docs
+Apr 23 07:19:28 <jony>	ah k .. 
+Apr 23 07:19:44 <jkerihuel>	we'll make a public announcement on openchange and devel mailing-list very soon
+Apr 23 07:19:53 <srag>	Ok, I'm done from my side, guys.. do we have anything else to discuss before we meet next week.
+Apr 23 07:19:59 <jony>	sounds good .. :) 
+Apr 23 07:20:07 <lakhil>	srag, Crash in exchange GAL http://bugzilla.gnome.org/show_bug.cgi?id=512605 - which needs attention :)
+Apr 23 07:20:27 <srag>	lakhil, thx
+Apr 23 07:20:32 <srag>	I will see it lakhil 
+Apr 23 07:20:39 <lakhil>	pretty good traces ..thanks :)
+Apr 23 07:21:04 <srag>	Ok guys, see you all next week. Bye
+
