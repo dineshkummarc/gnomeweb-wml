@@ -20,6 +20,7 @@ page_SCRIPTS= article_chronojump_aloma_179349b7.gif \
 	record_chronopic_pic_icprog_es.doc \
 	jornada_chronojump_vic.pdf \
 	validacion_chronopic3_sin_condensador_contra_osciloscopio.ods \
-	validacion_chronopic3_sin_condensador_contra_osciloscopio.pdf
+	validacion_chronopic3_sin_condensador_contra_osciloscopio.pdf \
+	chronojump_vic_fundamentos_teoricos.pdf
 
 include $(top_srcdir)/rules.common

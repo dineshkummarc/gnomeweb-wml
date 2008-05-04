@@ -71,6 +71,24 @@ page_SCRIPTS= \
 	poster_chronojump_vic-72_mini.png \
 	poster_chronojump_vic-72_nano.png \
 	poster_chronojump_vic-72.png \
+	adria1_small.jpg \
+	adria2_small.jpg \
+	adria3_small.jpg \
+	adria4_small.jpg \
+	carles_romagosa_small.jpg \
+	josep_ma_padulles_small.jpg \
+	learning_small.jpg \
+	raul_bescos_small.jpg \
+	xavi_de_blas_small.jpg \
+	adria2.jpg \
+	adria3.jpg \
+	adria4.jpg \
+	carles_romagosa.jpg \
+	josep_ma_padulles.jpg \
+	learning.jpg \
+	raul_bescos.jpg \
+	xavi_de_blas.jpg \
+	adria1.jpg \
 	test_png.png \
 	test_jpg.jpg 
 
