@@ -83,6 +83,8 @@ page_SCRIPTS= \
 	adria2.jpg \
 	adria3.jpg \
 	adria4.jpg \
+	audience.jpg \
+	audience_small.jpg \
 	carles_romagosa.jpg \
 	josep_ma_padulles.jpg \
 	learning.jpg \
