@@ -94,6 +94,16 @@ page_SCRIPTS= \
 	old_chronopics_gl.html \
 	old_chronopics.html \
 	old_chronopics_pt.html \
+	construction_chronopic_juanfer_en.html \
+	construction_contact_platform_en.html \
+	construction_en.html \
+	contact_en.html \
+	documents_en.html \
+	faq_en.html \
+	features_en.html \
+	index_en.html \
+	installation_en.html \
+	screenshots_en.html \
 	style.css
 
 include $(top_srcdir)/rules.common
