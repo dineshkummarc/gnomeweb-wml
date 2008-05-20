@@ -91,6 +91,16 @@ page_SCRIPTS= \
 	raul_bescos.jpg \
 	xavi_de_blas.jpg \
 	adria1.jpg \
+	chronopics.jpg \
+	chronopics_small.jpg \
+	drop.jpg \
+	drop_small.jpg \
+	bernat_busca-xavi_p.jpg \
+	bernat_busca-xavi_p_small.jpg \
+	bernat_busca1.jpg \
+	bernat_busca1_small.jpg \
+	bernat_busca2.jpg \
+	bernat_busca2_small.jpg \
 	test_png.png \
 	test_jpg.jpg 
 
