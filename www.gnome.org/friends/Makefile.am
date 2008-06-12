@@ -18,6 +18,7 @@ include $(top_srcdir)/rules.common
 
 misc_images = \
 	donate.png \
+	donate-monthly.png \
 	swag.png
 	
 page_DATA=$(misc_images)
