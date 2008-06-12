@@ -56,6 +56,7 @@ images_DATA =\
   data/images/application-x-executable.png \
   data/images/dialog-warning.png \
   data/images/cheese-tour.png \
+  data/images/cheese-birthday.png \
 	$(NULL)
 
 tourdir = $(pagedir)/data/tour
