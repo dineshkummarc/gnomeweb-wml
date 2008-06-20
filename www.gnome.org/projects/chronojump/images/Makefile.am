@@ -36,6 +36,8 @@ page_SCRIPTS= \
 	chronojump_logo_small.png \
 	chronojump_new_run_type_spanish.png \
 	chronojump_new_run_type_spanish_small.png \
+	chronojump_no_start_en.dia \
+	chronojump_no_start_en.png \
 	chronopic_foto.jpg \
 	chronopic_foto_small.png \
 	chronopic_juanfer_back.jpg \

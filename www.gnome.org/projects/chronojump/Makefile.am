@@ -66,6 +66,7 @@ page_SCRIPTS= \
 	installation_gl.html \
 	installation_pt.html \
 	photocells_es.html \
+	problems.html \
 	screenshots.html \
 	screenshots_ca.html \
 	screenshots_es.html \
