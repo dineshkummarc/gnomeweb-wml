@@ -43,6 +43,8 @@ page_SCRIPTS= \
 	chronopic_juanfer_back.jpg \
 	chronopic_juanfer_front.jpg \
 	chronopic_juanfer_schema.jpg \
+	chronopic_no_work.dia \
+	chronopic_no_work.png \
 	deporteyciencia_blues.gif \
 	gnome_logo_88_blues.png \
 	plataforma_contactos_cinta_adhesiva_plastico.jpg \
