@@ -21,6 +21,7 @@ SUBDIRS = \
 	gtksourceview		\
 	gyrus			\
 	gb			\
+        hotssh                  \
 	nautilus		\
 	nautilus-locked-folders \
 	netspeed                \
