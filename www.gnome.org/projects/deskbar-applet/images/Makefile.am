@@ -18,6 +18,10 @@ screenshots_DATA = \
     screenshots/deskbar-yahoo-search.png \
     screenshots/deskbar-yahoo-search-thumb.png \
     screenshots/deskbar-yahoo-suggest.png \
-    screenshots/deskbar-yahoo-suggest-thumb.png
+    screenshots/deskbar-yahoo-suggest-thumb.png \
+    screenshots/deskbar-prefs-1.png \
+    screenshots/deskbar-prefs-1-thumb.png \
+    screenshots/deskbar-prefs-2.png \
+    screenshots/deskbar-prefs-2-thumb.png
 
 include $(top_srcdir)/rules.common
