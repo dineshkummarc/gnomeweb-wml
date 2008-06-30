@@ -10,7 +10,8 @@ page_DATA=\
 	features.html \
 	screenshots.html \
 	documentation.html \
-	development.html
+	development.html \
+	pygtksourceview.html
 
 include $(top_srcdir)/rules.common
 
