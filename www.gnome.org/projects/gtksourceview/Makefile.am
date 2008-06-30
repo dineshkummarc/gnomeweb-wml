@@ -12,8 +12,5 @@ page_DATA=\
 	documentation.html \
 	development.html
 
-page_SCRIPTS=\
-	.htaccess
-
 include $(top_srcdir)/rules.common
 
