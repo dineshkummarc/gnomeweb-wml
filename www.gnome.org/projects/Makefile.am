@@ -39,6 +39,7 @@ SUBDIRS = \
 	evince			\
 	sabayon			\
 	seahorse		\
+	sony-ericsson-remotes	\
 	tracker			\
 	tomboy			\
 	totem			\
