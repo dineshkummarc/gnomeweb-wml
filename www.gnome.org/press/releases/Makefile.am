@@ -75,6 +75,7 @@ page_SCRIPTS = \
 	guadec2008.html \
 	2008-03-mofojoins.html \
 	2008-04-mobilesummit.html \
-	2008-04-22-akademy-guadec.html
+	2008-04-22-akademy-guadec.html \
+	2008-07-stormy-executive-director.html
 
 include $(top_srcdir)/rules.common
