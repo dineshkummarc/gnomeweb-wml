@@ -1,0 +1,116 @@
+**** BEGIN LOGGING AT Wed Jul 30 11:38:15 2008
+
+Jul 30 11:38:15 *	Now talking on #evolution-meet
+Jul 30 11:38:15 *	Topic for #evolution-meet is: Evolution Team meetings every Wed 10:00 UTC | http://www.go-evolution.org/Evo2.24
+Jul 30 11:38:15 *	Topic for #evolution-meet set by guenther at Sat Jul 26 18:19:07 2008
+Jul 30 11:41:57 *	jony (~jjohnny@192.31.114.252) has joined #evolution-meet
+Jul 30 11:54:12 *	srag (~sragavan@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 11:54:14 *	monkey|bot gives channel operator status to srag
+Jul 30 11:55:08 <mcrha>	will schooms call others? ;) (hi schooms)
+Jul 30 11:55:11 *	ashish (~ashish@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 11:55:27 <schooms>	hi mcrha :)
+Jul 30 11:56:28 *	lakhil (~lakhil@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 11:56:56 <mcrha>	srag, is it possible to republish 2.22 with reverted patch which causes crashers?
+Jul 30 11:57:22 <srag>	mcrha, like ?
+Jul 30 11:57:27 <mcrha>	I will talk about it later, just want to know
+Jul 30 11:57:32 <srag>	ok
+Jul 30 11:57:37 <mcrha>	like http://bugzilla.gnome.org/show_bug.cgi?id=544187#c2
+Jul 30 11:57:44 *	chen (~chen@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 11:57:45 *	abharath (~abharath@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 11:57:49 <srag>	We can wait for one more min
+Jul 30 11:57:52 <chen>	hi all
+Jul 30 11:57:56 <jony>	hello
+Jul 30 11:57:59 *	srag hopes to have  a quick meeting
+Jul 30 11:58:09 <mcrha>	hi and lo :)
+Jul 30 11:58:13 <srag>	want to clear some finance stuff in another 10 mins
+Jul 30 11:58:47 <mcrha>	money? did I hear something about money?
+Jul 30 11:58:57 <srag>	mcrha, hehe
+Jul 30 11:59:10 *	pvanhoof (~pvanhoof@d54C0C06D.access.telenet.be) has joined #evolution-meet
+Jul 30 11:59:11 <jony>	yep yep .. 
+Jul 30 11:59:14 <srag>	** Time out **
+Jul 30 11:59:23 <srag>	Ok guys, lets start
+Jul 30 11:59:23 <chen>	mcrha, giving money back, not getting ;)
+Jul 30 11:59:37 <mcrha>	ahh, back to me ;)
+Jul 30 11:59:48 <srag>	Guys, we merged disk summary to trunk and things just started working back
+Jul 30 11:59:52 <chen>	lol
+Jul 30 11:59:59 <srag>	I think in another 1-2 weeks things should be back to normal
+Jul 30 12:00:07 <srag>	thx to all our great testers :)
+Jul 30 12:00:38 <srag>	I was hoping to do a .1 release last monday, but just realized we have another release coming Monday
+Jul 30 12:00:55 <srag>	so, 2.23.6 should be stabler than .5
+Jul 30 12:01:12 <srag>	Nothing much from me otherwise
+Jul 30 12:01:18 <srag>	abharath, anything to share with us ?
+Jul 30 12:01:48 <abharath>	srag: just been working on some crashers. Exchange with DB Summary seems stable to me except the pstring crash ofcourse
+Jul 30 12:02:15 <srag>	abharath, you need to fix the warnings.. I changed info->uid as const.. so it warns now, where ever we g_free
+Jul 30 12:02:49 <abharath>	srag: apart from that just been working on some Installers. picked up a good one. just playing around with MSI installers
+Jul 30 12:02:49 <srag>	abharath, note on summary/unread count..
+Jul 30 12:02:52 <srag>	we changed lot there
+Jul 30 12:02:56 <srag>	abharath, cool.
+Jul 30 12:03:06 <srag>	ashish, anything to share with us ?
+Jul 30 12:03:08 <abharath>	srag: ya keeping note. will try to fix some on that
+Jul 30 12:03:32 <srag>	chen, anything to share with us ?
+Jul 30 12:03:52 <chen>	srag, couple of patch reviews, some co-ordination work for getting PTF's to dave and working on cleaning up the ECalModel stuff's...
+Jul 30 12:04:21 <srag>	chen, ok. just keep the cal patches down
+Jul 30 12:04:25 <mcrha>	chen, any pointers for ECalModel?
+Jul 30 12:04:28 <chen>	sure..
+Jul 30 12:04:34 <srag>	thx chen 
+Jul 30 12:04:44 <srag>	jony, any thing to share with us ?
+Jul 30 12:04:46 <chen>	mcrha, you mean what am doing there?
+Jul 30 12:04:47 <jony>	srag:  trunk testing :) and ﻿working on MAPI ... 
+Jul 30 12:05:06 <mcrha>	chen, yes, I noticed some design bad things there, so curious :)
+Jul 30 12:05:17 <srag>	jony, thx. You prove to be a good test bed wrt disk-summary
+Jul 30 12:05:26 <jony>	srag: :) anytime ..
+Jul 30 12:05:36 <srag>	lakhil, anything to share with us ?
+Jul 30 12:05:56 <lakhil>	nothing much apart from camel db summary testing and tried webdev patch :)
+Jul 30 12:06:05 <srag>	lakhil, cool. thx
+Jul 30 12:06:10 <srag>	mcrha, anything to share with us ?
+Jul 30 12:06:14 <mcrha>	I committed nice bunch of patches last week, more than I produce, so good ratio. But
+Jul 30 12:06:27 <chen>	mcrha, reducing the number of queries made to EDS, making the ModelComponent as a GObject and some work on the way but need to wait until the EDS optimitzation (SOC) work is completed
+Jul 30 12:06:46 <srag>	mcrha, awesome
+Jul 30 12:07:03 <mcrha>	But I want to point out on http://bugzilla.gnome.org/show_bug.cgi?id=544187, I caused this, in commit to stable, which should be reverted, otherwise it will give us some good number of issues
+Jul 30 12:07:04 <chen>	mcrha, planning to have a single model for all the views, but that will be done after the soc work
+Jul 30 12:07:09 <mcrha>	I think.
+Jul 30 12:07:36 <mcrha>	chen, ok
+Jul 30 12:08:05 <mcrha>	srag, so the question is whether we can and we want to revert offending patches there and rerelease 2.22 or not
+Jul 30 12:08:07 <srag>	mcrha, we can discuss it later after the meeting
+Jul 30 12:08:15 <mcrha>	ok
+Jul 30 12:08:23 <srag>	mcrha, which means we need to push another 2.22.3.2 release
+Jul 30 12:08:34 <mcrha>	it's probably a question for chen too, because it touches ECalModel too
+Jul 30 12:08:45 <srag>	Im not favor of it, and it depends on the criticality of hte bug
+Jul 30 12:08:54 <srag>	if it is so imp, we can surely do.
+Jul 30 12:09:06 *	chen is looking at the bug atm
+Jul 30 12:09:11 <srag>	pvanhoof, hey.. anything to share with us ?>
+Jul 30 12:10:13 <srag>	schooms, anything to share with us ?
+Jul 30 12:10:20 <schooms>	hmm.. 
+Jul 30 12:10:33 <schooms>	we are able to parse meeting requests/cancellation 
+Jul 30 12:10:39 <srag>	cool.
+Jul 30 12:11:09 <srag>	jony, schooms, when are we merging to trunk.. do we have a rolled out plan? I know 2.26. But lets put a date and back track the dev from there
+Jul 30 12:11:17 <pvanhoof>	srag, nope
+Jul 30 12:11:18 <srag>	we can work offline on it
+Jul 30 12:11:23 <srag>	pvanhoof, sure
+Jul 30 12:11:33 <jony>	srag: sure. after 2.24 for sure ... 
+Jul 30 12:11:39 <schooms>	srag: sure.. merge (when required) is possible
+Jul 30 12:11:39 *	kandepu (~kandepu@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jul 30 12:11:50 <jony>	srag: i'll work out the exact release cycle .. 
+Jul 30 12:11:52 <srag>	kandepu, anything to share with us ?
+Jul 30 12:11:56 <srag>	jony, sure. 
+Jul 30 12:12:30 <srag>	Ok guys, thatz it from my side...
+Jul 30 12:12:41 <srag>	Anything else ot discuss before we leave ?
+Jul 30 12:12:46 <ashish>	srag, Sorry!! out-of-network-connection... nothing much...working on non-intrusive-error dialog......facing problem to display error message to task bar..:(...logging error n display into dialog window r working fine..
+Jul 30 12:13:04 <srag>	ashish, ok.
+Jul 30 12:13:10 <srag>	thx ashish 
+Jul 30 12:13:18 <srag>	Ok guys, see you all next week
+Jul 30 12:13:19 <srag>	bye
+Jul 30 12:13:22 *	abharath wishes he could somehow delay a hurrying srag a little more :D
+Jul 30 12:13:33 <mcrha>	:)
+Jul 30 12:13:46 *	srag kicks abharath 
+Jul 30 12:13:47 *	srag (~sragavan@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Jul 30 12:13:56 <schooms>	jony: dude.. is samba4 approved as a blessed external dep?
+Jul 30 12:14:08 <jony>	schooms: not yet . 
+Jul 30 12:14:15 *	lakhil (~lakhil@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Jul 30 12:14:17 *	abharath (~abharath@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Jul 30 12:14:35 *	kandepu (~kandepu@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Jul 30 12:14:47 <schooms>	jony: then that's our first target :)
+Jul 30 12:15:00 *	ashish (~ashish@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Jul 30 12:16:00 *	ashish (~ashish@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+**** ENDING LOGGING AT Wed Jul 30 12:16:12 2008
+
