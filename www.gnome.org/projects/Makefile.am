@@ -55,6 +55,7 @@ SUBDIRS = \
 	brasero			\
 	gnome-scan		\
 	vinagre		\
+	billreminder		\
 	cheese
 
 urlpath = /projects
