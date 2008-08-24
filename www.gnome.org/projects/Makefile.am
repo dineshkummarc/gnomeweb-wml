@@ -25,6 +25,7 @@ SUBDIRS = \
         hotssh                  \
 	nautilus		\
 	nautilus-locked-folders \
+	nemiver			\
 	netspeed                \
 	NetworkManager		\
 	ooo			\
