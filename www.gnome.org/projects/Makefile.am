@@ -20,6 +20,7 @@ SUBDIRS = \
 	gnumeric		\
 	guppi			\
 	gtksourceview		\
+	gtksourceviewmm		\
 	gyrus			\
 	gb			\
         hotssh                  \
