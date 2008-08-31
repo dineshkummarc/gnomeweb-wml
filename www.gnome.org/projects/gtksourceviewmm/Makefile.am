@@ -27,7 +27,6 @@ classgtksourceview_1_1SourceView-members.html \
 doxygen.css \
 doxygen.png \
 files.html \
-files.txt \
 functions_0x62.html \
 functions_0x63.html \
 functions_0x65.html \
