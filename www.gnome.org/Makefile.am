@@ -1,4 +1,5 @@
-SUBDIRS = about community css images start support projects resources learn i18n press faqs include friends fonts img contact roadmap softwaremap mobile
+SUBDIRS = about community css images start support projects resources learn i18n press faqs include friends fonts img contact roadmap mobile
+#diegoe: disable softwaremap now that there's no gnomefiles.org (20080804)
 #vuntz: disable the tour subdir for now since it breaks the build and we need an urgent fix for 2.16
 #tour
 
