@@ -116,6 +116,7 @@ page_SCRIPTS= \
 	chronopic_buy_add_shopping_cart.png \
 	chronopic_buy_view_cart_es.png \
 	chronopic_buy_view_cart.png \
+	chronopic_store.png \
 	howto_buttons_buy.txt \
 	test_png.png \
 	test_jpg.jpg 
