@@ -105,6 +105,18 @@ page_SCRIPTS= \
 	bernat_busca1_small.jpg \
 	bernat_busca2.jpg \
 	bernat_busca2_small.jpg \
+	store_header.png \
+	store_header.xcf \
+	chronopics_paypal_header.png \
+	chronopic3_blue_mini.png \
+	chronopic3_orange_mini.png \
+	chronopic3_transparent_mini.png \
+	chronopic3_yellow_mini.png \
+	chronopic_buy_add_shopping_cart_es.png \
+	chronopic_buy_add_shopping_cart.png \
+	chronopic_buy_view_cart_es.png \
+	chronopic_buy_view_cart.png \
+	howto_buttons_buy.txt \
 	test_png.png \
 	test_jpg.jpg 
 

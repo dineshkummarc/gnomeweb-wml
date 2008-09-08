@@ -72,6 +72,7 @@ page_SCRIPTS= \
 	screenshots_es.html \
 	screenshots_gl.html \
 	screenshots_pt.html \
+	store.html \
 	barreras-sch-color.pdf \
 	chronojump_esquema_jump_250.png \
 	chronojump_esquema_pulse_250.png \
