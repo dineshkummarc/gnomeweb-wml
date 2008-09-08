@@ -106,6 +106,7 @@ page_SCRIPTS= \
 	index_en.html \
 	installation_en.html \
 	screenshots_en.html \
+	shipping.js \
 	style.css
 
 include $(top_srcdir)/rules.common
