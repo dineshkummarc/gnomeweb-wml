@@ -17,6 +17,7 @@ SUBDIRS = \
 	gnome-core		\
 	gnome-games		\
 	gnome-libs		\
+	gnomeradio		\
 	gnumeric		\
 	guppi			\
 	gtksourceview		\
