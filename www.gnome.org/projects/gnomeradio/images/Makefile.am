@@ -12,7 +12,7 @@ misc_images=\
 	gnomeradio-main.png \
 	gnomeradio-menu.png \
 	gnomeradio-recording.png \
-	gnomeradio-settings.png \
+	gnomeradio-setting.png \
 	spacer.png \
 	top-bg.png
 
