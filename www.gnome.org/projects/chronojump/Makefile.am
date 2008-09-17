@@ -1,86 +1,13 @@
-SUBDIRS= images articles print slides-en-fr slides-es-ca 
-
 urlpath=/projects/chronojump
 
 page_SCRIPTS= \
-	index.html	\
-	chronopic3_lista_espera_es.html \
-	construction_contact_platform.html \
-	construction_contact_platform_ca.html \
-	construction_contact_platform_es.html \
-	construction_contact_platform_gl.html \
-	construction_contact_platform_pt.html \
-	construction_contact_platform_comments_ca.html \
-	construction_contact_platform_comments_es.html \
-	construction_contact_platform_parallel_port_ca.html \
-	construction_contact_platform_parallel_port_es.html \
-	construction_chronopic_juanfer.html \
-	construction_chronopic_juanfer_es.html \
-	construction_chronopic_juanfer_gl.html \
-	construction.html \
-	construction_ca.html \
-	construction_es.html \
-	construction_gl.html \
-	construction_pt.html \
-	contact.html \
-	contact_ca.html \
-	contact_de.html \
-	contact_es.html \
-	contact_fr.html \
-	contact_gl.html \
-	contact_pt.html \
-	courses_ca.html \
-	courses_es.html \
-	documents.html \
-	documents_ca.html \
-	documents_es.html \
-	documents_gl.html \
-	documents_pt.html \
-	faq.html \
-	faq_ca.html \
-	faq_es.html \
-	faq_gl.html \
-	faq_pt.html \
-	features.html \
-	features_ca.html \
-	features_de.html \
-	features_es.html \
-	features_gl.html \
-	features_pt.html \
-	hardware_ca.html \
-	hardware_es.html \
-	hardware_gl.html \
-	hardware.html \
-	hardware_pt.html \
-	index_en.html	\
-	index_ca.html \
-	index_de.html \
-	index_es.html \
-	index_fr.html \
-	index_gl.html \
-	index_it.html \
-	index_pt.html \
-	installation.html \
-	installation_ca.html \
-	installation_es.html \
-	installation_gl.html \
-	installation_pt.html \
-	photocells_es.html \
-	problems.html \
-	screenshots.html \
-	screenshots_ca.html \
-	screenshots_es.html \
-	screenshots_gl.html \
-	screenshots_pt.html \
-	store.html \
 	barreras-sch-color.pdf \
 	chronojump_esquema_jump_250.png \
 	chronojump_esquema_pulse_250.png \
 	chronojump_esquema_reaction_time_250.png \
 	chronojump_esquema_run_250.png \
-	chronopic_juanfer_1_1_schema.jpg \
-	test_png.png \
-	test_jpg.jpg \
+	chronojump_main_06.png \
+	chronojump_main_06_small.png \
 	chronopic_2_0_serial_back.jpg \
 	chronopic_2_0_serial_back_mini.jpg \
 	chronopic_2_0_serial_front.jpg \
@@ -89,24 +16,87 @@ page_SCRIPTS= \
 	chronopic_2_0_usb_back_mini.jpg \
 	chronopic_2_0_usb_front.jpg \
 	chronopic_2_0_usb_front_mini.jpg \
-	chronojump_main_06.png \
-	chronojump_main_06_small.png \
+	chronopic3_lista_espera_es.html \
+	chronopic_juanfer_1_1_schema.jpg \
+	construction_ca.html \
+	construction_chronopic_juanfer_es.html \
+	construction_chronopic_juanfer_gl.html \
+	construction_chronopic_juanfer.html \
+	construction_contact_platform_buy_stuff_es.html \
+	construction_contact_platform_buy_stuff.html \
+	construction_contact_platform_ca.html \
+	construction_contact_platform_comments_ca.html \
+	construction_contact_platform_comments_es.html \
+	construction_contact_platform_es.html \
+	construction_contact_platform_gl.html \
+	construction_contact_platform.html \
+	construction_contact_platform_parallel_port_ca.html \
+	construction_contact_platform_parallel_port_es.html \
+	construction_contact_platform_pt.html \
+	construction_es.html \
+	construction_gl.html \
+	construction.html \
+	construction_pt.html \
+	contact_ca.html \
+	contact_de.html \
+	contact_es.html \
+	contact_fr.html \
+	contact_gl.html \
+	contact.html \
+	contact_pt.html \
+	courses_ca.html \
+	courses_es.html \
+	documents_ca.html \
+	documents_es.html \
+	documents_gl.html \
+	documents.html \
+	documents_pt.html \
+	faq_ca.html \
+	faq_es.html \
+	faq_gl.html \
+	faq.html \
+	faq_pt.html \
+	features_ca.html \
+	features_de.html \
+	features_es.html \
+	features_gl.html \
+	features.html \
+	features_pt.html \
+	hardware_ca.html \
+	hardware_es.html \
+	hardware_gl.html \
+	hardware.html \
+	hardware_pt.html \
+	index_ca.html \
+	index_de.html \
+	index_en.html \
+	index_es.html \
+	index_fr.html \
+	index_gl.html \
+	index.html	\
+	index_it.html \
+	index_pt.html \
+	installation_ca.html \
+	installation_es.html \
+	installation_gl.html \
+	installation.html \
+	installation_pt.html \
 	old_chronopics_ca.html \
 	old_chronopics_es.html \
 	old_chronopics_gl.html \
 	old_chronopics.html \
 	old_chronopics_pt.html \
-	construction_chronopic_juanfer_en.html \
-	construction_contact_platform_en.html \
-	construction_en.html \
-	contact_en.html \
-	documents_en.html \
-	faq_en.html \
-	features_en.html \
-	index_en.html \
-	installation_en.html \
-	screenshots_en.html \
+	photocells_es.html \
+	problems.html \
+	screenshots_ca.html \
+	screenshots_es.html \
+	screenshots_gl.html \
+	screenshots.html \
+	screenshots_pt.html \
 	shipping.js \
+	store.html \
+	test_jpg.jpg \
+	test_png.png \
 	style.css
 
 include $(top_srcdir)/rules.common

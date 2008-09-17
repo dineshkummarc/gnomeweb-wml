@@ -56,6 +56,7 @@ page_SCRIPTS= \
 	plataforma_contactos_juntar_varillas.jpg \
 	plataforma_contactos_marcar_cortar_cable.jpg \
 	plataforma_contactos_material.jpg \
+	plataforma_contactos_material_small.jpg \
 	plataforma_contactos_pegar_cinta_entre_varillas.jpg \
 	plataforma_contactos_pegar_varillas_plastico.jpg \
 	plataforma_contactos_perforar_varillas.jpg \
