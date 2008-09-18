@@ -57,8 +57,11 @@ if (form.place[0].checked)
 	 } else if (form.quantity_pre.value == 2) {
 		 form.os1.value = "2 chronopics"
 		 form.amount.value = 4.4
-	 } else if (form.quantity_pre.value >= 3 && form.quantity_pre.value <= 4) {
-		 form.os1.value = form.quantity.pre.value
+	 } else if (form.quantity_pre.value == 3) {
+		 form.os1.value = "3 chronopics"
+		 form.amount.value = 5.3
+	 } else if (form.quantity_pre.value == 4) { //different than above for the "handling" at end of file
+		 form.os1.value = "4 chronopics"
 		 form.amount.value = 5.3
 	 } else if (form.quantity_pre.value >= 5 && form.quantity_pre.value <= 6) {
 		 form.os1.value = "5-6 chronopics"
@@ -97,8 +100,11 @@ else if (form.place[1].checked)
 	 } else if (form.quantity_pre.value == 2) {
 		 form.os1.value = "2 chronopics"
 		 form.amount.value = 7.05
-	 } else if (form.quantity_pre.value >= 3 && form.quantity_pre.value <= 4) {
-		 form.os1.value = "3-4 chronopics"
+	 } else if (form.quantity_pre.value == 3) {
+		 form.os1.value = "3 chronopics"
+		 form.amount.value = 10.2
+	 } else if (form.quantity_pre.value == 4) { //different than above for the "handling" at end of file
+		 form.os1.value = "4 chronopics"
 		 form.amount.value = 10.2
 	 } else if (form.quantity_pre.value >= 5 && form.quantity_pre.value <= 6) {
 		 form.os1.value = "5-6 chronopics"
@@ -136,8 +142,11 @@ else if (form.place[2].checked)
 	 } else if (form.quantity_pre.value == 2) {
 		 form.os1.value = "2 chronopics"
 		 form.amount.value = 8.09
-	 } else if (form.quantity_pre.value >= 3 && form.quantity_pre.value <= 4) {
-		 form.os1.value = "3-4 chronopics"
+	 } else if (form.quantity_pre.value == 3) {
+		 form.os1.value = "3 chronopics"
+		 form.amount.value = 12.34
+	 } else if (form.quantity_pre.value == 4) { //different than above for the "handling" at end of file
+		 form.os1.value = "4 chronopics"
 		 form.amount.value = 12.34
 	 } else if (form.quantity_pre.value >= 5 && form.quantity_pre.value <= 6) {
 		 form.os1.value = "5-6 chronopics"
@@ -163,17 +172,24 @@ if(form.lang.value == "en") {
 	 form.os1.value = form.os1.value + ". Nota: la següent columna \"Quantitat\" ha de ser 1"
 }
 
-
 //manage handling
+a = form.amount.value;
+
 if (form.quantity_pre.value == 1) {
-	form.amount.value = form.amount.value + 1.6
+	b = 1.6;
 } else if (form.quantity_pre.value == 2) {
-	form.amount.value += 2.8
+	b = 2.8;
 } else if (form.quantity_pre.value == 3) {
-	form.amount.value += 4
+	b = 4;
 } else {
-	form.amount.value += 5
+	b = 5;
 }  
 
+var a2 = a*1;
+var b2 = b*1;
+
+form.amount.value = (a2+b2);
+
+}
 
 //--------------------------------------------------------------//
