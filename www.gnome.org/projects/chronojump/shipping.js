@@ -164,6 +164,15 @@ if(form.lang.value == "en") {
 }
 
 
+//manage handling
+if (form.quantity_pre.value == 1) {
+	form.amount.value = form.amount.value + 1.6
+} else if (form.quantity_pre.value == 2) {
+	form.amount.value += 2.8
+} else if (form.quantity_pre.value == 3) {
+	form.amount.value += 4
+} else {
+	form.amount.value += 5
 }  
 
 
