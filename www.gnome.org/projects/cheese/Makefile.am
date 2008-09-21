@@ -8,7 +8,6 @@ mrproper:
 page_SCRIPTS= \
 	index.html \
 	download.html \
-#	screenshots.html \
 	tour.html \
 	detect.py \
 	$(NULL)
@@ -83,12 +82,12 @@ shadowboximages_DATA =\
 	$(NULL)
 
 shadowboxcssdir = $(pagedir)/data/shadowbox/css
-shadowboximages_DATA =\
+shadowboxcss_DATA =\
 	data/shadowbox/css/shadowbox-light.css \
 	$(NULL)
 
 shadowboxjsdir = $(pagedir)/data/shadowbox/js
-shadowboximages_DATA =\
+shadowboxjs_DATA =\
 	data/shadowbox/js/shadowbox.js \
 	data/shadowbox/js/yui-utilities.js \
 	data/shadowbox/js/shadowbox-yui.js \
