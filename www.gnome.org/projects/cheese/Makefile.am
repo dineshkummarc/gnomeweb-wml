@@ -8,7 +8,7 @@ mrproper:
 page_SCRIPTS= \
 	index.html \
 	download.html \
-	screenshots.html \
+#	screenshots.html \
 	tour.html \
 	detect.py \
 	$(NULL)
@@ -39,6 +39,11 @@ screenshots_DATA = \
 	data/screenshots/cheese-0.3.0.jpg \
 	data/screenshots/cheese-2.22.0.jpg \
 	data/screenshots/cheese-2.22.0_2.jpg \
+	data/screenshots/cheese-2.24.0-countdown.jpg \
+	data/screenshots/cheese-2.24.0-effects.jpg \
+	data/screenshots/cheese-2.24.0-fullscreen.jpg \
+	data/screenshots/cheese-2.24.0-main.jpg \
+	data/screenshots/cheese-2.24.0-share.jpg \
 	$(NULL)
 
 imagesdir = $(pagedir)/data/images
@@ -47,26 +52,46 @@ images_DATA =\
 	data/images/gnome-favicon.png \
 	data/images/package-x-generic.png \
 	data/images/preferences-desktop-wallpaper.png \
-  data/images/internet-group-chat.png \
-  data/images/system-users.png \
-  data/images/video-x-generic.png \
-  data/images/applications-development.png \
-  data/images/package-x-generic.png \
-  data/images/dialog-information.png \
-  data/images/application-x-executable.png \
-  data/images/dialog-warning.png \
-  data/images/cheese-tour.png \
-  data/images/cheese-birthday.png \
+	data/images/internet-group-chat.png \
+	data/images/system-users.png \
+	data/images/video-x-generic.png \
+	data/images/applications-development.png \
+	data/images/package-x-generic.png \
+	data/images/dialog-information.png \
+	data/images/application-x-executable.png \
+	data/images/dialog-warning.png \
+	data/images/cheese-tour.png \
+	data/images/cheese-birthday.png \
+	data/images/cheese-2.24.png \
 	$(NULL)
 
 tourdir = $(pagedir)/data/tour
 tour_DATA =\
-  data/tour/cheese-video.jpg \
-  data/tour/cheese-about.jpg \
-  data/tour/cheese-effects.jpg \
-  data/tour/cheese-countdown.jpg \
-  data/tour/cheese-share.jpg \
-  data/tour/cheese-main.jpg \
+	data/tour/cheese-video.jpg \
+	data/tour/cheese-about.jpg \
+	data/tour/cheese-effects.jpg \
+	data/tour/cheese-countdown.jpg \
+	data/tour/cheese-share.jpg \
+	data/tour/cheese-main.jpg \
+	data/tour/cheese-prefs.jpg \
+	data/tour/cheese-fullscreen.jpg \
+	$(NULL)
+
+shadowboximagesdir = $(pagedir)/data/shadowbox/images
+shadowboximages_DATA =\
+	data/shadowbox/images/loading-light.gif \
+	$(NULL)
+
+shadowboxcssdir = $(pagedir)/data/shadowbox/css
+shadowboximages_DATA =\
+	data/shadowbox/css/shadowbox-light.css \
+	$(NULL)
+
+shadowboxjsdir = $(pagedir)/data/shadowbox/js
+shadowboximages_DATA =\
+	data/shadowbox/js/shadowbox.js \
+	data/shadowbox/js/yui-utilities.js \
+	data/shadowbox/js/shadowbox-yui.js \
 	$(NULL)
 
 include $(top_srcdir)/rules.common
