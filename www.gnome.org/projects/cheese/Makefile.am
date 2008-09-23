@@ -78,11 +78,13 @@ tour_DATA =\
 
 shadowboximagesdir = $(pagedir)/data/shadowbox/images
 shadowboximages_DATA =\
+	data/shadowbox/images/loading.gif \
 	data/shadowbox/images/loading-light.gif \
 	$(NULL)
 
 shadowboxcssdir = $(pagedir)/data/shadowbox/css
 shadowboxcss_DATA =\
+	data/shadowbox/css/shadowbox.css \
 	data/shadowbox/css/shadowbox-light.css \
 	$(NULL)
 
