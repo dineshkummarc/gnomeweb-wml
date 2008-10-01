@@ -1,4 +1,4 @@
-SUBDIRS= figures stylesheet-images
+SUBDIRS= figures stylesheet-images shell
 
 urlpath=/projects/evolution/doc
 
