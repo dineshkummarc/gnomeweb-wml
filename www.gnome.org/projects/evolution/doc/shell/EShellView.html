@@ -49,6 +49,7 @@
 #include &lt;shell/e-shell-view.h&gt;
 
                     <a class="link" href="EShellView.html#EShellView-struct" title="EShellView">EShellView</a>;
+                    <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass">EShellViewClass</a>;
 const <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*        <a class="link" href="EShellView.html#e-shell-view-get-name" title="e_shell_view_get_name ()">e_shell_view_get_name</a>               (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);
@@ -72,8 +73,6 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
 >gboolean</a>            <a class="link" href="EShellView.html#e-shell-view-is-active" title="e_shell_view_is_active ()">e_shell_view_is_active</a>              (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);
-void                <a class="link" href="EShellView.html#e-shell-view-add-activity" title="e_shell_view_add_activity ()">e_shell_view_add_activity</a>           (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view,
-                                                         EActivity *activity);
 <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 >gint</a>                <a class="link" href="EShellView.html#e-shell-view-get-page-num" title="e_shell_view_get_page_num ()">e_shell_view_get_page_num</a>           (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);
@@ -154,10 +153,164 @@ functions below.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
+<a name="EShellViewClass"></a><h3>EShellViewClass</h3>
+<pre class="programlisting">typedef struct {
+	GObjectClass parent_class;
+
+	/* Initial switcher action values. */
+	const gchar *label;
+	const gchar *icon_name;
+
+	/* Base name of the UI definition file. */
+	const gchar *ui_definition;
+
+	/* Widget path to the search options popup menu. */
+	const gchar *search_options;
+
+	/* Subclasses should set this via the "class_data" field in
+	 * the GTypeInfo they pass to g_type_module_register_type(). */
+	GTypeModule *type_module;
+
+	/* A unique instance is created for each subclass. */
+	GalViewCollection *view_collection;
+
+	/* Factory Methods */
+	GtkWidget *	(*new_shell_content)	(EShellView *shell_view);
+	GtkWidget *	(*new_shell_sidebar)	(EShellView *shell_view);
+	GtkWidget *	(*new_shell_taskbar)	(EShellView *shell_view);
+
+	/* Signals */
+	void		(*toggled)		(EShellView *shell_view);
+	void		(*update_actions)	(EShellView *shell_view);
+} EShellViewClass;
+</pre>
+<p>
+<a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> contains a number of important settings for subclasses.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectClass"
+>GObjectClass</a> <em class="structfield"><code>parent_class</code></em>;</span></p></td>
+<td>	The parent class structure.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>label</code></em>;</span></p></td>
+<td>		The initial value for the switcher action's
+			<a
+href="/usr/share/gtk-doc/html/gtk/GtkAction.html#GtkAction--label"
+><span class="type">"label"</span></a> property.  See
+			<a class="link" href="EShellView.html#e-shell-view-get-action" title="e_shell_view_get_action ()"><code class="function">e_shell_view_get_action()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>icon_name</code></em>;</span></p></td>
+<td>		The initial value for the switcher action's
+			<a
+href="/usr/share/gtk-doc/html/gtk/GtkAction.html#GtkAction--icon-name"
+><span class="type">"icon-name"</span></a> property.  See
+			<a class="link" href="EShellView.html#e-shell-view-get-action" title="e_shell_view_get_action ()"><code class="function">e_shell_view_get_action()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>ui_definition</code></em>;</span></p></td>
+<td>	Base name of the UI definintion file to add
+			when the shell view is activated.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>search_options</code></em>;</span></p></td>
+<td>	Widget path in the UI definition to the search
+			options popup menu.  The menu gets shown when the
+			user clicks the "find" icon in the search entry.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a> *<em class="structfield"><code>type_module</code></em>;</span></p></td>
+<td>	The corresponding <a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+><span class="type">GTypeModule</span></a> for this shell
+			view.  Subclasses are responsible for setting
+			this.  An easy way do so is to pass it to the
+			shell view's <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GClassInitFunc"
+><span class="type">GClassInitFunc</span></a> via the
+			<em class="structfield"><code>class_data</code></em> field in
+			<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GTypeInfo"
+><span class="type">GTypeInfo</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">GalViewCollection *<em class="structfield"><code>view_collection</code></em>;</span></p></td>
+<td>	A unique <span class="type">GalViewCollection</span> instance is created
+			for each subclass and shared across all instances
+			of that subclass.  That much is done automatically
+			for subclasses, but subclasses are still responsible
+			for adding the appropriate <span class="type">GalView</span> factories to the
+			view collection.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>new_shell_content</code></em> ()</span></p></td>
+<td>	Factory method for the shell view's <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a>.
+			See <a class="link" href="EShellView.html#e-shell-view-get-shell-content" title="e_shell_view_get_shell_content ()"><code class="function">e_shell_view_get_shell_content()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>new_shell_sidebar</code></em> ()</span></p></td>
+<td>	Factory method for the shell view's <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a>.
+			See <a class="link" href="EShellView.html#e-shell-view-get-shell-sidebar" title="e_shell_view_get_shell_sidebar ()"><code class="function">e_shell_view_get_shell_sidebar()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>new_shell_taskbar</code></em> ()</span></p></td>
+<td>	Factory method for the shell view's <a class="link" href="EShellTaskbar.html" title="EShellTaskbar"><span class="type">EShellTaskbar</span></a>.
+			See <a class="link" href="EShellView.html#e-shell-view-get-shell-taskbar" title="e_shell_view_get_shell_taskbar ()"><code class="function">e_shell_view_get_shell_taskbar()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>toggled</code></em> ()</span></p></td>
+<td>		Class method for the <a class="link" href="EShellView.html#EShellView-toggled" title='The "toggled" signal'><span class="type">"toggled"</span></a> signal.
+			Subclasses should rarely need to override the
+			default behavior.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>update_actions</code></em> ()</span></p></td>
+<td>	Class method for the <a class="link" href="EShellView.html#EShellView-update-actions" title='The "update-actions" signal'><span class="type">"update_actions"</span></a>
+			signal.  There is no default behavior; subclasses
+			should override this.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
 <a name="e-shell-view-get-name"></a><h3>e_shell_view_get_name ()</h3>
 <pre class="programlisting">const <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*        e_shell_view_get_name               (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
+<p>
+Returns the view name for <em class="parameter"><code>shell_view</code></em>, which is also the name of
+the corresponding <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a> (see the <em class="structfield"><code>name</code></em>
+field in <a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo"><span class="type">EShellModuleInfo</span></a>).</p>
 <p>
 
 </p>
@@ -166,14 +319,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the view name for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -186,6 +337,17 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
 >GtkAction</a>*          e_shell_view_get_action             (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the switcher action for <em class="parameter"><code>shell_view</code></em>.
+</p>
+<p>
+An <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> creates a <a
+href="/usr/share/gtk-doc/html/gtk/GtkRadioAction.html"
+><span class="type">GtkRadioAction</span></a> for each <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> class
+it instantiates.  This action gets passed to the <a class="link" href="EShellSwitcher.html" title="EShellSwitcher"><span class="type">EShellSwitcher</span></a>, which
+displays a button that proxies the action.  The icon at the top of the
+sidebar also proxies the action.  When <em class="parameter"><code>shell_view</code></em> is active, the
+action's icon becomes the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> icon.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -193,14 +355,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the switcher action for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -213,6 +373,9 @@ href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*        e_shell_view_get_title              (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the title for <em class="parameter"><code>shell_view</code></em>.  When <em class="parameter"><code>shell_view</code></em> is active, the
+shell view's title becomes the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> title.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -220,14 +383,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the title for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -241,6 +402,9 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a> *title);</pre>
 <p>
+Sets the title for <em class="parameter"><code>shell_view</code></em>.  When <em class="parameter"><code>shell_view</code></em> is active, the
+shell view's title becomes the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> title.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -248,14 +412,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>title</code></em> :</span></p></td>
-<td>
-
-
+<td> a title for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -268,6 +430,16 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*        e_shell_view_get_view_id            (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the ID of the currently selected <span class="type">GalView</span>.
+</p>
+<p>
+<a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses are responsible for keeping this property in
+sync with their <span class="type">GalViewInstance</span>.  <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> itself just provides
+a place to store the view ID, and emits a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-notify"
+><span class="type">"notify"</span></a> signal
+when the property changes.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -275,14 +447,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the ID of the current <span class="type">GalView</span>
 </td>
 </tr>
 </tbody>
@@ -296,6 +466,16 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a> *view_id);</pre>
 <p>
+Selects the <span class="type">GalView</span> whose ID is equal to <em class="parameter"><code>view_id</code></em>.
+</p>
+<p>
+<a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses are responsible for keeping this property in
+sync with their <span class="type">GalViewInstance</span>.  <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> itself just provides
+a place to store the view ID, and emits a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-notify"
+><span class="type">"notify"</span></a> signal
+when the property changes.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -303,14 +483,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>view_id</code></em> :</span></p></td>
-<td>
-
-
+<td> a <span class="type">GalView</span> ID
 </td>
 </tr>
 </tbody>
@@ -323,31 +501,17 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
 >gboolean</a>            e_shell_view_is_active              (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
-
+Returns <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if <em class="parameter"><code>shell_view</code></em> is active.  That is, if it's currently
+visible in its <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>.  An <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> can only display one
+shell view at a time.
 </p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" lang="en">
-<a name="e-shell-view-add-activity"></a><h3>e_shell_view_add_activity ()</h3>
-<pre class="programlisting">void                e_shell_view_add_activity           (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view,
-                                                         EActivity *activity);</pre>
+<p>
+Technically this just checks the <a
+href="/usr/share/gtk-doc/html/gtk/GtkToggleAction.html#GtkToggleAction--active"
+><span class="type">"active"</span></a> property of
+the shell view's switcher action.  See <a class="link" href="EShellView.html#e-shell-view-get-action" title="e_shell_view_get_action ()"><code class="function">e_shell_view_get_action()</code></a>.</p>
 <p>
 
 </p>
@@ -356,14 +520,14 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>activity</code></em> :</span></p></td>
-<td>
-
-
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if <em class="parameter"><code>shell_view</code></em> is active
 </td>
 </tr>
 </tbody>
@@ -376,6 +540,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 >gint</a>                e_shell_view_get_page_num           (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+This function is only interesting to <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>.  It returns the
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkNotebook.html"
+><span class="type">GtkNotebook</span></a> page number for <em class="parameter"><code>shell_view</code></em>.  The rest of the application
+should have no need for this.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -383,14 +553,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the notebook page number for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -403,6 +571,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 >GtkSizeGroup</a>*       e_shell_view_get_size_group         (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns a <a
+href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
+><span class="type">GtkSizeGroup</span></a> that <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a> and <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a> use
+to keep the search bar and sidebar banner vertically aligned.  The
+rest of the application should have no need for this.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -410,14 +584,14 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> a <a
+href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
+><span class="type">GtkSizeGroup</span></a> for internal use
 </td>
 </tr>
 </tbody>
@@ -428,6 +602,14 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-get-shell-content"></a><h3>e_shell_view_get_shell_content ()</h3>
 <pre class="programlisting"><a class="link" href="EShellContent.html" title="EShellContent">EShellContent</a>*      e_shell_view_get_shell_content      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a> instance for <em class="parameter"><code>shell_view</code></em>.
+</p>
+<p>
+By default, <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> creates a plain <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a> during
+initialization.  But <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses can override the
+<em class="structfield"><code>new_shell_content</code></em> factory method
+in <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> to create a custom <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a>.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -435,14 +617,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a> instance for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -453,6 +633,14 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-get-shell-sidebar"></a><h3>e_shell_view_get_shell_sidebar ()</h3>
 <pre class="programlisting"><a class="link" href="EShellSidebar.html" title="EShellSidebar">EShellSidebar</a>*      e_shell_view_get_shell_sidebar      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a> instance for <em class="parameter"><code>shell_view</code></em>.
+</p>
+<p>
+By default, <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> creates a plain <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a> during
+initialization.  But <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses can override the
+<em class="structfield"><code>new_shell_sidebar</code></em> factory method
+in <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> to create a custom <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a>.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -460,14 +648,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the <a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a> instance for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -478,6 +664,14 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-get-shell-taskbar"></a><h3>e_shell_view_get_shell_taskbar ()</h3>
 <pre class="programlisting"><a class="link" href="EShellTaskbar.html" title="EShellTaskbar">EShellTaskbar</a>*      e_shell_view_get_shell_taskbar      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the <a class="link" href="EShellTaskbar.html" title="EShellTaskbar"><span class="type">EShellTaskbar</span></a> instance for <em class="parameter"><code>shell_view</code></em>.
+</p>
+<p>
+By default, <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> creates a plain <a class="link" href="EShellTaskbar.html" title="EShellTaskbar"><span class="type">EShellTaskbar</span></a> during
+initialization.  But <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses can override the
+<em class="structfield"><code>new_shell_taskbar</code></em> factory method
+in <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> to create a custom <a class="link" href="EShellTaskbar.html" title="EShellTaskbar"><span class="type">EShellTaskbar</span></a>.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -485,14 +679,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the <a class="link" href="EShellTaskbar.html" title="EShellTaskbar"><span class="type">EShellTaskbar</span></a> instance for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -503,6 +695,8 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-get-shell-window"></a><h3>e_shell_view_get_shell_window ()</h3>
 <pre class="programlisting"><a class="link" href="EShellWindow.html" title="EShellWindow">EShellWindow</a>*       e_shell_view_get_shell_window       (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> to which <em class="parameter"><code>shell_view</code></em> belongs.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -510,14 +704,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> to which <em class="parameter"><code>shell_view</code></em> belongs
 </td>
 </tr>
 </tbody>
@@ -528,6 +720,8 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-get-shell-module"></a><h3>e_shell_view_get_shell_module ()</h3>
 <pre class="programlisting"><a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       e_shell_view_get_shell_module       (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Returns the corresponding <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a> for <em class="parameter"><code>shell_view</code></em>.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
@@ -535,14 +729,12 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-
-
+<td> the corresponding <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a> for <em class="parameter"><code>shell_view</code></em>
 </td>
 </tr>
 </tbody>
@@ -553,15 +745,26 @@ href="/usr/share/gtk-doc/html/gtk/GtkSizeGroup.html"
 <a name="e-shell-view-update-actions"></a><h3>e_shell_view_update_actions ()</h3>
 <pre class="programlisting">void                e_shell_view_update_actions         (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view);</pre>
 <p>
+Emits the <a class="link" href="EShellView.html#EShellView-update-actions" title='The "update-actions" signal'><span class="type">"update-actions"</span></a> signal.
+</p>
+<p>
+<a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses should implement the
+<em class="structfield"><code>update_actions</code></em> method in <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a>
+to update the various <a
+href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
+><span class="type">GtkAction</span></a>s based on the current
+<a class="link" href="EShellSidebar.html" title="EShellSidebar"><span class="type">EShellSidebar</span></a> and <a class="link" href="EShellContent.html" title="EShellContent"><span class="type">EShellContent</span></a> selections.  The
+<a class="link" href="EShellView.html#EShellView-update-actions" title='The "update-actions" signal'><span class="type">"update-actions"</span></a> signal is typically emitted just before
+showing a popup menu or just after the user selects an item in the
+shell view.</p>
+<p>
 
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
-<td>
-
-
+<td> an <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -619,7 +822,13 @@ href="/usr/share/gtk-doc/html/gdk/gdk-Event-Structures.html#GdkEventButton"
 <pre class="programlisting">  "action"                   <a
 href="/usr/share/gtk-doc/html/gtk/GtkRadioAction.html"
 >GtkRadioAction</a>*       : Read / Write / Construct Only</pre>
-<p>The switcher action for this shell view.</p>
+<p>
+The <a
+href="/usr/share/gtk-doc/html/gtk/GtkRadioAction.html"
+><span class="type">GtkRadioAction</span></a> registered with <a class="link" href="EShellSwitcher.html" title="EShellSwitcher"><span class="type">EShellSwitcher</span></a>.</p>
+<p>
+
+</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -627,7 +836,13 @@ href="/usr/share/gtk-doc/html/gtk/GtkRadioAction.html"
 <pre class="programlisting">  "page-num"                 <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 >gint</a>                  : Read / Write / Construct Only</pre>
-<p>The notebook page number of the shell view.</p>
+<p>
+The <a
+href="/usr/share/gtk-doc/html/gtk/GtkNotebook.html"
+><span class="type">GtkNotebook</span></a> page number of the shell view.</p>
+<p>
+
+</p>
 <p>Allowed values: &gt;= -1</p>
 <p>Default value: -1</p>
 </div>
@@ -635,25 +850,43 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 <div class="refsect2" lang="en">
 <a name="EShellView--shell-content"></a><h3>The <code class="literal">"shell-content"</code> property</h3>
 <pre class="programlisting">  "shell-content"            <a class="link" href="EShellContent.html" title="EShellContent">EShellContent</a>*        : Read</pre>
-<p>The content widget appears in a shell window's right pane.</p>
+<p>
+The content widget appears in an <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>'s
+right pane.</p>
+<p>
+
+</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="EShellView--shell-sidebar"></a><h3>The <code class="literal">"shell-sidebar"</code> property</h3>
 <pre class="programlisting">  "shell-sidebar"            <a class="link" href="EShellSidebar.html" title="EShellSidebar">EShellSidebar</a>*        : Read</pre>
-<p>The sidebar widget appears in a shell window's left pane.</p>
+<p>
+The sidebar widget appears in an <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>'s
+left pane.</p>
+<p>
+
+</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="EShellView--shell-taskbar"></a><h3>The <code class="literal">"shell-taskbar"</code> property</h3>
 <pre class="programlisting">  "shell-taskbar"            <a class="link" href="EShellTaskbar.html" title="EShellTaskbar">EShellTaskbar</a>*        : Read</pre>
-<p>The taskbar widget appears at the bottom of a shell window.</p>
+<p>
+The taskbar widget appears at the bottom of an <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>.</p>
+<p>
+
+</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
 <a name="EShellView--shell-window"></a><h3>The <code class="literal">"shell-window"</code> property</h3>
 <pre class="programlisting">  "shell-window"             <a class="link" href="EShellWindow.html" title="EShellWindow">EShellWindow</a>*         : Read / Write / Construct Only</pre>
-<p>The window to which the shell view belongs.</p>
+<p>
+The <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a> to which the shell view belongs.</p>
+<p>
+
+</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
@@ -661,7 +894,12 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
 <pre class="programlisting">  "title"                    <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*                : Read / Write</pre>
-<p>The title of the shell view.</p>
+<p>
+The title of the shell view.  Also serves as the <a class="link" href="EShellWindow.html" title="EShellWindow"><span class="type">EShellWindow</span></a>
+title when the shell view is active.</p>
+<p>
+
+</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
@@ -670,7 +908,11 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <pre class="programlisting">  "view-id"                  <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 >gchar</a>*                : Read / Write</pre>
-<p>The current GAL view ID.</p>
+<p>
+The current <span class="type">GalView</span> ID.</p>
+<p>
+
+</p>
 <p>Default value: NULL</p>
 </div>
 </div>
@@ -678,10 +920,21 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
 <a name="EShellView.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
 <a name="EShellView-toggled"></a><h3>The <code class="literal">"toggled"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *eshellview,
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view,
                                                         <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
 >gpointer</a>    user_data)       : Run First</pre>
+<p>
+Emitted when <em class="parameter"><code>shell_view</code></em> is activated or deactivated.
+Use <a class="link" href="EShellView.html#e-shell-view-is-active" title="e_shell_view_is_active ()"><code class="function">e_shell_view_is_active()</code></a> to find out which event has
+occurred.  The shell view being deactivated is always
+notified before the shell view being activated.
+</p>
+<p>
+By default, <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> adds the UI definition file
+given in the <em class="structfield"><code>ui_definition</code></em>
+field of <a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> on activation, and removes the
+UI definition on deactivation.</p>
 <p>
 
 </p>
@@ -689,9 +942,8 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>eshellview</code></em> :</span></p></td>
-<td>the object which received the signal.
-
+<td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
+<td> the <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> which emitted the signal
 </td>
 </tr>
 <tr>
@@ -704,10 +956,23 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
 <hr>
 <div class="refsect2" lang="en">
 <a name="EShellView-update-actions"></a><h3>The <code class="literal">"update-actions"</code> signal</h3>
-<pre class="programlisting">void                user_function                      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *eshellview,
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShellView.html" title="EShellView">EShellView</a> *shell_view,
                                                         <a
 href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
 >gpointer</a>    user_data)       : Run First</pre>
+<p>
+<a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclasses should override the
+<em class="structfield"><code>update_actions</code></em> method in
+<a class="link" href="EShellView.html#EShellViewClass" title="EShellViewClass"><span class="type">EShellViewClass</span></a> to update sensitivities, labels, or any
+other aspect of the <a
+href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
+><span class="type">GtkAction</span></a>s they have registered.
+</p>
+<p>
+Plugins can also connect to this signal to be notified
+when to update their own <a
+href="/usr/share/gtk-doc/html/gtk/GtkAction.html"
+><span class="type">GtkAction</span></a>s.</p>
 <p>
 
 </p>
@@ -715,9 +980,8 @@ href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>eshellview</code></em> :</span></p></td>
-<td>the object which received the signal.
-
+<td><p><span class="term"><em class="parameter"><code>shell_view</code></em> :</span></p></td>
+<td> the <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> which emitted the signal
 </td>
 </tr>
 <tr>
