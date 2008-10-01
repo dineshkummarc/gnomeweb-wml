@@ -1,0 +1,660 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EShellModule</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Evolution Shell Reference Manual">
+<link rel="up" href="ch01.html" title="The Shell">
+<link rel="prev" href="EShell.html" title="EShell">
+<link rel="next" href="EShellWindow.html" title="EShellWindow">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="The Shell">
+<link rel="chapter" href="ch02.html" title="Actions">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="EShell.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution Shell Reference Manual</th>
+<td><a accesskey="n" href="EShellWindow.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#EShellModule.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#EShellModule.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#EShellModule.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#EShellModule.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                   | 
+                  <a href="#EShellModule.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#EShellModule.signals" class="shortcut">Signals</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="EShellModule"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EShellModule.top_of_page"></a>EShellModule</span></h2>
+<p>EShellModule — dynamically loaded capabilities</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="EShellModule.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;shell/e-shell-module.h&gt;
+
+                    <a class="link" href="EShellModule.html#EShellModule-struct" title="EShellModule">EShellModule</a>;
+                    <a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo">EShellModuleInfo</a>;
+<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       <a class="link" href="EShellModule.html#e-shell-module-new" title="e_shell_module_new ()">e_shell_module_new</a>                  (struct _EShell *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="EShellModule.html#e-shell-module-compare" title="e_shell_module_compare ()">e_shell_module_compare</a>              (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module_a,
+                                                         <a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module_b);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a class="link" href="EShellModule.html#e-shell-module-get-config-dir" title="e_shell_module_get_config_dir ()">e_shell_module_get_config_dir</a>       (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a class="link" href="EShellModule.html#e-shell-module-get-data-dir" title="e_shell_module_get_data_dir ()">e_shell_module_get_data_dir</a>         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a class="link" href="EShellModule.html#e-shell-module-get-filename" title="e_shell_module_get_filename ()">e_shell_module_get_filename</a>         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a class="link" href="EShellModule.html#e-shell-module-get-searches" title="e_shell_module_get_searches ()">e_shell_module_get_searches</a>         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+struct <a class="link" href="EShell.html" title="EShell">_EShell</a>*     <a class="link" href="EShellModule.html#e-shell-module-get-shell" title="e_shell_module_get_shell ()">e_shell_module_get_shell</a>            (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+void                <a class="link" href="EShellModule.html#e-shell-module-add-activity" title="e_shell_module_add_activity ()">e_shell_module_add_activity</a>         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module,
+                                                         EActivity *activity);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShellModule.html#e-shell-module-is-busy" title="e_shell_module_is_busy ()">e_shell_module_is_busy</a>              (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShellModule.html#e-shell-module-shutdown" title="e_shell_module_shutdown ()">e_shell_module_shutdown</a>             (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);
+void                <a class="link" href="EShellModule.html#e-shell-module-set-info" title="e_shell_module_set_info ()">e_shell_module_set_info</a>             (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module,
+                                                         const <a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo">EShellModuleInfo</a> *info);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a>
+         +----EShellModule
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+EShellModule implements
+ <a
+href="/usr/share/gtk-doc/html/gobject/GTypePlugin.html"
+>GTypePlugin</a>.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="EShellModule.html#EShellModule--filename" title='The "filename" property'>filename</a>"                 <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct Only
+  "<a class="link" href="EShellModule.html#EShellModule--shell" title='The "shell" property'>shell</a>"                    <a class="link" href="EShell.html" title="EShell">EShell</a>*               : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="EShellModule.html#EShellModule-activity-added" title='The "activity-added" signal'>activity-added</a>"                                 : Run Last
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.description"></a><h2>Description</h2>
+<p>
+</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShellModule-struct"></a><h3>EShellModule</h3>
+<pre class="programlisting">typedef struct _EShellModule EShellModule;</pre>
+<p>
+Contains only private data that should be read and manipulated using the
+functions below.</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShellModuleInfo"></a><h3>EShellModuleInfo</h3>
+<pre class="programlisting">typedef struct {
+	const gchar *name;
+	const gchar *aliases;
+	const gchar *schemes;
+	const gchar *searches;
+	gint sort_order;
+
+	gboolean	(*is_busy)		(EShellModule *shell_module);
+	gboolean	(*shutdown)		(EShellModule *shell_module);
+} EShellModuleInfo;
+</pre>
+<p>
+</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>name</code></em>;</span></p></td>
+<td>	The name of the module.  Also becomes the name of
+		the corresponding <a class="link" href="EShellView.html" title="EShellView"><span class="type">EShellView</span></a> subclass that the
+		module will register.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>aliases</code></em>;</span></p></td>
+<td>	Colon-separated list of aliases that can be used
+		when referring to a module by name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>schemes</code></em>;</span></p></td>
+<td>	Colon-separated list of URI schemes.  The <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a>
+		will forward command-line URIs to the appropriate
+		module based on this list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *<em class="structfield"><code>searches</code></em>;</span></p></td>
+<td>	Base name of the XML file containing predefined
+		search rules for this module.  These show up as
+		options in the search entry drop-down.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> <em class="structfield"><code>sort_order</code></em>;</span></p></td>
+<td>	Used to determine the order of modules listed in
+		the main menu and in the switcher.  See
+		<a class="link" href="EShellModule.html#e-shell-module-compare" title="e_shell_module_compare ()"><code class="function">e_shell_module_compare()</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>is_busy</code></em> ()</span></p></td>
+<td>	Callback for querying whether the module has
+		operations in progress that cannot be cancelled
+		or finished immediately.  Returning <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> prevents
+		the application from shutting down.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code>shutdown</code></em> ()</span></p></td>
+<td>	Callback for notifying the module to begin
+		shutting down.  Returning <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> indicates there
+		are still unfinished operations and the <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a>
+		should check back shortly.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-new"></a><h3>e_shell_module_new ()</h3>
+<pre class="programlisting"><a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       e_shell_module_new                  (struct _EShell *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);</pre>
+<p>
+Loads <em class="parameter"><code>filename</code></em> as a <a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+><span class="type">GTypeModule</span></a> and tries to invoke a module
+function named <code class="function">e_shell_module_init</code>, passing
+the newly loaded <a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+><span class="type">GTypeModule</span></a> as an argument.  The shell module is
+responsible for defining such a function to perform the appropriate
+initialization steps.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td> an <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> the name of the file containing the shell module
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-compare"></a><h3>e_shell_module_compare ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                e_shell_module_compare              (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module_a,
+                                                         <a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module_b);</pre>
+<p>
+Using the <em class="structfield"><code>sort_order</code></em> field from both modules'
+<a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo"><span class="type">EShellModuleInfo</span></a>, compares <em class="parameter"><code>shell_module_a</code></em> with <em class="parameter"><code>shell_mobule_b</code></em> and
+returns -1, 0 or +1 if <em class="parameter"><code>shell_module_a</code></em> is found to be less than, equal
+to or greater than <em class="parameter"><code>shell_module_b</code></em>, respectively.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module_a</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module_b</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> -1, 0 or +1, for a less than, equal to or greater than result
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-get-config-dir"></a><h3>e_shell_module_get_config_dir ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        e_shell_module_get_config_dir       (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns the absolute path to the configuration directory for
+<em class="parameter"><code>shell_module</code></em>.  The string is owned by <em class="parameter"><code>shell_module</code></em> and should
+not be modified or freed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the module's configuration directory
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-get-data-dir"></a><h3>e_shell_module_get_data_dir ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        e_shell_module_get_data_dir         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns the absolute path to the data directory for <em class="parameter"><code>shell_module</code></em>.
+The string is owned by <em class="parameter"><code>shell_module</code></em> and should not be modified or
+freed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the module's data directory
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-get-filename"></a><h3>e_shell_module_get_filename ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        e_shell_module_get_filename         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns the name of the file from which <em class="parameter"><code>shell_module</code></em> was loaded.
+The string is owned by <em class="parameter"><code>shell_module</code></em> and should not be modified or
+freed.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the module's file name
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-get-searches"></a><h3>e_shell_module_get_searches ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        e_shell_module_get_searches         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns the base name of the XML file containing predefined search
+rules for <em class="parameter"><code>shell_module</code></em>.  The XML files are usually named something
+like <code class="filename"><span class="emphasis"><em>module</em></span>types.xml</code>.
+</p>
+<p>
+XXX This function is likely to change or disappear.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the base name of the XML filter file
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-get-shell"></a><h3>e_shell_module_get_shell ()</h3>
+<pre class="programlisting">struct <a class="link" href="EShell.html" title="EShell">_EShell</a>*     e_shell_module_get_shell            (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns the <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a> that was passed to <a class="link" href="EShellModule.html#e-shell-module-new" title="e_shell_module_new ()"><code class="function">e_shell_module_new()</code></a>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-add-activity"></a><h3>e_shell_module_add_activity ()</h3>
+<pre class="programlisting">void                e_shell_module_add_activity         (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module,
+                                                         EActivity *activity);</pre>
+<p>
+Emits an <a class="link" href="EShellModule.html#EShellModule-activity-added" title='The "activity-added" signal'><span class="type">"activity-added"</span></a> signal.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>activity</code></em> :</span></p></td>
+<td> an <span class="type">EActivity</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-is-busy"></a><h3>e_shell_module_is_busy ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_module_is_busy              (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Returns <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if <em class="parameter"><code>shell_module</code></em> is busy and cannot be shutdown at
+present.  Each module must define what "busy" means to them and
+determine an appropriate response.
+</p>
+<p>
+XXX This function is likely to change or disappear.  I'm toying with
+    the idea of just having it check whether there are any unfinished
+    <span class="type">EActivity</span>'s left, so we have a consistent and easily
+    testable definition of what "busy" means.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the module is busy
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-shutdown"></a><h3>e_shell_module_shutdown ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_module_shutdown             (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module);</pre>
+<p>
+Alerts <em class="parameter"><code>shell_module</code></em> to begin shutdown procedures.  If the module is
+busy and cannot immediately shut down, the function returns <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a>.
+A <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> response implies <em class="parameter"><code>shell_module</code></em> has successfully shut down.
+</p>
+<p>
+XXX This function is likely to change or disappear.  I'm toying with
+    the idea of just having it check whether there are any unfinished
+    <span class="type">EActivity</span>'s left, so we have a consistent and easily
+    testable definition of what "busy" means.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"
+><code class="literal">TRUE</code></a> if the module has shut down, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"
+><code class="literal">FALSE</code></a> if the module is
+         busy and cannot immediately shut down
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-module-set-info"></a><h3>e_shell_module_set_info ()</h3>
+<pre class="programlisting">void                e_shell_module_set_info             (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module,
+                                                         const <a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo">EShellModuleInfo</a> *info);</pre>
+<p>
+Registers basic configuration information about <em class="parameter"><code>shell_module</code></em> that
+the <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a> can use for processing command-line arguments.
+</p>
+<p>
+Configuration information should be registered from
+<em class="parameter"><code>shell_module</code></em>'s <code class="function">e_shell_module_init</code>
+initialization function.  See <a class="link" href="EShellModule.html#e-shell-module-new" title="e_shell_module_new ()"><code class="function">e_shell_module_new()</code></a> for more information.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td> an <a class="link" href="EShellModule.html#EShellModuleInfo" title="EShellModuleInfo"><span class="type">EShellModuleInfo</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShellModule--filename"></a><h3>The <code class="literal">"filename"</code> property</h3>
+<pre class="programlisting">  "filename"                 <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct Only</pre>
+<p>
+The filename of the module.</p>
+<p>
+
+</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShellModule--shell"></a><h3>The <code class="literal">"shell"</code> property</h3>
+<pre class="programlisting">  "shell"                    <a class="link" href="EShell.html" title="EShell">EShell</a>*               : Read / Write / Construct Only</pre>
+<p>
+The <a class="link" href="EShell.html" title="EShell"><span class="type">EShell</span></a> singleton.</p>
+<p>
+
+</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShellModule.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShellModule-activity-added"></a><h3>The <code class="literal">"activity-added"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a> *shell_module,
+                                                        EActivity    *activity,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>      user_data)         : Run Last</pre>
+<p>
+Broadcasts a newly added activity.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell_module</code></em> :</span></p></td>
+<td> the <a class="link" href="EShellModule.html" title="EShellModule"><span class="type">EShellModule</span></a> that emitted the signal
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>activity</code></em> :</span></p></td>
+<td> an <span class="type">EActivity</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.10</div>
+</body>
+</html>

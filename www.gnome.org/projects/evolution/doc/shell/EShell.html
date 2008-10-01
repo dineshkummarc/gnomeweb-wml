@@ -1,0 +1,782 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EShell</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="Evolution Shell Reference Manual">
+<link rel="up" href="ch01.html" title="The Shell">
+<link rel="prev" href="ch01.html" title="The Shell">
+<link rel="next" href="EShellModule.html" title="EShellModule">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="The Shell">
+<link rel="chapter" href="ch02.html" title="Actions">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution Shell Reference Manual</th>
+<td><a accesskey="n" href="EShellModule.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#EShell.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#EShell.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#EShell.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#EShell.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#EShell.signals" class="shortcut">Signals</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="EShell"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EShell.top_of_page"></a>EShell</span></h2>
+<p>EShell — the backbone of Evolution</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="EShell.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;shell/e-shell.h&gt;
+
+                    <a class="link" href="EShell.html#EShell-struct" title="EShell">EShell</a>;
+enum                <a class="link" href="EShell.html#EShellLineStatus" title="enum EShellLineStatus">EShellLineStatus</a>;
+<a class="link" href="EShell.html" title="EShell">EShell</a>*             <a class="link" href="EShell.html#e-shell-new" title="e_shell_new ()">e_shell_new</a>                         (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a>*              <a class="link" href="EShell.html#e-shell-list-modules" title="e_shell_list_modules ()">e_shell_list_modules</a>                (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        <a class="link" href="EShell.html#e-shell-get-canonical-name" title="e_shell_get_canonical_name ()">e_shell_get_canonical_name</a>          (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       <a class="link" href="EShell.html#e-shell-get-module-by-name" title="e_shell_get_module_by_name ()">e_shell_get_module_by_name</a>          (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       <a class="link" href="EShell.html#e-shell-get-module-by-scheme" title="e_shell_get_module_by_scheme ()">e_shell_get_module_by_scheme</a>        (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *scheme);
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*          <a class="link" href="EShell.html#e-shell-create-window" title="e_shell_create_window ()">e_shell_create_window</a>               (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShell.html#e-shell-handle-uri" title="e_shell_handle_uri ()">e_shell_handle_uri</a>                  (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uri);
+void                <a class="link" href="EShell.html#e-shell-send-receive" title="e_shell_send_receive ()">e_shell_send_receive</a>                (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a
+href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"
+>GtkWindow</a> *parent);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShell.html#e-shell-get-online-mode" title="e_shell_get_online_mode ()">e_shell_get_online_mode</a>             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+void                <a class="link" href="EShell.html#e-shell-set-online-mode" title="e_shell_set_online_mode ()">e_shell_set_online_mode</a>             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online_mode);
+<a class="link" href="EShell.html#EShellLineStatus" title="enum EShellLineStatus">EShellLineStatus</a>    <a class="link" href="EShell.html#e-shell-get-line-status" title="e_shell_get_line_status ()">e_shell_get_line_status</a>             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+void                <a class="link" href="EShell.html#e-shell-set-line-status" title="e_shell_set_line_status ()">e_shell_set_line_status</a>             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a class="link" href="EShell.html#EShellLineStatus" title="enum EShellLineStatus">EShellLineStatus</a> status);
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*          <a class="link" href="EShell.html#e-shell-get-preferences-window" title="e_shell_get_preferences_window ()">e_shell_get_preferences_window</a>      (void);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShell.html#e-shell-is-busy" title="e_shell_is_busy ()">e_shell_is_busy</a>                     (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShell.html#e-shell-do-quit" title="e_shell_do_quit ()">e_shell_do_quit</a>                     (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EShell.html#e-shell-quit" title="e_shell_quit ()">e_shell_quit</a>                        (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----EShell
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="EShell.html#EShell--online-mode" title='The "online-mode" property'>online-mode</a>"              <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>              : Read / Write / Construct
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="EShell.html#EShell-handle-uri" title='The "handle-uri" signal'>handle-uri</a>"                                     : Run Last / Action
+  "<a class="link" href="EShell.html#EShell-send-receive" title='The "send-receive" signal'>send-receive</a>"                                   : Run Last / Action
+  "<a class="link" href="EShell.html#EShell-window-created" title='The "window-created" signal'>window-created</a>"                                 : Run Last
+  "<a class="link" href="EShell.html#EShell-window-destroyed" title='The "window-destroyed" signal'>window-destroyed</a>"                               : Run Last
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.description"></a><h2>Description</h2>
+<p>
+</p>
+<p>
+
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShell-struct"></a><h3>EShell</h3>
+<pre class="programlisting">typedef struct _EShell EShell;</pre>
+<p>
+Contains only private data that should be read and manipulated using the
+functions below.</p>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShellLineStatus"></a><h3>enum EShellLineStatus</h3>
+<pre class="programlisting">enum EShellLineStatus {
+	E_SHELL_LINE_STATUS_ONLINE,
+	E_SHELL_LINE_STATUS_GOING_OFFLINE, /* NB: really means changing state in either direction */
+	E_SHELL_LINE_STATUS_OFFLINE,
+	E_SHELL_LINE_STATUS_FORCED_OFFLINE
+};
+</pre>
+<p>
+
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-new"></a><h3>e_shell_new ()</h3>
+<pre class="programlisting"><a class="link" href="EShell.html" title="EShell">EShell</a>*             e_shell_new                         (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>online</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-list-modules"></a><h3>e_shell_list_modules ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a>*              e_shell_list_modules                (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-canonical-name"></a><h3>e_shell_get_canonical_name ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*        e_shell_get_canonical_name          (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-module-by-name"></a><h3>e_shell_get_module_by_name ()</h3>
+<pre class="programlisting"><a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       e_shell_get_module_by_name          (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-module-by-scheme"></a><h3>e_shell_get_module_by_scheme ()</h3>
+<pre class="programlisting"><a class="link" href="EShellModule.html" title="EShellModule">EShellModule</a>*       e_shell_get_module_by_scheme        (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *scheme);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scheme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-create-window"></a><h3>e_shell_create_window ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*          e_shell_create_window               (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-handle-uri"></a><h3>e_shell_handle_uri ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_handle_uri                  (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uri);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-send-receive"></a><h3>e_shell_send_receive ()</h3>
+<pre class="programlisting">void                e_shell_send_receive                (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a
+href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"
+>GtkWindow</a> *parent);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-online-mode"></a><h3>e_shell_get_online_mode ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_get_online_mode             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-set-online-mode"></a><h3>e_shell_set_online_mode ()</h3>
+<pre class="programlisting">void                e_shell_set_online_mode             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online_mode);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>online_mode</code></em> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-line-status"></a><h3>e_shell_get_line_status ()</h3>
+<pre class="programlisting"><a class="link" href="EShell.html#EShellLineStatus" title="enum EShellLineStatus">EShellLineStatus</a>    e_shell_get_line_status             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-set-line-status"></a><h3>e_shell_set_line_status ()</h3>
+<pre class="programlisting">void                e_shell_set_line_status             (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell,
+                                                         <a class="link" href="EShell.html#EShellLineStatus" title="enum EShellLineStatus">EShellLineStatus</a> status);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-get-preferences-window"></a><h3>e_shell_get_preferences_window ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*          e_shell_get_preferences_window      (void);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-is-busy"></a><h3>e_shell_is_busy ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_is_busy                     (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-do-quit"></a><h3>e_shell_do_quit ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_do_quit                     (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="e-shell-quit"></a><h3>e_shell_quit ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_shell_quit                        (<a class="link" href="EShell.html" title="EShell">EShell</a> *shell);</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShell--online-mode"></a><h3>The <code class="literal">"online-mode"</code> property</h3>
+<pre class="programlisting">  "online-mode"              <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>              : Read / Write / Construct</pre>
+<p>Whether the shell is online.</p>
+<p>Default value: TRUE</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="EShell.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="EShell-handle-uri"></a><h3>The <code class="literal">"handle-uri"</code> signal</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            user_function                      (<a class="link" href="EShell.html" title="EShell">EShell</a>  *eshell,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>   *arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last / Action</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>eshell</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShell-send-receive"></a><h3>The <code class="literal">"send-receive"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShell.html" title="EShell">EShell</a>    *eshell,
+                                                        <a
+href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"
+>GtkWindow</a> *arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>   user_data)      : Run Last / Action</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>eshell</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShell-window-created"></a><h3>The <code class="literal">"window-created"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShell.html" title="EShell">EShell</a>       *eshell,
+                                                        <a class="link" href="EShellWindow.html" title="EShellWindow">EShellWindow</a> *arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>      user_data)      : Run Last</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>eshell</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="EShell-window-destroyed"></a><h3>The <code class="literal">"window-destroyed"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EShell.html" title="EShell">EShell</a>  *eshell,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>eshell</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.10</div>
+</body>
+</html>
