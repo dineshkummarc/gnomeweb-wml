@@ -2,13 +2,13 @@
                     A brief primer about gnome-web hacking.
 
    gnome.org  hosts many Web sites. The source for the sites are in GNOME
-   CVS in several modules. Each module contains one or more Web sites and
+   SVN in several modules. Each module contains one or more Web sites and
    a  method  to  generate  the  site. The long term goal is to unify the
    sites, both in presentation and how they are generated.
 
 Web hacking tools
 
-   CVS
+   SVN
           for  checking  out modules, updating code, creating patches and
           committing.
 
@@ -45,23 +45,22 @@ Web hacking tools
 
 Checking out the code
 
-   The  GNOME  Web  sites  are  stored  in cvs.gnome.org in gnomeweb-wml,
-   web-devel-2, and foundation-web modules, as too are lxr (cvs), bosnsai
-   (cvs), and bugzilla:
+   The  GNOME  Web  sites  are  stored  in svn.gnome.org in gnomeweb-wml,
+   web-devel-2, and foundation-web modules, as too are lxr (svn), bonsai
+   (svn), and bugzilla:
 
-   CAPTION: CVS module location of GNOME sites
+   CAPTION: SVN module location of GNOME sites
 
            Site             Module
    www.gnome.org        gnomeweb-wml
    foundation.gnome.org foundation-web
    developer.gnome.org  web-devel-2
    guadec.gnome.org     guadec-web
-   cvs.gnome.org        bonsai and lxr
-   bugzilla.gnome.org   bugzilla
-   mail.gnome.org       none
-   irc.gnome.org        none
+   svn.gnome.org        bonsai and lxr
+   bugzilla.gnome.org   bugzilla-newer
+   mail.gnome.org       mail-web
 
-   Instructions for using GNOME CVS are located at [1]developer.gnome.org
+   Instructions for using GNOME SVN are located at [1]developer.gnome.org
    tools. Check out one, or all, of the modules out.
 
    Run,  at  the  top of each module, autogen.sh --with-http-prefix=HOST,
@@ -129,8 +128,8 @@ Making changes
    --with-http-prefix=HOST  to  make  file  and  directory additions take
    affect, and you must run make to see them.
 
-   Moving  a directory will break its history in CVS, so please contact a
-   CVS  administrator  to make arrangements. Breaking URLs is a bad thing
+   Moving  a directory will break its history in SVN, so please contact a
+   SVN  administrator  to make arrangements. Breaking URLs is a bad thing
    for  search  engines,  bookmarks,  and linking sites. If an asset must
    move,  a  redirect should be setup in the htaccess file located at the
    top  of  the module. Note that the htaccess file is copied by the make
@@ -148,9 +147,9 @@ Making changes
 
 Committing changes
 
-   If you created new files and directories, add them to cvs. Remove your
-   deleted files from CVS. You should run cvs up at the top of the module
-   to get the most recent changes from CVS. Be sure to check that none of
+   If you created new files and directories, add them to SVN. Remove your
+   deleted files from SVN. You should run 'svn up' at the top of the module
+   to get the most recent changes from SVN. Be sure to check that none of
    your change show up as a conflict.
 
    Run   the  prepare-ChangeLog.pl  script  (from  [2]developer.gnome.org
@@ -160,7 +159,7 @@ Committing changes
    have commit rights, the maintainer or another member of the webhackers
    group can.
 
-   To create a patch, run cvs diff >
+   To create a patch, run svn diff >
    module_name-your_name-fix_description.patch  at the top of the module.
    The  patch  should  be sent to the gnome-web-list to notify someone to
    review your changes. If you can catch the attention of a maintainer in
@@ -173,5 +172,5 @@ Committing changes
 
 References
 
-   1. http://developer.gnome.org/tools/cvs.html
+   1. http://developer.gnome.org/tools/svn.html
    2. http://developer.gnome.org/tools/scripts.html
