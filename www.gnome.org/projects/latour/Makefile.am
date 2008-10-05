@@ -1,9 +1,4 @@
-#SUBDIRS=doc data
-
 urlpath=/projects/latour/
-
-mrproper:
-	rm -rf *;
 
 page_SCRIPTS= \
 	index.html \
@@ -12,7 +7,6 @@ page_SCRIPTS= \
 	index.pt.html \
 	layout.css \
 	latinamericatour.css \
-	latour-logo.png \
-	$(NULL)
+	latour-logo.png 
 
 include $(top_srcdir)/rules.common
