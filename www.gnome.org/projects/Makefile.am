@@ -59,7 +59,8 @@ SUBDIRS = \
 	gnome-scan		\
 	vinagre		\
 	billreminder		\
-	cheese
+	cheese \
+	latour
 
 urlpath = /projects
 
