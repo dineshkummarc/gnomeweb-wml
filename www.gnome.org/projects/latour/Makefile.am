@@ -5,9 +5,9 @@ page_SCRIPTS= \
 
 page_DATA = \
 	index.html \
-	index.en.html \
-	index.es.html \
-	index.pt.html \
+	index.html.en \
+	index.html.es \
+	index.html.pt \
 	layout.css \
 	latinamericatour.css \
 	latour-logo.png
