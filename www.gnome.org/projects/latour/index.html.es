@@ -15,25 +15,25 @@
 
 <ul id="general">
       <li class="home" id="siteaction-gnome_home">
-        <a title="Home" href="http://www.gnome.org/">Home</a>
+        <a title="Home" href="http://www.gnome.org/">Inicio</a>
       </li>
       <li id="siteaction-gnome_news">
-        <a title="News" href="http://news.gnome.org/">News</a>
+        <a title="News" href="http://news.gnome.org/">Noticias</a>
       </li>
       <li id="siteaction-gnome_projects">
-        <a title="Projects" href="http://www.gnome.org/projects/">Projects</a>
+        <a title="Projects" href="http://www.gnome.org/projects/">Proyectos</a>
       </li>
       <li id="siteaction-gnome_art">
-        <a title="Art" href="http://art.gnome.org/">Art</a>
+        <a title="Art" href="http://art.gnome.org/">Arte</a>
       </li>
       <li id="siteaction-gnome_support">
-        <a title="Support" href="http://www.gnome.org/support/">Support</a>
+        <a title="Support" href="http://www.gnome.org/support/">Soporte</a>
       </li>
       <li id="siteaction-gnome_development">
-        <a title="Development" href="http://developer.gnome.org/">Development</a>
+        <a title="Development" href="http://developer.gnome.org/">Desarrollo</a>
       </li>
       <li id="siteaction-gnome_community">
-        <a title="Community" href="http://www.gnome.org/community/">Community</a>
+        <a title="Community" href="http://www.gnome.org/community/">Comunidad</a>
       </li>
     </ul>
 <div id="languages"><a href="index.html.en">English</a> &middot; <a href="index.html.es">Español</a> &middot; <a href="index.html.pt">Português</a></div>
@@ -121,7 +121,7 @@ candidato.
 <div class="latour-logo-content">
 <img src="latour-logo.png"/>
   <h3>¿Dónde?</h3>
-  <iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;s=AARTsJp1EhHvNt0w5DHkc-nFNWvD0p9i_Q&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+  <iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;s=AARTsJp1EhHvNt0w5DHkc-nFNWvD0p9i_Q&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
   <h3><span>Concepción, Chile</span> - Octubre 22, 23, 24, 25<br/> Día GNOME, 9no Encuentro Linux</h3>
   <a name="encuentro"> </a>
   <p>Como todo año en Chile, los usuarios de Linux, fans y colaboradores de
