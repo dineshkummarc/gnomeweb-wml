@@ -120,7 +120,7 @@ candidato.
 <div id="latour-logo">
 <div class="latour-logo-content">
 <img src="latour-logo.png"/>
-  <h3>Where?</h3>
+  <h3>¿Dónde?</h3>
   <iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;s=AARTsJp1EhHvNt0w5DHkc-nFNWvD0p9i_Q&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
   <h3><span>Concepción, Chile</span> - Octubre 22, 23, 24, 25<br/> Día GNOME, 9no Encuentro Linux</h3>
   <a name="encuentro"> </a>
