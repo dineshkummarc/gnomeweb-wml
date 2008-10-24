@@ -1,4 +1,4 @@
-SUBDIRS = eplugin gal libebook libedata-book libecal libedata-cal
+SUBDIRS = eplugin gal
 
 page_SCRIPTS=
 
