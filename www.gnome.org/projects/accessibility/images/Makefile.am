@@ -1,0 +1,12 @@
+SUBDIRS=
+
+urlpath=/projects/accessibility/images
+
+page_SCRIPTS=
+
+include $(top_srcdir)/rules.common
+
+misc_images=\
+	logo.png
+
+page_DATA=$(misc_images)

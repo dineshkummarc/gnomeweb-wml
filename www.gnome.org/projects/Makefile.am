@@ -1,4 +1,5 @@
 SUBDIRS = \
+	accessibility		\
 	application-framework	\
 	beagle 			\
 	chronojump		\
