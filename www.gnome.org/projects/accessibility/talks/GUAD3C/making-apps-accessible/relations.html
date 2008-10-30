@@ -1,0 +1,85 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (X11; U; Linux 2.4.2-2 i686) [Netscape]">
+   <title>ATK Relation Sets (Making Applications Accessible)</title>
+</head>
+<body bgcolor="#FFFFFF" link="#CC0000" vlink="#330099" alink="#FF3300">
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="555" >
+<tr>
+<td>
+<img SRC="foot-banner.gif" ALT="Small GNOME foot in banner" height="60" >
+</td>
+
+<td COLSPAN="2">
+<img SRC="foot-less-banner-wide.gif" ALT="[Making Applications Accessible]" BORDER=0 height=60 width=682>
+</td>
+</tr>
+      
+<tr>
+<td><a href="case-study-volume-control.html">back</a></td>
+<td></td>
+<td><a href="glade-support.html">next</a></td>
+</tr>
+<tr>
+<td>
+<h1>
+</h1>
+</td>
+
+<td COLSPAN="2">
+<h1>
+<b><font size=+2>ATK Relation Sets</font></b></h1>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td VALIGN=TOP COLSPAN="2">
+<ul style="padding-left:2.0em;margin-top:0em;margin-bottom:0em">
+<li>
+<b><font size=+1>many-to-many mapping of UI objects</font></b>
+</li>
+<li>
+<b><font size=+1>relationships may be reciprocal</font></b>
+</li>
+<li>
+<font size=+1><b>Relation types:</b></font>
+<ul style="padding-left:2.0em;margin-top:0em;margin-botton:0em">
+<li>
+<font size=+1>LABEL_FOR / LABELLED_BY</font></li>
+<li>
+<font size=+1>CONTROLLER_FOR / CONTROLLED_BY</font></li>
+<li>
+<font size=+1>MEMBER_OF</font></li>
+<li>
+<font size=+1>NODE_CHILD_OF</font></li>
+</ul>
+</li>
+<pre style="margin-top:0em"><tt><font size=-1>
+/* This code snippet associates a label with a text entry field */
+
+  GtkWidget *gtk_entry, *gtk_label;
+  AtkObject *atk_entry, *atk_label;
+  Atkrelation *relation;
+  AtkRelationSet *set;
+  ...
+  atk_entry = gtk_widget_get_accessible (gtk_entry);
+  atk_label = gtk_widget_get_accessible (gtk_label);
+
+  relation = atk_relation_new (&amp;atk_label, 1, ATK_RELATION_LABELLED_BY);
+  set = atk_object_ref_relation_set (atk_entry);
+  atk_relation_set_add (set, relation);
+...
+</font></pre></tt>
+</ul>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

@@ -3,10 +3,11 @@ SUBDIRS=images prosimii
 urlpath=/projects/accessibility/
 
 page_SCRIPTS= \
-	index.html \
 	about.html \
-	screencasts.html \
+	goals.html \
+	index.html \
 	participate.html \
-	goals.html
+	screencasts.html \
+	talks.html
 
 include $(top_srcdir)/rules.common

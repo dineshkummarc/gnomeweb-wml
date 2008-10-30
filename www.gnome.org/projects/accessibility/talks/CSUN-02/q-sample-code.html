@@ -1,0 +1,65 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (X11; U; Linux 2.4.2-2 i686) [Netscape]">
+   <title>GNOME Accessibility</title>
+</head>
+<body bgcolor="#FFFFFF" link="#CC0000" vlink="#330099" alink="#FF3300">
+<map name="bannerMap"><area coords="538,0,681,4" href="a-start.html" alt="Go to start"><!--home--><area coords="616,30,639,53" href="p-extensibility.html" alt="previous page"><!--back--><area coords="645,30,669,53" href="r-bindings.html" alt="next page"><!--forward--></map>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="555" >
+<tr>
+<td><img SRC="foot-banner.gif" ALT="Small GNOME foot in banner" hight="60" ></td>
+
+<td COLSPAN="2"><img SRC="foot-less-banner-wide.gif" ALT="[Making GNOME Accessible]" BORDER=0 usemap="#bannerMap" height=60 width=682></td>
+</tr>
+
+<tr>
+<td COLSPAN="3"><b></b></td>
+</tr>
+
+<tr>
+<td COLSPAN="3">
+<pre><b>void report_focus_event (AccessibleEvent *e) {
+&#xA0;&#xA0;&#xA0; char *name = Accessible_getName (e->source);
+&#xA0;&#xA0;&#xA0; say (name);
+&#xA0;&#xA0;&#xA0; SPI_freeString (name);
+&#xA0;&#xA0;&#xA0; if (SPI_IS_COMPONENT (e->source)) {
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; int x, y, w, h;
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; AccessibleComponent_getBounds (
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; SPI_COMPONENT (e->source), &amp;x, &amp;y, &amp;w, &amp;h);
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; set_mag_roi (x, y, w, h);
+&#xA0;&#xA0;&#xA0; }
+}
+
+int main () {
+&#xA0;&#xA0;&#xA0; AccessibleEventListener *focus_listener;
+&#xA0;&#xA0;&#xA0; SPI_init ();
+&#xA0;&#xA0;&#xA0; focus_listener = SPI_createAccessibleEventListener (
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; report_focus_event, NULL);
+&#xA0;&#xA0;&#xA0; SPI_registerGlobalEventListener (focus_listener, "focus:");
+&#xA0;&#xA0;&#xA0; SPI_event_main ();
+&#xA0;&#xA0;&#xA0; AccessibleEventListener_free (focus_listener);
+&#xA0;&#xA0;&#xA0; return SPI_exit ();
+}
+</b>&#xA0;&#xA0;</pre>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td COLSPAN="2">&#xA0;</td>
+</tr>
+
+<tr>
+<td></td>
+</tr>
+
+<tr>
+<td COLSPAN="3"></td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (X11; U; Linux 2.4.2-2 i686) [Netscape]">
+   <title>Anonymous Inheritance of AtkObject types (1 of 2)</title>
+</head>
+<body bgcolor="#FFFFFF" link="#CC0000" vlink="#330099" alink="#FF3300">
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="555" >
+<tr>
+<td>
+<img SRC="foot-banner.gif" ALT="Small GNOME foot in banner" height="60" >
+</td>
+
+<td COLSPAN="2">
+<img SRC="foot-less-banner-wide.gif" ALT="[Making Applications Accessible]" BORDER=0 height=60 width=682>
+</td>
+</tr>
+      
+<tr>
+<td><a href="custom-widget-basics.html">back</a></td>
+<td></td>
+<td><a href="anonymous-inheritance-2.html">next</a></td>
+</tr>
+<tr>
+<td>
+<h1>
+</h1>
+</td>
+
+<td COLSPAN="2">
+<h2>
+<b><font size=+2>Anonymous (run-time) Inheritance from GAIL</font></b></h2>
+</td>
+</tr>
+
+<tr>
+<td></td>
+
+<td VALIGN=TOP COLSPAN="2">
+<ul style="padding-left:2.0em;margin-top:0em">
+<li>
+<font size=+1>override get_accessible to register your new factory on-demand</font></li>
+<li>
+<font size=+1>get a reference to your parent type's accessible type to
+		see if accessibility is enabled already</font></li>
+<font size=-1>	    
+<pre><tt>	      
+  static gboolean first_time = TRUE;
+  AtkRegistry *registry;
+  AtkObjectFactory *factory;  
+  GType derived_type;
+  GType derived_atk_type;
+
+  if (first_time)
+    {
+      /* Determine whether accessibility is enabled by checking accessible
+	 created for parent */
+
+      registry = atk_get_default_registry ();
+      derived_type = g_type_parent (ZVT_TYPE_TERM);
+      factory = atk_registry_get_factory (registry,
+					 derived_type);
+      derived_atk_type = atk_object_factory_get_accessible_type (factory);
+      if (g_type_is_a(derived_atk_type, GTK_TYPE_ACCESSIBLE))
+	{
+	  atk_registry_set_factory_type (registry,
+					 ZVT_TYPE_TERM, ZVT_TYPE_ACCESSIBLE_FACTORY);
+	}
+      first_time = FALSE;
+    }
+  return GTK_WIDGET_CLASS(parent_class)->get_accessible (widget);
+</tt></pre></font>
+</ul>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
+st
