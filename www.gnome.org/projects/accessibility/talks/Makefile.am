@@ -7,6 +7,7 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_files=\
+	talks.html \
 	2008-10-18-GNOME.Asia.odp \
 	2008-10-19-GNOME.Asia.odp \
 	CSUN-slides-220301.tar.gz \

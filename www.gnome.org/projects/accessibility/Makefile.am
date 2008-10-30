@@ -7,7 +7,6 @@ page_SCRIPTS= \
 	goals.html \
 	index.html \
 	participate.html \
-	screencasts.html \
-	talks.html
+	screencasts.html
 
 include $(top_srcdir)/rules.common
