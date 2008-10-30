@@ -33,7 +33,6 @@ misc_files=\
 	glade2.png \
 	foot-banner.gif \
 	foot-less-banner-wide.gif \
-	GNOME_diagram_public_small.jpg \
 	gnome-logo-large.gif
 
 page_DATA=$(misc_files)
