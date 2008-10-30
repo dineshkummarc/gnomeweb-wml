@@ -1,4 +1,4 @@
-SUBDIRS=images prosimii
+SUBDIRS=images prosimii talks
 
 urlpath=/projects/accessibility/
 
