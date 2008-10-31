@@ -37,8 +37,8 @@
 	 <p>Most contact should be through the mailing list or bugzilla. If, for some reason, you need to contact the maintainer directly the <tt>MAINTAINERS</tt> file in the <tt>gnome-games</tt> distribution has the name and email address of the current maintainer.</p>
 
         <h2>Getting the code</h2>
-	<p>Obviously you need some code to work with. You can work with the latest tarballs from the <a href="http://ftp.gnome.org/pub/GNOME/sources/gnome-games/">FTP site</a> but this is not recommended since they get out of date quickly. The best option is to use CVS. There are two options for using CVS: either update your entire GNOME system from CVS using something like <a href="http://www.daa.com.au/~james/software/jhbuild/">jhbuild</a> or only download Gnome Games from CVS. jhbuild is comprehensive and guaranteed to keep you up to date. Unfortunately it takes a lot of time and disk space and often keeps you too close to the bleeding edge. If you only download the gnome-games module you will have to take care of dependencies yourself.</p>
-<p>The best solution depends on what you want to do. If you want to keep up with all the latest GNOME work then a full CVS build is best. If you only want to work on Gnome Games then it is best only to download the single module. To do this issue the following shell commands from the directory you want to store everything in.</p>
+	<p>Obviously you need some code to work with. You can work with the latest tarballs from the <a href="http://ftp.gnome.org/pub/GNOME/sources/gnome-games/">FTP site</a> but this is not recommended since they get out of date quickly. The best option is to use SVN. There are two options for using SVN: either update your entire GNOME system from SVN using something like <a href="http://www.daa.com.au/~james/software/jhbuild/">jhbuild</a> or only download Gnome Games from SVN. jhbuild is comprehensive and guaranteed to keep you up to date. Unfortunately it takes a lot of time and disk space and often keeps you too close to the bleeding edge. If you only download the gnome-games module you will have to take care of dependencies yourself.</p>
+<p>The best solution depends on what you want to do. If you want to keep up with all the latest GNOME work then a full SVN build is best. If you only want to work on Gnome Games then it is best only to download the single module. To do this issue the following shell commands from the directory you want to store everything in.</p>
 
 <div class="programlisting">
 <tt>
@@ -52,7 +52,7 @@ CVS password:<br/>
 </tt>
 </div>
 
-<p>When asked for a password just hit enter, anyone can use anonymous CVS and there is no password. When you issue each get command a long list of file names will be printed as they are downloaded. Once it is finished you will have a directory named <tt>gnome-games</tt> and a directory called <tt>gnome-common</tt>. You are almost ready.</p>
+<p>When asked for a password just hit enter, anyone can use anonymous SVN and there is no password. When you issue each get command a long list of file names will be printed as they are downloaded. Once it is finished you will have a directory named <tt>gnome-games</tt> and a directory called <tt>gnome-common</tt>. You are almost ready.</p>
 <p>Go into the <tt>gnome-common</tt> directory and type <tt>./autogen.sh --prefix=/some/directory</tt>, this will run <tt>configure</tt> and set everything up. The directory you give should be the place you want to install the GNOME software you are going to hack on. This should not be <tt>/usr</tt>. You can use your home directory, e.g. <tt>--prefix=~/gnome/</tt>.</p> 
 <p>If <tt>autogen.sh</tt> complains about missing libraries or libraries that are too old then you will need to find and install appropriate versions of these libraries yourself. Usually these can be found at the <a href="http://ftp.gnome.org/pub/GNOME/sources/">GNOME FTP site</a>. If <tt>autogen.sh</tt> dies strangely then either you haven't installed gnome-common or you need to install newer <a href="http://sources.redhat.com/autobook/">autotools</a>. Once <tt>autogen.sh</tt> has run successfully you can type <tt>make install</tt> to build everything and install it.</p>
 <p>Once gnome-common is installed repeat the process in the <tt>gnome-games</tt> directory. You are now ready to begin hacking !</p>
@@ -84,26 +84,26 @@ CVS password:<br/>
 
 <h2>Keeping up to date</h2>
 
-<p>Between the time you started hacking and when you finish the code in CVS has probably changed. To re-synchronize your code use the command:</p>
+<p>Between the time you started hacking and when you finish the code in SVN has probably changed. To re-synchronize your code use the command:</p>
 
 <tt class="programlisting">
 <b>$ cvs -z3 -q -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome update -Pd gnome-games</b>
 </tt>
 
-<p>in the same directory you issues the previous cvs commands. You do not need to login again, in fact you only need to do that once ever. A list of files will be displayed along with a single character denoting their status. The only ones you need to know about are those labeled with a "C". The C stands for conflict and it means that someone has changed a file you changed and the changes are incompatible. If there is a C beside a file, edit that file to resolve the differences, CVS should have clearly marked the problem and there is usually no difficulty resolving them. ChangeLogs are a common source of conflicts.</p>
+<p>in the same directory you issues the previous cvs commands. You do not need to login again, in fact you only need to do that once ever. A list of files will be displayed along with a single character denoting their status. The only ones you need to know about are those labeled with a "C". The C stands for conflict and it means that someone has changed a file you changed and the changes are incompatible. If there is a C beside a file, edit that file to resolve the differences, SVN should have clearly marked the problem and there is usually no difficulty resolving them. ChangeLogs are a common source of conflicts.</p>
 
 <h2>Patches</h2>
-<p>Now that you have your code is synchronized with the GNOME CVS repository you need to generate a patch. You do this using the command:</p>
+<p>Now that you have your code is synchronized with the GNOME SVN repository you need to generate a patch. You do this using the command:</p>
 
 <tt class="programlisting">
 <b>$ cvs -z3 -q -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome diff -u gnome-games > patch-file</b>
 </tt>
 
-<p><tt>patch-file</tt> should now contain the difference between your code and the code in CVS. It is ready to be sent to the maintainer to be reviewed and hopefully applied. The usual way to do this is to attach it to a bug report using the "Create New Attachment" link. If you generate a patch any other way, say using <tt>diff</tt>, then try and use the "unified" format. For <tt>diff</tt> use the <tt>-u</tt> switch.</p>
+<p><tt>patch-file</tt> should now contain the difference between your code and the code in SVN. It is ready to be sent to the maintainer to be reviewed and hopefully applied. The usual way to do this is to attach it to a bug report using the "Create New Attachment" link. If you generate a patch any other way, say using <tt>diff</tt>, then try and use the "unified" format. For <tt>diff</tt> use the <tt>-u</tt> switch.</p>
 
 <h2>Once you have submitted a patch</h2>
 
-<p>Once he has received it, the maintainer will have to have a look at your patch and decide whether he wants to apply it. Usually he does, but sometimes changes need to be made. The time it takes to apply the patch depends on both how busy the maintainer is and what code freezes are in place. Code freezes are used to stabilize the code before a major release and mean that only bugs are fixed, new features are not added. In that case the patch will be deferred until the next development cycle. The best time for large pieces of code is at the beginning of a development cycle, usually a week or so after a major GNOME release (e.g. 2.6.0).</p> <p>People who consistently post good quality patches are given direct access to the GNOME CVS server so they can do it themselves.</p>
+<p>Once he has received it, the maintainer will have to have a look at your patch and decide whether he wants to apply it. Usually he does, but sometimes changes need to be made. The time it takes to apply the patch depends on both how busy the maintainer is and what code freezes are in place. Code freezes are used to stabilize the code before a major release and mean that only bugs are fixed, new features are not added. In that case the patch will be deferred until the next development cycle. The best time for large pieces of code is at the beginning of a development cycle, usually a week or so after a major GNOME release (e.g. 2.6.0).</p> <p>People who consistently post good quality patches are given direct access to the GNOME SVN server so they can do it themselves.</p>
 
 <h2>Translating Documents</h2>
 

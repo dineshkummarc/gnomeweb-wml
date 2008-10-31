@@ -9,7 +9,7 @@
 	<body>
 		<h1>A brief primer about gnome-web hacking.</h1>
 
-		<p>gnome.org hosts many Web sites.  The source for the sites are in GNOME CVS in several modules.  Each module contains one or more Web sites and a method to generate the site.  The long term goal is to unify the sites, both in presentation and how they are generated.</p>
+		<p>gnome.org hosts many Web sites.  The source for the sites are in GNOME SVN in several modules.  Each module contains one or more Web sites and a method to generate the site.  The long term goal is to unify the sites, both in presentation and how they are generated.</p>
 
 		<h2>Web hacking tools</h2>
 
@@ -92,7 +92,7 @@
 			</tr>
 		</table>
 
-		<p>Instructions for using GNOME CVS are located at <a href="http://developer.gnome.org/tools/cvs.html">developer.gnome.org tools</a>.  Check out one, or all, of the modules out.</p>  
+		<p>Instructions for using GNOME SVN are located at <a href="http://live.gnome.org/SVN">here</a>.  Check out one, or all, of the modules out.</p>  
 
 		<p>Run, at the top of each module, <code>autogen.sh --with-http-prefix=HOST</code>, where HOST is the base URL where you will access the test site.  HOST may be like <code>http://wgo</code> as was set in the host file example below.  I have:</p>
 
@@ -114,7 +114,7 @@
 			</tr>
 
 			<tr>
-				<td>developer.gnome.org</td>
+				<td>library.gnome.org/devel/</td>
 				<td>http://dgo</td>
 			</tr>
 
@@ -153,17 +153,15 @@
 
 		<p>If you add files to a site, be sure to update the <em>Makefile.am</em> file in the same directory with the file names.  <em>Makefile.am</em> contains the list of files that the make program must compile and/or generate for the site.  If you create a directory, you must also create a <em>Makefile.am</em> in that directory, <strong>and you must add</strong> that <em>Makefile.am</em> to the <em>configure.in</em> file located at the top of the module.  You must rerun <code>autogen.sh --with-http-prefix=HOST</code> to make file and directory additions take affect, and you must run <code>make</code> to see them. </p>
 		
-		<p>Moving a directory will break its history in CVS, so please contact a CVS administrator to make arrangements.  <strong>Breaking URLs is a bad thing</strong> for search engines, bookmarks, and linking sites.  If an asset must move, a redirect should be setup in the <em>htaccess</em> file located at the top of the module.  Note that the htaccess file is copied by the make program to the generated site as <em>.htaccess</em>.</p>
-
 		<p>Some older PHP application require the true GNOME server to run so they cannot easily be developed.</p>
 
 		<p>Good markup makes good pages.  Please check that your work is free of errors.  Tidy, from tidy.sf.org, is a HTML markup validator, cleaner, and transformer.  Use the <code>tidy -e</code> command to check for errors.  Errors may come from your changes, the included, assets, or by their merger.  Tidy's cleaning and formating features can be used, but they are limited since it cannot check the source file.</p>
 
 		<h2>Committing changes</h2>
 
-		<p>If you created new files and directories, add them to cvs.  Remove your deleted files from CVS.  You should run <code>cvs up</code> at the top of the module to get the most recent changes from CVS.  Be sure to check that none of your change show up as a conflict.</p>
+		<p>If you created new files and directories, add them to SVN.  Remove your deleted files from SVN.  You should run <code>svn up</code> at the top of the module to get the most recent changes from SVN.  Be sure to check that none of your change show up as a conflict.</p>
 
-		<p>Run the <code>prepare-ChangeLog.pl</code> script (from <a href="http://developer.gnome.org/tools/scripts.html"> developer.gnome.org scripts</a>) at the top of the module.  Update the <em>ChangeLog</em> file at the top of the module with your changes.  The modules's maintainer can give you permission to commit after the patch is reviewed.  If you do not have commit rights, the maintainer or another member of the webhackers group can.</p>
+		<p>Run the <code>prepare-ChangeLog.pl</code> script (from <a href="http://live.gnome.org/DeveloperUtilities"> developer.gnome.org scripts</a>) at the top of the module.  Update the <em>ChangeLog</em> file at the top of the module with your changes.  The modules's maintainer can give you permission to commit after the patch is reviewed.  If you do not have commit rights, the maintainer or another member of the webhackers group can.</p>
 
 		<p>To create a patch, run <code>cvs diff &gt; module_name-your_name-fix_description.patch</code> at the top of the module.  The patch should be sent to the gnome-web-list to notify someone to review your changes.  If you can catch the attention of a maintainer in #webhackers on irc, you can send the patch to them.</p>
 
