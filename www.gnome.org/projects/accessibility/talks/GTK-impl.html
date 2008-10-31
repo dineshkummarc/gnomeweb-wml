@@ -1,0 +1,6719 @@
+<!--#set var="last_modified" value="$Date: 2005-11-28 23:49:08 -0500 (Mon, 28 Nov 2005) $" -->
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta name="GENERATOR" content="Mozilla/4.7 [en] (X11; I; SunOS 5.8 sun4u) [Netscape]">
+   <title>ATK Widget Implementation Proposal</title>
+</head>
+<body>
+
+<center>
+<h1>
+ATK Implementation Proposal<br>
+Draft 0.5</h1></center>
+
+<p><br>
+<p>The following table lists all the widgets currently in the GTK+ 2.0
+API. It outlines which of the ATK interfaces needs to be implemented on
+which GTK+ widgets. An 'X' in the column indicates that the interface must
+be implemented specifically for the widget type listed. If a column for
+a specific interface is blank, it means either that the widget does not
+support the interface, or that it inherits its implementation of that interface
+from an ancestor widget.
+<p>Note also that some GTK+ widgets represent base classes. This table
+suggests that some ATK interfaces be implemented on these base classes,
+so as to minimize engineering work, and allow as many widgets to inherit
+a single interface implementation as possible. Because some GTK+ widgets
+are base classes, they do not represent widgets in the UI, and therefore,
+the ATK_ROLE column contains 'N/A'.
+<p>The 'Requires Impl.' column indicates whether I believed that specific
+engineering work will be required to implement accessibility on a widget.
+Click on the name of any widget to scroll to my notes about it and a link
+to its API documentation.
+<br>&#xA0;
+<table BORDER=3 CELLSPACING=3 CELLPADDING=3 >
+<tr>
+<th>Widget</th>
+
+<th>Requires Impl.</th>
+
+<th>ATK_ROLE</th>
+
+<th>Difficulty</th>
+
+<th>AtkAction</th>
+
+<th>AtkComponent</th>
+
+<th>AtkEditableText</th>
+
+<th>AtkHyperLink</th>
+
+<th>AtkHyperText</th>
+
+<th>AtkImage</th>
+
+<th>AtkSelection</th>
+
+<th>AtkTable</th>
+
+<th>AtkText</th>
+
+<th>AtkValue</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkWidget">GtkWidget</a></td>
+
+<td>GailWidget</td>
+
+<td>N/A</td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkMisc">GtkMisc</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkLabel">GtkLabel</a></td>
+
+<td>GailLabel</td>
+
+<td>ATK_ROLE_LABEL</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkAccelLabel">GtkAccelLabel</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkTipsQuery (Depricated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkArrow">GtkArrow</a></td>
+
+<td>GailArrow</td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkImage">GtkImage</a></td>
+
+<td>GailImage</td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkPixmap">GtkPixmap</a></td>
+
+<td>GailPixmap</td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkContainer">GtkContainer</a></td>
+
+<td>GailContainer</td>
+
+<td>ATK_ROLE_UNKNOWN</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkBin">GtkBin</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkAlignment">GtkAlignment</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkFrame">GtkFrame</a></td>
+
+<td>GailFrame</td>
+
+<td>ATK_ROLE_FRAME</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkAspectFrame">GtkAspectFrame</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkButton">GtkButton</a></td>
+
+<td>GailButton</td>
+
+<td>ATK_ROLE_PUSH_BUTTON</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkToggleButton">GtkToggleButton</a></td>
+
+<td>GailToggleButton</td>
+
+<td>ATK_ROLE_TOGGLE_BUTTON</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkCheckButton">GtkCheckButton</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_CHECK_BOX</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkRadioButton">GtkRadioButton</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_RADIO_BUTTON</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkOptionMenu">GtkOptionMenu</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_OPTION_MENU</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkItem">GtkItem</a></td>
+
+<td>GailItem</td>
+
+<td>N/A</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkMenuItem">GtkMenuItem</a></td>
+
+<td>GailMenuItem</td>
+
+<td>ATK_ROLE_MENU_ITEM</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkCheckMenuItem">GtkCheckMenuItem</a></td>
+
+<td>GailCheckMenuItem</td>
+
+<td>?</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkRadioMenuItem</td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkTearOffMenuItem">GtkTearOffMenuItem</a></td>
+
+<td>GailTearOffMenuItem</td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkListItem">GtkListItem</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_LIST_ITEM</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkTreeItem">GtkTreeItem</a></td>
+
+<td>GailTreeItem</td>
+
+<td>ATK_ROLE_TREE_ITEM</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkWindow">GtkWindow</a></td>
+
+<td>GailWindow</td>
+
+<td>ATK_ROLE_WINDOW</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkDialog">GtkDialog</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_DIALOG</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkColorSelectionDialog">GtkColorSelectionDialog</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_DIALOG</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkFileSelection">GtkFileSelection</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_FILE_CHOOSER</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkFontSelectionDialog">GtkFontSelectionDialog</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_DIALOG</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkInputDialog (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkMessageDialog">GtkMessageDialog</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkPlug">GtkPlug</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkEventBox">GtkEventBox</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHandleBox">GtkHandleBox</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkScrolledWindow">GtkScrolledWindow</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_SCROLL_PANE</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkViewPort">GtkViewPort</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkBox">GtkBox</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_PANEL</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="GtkButtonBox">GtkButtonBox</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHButtonBox">GtkHButtonBox</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkVButtonBox">GtkVButtonBox</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkColorSelection">GtkColorSelection</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_COLOR_CHOOSER</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkFontSelection">GtkFontSelection</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkGammaCurve (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHBox">GtkHBox</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkCombo">GtkCombo</a></td>
+
+<td>GailCombo</td>
+
+<td>ATK_ROLE_COMBO_BOX</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkStatusBar">GtkStatusBar</a></td>
+
+<td>GailStatusBar</td>
+
+<td>ATK_ROLE_STATUSBAR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkCList">GtkCList</a></td>
+
+<td>GailCList</td>
+
+<td>ATK_ROLE_LIST</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkCTree</td>
+
+<td>GailCTree</td>
+
+<td>ATK_ROLE_TREE</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkFixed">GtkFixed</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkPaned">GtkPaned</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHPaned">GtkHPaned</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkVPaned">GtkVpaned</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkLayout">GtkLayout</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkList">GtkList</a></td>
+
+<td>GailList</td>
+
+<td>ATK_ROLE_LIST</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkMenuShell>GtkMenuShell</a></td><td>GailMenuShell</td><td>N/A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td><td></td><td></td><td></td></tr><tr><td><a href =" #GtkMenu">GtkMenu</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_MENU</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkMenuBar">GtkMenuBar</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_MENU_BAR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkNotebook">GtkNotebook</a></td>
+
+<td>GailNotebook</td>
+
+<td>ATK_ROLE_PAGE_TAB_LIST</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkPacker">GtkPacker</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkSocket">GtkSocket</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkTable">GtkTable</a></td>
+
+<td>GailTable</td>
+
+<td>ATK_ROLE_TABLE</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkTextView">GtkTextView</a></td>
+
+<td>GailTextView</td>
+
+<td>ATK_ROLE_TEXT</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkToolbar">GtkToolbar</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_TOOLBAR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkTree">GtkTree</a></td>
+
+<td>GailTree</td>
+
+<td>ATK_ROLE_TREE</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkCalendar">GtkCalendar</a></td>
+
+<td>GailCalendar</td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkDrawingArea">GtkDrawingArea</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkCurve (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkEntry">GtkEntry</a></td>
+
+<td>GailEntry</td>
+
+<td>ATK_ROLE_TEXT</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkSpinButton">GtkSpinButton</a></td>
+
+<td>GailSpinButton</td>
+
+<td>ATK_ROLE_SPIN_BUTTON</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+</tr>
+
+<tr>
+<td>GtkRuler (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkHRuler (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkVRuler (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkRange">GtkRange</a></td>
+
+<td>GailRange</td>
+
+<td>ATK_ROLE_SLIDER</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+</tr>
+
+<tr>
+<td><a href="#GtkScale">GtkScale</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHScale">GtkHScale</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkVScale">GtkVScale</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkScrollbar">GtkScrollbar</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_SCROLL_BAR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="GtkHScrollbar">GtkHScrollbar</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkVScrollbar">GtkVScrollbar</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkSeparator">GtkSeparator</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_SEPARATOR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkHSeparator">GtkHSeparator</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkVSeparator">GtkVSeparator</a></td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkInvisible (internal use only)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkOldEditable (depricated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkText (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkPreview (deprecated)</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkProgress">GtkProgress</a></td>
+
+<td>GailProgress</td>
+
+<td>N/A</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+</tr>
+
+<tr>
+<td><a href="#GtkProgressbar">GtkProgressbar</a></td>
+
+<td></td>
+
+<td>ATK_ROLE_PROGRESS_BAR</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkData">GtkData</a></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td><a href="#GtkAdjustment">GtkAdjustment</a></td>
+
+<td>GailAdjustment</td>
+
+<td>?</td>
+
+<td></td>
+
+<td>X</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td>X</td>
+</tr>
+
+<tr>
+<td><a href="#GtkTooltips">GtkToolTips</a></td>
+
+<td>GailTooltips</td>
+
+<td>N/A</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkIMContext</td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkIMMulticontext</td>
+
+<td></td>
+
+<td>?</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>GtkItemFactory</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>&#xA0;</td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+
+<td></td>
+</tr>
+</table>
+
+<p><a NAME="GtkWidget"></a>
+<h1>
+GtkWidget Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkwidget.html">GtkWidget
+API Documentation</a>
+<br>Accessible Implementation: GailWidget
+<table>
+<caption>&#xA0;</caption>
+
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Queries the name member of the GtkWidget structure. If empty, returns
+NULL.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>This function checks to see if a tooltip exists for the widget, and
+if so, returns the text of the tooltip as the widget description. If not,
+it returns a stock description based on the widget type.</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation maps the gtype of the GtkWidget to the appropriate ATK_ROLE.
+The implementation of get_accessible_role and set_accessible_role in GailWidget
+handles getting and setting accessible roles for all types derived from
+GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not Implemented (not all widgets have children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Basic support for accelerators inherited by all descendants of GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>The implementation of AtkComponent interface in GailWidget is inherited
+by all types derived from GailWidget.</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkMisc"></a>
+<h1>
+GtkMisc Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmisc.html">GtkMisc
+API Documentation</a>
+<br>No accessibility implementation required-- abstract base class.
+<p><a NAME="GtkLabel"></a>
+<h1>
+GtkLabel Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtklabel.html">GtkLabel
+API Documentation</a>
+<br>Accessible Implementation: GailLabel
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Returns text of label</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not implemented (GtkLabels have no children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Exposes text contained on label</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkAccelLabel"></a>
+<h1>
+GtkAccelLabel Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkaccellabel.html">GtkAccelLabel
+API Documentation</a>
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailLabel</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not implemented (GtkLabels and their descendants have no children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Implementation inherited from GailLabel</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkArrow"></a>
+<h1>
+GtkArrow Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkarrow.html">GtkArrow
+API Documentation</a>
+<br>Accessible Implementation: GailArrow
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Description of direction in which arrow points</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not implemented (GtkArrows have no children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Implements access to the bits of the arrow's image</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkImage"></a>
+<h1>
+GtkImage Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkimage.html">GtkImage
+API Documentation</a>
+<br>Accessible Implementation: GailImage
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not implemented (GtkImages have no children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Implements access to the bits of the image</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkPixmap"></a>
+<h1>
+GtkPixmap Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkpixmap.html">GtkPixmap
+API Documentation</a>
+<br>Accessible Implementation: GailPixmap
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Not implemented (GtkPixmaps have no children)</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Implements access to the bits of the pixmap</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkContainer"></a>
+<h1>
+GtkContainer Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcontainer.html">GtkContainer
+API Documentation</a>
+<br>Accessible Implementation: GailContainer
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Provides access to children of container</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkBin"></a>
+<h1>
+GtkBin Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkbin.html">GtkBin
+API Documentation</a>
+<br>No accessible implementation required
+<p><a NAME="GtkAlignment"></a>
+<h1>
+GtkAlignment Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkalignment.html">GtkAlignment
+API Documentation</a>
+<br>No accessible implementation required
+<p><a NAME="GtkFrame"></a>
+<h1>
+GtkFrame Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkframe.html">GtkFrame
+API Documentation</a>
+<br>Accessible Implementation: GailFrame
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Exposes label of frame as accessible name</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Implementation inherited from GailContainer</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkAspectFrame"></a>
+<h1>
+GtkAspectFrame Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkaspectframe.html">GtkAspectFrame
+API Documentation</a>
+<br>No accessible implementation required
+<p><a NAME="GtkButton"></a>
+<h1>
+GtkButton Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkbutton.html">GtkButton
+API Documentation</a>
+<br>Accessible Implementation: GailButton
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>If button's child is a label, returns the text of the label. Otherwise,
+widget is considered unnamed.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Reported as having no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>click, press,release-- Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>If button's child is an image, exposes the bits of the image, otherwise
+does nothing</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkToggleButton"></a>
+<h1>
+GtkToggleButton Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktogglebutton.html">GtkToggleButton
+API Documentation</a>
+<br>Accessible Implementation: GailToggleButton
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailButton</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Implementation inherited from GailButton</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Actions inherited from GailButton</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Implementation inherited from GailButton</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkCheckButton"></a>
+<h1>
+GtkCheckButton Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcheckbutton.html">GtkCheckButton
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailToggleButton.
+<p><a NAME="GtkRadioButton"></a>
+<h1>
+GtkRadioButton Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkradiobutton.html">GtkRadioButton
+API Documentation</a>
+<br>No accessibility implementation required. Inherits functionality from
+GailToggleButton.
+<p><a NAME="GtkOptionMenu"></a>
+<h1>
+GtkOptionMenu Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkoptionmenu.html">GtkOptionMenu
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailButton.
+<p><a NAME="GtkItem"></a>
+<h1>
+GtkItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkitem.html">GtkItem
+API Documentation</a>
+<br>Accessible implementation: GailItem
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>If child widget is a label, the accessible name is considered to be
+the text of this label. Otherwise, the GtkItem widget is considered nameless.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Reported as having no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkMenuItem"></a>
+<h1>
+GtkMenuItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmenuitem.html">GtkMenuItem
+API Documentation</a>
+<br>Accessible implementation: GailMenuItem
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailItem</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>If the GtkMenuItem has a submenu, this submenu is exposed as its only
+accessible child. Otherwise, it is exposed as having 0 accessible children.</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>One action "click" -- Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkCheckMenuItem"></a>
+<h1>
+GtkCheckMenuItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcheckmenuitem.html">GtkCheckMenuItem
+API Documentation</a>
+<br>Accessible implementation: GailCheckMenuItem
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailItem</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Implementation inherited from GailMenuItem</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>actions inherited from GailMenuItem</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkRadioMenuItem"></a>
+<h1>
+GtkRadioMenuItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkradiomenuitem.html">GtkRadioMenuItem
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailMenuItem.
+<p><a NAME="GtkTearOffMenuItem"></a>
+<h1>
+GtkTearOffMenuItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktearoffmenuitem.html">GtkTearOffMenuItem
+API Documentation</a>
+<br>Accessible implementation: GailTearOffMenuItem
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailItem</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Implementation inherited from GailMenuItem</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Actions inherited from GailMenuItem</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkListItem"></a>
+<h1>
+GtkListItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtklistitem.html">GtkListItem
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailItem.
+<p><a NAME="GtkTreeItem"></a>
+<h1>
+GtkTreeItem Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktreeitem.html">GtkTreeItem
+API Documentation</a>
+<br>Accessible implementation: GailTreeItem
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailItem</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>If the GtkTreeItem has a subtree, this subtree is exposed as its only
+accessible child. Otherwise, it is reported to have no children.</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>actions inherited from GailItem, additional actions "collapse_tree"
+and "expand_tree"</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkWindow"></a>
+<h1>
+GtkWindow Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkwindow.html">GtkWindow
+API Documentation</a>
+<br>Accessible implementation: GailWindow
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Returns text of window title</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Implementation inherited from GailContainer</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkDialog"></a>
+<h1>
+GtkDialog Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkdialog.html">GtkDialog
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWindow.
+<p><a NAME="GtkColorSelectionDialog"></a>
+<h1>
+GtkColorSelectionDialog Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcolorselectiondialog.html">GtkColorSelectionDialog
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWindow.
+<p><a NAME="GtkFileSelection"></a>
+<h1>
+GtkFileSelection Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkfileselection.html">GtkFileSelection
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWindow.
+<p><a NAME="GtkFontSelectionDialog"></a>
+<h1>
+GtkFontSelectionDialog Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkfontselectiondialog.html">GtkFontSelectionDialog
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWindow.
+<p><a NAME="GtkMessageDialog"></a>
+<h1>
+GtkMessageDialog Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmessagedialog.html">GtkMessageDialog
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWindow.
+<p><a NAME="GtkPlug"></a>
+<h1>
+GtkPlug Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkplug.html">GtkPlug
+API Documentation</a>
+<br>No accessible implementation required. Does not represent an element
+in the UI.
+<p><a NAME="GtkEventBox"></a>
+<h1>
+GtkEventBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkeventbox.html">GtkEventBox
+API Documentation</a>
+<br>No accessible implementation required. Does not represent an element
+in the UI.
+<br><a NAME="GtkHandleBox"></a>
+<h1>
+GtkHandleBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhandlebox.html">GtkHandleBox
+API Documentation</a>
+<br>No accessible implementation required. Accessibility functionality
+provided by GailWindow.
+<p><a NAME="GtkScrolledWindow"></a>
+<h1>
+GtkScrolledWindow Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkscrolledwindow.html">GtkScrolledWindow
+API Documentation</a>
+<br>No accessible implementation required. Accessibility functionality
+provided by GailContainer.
+<p><a NAME="GtkViewPort"></a>
+<h1>
+GtkViewPort Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkviewport.html">GtkViewPort
+API Documentation</a>
+<br>No accessible implementation required. Accessibility functionality
+provided by GailWindow.
+<p><a NAME="GtkBox"></a>
+<h1>
+GtkBoxNotes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkbox.html">GtkBox
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkButtonBox"></a>
+<h1>
+GtkButtonBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkbuttonbox.html">GtkButtonBox
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkHButtonBox"></a>
+<h1>
+GtkHButtonBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhbuttonbox.html">GtkHButtonBox
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkVButtonBox"></a>
+<h1>
+GtkVButtonBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkvbuttonbox.html">GtkVButtonBox
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkColorSelection"></a>
+<h1>
+GtkColorSelection Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcolorselection.html">GtkColorSelection
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkFontSelection"></a>
+<h1>
+GtkFontSelection Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkfontselection.html">GtkFontSelection
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer
+<p><a NAME="GtkHBox"></a>
+<h1>
+GtkHBox Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhbox.html">GtkHBox
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkCombo"></a>
+<h1>
+GtkCombo Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcombo.html">GtkCombo
+API Documentation</a>
+<br>Accessible implementation: GailCombo
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Exposes entry, list, pushbutton, and popup menu as children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkStatusBar"></a>
+<h1>
+GtkStatusBar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkstatusbar.html">GtkStatusBar
+API Documentation</a>
+<br>Accessible implementation: GailStatusBar
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>The name of the label associated with the GtkStatusbar</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Reported as having no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkCList"></a>
+<h1>
+GtkCList Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkclist.html">GtkCList
+API Documentation</a>
+<br>Accessible implementation: GailCList
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Produces Flyweight accessible objects to represent its children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of GtkCList Items</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>We may wish to support this interface-- GtkCLists can contain multiple
+columns and rows. The columns, however, are not individually selectable.</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkCTree"></a>
+<h1>
+GtkCTree Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkctree.html">GtkCTree
+API Documentation</a>
+<br>Accessible implementation: GailCTree
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Produces Flyweight accessible objects to represent its children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of GtkCTree Rows</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>We may wish to support this interface-- GtkCTrees can contain multiple
+columns and rows. The columns, however, are not individually selectable.</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkFixed"></a>
+<h1>
+GtkFixed Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkfixed.html">GtkFixed
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkPaned"></a>
+<h1>
+GtkPaned Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkpaned.html">GtkPaned
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailContainer.
+<p><a NAME="GtkHPaned"></a>
+<h1>
+GtkHPaned Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhpaned.html">GtkHPaned
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailContainer.
+<p><a NAME="GtkVPaned"></a>
+<h1>
+GtkVPaned Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkvpaned.html">GtkVPaned
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailContainer.
+<p><a NAME="GtkLayout"></a>
+<h1>
+GtkLayout Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtklayout.html">GtkLayout
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailContainer.
+<p><a NAME="GtkList"></a>
+<h1>
+GtkList Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtklist.html">GtkList
+API Documentation</a>
+<br>Accessible implementation: GailList
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Provides access to child list items. Note that these are not flyweights--
+each list item is a GtkListItem widget.</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of list items</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkMenuShell"></a>
+<h1>
+GtkMenuShell Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmenushell.html">GtkMenuShell
+API Documentation</a>
+<br>Accessible implementation: GailMenuShell
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Inherits implementation from GailContainer</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of menu items</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkMenu"></a>
+<h1>
+GtkMenu Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmenu.html">GtkMenu
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailMenuShell.
+<p><a NAME="GtkMenuBar"></a>
+<h1>
+GtkMenuBar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkmenubar.html">GtkMenuBar
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailMenuShell.
+<p><a NAME="GtkNotebook"></a>
+<h1>
+GtkNotebook Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtknotebook.html">GtkNotebook
+API Documentation</a>
+<br>Accessible implementation: GailNotebook
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Provides access to flyweight accessible implementations of notebook
+tabs</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of notebook tabs</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkPacker"></a>
+<h1>
+GtkPacker Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkpacker.html">GtkPacker
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailContainer.
+<p><a NAME="GtkSocket"></a>
+<h1>
+GtkSocket Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtksocket.html">GtkSocket
+API Documentation</a>
+<br>No accessible implementation required. Not a component of the UI.
+<p><a NAME="GtkTable"></a>
+<h1>
+GtkTable Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktable.html">GtkTable
+API Documentation</a>
+<br>Accessible implementation: GailTable
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Returns accessible implementations of child widgets</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Allows access to individual widgets in a row-column format</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkTextView"></a>
+<h1>
+GtkTextView Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktextview.html">GtkTextView
+API Documentation</a>
+<br>Accessible implementation: GailTextView
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Allows editing of text</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>GtkTextView supports hyperlinks, so it would seem that in some instances
+at least, this interface should be supported. What about text which does
+not contain hyperlinks?</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>GtkTextView supports hyperlinks, so it would seem that in some instances
+at least, this interface should be supported. What about text which does
+not contain hyperlinks?</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Allows access to text within the GtkTextView</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkToolbar"></a>
+<h1>
+GtkToolbar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktoolbar.html">GtkToolbar
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailContainer.
+<p><a NAME="GtkTree"></a>
+<h1>
+GtkTree Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktree.html">GtkTree
+API Documentation</a>
+<br>Accessible implementation: GailTree
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Exposes tree items as accessible children-- note that these are not
+flyweights, they have corresponding GtkTreeItem widgets.</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of tree items</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkCalendar"></a>
+<h1>
+GtkCalendar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkcalendar.html">GtkCalendar
+API Documentation</a>
+<br>Accessible implementation: GailCalendar
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Month and year of calendar</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Exposes days of the displayed month as flyweight children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Allows selection of a date</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkDrawingArea"></a>
+<h1>
+GtkDrawingArea Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkdrawingarea.html">GtkDrawingArea
+API Documentation</a>
+<br>No accessible implementation required. Inherits functionality from
+GailWidget
+<p><a NAME="GtkEntry"></a>
+<h1>
+GtkEntry Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkentry.html">GtkEntry
+API Documentation</a>
+<br>Accessible implementation: GailEntry
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Allows editing of text</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Allows access to text within the GtkEntry</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not Supported</td>
+</tr>
+</table>
+
+<p><a NAME="GtkSpinButton"></a>
+<h1>
+GtkSpinButton Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkspinbutton.html">GtkSpinButton
+API Documentation</a>
+<br>Accessible implementation: GailSpinButton
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Increment, decrement-- Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Implementation inherited from GailEntry</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Implementation inherited from GailEntry</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Allows manipulation of value of spin button</td>
+</tr>
+</table>
+
+<p><a NAME="GtkRange"></a>
+<h1>
+GtkRange Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkrange.html">GtkRange
+API Documentation</a>
+<br>Accessible implementation: GailRange
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Allows manipulation of value of GtkRange</td>
+</tr>
+</table>
+
+<p><a NAME="GtkScale"></a>
+<h1>
+GtkScale Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkscale.html">GtkScale
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkHScale"></a>
+<h1>
+GtkHScale Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhscale.html">GtkHScale
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkVScale"></a>
+<h1>
+GtkVScale Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkvscale.html">GtkVScale
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkScrollbar"></a>
+<h1>
+GtkScrollbar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkscrollbar.html">GtkScrollbar
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkHScrollbar"></a>
+<h1>
+GtkHScrollbar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhscrollbar.html">GtkHScrollbar
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkVScrollbar"></a>
+<h1>
+GtkVScrollbar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkvscrollbar.html">GtkVScrollbar
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailRange
+<p><a NAME="GtkSeparator"></a>
+<h1>
+GtkSeparator Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkseparator.html">GtkSeparator
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailWidget
+<p><a NAME="GtkHSeparator"></a>
+<h1>
+GtkHSeparator Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkhseparator.html">GtkHSeparator
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailWidget
+<p><a NAME="GtkVSeparator"></a>
+<h1>
+GtkVSeparator Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkvseparator.html">GtkVSeparator
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailWidget
+<p><a NAME="GtkProgress"></a>
+<h1>
+GtkProgress Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkprogress.html">GtkProgress
+API Documentation</a>
+<br>Accessible implementation: GailProgress
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Implementation inherited from GailWidget.</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Implementation inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Allows read-only access to the value of the GtkProgress widget</td>
+</tr>
+</table>
+
+<p><a NAME="GtkProgressbar"></a>
+<h1>
+GtkProgressbar Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkprogressbar.html">GtkProgressbar
+API Documentation</a>
+<br>No accessible implementation required. Functionality provided by GailProgress
+<p><a NAME="GtkData"></a>
+<h1>
+GtkData Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkdata.html">GtkData
+API Documentation</a>
+<br>No accessible implementation required. Does not represent a UI element.
+<p><a NAME="GtkAdjustment"></a>
+<h1>
+GtkAdjustment Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtkadjustment.html">GtkAdjustment
+API Documentation</a>
+<br>Accessible implementation: GailAdjustment
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Assumed nameless</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Assumed descriptionless</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Assumed roleless</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Has no children</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>increment, decrement, page_increment, page_decrement-- Accelerator
+support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Allows the manipulation of the GtkAdjustment's value</td>
+</tr>
+</table>
+
+<p><a NAME="GtkTooltips"></a>
+<h1>
+GtkTooltips Notes</h1>
+<a href="http://developer.gnome.org/doc/API/2.0/gtk/gtktooltips.html">GtkTooltips
+API Documentation</a>
+<br>Accessible implementation: GailTooltips
+<table>
+<tr>
+<th>Accessibility Property/Interface</th>
+
+<th>Implementation Notes</th>
+</tr>
+
+<tr>
+<td></td>
+
+<td></td>
+</tr>
+
+<tr>
+<td>Accessible Name</td>
+
+<td>Assumed nameless</td>
+</tr>
+
+<tr>
+<td>Accessible Description</td>
+
+<td>Assumed Descriptionless</td>
+</tr>
+
+<tr>
+<td>Accessible Role</td>
+
+<td>Assumed Roleless</td>
+</tr>
+
+<tr>
+<td>Accessible Children</td>
+
+<td>Exposes tooltips label as only accessible child</td>
+</tr>
+
+<tr>
+<td>AtkAction Interface</td>
+
+<td>Accelerator support inherited from GailWidget</td>
+</tr>
+
+<tr>
+<td>AtkComponent Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkEditableText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHyperlink Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkHypertext Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkImage Interface</td>
+
+<td>Not Supported</td>
+</tr>
+
+<tr>
+<td>AtkSelection Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkTable Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkText Interface</td>
+
+<td>Not supported</td>
+</tr>
+
+<tr>
+<td>AtkValue Interface</td>
+
+<td>Not supported</td>
+</tr>
+</table>
+
+</body>
+</html>
