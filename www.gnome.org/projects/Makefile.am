@@ -2,6 +2,7 @@ SUBDIRS = \
 	accessibility		\
 	application-framework	\
 	beagle 			\
+	bugsquad		\
 	chronojump		\
 	deskbar-applet		\
 	desktop			\
