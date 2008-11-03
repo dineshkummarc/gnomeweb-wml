@@ -78,6 +78,6 @@ page_SCRIPTS = \
 	2008-04-22-akademy-guadec.html \
 	2008-07-stormy-executive-director.html \
 	2008-07-guadec-akademy-grancanaria.html \
-	2008-10-motorola-google.wml
+	2008-10-motorola-google.html
 
 include $(top_srcdir)/rules.common
