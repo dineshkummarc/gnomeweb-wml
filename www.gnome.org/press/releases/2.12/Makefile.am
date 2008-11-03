@@ -1,7 +1,7 @@
 
 SUBDIRS = docbook
 
-urlpath = /start/2.14/press_release
+urlpath = /press/releases/2.12
 
 page_SCRIPTS=
 page_DATA =
@@ -10,10 +10,10 @@ include $(top_srcdir)/rules.common
 
 
 # Get DOC_INCLUDES and DOC_LINGUAS
-include $(top_srcdir)/www.gnome.org/start/2.14/press_release/docbook/Makefile_shared.am_fragment
+include $(top_srcdir)/www.gnome.org/press/releases/2.12/docbook/Makefile_shared.am_fragment
 
 
-VERSION = 2.14
+VERSION = 2.12
 ROOTDOC = press_release.xml
 STYLE_PATH = ../../../../docbook_html_style/
 
@@ -34,7 +34,7 @@ html:
 	    --param yelp_max_chunk_depth 1 \
 	    --stringparam admon.graphics.path ./images/ \
 	    --stringparam http_root http://www.gnome.org \
-	    --stringparam http_prefix /start/2.14/press_release \
+	    --stringparam http_prefix /start/2.12/press_release \
 	    $(STYLE_PATH)db2html.xsl docbook/$$docbookdir/$(ROOTDOC); \
 	  echo "  xlstproc finished"; \
 	  for i in $$docbookdir/*.html; do \

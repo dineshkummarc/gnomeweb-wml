@@ -1,4 +1,4 @@
-SUBDIRS =
+SUBDIRS = 2.12 2.14
 
 urlpath = /press/releases
 
