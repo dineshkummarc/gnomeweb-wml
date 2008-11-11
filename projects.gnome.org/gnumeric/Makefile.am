@@ -23,5 +23,6 @@ page_SCRIPTS=index.shtml		\
 
 include $(top_srcdir)/rules.common
 
-install-exec-hook:
-	ls -lR $(pagedir) >$(pagedir)/files
+# Commented out because this breaks the build. murrayc.
+#install-exec-hook:
+#	ls -lR $(pagedir) >$(pagedir)/files
