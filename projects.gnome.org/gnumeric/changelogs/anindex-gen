@@ -1,0 +1,77 @@
+#!/usr/bin/perl -w
+use strict;
+
+#THIS IS VERSION $Id: anindex-gen,v 1.1 2004/11/29 07:01:15 solarion Exp $
+#Fairly simple;
+#Just read in the directory.  Each file we care about is
+#  in the following format:
+#    gnumeric-version
+#This is essentially identical to the announcements one, except for a few snippets
+#  of text.
+
+
+if(!defined($ARGV[0])){
+  print STDERR "No argument given!  What directory should I create an index in?!\n";
+  exit 1;
+}
+my $maindir=shift(@ARGV);
+
+#Alright.  Open the directory.
+opendir(DIR, $maindir) or die("Unable to open directory \"$maindir\"!  ($!).\n");
+
+#First, output to the header.
+print <<EOF
+    <!--#set var="title" value="Gnumeric Release Changelogs" -->
+    <!--#set var="rootdir" value="../.." -->
+    <!--#include virtual="../../header-begin.shtml" -->
+    <style type="text/css">
+     <!--
+        html {
+         height: 100%;
+         width: 100%;
+        }
+        body {
+         height: 100%;
+         width: 100%;
+         background: #F0F0F0;
+        }
+      -->
+    </style>
+    <!--#include virtual="../../header-end.shtml" -->
+
+    <div>
+    <ul>
+EOF
+;
+
+my $file;
+my $name;
+my @pieces;
+my $modded = 0;
+my @files = ();
+while($file = readdir(DIR)){
+  push(@files, $file);
+}
+foreach $file (sort @files){
+  if($file eq "." || $file eq ".."){next;}
+  #Make sure it's in the proper format.
+  if(!($file =~ /^gnumeric-([0-9]+\.[0-9]+\.[0-9]+|[0-9]+\.[0-9]+)(\.html|\.shtml|\.txt){0,1}$/)){next;}
+  #Trim off any suffix.
+  $name = $file;
+  $name =~ s/\.[a-zA-Z]*$//g;
+  #Alright.  It is.  Now, output our links.
+  @pieces = split(/-+/, $name);
+  print "      <li><a href=\"$file\">$pieces[1]</a></i>\n";
+  $modded=1;
+}
+if(!$modded){
+  print "      <li>No Changelogs yet!  Check back later.</li>\n";
+}
+
+#Now output the footer.
+print <<EOF
+    </ul>
+    </div>
+  <!--#include virtual="../../footer.shtml"-->
+EOF
+;

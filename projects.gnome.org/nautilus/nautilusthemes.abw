@@ -1,0 +1,1266 @@
+<?xml version="1.0"?>
+<!DOCTYPE abiword PUBLIC "-//ABISOURCE//DTD AWML 1.0 Strict//EN" "http://www.abisource.com/awml.dtd">
+<abiword xmlns="http://www.abisource.com/awml.dtd" xmlns:awml="http://www.abisource.com/awml.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.0.2" fileformat="1.0" styles="unlocked">
+<!-- =====================================================================  -->
+<!-- This file is an AbiWord document.                                      -->
+<!-- AbiWord is a free, Open Source word processor.                         -->
+<!-- You may obtain more information about AbiWord at www.abisource.com     -->
+<!-- You should not edit this file by hand.                                 -->
+<!-- =====================================================================  -->
+
+<styles>
+<s type="P" name="Normal" basedon="" followedby="Current Settings" props="font-family:Times New Roman; margin-top:0pt; font-variant:normal; margin-left:0pt; text-indent:0in; widows:2; font-style:normal; font-weight:normal; text-decoration:none; color:000000; line-height:1.000000; text-align:left; margin-bottom:0pt; text-position:normal; margin-right:0pt; bgcolor:transparent; font-size:12pt; font-stretch:normal"/>
+</styles>
+<lists>
+<l id="1822067250" parentid="0" type="5" start-value="0" list-delim="%L" list-decimal="NULL"/>
+<l id="1470116994" parentid="0" type="5" start-value="0" list-delim="%L" list-decimal="NULL"/>
+<l id="1557789063" parentid="0" type="5" start-value="0" list-delim="%L" list-decimal="NULL"/>
+</lists>
+<pagesize pagetype="Letter" orientation="portrait" width="8.500000" height="11.000000" units="in" page-scale="1.000000"/>
+<section props="page-margin-footer:0.5in; page-margin-header:0.5in">
+<p style="Normal"><c props="lang:en-US; font-size:24 pt; font-weight:bold">Creating themes for Nautilus</c><c props="lang:en-US; font-size:24 pt; font-weight:bold"></c></p>
+<p style="Normal"><c props="lang:en-US; font-weight:bold; font-size: 14 pt">Version 1.1 - 29. September 2002</c></p>
+<p style="Normal"><c props="lang:en-US; font-weight:bold; font-size: 14 pt"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:11 pt; font-weight:normal">Written by Christian Fredrik Kalager Schaller</c><c props="lang:en-US; font-size:11 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:9 pt; font-weight:normal">Thanks to Jacub 'Jimmac' Steiner, Dave 'Campd' Camp  and Roman 'Star' Beigelbeck for providing information and help.</c><c props="lang:en-US; font-size:9 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:24 pt; font-weight:bold"></c><c props="lang:en-US; font-size:12 pt; font-weight:normal">Nautilus has great theme capabilities both for its GUI and for the file and device type icons it presents. This tutorial which try and explain how Nautilus themeing works and how you can make themes for this great file manager.</c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:bold">Understanding the Natilus theme engine</c><c props="lang:en-US; font-size:12 pt; font-weight:bold"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">The first thing you need to know is how the Nautilus theme engine works.  When explaining I will base my explanation on where Red Hat Linux place this files, they might be placed elsewhere on other distributions.  Nautilus keeps all its files for its themes under</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">'/usr/share/pixmaps/nautilus/', in this directory you should be able to see directories with the names of the themes that you currently have installed on your system.  On my computer that includes the standard themes with names such as 'sierra','tahoe','gnome' and of course 'default'.</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">When you look at those themes you will notice that there is a different amount of files in each, there are two reasons for this. First of all a theme does not need to supply icons for everything as nautilus will use the correct icon from the default theme if a specific icon is missing. Secondly a theme might contain many sizes of each icon.</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">When creating icons for Nautilus you have a few specific formats to choose between namely</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">PNG, SVG and XPM. PNG and SVG is the two recommended ones for respectively bitmap icons and vector graphics icons. the XPM support is in there mainly for legacy support.  It is important to note that there is no need to provide multiple size icons of SVG icons size they can scale to any size without reducing their displayed quality. SVG icons are a little heavier for the computer to render however so slow machines might have problems running Nautilus using such themes.</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">Also in each theme directory you find some .xml files. The one with the name of the theme for instance 'crux.xml' is the most important one since it contains information on what background color to use for the sidebar and main panel in nautilus and text for the theme chooser in Natilus.</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal">I suggest starting with another theme when creating a Nautilus theme and then replace the icons one by one.  Creating a directory with the same name as your planned theme and creating the themename.xml inside it is all that is needed to make the theme available in the Nautilus theme selector.</c><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c></p>
+<p style="Normal"><c props="lang:en-US; font-size:12 pt; font-weight:normal"></c><c props="font-weight:bold; font-size:14 pt">Step 1. Creating a theme XML configuration file</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">Creating a theme starts with creating a directory for you theme, either by just doing a mkdir or but copying another theme as suggested above. Then you are ready to start setting up your theme.</p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">Below you see an example themename.xml file. Look it over and I will explain it line by line below. </p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">&lt;?xml version="1.0"?&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c><c props="font-weight:normal; font-size:12 pt; font-style:italic">&lt;theme _name="Blue Danube" _description="This is a theme for Nautilus inspired by the blue Danube."&gt;</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c><c props="font-weight:normal; font-size:12 pt; font-style:italic">  &lt;sidebar sidebar_background_tile_image="./side_bar_image.png"</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">           sidebar_background_color="#474A7C-#22233A:h"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">           tab_piece_images="sidebar_tab_pieces" combine="true"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">           left_offset="0" shadow_offset="1" text_h_offset="-4" label_color="#FFFFFF"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">           tab_font="Helvetica Bold" /&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">  &lt;directory background_color="#F0F0F0" selection_box_color_rgba="0x727D974C"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">            selection_box_color="#727D97"/&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"> &lt;icon highlight_background_color="#000000" highlight_text_color="#FFFFFF"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">       	text_fill_color="#FFFFFF"/&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">  </c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"> &lt;thumbnails frame_offsets="3,3,6,6"/&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"> &lt;throbber frame_count="30" url="http://www.gnome.org/nautilus/" delay="75"/&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"> &lt;zoom_control number_v_offset="-1" number_h_offset="-2"/&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"> &lt;/theme&gt;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal">If you have edited XML or HTML files before the format for this is fairly straightforward. Between each &lt; and &gt; symbol there is some parameters being set.  </c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal"></c><c props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt">The first line simply states that this is a xml version 1.0 file.</c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal">You will not have any need to alter this. The second line contains the name of the theme and a description. This is the information that is available in the theme selector in nautilus so make it descriptive.</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal"></c><image dataid="/home/cschalle/theme-select-nautilus.png_1" props="height:2.25in; width:4.88in"/></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">The third entry which starts with '&lt;sidebar' is the setting for the nautilus sidebar. The format for the sidebar_background_color parameter is for gradients using standard RGB format ( you find a nice overview of some RGB codes here. The :h at the end can be replaced by :v which gives you either a horizontal of vertikal gradient. If you don't want a gradient you can of course just use a plain color code. Also in case you wonder why you set both a tile image and a background color, well it is because PNG images has support for transparency so you can make some nice effects mixing gradient backgrounds and transparent tiles.</p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">There is also a tab_piece_images setting here, and all the parameters after that are for the tabs.  Creating your own set of sidebar tabs is quite hard and I have never done it myself, I will due to that not go into any details for changing these settings. If you want to you can experiement with changing these yourself. Things like label_color and tab_font can of course be changed as you wish, but make sure that for instance the font you choose actually works with the tabs.  I will show you the tab images later in this document.</p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:italic; text-decoration:none"></c>The next entry to look at is '<c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:italic; lang:en-US">&lt;directory' </c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">which sets some parameters for your file view. The tricky one here is the </c><c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:italic; lang:en-US">selection_box_color_rgba </c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">parameter which lets you set a alpha transparent color</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">for the selection box that appears when you select more than one icon using the mouse. I have no </c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">easy directions to give you for finding codes to put here. So all I can do is explain how it is composed the example seen (</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c><c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:italic; lang:en-US">0x727D974C)</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"> that first two numbers is the hew code which simply means that the numbers coming after is hex codes. Then we have a two digit number for Red, Green, Blue and Alpha respectivly.  So by altering these two digit code you can increase/decrease the amount of each color and level of alpha transparency.</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">The '&lt;thumbnails' setting lets you choose the size of the frame around the thumbnails of images in the nautilus icon view. Nautilus as you probably know makes thumbnails of the images in the directories you view and present them as an icon for the image in question.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The '&lt;throbber' parameters is for setting how many images you have in your throbber animation and also what URL will be opened when someone clicks on the throbber.</c><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">Lastly is the '&lt;zoom_control' parameter which lets you adjust the vertical and horizontal offset of the number displayed. This is important so that you can adjust its placement to fit with the zoom_body.png you created above.</c><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12pt">Ok, so now we got the main XML file covered.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size:14 pt">Step 2. The tabs in the sidebar</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size:14 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">Ok, as mentioned earlier if you need sidebar graphics. I strongly suggest you copy one of the two made by Eazel from one of the other standard themes. This doesn't mean you can't do some themeing however. The tab graphics are to be put in a subdirectory called sidebar_tab_pieces as defined in the XML above. Once you have copied them over you can apply your own color and effects to these graphics to make them fit with the rest of your theme.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size:14 pt">Step 3. Creating the icons</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size:14 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">Ok, now we are over to the fun part of theme creation, the icons. The first icons you want to create are the ones for the two standard desktop entries. The home icon and the trash-can icon.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">Remember however that creating all these icons are voluntary in the sense that if you don't provide one Nautilus will just use the one from the default theme. </c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">The Home icon is called desktop-home.png (temp-home.png in Nautilus for GNOME 1). For the trashcan you need two icons, one for empty and one for full. They are called trash-empty.png	       trash-full.png. You can also optionally add a third called trash-empty-accept.png which will be displayed when you move something over an empty trash can to dispose of it.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">Once these icons are done, then the next natural step is creating folder icons. You need two icons for folders. One basic one which you name i-directory.png, and another one called i-directory-accept.png which gets displayed when you drag something above the folder to drop it into the folder.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt">The next step is creating icons for the devices on the system. You need the following:</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c props="font-family:Times New Roman; text-decoration:none; color:000000; lang:en-US; list-tag:274957375; text-position:normal; font-weight:normal; font-style:normal; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-blockdev</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:502313543; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-symlink</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:1375510849; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-chardev</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:2146060848; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-directory</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:488256225; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-executable</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:484304176; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-fifo (not provided by other themes currently)</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:1527640320; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c level="1" listid="1822067250" parentid="0" style="Normal" type="list_label" props="width:0in; font-family:Times New Roman; color:000000; margin-left:0.5000in; start-value:0; font-style:normal; text-indent:-0.3000in; list-style:Bullet List; bgcolor:transparent; height:0in; text-decoration:none; font-size:12 pt; font-weight:normal; text-position:normal; lang:en-US; field-font:Symbol"> </c><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal">i-regular</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:883475758; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-search (Can be omitted as search functionality is currently not on by default)</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:413361640; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> i-sock (not provided by other themes currently)</c></p>
+<p level="1" listid="1822067250" parentid="0" style="Normal" props="start-value:0; text-indent:-0.3000in; list-style:Bullet List; field-font:Symbol; margin-left:0.5000in"><c type="list_label" props="width:0in; list-tag:1703721952; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; text-position:normal; color:000000; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><field type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></field><c type="list_label" props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"> loading (displayed when Nautilus is working with a file, for instance generating a thumbnail)</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt">These icons are defined in the nautlilus-icon-factory.c file as can be seen in the link below.</c><c props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal">http://cvs.gnome.org/bonsai/cvsblame.cgi?file=nautilus/libnautilus-private/nautilus-icon-factory.c&amp;rev=&amp;root=/cvs/gnome</c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt">Now you are ready to start with the vast majority of the icon creating process.  The default mime types icons are not part of the nautilus package rather they are shipped with the gnome-mime-data package, so if you look into the 'default' directory under '/usr/share/pixmaps/nautilus' you will see that there are no mime type icons there. So the easiest solution is to look at theme which has a reasonably complete set of icons and just make the same icons as is in that theme. Scaleble Gorilla from Ximian in a good theme to look at.  However if you want a complete list of possible mime-type icons or want to add new ones you need to look at the gnome-mime-data module in CVS. The file gnome-vfs.mime defines all the mime-types currently available (</c><c props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12 pt"></c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal">http://cvs.gnome.org/bonsai/cvsblame.cgi?file=gnome-mime-data/gnome-vfs.mime&amp;rev=&amp;root=/cvs/gnome). You can see what the mime type icon names should be by looking at the mime type definitions in that file.</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:bold; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:14pt; height:0in; text-position:normal">Step 4. Preparing icons for emblems</c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:bold; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:14pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal">One of the nice features of Nautilus is the concept of emblems. Emblems are little graphics you can attach to your files and folders to make the files stand out from the rest. These little graphics usually are designed to let you mark the files or folders with a sign giving you some information on the content. Current emblems include  things like 'Certified','Ok','Draft','Important','Urgent' and so on. I will explain how you can add emblems for use in your themes later, but first you need to know how you can extend the way emblems work with your current icons.</c><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="width:0in; font-family:Times New Roman; font-style:normal; font-weight:normal; lang:en-US; color:000000; bgcolor:transparent; text-decoration:none; font-size:12 pt; height:0in; text-position:normal"></c><image dataid="/home/cschalle/emblems-default-nautilus.png_0" props="height:1.34in; width:1.40in"/></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">The image above shows the default behavior for emblems. When you add emblems to your icons, folders, devices or images they start in the top right corner and move their way down and around the icon.  If you don't want that behavior for specific mime types, folders or devices you can change it by creating a xml file with the same name as the icon, for instance for the i-directory.png icon you create a i-directory.xml file. The format of that file should be as shown here:</p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic"></c><c props="font-style:italic"> &lt;?xml version="1.0"?&gt;</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">&lt;icon_set&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">  &lt;icon size="48" attach_points="20,36|50,36|50,0|20,0" /&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">  &lt;icon size="72" attach_points="30,54|75,54|75,0|30,0" /&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">  &lt;icon size="96" attach_points="40,72|100,72|100,0|40,0" /&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">  &lt;icon size="192" attach_points="80,144|200,144|200,0|80,0|320,144|320,0" /&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic">  &lt;/icon_set&gt;</c><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal">The format is rather simple as you see. A thing you might notice is that the attach_point coordinates are defined for different icon sizes.  The next section of this document will explain how you can improve the look and speed of your theme by providing your icons with more than one size.a range of premade sizes for your theme.  It is important to remember here however that a 48x48 pixels icon stretched to 192x192 pixels inside Nautilus is still a 48x48 icon as far as </c><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal">Nautilus is concerned. So unless you actually plan to provide icons in a certain size there is no reason to create lines for other sizes then the ones you actually provide.</c><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal">The format of the attach points is coordinates in a x,y fashion separated with pipe symbols. The first emblem added to an icon will go to the first coordinate the second to the second coordinate and so on.</c><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:bold; font-size:14 pt; font-style:normal">Step 5. Making your icons look good when scaling</c><c props="font-weight:bold; font-size:14 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:normal">If you made your icons in the SVG graphics format this is no issue for you and you can safely jump on to the next step. If you made your icons in PNG format however you should consider if you want to add versions of your icons in some larger and smaller sizes. How many different sizes and what sizes are all up to you.  All you need to do to get Nautilus to be able to utilize your pre-scaled icons are adding a number after them with the pixel size. For instance if you add a set of 16x16 versions of your icons then you create an icon file called iconname-16.png. </c><c props="font-weight:normal; font-size:12 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:normal">The reason for this is twofold. The primary reason is that if a user enlarge your 48x48 icon to something like 72x72, either by stretching it or by zooming the icon view, it will start to look bad. Jagged edges and the like. The second reason is that there is a small performance gain in making the scaling Nautilus need to do as little as possible. </c><c props="font-weight:normal; font-size:12 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:normal">Anyway the way these alternate size icons work is that as users either stretch or zoom the icons the Nautilus will use the icon which pixmap size is closest to the one currently being used and scale that to fit exactly with the size the user requested.</c><c props="font-weight:normal; font-size:12 pt; font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-style:normal"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:14pt; text-position:normal; font-weight:bold; font-style:normal; lang:en-US">Step 6. Creating your own emblems</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:14pt; text-position:normal; font-weight:bold; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12 pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">Themes in Nautilus is not really theme-able, and making emblems should probably been seen as a separate activity. But you can of course add your own set of of emblems which will fit well with your theme.  Emblems are stored under '/usr/share/nautilus/emblems' on my Red Hat system. They are usually around 40x40 pixels in size but if you look at the existing ones you see that the size and form varies greatly.</c><c props="font-family:Times New Roman; font-size:12 pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12 pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:14 pt; color:000000; text-decoration:none; text-position:normal; font-weight:bold; font-style:normal; lang:en-US">Step 7. Creating icons for the Nautilus Toolbar</c><c props="font-family:Times New Roman; font-size:14 pt; color:000000; text-decoration:none; text-position:normal; font-weight:bold; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">At this time the Nautilus toolbar is themed through the .gtkrc file which is part of Gtk+ themes. </c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">This was change came with version 2 of Nautilus because the separate toolbar themeing created some UI inconsistencies which was troublesome in regards to accessibility. </c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The Zoom tool and throbber is still themed as part of the Nautilus themes setup and is not themed through, gtkrc.  So at this point themeing the Nautilus toolbar is not really part of Nautilus themeing, but a part of Gtk+ 2.0 themes.  I will in order to provide completeness I will document them here anyway.</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The first thing you want to do is create new images for the Nautilus toolbar. You need a total of 9 images for this. When creating these files remember to be very precise when it comes to things like letter case and whether you use underscore or hyphen symbol. If you put an icon in your theme and the default one still shows up when trying to test the theme then you probably misnamed your icon file. The images needed are the following:</c><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><image dataid="image_1_0" props="height:0.550000in; width:3.169444in"/></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="list-tag:993480423"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field>	<c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">Back.png</c></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:1204269098; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	Forward.png</c></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:1651276802; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	Up.png</c></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:1459332401; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	Refresh.png</c></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:1212588779; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	Home.png</c></p>
+<p level="1" listid="1470116994" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:1449464379; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	Stop.png</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The size for these images are 32x32 pixels. If you make them bigger or smaller Nautilus will just scale them to this size so you might as well use it to save the CPU cycles.</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">To make your new Nautilus toolbar icons part of a Gtk + 2.0 theme you need to add the following lines to the .gtkrc file:</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"> style "icons" {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-go-down"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_down_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_down_24.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-go-back"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_left_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Back.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-go-forward"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_right_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Forward.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-go-up"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_up_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Up.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-home"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_up_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Home.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-refresh"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_up_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Refresh.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   stock["gtk-stop"] =</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   {</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"stock_up_arrow_16.png", *, *, "gtk-menu"},</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">     {"Stop.png", *, *, "gtk-large-toolbar"}</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">   }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"> }</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; color:000000; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"> widget "Nautilus*" style "icons"</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; text-decoration:none; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size: 14 pt">Themeing the Zoom tool and the throbber</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; text-decoration:none; lang:en-US; text-position:normal; font-weight:bold; font-style:normal; font-size: 14 pt"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; text-decoration:none; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size: 12 pt">These two components of the toolbar is part of the Nautilus theme package. You need the following images to theme them:</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><image dataid="image_2_0" props="height:0.409722in; width:0.900000in"/></p>
+<p level="1" listid="1557789063" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="list-tag:720413354"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field>	<c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">decrement.png</c></p>
+<p level="1" listid="1557789063" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:504497507; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	zoom_body.png</c></p>
+<p level="1" listid="1557789063" parentid="0" style="Normal" props="margin-top:0.0000in; list-decimal:NULL; margin-left:0.5000in; text-indent:-0.2993in; list-style:Bullet List; list-delim:%L; margin-right:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; field-font:Symbol"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; list-tag:934979427; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><field type="list_label" props="width:0in; font-family:Times New Roman; color:000000; font-weight:normal; lang:en-US; font-style:normal; text-position:normal; bgcolor:transparent; text-decoration:none; height:0in; font-size:12pt"></field><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	increment.png</c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The size of the increment and decrement images are 16x16 pixels. The zoom_body image can vary some more in size but a width of 32 pixels and a height of 16 is the most common. The example zoom_body image above is actually 32 pixels wide and 28 pixels high. Also notice that these image names are written with lower case front letters as opposed to the ones above.</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">The last piece of the Nautilus toolbar that you need to make is the throbber (the animated icon in the top right corner.</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><image dataid="image_3_0" props="height:0.699306in; width:0.829861in"/></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">You create the throbber by creating a directory called throbber in the theme directory you created earlier. Then you create the images for your animation and name them 001.png and upwards. You also need to create a rest.png image which will be the image that is displayed when Nautilus is inactive.  The animation can contain as many images as you like, but around 12-13 has proven to be a fitting number to get a smoth animation that actually manages to run through before Nautilus is done. The throbber images should be 30x30 pixels big.</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; margin-bottom:0.0000in; line-height:1.000000; text-align:left; margin-right:0.0000in"><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">Ok, now you have created all the images need to theme the toolbar in Nautilus, lets look at the theme configuration XML file.</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:12 pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; font-size:14pt; color:000000; text-decoration:none; text-position:normal; font-weight:bold; font-style:normal; lang:en-US">Step 8. Finishing </c><c props="font-family:Times New Roman; font-size:14pt; color:000000; text-decoration:none; text-position:normal; font-weight:bold; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12 pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">The last thing you need to do before your theme is ready for publication is create a presentation icon. Presentation icons are the image that will appear with your theme in the Nautilus theme selector. The standard for this have it consist of three parts as shown in the example below. </c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12 pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12 pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">The backmost image illustrated the sidebar and iconview background colors. Then you also add your folder icon and your unknown mime-type icon as shown. The size of this icon is 447x302 pixels and should be placed in your theme directory with the rest of the icons.</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12 pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12 pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c><image dataid="/usr/share/pixmaps/nautilus/crux_eggplant/theme_preview.png_0" props="height:0.45in; width:0.63in"/></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:bold; font-size:14 pt">Some notes:</c><c props="font-weight:bold; font-size:14 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt">If you look at a theme like Unscaleable Gorrilla from Ximian you will notice that there is a directory called extra in that theme. This is not part of the Nautilus theme system, but just a folder containing extra icons that the artists thought that users could want to use. If you make icons for your theme that don't get used by Nautilus then you could do the same.</p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:bold; font-size:14 pt">Poststep 1: Packaging</c><c props="font-weight:bold; font-size:14 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt">For users to be able to install you theme easily you should probably package it. I have pasted in the SPEC file that Ximian uses to create their theme RPMS. You should use this as a template for creating your own SPEC file.  </c><c props="font-weight:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt"></c><c props="font-weight:normal; font-size:12 pt; font-style:italic"># RPM specfile for ximian-south module</c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># Generated Fri Mar 29 19:07:06 2002 GMT by Ximian build system</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># $Id: nautilusthemes.abw,v 1.2 2002/09/29 13:17:41 uraeus Exp $</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># from $Id: nautilusthemes.abw,v 1.2 2002/09/29 13:17:41 uraeus Exp $</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%define nam	ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%define ver	1.3.5</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%define ximrev	1</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Name:     	ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Version: 	1.3.5</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Release:	1.ximian.1</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Vendor:	Ximian, Inc.</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Distribution:	Ximian GNOME for Red Hat Linux 7.1 / i386</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Copyright:	GPL</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">BuildRoot:	/var/tmp/%{nam}-%{ver}-root</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Docdir:         /usr/share/doc</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">BuildArch:      noarch</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">URL:		http://ximian.com/</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Source0:	nautilus-ximian-south-1.3.5.tar.gz</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Summary:	Ximian South Nautilus theme</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Group:		User Interface/Desktop</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">Provides:	ximian-ximian-south = %{?epoch:%{epoch}:}%{version}-%{?ximrev:%{ximrev}}%{!?ximrev:%{release}}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%description</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">This package provides the Ximian South theme for Nautilus</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%files</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%defattr(-, root, root)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%doc README</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">/usr/share/pixmaps/nautilus/ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># $RPM_COMMAND is an environment variable used by the Ximian build</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># system to control the build process with finer granularity than RPM</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># normally allows.  This specfile will function as expected by RPM if</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># $RPM_COMMAND is unset.  If you are not the Ximian build system,</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># feel free to ignore it.</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%prep</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "${RPM_COMMAND:-all}" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">dist)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%setup  -q -D -n ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%setup  -q -n ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%build</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">MAKE=${MAKE:-make}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">RPM_COMMAND=${RPM_COMMAND:-all}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">DESTDIR=${DESTDIR:-"$RPM_BUILD_ROOT"}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">ARCH=%{_target_platform}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">export MAKE RPM_COMMAND DESTDIR ARCH</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "$RPM_COMMAND" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">prepare|all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    true</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "$RPM_COMMAND" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">clean|all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    if [ "/" != "$DESTDIR" ]; then</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">	rm -rf "$DESTDIR"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    fi</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "$RPM_COMMAND" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">build|all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    true</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%install</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">MAKE=${MAKE:-make}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">DESTDIR=${DESTDIR:-"$RPM_BUILD_ROOT"}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"># export DESTDIR</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "${RPM_COMMAND:-all}" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">install|all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    mkdir -p ${DESTDIR}/usr/share/pixmaps/nautilus/ximian-south; cp -r * ${DESTDIR}/usr/share/pixmaps/nautilus/ximian-south</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%clean</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">DESTDIR=${DESTDIR:-"$RPM_BUILD_ROOT"}</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">export DESTDIR</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">case "${RPM_COMMAND:-all}" in</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">clean|all)</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    if [ "/" != "$DESTDIR" ]; then</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">	rm -rf "$DESTDIR"</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    fi</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">    ;;</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">esac</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">%changelog</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">* Fri Mar 29 2002 Ximian, Inc.</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">- Version: 1.3.5-1.ximian.1</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">- Summary: New build.</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+<p style="Normal" props="text-indent:0in; margin-left:0pt"><c props="font-weight:normal; font-size:12 pt; font-style:italic">- New automated build.</c><c props="font-weight:normal; font-size:12 pt; font-style:italic"></c></p>
+</section>
+<data>
+<d name="/home/cschalle/theme-select-nautilus.png_1" mime-type="image/png" base64="yes">
+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
+YdYZ/z8iTyl/6DM6FwAAAABJRU5ErkJggg==
+</d>
+<d name="image_3_0" mime-type="image/png" base64="yes">
+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
+AAAAAElFTkSuQmCC
+</d>
+<d name="image_1_0" mime-type="image/png" base64="yes">
+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
+RU5ErkJggg==
+</d>
+<d name="/usr/share/pixmaps/nautilus/crux_eggplant/theme_preview.png_0" mime-type="image/png" base64="yes">
+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
+AAAAAElFTkSuQmCC
+</d>
+<d name="image_2_0" mime-type="image/png" base64="yes">
+iVBORw0KGgoAAAANSUhEUgAAAFoAAAApCAIAAAA6fKk6AAAFj0lEQVR4nO2aT0wTWRzH38y8
+dmZouwVLSwsVqKzi0KCuY0lDCLpQ3XpiDZqNR0tWDsTE7MHsBUP2sFE8rMkGNvFATHQPG01I
+jCR6WmzULNWG6i5tigGa8mzSKrSbkKZT25k9DDalILbNdgpJv6fp783r75tP3v83mNfrBRV9
+FJyeni63h4p2qjBBEMrtYQcJ+ny+cnvYQcLLbWBnqYJjgyo4NqiCY4NgWbIihGZnZxcXF8Ph
+cDS6wnFJkiT37Nmj1xtMJtORI0eMRqP0rhiGkRoHQmhmZsbv9/E8MBj0LS2dtbUamqY4jltZ
+iUYi4cePH8/N/XPgwAGLpUN6KJLiQAg9evRocnJyYMBhNrfV1tbSdBVFkRDKBIH/8CHFcVxv
+b8/cnPfhw6lY7N+TJ09KTGR9kX7ixIlSZ0IIPXjwYGpq6tq1nxsbG6urayiKlMlkBEHgOI5h
+mCAIPM8bDPq9e/eazebr10fT6bTdbpeSCAYAEASh1IuxTLu4efMXk8mkVCpompbL5RBCHMdx
+fH1E53me5/lUKpVMJpeWAsPDVy0WS09PjzREGIaB0uxoXa6ZycnJGzeut7S0qFTKqqoqkiQh
+hARBYBiWjUMQhHQ6LZPJ9u//cmTk6sjIT9XV6oJw+P3+zDNCqLe3N/+6Uky0CCG/3z84eLGp
+qUmlUiqVSpqmMzgyLAAAOI4TBAEhJEmSpul9+/adP39+cXEBIVRQxr6+vra2ttXV1UKtSoHD
+4/FgGHb48CGNRiO2i8yQsbUnHCcIQiaTqdXqY8eOLiwsSXYoI8XMsrS0VF/foNVq1Wo1AICi
+qHxqEQQBANDpdKdP24PBYGktflQBOLL75PZqbW3N/hmJRMxms0qlAgCo1erjx79+8uRPsej5
+87+6u7sBAE6ns7PTmhOxWjtomm5qavJ4PEV7yy7KMbZZhbWOvr6+7V8IBoP9/f137tzJDkaj
+K3V1WoqiIYTnzn337NmzTFF3d3cqlQQAQCgXH3IiJEkaDPr3798X4a2rq4skycbGxk8Z26yC
+O8ubN2+2KX369OnmYCKRVCqVcrkMx/F79/6AUJ5/OgihQqHw++eL88ZxnBjc0tgW6fJ3BgAI
+BoN5/m+2KIrkOE4QwKfGzm3E83wikTh48DONPMdbV1cXyBtBtgrD0d/fX2gCAIBGo1lZWeX5
+dBF1U6lUJPJOq9V+9s1sbxcuXBAbxfj4eEHpCsDR2tr62b63pfR6QygU4jiuiLrJZHJ5eVmv
+N+TvLWdYLcizFOuO5ubm6eknsVhMXINnFzmdTgjlEMqdTueWkWg0GggExOFQAkmx7mhvb/f7
+fa9f/93QYJTL12cQUZ2d1uyfOZF4PO7xvJqd9Zw69U1BGYsb44A0OIxGo8nUcvfu74cOtX/x
+hSp7k7K9QqHQ+PhvNputoD0LQgghdPv27SKsSnTewbIsAODKlR/Hxn41mUz5VEEIDQ1dYllW
+rJu/xD1bQTu3jCQ6KzUajSzL2my2oaFL8/Pza2tr27wcj8cXFhYGBr5nWXZ0dPTWrVvSmARS
+noZlGvzlyz8MDl48evSrmpqazHYunU6LxxzRaNTjeTU2Ns6yrNVqPXv27P37910uV319/cTE
+RKlNYl6vl2EYye7iEEJut/vt22Wfz3/mzLfNzc11dTqFQhGPx8PhSDAYDAQCL1+6bTYby7Ii
+QbvdLm7wOzo6SkqEYZj1O1oprybX1tZisZjb7Y5Go5FI+N27SCLBURSl0+n0ekM6nc4ZOx0O
+h8vlEp9LSoRhGKws33fwPC9OLpvPdbacRKQhUjYcRcjhcLx48QIAIAhCiYgwDLNrbuEmJiYs
+FgsAAMMwl8vlcDhKkWXX4AAfiTQ0NBiNxlAoNDw8/L+n2DWdRRrtptYhgSo4NqiCY4MqH1Ju
+0H+x22C4aUBaKQAAAABJRU5ErkJggg==
+</d>
+<d name="/home/cschalle/emblems-default-nautilus.png_0" mime-type="image/png" base64="yes">
+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
+fbqpqSkej6fT6fz8/AUzr79nxUpPJEJf550+veCXv/ROnQr0AwlJfvVV7MMPu/78Z/tzc3PF
+T9eg0tLvBR+2bdalolDtof08rHmbm/1mZcIZn0EPduYFo+DUjqeUzhj0T8/+x1tvv5NOpxct
+WpSTk/Pmm2/SVeSOHTsCgUBpaen69evz8vLy8vJaWlp0Xff5fNSCMAzD5/NJkkRTFSmv0FqS
+qVSKooqaxRSRArdJQdf1+fPni6L4wQcfJJPJsWPHVlVVffXVV3S3bCqVGjJkyFVXXbVnzx6K
+wgEDBnR1dR0/fryzs5OSeW5Ozos+37CTJwFA8PuL//CHwP33k2Qy9NhjgJAycGDggQcoEGIf
+f3z+wQet9nYAgDFjzL++hnocvPQd8HGtdhg/SZpH4zMr7URLZCcoE0AsZwUhRKsMZFx57DmS
+wRkvfDOMLIhAcCgU6tev3y233LJu3TrDMK644gpCyPnz58Ph8LBhw/r3779x48Zrrrmmurr6
+D3/4w1VXXVVTU/Piiy9WV1cPHTp069atADBixIhTp05JkqQoimmapmnSHeHpdDoej9P6Z7FY
+zOv1Up8brbNQW1tLN+ypqpqbm+v1eru7uw3DYPmz0Wi0paWltLR09uzZzz777KBBg+65555n
+n302lUopijJdECiGkMdTtXevPHAgAOBUquvZZwHAO2UKQ5L/5ps9V155ZsQIKxSCPXvUZR8K
+dy++cPgQ4hzoR7Cd7kiPWmOcxBCOuDiHS0v1ykP8g5Ad/eN1ICHk57/4pyN1dWPGjKmvry8q
+Kpo8efJzzz0XDAZvv/32t956KxqN3nHHHZs2bUqlUgMHDgyHw6Zpdnd3l5SUDBkyZOnSpWPH
+jp0wYcKzzz47cuTIyy677J133ikoKLjqqqs2btxoWVafPn0aGxvT6TQVkoZhxONxr9dLK3bQ
+tTMApNNpWjuFVpzBGKdSqcLCwnvvvXfbtm379++nPl+K13A47Af43LJ8lgUApS+/zPBhdXae
+KiqiSKr84gseFPH168/ecAMAgKJYa1ZBsPwC4UO4ukT8gIKzivZoHs3ZV+1RVVVRFM3j9Xh9
+mqbRCpz0X/pDVVWP1+d6lnWgT8mKqqiK5vGy/yKRSHt7+5YtW2bOnClJ0u9+97vZs2cPHz78
+zTffrKqquvTSSw8ePJhMJjVNGzp06OnTpxsaGm666aa2trYVK1YsXrxYFMU33nhjypQpkiTV
+19cPGDCgX79+paWluq7Tok+SJPXv3/+hhx5CCOXk5CxcuFBVVVmWa2pq8vPzTdMsKCjIzc1V
+VVUURZrXgDGeOHHi1VdfvW7dOkLI0KFDZVlub2/v6Ojo7u7OycmZgjHFkHfy5MD99/NU2ZNS
+afNdd13g3nsBAHRd+XTdhcNH0zRV89D/6G9F1VTNIySdlkqmUqlUKpmKx+O0bEg6lYzHuunv
+JNdo8mIqmUin06lUKp1OJxP2RdozHutOpVJ6OpVKppKJeDzWnUzE06lkeyh0+eWX33vvvTSe
+dvXVVycSidbW1kQiMXToUF3XP/vss4kTJw4ePPj3v//96NGjr7322jfffLO8vHzs2LG0SGQg
+EKiqqurs7Kytrb3xxht1Xf/rX/+6YMGCQCDwzjvvXHnllSUlJZs3b66srKyuriaEeL3eUaNG
+XXfddZIk9enTZ/HixRhjj8dz1113Udtv7NixBQUF3d3dZ86coYvrN954o7KycuHChaZpxmKx
+GY5SKXjkEehtT0SvFwv+z/+xGe7zjRcOn2QyqadTejqVTMRTqVQ6laT/OZUjOaZz+U8RQq5z
+hgGcKEh2cz3LD0tF5dWTp5WWlhYUFGzatOnaa68dMmTICy+8MGPGjJqampdffnno0KFXX331
+0qVLKyoqvF6voiipVKqurm769OnJZHLFihV33nmnz+d75ZVX5s6dS8saV1dXl5SURKPRxsZG
+v98/fvz47du3nz59+pe//OXmzZt37Njxi1/8Yv/+/d98882sWbNoN1mWfT5f//79t23bFggE
+brrpppdeeqmsrGzOnDkvvvhiUVHRtGnTdu/e3dXVFY1G29vbP8W4ihCkKIMSCeCSSayOjlPF
+xQDgnTq1cuPGnng63b+/ceYMUhSp9iAD5nfDhy1SXYa7fTom60TtGWogYa4MFFsJuko89LTx
+BG6bNbP06cUbb7qlqamJ7i30+XyiKKZSqdzc3Pz8/JMnT1ZWVo4ePXr9+vXDhg2bOXPmc889
+N3jw4Dlz5vzpT3+iBtiGDRtoXdt0Oh2LxSKRyJAhQ/Lz899+++358+cXFha++OKLN910U3Fx
+8fr164PB4IgRI+rr67u7uynHHD58+MiRI3ffffeBAwe++OKLf/qnfzpy5Mi2bdvmzp17/vz5
+tra2vLw8QRBKS0u/+eab9vb2dDodCAQ+aW31AchVVdWnT/NfaoVCp0pKAMA7bVrl55/3RFLT
+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
+C59P6wqdh3OG8iUAAAAASUVORK5CYII=
+</d>
+</data>
+</abiword>
