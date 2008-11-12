@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/doc/stylesheet
+urlpath = /gnumeric/doc/stylesheet
  
 page_SCRIPTS=		\
 blank.png 		\

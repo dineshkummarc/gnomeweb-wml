@@ -1,6 +1,6 @@
 #SUBDIRS=doc data
 
-urlpath=/projects/cheese/
+urlpath = /cheese/
 
 mrproper:
 	rm -rf *;

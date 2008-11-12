@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnome-db/images
+urlpath = /gnome-db/images
 
 page_SCRIPTS=\
 	gnome-db.png \

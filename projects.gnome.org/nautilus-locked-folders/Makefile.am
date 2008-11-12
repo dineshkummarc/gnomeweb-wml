@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/nautilus-locked-folders/
+urlpath = /nautilus-locked-folders/
 
 page_SCRIPTS= index.html	\
 		style.css

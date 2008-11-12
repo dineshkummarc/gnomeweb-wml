@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/talks/CSUN-02
+urlpath = /accessibility/talks/CSUN-02
 
 page_SCRIPTS=
 

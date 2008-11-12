@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/diatut/install
+urlpath = /dia/diatut/install
 
 page_SCRIPTS=
 

@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gdm/docs/2.8
+urlpath = /gdm/docs/2.8
 
 page_SCRIPTS= accessibility.html \
 	bindir_binaries.html \

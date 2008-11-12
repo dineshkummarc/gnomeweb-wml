@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnome-power-manager/images
+urlpath = /gnome-power-manager/images
 
 page_SCRIPTS=
 

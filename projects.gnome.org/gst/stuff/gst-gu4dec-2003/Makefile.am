@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath=/projects/gst/stuff/gst-gu4dec-2003
+urlpath = /gst/stuff/gst-gu4dec-2003
 
 page_SCRIPTS =  first0.gif \
 		first1.gif \

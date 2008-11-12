@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath=/projects/gnome-print/images
+urlpath = /gnome-print/images
 
 page_SCRIPTS= \
 	1x1white.gif \

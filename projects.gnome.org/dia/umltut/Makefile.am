@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/umltut/
+urlpath = /dia/umltut/
 
 page_SCRIPTS=\
 	basic.gif \

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/nautilus-locked-folders/images/
+urlpath = /nautilus-locked-folders/images/
 
 page_SCRIPTS=
 

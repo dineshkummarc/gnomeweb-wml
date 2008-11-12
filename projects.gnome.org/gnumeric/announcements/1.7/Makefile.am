@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/announcements/1.7
+urlpath = /gnumeric/announcements/1.7
 
 page_SCRIPTS= \
 	gnumeric-1.7.0.html \

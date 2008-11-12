@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/NetworkManager/admins/
+urlpath = /NetworkManager/admins/
 
 page_SCRIPTS=index.html
 

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/ORBit2/images
+urlpath = /ORBit2/images
 
 page_SCRIPTS = orbit.png        \
                orbit-small.png  \

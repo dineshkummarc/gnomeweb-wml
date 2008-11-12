@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/desktopwiki
+urlpath = /desktopwiki
 
 page_SCRIPTS=				\
 		index.shtml		\

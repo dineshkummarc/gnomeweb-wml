@@ -2,7 +2,7 @@ SUBDIRS=		\
 	images		\
 	screenshots
 
-urlpath=/projects/evince
+urlpath = /evince
 
 page_SCRIPTS=			\
 	evince.css		\

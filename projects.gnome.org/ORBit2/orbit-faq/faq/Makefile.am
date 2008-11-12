@@ -1,6 +1,6 @@
 SUBDIRS=stylesheet-images
 
-urlpath=/projects/ORBit2/orbit-faq/faq
+urlpath = /ORBit2/orbit-faq/faq
 
 page_SCRIPTS=faq.html
 

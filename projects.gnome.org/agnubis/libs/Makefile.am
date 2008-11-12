@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/agnubis/libs
+urlpath = /agnubis/libs
 
 page_SCRIPTS = gdome2-agnubis-fixed.tar.gz
 

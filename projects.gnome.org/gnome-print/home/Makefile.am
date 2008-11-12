@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath=/projects/gnome-print/home
+urlpath = /gnome-print/home
 
 page_SCRIPTS= \
 	about.html \

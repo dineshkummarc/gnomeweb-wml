@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/totem/images
+urlpath = /totem/images
 
 page_SCRIPTS= \
 	favicon.png \

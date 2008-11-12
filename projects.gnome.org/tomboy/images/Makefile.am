@@ -1,4 +1,4 @@
-urlpath=/projects/tomboy/images
+urlpath = /tomboy/images
 
 page_DATA = \
 	applet-plugins.png	\

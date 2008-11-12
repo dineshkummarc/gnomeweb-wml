@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/eog/images
+urlpath = /eog/images
 
 page_SCRIPTS=
 

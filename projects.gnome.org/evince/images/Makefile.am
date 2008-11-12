@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/evince/images
+urlpath = /evince/images
 
 page_SCRIPTS=					\
 	grnbar.png				\

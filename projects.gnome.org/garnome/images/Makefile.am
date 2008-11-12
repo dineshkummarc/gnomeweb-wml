@@ -1,4 +1,4 @@
-urlpath=/projects/garnome/images
+urlpath = /garnome/images
 
 page_SCRIPTS=
 

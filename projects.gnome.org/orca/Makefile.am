@@ -1,6 +1,6 @@
 SUBDIRS=images pydoc
 
-urlpath=/projects/orca/
+urlpath = /orca/
 
 page_SCRIPTS= index.html	\
 		about.html 	\

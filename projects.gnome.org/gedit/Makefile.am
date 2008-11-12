@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/gedit
+urlpath = /gedit
 
 page_SCRIPTS =
 

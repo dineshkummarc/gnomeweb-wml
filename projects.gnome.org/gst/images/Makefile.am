@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/gst/images
+urlpath = /gst/images
 
 page_SCRIPTS = \
 	bugzilla.png \

@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gb
+urlpath = /gb
 
 page_SCRIPTS=bg.jpg			\
 	    foot-transparent.gif	\

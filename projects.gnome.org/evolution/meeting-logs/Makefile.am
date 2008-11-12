@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/evolution/meeting-logs
+urlpath = /evolution/meeting-logs
 
 page_SCRIPTS=
 

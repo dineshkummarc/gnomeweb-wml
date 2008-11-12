@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/netspeed/
+urlpath = /netspeed/
 
 page_SCRIPTS= index.html \
 		netspeed.css

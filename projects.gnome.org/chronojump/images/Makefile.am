@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/chronojump/images
+urlpath = /chronojump/images
 
 page_SCRIPTS= \
 	1.png \

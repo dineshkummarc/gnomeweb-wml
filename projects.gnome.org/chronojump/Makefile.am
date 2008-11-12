@@ -1,6 +1,6 @@
 SUBDIRS= images articles print slides-en-fr slides-es-ca
 
-urlpath=/projects/chronojump
+urlpath = /chronojump
 
 page_SCRIPTS= \
 	barreras-sch-color.pdf \

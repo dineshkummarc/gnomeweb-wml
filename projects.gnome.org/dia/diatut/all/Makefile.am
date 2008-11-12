@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/diatut/all
+urlpath = /dia/diatut/all
 
 page_SCRIPTS=\
 	all.html \

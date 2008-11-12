@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/fantasdic/images
+urlpath = /fantasdic/images
 
 page_SCRIPTS=
 

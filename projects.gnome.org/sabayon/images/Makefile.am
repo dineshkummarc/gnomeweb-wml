@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/sabayon/images
+urlpath = /sabayon/images
 
 page_SCRIPTS=					\
 	screenshot.png

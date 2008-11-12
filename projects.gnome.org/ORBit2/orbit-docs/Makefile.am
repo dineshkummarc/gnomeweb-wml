@@ -1,6 +1,6 @@
 SUBDIRS=orbit
 
-urlpath=/projects/ORBit2/orbit-docs
+urlpath = /ORBit2/orbit-docs
 
 page_SCRIPTS=orbit.ps orbit.pdf
 

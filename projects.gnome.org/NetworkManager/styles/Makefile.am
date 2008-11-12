@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/NetworkManager/styles/
+urlpath = /NetworkManager/styles/
 
 page_SCRIPTS=default.css
 

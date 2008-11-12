@@ -1,6 +1,6 @@
 SUBDIRS= new-pics doc images func-tests announcements changelogs style
 
-urlpath=/projects/gnumeric
+urlpath = /gnumeric
 
 page_SCRIPTS=index.shtml		\
 		contact-info.shtml	\

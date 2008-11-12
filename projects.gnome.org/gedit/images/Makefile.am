@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gedit/images
+urlpath = /gedit/images
 
 page_SCRIPTS= \
 	gedit-banner.png \

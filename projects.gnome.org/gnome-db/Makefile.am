@@ -1,6 +1,6 @@
 SUBDIRS=images doc
 
-urlpath=/projects/gnome-db
+urlpath = /gnome-db
 
 page_SCRIPTS = \
 	index.html \

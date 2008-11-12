@@ -1,6 +1,6 @@
 SUBDIRS = style images screenshots release_notes
 
-urlpath=/projects/gnome-network
+urlpath = /gnome-network
 
 page_SCRIPTS=index.shtml	\
 		bugs.shtml	\

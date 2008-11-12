@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/sony-ericsson-remotes/240x320/
+urlpath = /sony-ericsson-remotes/240x320/
 
 include $(top_srcdir)/rules.common
 

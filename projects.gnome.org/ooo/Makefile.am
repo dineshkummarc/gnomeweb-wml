@@ -1,6 +1,6 @@
 SUBDIRS=images screenshots
 
-urlpath=/projects/ooo
+urlpath = /ooo
 
 page_SCRIPTS= \
 	head.shtml \

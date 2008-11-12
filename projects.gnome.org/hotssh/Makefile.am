@@ -1,6 +1,6 @@
 #SUBDIRS=doc data
 
-urlpath=/projects/hotssh/
+urlpath = /hotssh/
 
 mrproper:
 	rm -rf *;

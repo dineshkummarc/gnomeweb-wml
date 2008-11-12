@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/changelogs/ancient
+urlpath = /gnumeric/changelogs/ancient
 
 page_SCRIPTS= 		\
     index.shtml

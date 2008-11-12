@@ -1,6 +1,6 @@
 SUBDIRS=images libs
 
-urlpath=/projects/agnubis
+urlpath = /agnubis
 
 page_SCRIPTS=				\
 		foot.shtml		\

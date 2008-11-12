@@ -1,4 +1,4 @@
-urlpath=/projects/evolution/developer-doc/eplugin
+urlpath = /evolution/developer-doc/eplugin
 
 page_SCRIPTS=
 

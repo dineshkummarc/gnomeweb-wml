@@ -1,6 +1,6 @@
 SUBDIRS= images
 
-urlpath=/projects/guppi
+urlpath = /guppi
 
 page_SCRIPTS=index.shtml		\
 		news.shtml		\

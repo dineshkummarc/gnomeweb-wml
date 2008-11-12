@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/epiphany/screenshots
+urlpath = /epiphany/screenshots
 
 page_SCRIPTS=		\
 	contributed.html	\

@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/nemiver/
+urlpath = /nemiver/
 
 page_SCRIPTS =	index.html	\
 		default.css

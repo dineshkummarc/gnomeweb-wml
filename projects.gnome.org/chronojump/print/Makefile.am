@@ -1,6 +1,6 @@
 SUBDIRS=  
 
-urlpath=/projects/chronojump/print
+urlpath = /chronojump/print
 
 page_SCRIPTS= \
 	chronopic3_lista_espera_es.html \

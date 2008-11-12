@@ -1,6 +1,6 @@
 SUBDIRS=keynote making-apps-accessible
 
-urlpath=/projects/accessibility/talks/GUAD3C
+urlpath = /accessibility/talks/GUAD3C
 
 page_SCRIPTS=
 

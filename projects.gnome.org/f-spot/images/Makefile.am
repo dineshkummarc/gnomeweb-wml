@@ -1,4 +1,4 @@
-urlpath=/projects/f-spot/images
+urlpath = /f-spot/images
 
 page_SCRIPTS=
 

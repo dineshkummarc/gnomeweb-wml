@@ -1,4 +1,4 @@
-urlpath=/projects/deskbar-applet/images
+urlpath = /deskbar-applet/images
 
 page_DATA = \
 	deskbar-applet.png \

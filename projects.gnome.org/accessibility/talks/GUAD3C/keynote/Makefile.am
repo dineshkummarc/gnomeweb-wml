@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/talks/GUAD3C/keynote
+urlpath = /accessibility/talks/GUAD3C/keynote
 
 page_SCRIPTS=
 

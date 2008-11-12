@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/gnome-network/style
+urlpath = /gnome-network/style
 
 page_SCRIPTS = gn.css
 

@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/hipo/
+urlpath = /hipo/
 
 page_SCRIPTS= index.html	\
 		screenshots.html \

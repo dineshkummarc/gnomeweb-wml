@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/seahorse/
+urlpath = /seahorse/
 
 page_SCRIPTS= index.html	\
 		development.html \

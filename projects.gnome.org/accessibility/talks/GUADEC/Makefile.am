@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/talks/GUADEC
+urlpath = /accessibility/talks/GUADEC
 
 page_SCRIPTS=
 

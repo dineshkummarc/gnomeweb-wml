@@ -1,6 +1,6 @@
 #SUBDIRS= 
 
-urlpath=/projects/libgsf
+urlpath = /libgsf
 
 page_SCRIPTS= 	\
     api.html								\

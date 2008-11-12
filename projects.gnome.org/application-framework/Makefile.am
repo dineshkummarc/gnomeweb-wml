@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/application-framework
+urlpath = /application-framework
 
 page_SCRIPTS=
 

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/images
+urlpath = /accessibility/images
 
 page_SCRIPTS=
 

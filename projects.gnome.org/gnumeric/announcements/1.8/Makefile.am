@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/announcements/1.8
+urlpath = /gnumeric/announcements/1.8
 
 page_SCRIPTS= \
 	gnumeric-1.8.0.shtml \

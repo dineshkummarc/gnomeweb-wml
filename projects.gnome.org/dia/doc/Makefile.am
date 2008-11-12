@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/doc
+urlpath = /dia/doc
 
 page_SCRIPTS=\
 	dia-manual.pdf

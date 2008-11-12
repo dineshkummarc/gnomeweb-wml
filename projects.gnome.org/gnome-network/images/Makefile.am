@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/gnome-network/images
+urlpath = /gnome-network/images
 
 page_SCRIPTS =  foot-16.png	\
 		gnome-194.png	\

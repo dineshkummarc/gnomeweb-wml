@@ -1,6 +1,6 @@
 SUBDIRS = library images home
 
-urlpath=/projects/gnome-print
+urlpath = /gnome-print
 
 page_SCRIPTS = \
 	index.php3 \

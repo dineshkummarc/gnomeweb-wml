@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/guppi/images
+urlpath = /guppi/images
 
 page_SCRIPTS =  3h.gif  		\
 		3w.gif			\

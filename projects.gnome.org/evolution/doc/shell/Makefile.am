@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/evolution/doc/shell
+urlpath = /evolution/doc/shell
 
 page_SCRIPTS=
 

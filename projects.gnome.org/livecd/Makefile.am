@@ -1,4 +1,4 @@
-urlpath=/projects/livecd/
+urlpath = /livecd/
 
 page_SCRIPTS= index.html	\
 		mission.html \

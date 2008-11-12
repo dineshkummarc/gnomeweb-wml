@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/brasero/images
+urlpath = /brasero/images
 
 page_SCRIPTS=
 

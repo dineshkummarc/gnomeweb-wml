@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/visio
+urlpath = /dia/visio
 
 # Not publishing these yet, as they have no real use, they're just samples.
 page_SCRIPTS=

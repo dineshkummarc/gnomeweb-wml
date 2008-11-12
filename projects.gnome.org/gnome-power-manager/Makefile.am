@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/gnome-power-manager/
+urlpath = /gnome-power-manager/
 
 page_SCRIPTS=		\
 	bugs.html	\

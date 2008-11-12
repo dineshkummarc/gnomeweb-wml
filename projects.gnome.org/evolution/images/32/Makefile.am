@@ -1,4 +1,4 @@
-urlpath=/projects/evolution/images/32
+urlpath = /evolution/images/32
 
 page_SCRIPTS =
 

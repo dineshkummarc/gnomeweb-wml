@@ -1,6 +1,6 @@
 SUBDIRS=python backup images orbit-docs orbit-faq 
 
-urlpath=/projects/ORBit2
+urlpath = /ORBit2
 
 page_SCRIPTS=go.css                \
                index.html          \

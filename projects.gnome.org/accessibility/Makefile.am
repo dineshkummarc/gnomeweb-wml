@@ -1,6 +1,6 @@
 SUBDIRS=images prosimii talks
 
-urlpath=/projects/accessibility/
+urlpath = /accessibility/
 
 page_SCRIPTS= \
 	about.html \

@@ -1,6 +1,6 @@
 SUBDIRS = figures stylesheet
 
-urlpath=/projects/gnumeric/doc
+urlpath = /gnumeric/doc
 
 page_SCRIPTS= \
 	alignmentandothertabs.shtml		\

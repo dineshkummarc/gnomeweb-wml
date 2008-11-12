@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/gnome-games
+urlpath = /gnome-games
 
 page_SCRIPTS= \
 	gnomegames.css \

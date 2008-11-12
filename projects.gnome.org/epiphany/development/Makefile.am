@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/epiphany/development
+urlpath = /epiphany/development
 
 page_SCRIPTS=		\
 	bugreports.html	\

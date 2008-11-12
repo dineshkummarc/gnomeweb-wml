@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gtksourceviewmm/
+urlpath = /gtksourceviewmm/
 
 page_SCRIPTS = \
 annotated.html \

@@ -1,4 +1,4 @@
-urlpath=/projects/ooo/images
+urlpath = /ooo/images
 
 page_SCRIPTS= \
 	foot-transparent.gif spacer.png \

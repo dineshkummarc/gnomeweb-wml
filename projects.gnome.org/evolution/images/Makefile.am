@@ -1,6 +1,6 @@
 SUBDIRS= screenshots 16 32 48
 
-urlpath=/projects/evolution/images
+urlpath = /evolution/images
 
 page_SCRIPTS =
 

@@ -1,6 +1,6 @@
 SUBDIRS=  
 
-urlpath=/projects/chronojump/slides-es-ca
+urlpath = /chronojump/slides-es-ca
 
 include $(top_srcdir)/rules.common
 

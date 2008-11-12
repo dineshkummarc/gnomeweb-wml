@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gyrus/images
+urlpath = /gyrus/images
 
 page_SCRIPTS=
 

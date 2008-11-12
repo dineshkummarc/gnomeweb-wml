@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/brasero/
+urlpath = /brasero/
 
 page_SCRIPTS= index.html	\
 		screenshots.html \

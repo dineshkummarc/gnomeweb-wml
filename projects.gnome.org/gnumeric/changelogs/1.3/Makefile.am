@@ -1,4 +1,4 @@
-urlpath=/projects/gnumeric/changelogs/1.3
+urlpath = /gnumeric/changelogs/1.3
 
 page_SCRIPTS= 			\
     changelog-1.3.93.txt	\

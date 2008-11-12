@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/ORBit2/backup
+urlpath = /ORBit2/backup
 
 page_SCRIPTS = faq.xml  orbit-docs.tar.gz
 

@@ -1,4 +1,4 @@
-urlpath=/projects/orca/images
+urlpath = /orca/images
 
 page_DATA = orca2-lg.jpg orca2-sm.jpg
 

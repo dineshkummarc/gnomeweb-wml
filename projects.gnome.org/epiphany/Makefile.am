@@ -4,7 +4,7 @@ SUBDIRS=\
 	images		\
 	screenshots
 
-urlpath=/projects/epiphany
+urlpath = /epiphany
 
 page_DATA=\
 	default.css		\

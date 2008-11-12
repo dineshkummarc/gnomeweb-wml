@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/totem
+urlpath = /totem
 
 page_SCRIPTS= \
 	totem.css \

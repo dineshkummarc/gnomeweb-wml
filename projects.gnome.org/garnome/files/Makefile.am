@@ -1,4 +1,4 @@
-urlpath=/projects/garnome/files
+urlpath = /garnome/files
 
 page_SCRIPTS=						\
 		garnome-build-count-0.1.sh	\

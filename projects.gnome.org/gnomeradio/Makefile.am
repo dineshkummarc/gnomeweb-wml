@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/gnomeradio/
+urlpath = /gnomeradio/
 
 page_SCRIPTS= index.html \
 		gnomeradio.css

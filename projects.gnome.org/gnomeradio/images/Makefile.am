@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnomeradio/images
+urlpath = /gnomeradio/images
 
 page_SCRIPTS=
 

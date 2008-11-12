@@ -1,6 +1,6 @@
 SUBDIRS=GUAD3C GUADEC CSUN-02 HKAA-2002
 
-urlpath=/projects/accessibility/talks
+urlpath = /accessibility/talks
 
 page_SCRIPTS=
 

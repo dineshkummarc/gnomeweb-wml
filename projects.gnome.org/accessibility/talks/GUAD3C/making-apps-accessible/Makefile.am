@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/talks/GUAD3C/making-apps-accessible
+urlpath = /accessibility/talks/GUAD3C/making-apps-accessible
 
 page_SCRIPTS=
 

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/orca/pydoc/
+urlpath = /orca/pydoc/
 
 page_SCRIPTS=
 

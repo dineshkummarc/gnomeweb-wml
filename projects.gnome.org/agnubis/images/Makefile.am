@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/agnubis/images
+urlpath = /agnubis/images
 
 page_SCRIPTS =  3h.gif  		\
 		3w.gif			\

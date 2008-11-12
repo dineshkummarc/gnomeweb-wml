@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/tracker/js
+urlpath = /tracker/js
 
 page_SCRIPTS=\
 	datemod.js

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/nemiver/images
+urlpath = /nemiver/images
 
 page_SCRIPTS=
 

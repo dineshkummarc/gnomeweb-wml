@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/gnumeric/images
+urlpath = /gnumeric/images
 
 page_SCRIPTS= 				\
     down-2.png				\

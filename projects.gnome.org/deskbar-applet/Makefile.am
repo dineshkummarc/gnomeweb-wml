@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/deskbar-applet
+urlpath = /deskbar-applet
 
 page_SCRIPTS= \
 	default.css \

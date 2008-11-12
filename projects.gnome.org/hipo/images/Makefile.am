@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/hipo/images
+urlpath = /hipo/images
 
 page_SCRIPTS=
 

@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/straw/
+urlpath = /straw/
 
 page_SCRIPTS= index.html	\
 		download.html 	\

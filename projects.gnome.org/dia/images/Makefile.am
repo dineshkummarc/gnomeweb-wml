@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/dia/images
+urlpath = /dia/images
 
 page_SCRIPTS=\
 	addbend1.png \

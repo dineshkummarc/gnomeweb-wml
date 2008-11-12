@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/bugsquad/statistics/2003and2004/
+urlpath = /bugsquad/statistics/2003and2004/
 
 page_SCRIPTS = index.html              \
 	top-triagers.txt        \

@@ -1,4 +1,4 @@
-urlpath=/projects/evolution/developer-doc/gal
+urlpath = /evolution/developer-doc/gal
 
 page_SCRIPTS=
 

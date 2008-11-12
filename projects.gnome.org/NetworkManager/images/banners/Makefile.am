@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/NetworkManager/images/banners
+urlpath = /NetworkManager/images/banners
 
 page_SCRIPTS=
 

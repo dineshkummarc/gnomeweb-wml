@@ -1,6 +1,6 @@
 SUBDIRS = gst-gu4dec-2003
 
-urlpath=/projects/gst/stuff
+urlpath = /gst/stuff
 
 page_SCRIPTS =  
 

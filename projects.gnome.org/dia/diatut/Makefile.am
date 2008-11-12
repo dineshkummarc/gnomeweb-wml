@@ -1,6 +1,6 @@
 SUBDIRS=advanced all basics install
 
-urlpath=/projects/dia/diatut
+urlpath = /dia/diatut
 
 page_SCRIPTS =
 

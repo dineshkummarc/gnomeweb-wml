@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/straw/images/thumbs
+urlpath = /straw/images/thumbs
 
 page_SCRIPTS=
 

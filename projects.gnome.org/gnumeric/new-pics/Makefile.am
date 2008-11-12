@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnumeric/new-pics
+urlpath = /gnumeric/new-pics
 
 page_SCRIPTS=\
 	    startup.png			\

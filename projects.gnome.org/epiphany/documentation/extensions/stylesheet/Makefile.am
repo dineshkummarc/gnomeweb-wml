@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/epiphany/documentation/extensions/stylesheet
+urlpath = /epiphany/documentation/extensions/stylesheet
 
 page_SCRIPTS= \
     blank.png \

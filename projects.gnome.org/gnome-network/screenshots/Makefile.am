@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/gnome-network/screenshots
+urlpath = /gnome-network/screenshots
 
 page_SCRIPTS = 	info_info.jpg		\
 		info_info-thumb.jpg	\

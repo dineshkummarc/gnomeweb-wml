@@ -1,7 +1,7 @@
 SUBDIRS=\
 	images
 
-urlpath=/projects/fantasdic
+urlpath = /fantasdic
 
 page_DATA=\
 	fantasdic.css		\

@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gtksourceview/images/screenshots
+urlpath = /gtksourceview/images/screenshots
 
 page_SCRIPTS= \
 	gedit.png		\

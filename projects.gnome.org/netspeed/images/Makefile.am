@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/netspeed/images
+urlpath = /netspeed/images
 
 page_SCRIPTS=
 

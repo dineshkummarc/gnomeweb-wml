@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/nautilus/images
+urlpath = /nautilus/images
 
 page_SCRIPTS=
 

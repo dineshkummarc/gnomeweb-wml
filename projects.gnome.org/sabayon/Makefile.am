@@ -1,7 +1,7 @@
 SUBDIRS=		\
 	images
 
-urlpath=/projects/sabayon
+urlpath = /sabayon
 
 page_SCRIPTS=			\
 	sabayon.css		\

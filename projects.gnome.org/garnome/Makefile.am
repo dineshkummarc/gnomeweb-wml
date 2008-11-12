@@ -2,7 +2,7 @@ SUBDIRS=							\
 		images						\
 		files
 
-urlpath=/projects/garnome/
+urlpath = /garnome/
 
 page_SCRIPTS=						\
 			deps-list-fc.html		\

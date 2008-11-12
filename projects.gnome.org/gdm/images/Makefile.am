@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gdm/images
+urlpath = /gdm/images
 
 page_SCRIPTS=
 

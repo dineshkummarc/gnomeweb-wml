@@ -1,6 +1,6 @@
 SUBDIRS = images
 
-urlpath=/projects/gst
+urlpath = /gst
 
 page_SCRIPTS =  index.html	\
 		default.css

@@ -1,6 +1,6 @@
 SUBDIRS=images docs
 
-urlpath=/projects/gdm/
+urlpath = /gdm/
 
 page_SCRIPTS= index.html	\
 		about.html	\

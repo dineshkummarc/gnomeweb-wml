@@ -1,4 +1,4 @@
-urlpath=/projects/devtools
+urlpath = /devtools
 
 page_SCRIPTS=\
 	index.shtml

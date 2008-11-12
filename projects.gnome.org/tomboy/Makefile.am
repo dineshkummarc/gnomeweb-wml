@@ -1,6 +1,6 @@
 SUBDIRS=images
 
-urlpath=/projects/tomboy/
+urlpath = /tomboy/
 
 page_SCRIPTS=\
 	default.css		\

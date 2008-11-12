@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/template/images
+urlpath = /template/images
 
 page_SCRIPTS=
 

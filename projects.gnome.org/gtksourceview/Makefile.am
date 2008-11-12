@@ -1,7 +1,7 @@
 SUBDIRS=\
 	images
 
-urlpath=/projects/gtksourceview
+urlpath = /gtksourceview
 
 page_DATA=\
 	gtksourceview.css \

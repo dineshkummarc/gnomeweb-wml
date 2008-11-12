@@ -2,7 +2,7 @@ NULL=
 
 SUBDIRS=
 
-urlpath=/projects/NetworkManager/developers
+urlpath = /NetworkManager/developers
 
 page_SCRIPTS=\
 	index.html \

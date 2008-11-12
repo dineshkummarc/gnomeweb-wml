@@ -1,6 +1,6 @@
 SUBDIRS=images 
 
-urlpath=/projects/template/
+urlpath = /template/
 
 page_SCRIPTS= index.html	\
 		about.html \

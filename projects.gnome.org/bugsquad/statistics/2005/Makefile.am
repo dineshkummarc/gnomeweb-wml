@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/bugsquad/statistics/2005/
+urlpath = /bugsquad/statistics/2005/
 
 page_SCRIPTS = index.html                      \
 	top-duplicates.txt              \

@@ -3,7 +3,7 @@ SUBDIRS = 2002 \
           2005 \
           2006
 
-urlpath=/projects/bugsquad/statistics/
+urlpath = /bugsquad/statistics/
 
 page_SCRIPTS = index.html
 

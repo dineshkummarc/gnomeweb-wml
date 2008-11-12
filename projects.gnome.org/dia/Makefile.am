@@ -1,6 +1,6 @@
 SUBDIRS=diatut doc images umltut visio
 
-urlpath=/projects/dia
+urlpath = /dia
 
 page_SCRIPTS = \
 	contact.html \

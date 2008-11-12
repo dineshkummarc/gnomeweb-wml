@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/prosimii
+urlpath = /accessibility/prosimii
 
 page_SCRIPTS=
 

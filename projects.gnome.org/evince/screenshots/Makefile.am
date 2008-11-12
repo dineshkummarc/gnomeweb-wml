@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/evince/screenshots
+urlpath = /evince/screenshots
 
 page_SCRIPTS=		\
 	index.html

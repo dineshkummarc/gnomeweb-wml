@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/baobab/
+urlpath = /baobab/
 
 page_SCRIPTS= index.html
 		

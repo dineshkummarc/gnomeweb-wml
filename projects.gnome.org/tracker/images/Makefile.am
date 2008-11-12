@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/tracker/images
+urlpath = /tracker/images
 
 page_SCRIPTS=
 

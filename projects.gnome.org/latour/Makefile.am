@@ -1,4 +1,4 @@
-urlpath=/projects/latour/
+urlpath = /latour/
 
 page_SCRIPTS= \
 	.htaccess

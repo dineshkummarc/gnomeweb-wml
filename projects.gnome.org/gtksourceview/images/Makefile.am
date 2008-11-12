@@ -1,6 +1,6 @@
 SUBDIRS= screenshots
 
-urlpath=/projects/gtksourceview/images
+urlpath = /gtksourceview/images
 
 page_SCRIPTS= \
 	favicon.png	\

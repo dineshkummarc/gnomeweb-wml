@@ -4,7 +4,7 @@
 SUBDIRS= \
     stylesheet
 
-urlpath=/projects/epiphany/documentation/extensions
+urlpath = /epiphany/documentation/extensions
 
 page_SCRIPTS= \
     ch01.html \

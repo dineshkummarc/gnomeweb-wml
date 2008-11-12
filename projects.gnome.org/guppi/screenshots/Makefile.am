@@ -1,6 +1,6 @@
 SUBDIRS= 
 
-urlpath=/projects/guppi/screenshots
+urlpath = /guppi/screenshots
 
 page_SCRIPTS =  2000_08_29_114942_shot.jpg 	\
 		2000_08_29_115035_shot.jpg	\

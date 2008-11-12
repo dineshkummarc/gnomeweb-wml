@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnome-libs
+urlpath = /gnome-libs
 
 page_SCRIPTS=
 

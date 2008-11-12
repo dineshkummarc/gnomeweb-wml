@@ -1,6 +1,6 @@
 SUBDIRS = statistics
 
-urlpath=/projects/bugsquad/
+urlpath = /bugsquad/
 
 page_SCRIPTS =	\
 	index.html

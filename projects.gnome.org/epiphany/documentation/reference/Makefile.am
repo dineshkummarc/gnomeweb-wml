@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/epiphany/documentation/reference
+urlpath = /epiphany/documentation/reference
 
 page_SCRIPTS= \
 	ch01.html \

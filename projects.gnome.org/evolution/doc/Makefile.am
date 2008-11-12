@@ -1,6 +1,6 @@
 SUBDIRS= figures stylesheet-images shell
 
-urlpath=/projects/evolution/doc
+urlpath = /evolution/doc
 
 page_SCRIPTS=
 

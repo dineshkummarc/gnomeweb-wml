@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/gnome-games/images
+urlpath = /gnome-games/images
 
 page_SCRIPTS= \
 	aisleriot-ss.png \

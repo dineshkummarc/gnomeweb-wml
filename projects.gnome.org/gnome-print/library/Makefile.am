@@ -1,4 +1,4 @@
-urlpath=/projects/gnome-print/library
+urlpath = /gnome-print/library
 
 page_SCRIPTS= \
 	data.lib \

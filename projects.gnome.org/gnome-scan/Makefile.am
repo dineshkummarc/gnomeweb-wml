@@ -1,6 +1,6 @@
 #SUBDIRS=doc data
 
-urlpath=/projects/gnome-scan/
+urlpath = /gnome-scan/
 
 mrproper:
 	rm -rf *;

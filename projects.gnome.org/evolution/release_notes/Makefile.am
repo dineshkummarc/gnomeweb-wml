@@ -1,6 +1,6 @@
 SUBDIRS = 
 
-urlpath=/projects/evolution/release_notes
+urlpath = /evolution/release_notes
 
 page_SCRIPTS =
 

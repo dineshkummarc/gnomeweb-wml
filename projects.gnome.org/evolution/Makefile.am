@@ -1,6 +1,6 @@
 SUBDIRS = developer-doc doc images meeting-logs release_notes
 
-urlpath=/projects/evolution
+urlpath = /evolution
 
 page_SCRIPTS =
 

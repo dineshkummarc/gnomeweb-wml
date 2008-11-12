@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/accessibility/talks/HKAA-2002
+urlpath = /accessibility/talks/HKAA-2002
 
 page_SCRIPTS=
 

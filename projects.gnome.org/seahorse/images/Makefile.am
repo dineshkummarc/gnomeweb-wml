@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/seahorse/images
+urlpath = /seahorse/images
 
 page_SCRIPTS=
 

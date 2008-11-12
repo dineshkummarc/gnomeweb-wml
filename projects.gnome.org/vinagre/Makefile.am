@@ -1,4 +1,4 @@
-urlpath=/projects/vinagre/
+urlpath = /vinagre/
 
 page_SCRIPTS= 	index.html \
 		about.html \

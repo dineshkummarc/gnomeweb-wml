@@ -1,6 +1,6 @@
 SUBDIRS=
 
-urlpath=/projects/desktop
+urlpath = /desktop
 
 page_SCRIPTS=
 

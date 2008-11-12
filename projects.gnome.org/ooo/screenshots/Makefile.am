@@ -1,4 +1,4 @@
-urlpath=/projects/ooo/screenshots
+urlpath = /ooo/screenshots
 
 page_SCRIPTS= \
 	writer.png \
