@@ -7,25 +7,25 @@ mrproper:
 
 page_SCRIPTS= \
 	index.html \
-	index.en.html \
-	index.ca.html \
-	index.de.html \
-	index.fr.html \
-	index.sv.html \
+	index.html.en \
+	index.html.ca \
+	index.html.de \
+	index.html.fr \
+	index.html.sv \
 	screenshots.html \
-	screenshots.en.html \
-	screenshots.ca.html \
-	screenshots.de.html \
-	screenshots.fr.html \
-	screenshots.sv.html \
+	screenshots.html.en \
+	screenshots.html.ca \
+	screenshots.html.de \
+	screenshots.html.fr \
+	screenshots.html.sv \
 	contribute.html \
-	contribute.fr.html \
+	contribute.html.fr \
 	download.html \
-	download.en.html \
-	download.ca.html \
-	download.de.html \
-	download.fr.html \
-	download.sv.html \
+	download.html.en \
+	download.html.ca \
+	download.html.de \
+	download.html.fr \
+	download.html.sv \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/gnome
