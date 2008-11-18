@@ -19,10 +19,12 @@ function roundNumber(num, dec) {
 	return result;
 }
 
+/*
 function saveSelect(index) {
 	document.form.quantity_pre = form.quantity_pre_a.options[index].value;
 	alert(document.form.quantity_pre);
 }
+*/
 
 function CalculateOrder(form)
 {
