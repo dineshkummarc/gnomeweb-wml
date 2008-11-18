@@ -19,6 +19,10 @@ function roundNumber(num, dec) {
 	return result;
 }
 
+function saveSelect(index) {
+	form.quantity_pre = form.quantity_pre_a.options[index].value;
+}
+
 function CalculateOrder(form)
 {
 	// 1 chronopic: 80gr
