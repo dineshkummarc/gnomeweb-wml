@@ -192,20 +192,23 @@ a = form.amount.value;
 b = 0;
 
 if (form.quantity_pre.value == 1) {
-	b = 1.6;
+//	b = 1.6;
+	b = 2;
 } else if (form.quantity_pre.value == 2) {
-	b = 2.8;
+//	b = 2.8;
+	b = 3;
 } else if (form.quantity_pre.value == 3) {
 	b = 4;
 } else {
 	b = 5;
 }  
 
-var a2 = a*1;
-var b2 = b*1;
+//var a2 = a*1;
+//var b2 = b*1;
 
 //form.amount.value=(a2+b2); //funciona per tots menys els 1 d'europa i mon (pq surten molts decimals)
-form.amount.value = roundNumber(a2+b2,2)
+//form.amount.value = roundNumber(a2+b2,2) //funciona pero no a alguns ie
+form.amount.value = (a+b)
 }
 
 //--------------------------------------------------------------//
