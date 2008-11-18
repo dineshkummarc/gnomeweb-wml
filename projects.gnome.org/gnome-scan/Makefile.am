@@ -7,13 +7,11 @@ mrproper:
 
 page_SCRIPTS= \
 	index.html \
-	index.html.en \
 	index.html.ca \
 	index.html.de \
 	index.html.fr \
 	index.html.sv \
 	screenshots.html \
-	screenshots.html.en \
 	screenshots.html.ca \
 	screenshots.html.de \
 	screenshots.html.fr \
@@ -21,7 +19,6 @@ page_SCRIPTS= \
 	contribute.html \
 	contribute.html.fr \
 	download.html \
-	download.html.en \
 	download.html.ca \
 	download.html.de \
 	download.html.fr \
@@ -69,7 +66,7 @@ ss021_DATA = \
 	data/screenshots/0.2.1/documentation-mini.png \
 	data/screenshots/0.2.1/documentation.png \
 	$(NULL)
-
+	
 ss041dir = $(screenshotsdir)/0.4.1
 ss041_DATA = \
 	data/screenshots/0.4.1/main-filled-mini.png \
