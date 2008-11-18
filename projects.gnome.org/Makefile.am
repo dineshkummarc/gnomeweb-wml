@@ -66,6 +66,9 @@ SUBDIRS = css \
 
 urlpath = 
 
-page_SCRIPTS = index.html .htaccess
+page_SCRIPTS = .htaccess
+
+page_DATA = \
+	index.html
 
 include $(top_srcdir)/rules.common
