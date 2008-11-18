@@ -203,12 +203,12 @@ if (form.quantity_pre.value == 1) {
 	b = 5;
 }  
 
-//var a2 = a*1;
-//var b2 = b*1;
+var a2 = a*1;
+var b2 = b*1;
 
 //form.amount.value=(a2+b2); //funciona per tots menys els 1 d'europa i mon (pq surten molts decimals)
 //form.amount.value = roundNumber(a2+b2,2) //funciona pero no a alguns ie
-form.amount.value = (a+b)
+form.amount.value = (a2+b2)
 }
 
 //--------------------------------------------------------------//
