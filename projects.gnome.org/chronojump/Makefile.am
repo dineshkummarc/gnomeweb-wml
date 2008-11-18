@@ -97,6 +97,8 @@ page_SCRIPTS= \
 	screenshots_pt.html \
 	shipping.js \
 	store.html \
+	store_ca.html \
+	store_es.html \
 	test_jpg.jpg \
 	test_png.png \
 	style.css

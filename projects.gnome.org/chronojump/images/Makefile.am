@@ -113,8 +113,10 @@ page_SCRIPTS= \
 	chronopic3_orange_mini.png \
 	chronopic3_transparent_mini.png \
 	chronopic3_yellow_mini.png \
+	chronopic_buy_add_shopping_cart_ca.png \
 	chronopic_buy_add_shopping_cart_es.png \
 	chronopic_buy_add_shopping_cart.png \
+	chronopic_buy_view_cart_ca.png \
 	chronopic_buy_view_cart_es.png \
 	chronopic_buy_view_cart.png \
 	chronopic_store.png \

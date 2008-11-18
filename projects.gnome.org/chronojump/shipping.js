@@ -4,6 +4,21 @@
 //------- PAYPAL CART SCRIPT FOR : chronojump --------------/////
 
 
+function showstuff(boxid){
+	   //document.getElementById(boxid).style.visibility="visible";
+	   document.getElementById(boxid).style.display="block";
+}
+
+function hidestuff(boxid){
+	   //document.getElementById(boxid).style.visibility="hidden";
+	   document.getElementById(boxid).style.display="none";
+}
+
+function roundNumber(num, dec) {
+	var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+	return result;
+}
+
 function CalculateOrder(form)
 {
 	// 1 chronopic: 80gr
@@ -27,11 +42,11 @@ if(form.lang.value == "en") {
 	form.on0.value = "place"
 	form.on1.value = "rate of"
 } else if (form.lang.value == "es") {
-	form.item_name.value = "Enviar Chronopics"
+	form.item_name.value = "Envio de Chronopics"
 	form.on0.value = "lugar"
 	form.on1.value = "tarifa de"
 } else if (form.lang.value == "ca") {
-	form.item_name.value = "Enviar Chronopics"
+	form.item_name.value = "Enviament de Chronopics"
 	form.on0.value = "lloc"
 	form.on1.value = "tarifa de"
 }
@@ -126,7 +141,7 @@ else if (form.place[2].checked)
  {
 	 form.os0.value = "Rest of the World"
 	 
-		 /* 
+	 /* 
 	  * tarifes resta del mon correus 2008 cartes certificades (llibret Tarifes)
 	  * 1 chronopic >50-100gr 4.74 + sobre.p = 5.54
 	  * 2 | >100-200gr 7.29 + sobre.p = 8.09
@@ -165,15 +180,16 @@ else if (form.place[2].checked)
  }
 
 if(form.lang.value == "en") {
-	 form.os1.value = form.os1.value + ". Note: next column \"Quantity\" should be 1"
+	 form.os1.value = form.os1.value + ". Note: next column \"Quantity\" should be 1 because it's one shipping."
 } else if (form.lang.value == "es") {
-	 form.os1.value = form.os1.value + ". Nota: la siguiente columna \"Cantidad\" debe ser 1"
+	 form.os1.value = form.os1.value + ". Nota: la siguiente columna \"Cantidad\" debe ser 1 pues se trata de un envio."
 } else if (form.lang.value == "ca") {
-	 form.os1.value = form.os1.value + ". Nota: la següent columna \"Quantitat\" ha de ser 1"
+	 form.os1.value = form.os1.value + ". Nota: la següent columna \"Quantitat\" ha de ser 1 perque es un enviament."
 }
 
 //manage handling
 a = form.amount.value;
+b = 0;
 
 if (form.quantity_pre.value == 1) {
 	b = 1.6;
@@ -188,8 +204,8 @@ if (form.quantity_pre.value == 1) {
 var a2 = a*1;
 var b2 = b*1;
 
-form.amount.value = (a2+b2);
-
+//form.amount.value=(a2+b2); //funciona per tots menys els 1 d'europa i mon (pq surten molts decimals)
+form.amount.value = roundNumber(a2+b2,2)
 }
 
 //--------------------------------------------------------------//
