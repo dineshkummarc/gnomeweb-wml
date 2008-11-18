@@ -20,7 +20,8 @@ function roundNumber(num, dec) {
 }
 
 function saveSelect(index) {
-	form.quantity_pre = form.quantity_pre_a.options[index].value;
+	document.form.quantity_pre = form.quantity_pre_a.options[index].value;
+	alert(document.form.quantity_pre);
 }
 
 function CalculateOrder(form)
