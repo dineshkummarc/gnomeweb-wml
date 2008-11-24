@@ -16,15 +16,30 @@
 	</div>
 
 	<h2>Using NetworkManager</h2>
-	<p>Once the NetworkManager service is started, and the applet is running, using NetworkManager is a piece of cake.  For information on how to get the service started, see the <a href="../admins/">administrators</a> page.  NetworkManager will scan for available wireless networks.  To view the list of available networks, simply click on the applet.</p> 
-	<p>NetworkManager will automatically connect to networks it knows about, but you will need to manually connect to a network at least once.  Simply select the network from the list, and NetworkManager will automatically attempt to connect.  If the network requires an encryption key, NetworkManager will prompt for one.  Once the correct key is input, the connection will be made.</p>
-	<p>To switch wireless networks, simply choose another one from the applet's menu.</p>
+	<p>Once the NetworkManager service is started (which should have been done automatically for you!), and the applet is running (which is also automatic when you log in), using NetworkManager is a piece of cake.  For information on how to get the service started, see the <a href="../admins/">administrators</a> page.  NetworkManager will scan for available network hardware and wireless networks.  To view the list of available network connections, simply click on the applet.</p> 
+	<p>NetworkManager will automatically connect to networks you have connected to before, but you will need to manually connect at least the first time.  Simply select the network or device from the list, and NetworkManager will attempt to connect, asking you if more information is required.  If the connection fails, your keys or passphrases might be wrong, so NetworkManager will ask you for them again.  Make sure they are correct, and just hit "Connect..." again.</p>
+	<p>To switch network connections, simply choose another one from the applet's menu.</p>
 
 	<h2>Supported Wireless Hardware</h2>
-	<p>A list of the wireless cards and drivers that NetworkManager interoperates with can be found here: <a href="http://live.gnome.org/NetworkManagerHardware">http://live.gnome.org/NetworkManagerHardware</a>.<p>
+	<p>Drivers that are included in the upstream Linux kernel work best with NetworkManager, because they have been reviewed and vetted by many kernel developers.  If the driver isn't upstream, work with the provider of the driver to clean it up and submit it for inclusion into the kernel.  If the driver is not completely open-source (ex. ndiswrapper, madwifi, and Broadcom's wl.o), then driver bugs cannot be fixed quickly and easily, and NetworkManager cannot be guaranteed to work with it.  Make sure the driver your OS uses are top-quality.<p>
 
 	<h2>Bugs</h2>
 	<p>If you should find a bug, please <a href="http://bugzilla.gnome.org/enter_bug.cgi?product=NetworkManager">report it to us in GNOME Bugzilla</a> so we know what to fix!  Your bug reports help us continually improve the quality of the product.</p>
+
+	<p>If you have trouble connecting to a specific network, attaching logs to the bug report is a great way to get faster help.  Most distributions direct NetworkManager log output to /var/log/messages or /var/log/daemon.log; look in those two files for lines like:
+	<code><kbd>
+		NetworkManager: &lt;info&gt;  starting...<br>
+		NetworkManager: &lt;info&gt;  Found radio killswitch /org/freedesktop/Hal/devices/ipw_wlan_switch<br>
+		NetworkManager: &lt;info&gt;  eth0: driver is 'e1000'.<br>
+		NetworkManager: &lt;info&gt;  Found new Ethernet device 'eth0'.<br>
+		NetworkManager: &lt;info&gt;  (eth0): exported as /org/freedesktop/Hal/devices/net_00_16_aa_bb_cc_dd<br>
+		NetworkManager: &lt;info&gt;  eth2: driver is 'ipw2200'.<br>
+		NetworkManager: &lt;info&gt;  eth2: driver supports SSID scans (scan_capa 0x21).<br>
+		NetworkManager: &lt;info&gt;  Found new 802.11 WiFi device 'eth2'.<br>
+		NetworkManager: &lt;info&gt;  (eth2): exported as /org/freedesktop/Hal/devices/net_00_16_dd_cc_bb_aa<br>
+	</code>
+	And attach the file to the bug report along with the time the problem ocurred, so that the developers can isolate the issue.</p>
+	<p>If you're familiar with <a href="http://w1.fi/wpa_supplicant/">wpa_supplicant</a> configuration, a great way to debug wifi connection issues is to stop the NetworkManager service, kill wpa_supplicant, create a wpa_supplicant config that works with a network where NetworkManager does not, and attach that wpa_supplicant config file, along with the output of wpa_supplicant when launched with the "-dddt" flags, to the bug report.</p>
 
 </div>
 <div id="copyright">
