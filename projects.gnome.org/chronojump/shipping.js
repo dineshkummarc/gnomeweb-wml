@@ -19,13 +19,6 @@ function roundNumber(num, dec) {
 	return result;
 }
 
-/*
-function saveSelect(index) {
-	document.form.quantity_pre = form.quantity_pre_a.options[index].value;
-	alert(document.form.quantity_pre);
-}
-*/
-
 function CalculateOrder(form)
 {
 	// 1 chronopic: 80gr
@@ -43,7 +36,11 @@ if (form.quantity.index == 0 || form.quantity.index == -1) {
 	 return false;
 }
 */
-		
+
+/* c3 = document.form.quantity_pre[document.form.quantity_pre.selectedIndex].value */
+/* c3 = form.quantity_pre[form.quantity_pre.selectedIndex].value */
+//var c3 = form.quantity_pre.value;
+
 if(form.lang.value == "en") {
 	form.item_name.value = "Ship Chronopics"
 	form.on0.value = "place"
@@ -187,11 +184,11 @@ else if (form.place[2].checked)
  }
 
 if(form.lang.value == "en") {
-	 form.os1.value = form.os1.value + ". Note: next column \"Quantity\" should be 1 because it's one shipping."
+	 form.os1.value = form.os1.value + ". NOTE: next column \"Quantity\" should be 1 because it's ONE SHIPPING."
 } else if (form.lang.value == "es") {
-	 form.os1.value = form.os1.value + ". Nota: la siguiente columna \"Cantidad\" debe ser 1 pues se trata de un envio."
+	 form.os1.value = form.os1.value + ". NOTA: la siguiente columna \"Cantidad\" debe ser 1 pues se trata de UN ENVIO."
 } else if (form.lang.value == "ca") {
-	 form.os1.value = form.os1.value + ". Nota: la següent columna \"Quantitat\" ha de ser 1 perque es un enviament."
+	 form.os1.value = form.os1.value + ". NOTA: la següent columna \"Quantitat\" ha de ser 1 perque es UN ENVIAMENT."
 }
 
 //manage handling
@@ -215,7 +212,9 @@ var b2 = b*1;
 
 //form.amount.value=(a2+b2); //funciona per tots menys els 1 d'europa i mon (pq surten molts decimals)
 //form.amount.value = roundNumber(a2+b2,2) //funciona pero no a alguns ie
+
 form.amount.value = (a2+b2)
+form.shippingPrint.value = (a2+b2);
 }
 
 //--------------------------------------------------------------//
