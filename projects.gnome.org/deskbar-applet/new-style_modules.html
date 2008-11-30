@@ -1,0 +1,1334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.3.0" />
+<title>Writing new-style modules for Deskbar-Applet</title>
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-right: 10%;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock {
+  margin-right: 0%;
+}
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock {
+  padding-left: 2.0em;
+}
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock {
+  padding-left: 2.0em;
+}
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+div.olist > ol {
+  list-style-type: decimal;
+}
+div.olist2 > ol {
+  list-style-type: lower-alpha;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+/* Workarounds for IE6's broken and incomplete CSS2. */
+
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+div.sidebar-title, div.image-title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
+}
+
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock-attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock-content {
+  white-space: pre;
+}
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+
+div.exampleblock-content {
+  border-left: 2px solid silver;
+  padding-left: 0.5em;
+}
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
+
+/* Because IE6 child selector is broken. */
+div.olist2 ol {
+  list-style-type: lower-alpha;
+}
+div.olist2 div.olist ol {
+  list-style-type: decimal;
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){generateToc(2)}
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, October 2006. License: GPL */
+
+function getText(el) {
+  var text = "";
+  for (var i = el.firstChild; i != null; i = i.nextSibling) {
+    if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+      text += i.data;
+    else if (i.firstChild != null)
+      text += getText(i);
+  }
+  return text;
+}
+
+function TocEntry(el, text, toclevel) {
+  this.element = el;
+  this.text = text;
+  this.toclevel = toclevel;
+}
+
+function tocEntries(el, toclevels) {
+  var result = new Array;
+  var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+  // Function that scans the DOM tree for header elements (the DOM2
+  // nodeIterator API would be a better technique but not supported by all
+  // browsers).
+  var iterate = function (el) {
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+        var mo = re.exec(i.tagName)
+        if (mo)
+          result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+        iterate(i);
+      }
+    }
+  }
+  iterate(el);
+  return result;
+}
+
+// This function does the work. toclevels = 1..4.
+function generateToc(toclevels) {
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementsByTagName("body")[0], toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "toc" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    document.getElementById("header").removeChild(toc);
+}
+/*]]>*/
+</script>
+</head>
+<body>
+<div id="header">
+<h1>Writing new-style modules for Deskbar-Applet</h1>
+<span id="author">Sebastian Pölsterl</span><br />
+<span id="revision">version 1.2.9,</span>
+September 9th, 2008
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>In this article I give an introduction to the new module interface of GNOME Deskbar-Applet.
+The module interface changed for various reasons. One of them was the very slow startup time.
+With the new interface the startup is significantly faster, because the modules are checked
+before an instance is created.</p></div>
+</div>
+</div>
+<h2 id="interfaces">Interfaces</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><span class="image">
+<img src="images/uml_new-style.png" alt="UML diagram" title="UML diagram" />
+</span></p></div>
+<h3 id="class-module">Module</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Here's how the new interface looks like.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">Module</span></span><span style="color: #990000">(</span>gobject<span style="color: #990000">.</span>GObject<span style="color: #990000">):</span>
+
+    INFOS <span style="color: #990000">=</span> <span style="color: #990000">{</span><span style="color: #FF0000">'icon'</span><span style="color: #990000">:</span> <span style="color: #FF0000">''</span><span style="color: #990000">,</span> <span style="color: #FF0000">'name'</span><span style="color: #990000">:</span> <span style="color: #FF0000">''</span><span style="color: #990000">,</span> <span style="color: #FF0000">'description'</span><span style="color: #990000">:</span> <span style="color: #FF0000">''</span><span style="color: #990000">,</span> <span style="color: #FF0000">'version'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'1.0.0.0'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'categories'</span><span style="color: #990000">:</span> <span style="color: #990000">{}}</span>
+    INSTRUCTIONS <span style="color: #990000">=</span> <span style="color: #FF0000">""</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #000000">super</span></span><span style="color: #990000">(</span>Module<span style="color: #990000">,</span> self<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">()</span>
+        self<span style="color: #990000">.</span>_priority <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+        self<span style="color: #990000">.</span>_enabled <span style="color: #990000">=</span> False
+        self<span style="color: #990000">.</span>_filename <span style="color: #990000">=</span> None
+        self<span style="color: #990000">.</span>_id <span style="color: #990000">=</span> <span style="color: #FF0000">""</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">_emit_query_ready</span></span> <span style="color: #990000">(</span>self<span style="color: #990000">,</span> query<span style="color: #990000">,</span> matches<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">emit</span></span> <span style="color: #990000">(</span><span style="color: #FF0000">"query-ready"</span><span style="color: #990000">,</span> query<span style="color: #990000">,</span> matches<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> False
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">is_enabled</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_enabled
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_enabled</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> val<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>_enabled <span style="color: #990000">=</span> val
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_priority</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_priority
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_priority</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> prio<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>_priority <span style="color: #990000">=</span> prio
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_filename</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_filename
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_filename</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> filename<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>_filename <span style="color: #990000">=</span> filename
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_id</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_id
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_id</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> mod_id<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>_id <span style="color: #990000">=</span> mod_id
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_priority_for_matches</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> matches<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> m <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> matches<span style="color: #990000">:</span>
+            m<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">set_priority</span></span><span style="color: #990000">(</span> self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_priority</span></span><span style="color: #990000">(</span> <span style="color: #990000">))</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">query</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> NotImplementedError
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">has_config</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> False
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">show_config</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> parent<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">pass</span></span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">initialize</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">pass</span></span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">stop</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">pass</span></span>
+
+    @staticmethod
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">has_requirements</span></span><span style="color: #990000">():</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> True</tt></pre></div></div>
+<div class="paragraph"><p>As you can see there are two attributes at the top.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>INFOS</tt>: A dictionary containing information about the module. The mandatory keys are
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>icon</tt>: A <a href="http://www.pygtk.org/pygtk2reference/class-gdkpixbuf.html">gtk.gdk.Pixbuf</a> representing the module's icon
+</p>
+</li>
+<li>
+<p>
+<tt>name</tt>: The name of the module
+</p>
+</li>
+<li>
+<p>
+<tt>description</tt>: A short description of the module
+</p>
+</li>
+<li>
+<p>
+<tt>version</tt>: The module's version
+</p>
+</li>
+<li>
+<p>
+<a id="categories_attr"></a> (optional) <tt>categories</tt>: You can add a dictionary here to add custom categories. Each key is the identifier of the category and the value another dictionary of the form <tt>{"name": "My category's name"}</tt>.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<tt>INSTRUCTIONS</tt>: Information stored here will be displayed in the preferences dialog if you select the module. You can store error messages (e.g. about missing dependencies) here, too.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>You can override the following methods in your sub-class:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>query</tt>: This method will be called to start the module's search mechanism.
+</p>
+</li>
+<li>
+<p>
+(optional) <tt>has_config</tt>: If your module comes with a configuration dialog override this method and return <tt>True</tt>.
+</p>
+</li>
+<li>
+<p>
+(optional) <tt>show_config</tt>: This method should contain everything to create an optional configuration dialog and display it.
+</p>
+</li>
+<li>
+<p>
+(optional) <tt>initialize</tt>: This method will be called if Deskbar is starting up. If you have to do some time-consuming stuff at startup (e.g. indexing) do this here.
+</p>
+</li>
+<li>
+<p>
+(optional) <tt>stop</tt>: Any cleaning up should happen in here.
+</p>
+</li>
+<li>
+<p>
+(optional) <tt>has_requirements</tt>: Override this method if your module depends on additional tools or applications. You can check for them in this method and return the appropriate value.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="images/icons//important.png" alt="Important" />
+</td>
+<td class="content">
+<div class="paragraph"><p>If you want to override <tt>has_requirements</tt> you <strong>must</strong> make it static in your sub-class as well.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>The following methods are needed by Deskbar core. <strong>Do not override them</strong>.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>_emit_query_ready</tt>: Call this method if you collected your search results and want the world to know about it.
+</p>
+</li>
+<li>
+<p>
+<tt>is_enabled</tt> and <tt>set_enabled</tt>: Getter and setter for the module's status.
+</p>
+</li>
+<li>
+<p>
+<tt>(get|set)_priority</tt>: Get or set the module's priority.
+</p>
+</li>
+<li>
+<p>
+<tt>(get|set)_filename</tt>: Get or set the complete path of the file that contains this module
+</p>
+</li>
+<li>
+<p>
+<tt>(get|set)_id</tt>: Get or set the module's id. The id in this case is the filename.
+</p>
+</li>
+</ul></div>
+<h3 id="class-match">Match</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Let's take a look on the new Match interface. Unless in previous versions this class isn't responsible for "doing" the action anymore. It just supplies actions.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> Match<span style="color: #990000">:</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> <span style="color: #990000">**</span>args<span style="color: #990000">):</span>
+                self<span style="color: #990000">.</span>_name <span style="color: #990000">=</span> <span style="color: #FF0000">""</span>
+                self<span style="color: #990000">.</span>_icon <span style="color: #990000">=</span> None
+                self<span style="color: #990000">.</span>_pixbuf <span style="color: #990000">=</span> None
+                self<span style="color: #990000">.</span>_category <span style="color: #990000">=</span> <span style="color: #FF0000">"default"</span>
+                self<span style="color: #990000">.</span>_priority <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+                self<span style="color: #990000">.</span>_actions <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+                self<span style="color: #990000">.</span>_default_action <span style="color: #990000">=</span> None
+                self<span style="color: #990000">.</span>_snippet <span style="color: #990000">=</span> None
+                self<span style="color: #990000">.</span>__actions_hashes <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">set</span></span><span style="color: #990000">()</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">"name"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> args<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span>_name <span style="color: #990000">=</span> args<span style="color: #990000">[</span><span style="color: #FF0000">"name"</span><span style="color: #990000">]</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">"icon"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> args <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> args<span style="color: #990000">[</span><span style="color: #FF0000">"icon"</span><span style="color: #990000">]</span> <span style="color: #990000">!=</span> None<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">set_icon</span></span><span style="color: #990000">(</span>args<span style="color: #990000">[</span><span style="color: #FF0000">"icon"</span><span style="color: #990000">])</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">"pixbuf"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> args <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> args<span style="color: #990000">[</span><span style="color: #FF0000">"pixbuf"</span><span style="color: #990000">]</span> <span style="color: #990000">!=</span> None<span style="color: #990000">:</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> <span style="font-weight: bold"><span style="color: #000000">isinstance</span></span><span style="color: #990000">(</span>args<span style="color: #990000">[</span><span style="color: #FF0000">"pixbuf"</span><span style="color: #990000">],</span> gtk<span style="color: #990000">.</span>gdk<span style="color: #990000">.</span>Pixbuf<span style="color: #990000">):</span>
+                                <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> TypeError<span style="color: #990000">,</span> <span style="color: #FF0000">"pixbuf must be a gtk.gdk.Pixbuf"</span>
+                        self<span style="color: #990000">.</span>_pixbuf <span style="color: #990000">=</span> args<span style="color: #990000">[</span><span style="color: #FF0000">"pixbuf"</span><span style="color: #990000">]</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">"category"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> args<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span>_category <span style="color: #990000">=</span> args<span style="color: #990000">[</span><span style="color: #FF0000">"category"</span><span style="color: #990000">]</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #FF0000">"priority"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> args<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span>_priority <span style="color: #990000">=</span> args<span style="color: #990000">[</span><span style="color: #FF0000">"priority"</span><span style="color: #990000">]</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">_get_default_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> CATEGORIES<span style="color: #990000">[</span>self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_category</span></span><span style="color: #990000">()].</span><span style="font-weight: bold"><span style="color: #000000">has_key</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"icon"</span><span style="color: #990000">):</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> CATEGORIES<span style="color: #990000">[</span>self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_category</span></span><span style="color: #990000">()][</span><span style="color: #FF0000">"icon"</span><span style="color: #990000">]</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">else</span></span><span style="color: #990000">:</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> CATEGORIES<span style="color: #990000">[</span><span style="color: #FF0000">"default"</span><span style="color: #990000">][</span><span style="color: #FF0000">"icon"</span><span style="color: #990000">]</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_priority</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_priority
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_priority</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> prio<span style="color: #990000">):</span>
+                self<span style="color: #990000">.</span>_priority <span style="color: #990000">=</span> prio
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> self<span style="color: #990000">.</span>_pixbuf <span style="color: #990000">!=</span> None<span style="color: #990000">:</span>
+                        <span style="font-style: italic"><span style="color: #9A1900"># Only for Matches that won't be stored in history</span></span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_pixbuf
+                <span style="font-weight: bold"><span style="color: #0000FF">elif</span></span> self<span style="color: #990000">.</span>_icon <span style="color: #990000">!=</span> None<span style="color: #990000">:</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>Utils<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">load_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>_icon<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">else</span></span><span style="color: #990000">:</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">_get_default_icon</span></span><span style="color: #990000">()</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> iconname<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> <span style="font-weight: bold"><span style="color: #000000">isinstance</span></span><span style="color: #990000">(</span>iconname<span style="color: #990000">,</span> str<span style="color: #990000">):</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> TypeError<span style="color: #990000">,</span> <span style="color: #FF0000">"icon must be a string"</span>
+                self<span style="color: #990000">.</span>_icon <span style="color: #990000">=</span> iconname
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_snippet</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_snippet
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_snippet</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> snippet<span style="color: #990000">):</span>
+                self<span style="color: #990000">.</span>_snippet <span style="color: #990000">=</span> snippet
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_category</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_category
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">set_category</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> cat<span style="color: #990000">):</span>
+                self<span style="color: #990000">.</span>_category <span style="color: #990000">=</span> cat
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_actions</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_actions
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_default_action</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_default_action
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">add_action</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> action<span style="color: #990000">,</span> is_default<span style="color: #990000">=</span>False<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> action<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_hash</span></span><span style="color: #990000">()</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> self<span style="color: #990000">.</span>__actions_hashes<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span>__actions_hashes<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">add</span></span><span style="color: #990000">(</span>action<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_hash</span></span><span style="color: #990000">())</span>
+                        self<span style="color: #990000">.</span>_actions<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span>action<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> is_default<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span>_default_action <span style="color: #990000">=</span> action
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">add_all_actions</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> actions<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> action <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> actions<span style="color: #990000">:</span>
+                        self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">add_action</span></span><span style="color: #990000">(</span>action<span style="color: #990000">)</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_hash</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> None
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_name</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_name</tt></pre></div></div>
+<div class="paragraph"><p>You can pass various parameters to the constructor and it will set the proper values.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>name</tt>: The query string. This value is mandatory.
+</p>
+</li>
+<li>
+<p>
+<tt>icon</tt>: The name or path of an icon. It's very important that you don't try to store something else in it. If you don't set a icon a default icon according to the match's category is displayed.
+</p>
+</li>
+<li>
+<p>
+<tt>pixbuf</tt>: If you fetch the match's icon on the fly you can provide a pixbuf as well and it overrides the value of <tt>icon</tt>.
+</p>
+</li>
+<li>
+<p>
+<tt>category</tt>: The <a href="#Categories">category</a> the match belongs to.
+</p>
+</li>
+<li>
+<p>
+<tt>priority</tt>: Match's priority. It's recommended that you use your module's <tt>set_priority_for_matches</tt> method to assign your matches the priority of your module.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If you create your own match class you can override the following methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>get_hash</tt>: Returns a hash that identifies the result. You have to return a hashable object (a string is the best choice). If two matches have they same hash the will be merged, i.e. the actions of the second match will be added to the first match and the second match will be discarded.
+</p>
+</li>
+<li>
+<p>
+<tt>get_name</tt>: Returns a string used to present a special match in the results. If more than one action is available the value returned by <tt>get_name</tt> will be displayed in the results.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Important getter and setter methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>add_action</tt>: Adds a action to the match. If the parameter <tt>is_default</tt> is set to <tt>True</tt> the action is marked as default. If you don't supply a default action the first one that has been added is treated as such.
+</p>
+</li>
+<li>
+<p>
+<tt>add_all_actions</tt>: Calls <tt>add_action</tt> for each item in the supplied list.
+</p>
+</li>
+<li>
+<p>
+<tt>get_actions</tt>: Returns a list of actions.
+</p>
+</li>
+<li>
+<p>
+<tt>get_default_action</tt>: Returns the default action, if available, or <tt>None</tt>.
+</p>
+</li>
+<li>
+<p>
+<tt>set_snippet</tt>: You can supply markup that will displayed in a new line under the Matche's <tt>get_verb</tt> value. This method is available since 2.24.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="images/icons//important.png" alt="Important" />
+</td>
+<td class="content">
+<div class="paragraph"><p>You should forbear from using the attributes that start with <tt>_</tt> directly in your sub-class.
+Always use either the appropriate Getter/Setter or provide the value when creating the class.</p></div>
+</td>
+</tr></table>
+</div>
+<h3 id="class-action">Action</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This class is entirely new. It is responsible for executing the action.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">class</span></span> Action<span style="color: #990000">:</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> name<span style="color: #990000">):</span>
+                self<span style="color: #990000">.</span>_name <span style="color: #990000">=</span> name
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_escaped_name</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-style: italic"><span style="color: #9A1900"># Escape the query now for display</span></span>
+                name_dict <span style="color: #990000">=</span> <span style="color: #990000">{</span><span style="color: #FF0000">"text"</span> <span style="color: #990000">:</span> cgi<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">escape</span></span><span style="color: #990000">(</span>text<span style="color: #990000">)}</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> key<span style="color: #990000">,</span> value <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_name</span></span><span style="color: #990000">(</span>text<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">items</span></span><span style="color: #990000">():</span>
+                        name_dict<span style="color: #990000">[</span>key<span style="color: #990000">]</span> <span style="color: #990000">=</span> cgi<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">escape</span></span><span style="color: #990000">(</span>value<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> name_dict
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_hash</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>_name
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> None
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_pixbuf</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_icon</span></span><span style="color: #990000">()</span> <span style="color: #990000">!=</span> None<span style="color: #990000">:</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #000000">load_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get_icon</span></span><span style="color: #990000">())</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> None
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">activate</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> NotImplementedError
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_verb</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">raise</span></span> NotImplementedError
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_tooltip</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> None
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_name</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">{</span><span style="color: #FF0000">"name"</span><span style="color: #990000">:</span> self<span style="color: #990000">.</span>_name<span style="color: #990000">}</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">is_valid</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> True
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">skip_history</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> False</tt></pre></div></div>
+<div class="paragraph"><p>As you can see the constructor expects a <tt>name</tt> parameter. This parameter should describe the object the action works with. E.g. if the action opens files, <tt>name</tt> should be the filename of the file that will be opened, if the action gets executed.</p></div>
+<div class="paragraph"><p>To implement your own action you have to implement the following methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>activate</tt>: This method will be called if the user activated the match.
+</p>
+</li>
+<li>
+<p>
+<tt>get_verb</tt>: A string containing one or more <tt>%(name)s</tt> that will be replaced by the match's <tt>get_name</tt> method (e.g. <tt>Execute %(prog)s</tt>). The name between the paranthesis must be a key of the dictionary returned by <tt>get_name</tt>. You can always make use of <tt>%(text)s</tt>. It will be replaced by the query string.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>In addition, you can override the following methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>get_hash</tt>: Returns a hash that identifies the action. You have to return a hashable object (a string is the best choice). If two actions have the same hash only the first one will be added.
+</p>
+</li>
+<li>
+<p>
+<tt>get_icon</tt>: Returns the name of the icon displayed beside the action.
+</p>
+</li>
+<li>
+<p>
+<tt>get_name</tt>: Returns a dictionary whose entries will be used in the action string returned by <tt>get_verb</tt>. <strong>Do not</strong> escape the strings as they will be escaped automatically.
+</p>
+</li>
+<li>
+<p>
+<tt>is_valid</tt>: Whether the action is still valid. E.g. if the action opens a file and it has been deleted, this method should return <tt>False</tt>.
+</p>
+</li>
+<li>
+<p>
+<tt>skip_history</tt>: Whether the action should be stored in history.
+</p>
+</li>
+<li>
+<p>
+<tt>get_snippet</tt>: Returns the tooltip markup string associated to this action. Override this method to display a tooltip when the user hovers over the match (the default action's tooltip is displayed) or over an action in the list of additional actions. This method is available since 2.24.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Despite writing your own action you can make use of the basic actions shipped with Deskbar-Applet. The actions are located in the <tt>deskbar.handlers.actions</tt> module. It contains the actions</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+CopyToClipboardAction
+</p>
+</li>
+<li>
+<p>
+GoToLocationAction
+</p>
+</li>
+<li>
+<p>
+OpenDesktopFileAction
+</p>
+</li>
+<li>
+<p>
+OpenFileAction
+</p>
+</li>
+<li>
+<p>
+OpenWithApplicationAction
+</p>
+</li>
+<li>
+<p>
+OpenWithNautilusAction
+</p>
+</li>
+<li>
+<p>
+SendEmailToAction
+</p>
+</li>
+<li>
+<p>
+SendFileViaEmailAction
+</p>
+</li>
+<li>
+<p>
+ShowUrlAction
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If you want to know how the actions work have a look at the sources.</p></div>
+<div class="paragraph"><p>Another way suited especially for files is the <tt>deskbar.handlers.actions.ActionsFactory.get_actions_for_uri</tt> function.
+You provide an unescaped URI or path of a file and it will return a list of actions depending on the file's MIME-type.
+An empty list will be returned if an error occured during the retrival of the MIME-type (e.g. file doesn't exist).
+Run Deskbar-Applet on the command line with the <tt>-w</tt> option to see debug information.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="images/icons//important.png" alt="Important" />
+</td>
+<td class="content">
+<div class="paragraph"><p>The list returned by <tt>get_actions_for_uri</tt> does not include a action for the default/preferred application.
+Use the <tt>OpenFileAction</tt> class for that and add it as default action to the match.</p></div>
+</td>
+</tr></table>
+</div>
+<h3 id="Categories">Categories</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Here's a list of categories you can use.
+If your favorite category is missing you can add your own with the <a href="#categories_attr">categories</a> key of your module's
+<tt>INFO</tt> attribute. The icon is the default icon for each category. The icon may vary depending on the icon theme you use.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+default <span class="image">
+<img src="images/default.png" alt="images/default.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+history <span class="image">
+<img src="images/history.png" alt="images/history.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+documents <span class="image">
+<img src="images/documents.png" alt="images/documents.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+emails <span class="image">
+<img src="images/emails.png" alt="images/emails.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+conversations <span class="image">
+<img src="images/conversations.png" alt="images/conversations.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+files <span class="image">
+<img src="images/files.png" alt="images/files.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+people <span class="image">
+<img src="images/people.png" alt="images/people.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+places <span class="image">
+<img src="images/places.png" alt="images/places.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+actions <span class="image">
+<img src="images/actions.png" alt="images/actions.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+web <span class="image">
+<img src="images/web.png" alt="images/web.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+websearch <span class="image">
+<img src="images/websearch.png" alt="images/websearch.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+news <span class="image">
+<img src="images/news.png" alt="images/news.png" />
+</span>
+</p>
+</li>
+<li>
+<p>
+notes <span class="image">
+<img src="images/notes.png" alt="images/notes.png" />
+</span>
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="creating-own-module">Creating your own module</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Now it's time to create our own module. To do this we subclass all three interfaces from above.
+Let's say we want to search the <tt>PATH</tt> for a program named like the query.</p></div>
+<h3 id="own-action">Action</h3><div style="clear:left"></div>
+<div class="paragraph"><p>First of all, we create our own Action class.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Action
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">MyAction</span></span><span style="color: #990000">(</span>deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Action<span style="color: #990000">):</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> prog<span style="color: #990000">):</span>
+                deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Action<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">basename</span></span><span style="color: #990000">(</span>prog<span style="color: #990000">))</span>
+                self<span style="color: #990000">.</span>_prog <span style="color: #990000">=</span> prog
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">activate</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>Utils<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">spawn_async</span></span><span style="color: #990000">(</span> <span style="color: #990000">[</span>self<span style="color: #990000">.</span>_prog<span style="color: #990000">]</span> <span style="color: #990000">)</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_verb</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #FF0000">"Execute %(name)s"</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_icon</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #FF0000">"gtk-execute"</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">is_valid</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">=</span>None<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">exists</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>_prog<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isfile</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>_prog<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">access</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>_prog<span style="color: #990000">,</span> os<span style="color: #990000">.</span>F_OK <span style="color: #990000">|</span> os<span style="color: #990000">.</span>R_OK <span style="color: #990000">|</span> os<span style="color: #990000">.</span>X_OK<span style="color: #990000">))</span></tt></pre></div></div>
+<div class="paragraph"><p><tt>activate</tt> spawns the program and <tt>get_verb</tt> together with <tt>get_name</tt> determines how the result will look like to the user.</p></div>
+<h3 id="own-match">Match</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Now we make your own Match class that supplies the action from above and another action named <tt>CopyToClipboardAction</tt>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Match
+<span style="font-weight: bold"><span style="color: #000080">from</span></span> deskbar<span style="color: #990000">.</span>handlers<span style="color: #990000">.</span>actions<span style="color: #990000">.</span>CopyToClipboardAction <span style="font-weight: bold"><span style="color: #000080">import</span></span> CopyToClipboardAction
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">MyMatch</span></span> <span style="color: #990000">(</span>deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Match<span style="color: #990000">):</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> prog<span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">):</span>
+                deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Match<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span>
+                        name<span style="color: #990000">=</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">basename</span></span><span style="color: #990000">(</span>prog<span style="color: #990000">),</span>
+                        icon<span style="color: #990000">=</span><span style="color: #FF0000">"gtk-execute"</span><span style="color: #990000">,</span> category<span style="color: #990000">=</span><span style="color: #FF0000">"actions"</span><span style="color: #990000">,</span> <span style="color: #990000">**</span>kwargs<span style="color: #990000">)</span>
+                self<span style="color: #990000">.</span>prog <span style="color: #990000">=</span> prog
+                self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">add_action</span></span><span style="color: #990000">(</span> <span style="font-weight: bold"><span style="color: #000000">MyAction</span></span><span style="color: #990000">(</span>self<span style="color: #990000">.</span>prog<span style="color: #990000">)</span> <span style="color: #990000">)</span>
+                self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">add_action</span></span><span style="color: #990000">(</span> <span style="font-weight: bold"><span style="color: #000000">CopyToClipboardAction</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"URL"</span><span style="color: #990000">,</span> self<span style="color: #990000">.</span>prog<span style="color: #990000">)</span> <span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>We just forward the arguments of our Match to the constructor of the base class, set the category and icon
+and store the location of the program we found. Afterwards, we add the actions <tt>MyAction</tt> and <tt>CopyToClipboardAction</tt> to the match.</p></div>
+<div class="paragraph"><p>Now we only override one additional method. The remaining methods just retain their default implementation.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">get_hash</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> self<span style="color: #990000">.</span>prog</tt></pre></div></div>
+<h3 id="own-module">Module</h3><div style="clear:left"></div>
+<div class="paragraph"><p>We have our own Action and Match class now. The only thing that's missing is our own Module class that creates those matches.
+We start of again by creating a sub-class of the Module interface.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>Utils
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Module
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">MyModule</span></span> <span style="color: #990000">(</span>deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Module<span style="color: #990000">):</span>
+
+        INFOS <span style="color: #990000">=</span> <span style="color: #990000">{</span><span style="color: #FF0000">'icon'</span><span style="color: #990000">:</span> deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>Utils<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">load_icon</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"gtk-execute"</span><span style="color: #990000">),</span>
+                <span style="color: #FF0000">'name'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'My first module'</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">'description'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'Search the PATH for a program'</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">'version'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'1.0.0.0'</span><span style="color: #990000">,</span>
+                <span style="color: #990000">}</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+                deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Module<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">__init__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>In the <tt>INFO</tt> attribute we store information about the module like the icon and name. You only have to pay attention
+that <tt>icon</tt> must be a <a href="http://www.pygtk.org/pygtk2reference/class-gdkpixbuf.html">gtk.gdk.Pixbuf</a> instance.</p></div>
+<div class="paragraph"><p>We only have to implement our own <tt>query</tt> method because the other methods already return the correct values
+or don't make sense here.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>        <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">query</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> text<span style="color: #990000">):</span>
+                PATH <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> path <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getenv</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"PATH"</span><span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span>os<span style="color: #990000">.</span>path<span style="color: #990000">.</span>pathsep<span style="color: #990000">):</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">strip</span></span><span style="color: #990000">()</span> <span style="color: #990000">!=</span> <span style="color: #FF0000">""</span> <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">exists</span></span><span style="color: #990000">(</span>path<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdir</span></span><span style="color: #990000">(</span>path<span style="color: #990000">):</span>
+                                PATH<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span>path<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> dir <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> PATH<span style="color: #990000">:</span>
+                        prog_path <span style="color: #990000">=</span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>dir<span style="color: #990000">,</span> text<span style="color: #990000">)</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">exists</span></span><span style="color: #990000">(</span>prog_path<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span>path<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isfile</span></span><span style="color: #990000">(</span>prog_path<span style="color: #990000">)</span>
+                        <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> os<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">access</span></span><span style="color: #990000">(</span>prog_path<span style="color: #990000">,</span> os<span style="color: #990000">.</span>F_OK <span style="color: #990000">|</span> os<span style="color: #990000">.</span>R_OK <span style="color: #990000">|</span> os<span style="color: #990000">.</span>X_OK<span style="color: #990000">):</span>
+                                self<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">_emit_query_ready</span></span><span style="color: #990000">(</span> text<span style="color: #990000">,</span> <span style="color: #990000">[</span><span style="font-weight: bold"><span style="color: #000000">MyMatch</span></span><span style="color: #990000">(</span>prog_path<span style="color: #990000">)]</span> <span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>Basically, we just split the <tt>PATH</tt> variable and look out for a program that is named like the query string in all
+the directories.</p></div>
+<div class="paragraph"><p>To let Deskbar-Applet know what modules are available from your file you have to define a <tt>HANDLERS</tt> variable somewhere
+in your file as a list of names of classes. In this case this would look like <tt>HANDLERS = ["MyModule"]</tt>.
+Now open the preferences dialog and drag the
+Python file onto the list of handlers and you're set.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="images/icons//note.png" alt="Note" />
+</td>
+<td class="content">
+<div class="paragraph"><p>You can download the complete source of the module <a href="http://www.k-d-w.org/deskbar/mymodule.tar.gz">here</a></p></div>
+</td>
+</tr></table>
+</div>
+</div>
+<h2 id="advanced">Advanced usage</h2>
+<div class="sectionbody">
+<h3 id="advanced-configure">Making your module configurable</h3><div style="clear:left"></div>
+<div class="paragraph"><p>In many cases you want to provide some options the user can change to adjust the
+behavior of the module. Deskbar-Applet allows you to provide a configure dialog when
+the module is selected and the &#8220;More&#8230;&#8221; button is pressed in preferences.</p></div>
+<div class="paragraph"><p>You have to do two things in your <a href="#class-module">Module</a> sub-class:</p></div>
+<div class="olist"><ol>
+<li>
+<p>
+Override <tt>has_config</tt> method that it returns <tt>True</tt>
+</p>
+</li>
+<li>
+<p>
+Override <tt>show_config</tt> method where you create your dialog
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>You can store the values of the options in a plain text file, in <a href="#advanced-gconf">GConf</a> or
+using one of the Python modules <a href="http://docs.python.org/lib/module-pickle.html">pickle</a> and
+<a href="http://docs.python.org/lib/module-cPickle.html">cPickle</a>.</p></div>
+<h3 id="advanced-gconf">Make use of GConf</h3><div style="clear:left"></div>
+<div class="paragraph"><p>If you want to write a module that reads or writes modules to GConf you can use the <tt>GconfStore</tt> class.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>GconfStore <span style="font-weight: bold"><span style="color: #000080">import</span></span> GconfStore</tt></pre></div></div>
+<div class="paragraph"><p>After importing the Class you get a normal GConf client with <tt>GconfStore.get_instance().get_client()</tt>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="images/icons//note.png" alt="Note" />
+</td>
+<td class="content">
+<div class="paragraph"><p>You can only create and modify GConf keys in <tt>/apps/deskbar/</tt>.</p></div>
+</td>
+</tr></table>
+</div>
+<h3 id="advanced-internet">Retrieving results from the internet</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Some modules retrieve their results from online services such as Yahoo! or del.ico.us.
+When your module retrieves its results from the internet you must pay attention to the fact
+that the user might not have a working internet connection at all time.
+In most cases it's enough to catch <tt>IOError</tt> exceptions, print that something went wrong for debugging
+purposes and abort retrieving results.
+In addition, you have to take into account that the user might want to use a proxy.
+The following code respects both cases:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> logging
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> urllib
+<span style="font-weight: bold"><span style="color: #000080">from</span></span> deskbar<span style="color: #990000">.</span>core<span style="color: #990000">.</span>Utils <span style="font-weight: bold"><span style="color: #000080">import</span></span> get_proxy
+
+LOGGER <span style="color: #990000">=</span> logger<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getLogger</span></span><span style="color: #990000">(</span>__name__<span style="color: #990000">)</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">MyModule</span></span><span style="color: #990000">(</span>deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Module<span style="color: #990000">):</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">query</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> qstring<span style="color: #990000">):</span>
+        <span style="font-style: italic"><span style="color: #9A1900"># Parameters of your url</span></span>
+        url_params <span style="color: #990000">=</span> urllib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">urlencode</span></span><span style="color: #990000">({</span><span style="color: #FF0000">'query'</span><span style="color: #990000">:</span> qstring<span style="color: #990000">,})</span>
+        <span style="font-style: italic"><span style="color: #9A1900"># Your URL with parameters</span></span>
+        url <span style="color: #990000">=</span> <span style="color: #FF0000">"http://www.example.com/search?%s"</span> <span style="color: #990000">%</span> url_params
+        <span style="font-weight: bold"><span style="color: #0000FF">try</span></span><span style="color: #990000">:</span>
+            <span style="font-style: italic"><span style="color: #9A1900"># Try to open your URL using user's proxy</span></span>
+            <span style="font-style: italic"><span style="color: #9A1900"># If the user doesn't use a proxy this works as well</span></span>
+            stream <span style="color: #990000">=</span> urllib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">urlopen</span></span><span style="color: #990000">(</span>url<span style="color: #990000">,</span> proxies<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">get_proxy</span></span><span style="color: #990000">())</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">except</span></span> IOError<span style="color: #990000">,</span> msg<span style="color: #990000">:</span>
+            <span style="font-style: italic"><span style="color: #9A1900"># Print error for debugging purposes and end querying</span></span>
+            LOGGER<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">error</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Could not open URL %s: %s, %s"</span> <span style="color: #990000">%</span> <span style="color: #990000">(</span>url<span style="color: #990000">,</span> msg<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">],</span> msg<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]))</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">return</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900"># Continue to work with stream and retrieve results as usual</span></span></tt></pre></div></div>
+<h3 id="advanced-dbus">Using DBus in your module</h3><div style="clear:left"></div>
+<div class="paragraph"><p>When you use DBus in your module make sure to catch <tt>dbus.exceptions.DBusException</tt> when you make
+a DBus call.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> logging
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> dbus
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> dbus<span style="color: #990000">.</span>glib
+
+LOGGER <span style="color: #990000">=</span> logging<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getLogger</span></span><span style="color: #990000">(</span>__name__<span style="color: #990000">)</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="font-weight: bold"><span style="color: #000000">MyModule</span></span><span style="color: #990000">(</span>deskbar<span style="color: #990000">.</span>interfaces<span style="color: #990000">.</span>Module<span style="color: #990000">):</span>
+
+    <span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">query</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> qstring<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">try</span></span><span style="color: #990000">:</span>
+            <span style="font-style: italic"><span style="color: #9A1900"># Some DBus call here</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">except</span></span> dbus<span style="color: #990000">.</span>exceptions<span style="color: #990000">.</span>DBusException<span style="color: #990000">,</span> e<span style="color: #990000">:</span>
+            LOGGER<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">exception</span></span><span style="color: #990000">(</span>e<span style="color: #990000">)</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">return</span></span></tt></pre></div></div>
+<h3 id="advanced-pickle">C modules in Action class</h3><div style="clear:left"></div>
+<div class="paragraph"><p>A problem that may occur if you're using external modules, especially modules written in C (e.g. gtk, gobject),
+is that the information stored in a class from such modules can't be stored in history.
+You have two options. Either modify the action class that <tt>skip_history</tt> always returns <tt>True</tt> or you define two
+additional methods <tt>__getstate__</tt> and <tt>__setstate_\_</tt> that affect they way the match is stored and re-created.</p></div>
+<div class="paragraph"><p>The matches are stored using the <a href="http://docs.python.org/lib/module-pickle.html">pickle module</a>.
+The method <tt>__getstate__</tt> will be called to pickle the object and <tt>__setstate_\_</tt> to restore it.
+More information can be found at <br />[http://docs.python.org/lib/pickle-inst.html#pickle-inst]<br />.</p></div>
+<div class="paragraph"><p>Let's say you create the evil object by passing it the location of a file and the object will be stored in a
+variable called <tt>self.object</tt>. To create it again you have to remember the file's location as well. It's stored
+in <tt>self.file_location</tt> here.
+The following code solves the problem and Deskbar-Applet can store those objects safely.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.10
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__getstate__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">):</span>
+        state <span style="color: #990000">=</span> self<span style="color: #990000">.</span>__dict__<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">copy</span></span><span style="color: #990000">()</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">del</span></span> state<span style="color: #990000">[</span><span style="color: #FF0000">"object"</span><span style="color: #990000">]</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> state
+
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">__setstate__</span></span><span style="color: #990000">(</span>self<span style="color: #990000">,</span> state<span style="color: #990000">):</span>
+        self<span style="color: #990000">.</span>__dict__ <span style="color: #990000">=</span> state
+        self<span style="color: #990000">.</span>object <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">EvilObject</span></span><span style="color: #990000">(</span> self<span style="color: #990000">.</span>file_location <span style="color: #990000">)</span></tt></pre></div></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.2.9<br />
+Last updated 2008-11-30 20:57:03 CEST
+</div>
+</div>
+</body>
+</html>
