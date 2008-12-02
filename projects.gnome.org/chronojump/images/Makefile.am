@@ -121,6 +121,22 @@ page_SCRIPTS= \
 	chronopic_buy_view_cart.png \
 	chronopic_store.png \
 	howto_buttons_buy.txt \
+	vic_nov_08_cp_1.jpg \
+	vic_nov_08_cp_1_small.jpg \
+	vic_nov_08_cp_2.jpg \
+	vic_nov_08_cp_2_small.jpg \
+	vic_nov_08_plat_1.jpg \
+	vic_nov_08_plat_1_small.jpg \
+	vic_nov_08_plat_2.jpg \
+	vic_nov_08_plat_2_small.jpg \
+	vic_nov_08_plat_3.jpg \
+	vic_nov_08_plat_3_small.jpg \
+	vic_nov_08_plat_4.jpg \
+	vic_nov_08_plat_4_small.jpg \
+	vic_nov_08_plat_5.jpg \
+	vic_nov_08_plat_5_small.jpg \
+	vic_nov_08_portatils.jpg \
+	vic_nov_08_portatils_small.jpg \
 	test_png.png \
 	test_jpg.jpg 
 
