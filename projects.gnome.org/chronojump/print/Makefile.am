@@ -24,7 +24,6 @@ page_SCRIPTS= \
 	construction.html \
 	construction_pt.html \
 	contact_ca.html \
-	contact_de.html \
 	contact_es.html \
 	contact_fr.html \
 	contact_gl.html \
@@ -43,7 +42,6 @@ page_SCRIPTS= \
 	faq.html \
 	faq_pt.html \
 	features_ca.html \
-	features_de.html \
 	features_es.html \
 	features_gl.html \
 	features.html \
@@ -54,7 +52,6 @@ page_SCRIPTS= \
 	hardware.html \
 	hardware_pt.html \
 	index_ca.html \
-	index_de.html \
 	index_en.html \
 	index_es.html \
 	index_fr.html \
