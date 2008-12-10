@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Support for ConsoleKit</title><link rel="previous" href="security.html" title="Security"/><link rel="next" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM"/><link rel="top" href="gdm.html" title="Gnome Display Manager Reference Manual"/><style type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>GNOME Display Manager Reference Manual</title><link rel="previous" href="gdm-info.html" title=""/><link rel="next" href="preface.html" title="Terms and Conventions Used in This Manual"/><style type="text/css">
 
 html { height: 100%; }
 body {
@@ -436,35 +436,76 @@ dd.answer {
 dd.answer div.label { float: left; }
 </style></head>
 <meta http-equiv="Content-Type" content="text/html charset=utf8">
-<body><div class="navbar navbar-top"><table class="navbar"><tr><td class="navbar-prev"><a class="navbar-prev" href="security.html" title="Security">Security</a></td><td class="navbar-next"><a class="navbar-next" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></td></tr></table></div><div class="sidebar"><div class="sidenav"><div class="autotoc"><ul><li><a href="gdm-info.html" title="About This Document">About This Document</a></li><li><a class="xref" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a><div class="autotoc"><ul><li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li><li><a class="xref" href="overview.html" title="Overview">Overview</a></li><li><a class="xref" href="security.html" title="Security">Security</a></li><li>Support for ConsoleKit</li><li><a class="xref" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></li><li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li><li><a class="xref" href="controlling.html" title="Controlling GDM">Controlling GDM</a></li><li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li><li><a class="xref" href="thememanual.html" title="Themed Greeter">Themed Greeter</a></li><li><a class="xref" href="accessibility.html" title="Accessibility">Accessibility</a></li><li><a class="xref" href="solaris.html" title="Solaris Specific Features">Solaris Specific Features</a></li><li><a class="xref" href="exampleconf.html" title="Example Configurations">Example Configurations</a></li><li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li><li><a class="xref" href="license.html" title="License">License</a></li></ul></div></li></ul></div></div></div><div class="body body-sidebar"><div class="division sect1"><a name="consolekit"/><div class="header"><h1 xmlns="" class="sect1 title"><span xmlns="http://www.w3.org/1999/xhtml" class="title">Support for ConsoleKit</span></h1></div><ul class="linktrail"><li class="linktrail linktrail-only"><a class="linktrail" href="gdm.html" title="Gnome Display Manager Reference Manual">Gnome Display Manager Reference Manual</a></li></ul><p class="para block block-first">
-      GDM includes support for publishing user login information with the user
-      and login session accounting framework known as ConsoleKit.  ConsoleKit
-      is able to keep track of all the users currently logged in.  In this
-      respect, it can be used as a replacement for the utmp or utmpx files that
-      are available on most Unix-like operating systems.
-    </p><p class="para block">
-      When GDM is about to create a new login process for a user it will call
-      a privileged method of ConsoleKit in order to open a new session for this
-      user.  At this time GDM also provides ConsoleKit with information about
-      this user session such as: the user ID, the X11 Display name that will be
-      associated with the session, the host-name from which the session
-      originates (useful in the case of an XDMCP session), whether or not this
-      session is attached, etc.  As the entity that initiates the user process,
-      GDM is in a unique position know and to be trusted to provide these bits
-      of information about the user session.  The use of this privileged method
-      is restricted by the use of D-Bus system message bus security policy.
-    </p><p class="para block">
-      In the case where a user with an existing session and has authenticated
-      at GDM and requests to resume that existing session GDM calls a
-      privileged method of ConsoleKit to unlock that session.  The exact
-      details of what happens when the session receives this unlock signal is
-      undefined and session-specific.  However, most sessions will unlock a
-      screensaver in response.
-    </p><p class="para block">
-      When the user chooses to log out, or if GDM or the session quit
-      unexpectedly the user session will be unregistered from ConsoleKit.
-    </p><p class="para block">
-      If support for ConsoleKit is not desired it can be disabled at build
-      time using the "--with-console-kit=no" option when running
-      configure.
-    </p></div></div><div class="navbar navbar-bottom"><table class="navbar"><tr><td class="navbar-prev"><a class="navbar-prev" href="security.html" title="Security">Security</a></td><td class="navbar-next"><a class="navbar-next" href="gdmsetupusage.html" title="Using gdmsetup To Configure GDM">Using gdmsetup To Configure GDM</a></td></tr></table></div></body></html>
+<body><div class="navbar navbar-top"><table class="navbar"><tr><td class="navbar-prev"><a class="navbar-prev" href="gdm-info.html" title="About This Document">About This Document</a></td><td class="navbar-next"><a class="navbar-next" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></td></tr></table></div><div class="sidebar"><div class="sidenav"><div class="autotoc"><ul><li>About This Document</li><li><a class="xref" href="gdm.html" title="GNOME Display Manager Reference Manual">GNOME Display Manager Reference Manual</a><div class="autotoc"><ul><li><a class="xref" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></li><li><a class="xref" href="overview.html" title="Overview">Overview</a></li><li><a class="xref" href="security.html" title="Security">Security</a></li><li><a class="xref" href="consolekit.html" title="Support for ConsoleKit">Support for ConsoleKit</a></li><li><a class="xref" href="configuration.html" title="Configuration">Configuration</a></li><li><a class="xref" href="binaries.html" title="GDM Commands">GDM Commands</a></li><li><a class="xref" href="troubleshooting.html" title="Troubleshooting">Troubleshooting</a></li><li><a class="xref" href="license.html" title="License">License</a></li></ul></div></li></ul></div></div></div><div class="body body-sidebar"><div class="division articleinfo"><a name="articleinfo"/><div class="header"><h1 class="title">GNOME Display Manager Reference Manual</h1></div><div class="division"><h2 class="title author">Authors</h2><div class="block block-first"><dl class="dl-compact"><dt class="author"><span class="firstname">Martin</span> <span class="othername">K.</span> <span class="surname">Petersen</span></dt><dt class="author"><span class="firstname">George</span> <span class="surname">Lebl</span></dt><dt class="author"><span class="firstname">Jon</span> <span class="surname">McCann</span></dt><dt class="author"><span class="firstname">Ray</span> <span class="surname">Strode</span></dt><dt class="author"><span class="firstname">Brian</span> <span class="surname">Cameron</span></dt></dl></div></div><div class="division"><h2 class="title copyright">Copyrights</h2><div class="block block-first"><dl class="dl-compact"><dt class="copyright">Copyright © <span class="year">1998</span>, <span class="year">1999</span>  <span class="holder">Martin K. Petersen</span></dt><dt class="copyright">Copyright © <span class="year">2001</span>, <span class="year">2003</span>, <span class="year">2004</span>  <span class="holder">George Lebl</span></dt><dt class="copyright">Copyright © <span class="year">2003</span>, <span class="year">2007</span>, <span class="year">2008</span>  <span class="holder">Red Hat, Inc.</span></dt><dt class="copyright">Copyright © <span class="year">2003</span>, <span class="year">2004</span>, <span class="year">2005</span>, <span class="year">2006</span>, <span class="year">2007</span>, <span class="year">2008</span>  <span class="holder">Sun Microsystems, Inc.</span></dt></dl></div></div><div class="division legalnotice"><a name="legalnotice"/><h2 class="title legalnotice">Legal Notice</h2>
+	<p class="para block block-first">
+	  Permission is granted to copy, distribute and/or modify this
+	  document under the terms of the GNU Free Documentation
+	  License (GFDL), Version 1.1 or any later version published
+	  by the Free Software Foundation with no Invariant Sections,
+	  no Front-Cover Texts, and no Back-Cover Texts.  You can find
+	  a copy of the GFDL at this <a class="ulink" href="ghelp:fdl" title="ghelp:fdl">link</a> or in the file COPYING-DOCS
+	  distributed with this manual.
+         </p>
+         <p class="para block"> This manual is part of a collection of GNOME manuals
+          distributed under the GFDL.  If you want to distribute this
+          manual separately from the collection, you can do so by
+          adding a copy of the license to the manual, as described in
+          section 6 of the license.
+	</p>
+
+	<p class="para block">
+	  Many of the names used by companies to distinguish their
+	  products and services are claimed as trademarks. Where those
+	  names appear in any GNOME documentation, and the members of
+	  the GNOME Documentation Project are made aware of those
+	  trademarks, then the names are in capital letters or initial
+	  capital letters.
+	</p>
+
+	<p class="para block">
+	  DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED
+	  UNDER  THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE
+	  WITH THE FURTHER UNDERSTANDING THAT:
+
+	  <div class="block list orderedlist"><ol class="orderedlist"><li class="li-first">
+		  <span class="para">DOCUMENT IS PROVIDED ON AN "AS IS" BASIS,
+                    WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+                    IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES
+                    THAT THE DOCUMENT OR MODIFIED VERSION OF THE
+                    DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR
+                    A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE
+                    RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE
+                    OF THE DOCUMENT OR MODIFIED VERSION OF THE
+                    DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR
+                    MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT,
+                    YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY
+                    CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY
+                    SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER
+                    OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS
+                    LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED
+                    VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER
+                    EXCEPT UNDER THIS DISCLAIMER; AND
+		  </span>
+		</li><li>
+		  <span class="para">UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL
+                       THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE),
+                       CONTRACT, OR OTHERWISE, SHALL THE AUTHOR,
+                       INITIAL WRITER, ANY CONTRIBUTOR, OR ANY
+                       DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION
+                       OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH
+                       PARTIES, BE LIABLE TO ANY PERSON FOR ANY
+                       DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR
+                       CONSEQUENTIAL DAMAGES OF ANY CHARACTER
+                       INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS
+                       OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR
+                       MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR
+                       LOSSES ARISING OUT OF OR RELATING TO USE OF THE
+                       DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT,
+                       EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF
+                       THE POSSIBILITY OF SUCH DAMAGES.
+		  </span>
+		</li></ol></div>
+	</p>
+  </div><div class="division revhistory"><h2 class="title revhistory">Revision History</h2>
+      <div class="block revision"><span class="date">2008-09</span>: <span class="revnumber">0.0</span></div>
+    </div></div></div><div class="navbar navbar-bottom"><table class="navbar"><tr><td class="navbar-prev"><a class="navbar-prev" href="gdm-info.html" title="About This Document">About This Document</a></td><td class="navbar-next"><a class="navbar-next" href="preface.html" title="Terms and Conventions Used in This Manual">Terms and Conventions Used in This Manual</a></td></tr></table></div></body></html>
