@@ -79,6 +79,7 @@ page_SCRIPTS = \
 	2008-07-stormy-executive-director.html \
 	2008-07-guadec-akademy-grancanaria.html \
 	2008-10-motorola-google.html \
-	2008-11-25-grancanaria.html
+	2008-11-25-grancanaria.html \
+	2008-12-sugarlabs.html
 
 include $(top_srcdir)/rules.common
