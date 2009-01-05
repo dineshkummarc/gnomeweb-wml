@@ -1,0 +1,215 @@
+<?php
+	ob_start();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<link media="screen" type="text/css" rel="stylesheet" href="css/layout.css"/>
+	<link media="all" type="text/css" rel="stylesheet" href="css/style.css"/>
+	<link media="all" type="text/css" rel="stylesheet" href="css/friends.css"/>
+	<link href="http://www.gnome.org/img/logo/foot-16.png" type="image/png" rel="icon"/>
+	<link href="http://www.gnome.org/img/logo/foot-16.png" type="image/png" rel="SHORTCUT ICON"/>
+	<title>GNOME: The Free Software Desktop Project</title>
+	<link href="/frontpage.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/fog-website.js"></script>
+</head>
+<body>
+
+  <!-- site header -->
+  <div id="page">
+    <ul id="general">
+      <li id="siteaction-gnome_home" class="home">
+        <a href="http://www.gnome.org/" title="Home">Home</a>
+      </li>
+      <li id="siteaction-gnome_news">
+        <a href="http://news.gnome.org/" title="News">News</a>
+      </li>
+      <li id="siteaction-gnome_projects">
+        <a href="http://www.gnome.org/projects/" title="Projects">Projects</a>
+      </li>
+      <li id="siteaction-gnome_art">
+        <a href="http://art.gnome.org/" title="Art">Art</a>
+      </li>
+      <li id="siteaction-gnome_support">
+        <a href="http://www.gnome.org/support/" title="Support">Support</a>
+      </li>
+      <li id="siteaction-gnome_development">
+        <a href="http://developer.gnome.org/" title="Development">Development</a>
+      </li>
+      <li id="siteaction-gnome_community">
+        <a href="http://www.gnome.org/community/" title="Community">Community</a>
+      </li>
+    </ul>
+    <div id="header">
+      <h1>Become a Friend of GNOME!</h1>
+      <div id="tabs">
+   &nbsp;
+      </div> <!-- end of #tabs -->
+    </div> <!-- end of #header -->
+  </div>
+<!-- end site header -->
+
+  <div id="body">
+    <div id="content">
+
+
+
+
+
+<div id="friend-sidebar">
+<div id="sidebar-info">
+<h5>Thanks for your donation!</h5>
+<ul>
+<li>$600 Sends one hacker to GUADEC.</li>
+
+<li>$3000 Pays for lodging and food for a 3 day hackfest for 5 developers.</li>
+
+<li>$5000 Pays for a usability study.</li>
+
+</ul>
+</div>
+</div>
+
+
+<div id="friend-bread">
+
+<h2>Please fill out your donation details</h2>
+
+<form method="post" action="https://www.paypal.com/cgi-bin/webscr">	
+<?php
+
+	if(!empty($_POST['aidtype'])) {
+		switch($_POST['aidtype']) {
+			case 'adopt':
+			echo 'You have chosen to <strong>adopt a hacker</strong> <a href="index.html">(change)</a> for a monthly amount of $10';
+
+			break;
+			case 'associate':
+			echo 'You have chosen to become a <strong>associate</strong> <a href="index.html">(change)</a> for a one time amount of <input type="text" id="amount" name="amount" value="$25" size=5>';
+
+			break;
+			case 'sponsor':
+			echo 'You have chosen to become a <strong>sponsor</strong> <a href="index.html">(change)</a> for a one time  <input type="text" id="amount" name="amount" value="$500" size=5>';
+
+			break;
+			case 'philanthropist':
+				echo 'You have chosen to become a <strong>philanthropist</strong> <a href="index.html">(change)</a> for a one time  <input type="text" id="amount" name="amount" value="$1200" size=5>';
+			break;
+			default:
+				header('location: ./index.html');
+				die('No type selected.');
+			break;
+		}
+	}
+	else header('location: ./index.html');
+	
+
+?>
+
+
+<h3>Pick a hacker from whom you will receive a post card:</h3>
+
+<input type="radio" value="You will recieve a postcard from Brian Cameron" name="item_name"/>Brian Cameron<br/>
+<input type="radio" value="You will recieve a postcard from Behdad Esfahbod" name="item_name"/>Behdad Esfahbod<br/>
+<input type="radio" value="You will recieve a postcard from John Palmieri" name="item_name"/>John Palmieri<br/>
+<input type="radio" value="You will recieve a postcard from Lucas Rocha" name="item_name"/>Lucas Rocha<br/>
+<input type="radio" value="You will recieve a postcard from Vincent Untz" name="item_name"/>Vincent Untz<br/>
+<input type="radio" value="You will recieve a postcard from Luis Villa" name="item_name"/>Luis Villa<br/>
+
+
+
+<h3>Select whenever you want to recieve a gift:</h3>
+<input type="radio" value="do not send a gift" name="item_number" checked>Yes, I want to receive a gift as a thank you for my donation.<br/>
+<input type="radio" value="send a gift please" name="item_number"/>Don't send me a gift, please.<br/>
+<!--<input type="checkbox" name="item_number" value="1" checked="checked"> -->
+<small>If you do not want to receive a gift, we will save the money for the gift and shipping and use it to further the mission of the GNOME Project, bringing a free desktop to the public.</small>
+
+<!-- <p>Your name as you want it to be displayed on the web page <input type="text" name="name" size="23"></p> -->
+
+<p>Additional comments or ideas on how we can improve the GNOME Foundation:
+<textarea rows="7" cols="88" name="custom"></textarea>
+</p>
+
+<?php 
+
+	switch($_POST['aidtype']) {
+			case 'adopt':
+				echo '
+				<!-- Identify your business so that you can collect the payments. --> 
+				<input type="hidden" name="business" value="friends@gnome.org"> 
+				<!-- Specify a Subscribe but t on. --> 
+				<input type="hidden" name="cmd" value="_xclick-subscriptions"> 
+				<! -- Identify the subscription. - - >
+				<!-- 
+				<input type="hidden" name="item_name" value="Adopt a hacker for 10$ a month"> 
+				<input type="hidden" name ="item_number" value="DIG Weekly"> 
+				-->
+				<! -- Set the terms of the regular subscription. --> 
+				<input type="hidden" name="currency_code" value="USD"> 
+				<input type="hidden" name="a3" value= "10.00"> 
+				<input type="hidden" name="p3" value="1" > 
+				<input type="hidden" name="t3" value ="M" > 
+				<!-- Display the payment button. --> 
+				<input type ="image" name= "submit" src="images/donate-button.png" alt="PayPal - The safer, easier way to pay online"> 
+				<img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" >
+				</form>';
+			break;
+
+			case 'associate':
+				echo '<input type="hidden" value="friends@gnome.org" name="business"/>
+				<input type="hidden" value="http://www.gnome.org/friends/thank-you.html" name="return"/>
+				<input type="hidden" value="_xclick" name="cmd"/>
+				<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>';
+			break;
+
+			case 'sponsor':
+				echo '<input type="hidden" value="friends@gnome.org" name="business"/>
+				<input type="hidden" value="http://www.gnome.org/friends/thank-you.html" name="return"/>
+				<input type="hidden" value="_xclick" name="cmd"/>
+				<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>';
+			break;
+
+			case 'philanthropist':
+				echo '<input type="hidden" value="friends@gnome.org" name="business"/>
+				<input type="hidden" value="http://www.gnome.org/friends/thank-you.html" name="return"/>
+				<input type="hidden" value="_xclick" name="cmd"/>
+				<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>';
+			break;
+
+			default:
+				header('location: ./index.html');
+				die('No type selected.');
+			break;
+		}
+/*
+<!--
+<input type="hidden" value="friends@gnome.org" name="business"/>
+<input type="hidden" value="http://www.gnome.org/friends/thank-you.html" name="return"/>
+<input type="hidden" value="_xclick" name="cmd"/>
+
+<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>
+*/
+?>
+</form>
+
+
+<br/>
+<p>Thank you for your support!</p>
+
+<p id="foundation-info">GNOME Foundation is a 501(c)3 non-profit organization, and your donation is considered charitable to the extent of applicable law. Consult your tax preparer to determine tax-deductibility.</p>
+
+</div>
+
+
+
+  </div> <!-- end of div#content -->
+
+  <div id="footer">
+    Copyright © 2005-2008 <a href="http://www.gnome.org/">The GNOME Project</a>.<br>
+    <a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>. Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
+  </div>
+
+  </div> <!-- end of div#body -->
+</body>
+</html>
