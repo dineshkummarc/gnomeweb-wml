@@ -1,4 +1,4 @@
-SUBDIRS = css images include js 
+SUBDIRS = css images js 
 
 urlpath = /new-friends
 
