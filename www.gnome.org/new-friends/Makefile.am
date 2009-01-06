@@ -6,11 +6,11 @@ page_SCRIPTS = \
 	about-foundation.html \
 	index.html \
 	previous-donors.html \
+	step2.php \
 	thank-you.html
 
 include $(top_srcdir)/rules.common
 
-page_DATA = \
-	step2.php
+page_DATA =
 
 EXTRA_DIST=$(page_DATA)
