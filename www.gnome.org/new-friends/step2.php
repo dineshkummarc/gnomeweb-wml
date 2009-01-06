@@ -1,61 +1,20 @@
-<?php
-	ob_start();
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-	<link media="screen" type="text/css" rel="stylesheet" href="css/layout.css"/>
-	<link media="all" type="text/css" rel="stylesheet" href="css/style.css"/>
-	<link media="all" type="text/css" rel="stylesheet" href="css/friends.css"/>
-	<link href="http://www.gnome.org/img/logo/foot-16.png" type="image/png" rel="icon"/>
-	<link href="http://www.gnome.org/img/logo/foot-16.png" type="image/png" rel="SHORTCUT ICON"/>
-	<title>GNOME: The Free Software Desktop Project</title>
-	<link href="/frontpage.css" type="text/css" rel="stylesheet"/>
-	<script type="text/javascript" src="./js/jquery.js"></script>
-	<script type="text/javascript" src="./js/fog-website.js"></script>
+
+<title>Become a Friend of GNOME!</title>
+<meta name="description" content="Become a Friend of GNOME!" />
+
+<link media="all" type="text/css" rel="stylesheet" href="css/friends.css"/>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/fog-website.js"></script>
+
 </head>
+
 <body>
 
-  <!-- site header -->
-  <div id="page">
-    <ul id="general">
-      <li id="siteaction-gnome_home" class="home">
-        <a href="http://www.gnome.org/" title="Home">Home</a>
-      </li>
-      <li id="siteaction-gnome_news">
-        <a href="http://news.gnome.org/" title="News">News</a>
-      </li>
-      <li id="siteaction-gnome_projects">
-        <a href="http://www.gnome.org/projects/" title="Projects">Projects</a>
-      </li>
-      <li id="siteaction-gnome_art">
-        <a href="http://art.gnome.org/" title="Art">Art</a>
-      </li>
-      <li id="siteaction-gnome_support">
-        <a href="http://www.gnome.org/support/" title="Support">Support</a>
-      </li>
-      <li id="siteaction-gnome_development">
-        <a href="http://developer.gnome.org/" title="Development">Development</a>
-      </li>
-      <li id="siteaction-gnome_community">
-        <a href="http://www.gnome.org/community/" title="Community">Community</a>
-      </li>
-    </ul>
-    <div id="header">
-      <h1>Become a Friend of GNOME!</h1>
-      <div id="tabs">
-   &nbsp;
-      </div> <!-- end of #tabs -->
-    </div> <!-- end of #header -->
-  </div>
-<!-- end site header -->
-
-  <div id="body">
-    <div id="content">
-
-
-
-
+<h1>Become a Friend of GNOME!</h1>
 
 <div id="friend-sidebar">
 <div id="sidebar-info">
@@ -78,6 +37,7 @@
 
 <form method="post" action="https://www.paypal.com/cgi-bin/webscr">	
 <?php
+	ob_start();
 
 	if(!empty($_POST['aidtype'])) {
 		switch($_POST['aidtype']) {
@@ -103,8 +63,6 @@
 		}
 	}
 	else header('location: ./index.html');
-	
-
 ?>
 
 
@@ -182,17 +140,8 @@
 				die('No type selected.');
 			break;
 		}
-/*
-<!--
-<input type="hidden" value="friends@gnome.org" name="business"/>
-<input type="hidden" value="http://www.gnome.org/friends/thank-you.html" name="return"/>
-<input type="hidden" value="_xclick" name="cmd"/>
-
-<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>
-*/
 ?>
 </form>
-
 
 <br/>
 <p>Thank you for your support!</p>
@@ -201,15 +150,5 @@
 
 </div>
 
-
-
-  </div> <!-- end of div#content -->
-
-  <div id="footer">
-    Copyright © 2005-2008 <a href="http://www.gnome.org/">The GNOME Project</a>.<br>
-    <a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>. Hosted by <a href="http://www.redhat.com/">Red Hat</a>.
-  </div>
-
-  </div> <!-- end of div#body -->
 </body>
 </html>
