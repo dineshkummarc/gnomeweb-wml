@@ -7,7 +7,8 @@ page_SCRIPTS = \
 	index.html \
 	previous-donors.html \
 	step2.php \
-	thank-you.html
+	thank-you.html \
+	.htaccess
 
 include $(top_srcdir)/rules.common
 
