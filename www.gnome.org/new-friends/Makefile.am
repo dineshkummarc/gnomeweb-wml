@@ -5,6 +5,7 @@ urlpath = /new-friends
 page_SCRIPTS = \
 	about-foundation.html \
 	index.html \
+	check.html \
 	previous-donors.html \
 	step2.php \
 	thank-you.html \
