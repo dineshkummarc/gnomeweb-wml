@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /new-friends/js
+urlpath = /friends/js
 
 page_DATA = \
 	fog-website.js \

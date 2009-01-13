@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = /new-friends/images
+urlpath = /friends/images
 
 page_DATA = \
 	bullet.png \

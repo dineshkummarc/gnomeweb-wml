@@ -1,6 +1,6 @@
 #SUBDIRS =
 
-urlpath = /new-friends/css
+urlpath = /friends/css
 
 page_DATA = \
 	bar.png \

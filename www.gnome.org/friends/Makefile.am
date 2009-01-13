@@ -1,6 +1,6 @@
 SUBDIRS = css images js 
 
-urlpath = /new-friends
+urlpath = /friends
 
 page_SCRIPTS = \
 	about-foundation.html \
