@@ -48,6 +48,7 @@ page_DATA = \
 	ghop-2007.png \
 	gnome-equation.png \
 	outreach-a11y.png \
-	two-twenty-four.png
+	two-twenty-four.png \
+	new-friends-of-gnome.png
 
 include $(top_srcdir)/rules.common
