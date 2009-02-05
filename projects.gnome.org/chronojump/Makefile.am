@@ -69,6 +69,7 @@ page_SCRIPTS= \
 	hardware_gl.html \
 	hardware.html \
 	hardware_pt.html \
+	index.html \
 	index_ca.html \
 	index_de.html \
 	index_en.html \
