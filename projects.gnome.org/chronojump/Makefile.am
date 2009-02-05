@@ -75,7 +75,6 @@ page_SCRIPTS= \
 	index_es.html \
 	index_fr.html \
 	index_gl.html \
-	index.html	\
 	index_it.html \
 	index_pt.html \
 	installation_ca.html \
