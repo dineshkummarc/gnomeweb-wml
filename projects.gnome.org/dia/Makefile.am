@@ -23,7 +23,11 @@ page_SCRIPTS = \
 	right_bar.html \
 	scrshot.html \
 	umlclass.html \
-	workspac.html
+	workspac.html \
+	\
+	dia-0.97-integrated-ui.png \
+	dia-0-97-coming-soon.png \
+	render-test.pdf 
 
 include $(top_srcdir)/rules.common
 
