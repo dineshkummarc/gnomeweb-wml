@@ -7,15 +7,16 @@
 fixes.  Also, this version is considerably faster than previous
 versions in three ways: (1) when dealing with spreadsheets containing
 large farms of VLOOKUP, HLOOKUP, or MATCH calls over the same
-database; (2) we now only calculate the relevant branch of IF calls,
+database, we now pre-process the database range once and the actual lookups are 
+very fast; (2) we now only calculate the relevant branch of IF calls,
 unless implicit iteration is in effect; (3) large spreadsheets
-containing ranges like, for example, A$10:A10, A$10:A11, ...,
-A$10:A$9999 used to hit a degenerate case in our dependency tracking
-</p>
+containing many similar ranges like, for example, A$10:A10, A$10:A11, ...,
+A$10:A9999 used to hit a degenerate case in our dependency tracking.</p>
   <p>This release requires the concurrently released goffice 0.7.3.  We also
 recommend the new libgsf 1.4.11.</p>
   <p><strong>Attention packagers</strong>: goffice no longer depends
-on libgnome, libgnomeui, and gnome-vfs.</p>
+on libgnome, libgnomeui, and gnome-vfs.  (To get the full benefit of this, make
+sure libgsf is not compiled to require gnome-vfs and bonobo.)</p>
   <p><strong>Attention packagers</strong>: please do not ship goffice
   with equation enabled.
   <ul>
@@ -329,7 +330,7 @@ on libgnome, libgnomeui, and gnome-vfs.</p>
 	Experimental support for equation using gmathml. Disabled by default,
 	as no release of gmathml exists yet. Source code of gmathml can be
 	retrieved using the following command:
-	<code>git clone http://people.freedesktop.org/~emmanuel/gmathml.git</code>
+	git clone http://people.freedesktop.org/~emmanuel/gmathml.git
       </li>
     </ul>
   <li>Halton Huo
