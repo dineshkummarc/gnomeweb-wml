@@ -121,6 +121,26 @@ page_SCRIPTS= \
 	chronopic_buy_view_cart.png \
 	chronopic_store.png \
 	howto_buttons_buy.txt \
+	modular_platform_bridge2.jpg \
+	modular_platform_bridge2_mini.jpg \
+	modular_platform_bridge.jpg \
+	modular_platform_bridge_mini.jpg \
+	modular_platform_circuit_board_external.jpg \
+	modular_platform_circuit_board_external_mini.jpg \
+	modular_platform_circuit_board_internal.jpg \
+	modular_platform_circuit_board_internal_mini.jpg \
+	modular_platform_circuit_board_internal_tape.jpg \
+	modular_platform_circuit_board_internal_tape_mini.jpg \
+	modular_platform_one_foot_done.jpg \
+	modular_platform_one_foot_done_mini.jpg \
+	modular_platform_padu_xavi.jpg \
+	modular_platform_padu_xavi_mini.jpg \
+	modular_platform_tape_removal.jpg \
+	modular_platform_tape_removal_mini.jpg \
+	modular_platform_with_boscosystem.jpg \
+	modular_platform_with_boscosystem_mini.jpg \
+	modular_platform_with_chronopic.jpg \
+	modular_platform_with_chronopic_mini.jpg \
 	vic_nov_08_cp_1.jpg \
 	vic_nov_08_cp_1_small.jpg \
 	vic_nov_08_cp_2.jpg \
