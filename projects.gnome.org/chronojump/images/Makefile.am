@@ -140,6 +140,7 @@ page_SCRIPTS= \
 	modular_platform_with_boscosystem.jpg \
 	modular_platform_with_boscosystem_mini.jpg \
 	modular_platform_with_chronopic.jpg \
+	modular_platform_with_chronopic_250.jpg \
 	modular_platform_with_chronopic_mini.jpg \
 	vic_nov_08_cp_1.jpg \
 	vic_nov_08_cp_1_small.jpg \
