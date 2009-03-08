@@ -53,6 +53,8 @@ images_DATA =\
 	data/images/dialog-information.png \
 	data/images/application-x-executable.png \
 	data/images/dialog-warning.png \
+	data/images/empathy-map.png \
+	data/images/logo.png \
 	$(NULL)
 
 shadowboximagesdir = $(pagedir)/data/shadowbox/images
