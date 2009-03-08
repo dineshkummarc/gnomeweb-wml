@@ -62,7 +62,8 @@ SUBDIRS = css \
 	vinagre		\
 	billreminder		\
 	cheese \
-	latour
+	latour			\
+	libchamplain
 
 urlpath = 
 
