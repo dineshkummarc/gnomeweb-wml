@@ -36,7 +36,6 @@ SUBDIRS = css \
 	ORBit2			\
 	gnome-power-manager	\
 	gnome-print		\
-	agnubis			\
 	gst			\
 	gnome-network		\
 	epiphany		\
