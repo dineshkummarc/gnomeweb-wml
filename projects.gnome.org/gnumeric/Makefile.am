@@ -5,6 +5,7 @@ urlpath = /gnumeric
 page_SCRIPTS=index.shtml		\
 		contact-info.shtml	\
 		downloads.shtml		\
+		date-time-formats.shtml \
 		footer.shtml		\
 		header-begin.shtml	\
 		header-end.shtml	\
