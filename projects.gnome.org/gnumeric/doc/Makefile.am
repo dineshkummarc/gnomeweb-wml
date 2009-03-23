@@ -21,6 +21,7 @@ page_SCRIPTS= \
 	CATEGORY_Random_Numbers.shtml		\
 	CATEGORY_Statistics.shtml		\
 	CATEGORY_String.shtml		\
+	CATEGORY_Time_Series_Analysis.shtml	\
 	cell-grid-scrollbars.shtml		\
 	cell-grid.shtml		\
 	cell-grid-tabs.shtml		\
@@ -78,6 +79,8 @@ page_SCRIPTS= \
 	File-Menu.shtml		\
 	file-open-dialog.shtml		\
 	fmt-toolbar.shtml		\
+	forecast-tools.shtml		\
+	frequencies-tools.shtml		\
 	Format-Menu.shtml		\
 	fourier-analysis-tool.shtml		\
 	ftest-two-sample-for-variances-tool.shtml		\
@@ -232,6 +235,7 @@ page_SCRIPTS= \
 	gnumeric-GEOMDIST.shtml		\
 	gnumeric-GEOMEAN.shtml		\
 	gnumeric-GESTEP.shtml		\
+	gnumeric-GET.FORMULA.shtml	\
 	gnumeric-GETENV.shtml		\
 	gnumeric-GETPIVOTDATA.shtml		\
 	gnumeric-GNUMERIC_VERSION.shtml		\
@@ -247,6 +251,7 @@ page_SCRIPTS= \
 	gnumeric-HYPGEOMDIST.shtml		\
 	gnumeric-HYPOT.shtml		\
 	gnumeric-IF.shtml		\
+	gnumeric-IFERROR.shtml		\
 	gnumeric-IMABS.shtml		\
 	gnumeric-IMAGINARY.shtml		\
 	gnumeric-IMARCCOSH.shtml		\
@@ -293,6 +298,7 @@ page_SCRIPTS= \
 	gnumeric-INFO.shtml		\
 	gnumeric-info.shtml		\
 	gnumeric-INTERCEPT.shtml		\
+	gnumeric-INTERPOLATION.shtml	\
 	gnumeric-INTRATE.shtml		\
 	gnumeric-INT.shtml		\
 	gnumeric-INVSUMINV.shtml		\
@@ -417,6 +423,7 @@ page_SCRIPTS= \
 	gnumeric-PEARSON.shtml		\
 	gnumeric-PERCENTILE.shtml		\
 	gnumeric-PERCENTRANK.shtml		\
+	gnumeric-PERIODOGRAM.shtml	\
 	gnumeric-PERMUT.shtml		\
 	gnumeric-PFACTOR.shtml		\
 	gnumeric-PI.shtml		\
@@ -603,6 +610,7 @@ page_SCRIPTS= \
 	gnumeric-YIELDMAT.shtml		\
 	gnumeric-YIELD.shtml		\
 	gnumeric-ZTEST.shtml		\
+	gnumeric-atl_last.shtml		\
 	Help-Menu.shtml		\
 	histogram-tool.shtml		\
 	info-area-calc.shtml		\
@@ -610,6 +618,7 @@ page_SCRIPTS= \
 	info-area-hint.shtml		\
 	info-area.shtml		\
 	Insert-Menu.shtml		\
+	kaplan-meier-tool.shtml		\
 	keybinding.shtml		\
 	menu-bars.shtml		\
 	menu-context-col-row-header.shtml		\
@@ -665,9 +674,15 @@ page_SCRIPTS= \
 	sect-advanced-analysis-goalseek.shtml		\
 	sect-advanced-analysis-goalseek-tool.shtml		\
 	sect-advanced-analysis-scenarios-adding.shtml		\
-	sect-advanced-analysis-scenarios.shtml		\
+	sect-advanced-analysis-scenarios.shtml			\
 	sect-advanced-analysis-scenarios-viewing.shtml		\
-	sect-advanced-analysis-simulation.shtml		\
+	sect-advanced-analysis-simulation.shtml			\
+	sect-advanced-analysis-simulation-iterations.shtml	\
+	sect-advanced-analysis-simulation-output.shtml		\
+	sect-advanced-analysis-simulation-running.shtml		\
+	sect-advanced-analysis-simulation-setup.shtml		\
+	sect-advanced-analysis-simulation-simtable.shtml	\
+	sect-advanced-analysis-simulation-intro.shtml		\
 	sect-advanced-analysis-solver-intprog.shtml		\
 	sect-advanced-analysis-solver-linearprog.shtml		\
 	sect-advanced-analysis-solver-modeling.shtml		\
