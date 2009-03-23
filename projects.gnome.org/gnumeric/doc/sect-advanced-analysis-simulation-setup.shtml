@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Setting up the simulation model</title>
+<link rel="previous" href="sect-advanced-analysis-simulation-intro.shtml" title="Introduction to simulation analysis">
+<link rel="next" href="sect-advanced-analysis-simulation-running.shtml" title="Running the simulation">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">
+<link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-advanced-analysis-simulation-intro.shtml" title="Introduction to simulation analysis">Introduction to simulation analysis</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-advanced-analysis-simulation-running.shtml" title="Running the simulation">Running the simulation</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a><div class="autotoc"><ul>
+<li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
+<li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
+<li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
+<li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
+<li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
+<li>
+<a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-analysis-overview.shtml" title="Advanced Analysis in Gnumeric">Advanced Analysis in Gnumeric</a></li>
+<li><a class="xref" href="sect-advanced-analysis-complexNumbers.shtml" title="Analysis using Complex Numbers">Analysis using Complex Numbers</a></li>
+<li><a class="xref" href="sect-advanced-analysis-goalseek.shtml" title="Goal Seek Tool">Goal Seek Tool</a></li>
+<li><a class="xref" href="sect-advanced-analysis-solver.shtml" title="Solver">Solver</a></li>
+<li>
+<a class="xref" href="sect-advanced-analysis-simulation.shtml" title="Simulation Analysis">Simulation Analysis</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-advanced-analysis-simulation-intro.shtml" title="Introduction to simulation analysis">Introduction to simulation analysis</a></li>
+<li>Setting up the simulation model</li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-running.shtml" title="Running the simulation">Running the simulation</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-output.shtml" title="Simulation output">Simulation output</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">Using SIMTABLE</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-iterations.shtml" title="Determining the number of iterations">Determining the number of iterations</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="sect-advanced-analysis-scenarios.shtml" title="Analysis using scenarios">Analysis using scenarios</a></li>
+<li><a class="xref" href="sect-analysis-statistical.shtml" title="Statistical Analysis">Statistical Analysis</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
+<li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
+<li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
+<li><a class="xref" href="chapter-morehelp.shtml" title="Getting More Help">Getting More Help</a></li>
+<li><a class="xref" href="chapter-bugs.shtml" title="Reporting a Problem">Reporting a Problem</a></li>
+<li><a class="xref" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
+<li><a class="xref" href="function-reference.shtml" title="Function Reference">Function Reference</a></li>
+<li><a class="xref" href="keybinding.shtml" title="Keybinding Reference">Keybinding Reference</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect2">
+<a name="sect-advanced-analysis-simulation-setup"></a><div class="header"><h1 class="sect2 title"><span class="title">Setting up the simulation model</span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a></li>
+<li class="linktrail"><a class="linktrail" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="sect-advanced-analysis-simulation.shtml" title="Simulation Analysis">Simulation Analysis</a></li>
+</ul>
+<p class="para block block-first">The remainder of this chapter will illustrate use of the simulation tool using an example from Banks et. al.  
+      <a name="-noteref-id2439306"></a><sup><a class="footnote" href="#-note-id2439306">1</a></sup> 
+    A classic inventory problem is the newsvendor problem.  A newsvendor buys papers for 33 cents each and sells for 50 cents.  Newspapers not sold are sold as scrap (recycled) for 5 cents.  Newspapers are purchased by the paper seller in bundles of 10.  Demand for newspapers can be categorized as “good,” “fair,” or “poor” with probability 0.35, 0.45 and 0.20 respectively, with each day's demand being independent of prior days.  The problem for the newsvendor is to determine the optimal number of papers to purchase when the day's demand is not yet known.</p>
+<p class="para block">The daily profit equation for the newsvendor is:</p>
+<div class=" block informalequation">
+     
+     <span class="mathphrase">Profit = [(Sale revenue) - (Cost) - (Scrap value)]</span>
+    </div>
+<p class="para block">To set up the model, this example will use two tabs in Gnumeric, a tab labeled 'Profit' to calculate profit, and a tab labeled 'Demand Tables' to store the various tables needed to calculate the demand for any given sampling.</p>
+<p class="para block">For the Profit tab, set up the profit tab as in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#fig-simulation-example-profit-table" title="Profit table for newsvendor example">Figure 6-5</a>.</p>
+<p class="para block">At the top of the Profit' tab, the Profit table will be entered .  There are three variables: Sale revenue, Cost and Scrap value, and they take the per unit coefficients of 0.5, 0.33 and 0.05 respectively.  Enter the coefficients in cells B13 through D13.  In cells B12 through D12, enter the equations for sale revenue, cost and Scrap value that are in the list below.  In cell E12, enter the equation for Profit</p>
+<p class="para block">Next, we add the values for the decision variable, which is the amount purchased, and the amount sold.  </p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first"><span class="para">B12: =B13*min(B16,B20)</span></li>
+<li><span class="para">C12: =C13*B16</span></li>
+<li><span class="para">D12: =D13*max(0,B16-B20)</span></li>
+<li><span class="para">E12: =B12-C12+D12</span></li>
+<li><span class="para">B13: 0.5</span></li>
+<li><span class="para">C13: 0.33</span></li>
+<li><span class="para">D13: 0.05</span></li>
+<li><span class="para">B16: 50</span></li>
+</ul></div>
+<div class=" block figure block-indent">
+<a name="fig-simulation-example-profit-table"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 6-5</span> </span>Profit table for newsvendor example</span></div>
+<div class="figure-inner">
+      
+      <div class=" block screenshot block-first">
+        <div class="mediaobject"><img src="figures/analysis-simulation-profit-ex1.png"></div>
+      </div>
+    </div>
+</div>
+<div class="admonition block tip block-indent">
+      <div class="block block-first title title-formal"><span class="title"><span class="label"></span> Using SIMTABLE for parameter values.</span></div>
+      <p class="para block block-first">Sometimes, there is a need to try a number of different values for a single parameter. In <a class="xref" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">Section 6.5.5 ― Using SIMTABLE</a> the <span class="function">SIMTABLE</span> function will be used to automate the use of a set of values for a parameter such as purchase quantity.  For now, set the purchase quantity to 50 in cell C16.</p>
+    </div>
+<p class="para block">Next, create the demand tables from which the demand will be generated.  In the tab 'Demand Tables' enter the values of the probability in cells B4 through B6 (B4: 0.35; B5: 0.45; B6: 0.2).  In cells C4, C5 and C6 enter the cumulative probability values (C4: 0.35; C5: 0.8; C6: 1) as shown in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#fig-simulation-example-demand-newsday-type" title="Probability distribution for type of newsday">Figure 6-6</a>. </p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first"><span class="para">B4: 0.35</span></li>
+<li><span class="para">B5: 0.45</span></li>
+<li><span class="para">B6: 0.2</span></li>
+<li><span class="para">C4: 0.35</span></li>
+<li><span class="para">C5: 0.8</span></li>
+<li><span class="para">C6: 1.0</span></li>
+</ul></div>
+<div class=" block figure block-indent">
+<a name="fig-simulation-example-demand-newsday-type"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 6-6</span> </span>Probability distribution for type of newsday</span></div>
+<div class="figure-inner">
+      
+      <div class=" block screenshot block-first">
+        <div class="mediaobject"><img src="figures/analysis-simulation-demand-ex1.png"></div>
+      </div>
+    </div>
+</div>
+<p class="para block">The next table is the daily demand for newspapers based on the type of news day.  The table Distribution of Newspapers Demanded is in cells A11 through D18 of the Demand Tables worksheet as shown in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#table-analysis-simulation-daily-demand" title="Daily newspaper demand distribution table in Demand Tables worksheet">Table 6-1</a> and contains the daily demand distribution values.  The cumulative distribution tables in cells A21 through G29, shown in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#table-analysis-simulation-cumulative-demand" title="Cumulative demand distribution table in Demand Tables worksheet">Table 6-2</a> are derived values from the Distribution of Newspapers Demanded using values in the top Distribution of Newspapers demanded table.</p>
+<div class="table block block-indent">
+<a name="table-analysis-simulation-daily-demand"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Table 6-1</span> </span>Daily newspaper demand distribution table in Demand Tables worksheet</span></div>
+<table summary="Daily newspaper demand distribution table in Demand Tables worksheet" style="border: solid 1px;"><tbody>
+<tr>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">A</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">B</span></span>
+        </td>
+<td>
+          <span class="para"><span class="emphasis">C</span></span>
+        </td>
+<td>
+          <span class="para"><span class="emphasis">D</span></span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">11</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Demand</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Good</span>
+        </td>
+<td>
+          <span class="para">Fair</span>
+        </td>
+<td>
+          <span class="para">Poor</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">12</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">40</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.03</span>
+        </td>
+<td>
+          <span class="para">0.1</span>
+        </td>
+<td>
+          <span class="para">0.44</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">13</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">50</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.05</span>
+        </td>
+<td>
+          <span class="para">0.18</span>
+        </td>
+<td>
+          <span class="para">0.22</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">14</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">60</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.15</span>
+        </td>
+<td>
+          <span class="para">0.4</span>
+        </td>
+<td>
+          <span class="para">0.16</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">15</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">70</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.2</span>
+        </td>
+<td>
+          <span class="para">0.2</span>
+        </td>
+<td>
+          <span class="para">0.16</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">16</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">80</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.35</span>
+        </td>
+<td>
+          <span class="para">0.08</span>
+        </td>
+<td>
+          <span class="para">0.06</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">17</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">90</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.15</span>
+        </td>
+<td>
+          <span class="para">0.04</span>
+        </td>
+<td>
+          <span class="para">0</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">18</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">100</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.07</span>
+        </td>
+<td>
+          <span class="para">0</span>
+        </td>
+<td>
+          <span class="para">0</span>
+        </td>
+</tr>
+</tbody></table>
+</div>
+<div class="table block block-indent">
+<a name="table-analysis-simulation-cumulative-demand"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Table 6-2</span> </span>Cumulative demand distribution table in Demand Tables worksheet</span></div>
+<table summary="Cumulative demand distribution table in Demand Tables worksheet" style="border: solid 1px;"><tbody>
+<tr>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">A</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">B</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">C</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">D</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">E</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">F</span></span>
+        </td>
+<td>
+          <span class="para"><span class="emphasis">G</span></span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">21</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          Cumulative Distribution
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Values</span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td>
+          <span class="para"></span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">22</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Demand</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Good</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Fair</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Poor</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">Good</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">Fair</span>
+        </td>
+<td>
+          <span class="para">Poor</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">23</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">40</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.03</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.1</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.44</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0</span>
+        </td>
+<td>
+          <span class="para">0</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">24</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">50</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.08</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.28</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.66</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.03</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0.1</span>
+        </td>
+<td>
+          <span class="para">0.44</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">25</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">60</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.23</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.68</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.82</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.08</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0.28</span>
+        </td>
+<td>
+          <span class="para">0.66</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">26</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">70</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.43</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.88</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.94</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.23</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0.68</span>
+        </td>
+<td>
+          <span class="para">0.82</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">27</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">80</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.78</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.96</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">1</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.43</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0.88</span>
+        </td>
+<td>
+          <span class="para">0.94</span>
+        </td>
+</tr>
+<tr>
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">28</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">90</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.93</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">1</span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.78</span>
+        </td>
+<td class="td-colsep">
+        <span class="para">0.96</span>
+        </td>
+<td>
+          <span class="para">1</span>
+        </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+          <span class="para"><span class="emphasis">29</span></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">100</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">1</span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para"></span>
+        </td>
+<td class="td-colsep">
+          <span class="para">0.93</span>
+        </td>
+<td class="td-colsep">
+          <span class="para">1</span>
+        </td>
+<td>
+          <span class="para"></span>
+        </td>
+</tr>
+</tbody></table>
+</div>
+<p class="para block">When these values are entered, the final results will look like <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#fig-simulation-example-daily-demand" title="Completed probability distribution tables in Demand Tables worksheet">Figure 6-7</a>.</p>
+<div class=" block figure block-indent">
+<a name="fig-simulation-example-daily-demand"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 6-7</span> </span>Completed probability distribution tables in Demand Tables worksheet</span></div>
+<div class="figure-inner">
+      
+      <div class=" block screenshot block-first">
+        <div class="mediaobject"><img src="figures/analysis-simulation-demand-ex2.png"></div>
+      </div>
+    </div>
+</div>
+<p class="para block">Finally, back in the Profit tab, the demand data will be filled in through the use of references to the Demand Tables tab as shown in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#fig-simulation-example-profit-sheet" title="Profit table for newsvendor example">Figure 6-8</a>. </p>
+<p class="para block">In the following cells, enter the equations below in the 'Profit' tab:</p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first"><span class="para">B17: =rand()</span></li>
+<li><span class="para">C17: =if(B17&lt;'Demand Tables'!C4,"Good",if(C19&lt;'Demand Tables'!C5,"Fair","Poor"))</span></li>
+<li><span class="para">B18: =rand()</span></li>
+<li><span class="para">B20: =lookup($C17,$B23:$D23,$B24:$D24)</span></li>
+<li><span class="para">B21: =E12</span></li>
+<li><span class="para">B24: =lookup(Profit!$B18,'Demand Tables'!E23:E29,'Demand Tables'!$A23:$A29)</span></li>
+<li><span class="para">C24: =lookup(Profit!$B18,'Demand Tables'!F23:F29,'Demand Tables'!$A23:$A29)</span></li>
+<li><span class="para">D24: =lookup(Profit!$B18,'Demand Tables'!G23:G29,'Demand Tables'!$A23:$A29)</span></li>
+</ul></div>
+<div class=" block figure block-indent">
+<a name="fig-simulation-example-profit-sheet"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 6-8</span> </span>Profit table for newsvendor example</span></div>
+<div class="figure-inner">
+      
+      <div class=" block screenshot block-first">
+        <div class="mediaobject"><img src="figures/analysis-simulation-profit-ex2.png"></div>
+      </div>
+    </div>
+</div>
+<p class="para block">When done, the Profit spreadsheet will be setup with a profit equation, decision variables, and random events as shown in <a class="xref" href="sect-advanced-analysis-simulation-setup.shtml#fig-simulation-example-profit-sheet" title="Profit table for newsvendor example">Figure 6-8</a>.  The <span class="function">rand()</span> functions in cells C17 and C18 return a random value between 0 and 1, which are used by the <span class="function">lookup()</span> functions in cells B20, B24, C24 and D24 to calculate a randomly determined daily demand.  Next, this sheet will be used for analysis through the use of simulation.</p>
+<div class="footnotes"><div class="footnote">
+<a name="-note-id2439306"></a><span class="footnote-number"><a class="footnote-ref" href="#-noteref-id2439306">1</a></span>
+        <p class="para block block-first">Adapted from Banks, Carson, Nelson and Nicol (2001), Discrete-Event System Simulation, 3rd ed. pp. 42-45.</p>
+      </div></div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-advanced-analysis-simulation-intro.shtml" title="Introduction to simulation analysis">Introduction to simulation analysis</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-advanced-analysis-simulation-running.shtml" title="Running the simulation">Running the simulation</a></td>
+</tr></table></div>
+</body>
+</html>

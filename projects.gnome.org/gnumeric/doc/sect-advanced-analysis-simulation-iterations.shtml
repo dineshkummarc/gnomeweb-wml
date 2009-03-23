@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Determining the number of iterations</title>
+<link rel="previous" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">
+<link rel="next" href="sect-advanced-analysis-scenarios.shtml" title="Analysis using scenarios">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">
+<link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">Using SIMTABLE</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-advanced-analysis-scenarios.shtml" title="Analysis using scenarios">Analysis using scenarios</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a><div class="autotoc"><ul>
+<li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
+<li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
+<li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
+<li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
+<li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
+<li>
+<a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-analysis-overview.shtml" title="Advanced Analysis in Gnumeric">Advanced Analysis in Gnumeric</a></li>
+<li><a class="xref" href="sect-advanced-analysis-complexNumbers.shtml" title="Analysis using Complex Numbers">Analysis using Complex Numbers</a></li>
+<li><a class="xref" href="sect-advanced-analysis-goalseek.shtml" title="Goal Seek Tool">Goal Seek Tool</a></li>
+<li><a class="xref" href="sect-advanced-analysis-solver.shtml" title="Solver">Solver</a></li>
+<li>
+<a class="xref" href="sect-advanced-analysis-simulation.shtml" title="Simulation Analysis">Simulation Analysis</a><div class="autotoc"><ul>
+<li><a class="xref" href="sect-advanced-analysis-simulation-intro.shtml" title="Introduction to simulation analysis">Introduction to simulation analysis</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-setup.shtml" title="Setting up the simulation model">Setting up the simulation model</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-running.shtml" title="Running the simulation">Running the simulation</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-output.shtml" title="Simulation output">Simulation output</a></li>
+<li><a class="xref" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">Using SIMTABLE</a></li>
+<li>Determining the number of iterations</li>
+</ul></div>
+</li>
+<li><a class="xref" href="sect-advanced-analysis-scenarios.shtml" title="Analysis using scenarios">Analysis using scenarios</a></li>
+<li><a class="xref" href="sect-analysis-statistical.shtml" title="Statistical Analysis">Statistical Analysis</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
+<li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
+<li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
+<li><a class="xref" href="chapter-morehelp.shtml" title="Getting More Help">Getting More Help</a></li>
+<li><a class="xref" href="chapter-bugs.shtml" title="Reporting a Problem">Reporting a Problem</a></li>
+<li><a class="xref" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
+<li><a class="xref" href="function-reference.shtml" title="Function Reference">Function Reference</a></li>
+<li><a class="xref" href="keybinding.shtml" title="Keybinding Reference">Keybinding Reference</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect2">
+<a name="sect-advanced-analysis-simulation-iterations"></a><div class="header"><h1 class="sect2 title"><span class="title">Determining the number of iterations</span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a></li>
+<li class="linktrail"><a class="linktrail" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="sect-advanced-analysis-simulation.shtml" title="Simulation Analysis">Simulation Analysis</a></li>
+</ul>
+<p class="para block block-first">In simulation, one major question is how many iterations are needed to reach a chosen level of precision in the results.  Simulation as a tool provides an approximation of the actual relationship between the input and output variables.  The precision of the approximation is based on the number of iterations of the simulation done.   More iterations in the sample lead to greater precision.  But the relationship between iterations and precision depends on the relationship between the variables in the precision.  In addition, the analyst must decide which output variable is the variable of interest, and what degree of precision is required.  The next step is to determine a sufficiently large number of iterations
+      <span class="inlineequation">
+        
+        <span class="mathphrase">R</span>
+      </span> 
+    be used to satisfy:    
+    <div class=" block informalequation">
+      
+      <div class="mediaobject"><img src="figures/analysis-simulation-confidence-interval-equation.png"></div>
+    </div>
+    </p>
+<p class="para block">Where 
+    <span class="inlineequation"> 
+      
+      <span class="mathphrase">Θ-hat</span>
+    </span> is the estimate of the mean, 
+    <span class="inlineequation">
+      
+      <span class="mathphrase">Θ</span>
+    </span> is the actual mean, ε is the specified error, and (1-α) is the probability that the estimate is within ε of the actual value (i.e. the (1-α) confidence interval). 
+    Common values of (1-α) are 95% and 99%. 
+    The Simulation Report from Gnumeric includes values for the 95% confidence interval as shown in <a class="xref" href="sect-advanced-analysis-simulation-output.shtml#fig-analysis-simulation-report-screen" title="Simulation output example">Figure 6-14</a>.
+		</p>
+<p class="para block">The general procedure is as follows:<a name="-noteref-id2439211"></a><sup><a class="footnote" href="#-note-id2439211">1</a></sup>
+    </p>
+<div class="block list orderedlist"><ol class="orderedlist">
+<li class="li-first"><span class="para">Run simulation for a sample of
+    <span class="inlineequation">
+      
+      <span class="mathphrase"> R<sub class="subscript">0</sub></span>
+    </span> iterations. 
+    The default value in Gnumeric is 1000, set in the options tab of the Simulation menu, <a class="xref" href="sect-advanced-analysis-simulation-running.shtml#fig-analysis-simulation-options-dialog" title="Options tab in Simulation dialog box for newsvendor simulation example">Figure 6-10</a>. </span></li>
+<li><span class="para">Take the sample variance
+    <span class="inlineequation">
+      
+      <span class="mathphrase"> S<sub class="subscript">0</sub><sup class="superscript">2</sup></span>
+    </span> from the simulation output spreadsheet and determine the sample standard deviation 
+    <span class="inlineequation">
+      
+      <span class="mathphrase"> S<sub class="subscript">0</sub></span>
+    </span>
+    (see <a class="xref" href="sect-advanced-analysis-simulation-output.shtml#fig-analysis-simulation-report-screen" title="Simulation output example">Figure 6-14</a>). </span></li>
+<li><span class="para">Using
+    <span class="inlineequation">
+      
+      <span class="mathphrase">z<sub class="subscript">α/2</sub></span>
+    </span>
+    as the z-value of the 
+    <span class="inlineequation">
+      
+      <span class="mathphrase">(1-(α/2))</span>
+    </span> percentile of the standard normal distribution, set the initial estimate of the number of iterations required as the smallest integer 
+    <span class="inlineequation">
+      
+      <span class="mathphrase">R</span>
+    </span> 
+    such that 
+    <div class=" block equation">
+<div class="block block-first title"><span class="title"><span class="label"></span>Iterations required for simulation</span></div>
+      
+      <div class="mediaobject"><img src="figures/analysis-simulation-interations-equation1.png"></div>
+    </div>.  Note that if 
+    <span class="inlineequation">
+      
+      <span class="mathphrase">R<sub class="subscript">0</sub></span>
+    </span> is small, it would be more appropriate to use the student's t-distribution of 
+    <span class="inlineequation">
+       
+      <span class="mathphrase">t<sub class="subscript">α/2, R<sub class="subscript">0</sub></sub></span>
+    </span> instead of  
+    <span class="inlineequation">
+      
+      <span class="mathphrase">z<sub class="subscript">α/2</sub></span>
+    </span>.
+    </span></li>
+</ol></div>
+<p class="para block">In this example, to estimate the profit to within
+      <span class="inlineequation">
+        
+        <span class="mathphrase">ε=0.05</span>
+      </span>
+        , first run the simulation with 1000 iterations and a purchase quantity of 50 results in the following </p>
+<p class="para block">
+      <div class="table block block-indent"><table style="border: solid 1px;"><tbody>
+<tr>
+<td class="td-colsep">
+      <span class="para"></span>
+      </td>
+<td class="td-colsep">
+      <span class="para">Mean</span>
+      </td>
+<td class="td-colsep">
+      <span class="para">Variance</span>
+      </td>
+<td>
+      <span class="para">Confidence (95%)</span>
+      </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+      <span class="para">Demand QUANTITY</span>
+      </td>
+<td class="td-colsep">
+      <span class="para">59.19</span>
+      </td>
+<td class="td-colsep">
+      <span class="para">152.4</span>
+      </td>
+<td>
+      <span class="para">0.64</span>
+      </td>
+</tr>
+<tr>
+<td class="td-colsep">
+      <span class="para">Profit QUANTITY</span>
+      </td>
+<td class="td-colsep">
+      <span class="para">7.85</span>
+      </td>
+<td class="td-colsep">
+      <span class="para">2.51</span>
+      </td>
+<td>
+      <span class="para">0.08</span>
+      </td>
+</tr>
+</tbody></table></div>
+    </p>
+<p class="para block"></p>
+<p class="para block">Taking the variance of the table, and setting
+      <span class="inlineequation">
+        
+        <span class="mathphrase">ε=0.05</span>
+      </span>
+      and 
+      <span class="inlineequation">
+        
+        <span class="mathphrase">α=0.05</span>
+      </span>, lookup 
+      <span class="inlineequation">
+         
+        <span class="mathphrase">z<sub class="subscript">α/2</sub></span>
+      </span> from a standard normal table.  
+      <span class="inlineequation">
+        
+        <span class="mathphrase">z<sub class="subscript">α/2=1.96</sub></span>
+      </span> so we have</p>
+<p class="para block"></p>
+<p class="para block">
+    <div class=" block informalequation block-first">
+       
+      <div class="graphic"><img src="figures/analysis-simulation-interations-equation2.png"></div>
+    </div>.
+    </p>
+<p class="para block"></p>
+<p class="para block">Therefore, the minimum number of iterations is 3857.  The simulation can then be re-run with 3857 iterations to create a 95% c.i for profit where 
+    <span class="inlineequation">
+      
+      <span class="mathphrase">ε &lt;=0.05</span>
+    </span>
+         
+    In this example with 3857 iterations, we get the following Simulation Report table: </p>
+<p class="para block"></p>
+<div class="table block block-indent"><table style="border: solid 1px;"><tbody>
+<tr>
+<td class="td-colsep">
+    <span class="para"></span>
+    </td>
+<td class="td-colsep">
+    <span class="para">Mean</span>
+    </td>
+<td class="td-colsep">
+    <span class="para">Variance</span>
+    </td>
+<td>
+    <span class="para">Confidence (95%)</span>
+    </td>
+</tr>
+<tr class="tr-shade">
+<td class="td-colsep">
+    <span class="para">Demand QUANTITY</span>
+    </td>
+<td class="td-colsep">
+    <span class="para">59.11</span>
+    </td>
+<td class="td-colsep">
+    <span class="para">163.9</span>
+    </td>
+<td>
+    <span class="para">0.34</span>
+    </td>
+</tr>
+<tr>
+<td class="td-colsep">
+    <span class="para">Profit QUANTITY</span>
+    </td>
+<td class="td-colsep">
+    <span class="para">7.72</span>
+    </td>
+<td class="td-colsep">
+    <span class="para">2.88</span>
+    </td>
+<td>
+    <span class="para">0.04</span>
+    </td>
+</tr>
+</tbody></table></div>
+<p class="para block"></p>
+<p class="para block">As expected, the 95% Confidence interval for Profit is less than 0.05. For the newsvendor example, the next step would be to look at the confidence intervals of the profit for all values of purchase quantity, and verify that this confidence interval is adequate for the decision to be made.  </p>
+<p class="para block"></p>
+<p class="para block"></p>
+<div class="footnotes"><div class="footnote">
+<a name="-note-id2439211"></a><span class="footnote-number"><a class="footnote-ref" href="#-noteref-id2439211">1</a></span>
+    <p class="para block block-first">Adapted from Banks et. al. Discrete-Event System Simulation, 3rd Edition, pp. 414-416.</p>
+    </div></div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="sect-advanced-analysis-simulation-simtable.shtml" title="Using SIMTABLE">Using SIMTABLE</a></td>
+<td class="navbar-next"><a class="navbar-next" href="sect-advanced-analysis-scenarios.shtml" title="Analysis using scenarios">Analysis using scenarios</a></td>
+</tr></table></div>
+</body>
+</html>
