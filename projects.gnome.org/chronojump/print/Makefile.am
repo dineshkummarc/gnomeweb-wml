@@ -19,6 +19,7 @@ page_SCRIPTS= \
 	construction_contact_platform_parallel_port_ca.html \
 	construction_contact_platform_parallel_port_es.html \
 	construction_contact_platform_pt.html \
+	construction_modular_circuit_platform.html \
 	construction_modular_circuit_platform_es.html \
 	construction_es.html \
 	construction_gl.html \
