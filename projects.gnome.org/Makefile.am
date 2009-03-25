@@ -1,6 +1,6 @@
 SUBDIRS = css \
 	accessibility		\
-	anjuta \
+	anjuta 			\
 	application-framework	\
 	beagle 			\
 	bugsquad		\
