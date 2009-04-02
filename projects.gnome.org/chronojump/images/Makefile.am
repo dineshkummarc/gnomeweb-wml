@@ -64,6 +64,10 @@ page_SCRIPTS= \
 	plataforma_contactos_remaches.jpg \
 	plataforma_contactos_taladrar_varillas.jpg \
 	plataforma_contactos_unir_conjuntos_varilla.jpg \
+	pulsador1.jpg \
+	pulsador2.jpg \
+	pulsador3.jpg \
+	pulsador4.jpg \
 	tropheesdulibre.jpg \
 	Chronopic_v3.0.jpg \
 	Chronopic_v3.0_PCB.jpg \

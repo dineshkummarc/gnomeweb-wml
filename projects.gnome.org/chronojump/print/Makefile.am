@@ -21,6 +21,8 @@ page_SCRIPTS= \
 	construction_contact_platform_pt.html \
 	construction_modular_circuit_platform.html \
 	construction_modular_circuit_platform_es.html \
+	construction_push_button_es.html \
+	construction_push_button.html \
 	construction_es.html \
 	construction_gl.html \
 	construction.html \
