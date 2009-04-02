@@ -146,6 +146,18 @@ page_SCRIPTS= \
 	modular_platform_with_chronopic.jpg \
 	modular_platform_with_chronopic_250.jpg \
 	modular_platform_with_chronopic_mini.jpg \
+	velleman_connecting1.jpg \
+	velleman_connecting1_small.jpg \
+	velleman_connecting2_rca.jpg \
+	velleman_connecting2_rca_small.jpg \
+	velleman_connecting3.jpg \
+	velleman_connecting3_small.jpg \
+	velleman_connecting4.jpg \
+	velleman_connecting4_small.jpg \
+	velleman_connecting5.jpg \
+	velleman_connecting5_small.jpg \
+	velleman_connecting6.jpg \
+	velleman_connecting6_small.jpg \
 	vic_nov_08_cp_1.jpg \
 	vic_nov_08_cp_1_small.jpg \
 	vic_nov_08_cp_2.jpg \

@@ -77,6 +77,8 @@ page_SCRIPTS= \
 	old_chronopics.html \
 	old_chronopics_pt.html \
 	photocells_es.html \
+	photocells_velleman_es.html \
+	photocells_velleman.html \
 	problems.html \
 	screenshots_ca.html \
 	screenshots_es.html \
