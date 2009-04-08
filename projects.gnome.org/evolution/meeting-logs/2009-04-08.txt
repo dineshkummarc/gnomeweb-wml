@@ -1,0 +1,134 @@
+pr 08 06:06:20 <srag_>	hello again
+Apr 08 06:06:43 <srag_>	we are approaching 2.26.1 and branching for 2.26 by monday
+Apr 08 06:07:09 <srag_>	Im on official vacation atm, but getting in some of the regression fixes
+Apr 08 06:07:21 <srag_>	which are still left from disk summary
+Apr 08 06:07:30 <srag_>	most probably I would have unmatched search folder for 2.26.1
+Apr 08 06:07:41 <srag_>	and also the timed-db-vaccuum
+Apr 08 06:08:07 <srag_>	unmatched vfolder may bring  in some issues, which we would fix as we go
+Apr 08 06:08:22 <srag_>	also, I have started on patches, should be done pretty soon
+Apr 08 06:08:36 *	chen (~chen@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Apr 08 06:08:49 <srag_>	Anjal is coming up well.
+Apr 08 06:09:08 <srag_>	I donno, but 1. or .2 I should have *optional* webkit rendering for Evolutoin
+Apr 08 06:09:26 <srag_>	it just depends on when I finish the *full* webkit rendering for Anjal.
+Apr 08 06:09:35 <srag_>	Once done, it should be a just a back port to Evolution
+Apr 08 06:09:44 <EvaSDK>	cool
+Apr 08 06:09:58 <srag_>	we still won't be looking at webkit for editing, 
+Apr 08 06:10:17 <srag_>	its very primitive without gobject/DOM interface in webkit
+Apr 08 06:10:28 <srag_>	once that is done, Evo should kick out gtkhtml completely
+Apr 08 06:10:36 <mcrha>	does it mean rendering for mail only? or memo/task preview too?
+Apr 08 06:10:55 <srag_>	mcrha, mail is tough, rest should be pretty easy IMO
+Apr 08 06:11:09 <srag_>	so it means for all
+Apr 08 06:11:33 <mcrha>	ok
+Apr 08 06:11:42 <srag_>	Im still reviewing the 3.0 plan, and we might have to take alot from there, plan it accordingly
+Apr 08 06:11:54 <srag_>	Im waiting to finish my vacation and get back to work on monday to do all of them
+Apr 08 06:12:14 <srag_>	but its a nice plan IMO, given that we have  a year for 3.0, we can do nice with in that
+Apr 08 06:12:28 <srag_>	credits to the release-team
+Apr 08 06:12:35 <srag_>	Thatz it from my side
+Apr 08 06:12:40 <srag_>	abharath, anything to share with us ?
+Apr 08 06:13:15 *	mcrha wonders how many people will get rid of deprecated stuff in evo*
+Apr 08 06:13:24 <abharath>	srag_: Been working on Anjal. Committed all my changes to the inline-composer branch. Onto the accnt editor now
+Apr 08 06:13:30 <srag_>	abharath, cool.
+Apr 08 06:13:42 <srag_>	mcrha, donno, but Evo carries a lot of those stuff :(
+Apr 08 06:13:53 <mcrha>	yeah, that's why I wonder
+Apr 08 06:14:08 <srag_>	libgnomecanvas deprecation hits hard for Calendar (?) & Addressbook I guess
+Apr 08 06:14:23 <mcrha>	definitely, partly ETable as well?
+Apr 08 06:14:29 <seb128>	you can still use libgnomecanvas probably
+Apr 08 06:14:33 <srag_>	hmm, not exactly etable
+Apr 08 06:14:47 <seb128>	moving away from libbonobo is a good GNOME3 step though ;-)
+Apr 08 06:14:48 <srag_>	I saw there was a discussion on that
+Apr 08 06:14:53 <chen>	oh libgnomecanvas deprecates.
+Apr 08 06:14:54 <andre>	(i still can't find reasons in the archives why gnomecanvas was deprecated, sorry for that, but i guess that former r-t's had their reasons) :-/
+Apr 08 06:15:11 <seb128>	I doubt gnomecanvas is really an issue as said
+Apr 08 06:15:16 <seb128>	that might be still discussed
+Apr 08 06:15:26 <chen>	ok
+Apr 08 06:15:28 <seb128>	it's rather libgnome*, libbonobo* to clean
+Apr 08 06:15:50 <srag_>	yep
+Apr 08 06:16:07 <srag_>	lets, leave the call to the release team, but it might be lot of work
+Apr 08 06:16:13 <srag_>	ETable may not suffer AFAICS
+Apr 08 06:16:18 <srag_>	not sure, if I miss something
+Apr 08 06:16:45 <srag_>	For addressbook, few years back, Rodrigo wrote a Gtk replacement for canvas-based-card view
+Apr 08 06:16:53 <srag_>	time to relook at that then
+Apr 08 06:17:02 <mcrha>	srag_, quite many #include <libgnomecanvas/gnome-canvas.h> in ETable directory
+Apr 08 06:17:16 <srag_>	mcrha, I think its the EText that brings it
+Apr 08 06:17:22 <srag_>	mcrha, as I said, I could be missing something
+Apr 08 06:17:28 <srag_>	the real need may be very less
+Apr 08 06:17:29 <mcrha>	e-tree.c:1060:	GnomeCanvas *canvas;
+Apr 08 06:17:33 <mcrha>	could be :)
+Apr 08 06:17:48 <srag_>	we need more careful analysis and planning
+Apr 08 06:17:51 <srag_>	lets see, how it goes
+Apr 08 06:18:04 <mcrha>	yup
+Apr 08 06:18:14 <srag_>	andre, anything to share with us ?
+Apr 08 06:18:36 <andre>	yupp: i can haz gtkhtml branch so we can start with 3.0ing? :)
+Apr 08 06:18:51 <andre>	re 571743
+Apr 08 06:19:27 <srag_>	sure, we can branch gtkhtml earler
+Apr 08 06:19:36 <srag_>	andre, lemme do that today or so :-)
+Apr 08 06:19:48 <andre>	great
+Apr 08 06:19:56 <srag_>	anything else ?
+Apr 08 06:20:01 <srag_>	chen, anything for us ?
+Apr 08 06:20:04 <andre>	nope, just lurking
+Apr 08 06:20:06 <chen>	was fixing some customer issues, some packaging work and got some a perfomance issue in addressbook NameSelector dialog nailed down today after working sometime on it. 
+Apr 08 06:20:12 <chen>	Currently making a patch, it would make the NameSelectorDialog load the contacts ~60% faster. We can get away with ETreeModelGenerator with the patch.
+Apr 08 06:20:23 <srag_>	sure
+Apr 08 06:20:35 <srag_>	chen, be cautious about the ABI  around there
+Apr 08 06:20:45 <chen>	srag_, not ABI changes would be required
+Apr 08 06:20:49 <chen>	*no
+Apr 08 06:20:50 <srag_>	cool
+Apr 08 06:20:57 <srag_>	EvaSDK, anything to share with us ?
+Apr 08 06:21:13 *	chen is now known as chen_brb
+Apr 08 06:21:47 <srag_>	lakhil, anything for us ?
+Apr 08 06:22:23 <lakhil>	srag_, nothing much, bug triaging and some other stuffs 
+Apr 08 06:22:26 <srag_>	mcrha, anything to share with us ?
+Apr 08 06:22:27 <srag_>	lakhil, thx
+Apr 08 06:22:50 <mcrha>	nothing special, committed some approved patches, one not-reviewed, and otherwise just playing and scared of all the upcoming changes
+Apr 08 06:22:51 <EvaSDK>	srag_: nop
+Apr 08 06:23:04 <srag_>	mcrha, hehe :-)
+Apr 08 06:23:12 <srag_>	seb128, anything to share with us ?
+Apr 08 06:23:21 <seb128>	not really
+Apr 08 06:23:32 <seb128>	looking forward having extra bugs fixed in 2.26.1 ;-)
+Apr 08 06:23:37 <mcrha>	srag_, one thing:
+Apr 08 06:23:40 <srag_>	sure seb128 
+Apr 08 06:23:43 <srag_>	yep mcrha 
+Apr 08 06:24:02 <mcrha>	if you called 2.26 a maintenance release, how would you call the next or two? a "rewrite releases"?
+Apr 08 06:24:24 <srag_>	mcrha, I donno, you seem to be in a joking mood ;-)
+Apr 08 06:24:39 <mcrha>	actually, not joking, I'm serious now
+Apr 08 06:24:43 <srag_>	:)
+Apr 08 06:24:57 <srag_>	mcrha, it could be
+Apr 08 06:25:21 <srag_>	Im not a fan of re-writes, unless there are tangible benefits :-)
+Apr 08 06:25:27 <mcrha>	the name is not important, just the amount of changes
+Apr 08 06:25:38 <srag_>	but, some of the restrictions force us to do so
+Apr 08 06:25:50 <srag_>	I would really like to reduce the changes
+Apr 08 06:26:02 <srag_>	I know we have a biggie soon, the KB branch
+Apr 08 06:26:33 <mcrha>	and removing *all* the rest deprecated stuff in there will be not as small too
+Apr 08 06:26:41 <srag_>	mcrha, I know
+Apr 08 06:26:54 <srag_>	mcrha, lemme see, how we can plan these
+Apr 08 06:27:12 <srag_>	I think we should first identify our work, then plan what we should do
+Apr 08 06:27:19 <mcrha>	might be covered be The Plan. Agreed.
+Apr 08 06:27:20 <srag_>	we are now speaking of just the known bits
+Apr 08 06:27:33 <srag_>	there could be some more unknown, which are equally big
+Apr 08 06:28:08 <srag_>	so, first lets identify. and then plan how to tackle it
+Apr 08 06:28:23 <mcrha>	will you identify?
+Apr 08 06:28:26 <srag_>	I might pull in for a short meeting may be monday or so, where we can discuss on how to take it
+Apr 08 06:28:33 <srag_>	mcrha, obviously code-read :-)
+Apr 08 06:28:46 <srag_>	mcrha, I would do a part, there could be some, which other can help in
+Apr 08 06:28:50 <mcrha>	not -how- but -whom-
+Apr 08 06:29:02 <srag_>	answered
+Apr 08 06:29:05 <mcrha>	yup
+Apr 08 06:29:28 <mcrha>	ok, it'll be fun, hopefully :)
+Apr 08 06:29:43 <srag_>	:-)
+Apr 08 06:29:45 <srag_>	Anything else ?
+Apr 08 06:29:57 <mcrha>	srag_, also, shouldn't it be better to identify after kill-bnonobo?
+Apr 08 06:30:18 <srag_>	mcrha, I think its not very redundant.
+Apr 08 06:30:22 <mcrha>	or at least after branch and commit of regression-full gtk+ deprecated stuff removal? ;)
+Apr 08 06:30:31 <srag_>	if we just see what libs we depend on, which would go off.
+Apr 08 06:30:36 <srag_>	and see where we use, 
+Apr 08 06:30:41 <mcrha>	Matt did there quite much work
+Apr 08 06:30:43 <srag_>	we can do it in simple
+Apr 08 06:31:11 *	mcrha makes not of 'simple' in this context for future use
+Apr 08 06:31:19 <mcrha>	*note
+Apr 08 06:32:20 <mcrha>	ok, I've nothing else at the moment
+Apr 08 06:34:05 *	srag__ (~sragavan@59.92.113.201) has joined #evolution-meet
+Apr 08 06:34:29 <srag__>	got disconnected
+Apr 08 06:34:31 <srag__>	Anhything else ?
+Apr 08 06:34:34 <srag__>	I might have missed if you had said something
+Apr 08 06:34:55 <srag__>	Ok, see you all next week. bye guys
+

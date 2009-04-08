@@ -5,6 +5,7 @@ urlpath = /evolution/meeting-logs
 page_SCRIPTS=
 
 page_DATA =			\
+	2009-04-08.shtml	\
 	2009-04-01.shtml	\
 	2009-03-18.shtml	\
 	2009-03-04.shtml	\
