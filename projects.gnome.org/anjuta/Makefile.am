@@ -2,7 +2,7 @@ SUBDIRS=css
 
 urlpath = /anjuta
 
-HTMLFILES = development.shtml downloads.shtml features.shtml index.shtml layout.shtml
+HTMLFILES = development.shtml downloads.shtml features.shtml index.shtml layout.shtml index.html
 
 page_DATA = $(HTMLFILES)
 
