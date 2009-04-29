@@ -1,0 +1,392 @@
+Apr 29 06:06:10 <srag>	Hello guys
+Apr 29 06:06:52 *	seb128 (~seb128@ANancy-158-1-16-202.w90-40.abo.wanadoo.fr) has joined #evolution-meet
+Apr 29 06:07:04 <srag>	2.27.1 is moved to next monday as you know, and that gives us some time to get prepared with git
+Apr 29 06:07:22 <srag>	but we are shrinking our oustanding patches
+Apr 29 06:07:31 <srag>	should be done with most of them pretty soon.
+Apr 29 06:07:57 <srag>	I assume, we have some agenda to discuss today, we can get to that asap
+Apr 29 06:07:58 *	Fridrich is going to attach patches in bugzilla, because git is a bit above his paygrade for the while :)
+Apr 29 06:08:05 <srag>	:)
+Apr 29 06:08:33 *	srag is yet to commit to Evo/EDS git
+Apr 29 06:08:49 <abharath>	:)
+Apr 29 06:08:51 <srag>	I have a list of pending things to commit, just that Im mad schedule on Anjal for the next 2 weeks
+Apr 29 06:08:59 <srag>	I should find some time.
+Apr 29 06:09:04 <seb128>	is anybody still working on 2.26?
+Apr 29 06:09:07 <srag>	I'll quickly move ahead
+Apr 29 06:09:12 <srag>	seb128, of course..
+Apr 29 06:09:29 <srag>	we still have two dot releases on stable 
+Apr 29 06:09:31 <seb128>	calendar is quite broken there
+Apr 29 06:09:35 <srag>	and you will see regular improvements
+Apr 29 06:09:41 <srag>	chen, are you aware of it ?
+Apr 29 06:09:42 <chen>	seb128, whats the issue?
+Apr 29 06:09:52 <seb128>	chen: can't edit recursive events
+Apr 29 06:10:05 <seb128>	those are not moved correctly or duplicated
+Apr 29 06:10:11 <seb128>	when evolution doesn't crash
+Apr 29 06:10:20 <chen>	seb128, have u filed any bug?
+Apr 29 06:10:26 *	jony (~jjohnny@122.167.78.248) has joined #evolution-meet
+Apr 29 06:10:27 <chen>	seb128, let me know the bug id..
+Apr 29 06:10:36 <srag>	sure
+Apr 29 06:10:42 <srag>	lets get around the channel
+Apr 29 06:10:42 <seb128>	chen: http://bugzilla.gnome.org/show_bug.cgi?id=580720
+Apr 29 06:10:42 <jony>	srag, i made it :) and hello all 
+Apr 29 06:10:46 <srag>	andre, anything to share with us ?
+Apr 29 06:10:48 <srag>	jony, awesome
+Apr 29 06:11:02 <chen>	seb128, will look into it today
+Apr 29 06:11:05 <seb128>	ups
+Apr 29 06:11:12 <srag>	abharath, anything to share with us ?
+Apr 29 06:11:27 <andre>	basically i want the e-d-s dbus port to become default, but there's not the right people here :)
+Apr 29 06:11:30 <seb128>	chen: that one was a translation issue, I will give you the correct number in a few minutes
+Apr 29 06:11:42 <chen>	seb128, sure
+Apr 29 06:11:44 <abharath>	srag: We have a rework of external editor now on master
+Apr 29 06:11:52 <abharath>	It works neat and is very lovely
+Apr 29 06:11:59 <srag>	andre, right. I had poked Ross last week on it, 
+Apr 29 06:12:09 <srag>	seems like we should see more progress now.
+Apr 29 06:12:14 <abharath>	apart from that some fixes for templates and other issues.
+Apr 29 06:12:20 <srag>	I realized that a new git branch was created last week
+Apr 29 06:12:31 <Fridrich>	but leave the non-dbus solution possible still, because dbus for win32 is not going to be reality for some time still
+Apr 29 06:12:49 <srag>	Fridrich, we can discuss that out.
+Apr 29 06:12:55 <abharath>	Fridrich: some time ;)
+Apr 29 06:13:00 <andre>	Fridrich, yeah, but default should be dbus
+Apr 29 06:13:07 <chen>	ah yeah srag i also asked ross about eds-port and the reply was ideally it would be done for 2.27.2 :) so not sure
+Apr 29 06:13:16 <srag>	right.
+Apr 29 06:13:31 <srag>	I have more contact with Intel on this, so Im hoping for the best
+Apr 29 06:13:38 <chen>	nice!
+Apr 29 06:14:10 <andre>	great
+Apr 29 06:14:13 <srag>	thx
+Apr 29 06:14:18 <srag>	bradh, anything to share with us ?
+Apr 29 06:14:21 <srag>	abharath, awesome
+Apr 29 06:14:31 <srag>	abharath, any reason it can't make to stablke ?
+Apr 29 06:14:35 <srag>	any UI changes ?
+Apr 29 06:14:46 <abharath>	srag: some configuration changes yes
+Apr 29 06:14:52 <srag>	hokay
+Apr 29 06:14:52 <abharath>	plugin configuration
+Apr 29 06:15:15 <srag>	chen, anything to share with us ?
+Apr 29 06:15:43 <chen>	srag, fixing bnc (bugzilla.novell.com) bugs and some customer issues along with some patch reviews
+Apr 29 06:15:50 <srag>	chen, cool. 
+Apr 29 06:16:00 <srag>	EvaSDK, anything to share with us ?
+Apr 29 06:16:56 <srag>	Fridrich, anything to share with us ?
+Apr 29 06:17:22 <bradh>	sorry, nothing from me
+Apr 29 06:17:28 <srag>	bradh, thx
+Apr 29 06:17:35 <srag>	jkerihuel, anything to share with us ?
+Apr 29 06:17:42 <jkerihuel>	srag: yes ;-)
+Apr 29 06:17:47 <srag>	jkerihuel, awesome :-)
+Apr 29 06:17:59 <srag>	go ahead
+Apr 29 06:18:01 <jkerihuel>	ok, so let's start with development oriented things first
+Apr 29 06:18:06 <srag>	sure
+Apr 29 06:18:14 <jkerihuel>	1. we have 2 students working on openchange as part of GSoC 2009
+Apr 29 06:18:31 <jony>	(oh .. i thought 3 projects ) 
+Apr 29 06:18:42 <jkerihuel>	and their work (if successful) should at some point be worthwhile enough to enter gnome desktop
+Apr 29 06:18:44 <jkerihuel>	jony: yeah 3
+Apr 29 06:19:00 <srag>	nice
+Apr 29 06:19:01 <jkerihuel>	but the 3rd one is a bit unrelated to gnome (in some way - thunderbird integration)
+Apr 29 06:19:13 <jkerihuel>	1st project: GUI frontend for openchange tools
+Apr 29 06:19:26 <seb128>	chen: http://bugzilla.gnome.org/show_bug.cgi?id=580724
+Apr 29 06:19:27 *	chen looks at it
+Apr 29 06:19:32 <jkerihuel>	which basically means: mapiprofile applet for gnome/kde system tool
+Apr 29 06:19:40 <jkerihuel>	openchangepfadmin and mapiproxy
+Apr 29 06:19:50 <jkerihuel>	the one that may really matters here is mapiprofile
+Apr 29 06:20:18 <jkerihuel>	I'd like as much as possible to extract to sync the ema account setup and this work, so there's a common database for all apps
+Apr 29 06:20:51 <jkerihuel>	let's say you use ema for email/calendar but prefer kontact for contacts (and all of them have openchange support), it would be nice for the user not to have to define different profiles databases
+Apr 29 06:21:20 <chen>	ema?
+Apr 29 06:21:28 <Fridrich>	evo-mapi
+Apr 29 06:21:35 <jkerihuel>	chen: sorry learned mcrha acronyms ;-)
+Apr 29 06:21:37 <chen>	ok :)
+Apr 29 06:21:41 <abharath>	:)
+Apr 29 06:21:42 <srag>	:)
+Apr 29 06:22:02 <jkerihuel>	so if we could find in a near future a way to sync on this, that would be nice
+Apr 29 06:22:03 <srag>	jkerihuel, sure.
+Apr 29 06:22:11 *	jony has quit (Read error: 104 (Connection reset by peer))
+Apr 29 06:22:15 <jkerihuel>	among things I'd like to see: the possibility for the user to select between a list of profiles
+Apr 29 06:22:18 <srag>	what sort of sync you expect ?
+Apr 29 06:22:21 <jkerihuel>	set the default one etc.
+Apr 29 06:22:33 <jkerihuel>	a sync in term of database location (mostly)
+Apr 29 06:22:39 *	jony (~jjohnny@122.167.78.248) has joined #evolution-meet
+Apr 29 06:22:44 <srag>	sure.
+Apr 29 06:23:04 <jkerihuel>	something that is painful for users atm is when they come to fill bug reports
+Apr 29 06:23:20 <jkerihuel>	and we ask them to use openchange tools to detect whether the bug is ours or ema related only
+Apr 29 06:23:33 <srag>	jkerihuel, the current model is we hide profile to the users
+Apr 29 06:23:42 <srag>	since we didn't want to complicate the UI
+Apr 29 06:24:11 <jkerihuel>	srag: yeah I can understand this ;-)
+Apr 29 06:24:16 <srag>	and it currently lies inside .evolution
+Apr 29 06:24:28 <jony>	jkerihuel, want the profile.ldb to be in a common place rather than ~/.evolution
+Apr 29 06:24:32 <jony>	?
+Apr 29 06:24:36 <jkerihuel>	jony: correct
+Apr 29 06:24:42 <jkerihuel>	for general-purpose benefits
+Apr 29 06:24:44 <srag>	may be ~/.mapi-profiles.ldb
+Apr 29 06:25:22 <jkerihuel>	it is not an urgent task, just wanted to place a reminder on this so it is not forgotten next
+Apr 29 06:25:25 <jony>	this should be a simple change .. :) and shouldn't hurt evolution at all .. 
+Apr 29 06:25:28 <srag>	sure.
+Apr 29 06:25:35 <srag>	jony, may be some migration for 2.26 users
+Apr 29 06:25:42 <srag>	 in 2.28
+Apr 29 06:25:46 <jony>	right .. 
+Apr 29 06:25:47 <jkerihuel>	srag: also some users tends to use mapiprofile instead of ema in some cases - e.g.: when they have ambiguous names
+Apr 29 06:26:07 *	You are now known as mbarnes
+Apr 29 06:26:25 <jkerihuel>	that is only meant to be temp, but solves some issues and can help decreasing importance of such issues in trackers/bugzillas
+Apr 29 06:26:36 <jkerihuel>	the other project is about exchange2ical tool
+Apr 29 06:26:43 <jkerihuel>	mentored by bradh
+Apr 29 06:26:57 <srag>	nice
+Apr 29 06:26:59 <jkerihuel>	which should - if successful - be dual calendar sync exchange <-> ical
+Apr 29 06:27:05 <jkerihuel>	and will rely on libical
+Apr 29 06:27:22 *	jony has quit (Read error: 104 (Connection reset by peer))
+Apr 29 06:27:27 <srag>	the upstream libical irght?
+Apr 29 06:27:40 <srag>	jkerihuel, ^^ ?>
+Apr 29 06:27:41 *	jony (~jjohnny@122.167.78.248) has joined #evolution-meet
+Apr 29 06:27:45 <jkerihuel>	so question: very probably - up to bradh to answer this one
+Apr 29 06:28:01 <jkerihuel>	the exchange2ical code should be refactored into some library
+Apr 29 06:28:23 <jkerihuel>	so question: when we come to have this code ready, would you like to use it for offline storage?
+Apr 29 06:28:35 <jkerihuel>	or would it have a lot of impact on evolution storage semantics
+Apr 29 06:28:46 <jony>	chen ^? 
+Apr 29 06:28:49 <chen>	seb128, just tried the operations in trunk and seems to work fine. will checkout 2.6.x (need to build). could be some missing patch
+Apr 29 06:28:56 *	chen reads the logs
+Apr 29 06:29:07 <seb128>	chen: ok thanks
+Apr 29 06:29:22 <seb128>	chen: I confirmed on 2 boxes and mcrha said it doesn't work for him either
+Apr 29 06:29:43 <srag>	jkerihuel, the point is, we already have an implementation for this
+Apr 29 06:29:58 <srag>	I would be happy if the code in evolution is picked up and refactored as library
+Apr 29 06:30:04 <jkerihuel>	srag: a complete exchange 2 ical ?
+Apr 29 06:30:07 <mcrha>	seb128, chen yup, it didn't, on trunk/master
+Apr 29 06:30:09 <bradh>	srag: the exchange2ical plan is to ahve a lib that talks libical on one side and exchange on the other side.
+Apr 29 06:30:17 <jkerihuel>	with the 100% mapping as described in MS specs
+Apr 29 06:30:29 <srag>	jkerihuel, not sure on the MS specs,
+Apr 29 06:30:29 <bradh>	so it effectively implements all of MS-OXOICAL
+Apr 29 06:30:55 <chen>	seb128, mcrha : will build 2.26.x and fix it up
+Apr 29 06:30:57 <bradh>	then exchange2ical just does a local store and sync
+Apr 29 06:31:02 <seb128>	chen: thanks
+Apr 29 06:31:09 <chen>	seb128, np
+Apr 29 06:31:14 <jony>	bradh, this includes recurrence / meetings / and all the variations ? 
+Apr 29 06:31:34 <srag>	may be I need to understand more on the aspects of exchange2ical
+Apr 29 06:31:40 <EvaSDK>	srag: nope
+Apr 29 06:31:53 <srag>	jkerihuel, how would you think, it would affect Evo, in code..
+Apr 29 06:32:00 <srag>	meaning, how could Evo use it ?
+Apr 29 06:32:07 <bradh>	jony: we already have recurrence implemented (in exchange->ical direction), just needs polish and packaging up.
+Apr 29 06:32:58 <srag>	is it just about get/put of ical ?
+Apr 29 06:33:02 <jkerihuel>	srag: I'm not sure yet, we obviously need to discuss this later when we have some of the code we discussed above ready
+Apr 29 06:33:10 <jony>	evolution -> exchange2ical -> libical ? 
+Apr 29 06:33:10 <srag>	or does it deal with individual events  on a existing cal ?
+Apr 29 06:33:13 <bradh>	you'll basically be able to say "give me meeting matching Message ID" and it will give you back an ical data structure.
+Apr 29 06:33:23 <srag>	jkerihuel, sure
+Apr 29 06:33:38 <jkerihuel>	bradh is the one to be in the loop for this one ;-)
+Apr 29 06:33:41 <jony>	srag, one concern i would have here is the number of connections .. 
+Apr 29 06:33:48 <srag>	jony, sure
+Apr 29 06:34:12 <jkerihuel>	shall I move to the next point/topic?
+Apr 29 06:34:22 <bradh>	well, right now you have to get all the properties and convert them.
+Apr 29 06:34:24 <srag>	jkerihuel, sure.
+Apr 29 06:34:32 <jkerihuel>	ok exchange 2007 support
+Apr 29 06:34:33 <srag>	bradh, we can discuss in detail later on
+Apr 29 06:34:45 <bradh>	srag: np. ask when ready.
+Apr 29 06:34:46 <chen>	bradh, does that mean using this tool, evolution can speak ical with exchange both ways ?
+Apr 29 06:35:17 <jkerihuel>	currently we are using exchange 2000 (xormagic) calls and it sometimes cause troubles to users within a exchange 2007 environment with no rollback compatibility
+Apr 29 06:35:28 <srag>	ok
+Apr 29 06:35:36 <jkerihuel>	I intend to change this on mid-term and mix openchange libmapi stack so we can have native exch2k7 support too
+Apr 29 06:35:45 <srag>	sounds awesome
+Apr 29 06:35:54 <jkerihuel>	and fallback to existing stack in case it doesn't work / is not supported
+Apr 29 06:36:03 <jkerihuel>	I've also been working on clustered exchange environment
+Apr 29 06:36:04 <jony>	ncie ! 
+Apr 29 06:36:12 <srag>	nice
+Apr 29 06:36:22 <jkerihuel>	so users shouldn't encounter anymore ecWrongServer errors
+Apr 29 06:36:36 <srag>	right, its a common question on the list I guess
+Apr 29 06:36:44 <jkerihuel>	there may still be some special cases not handled but at least should work with most users
+Apr 29 06:36:51 <jkerihuel>	it is already in openchange trunk
+Apr 29 06:36:58 <srag>	ok
+Apr 29 06:37:00 <jkerihuel>	so this leads to the next point:
+Apr 29 06:37:12 <jkerihuel>	what about ema/openchange libs version sync?
+Apr 29 06:37:20 <jkerihuel>	how can we get sure we keep updated?
+Apr 29 06:37:26 <srag>	jkerihuel, for GNOME 2.28, we can update the versions
+Apr 29 06:37:27 <jkerihuel>	how does this impact distributions?
+Apr 29 06:37:36 <srag>	distros would adopt to it
+Apr 29 06:38:10 <srag>	infact, I was looking at bringing in 0.8.2 for gnome 2-26 stable, but yet to receive a nod from jony on the level of changes/risk
+Apr 29 06:38:31 <srag>	iirc, seb128 was not in favour of changing the deps on the stable branch, but we first need to see, where we would stand
+Apr 29 06:38:42 <jkerihuel>	srag: I expect OpenChange to be able to release a new version within a month or so
+Apr 29 06:38:47 <seb128>	I just said updating to 0.8.2 would not work for jaunty
+Apr 29 06:38:49 <jony>	:) will get this done before next meet. (/me has some internal time consuming tasks) 
+Apr 29 06:38:54 <seb128>	0.8 to 0.8.2 is not a trivial update
+Apr 29 06:38:59 <srag>	seb128, sure
+Apr 29 06:39:06 <jkerihuel>	seb128: yeah correct
+Apr 29 06:39:29 <srag>	jkerihuel,  would we have a version of Samba/OpenChange/libmapi for GNOME 2.28 to depend on soon ?
+Apr 29 06:39:32 <srag>	all three synced
+Apr 29 06:39:34 <jkerihuel>	what makes it pretty "not ubuntu convenient" is that a lot of server-side code was added
+Apr 29 06:39:55 <jkerihuel>	srag: probably, we are looking for a new samba4 version in a while samba4-alpha8
+Apr 29 06:40:02 <srag>	ok. 
+Apr 29 06:40:07 <jkerihuel>	which we'll be using for the next openchange release
+Apr 29 06:40:11 <srag>	I assume your new version would have some samba deps
+Apr 29 06:40:25 <srag>	as you know, GNOME wants a tarball/version to depend on than revs
+Apr 29 06:40:33 <jkerihuel>	srag: afaik no other deps than the ones already packaged/existing
+Apr 29 06:40:46 <srag>	oh.. interesting
+Apr 29 06:40:51 <jkerihuel>	afaik mbarnes/simo are working on this part
+Apr 29 06:41:02 <srag>	meaning htat with existing samba, and new libmapi, it would be fine ?
+Apr 29 06:41:12 <jkerihuel>	yes
+Apr 29 06:41:21 <srag>	that would make things a lot easier
+Apr 29 06:41:25 <jkerihuel>	however we'll increased the major version for next release
+Apr 29 06:41:35 <jkerihuel>	there are a few API changes (regarding notifications)
+Apr 29 06:41:39 <jkerihuel>	that require us to do so
+Apr 29 06:42:00 <srag>	are there any changes that Evo should adopt to?
+Apr 29 06:42:01 <jkerihuel>	however no incompatibility regarding the API ema already uses
+Apr 29 06:42:12 <jony>	we are not using any sort of notifications as of now . .so should be fine . 
+Apr 29 06:42:14 <srag>	that answers it
+Apr 29 06:42:23 <srag>	jony, we should be looking at very soon
+Apr 29 06:42:28 <jkerihuel>	srag: maybe a few proto, but nothing really meaningful
+Apr 29 06:42:33 <srag>	cool.
+Apr 29 06:42:41 <jony>	srag, sure .. 
+Apr 29 06:42:49 <srag>	that should be no problem IMO, we can depend on 0.9 (?)  once thatz released, after I get a nod from the gnome release team
+Apr 29 06:43:08 <jkerihuel>	srag: fair enough
+Apr 29 06:43:31 <jkerihuel>	last point I wanted to check with you is about all the bugs report
+Apr 29 06:43:39 <jkerihuel>	I'm starting getting lost to be honest
+Apr 29 06:43:46 <srag>	:)
+Apr 29 06:43:54 <jkerihuel>	gnome bugzilla, launchpad, redhat bugzilla
+Apr 29 06:44:20 <jkerihuel>	I do not automatically receive notifications for those who may impact openchange, (except launchpad)
+Apr 29 06:44:30 <jkerihuel>	this makes the sync in fixing bugs a but difficult
+Apr 29 06:44:42 <jkerihuel>	would you have any suggestions/pointers on how this could be improved?
+Apr 29 06:44:54 <jony>	hmm .. been working on internal tasks .. but i think i should be able to spend more time on MAPI from few days .. 
+Apr 29 06:45:12 <srag>	jkerihuel, my preference would be to bring issues to upstream
+Apr 29 06:45:16 <srag>	and track from there,
+Apr 29 06:45:22 <srag>	which is how, we handle most of hte things
+Apr 29 06:45:45 <jkerihuel>	ok so gnome bugzilla should be ref nb 1?
+Apr 29 06:46:07 <srag>	I would believe so, unless seb128 mbarnes mcrha have some thoughts against it.
+Apr 29 06:46:23 <mcrha>	nope, usually upstream things from the rh bugzilla
+Apr 29 06:46:36 <seb128>	I usually send bugs upstream too
+Apr 29 06:46:44 <srag>	cool, that makes it easier
+Apr 29 06:46:48 <bradh>	so you'll push stuff to openchange trac?
+Apr 29 06:47:04 <mcrha>	jony, is there any virtual mapi user jkerihuel can watch to?
+Apr 29 06:47:20 <seb128>	oh, openchange, I'm not working on that, the ubuntu packages come from debian
+Apr 29 06:47:23 <srag>	mcrha, jkerihuel we can add jkerihuel part of mapi bug list
+Apr 29 06:47:26 <jony>	i use rss to track .. 
+Apr 29 06:47:39 <seb128>	but I can ask the ubuntu server team to try to do that
+Apr 29 06:48:00 <srag>	cool.
+Apr 29 06:48:19 <jkerihuel>	thx
+Apr 29 06:48:20 <srag>	jkerihuel, I can get you part of Evo/MAPI bugs, from where, you can take your bugs to OpenChange
+Apr 29 06:48:32 <srag>	if they aren't EMA 
+Apr 29 06:48:33 <jkerihuel>	srag: that would be great
+Apr 29 06:48:37 <srag>	awesome
+Apr 29 06:48:49 <srag>	anything more jkerihuel ?
+Apr 29 06:48:54 <jkerihuel>	ok, nothing more to share yet ;-)
+Apr 29 06:49:01 <srag>	thanks a lot jkerihuel 
+Apr 29 06:49:05 <srag>	jony, anything to discuss ?
+Apr 29 06:49:38 <srag>	lakhil, anything to share with us ?
+Apr 29 06:49:46 <jony>	srag, hmm nothing much .. help up in internal tasks (keep  saying this for a longtime .. ) and i should be able to work on mapi a bit more from few days 
+Apr 29 06:49:51 <jony>	s/help/held
+Apr 29 06:49:59 <lakhil>	sle related stuff,  testing on evolution-mapi with libmapi trunk (mostly towards memory related issue), bug triaging and have started with anjal   
+Apr 29 06:50:02 <srag>	nice
+Apr 29 06:50:21 <srag>	lakhil, I had requested a bugzilla for Anjal, should be there soon.
+Apr 29 06:50:32 <lakhil>	that will be great 
+Apr 29 06:50:44 <jkerihuel>	lakhil, cool. feel free to put me in the loop if you have comments/critics
+Apr 29 06:50:44 <srag>	mbarnes, morning :-) anything to share with us ?
+Apr 29 06:50:51 <mbarnes>	landed the attachment rewrite for 2.27.1, so watch out for bugs there
+Apr 29 06:50:51 <mbarnes>	now I'm back to kill-bonobo hacking
+Apr 29 06:50:51 <mbarnes>	lakhil has been testing and filing bugs on it (thanks, btw)
+Apr 29 06:50:51 <mbarnes>	anyone else is welcome to as well
+Apr 29 06:50:58 <lakhil>	jkerihuel, sure 
+Apr 29 06:51:05 <srag>	mbarnes, awesome
+Apr 29 06:51:08 <lakhil>	mbarnes, most welcome :) 
+Apr 29 06:51:26 <srag>	mbarnes, I like the idea, of cut and merge small portions of KB, 
+Apr 29 06:51:28 <seb128>	mbarnes: how far is that one to land to trunk?
+Apr 29 06:52:16 *	jony is now known as jony|afk
+Apr 29 06:52:27 <mbarnes>	seb128: I still have a lot of work to do on the calendar.  haven't lost hope for 2.27.3 but the the deadline's approaching fast
+Apr 29 06:52:40 <srag>	thx mbarnes and all the best
+Apr 29 06:52:46 <srag>	mcrha, anything to share with us ?
+Apr 29 06:52:49 <mcrha>	just committed bunch of patches to git, which leads me to discussing about changelogs and commit messages. Any consensus on evo-family side already?
+Apr 29 06:53:16 <srag>	we can ditch ChangeLogs, Im in favor of it.
+Apr 29 06:53:25 *	mbarnes has already stopped updating ChangeLogs
+Apr 29 06:53:26 <srag>	we can have a format for git commit logs
+Apr 29 06:53:30 <srag>	cool.
+Apr 29 06:53:39 *	srag was asked this, but wanted to take a decision on this meeting
+Apr 29 06:53:47 <srag>	is anyone against this model ?
+Apr 29 06:54:03 <mcrha>	what will be a format for git commit messages?
+Apr 29 06:54:09 <seb128>	http://live.gnome.org/Git/CommitMessages
+Apr 29 06:54:20 <jony|afk>	my concern would be what if after few years we move to a new VCS  ? 
+Apr 29 06:54:20 <mcrha>	what will be a format for git commit messages in evo?
+Apr 29 06:54:37 <srag>	mcrha, I have some format, specially that helps NEWS generation
+Apr 29 06:54:38 <mbarnes>	it if make it official we should rename all the ChangeLog files
+Apr 29 06:54:45 <mbarnes>	ChangeLog.pre-2.27 or something
+Apr 29 06:54:47 <jony|afk>	and changelogs are much easier way for finding information than going through git commit logs 
+Apr 29 06:54:52 <srag>	mbarnes, sure
+Apr 29 06:55:17 <mcrha>	srag, "some format" sounds very promising ;)
+Apr 29 06:55:22 <srag>	jony|afk, I assume, we can extract them, at some point, if we really want.
+Apr 29 06:55:35 <srag>	mcrha, basically, http://live.gnome.org/Git/CommitMessages looks simple
+Apr 29 06:55:56 <srag>	I want the [Short tag] to be specificed with some tags, which would go automatically for NEWS
+Apr 29 06:56:04 <srag>	so that we give meaning ful NEWS files
+Apr 29 06:56:13 <srag>	I guess the dev is the best guy, to write  an entry for NEWS
+Apr 29 06:56:15 <jony|afk>	srag, imho changelog files : i just open it up and search for some phrase . .
+Apr 29 06:56:27 <mcrha>	ok, if following that, and no special ChangeLog entries anywhere, then why not. I'm fine with that
+Apr 29 06:56:30 <jony|afk>	not sure how i would be able to do that (easy) in git logs
+Apr 29 06:56:47 <seb128>	there is some discussion on d-d-l about ChangeLog too
+Apr 29 06:57:06 <seb128>	and some piece of code to autogenerate those from git log
+Apr 29 06:57:09 <mcrha>	srag, eh, what kind of tag do you mean?
+Apr 29 06:57:34 <srag>	Currently we have something like '** fix for bug #?'
+Apr 29 06:57:49 <seb128>	"git log --date=short --pretty=format:"@@@@%cd  %an  <%ae>%n%n%s%n%n%b" |
+Apr 29 06:57:49 <seb128>	perl -ne 'if (/^\s*$/) { if (!$blank) { print; $blank=1; } } else
+Apr 29 06:57:49 <seb128>	{$blank=0; if (!s/^@@@@// && !/^\t/) { print "\t"; } print; }'"
+Apr 29 06:57:53 <seb128>	was suggested on the list
+Apr 29 06:58:00 <seb128>	which gives a format similar to the current one
+Apr 29 06:58:18 <srag>	instead, ** BUGFIX: #NUM - Fixes the crash while loading calendar foo
+Apr 29 06:58:45 <abharath>	srag: that would make the work for generating NEWS too simple ;)
+Apr 29 06:58:50 <srag>	or something line ** FEATURE: Adds support for Smartcard auth
+Apr 29 06:58:55 <Fridrich>	and for commit that doesn't have bugzilla entry?
+Apr 29 06:59:00 <Fridrich>	ah, ok
+Apr 29 06:59:12 <mcrha>	less than 80 chars on the first line, right?
+Apr 29 06:59:16 <srag>	Fridrich, if you think that not worth mentioning, leave that ** entry at all
+Apr 29 06:59:32 <mbarnes>	yeah, drop the **
+Apr 29 06:59:36 <srag>	that would help us to generate good NEWS files, useful for users/distro maintainers
+Apr 29 07:00:00 <Fridrich>	ah,ok, it is not mandatory
+Apr 29 07:00:26 <srag>	we can make a template, and add this to Evo, lets make the template and make it part of our git
+Apr 29 07:00:45 <srag>	oops, repetition
+Apr 29 07:00:46 <Fridrich>	actually, can someone commit this for me before I learn git? http://www.go-oo.org/~fridrich/win32/evolution-2.26.0-fileuri.patch
+Apr 29 07:01:13 <srag>	does the format sounds fine for every one ?
+Apr 29 07:01:29 <mcrha>	one thing, th e bugfix, if it's a different bug than gnome?
+Apr 29 07:01:49 <mbarnes>	srag: for bugfixes, could we instead just copy-n-paste the Bugzilla title?  (Bug nnnnnn - Bug summary goes here)
+Apr 29 07:02:23 <srag>	BUGFIX is the keyword, we can have #F00(BNC) - fixes baa
+Apr 29 07:02:31 <srag>	mbarnes, it won't be meaning ful always
+Apr 29 07:02:43 <srag>	mbarnes, we should have some one correcting the titles then
+Apr 29 07:02:53 <srag>	at times, its not even english 
+Apr 29 07:03:04 <abharath>	and for bnc bugs, plz add the description as part of the longer explanation please
+Apr 29 07:03:25 <mbarnes>	well, -we- should be doing that.  at the very least when we close the bug
+Apr 29 07:03:54 <srag>	mbarnes, we can do either way. 
+Apr 29 07:04:00 *	mcrha is lazy and bad in wording
+Apr 29 07:04:22 <srag>	mcrha, you are going for english classes, so you would be better then ;-)
+Apr 29 07:04:35 <srag>	seb128, anything to share with us ?
+Apr 29 07:04:44 <mcrha>	srag, it would be nice if so
+Apr 29 07:04:45 *	srag has one question to seb128 & mbarnes at the end.
+Apr 29 07:04:48 <mbarnes>	I mean if we're gonna have to summarize the bug in one line anyway, may as well update the Bugzilla summary to match, right?
+Apr 29 07:05:23 <seb128>	srag: not really
+Apr 29 07:05:28 <srag>	mbarnes, since we have a short commit msg, we can add it part of it. git helps to commit offline
+Apr 29 07:05:30 <seb128>	tracking some calendar issues in 2.26
+Apr 29 07:05:39 <mcrha>	mbarnes, srag, I either write what I fixed or what's the impact on user/what they see
+Apr 29 07:05:41 <srag>	seb128, mbarnes I have a question for you 
+Apr 29 07:05:43 <seb128>	there is quite some libical crash cases too
+Apr 29 07:05:50 <seb128>	srag: yes?
+Apr 29 07:06:06 <mcrha>	mbarnes, srag, never ever both
+Apr 29 07:06:20 <srag>	Im splitting libevolution-mail-component.so and creating libevolution-mail-share.so
+Apr 29 07:06:37 <srag>	Is it fine, if I take it to stable branch also ?
+Apr 29 07:06:58 *	chen has quit (Leaving)
+Apr 29 07:07:04 <srag>	I know, for 2.26.2 packaging you might have to do some extra packaging
+Apr 29 07:07:16 <seb128>	srag: there is no such .so right now?
+Apr 29 07:07:22 <srag>	seb128, right
+Apr 29 07:07:31 <srag>	Anjal would need that -share.so,
+Apr 29 07:07:35 <seb128>	you mean libevolution-mail.so?
+Apr 29 07:07:41 <srag>	seb128, right :-)
+Apr 29 07:07:43 <Fridrich>	srag: when is 2.26.2 due?
+Apr 29 07:07:49 <seb128>	it's not a shared library so that should be no issue
+Apr 29 07:08:03 <srag>	Fridrich, May 18
+Apr 29 07:08:15 <srag>	I would have addition libevolutoin-mail-shared.so
+Apr 29 07:08:29 <srag>	it would help Anjal to run on 2.26.x as well as 2.27.x
+Apr 29 07:08:30 <mbarnes>	srag: packaging is no big deal.  -share.so is kinda redundant.  can we just make it libevolution-mail.so and libevolution-mail-component.so?
+Apr 29 07:08:35 <lakhil>	Fridrich, http://live.gnome.org/TwoPointTwentyseven - you can have as webcal :-)
+Apr 29 07:08:56 <srag>	mbarnes, is it just the naming ?
+Apr 29 07:09:01 <srag>	if so, pretty cool.
+Apr 29 07:09:25 <mbarnes>	".so" is "shared object", so sharing is already implied
+Apr 29 07:09:34 <srag>	currently we have libevolution-mail.so
+Apr 29 07:09:38 <srag>	and I want another .so
+Apr 29 07:09:44 <srag>	ah ok.
+Apr 29 07:09:49 <seb128>	why?
+Apr 29 07:09:53 <seb128>	just curious
+Apr 29 07:09:54 <srag>	libevolution-mail-utils.so
+Apr 29 07:09:59 <mbarnes>	pick something like -base.so or -core.so or something and I'm fine with it
+Apr 29 07:10:03 <srag>	sure.
+Apr 29 07:10:20 <seb128>	I've no issue with it either
+Apr 29 07:10:22 <srag>	seb128, Anjal won't link to Bonobo, and would have redundant things
+Apr 29 07:10:26 <srag>	cool.
+Apr 29 07:10:29 <seb128>	ok
+Apr 29 07:10:32 <srag>	Thatz it from my side.
+Apr 29 07:10:36 <srag>	anything else to discuss ?
+Apr 29 07:10:46 <srag>	pretty long meeting today :-)
+Apr 29 07:10:51 <abharath>	:)
+Apr 29 07:10:54 <srag>	and good discussion and lot of out comes
+Apr 29 07:11:17 <srag>	Thanks a lot for everyone, and good bye
+
