@@ -32,6 +32,10 @@ screenshots_DATA = \
 	data/screenshots/default-markers_t.png \
 	data/screenshots/empathy-markers.png \
 	data/screenshots/empathy-markers_t.png \
+	data/screenshots/map-source-osmarender.png \
+	data/screenshots/map-source-osmarender_t.png \
+	data/screenshots/map-source-cyclemap.png \
+	data/screenshots/map-source-cyclemap_t.png \
 	data/screenshots/map-source-osm.png \
 	data/screenshots/map-source-osm_t.png \
 	data/screenshots/map-source-oam.png \
