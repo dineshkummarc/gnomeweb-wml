@@ -8,6 +8,7 @@ page_SCRIPTS = \
 	check.html \
 	previous-donors.html \
 	step2.php \
+	spread.html \
 	thank-you.html \
 	.htaccess
 
