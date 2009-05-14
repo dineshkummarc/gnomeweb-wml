@@ -26,6 +26,7 @@ SUBDIRS = css \
 	gtksourceview		\
 	gtksourceviewmm		\
 	gyrus			\
+	gevice			\
 	gb			\
         hotssh                  \
 	nautilus		\
