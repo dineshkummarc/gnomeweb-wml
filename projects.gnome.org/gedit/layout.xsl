@@ -83,6 +83,7 @@
           <p>The latest release can always be found at the <a href="http://ftp.gnome.org/pub/GNOME/sources/gedit">GNOME ftp site</a>.</p>
           <p>The latest stable release is <a href="{$release/download}"><xsl:value-of select="$release/version"/></a>
           (<a href="{$release/news}">what's new</a>).</p>
+          <p>The latest windows binary can be found from <a href="{$release/win32}">gedit win32 binary</a>.</p>
 
           <p class="section">Feedback</p>
           <p>Bugs should be reported to the <a href="http://bugzilla.gnome.org">GNOME Bug Tracking System</a>.</p>
