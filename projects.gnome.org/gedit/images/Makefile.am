@@ -13,7 +13,10 @@ page_SCRIPTS= \
 	gedit1-small.png \
 	gedit2-small.png \
 	gedit3-small.png \
-	gedit4-small.png
+	gedit4-small.png \
+	icon.png \
+	tab_left.png \
+	tab_right.png
 
 include $(top_srcdir)/rules.common
 
