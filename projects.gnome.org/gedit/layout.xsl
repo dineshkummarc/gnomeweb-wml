@@ -24,10 +24,10 @@
     <xsl:param name="name"/>
     <xsl:choose>
       <xsl:when test="$pname=$name">
-        <a href="{$target}"><b><xsl:value-of select="$name"/></b></a>
+        <li class="selected"><a href="{$target}"><span><xsl:value-of select="$name"/></span></a></li>
       </xsl:when>
       <xsl:otherwise>
-        <a href="{$target}"><xsl:value-of select="$name"/></a>
+        <li><a href="{$target}"><span><xsl:value-of select="$name"/></span></a></li>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -37,7 +37,8 @@
     <html>
       <head>
         <title>gedit</title>
-        <link rel="stylesheet" type="text/css" href="http://www.gnome.org/default.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.gnome.org/css/layout.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.gnome.org/css/style.css" />
         <link rel="stylesheet" type="text/css" href="gedit.css" />
         <link rel="icon" type="image/png" href="images/favicon.png" />
       </head>
@@ -45,37 +46,41 @@
       <body>
 
         <div id="hdr">
-          <a href="http://www.gnome.org/"><img id="logo" src="http://gnome.org/img/logo/text-64" alt="Gnome" /></a>
-          <div id="hdrNav">
-            <xsl:call-template name="navitem">
-              <xsl:with-param name="target">index.html</xsl:with-param>
-              <xsl:with-param name="name">Home</xsl:with-param>
-            </xsl:call-template>
-            <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <xsl:call-template name="navitem">
-              <xsl:with-param name="target">plugins.html</xsl:with-param>
-              <xsl:with-param name="name">Plugins</xsl:with-param>
-            </xsl:call-template>
-            <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <xsl:call-template name="navitem">
-              <xsl:with-param name="target">screenshots.html</xsl:with-param>
-              <xsl:with-param name="name">Screenshots</xsl:with-param>
-            </xsl:call-template>
-            <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <xsl:call-template name="navitem">
-              <xsl:with-param name="target">developers.html</xsl:with-param>
-              <xsl:with-param name="name">Developers</xsl:with-param>
-            </xsl:call-template>
-            <xsl:text disable-output-escaping="yes"> &amp;middot; </xsl:text>
-            <xsl:call-template name="navitem">
-              <xsl:with-param name="target">http://live.gnome.org/Gedit</xsl:with-param>
-              <xsl:with-param name="name">Wiki</xsl:with-param>
-            </xsl:call-template>
+          <div id="page">
+            <div id="header" style="text-align:left;">
+              <h1>gedit text editor</h1>
+              <div id="tabs">
+                <ul id="portal-globalnav">
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">index.html</xsl:with-param>
+                    <xsl:with-param name="name">Home</xsl:with-param>
+                  </xsl:call-template>
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">plugins.html</xsl:with-param>
+                    <xsl:with-param name="name">Plugins</xsl:with-param>
+                  </xsl:call-template>
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">screenshots.html</xsl:with-param>
+                    <xsl:with-param name="name">Screenshots</xsl:with-param>
+                  </xsl:call-template>
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">developers.html</xsl:with-param>
+                    <xsl:with-param name="name">Developers</xsl:with-param>
+                  </xsl:call-template>
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">http://live.gnome.org/Gedit</xsl:with-param>
+                    <xsl:with-param name="name">Wiki</xsl:with-param>
+                  </xsl:call-template>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
         <div id="body">
-          <xsl:copy-of select="page/*" />
+          <div id="content">
+            <xsl:copy-of select="page/*" />
+          </div>
         </div>
 
         <div id="sidebar">
@@ -83,6 +88,7 @@
           <p>The latest release can always be found at the <a href="http://ftp.gnome.org/pub/GNOME/sources/gedit">GNOME ftp site</a>.</p>
           <p>The latest stable release is <a href="{$release/download}"><xsl:value-of select="$release/version"/></a>
           (<a href="{$release/news}">what's new</a>).</p>
+          <p>The latest windows binary can be found from <a href="{$release/win32}">gedit win32 binary</a>.</p>
 
           <p class="section">Feedback</p>
           <p>Bugs should be reported to the <a href="http://bugzilla.gnome.org">GNOME Bug Tracking System</a>.</p>
