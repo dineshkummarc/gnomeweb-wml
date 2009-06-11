@@ -81,6 +81,7 @@ page_SCRIPTS = \
 	2008-10-motorola-google.html \
 	2008-11-25-grancanaria.html \
 	2008-12-sugarlabs.html \
-	2009-06-desktop-summit-platinum.html
+	2009-06-desktop-summit-platinum.html \
+	2009-06-desktop-summit-keynotes.html
 
 include $(top_srcdir)/rules.common
