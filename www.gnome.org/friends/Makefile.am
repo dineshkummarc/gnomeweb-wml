@@ -1,4 +1,4 @@
-SUBDIRS = banners css images js 
+SUBDIRS = banners css drive images js
 
 urlpath = /friends
 
