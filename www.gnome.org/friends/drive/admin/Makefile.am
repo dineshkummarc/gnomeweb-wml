@@ -16,6 +16,7 @@ DRIVE_WEBROOT = http://$(SITE)/friends/drive
 
 %.cgi: %.wml
 	@sed -e "s,@DRIVE_WEBROOT@,$(DRIVE_WEBROOT),g;s,@DRIVE_PATH@,$(DRIVE_PATH),g" $< > $@
+	chmod +x $@
 
 page_DATA = \
 	admin.cgi \
