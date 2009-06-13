@@ -15,8 +15,7 @@ HTML_FILES = \
 
 page_DATA = \
 	$(HTML_FILES) \
-	gedit.css \
-	current-release.xml
+	gedit.css
 
 %.html: %.page layout.xsl Makefile
 	xsltproc --nonet --stringparam date "$$(date -R)" -o $@ layout.xsl $<
