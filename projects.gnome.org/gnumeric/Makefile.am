@@ -20,6 +20,7 @@ page_SCRIPTS=index.shtml		\
 		past-news.shtml		\
 		building.shtml		\
 		function-info.shtml	\
+		func-doc.shtml		\
 		functions.shtml
 
 include $(top_srcdir)/rules.common
