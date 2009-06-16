@@ -6,9 +6,11 @@ mrproper:
 	rm -rf *;
 
 page_SCRIPTS= \
-	index.html \
-	download.html \
-	tour.html \
+	index.shtml \
+	download.shtml \
+	tour.shtml \
+	header.shtml \
+	footer.shtml \
 	detect.py \
 	$(NULL)
 
