@@ -12,8 +12,8 @@ page_SCRIPTS= \
 	unstable.shtml \
 	archive_header.shtml \
 	archive.shtml \
-	archive_stable.shtml \
-	archive_unstable.shtml \
+	stable_archive.shtml \
+	unstable_archive.shtml \
 	tour.shtml \
 	header.shtml \
 	footer.shtml \
