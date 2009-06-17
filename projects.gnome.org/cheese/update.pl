@@ -89,7 +89,7 @@ for (@sorted_keys) {
     }
     print $fh <<EOF;
 <div class="download">
-  <a href="http://ftp.gnome.org/pub/GNOME/sources/cheese/$packages{$_}{"url"}"
+  <a href="$packages{$_}{"url"}"
      title="Download $packages{$_}{"release"} tarball">
     <img src="data/images/package-x-generic.png" alt="source package" />
       Cheese $packages{$_}{"release"}
