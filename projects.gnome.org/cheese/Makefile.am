@@ -8,6 +8,12 @@ mrproper:
 page_SCRIPTS= \
 	index.shtml \
 	download.shtml \
+	stable.shtml \
+	unstable.shtml \
+	archive_header.shtml \
+	archive.shtml \
+	archive_stable.shtml \
+	archive_unstable.shtml \
 	tour.shtml \
 	header.shtml \
 	footer.shtml \
