@@ -57,7 +57,7 @@ screenshots_DATA = \
 imagesdir = $(pagedir)/data/images
 images_DATA =\
 	data/images/cheese-big.png \
-	data/images/gnome-favicon.png \
+	data/images/cheese-favicon.png \
 	data/images/package-x-generic.png \
 	data/images/preferences-desktop-wallpaper.png \
 	data/images/internet-group-chat.png \
