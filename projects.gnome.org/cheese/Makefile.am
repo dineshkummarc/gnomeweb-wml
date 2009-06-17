@@ -7,6 +7,7 @@ mrproper:
 
 page_SCRIPTS= \
 	index.shtml \
+	news.shtml \
 	download.shtml \
 	stable.shtml \
 	unstable.shtml \
