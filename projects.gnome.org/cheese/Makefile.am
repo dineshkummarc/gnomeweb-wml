@@ -2,8 +2,8 @@
 
 urlpath = /cheese/
 
-mrproper:
-	rm -rf *;
+#mrproper:
+#	rm -rf *;
 
 page_SCRIPTS= \
 	index.shtml \
