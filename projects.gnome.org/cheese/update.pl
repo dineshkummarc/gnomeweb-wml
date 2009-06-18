@@ -1,10 +1,36 @@
 #!/usr/bin/perl -w
 
+# Copyright © 2009 Filippo Argiolas <fargiolas@gnome.org
+#
+# Licensed under the GNU General Public License Version 2
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Little script that updates download page in Cheese website
+# retrieving data from GNOME Ftp.
+# Just run it in the main website directory and commit the changes.
+# Use at your own risk!
+
 use Net::FTP;
 use Date::Format;
 
+# maximum stable packages to list
 my $max_stables = 7;
+# maximum unstable packages to list
 my $max_unstables = 5;
+# other useful vars, probably not enough if you want to use the script
+# elsewhere, feel free to readapt to your needs, fwiw
 my $gnomeurl = "ftp.gnome.org";
 my $directory = "pub/GNOME/sources/cheese/";
 
@@ -28,23 +54,26 @@ print "-- Retrieving packages informations from ftp.gnome.org\n";
 for (@maindir) {
     @dir = $gnomeftp->ls("$_");
     for (@dir) {
+        $current_file = $_;
         m/^(.*)\.(.*)\/(.*)\.tar\.gz/g or next;
         $filename = "$3.tar.gz";
         $packages{$filename}{"news"} = "$3\.changes";
         $packages{$filename}{"url"} =
-            "http://ftp.gnome.org/pub/GNOME/sources/cheese/$_";
+            "http://ftp.gnome.org/pub/GNOME/sources/cheese/$current_file";
         $packages{$filename}{"major"} = $1;
         $packages{$filename}{"minor"} = $2;
         print "++ $filename\n";
         $sumfile = $gnomeftp->get("$1.$2/$3.md5sum");
         open (SUM, "<$sumfile");
-        $sum = <SUM>;
-        $sum =~ s/^(\w+)\s.*$/$1/;
-        chomp ($sum);
+        my $sum = "";
+        while (<SUM>) {
+            m/^(\w+)\s+$filename/ and $sum = $1;
+        }
         close (SUM);
         unlink $sumfile;
+        if ($sum eq "") { print "** WARNING: no hash found for $filename\n"; }
         $packages{$filename}{"sum"} = $sum;
-        $mdtm = $gnomeftp->mdtm($_)
+        $mdtm = $gnomeftp->mdtm($current_file)
             or die "Cannot retrieve mtime ", $ftp->message;
         $packages{$filename}{"epoch"} = $mdtm;
         $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm);
@@ -55,6 +84,7 @@ for (@maindir) {
 }
 
 $gnomeftp->quit;
+print "QUIT\n";
 
 # sort by mtime
 my @sorted_keys =
