@@ -24,11 +24,14 @@
 
 use Net::FTP;
 use Date::Format;
+use LWP::Simple;
 
 # maximum stable packages to list
 my $max_stables = 7;
 # maximum unstable packages to list
 my $max_unstables = 5;
+# maximum news items
+my $max_news = 7;
 # other useful vars, probably not enough if you want to use the script
 # elsewhere, feel free to readapt to your needs, fwiw
 my $gnomeurl = "ftp.gnome.org";
@@ -84,7 +87,6 @@ for (@maindir) {
 }
 
 $gnomeftp->quit;
-print "QUIT\n";
 
 # sort by mtime
 my @sorted_keys =
@@ -137,3 +139,44 @@ close (STABLE);
 close (UNSTABLE);
 close (STABLE_ARCHIVE);
 close (UNSTABLE_ARCHIVE);
+
+# WARNING: poor error checking, check results before commit
+
+print "\n";
+print "++ Retrieving release announcements from mail.gnome.org\n";
+
+open (NEWS, ">news.shtml");
+print NEWS "          <h2>News</h2>\n";
+
+for (@sorted_keys) {
+    $item = $_;
+    $date = time2str ("%Y-%B", $packages{$item}{"epoch"});
+    $release = $packages{$item}{"release"};
+    print "-- release: $release\n";
+    $stable = $packages{$item}{"minor"} % 2 ? "Unstable" : "Stable";
+    print "-- retrieving $date archive\n";
+    $thread = get("http://mail.gnome.org/archives/gnome-announce-list/$date/thread.html");
+    die "Couldn't get $date thread!" unless defined $thread;
+    @lines = split (/\n/, $thread);
+    for (@lines) {
+        m/href=\"(\w+\.html)\">.*cheese.*$release.*<\/a>/i and do {
+            print "++ great, found release message $1\n";
+            print NEWS <<EOF;
+
+          <h3>$packages{$item}{"mdtm"}</h3>
+          <p>
+          <b>$stable</b>
+          version $release was released!<br/>
+          </p>
+          <a href="download.shtml">Download it</a>
+          <a href="http://mail.gnome.org/archives/gnome-announce-list/$date/$1">Release Notes</a>.
+EOF
+            $max_news--;
+            last;
+        };
+    }
+    last if ($max_news <= 0);
+}
+
+close (NEWS);
+
