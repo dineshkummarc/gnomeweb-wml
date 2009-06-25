@@ -1,0 +1,298 @@
+Jun 25 06:06:49 <srag>	so, here we go :-)
+Jun 25 06:06:57 <mbarnes>	hope ya'll weren't waiting on me  :)
+Jun 25 06:07:05 <srag>	mbarnes, we were ;-)
+Jun 25 06:07:24 <srag>	First the agenda and then the status.
+Jun 25 06:07:48 <srag>	so, I had a proposal to handle the dbus merge (kb and dbus-hybrid)
+Jun 25 06:07:54 <srag>	there were couple of options
+Jun 25 06:08:19 <srag>	1, continue 2.26.x as stable till 3.0 and break and fix 2.27.x till 3.0
+Jun 25 06:08:43 <seb128>	--
+Jun 25 06:08:52 <srag>	2. branch out 2.27.x right away and do the merge of dbus kill in the master
+Jun 25 06:09:44 <srag>	both has its pros and cons.. and I guess we need to decide fast on this and communicate iwth the release-team
+Jun 25 06:10:01 <srag>	the main reason, I brought this out is that,
+Jun 25 06:10:19 <EvaSDK>	before doing that I strongly suggest to look at what went wrong for gnome-session and gnome-power-manager debacle
+Jun 25 06:10:21 <srag>	k-b and dbus-hybrid are big stuff and may need more than a release cycle to stabilize
+Jun 25 06:10:22 <seb128>	is that about dbus or bonobo-slay or both?
+Jun 25 06:10:32 <seb128>	do you think you can get any of those stable for 2.28?
+Jun 25 06:10:38 <srag>	seb128, both. the eds-dbus and kill-bonobo
+Jun 25 06:10:47 <seb128>	you want to mix both transitions?
+Jun 25 06:11:06 <srag>	EvaSDK, sure. I need to look.
+Jun 25 06:11:11 <srag>	seb128, yep.
+Jun 25 06:11:22 <srag>	seb128, they should be fairly independent, interms of code/etc
+Jun 25 06:11:51 <seb128>	and you don't think you can't get any of those stable for 2.28?
+Jun 25 06:12:15 <srag>	seb128, I wont say that it will be rock solid.
+Jun 25 06:12:30 <srag>	we can make it work well.. but definietly not regression free or bug free.
+Jun 25 06:12:38 <srag>	I really want to avoid what happened with disk-summary branch..
+Jun 25 06:12:42 <seb128>	you aim to have  those stable by 2.30 but you will rely only on unstable users feedback then
+Jun 25 06:12:59 <srag>	I really take that as a lesson, it took more than a 6month cycle to get better
+Jun 25 06:13:01 <seb128>	well having 2.28 a bit less stable would give you extra feedback
+Jun 25 06:13:25 <seb128>	you will not get real world feedback until those changes are pushed to users
+Jun 25 06:13:32 <seb128>	ie GNOME 2.30 == GNOME 3
+Jun 25 06:13:35 <srag>	seb128, I honestly want that feedback, but I know users might be pissed of if it gets breka for them, the I have 2.26, supported longer than ever
+Jun 25 06:13:51 <seb128>	they will be rather pissed if the GNOME 3 version is buggy
+Jun 25 06:14:01 <srag>	which is something I really really want to avoid.
+Jun 25 06:14:13 <seb128>	you will have to land an unstable version to users at some point to get this feedback and fix issues
+Jun 25 06:14:26 <srag>	taking this 9 month focussed cycle for evo/eds should help realy
+Jun 25 06:14:31 <EvaSDK>	in the meantime, 2.26 is still not perfectly stable with sqlite stuff
+Jun 25 06:14:50 <srag>	seb128, didn't get you
+Jun 25 06:15:03 <seb128>	well if you say you aim at landing all the change stable for 2.30
+Jun 25 06:15:05 <mbarnes>	fact of the matter is I doubt either branch will be ready for merging in time for 2.28
+Jun 25 06:15:11 <seb128>	when do you get the real world feedback before 2.30?
+Jun 25 06:15:19 <jony>	seb128: the developers will be running master (kill-bonobo and dbus-hybrid ) that should help spot most of the issues.
+Jun 25 06:15:27 <seb128>	I doubt that will
+Jun 25 06:15:43 <seb128>	experience show that developers only user part of the protocols, features, etc
+Jun 25 06:15:45 <srag>	seb128, , also, if you ship 2.27.x series, that surely gonna help
+Jun 25 06:16:12 <seb128>	srag, I'm not going to ship 2.27 if that will not be the 2.28 codebase
+Jun 25 06:16:33 <seb128>	I mean it's a chicken egg problem
+Jun 25 06:16:42 <srag>	hmm
+Jun 25 06:16:48 <seb128>	we want the next ubuntu version to use what GNOME 2.28 will use
+Jun 25 06:16:55 <seb128>	ie ship something usable to users
+Jun 25 06:17:05 <EvaSDK>	seb128: do you guys ship g-p-m-2.26 ?
+Jun 25 06:17:08 <seb128>	but it means the dbus and bonobo-slay will get no testing
+Jun 25 06:17:29 <seb128>	EvaSDK, yes with karmic, we didn't for jaunty (ie we had GNOME 2.26 and gpm 2.24)
+Jun 25 06:17:40 <srag>	if it doesn't get shipped then, its almost same as branching now..
+Jun 25 06:17:43 <EvaSDK>	ok, so do we
+Jun 25 06:17:50 <seb128>	"we" being?
+Jun 25 06:17:54 <EvaSDK>	gentoo
+Jun 25 06:17:57 <seb128>	ok
+Jun 25 06:18:40 <seb128>	srag, I appreciate that you will not manage to get those transitions for 2.28
+Jun 25 06:18:54 <seb128>	but that means you will not get the new codebase stable for GNOME 2.30
+Jun 25 06:19:01 <srag>	I think Im getting closer to the second  approach
+Jun 25 06:19:07 <seb128>	I don't see something being stable without one cycle of bug fixing
+Jun 25 06:19:21 <seb128>	something with such magnitude of changes
+Jun 25 06:19:37 <seb128>	you need a drop to real world users to get proper feedback and work at least 6 months on that
+Jun 25 06:19:54 <EvaSDK>	I'm confident that eds-dbus could be done this cycle, but both seems it bit too much
+Jun 25 06:20:13 <seb128>	ie the evo hackers are probably having a specific workflow, most using imap and not pop for example
+Jun 25 06:20:29 <seb128>	which means pop will not get lot of testing until you install it for users out of the hacker team for example
+Jun 25 06:20:37 <srag>	seb128, perfect, devs can't replace real users any point. 
+Jun 25 06:20:42 <mbarnes>	srag: as a fedora maintainer, I'm -strongly- in favor of the second approach, given that I've already packaged 2.27 releases for Fedora 12
+Jun 25 06:20:57 <seb128>	I've already packaged 2.27 for ubuntu too
+Jun 25 06:21:02 <srag>	cool.
+Jun 25 06:21:09 <seb128>	which means I'm in favor of anything which base 2.28 on the current 2.27.3 codebase
+Jun 25 06:21:10 <srag>	any other comments from any one else ?
+Jun 25 06:21:21 <jony>	nope. fine with this.
+Jun 25 06:21:22 <seb128>	and not using 2.26 for 2.28
+Jun 25 06:21:42 <seb128>	but that's orthogonal with trying to land the dbus switch for 2.28
+Jun 25 06:21:53 <mbarnes>	seb128: also, fwiw, I've been furiously cherry-pick changes from the kill-bonobo branch for 2.27 so it's gets early testing
+Jun 25 06:21:54 <mcrha>	how much time for a branch, approximately?
+Jun 25 06:22:07 <srag>	mcrha, meaning ?
+Jun 25 06:22:27 <seb128>	mbarnes, is there a gap to jump at some point or while you converge by incremental changes?
+Jun 25 06:22:49 <mcrha>	what do you mean "meaning"? :) I commit to master only, the new things, so how much time I have for some work I want to break caldav?
+Jun 25 06:22:51 <lakhil>	same with OpenSUSE factory also but i would go for 2.26.x , instead of shipping half cooked 2.27.x   
+Jun 25 06:23:26 <seb128>	dunno how opensuse work but downgrading versions in ubuntu would not be easy
+Jun 25 06:23:29 <mbarnes>	seb128: yes, at some point I have to drop a nuke on the codebase, so to speak
+Jun 25 06:23:31 <srag>	mcrha, caldav should be a smaller task compared to others
+Jun 25 06:23:40 <srag>	mcrha, so you can work on trunk and back port or 
+Jun 25 06:23:43 <srag>	do the other way also
+Jun 25 06:23:53 <seb128>	discussion seems to divert there
+Jun 25 06:23:57 <seb128>	I see several topics
+Jun 25 06:23:59 <srag>	seb128, Im not speaking about downgrading.. its tough in openSUSE also
+Jun 25 06:24:09 <seb128>	- whether 2.26 or 2.27.3 should be use to go to 2.28
+Jun 25 06:24:19 <seb128>	- when and where should land dbus and bonobo-slay
+Jun 25 06:24:27 <mcrha>	srag, sure, that's nothing with compere to both others, just that I rather like to commit to development branch than to stable
+Jun 25 06:24:46 <seb128>	it seems consensus is that whatever is in 2.27 now should be used to roll 2.28?
+Jun 25 06:25:02 <srag>	seb128, right. thatz where we are tending more towards
+Jun 25 06:25:09 <seb128>	then we can discuss when 2.29 open and where dbus and bonobo-slay land and when
+Jun 25 06:25:17 <srag>	branchout now.. and merge dbus ports to master
+Jun 25 06:25:41 <seb128>	there is no chance you can manage dbus switch to 2.28 you think?
+Jun 25 06:25:56 <seb128>	it's only a framework change it should not impact on user experience much
+Jun 25 06:26:18 <srag>	seb128, the e-d-s thing or the evolution-killbonobo ?
+Jun 25 06:26:47 <seb128>	e-d-s over dbus
+Jun 25 06:27:02 <srag>	e-d-s over dbus, the addressbook part is more or less complete
+Jun 25 06:27:11 <srag>	calendar needs good amount of work
+Jun 25 06:27:11 <srag>	ross, ?
+Jun 25 06:27:35 <srag>	I'm looking forward Chen to work close with ross and close that.
+Jun 25 06:27:58 <srag>	but one option we have is have eds use dbus for addressbook and bonobo for cal for now and fix calendar later...
+Jun 25 06:28:19 <srag>	iirc, chen wasn't in favour of that... I dont remember the reasons for htat
+Jun 25 06:28:27 <srag>	poor of my memory.
+Jun 25 06:28:44 <seb128>	using 2 mixed technologies seem suboptimal
+Jun 25 06:29:06 <srag>	seb128, but it should be totally independent
+Jun 25 06:29:42 <srag>	so, lemme try to conclude...
+Jun 25 06:29:57 <srag>	we gonna branch *soon*, <ok. not today/tomorrow>
+Jun 25 06:30:15 <srag>	once we feel one of them is ready to be merged.. we branch out <before the freezes starts>
+Jun 25 06:30:30 <srag>	and use gnome-2-28 code base for 2.28 as usual..
+Jun 25 06:30:51 <srag>	and give way for the kb and dbus-hybrid to mix & work in master
+Jun 25 06:31:51 <srag>	2.29.x is when its gonna be hard tested by the users 
+Jun 25 06:31:57 <srag>	sounds fine ?
+Jun 25 06:32:08 <mbarnes>	I'd suggest delaying the branch as long as possible to save ourselves the added maintenance
+Jun 25 06:32:16 <seb128>	somewhat
+Jun 25 06:32:21 <seb128>	what mbarnes says
+Jun 25 06:32:38 <seb128>	+ I think it would be nice to be able to land the e-d-s over dbus switch this cycle
+Jun 25 06:33:18 <srag>	seb128, right... but you can't have the stability you are looking for... it *could* be bit broken
+Jun 25 06:33:33 <seb128>	well that's not much change to user features
+Jun 25 06:33:43 <seb128>	it's mainly the underline technology
+Jun 25 06:33:49 <mbarnes>	srag: we'll also need to make it clear to the translation teams what we're doing, as the freeze won't apply to master (post-branching) this cycle
+Jun 25 06:33:55 <seb128>	so it should not impact much of user experience
+Jun 25 06:34:06 <seb128>	on
+Jun 25 06:34:20 <srag>	mbarnes, I'll take care
+Jun 25 06:34:40 <srag>	seb128, the same would then apply for kill-bonobo.. *honestly*
+Jun 25 06:34:54 <seb128>	well you can't handle that much change in one cycle
+Jun 25 06:34:56 *	knirav (~knirav@ecoprobe-dmz.gns.novell.com) has joined #evolution-meet
+Jun 25 06:34:56 <srag>	its not about a major UI revamp.. its just the way modules intereact with shell etc
+Jun 25 06:35:05 <seb128>	it's another reason it would be nice to land one of the 2 rewrites this cycle
+Jun 25 06:35:22 <seb128>	and not land both in the 2.29 cycle to expect 2.30 to be stable
+Jun 25 06:35:22 <lakhil>	 -1
+Jun 25 06:35:26 <seb128>	I don't see that happening
+Jun 25 06:35:29 <srag>	lakhil, -1 ?
+Jun 25 06:35:31 <jony>	seb128: hmm .. not really .. may not have enough ppl to fix bugs on both :) 
+Jun 25 06:35:36 <seb128>	2.29 having so much changes and 2.30 being stable
+Jun 25 06:35:43 <lakhil>	srag, for merging dbus in 2.28
+Jun 25 06:35:55 <seb128>	jony, well they land eds-dbus now, focus on getting to in shape for 2.28
+Jun 25 06:36:07 <seb128>	land bonobo-slay in 2.29 and get it stable for 2.30
+Jun 25 06:36:12 <seb128>	and you have 2.30 somewhat stable
+Jun 25 06:36:20 <srag>	seb128, I seem to like what you say, honestly
+Jun 25 06:36:27 <seb128>	if you wait for 2.29 and land everything I fail to see you success at stabilizing all the changes
+Jun 25 06:36:40 <seb128>	at least not for 2.30
+Jun 25 06:36:51 <lakhil>	may be ship dbus only for ubuntu ;-)
+Jun 25 06:37:46 <srag>	seb128, I think I get a plan now. I need to work with ross/chen to see, if I can get it in for 2.28
+Jun 25 06:38:07 <seb128>	cool
+Jun 25 06:38:24 <srag>	its almost same as what I proposed, but yeah, its a bit less, doesn't include kill-bonobo
+Jun 25 06:38:37 <abharath>	srag: :)
+Jun 25 06:38:54 <lakhil>	if calendar doesn't work due to dbus, it will be a trouble 
+Jun 25 06:39:02 <seb128>	srag, ie land eds-dbus in master and use that for 2.28 if it stabilize enough?
+Jun 25 06:39:05 <srag>	lakhil, we would take care of that
+Jun 25 06:39:26 <mbarnes>	srag: does eds-dbus change API at all?  squeezing it in at the last moment may mean committing to the API prematurely
+Jun 25 06:39:50 <srag>	mbarnes, I dont think it breaks ABI/ABI by design
+Jun 25 06:39:57 <EvaSDK>	the advantage of doing that in two steps is that it let mbarnes enough time to rething the GnomeCalendar stuff :)
+Jun 25 06:40:22 <srag>	EvaSDK, no, please don't add more to kill-bonobo :-)
+Jun 25 06:40:34 <srag>	I wanted it to merge very soon :-)
+Jun 25 06:40:43 <EvaSDK>	hum
+Jun 25 06:40:48 <srag>	its the one, which would be closer to the user and needs more QA
+Jun 25 06:40:56 <mbarnes>	EvaSDK: Evolution Exchange is actually my biggest concern
+Jun 25 06:40:57 <EvaSDK>	right
+Jun 25 06:41:02 *	andre (~andre@g1.blanicka25.net) has joined #evolution-meet
+Jun 25 06:41:04 *	monkey|bot gives channel operator status to andre
+Jun 25 06:41:21 <EvaSDK>	but if you get a longer dev-cycle, it would maybe be best to take advantage of that to clean up the calendar stuff as well
+Jun 25 06:41:23 <lakhil>	hey andre 
+Jun 25 06:41:27 <jony>	mbarnes: right ... :)
+Jun 25 06:41:50 <srag>	mbarnes, true.. lets tackle it. we now have more time in k-b
+Jun 25 06:42:03 <andre>	hi
+Jun 25 06:42:07 <srag>	hey andre 
+Jun 25 06:42:17 <srag>	are we done.. shall we move ahead to the status ?
+Jun 25 06:42:38 <EvaSDK>	I think so
+Jun 25 06:42:38 <seb128>	nothing else to add from me there
+Jun 25 06:42:41 <srag>	cool
+Jun 25 06:42:48 <srag>	andre, anything to share with us ?
+Jun 25 06:43:13 <andre>	nope. but meeting log forwarding welcome :-)
+Jun 25 06:43:20 <abharath>	:)
+Jun 25 06:43:22 <srag>	andre, sure :)
+Jun 25 06:43:23 <srag>	abharath, anything to share with us ?
+Jun 25 06:43:25 <jony>	srag: summary please .
+Jun 25 06:43:58 <abharath>	srag: some upstream fixes, and a couple of days back have started on a Native GAL implementation for MAPI
+Jun 25 06:44:15 <srag>	jony, sure. I will be posting a mail on e-h today.. no tomorrow :-)
+Jun 25 06:44:21 <srag>	abharath, awesome.
+Jun 25 06:44:21 <jony>	srag: cool.
+Jun 25 06:44:27 <srag>	EvaSDK, anything to share with us ?
+Jun 25 06:44:46 <EvaSDK>	no
+Jun 25 06:44:55 <srag>	jony, anything to share with us ?
+Jun 25 06:45:19 <jony>	srag: mapi bug. 
+Jun 25 06:45:26 <jony>	srag: and got threading (partially working)
+Jun 25 06:45:38 <jony>	and wrt to this evolution branching .. 
+Jun 25 06:45:39 <srag>	jony, nice. any thing on oof ?
+Jun 25 06:45:48 <mbarnes>	andre: I'll be posting the log to the website immediately after the meeting
+Jun 25 06:45:49 <jony>	evo-mapi wont have much impact.
+Jun 25 06:45:54 <srag>	jony, cool.
+Jun 25 06:46:02 <srag>	knirav, anything to share with us ?
+Jun 25 06:46:08 <jony>	srag: OOF (out of office) . not yet . but would probably try it for next week.
+Jun 25 06:46:18 <jony>	and more thing. 
+Jun 25 06:46:26 <knirav>	srag, nothing from my side
+Jun 25 06:46:30 <jony>	libmapi minimum deps is moved to 0.8.2 
+Jun 25 06:46:38 <srag>	jony, ok.
+Jun 25 06:47:04 <srag>	knirav, we should have dbus-hybrid tested for addressbook asap and look at the calendar work with more prio
+Jun 25 06:47:30 <srag>	knirav, Im already reading the code bits as a review.. but real testing is a must thing
+Jun 25 06:47:32 <knirav>	srag,ok 
+Jun 25 06:47:37 <srag>	lakhil, anything to share with us ?>
+Jun 25 06:47:45 <lakhil>	srag, mostly on mapi testing and bug triaging  
+Jun 25 06:47:53 <jony>	thanks lakhil !
+Jun 25 06:48:06 <lakhil>	welcome 
+Jun 25 06:48:12 *	ross finally arrives
+Jun 25 06:48:18 <srag>	lakhil, cool. lakhil would be great, if you can see how you can get dbus-hybrid on to your box for testing.
+Jun 25 06:48:20 <srag>	welcome ross
+Jun 25 06:48:23 <jony>	heya ross :)
+Jun 25 06:48:28 <ross>	sorry, had to put the baby to sleep :)
+Jun 25 06:48:29 <seb128>	hey ross
+Jun 25 06:48:37 <ross>	hi seb128
+Jun 25 06:48:44 <lakhil>	srag, may be we can discuss later about dbus testing 
+Jun 25 06:49:04 <srag>	lakhil, anything you wanna say ?
+Jun 25 06:49:14 <srag>	mbarnes, anything to share with us ?
+Jun 25 06:49:35 <mbarnes>	nothing beyond what I've already blogged about.  had a few bugs trickle in from k-b testers
+Jun 25 06:49:52 <lakhil>	srag, i may not be able to do due to sle release, that's all 
+Jun 25 06:50:06 <srag>	mbarnes, we need to break down calendar and move forward there. expect some helping hand from me/others :-)
+Jun 25 06:50:09 <srag>	lakhil, ok.
+Jun 25 06:50:20 <mbarnes>	srag: sweet, appreciated
+Jun 25 06:50:25 <srag>	mcrha, anything to share with us ?
+Jun 25 06:50:28 <mcrha>	nothing interesting, just I did and plan to do some tweaks in caldav, as I mentioned above. Otherwise on  calendar bugs, filling Chen's patch review quota.
+Jun 25 06:50:43 <srag>	mbarnes, only after you tell me a list of todos that can be done in parallel ;-)
+Jun 25 06:51:24 <srag>	mcrha, thanks 
+Jun 25 06:51:31 <srag>	partha, anything to share with us ?
+Jun 25 06:51:55 <partha>	nothing for now. i'll pass. Thanks :)
+Jun 25 06:52:07 <srag>	partha, you gonna give share me  your Anjal build ? :-)
+Jun 25 06:52:20 <abharath>	partha: make a deal :D
+Jun 25 06:52:26 <srag>	ross, anything to share with us ?
+Jun 25 06:52:29 <abharath>	this is the chance :D
+Jun 25 06:53:14 <partha>	yeah! sure that will be done.
+Jun 25 06:53:20 <ross>	the aggressive plan to land eds-dbus for 2.28 is cool but ideally i'll get more work time to sort it out.  let me speak to my manager 
+Jun 25 06:53:43 <ross>	note that eds-dbus *will break evolution*
+Jun 25 06:53:57 <ross>	because evolution uses some of the corba fu directly
+Jun 25 06:54:22 <ross>	i was hoping on kill-bonobo landing in sync, if that doesn't happen then we'll probably need to merge bits of it early
+Jun 25 06:55:26 <srag>	oh
+Jun 25 06:55:54 <mbarnes>	alarm-notify, for example.  right?
+Jun 25 06:56:16 <ross>	exactly
+Jun 25 06:56:31 <ross>	there isn't a lot of breakage
+Jun 25 06:56:37 <ross>	but there is some
+Jun 25 06:57:07 <srag>	if its just alarm, its a very much independent piece, we can handle that
+Jun 25 06:57:17 <mbarnes>	ross: is evo still going be killing the e-d-s daemon on startup?
+Jun 25 06:57:40 <ross>	i certainly hope not
+Jun 25 06:57:46 <ross>	silly thing to do :)
+Jun 25 06:58:03 <mbarnes>	good, I'd like to ditch that junk in main()
+Jun 25 06:58:05 <srag>	specially when its being used by more than evo
+Jun 25 06:58:37 <ross>	how does that currently work with the panel?  does the panel reconnect when eds dies, or does it not really die?
+Jun 25 06:59:07 <jony>	panel respawns eds .
+Jun 25 06:59:08 <mbarnes>	we literally kill the process, so I assume it reconnects
+Jun 25 06:59:39 *	srag haven't debugged that much.. so no idea honestly
+Jun 25 07:00:16 <ross>	best make sure eds-dbus handles that case then :)
+Jun 25 07:00:16 <srag>	ross, are you aware of anything big than the alarm stuff ?
+Jun 25 07:00:27 <srag>	:)
+Jun 25 07:01:04 <ross>	srag: honestly, i can't recall.  i think it was mainly the use of orbit typedefs which are not part of the libecal api
+Jun 25 07:01:46 <srag>	ross, oh, are we expecting some API breakage ?
+Jun 25 07:02:13 *	srag just recalled that he, ross needs to close some api compliance
+Jun 25 07:02:24 <ross>	eds-dbus and eds have identical client side libebook/libecal API
+Jun 25 07:02:36 <srag>	that makes it pretty safe.
+Jun 25 07:02:38 <ross>	the IDL obviously disappears, but that is an implementaiton detail imho and shouldn't be used
+Jun 25 07:02:45 <srag>	cool.
+Jun 25 07:02:49 <ross>	the libedata-* APIs have changed slightly
+Jun 25 07:02:54 <ross>	very slightly, iirc
+Jun 25 07:03:09 <srag>	but thatz interenal to the backend which is easier to handle internally
+Jun 25 07:03:11 *	ross curses the damn americans flying over his house
+Jun 25 07:03:37 <ross>	srag: yeah, only really effects out-of-tree backends (-exchange, -mapi, etc)
+Jun 25 07:04:00 <ross>	speaking of which, can we move everything with "exchange" in its name from eds into evo-exchange?
+Jun 25 07:04:18 <ross>	or -mapi or whatever
+Jun 25 07:04:20 <srag>	ross, how much effort or what is pending / do you force on finishing off the calendar stuff
+Jun 25 07:04:52 <jony>	ross: hmm .. for -mapi , licensing issues. so gotta look at that part (not sure )
+Jun 25 07:05:04 <ross>	the calendar port really needs to be rewritten. probably about a week of work fulltime
+Jun 25 07:05:41 <srag>	ross, cool.
+Jun 25 07:06:13 <srag>	ross, will be great if you put that week over eds-dbus for calendar and get it in asap. 
+Jun 25 07:06:20 <mbarnes>	ross: +1 on cleansing e-d-s of exchange
+Jun 25 07:06:31 <ross>	srag: i'll speak to the bosses and see if i can get the time
+Jun 25 07:06:40 <ross>	obviously we're rather busy atm
+Jun 25 07:06:47 <srag>	ross, sure.  I understand.
+Jun 25 07:06:52 <srag>	mbarnes, ross we can look at it surely.
+Jun 25 07:07:09 <mcrha>	jony, I do not remember any ema pieces in eds, do you?
+Jun 25 07:07:23 <srag>	mcrha, some bits in servers/mapi
+Jun 25 07:07:24 <srag>	iirc
+Jun 25 07:07:30 <jony>	mcrha: nope. there is nothing 
+Jun 25 07:07:38 <jony>	srag: nope. we have that in evo-mapi. 
+Jun 25 07:07:57 <srag>	thanks a lot ross for the great updates and data. honestly, I feel more confident on eds-dbus for 2.28.. but lets see how we can merge fast.
+Jun 25 07:08:09 <srag>	jony, cool. so nothing then :)
+Jun 25 07:08:17 <jony>	(i think i misunderstood ross's line .. sorry about that )
+Jun 25 07:08:33 <srag>	seb128, anything ot share with us ?
+Jun 25 07:08:42 <seb128>	not a lot, evo 2.27 is in ubuntu karmic now, we can do ppa builds for eds-dbus and evolution-bonobo-slay if that's useful
+Jun 25 07:09:28 <srag>	seb128, thatz gonna be very useful.  I want more hands on eds-dbus and kill bonobo
+Jun 25 07:09:28 <mbarnes>	seb128: yes it would be, even if we can pick up just a few extra testers
+Jun 25 07:09:48 <seb128>	ok, I will look at that then should be easy to do
+Jun 25 07:10:01 <srag>	cool.
+Jun 25 07:10:05 <srag>	anything else to discuss ?
+Jun 25 07:10:09 <seb128>	no
+Jun 25 07:10:15 <jony>	nope.
+Jun 25 07:10:23 <mbarnes>	k-b distchecks.  I've just been snapshotting HEAD regularly
+Jun 25 07:11:09 <srag>	Ok guys, see you all next week
+
