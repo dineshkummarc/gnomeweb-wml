@@ -1,8 +1,47 @@
-SUBDIRS= images articles print slides-en-fr slides-es-ca
+SUBDIRS= images articles slides-en-fr slides-es-ca
 
 urlpath = /chronojump
 
 page_SCRIPTS= \
+	chronojump33.png \
+	chronojump_77h.png \
+	documents.png \
+	forum_64.png \
+	forum.png \
+	hardware_64.png \
+	hardware.png \
+	multimedia_64.png \
+	multimedia.png \
+	presentation.png \
+	server_64.png \
+	server.png \
+	software_64.png \
+	software.png \
+	videos.png \
+	construction_contact_platform_es.html \
+	construction_contact_platform.html \
+	construction_modular_circuit_platform_es.html \
+	construction_modular_circuit_platform.html \
+	construction_push_button_es.html \
+	construction_push_button.html \
+	faq_hardware_es.html \
+	faq_hardware.html \
+	faq_software_es.html \
+	faq_software.html \
+	hardware_store_es.html \
+	hardware_store.html \
+	index_es.html \
+	index.html \
+	multimedia_es.html \
+	multimedia.html \
+	photocells_velleman_es.html \
+	photocells_velleman.html \
+	server_es.html \
+	server.html \
+	software.html \
+	software_es.html \
+	software_more_es.html \
+	software_more.html \
 	barreras-sch-color.pdf \
 	chronojump_esquema_jump_250.png \
 	chronojump_esquema_pulse_250.png \
@@ -29,16 +68,10 @@ page_SCRIPTS= \
 	construction_contact_platform_ca.html \
 	construction_contact_platform_comments_ca.html \
 	construction_contact_platform_comments_es.html \
-	construction_contact_platform_es.html \
 	construction_contact_platform_gl.html \
-	construction_contact_platform.html \
 	construction_contact_platform_parallel_port_ca.html \
 	construction_contact_platform_parallel_port_es.html \
 	construction_contact_platform_pt.html \
-	construction_modular_circuit_platform.html \
-	construction_modular_circuit_platform_es.html \
-	construction_push_button_es.html \
-	construction_push_button.html \
 	construction_es.html \
 	construction_gl.html \
 	construction.html \
@@ -73,11 +106,9 @@ page_SCRIPTS= \
 	hardware_gl.html \
 	hardware.html \
 	hardware_pt.html \
-	index.html \
 	index_ca.html \
 	index_de.html \
 	index_en.html \
-	index_es.html \
 	index_fr.html \
 	index_gl.html \
 	index_it.html \
@@ -93,8 +124,6 @@ page_SCRIPTS= \
 	old_chronopics.html \
 	old_chronopics_pt.html \
 	photocells_es.html \
-	photocells_velleman_es.html \
-	photocells_velleman.html \
 	problems.html \
 	screenshots_ca.html \
 	screenshots_es.html \
