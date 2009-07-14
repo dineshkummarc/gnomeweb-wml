@@ -109,7 +109,8 @@ for (@sorted_keys) {
     print "hash: " . $packages{$_}{"sum"} . "\n";
     print "epoch: " . $packages{$_}{"epoch"} . "\n";
     print "release date: " . $packages{$_}{"mdtm"} . "\n";
-    if ($packages{$_}{"minor"} % 2) {
+    # GNOME release cycle: minor odd number is unstable, except the 0.x releases
+    if ($packages{$_}{"minor"} % 2 && $packages{$_}{"major"} != 0) {
         if ($i < $max_unstables) {
             $i++;
             $fh = UNSTABLE;
