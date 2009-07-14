@@ -170,7 +170,7 @@ for (@sorted_keys) {
           <b>$stable</b>
           version $release was released!<br/>
           </p>
-          <a href="download.shtml">Download it</a>
+          <a href="download">Download it</a>
           <a href="http://mail.gnome.org/archives/gnome-announce-list/$date/$1">Release Notes</a>.
 EOF
             $max_news--;
