@@ -27,6 +27,8 @@ use Net::FTP;
 use Date::Format;
 use LWP::Simple;
 
+# directory where the include files lurk around
+my $includes_dir = "includes/";
 # maximum stable packages to list
 my $max_stables = 7;
 # maximum unstable packages to list
@@ -94,10 +96,10 @@ $gnomeftp->quit;
 my @sorted_keys =
     sort { $packages{$b}{"epoch"} <=> $packages{$a}{"epoch"} } keys %packages;
 
-open (STABLE, ">stable.shtml");
-open (UNSTABLE, ">unstable.shtml");
-open (STABLE_ARCHIVE, ">stable_archive.shtml");
-open (UNSTABLE_ARCHIVE, ">unstable_archive.shtml");
+open (STABLE, ">${includes_dir}stable.shtml");
+open (UNSTABLE, ">${includes_dir}unstable.shtml");
+open (STABLE_ARCHIVE, ">${includes_dir}stable_archive.shtml");
+open (UNSTABLE_ARCHIVE, ">${includes_dir}unstable_archive.shtml");
 
 $i = 0;
 $j = 0;
@@ -152,7 +154,7 @@ close (UNSTABLE_ARCHIVE);
 print "\n";
 print "++ Retrieving release announcements from mail.gnome.org\n";
 
-open (NEWS, ">news.shtml");
+open (NEWS, ">${includes_dir}news.shtml");
 print NEWS "          <h2>News</h2>\n";
 
 for (@sorted_keys) {

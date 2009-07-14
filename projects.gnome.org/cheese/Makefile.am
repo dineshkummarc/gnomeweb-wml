@@ -7,17 +7,23 @@ urlpath = /cheese/
 
 page_SCRIPTS= \
 	index.shtml \
-	news.shtml \
 	download.shtml \
-	stable.shtml \
-	unstable.shtml \
 	archive.shtml \
-	stable_archive.shtml \
-	unstable_archive.shtml \
 	tour.shtml \
 	header.shtml \
 	footer.shtml \
 	detect.py \
+	$(NULL)
+
+includesdir=$(pagedir)/includes
+includes_DATA = \
+	news.shtml \
+	unstable.shtml \
+	stable_archive.shtml \
+	unstable_archive.shtml \
+	stable.shtml \
+	data/themes/cheese/document.all.css \
+	data/themes/cheese/document.screen.css \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/cheese
