@@ -11,7 +11,6 @@ page_SCRIPTS= \
 	download.shtml \
 	stable.shtml \
 	unstable.shtml \
-	archive_header.shtml \
 	archive.shtml \
 	stable_archive.shtml \
 	unstable_archive.shtml \
