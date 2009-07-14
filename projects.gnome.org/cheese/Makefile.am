@@ -17,11 +17,11 @@ page_SCRIPTS= \
 
 includesdir=$(pagedir)/includes
 includes_DATA = \
-	news.shtml \
-	unstable.shtml \
-	stable_archive.shtml \
-	unstable_archive.shtml \
-	stable.shtml \
+	includes/news.shtml \
+	includes/unstable.shtml \
+	includes/stable_archive.shtml \
+	includes/unstable_archive.shtml \
+	includes/stable.shtml \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/cheese
