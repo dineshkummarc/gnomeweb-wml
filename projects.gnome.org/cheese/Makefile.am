@@ -22,8 +22,6 @@ includes_DATA = \
 	stable_archive.shtml \
 	unstable_archive.shtml \
 	stable.shtml \
-	data/themes/cheese/document.all.css \
-	data/themes/cheese/document.screen.css \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/cheese
