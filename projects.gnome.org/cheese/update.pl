@@ -66,7 +66,8 @@ for (@maindir) {
         $packages{$filename}{"major"} = $1;
         $packages{$filename}{"minor"} = $2;
         print "++ $filename\n";
-        $sumfile = $gnomeftp->get("$1.$2/$3.md5sum");
+        $sumfile = $gnomeftp->get("$1.$2/$3.sha256sum") or
+          $sumfile = $gnomeftp->get("$1.$2/$3.md5sum");
         open (SUM, "<$sumfile");
         my $sum = "";
         while (<SUM>) {
@@ -105,7 +106,7 @@ for (@sorted_keys) {
     print "filename: $_\n";
     print "news: " . $packages{$_}{"news"} . "\n";
     print "release: " . $packages{$_}{"release"} . "\n";
-    print "md5sum: " . $packages{$_}{"sum"} . "\n";
+    print "hash: " . $packages{$_}{"sum"} . "\n";
     print "epoch: " . $packages{$_}{"epoch"} . "\n";
     print "release date: " . $packages{$_}{"mdtm"} . "\n";
     if ($packages{$_}{"minor"} % 2) {
@@ -128,7 +129,7 @@ for (@sorted_keys) {
   </a>
   <p>
     released on $packages{$_}{"mdtm"} <br />
-    md5sum: $packages{$_}{"sum"}
+    hash: $packages{$_}{"sum"}
   </p>
 </div>
 
