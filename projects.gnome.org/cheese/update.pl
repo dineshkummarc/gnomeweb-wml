@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
-# Copyright © 2009 Filippo Argiolas <fargiolas@gnome.org
+# Copyright © 2009 Filippo Argiolas <fargiolas@gnome.org>
+# Copyright © 2009 daniel g. siegel <dgsiegel@gnome.org>
 #
 # Licensed under the GNU General Public License Version 2
 #
@@ -38,7 +39,7 @@ my $gnomeurl = "ftp.gnome.org";
 my $directory = "pub/GNOME/sources/cheese/";
 
 my $gnomeftp = Net::FTP->new($gnomeurl, Debug => 0)
-    or die "Cannot connect to some.host.name: $@";
+    or die "Cannot connect to $gnomeurl: $@";
 
 $gnomeftp->login("anonymous",'-anonymous@')
     or die "Cannot login ", $ftp->message;
@@ -121,6 +122,10 @@ for (@sorted_keys) {
             $fh = STABLE;
         } else { $fh = STABLE_ARCHIVE; }
     }
+    $hashtype = "md5sum";
+    if (length($packages{$_}{"sum"}) > 32) {
+      $hashtype = "sha256";
+    }
     print $fh <<EOF;
 <div class="download">
   <a href="$packages{$_}{"url"}"
@@ -130,7 +135,7 @@ for (@sorted_keys) {
   </a>
   <p>
     released on $packages{$_}{"mdtm"} <br />
-    hash: $packages{$_}{"sum"}
+    $hashtype: $packages{$_}{"sum"}
   </p>
 </div>
 
