@@ -1,6 +1,6 @@
 SUBDIRS=images js
 
-urlpath = /tracker/dev/
+urlpath = /tracker/
 
 page_SCRIPTS=		\
 	development.html	\
