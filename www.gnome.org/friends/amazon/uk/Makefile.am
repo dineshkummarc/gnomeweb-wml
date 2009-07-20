@@ -1,13 +1,11 @@
-SUBDIRS = ca de fr jp uk
 
-urlpath = /friends/amazon
+urlpath = /friends/amazon/uk
 
 include $(top_srcdir)/rules.common
 
 page_DATA = \
 	index.html \
-	amazon.ico \
-	amazon-com-gnome.xml
+	amazon-uk-gnome.xml
 	
 
 EXTRA_DIST=$(page_DATA)
