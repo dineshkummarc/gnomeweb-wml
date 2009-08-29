@@ -1,4 +1,4 @@
-SUBDIRS = ca de fr jp uk
+SUBDIRS = ca de fr jp uk images
 
 urlpath = /friends/amazon
 
