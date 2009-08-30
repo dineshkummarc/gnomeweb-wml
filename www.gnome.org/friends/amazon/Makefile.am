@@ -7,7 +7,8 @@ include $(top_srcdir)/rules.common
 page_DATA = \
 	index.html \
 	amazon.ico \
-	amazon-com-gnome.xml
+	amazon-com-gnome.xml \
+	searchplugin.js
 	
 
 EXTRA_DIST=$(page_DATA)
