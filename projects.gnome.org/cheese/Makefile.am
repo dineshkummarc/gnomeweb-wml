@@ -54,6 +54,15 @@ screenshots_DATA = \
 	data/screenshots/cheese-2.24.0-effects.jpg \
 	data/screenshots/cheese-2.24.0-fullscreen.jpg \
 	data/screenshots/cheese-2.24.0-main.jpg \
+	data/screenshots/cheese-2.28.0-burst.jpg \
+	data/screenshots/cheese-2.28.0-countdown.jpg \
+	data/screenshots/cheese-2.28.0-effects.jpg \
+	data/screenshots/cheese-2.28.0-fullscreen.jpg \
+	data/screenshots/cheese-2.28.0-main.jpg \
+	data/screenshots/cheese-2.28.0-preferences.jpg \
+	data/screenshots/cheese-2.28.0-share.jpg \
+	data/screenshots/cheese-2.28.0-video.jpg \
+	data/screenshots/cheese-2.28.0-wide.jpg \
 	data/screenshots/cheese-2.24.0-share.jpg \
 	$(NULL)
 
