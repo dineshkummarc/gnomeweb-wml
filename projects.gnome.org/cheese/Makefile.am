@@ -95,6 +95,8 @@ tour_DATA =\
 	data/tour/cheese-main.jpg \
 	data/tour/cheese-prefs.jpg \
 	data/tour/cheese-fullscreen.jpg \
+	data/tour/cheese-burst.jpg \
+	data/tour/cheese-wide.jpg \
 	$(NULL)
 
 shadowboximagesdir = $(pagedir)/data/shadowbox/images
