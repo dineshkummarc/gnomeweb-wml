@@ -88,7 +88,6 @@ images_DATA =\
 tourdir = $(pagedir)/data/tour
 tour_DATA =\
 	data/tour/cheese-video.jpg \
-	data/tour/cheese-about.jpg \
 	data/tour/cheese-effects.jpg \
 	data/tour/cheese-countdown.jpg \
 	data/tour/cheese-share.jpg \
