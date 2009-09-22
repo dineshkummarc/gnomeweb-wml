@@ -82,6 +82,8 @@ page_SCRIPTS = \
 	2008-11-25-grancanaria.html \
 	2008-12-sugarlabs.html \
 	2009-06-desktop-summit-platinum.html \
-	2009-06-desktop-summit-keynotes.html
+	2009-06-desktop-summit-keynotes.html \
+	2009-08-desktop-summit-conclusion.html \
+	2009-09-softwarefreedomday.html
 
 include $(top_srcdir)/rules.common

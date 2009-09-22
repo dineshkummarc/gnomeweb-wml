@@ -1,0 +1,121 @@
+Aug 12 06:04:17 <chen>	Lets get started right away. I see almost everyone is already here :)
+Aug 12 06:04:24 <chen>	hello all!
+Aug 12 06:04:45 <chen>	So we have branched evolution packages for 2.28!
+Aug 12 06:04:57 <chen>	http://mail.gnome.org/archives/evolution-hackers/2009-August/msg00016.html has more details
+Aug 12 06:05:14 <chen>	We have started the planning page for evolution 3.0 (or maybe 2.30 ?)  - http://www.go-evolution.org/Evo3.0 . Just a initial document which will be populated..
+Aug 12 06:05:43 <chen>	mbarnes will be adding more tasks on porting deprecated modules as part of GNOME 3.0 goals
+Aug 12 06:06:27 <chen>	We have the UI freeze in place for gnome-2-28 branch and string freeze coming up on aug 24 - just to keep things known
+Aug 12 06:06:48 <chen>	the master branch is free of all freezes now and waiting for the big merges to happen
+Aug 12 06:07:18 <chen>	I have informed ross to merge the address-book/calendar dbus ports this week
+Aug 12 06:08:14 <chen>	mbarnes would be merging the kill-bonobo branch after fixing some blocking bugs there in calendar and we have a dead-line for it until aug end and will merged anyway by that time
+Aug 12 06:08:43 <chen>	though if it has major blockers at the end of aug.
+Aug 12 06:08:50 *	jony_ is now known as jony
+Aug 12 06:09:35 <chen>	starting initially we were thinking of two people working on kill-bonobo merge to fix regressions and two people on eds-dbus-port
+Aug 12 06:09:58 <chen>	kill-bonobo mbarnes and mcrha. eds-dbus-port myself and abharath 
+Aug 12 06:10:15 <mcrha>	the rest of 3.0 to jony. Sounds good ;)
+Aug 12 06:10:17 <chen>	and jony will be pitching in if he gets some time
+Aug 12 06:10:29 <jony>	mcrha: right ! :D 
+Aug 12 06:10:36 <chen>	mcrha, he would be more involved in mapi :)
+Aug 12 06:10:43 <abharath>	:D
+Aug 12 06:10:45 <mcrha>	yup yup
+Aug 12 06:11:24 <chen>	so this is the plan to start with and we need to get the tasks for porting deprecated modules and share them
+Aug 12 06:11:53 <chen>	so initial efforts will go on to make evolution usuable for 2.29.1 after the merges
+Aug 12 06:12:15 <chen>	evolution-exchange is going to require some work with both the merges
+Aug 12 06:12:37 <chen>	so these are the areas we have thinking about..
+Aug 12 06:12:45 <chen>	any questions/concerns ?
+Aug 12 06:12:52 *	chen waits for mcrha :)
+Aug 12 06:13:19 <mcrha>	yeah, I've ready a quite long essay of things, but you answered the questions from there, thus I'm quiet now
+Aug 12 06:13:21 <mbarnes>	I don't know if the eds-dbus guys feel the same, but from here out please try to commit Evolution patches to kill-bonobo first and work backwards
+Aug 12 06:13:26 *	andre crossing fingers that abharath or jony take a look at http://bugzilla.gnome.org/show_bug.cgi?id=580904 (libgnomeui in evo-exchange)
+Aug 12 06:13:44 <mbarnes>	I spent two solid days merging 2.27.90 into kill-bonobo.  it's getting to be quite painful
+Aug 12 06:14:00 <abharath>	andre: I'll take that up for the first 3 issues :)
+Aug 12 06:14:04 <abharath>	others as I go
+Aug 12 06:14:06 <mcrha>	mbarnes, oops, I'm sorry about that
+Aug 12 06:14:35 <chen>	mcrha, so i guess we wont have much patches in evolution to commit right now and can freeze evolution changes,
+Aug 12 06:14:43 <chen>	until kill-bonobo is merged
+Aug 12 06:14:50 <chen>	sounds good ?
+Aug 12 06:15:09 <mcrha>	chen, yeah, and that's making me wonder...
+Aug 12 06:15:27 <chen>	i guess eds-dbus-port can go on its own and wont affect kill-bonobo much right ?
+Aug 12 06:15:38 <mcrha>	is the only reason to pospone kb merge to "frozen" master the work eds-dbus? 
+Aug 12 06:16:30 <mcrha>	as if it is not so, then why not to merge kb immediately? we should be able to make it fine in two moths
+Aug 12 06:16:31 <chen>	mcrha, nope, i heard from mbarnes that calendar is broken and for dev's to start fixing bugs, it would good if it in a working state
+Aug 12 06:16:49 <mbarnes>	chen: other than the e-d-s reset code in evolution's main.c (which I understand we'll be dropping), that's correct
+Aug 12 06:16:50 <chen>	mcrha, so working in the same, able to start calendar..
+Aug 12 06:17:42 <mcrha>	chen, so the master, until the eng of august, will be for eds-dbus port testing?
+Aug 12 06:17:43 <chen>	mbarnes, so if it can be used a bit, the merge can happen anytime you prefer
+Aug 12 06:18:02 <mcrha>	chen, and did you sau the calendar is done there, thus the eds is bonobo free since next monday?
+Aug 12 06:18:20 <mbarnes>	okay.  I just don't want to block testing the calendar side of eds-dbus due to a broken calendar
+Aug 12 06:18:21 <chen>	mcrha, yes calendar/address-book both are done
+Aug 12 06:18:39 <chen>	mcrha, but there are bugs to be fixed
+Aug 12 06:18:45 <chen>	mcrha, i heard from ross that,
+Aug 12 06:18:48 <mcrha>	chen, good, let's see how well next week ;)
+Aug 12 06:18:59 <chen>	they have the calendar port is in the open-hand branch
+Aug 12 06:19:27 <mcrha>	chen, will there be any list of such bugs-t-be -done? preferable in bugzilla search or something
+Aug 12 06:19:47 <mcrha>	I have one from mbarnes about kb, but no idea about eds-dbus
+Aug 12 06:19:56 <chen>	mcrha, we have the bugs with white-board status which we will be continuing to use in the same way
+Aug 12 06:20:06 *	mcrha can try to learn on eds-dbus until kb is in
+Aug 12 06:20:19 <chen>	i think we have it with the tag dbus-hybrid for address-book dbus port bugs as of now
+Aug 12 06:20:27 <andre>	openedhand bugzilla only lists 6 open bugs for eds-dbus
+Aug 12 06:20:48 <mcrha>	chen, good, if you've an exact link...
+Aug 12 06:21:05 <chen>	andre, one issue which i see is, they have not tested the authenticated backends as we came to know from address-book port testing
+Aug 12 06:21:06 <mcrha>	will those foreign bugs be moved to gnome bugzilla?
+Aug 12 06:21:08 <chen>	and exchange is broken
+Aug 12 06:21:43 <chen>	andre, mcrha i just came to know about the bugs present there, so makes sense to move them to bgo after merge
+Aug 12 06:21:53 <mbarnes>	mcrha: http://http://tinyurl.com/evolution-dbus-hybrid
+Aug 12 06:21:54 <andre>	http://bugzilla.openedhand.com/buglist.cgi?product=EDS+(DBus+Port)&bug_status=UNCONFIRMED&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED
+Aug 12 06:22:11 <mcrha>	thanks
+Aug 12 06:22:28 <chen>	cool
+Aug 12 06:22:38 *	chen will go through them aftre the meeting
+Aug 12 06:23:00 <chen>	anything else before we go around the room?
+Aug 12 06:23:30 <chen>	let me start with my status,
+Aug 12 06:24:22 <chen>	have been reviewing some patches last week for ui freeze, discussions over ds bugs, async operations and 2.22.90 release, branching
+Aug 12 06:24:48 <chen>	with many meetings around the same :)
+Aug 12 06:25:13 <chen>	thats it from my side and i will start fixing bugs on eds-dbus port as soon as its merged
+Aug 12 06:25:32 <chen>	mbarnes, updates ? :)
+Aug 12 06:26:11 <mbarnes>	I'm sure everyone can guess what I'm busy with...
+Aug 12 06:26:18 *	chen is sure mbarnes is going to be relieved merging all the kill-bonobo changes into master soon :)
+Aug 12 06:26:26 <mbarnes>	calendar is getting there.  kill-bonobo is sync'ed up with the gnome-2-28 branch point now
+Aug 12 06:26:36 <mbarnes>	yes, very much  :)
+Aug 12 06:26:42 <abharath>	nice
+Aug 12 06:26:50 <chen>	mbarnes, awesome!!
+Aug 12 06:27:02 <chen>	abharath, updates?
+Aug 12 06:27:56 *	chen thanks andre for helping out on translation stuff for branching :)
+Aug 12 06:28:08 <abharath>	chen: was onto fixing some issues with evoldap2 for openSUSE
+Aug 12 06:28:16 <abharath>	chen: I'll be onto the GAL and eds-dbus port along with you
+Aug 12 06:28:26 <chen>	abharath, thanks!
+Aug 12 06:28:35 <chen>	andre, anything to share?
+Aug 12 06:28:40 <andre>	nope
+Aug 12 06:28:44 <chen>	EvaSDK, anything to share ?
+Aug 12 06:29:12 <chen>	jony, any updates ?
+Aug 12 06:29:15 <jony>	chen: nope.
+Aug 12 06:29:44 <chen>	mcrha, any updates ?
+Aug 12 06:29:49 <mcrha>	made Matt's life harder with commits to master, otherwise on calendar bugs, plugin bugs and mapi bugs. Looking forward for all the new work after merging The Things.
+Aug 12 06:30:09 <chen>	cool
+Aug 12 06:30:19 <chen>	seb128, anything to share?
+Aug 12 06:30:35 <seb128>	not really, is anybody still working on 2.28?
+Aug 12 06:30:48 <mcrha>	translators ;)
+Aug 12 06:30:49 <seb128>	(some distro plan to ship that with GNOME 2.28 ;-)
+Aug 12 06:31:18 <chen>	seb128, thinking of only blockers as of now..
+Aug 12 06:31:25 <seb128>	not really
+Aug 12 06:31:40 <seb128>	but I see lot of talk about master and none about 2.28
+Aug 12 06:31:47 <seb128>	so I was just wondering ;-)
+Aug 12 06:32:04 <chen>	seb128,  http://mail.gnome.org/archives/evolution-hackers/2009-August/msg00016.html has some info for 2.28 :)
+Aug 12 06:32:05 <seb128>	I know breaking things is lot of fun compared to bug fixing
+Aug 12 06:32:18 <seb128>	but users expect something they can use still meanwhile ;-)
+Aug 12 06:32:33 <seb128>	ok good
+Aug 12 06:32:53 <chen>	seb128, so i have been discussing about ds bugs a bit for 2.28 with srini, we keep you informed about how it goes
+Aug 12 06:33:06 <chen>	i guess that is the one major thing apart from blockers
+Aug 12 06:33:21 <seb128>	ok thanks
+Aug 12 06:33:24 <seb128>	right
+Aug 12 06:33:37 <seb128>	nothing else from me, 2.27.90 seems quite stable
+Aug 12 06:33:48 <chen>	nice to hear that :)
+Aug 12 06:34:00 <chen>	we have associated some names with tasks,
+Aug 12 06:34:24 <chen>	but that will be changed based on the bugs we get, so next one month after merges happen,
+Aug 12 06:34:52 <chen>	we will have a clear idea on how much efforts would be need and can be shared along..
+Aug 12 06:35:13 <chen>	Thats all we have for the meeting today :)
+Aug 12 06:35:22 *	jony (~jjohnny@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Aug 12 06:35:28 <chen>	Lets meet next week with more updates!
+Aug 12 06:35:35 <seb128>	thanks chen
+Aug 12 06:35:39 <mcrha>	see you
+Aug 12 06:35:41 <chen>	Thanks and bye all
+

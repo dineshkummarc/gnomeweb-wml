@@ -4,6 +4,7 @@ urlpath = /rhythmbox
 
 page_SCRIPTS= index.html	\
 		developers.html \
+		development.html \
 		screenshots.html \
 		rhythmbox.css
 

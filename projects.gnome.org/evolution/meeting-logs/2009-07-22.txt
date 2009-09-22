@@ -1,0 +1,113 @@
+Jul 22 06:02:01 <chen>	lets get started!
+Jul 22 06:02:14 *	seb128 (~seb128@ANancy-258-1-53-2.w90-39.abo.wanadoo.fr) has joined #evolution-meet
+Jul 22 06:02:15 <chen>	we have 2.27.5 release coming on monday
+Jul 22 06:02:36 <seb128>	hi
+Jul 22 06:02:41 <chen>	and feature freeze starts then. if you have any features to be committed, get them in by this week
+Jul 22 06:02:43 <chen>	hey seb128 
+Jul 22 06:03:08 *	andre gives channel operator status to chen mbarnes
+Jul 22 06:03:20 <chen>	we will also be branching around couple of weeks time for 2.27 as we discussed before
+Jul 22 06:03:37 <chen>	jony, please update us on the eds-dbus-addressbook port..
+Jul 22 06:03:59 <chen>	once thats merged we should be ready for branching
+Jul 22 06:04:21 <jony>	okies .. so i fixed a two bugs 
+Jul 22 06:04:36 <jony>	now google addressbook seems toe be working good . 
+Jul 22 06:04:41 <jony>	and groupwise testing is going on . 
+Jul 22 06:04:52 <chen>	nice!!
+Jul 22 06:04:54 <jony>	and almost there with groupwise .. 
+Jul 22 06:04:56 <chen>	what about exchange ?
+Jul 22 06:05:07 <jony>	chen: that is yet to be done .. probably by tonight .. 
+Jul 22 06:05:22 <chen>	jony, great
+Jul 22 06:05:26 <jony>	i think by this weekend addressbook would be working with dbus . 
+Jul 22 06:06:00 <varadhan>	jony, excellent!
+Jul 22 06:06:01 <chen>	so shall we then go for merging dbus-hybrid branch after 2.27.5 release is over..
+Jul 22 06:06:07 <chen>	?
+Jul 22 06:06:40 <chen>	jony, ^
+Jul 22 06:06:44 <jony>	chen before .5 .. right ? 
+Jul 22 06:07:10 <jony>	thanks varadhan :) just looking into eds for some fun :)
+Jul 22 06:07:12 <chen>	jony, if you can get that working sure..
+Jul 22 06:07:20 <chen>	i mean on all backends 
+Jul 22 06:07:31 <jony>	chen: gimme a day .. i'll let you know .. 
+Jul 22 06:07:38 <chen>	fine
+Jul 22 06:07:58 <chen>	updates from my side,
+Jul 22 06:08:28 <chen>	Calendar cache rewrite done. Have a patch which ports groupwise,caldav, weather and http backends which is currently being tested. I will be committing the patch today or tomorrow after getting a nod from lakhil, mcrha 
+Jul 22 06:08:51 <chen>	Reivewed GSoc patches, it still has some missing files and some re-work needs to be done. I will be provding the entire list of comments to stanislav and we will be taking the patch for 3.0 once its re-worked
+Jul 22 06:09:07 <chen>	updated the sqlite version minimum version to 3.6.16 in external dependency for gnome-2.27.x..
+Jul 22 06:09:21 <chen>	yet to start on a thread in e-h list regarding bugzilla cleanup.. 
+Jul 22 06:09:51 <chen>	i also wanted to list all the active hackers who will be involved in patch-reviews mapping with components
+Jul 22 06:10:17 <chen>	prolly we will discuss it after the meeting, though we are clear on some components, it would be better to have it published
+Jul 22 06:10:37 <lakhil>	chen, is it possible to file bug on gsoc work (if it doesn't affect gsoc process) so we can also see updates ? 
+Jul 22 06:11:01 <chen>	lakhil, yup i have asked stanislav to file a bug and upload the patches there
+Jul 22 06:11:08 <lakhil>	cool
+Jul 22 06:11:22 <chen>	lakhil, since i don have the entire patch yet, am waiting. but can still raise a bug :-)
+Jul 22 06:11:40 <chen>	lets go around to the room to gather updates..
+Jul 22 06:11:46 <lakhil>	oh .. missing files :(
+Jul 22 06:11:50 <chen>	andre, anything to share..
+Jul 22 06:12:35 <chen>	mbarnes, updates for us?
+Jul 22 06:12:50 <mbarnes>	almost finished migrating kill-bonobo from libglade to GtkBuilder
+Jul 22 06:12:50 <mbarnes>	then it's on to get the calendar working as quickly as possible
+Jul 22 06:13:11 <chen>	mbarnes, awesome!!
+Jul 22 06:13:39 <chen>	mbarnes, understand its really a lot of changes for migrating to gtkbuilder
+Jul 22 06:13:40 <andre>	congrats
+Jul 22 06:14:01 <chen>	abharath, updates ?
+Jul 22 06:14:28 <abharath>	chen: been onto the native GAL for MAPI. Planning to push it in for this release
+Jul 22 06:14:45 <chen>	abharath, great!
+Jul 22 06:14:50 <abharath>	so we had hid the GAL configuration from the account editor. will open it up
+Jul 22 06:14:52 <chen>	EvaSDK, anything to share ?
+Jul 22 06:15:06 <abharath>	so that the feature freeze is ok :)
+Jul 22 06:15:13 <chen>	cool :)
+Jul 22 06:15:26 <mbarnes>	chen: migration is straight-forward but it touches a lot of code, yes
+Jul 22 06:15:41 <hggdh>	question: any position on which version of libpst will be used?
+Jul 22 06:15:54 <chen>	abharath, ^
+Jul 22 06:16:09 <abharath>	mbarnes: would .41 be good for us?
+Jul 22 06:16:30 <mbarnes>	I spoke with Carl about libpst yesterday.  claims there's no more API breaks coming
+Jul 22 06:16:33 <abharath>	I'll work on it once we get the version fixed. I had the patch for .37 in there
+Jul 22 06:16:49 <mbarnes>	so yeah, we should target .41
+Jul 22 06:17:14 <abharath>	mbarnes: cool. Onto my todo list then
+Jul 22 06:17:15 <chen>	hggdh, anything else you want to bring ?
+Jul 22 06:17:28 <hggdh>	abharath: could you please contact Carl? My emails to him seem to be bouncing again
+Jul 22 06:17:45 <abharath>	hggdh: sure I'll do
+Jul 22 06:17:46 <hggdh>	chen, no, I am OK. This was my only doubt
+Jul 22 06:17:56 <chen>	hggdh, fine
+Jul 22 06:17:59 <chen>	jony, updates ?
+Jul 22 06:18:15 <jony>	chen: nothing much .. just poking around eds dbus .. 
+Jul 22 06:18:31 <chen>	jony, have ur patches committed to the branch asap
+Jul 22 06:18:36 <chen>	lakhil, updates ?
+Jul 22 06:18:39 <jony>	chen: sure .. 
+Jul 22 06:18:58 <lakhil>	chen, sle testing, bug triaging,  tested mapi folder size patch and currently on cache rewrite patch
+Jul 22 06:19:10 <chen>	lakhil, thanks!
+Jul 22 06:19:18 <chen>	liam, anything to share ?
+Jul 22 06:19:50 <chen>	mcrha, updates ?
+Jul 22 06:19:55 <liam>	Well there's the nspr/nss bug thing ( which I'm still sorry for bombing through my flu :-( ) and there's the bogofilter check
+Jul 22 06:20:17 <mcrha>	actually nothing interesting, just a usual week
+Jul 22 06:20:39 <chen>	liam, i think u were in touch with mbarnes for nspr/nss patches right ?
+Jul 22 06:20:57 <chen>	mcrha, thanks for the update on etable stuff :)
+Jul 22 06:21:00 <varadhan>	lakhil is actually a test bot here - not a homo sapien ;-)
+Jul 22 06:21:05 <liam>	Yes. But they should still be tested. The bogofilter update will be updated, there was a stupid typi in it. Think I'm fine again.
+Jul 22 06:21:13 <mcrha>	chen, ah, right, that one wasn't a usual work :)
+Jul 22 06:21:29 <lakhil>	varadhan, far behind to be declared a bot :P
+Jul 22 06:21:36 <chen>	liam, ok
+Jul 22 06:21:46 <chen>	seb128, anything to share ?
+Jul 22 06:21:47 <mbarnes>	liam: I'll try to get to those patches soon.  might not be today, but will target 2.27.5
+Jul 22 06:22:01 <seb128>	chen, not this week, looking forward all the changes ;-)
+Jul 22 06:22:08 <chen>	cool :)
+Jul 22 06:22:26 <chen>	varadhan, any updates ?
+Jul 22 06:22:31 <liam>	mbarnes, I'm fine with me. The flu has really influenced the quality, so I will do today some good checking.
+Jul 22 06:22:55 *	chen remembers varadhan was interested in porting addressbook cache from libdb to sqlite ;)
+Jul 22 06:22:58 <varadhan>	chen, wanted to work on a patch to bid farewell to libdb and use sqlite instead
+Jul 22 06:22:59 <liam>	Ah and there's a lil problem left... Although I'm not sure if it's relevant for release
+Jul 22 06:23:06 <liam>	We fail to build doc with gtk-doc 1.12
+Jul 22 06:23:12 <varadhan>	but, yet to squeeze some time to actually do it ;-)
+Jul 22 06:23:14 <liam>	( which hasn't been released yet! )
+Jul 22 06:23:33 <chen>	varadhan, looking forward for that :)
+Jul 22 06:23:55 <mcrha>	hmm, sqlite for contacts cache? with all the issues on mailer side?
+Jul 22 06:24:28 <varadhan>	mcrha, moving from libdb to sqlite would mostly a straight forward method than what happened in mailer
+Jul 22 06:24:55 <mcrha>	varadhan, do you expect it as that quick as it is now, at least?
+Jul 22 06:25:01 <chen>	liam, lets take it after the meeting..
+Jul 22 06:25:16 <hggdh>	well, and the addressbook is not as volatile as mailer's cache
+Jul 22 06:25:17 <varadhan>	mcrha, yes, won't be much dragging
+Jul 22 06:25:36 <EvaSDK>	chen: nope
+Jul 22 06:25:37 <mcrha>	varadhan, ok, let's see
+Jul 22 06:26:33 <chen>	anything else from anyone ?
+Jul 22 06:27:21 *	chen wants to track some critical bugs and patches in the meeting from next week. will kick start a thread in e-h list first which i have been thinking for sometime
+Jul 22 06:27:35 <chen>	so thats for next week!
+Jul 22 06:27:58 <chen>	until then have fun! and let meet next week with more updates :)
+

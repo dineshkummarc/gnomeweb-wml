@@ -18,7 +18,6 @@ page_DATA =			\
 	build.shtml \
 	copyright.shtml \
 	credits.shtml \
-	cvs.shtml \
 	devdoc.shtml \
 	developer.shtml \
 	documentation.shtml \
@@ -26,6 +25,7 @@ page_DATA =			\
 	eplugins.shtml \
 	faq.shtml \
 	features.shtml \
+	git.shtml \
 	information.shtml \
 	keys.shtml \
 	meetings.shtml \
@@ -35,7 +35,6 @@ page_DATA =			\
 	screenshots.shtml \
 	screenshots14.shtml \
 	screenshots15.shtml \
-	svn.shtml \
 	jhbuildrc
 
 include $(top_srcdir)/rules.common

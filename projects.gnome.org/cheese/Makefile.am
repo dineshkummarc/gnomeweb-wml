@@ -54,6 +54,15 @@ screenshots_DATA = \
 	data/screenshots/cheese-2.24.0-effects.jpg \
 	data/screenshots/cheese-2.24.0-fullscreen.jpg \
 	data/screenshots/cheese-2.24.0-main.jpg \
+	data/screenshots/cheese-2.28.0-burst.jpg \
+	data/screenshots/cheese-2.28.0-countdown.jpg \
+	data/screenshots/cheese-2.28.0-effects.jpg \
+	data/screenshots/cheese-2.28.0-fullscreen.jpg \
+	data/screenshots/cheese-2.28.0-main.jpg \
+	data/screenshots/cheese-2.28.0-preferences.jpg \
+	data/screenshots/cheese-2.28.0-share.jpg \
+	data/screenshots/cheese-2.28.0-video.jpg \
+	data/screenshots/cheese-2.28.0-wide.jpg \
 	data/screenshots/cheese-2.24.0-share.jpg \
 	$(NULL)
 
@@ -79,13 +88,14 @@ images_DATA =\
 tourdir = $(pagedir)/data/tour
 tour_DATA =\
 	data/tour/cheese-video.jpg \
-	data/tour/cheese-about.jpg \
 	data/tour/cheese-effects.jpg \
 	data/tour/cheese-countdown.jpg \
 	data/tour/cheese-share.jpg \
 	data/tour/cheese-main.jpg \
 	data/tour/cheese-prefs.jpg \
 	data/tour/cheese-fullscreen.jpg \
+	data/tour/cheese-burst.jpg \
+	data/tour/cheese-wide.jpg \
 	$(NULL)
 
 shadowboximagesdir = $(pagedir)/data/shadowbox/images

@@ -1,0 +1,124 @@
+Aug 05 06:11:25 <mbarnes>	I guess this is everybody?
+Aug 05 06:12:35 <mbarnes>	okay, let's get started then
+Aug 05 06:12:41 <mbarnes>	short agenda today anyway
+Aug 05 06:13:11 <mbarnes>	I'm filling in for chen today, who is away on an urgent matter and will be back Thursday
+Aug 05 06:13:35 <mbarnes>	just a quick recap of things...
+Aug 05 06:13:57 <mbarnes>	Evolution 2.27.90 release is on Monday, and the UI freeze is in effect thereafter
+Aug 05 06:14:28 <mbarnes>	please set aside time this week for reviewing patches and addressing critical bugs in preparation for 2.28
+Aug 05 06:15:16 <mbarnes>	also, as chen indicated on evo-hackers, we will create the gnome-2-28 branch very shortly after UI freeze begins
+Aug 05 06:15:18 <jony>	hello and sorry i'm late .
+Aug 05 06:15:25 <mbarnes>	hey jony
+Aug 05 06:15:52 <mbarnes>	iiuc, the dbus-hybrid branch will be merged to master -after- we create the gnome-2-28 branch
+Aug 05 06:16:21 <mbarnes>	which means it will -not- be included in Evolution 2.28, due to severity of regressions and build issues with Evolution Exchange
+Aug 05 06:17:04 <mbarnes>	I'm also requesting that we not go hog wild with commits to master after branching
+Aug 05 06:17:30 <mbarnes>	it creates more work for those trying to prepare branches for merging
+Aug 05 06:18:11 <mbarnes>	so please either hold off on commits until eds-dbus and kill-bonobo are merged
+Aug 05 06:18:35 <mbarnes>	or commit to those branches and backport to master and gnome-2-28 (if appropriate)
+Aug 05 06:18:48 <lakhil>	mbarnes, when are you planning to merger kill-bonobo ? before 2.29.1 ?
+Aug 05 06:18:56 <lakhil>	s/merger/merge
+Aug 05 06:19:41 <mbarnes>	that's the plan.  I need to check whether chen has exact dates in mind or if it's more "when it's ready"
+Aug 05 06:20:04 <mbarnes>	I assume dbus-hybrid will be the first to merge
+Aug 05 06:20:45 <lakhil>	yeah
+Aug 05 06:21:01 <mbarnes>	that's all the announcements I have...
+Aug 05 06:21:09 <mbarnes>	any questions or shall we go 'round the channel?
+Aug 05 06:21:28 <mcrha>	I would like to ask
+Aug 05 06:22:02 <mcrha>	after the merge, of any of those two, ther will arise porbably many issues/regressions/bugs/required-enhancements and such
+Aug 05 06:22:49 <mcrha>	how that will be handled? I mean, the bugzilla itself has many bugs already, will there be any explicit list of those to be done before 2.29.1 or something?
+Aug 05 06:23:05 <mcrha>	and, of course, to not duplicate effort, how will we share those?
+Aug 05 06:23:28 <mcrha>	"share" or "divide", as you prefer
+Aug 05 06:23:50 *	jony and lakhil saw quite a few regressions in EDS DBUS.
+Aug 05 06:24:14 <lakhil>	we are using white board status and regression in summary field 
+Aug 05 06:24:28 <lakhil>	but i am not sure how we decide on sharing 
+Aug 05 06:25:06 <mcrha>	maybe just think about that until next meeting and discuss it there. I believe it'll be better
+Aug 05 06:25:19 <mbarnes>	right.  white board tags and "[regression]" in the summary have worked well for k-b
+Aug 05 06:25:39 <mbarnes>	we can continue with that until regressions get worked out
+Aug 05 06:25:51 <mbarnes>	but yeah, need to think on it some more and talk it over with chen
+Aug 05 06:26:11 <mcrha>	so I guess new sections will be added to http://www.go-evolution.org/Bugzilla_Topics
+Aug 05 06:26:12 <mcrha>	too
+Aug 05 06:26:57 <mbarnes>	dbus-hybrid is listed already.  guess I need to add kill-bonobo.  but yes.
+Aug 05 06:27:42 <mcrha>	would be good to have a section for "until 2.29.1", to not have them hidden in the quite large amount of others there
+Aug 05 06:28:46 <mbarnes>	yeah, something like that perhaps
+Aug 05 06:29:26 <mbarnes>	abharath, anything to share?
+Aug 05 06:29:49 <abharath>	mbarnes: nothing much. just working on some bugs and looking into some plugins
+Aug 05 06:30:17 <abharath>	would be looking into GAL for the next week
+Aug 05 06:30:43 *	mcrha recalls abharath saying about reviewing plugin patches too, there is at least one I'm not sure about, the new plugin proposal
+Aug 05 06:30:54 <mbarnes>	abharath: think I some a commit sometime back that said you had some early success with GAL?
+Aug 05 06:31:00 <mbarnes>	s/some/saw/
+Aug 05 06:31:38 <abharath>	mbarnes: most of the code is already in. just needs some cleaning up and fixing a couple of bugs
+Aug 05 06:31:44 <jony>	mbarnes: been looking at eds-dbus (addressbook). Will start looking at mapi this week. 
+Aug 05 06:31:47 <jony>	mbarnes: been looking at eds-dbus (addressbook). Will start looking at mapi this week. 
+Aug 05 06:32:00 <mbarnes>	abharath: sweet!
+Aug 05 06:32:04 <abharath>	mcrha: what's with the new plugin proposal?
+Aug 05 06:32:04 <mbarnes>	EvaSDK, anything to share?
+Aug 05 06:32:05 <jony>	(oh man .. i need to get used to irssi :( ) 
+Aug 05 06:32:07 <lakhil>	jony, :D
+Aug 05 06:32:11 <EvaSDK>	mbarnes: nope
+Aug 05 06:32:26 <mbarnes>	jony: :)
+Aug 05 06:32:29 <jony>	(and not drink 6 cups of coffee)
+Aug 05 06:32:36 <EvaSDK>	actually, got in contact about autotols with liam but not much done yet
+Aug 05 06:32:36 <mcrha>	abharath, just a bug with attached patch with a new plugin
+Aug 05 06:32:53 <lakhil>	and that also without water, milk and sugar :P
+Aug 05 06:33:04 <mbarnes>	I'm on my 3rd cup.  trying to lead a meeting at 6am  :P
+Aug 05 06:33:08 <jony>	lakhil: :)
+Aug 05 06:33:12 <jony>	mbarnes: hehe 
+Aug 05 06:33:21 <mbarnes>	lakhil: anything to share?
+Aug 05 06:33:34 <lakhil>	mbarnes, mostly on dbus-hybrid branch testing, filed bugs for issues/ regression , apart from it bug triaging 
+Aug 05 06:34:57 <mbarnes>	lakhil: okay, good.  did you attend the bugmaster meeting on Monday?
+Aug 05 06:35:30 <lakhil>	bug squad meeting i guess :)
+Aug 05 06:35:44 <lakhil>	I did attend it .. minutes are published already 
+Aug 05 06:35:54 <mbarnes>	bug squad meeting I meant, yeah
+Aug 05 06:36:05 <lakhil>	http://live.gnome.org/Bugsquad/Meetings/20090903
+Aug 05 06:36:47 <mbarnes>	okay cool
+Aug 05 06:37:06 <mbarnes>	mcrha, anything to share?
+Aug 05 06:37:11 <mcrha>	mostly calendar bugs, and some other things around. Nothing special, I think. but looking forward for a branch & merge, seems to bring new challenging work to be done in sources
+Aug 05 06:37:15 *	mbarnes almost asked himself... new at this  :)
+Aug 05 06:37:32 <abharath>	:D
+Aug 05 06:37:36 <lakhil>	hehe
+Aug 05 06:38:12 <mbarnes>	mcrha: "challenging" would be one word for it  ;)
+Aug 05 06:38:20 <mbarnes>	I'm looking forward to it too
+Aug 05 06:38:25 <abharath>	:)
+Aug 05 06:38:36 *	seb128 has quit (Ex-Chat)
+Aug 05 06:38:36 <mbarnes>	seb128: anything to share?
+Aug 05 06:38:41 <mcrha>	mbarnes, sooner is better here, right?
+Aug 05 06:38:44 <mbarnes>	whoops.  guess not
+Aug 05 06:39:27 <abharath>	maybe mcrha's challenge had some role to play in that happening :D
+Aug 05 06:39:30 *	abharath hides
+Aug 05 06:39:45 <mbarnes>	yeah, the sooner the better
+Aug 05 06:39:59 *	mcrha doesn't have any challenge nearby
+Aug 05 06:39:59 <mbarnes>	myself, I'm racing the clock trying to get kill-bonobo's calendar working
+Aug 05 06:40:35 *	seb128 (~seb128@89.127.177.75) has joined #evolution-meet
+Aug 05 06:40:51 <mbarnes>	seb128: hey, you came back!
+Aug 05 06:40:59 <mbarnes>	seb128: anything to share?
+Aug 05 06:41:03 <lakhil>	mbarnes, i applied your schema changes but i am still facing same problem :(
+Aug 05 06:41:04 <seb128>	yeah sorry got to restart my session
+Aug 05 06:41:18 <lakhil>	mbarnes, may i will wait for some time and try it later 
+Aug 05 06:41:23 <abharath>	mcrha: I'll look into the plugins before the UI freeze commences
+Aug 05 06:41:36 <seb128>	not really, as said I think by not landing dbus changes this cycle that put a difficult position for next cycle
+Aug 05 06:41:37 <lakhil>	( it was with respect to kill-bonobo )
+Aug 05 06:41:40 <mbarnes>	lakhil: yeah, let's talk after the meeting
+Aug 05 06:41:41 <seb128>	but let's see how it goes
+Aug 05 06:41:57 <mcrha>	abharath, yup, thanks
+Aug 05 06:43:08 <mbarnes>	seb128: I agree this next cycle will be interesting
+Aug 05 06:43:25 <mbarnes>	at least we'll have a little extra time with it
+Aug 05 06:44:13 *	mcrha is hoping in mbarnes' test rpm for the kb, involving more people for testing
+Aug 05 06:44:41 <seb128>	will that give testing in the eds port too?
+Aug 05 06:45:04 <seb128>	it took several cycle to stabilize the disk summary
+Aug 05 06:45:20 <seb128>	I doubt bonobo-slay and dbus will land and stabilize in one cycle
+Aug 05 06:45:25 <abharath>	I run nightly builds. so once dbus-port and kb branches are merged we can expect some good testing
+Aug 05 06:45:27 <mbarnes>	no, unfortunately not.  but it might not be a bad idea to package that branch too
+Aug 05 06:45:52 <mcrha>	mbarnes, probably all involved, like eex too, right?
+Aug 05 06:46:08 <mbarnes>	mcrha: right
+Aug 05 06:46:20 <mcrha>	ok
+Aug 05 06:46:30 <mcrha>	it'll be fun
+Aug 05 06:46:38 <mbarnes>	we also haven't really introduced eds-dbus and kill-bonobo to each other yet
+Aug 05 06:46:52 <abharath>	hope they love each other :)
+Aug 05 06:46:53 <mbarnes>	some early test packages might help shake out any issues there
+Aug 05 06:47:35 <mbarnes>	okay, I guess that about wraps it up for this week
+Aug 05 06:47:43 <mbarnes>	thanks everyone
+Aug 05 06:47:51 <seb128>	thanks
+Aug 05 06:48:15 <jony>	mbarnes: one more thing. Freezes are on 11th.
+Aug 05 06:48:23 <jony>	UI freeze on 11th.
+Aug 05 06:48:34 <jony>	oops .. mentioned .. 
+Aug 05 06:49:22 <mbarnes>	11th, right.  keep thinking it's when tarballs are due
+Aug 05 06:49:36 <mbarnes>	next Tuesday
+
