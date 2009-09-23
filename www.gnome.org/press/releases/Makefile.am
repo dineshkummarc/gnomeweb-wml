@@ -84,6 +84,7 @@ page_SCRIPTS = \
 	2009-06-desktop-summit-platinum.html \
 	2009-06-desktop-summit-keynotes.html \
 	2009-08-desktop-summit-conclusion.html \
-	2009-09-softwarefreedomday.html
+	2009-09-softwarefreedomday.html \
+	2009-09-gnome228.html
 
 include $(top_srcdir)/rules.common
