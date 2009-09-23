@@ -50,6 +50,7 @@ page_DATA = \
 	outreach-a11y.png \
 	two-twenty-four.png \
 	new-friends-of-gnome.png \
-	two-twenty-six.png
+	two-twenty-six.png \
+	two-twenty-eight.png
 
 include $(top_srcdir)/rules.common
