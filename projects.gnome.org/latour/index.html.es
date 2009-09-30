@@ -7,7 +7,7 @@
 
 
 
-	<title>GNOME Latin America Tour 2008</title>
+	<title>GNOME Latin America Tour 2009</title>
 	<link href="layout.css" rel="stylesheet" type="text/css" media="screen">
 	<link rel="stylesheet" type="text/css" href="latinamericatour.css">
 	
@@ -39,14 +39,14 @@
 <div id="languages"><a href="index.html.en">English</a> &middot; <a href="index.html.es">Español</a> &middot; <a href="index.html.pt">Português</a></div>
 
 <div id="latour-content">
-<p class="tour-stop"><strong>Octubre 22, 23, 24, 25</strong> <br>
-<a href="#encuentro">9no Encuentro Linux</a> -  Concepción, Chile</p> 
+<p class="tour-stop"><strong>Octubre 22, 23, 24</strong> <br>
+<a href="#encuentro">10mo Encuentro Linux</a> -  Valparaíso, Chile</p> 
 
-<p class="tour-stop"><strong>Octubre 30, 31, Noviembre 1</strong><br>
+<p class="tour-stop"><strong>Octubre 22, 23, 24</strong><br>
 <a href="#forum">Fórum GNOME</a> - Foz do Iguaçu, Brasil</p>
 
-<h3>GNOME Latin America Tour! 2008!</h3>
-<p>Ésta es la página oficial para el Tour GNOME Latinoamérica 2008. Este
+<h3>GNOME Latin America Tour! 2009!</h3>
+<p>Ésta es la página oficial para el Tour GNOME Latinoamérica 2009. Este
 proyecto tiene como objetivo promover la inclusión e integración de
 colaboradores en toda América Latina.</p>
 
@@ -122,7 +122,7 @@ candidato.
 <img src="latour-logo.png"/>
   <h3>¿Dónde?</h3>
   <iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;s=AARTsJp1EhHvNt0w5DHkc-nFNWvD0p9i_Q&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
-  <h3><span>Concepción, Chile</span> - Octubre 22, 23, 24, 25<br/> Día GNOME, 9no Encuentro Linux</h3>
+  <h3><span>Valparaíso, Chile</span> - Octubre 22, 23, 24<br/> Día GNOME, 10mo Encuentro Linux</h3>
   <a name="encuentro"> </a>
   <p>Como todo año en Chile, los usuarios de Linux, fans y colaboradores de
   todo el país se reunen para compartir su trabajo e ideas, GNOME por supuesto
@@ -130,10 +130,10 @@ candidato.
   están a cargo, <a
   href="http://mail.gnome.org/mailman/listinfo/gnome-cl-list">escríbeles</a> if
   si quieres saber cómo asistir.<br/>
-  <br/><a href="http://2008.encuentrolinux.cl">Web 9no Encuentro Linux</a>
+  <br/><a href="http://2009.encuentrolinux.cl">Web 10mo Encuentro Linux</a>
   &middot; <a href="http://noticias.gnome.cl/">Web GNOME Chile</a>
   </p>
-  <h3><span>Foz do Iguaçu</span> - Octubre 30, 31, Noviembre 1st<br/> Fórum GNOME, Latinoware</h3>
+  <h3><span>Foz do Iguaçu</span> - Octubre 22, 23, 24<br/> Fórum GNOME, Latinoware</h3>
   <a name="forum"> </a>
   <p>Todo los años, Fórum GNOME permite a los colaboradores y usuarios
   brasileros reunirse para compartir su amor por GNOME y compartir conocimiento
