@@ -4,7 +4,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Dia GNOME 2009 - Valparaiso, Chile.</title>
+	<title>Día GNOME 2009 - Valparaíso, Chile.</title>
 	<link href="layout.css" rel="stylesheet" type="text/css" media="screen">
 	<link rel="stylesheet" type="text/css" href="diagnome.css"> 
 	
@@ -39,7 +39,7 @@
 </div>
 
 <div id="latour-content">
-<h2>Dia de GNOME en Chile! 2009!</h2>
+<h2>Día de GNOME en Chile! 2009!</h2>
 <p>Este es el evento de difusión del proyecto <a href="www.gnome.org">GNOME</a> más grande que se organiza a nivel nacional.</p>
 <p>
 Se darán a conocer al público en general y a los desarrolladores interesados en poder contribuir, información sobre sus alcances, tecnologías y últimos avances del proyecto.
