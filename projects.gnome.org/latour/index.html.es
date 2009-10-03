@@ -40,7 +40,7 @@
 
 <div id="latour-content">
 <p class="tour-stop"><strong>Octubre 22, 23, 24</strong> <br>
-<a href="#encuentro">10mo Encuentro Linux</a> -  Valparaíso, Chile</p> 
+<a href="http://projects.gnome.org/diagnome">Día GNOME 2009</a> -  Valparaíso, Chile</p> 
 
 <p class="tour-stop"><strong>Octubre 22, 23, 24</strong><br>
 <a href="#forum">Fórum GNOME</a> - Foz do Iguaçu, Brasil</p>
