@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8";?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
 
 
-	<title>GNOME Latin America Tour 2009</title>
+	<title>Tour GNOME Latinoamérica 2009</title>
 	<link href="layout.css" rel="stylesheet" type="text/css" media="screen">
 	<link rel="stylesheet" type="text/css" href="latinamericatour.css">
 	
@@ -15,34 +15,34 @@
 
 <ul id="general">
       <li class="home" id="siteaction-gnome_home">
-        <a title="Home" href="http://www.gnome.org/">Inicio</a>
+        <a title="Home" href="http://www.gnome.org/">Home</a>
       </li>
       <li id="siteaction-gnome_news">
-        <a title="News" href="http://news.gnome.org/">Noticias</a>
+        <a title="News" href="http://news.gnome.org/">News</a>
       </li>
       <li id="siteaction-gnome_projects">
-        <a title="Projects" href="http://www.gnome.org/projects/">Proyectos</a>
+        <a title="Projects" href="http://projects.gnome.org/">Projects</a>
       </li>
       <li id="siteaction-gnome_art">
-        <a title="Art" href="http://art.gnome.org/">Arte</a>
+        <a title="Art" href="http://art.gnome.org/">Art</a>
       </li>
       <li id="siteaction-gnome_support">
-        <a title="Support" href="http://www.gnome.org/support/">Soporte</a>
+        <a title="Support" href="http://www.gnome.org/support/">Support</a>
       </li>
       <li id="siteaction-gnome_development">
-        <a title="Development" href="http://developer.gnome.org/">Desarrollo</a>
+        <a title="Development" href="http://library.gnome.org/devel/">Development</a>
       </li>
       <li id="siteaction-gnome_community">
-        <a title="Community" href="http://www.gnome.org/community/">Comunidad</a>
+        <a title="Community" href="http://www.gnome.org/community/">Community</a>
       </li>
     </ul>
 <div id="languages"><a href="index.html.en">English</a> &middot; <a href="index.html.es">Español</a> &middot; <a href="index.html.pt">Português</a></div>
 
 <div id="latour-content">
-<p class="tour-stop"><strong>Octubre 22, 23, 24</strong> <br>
+<p class="tour-stop"><strong>October 22, 23, 24</strong> <br>
 <a href="http://projects.gnome.org/diagnome">Día GNOME 2009</a> -  Valparaíso, Chile</p> 
 
-<p class="tour-stop"><strong>Octubre 22, 23, 24</strong><br>
+<p class="tour-stop"><strong>October 22, 23, 24</strong><br>
 <a href="#forum">Fórum GNOME</a> - Foz do Iguaçu, Brasil</p>
 
 <h3>GNOME Latin America Tour! 2009!</h3>
@@ -56,36 +56,51 @@ dos paradas del Tour. Respectivamente Fórum GNOME y Día GNOME.</p>
 
 <p>Gnomos de toda la región volarán a ambos eventos para conocerse, planear y
 divertirse.<br/>
-En este primer tour, se busca que los colaboradores ya existentes puedan
-conocerse, acercarse más y crear juntos planes para facilitar el camino a
-nuevos colaboradores.</p>
 
 <p class="photos">
-<a href="http://www.flickr.com/photos/gpoo/293445431/"><img src="http://farm1.static.flickr.com/101/293445431_9fde999d9e_m.jpg"/></a>
-<a href="http://www.flickr.com/photos/gpoo/295635414/"><img src="http://farm1.static.flickr.com/120/295635414_b72c83b0da_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/295649512/"><img src="http://farm1.static.flickr.com/100/295649512_d87a715e1d_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/295590480/"><img src="http://farm1.static.flickr.com/99/295590480_0f6351b820_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/293362820/"><img src="http://farm1.static.flickr.com/122/293362820_11e10c485e_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1480123436/"><img src="http://farm2.static.flickr.com/1075/1480123436_0a71cd981d_m.jpg" /></a>
+<a href="http://www.flickr.com/photos/diegoe/3003317931/" title="Fire dancers by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3252/3003317931_e2cb1e2a23_s.jpg" width="75" height="75" alt="Fire dancers" /></a>
 
-<a href="http://www.flickr.com/photos/gpoo/293372278/"><img src="http://farm1.static.flickr.com/109/293372278_47d9401551_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/293362820/"><img src="http://farm1.static.flickr.com/122/293362820_11e10c485e_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/293445172/"><img src="http://farm1.static.flickr.com/103/293445172_82a31d73ce_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/gpoo/295585417/"><img src="http://farm1.static.flickr.com/122/295585417_bfdd58bd1b_s.jpg" /></a>
 
-<br/>
-<a href="http://www.flickr.com/photos/gpoo/295602107/"><img src="http://farm1.static.flickr.com/108/295602107_c70f32779f_s.jpg" /></a>
 
-<a href="http://www.flickr.com/photos/chukitta/1468329587/"><img src="http://farm2.static.flickr.com/1333/1468329587_4c97307b28_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1480209154/"><img src="http://farm2.static.flickr.com/1220/1480209154_65050e860e_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1455924784/"><img src="http://farm2.static.flickr.com/1372/1455924784_0a3f3a5ba6_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1455924794/"><img src="http://farm2.static.flickr.com/1043/1455924794_9f4e8753d1_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/jwendell/2495391016/"><img src="http://farm4.static.flickr.com/3257/2495391016_703f05e767_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1480123410/"><img src="http://farm2.static.flickr.com/1237/1480123410_da80be748b_s.jpg" /></a>
+<a href="http://www.flickr.com/photos/gpoo/3188692723/" title="El panel de amor y odio a Gnome by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3303/3188692723_5bb033a351_s.jpg" width="75" height="75" alt="El panel de amor y odio a Gnome" /></a>
 
-<a href="http://www.flickr.com/photos/27909074@N00/1480123436/"><img src="http://farm2.static.flickr.com/1075/1480123436_0a71cd981d_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/27909074@N00/1455924776/"><img src="http://farm2.static.flickr.com/1141/1455924776_ff6fa1a125_s.jpg" /></a>
-<a href="http://www.flickr.com/photos/jwendell/2495390836/"><img src="http://farm3.static.flickr.com/2162/2495390836_8e64f8b8f4_s.jpg" /></a>
+<img src="topleft.png"/>
+<a href="http://www.flickr.com/photos/diegoe/2998446070/" title="Grupo de nuevo by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3059/2998446070_370dd2ced8_s.jpg" width="75" height="75" alt="Grupo de nuevo" /></a>
+
+<a href="http://www.flickr.com/photos/gpoo/3188694885/" title="Gnome by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3533/3188694885_fbd048c3d5_s.jpg" width="75" height="75" alt="Gnome" /></a>
+
+<a href="/photos/gpoo/3335856555/in/set-72157614942612086/" title="Pedro Villavicencio y John Wendell by gpoo"><img src="http://farm4.static.flickr.com/3346/3335856555_620539c93a_s.jpg" width="75" height="75" alt="Pedro Villavicencio y John Wendell by gpoo"  /></a>
+<a href="http://www.flickr.com/photos/diegoe/2998142608/" title="Daniel y el compatriota Milton by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3228/2998142608_c3aafc5a5f_s.jpg" width="75" height="75" alt="Daniel y el compatriota Milton" /></a>
+
+
+
+<a href="http://www.flickr.com/photos/diegoe/2997563249/" title="Besos gratis by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3069/2997563249_d182bb081a_s.jpg" width="75" height="75" alt="Besos gratis" /></a>
+<a href="/photos/gpoo/3335859855/in/set-72157614942612086/" title="KDE &amp; GNOME by gpoo"><img src="http://farm4.static.flickr.com/3542/3335859855_07eefa2615_s.jpg" width="75" height="75" alt="KDE &amp; GNOME by gpoo"  /></a>
+
+<img src="topright.png"/>
+
+<a href="http://www.flickr.com/photos/josita/2974405989/" title="Regalos Gnome by jooanfossi, on Flickr"><img src="http://farm4.static.flickr.com/3182/2974405989_28595ae69c_s.jpg" width="75" height="75" alt="Regalos Gnome" /></a>
+
+<img src="bottomleft.png"/>
+
+
+<a href="/photos/gpoo/3336698318/in/set-72157614942612086/" title="Eline y John Wendell by gpoo"><img src="http://farm4.static.flickr.com/3558/3336698318_f1be39f88d_s.jpg" width="75" height="75" alt="Eline y John Wendell by gpoo"  /></a>
+<a href="http://www.flickr.com/photos/gpoo/3189545188/" title="Gnome Love by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3427/3189545188_a74b89bb36_s.jpg" width="75" height="75" alt="Gnome Love" /></a>
+
+<a href="http://www.flickr.com/photos/gpoo/2981726815/" title="Día de Gnome 2008 by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3173/2981726815_e4952d58b0_s.jpg" width="75" height="75" alt="Día de Gnome 2008" /></a>
+
+<a href="/photos/gpoo/3335853381/in/set-72157614942612086/" title="Vinicius Depizzol by gpoo"><img src="http://farm4.static.flickr.com/3387/3335853381_3c7b5b65fc_s.jpg" width="75" height="75" alt="Vinicius Depizzol by gpoo"  /></a>
+<a href="http://www.flickr.com/photos/diegoe/2997659708/" title="Fácil y simple: GNOME by Diego Escalante Urrelo, on Flickr"><img src="http://farm3.static.flickr.com/2326/2997659708_7a12b9afa5_s.jpg" width="75" height="75" alt="Fácil y simple: GNOME" /></a>
+<a href="http://www.flickr.com/photos/diegoe/3004757904/" title="More stuff for fans by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3070/3004757904_700f5ab45f_s.jpg" width="75" height="75" alt="More stuff for fans" /></a>
+
+<img src="bottomright.png"/>
+
+<a href="http://www.flickr.com/photos/diegoe/2998585850/" title="GNOME! by Diego Escalante Urrelo, on Flickr"><img src="http://farm4.static.flickr.com/3058/2998585850_a94b5812ea_s.jpg" width="75" height="75" alt="GNOME!" /></a>
+<a href="/photos/gpoo/3335875581/in/set-72157614942612086/" title="KDE migró a GNOME by gpoo"><img src="http://farm4.static.flickr.com/3407/3335875581_66d92dc121_s.jpg" width="75" height="75" alt="KDE migró a GNOME by gpoo"  /></a>
+<a href="http://www.flickr.com/photos/gpoo/2981726815/" title="Día de Gnome 2008 by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3173/2981726815_e4952d58b0_s.jpg" width="75" height="75" alt="Día de Gnome 2008" /></a>
+
+<a href="/photos/gpoo/3335879177/in/set-72157614942612086/" title="Invasión de GNOME by gpoo"><img src="http://farm4.static.flickr.com/3333/3335879177_aab2ba539b_s.jpg" width="75" height="75" alt="Invasión de GNOME by gpoo"  /></a>
+<a href="http://www.flickr.com/photos/gpoo/3189505260/" title="Aldrin Martoq by gpoo, on Flickr"><img src="http://farm4.static.flickr.com/3499/3189505260_550c685ebc_s.jpg" width="75" height="75" alt="Aldrin Martoq" /></a>
 <br/>
 </p>
 
@@ -121,8 +136,8 @@ candidato.
 <div class="latour-logo-content">
 <img src="latour-logo.png"/>
   <h3>¿Dónde?</h3>
-  <iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;s=AARTsJp1EhHvNt0w5DHkc-nFNWvD0p9i_Q&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;t=p&amp;msa=0&amp;msid=109190276891622691099.0004580cb8ef896ad9a8b&amp;ll=-30.600094,-63.720703&amp;spn=18.856807,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">Ver mapa más grande</a></small>
-  <h3><span>Valparaíso, Chile</span> - Octubre 22, 23, 24<br/> Día GNOME, 10mo Encuentro Linux</h3>
+<iframe width="350" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;msa=0&amp;msid=105206674481611996772.000475238e8cfa308e277&amp;ll=-29.840644,-62.314453&amp;spn=19.00031,30.761719&amp;z=4&amp;output=embed"></iframe><br /><small>View <a href="http://maps.google.com/maps/ms?ie=UTF8&amp;hl=en&amp;msa=0&amp;msid=105206674481611996772.000475238e8cfa308e277&amp;ll=-29.840644,-62.314453&amp;spn=19.00031,30.761719&amp;z=4&amp;source=embed" style="color:#0000FF;text-align:left">GNOME Latin America Tour 2009</a> en un mapa completo</small>
+  <h3><span>Valparaíso, Chile</span> - October 22, 23, 24<br/> Día GNOME, 10mo Encuentro Linux</h3>
   <a name="encuentro"> </a>
   <p>Como todo año en Chile, los usuarios de Linux, fans y colaboradores de
   todo el país se reunen para compartir su trabajo e ideas, GNOME por supuesto
@@ -133,7 +148,7 @@ candidato.
   <br/><a href="http://2009.encuentrolinux.cl">Web 10mo Encuentro Linux</a>
   &middot; <a href="http://noticias.gnome.cl/">Web GNOME Chile</a>
   </p>
-  <h3><span>Foz do Iguaçu</span> - Octubre 22, 23, 24<br/> Fórum GNOME, Latinoware</h3>
+  <h3><span>Foz do Iguaçu</span> - October 22, 23, 24<br/> Fórum GNOME, Latinoware</h3>
   <a name="forum"> </a>
   <p>Todo los años, Fórum GNOME permite a los colaboradores y usuarios
   brasileros reunirse para compartir su amor por GNOME y compartir conocimiento
@@ -145,11 +160,10 @@ candidato.
   </p>
 </div>
 </div>
+
 <div id="footer">
 Copyright © 2008 The GNOME Project.<br/>
-Fotos por <a href="http://www.bani.com.br/">John Wendell</a>, <a
-href="http://calcifer.org">Germán Poó-Caamañó</a>, <a
-href="http://blogs.gnome.org/brunobol/">Bruno Boaventura</a> y <a href="http://www.flickr.com/photos/chukitta/">Karin Lizana</a>.
+Fotos por <a href="http://www.bani.com.br/">John Wendell</a>, <a href="http://calcifer.org">Germán Poó-Caamañó</a>, <a href="http://blogs.gnome.org/brunobol/">Bruno Boaventura</a> y <a href="http://www.flickr.com/photos/chukitta/">Karin Lizana</a>.
 <br/>
 Diseño por <a href="http://www.andreasn.se/">Andreas Nilsson</a> y <a href="http://www.gnome.org/~diegoe/">Diego Escalante Urrelo</a>.
 </div>
