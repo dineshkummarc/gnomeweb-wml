@@ -6,7 +6,10 @@ page_SCRIPTS= index.html	\
 		programa.html \
 		expositores.html \
 		layout.css \
-		style.css \
+        header.png \
+        facebook.png \
+        index.html.es \
+        index.html.en \
 		diagnome.css
 
 
