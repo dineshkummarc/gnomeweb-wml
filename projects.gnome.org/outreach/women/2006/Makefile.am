@@ -1,5 +1,5 @@
 SUBDIRS = 
-urlpath = /outreach/women2006
+urlpath = /outreach/women/2006
 
 page_SCRIPTS = \
 	index.html \

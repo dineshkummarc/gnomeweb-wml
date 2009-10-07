@@ -1,4 +1,4 @@
-SUBDIRS = css images
+SUBDIRS = 2006 css images
 
 urlpath = /outreach/women
 

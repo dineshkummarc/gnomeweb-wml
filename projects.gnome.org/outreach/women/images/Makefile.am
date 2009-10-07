@@ -1,6 +1,6 @@
 SUBDIRS =
 
-urlpath = outreach/women/images
+urlpath = /outreach/women/images
 
 page_DATA = \
         make-a-donation.png \

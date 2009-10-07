@@ -1,4 +1,4 @@
-SUBDIRS = a11y women women2006
+SUBDIRS = a11y women
 urlpath = /outreach
 
 page_SCRIPTS = \
