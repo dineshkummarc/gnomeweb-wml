@@ -1,4 +1,4 @@
-SUBDIRS= 
+SUBDIRS= images 
 
 urlpath = /diagnome/
 
