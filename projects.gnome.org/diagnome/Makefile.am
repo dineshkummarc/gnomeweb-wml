@@ -10,6 +10,7 @@ page_SCRIPTS= diagnome.css \
 	mapa-diagnome.png \
 	expositores.html \
 	index.html \
-	programa.html
+	programa.html	\
+	charlas.html
 
 include $(top_srcdir)/rules.common
