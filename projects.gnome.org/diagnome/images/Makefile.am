@@ -20,6 +20,8 @@ misc_images=\
 	jbustos.jpg	\
 	juanrojas.jpg	\
 	pedro.jpg	\
-	sergioinfante.jpg
+	sergioinfante.jpg	\
+	manuelmoscoso.jpg	\
+	mruiz.png
 
 page_DATA=$(misc_images)
