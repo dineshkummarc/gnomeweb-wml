@@ -22,6 +22,7 @@ misc_images=\
 	pedro.jpg	\
 	sergioinfante.jpg	\
 	manuelmoscoso.jpg	\
-	mruiz.png
+	mruiz.png		\
+	vvargas.jpg
 
 page_DATA=$(misc_images)
