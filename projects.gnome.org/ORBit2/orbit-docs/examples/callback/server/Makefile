@@ -21,7 +21,7 @@ $(IDLOUT): callback-server.idl
 	$(ORBIT_IDL) -I . --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref callback-server
 
 distclean: clean
 	rm -rf callback-server

@@ -20,7 +20,7 @@ $(IDLOUT): byteseq.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref byteseq-client byteseq-server
 
 distclean: clean
 	rm -rf byteseq-client byteseq-server

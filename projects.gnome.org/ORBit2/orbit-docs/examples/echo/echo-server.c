@@ -57,7 +57,6 @@ server_init (int                 *argc_ptr,
 	signal(SIGTERM, server_shutdown);
 	
 	/* create Object Request Broker (ORB) */
-	
         (*orb) = CORBA_ORB_init(argc_ptr, argv, "orbit-local-mt-orb", ev);
 	if (etk_raised_exception(ev)) 
 		goto failed_orb;

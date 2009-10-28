@@ -21,7 +21,7 @@ $(IDLOUT): name-resolve.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref name-resolve-client name-resolve-server
 
 distclean: clean
 	rm -rf name-resolve-client name-resolve-server

@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <signal.h>
+#include <string.h>
+#include <stdlib.h>
 #include <orbit/orbit.h>
 
 /*
@@ -18,6 +20,7 @@
 
 #include "echo.h"
 
+#include "examples-toolkit.h" /* ie. etk_abort_if_exception() */ 
 
 static CORBA_ORB  global_orb = CORBA_OBJECT_NIL; /* global orb */
  
@@ -183,6 +186,7 @@ main(int argc, char* argv[])
 	echo_service = (Echo) etk_import_object_from_file (global_orb,
 							   filename,
 							   ev);
+
         etk_abort_if_exception(ev, "import service failed");
 
 	client_run (echo_service, ev);

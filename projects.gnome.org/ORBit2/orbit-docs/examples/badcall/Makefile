@@ -21,7 +21,7 @@ $(IDLOUT): badcall.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref badcall-client badcall-server
 
 distclean: clean
 	rm -rf badcall-client badcall-server

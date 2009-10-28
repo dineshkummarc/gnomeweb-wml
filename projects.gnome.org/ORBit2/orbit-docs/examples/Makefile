@@ -8,6 +8,7 @@ all:
 	$(MAKE) -C factory  	all
 	$(MAKE) -C name-resolve all
 	$(MAKE) -C callback     all
+	$(MAKE) -C threaded-calculator   all
 
 clean:
 	rm -f *~
@@ -19,6 +20,7 @@ clean:
 	$(MAKE) -C factory      clean
 	$(MAKE) -C name-resolve clean
 	$(MAKE) -C callback     clean
+	$(MAKE) -C threaded-calculator   clean
 
 distclean: 
 	rm -f *~
@@ -30,4 +32,5 @@ distclean:
 	$(MAKE) -C factory      distclean
 	$(MAKE) -C name-resolve distclean
 	$(MAKE) -C callback     distclean
+	$(MAKE) -C threaded-calculator   distclean
 

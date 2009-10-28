@@ -21,7 +21,7 @@ $(IDLOUT): account.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref account-client account-server
 
 distclean: clean
 	rm -rf account-client account-server

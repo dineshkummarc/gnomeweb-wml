@@ -21,7 +21,7 @@ $(IDLOUT): factory.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref factory-client factory-server
 
 distclean: clean
 	rm -rf factory-client factory-server

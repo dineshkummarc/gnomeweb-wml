@@ -1,6 +1,6 @@
 SUBDIRS=stylesheet-images 
 
-urlpath = /ORBit2/orbit-docs/orbit
+urlpath=/projects/ORBit2/orbit-docs/orbit
 
 page_SCRIPTS= \
 book1.html c85.html    x140.html  x478.html \

@@ -21,7 +21,7 @@ $(IDLOUT): calculator.idl
 	$(ORBIT_IDL) --skeleton-impl $^
 
 clean:
-	rm -rf *.o *~ $(IDLOUT) *.ior *.ref
+	rm -rf *.o *~ $(IDLOUT) *.ior *.ref calculator-client mt-calculator-server
 
 distclean: clean
 	rm -rf calculator-client mt-calculator-server
