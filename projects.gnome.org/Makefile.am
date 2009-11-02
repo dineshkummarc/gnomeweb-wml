@@ -37,6 +37,7 @@ SUBDIRS = css \
 	ooo			\
 	ORBit2			\
 	gnome-power-manager	\
+	gnome-color-manager	\
 	gnome-print		\
 	gst			\
 	gnome-network		\
