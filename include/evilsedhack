@@ -3,6 +3,18 @@ PAGE=$1
 ROOT=$2
 URLPATH=$3
 
+case "$ROOT" in
+	http://www.gnome.org)
+		PIWIK_SITE_ID=1
+	;;
+	http://news.gnome.org)
+		PIWIK_SITE_ID=2
+	;;
+	http://projects.gnome.org)
+		PIWIK_SITE_ID=3
+	;;
+esac
+
 ## we use two seds in these operations so the second
 ## instance operates on the output of the first, ugh
 
@@ -113,11 +125,11 @@ var pkBaseURL = (("https:" == document.location.protocol) ? "https://webstats.gn
 document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 </script><script type="text/javascript">
 try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", $PIWIK_SITE_ID);
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
-</script><noscript><p><img src="http://webstats.gnome.org/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+</script><noscript><p><img src="http://webstats.gnome.org/piwik.php?idsite=$PIWIK_SITE_ID" style="border:0" alt=""/></p></noscript>
 <!-- End Piwik Tag -->
 </body>
 </html>
