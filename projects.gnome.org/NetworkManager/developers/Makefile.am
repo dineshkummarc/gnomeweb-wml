@@ -9,6 +9,7 @@ page_SCRIPTS=\
 	design_goals.html \
 	spec-07.html \
 	spec-08.html \
+	settings-spec-07.html \
 	settings-spec-08.html \
 	$(NULL)
 
