@@ -112,7 +112,7 @@ General Public License for more details.</p>
 <p>You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</p>
-</div><h2>Interfaces</h2><ul><li><code><a href="#org.freedesktop.NetworkManager">org.freedesktop.NetworkManager</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.AccessPoint">org.freedesktop.NetworkManager.AccessPoint</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device">org.freedesktop.NetworkManager.Device</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Wired">org.freedesktop.NetworkManager.Device.Wired</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Wireless">org.freedesktop.NetworkManager.Device.Wireless</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Cdma">org.freedesktop.NetworkManager.Device.Cdma</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Gsm">org.freedesktop.NetworkManager.Device.Gsm</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Serial">org.freedesktop.NetworkManager.Device.Serial</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.IP4Config">org.freedesktop.NetworkManager.IP4Config</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.DHCP4Config">org.freedesktop.NetworkManager.DHCP4Config</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings">org.freedesktop.NetworkManagerSettings</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings.Connection">org.freedesktop.NetworkManagerSettings.Connection</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings.Connection.Secrets">org.freedesktop.NetworkManagerSettings.Connection.Secrets</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Connection.Active">org.freedesktop.NetworkManager.Connection.Active</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.VPN.Connection">org.freedesktop.NetworkManager.VPN.Connection</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.VPN.Plugin">org.freedesktop.NetworkManager.VPN.Plugin</a></code></li></ul>
+</div><h2>Interfaces</h2><ul><li><code><a href="#org.freedesktop.NetworkManager">org.freedesktop.NetworkManager</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.AccessPoint">org.freedesktop.NetworkManager.AccessPoint</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device">org.freedesktop.NetworkManager.Device</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Wired">org.freedesktop.NetworkManager.Device.Wired</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Wireless">org.freedesktop.NetworkManager.Device.Wireless</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Cdma">org.freedesktop.NetworkManager.Device.Cdma</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Gsm">org.freedesktop.NetworkManager.Device.Gsm</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Device.Serial">org.freedesktop.NetworkManager.Device.Serial</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.IP4Config">org.freedesktop.NetworkManager.IP4Config</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.DHCP4Config">org.freedesktop.NetworkManager.DHCP4Config</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings">org.freedesktop.NetworkManagerSettings</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings.Connection">org.freedesktop.NetworkManagerSettings.Connection</a></code></li><li><code><a href="#org.freedesktop.NetworkManagerSettings.Connection.Secrets">org.freedesktop.NetworkManagerSettings.Connection.Secrets</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Connection.Active">org.freedesktop.NetworkManager.Connection.Active</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.Connection.Active">org.freedesktop.NetworkManager.Connection.Active</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.VPN.Connection">org.freedesktop.NetworkManager.VPN.Connection</a></code></li><li><code><a href="#org.freedesktop.NetworkManager.VPN.Plugin">org.freedesktop.NetworkManager.VPN.Plugin</a></code></li></ul>
   <h1><a name="org.freedesktop.NetworkManager" id="org.freedesktop.NetworkManager"></a>org.freedesktop.NetworkManager</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.NetworkManager.GetDevices" id="org.freedesktop.NetworkManager.GetDevices">GetDevices</a> (
         
         ) &#8594;
@@ -134,10 +134,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
           The connection to activate the devices with.
         </dd><dt><code>device</code> -
       <code>o</code></dt><dd>
-          The device to be activated.
+          The object path of device to be activated for physical connections.  This parameter is ignored for VPN connections, because the specific_object (if provided) specifies the device to use.
         </dd><dt><code>specific_object</code> -
       <code>o</code></dt><dd>
-          The path of a device-type-specific object this activation should use, for example a WiFi access point.
+          The path of a connection-type-specific object this activation should use. 
+          This parameter is currently ignored for wired and mobile broadband connections,
+          and the value of "/" should be used (ie, no specific object).  For WiFi
+          connections, pass the object path of a specific AP from the card's scan
+          list, or "/" to pick and AP automatically.  For VPN connections, pass
+          the object path of an ActiveConnection object that should serve as the
+          "base" connection (to which the VPN connections lifetime will be tied),
+          or pass "/" and NM will automatically use the current default device.
         </dd></dl></div><div><h4>Returns</h4><dl><dt><code>active_connection</code> -
       <code>o</code></dt><dd>
           The path of the active connection object representing this active connection.
@@ -352,7 +359,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
         Whether or not this device is managed by NetworkManager.
       </dd><dt><code>DeviceType</code> -
       <code>u</code> -
-      <code>(read)</code></dt><dd>
+      <code>(read)</code>
+      (<a xmlns="" href="#type-NM_DEVICE_TYPE">NM_DEVICE_TYPE</a>)
+    </dt><dd>
+        The general type of the network device; ie Ethernet, WiFi, etc.
       </dd></dl><h2>Enumerated types:</h2><h3><a name="type-NM_DEVICE_STATE" id="type-NM_DEVICE_STATE">NM_DEVICE_STATE</a></h3><dl><dt><code>NM_DEVICE_STATE_UNKNOWN = 0</code></dt><dd>
           The device is in an unknown state.
         </dd><dt><code>NM_DEVICE_STATE_UNMANAGED = 1</code></dt><dd>
@@ -373,6 +383,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
           The device is active.
         </dd><dt><code>NM_DEVICE_STATE_FAILED = 9</code></dt><dd>
           The device is in a failure state following an attempt to activate it.
+        </dd></dl><h3><a name="type-NM_DEVICE_TYPE" id="type-NM_DEVICE_TYPE">NM_DEVICE_TYPE</a></h3><dl><dt><code>NM_DEVICE_TYPE_UNKNOWN = 0</code></dt><dd>
+          The device type is unknown.
+        </dd><dt><code>NM_DEVICE_TYPE_ETHERNET = 1</code></dt><dd>
+          The device is wired Ethernet device.
+        </dd><dt><code>NM_DEVICE_TYPE_WIFI = 2</code></dt><dd>
+          The device is an 802.11 WiFi device.
+        </dd><dt><code>NM_DEVICE_TYPE_GSM = 3</code></dt><dd>
+          The device is a GSM-based cellular WAN device.
+        </dd><dt><code>NM_DEVICE_TYPE_CDMA = 4</code></dt><dd>
+          The device is a CDMA/IS-95-based cellular WAN device.
         </dd></dl><h3><a name="type-NM_DEVICE_STATE_REASON" id="type-NM_DEVICE_STATE_REASON">NM_DEVICE_STATE_REASON</a></h3><dl><dt><code>NM_DEVICE_STATE_REASON_UNKNOWN = 0</code></dt><dd>
           The reason for the device state change is unknown.
         </dd><dt><code>NM_DEVICE_STATE_REASON_NONE = 1</code></dt><dd>
@@ -471,7 +491,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       </dd><dt><code>Speed</code> -
       <code>u</code> -
       <code>(read)</code></dt><dd>
-        Design speed of the device.
+        Design speed of the device, in megabits/second (Mb/s).
       </dd><dt><code>Carrier</code> -
       <code>b</code> -
       <code>(read)</code></dt><dd>
@@ -567,13 +587,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
 
   <h1><a name="org.freedesktop.NetworkManager.IP4Config" id="org.freedesktop.NetworkManager.IP4Config"></a>org.freedesktop.NetworkManager.IP4Config</h1><p>Interface has no methods.</p><p>Interface has no signals.</p><h2>Properties:</h2><dl><dt><code>Addresses</code> -
       <code>aau</code> -
-      <code>(read)</code></dt><dd>Tuples of IPv4 address/prefix/gateway.</dd><dt><code>Nameservers</code> -
+      <code>(read)</code></dt><dd>Array of tuples of IPv4 address/prefix/gateway.  All 3
+      elements of each tuple are in network byte order.  Essentially:
+      [(addr, prefix, gateway), (addr, prefix, gateway), ...]
+      </dd><dt><code>Nameservers</code> -
       <code>au</code> -
-      <code>(read)</code></dt><dd>The nameservers in use.</dd><dt><code>Domains</code> -
+      <code>(read)</code></dt><dd>The nameservers in use.</dd><dt><code>WinsServers</code> -
+      <code>au</code> -
+      <code>(read)</code></dt><dd>The Windows Internet Name Service servers associated with the connection.  Each address is in network byte order.</dd><dt><code>Domains</code> -
       <code>as</code> -
       <code>(read)</code></dt><dd>A list of domains this address belongs to.</dd><dt><code>Routes</code> -
       <code>aau</code> -
-      <code>(read)</code></dt><dd>Tuples of IPv4 route/prefix/next-hop/metric.</dd></dl>
+      <code>(read)</code></dt><dd>Tuples of IPv4 route/prefix/next-hop/metric.  All 4 elements
+      of each tuple are in network byte order.  'route' and 'next hop' are IPv4
+      addresses, while prefix and metric are simple unsigned integers.  Essentially:
+      [(route, prefix, next-hop, metric), (route, prefix, next-hop, metric), ...]
+      </dd></dl>
 
     <h1><a name="org.freedesktop.NetworkManager.DHCP4Config" id="org.freedesktop.NetworkManager.DHCP4Config"></a>org.freedesktop.NetworkManager.DHCP4Config</h1>
             Options and configuration returned by the IPv4 DHCP server.
@@ -614,7 +643,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
         a{sa{sv}}: properties
         ) &#8594;
         nothing</h3><div class="docstring">
-            Update the connection.
+            Update the connection with new settings and properties, replacing all previous settings and properties.
           </div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
       <code>a{sa{sv}}</code></dt><dd>
               New connection properties.
@@ -694,13 +723,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       (<a xmlns="" href="#type-NM_ACTIVE_CONNECTION_STATE">NM_ACTIVE_CONNECTION_STATE</a>)
     </dt><dd>The state of this active connection.</dd><dt><code>Default</code> -
       <code>b</code> -
-      <code>(read)</code></dt><dd>Whether this active connection is the default connection, i.e. whether it currently owns the default route.</dd></dl><h2>Enumerated types:</h2><h3><a name="type-NM_ACTIVE_CONNECTION_STATE" id="type-NM_ACTIVE_CONNECTION_STATE">NM_ACTIVE_CONNECTION_STATE</a></h3><dl><dt><code>NM_ACTIVE_CONNECTION_STATE_UNKNOWN = 0</code></dt><dd>
+      <code>(read)</code></dt><dd>Whether this active connection is the default connection, i.e. whether it currently owns the default route.</dd><dt><code>Vpn</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>Whether this active connection is also a VPN connection.</dd></dl><h2>Enumerated types:</h2><h3><a name="type-NM_ACTIVE_CONNECTION_STATE" id="type-NM_ACTIVE_CONNECTION_STATE">NM_ACTIVE_CONNECTION_STATE</a></h3><dl><dt><code>NM_ACTIVE_CONNECTION_STATE_UNKNOWN = 0</code></dt><dd>
           The active connection is in an unknown state.
         </dd><dt><code>NM_ACTIVE_CONNECTION_STATE_ACTIVATING = 1</code></dt><dd>
           The connection is activating.
         </dd><dt><code>NM_ACTIVE_CONNECTION_STATE_ACTIVATED = 2</code></dt><dd>
           The connection is activated.
         </dd></dl>
+
+  <h1><a name="org.freedesktop.NetworkManager.Connection.Active" id="org.freedesktop.NetworkManager.Connection.Active"></a>org.freedesktop.NetworkManager.Connection.Active</h1><p>Interface has no methods.</p><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged" id="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged">PropertiesChanged</a> (
+        a{sv}: properties
+        )</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code>
+      (<a xmlns="" href="#type-String_Variant_Map">String_Variant_Map</a>)
+    </dt><dd>
+                A dictionary mapping property names to variant boxed values
+            </dd></dl></div></div><h2>Properties:</h2><dl><dt><code>ServiceName</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>The D-Bus service name providing this connection.</dd><dt><code>Connection</code> -
+      <code>o</code> -
+      <code>(read)</code></dt><dd>The path of the connection.</dd><dt><code>SpecificObject</code> -
+      <code>o</code> -
+      <code>(read)</code></dt><dd>A specific object associated with the active connection.</dd><dt><code>Devices</code> -
+      <code>ao</code> -
+      <code>(read)</code></dt><dd>Array of object paths representing devices which are part of this active connection.</dd><dt><code>State</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-NM_ACTIVE_CONNECTION_STATE">NM_ACTIVE_CONNECTION_STATE</a>)
+    </dt><dd>The state of this active connection.</dd><dt><code>Default</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>Whether this active connection is the default connection, i.e. whether it currently owns the default route.</dd><dt><code>Vpn</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>Whether this active connection is also a VPN connection.</dd></dl>
 
   <h1><a name="org.freedesktop.NetworkManager.VPN.Connection" id="org.freedesktop.NetworkManager.VPN.Connection"></a>org.freedesktop.NetworkManager.VPN.Connection</h1>
       Represents an active connection to a Virtual Private Network.
@@ -924,6 +980,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
     - u</li><li><code><a href="#type-NM_DEVICE_CAP">NM_DEVICE_CAP</a></code>
     - u</li><li><code><a href="#type-NM_DEVICE_STATE">NM_DEVICE_STATE</a></code>
     - u</li><li><code><a href="#type-NM_DEVICE_STATE_REASON">NM_DEVICE_STATE_REASON</a></code>
+    - u</li><li><code><a href="#type-NM_DEVICE_TYPE">NM_DEVICE_TYPE</a></code>
     - u</li><li><code><a href="#type-NM_STATE">NM_STATE</a></code>
     - u</li><li><code><a href="#type-NM_VPN_CONNECTION_STATE">NM_VPN_CONNECTION_STATE</a></code>
     - u</li><li><code><a href="#type-NM_VPN_CONNECTION_STATE_REASON">NM_VPN_CONNECTION_STATE_REASON</a></code>
