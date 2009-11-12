@@ -66,7 +66,8 @@ SUBDIRS = css \
 	cheese \
 	latour			\
 	libchamplain	\
-	diagnome
+	diagnome \
+	postr
 
 urlpath = 
 
