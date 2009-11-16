@@ -18,121 +18,121 @@
 <td><strong>eap</strong></td>
 <td>array of string</td>
 <td></td>
-<td>EAP</td>
+<td>The allowed EAP method to be used when authenticating to the network with 802.1x. Valid methods are: 'leap', 'md5', 'tls', 'peap', and 'ttls'. Each method requires different configuration using the properties of this setting; refer to wpa_supplicant documentation for the allowed combinations.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>identity</strong></td>
 <td>string</td>
 <td></td>
-<td>Identity</td>
+<td>Identity string for EAP authentication methods.  Often the user's user or login name.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>anonymous-identity</strong></td>
 <td>string</td>
 <td></td>
-<td>Anonymous identity</td>
+<td>Anonymous identity string for EAP authentication methods.  Used as the unencrypted identity with EAP types that support different tunneled identity like EAP-TTLS.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>ca-cert</strong></td>
 <td>byte array</td>
 <td></td>
-<td>CA certificate</td>
+<td>Contains the CA certificate if used by the EAP method specified in the 'eap' property.  When set this property should be set to the certificate's DER encoded data.  This property can be unset even if the EAP method supports CA certificates, but this allows man-in-the-middle attacks and is NOT recommended.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>ca-path</strong></td>
 <td>string</td>
 <td></td>
-<td>CA path</td>
+<td>UTF-8 encoded path to a directory containing PEM or DER formatted certificates to be added to the verification chain in addition to the certificate specified in the 'ca-cert' property.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>client-cert</strong></td>
 <td>byte array</td>
 <td></td>
-<td>Client certificate</td>
+<td>Contains the client certificate if used by the EAP method specified in the 'eap' property.  When set this property should be set to the certificate's DER encoded data.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase1-peapver</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase1 PEAPVER</td>
+<td>Forces which PEAP version is used when PEAP is set as the EAP method in 'eap' property.  When unset, the version reported by the server will be used.  Sometimes when using older RADIUS servers, it is necessary to force the client to use a particular PEAP version.  To do so, this property may be set to '0' or '1; to force that specific PEAP version.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase1-peaplabel</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase1 PEAP label</td>
+<td>Forces use of the new PEAP label during key derivation.  Some RADIUS servers may require forcing the new PEAP label to interoperate with PEAPv1.  Set to '1' to force use of the new PEAP label.  See the wpa_supplicant documentation for more details.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase1-fast-provisioning</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase1 fast provisioning</td>
+<td>Enables or disables in-line provisioning of EAP-FAST credentials when FAST is specified as the EAP method in the #NMSetting8021x:eap property. Allowed values are '0' (disabled), '1' (allow unauthenticated provisioning), '2' (allow authenticated provisioning), and '3' (allow both authenticated and unauthenticated provisioning).  See the wpa_supplicant documentation for more details.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-auth</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase2 auth</td>
+<td>Specifies the allowed 'phase 2' inner non-EAP authentication methods when an EAP method that uses an inner TLS tunnel is specified in the 'eap' property. Recognized non-EAP phase2 methods are 'pap', 'chap', 'mschap', 'mschapv2', 'gtc', 'otp', 'md5', and 'tls'.  Each 'phase 2' inner method requires specific parameters for successful authentication; see the wpa_supplicant documentation for more details.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-autheap</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase2 autheap</td>
+<td>Specifies the allowed 'phase 2' inner EAP-based authentication methods when an EAP method that uses an inner TLS tunnel is specified in the 'eap' property. Recognized EAP-based 'phase 2' methods are 'md5', 'mschapv2', 'otp', 'gtc', and 'tls'. Each 'phase 2' inner method requires specific parameters for successful authentication; see the wpa_supplicant documentation for more details.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-ca-cert</strong></td>
 <td>byte array</td>
 <td></td>
-<td>Phase2 CA certificate</td>
+<td>Contains the CA certificate if used by the EAP method specified in the 'phase2-eap' or 'phase2-autheap' properties. When set this property should be set to the certificate's DER encoded data.  This property can be unset even if the EAP method supports CA certificates, but this allows man-in-the-middle attacks and is NOT recommended.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-ca-path</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase2 auth CA path</td>
+<td>UTF-8 encoded path to a directory containing PEM or DER formatted certificates to be added to the verification chain in addition to the certificate specified in the 'phase2-ca-cert' property.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-client-cert</strong></td>
 <td>byte array</td>
 <td></td>
-<td>Phase2 client certificate</td>
+<td>Contains the 'phase 2' client certificate if used by the EAP method specified in the 'phase2-eap' or 'phase2-autheap' properties. When set this property should be set to the certificate's DER encoded data.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>password</strong></td>
 <td>string</td>
 <td></td>
-<td>Password</td>
+<td>Password used for EAP authentication methods.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>private-key</strong></td>
 <td>byte array</td>
 <td></td>
-<td>Private key</td>
+<td>Contains the private key when the 'eap' property is set to 'tls'.  When using X.509 private keys, this property should be set to the keys's decrypted DER encoded data. When using PKCS#12 format private keys this property should be set to the PKCS#12 data (which is encrypted) and the 'private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>private-key-password</strong></td>
 <td>string</td>
 <td></td>
-<td>Private key password</td>
+<td>The password used to decrypt the private key specified in the 'private-key' property when the private key is a PKCS#12 format key.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-private-key</strong></td>
 <td>byte array</td>
 <td></td>
-<td>Phase2 private key</td>
+<td>Contains the private key when the 'phase2-eap' or 'phase2-autheap' properties are set to 'tls'. When using X.509 private keys, this property should be set to the keys's decrypted DER encoded data. When using PKCS#12 format private keys this property should be set to the PKCS#12 data (which is encrypted) and the 'phase2-private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-private-key-password</strong></td>
 <td>string</td>
 <td></td>
-<td>Phase2 private key password</td>
+<td>The password used to decrypt the private key specified in the 'phase2-private-key' property when the phase2 private key is a PKCS#12 format key.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>system-ca-certs</strong></td>
 <td>boolean</td>
 <td>FALSE</td>
-<td>Use system CA certificates</td>
+<td>When TRUE, overrides 'ca-path' and 'phase2-ca-path' properties using the system CA directory specified at configure time with the --system-ca-path switch.  The certificates in this directory are added to the verification chain in addition to any certificates specified by the 'ca-cert' and 'phase2-ca-cert' properties.</td>
 </tr>
 </table><br/>
 <p><h2>Setting name: 'cdma'</h2></p>
@@ -298,61 +298,61 @@
 <td><strong>method</strong></td>
 <td>string</td>
 <td></td>
-<td>IP configuration method</td>
+<td>IPv4 configuration method.  If 'auto' is specified then the appropriate automatic method (DHCP, PPP, etc) is used for the interface and most other properties can be left unset.  If 'link-local' is specified, then a link-local address in the 169.254/16 range will be assigned to the interface.  If 'manual' is specified, static IP addressing is used and at least one IP address must be given in the 'addresses' property.  If 'shared' is specified (indicating that this connection will provide network access to other computers) then the interface is assigned an address in the 10.42.x.1/24 range and a DHCP and forwarding DNS server are started, and the interface is NAT-ed to the current default network connection.  This property must be set.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>dns</strong></td>
-<td>GArray_guint_</td>
+<td>array of uint32</td>
 <td></td>
-<td>List of DNS servers</td>
+<td>List of DNS servers (network byte order). For the 'auto' method, these DNS servers are appended to those (if any) returned by automatic configuration.  DNS servers cannot be used with the 'shared' or 'link-local' methods as there is no usptream network.  In all other methods, these DNS servers are used as the only DNS servers for this connection.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>dns-search</strong></td>
 <td>array of string</td>
 <td></td>
-<td>List of DNS search domains</td>
+<td>List of DNS search domains.  For the 'auto' method, these search domains are appended to those returned by automatic configuration. Search domains cannot be used with the 'shared' or 'link-local' methods as there is no upstream network.  In all other methods, these search domains are used as the only search domains for this connection.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>addresses</strong></td>
 <td>array of array of uint32</td>
 <td></td>
-<td>List of NMIP4Addresses</td>
+<td>Array of IPv4 address structures.  Each IPv4 address structure is composed of 3 32-bit values; the first being the IPv4 address (network byte order), the second the prefix (1 - 32), and last the IPv4 gateway (network byte order). The gateway may be left as 0 if no gateway exists for that subnet.  For the 'auto' method, given IP addresses are appended to those returned by automatic configuration.  Addresses cannot be used with the 'shared' or 'link-local' methods as the interface is automatically assigned an address with these methods.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>routes</strong></td>
 <td>array of array of uint32</td>
 <td></td>
-<td>List of NMIP4Routes</td>
+<td>Array of IPv4 route structures.  Each IPv4 route structure is composed of 4 32-bit values; the first being the destination IPv4 network or address (network byte order), the second the destination network or address prefix (1 - 32), the third being the next-hop (network byte order) if any, and the fourth being the route metric. For the 'auto' method, given IP routes are appended to those returned by automatic configuration.  Routes cannot be used with the 'shared' or 'link-local' methods as there is no upstream network.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>ignore-auto-routes</strong></td>
 <td>boolean</td>
 <td>FALSE</td>
-<td>Ignore automatic routes</td>
+<td>When the method is set to 'auto' and this property to TRUE, automatically configured routes are ignored and only routes specified in the 'routes' property, if any, are used.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>ignore-auto-dns</strong></td>
 <td>boolean</td>
 <td>FALSE</td>
-<td>Ignore automatic DNS</td>
+<td>When the method is set to 'auto' and this property to TRUE, automatically configured nameservers and search domains are ignored and only namservers and search domains specified in the 'dns' and 'dns-search' properties, if any, are used.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>dhcp-client-id</strong></td>
 <td>string</td>
 <td></td>
-<td>DHCP Client ID</td>
+<td>A string sent to the DHCP server to identify the local machine which the DHCP server may use to cusomize the DHCP lease and options.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>dhcp-hostname</strong></td>
 <td>string</td>
 <td></td>
-<td>DHCP Hostname</td>
+<td>A hostname to be sent to the DHCP server when acquiring a lease. Some DHCP servers use this hostname to update DNS databases, essentially providing a static hostname for the computer.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>never-default</strong></td>
 <td>boolean</td>
 <td>FALSE</td>
-<td>Never make this connection the default IPv4 connection</td>
+<td>If TRUE, this connection will never be the default IPv4 connection, meaning it will never be assigned the default route by NetworkManager.</td>
 </tr>
 </table><br/>
 <p><h2>Setting name: 'ppp'</h2></p>
