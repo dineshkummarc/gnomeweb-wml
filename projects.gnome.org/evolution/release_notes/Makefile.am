@@ -28,6 +28,8 @@ page_DATA =			\
 	2.6.shtml		\
 	2.12.shtml		\
 	2.22.shtml		\
+	2.24.shtml		\
+	2.26.shtml		\
 	foot.shtml
 
 
