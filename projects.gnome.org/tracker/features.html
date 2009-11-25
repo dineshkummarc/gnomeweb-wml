@@ -34,7 +34,6 @@
 	    <td><a title="About Tracker." href="index.html">About</a></td>
 	    <td><a title="Find out what Tracker can do." href="features.html" class="current">Features</a></td>
 	    <td><a title="Download Tracker." href="download.html">Download</a></td>
-	    <td><a title="See Tracker in use." href="screenshots.html">Screenshots</a></td>
 	    <td><a title="Read up on documentation about Tracker+." href="documentation.html">Documentation</a></td>
 	    <td><a title="Find out how you can get involved in the development of Tracker." href="development.html">Development</a></td>
 	  </tr>
@@ -44,67 +43,54 @@
       <div id="content">
 	<h2>Key Features</h2>
 	<ul>
-	  <li>Supports both free text search (like Beagle/Google) as well as structured searches using RDF Query.</li>
-	  <li>Responds in real time to filesystem changes, automaticaly keeping its metadata database up to date.</li>
-	  <li>Extracts file contents as plain text and indexes them.</li>
-	  <li>Can provide thumbnailing on the fly if a thumbnail does not currently exist.</li>
-	  <li>Uses multilingual word stemmers to help find more relevant results. For example a search for motorbikes (plural) will also return results relevant to motorbike (singular).</li>
+	  <li><a href="http://en.wikipedia.org/wiki/Full_text_search"
+	  alt="">Full Text Search</a> (FTS).</li> 
+	  <li>Real time updates to file system changes.</li> 
+	  <li>Uses multilingual
+	  word <a href="http://en.wikipedia.org/wiki/Stemming"
+	  alt="">stemmers</a> to help find more relevant results. For
+	  example a search for motorbikes (plural) will also return
+	  results relevant to motorbike (singular).</li> 
+	  <li>Intelligent scheduling priorities so Tracker works in
+	  the background without disturbing you.</li>
+	  <li>Low memory requirements, typically using 3-10 MB.</li>
+	  <li>Extractors run in separate processes so that 3rd party
+	  libraries don't risk the daemon's crashing.</li>
 	</ul>
 
-	<h2>Desktop Neutral Design</h2>
+	<h2>Standards</h2>
 	<ul>
-	  <li>Adheres to freedesktop thumbail spec.</li>
-	  <li>Uses freedesktop technologies like DBus and XDGMime.</li>
-	  <li>Uses XDG utils like xdg-open.</li>
-	  <li>Implements the freedesktop specification for metadata (http://freedesktop.org/wiki/Standards/shared-filemetadata-spec).</li>
-	  <li>Supports the WC3's RDF Query syntax for querying that metadata.</li>
+	  <li><a href="http://www.freedesktop.org/wiki/Specifications/basedir-spec"
+	  alt="">Desktop base directory</a> details how desktops
+	  should locate files at runtime.</li>
+ <li><a href="http://www.freedesktop.org/wiki/Specifications/config-spec" alt="">Shared configuration system</a> (desktop-neutral). </li>
+	  <li><a href="http://www.freedesktop.org/wiki/Software/dbus" alt="">D-Bus</a> for <a href="http://en.wikipedia.org/wiki/Inter-process_communication" alt="">inter-process communication</a> (IPC).</li>
+	  <li><a href="http://www.w3.org/RDF/" alt="">RDF</a> style querying using <a href="http://www.w3.org/TR/rdf-sparql-query/" alt="">SPARQL</a>.</li>
+	  <li><a href="http://nepomuk.semanticdesktop.org/" alt="">Nepomuk</a> ontologies.</li>
 	</ul>
 
-	<h2>Efficient and Stable</h2>
+	<h2>Nepomuk Ontologies</h2>
 	<ul>
-	  <li>Written in C for maximum efficiency.</li>
-	  <li>Designed and built to run well on lower-memory systems with typically 128MB or 256MB memory. Typical RAM usage is 3-9 MB.</li>
-	  <li>High performance indexer capable of indexing 100+ text files a second.</li>
-	  <li>Scheduled nicely so that you can work and use your machine without noticing any slow downs.</li>
-	  <li>Extractors run in separate processes, so a crash in one will not bring down the daemon.</li>
-	</ul>
-
-	<h2>Components</h2>
-	<ul>
-	  <li>Indexer, a lightweight daemon that extracts information from files (trackerd).</li>
-	  <li>Tracker Search Tool, a small GUI to search for indexed data.</li>
-	  <li>Command line tools for searching, querying the daemon status, and tagging.</li>
-	  <li>libtracker, a C wrapper around the DBus API.</li>
-	  <li>Full DBus API for application authors using different toolkits or programming languages.</li>
-	</ul>
-
-
-	<h2> Use Cases </h2>
-	<ul>
-	  <li> Application-neutral and desktop-neutral tagging. Tagging support 'for free' in any application that uses Tracker, such as Nautilus and file-chooser dialogs.</li>
-	  <li> A cross-application metadata database. If applications chooses to use Tracker as their metadata database and indexer, they would see signifigant improvements. Users would no longer need to add a MP3 they have downloaded to Rhythmbox, nor a photo they have taken to f-spot, these items would be detected and imported automatically.</li>
-	  <li> Users may completely move away from a folder-heirarchy based home folder, and instead organise their data into collections using tags. The combination of tagging support in the file-chooser, tagging awareness in Nautilus, or even a tag based filesystem using FUSE could allow radical exploration of new desktop ideas.</li>
-	  <li> Improved performance. With an always running indexer, application start-up time could be dramatically reduced in instances where applicaions scan or parse a numer of files on disk. For example, Alacarte could use it as its desktop file parser, or Rhythmbox as its song index. In addition, by using a DBus-based API, one can take advantage of asynchronous replies for improved GUI responsiveness.</li>
-	</ul>
-
-	<h2>Object store</h2>
-	Tracker can also provide a user definable object store (for things like notes, playlists, contacts, etc) complete with user-definable properties (metadata). Using Tracker as a storage base has a number of benefits:
-	<ul>
-	  <li>Automatically indexed via crawler or notifications frameworks. </li>
-	  <li>Embedded metadata and text contents are fully extracted and indexed for storage and high speed search.</li>
-	  <li>Extensible metadata and tags. All entities can have an almost infinite number of properties which can be application or user-defined.</li>
-	  <li>Persistent internal storage of objects removes the need for storing them externally if desired.</li>
-	  <li>Link and define explicit relationships between different objects.</li>
-	  <li>Easily exploitable and shareable via high level and rich Dbus based interfaces.</li>
-	  <li>Searchable and queryable by content or by any criteria. Provides one of the richest and most powerful search frameworks currently available.</li>
-	</ul>
-	<h2>Tagging</h2>
-	Tags are one-word labels that you can assign to any file to help you categorize and remember them. 
-	<ul>
-	  <li>You can assign as many tags to a file as you like and rename or delete the tags later.</li>
-	  <li>You can organize, under a logical tag, several files in different folders and retrieve all of them using the common tag.</li>
+	  <li>xsd</li>
+	  <li>rdf</li>
+	  <li>nrl</li>
+	  <li>dc</li>
+	  <li>nie</li>
+	  <li>nao</li>
+	  <li>nco</li>
+	  <li>nfo</li>
+	  <li>nmo</li>
+	  <li>ncal</li>
+	  <li>scal</li>
+	  <li>nid3</li>
+	  <li>nmm</li>
+	  <li>mto</li>
+	  <li>mlo</li>
+	  <li>mfo</li>
+	  <li>mtp</li>
+	  <li>tracker</li>
+	  <li>maemo</li>
 	</ul> 
-
       </div> <!-- container -->
     </body>
   </html>
