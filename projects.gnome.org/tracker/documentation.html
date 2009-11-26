@@ -41,59 +41,61 @@
       </div>
       
       <div id="content">
-	<h2>Documentation</h2>
-	<p>For <b>a quickstart</b> in how to install and run tracker
-	read <a href="start.html">here</a>.</p> 
-	<p>The <b>documentation to develop an applications using
-	tracker</b> as backend can be found in
-	the <a href="http://live.gnome.org/Tracker/Documentation">wiki</a>.</p> 
+	<h2>API</h2>
+	<p>There are two approaches to the API for Tracker. There is
+	an API for applications to build their own data miners and by
+	doing this contribute to the data store which we have in
+	Tracker. There is also an API for querying the data in the
+	databases (which is most likely the API you want).</p>
 
-	<p>The <b>list of the application</b> using Tracker can be
-	found <a href="documentation.html#applications">here</a>.</p> 
+	<p>For more information which might not be covered here, visit the documentation <a href="http://live.gnome.org/Tracker/Documentation" alt="">wiki</a>.</p>
 
-	<h2>Choose what to index</h2>
-	<p>Tracker comes with a GUI (Gtk2) interface to choose what
-	and how index. From a terminal
-	digit: <span class="terminal">tracker-preferences</span> to
-	fire up the preferences dialog.</p>  
-	<p><img src="images/screenshots/screenshot-0.6.0-tracker-prefs.png" width="441" height="489" alt="tracker preferences" /></p>
+	<p>NOTE: This page will detail the documentation for Tracker
+	0.7+ only.</p>
 
-	<p>You can always tune Tracker's behaviour by writing directly
-	the config file under <em>~/.config/tracker.cfg</em>. Tracker
-	can automatically detect those changes even when running.</p>
-
-	<h2>Command line</h2>
-	<p>Tracker has several command line:</p>
+	<h3>Data Mining</h3>
+	<p>There are many libraries internally for Tracker which are
+	shared amongst the processes. The ones of particular interest
+	are:</p>
 	<ul>
-	  <li><span>tracker-tag</span> for setting and searching
-	  tags/keywords</li> 
-	  <li><span>tracker-extract FILE</span> this extracts embedded
-	  metadata from FILE and prints to stdout</li> 
-	  <li><span>tracker-query</span> this reads an RDF Query that
-	  specifies the search criteria for various fields. </li> 
+	  <li><a href="http://library.gnome.org/devel/libtracker-common/unstable/" alt="">libtracker-common</a></li>
+	  <li><a href="http://library.gnome.org/devel/libtracker-miner/unstable/" alt="">libtracker-miner</a></li>
 	</ul>
 
-	<h2>Following the Fredesktop.org standards</h2>
-	<p>From 0.6.0 Tracker follows
-	the <a href="http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html">freedesktop.org
-	standards</a>:</p>  
+	<h3>Data Querying</h3>
+	<p>For querying and updating data you should use:</p>
 	<ul>
-	  <li><strong>configuration</strong> -- <em>~/.config/tracker/tracker.cfg</em></li>
-	  <li><strong>data</strong> -- <em>~/.local/share/tracker</em></li>
-	  <li><strong>index cache</strong> -- <em>~/.cache/tracker</em></li>
+	  <li><a href="http://git.gnome.org/cgit/tracker/tree/src/libtracker-client" alt="">libtracker-client</a></li>
 	</ul>
 
-	<h2>Autostart Tracker</h2>
-	<p>Tracker should be alredy added to your session if you use a
-	Desktop Enviroment that respects the freedesktop spec. </p> 
+	<h2>Architecture</h2>
+	<p>Tracker is split up into several main components. They are:</p>
 	<ul>
-	  <li>In Gnome check your Session Property and enable Tracker
-	  if is not already.</li> 
-	  <li>In KDE check your Autostart program and enable Tracker
-	  if is not already.</li> 
-	  <li>In XFCE check your Session Manager and enable Tracker if
-	  is not already.</li> 
+	  <li><strong>tracker-store</strong><br/>The data store and daemon to interface to Tracker's databases</li>
+	  <li><strong>tracker-miner-fs</strong><br/>The file system crawler to mine data from local files</li>
+	  <li><strong>tracker-extract</strong><br/>The metadata extraction application used on each file</li>
+	  <li><strong>tracker-writeback</strong><br/>The application for writing metadata back to files</li>
 	</ul>
+
+	<p>There are also a range of command line utilities to use with Tracker:</p>
+	<ul>
+	  <li><strong>tracker-control</strong><br/>Manage Tracker processes and data</li>
+	  <li><strong>tracker-info</strong><br/>Get all information about one or more files</li>
+	  <li><strong>tracker-search</strong><br/>Search for terms in all data</li>
+	  <li><strong>tracker-stats</strong><br/>Show statistics for all Nepomuk defined ontology classes</li>
+	  <li><strong>tracker-status</strong><br/>Monitor and control status</li>
+	  <li><strong>tracker-sparql</strong><br/>Query or update using SPARQL</li>
+	  <li><strong>tracker-tag</strong><br/>Add, remove or list tags</li>
+	</ul>
+
+	<h2>Configuration</h2>
+	<p>All of Tracker's configuration is kept in $HOME/.config/tracker. There are manual pages for each of the configurations should you want more information about them. For example, you can use:</p>
+	<pre>$ man tracker-miner-fs.cfg</pre>
+
+	<h2>Data &amp; Logging</h2>
+	<p>The databases are kept in <tt>$HOME/.cache/tracker</tt>. The user's data backup is kept in <tt>$HOME/.local/share/tracker/data</tt>.</p>
+	<p>If Tracker is configured to have the logging verbosity (set in each .cfg file for each main component) set to a value higher than 0, then logs are generated and stored in <tt>$HOME/.local/share/tracker</tt></p>
+
       </div> <!-- content -->
       
     </div> <!-- container -->
