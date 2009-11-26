@@ -6,28 +6,7 @@ page_SCRIPTS =
 
 include $(top_srcdir)/rules.common
 
-misc_images = 								\
-        screenshot-0.6.0-tracker-prefs.png 				\
-        screenshot-0.6.0-tracker-prefs2.png 				\
-        screenshot-0.6.0-tracker-search-tool.png 			\
-        screenshot-deskbar-live-search-for-daze.png 			\
-        screenshot-deskbar-live-search-for-daze_thumbnail.png 		\
-        screenshot-nautilus_search_for_bioinformatics.png 		\
-        screenshot-nautilus_search_for_bioinformatics_thumbnail.png 	\
-        screenshot-nautilus_search_for_echoes.png 			\
-        screenshot-nautilus_search_for_echoes_thumbnail.png 		\
-        screenshot-search_for_technologies.png 				\
-        screenshot-search_for_technologies_thumbnail.png 		\
-        screenshot-search_for_test.png 					\
-        screenshot-search_for_test_thumbnail.png 			\
-        screenshot-system_monitor-trackerd.png 				\
-        screenshot-system_monitor-trackerd_thumbnail.png 		\
-        screenshot-t-s-t_search_for_pearl_jam.png 			\
-        screenshot-t-s-t_search_for_pearl_jam_and_ten.png 		\
-        screenshot-t-s-t_search_for_pearl_jam_and_ten_thumbnail.png 	\
-        screenshot-t-s-t_search_for_pearl_jam_thumbnail.png 		\
-        screenshot-time-tracker-search.png 				\
-        screenshot-time-tracker-search_thumbnail.png
+misc_images =
 
 page_DATA = $(misc_images)
 
