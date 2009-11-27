@@ -1,4 +1,4 @@
-SUBDIRS =
+SUBDIRS = screenshots
 
 urlpath = /tracker/images
 
