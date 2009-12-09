@@ -1,3 +1,5 @@
+SUBDIRS=
+
 urlpath = /tracker/img
 
 page_SCRIPTS =

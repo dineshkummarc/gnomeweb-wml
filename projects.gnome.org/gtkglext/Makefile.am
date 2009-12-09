@@ -1,15 +1,18 @@
-SUBDIRS=images 
+SUBDIRS=img
 
 urlpath = /gtkglext/
 
 # This has to be fixed
 
-page_SCRIPTS= index.html	\
-		about.html \
-		developers.html \
-		screenshots.html \
-		scripts.html \
-		gfoobar.css
+page_SCRIPTS= content.css \
+		devel.html \
+		doc.html \
+		download.html \
+		features.html \
+		index.html	\
+		site.css \
+		sshots.html \
+		users.html
 
 
 include $(top_srcdir)/rules.common
