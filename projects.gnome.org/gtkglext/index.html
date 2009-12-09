@@ -1,176 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<?php
-class RSS2Image
-{
-    var $url = "";
-    var $title = "";
-    var $link = "";
-    var $width = "";
-    var $height = "";
-}
-
-class RSS2Item
-{
-    var $title = "";
-    var $link = "";
-    var $description = "";
-    var $author = "";
-    var $category = "";
-    var $comments = "";
-    var $enclosure = "";
-    var $guid = "";
-    var $pub_date = "";
-    var $source = "";
-}
-
-class RSS2Channel
-{
-    var $title;
-    var $link;
-    var $description;
-    var $copyright;
-    var $last_build_date;
-    var $generator;
-    var $image;
-    var $items;
-
-    function RSS2Channel()
-    {
-        $this->title = "";
-        $this->link = "";
-        $this->description = "";
-        $this->copyright = "";
-        $this->last_build_date = "";
-        $this->generator = "";
-        $this->image = null;
-        $this->items = array();
-    }
-}
-
-class RSS2ParseInfo
-{
-    var $channel;
-
-    var $in_channel, $in_image, $in_item;
-    var $current_element;
-    var $current_element_name;
-    var $current_item;
-
-    function RSS2ParseInfo()
-    {
-        $this->in_channel = false;
-        $this->in_image = false;
-        $this->in_item = false;
-        $this->current_item = null;
-    }
-
-    function start_element($parser, $name, $attribs)
-    {
-        $name = strtolower($name);
-        if ($name == "channel") {
-            $this->in_channel = true;
-            $this->channel = new RSS2Channel();
-            return true;
-        }
-
-        if ($this->in_channel) {
-            if ($name == "image") {
-                $this->in_image = true;
-                $this->channel->image = new RSS2Image();
-                return true;
-            } elseif ($name == "item") {
-                $this->in_item = true;
-                $this->current_item = new RSS2Item();
-                $this->channel->items[] = &$this->current_item;
-                return true;
-            }
-        }
-
-        $this->current_element_name = $name;
-        return true;
-    }
-
-    function end_element($parser, $name)
-    {
-        $name = strtolower($name);
-        if ($name == "channel") {
-            $this->in_channel = false;
-        } elseif ($name == "image") {
-            $this->in_image = false;
-        } elseif ($name == "item") {
-            $this->in_item = false;
-            unset($this->current_item);
-        }
-        unset($this->current_element);
-        unset($this->current_element_name);
-        return true;
-    }
-
-    function character_data($parser, $data)
-    {
-        if (isset($this->current_element_name)) {
-            if ($this->in_item) {
-                if ($this->current_element_name == "title") {
-                    $this->current_item->title .= $data;
-                } elseif ($this->current_element_name == "description") {
-                    $this->current_item->description .= $data;
-                } elseif ($this->current_element_name == "link") {
-                    $this->current_item->link .= $data;
-                }
-            }
-        }
-        return true;
-    }
-}
-
-function get_feed($filename, $uri)
-{
-    if (((time() - filemtime($filename)) / 60) > 30) {
-        if (!file_exists($filename)) {
-            touch($filename);
-        }
-        $feed = file_get_contents($uri);
-        $file = fopen($filename, "w");
-        fwrite($file, $feed);
-        fclose($file);
-    }
-    return file_get_contents($filename);
-}
-
-function parse($feed, $parse_info)
-{
-    $xml_parser = xml_parser_create();
-    xml_set_object($xml_parser, &$parse_info);
-    xml_set_element_handler($xml_parser,
-                            "start_element",
-                            "end_element");
-    xml_set_character_data_handler($xml_parser,
-                                   "character_data");
-    xml_parse($xml_parser, $feed);
-    xml_parser_free($xml_parser);
-}
-
-?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <title>GTK+ OpenGL Extension - About</title>
-  <link href="content" rel="stylesheet" />
-  <link href="site" rel="stylesheet" />
+  <link href="content.css" rel="stylesheet" />
+  <link href="site.css" rel="stylesheet" />
 </head>
 <body>
 <div id="container">
   <div id="header">
     <!-- Logo -->
-    <h1>GTK+ OpenGL Extension - About</h1>
+    <img src="img/logo.png" width="750" height="123" border="0" alt="GTK+ OpenGL Extension">
+    
     <!-- Navigation Bar -->
     <ul id="nav">
-      <li><a class="current" href="index">About</a></li>
-      <li><a href="features">Features</a></li>
-      <li><a href="download">Download</a></li>
-      <li><a href="sshots">Screenshots</a></li>
-      <li><a href="doc">Documentation</a></li>
-      <li><a href="devel">Development</a></li>
+      <li><a class="current" href="index.html">About</a></li>
+      <li><a href="download.html">Download</a></li>
+      <li><a href="sshots.html">Screenshots</a></li>
+      <li><a href="doc.html">Documentation</a></li>
+      <li><a href="devel.html">Development</a></li>
+      <li><a href="users.html">Users</a></li>
     </ul>
   </div>
   <div id="content">
@@ -194,10 +43,57 @@ function parse($feed, $parse_info)
     <a href="mailto:stephane@stephanebrunet.net">St&eacute;phane Brunet</a>,
     <a href="mailto:rc040203@freenet.de">Ralf Cors&eacute;pius</a>, and
     <a href="mailto:braden@endoframe.com">Braden McDaniel</a>.</p>
+    
+        <h2>Cross Platform</h2>
+      <p>Currently GtkGLExt and related packages support:</p>
+      <ul>
+        <li>UNIX and UNIX-like platforms: tested under Linux, FreeBSD,
+        OpenBSD, IRIX, and Mac OS X.</li>
+        <li>Win32 platforms: tested under Windows XP &amp; 2000
+        Professional using MinGW/Cygwin environment. A binary package
+        is also available. It contains all headers, DLLs, and MSVC
+        import libraries (gtkglextmm supports only MinGW).</li>
+      </ul>
+
+    <h2>Language Bindings</h2>
+    <p>There are bindings to GtkGLExt for many programming languages:</p>
+    <table class="bindings">
+      <tr><th>Language</th><th>Project</th></tr>
+      <tr><td>C++</td><td><a href="download.html#gtkglextmm">gtkglextmm</a></td></tr>
+      <tr class="odd"><td>C#</td><td>gtkglext-sharp</td></tr>
+      <tr>
+        <td>D</td>
+        <td><a href="http://www.dsource.org/projects/gtkd">GtkD</a></td>
+      </tr>
+      <tr class="odd">
+        <td>Haskell</td>
+        <td><a href="http://haskell.org/gtk2hs">Gtk2Hs</a></td>
+      </tr>
+      <tr>
+        <td>Gauche (Scheme)</td>
+        <td><a href="http://practical-scheme.net/gauche/packages.html">Gauche-gtk</a></td>
+      </tr>
+      <tr class="odd">
+        <td>Pascal</td>
+        <td><a href="http://freepascal.org">FreePascal</a></td>
+      </tr>
+      <tr>
+        <td>Python</td>
+        <td><a href="download.html#pygtkglext">PyGtkGLExt</a></td>
+      </tr>
+      <tr class="odd">
+        <td>Perl</td>
+        <td><a href="http://gtk2-perl.sourceforge.net">perl-Gtk2-GLExt<a/></td>
+      </tr>
+      <tr>
+        <td>Ruby</td>
+        <td><a href="http://ruby-gnome2.sourceforge.jp">Ruby/GtkGLExt</a></td>
+      </tr>
+    </table>
 
   </div>
   <div id="footer">
-    <a href="http://sourceforge.net/projects/gtkglext"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=54333&type=10" width="80" height="15" border="0" alt="SourceForge.net" title="Get GtkGLExt at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>
+    <a href="http://validator.w3.org/check/referer">Optimised</a> for <a href="http://www.w3.org/">standards</a>
   </div>
 </div>
 </body>
