@@ -1,10 +1,10 @@
 SUBDIRS=
 
-urlpath = /tracker/img
+urlpath = /gtkglext/img
 
 page_SCRIPTS =
 
-misc_images =       \
+misc_images =\
 	logo.png \
 	3d_linux.jpg \
 	3d_linux_thumbnail.png \

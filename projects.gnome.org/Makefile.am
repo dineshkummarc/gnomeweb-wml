@@ -23,6 +23,7 @@ SUBDIRS = css \
 	gnomeradio		\
 	gnumeric		\
 	guppi			\
+	gtkglext        \
 	gtksourceview		\
 	gtksourceviewmm		\
 	gyrus			\
