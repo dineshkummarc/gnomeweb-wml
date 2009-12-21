@@ -22,7 +22,7 @@ bonobo-activation configuration file, which will be:<br>
   <br>
 </blockquote>
 
-<p>usually. Between the  markers add:<br>
+<p>usually. Between the markers add:<br>
 <br>
  &lt;item&gt;*evolution prefix*/lib/bonobo/servers&lt;/item&gt;</p>
 
@@ -33,118 +33,22 @@ the process)</p>
 <h3>Building with jhbuild</h3>
 
 <p>You can get jhbuild information at <a href=
-"http://library.gnome.org/devel/jhbuild/">http://library.gnome.org/devel/jhbuild/</a></p>
+"http://library.gnome.org/devel/jhbuild/">http://library.gnome.org/devel/jhbuild/</a>. A <a href="http://git.gnome.org/browse/jhbuild/tree/sample.jhbuildrc">sample .jhbuildrc file is also available</a>.</p>
 
 <ul>
-  <li>Set your moduleset to gnome-2.20 in ~/.jhbuildrc (there is a sample
-  <a href="jhbuildrc">.jhbuildrc</a>)</li>
+  <li>Set <pre>moduleset = 'gnome-2.30'</pre> in ~/.jhbuildrc if you want to build the current (December 2009) unstable version, or set <pre>moduleset = 'gnome-2.28'</pre> if you want to build the current stable version.</li>
 
-  <li>Do 'jhbuild bootstrap' and update to the latest modules -
+  <li>Set <pre>modules = ['evolution']</pre>.</li>
+
+  <li>Run <pre>jhbuild bootstrap</pre> and update to the latest modules -
   make sure you install pkg-config even if you have the same
   version that is required. Do not install automake 1.8 since it
   will cause build failures.</li>
 
-  <li>Do 'jhbuild build evolution'</li>
+  <li>Run <pre>jhbuild build evolution</pre>.</li>
 </ul>
 
-<p>It should now build 57 modules. If something fails for you, some
-common problems are listed below:</p>
-
-<ol>
-  <li><strong>Jhbuild throws a python exception</strong>
-  <br>
-   Solution: You probably have a distro that maps 'python' to a
-  version less than 2. Just change the installed jhbuild script
-  (usually ~/bin/jhbuild) to use 'python2' instead of 'python'.<br>
-  <br>
-  </li>
-
-  <li>
-    <strong>Build fails in libxml</strong>
-    <br>
-     
-
-    <blockquote>
-      ./autogen.sh --prefix /g/home/sig/src/gnome-install
-      --enable-maintainer-mode --disable-static
-      --disable-gtk-doc<br>
-      You should add the contents
-      of`/g/home/sig/src/gnome-install/share/aclocal/libtool.m4'
-      to`aclocal.m4'.<br>
-      acinclude.m4:4: warning: underquoted definition of
-      AC_TRY_EVAL2 run info '(automake)Extending aclocal'<br>
-    </blockquote>
-    Solution: Don't install automake 1.8 or do "jhbuild shell" and
-    uninstall automake 1.8 from the jhbuild environment.
-  </li>
-
-  <li>
-    <strong>Build fails in fontconfig</strong>
-    <br>
-     
-
-    <blockquote>
-      docbook2txt local-fontconfig-user.sgml<br>
-      Using catalogs: /etc/sgml/sgml-docbook-3.1-1.0-17.cat<br>
-      Using stylesheet:
-      /usr/share/sgml/docbook/utils-0.6.12/docbook-utils.dsl#html<br>
-
-      Working on:
-      /home/jpr/src/jhbuild-evo/fontconfig/doc/local-fontconfig-user.sgml<br>
-
-			No way to convert HTML to text found.
-    </blockquote>
-		Solution: Install lynx
-    <br>
-  </li>
-
-  <li>
-	<strong>Build fails in Xrender</strong>
-     
-
-    <blockquote>
-      ./configure: line 18388: syntax error near unexpected token
-      `X,'<br>
-      ./configure: line 18388: `PKG_CHECK_MODULES(X, x11,'<br>
-    </blockquote>
-		Solution: Install pkg-config during jhbuild bootstap
-  </li>
-
-  <li>
-    <strong>gnome-vfs compilation fails</strong> 
-
-    <blockquote>
-      In file included from /usr/include/openssl/ssl.h:179,<br>
-       from gnome-vfs-ssl.c:41:<br>
-      /usr/include/openssl/kssl.h:72:18: krb5.h: No such file or
-      directory<br>
-      In file included from /usr/include/openssl/ssl.h:179,<br>
-       from gnome-vfs-ssl.c:41:<br>
-      /usr/include/openssl/kssl.h:134: parse error before
-      "krb5_enctype"<br>
-      /usr/include/openssl/kssl.h:136: parse error before '*'
-      token<br>
-      /usr/include/openssl/kssl.h:137: parse error before '}'
-      token<br>
-      /usr/include/openssl/kssl.h:149: parse error before
-      "kssl_ctx_setstring"<br>
-    </blockquote>
-    Solution: Soft link (ln -s) openssl.pc to
-		&lt;jhbuild-prefix&gt;/lib/pkg-config
-  </li>
-
-  <li>
-    <strong>Build fails in libgnomeui</strong> 
-
-    <blockquote>
-      In libgnomeui<br>
-      failed to load "./stock_attach.png": Couldn't recognize the
-      image file<br>
-      format for file './stock_attach.png'<br>
-    </blockquote>
-    Solution: Try rebuild gdk-pixbuf, your loaders file is
-		empty.
-  </li>
-</ol>
+<p>It should now build a few dozens of modules. If something fails for you (which is likely), some
+common problems are listed at the <a href="http://live.gnome.org/JhbuildIssues">JhBuild wikipage</a>.</p>
 
 <!--#include virtual="foot.shtml"-->
