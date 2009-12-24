@@ -30,6 +30,7 @@ SUBDIRS = css \
 	gevice			\
 	gb			\
         hotssh                  \
+	nanny			\
 	nautilus		\
 	nautilus-locked-folders \
 	nemiver			\
