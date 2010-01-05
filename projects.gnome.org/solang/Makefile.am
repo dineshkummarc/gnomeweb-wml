@@ -1,6 +1,7 @@
 urlpath = /solang/
 
 page_SCRIPTS= \
+	download.shtml \
 	index.shtml \
 	header.shtml \
 	footer.shtml \
@@ -9,6 +10,7 @@ page_SCRIPTS= \
 includesdir=$(pagedir)/includes
 includes_DATA = \
 	includes/news.shtml \
+	includes/unstable.shtml \
 	$(NULL)
 
 themedir=$(pagedir)/themes
@@ -26,11 +28,12 @@ themeimg_DATA = \
 
 imagesdir = $(pagedir)/images
 images_DATA =\
+	images/applications-development.png \
+	images/application-x-executable.png \
 	images/logo.png \
 	images/favicon.png \
 	images/internet-group-chat.png \
-	images/applications-development.png \
-	images/application-x-executable.png \
+	images/package-x-generic.png \
 	$(NULL)
 
 shadowboximagesdir = $(pagedir)/shadowbox/images
@@ -40,13 +43,13 @@ shadowboximages_DATA =\
 	$(NULL)
 
 shadowboxcssdir = $(pagedir)/shadowbox/css
-shadowboxcss_DATA =\
+shadowboxcss_DATA = \
 	shadowbox/css/shadowbox.css \
 	shadowbox/css/shadowbox-light.css \
 	$(NULL)
 
 shadowboxjsdir = $(pagedir)/shadowbox/js
-shadowboxjs_DATA =\
+shadowboxjs_DATA = \
 	shadowbox/js/shadowbox.js \
 	shadowbox/js/yui-utilities.js \
 	shadowbox/js/shadowbox-yui.js \
