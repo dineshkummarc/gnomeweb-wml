@@ -48,6 +48,7 @@ SUBDIRS = css \
 	evince			\
 	sabayon			\
 	seahorse		\
+	solang			\
 	sony-ericsson-remotes	\
 	tracker			\
 	tomboy			\
