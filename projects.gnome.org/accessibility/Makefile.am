@@ -8,6 +8,7 @@ page_SCRIPTS= \
 	index.html \
 	participate.html \
 	related.html \
-	screencasts.html
+	screencasts.html \
+	solutions.html
 
 include $(top_srcdir)/rules.common
