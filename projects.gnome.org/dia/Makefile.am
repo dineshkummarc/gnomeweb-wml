@@ -19,6 +19,7 @@ page_SCRIPTS = \
 	mainwin.html \
 	menu.html \
 	news.html \
+	pydia.html \
 	python.html \
 	right_bar.html \
 	scrshot.html \

@@ -1,0 +1,793 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module dia</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>dia</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br>(built-in)</font></td></tr></table>
+    <p><tt>The&nbsp;dia&nbsp;module&nbsp;allows&nbsp;to&nbsp;write&nbsp;Python&nbsp;plug-ins&nbsp;for&nbsp;Dia&nbsp;[<a href="http://live.gnome.org/Dia/Python">http://live.gnome.org/Dia/Python</a>]<br>
+&nbsp;<br>
+This&nbsp;modules&nbsp;is&nbsp;designed&nbsp;to&nbsp;run&nbsp;Python&nbsp;scripts&nbsp;embedded&nbsp;in&nbsp;Dia.&nbsp;To&nbsp;make&nbsp;your&nbsp;script&nbsp;accessible<br>
+to&nbsp;Dia&nbsp;you&nbsp;have&nbsp;to&nbsp;put&nbsp;it&nbsp;into&nbsp;$HOME/.dia/python&nbsp;and&nbsp;let&nbsp;it&nbsp;call&nbsp;one&nbsp;of&nbsp;the&nbsp;register_*()&nbsp;functions.<br>
+It&nbsp;is&nbsp;possible&nbsp;to&nbsp;write&nbsp;import&nbsp;filters&nbsp;[<a href="#-register_import">register_import</a>()]&nbsp;and&nbsp;export&nbsp;filters&nbsp;[<a href="#-register_export">register_export</a>()],&nbsp;as&nbsp;well&nbsp;as&nbsp;scripts&nbsp;to&nbsp;manipulate&nbsp;existing&nbsp;diagrams&nbsp;or&nbsp;create&nbsp;new&nbsp;ones&nbsp;[<a href="#-register_action">register_action</a>()].<br>
+&nbsp;<br>
+For&nbsp;stand-alone&nbsp;Python&nbsp;bindings&nbsp;to&nbsp;Dia&nbsp;see&nbsp;<a href="http://mail.gnome.org/archives/dia-list/2007-March/msg00092.html">http://mail.gnome.org/archives/dia-list/2007-March/msg00092.html</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="dia.html#Arrow">Arrow</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#BezPoint">BezPoint</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#ConnectionPoint">ConnectionPoint</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Diagram">Diagram</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#DiagramData">DiagramData</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Display">Display</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#ExportFilter">ExportFilter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Font">Font</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Handle">Handle</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Image">Image</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Layer">Layer</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Object">Object</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#ObjectType">ObjectType</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Paperinfo">Paperinfo</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Point">Point</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Properties">Properties</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Property">Property</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Rectangle">Rectangle</a>
+</font></dt><dt><font face="helvetica, arial"><a href="dia.html#Text">Text</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Arrow">class <strong>Arrow</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Dia's&nbsp;line&nbsp;objects&nbsp;usually&nbsp;ends&nbsp;with&nbsp;an&nbsp;dia.<a href="#Arrow">Arrow</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Arrow-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Arrow-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Arrow-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#Arrow-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="Arrow-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Arrow-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Arrow-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Arrow-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>length</strong></dt>
+<dd><tt>double:&nbsp;length&nbsp;along&nbsp;the&nbsp;line</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>int:&nbsp;the&nbsp;shape&nbsp;of&nbsp;the&nbsp;arrow</tt></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><tt>double:&nbsp;corresponding&nbsp;to&nbsp;line&nbsp;width</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BezPoint">class <strong>BezPoint</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;dia.<a href="#Point">Point</a>,&nbsp;a&nbsp;bezier&nbsp;type&nbsp;and&nbsp;two&nbsp;control&nbsp;points&nbsp;(dia.<a href="#Point">Point</a>)&nbsp;make&nbsp;a&nbsp;bezier&nbsp;point.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BezPoint-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#BezPoint-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="BezPoint-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#BezPoint-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="BezPoint-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#BezPoint-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>p1</strong></dt>
+<dd><tt>Point:&nbsp;first&nbsp;control&nbsp;point&nbsp;for&nbsp;CURVETO</tt></dd>
+</dl>
+<dl><dt><strong>p2</strong></dt>
+<dd><tt>Point:&nbsp;second&nbsp;control&nbsp;point&nbsp;for&nbsp;CURVETO</tt></dd>
+</dl>
+<dl><dt><strong>p3</strong></dt>
+<dd><tt>Point:&nbsp;target&nbsp;point&nbsp;for&nbsp;CURVETO</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>int:&nbsp;MOVETO,&nbsp;LINETO&nbsp;using&nbsp;p1&nbsp;only;&nbsp;&nbsp;CURVETO&nbsp;all&nbsp;3&nbsp;points</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ConnectionPoint">class <strong>ConnectionPoint</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>One&nbsp;of&nbsp;the&nbsp;major&nbsp;features&nbsp;of&nbsp;Dia&nbsp;are&nbsp;connectable&nbsp;objects.&nbsp;They&nbsp;work&nbsp;by&nbsp;this&nbsp;type&nbsp;accesible&nbsp;through&nbsp;dia.<a href="#Object">Object</a>.connections[].<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ConnectionPoint-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#ConnectionPoint-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="ConnectionPoint-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#ConnectionPoint-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>connected</strong></dt>
+<dd><tt>List&nbsp;of&nbsp;Object:&nbsp;read-only&nbsp;list&nbsp;of&nbsp;connected&nbsp;objects</tt></dd>
+</dl>
+<dl><dt><strong>object</strong></dt>
+<dd><tt>Object:&nbsp;the&nbsp;object&nbsp;owning&nbsp;this&nbsp;connection&nbsp;point</tt></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><tt>Point:&nbsp;read-only&nbsp;position&nbsp;of&nbsp;the&nbsp;connection&nbsp;point</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Diagram">class <strong>Diagram</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Subclass&nbsp;of&nbsp;dia.<a href="#DiagramData">DiagramData</a>&nbsp;(at&nbsp;least&nbsp;in&nbsp;the&nbsp;C&nbsp;implementation)&nbsp;adding&nbsp;interfacing&nbsp;the&nbsp;GUI&nbsp;elements.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Diagram-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Diagram-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Diagram-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Diagram-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Diagram-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Diagram-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="Diagram-add_update"><strong>add_update</strong></a>(...)</dt><dd><tt><a href="#Diagram-add_update">add_update</a>(real:&nbsp;top,&nbsp;real:&nbsp;left,&nbsp;real:&nbsp;bottom,&nbsp;real:&nbsp;right)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Add&nbsp;the&nbsp;given&nbsp;rectangle&nbsp;to&nbsp;the&nbsp;update&nbsp;queue.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-add_update_all"><strong>add_update_all</strong></a>(...)</dt><dd><tt><a href="#Diagram-add_update_all">add_update_all</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Add&nbsp;the&nbsp;diagram&nbsp;visible&nbsp;area&nbsp;to&nbsp;the&nbsp;update&nbsp;queue.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-connect_after"><strong>connect_after</strong></a>(...)</dt><dd><tt><a href="#Diagram-connect_after">connect_after</a>(string:&nbsp;signal_name,&nbsp;Callback:&nbsp;func)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Listen&nbsp;to&nbsp;diagram&nbsp;events&nbsp;in&nbsp;['removed',&nbsp;'selection_changed'].</tt></dd></dl>
+
+<dl><dt><a name="Diagram-display"><strong>display</strong></a>(...)</dt><dd><tt><a href="#Diagram-display">display</a>()&nbsp;-&gt;&nbsp;<a href="#Display">Display</a>.&nbsp;&nbsp;Create&nbsp;a&nbsp;new&nbsp;display&nbsp;of&nbsp;the&nbsp;diagram.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-find_clicked_object"><strong>find_clicked_object</strong></a>(...)</dt><dd><tt><a href="#Diagram-find_clicked_object">find_clicked_object</a>(real[2]:&nbsp;point,&nbsp;real:&nbsp;distance)&nbsp;-&gt;&nbsp;<a href="#Object">Object</a>.&nbsp;&nbsp;Find&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;the&nbsp;given&nbsp;distance&nbsp;of&nbsp;the&nbsp;given&nbsp;point.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-find_closest_connectionpoint"><strong>find_closest_connectionpoint</strong></a>(...)</dt><dd><tt><a href="#Diagram-find_closest_connectionpoint">find_closest_connectionpoint</a>(real:&nbsp;x,&nbsp;real:&nbsp;y[,&nbsp;<a href="#Object">Object</a>:&nbsp;o])&nbsp;-&gt;&nbsp;(real:&nbsp;dist,&nbsp;<a href="#ConnectionPoint">ConnectionPoint</a>:&nbsp;cp).&nbsp;&nbsp;Given&nbsp;a&nbsp;point&nbsp;and&nbsp;an&nbsp;optional&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;exclude,&nbsp;return&nbsp;the&nbsp;distance&nbsp;and&nbsp;closest&nbsp;connection&nbsp;point&nbsp;or&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-find_closest_handle"><strong>find_closest_handle</strong></a>(...)</dt><dd><tt><a href="#Diagram-find_closest_handle">find_closest_handle</a>(real[2]:&nbsp;point)&nbsp;-&gt;&nbsp;(real:&nbsp;distance,&nbsp;<a href="#Handle">Handle</a>:&nbsp;h,&nbsp;<a href="#Object">Object</a>:&nbsp;o).&nbsp;&nbsp;Find&nbsp;the&nbsp;closest&nbsp;handle&nbsp;from&nbsp;point&nbsp;and&nbsp;return&nbsp;a&nbsp;tuple&nbsp;of&nbsp;the&nbsp;search&nbsp;results.&nbsp;&nbsp;<a href="#Handle">Handle</a>&nbsp;and&nbsp;<a href="#Object">Object</a>&nbsp;might&nbsp;be&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-flush"><strong>flush</strong></a>(...)</dt><dd><tt><a href="#Diagram-flush">flush</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;If&nbsp;no&nbsp;display&nbsp;update&nbsp;is&nbsp;queued,&nbsp;queue&nbsp;update.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-get_sorted_selected"><strong>get_sorted_selected</strong></a>(...)</dt><dd><tt><a href="#Diagram-get_sorted_selected">get_sorted_selected</a>()&nbsp;-&gt;&nbsp;list.&nbsp;&nbsp;Return&nbsp;the&nbsp;current&nbsp;selection&nbsp;sorted&nbsp;by&nbsp;Z-Order.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-get_sorted_selected_remove"><strong>get_sorted_selected_remove</strong></a>(...)</dt><dd><tt><a href="#Diagram-get_sorted_selected_remove">get_sorted_selected_remove</a>()&nbsp;-&gt;&nbsp;list.&nbsp;&nbsp;Return&nbsp;sorted&nbsp;selection&nbsp;and&nbsp;remove&nbsp;it&nbsp;from&nbsp;the&nbsp;diagram.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-group_selected"><strong>group_selected</strong></a>(...)</dt><dd><tt><a href="#Diagram-group_selected">group_selected</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Turn&nbsp;the&nbsp;current&nbsp;selection&nbsp;into&nbsp;a&nbsp;group&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-is_selected"><strong>is_selected</strong></a>(...)</dt><dd><tt><a href="#Diagram-is_selected">is_selected</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;bool.&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;given&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;is&nbsp;already&nbsp;selected.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-remove_all_selected"><strong>remove_all_selected</strong></a>(...)</dt><dd><tt><a href="#Diagram-remove_all_selected">remove_all_selected</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Delete&nbsp;all&nbsp;selected&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-save"><strong>save</strong></a>(...)</dt><dd><tt><a href="#Diagram-save">save</a>(string:&nbsp;filename)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Save&nbsp;the&nbsp;diagram&nbsp;under&nbsp;the&nbsp;given&nbsp;filename.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-select"><strong>select</strong></a>(...)</dt><dd><tt><a href="#Diagram-select">select</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Add&nbsp;the&nbsp;given&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;the&nbsp;selection.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-ungroup_selected"><strong>ungroup_selected</strong></a>(...)</dt><dd><tt><a href="#Diagram-ungroup_selected">ungroup_selected</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Split&nbsp;all&nbsp;groups&nbsp;in&nbsp;the&nbsp;current&nbsp;selection&nbsp;into&nbsp;single&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-unselect"><strong>unselect</strong></a>(...)</dt><dd><tt><a href="#Diagram-unselect">unselect</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;the&nbsp;given&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;selection)</tt></dd></dl>
+
+<dl><dt><a name="Diagram-update_connections"><strong>update_connections</strong></a>(...)</dt><dd><tt><a href="#Diagram-update_connections">update_connections</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Update&nbsp;all&nbsp;connections&nbsp;of&nbsp;the&nbsp;given&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;Might&nbsp;move&nbsp;connected&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="Diagram-update_extents"><strong>update_extents</strong></a>(...)</dt><dd><tt><a href="#Diagram-update_extents">update_extents</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Force&nbsp;recaculation&nbsp;of&nbsp;the&nbsp;diagram&nbsp;extents.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>data</strong></dt>
+<dd><tt>Backward-compatible&nbsp;base-class&nbsp;access</tt></dd>
+</dl>
+<dl><dt><strong>displays</strong></dt>
+<dd><tt>The&nbsp;list&nbsp;of&nbsp;current&nbsp;displays&nbsp;of&nbsp;this&nbsp;diagram.</tt></dd>
+</dl>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>Filename&nbsp;in&nbsp;utf-8&nbsp;encoding.</tt></dd>
+</dl>
+<dl><dt><strong>modified</strong></dt>
+<dd><tt>Modification&nbsp;state.</tt></dd>
+</dl>
+<dl><dt><strong>selected</strong></dt>
+<dd><tt>The&nbsp;current&nbsp;object&nbsp;selection.</tt></dd>
+</dl>
+<dl><dt><strong>unsaved</strong></dt>
+<dd><tt>True&nbsp;if&nbsp;the&nbsp;diagram&nbsp;was&nbsp;not&nbsp;saved&nbsp;yet.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DiagramData">class <strong>DiagramData</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;'low&nbsp;level'&nbsp;diagram&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;It&nbsp;contains&nbsp;everything&nbsp;to&nbsp;manipulate&nbsp;diagrams&nbsp;from&nbsp;im-&nbsp;and&nbsp;export&nbsp;filters&nbsp;as&nbsp;well&nbsp;as&nbsp;from&nbsp;the&nbsp;UI.&nbsp;It&nbsp;does&nbsp;not&nbsp;provide&nbsp;any&nbsp;access&nbsp;to&nbsp;GUI&nbsp;elements&nbsp;related&nbsp;to&nbsp;the&nbsp;diagram.Use&nbsp;the&nbsp;subclass&nbsp;dia.<a href="#Diagram">Diagram</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;such&nbsp;matters.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DiagramData-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#DiagramData-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#DiagramData-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#DiagramData-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-add_layer"><strong>add_layer</strong></a>(...)</dt><dd><tt><a href="#DiagramData-add_layer">add_layer</a>(<a href="#Layer">Layer</a>:&nbsp;layer[,&nbsp;int:&nbsp;position])&nbsp;-&gt;&nbsp;<a href="#Layer">Layer</a>.&nbsp;&nbsp;Add&nbsp;a&nbsp;layer&nbsp;to&nbsp;the&nbsp;diagram&nbsp;at&nbsp;the&nbsp;top&nbsp;or&nbsp;the&nbsp;given&nbsp;position&nbsp;counting&nbsp;from&nbsp;bottom.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-connect_after"><strong>connect_after</strong></a>(...)</dt><dd><tt><a href="#DiagramData-connect_after">connect_after</a>(string:&nbsp;signal_name,&nbsp;Callback:&nbsp;func)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Listen&nbsp;to&nbsp;diagram&nbsp;events&nbsp;in&nbsp;['object_add',&nbsp;'object_remove'].</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-delete_layer"><strong>delete_layer</strong></a>(...)</dt><dd><tt><a href="#DiagramData-delete_layer">delete_layer</a>(<a href="#Layer">Layer</a>:&nbsp;layer)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Remove&nbsp;the&nbsp;given&nbsp;layer&nbsp;from&nbsp;the&nbsp;diagram.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-get_sorted_selected"><strong>get_sorted_selected</strong></a>(...)</dt><dd><tt><a href="#DiagramData-get_sorted_selected">get_sorted_selected</a>()&nbsp;-&gt;&nbsp;list.&nbsp;&nbsp;Return&nbsp;the&nbsp;current&nbsp;selection&nbsp;sorted&nbsp;by&nbsp;Z-Order.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-lower_layer"><strong>lower_layer</strong></a>(...)</dt><dd><tt><a href="#DiagramData-lower_layer">lower_layer</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Move&nbsp;the&nbsp;layer&nbsp;towards&nbsp;the&nbsp;bottom.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-raise_layer"><strong>raise_layer</strong></a>(...)</dt><dd><tt><a href="#DiagramData-raise_layer">raise_layer</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Move&nbsp;the&nbsp;layer&nbsp;towards&nbsp;the&nbsp;top.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-set_active_layer"><strong>set_active_layer</strong></a>(...)</dt><dd><tt><a href="#DiagramData-set_active_layer">set_active_layer</a>(<a href="#Layer">Layer</a>:&nbsp;layer)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Make&nbsp;the&nbsp;given&nbsp;layer&nbsp;the&nbsp;active&nbsp;one.</tt></dd></dl>
+
+<dl><dt><a name="DiagramData-update_extents"><strong>update_extents</strong></a>(...)</dt><dd><tt><a href="#DiagramData-update_extents">update_extents</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Recalculation&nbsp;of&nbsp;the&nbsp;diagram&nbsp;extents.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>active_layer</strong></dt>
+<dd><tt>Layer&nbsp;currently&nbsp;active&nbsp;in&nbsp;the&nbsp;diagram.</tt></dd>
+</dl>
+<dl><dt><strong>bg_color</strong></dt>
+<dd><tt>Color&nbsp;of&nbsp;the&nbsp;diagram's&nbsp;background.</tt></dd>
+</dl>
+<dl><dt><strong>extents</strong></dt>
+<dd><tt>Rectangle&nbsp;covering&nbsp;all&nbsp;object's&nbsp;bounding&nbsp;boxes.</tt></dd>
+</dl>
+<dl><dt><strong>grid_visible</strong></dt>
+<dd><tt>bool:&nbsp;visibility&nbsp;of&nbsp;the&nbsp;grid.</tt></dd>
+</dl>
+<dl><dt><strong>grid_width</strong></dt>
+<dd><tt>Tuple(real:&nbsp;x,&nbsp;real:&nbsp;y)&nbsp;:&nbsp;describing&nbsp;the&nbsp;grid&nbsp;size.</tt></dd>
+</dl>
+<dl><dt><strong>hguides</strong></dt>
+<dd><tt>List&nbsp;of&nbsp;real:&nbsp;horizontal&nbsp;guides.</tt></dd>
+</dl>
+<dl><dt><strong>layers</strong></dt>
+<dd><tt>Read-only&nbsp;list&nbsp;of&nbsp;the&nbsp;diagrams&nbsp;layers.</tt></dd>
+</dl>
+<dl><dt><strong>paper</strong></dt>
+<dd><tt>Paperinfo&nbsp;of&nbsp;the&nbsp;diagram.</tt></dd>
+</dl>
+<dl><dt><strong>selected</strong></dt>
+<dd><tt>List&nbsp;of&nbsp;Object:&nbsp;current&nbsp;selection.</tt></dd>
+</dl>
+<dl><dt><strong>vguides</strong></dt>
+<dd><tt>List&nbsp;of&nbsp;real:&nbsp;vertical&nbsp;guides.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Display">class <strong>Display</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#Diagram">Diagram</a>&nbsp;can&nbsp;have&nbsp;multiple&nbsp;displays&nbsp;but&nbsp;every&nbsp;<a href="#Display">Display</a>&nbsp;has&nbsp;just&nbsp;one&nbsp;<a href="#Diagram">Diagram</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Display-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Display-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Display-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Display-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Display-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Display-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="Display-add_update_all"><strong>add_update_all</strong></a>(...)</dt><dd><tt><a href="#Display-add_update_all">add_update_all</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Add&nbsp;the&nbsp;diagram&nbsp;visible&nbsp;area&nbsp;to&nbsp;the&nbsp;update&nbsp;queue.</tt></dd></dl>
+
+<dl><dt><a name="Display-close"><strong>close</strong></a>(...)</dt><dd><tt><a href="#Display-close">close</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Close&nbsp;the&nbsp;display&nbsp;possibly&nbsp;asking&nbsp;to&nbsp;save.</tt></dd></dl>
+
+<dl><dt><a name="Display-flush"><strong>flush</strong></a>(...)</dt><dd><tt><a href="#Display-flush">flush</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;If&nbsp;no&nbsp;display&nbsp;update&nbsp;is&nbsp;queued,&nbsp;queue&nbsp;update.</tt></dd></dl>
+
+<dl><dt><a name="Display-resize_canvas"><strong>resize_canvas</strong></a>(...)</dt><dd><tt><a href="#Display-resize_canvas">resize_canvas</a>(int:&nbsp;width,&nbsp;int:&nbsp;height)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;BEWARE:&nbsp;Changing&nbsp;the&nbsp;drawing&nbsp;area&nbsp;but&nbsp;not&nbsp;the&nbsp;window&nbsp;size.</tt></dd></dl>
+
+<dl><dt><a name="Display-scroll"><strong>scroll</strong></a>(...)</dt><dd><tt><a href="#Display-scroll">scroll</a>(real:&nbsp;dx,&nbsp;real:&nbsp;dy)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Scroll&nbsp;the&nbsp;visible&nbsp;area&nbsp;by&nbsp;the&nbsp;given&nbsp;delta.</tt></dd></dl>
+
+<dl><dt><a name="Display-scroll_down"><strong>scroll_down</strong></a>(...)</dt><dd><tt><a href="#Display-scroll_down">scroll_down</a>()&nbsp;-&gt;&nbsp;None.&nbsp;Scroll&nbsp;downwards&nbsp;by&nbsp;a&nbsp;fixed&nbsp;amount.</tt></dd></dl>
+
+<dl><dt><a name="Display-scroll_left"><strong>scroll_left</strong></a>(...)</dt><dd><tt><a href="#Display-scroll_left">scroll_left</a>()&nbsp;-&gt;&nbsp;None.&nbsp;Scroll&nbsp;to&nbsp;the&nbsp;left&nbsp;by&nbsp;a&nbsp;fixed&nbsp;amount.</tt></dd></dl>
+
+<dl><dt><a name="Display-scroll_right"><strong>scroll_right</strong></a>(...)</dt><dd><tt><a href="#Display-scroll_right">scroll_right</a>()&nbsp;-&gt;&nbsp;None.&nbsp;Scroll&nbsp;to&nbsp;the&nbsp;right&nbsp;by&nbsp;a&nbsp;fixed&nbsp;amount.</tt></dd></dl>
+
+<dl><dt><a name="Display-scroll_up"><strong>scroll_up</strong></a>(...)</dt><dd><tt><a href="#Display-scroll_up">scroll_up</a>()&nbsp;-&gt;&nbsp;None.&nbsp;Scroll&nbsp;upwards&nbsp;by&nbsp;a&nbsp;fixed&nbsp;amount.</tt></dd></dl>
+
+<dl><dt><a name="Display-set_origion"><strong>set_origion</strong></a>(...)</dt><dd><tt><a href="#Display-set_origion">set_origion</a>(real:&nbsp;x,&nbsp;real,&nbsp;y)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Move&nbsp;the&nbsp;given&nbsp;diagram&nbsp;point&nbsp;to&nbsp;the&nbsp;top-left&nbsp;corner&nbsp;of&nbsp;the&nbsp;visible&nbsp;area.</tt></dd></dl>
+
+<dl><dt><a name="Display-set_title"><strong>set_title</strong></a>(...)</dt><dd><tt><a href="#Display-set_title">set_title</a>(string:&nbsp;title)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Temporary&nbsp;change&nbsp;of&nbsp;the&nbsp;diagram&nbsp;title.</tt></dd></dl>
+
+<dl><dt><a name="Display-zoom"><strong>zoom</strong></a>(...)</dt><dd><tt><a href="#Display-zoom">zoom</a>(real[2]:&nbsp;point,&nbsp;real:&nbsp;factor)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Zoom&nbsp;around&nbsp;the&nbsp;given&nbsp;point.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>diagram</strong></dt>
+<dd><tt>Diagram&nbsp;displayed.</tt></dd>
+</dl>
+<dl><dt><strong>origin</strong></dt>
+<dd><tt>Point&nbsp;in&nbsp;diagram&nbsp;coordinates&nbsp;of&nbsp;the&nbsp;top-left&nbsp;corner&nbsp;of&nbsp;the&nbsp;visible&nbsp;area.</tt></dd>
+</dl>
+<dl><dt><strong>visible</strong></dt>
+<dd><tt>Tuple(real:&nbsp;top,&nbsp;real:&nbsp;left,&nbsp;real:&nbsp;bottom,&nbsp;real:&nbsp;right)&nbsp;:&nbsp;visible&nbsp;area</tt></dd>
+</dl>
+<dl><dt><strong>zoom_factor</strong></dt>
+<dd><tt>Real:&nbsp;zoom-factor</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExportFilter">class <strong>ExportFilter</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>returned&nbsp;by&nbsp;dia.<a href="#-register_export">register_export</a>()&nbsp;but&nbsp;not&nbsp;used&nbsp;otherwise&nbsp;yet.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ExportFilter-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#ExportFilter-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="ExportFilter-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#ExportFilter-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="ExportFilter-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#ExportFilter-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;description&nbsp;for&nbsp;the&nbsp;filter.</tt></dd>
+</dl>
+<dl><dt><strong>unique_name</strong></dt>
+<dd><tt>A&nbsp;uniqe&nbsp;name&nbsp;within&nbsp;filters&nbsp;to&nbsp;allow&nbsp;disambiguation.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Font">class <strong>Font</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Provides&nbsp;access&nbsp;to&nbsp;some&nbsp;objects&nbsp;font&nbsp;property.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Font-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Font-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Font-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Font-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Font-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Font-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>family</strong></dt>
+<dd><tt>string:&nbsp;family&nbsp;name&nbsp;of&nbsp;the&nbsp;font</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>string:&nbsp;legacy&nbsp;name&nbsp;of&nbsp;the&nbsp;font</tt></dd>
+</dl>
+<dl><dt><strong>style</strong></dt>
+<dd><tt>int:&nbsp;style&nbsp;flags</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Handle">class <strong>Handle</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;handle&nbsp;is&nbsp;used&nbsp;to&nbsp;connect&nbsp;objects&nbsp;or&nbsp;for&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;resizing.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Handle-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Handle-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Handle-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Handle-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Handle-connect"><strong>connect</strong></a>(...)</dt><dd><tt><a href="#Handle-connect">connect</a>(<a href="#ConnectionPoint">ConnectionPoint</a>:&nbsp;cp)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Connect&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;A's&nbsp;handle&nbsp;with&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;B's&nbsp;connection&nbsp;point.&nbsp;To&nbsp;disconnect&nbsp;a&nbsp;handle&nbsp;pass&nbsp;in&nbsp;None.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>connect_type</strong></dt>
+<dd><tt>NONCONNECTABLE=0.</tt></dd>
+</dl>
+<dl><dt><strong>connected_to</strong></dt>
+<dd><tt>The&nbsp;connected&nbsp;ConnectionPoint&nbsp;object&nbsp;or&nbsp;None.</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Can&nbsp;be&nbsp;used&nbsp;to&nbsp;derive&nbsp;preferred&nbsp;directions&nbsp;from&nbsp;it.</tt></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><tt>The&nbsp;position&nbsp;of&nbsp;the&nbsp;connection&nbsp;point.</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>NON_MOVABLE=0,&nbsp;MAJOR_CONTROL=1,&nbsp;MINOR_CONTROL=2</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Image">class <strong>Image</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>dia.<a href="#Image">Image</a>&nbsp;gets&nbsp;passed&nbsp;into&nbsp;DiaRenderer.draw_image<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Image-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Image-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Image-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Image-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Image-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Image-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>filename</strong></dt>
+<dd><tt>string:&nbsp;utf-8&nbsp;encoded&nbsp;filename&nbsp;of&nbsp;the&nbsp;image</tt></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><tt>int:&nbsp;pixel&nbsp;height&nbsp;of&nbsp;the&nbsp;image</tt></dd>
+</dl>
+<dl><dt><strong>mask_data</strong></dt>
+<dd><tt>string:&nbsp;array&nbsp;of&nbsp;alpha&nbsp;pixel&nbsp;values</tt></dd>
+</dl>
+<dl><dt><strong>rgb_data</strong></dt>
+<dd><tt>string:&nbsp;array&nbsp;of&nbsp;packed&nbsp;rgb&nbsp;pixel&nbsp;values</tt></dd>
+</dl>
+<dl><dt><strong>uri</strong></dt>
+<dd><tt>string:&nbsp;Uniform&nbsp;Resource&nbsp;Identifier&nbsp;of&nbsp;the&nbsp;image</tt></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><tt>int:&nbsp;pixel&nbsp;width&nbsp;of&nbsp;the&nbsp;image</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Layer">class <strong>Layer</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#Layer">Layer</a>&nbsp;is&nbsp;part&nbsp;of&nbsp;a&nbsp;<a href="#Diagram">Diagram</a>&nbsp;and&nbsp;can&nbsp;contain&nbsp;objects.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Layer-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Layer-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Layer-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Layer-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Layer-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Layer-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="Layer-add_object"><strong>add_object</strong></a>(...)</dt><dd><tt><a href="#Layer-add_object">add_object</a>(<a href="#Object">Object</a>:&nbsp;o[,&nbsp;int:&nbsp;position])&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Add&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;the&nbsp;layer&nbsp;at&nbsp;the&nbsp;top&nbsp;or&nbsp;the&nbsp;given&nbsp;position&nbsp;counting&nbsp;from&nbsp;bottom.</tt></dd></dl>
+
+<dl><dt><a name="Layer-destroy"><strong>destroy</strong></a>(...)</dt><dd><tt>Release&nbsp;the&nbsp;layer.&nbsp;Must&nbsp;not&nbsp;be&nbsp;called&nbsp;when&nbsp;already&nbsp;added&nbsp;to&nbsp;a&nbsp;diagram.</tt></dd></dl>
+
+<dl><dt><a name="Layer-find_closest_connection_point"><strong>find_closest_connection_point</strong></a>(...)</dt><dd><tt>find_closest_connectionpoint(real:&nbsp;x,&nbsp;real:&nbsp;y[,&nbsp;<a href="#Object">Object</a>:&nbsp;o])&nbsp;-&gt;&nbsp;(real:&nbsp;dist,&nbsp;<a href="#ConnectionPoint">ConnectionPoint</a>:&nbsp;cp).&nbsp;&nbsp;Given&nbsp;a&nbsp;point&nbsp;and&nbsp;an&nbsp;optional&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;exclude&nbsp;return&nbsp;the&nbsp;distance&nbsp;and&nbsp;the&nbsp;closest&nbsp;connection&nbsp;point&nbsp;or&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="Layer-find_closest_object"><strong>find_closest_object</strong></a>(...)</dt><dd><tt><a href="#Layer-find_closest_object">find_closest_object</a>(real:&nbsp;x,&nbsp;real:&nbsp;y,&nbsp;real:&nbsp;maxdist)&nbsp;-&gt;&nbsp;<a href="#Object">Object</a>.&nbsp;&nbsp;Find&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;the&nbsp;given&nbsp;maximum&nbsp;distance&nbsp;of&nbsp;the&nbsp;given&nbsp;point.</tt></dd></dl>
+
+<dl><dt><a name="Layer-find_objects_in_rectangle"><strong>find_objects_in_rectangle</strong></a>(...)</dt><dd><tt><a href="#Layer-find_objects_in_rectangle">find_objects_in_rectangle</a>(real:&nbsp;top,&nbsp;real&nbsp;left,&nbsp;real:&nbsp;bottom,&nbsp;real:&nbsp;right)&nbsp;-&gt;&nbsp;Objects&nbsp;&nbsp;Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;objects&nbsp;found&nbsp;in&nbsp;the&nbsp;given&nbsp;rectangle.</tt></dd></dl>
+
+<dl><dt><a name="Layer-object_get_index"><strong>object_get_index</strong></a>(...)</dt><dd><tt><a href="#Layer-object_get_index">object_get_index</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;int.&nbsp;&nbsp;Returns&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;in&nbsp;the&nbsp;layers&nbsp;list&nbsp;of&nbsp;objects.</tt></dd></dl>
+
+<dl><dt><a name="Layer-remove_object"><strong>remove_object</strong></a>(...)</dt><dd><tt><a href="#Layer-remove_object">remove_object</a>(<a href="#Object">Object</a>:&nbsp;o)&nbsp;-&gt;&nbsp;None&nbsp;&nbsp;Remove&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;from&nbsp;the&nbsp;layer&nbsp;and&nbsp;delete&nbsp;it.</tt></dd></dl>
+
+<dl><dt><a name="Layer-update_extents"><strong>update_extents</strong></a>(...)</dt><dd><tt><a href="#Layer-update_extents">update_extents</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Force&nbsp;recaculation&nbsp;of&nbsp;the&nbsp;layer&nbsp;extents.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>extents</strong></dt>
+<dd><tt>Rectangle&nbsp;covering&nbsp;all&nbsp;object's&nbsp;bounding&nbsp;boxes.</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;name&nbsp;of&nbsp;the&nbsp;layer.</tt></dd>
+</dl>
+<dl><dt><strong>objects</strong></dt>
+<dd><tt>The&nbsp;list&nbsp;of&nbsp;objects&nbsp;in&nbsp;the&nbsp;layer.</tt></dd>
+</dl>
+<dl><dt><strong>visible</strong></dt>
+<dd><tt>The&nbsp;visibility&nbsp;of&nbsp;the&nbsp;layer.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Object">class <strong>Object</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;main&nbsp;building&nbsp;block&nbsp;of&nbsp;diagrams.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Object-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Object-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Object-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Object-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Object-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#Object-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="Object-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Object-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="Object-copy"><strong>copy</strong></a>(...)</dt><dd><tt><a href="#Object-copy">copy</a>()&nbsp;-&gt;&nbsp;<a href="#Object">Object</a>.&nbsp;&nbsp;Create&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;copy.</tt></dd></dl>
+
+<dl><dt><a name="Object-destroy"><strong>destroy</strong></a>(...)</dt><dd><tt><a href="#Object-destroy">destroy</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Release&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;Must&nbsp;not&nbsp;be&nbsp;called&nbsp;when&nbsp;already&nbsp;added&nbsp;to&nbsp;a&nbsp;group&nbsp;or&nbsp;layer.</tt></dd></dl>
+
+<dl><dt><a name="Object-distance_from"><strong>distance_from</strong></a>(...)</dt><dd><tt><a href="#Object-distance_from">distance_from</a>(real:&nbsp;x,&nbsp;real:&nbsp;y)&nbsp;-&gt;&nbsp;real.&nbsp;&nbsp;Calculate&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>'s&nbsp;distance&nbsp;from&nbsp;the&nbsp;given&nbsp;point.</tt></dd></dl>
+
+<dl><dt><a name="Object-move"><strong>move</strong></a>(...)</dt><dd><tt><a href="#Object-move">move</a>(real:&nbsp;x,&nbsp;real:&nbsp;y)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Move&nbsp;the&nbsp;entire&nbsp;<a href="__builtin__.html#object">object</a>.&nbsp;The&nbsp;given&nbsp;point&nbsp;is&nbsp;the&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>.obj_pos.</tt></dd></dl>
+
+<dl><dt><a name="Object-move_handle"><strong>move_handle</strong></a>(...)</dt><dd><tt><a href="#Object-move_handle">move_handle</a>(<a href="#Handle">Handle</a>:&nbsp;h,&nbsp;(real:&nbsp;x,&nbsp;real:&nbsp;y)[int:&nbsp;reason,&nbsp;int:&nbsp;modifiers])&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Move&nbsp;the&nbsp;given&nbsp;handle&nbsp;of&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;the&nbsp;given&nbsp;position</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>bounding_box</strong></dt>
+<dd><tt>Box&nbsp;covering&nbsp;all&nbsp;the&nbsp;object.</tt></dd>
+</dl>
+<dl><dt><strong>connections</strong></dt>
+<dd><tt>Vector&nbsp;of&nbsp;connection&nbsp;points.</tt></dd>
+</dl>
+<dl><dt><strong>handles</strong></dt>
+<dd><tt>Vector&nbsp;of&nbsp;handles.</tt></dd>
+</dl>
+<dl><dt><strong>parent</strong></dt>
+<dd><tt>The&nbsp;parent&nbsp;object&nbsp;when&nbsp;parenting&nbsp;is&nbsp;in&nbsp;place,&nbsp;None&nbsp;otherwise.</tt></dd>
+</dl>
+<dl><dt><strong>properties</strong></dt>
+<dd><tt>Dictionary&nbsp;of&nbsp;object&nbsp;properties.</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>The&nbsp;dia.ObjectType&nbsp;of&nbsp;the&nbsp;object</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ObjectType">class <strong>ObjectType</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;dia.<a href="#Object">Object</a>&nbsp;factory.&nbsp;Allows&nbsp;to&nbsp;create&nbsp;objects&nbsp;of&nbsp;the&nbsp;specific&nbsp;type.&nbsp;Use:&nbsp;factory&nbsp;=&nbsp;<a href="#-get_object_type">get_object_type</a>(&lt;type&nbsp;name&gt;)&nbsp;to&nbsp;get&nbsp;a&nbsp;grip&nbsp;on&nbsp;it.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ObjectType-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#ObjectType-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="ObjectType-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#ObjectType-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="ObjectType-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#ObjectType-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="ObjectType-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#ObjectType-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="ObjectType-create"><strong>create</strong></a>(...)</dt><dd><tt><a href="#ObjectType-create">create</a>(real:&nbsp;x,&nbsp;real:&nbsp;y)&nbsp;-&gt;&nbsp;(<a href="#Object">Object</a>:&nbsp;o,&nbsp;<a href="#Handle">Handle</a>:&nbsp;h1,&nbsp;<a href="#Handle">Handle</a>:&nbsp;h2)&nbsp;&nbsp;Create&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;this&nbsp;type.&nbsp;Returns&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;and&nbsp;up&nbsp;to&nbsp;two&nbsp;handles.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>string:&nbsp;the&nbsp;unique&nbsp;type&nbsp;indentifier&nbsp;of&nbsp;the&nbsp;object&nbsp;type.</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+<dd><tt>int:&nbsp;version&nbsp;number</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Paperinfo">class <strong>Paperinfo</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>dia.<a href="#Paperinfo">Paperinfo</a>&nbsp;is&nbsp;part&nbsp;of&nbsp;dia.<a href="#DiagramData">DiagramData</a>&nbsp;describing&nbsp;the&nbsp;paper<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Paperinfo-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Paperinfo-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Paperinfo-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Paperinfo-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Paperinfo-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Paperinfo-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>height</strong></dt>
+<dd><tt>real:&nbsp;height&nbsp;of&nbsp;the&nbsp;drawable&nbsp;area&nbsp;(sans&nbsp;margins)</tt></dd>
+</dl>
+<dl><dt><strong>is_portrait</strong></dt>
+<dd><tt>int:&nbsp;paper&nbsp;orientation</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>string:&nbsp;paper&nbsp;name,&nbsp;e.g.&nbsp;A4&nbsp;or&nbsp;Letter</tt></dd>
+</dl>
+<dl><dt><strong>scaling</strong></dt>
+<dd><tt>real:&nbsp;factor&nbsp;to&nbsp;zoom&nbsp;the&nbsp;diagram&nbsp;on&nbsp;the&nbsp;paper</tt></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><tt>real:&nbsp;width&nbsp;of&nbsp;the&nbsp;drawable&nbsp;area&nbsp;(sans&nbsp;margins)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Point">class <strong>Point</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;dia.<a href="#Point">Point</a>&nbsp;does&nbsp;not&nbsp;only&nbsp;provide&nbsp;access&nbsp;trough&nbsp;it's&nbsp;members&nbsp;but&nbsp;also&nbsp;via&nbsp;a&nbsp;sequence&nbsp;interface.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Point-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Point-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="Point-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Point-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="Point-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Point-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="Point-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Point-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>x</strong></dt>
+<dd><tt>double:&nbsp;coordinate&nbsp;horizontal&nbsp;part</tt></dd>
+</dl>
+<dl><dt><strong>y</strong></dt>
+<dd><tt>double:&nbsp;coordinate&nbsp;vertical&nbsp;part</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Properties">class <strong>Properties</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;dictionary&nbsp;interface&nbsp;to&nbsp;dia.<a href="#Object">Object</a>'s&nbsp;standard&nbsp;properties.&nbsp;Many&nbsp;propertiescan&nbsp;be&nbsp;get&nbsp;and&nbsp;set&nbsp;through&nbsp;this.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;specific&nbsp;method&nbsp;to&nbsp;change&nbsp;anobjects&nbsp;property&nbsp;like&nbsp;o.move()&nbsp;or&nbsp;o.move_handle()&nbsp;use&nbsp;that&nbsp;instead.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Properties-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Properties-__delitem__"><strong>__delitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__delitem__">__delitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Properties-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Properties-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Properties-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="Properties-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="Properties-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Properties-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="Properties-get"><strong>get</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Properties-has_key"><strong>has_key</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Properties-keys"><strong>keys</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Property">class <strong>Property</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Interface&nbsp;to&nbsp;so&nbsp;called&nbsp;StdProps,&nbsp;the&nbsp;mechanism&nbsp;to&nbsp;control&nbsp;most&nbsp;of&nbsp;Dia's&nbsp;canvas&nbsp;objects&nbsp;properties.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Property-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Property-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Property-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Property-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Property-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Property-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>string:&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;property</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>string:&nbsp;the&nbsp;type&nbsp;name&nbsp;of&nbsp;the&nbsp;object</tt></dd>
+</dl>
+<dl><dt><strong>value</strong></dt>
+<dd><tt>various:&nbsp;the&nbsp;value&nbsp;is&nbsp;of&nbsp;type&nbsp;char,&nbsp;bool,&nbsp;dict,&nbsp;int,&nbsp;real,&nbsp;string,&nbsp;Text,&nbsp;Point,&nbsp;BezPoint,&nbsp;Rect,&nbsp;Arrow,&nbsp;Color&nbsp;or&nbsp;a&nbsp;tuple&nbsp;or&nbsp;list,&nbsp;possibly&nbsp;containing&nbsp;tuple&nbsp;of&nbsp;varying&nbsp;types.</tt></dd>
+</dl>
+<dl><dt><strong>visible</strong></dt>
+<dd><tt>bool:&nbsp;visibility&nbsp;of&nbsp;the&nbsp;property</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Rectangle">class <strong>Rectangle</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;dia.<a href="#Rectangle">Rectangle</a>&nbsp;does&nbsp;not&nbsp;only&nbsp;provide&nbsp;access&nbsp;trough&nbsp;it's&nbsp;members&nbsp;but&nbsp;also&nbsp;via&nbsp;a&nbsp;sequence&nbsp;interface.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Rectangle-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Rectangle-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Rectangle-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="Rectangle-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Rectangle-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="Rectangle-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Rectangle-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>bottom</strong></dt>
+<dd><tt>int&nbsp;or&nbsp;double:&nbsp;lower&nbsp;edge&nbsp;y&nbsp;coordinate</tt></dd>
+</dl>
+<dl><dt><strong>left</strong></dt>
+<dd><tt>int&nbsp;or&nbsp;double:&nbsp;left&nbsp;edge&nbsp;x&nbsp;coordinate</tt></dd>
+</dl>
+<dl><dt><strong>right</strong></dt>
+<dd><tt>int&nbsp;or&nbsp;double:&nbsp;right&nbsp;edge&nbsp;x&nbsp;coordinate</tt></dd>
+</dl>
+<dl><dt><strong>top</strong></dt>
+<dd><tt>int&nbsp;or&nbsp;double:&nbsp;upper&nbsp;edge&nbsp;y&nbsp;coordinate</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Text">class <strong>Text</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Many&nbsp;objects&nbsp;(dia.<a href="#Object">Object</a>)&nbsp;having&nbsp;text&nbsp;to&nbsp;display&nbsp;provide&nbsp;this&nbsp;property.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Text-__cmp__"><strong>__cmp__</strong></a>(...)</dt><dd><tt>x.<a href="#Text-__cmp__">__cmp__</a>(y)&nbsp;&lt;==&gt;&nbsp;cmp(x,y)</tt></dd></dl>
+
+<dl><dt><a name="Text-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#Text-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="Text-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#Text-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>alignment</strong></dt>
+<dd><tt>int:&nbsp;alignment&nbsp;out&nbsp;of&nbsp;LEFT=0,&nbsp;CENTER=1,&nbsp;RIGHT=2</tt></dd>
+</dl>
+<dl><dt><strong>color</strong></dt>
+<dd><tt>Color:&nbsp;color&nbsp;of&nbsp;the&nbsp;text</tt></dd>
+</dl>
+<dl><dt><strong>font</strong></dt>
+<dd><tt>Font:&nbsp;read-only&nbsp;reference&nbsp;to&nbsp;font&nbsp;used</tt></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><tt>real:&nbsp;height&nbsp;of&nbsp;the&nbsp;font</tt></dd>
+</dl>
+<dl><dt><strong>position</strong></dt>
+<dd><tt>Point:&nbsp;alignment&nbsp;position&nbsp;of&nbsp;the&nbsp;text</tt></dd>
+</dl>
+<dl><dt><strong>text</strong></dt>
+<dd><tt>string:&nbsp;text&nbsp;data</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-active_display"><strong>active_display</strong></a>(...)</dt><dd><tt><a href="#-active_display">active_display</a>()&nbsp;-&gt;&nbsp;<a href="#Display">Display</a>.&nbsp;&nbsp;Delivers&nbsp;the&nbsp;currently&nbsp;active&nbsp;display&nbsp;'dia.<a href="#Display">Display</a>'&nbsp;or&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-diagrams"><strong>diagrams</strong></a>(...)</dt><dd><tt><a href="#-diagrams">diagrams</a>()&nbsp;-&gt;&nbsp;List&nbsp;of&nbsp;<a href="#Diagram">Diagram</a>.&nbsp;&nbsp;Returns&nbsp;the&nbsp;list&nbsp;of&nbsp;currently&nbsp;open&nbsp;diagrams</tt></dd></dl>
+ <dl><dt><a name="-get_object_type"><strong>get_object_type</strong></a>(...)</dt><dd><tt><a href="#-get_object_type">get_object_type</a>(string:&nbsp;type)&nbsp;-&gt;&nbsp;<a href="#ObjectType">ObjectType</a>.&nbsp;&nbsp;From&nbsp;a&nbsp;type&nbsp;name&nbsp;like&nbsp;"Standard&nbsp;-&nbsp;Line"&nbsp;return&nbsp;the&nbsp;factory&nbsp;to&nbsp;create&nbsp;objects&nbsp;of&nbsp;that&nbsp;type,&nbsp;see:&nbsp;DiaObjectType</tt></dd></dl>
+ <dl><dt><a name="-group_create"><strong>group_create</strong></a>(...)</dt><dd><tt><a href="#-group_create">group_create</a>(List&nbsp;of&nbsp;<a href="#Object">Object</a>:&nbsp;objs)&nbsp;-&gt;&nbsp;<a href="#Object">Object</a>.&nbsp;&nbsp;Create&nbsp;a&nbsp;group&nbsp;containing&nbsp;the&nbsp;given&nbsp;list&nbsp;of&nbsp;dia.<a href="#Object">Object</a>(s)</tt></dd></dl>
+ <dl><dt><a name="-load"><strong>load</strong></a>(...)</dt><dd><tt><a href="#-load">load</a>(string:&nbsp;name)&nbsp;-&gt;&nbsp;<a href="#Diagram">Diagram</a>.&nbsp;&nbsp;Loads&nbsp;a&nbsp;diagram&nbsp;from&nbsp;the&nbsp;given&nbsp;filename</tt></dd></dl>
+ <dl><dt><a name="-message"><strong>message</strong></a>(...)</dt><dd><tt><a href="#-message">message</a>(int:&nbsp;type,&nbsp;string:&nbsp;msg)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Popup&nbsp;a&nbsp;dialog&nbsp;with&nbsp;given&nbsp;message</tt></dd></dl>
+ <dl><dt><a name="-new"><strong>new</strong></a>(...)</dt><dd><tt><a href="#-new">new</a>(string:&nbsp;name)&nbsp;-&gt;&nbsp;<a href="#Diagram">Diagram</a>.&nbsp;&nbsp;Create&nbsp;an&nbsp;empty&nbsp;diagram</tt></dd></dl>
+ <dl><dt><a name="-register_action"><strong>register_action</strong></a>(...)</dt><dd><tt><a href="#-register_action">register_action</a>(string:&nbsp;action,&nbsp;string:&nbsp;description,&nbsp;string:&nbsp;menupath,&nbsp;Callback:&nbsp;func)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Register&nbsp;a&nbsp;callback&nbsp;function&nbsp;which&nbsp;appears&nbsp;in&nbsp;the&nbsp;menu.&nbsp;Depending&nbsp;on&nbsp;the&nbsp;menu&nbsp;path&nbsp;used&nbsp;during&nbsp;registrationthe&nbsp;callback&nbsp;gets&nbsp;called&nbsp;with&nbsp;the&nbsp;current&nbsp;DiaDiagramData&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+ <dl><dt><a name="-register_callback"><strong>register_callback</strong></a>(...)</dt><dd><tt><a href="#-register_callback">register_callback</a>(string:&nbsp;description,&nbsp;string:&nbsp;menupath,&nbsp;Callback:&nbsp;func)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Register&nbsp;a&nbsp;callback&nbsp;function&nbsp;which&nbsp;appears&nbsp;in&nbsp;the&nbsp;menu.&nbsp;Depending&nbsp;on&nbsp;the&nbsp;menu&nbsp;path&nbsp;used&nbsp;during&nbsp;registrationthe&nbsp;callback&nbsp;gets&nbsp;called&nbsp;with&nbsp;the&nbsp;current&nbsp;DiaDiagramData&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+ <dl><dt><a name="-register_export"><strong>register_export</strong></a>(...)</dt><dd><tt><a href="#-register_export">register_export</a>(string:&nbsp;name,&nbsp;string:&nbsp;extension,&nbsp;Renderer:&nbsp;r)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Allows&nbsp;to&nbsp;register&nbsp;an&nbsp;export&nbsp;filter&nbsp;written&nbsp;in&nbsp;Python.&nbsp;It&nbsp;needs&nbsp;to&nbsp;conform&nbsp;to&nbsp;the&nbsp;DiaRenderer&nbsp;interface.</tt></dd></dl>
+ <dl><dt><a name="-register_import"><strong>register_import</strong></a>(...)</dt><dd><tt><a href="#-register_import">register_import</a>(string:&nbsp;name,&nbsp;string:&nbsp;extension,&nbsp;Callback:&nbsp;func)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Allows&nbsp;to&nbsp;register&nbsp;an&nbsp;import&nbsp;filter&nbsp;written&nbsp;in&nbsp;Python,&nbsp;that&nbsp;is&nbsp;mainly&nbsp;a&nbsp;callback&nbsp;function&nbsp;which&nbsp;fills&nbsp;thegiven&nbsp;DiaDiagramData&nbsp;from&nbsp;the&nbsp;given&nbsp;filename</tt></dd></dl>
+ <dl><dt><a name="-register_plugin"><strong>register_plugin</strong></a>(...)</dt><dd><tt><a href="#-register_plugin">register_plugin</a>(string:&nbsp;filename)&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Registers&nbsp;a&nbsp;single&nbsp;plug-in&nbsp;given&nbsp;its&nbsp;filename,&nbsp;that&nbsp;is&nbsp;load&nbsp;a&nbsp;dynamic&nbsp;module.</tt></dd></dl>
+ <dl><dt><a name="-registered_types"><strong>registered_types</strong></a>(...)</dt><dd><tt><a href="#-registered_types">registered_types</a>()&nbsp;-&gt;&nbsp;Dict&nbsp;of&nbsp;<a href="#ObjectType">ObjectType</a>&nbsp;indexed&nbsp;by&nbsp;their&nbsp;name.&nbsp;&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;all&nbsp;registered&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;factories,&nbsp;aka.&nbsp;DiaObjectType</tt></dd></dl>
+ <dl><dt><a name="-update_all"><strong>update_all</strong></a>(...)</dt><dd><tt><a href="#-update_all">update_all</a>()&nbsp;-&gt;&nbsp;None.&nbsp;&nbsp;Force&nbsp;an&nbsp;asynchronous&nbsp;update&nbsp;of&nbsp;all&nbsp;existing&nbsp;diagram&nbsp;displays</tt></dd></dl>
+</td></tr></table>
+</body></html>
