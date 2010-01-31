@@ -82,6 +82,7 @@
 	      </li>
 	    </ul>
             <div id="header" style="text-align:left;">
+	      <div id="header-wrap">
 	      <h1>Anjuta DevStudio: GNOME Integrated Development Environment</h1>
               <div id="tabs">
                 <ul id="portal-globalnav">
@@ -107,7 +108,8 @@
                   </xsl:call-template>
                 </ul>
               </div>
-            </div>
+              </div>
+	    </div>
           </div>
         </div>
 
