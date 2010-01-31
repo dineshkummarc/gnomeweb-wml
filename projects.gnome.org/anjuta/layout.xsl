@@ -120,9 +120,9 @@
         <div id="sidebar">
 	  <div class="download-button">
 	    <center>
-	      <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/anjuta-2.28.1.0.tar.gz"><strong>Download Now!</strong>
+	      <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/anjuta-2.28.2.0.tar.gz"><strong>Download Now!</strong>
 	      </a><br/>
-	      Anjuta 2.28.1
+	      Anjuta 2.28.2
 	    </center>
 	  </div>
           <p class="section">Documentations</p>
