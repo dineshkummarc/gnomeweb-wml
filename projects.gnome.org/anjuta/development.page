@@ -1,7 +1,19 @@
 <page name="Development">
+
+  <div class="table-of-contents">
+    <p class="table-of-contents-heading">Contents</p>
+      <ol>
+        <li><a href="#project-maintainers">Are you a library or project maintainer?</a></li>
+        <li><a href="#anjuta-contributors">Are you looking to contribute to Anjuta?</a></li>
+        <li><a href="#anjuta-website">Maintaining Anjuta website</a></li>
+        <li><a href="#anjuta-history">History</a></li>
+      </ol>
+  </div>
+
   <p class="quote">
   &quot;A service to open source is a service to mankind.&quot;
   </p>
+
   <a name="project-maintainers"></a>
   <h2>Are you a library or project maintainer?</h2>
   
@@ -47,8 +59,8 @@
     from the repository:</p>
   
   <div class="code">
-    $ git clone git://git.gnome.org/anjuta <br/>
-    $ git clone git://git.gnome.org/gdl <br/>
+    $ git clone git://git.gnome.org/anjuta
+    $ git clone git://git.gnome.org/gdl
   </div>
 
   <p>That only gives read access to the repository. If you have an account
@@ -57,8 +69,8 @@
     you instead need to check out the source with:</p>
   
   <div class="code">
-    $ git clone ssh://username@git.gnome.org/git/anjuta <br/>
-    $ git clone ssh://username@git.gnome.org/git/gdl <br/>
+    $ git clone ssh://username@git.gnome.org/git/anjuta
+    $ git clone ssh://username@git.gnome.org/git/gdl
   </div>
   
   <p>Now you will want to build and install.  Run:</p>
@@ -72,10 +84,10 @@
     package:</p>
   
   <div class="code">
-    $ ./configure<br/>
-    $ make<br/>
-    $ su [password]<br/>
-    # make install<br/>
+    $ ./configure
+    $ make
+    $ su [password]
+    # make install
   </div>
   <p>At the end of configure stage, you will see which plugins are being built
     and which aren't. If you see some plugins not built, it's because you are
@@ -92,6 +104,41 @@
     see this nice and simple <a href="http://live.gnome.org/Git/Developers">git tutorial</a>
     for further instructions</p>
   
+  <a name="anjuta-website"/>
+  <h2>Maintaining Anjuta website</h2>
+  <p>
+    Anjuta website (this website) is maintained in GNOME websites git repository. If you want to help update or fix errors in the site, you can easily just clone the git repository and submit patches in our bugzilla.
+  </p>
+  <p>
+    Run the following commands to checkout and prepare gnomeweb-wml project for editing anjuta module.
+  </p>
+  <div class="code">
+    $ git clone git://git.gnome.org/gnomeweb-wml
+    $ cd gnomeweb-wml
+    $ ./autogen.sh
+    $ cd projects.gnome.org/anjuta
+    $ make
+  </div>
+  <p>
+    If you have gnome account, you can substitute above clone command with following one.
+  </p>
+  <div class="code">
+    $ git clone ssh://username@git.gnome.org/gnomeweb-wml
+  </div>
+  <p>
+    The website pages are create by xsl transformation in above anjuta directory. The actual layout is controlled by <i>layout.xsl</i> file in the directory and html files are generated from corresponding <i>.page</i> files. You would be editing the <i>.pages</i> files and run <i>make</i> as usual to update html files.
+  </p>
+  <p>To preview your copy of website, install apache2 and just symlink this directory from your WWW directory. Following commands usually should do.
+  </p>
+
+  <div class="code">
+    $ sudo apt-get install apache2 (or equivalent for your distribution)
+    $ sudo ln -s [path to above git anjuta dir] /var/www/anjuta
+  </div>
+  <p>
+    You can then preview the site at url http://127.0.0.1/anjuta. Follow the <a href="http://live.gnome.org/Git/Developers">same procedure</a> mentioned above to pull, commit and push (or create patches and submit to bugzilla).
+  </p>
+  <a name="anjuta-history"/>
   <h2>History</h2>
   <p>Anjuta project was started in <b>27th Dec 1997</b>. To learn more about its history
     visit the first <a href="http://web.archive.org/web/20010924065759/anjuta.sourceforge.net/">archived anjuta website</a>
