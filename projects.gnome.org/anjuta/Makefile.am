@@ -3,6 +3,7 @@ SUBDIRS=css
 urlpath = /anjuta
 
 HTMLFILES = \
+	index.shtml \
 	index.html \
 	development.html \
 	downloads.html \
