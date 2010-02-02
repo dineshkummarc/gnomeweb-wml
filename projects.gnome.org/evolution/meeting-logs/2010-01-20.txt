@@ -1,0 +1,117 @@
+Jan 20 10:30:29 <chen>	Lets get started and akhil can join us in between..
+Jan 20 10:30:54 <chen>	API/ABI freeze has added up with the string announce period from jan 18,
+Jan 20 10:31:09 <chen>	we have the 2.29.6 release coming up next week Jan 26,
+Jan 20 10:31:18 *	lakhil (~lakhil@117.192.25.98) has joined #evolution-meet
+Jan 20 10:31:19 <chen>	please push all the patches early to get into the release..
+Jan 20 10:31:24 <chen>	hey lakhil 
+Jan 20 10:31:36 <lakhil>	hi chen sorry for being late 
+Jan 20 10:31:52 <chen>	lakhil, np we just started a minute back :)
+Jan 20 10:32:36 <chen>	update on imapx available at http://chenthill.wordpress.com/2010/01/11/evolution-with-improved-imap-support-imapx/
+Jan 20 10:33:09 <chen>	mbarnes, I guess we would be targetting all the regressions now and hope there is nothing pending on kill-bonobo ?
+Jan 20 10:33:40 <mbarnes>	yep, playing whack-a-mole with them
+Jan 20 10:33:57 <chen>	I would be testing gdbus branch from trietter tomorrow and see if it can be taken into master,
+Jan 20 10:34:37 <chen>	but need to clarify if it would add additional packaging of external modules..
+Jan 20 10:34:44 <chen>	mbarnes, cool :)
+Jan 20 10:35:13 <chen>	that would be for the general updates..
+Jan 20 10:35:28 <chen>	anything else which we need to discuss before moving on to status updates ?
+Jan 20 10:35:39 <mbarnes>	yeah, I have something
+Jan 20 10:35:49 <chen>	go on :)
+Jan 20 10:36:08 <mbarnes>	it came up recently on evolution-patches that the mailing list is effectively dead these days
+Jan 20 10:36:16 <mbarnes>	wondering if we should retire it officially
+Jan 20 10:36:35 <chen>	yes we can and should imho
+Jan 20 10:36:43 <abharath>	that would be best
+Jan 20 10:37:03 <mbarnes>	okay, I'll look into it and see if the archive can still be made available
+Jan 20 10:37:16 <chen>	that would be great
+Jan 20 10:37:27 <chen>	mbarnes, anything else..
+Jan 20 10:37:31 <mbarnes>	nope
+Jan 20 10:37:38 <lakhil>	gdbus can only be committed before API/ABI Freeze ?
+Jan 20 10:38:04 <chen>	lakhil, its just the transport layer we would change, so it wont affect the freeze i guess
+Jan 20 10:38:12 <lakhil>	ah..k
+Jan 20 10:38:24 <chen>	updates from my side,
+Jan 20 10:38:26 <jonner>	gdbus stuff can't be committed though afaik because it's not even in glib yet
+Jan 20 10:39:07 <chen>	jonner, ok, can it alone be packaged with EDS if it makes things stable ?
+Jan 20 10:39:08 <jony>	(hello)
+Jan 20 10:39:14 <chen>	hey jonner 
+Jan 20 10:39:17 <chen>	hey jony 
+Jan 20 10:40:18 <jonner>	chen, I doubt it.  as far as I know, it was targetted to be included in the upcoming glib release, but it's not in git yet, so travis has had to depend on an experimental branch of glib while doing the work.
+Jan 20 10:41:22 <chen>	jonner, ok was just wondering if there is something we can do if it makes things stable. With the current dbus-glib things are a bit slow due to the sync locks i guess. maybe lets take it offline
+Jan 20 10:41:30 <chen>	let me test the branch tomorrow..
+Jan 20 10:41:47 <jonner>	yeah, I'm not entirely sure what our options are.  it would obviously be best if they could just get it merged into glib soon
+Jan 20 10:42:02 <chen>	yup
+Jan 20 10:42:47 <chen>	updates from my side, mostly on leave and worked on some security fixes/back-porting them to opensuse+sle versions..
+Jan 20 10:43:04 <chen>	would be working on remaining imapx tasks over next week..
+Jan 20 10:43:12 <chen>	abharath, updates?
+Jan 20 10:43:47 <abharath>	chen: same here. Mostly on internal issues. Would start on mapi issues soon
+Jan 20 10:44:03 <chen>	abharath, fine
+Jan 20 10:44:04 <abharath>	Have some patches to finish
+Jan 20 10:44:18 <chen>	dave_largo, anything for us?
+Jan 20 10:44:25 <chen>	abharath, cool
+Jan 20 10:44:34 <chen>	jonner, updates?
+Jan 20 10:44:46 <abharath>	chen: and Fridrich had some patches for windows portability. Would be committing them in a day or two
+Jan 20 10:44:46 <dave_largo>	Not really anything for me, I'll try and poke at the Wiki some more. I have been really busy here.
+Jan 20 10:45:22 <chen>	dave_largo, cool, will join u there sometime during this week..
+Jan 20 10:45:28 <chen>	jony, updates?
+Jan 20 10:45:34 <jony>	chen: been away from code for a while. pushed event notification . we moved to libmapi 0.9 . will be fixing some bugs from next week.
+Jan 20 10:46:04 <jony>	i may diable push events if i can't fix the CPU bug from evolution-mapi. have a patch for libmapi though . 
+Jan 20 10:46:05 <chen>	jony, thanks
+Jan 20 10:46:07 <chen>	lakhil, updates
+Jan 20 10:46:11 <jony>	*disable
+Jan 20 10:46:32 <lakhil>	chen, testing mapi against libmapi 0.9, sle testing and bug triaging 
+Jan 20 10:46:40 <chen>	jony, ah, do u need to really disable ?
+Jan 20 10:46:58 <chen>	lakhil, cool
+Jan 20 10:47:01 <jony>	chen: not sure .. i'll be looking for a workaround tomorrow .. letz see :) 
+Jan 20 10:47:14 <chen>	jony, fine
+Jan 20 10:47:24 <jonner>	I've made some more progress on the backend split, which you can find here if anybody is interested: http://git.collabora.co.uk/?p=user/jonathon/evolution;a=shortlog;h=refs/heads/eds-mailer .  From now on it will be important to start defining the DBus API more concretely.
+Jan 20 10:47:29 *	chen wishes jony fixes it and not disables the awesome feature :)
+Jan 20 10:47:35 <jony>	chen: me too :)
+Jan 20 10:48:03 *	jony notes down jonner 's repo.
+Jan 20 10:48:03 <jonner>	i may be helping out a bit with some mapi stuff in the near future as well
+Jan 20 10:48:14 <jony>	welcome welcome !
+Jan 20 10:48:15 <chen>	jonner, defining the dbus api's should be interesting one :)
+Jan 20 10:48:25 <chen>	jonner, nice!
+Jan 20 10:48:35 <chen>	it definetly needs more people
+Jan 20 10:48:39 <jonner>	if I can get libmapi 0.9 built...
+Jan 20 10:48:53 <chen>	mbarnes, updates?
+Jan 20 10:49:01 <jony>	jonner: mmm .. lemme know if i can help out there .. 
+Jan 20 10:49:07 <dave_largo>	I would gladly accept drop and drag into PDF and Image Gallery here at some point :)
+Jan 20 10:49:17 <mbarnes>	just fixing regressions, mainly
+Jan 20 10:49:18 <abharath>	jonner: http://www.go-evolution.org/MAPIProvider
+Jan 20 10:49:19 <mbarnes>	I was also playing around with llvm and the clang static analyzer last weekend
+Jan 20 10:49:19 <mbarnes>	pretty impressive, despite the false positives
+Jan 20 10:49:19 <mbarnes>	would be cool to integrate it into an automated daily build, somehow
+Jan 20 10:49:19 <mbarnes>	build.gnome.org comes to mind, but I wouldn't know where to start
+Jan 20 10:49:44 <abharath>	most of the steps in there still hold good. Let us know if you face any issues
+Jan 20 10:50:19 <chen>	mbarnes, cool, something like opensuse build service ?
+Jan 20 10:50:34 <jonner>	abharath, ok, thanks.  I've been fighting with getting a newer samba4 installed, I'll see if that page helps me at all
+Jan 20 10:50:55 <chen>	dave_largo, sure, are those patches reviewed?
+Jan 20 10:50:59 <mbarnes>	chen: yeah, something like that.  build.gnome.org seems... well, less than useful from what I've seen
+Jan 20 10:51:04 <chen>	mcrha, updates?
+Jan 20 10:51:08 <mcrha>	on various bugs as usual, also some internal work. but, when you were talking about API/ABI freeze in effect, I added two public functions in eds code, intended to be used in there only, between two files. it doesn't change structure size or anything. It doesn't matter, right?
+Jan 20 10:51:09 <abharath>	jonner: sure
+Jan 20 10:51:12 <jony>	jonner: you can use scripts inside openchange for building samba4. (incase you missed them)
+Jan 20 10:51:22 <jonner>	jony, yes, I did.  I will try that now ;)
+Jan 20 10:51:25 <chen>	mbarnes, ok
+Jan 20 10:51:43 <dave_largo>	chen, DnD pdf was rough but working, Image Gallery had some comments by mbarnes, but needed more work
+Jan 20 10:51:54 <chen>	mcrha, in libcamel or libecal/libebook?
+Jan 20 10:52:11 <mcrha>	libedataserverui/e-name-selector-model.h
+Jan 20 10:52:25 <lakhil>	dave_largo, can you please give me bug id for Image gallery ?
+Jan 20 10:52:26 <chen>	dave_largo, ok, i guess the reworks must be complete before 25th for it to be taken in for 2.30..
+Jan 20 10:52:33 <chen>	as the feature freeze begins then
+Jan 20 10:52:53 <chen>	mcrha, that wont come into API/ABI freeze..
+Jan 20 10:53:14 <mcrha>	ok, thanks, I was just checking to be sure
+Jan 20 10:53:20 <dave_largo>	lakhil https://bugzilla.gnome.org/show_bug.cgi?id=567879
+Jan 20 10:53:23 <chen>	cool
+Jan 20 10:53:49 <chen>	that winds up the meeting today..
+Jan 20 10:54:01 <chen>	thanks, everyone
+Jan 20 10:54:19 <chen>	catch you next week same time :)
+Jan 20 10:54:23 <dave_largo>	lahkil, even as it works now...it's a huge help for us
+Jan 20 10:54:31 <mcrha>	bye
+Jan 20 10:54:38 <jony>	later .. /me |out
+Jan 20 10:54:43 *	jony is now known as jony|out
+Jan 20 10:54:51 *	mcrha (~mcrha@nat-pool-brq-t.redhat.com) has left #evolution-meet
+Jan 20 10:54:52 *	chen is now known as chen|brb
+Jan 20 10:55:29 <lakhil>	dave_largo, ah..k
+Jan 20 10:55:40 <dave_largo>	People can't locate these things on the file system
+Jan 20 10:55:47 <dave_largo>	and this lets them just drop and drag them into email
+Jan 20 10:55:55 <dave_largo>	corporate or city logos, emoticons
+

@@ -1,0 +1,55 @@
+Jan 13 10:37:20 <mbarnes>	hmm, not much of a turnout today
+Jan 13 10:37:42 <mbarnes>	chen is out for the rest of the week
+Jan 13 10:39:17 <treitter>	I guess we should just do a quick update on what we've done, in alphabetical order
+Jan 13 10:39:36 <treitter>	andre: anything new?
+Jan 13 10:40:19 <andre>	nope, just slacking here.
+Jan 13 10:40:57 <treitter>	cool :)
+Jan 13 10:41:00 <treitter>	jonner?
+Jan 13 10:42:01 <jonner>	well, I've chatted with mbarnes a bit about my huge refactoring of mail-mt stuff, and am moving forward with that.
+Jan 13 10:42:16 <jonner>	I've gotten to a point where I've not split the mail/ directory into two libraries in preparation for the backend split
+Jan 13 10:42:44 <jonner>	and now I'm starting to think about what the DBus API should look like between them.
+Jan 13 10:43:06 <jonner>	oops, "I've not" -> "I've now"
+Jan 13 10:43:57 <jonner>	so that's where I stand.  
+Jan 13 10:44:32 <mbarnes>	jonner: will the mail backed be structured in e-d-s similar to calendar and addressbook?
+Jan 13 10:44:40 <jonner>	Also, before too long, I'm probably going to need to merge the camel-gobject branch with my branch
+Jan 13 10:44:45 <mbarnes>	i.e. with libemail and libedata-mail libraries?
+Jan 13 10:45:02 <jonner>	mbarnes, that was sort of my assumption, yes
+Jan 13 10:45:51 <mbarnes>	I'll try to get camel-gobject somewhat working again as soon as I can
+Jan 13 10:46:16 <mbarnes>	it has some issues after the s/CamelException/GError/ work
+Jan 13 10:46:23 <jonner>	ok
+Jan 13 10:46:38 <mbarnes>	apparently CamelException silently allows errors to pile up, and the code abuses that in a few places
+Jan 13 10:47:06 <treitter>	yuck
+Jan 13 10:47:22 <jonner>	hm
+Jan 13 10:48:41 <treitter>	mbarnes: anything new on your end?
+Jan 13 10:48:50 <mbarnes>	I've been stuck on Red Hat stuff all week so nothing much to report
+Jan 13 10:48:55 <mbarnes>	but I'll speak for chen: he's made some really impressive progress on the new IMAP backend
+Jan 13 10:49:02 <mbarnes>	checkout: http://chenthill.wordpress.com/2010/01/11/evolution-with-improved-imap-support-imapx/
+Jan 13 10:49:09 <jonner>	yeah, that's exciting
+Jan 13 10:49:20 <treitter>	yeah, glad to see that
+Jan 13 10:49:36 <treitter>	we could always do with better IMAP support :)
+Jan 13 10:50:10 <jonner>	eek, I just accidentally pushed a bunch of my experimental branches to gnome's git when i was trying to push to my personal repo
+Jan 13 10:50:18 <jonner>	sorry if people get a bunch of commit mails or something
+Jan 13 10:50:23 <mbarnes>	yeah, and I think this is our third or fourth attempt to replace the original IMAP backend
+Jan 13 10:50:30 <mbarnes>	looks like this time it might actually stick
+Jan 13 10:51:18 <treitter>	mbarnes: was it not actually replaced those times, or was it just that the quality of the newer engine wasn't much better?
+Jan 13 10:52:27 <mbarnes>	I think they were all unfinished or abandoned for one reason or another.  they predate me so I don't know the backstories
+Jan 13 10:53:42 <treitter>	ah
+Jan 13 10:53:45 <treitter>	here's my update:
+Jan 13 10:53:49 <treitter>	I'm waiting on Chentill to review my calendar tests in bug #605709. Ross approved the addressbook tests already.
+Jan 13 10:53:53 <treitter>	The tests pointed out bug #606765 (which I'll be fixing in a few minutes), so I'm looking forward to merging them.
+Jan 13 10:54:03 <treitter>	I'm nearly done factoring out common code between the addressbook and calendar factories (and their immediate dependencies), so we should avoid some of the subtle differences between them (which can cause hard-to-find bugs).
+Jan 13 10:55:54 <mbarnes>	I wonder, since we have a working test suite now, if we should implement the GnomeGoal about adding gcov support
+Jan 13 10:56:03 <mbarnes>	at least for e-d-s, maybe not evo
+Jan 13 10:57:28 <treitter>	mbarnes: could be worthwhile
+Jan 13 10:57:42 <treitter>	this suite only skims the surface, so I hope we'll keep adding to it
+Jan 13 10:57:56 <jonner>	(OK, now I've cleaned up the mess I made in git, and pushed to the right repo, so if people want to check out my work, you can find it at http://git.collabora.co.uk/?p=user/jonathon/evolution;a=summary, branch eds-mailer)
+Jan 13 10:58:58 <mbarnes>	that's how most test suites get started.  and coverage analysis would help us identify where we need to add tests
+Jan 13 10:59:10 <treitter>	absolutely
+Jan 13 10:59:58 <mbarnes>	I'll keep an eye on the d-d-l discussion about it
+Jan 13 11:01:28 <treitter>	cool
+Jan 13 11:01:44 <mbarnes>	well, other than the usual reminder about entering the string and UI annoucement period, that's all I had for this meeting
+Jan 13 11:02:56 <mbarnes>	any other updates or shall we adjourn?
+Jan 13 11:03:07 <treitter>	I'm good
+Jan 13 11:03:44 <mbarnes>	alright, thanks guys
+Jan 13 11:04:14 <treitter>	bye!
+
