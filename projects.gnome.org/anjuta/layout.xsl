@@ -129,19 +129,22 @@
 	  </div>
           <p class="section">Documentations</p>
           <ul>
-            <li><a href="http://library.gnome.org/devel/libanjuta/stable">Anjuta API docs</a></li>
-            <li><a href="http://live.gnome.org/Anjuta">Anjuta wiki</a></li>
-            <li><a href="http://library.gnome.org/devel/anjuta-faqs/stable">FAQ [English]</a></li>
-            <li><a href="http://library.gnome.org/users/anjuta-build-tutorial/2.26">Build Tutorial [English]</a></li> 
-            <li><a href="http://library.gnome.org/devel/anjuta-manual/stable">Manual [English]</a></li>
+            <li><a href="http://library.gnome.org/devel/anjuta-manual/stable">Anjuta Manual</a> is a book on how to use Anjuta.<br/><br/></li>
+            <li><a href="http://library.gnome.org/devel/anjuta-faqs/stable">Anjuta FAQ</a> answers some common questions.<br/><br/></li>
+            <li><a href="http://library.gnome.org/users/anjuta-build-tutorial/2.26">Project Build Tutorial</a> describes how project management in Anjuta works.<br/><br/></li> 
+            <li><a href="http://library.gnome.org/devel/libanjuta/stable">Anjuta API docs</a> is developers documentation for core Anjuta and interfaces.<br/><br/></li>
+            <li><a href="http://library.gnome.org/devel/libanjuta/stable/anjuta-architecture.html">Anjuta Architecture</a> gives an overview of Anjuta architecture.<br/><br/></li>
+            <li><a href="http://library.gnome.org/devel/libanjuta/stable/project-wizard-format.html">Creating project templates</a> is a tutorial on adding new project templates.<br/><br/></li>
+            <li><a href="http://library.gnome.org/devel/libanjuta/stable/writing-plugins.html">Creating plugins</a> is a tutorial on how to write Anjuta plugins.<br/><br/></li>
           </ul>
-          <p class="section">Project Status</p>
+          <p class="section">Project Tools</p>
           <ul>
-            <li><a href="http://blogs.gnome.org/anjuta">Blog</a></li>
-            <li><a href="http://bugzilla.gnome.org/browse.cgi?product=anjuta">Bugs</a></li>
-            <li><a href="http://bugzilla.gnome.org/reports/patch-report.cgi?product=anjuta">Patches</a></li>
-            <li><a href="http://bugzilla.gnome.org/simple-bug-guide.cgi?product=anjuta">Submit</a></li>
-            <li><a href="http://git.gnome.org/cgit/anjuta/tree/AUTHORS"><span>Credits</span></a></li>
+            <li><a href="http://blogs.gnome.org/anjuta">Anjuta News Blog</a> talks about latest stuffs in Anjuta releases.<br/><br/></li>
+            <li><a href="http://live.gnome.org/Anjuta">Anjuta wiki</a> is a place to scribble new ideas.<br/><br/></li>
+            <li><a href="http://bugzilla.gnome.org/browse.cgi?product=anjuta">Anjuta Bugzilla</a> is the place to track bugs, obviously.<br/><br/></li>
+            <li><a href="http://bugzilla.gnome.org/reports/patch-report.cgi?product=anjuta">Pending Patches</a> are currently under review.<br/><br/></li>
+            <li><a href="http://bugzilla.gnome.org/simple-bug-guide.cgi?product=anjuta">Submit a bug</a>, if you encounter one.<br/><br/></li>
+            <li><a href="http://git.gnome.org/cgit/anjuta/tree/AUTHORS"><span>Credits</span></a> to know who made Anjuta possible.<br/><br/></li>
           </ul>
           <p><!--
             <A href="http://sourceforge.net">
