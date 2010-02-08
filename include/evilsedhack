@@ -57,6 +57,15 @@ case $TOPL in
 esac
 TABS=$(echo $TABS | sed "s#<li><a href=\"\(/$TOPL.*\)#<li class=\"selected\"><a href=\"\1#")
 
+case $URLPATH/$PAGE in
+	/index.wml)
+		RULER="<script type=\"text/javascript\" src=\"friends/ruler/ruler.js\"></script>"
+	;;
+	*)
+		RULER=""
+	;;
+esac
+
 ## END OF <HEAD> AND HEADER
 cat <<HEAD
 </head>
@@ -97,6 +106,8 @@ $TABS
     </div> <!-- end of #header -->
   </div>
 <!-- end site header -->
+
+  $RULER
 
   <div id="body">
     <div id="content">
