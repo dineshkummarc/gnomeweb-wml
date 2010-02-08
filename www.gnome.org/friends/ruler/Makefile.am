@@ -1,6 +1,6 @@
 SUBDIRS = admin
 
-urlpath = /friends/drive
+urlpath = /friends/ruler
 
 include $(top_srcdir)/rules.common
 
