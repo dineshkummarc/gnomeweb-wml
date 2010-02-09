@@ -1,4 +1,4 @@
-SUBDIRS = admin
+SUBDIRS =
 
 urlpath = /friends/ruler
 
