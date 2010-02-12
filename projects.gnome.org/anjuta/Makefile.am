@@ -1,4 +1,4 @@
-SUBDIRS=css
+SUBDIRS=css team
 
 urlpath = /anjuta
 
@@ -8,7 +8,8 @@ HTMLFILES = \
 	development.html \
 	downloads.html \
 	features.html \
-	projects.html
+	projects.html \
+	team.html 
 
 page_DATA = $(HTMLFILES)
 
