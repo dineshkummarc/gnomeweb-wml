@@ -6,6 +6,7 @@ page_DATA = \
 	bar.png \
 	foot.png \
 	friends.css \
+	ruler.css \
 	general_bg.png \
 	general_separator.png \
 	gnome.png \
