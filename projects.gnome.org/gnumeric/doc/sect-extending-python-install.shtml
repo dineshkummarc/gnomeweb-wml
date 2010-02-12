@@ -5,7 +5,7 @@
 <title>Installing and Building Gnumeric for Python</title>
 <link rel="previous" href="sect-extending-python-install.shtml" title="Installing and Building Gnumeric for Python">
 <link rel="next" href="sect-extending-python-console.shtml" title="The Python Console">
-<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">
+<link rel="top" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.10">
 <link rel="stylesheet" type="text/css" href="gnumeric-doc.css">
 </head>
 <body>
@@ -16,14 +16,19 @@
 <div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
 <li><a href="gnumeric-info.shtml" title="About This Document">About This Document</a></li>
 <li>
-<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a><div class="autotoc"><ul>
+<a class="xref" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.10">The Gnumeric Manual, version 1.10</a><div class="autotoc"><ul>
 <li><a class="xref" href="chapter-welcome.shtml" title="Welcome!">Welcome!</a></li>
 <li><a class="xref" href="chapter-manual-usage.shtml" title="How to Use this Manual">How to Use this Manual</a></li>
 <li><a class="xref" href="chapter-quick-start.shtml" title="A Quick Introduction">A Quick Introduction</a></li>
 <li><a class="xref" href="chapter-gui-elements.shtml" title="Gnumeric Elements">Gnumeric Elements</a></li>
 <li><a class="xref" href="chapter-data.shtml" title="Working with Data">Working with Data</a></li>
 <li><a class="xref" href="chapter-advanced-analysis.shtml" title="Advanced Analysis">Advanced Analysis</a></li>
-<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Plots, Images, Widgets, and Drawings">Graphics: Plots, Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-solver.shtml" title="The Solver">The Solver</a></li>
+<li><a class="xref" href="chapter-stat-analysis.shtml" title="Statistical Analysis">Statistical Analysis</a></li>
+<li><a class="xref" href="chapter-graphics.shtml" title="Graphics: Images, Widgets, and Drawings">Graphics: Images, Widgets, and Drawings</a></li>
+<li><a class="xref" href="chapter-graphs.shtml" title="Graphs">Graphs</a></li>
+<li><a class="xref" href="chapter-worksheets.shtml" title="Using Worksheets">Using Worksheets</a></li>
+<li><a class="xref" href="chapter-workbooks.shtml" title="Workbook Settings">Workbook Settings</a></li>
 <li><a class="xref" href="chapter-configuring.shtml" title="Configuring Gnumeric">Configuring Gnumeric</a></li>
 <li><a class="xref" href="chapter-files.shtml" title="Working with Files">Working with Files</a></li>
 <li><a class="xref" href="chapter-printing.shtml" title="Printing">Printing</a></li>
@@ -55,7 +60,7 @@
 <div class="body body-sidebar"><div class="division sect2">
 <a name="sect-extending-python-install"></a><div class="header"><h1 class="sect2 title"><span class="title">Installing and Building Gnumeric for Python</span></h1></div>
 <ul class="linktrail">
-<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.8">The Gnumeric Manual, version 1.8</a></li>
+<li class="linktrail linktrail-first"><a class="linktrail" href="gnumeric.shtml" title="The Gnumeric Manual, version 1.10">The Gnumeric Manual, version 1.10</a></li>
 <li class="linktrail"><a class="linktrail" href="chapter-extending.shtml" title="Extending Gnumeric">Extending Gnumeric</a></li>
 <li class="linktrail linktrail-last"><a class="linktrail" href="sect-extending-python.shtml" title="Programming Gnumeric using Python">Programming Gnumeric using Python</a></li>
 </ul>
@@ -67,14 +72,14 @@
     </p>
 <div class="autotoc"><ul>
 <li>
-<span class="label">13.3.1.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-prelim" title="Preliminaries">Preliminaries</a>
+<span class="label">18.3.1.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-prelim" title="Preliminaries">Preliminaries</a>
 </li>
 <li>
-<span class="label">13.3.1.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-build" title="In the Beginning (Installing and Building)">In the Beginning (Installing and Building)</a>
+<span class="label">18.3.1.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-build" title="In the Beginning (Installing and Building)">In the Beginning (Installing and Building)</a>
 </li>
 </ul></div>
 <div class="division sect3">
-<a name="sect-extending-python-install-prelim"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.1. </span>Preliminaries</span></h2></div>
+<a name="sect-extending-python-install-prelim"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">18.3.1.1. </span>Preliminaries</span></h2></div>
 <p class="para block block-first">
       I'm going to define some variables here so that you can insert
       the appropriate command or item for your system when they
@@ -89,17 +94,17 @@
         <div class="block list itemizedlist"><ul class="itemizedlist">
 <li class="li-first">
             <span class="para">
-              <span class="literal">su -</span> and hit <span class="keycap">Enter</span>
+              <span class="literal" dir="ltr">su -</span> and hit <span class="keycap">Enter</span>
             </span>
           </li>
 <li>
             <span class="para">
-            <span class="literal">sudo</span>
+            <span class="literal" dir="ltr">sudo</span>
             </span>
           </li>
 <li>
             <span class="para">
-            <span class="literal">fakeroot</span> (works in some situations, but
+            <span class="literal" dir="ltr">fakeroot</span> (works in some situations, but
             not all)
             </span>
           </li>
@@ -121,42 +126,42 @@
 </ul></div>
 </div>
 <div class="division sect3">
-<a name="sect-extending-python-install-build"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">13.3.1.2. </span>In the Beginning (Installing and Building)</span></h2></div>
+<a name="sect-extending-python-install-build"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">18.3.1.2. </span>In the Beginning (Installing and Building)</span></h2></div>
 <p class="para block block-first">
       You need to get Python and Gnumeric, and the Python plugin for
       Gnumeric. You can get the binaries, the packaged source, or the
-      developing edge CVS.
+      developing edge sources from Git.
     </p>
 <div class="autotoc"><ul>
 <li>
-<span class="label">13.3.1.2.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-binaries" title="Getting the binaries (Debian)">Getting the binaries (Debian)</a>
+<span class="label">18.3.1.2.1. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-binaries" title="Getting the binaries (Debian)">Getting the binaries (Debian)</a>
 </li>
 <li>
-<span class="label">13.3.1.2.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-debsource" title="
+<span class="label">18.3.1.2.2. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-debsource" title="
         Getting and building the current Debianized source
       ">
         Getting and building the current Debianized source
       </a>
 </li>
 <li>
-<span class="label">13.3.1.2.3. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-cvs" title="Getting and building the source from CVS-HEAD">Getting and building the source from CVS-HEAD</a>
+<span class="label">18.3.1.2.3. </span><a class="xref" href="sect-extending-python-install.shtml#sect-extending-python-install-git" title="Getting and building the source from Git">Getting and building the source from Git</a>
 </li>
 </ul></div>
 <div class="division sect4">
-<a name="sect-extending-python-install-binaries"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.1. </span>Getting the binaries (Debian)</span></h3></div>
+<a name="sect-extending-python-install-binaries"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">18.3.1.2.1. </span>Getting the binaries (Debian)</span></h3></div>
 <p class="para block block-first">
         I've only tested this on sid (unstable). The version you get
         from stable (woody) may not act quite the same.
       </p>
 <div class="block list procedure"><ul class="procedure"><li class="li-first">
           <p class="para block block-first">
-            <span class="emphasis">$root</span> <span class="literal">apt-get install
+            <span class="emphasis">$root</span> <span class="literal" dir="ltr">apt-get install
             gnumeric gnumeric-python python</span>
           </p>
         </li></ul></div>
 </div>
 <div class="division sect4">
-<a name="sect-extending-python-install-debsource"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.2. </span>
+<a name="sect-extending-python-install-debsource"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">18.3.1.2.2. </span>
         Getting and building the current Debianized source
       </span></h3></div>
 <p class="para block block-first">
@@ -173,29 +178,29 @@
           </li>
 <li>
             <p class="para block block-first">
-              <span class="emphasis">$root</span> <span class="literal">apt-get build-dep
+              <span class="emphasis">$root</span> <span class="literal" dir="ltr">apt-get build-dep
 			  gnumeric</span>
             </p>
           </li>
 <li>
             <p class="para block block-first">
-              <span class="literal">apt-get source gnumeric</span>
+              <span class="literal" dir="ltr">apt-get source gnumeric</span>
             </p>
           </li>
 <li>
             <p class="para block block-first">
-              <span class="literal">cd gnumeric-</span><span class="emphasis">$version</span>
+              <span class="literal" dir="ltr">cd gnumeric-</span><span class="emphasis">$version</span>
             </p>
           </li>
 <li>
             <p class="para block block-first">
-              <span class="literal">debian/rules build</span>
+              <span class="literal" dir="ltr">debian/rules build</span>
             </p>
           </li>
 <li>
             <p class="para block block-first">
               To make the .deb packages: <span class="emphasis">$root</span>
-            <span class="literal">./debian/rules binary</span>
+            <span class="literal" dir="ltr">./debian/rules binary</span>
             </p>
           </li>
 <li>
@@ -205,12 +210,12 @@
             <div class="block list procedure"><ol class="procedure">
 <li class="li-first">
                 <p class="para block block-first">
-                  <span class="literal">cd ..</span> to change to that directory.
+                  <span class="literal" dir="ltr">cd ..</span> to change to that directory.
                 </p>
               </li>
 <li>
                 <p class="para block block-first">
-                  <span class="emphasis">$root</span> <span class="literal">dpkg -i
+                  <span class="emphasis">$root</span> <span class="literal" dir="ltr">dpkg -i
                   gnum*deb</span> (presuming you don't have other
                   .deb packages beginning with "gnum" lying around
                   here.
@@ -221,14 +226,14 @@
 <li>
             <p class="para block block-first">
               You may or may not want to remove those .deb files now:
-              <span class="emphasis">$root</span> <span class="literal">rm
+              <span class="emphasis">$root</span> <span class="literal" dir="ltr">rm
               gnum*deb</span>)
             </p>
            </li>
 </ol></div>
 </div>
 <div class="division sect4">
-<a name="sect-extending-python-install-cvs"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">13.3.1.2.3. </span>Getting and building the source from CVS-HEAD</span></h3></div>
+<a name="sect-extending-python-install-git"></a><div class="header"><h3 class="sect4 title"><span class="title"><span class="label">18.3.1.2.3. </span>Getting and building the source from Git</span></h3></div>
 <p class="para block block-first">
         Remember that this is the developing edge. Things may not
         work. Generally don't do this unless you are subscribed to the
@@ -262,25 +267,13 @@
           </li>
 <li>
             <p class="para block block-first">
-              <span class="literal">export
-              CVSROOT=:pserver:anonymous@anoncvs.gnome.org:/cvs/gnome</span>
-            </p>
-          </li>
-<li>
-            <p class="para block block-first">
-              <span class="literal">cvs login</span> (No password -- hit
-              RETURN.)
-            </p>
-          </li>
-<li>
-            <p class="para block block-first">
               Getting and building libgsf:
             </p>
 
             <div class="block list procedure"><ol class="procedure">
 <li class="li-first">
                 <p class="para block block-first">
-                  cvs co libgsf
+                  git clone git://git.gnome.org/libgsf
                 </p>
               </li>
 <li>
@@ -290,28 +283,28 @@
               </li>
 <li>
                 <p class="para block block-first">
-                  Red Hat: <span class="literal">./autogen.sh</span>
+                  Red Hat: <span class="literal" dir="ltr">./autogen.sh</span>
                 </p>
               </li>
 <li>
                 <p class="para block block-first">
-                  Debian: <span class="literal">./autogen.sh --prefix=/usr
+                  Debian: <span class="literal" dir="ltr">./autogen.sh --prefix=/usr
                 --with-gconf-schema-file-dir=/etc/gconf/schemas</span>
                 </p>
               </li>
 <li>
                 <p class="para block block-first">
-                  <span class="literal">make</span>
+                  <span class="literal" dir="ltr">make</span>
                 </p>
               </li>
 <li>
                 <p class="para block block-first">
-                  <span class="emphasis">$root</span> <span class="literal">make install</span>
+                  <span class="emphasis">$root</span> <span class="literal" dir="ltr">make install</span>
                 </p>
               </li>
 <li>
                 <p class="para block block-first">
-                  If you find that this didn't work, try <span class="literal">make
+                  If you find that this didn't work, try <span class="literal" dir="ltr">make
                   clean</span> and then repeat from the autogen
                   step.
                 </p>
@@ -327,18 +320,65 @@
 	  </li>
 <li>
             <p class="para block block-first">
+              Getting and building goffice:
+            </p>
+
+            <div class="block list procedure"><ol class="procedure">
+<li class="li-first">
+                <p class="para block block-first">
+                  git clone git://git.gnome.org/goffice
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  cd goffice
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  Red Hat: <span class="literal" dir="ltr">./autogen.sh</span>
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  Debian: <span class="literal" dir="ltr">./autogen.sh --prefix=/usr
+                --with-gconf-schema-file-dir=/etc/gconf/schemas</span>
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  <span class="literal" dir="ltr">make</span>
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  <span class="emphasis">$root</span> <span class="literal" dir="ltr">make install</span>
+                </p>
+              </li>
+<li>
+                <p class="para block block-first">
+                  If you find that this didn't work, try <span class="literal" dir="ltr">make
+                  clean</span> and then repeat from the autogen
+                  step.
+                </p>
+              </li>
+</ol></div>
+
+          </li>
+<li>
+            <p class="para block block-first">
               Getting and building gnumeric:
             </p>
 		  <div class="block list procedure"><ol class="procedure">
-<li class="li-first"><p class="para block block-first"><span class="literal">cvs -z3 checkout gnumeric -d
-				gnumeric-head</span></p></li>
-<li><p class="para block block-first"><span class="literal">cd gnumeric-head</span></p></li>
-<li><p class="para block block-first">Red Hat: <span class="literal">./autogen.sh</span> and wait while it
+<li class="li-first"><p class="para block block-first"><span class="literal" dir="ltr">git clone
+git://git.gnome.org/gnumeric gnumeric-head</span></p></li>
+<li><p class="para block block-first"><span class="literal" dir="ltr">cd gnumeric-head</span></p></li>
+<li><p class="para block block-first">Red Hat: <span class="literal" dir="ltr">./autogen.sh</span> and wait while it
 			  compiles</p></li>
-<li><p class="para block block-first">Debian: <span class="literal">./autogen.sh --prefix=/usr --with-gconf-schema-file-dir=/etc/gconf/schemas</span></p></li>
-<li><p class="para block block-first"><span class="literal">make</span></p></li>
-<li><p class="para block block-first"><span class="emphasis emphasis-bold">Optional:</span> <span class="emphasis">$root</span> <span class="literal">make install</span></p></li>
-<li><p class="para block block-first">If you find that this didn't work, try <span class="literal">make clean</span> and
+<li><p class="para block block-first">Debian: <span class="literal" dir="ltr">./autogen.sh --prefix=/usr --with-gconf-schema-file-dir=/etc/gconf/schemas</span></p></li>
+<li><p class="para block block-first"><span class="literal" dir="ltr">make</span></p></li>
+<li><p class="para block block-first"><span class="emphasis emphasis-bold">Optional:</span> <span class="emphasis">$root</span> <span class="literal" dir="ltr">make install</span></p></li>
+<li><p class="para block block-first">If you find that this didn't work, try <span class="literal" dir="ltr">make clean</span> and
 			  then repeat from the autogen step. For example,
 			  sometimes I've had it not create the python-loader.</p></li>
 </ol></div>
@@ -349,8 +389,8 @@
           the Debianized version via apt-get, or did "make install",
           it should be installed to /usr/bin (or /usr/local/bin on
           Red Hat?)  and you can just type
-          <span class="literal">gnumeric</span>. Otherwise you will find it in
-          <span class="literal">gnumeric-head/src/</span> and you will have to
+          <span class="literal" dir="ltr">gnumeric</span>. Otherwise you will find it in
+          <span class="literal" dir="ltr">gnumeric-head/src/</span> and you will have to
           run it from there. 
         </p>
 </div>

@@ -5,6 +5,8 @@ urlpath = /gnumeric/doc
 page_SCRIPTS= \
 	alignmentandothertabs.shtml		\
 	anova.shtml		\
+	anova-single-factor-tool.shtml	\
+	anova-two-factor-tool.shtml	\
 	CATEGORY_Bitwise_Operations.shtml		\
 	CATEGORY_Complex.shtml		\
 	CATEGORY_Database.shtml		\
@@ -32,12 +34,18 @@ page_SCRIPTS= \
 	chapter-extending.shtml		\
 	chapter-files.shtml		\
 	chapter-graphics.shtml		\
+	chapter-graphs.shtml	\
 	chapter-gui-elements.shtml		\
 	chapter-manual-usage.shtml		\
 	chapter-morehelp.shtml		\
 	chapter-printing.shtml		\
 	chapter-quick-start.shtml		\
+	chapter-solver.shtml	\
+	chapter-stat-analysis.shtml	\
 	chapter-welcome.shtml		\
+	chapter-workbooks.shtml	\
+	chapter-worksheets.shtml	\
+	chi-square-tool.shtml	\
 	col-row-headers.shtml		\
 	context-menu.shtml		\
 	correlation-tool.shtml		\
@@ -56,13 +64,19 @@ page_SCRIPTS= \
 	file-format-applix.shtml		\
 	file-format-csv.shtml		\
 	file-format-dif.shtml		\
+	file-format-excel-binary-new.shtml	\
+	file-format-excel-binary-old.shtml	\
+	file-format-excel-moox.shtml	\
+	file-format-excel-oldxml.shtml	\
 	file-format-excel.shtml		\
+	file-format-excel-xml.shtml	\
 	file-format-gnumeric.shtml		\
 	file-format-html.shtml		\
 	file-format-latex.shtml		\
 	file-format-lotus.shtml		\
 	file-format-mps.shtml		\
 	file-format-multiplan.shtml		\
+	file-format-odf.shtml	\
 	file-format-oleo.shtml		\
 	file-format-ooo.shtml		\
 	file-format-pdf.shtml		\
@@ -71,6 +85,8 @@ page_SCRIPTS= \
 	file-format-qpro.shtml		\
 	file-format-save-formats.shtml		\
 	file-format-sc.shtml		\
+	file-format-sxc.shtml	\
+	file-format-sylk.shtml	\
 	file-format-tab.shtml		\
 	file-format-text.shtml		\
 	file-format-troff.shtml		\
@@ -80,9 +96,10 @@ page_SCRIPTS= \
 	file-open-dialog.shtml		\
 	fmt-toolbar.shtml		\
 	forecast-tools.shtml		\
-	frequencies-tools.shtml		\
 	Format-Menu.shtml		\
 	fourier-analysis-tool.shtml		\
+	frequencies-tools.shtml		\
+	frequency-tool.shtml	\
 	ftest-two-sample-for-variances-tool.shtml		\
 	function-reference.shtml		\
 	gnumeric-ABS.shtml		\
@@ -90,19 +107,28 @@ page_SCRIPTS= \
 	gnumeric-ACCRINT.shtml		\
 	gnumeric-ACOSH.shtml		\
 	gnumeric-ACOS.shtml		\
+	gnumeric-ACOTH.shtml	\
+	gnumeric-ACOT.shtml	\
 	gnumeric-ADDRESS.shtml		\
+	gnumeric-ADTEST.shtml	\
 	gnumeric-AMORDEGRC.shtml		\
 	gnumeric-AMORLINC.shtml		\
 	gnumeric-AND.shtml		\
+	gnumeric-Arabic.shtml	\
 	gnumeric-AREAS.shtml		\
+	gnumeric-ASCENSIONTHURSDAY.shtml	\
 	gnumeric-ASC.shtml		\
+	gnumeric-ASHWEDNESDAY.shtml	\
 	gnumeric-ASINH.shtml		\
 	gnumeric-ASIN.shtml		\
 	gnumeric-ATAN2.shtml		\
 	gnumeric-ATANH.shtml		\
 	gnumeric-ATAN.shtml		\
+	gnumeric-atl_last.shtml		\
+	gnumeric-ATL_LAST.shtml	\
 	gnumeric-AVEDEV.shtml		\
 	gnumeric-AVERAGEA.shtml		\
+	gnumeric-AVERAGEIF.shtml	\
 	gnumeric-AVERAGE.shtml		\
 	gnumeric-BASE.shtml		\
 	gnumeric-BERNOULLI.shtml		\
@@ -117,6 +143,7 @@ page_SCRIPTS= \
 	gnumeric-BIN2DEC.shtml		\
 	gnumeric-BIN2HEX.shtml		\
 	gnumeric-BIN2OCT.shtml		\
+	gnumeric-BINOM.DIST.RANGE.shtml	\
 	gnumeric-BINOMDIST.shtml		\
 	gnumeric-BITAND.shtml		\
 	gnumeric-BITLSHIFT.shtml		\
@@ -131,12 +158,14 @@ page_SCRIPTS= \
 	gnumeric-CHIDIST.shtml		\
 	gnumeric-CHIINV.shtml		\
 	gnumeric-CHITEST.shtml		\
+	gnumeric-CHOLESKY.shtml	\
 	gnumeric-CHOOSE.shtml		\
 	gnumeric-CLEAN.shtml		\
 	gnumeric-CODE.shtml		\
 	gnumeric-COLUMNNUMBER.shtml		\
 	gnumeric-COLUMN.shtml		\
 	gnumeric-COLUMNS.shtml		\
+	gnumeric-COMBINA.shtml	\
 	gnumeric-COMBIN.shtml		\
 	gnumeric-COMPLEX.shtml		\
 	gnumeric-CONCATENATE.shtml		\
@@ -145,6 +174,8 @@ page_SCRIPTS= \
 	gnumeric-CORREL.shtml		\
 	gnumeric-COSH.shtml		\
 	gnumeric-COS.shtml		\
+	gnumeric-COTH.shtml	\
+	gnumeric-COT.shtml	\
 	gnumeric-COUNTA.shtml		\
 	gnumeric-COUNTBLANK.shtml		\
 	gnumeric-COUNTIF.shtml		\
@@ -158,9 +189,12 @@ page_SCRIPTS= \
 	gnumeric-COVAR.shtml		\
 	gnumeric-CRITBINOM.shtml		\
 	gnumeric-CRONBACH.shtml		\
+	gnumeric-CSCH.shtml	\
+	gnumeric-CSC.shtml	\
 	gnumeric-CUM_BIV_NORM_DIST.shtml		\
 	gnumeric-CUMIPMT.shtml		\
 	gnumeric-CUMPRINC.shtml		\
+	gnumeric-CVMTEST.shtml	\
 	gnumeric-DATE2UNIX.shtml		\
 	gnumeric-DATEDIF.shtml		\
 	gnumeric-DATE.shtml		\
@@ -168,6 +202,7 @@ page_SCRIPTS= \
 	gnumeric-DAVERAGE.shtml		\
 	gnumeric-DAYS360.shtml		\
 	gnumeric-DAY.shtml		\
+	gnumeric-DAYS.shtml	\
 	gnumeric-DB.shtml		\
 	gnumeric-DCOUNTA.shtml		\
 	gnumeric-DCOUNT.shtml		\
@@ -195,8 +230,10 @@ page_SCRIPTS= \
 	gnumeric-DURATION.shtml		\
 	gnumeric-DVARP.shtml		\
 	gnumeric-DVAR.shtml		\
+	gnumeric-EASTERSUNDAY.shtml	\
 	gnumeric-EDATE.shtml		\
 	gnumeric-EFFECT.shtml		\
+	gnumeric-EIGEN.shtml	\
 	gnumeric-EOMONTH.shtml		\
 	gnumeric-ERFC.shtml		\
 	gnumeric-ERF.shtml		\
@@ -216,6 +253,7 @@ page_SCRIPTS= \
 	gnumeric-FALSE.shtml		\
 	gnumeric-FDIST.shtml		\
 	gnumeric-FIB.shtml		\
+	gnumeric-FINDB.shtml	\
 	gnumeric-FIND.shtml		\
 	gnumeric-FINV.shtml		\
 	gnumeric-FISHERINV.shtml		\
@@ -223,6 +261,7 @@ page_SCRIPTS= \
 	gnumeric-FIXED.shtml		\
 	gnumeric-FLOOR.shtml		\
 	gnumeric-FORECAST.shtml		\
+	gnumeric-FOURIER.shtml	\
 	gnumeric-FREQUENCY.shtml		\
 	gnumeric-FTEST.shtml		\
 	gnumeric-FVSCHEDULE.shtml		\
@@ -230,18 +269,28 @@ page_SCRIPTS= \
 	gnumeric-GAMMADIST.shtml		\
 	gnumeric-GAMMAINV.shtml		\
 	gnumeric-GAMMALN.shtml		\
+	gnumeric-GAMMA.shtml	\
 	gnumeric-GCD.shtml		\
+	gnumeric-GD.shtml	\
 	gnumeric-G_DURATION.shtml		\
 	gnumeric-GEOMDIST.shtml		\
 	gnumeric-GEOMEAN.shtml		\
 	gnumeric-GESTEP.shtml		\
-	gnumeric-GET.FORMULA.shtml	\
 	gnumeric-GETENV.shtml		\
+	gnumeric-GET.FORMULA.shtml	\
+	gnumeric-GET.LINK.shtml	\
 	gnumeric-GETPIVOTDATA.shtml		\
 	gnumeric-GNUMERIC_VERSION.shtml		\
+	gnumeric-GOODFRIDAY.shtml	\
 	gnumeric-G_PRODUCT.shtml		\
 	gnumeric-GROWTH.shtml		\
 	gnumeric-HARMEAN.shtml		\
+	gnumeric-HDATE_DAY.shtml	\
+	gnumeric-HDATE_HEB.shtml	\
+	gnumeric-HDATE_JULIAN.shtml	\
+	gnumeric-HDATE_MONTH.shtml	\
+	gnumeric-HDATE.shtml	\
+	gnumeric-HDATE_YEAR.shtml	\
 	gnumeric-HEX2BIN.shtml		\
 	gnumeric-HEX2DEC.shtml		\
 	gnumeric-HEX2OCT.shtml		\
@@ -250,8 +299,9 @@ page_SCRIPTS= \
 	gnumeric-HYPERLINK.shtml		\
 	gnumeric-HYPGEOMDIST.shtml		\
 	gnumeric-HYPOT.shtml		\
-	gnumeric-IF.shtml		\
 	gnumeric-IFERROR.shtml		\
+	gnumeric-IFNA.shtml	\
+	gnumeric-IF.shtml		\
 	gnumeric-IMABS.shtml		\
 	gnumeric-IMAGINARY.shtml		\
 	gnumeric-IMARCCOSH.shtml		\
@@ -295,8 +345,8 @@ page_SCRIPTS= \
 	gnumeric-IMTAN.shtml		\
 	gnumeric-INDEX.shtml		\
 	gnumeric-INDIRECT.shtml		\
-	gnumeric-INFO.shtml		\
 	gnumeric-info.shtml		\
+	gnumeric-INFO.shtml		\
 	gnumeric-INTERCEPT.shtml		\
 	gnumeric-INTERPOLATION.shtml	\
 	gnumeric-INTRATE.shtml		\
@@ -308,6 +358,7 @@ page_SCRIPTS= \
 	gnumeric-ISERROR.shtml		\
 	gnumeric-ISERR.shtml		\
 	gnumeric-ISEVEN.shtml		\
+	gnumeric-ISFORMULA.shtml	\
 	gnumeric-ISLOGICAL.shtml		\
 	gnumeric-ISNA.shtml		\
 	gnumeric-ISNONTEXT.shtml		\
@@ -320,16 +371,19 @@ page_SCRIPTS= \
 	gnumeric-ISREF.shtml		\
 	gnumeric-ISTEXT.shtml		\
 	gnumeric-ITHPRIME.shtml		\
+	gnumeric-JIS.shtml	\
 	gnumeric-KURTP.shtml		\
 	gnumeric-KURT.shtml		\
 	gnumeric-LANDAU.shtml		\
 	gnumeric-LAPLACE.shtml		\
 	gnumeric-LARGE.shtml		\
 	gnumeric-LCM.shtml		\
+	gnumeric-LEFTB.shtml	\
 	gnumeric-LEFT.shtml		\
 	gnumeric-LENB.shtml		\
 	gnumeric-LEN.shtml		\
 	gnumeric-LINEST.shtml		\
+	gnumeric-LKSTEST.shtml	\
 	gnumeric-LN1P.shtml		\
 	gnumeric-LN.shtml		\
 	gnumeric-LOG10.shtml		\
@@ -349,6 +403,7 @@ page_SCRIPTS= \
 	gnumeric-MDETERM.shtml		\
 	gnumeric-MDURATION.shtml		\
 	gnumeric-MEDIAN.shtml		\
+	gnumeric-MIDB.shtml	\
 	gnumeric-MID.shtml		\
 	gnumeric-MINA.shtml		\
 	gnumeric-MIN.shtml		\
@@ -361,6 +416,7 @@ page_SCRIPTS= \
 	gnumeric-MONTH.shtml		\
 	gnumeric-MROUND.shtml		\
 	gnumeric-MULTINOMIAL.shtml		\
+	gnumeric-MUNIT.shtml	\
 	gnumeric-NA.shtml		\
 	gnumeric-NEGBINOMDIST.shtml		\
 	gnumeric-NETWORKDAYS.shtml		\
@@ -379,6 +435,7 @@ page_SCRIPTS= \
 	gnumeric-NT_PHI.shtml		\
 	gnumeric-NT_PI.shtml		\
 	gnumeric-NT_SIGMA.shtml		\
+	gnumeric-NUMBERVALUE.shtml	\
 	gnumeric-OCT2BIN.shtml		\
 	gnumeric-OCT2DEC.shtml		\
 	gnumeric-OCT2HEX.shtml		\
@@ -421,9 +478,11 @@ page_SCRIPTS= \
 	gnumeric-OR.shtml		\
 	gnumeric-PARETO.shtml		\
 	gnumeric-PEARSON.shtml		\
+	gnumeric-PENTECOSTSUNDAY.shtml	\
 	gnumeric-PERCENTILE.shtml		\
 	gnumeric-PERCENTRANK.shtml		\
 	gnumeric-PERIODOGRAM.shtml	\
+	gnumeric-PERMUTATIONA.shtml	\
 	gnumeric-PERMUT.shtml		\
 	gnumeric-PFACTOR.shtml		\
 	gnumeric-PI.shtml		\
@@ -470,9 +529,12 @@ page_SCRIPTS= \
 	gnumeric-RANDRAYLEIGH.shtml		\
 	gnumeric-RANDRAYLEIGHTAIL.shtml		\
 	gnumeric-RAND.shtml		\
+	gnumeric-RANDSNORM.shtml	\
+	gnumeric-RANDSTDIST.shtml	\
 	gnumeric-RANDTDIST.shtml		\
 	gnumeric-RANDUNIFORM.shtml		\
 	gnumeric-RANDWEIBULL.shtml		\
+	gnumeric-RANK.AVG.shtml	\
 	gnumeric-RANK.shtml		\
 	gnumeric-RATE.shtml		\
 	gnumeric-RAYLEIGH.shtml		\
@@ -490,11 +552,15 @@ page_SCRIPTS= \
 	gnumeric-R.DNBINOM.shtml		\
 	gnumeric-R.DNORM.shtml		\
 	gnumeric-R.DPOIS.shtml		\
+	gnumeric-R.DSNORM.shtml	\
+	gnumeric-R.DST.shtml	\
 	gnumeric-R.DT.shtml		\
 	gnumeric-R.DWEIBULL.shtml		\
 	gnumeric-RECEIVED.shtml		\
+	gnumeric-REPLACEB.shtml	\
 	gnumeric-REPLACE.shtml		\
 	gnumeric-REPT.shtml		\
+	gnumeric-RIGHTB.shtml	\
 	gnumeric-RIGHT.shtml		\
 	gnumeric-ROMAN.shtml		\
 	gnumeric-ROUNDDOWN.shtml		\
@@ -515,6 +581,7 @@ page_SCRIPTS= \
 	gnumeric-R.PNBINOM.shtml		\
 	gnumeric-R.PNORM.shtml		\
 	gnumeric-R.PPOIS.shtml		\
+	gnumeric-R.PSNORM.shtml	\
 	gnumeric-R.PT.shtml		\
 	gnumeric-R.PWEIBULL.shtml		\
 	gnumeric-R.QBETA.shtml		\
@@ -532,10 +599,17 @@ page_SCRIPTS= \
 	gnumeric-R.QPOIS.shtml		\
 	gnumeric-R.QT.shtml		\
 	gnumeric-R.QWEIBULL.shtml		\
+	gnumeric-RRI.shtml	\
 	gnumeric-RSQ.shtml		\
+	gnumeric-SEARCHB.shtml	\
 	gnumeric-SEARCH.shtml		\
+	gnumeric-SECH.shtml	\
 	gnumeric-SECOND.shtml		\
+	gnumeric-SEC.shtml	\
 	gnumeric-SERIESSUM.shtml		\
+	gnumeric-SFTEST.shtml	\
+	gnumeric-SHEET.shtml	\
+	gnumeric-SHEETS.shtml	\
 	gnumeric.shtml		\
 	gnumeric-SIGN.shtml		\
 	gnumeric-SIMTABLE.shtml		\
@@ -610,14 +684,20 @@ page_SCRIPTS= \
 	gnumeric-YIELDMAT.shtml		\
 	gnumeric-YIELD.shtml		\
 	gnumeric-ZTEST.shtml		\
-	gnumeric-atl_last.shtml		\
 	Help-Menu.shtml		\
 	histogram-tool.shtml		\
+	homogeneity-tool.shtml	\
+	independence-tool.shtml	\
 	info-area-calc.shtml		\
 	info-area-file.shtml		\
 	info-area-hint.shtml		\
 	info-area.shtml		\
 	Insert-Menu.shtml		\
+	kaplan-meier-tool-example.shtml	\
+	kaplan-meier-tool-group-tab.shtml	\
+	kaplan-meier-tool-inputtab.shtml	\
+	kaplan-meier-tool-optionstab.shtml	\
+	kaplan-meier-tool-outputtab.shtml	\
 	kaplan-meier-tool.shtml		\
 	keybinding.shtml		\
 	menu-bars.shtml		\
@@ -626,10 +706,12 @@ page_SCRIPTS= \
 	menu-context-object.shtml		\
 	menu-context-tabs.shtml		\
 	moving-average-tool.shtml		\
+	normality-tool.shtml	\
 	note-file-textExport-druid.shtml		\
 	note-file-textImport-druid.shtml		\
 	number-formatting-overview.shtml		\
 	obj-toolbar.shtml		\
+	principal-component-tool.shtml	\
 	print-advanced.shtml		\
 	print-finishing.shtml		\
 	print-general.shtml		\
@@ -676,13 +758,13 @@ page_SCRIPTS= \
 	sect-advanced-analysis-scenarios-adding.shtml		\
 	sect-advanced-analysis-scenarios.shtml			\
 	sect-advanced-analysis-scenarios-viewing.shtml		\
-	sect-advanced-analysis-simulation.shtml			\
+	sect-advanced-analysis-simulation-intro.shtml		\
 	sect-advanced-analysis-simulation-iterations.shtml	\
 	sect-advanced-analysis-simulation-output.shtml		\
 	sect-advanced-analysis-simulation-running.shtml		\
 	sect-advanced-analysis-simulation-setup.shtml		\
+	sect-advanced-analysis-simulation.shtml			\
 	sect-advanced-analysis-simulation-simtable.shtml	\
-	sect-advanced-analysis-simulation-intro.shtml		\
 	sect-advanced-analysis-solver-intprog.shtml		\
 	sect-advanced-analysis-solver-linearprog.shtml		\
 	sect-advanced-analysis-solver-modeling.shtml		\
@@ -816,6 +898,39 @@ page_SCRIPTS= \
 	sect-graphics-widgets.shtml		\
 	sect-graphics-widgets-slider.shtml		\
 	sect-graphics-widgets-spinbutton.shtml		\
+	sect-graphs-elementProperties-axes.shtml	\
+	sect-graphs-elementProperties-backPanels.shtml	\
+	sect-graphs-elementProperties-legend.shtml	\
+	sect-graphs-elementProperties-plots.shtml	\
+	sect-graphs-elementProperties-series.shtml	\
+	sect-graphs-elementProperties.shtml	\
+	sect-graphs-elementProperties-title.shtml	\
+	sect-graphs-graphguru-components.shtml	\
+	sect-graphs-graphguru-navigating.shtml	\
+	sect-graphs-graphguru.shtml	\
+	sect-graphs-overview-componentHierarchy.shtml	\
+	sect-graphs-overview-components.shtml	\
+	sect-graphs-overview-process.shtml	\
+	sect-graphs-overview.shtml	\
+	sect-graphs-overview-terms.shtml	\
+	sect-graphs-overview-types-area.shtml	\
+	sect-graphs-overview-types-bar.shtml	\
+	sect-graphs-overview-types-bubble.shtml	\
+	sect-graphs-overview-types-coloredxy.shtml	\
+	sect-graphs-overview-types-column.shtml	\
+	sect-graphs-overview-types-contour.shtml	\
+	sect-graphs-overview-types-dropbar.shtml	\
+	sect-graphs-overview-types-line.shtml	\
+	sect-graphs-overview-types-minmax.shtml	\
+	sect-graphs-overview-types-pie.shtml	\
+	sect-graphs-overview-types-polar.shtml	\
+	sect-graphs-overview-types-radar.shtml	\
+	sect-graphs-overview-types-ring.shtml	\
+	sect-graphs-overview-types.shtml	\
+	sect-graphs-overview-types-statistics.shtml	\
+	sect-graphs-overview-types-suface.shtml	\
+	sect-graphs-overview-types-xy.shtml	\
+	sect-graphs-preselect.shtml	\
 	sect-gui-menus.shtml		\
 	sect-gui-mouse.shtml		\
 	sect-gui-overview.shtml		\
@@ -841,13 +956,51 @@ page_SCRIPTS= \
 	sect-quick-starting-gnumeric-unixdesktop.shtml		\
 	sect-quick-starting-gnumeric-unixshell.shtml		\
 	sect-quick-start-top.shtml		\
+	sect-stat-analysis-overview.shtml	\
+	sect-workbooks-docsummary.shtml	\
+	sect-workbooks-names.shtml	\
+	sect-workbooks-settings-autocorect.shtml	\
+	sect-workbooks-settings-autosave.shtml	\
+	sect-workbooks-settings-printing.shtml	\
+	sect-workbooks-settings-protection.shtml	\
+	sect-workbooks-settings-recalculation.shtml	\
+	sect-workbooks-settings.shtml	\
+	sect-workbooks-settings-validation.shtml	\
+	sect-workbooks-settings-view.shtml	\
+	sect-workbooks.shtml	\
+	sect-worksheets-display-appearance.shtml	\
+	sect-worksheets-display-grouping.shtml	\
+	sect-worksheets-display-panes.shtml	\
+	sect-worksheets-display.shtml	\
+	sect-worksheets-managing-adding.shtml	\
+	sect-worksheets-managing-copyPaste.shtml	\
+	sect-worksheets-managing-duplicating.shtml	\
+	sect-worksheets-managing-process.shtml	\
+	sect-worksheets-managing-removing.shtml	\
+	sect-worksheets-managing-renaming.shtml	\
+	sect-worksheets-managing-reorder.shtml	\
+	sect-worksheets-managing.shtml	\
+	sect-worksheets-managing-tabAppearance.shtml	\
+	sect-worksheets-navigation-movingAround.shtml	\
+	sect-worksheets-navigation-selection.shtml	\
+	sect-worksheets-navigation.shtml	\
+	sect-worksheets-overview.shtml	\
+	sect-worksheets-printSettings.shtml	\
+	sect-worksheets-settings-protection.shtml	\
+	sect-worksheets-settings.shtml	\
 	selecting-multiple-cells.shtml		\
+	sign-test-tool.shtml	\
 	simple-selections.shtml		\
 	std-toolbar.shtml		\
 	toolbar-use.shtml		\
 	Tools-Menu.shtml		\
+	t-test-paired-two-samples-for-means-tool.shtml	\
 	t-test.shtml		\
-	View-Menu.shtml
+	t-test-tool.shtml	\
+	t-test-two-sample-equal-variances-tool.shtml	\
+	t-test-two-samples-unequal-variances.shtml	\
+	View-Menu.shtml	\
+	ztest-two-samples-for-means-tool.shtml
 
 include $(top_srcdir)/rules.common
 
