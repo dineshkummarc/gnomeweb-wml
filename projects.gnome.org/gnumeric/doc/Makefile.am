@@ -114,7 +114,7 @@ page_SCRIPTS= \
 	gnumeric-AMORDEGRC.shtml		\
 	gnumeric-AMORLINC.shtml		\
 	gnumeric-AND.shtml		\
-	gnumeric-Arabic.shtml	\
+	gnumeric-ARABIC.shtml	\
 	gnumeric-AREAS.shtml		\
 	gnumeric-ASCENSIONTHURSDAY.shtml	\
 	gnumeric-ASC.shtml		\
