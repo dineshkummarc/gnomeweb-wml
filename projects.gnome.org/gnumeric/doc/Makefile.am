@@ -124,7 +124,6 @@ page_SCRIPTS= \
 	gnumeric-ATAN2.shtml		\
 	gnumeric-ATANH.shtml		\
 	gnumeric-ATAN.shtml		\
-	gnumeric-atl_last.shtml		\
 	gnumeric-ATL_LAST.shtml	\
 	gnumeric-AVEDEV.shtml		\
 	gnumeric-AVERAGEA.shtml		\
