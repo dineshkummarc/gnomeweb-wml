@@ -1,45 +1,109 @@
-<page name="Downloads">
-  <h3>Latest stable Anjuta 2.28.x releases</h3>
+<?xml version="1.0" encoding="UTF-8"?>
 
-  <p>
-    Latest stable release is  <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/">Anjuta version 2.28</a>.
-    Please see <a href="http://anjuta.org/features">features</a> for some details on this release.
-    This is a stable release of 2.28.x series and is under constant bug-fix.
-    We encourage to use it and help us with bug reports.
+<xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  version="1.0">
+
+<xsl:output
+    encoding="UTF-8"
+    method="xml"
+    indent="yes" 
+/>
+
+<!-- Load release data from current-release.xml -->
+<xsl:variable name="release" select="document('current-release.xml')/release"/>
+
+<xsl:template match="/">
+<page name="Downloads">
+  <div class="release-block">
+    <h2>Anjuta Core release</h2>
+    <p>
+      Anjuta Core contains main anjuta application, plugins development framework
+      and core plugins essential for main development. Plugins like project
+      manager, editor, build system, wizards, file manager, debugger,
+      git version control system etc. are part of core anjuta.
+      See <a href="features.html#core">full features list</a>.
+    </p>
+    <p>
+      See <a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.news">news file</a> for changes present in this release.
+    </p>
+    <h3>Stable core release</h3>
+    <div class="download-button">
+      <center>
+	<a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.gz"><strong>Download Stable</strong>
+	</a><br/>
+	Anjuta <xsl:value-of select="$release/anjuta/stable/version"/>
+      </center>
+    </div>
+    <h3>Latest Unstable core release</h3>
+    <div class="download-button">
+      <center>
+	<a href="{$release/anjuta/unstable/download}/anjuta-{$release/anjuta/unstable/version}.tar.gz"><strong>Download Unstable</strong>
+	</a><br/>
+	Anjuta <xsl:value-of select="$release/anjuta/unstable/version"/>
+      </center>
+    </div>
+  </div>
+  <div class="release-block">
+    <h2>Anjuta Extras release</h2>
+    <p>
+      Anjuta Extras contains additional plugins that provide less-essential but
+      nevertheless useful. Plugins such as class inheritance diagram, profiler, 
+      scintilla editor, scratchbox, valgrind etc. are present in extras. Extras
+      plugins are released less often.
+      See <a href="features.html#extras">full extras features list</a>.
+    </p>
+    <p>
+      See <a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.news">news file</a> for changes present
+	in this release.
+    </p>
+    <h3>Statble extras release</h3>
+    <div class="download-button">
+      <center>
+	<a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.tar.gz"><strong>Download Stable</strong>
+	</a><br/>
+	Anjuta Extras <xsl:value-of select="$release/anjuta-extras/stable/version"/>
+      </center>
+    </div>
+    <h3>Latest unstable extras release</h3>
+    <div class="download-button">
+      <center>
+	<a href="{$release/anjuta-extras/unstable/download}/anjuta-extras-{$release/anjuta-extras/unstable/version}.tar.gz"><strong>Download Unstable</strong>
+	</a><br/>
+	Anjuta Extras <xsl:value-of select="$release/anjuta-extras/unstable/version"/>
+      </center>
+    </div>
+  </div>
+  
+  <p class="clear-me">
+    Anjuta follows GNOME
+    <a href="http://live.gnome.org/TwoPointTwentyseven">release planning</a>
+    and version numbering scheme. Unstable
+    versions have a odd minor version number while stable version
+    have a even minor version number.
+    We encourage to use it and help us with
+    <a href="http://bugzilla.gnome.org/enter_bug.cgi?product=anjuta">bug reports</a>.
+    Some more information can be found at
+    <a href="http://live.gnome.org/Anjuta">Anjuta wiki</a>.
   </p>
-  <p>
-    Older releases and documentations are available
+  
+  <p class="clear-me">
+    Older releases are available
     <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/">here</a>
   </p>
   
-  <h3>Anjuta Extra plugins</h3>
-  <p>Several non-core plugins are available in the anjuta-extras package, this
-    includes class-inheritance, valgrind, profiler and scintilla plugin. 
-    <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta-extras/2.28/">Download anjuta-extras package</a>.</p>
-  
-  <h3>Ubuntu ppa</h3>
-  <p>Ubuntu Jaunty packages for the latest stable version are available at this
-    <a href="https://launchpad.net/~jhs.schmid/+archive/ppa">PPA</a>.</p>
-  
-  <h3>Latest unstable Anjuta 2.29.x releases</h3>
+  <h2>Ubuntu prebuild binary packages</h2>
   <p>
-    Latest unstable releases are available
-    <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.29" >here</a>.
-    
-    Anjuta now follows GNOME <a href="http://live.gnome.org/TwoPointTwentyseven">release planning</a> and version numbering scheme. Unstable
-    versions have a odd minor version number while stable version
-    have a even minor version number.
-    We encourage to use it and help us with <a href="http://bugzilla.gnome.org/enter_bug.cgi?product=anjuta">bug reports</a>.
-    Some more information can be found at <a
-					     href="http://live.gnome.org/Anjuta">Anjuta wiki</a>.
+    Ubuntu prebuilt binary packages for the latest stable version
+    are available at this
+    <a href="https://launchpad.net/~jhs.schmid/+archive/ppa">PPA</a>.
+    Follow the instructions to add the repository and you will get
+    regular updates. For other distrubutions, you will have to wait
+    until packages are available in their repositories.
   </p>
-  <p>
-    You might also be interested in the extra plugins set available in the 
-    anjuta-extras module also from <a href="http://download.gnome.org/sources/anjuta-extras/2.27/">download.gnome.org</a>.
-  </p>
-  <hr/>
+
   <a name="anjuta-dependencies"></a>
-  <h3>Anjuta 2.x Dependencies</h3>
+  <h2>Anjuta Dependencies</h2>
   <p> You must have these to install Anjuta 2.x. In case, you are installing binary package,
     please also install corresponding devel package as well.
   </p>
@@ -67,17 +131,19 @@
     </table>
   </p>	
   <p>
-    You can optionally have these to build extra (and very essential) plugins.
+    You can optionally have these to build these very essential plugins.
   </p>
   <p>
     <table border="1" cellspacing="1" cellpadding="4">
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/glade3/">glade3</a></td>
         <td nowrap="">3.1.3 or later</td>
-        <td>Next generation glade UI designer</td></tr>
+        <td>Next generation glade UI designer.
+	  GTK/GNOME Graphical User Interface Editor.
+	  You need this for developing GTK/GNOME applications in Anjuta</td></tr>
       
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/devhelp/">devhelp</a></td>
         <td nowrap="">0.22 or later</td>
-        <td>Developers help system</td></tr>
+        <td>Developer's help system. Required for context sensitive API help and search.</td></tr>
       
       <tr><td nowrap=""><a href="http://www.graphviz.org/Download.php">graphviz</a></td>
         <td nowrap="">2.6.0 or later</td>
@@ -88,36 +154,8 @@
         <td>Subversion version control (required for subversion plugin)</td></tr>
     </table>
   </p>
-  <hr/>
-  <h3>GNOME Development suite</h3>
-  <p>
-    Anjuta can be used alone for general development, but to be able to use the
-    application wizards and to do GTK+/GNOME related projects,
-    it is strongly recommended that you also get the following applications.
-    Anjuta IDE works best in conjunction with other GNOME
-    development tools (forming a development suite).
-  </p><p>
-    These are the packages you need to have
-    at the least to form the development suite. With these, you should be able
-    to develop GTK/GNOME applications in C language.
-  </p><p>
-    <table border="1" cellspacing="1" cellpadding="4">
-      <tr><td nowrap=""><a href="http://anjuta.org/">Anjuta IDE</a></td>
-	<td nowrap=""><i>current</i></td>
-	<td nowrap="">GNOME Integrated Development Environment.</td></tr>
-      <tr><td><a href="http://glade.gnome.org/">Glade</a></td>
-	<td>3.6.0 or later</td>
-	<td>GTK/GNOME Graphical User Interface Editor.
-	  You need this for developing GTK/GNOME applications in Anjuta (for
-	  C language only).</td></tr>
-      <tr><td><a href="http://www.imendio.com/projects/devhelp/">Devhelp</a></td>
-	<td>0.22.0 or later</td>
-	<td>Developer's Help system. Required for context
-	  sensitive API help and search.</td></tr>
-    </table>
-  </p>
     
-  <h3>Application development requirements</h3>
+  <h2>Application development requirements</h2>
   <p>
     These are required if you
     intend to do additional development (as mentioned alongside the
@@ -139,3 +177,6 @@
     </table>
   </p>
 </page>
+</xsl:template>
+
+</xsl:stylesheet>

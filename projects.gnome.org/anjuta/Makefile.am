@@ -13,7 +13,10 @@ HTMLFILES = \
 
 page_DATA = $(HTMLFILES)
 
-%.html: %.page layout.xsl Makefile
+%.page: %.xsl Makefile current-release.xml
+	xsltproc --nonet --stringparam date "$$(date -R)" -o $@ $< current-release.xml
+
+%.html: %.page layout.xsl Makefile current-release.xml
 	xsltproc --nonet --stringparam date "$$(date -R)" -o $@ layout.xsl $<
 
 include $(top_srcdir)/rules.common

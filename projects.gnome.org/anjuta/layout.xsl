@@ -106,6 +106,10 @@
                     <xsl:with-param name="target">projects.html</xsl:with-param>
                     <xsl:with-param name="name">Projects</xsl:with-param>
                   </xsl:call-template>
+                  <xsl:call-template name="navitem">
+                    <xsl:with-param name="target">team.html</xsl:with-param>
+                    <xsl:with-param name="name">Meet the team</xsl:with-param>
+                  </xsl:call-template>
                 </ul>
               </div>
               </div>
@@ -122,9 +126,9 @@
         <div id="sidebar">
 	  <div class="download-button">
 	    <center>
-	      <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/2.28/anjuta-2.28.2.0.tar.gz"><strong>Download Now!</strong>
+	      <a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.gz"><strong>Download Now!</strong>
 	      </a><br/>
-	      Anjuta 2.28.2
+	      Anjuta <xsl:value-of select="$release/anjuta/stable/version"/>
 	    </center>
 	  </div>
           <p class="section">Documentations</p>
