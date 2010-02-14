@@ -108,11 +108,25 @@
     please also install corresponding devel package as well.
   </p>
   <p>
-    <table border="1" cellspacing="1" cellpadding="4" width="100%">
-      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gdl/">gdl</a></td>
+    <table>
+
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtk/">GTK+</a></td>
+        <td nowrap="">2.17.10 or later</td>
+        <td>GTK+ toolkit UI development library</td></tr>
+
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/GConf/">GConf</a></td>
+        <td nowrap="">2.12.0 or later</td>
+        <td>GConf settings library</td></tr>
+
+
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gdl/">GDL</a></td>
         <td nowrap="">2.28 or later</td>
-        <td>GNOME development library</td></tr>
-      
+        <td>Docking library</td></tr>
+
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/">gtksourceview</a></td>
+        <td nowrap="">2.9.3 or later</td>
+        <td>GTK+ sourceview editor widget (required for Anjuta editor)</td></tr>
+
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/libgda/3.99/">libgda</a></td>
         <td nowrap="">4.0 or later</td>
         <td>GNOME DB library</td></tr>
@@ -128,13 +142,25 @@
       <tr><td nowrap=""><a href="http://sourceforge.net/project/showfiles.php?group_id=3593">autogen</a></td>
         <td nowrap="">5.6.5 or later</td>
         <td>Template processing engine</td></tr>
-    </table>
-  </p>	
-  <p>
-    You can optionally have these to build these very essential plugins.
-  </p>
-  <p>
-    <table border="1" cellspacing="1" cellpadding="4">
+
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/vte/">vte</a></td>
+        <td nowrap="">0.13.1 or later</td>
+        <td>GNOME vte terminal widget (required for embedded terminal plugin)</td></tr>
+
+      <tr><td nowrap=""><a href="http://www.xmlsoft.org/">libxml</a></td>
+        <td nowrap="">2.4.23 or later</td>
+        <td>XML processing library</td></tr>
+
+      <tr><td nowrap=""><a href="http://xmlsoft.org/XSLT/">libxslt</a></td>
+        <td nowrap="">Any</td>
+        <td>XSLT transformation library</td></tr>
+
+      <tr><td nowrap=""><a href="http://live.gnome.org/LibUnique">libunique</a></td>
+        <td nowrap="">2.4.23 or later</td>
+        <td>Unique is a library for writing single instance application.</td></tr>
+
+        <tr><td colspan="3" nowrap=""><h3>You can optionally have these to build some essential plugins.</h3></td></tr>
+
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/glade3/">glade3</a></td>
         <td nowrap="">3.1.3 or later</td>
         <td>Next generation glade UI designer.
@@ -152,6 +178,11 @@
       <tr><td nowrap=""><a href="http://subversion.tigris.org/project_packages.html">subversion</a></td>
         <td nowrap="">1.5.0 or later</td>
         <td>Subversion version control (required for subversion plugin)</td></tr>
+
+      <tr><td nowrap=""><a href="http://live.gnome.org/Vala">Vala</a></td>
+        <td nowrap="">0.7.8 or later</td>
+        <td>Vala is a new C# like programming language that aims to bring modern programming language features to GNOME developers (required for vala symbols support)</td></tr>
+
     </table>
   </p>
     
