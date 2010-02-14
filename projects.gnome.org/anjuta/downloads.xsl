@@ -57,7 +57,7 @@
       See <a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.news">news file</a> for changes present
 	in this release.
     </p>
-    <h3>Statble extras release</h3>
+    <h3>Stable extras release</h3>
     <div class="download-button">
       <center>
 	<a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.tar.gz"><strong>Download Stable</strong>
