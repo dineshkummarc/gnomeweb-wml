@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <page name="Development">
 
   <div class="table-of-contents">
@@ -7,7 +9,9 @@
         <li><a href="#project-maintainers">Are you a library or project maintainer?</a></li>
         <li><a href="#anjuta-contributors">Getting Anjuta from git repository</a></li>
         <li><a href="#anjuta-todo">Things to do in Anjuta</a></li>
-        <li><a href="#anjuta-website">Maintaining Anjuta website</a></li>
+	<li><a href="#anjuta-releases">Anjuta releases</a></li>
+	<li><a href="#anjuta-packaging">Packaging Anjuta</a></li>
+        <li><a href="#anjuta-website">Fixing Anjuta website</a></li>
         <li><a href="#anjuta-history">History</a></li>
       </ol>
   </div>
@@ -129,11 +133,35 @@
     If you are good in writing, you can also help us expand and update our documentations. Users manual, faq and tutorials are all part of documentation available in anjuta source tree. Documentation is part of the source, so you need to get it from git in usual manner (see side pane for existing documentations).
   </p>
   <p>
-    All anjuta devs hang out in <i>irc.gimp.net #anjuta</i> channel. Catch us for a little chat or if you have some questions to get answered. You can also join our development mailing list <a href="https://lists.sourceforge.net/lists/listinfo/anjuta-devel">anjuta-devel@lists.sf.net</a> if you want to participate in our discussions.
+    All anjuta devs hang out in <a href="irc://irc.gimp.org/anjuta">irc.gimp.net #anjuta</a> channel. Catch us for a little chat or if you have some questions to get answered. You can also join our development mailing list <a href="https://lists.sourceforge.net/lists/listinfo/anjuta-devel">anjuta-devel@lists.sf.net</a> if you want to participate in our discussions.
+  </p>
+
+  <a name="anjuta-releases"/>
+  <h2>Anjuta Releases</h2>
+  <p>
+    Anjuta follows GNOME release cycles, which is a timeboxed schedule. Check out <a href="http://live.gnome.org/Schedule">upcoming events</a> for any pending annoucements or releases. The full release calender can be found <a href="http://live.gnome.org/TwoPointTwentyseven">here</a>. Releasing procedure follows as described <a href="http://live.gnome.org/MaintainersCorner/Releasing">here</a>. Checkout our <a href="http://live.gnome.org/Anjuta/Roadmap">roadmap</a> for interesting upcoming features.
+  </p>
+
+  <a name="anjuta-packaging"/>
+  <h2>Packaging Anjuta</h2>
+  <p>
+    If you are packaging Anjuta for a distro, there are couple of things to keep in mind. Anjuta is available in 2 different release, core and extras. Both need to be packaged. Anjuta extras contains some important plugins which were origninally part of core Anjuta, but separated at some point to allow easier maintenance.
+  </p>
+  <p>
+    Anjuta plugins have lot of wild dependencies, and many plugins are actually built only when their dependencies are satisfied. Distro packaging would need to satisfy all dependencies to ensure all plugins are built. However, this creates the problem that anjuta or anjuta-extras would flatly depend on everything and can be intimidating for varied users who may be only interested in certain kind of development (e.g. C developer may not be interested in python dependencies).
+  </p>
+  <p>
+    To avoid this, it is possible that anjuta plugins are <i>packaged</i> separately, particularly those that require unrelated and heavy dependencies. Any plugin can be separately packaged, All the plugins reside in <i>anjuta/plugins/</i> in source tree (both anjuta and anjuta-extras). Each subdir under this can be packaged separately, but only pick heavy and isolated plugins for separate packaging.
+  </p>
+  <p>
+    It is important to keep the plugin package names consistent. Ideally, they should be called <i>anjuta-plugin-*</i>. This will also allow Anjuta to find additional plugins for installation on user's request (once we finish some basic plugins finding and installation feature). If in doubt, please ask in our mailing list what plugins are best packaged separately.
+  </p>
+  <p>
+    Thanks for packaging Anjuta. We are always looking forward to active and regular distro releases.
   </p>
 
   <a name="anjuta-website"/>
-  <h2>Maintaining Anjuta website</h2>
+  <h2>Fixing Anjuta website</h2>
   <p>
     Anjuta website (this website) is maintained in GNOME websites git repository. If you want to help update or fix errors in the site, you can easily just clone the git repository and submit patches in our bugzilla.
   </p>
@@ -168,7 +196,7 @@
   </p>
   <a name="anjuta-history"/>
   <h2>History</h2>
-  <p>Anjuta project was started in <b>27th Dec 1997</b>. To learn more about its history
+  <p>Anjuta project was started in <b>27th Dec 1999</b>. To learn more about its history
     visit the first <a href="http://web.archive.org/web/20010924065759/anjuta.sourceforge.net/">archived anjuta website</a>
   </p>
 </page>
