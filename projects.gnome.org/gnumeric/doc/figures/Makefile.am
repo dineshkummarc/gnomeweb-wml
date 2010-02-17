@@ -1,6 +1,8 @@
 SUBDIRS = icons
 
-EXTRA_DIST = \
+urlpath = /gnumeric/doc/figures
+
+page_SCRIPTS= 				\
 	add-decimals.png		\
 	advanced-filter-1.png		\
 	advanced-filter-2.png		\
