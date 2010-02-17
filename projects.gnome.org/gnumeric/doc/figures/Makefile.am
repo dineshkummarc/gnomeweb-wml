@@ -465,3 +465,5 @@ page_SCRIPTS= 				\
 	zoom-dialog.png		\
 	zoom.png		\
 	zoom-toolbar.png
+
+include $(top_srcdir)/rules.common
