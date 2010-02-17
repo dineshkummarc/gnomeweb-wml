@@ -47,7 +47,6 @@ page_DATA=\
 	epiphany-64.png				\
 	ext-certificateviewer-180.png		\
 	ext-certificateviewer.png		\
-	extensions.png				\
 	extensions-small.png			\
 	ext-errorviewer-180.png			\
 	ext-errorviewer.png			\

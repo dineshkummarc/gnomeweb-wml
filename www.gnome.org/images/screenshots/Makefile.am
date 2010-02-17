@@ -25,7 +25,6 @@ screen_images=\
 	20000520-ole-big.jpg\
 	20000520-ole-thumb.png\
 	20000520-ole-thumb.jpg\
-  20000520-ng-big.jpg\
 	20000520-ng-big.jpg\
 	20000520-ng-thumb.png\
 	20000520-ng-thumb.jpg\

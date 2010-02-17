@@ -16,7 +16,6 @@ misc_images =\
 	gears_win_thumbnail.png \
 	logo_linux.jpg \
 	logo_linux_thumbnail.png \
-	logo.png \
 	logo_win.jpg \
 	logo_win_thumbnail.png
 

@@ -53,7 +53,6 @@ images_DATA =\
 	data/images/system-users.png \
 	data/images/video-x-generic.png \
 	data/images/applications-development.png \
-	data/images/package-x-generic.png \
 	data/images/dialog-information.png \
 	data/images/application-x-executable.png \
 	data/images/dialog-warning.png \
