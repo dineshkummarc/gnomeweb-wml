@@ -19,4 +19,8 @@ page_DATA = $(HTMLFILES)
 %.html: %.page layout.xsl Makefile current-release.xml
 	xsltproc --nonet --stringparam date "$$(date -R)" -o $@ layout.xsl $<
 
+update:
+	wget http://git.gnome.org/browse/anjuta/plain/AUTHORS -O authors.txt
+	perl -w create-team-page.pl
+
 include $(top_srcdir)/rules.common
