@@ -149,7 +149,6 @@
             <li><a href="http://bugzilla.gnome.org/browse.cgi?product=anjuta">Anjuta Bugzilla</a> is the place to track bugs, obviously.<br/><br/></li>
             <li><a href="http://bugzilla.gnome.org/reports/patch-report.cgi?product=anjuta">Pending Patches</a> are currently under review.<br/><br/></li>
             <li><a href="http://bugzilla.gnome.org/simple-bug-guide.cgi?product=anjuta">Submit a bug</a>, if you encounter one.<br/><br/></li>
-            <li><a href="http://git.gnome.org/cgit/anjuta/tree/AUTHORS"><span>Credits</span></a> to know who made Anjuta possible.<br/><br/></li>
           </ul>
           <p><!--
             <A href="http://sourceforge.net">
