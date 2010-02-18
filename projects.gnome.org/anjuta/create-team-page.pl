@@ -59,6 +59,7 @@ while (my $line = <AUTHORS_FILE>)
     elsif ($line =~ m/^\s+[^\s]/gs) {
 	$line =~ s/^\s+//;
 	$line =~ s/\s+$//;
+	$line =~ s/\t/ - /;
 	print PAGE_FILE "\t<li class=\"author-list-item\">$line</li>\n";
     }
     elsif ($line =~ m/^\s*$/gs) {
