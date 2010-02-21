@@ -26,6 +26,7 @@ SUBDIRS = css \
 	gtkglext        \
 	gtksourceview		\
 	gtksourceviewmm		\
+	gtranslator		\
 	gyrus			\
 	gevice			\
 	gb			\
