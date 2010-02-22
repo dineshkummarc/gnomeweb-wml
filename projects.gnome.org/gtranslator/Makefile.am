@@ -1,6 +1,6 @@
-SUBDIRS=css team
+SUBDIRS=css
 
-urlpath = /anjuta
+urlpath = /gtranslator
 
 HTMLFILES = \
 	index.shtml \
