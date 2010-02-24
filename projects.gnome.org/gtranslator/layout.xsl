@@ -59,7 +59,7 @@
 		<a href="http://projects.gnome.org/gtranslator" title="Home">Home</a>
 	      </li>
 	      <li id="siteaction-gnome_news">
-		<a href="https://sourceforge.net/projects/gtranslator/forums/forum/940233" title"=News">News</a>
+		<a href="https://sourceforge.net/projects/gtranslator/forums/forum/940233" title="News">News</a>
 		
 	      </li>
 	      <li id="siteaction-gnome_projects">
