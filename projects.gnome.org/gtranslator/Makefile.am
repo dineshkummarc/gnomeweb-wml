@@ -4,7 +4,8 @@ urlpath = /gtranslator
 
 HTMLFILES = \
 	index.shtml \
-	index.html 
+	index.html  \
+	authors.html 
 
 page_DATA = $(HTMLFILES)
 
