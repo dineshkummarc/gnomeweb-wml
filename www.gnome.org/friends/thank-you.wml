@@ -57,6 +57,61 @@ Executive Director</p>
 <textarea rows="2" cols="65"><a href="http://www.gnome.org/friends/"> <img src="http://www.gnome.org/friends/banners/support-gnome.png" alt="Become a Friend of GNOME" border="0" /></a> <br/></textarea></p>
 </p>
 
+<?php
+	ob_start();
+
+	if(isset($_COOKIE['aidtype'])) {
+		switch($_COOKIE['aidtype']) {
+			case 'adopt':
+				$conversion_label = "iFaMCKvVxwEQ1_L_5wM";
+				$conversion_value = 120;
+	    			break;
+			case 'associate':
+				$conversion_label = "Dn0DCIXWxwEQ1_L_5wM";
+				$conversion_value = 25;
+				break;
+			case 'sponsor':
+				$conversion_label = "APL1CN_WxwEQ1_L_5wM";
+				$conversion_value = 500;
+				break;
+			case 'philanthropist':
+				$conversion_label = "BOGVCLnXxwEQ1_L_5wM";
+				$conversion_value = 1200;
+				break;
+			default:
+				// If cookie data is unexpected, use associate as default
+				$conversion_label = "Dn0DCIXWxwEQ1_L_5wM";
+				$conversion_value = 25;
+				break;
+		}
+	} else {
+        	// If no cookie data, use associate as default
+		$conversion_label = "Dn0DCIXWxwEQ1_L_5wM";
+        	$conversion_value = 25;
+	}
+?>
+
+<!-- Google Code for Thank You Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1023408471;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "<?php echo $conversion_label;?>";
+var google_conversion_value = 0;
+if (<?php echo $conversion_value;?>) {
+  google_conversion_value = <?php echo $conversion_value;?>;
+}
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+  <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1023408471/?value=<?php echo $conversion_value;?>&amp;label=<?php echo $conversion_label;?>&amp;guid=ON&amp;script=0"/>';
+</div>
+</noscript>
 
 </body>
 </html>

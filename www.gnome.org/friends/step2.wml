@@ -1,4 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<?php
+	ob_start();
+
+    // Track selection for Google Adwords
+	if(!empty($_POST['aidtype'])) {
+        setcookie("aidtype", $_POST['aidtype'], time()+60*60);
+    }
+?>
 <html>
 <head>
 
@@ -38,8 +46,6 @@ improve GNOME products.</li>
 
 <form method="post" action="https://www.paypal.com/cgi-bin/webscr">	
 <?php
-	ob_start();
-
 	if(!empty($_POST['aidtype'])) {
 		switch($_POST['aidtype']) {
 			case 'adopt':
@@ -185,6 +191,43 @@ improve GNOME products.</li>
 <p id="foundation-info">GNOME Foundation is a 501(c)3 non-profit organization, and your donation is considered charitable to the extent of applicable law. Consult your tax preparer to determine tax-deductibility.</p>
 
 </div>
-
+<?php
+	switch($_POST['aidtype']) {
+		case 'adopt':
+            $conversion_label = "FupuCMPSxwEQ1_L_5wM";
+			break;
+		case 'associate':
+            $conversion_label = "pqrMCJ3TxwEQ1_L_5wM";
+			break;
+		case 'sponsor':
+            $conversion_label = "LKLyCPfTxwEQ1_L_5wM";
+			break;
+		case 'philanthropist':
+            $conversion_label = "I4h4CNHUxwEQ1_L_5wM";
+			break;
+		default:
+			header('location: ./index.html');
+			die('No type selected.');
+			break;
+	}
+?>
+<!-- Google Code for Step 2 Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1023408471;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "<?php echo $conversion_label;?>";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1023408471/?label=<?php echo $conversion_label;?>&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 </body>
 </html>

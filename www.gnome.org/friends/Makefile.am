@@ -9,7 +9,7 @@ page_SCRIPTS = \
 	previous-donors.html \
 	step2.php \
 	promote.html \
-	thank-you.html \
+	thank-you.php \
 	.htaccess
 
 include $(top_srcdir)/rules.common
