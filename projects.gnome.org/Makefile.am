@@ -71,7 +71,8 @@ SUBDIRS = css \
 	latour			\
 	libchamplain	\
 	diagnome \
-	postr
+	postr \
+	gnome-blog
 
 urlpath = 
 
