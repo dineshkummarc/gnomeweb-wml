@@ -1,0 +1,146 @@
+Mar 10 10:34:19 <chen>	Lets get started!!
+Mar 10 10:34:21 *	andre_ (~andre@g1.blanicka25.net) has joined #evolution-meet
+Mar 10 10:34:56 *	mbarnes runs to get more coffee... back in a sec
+Mar 10 10:35:05 <chen>	This is going to be a week with more pace with more caution as we are nearing the hard-code freeze on monday..
+Mar 10 10:35:24 <chen>	all other freezes are in place already..
+Mar 10 10:35:56 *	Fridrich (~fridrich@85.4.82.239) has joined #evolution-meet
+Mar 10 10:36:01 <chen>	lakhil has shared some of the patches which needs to be reviewed/taken in for the release
+Mar 10 10:36:34 <chen>	obviously with less active reviewers at hand, we would not be able to review all the patches.. 
+Mar 10 10:36:55 <chen>	mbarnes and myself would get those in..
+Mar 10 10:37:05 <chen>	we definetly miss mcrha here :(
+Mar 10 10:37:14 *	tml (~tml@cs78191200.pp.htv.fi) has joined #evolution-meet
+Mar 10 10:37:22 <chen>	and going beyond 2.30,
+Mar 10 10:37:28 *	mbarnes rings a bell for mcrha
+Mar 10 10:37:41 *	Fridrich pulled tml in too
+Mar 10 10:38:02 <chen>	http://live.gnome.org/Evolution/PlanningFuture has some of the potential tasks which have discussed earlier..
+Mar 10 10:38:12 <chen>	its a page under-construction and,
+Mar 10 10:38:47 <chen>	would request everyone to feel free to change/add items to the list
+Mar 10 10:39:19 <chen>	it would be good to pick up just the tasks which have identified owners for the specific release, say 3.0..
+Mar 10 10:39:56 <chen>	Some tasks here are already in progress though would not be completed for 2.30 (http://live.gnome.org/Evolution/Planning230)
+Mar 10 10:40:26 <andre_>	GNOME3 covers early libgnomecanvas removal, gseal completion and e-d-s api breakage to get rid of deprecated gtk functions?
+Mar 10 10:40:42 <chen>	so thats what is going on the planning side for evolution 3.0  and we will have more discussions going further there
+Mar 10 10:40:54 <andre_>	are there vague plans for webkit, or do we wait for gdom bindings in webkit 1.4?
+Mar 10 10:40:54 <chen>	andre_, yes
+Mar 10 10:41:09 <chen>	andre_, yup its on the list :)
+Mar 10 10:41:18 <chen>	andre_, its more of porting,
+Mar 10 10:41:25 <andre_>	nice. when is branching for gnome-2-30 planned?
+Mar 10 10:41:32 <chen>	from anjal which already has webkit for rendering
+Mar 10 10:41:42 <chen>	andre_, on tuesday..
+Mar 10 10:41:52 <chen>	just after the hard-code freeze..
+Mar 10 10:41:53 <andre_>	okay
+Mar 10 10:42:11 <andre_>	well, webkit for editing is the big question :)
+Mar 10 10:42:13 <chen>	just had a word with mbarnes on the same before the meeting :) 
+Mar 10 10:42:15 *	dave_largo (~drichard@207.22.154.8) has joined #evolution-meet
+Mar 10 10:42:26 <chen>	andre_, so we could prolly have webkit for rendering alone,
+Mar 10 10:42:47 <chen>	and the missing part in anjal is printing using web-kit
+Mar 10 10:43:06 <chen>	I guess mbarnes has already got his hands dirty on the same :)
+Mar 10 10:43:10 <andre_>	ah, i see
+Mar 10 10:43:33 <chen>	We would be deciding dates for wiki migration day,
+Mar 10 10:43:33 <andre_>	erm, you don't plan to both depend on webkit && gtkhtml I assume?
+Mar 10 10:43:58 <chen>	so that all the pages can be manually migrated on a single day..
+Mar 10 10:44:10 <chen>	andre_, yes we do if,
+Mar 10 10:44:25 <dave_largo>	Sorry that I haven't had a lot of time to bring over Wiki content.
+Mar 10 10:44:29 <chen>	webkit composing isn possible, we would be depending on gtkhtml for that
+Mar 10 10:44:36 <dave_largo>	I saw that everyone has been doing a bit here and there
+Mar 10 10:44:43 <andre_>	hmm.
+Mar 10 10:44:45 <chen>	dave_largo, np, it just got populated :)
+Mar 10 10:44:59 <chen>	we have ample time for the next release :)
+Mar 10 10:45:42 <chen>	we have not yet decided on a day for wiki-migration, we would be announcing a day with explained set of tasks before coming tuesday..
+Mar 10 10:46:00 <dave_largo>	I keep watching for Evolution on the iPhone store.. :)
+Mar 10 10:46:22 <chen>	we have also a bug-day getting planned and lakhil would be initiating and sending more details on the same..
+Mar 10 10:46:49 <chen>	as we discussed sometime after the hard-code freeze would be an ideal time for cleanup bgo..
+Mar 10 10:46:57 <lakhil>	i will try to bring out a brief plan in next meeting 
+Mar 10 10:47:10 <chen>	lakhil, that would be great!!
+Mar 10 10:47:33 <chen>	thats with the overall project updates..
+Mar 10 10:47:38 <lakhil>	and i hope we will have full strength for bug day :-)
+Mar 10 10:47:40 <mbarnes>	andre_: was thinking of having a webkit branch with some unofficial preview releases like I did for kill-bonobo, but we can discuss offline
+Mar 10 10:47:49 <chen>	lakhil, definetly :)
+Mar 10 10:47:57 <andre_>	ah, okay
+Mar 10 10:48:12 <chen>	mbarnes, sure, something already ready to play ? :)
+Mar 10 10:48:17 <chen>	*play with
+Mar 10 10:48:34 <mbarnes>	not yet ... camel-gobject needs to happen first
+Mar 10 10:48:46 <chen>	mbarnes, ah ok
+Mar 10 10:49:04 <chen>	moving on with status updates..
+Mar 10 10:49:19 <chen>	from my side,
+Mar 10 10:49:29 <chen>	have been agressively fixing imapx issues,
+Mar 10 10:49:38 <chen>	mplemented folder subscriptions, create/delete folders.
+Mar 10 10:49:39 <chen>	Bug fixing with courier imap server. Around namespace handling.
+Mar 10 10:49:59 <chen>	the pending part in store operations, is just renaming the folder
+Mar 10 10:50:15 <chen>	and now on with some bugs from lakhil there too :)
+Mar 10 10:50:27 <chen>	andre_, anything to share ?
+Mar 10 10:50:28 <lakhil>	good job chen :-)
+Mar 10 10:50:34 <chen>	lakhil, thanks :)
+Mar 10 10:50:36 <andre_>	nope
+Mar 10 10:50:44 <chen>	dave_largo, anything to share ?
+Mar 10 10:51:02 <dave_largo>	Nothing new here, lots of ideas for features...but trying to get all of our 2.24 patches
+Mar 10 10:51:11 <dave_largo>	I have been telling them to mbarnes here and there
+Mar 10 10:51:22 <chen>	dave_largo, get them in at http://live.gnome.org/Evolution/PlanningFuture :)
+Mar 10 10:51:39 <chen>	Fridrich, any updates?
+Mar 10 10:51:54 <chen>	jonner, any updates?
+Mar 10 10:51:59 <Fridrich>	yeah, it builds now and we come to the point
+Mar 10 10:52:06 <Fridrich>	where we actually crash
+Mar 10 10:52:13 <chen>	nice :)
+Mar 10 10:52:36 <chen>	Fridrich, have been having some issues with gconf default values when i used sometime back ?
+Mar 10 10:52:37 <Fridrich>	just that I am giving it a bit of time here and there and cannot advance too quickly
+Mar 10 10:52:46 <Fridrich>	no, it is not that 
+Mar 10 10:52:48 <chen>	has that been fixed or are u aware of them ?
+Mar 10 10:53:04 <lakhil>	Fridrich, once you have build ready for 2.30.0, it will be good to announce it on mailing list so people don't use old versions 
+Mar 10 10:53:27 <Fridrich>	lakhil: git master builds, but does not run
+Mar 10 10:53:28 <chen>	Fridrich, thanks a lot :) and esp. when u are sparing a lot of ur free time :)
+Mar 10 10:53:55 <chen>	jpunit, updates?
+Mar 10 10:54:00 <Fridrich>	but if it actualyl does someting, it is tml to be thanked
+Mar 10 10:54:05 <lakhil>	Fridrich, oh..k
+Mar 10 10:54:15 <chen>	thanks to both tml and Fridrich  :)
+Mar 10 10:54:26 <chen>	kov, anything to share?
+Mar 10 10:54:34 <chen>	lakhil, updates?
+Mar 10 10:54:57 *	chen saw the first patch from jpunit today. congrats!!
+Mar 10 10:54:57 <lakhil>	 chen mapi address book performance testing, imapx testing and usual bug triaging
+Mar 10 10:55:20 <chen>	lakhil, special thanks for all the imapx bugs :)
+Mar 10 10:55:23 <lakhil>	long way to go jpunit 
+Mar 10 10:55:27 <chen>	mbarnes, updates?
+Mar 10 10:55:30 <mbarnes>	trying to channel mcrha this week and just focus on bugs and patch reviews for 2.30
+Mar 10 10:55:30 <chen>	yeah :)
+Mar 10 10:55:31 <mbarnes>	...also helping out some with the "express" branch when I find time
+Mar 10 10:55:34 <jpunit>	chen: thanks
+Mar 10 10:55:35 <lakhil>	chen, no probs .. i wish to give some more time 
+Mar 10 10:56:13 <chen>	mbarnes, thanks
+Mar 10 10:56:22 <chen>	tml, anything to share?
+Mar 10 10:56:29 <chen>	vibha, updates?
+Mar 10 10:57:21 <chen>	I guess vibha is not yet used to irc :)
+Mar 10 10:57:29 <jpunit>	lakhil: yes .. 
+Mar 10 10:57:36 <vibha>	yeah 
+Mar 10 10:57:36 <andre_>	self-introduction welcome :-P
+Mar 10 10:57:46 <chen>	jpunit, vibha ^^ :)
+Mar 10 10:58:18 <vibha>	got the fix for Duplicate mnemonic bug 
+Mar 10 10:58:20 <chen>	jpunit, vibha would be great if you introduce urself to all of us :)
+Mar 10 10:58:48 <chen>	andre_, ok let me introduce them ;)
+Mar 10 10:59:13 <chen>	andre_, vibha and jpunit have just joined evolution team at novell couple of weeks back
+Mar 10 10:59:24 <jpunit>	hi .. i am punit and learning about evolution and working on bugs
+Mar 10 10:59:28 *	lakhil still remembers andre_'s initial lessons :-P
+Mar 10 10:59:29 <chen>	they are working on gnome-love starters at the moment..
+Mar 10 10:59:40 <andre_>	ah, nice
+Mar 10 10:59:45 <andre_>	welcome :)
+Mar 10 10:59:53 <jpunit>	andre_: thanks :)
+Mar 10 10:59:55 <dave_largo>	Novell added 2 more Evo developers?
+Mar 10 10:59:57 <dave_largo>	That's great news
+Mar 10 11:00:02 <andre_>	lakhil: I hope I wasn't too much of an asshole ;-))
+Mar 10 11:00:19 <chen>	lol i can see a very happy person (dave_largo) there :)
+Mar 10 11:00:22 <vibha>	i am vibha m also learning thing and working on bug fixes for evolution
+Mar 10 11:00:25 <chen>	lol
+Mar 10 11:00:31 <lakhil>	andre_, lol .. not at all
+Mar 10 11:01:03 <chen>	anything else to be discussed.. ?
+Mar 10 11:01:31 <mbarnes>	jpunit, vibha: welcome to the party  :)
+Mar 10 11:01:45 <vibha>	thanks :)
+Mar 10 11:02:02 <jpunit>	mbarnes: thanks 
+Mar 10 11:02:12 <chen>	Next week then after the hard-code freeze :)
+Mar 10 11:02:29 <Fridrich>	when is that freeze?
+Mar 10 11:02:36 <chen>	Fridrich, monday
+Mar 10 11:02:40 <lakhil>	march 15 
+Mar 10 11:03:39 <andre_>	live.gnome.org/Schedule
+Mar 10 11:03:42 *	chen has a UI freeze break request to make tonight and hints andre_  for one approval :)
+Mar 10 11:04:11 *	mbarnes will bring blankets and hot cocoa for next week
+Mar 10 11:04:30 <chen>	thanks everyone :)
+Mar 10 11:05:03 *	chen will be back after grabbing some dinner..
+Mar 10 11:05:11 <Fridrich>	yeah, so on windows we can expect it to be usable not before 2.30.1
+Mar 10 11:06:04 <chen>	Fridrich, having it ready by 2.31 would be good by itself..
+
