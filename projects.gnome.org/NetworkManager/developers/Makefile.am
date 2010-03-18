@@ -1,6 +1,6 @@
 NULL=
 
-SUBDIRS=
+SUBDIRS= libnm-glib
 
 urlpath = /NetworkManager/developers
 
