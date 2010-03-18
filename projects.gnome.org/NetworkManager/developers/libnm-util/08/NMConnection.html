@@ -1,0 +1,1519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NMConnection</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libnm-util Reference Manual">
+<link rel="up" href="ch01.html" title="libnm-util API Reference">
+<link rel="prev" href="ch01.html" title="libnm-util API Reference">
+<link rel="next" href="NMSetting.html" title="NMSetting">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libnm-util API Reference">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libnm-util Reference Manual</th>
+<td><a accesskey="n" href="NMSetting.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#NMConnection.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#NMConnection.description" class="shortcut">Description</a>
+                 | 
+                <a href="#NMConnection.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#NMConnection.properties" class="shortcut">Properties</a>
+                 | 
+                <a href="#NMConnection.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="NMConnection">
+<a name="NMConnection"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="NMConnection.top_of_page"></a>NMConnection</span></h2>
+<p>NMConnection — Describes a connection to specific network or provider</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="NMConnection.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;nm-connection.h&gt;
+
+enum                <a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+>NMConnectionScope</a>;
+enum                <a
+href="../libnm-util/NMConnection.html#NMConnectionError"
+>NMConnectionError</a>;
+#define             <a
+href="../libnm-util/NMConnection.html#NM-TYPE-CONNECTION-ERROR--CAPS"
+>NM_TYPE_CONNECTION_ERROR</a>
+#define             <a
+href="../libnm-util/NMConnection.html#NM-CONNECTION-ERROR--CAPS"
+>NM_CONNECTION_ERROR</a>
+<a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a>              <a
+href="../libnm-util/NMConnection.html#nm-connection-error-quark"
+>nm_connection_error_quark</a>           (void);
+#define             <a
+href="../libnm-util/NMConnection.html#NM-CONNECTION-SCOPE--CAPS"
+>NM_CONNECTION_SCOPE</a>
+#define             <a
+href="../libnm-util/NMConnection.html#NM-CONNECTION-PATH--CAPS"
+>NM_CONNECTION_PATH</a>
+                    <a
+href="../libnm-util/NMConnection.html#NMConnection-struct"
+>NMConnection</a>;
+<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a
+href="../libnm-util/NMConnection.html#nm-connection-get-type"
+>nm_connection_get_type</a>              (void);
+<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      <a
+href="../libnm-util/NMConnection.html#nm-connection-new"
+>nm_connection_new</a>                   (void);
+<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      <a
+href="../libnm-util/NMConnection.html#nm-connection-new-from-hash"
+>nm_connection_new_from_hash</a>         (<a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *hash,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      <a
+href="../libnm-util/NMConnection.html#nm-connection-duplicate"
+>nm_connection_duplicate</a>             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-add-setting"
+>nm_connection_add_setting</a>           (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-remove-setting"
+>nm_connection_remove_setting</a>        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type);
+<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         <a
+href="../libnm-util/NMConnection.html#nm-connection-get-setting"
+>nm_connection_get_setting</a>           (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type);
+<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         <a
+href="../libnm-util/NMConnection.html#nm-connection-get-setting-by-name"
+>nm_connection_get_setting_by_name</a>   (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *name);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMConnection.html#nm-connection-replace-settings"
+>nm_connection_replace_settings</a>      (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *new_settings,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMConnection.html#nm-connection-compare"
+>nm_connection_compare</a>               (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *a,
+                                                         <a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *b,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+>NMSettingCompareFlags</a> flags);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMConnection.html#nm-connection-verify"
+>nm_connection_verify</a>                (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+const char *        <a
+href="../libnm-util/NMConnection.html#nm-connection-need-secrets"
+>nm_connection_need_secrets</a>          (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> **hints);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-clear-secrets"
+>nm_connection_clear_secrets</a>         (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMConnection.html#nm-connection-update-secrets"
+>nm_connection_update_secrets</a>        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *setting_name,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *secrets,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-set-scope"
+>nm_connection_set_scope</a>             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+>NMConnectionScope</a> scope);
+<a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+>NMConnectionScope</a>   <a
+href="../libnm-util/NMConnection.html#nm-connection-get-scope"
+>nm_connection_get_scope</a>             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-set-path"
+>nm_connection_set_path</a>              (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *path);
+const char *        <a
+href="../libnm-util/NMConnection.html#nm-connection-get-path"
+>nm_connection_get_path</a>              (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-for-each-setting-value"
+>nm_connection_for_each_setting_value</a>
+                                                        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingValueIterFn"
+>NMSettingValueIterFn</a> func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *        <a
+href="../libnm-util/NMConnection.html#nm-connection-to-hash"
+>nm_connection_to_hash</a>               (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+void                <a
+href="../libnm-util/NMConnection.html#nm-connection-dump"
+>nm_connection_dump</a>                  (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);
+<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         <a
+href="../libnm-util/NMConnection.html#nm-connection-create-setting"
+>nm_connection_create_setting</a>        (const char *name);
+<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a
+href="../libnm-util/NMConnection.html#nm-connection-lookup-setting-type"
+>nm_connection_lookup_setting_type</a>   (const char *name);
+<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a
+href="../libnm-util/NMConnection.html#nm-connection-lookup-setting-type-by-quark"
+>nm_connection_lookup_setting_type_by_quark</a>
+                                                        (<a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a> error_quark);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="NMConnection.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----NMConnection
+</pre>
+</div>
+<div class="refsect1" title="Properties">
+<a name="NMConnection.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a
+href="../libnm-util/NMConnection.html#NMConnection--path"
+>path</a>"                     <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct
+  "<a
+href="../libnm-util/NMConnection.html#NMConnection--scope"
+>scope</a>"                    <a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>                 : Read / Write / Construct
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="NMConnection.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a
+href="../libnm-util/NMConnection.html#NMConnection-secrets-updated"
+>secrets-updated</a>"                                : Run First
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="NMConnection.description"></a><h2>Description</h2>
+<p>
+An <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> describes all the settings and configuration values that
+are necessary to configure network devices for operation on a specific
+network.  Connections are the fundamental operating object for
+NetworkManager; no device is connected without a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>, or
+disconnected without having been connected with a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.
+</p>
+<p>
+Each <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> contains a list of <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> objects usually referenced
+by name (using <a
+href="../libnm-util/NMConnection.html#nm-connection-get-setting-by-name"
+><code class="function">nm_connection_get_setting_by_name()</code></a>) or by type (with
+<a
+href="../libnm-util/NMConnection.html#nm-connection-get-setting"
+><code class="function">nm_connection_get_setting()</code></a>).  The settings describe the actual parameters
+with which the network devices are configured, including device-specific
+parameters (MTU, SSID, APN, channel, rate, etc) and IP-level parameters
+(addresses, routes, addressing methods, etc).
+</p>
+<p>
+Most connections also have a <a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+><code class="literal">NMConnectionScope</code></a>; a connection will be
+provided over D-Bus either by the user settings service
+(org.freedesktop.NetworkManagerUserSettings) running in an active user
+session, or by the system-wide system settings service
+(org.freedesktop.NetworkManagerSystemSettings) which provides  connections
+for all users.</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="NMConnection.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum NMConnectionScope">
+<a name="NMConnectionScope"></a><h3>enum NMConnectionScope</h3>
+<pre class="programlisting">typedef enum {
+	NM_CONNECTION_SCOPE_UNKNOWN = 0,
+	NM_CONNECTION_SCOPE_SYSTEM,
+	NM_CONNECTION_SCOPE_USER
+} NMConnectionScope;
+</pre>
+<p>
+Connection scope indicated what settings service, if any, provides the
+connection.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-CONNECTION-SCOPE-UNKNOWN--CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_SCOPE_UNKNOWN</code></span></p></td>
+<td> scope not known or not yet set
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-CONNECTION-SCOPE-SYSTEM--CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_SCOPE_SYSTEM</code></span></p></td>
+<td> connection is provided by the system settings
+  service
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-CONNECTION-SCOPE-USER--CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_SCOPE_USER</code></span></p></td>
+<td> connection is provided by a user settings service
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="enum NMConnectionError">
+<a name="NMConnectionError"></a><h3>enum NMConnectionError</h3>
+<pre class="programlisting">typedef enum
+{
+	NM_CONNECTION_ERROR_UNKNOWN = 0,
+	NM_CONNECTION_ERROR_CONNECTION_SETTING_NOT_FOUND
+} NMConnectionError;
+</pre>
+<p>
+Describes errors that may result from operations involving a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-CONNECTION-ERROR-UNKNOWN--CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_ERROR_UNKNOWN</code></span></p></td>
+<td> unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-CONNECTION-ERROR-CONNECTION-SETTING-NOT-FOUND--CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_ERROR_CONNECTION_SETTING_NOT_FOUND</code></span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> object
+  did not contain the required <a
+href="../libnm-util/NMSettingConnection.html"
+><span class="type">NMSettingConnection</span></a> object, which must be
+  present for all connections
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="NM_TYPE_CONNECTION_ERROR">
+<a name="NM-TYPE-CONNECTION-ERROR--CAPS"></a><h3>NM_TYPE_CONNECTION_ERROR</h3>
+<pre class="programlisting">#define NM_TYPE_CONNECTION_ERROR (nm_connection_error_get_type ()) 
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_CONNECTION_ERROR">
+<a name="NM-CONNECTION-ERROR--CAPS"></a><h3>NM_CONNECTION_ERROR</h3>
+<pre class="programlisting">#define NM_CONNECTION_ERROR nm_connection_error_quark ()
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_error_quark ()">
+<a name="nm-connection-error-quark"></a><h3>nm_connection_error_quark ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a>              nm_connection_error_quark           (void);</pre>
+<p>
+Registers an error quark for <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> if necessary.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the error quark used for <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> errors.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="NM_CONNECTION_SCOPE">
+<a name="NM-CONNECTION-SCOPE--CAPS"></a><h3>NM_CONNECTION_SCOPE</h3>
+<pre class="programlisting">#define NM_CONNECTION_SCOPE "scope"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_CONNECTION_PATH">
+<a name="NM-CONNECTION-PATH--CAPS"></a><h3>NM_CONNECTION_PATH</h3>
+<pre class="programlisting">#define NM_CONNECTION_PATH "path"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMConnection">
+<a name="NMConnection-struct"></a><h3>NMConnection</h3>
+<pre class="programlisting">typedef struct _NMConnection NMConnection;</pre>
+<p>
+The NMConnection struct contains only private data.
+It should only be accessed through the functions described below.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_get_type ()">
+<a name="nm-connection-get-type"></a><h3>nm_connection_get_type ()</h3>
+<pre class="programlisting"><a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               nm_connection_get_type              (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_new ()">
+<a name="nm-connection-new"></a><h3>nm_connection_new ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      nm_connection_new                   (void);</pre>
+<p>
+Creates a new <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> object with no <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> objects.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new empty <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_new_from_hash ()">
+<a name="nm-connection-new-from-hash"></a><h3>nm_connection_new_from_hash ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      nm_connection_new_from_hash         (<a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *hash,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> from a hash table describing the connection.  See
+<a
+href="../libnm-util/NMConnection.html#nm-connection-to-hash"
+><code class="function">nm_connection_to_hash()</code></a> for a description of the expected hash table.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
+<td> the <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> describing the connection
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> on unsuccessful return, an error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> object, populated with settings created
+from the values in the hash table, or NULL if the connection failed to
+validate
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_duplicate ()">
+<a name="nm-connection-duplicate"></a><h3>nm_connection_duplicate ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *      nm_connection_duplicate             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Duplicates a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> to duplicate
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> containing the same settings and properties
+as the source <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_add_setting ()">
+<a name="nm-connection-add-setting"></a><h3>nm_connection_add_setting ()</h3>
+<pre class="programlisting">void                nm_connection_add_setting           (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Adds a <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> to the connection, replacing any previous <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> of the
+same name which has previously been added to the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.  The
+connection takes ownership of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object and does not increase
+the setting object's reference count.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> to add to the connection object
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_remove_setting ()">
+<a name="nm-connection-remove-setting"></a><h3>nm_connection_remove_setting ()</h3>
+<pre class="programlisting">void                nm_connection_remove_setting        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type);</pre>
+<p>
+Removes the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> with the given <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> from the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.  This
+operation dereferences the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting_type</code></em> :</span></p></td>
+<td> the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting object to remove
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_get_setting ()">
+<a name="nm-connection-get-setting"></a><h3>nm_connection_get_setting ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         nm_connection_get_setting           (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type);</pre>
+<p>
+Gets the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> with the given <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a>, if one has been previously added
+to the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting_type</code></em> :</span></p></td>
+<td> the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting object to return
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>, or NULL if no setting of that type was previously
+added to the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_get_setting_by_name ()">
+<a name="nm-connection-get-setting-by-name"></a><h3>nm_connection_get_setting_by_name ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         nm_connection_get_setting_by_name   (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *name);</pre>
+<p>
+Gets the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> with the given name, if one has been previously added
+the the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> a setting name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>, or NULL if no setting with that name was previously
+added to the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_replace_settings ()">
+<a name="nm-connection-replace-settings"></a><h3>nm_connection_replace_settings ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_connection_replace_settings      (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *new_settings,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>new_settings</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> of settings
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store error, or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the settings were valid and added to the connection, <code class="literal">FALSE</code>
+if they were not
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_compare ()">
+<a name="nm-connection-compare"></a><h3>nm_connection_compare ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_connection_compare               (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *a,
+                                                         <a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *b,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+>NMSettingCompareFlags</a> flags);</pre>
+<p>
+Compares two <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> objects for similarity, with comparison behavior
+modified by a set of flags.  See <a
+href="../libnm-util/NMSetting.html#nm-setting-compare"
+><code class="function">nm_setting_compare()</code></a> for a description of
+each flag's behavior.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
+<td> a second <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> to compare with the first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> compare flags, e.g. <code class="literal">NM_SETTING_COMPARE_FLAG_EXACT</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the comparison succeeds, <code class="literal">FALSE</code> if it does not
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_verify ()">
+<a name="nm-connection-verify"></a><h3>nm_connection_verify ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_connection_verify                (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Validates the connection and all its settings.  Each setting's properties
+have allowed values, and some values are dependent on other values.  For
+example, if a WiFi connection is security enabled, the <a
+href="../libnm-util/NMSettingWireless.html"
+><span class="type">NMSettingWireless</span></a>
+setting object's 'security' property must contain the setting name of the
+<a
+href="../libnm-util/NMSettingWirelessSecurity.html"
+><span class="type">NMSettingWirelessSecurity</span></a> object, which must also be present in the 
+connection for the connection to be valid.  As another example, the
+<a
+href="../libnm-util/NMSettingWired.html"
+><span class="type">NMSettingWired</span></a> object's 'mac-address' property must be a validly formatted
+MAC address.  The returned <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> contains information about which
+setting and which property failed validation, and how it failed validation.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> to verify
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store error, or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the connection is valid, <code class="literal">FALSE</code> if it is not
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_need_secrets ()">
+<a name="nm-connection-need-secrets"></a><h3>nm_connection_need_secrets ()</h3>
+<pre class="programlisting">const char *        nm_connection_need_secrets          (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> **hints);</pre>
+<p>
+Returns the name of the first setting object in the connection which would
+need secrets to make a successful connection.  The returned hints are only
+intended as a guide to what secrets may be required, because in some
+circumstances, there is no way to conclusively determine exactly which
+secrets are needed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hints</code></em> :</span></p></td>
+<td> the address of a pointer to a <a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+><span class="type">GPtrArray</span></a>, initialized to NULL, which
+on return points to an allocated <a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+><span class="type">GPtrArray</span></a> containing the property names of
+secrets of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> which may be required; the caller owns the array
+and must free the each array element with <a
+href="../glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a>, as well as the array
+itself with <a
+href="../glib/glib-Pointer-Arrays.html#g-ptr-array-free"
+><code class="function">g_ptr_array_free()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the setting name of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object which has invalid or
+missing secrets
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_clear_secrets ()">
+<a name="nm-connection-clear-secrets"></a><h3>nm_connection_clear_secrets ()</h3>
+<pre class="programlisting">void                nm_connection_clear_secrets         (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Clears and frees any secrets that may be stored in the connection, to avoid
+keeping secret data in memory when not needed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_update_secrets ()">
+<a name="nm-connection-update-secrets"></a><h3>nm_connection_update_secrets ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_connection_update_secrets        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *setting_name,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *secrets,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Update the specified setting's secrets, given a hash table of secrets
+intended for that setting (deserialized from D-Bus for example).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting_name</code></em> :</span></p></td>
+<td> the setting object name to which the secrets apply
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>secrets</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> mapping string:<a
+href="../gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> of setting property names and
+secrets
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store error, or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the secrets were successfully updated and the connection
+is valid, <code class="literal">FALSE</code> on failure or if the setting was never added to the connection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_set_scope ()">
+<a name="nm-connection-set-scope"></a><h3>nm_connection_set_scope ()</h3>
+<pre class="programlisting">void                nm_connection_set_scope             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+>NMConnectionScope</a> scope);</pre>
+<p>
+Sets the scope of the connection.  This property is not serialized, and is
+only for the reference of the caller.  A connection may have no scope
+(internal, temporary connections), "system" scope (provided by the system
+settings service), or "user" scope, provided by a user settings service.  The
+creator of the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> object is responsible for setting the
+connection's scope if needed.  Sets the <a
+href="../libnm-util/NMConnection.html#NMConnection--scope"
+><span class="type">"scope"</span></a> property.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td> the scope of the connection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_get_scope ()">
+<a name="nm-connection-get-scope"></a><h3>nm_connection_get_scope ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMConnection.html#NMConnectionScope"
+>NMConnectionScope</a>   nm_connection_get_scope             (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Returns the connection scope.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the scope of the connection, previously set by a call to
+<a
+href="../libnm-util/NMConnection.html#nm-connection-set-scope"
+><code class="function">nm_connection_set_scope()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_set_path ()">
+<a name="nm-connection-set-path"></a><h3>nm_connection_set_path ()</h3>
+<pre class="programlisting">void                nm_connection_set_path              (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         const char *path);</pre>
+<p>
+Sets the D-Bus path of the connection.  This property is not serialized, and
+is only for the reference of the caller.  Sets the <a
+href="../libnm-util/NMConnection.html#NMConnection--path"
+><span class="type">"path"</span></a>
+property.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the D-Bus path of the connection as given by the settings service
+which provides the connection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_get_path ()">
+<a name="nm-connection-get-path"></a><h3>nm_connection_get_path ()</h3>
+<pre class="programlisting">const char *        nm_connection_get_path              (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Returns the connection's D-Bus path.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the D-Bus path of the connection, previously set by a call to
+<a
+href="../libnm-util/NMConnection.html#nm-connection-set-path"
+><code class="function">nm_connection_set_path()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_for_each_setting_value ()">
+<a name="nm-connection-for-each-setting-value"></a><h3>nm_connection_for_each_setting_value ()</h3>
+<pre class="programlisting">void                nm_connection_for_each_setting_value
+                                                        (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingValueIterFn"
+>NMSettingValueIterFn</a> func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Iterates over the properties of each <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object in the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>,
+calling the supplied user function for each property.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> user-supplied function called for each setting's property
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> user data passed to <em class="parameter"><code>func</code></em> at each invocation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_to_hash ()">
+<a name="nm-connection-to-hash"></a><h3>nm_connection_to_hash ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *        nm_connection_to_hash               (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Converts the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a> into a <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> describing the connection,
+suitable for marshalling over D-Bus or serializing.  The hash table mapping
+is string:<a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> with each element in the returned hash representing
+a <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object.  The keys are setting object names, and the values
+are <span class="type">GHashTables</span> mapping string:GValue, each of which represents the
+properties of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> describing the connection, its settings, and
+each setting's properties.  The caller owns the hash table and must unref
+the hash table with <a
+href="../glib/glib-Hash-Tables.html#g-hash-table-unref"
+><code class="function">g_hash_table_unref()</code></a> when it is no longer needed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_dump ()">
+<a name="nm-connection-dump"></a><h3>nm_connection_dump ()</h3>
+<pre class="programlisting">void                nm_connection_dump                  (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection);</pre>
+<p>
+Print the connection to stdout.  For debugging purposes ONLY, should NOT
+be used for serialization of the connection or machine-parsed in any way. The
+output format is not guaranteed to be stable and may change at any time.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_create_setting ()">
+<a name="nm-connection-create-setting"></a><h3>nm_connection_create_setting ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         nm_connection_create_setting        (const char *name);</pre>
+<p>
+Create a new <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object of the desired type, given a setting name.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> a setting name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new setting object, or NULL if the setting name was unknown
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_lookup_setting_type ()">
+<a name="nm-connection-lookup-setting-type"></a><h3>nm_connection_lookup_setting_type ()</h3>
+<pre class="programlisting"><a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               nm_connection_lookup_setting_type   (const char *name);</pre>
+<p>
+Returns the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting's class for a given setting name.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> a setting name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting's class
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_connection_lookup_setting_type_by_quark ()">
+<a name="nm-connection-lookup-setting-type-by-quark"></a><h3>nm_connection_lookup_setting_type_by_quark ()</h3>
+<pre class="programlisting"><a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               nm_connection_lookup_setting_type_by_quark
+                                                        (<a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a> error_quark);</pre>
+<p>
+Returns the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting's class for a given setting error quark.
+Useful for figuring out which setting a returned error is for.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error_quark</code></em> :</span></p></td>
+<td> a setting error quark
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="../gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of the setting's class
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="NMConnection.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "path" property'>
+<a name="NMConnection--path"></a><h3>The <code class="literal">"path"</code> property</h3>
+<pre class="programlisting">  "path"                     <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct</pre>
+<p>
+The connection's D-Bus path, used only by the calling process as a record
+of the D-Bus path of the connection as provided by a settings service.</p>
+<p>
+</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2" title='The "scope" property'>
+<a name="NMConnection--scope"></a><h3>The <code class="literal">"scope"</code> property</h3>
+<pre class="programlisting">  "scope"                    <a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>                 : Read / Write / Construct</pre>
+<p>
+The connection's scope, used only by the calling process as a record
+of which settings service the connection is provided by.  One of the
+NM_CONNECTION_SCOPE_* defines.</p>
+<p>
+</p>
+<p>Allowed values: &lt;= 2</p>
+<p>Default value: 0</p>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="NMConnection.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "secrets-updated" signal'>
+<a name="NMConnection-secrets-updated"></a><h3>The <code class="literal">"secrets-updated"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a
+href="../libnm-util/NMConnection.html"
+>NMConnection</a> *connection,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a>        *setting_name,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>      user_data)         : Run First</pre>
+<p>
+The ::secrets-updated signal is emitted when the secrets of a setting
+have been changed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td> the object on which the signal is emitted
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting_name</code></em> :</span></p></td>
+<td> the setting name of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> for which secrets were
+updated
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

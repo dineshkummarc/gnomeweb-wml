@@ -1,0 +1,1017 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NMSetting</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libnm-util Reference Manual">
+<link rel="up" href="ch01.html" title="libnm-util API Reference">
+<link rel="prev" href="NMConnection.html" title="NMConnection">
+<link rel="next" href="NMSettingConnection.html" title="NMSettingConnection">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libnm-util API Reference">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="NMConnection.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libnm-util Reference Manual</th>
+<td><a accesskey="n" href="NMSettingConnection.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#NMSetting.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#NMSetting.description" class="shortcut">Description</a>
+                 | 
+                <a href="#NMSetting.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#NMSetting.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry" title="NMSetting">
+<a name="NMSetting"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="NMSetting.top_of_page"></a>NMSetting</span></h2>
+<p>NMSetting — Describes related configuration information</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="NMSetting.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;nm-setting.h&gt;
+
+enum                <a
+href="../libnm-util/NMSetting.html#NMSettingError"
+>NMSettingError</a>;
+#define             <a
+href="../libnm-util/NMSetting.html#NM-TYPE-SETTING-ERROR--CAPS"
+>NM_TYPE_SETTING_ERROR</a>
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-ERROR--CAPS"
+>NM_SETTING_ERROR</a>
+<a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a>              <a
+href="../libnm-util/NMSetting.html#nm-setting-error-quark"
+>nm_setting_error_quark</a>              (void);
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-PARAM-SERIALIZE--CAPS"
+>NM_SETTING_PARAM_SERIALIZE</a>
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-PARAM-REQUIRED--CAPS"
+>NM_SETTING_PARAM_REQUIRED</a>
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-PARAM-SECRET--CAPS"
+>NM_SETTING_PARAM_SECRET</a>
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-PARAM-FUZZY-IGNORE--CAPS"
+>NM_SETTING_PARAM_FUZZY_IGNORE</a>
+#define             <a
+href="../libnm-util/NMSetting.html#NM-SETTING-NAME--CAPS"
+>NM_SETTING_NAME</a>
+                    <a
+href="../libnm-util/NMSetting.html#NMSetting-struct"
+>NMSetting</a>;
+void                (<a
+href="../libnm-util/NMSetting.html#NMSettingValueIterFn"
+>*NMSettingValueIterFn</a>)             (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         const char *key,
+                                                         const <a
+href="../gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="../gobject/gobject-GParamSpec.html#GParamFlags"
+>GParamFlags</a> flags,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a
+href="../libnm-util/NMSetting.html#nm-setting-get-type"
+>nm_setting_get_type</a>                 (void);
+<a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *        <a
+href="../libnm-util/NMSetting.html#nm-setting-to-hash"
+>nm_setting_to_hash</a>                  (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         <a
+href="../libnm-util/NMSetting.html#nm-setting-new-from-hash"
+>nm_setting_new_from_hash</a>            (<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *hash);
+<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         <a
+href="../libnm-util/NMSetting.html#nm-setting-duplicate"
+>nm_setting_duplicate</a>                (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+const char *        <a
+href="../libnm-util/NMSetting.html#nm-setting-get-name"
+>nm_setting_get_name</a>                 (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMSetting.html#nm-setting-verify"
+>nm_setting_verify</a>                   (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> *all_settings,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+enum                <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+>NMSettingCompareFlags</a>;
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMSetting.html#nm-setting-compare"
+>nm_setting_compare</a>                  (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *a,
+                                                         <a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *b,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+>NMSettingCompareFlags</a> flags);
+void                <a
+href="../libnm-util/NMSetting.html#nm-setting-enumerate-values"
+>nm_setting_enumerate_values</a>         (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingValueIterFn"
+>NMSettingValueIterFn</a> func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+char *              <a
+href="../libnm-util/NMSetting.html#nm-setting-to-string"
+>nm_setting_to_string</a>                (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+void                <a
+href="../libnm-util/NMSetting.html#nm-setting-clear-secrets"
+>nm_setting_clear_secrets</a>            (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+<a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> *         <a
+href="../libnm-util/NMSetting.html#nm-setting-need-secrets"
+>nm_setting_need_secrets</a>             (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="../libnm-util/NMSetting.html#nm-setting-update-secrets"
+>nm_setting_update_secrets</a>           (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *secrets,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="NMSetting.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----NMSetting
+         +----<a
+href="../libnm-util/NMSettingGsm.html"
+>NMSettingGsm</a>
+         +----<a
+href="../libnm-util/NMSetting8021x.html"
+>NMSetting8021x</a>
+         +----<a
+href="../libnm-util/NMSettingBluetooth.html"
+>NMSettingBluetooth</a>
+         +----<a
+href="../libnm-util/NMSettingOlpcMesh.html"
+>NMSettingOlpcMesh</a>
+         +----<a
+href="../libnm-util/NMSettingCdma.html"
+>NMSettingCdma</a>
+         +----<a
+href="../libnm-util/NMSettingSerial.html"
+>NMSettingSerial</a>
+         +----<a
+href="../libnm-util/NMSettingWirelessSecurity.html"
+>NMSettingWirelessSecurity</a>
+         +----<a
+href="../libnm-util/NMSettingIP6Config.html"
+>NMSettingIP6Config</a>
+         +----<a
+href="../libnm-util/NMSettingIP4Config.html"
+>NMSettingIP4Config</a>
+         +----<a
+href="../libnm-util/NMSettingWired.html"
+>NMSettingWired</a>
+         +----<a
+href="../libnm-util/NMSettingConnection.html"
+>NMSettingConnection</a>
+         +----<a
+href="../libnm-util/NMSettingPPP.html"
+>NMSettingPPP</a>
+         +----<a
+href="../libnm-util/NMSettingPPPOE.html"
+>NMSettingPPPOE</a>
+         +----<a
+href="../libnm-util/NMSettingVPN.html"
+>NMSettingVPN</a>
+         +----<a
+href="../libnm-util/NMSettingWireless.html"
+>NMSettingWireless</a>
+</pre>
+</div>
+<div class="refsect1" title="Properties">
+<a name="NMSetting.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a
+href="../libnm-util/NMSetting.html#NMSetting--name"
+>name</a>"                     <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="NMSetting.description"></a><h2>Description</h2>
+<p>
+Each <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> contains properties that describe configuration that applies
+to a specific network layer (like IPv4 or IPv6 configuration) or device type
+(like Ethernet, or WiFi).  A collection of individual settings together
+make up an <a
+href="../libnm-util/NMConnection.html"
+><span class="type">NMConnection</span></a>. Each property is strongly typed and usually has
+a number of allowed values.  See each <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> subclass for a description
+of properties and allowed values.</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="NMSetting.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum NMSettingError">
+<a name="NMSettingError"></a><h3>enum NMSettingError</h3>
+<pre class="programlisting">typedef enum
+{
+	NM_SETTING_ERROR_UNKNOWN = 0,
+	NM_SETTING_ERROR_PROPERTY_NOT_FOUND,
+	NM_SETTING_ERROR_PROPERTY_NOT_SECRET,
+	NM_SETTING_ERROR_PROPERTY_TYPE_MISMATCH
+} NMSettingError;
+</pre>
+<p>
+Describes errors that may result from operations involving a <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-ERROR-UNKNOWN--CAPS"></a><span class="term"><code class="literal">NM_SETTING_ERROR_UNKNOWN</code></span></p></td>
+<td> unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-ERROR-PROPERTY-NOT-FOUND--CAPS"></a><span class="term"><code class="literal">NM_SETTING_ERROR_PROPERTY_NOT_FOUND</code></span></p></td>
+<td> a property required by the operation
+  was not found; for example, an attempt to update an invalid secret
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-ERROR-PROPERTY-NOT-SECRET--CAPS"></a><span class="term"><code class="literal">NM_SETTING_ERROR_PROPERTY_NOT_SECRET</code></span></p></td>
+<td> an operation which requires a secret
+  was attempted on a non-secret property
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-ERROR-PROPERTY-TYPE-MISMATCH--CAPS"></a><span class="term"><code class="literal">NM_SETTING_ERROR_PROPERTY_TYPE_MISMATCH</code></span></p></td>
+<td> the operation requires a property
+  of a specific type, or the value couldn't be transformed to the same type
+  as the property being acted upon
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="NM_TYPE_SETTING_ERROR">
+<a name="NM-TYPE-SETTING-ERROR--CAPS"></a><h3>NM_TYPE_SETTING_ERROR</h3>
+<pre class="programlisting">#define NM_TYPE_SETTING_ERROR (nm_setting_error_get_type ()) 
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_ERROR">
+<a name="NM-SETTING-ERROR--CAPS"></a><h3>NM_SETTING_ERROR</h3>
+<pre class="programlisting">#define NM_SETTING_ERROR nm_setting_error_quark ()
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_error_quark ()">
+<a name="nm-setting-error-quark"></a><h3>nm_setting_error_quark ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Quarks.html#GQuark"
+>GQuark</a>              nm_setting_error_quark              (void);</pre>
+<p>
+Registers an error quark for <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> if necessary.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the error quark used for NMSetting errors.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_PARAM_SERIALIZE">
+<a name="NM-SETTING-PARAM-SERIALIZE--CAPS"></a><h3>NM_SETTING_PARAM_SERIALIZE</h3>
+<pre class="programlisting">#define NM_SETTING_PARAM_SERIALIZE    (1 &lt;&lt; (0 + G_PARAM_USER_SHIFT))
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_PARAM_REQUIRED">
+<a name="NM-SETTING-PARAM-REQUIRED--CAPS"></a><h3>NM_SETTING_PARAM_REQUIRED</h3>
+<pre class="programlisting">#define NM_SETTING_PARAM_REQUIRED     (1 &lt;&lt; (1 + G_PARAM_USER_SHIFT))
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_PARAM_SECRET">
+<a name="NM-SETTING-PARAM-SECRET--CAPS"></a><h3>NM_SETTING_PARAM_SECRET</h3>
+<pre class="programlisting">#define NM_SETTING_PARAM_SECRET       (1 &lt;&lt; (2 + G_PARAM_USER_SHIFT))
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_PARAM_FUZZY_IGNORE">
+<a name="NM-SETTING-PARAM-FUZZY-IGNORE--CAPS"></a><h3>NM_SETTING_PARAM_FUZZY_IGNORE</h3>
+<pre class="programlisting">#define NM_SETTING_PARAM_FUZZY_IGNORE (1 &lt;&lt; (3 + G_PARAM_USER_SHIFT))
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTING_NAME">
+<a name="NM-SETTING-NAME--CAPS"></a><h3>NM_SETTING_NAME</h3>
+<pre class="programlisting">#define NM_SETTING_NAME "name"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMSetting">
+<a name="NMSetting-struct"></a><h3>NMSetting</h3>
+<pre class="programlisting">typedef struct _NMSetting NMSetting;</pre>
+<p>
+The NMSetting struct contains only private data.
+It should only be accessed through the functions described below.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMSettingValueIterFn ()">
+<a name="NMSettingValueIterFn"></a><h3>NMSettingValueIterFn ()</h3>
+<pre class="programlisting">void                (*NMSettingValueIterFn)             (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         const char *key,
+                                                         const <a
+href="../gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="../gobject/gobject-GParamSpec.html#GParamFlags"
+>GParamFlags</a> flags,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_get_type ()">
+<a name="nm-setting-get-type"></a><h3>nm_setting_get_type ()</h3>
+<pre class="programlisting"><a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a>               nm_setting_get_type                 (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_to_hash ()">
+<a name="nm-setting-to-hash"></a><h3>nm_setting_to_hash ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *        nm_setting_to_hash                  (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Converts the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> into a <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> mapping each setting property
+name to a GValue describing that property, suitable for marshalling over
+D-Bus or serializing.  The mapping is string:GValue.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> describing the setting's properties
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_new_from_hash ()">
+<a name="nm-setting-new-from-hash"></a><h3>nm_setting_new_from_hash ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         nm_setting_new_from_hash            (<a
+href="../gobject/gobject-Type-Information.html#GType"
+>GType</a> setting_type,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *hash);</pre>
+<p>
+Creates a new <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object and populates that object with the properties
+contained in the hash table, using each hash key as the property to set,
+and each hash value as the value to set that property to.  Setting properties
+are strongly typed, thus the GValue type of the hash value must be correct.
+See the documentation on each <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object subclass for the correct
+property names and value types.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting_type</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> type which the hash contains properties for
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
+<td> the <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> containing a string:GValue mapping of properties
+that apply to the setting
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object populated with the properties from the
+hash table, or NULL on failure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_duplicate ()">
+<a name="nm-setting-duplicate"></a><h3>nm_setting_duplicate ()</h3>
+<pre class="programlisting"><a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *         nm_setting_duplicate                (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Duplicates a <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> to duplicate
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> containing the same properties and values as the
+source <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_get_name ()">
+<a name="nm-setting-get-name"></a><h3>nm_setting_get_name ()</h3>
+<pre class="programlisting">const char *        nm_setting_get_name                 (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Returns the type name of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a string containing the type name of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object,
+like 'ppp' or 'wireless' or 'wired'.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_verify ()">
+<a name="nm-setting-verify"></a><h3>nm_setting_verify ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_setting_verify                   (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> *all_settings,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Validates the setting.  Each setting's properties have allowed values, and
+some are dependent on other values (hence the need for <em class="parameter"><code>all_settings</code></em>).  The
+returned <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> contains information about which property of the setting
+failed validation, and in what way that property failed validation.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> to verify
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>all_settings</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Singly-Linked-Lists.html#GSList"
+><span class="type">GSList</span></a> of all settings in the connection from which <em class="parameter"><code>setting</code></em>
+came
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store error, or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the setting is valid, <code class="literal">FALSE</code> if it is not
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="enum NMSettingCompareFlags">
+<a name="NMSettingCompareFlags"></a><h3>enum NMSettingCompareFlags</h3>
+<pre class="programlisting">typedef enum {
+	NM_SETTING_COMPARE_FLAG_EXACT = 0x00000000,
+	NM_SETTING_COMPARE_FLAG_FUZZY = 0x00000001,
+	NM_SETTING_COMPARE_FLAG_IGNORE_ID = 0x00000002,
+	NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS = 0x00000004
+} NMSettingCompareFlags;
+</pre>
+<p>
+These flags modify the comparison behavior when comparing two settings or
+two connections.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-EXACT--CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_EXACT</code></span></p></td>
+<td> match all properties exactly
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-FUZZY--CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_FUZZY</code></span></p></td>
+<td> match only important attributes, like SSID,
+  type, security settings, etc.  Does not match, for example, connection ID
+  or UUID.
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-ID--CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_ID</code></span></p></td>
+<td> ignore the connection's ID
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-SECRETS--CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS</code></span></p></td>
+<td> ignore secrets
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_compare ()">
+<a name="nm-setting-compare"></a><h3>nm_setting_compare ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_setting_compare                  (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *a,
+                                                         <a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *b,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+>NMSettingCompareFlags</a> flags);</pre>
+<p>
+Compares two <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> objects for similarity, with comparison behavior
+modified by a set of flags.  See the documentation for <a
+href="../libnm-util/NMSetting.html#NMSettingCompareFlags"
+><span class="type">NMSettingCompareFlags</span></a>
+for a description of each flag's behavior.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
+<td> a <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
+<td> a second <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> to compare with the first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> compare flags, e.g. <code class="literal">NM_SETTING_COMPARE_FLAG_EXACT</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the comparison succeeds, <code class="literal">FALSE</code> if it does not
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_enumerate_values ()">
+<a name="nm-setting-enumerate-values"></a><h3>nm_setting_enumerate_values ()</h3>
+<pre class="programlisting">void                nm_setting_enumerate_values         (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../libnm-util/NMSetting.html#NMSettingValueIterFn"
+>NMSettingValueIterFn</a> func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Iterates over each property of the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> object, calling the supplied
+user function for each property.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> user-supplied function called for each property of the setting
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> user data passed to <em class="parameter"><code>func</code></em> at each invocation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_to_string ()">
+<a name="nm-setting-to-string"></a><h3>nm_setting_to_string ()</h3>
+<pre class="programlisting">char *              nm_setting_to_string                (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Convert the setting into a string.  For debugging purposes ONLY, should NOT
+be used for serialization of the setting, or machine-parsed in any way. The
+output format is not guaranteed to be stable and may change at any time.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an allocated string containing a textual representation of the
+setting's properties and values (including secrets!), which the caller should
+free with <a
+href="../glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_clear_secrets ()">
+<a name="nm-setting-clear-secrets"></a><h3>nm_setting_clear_secrets ()</h3>
+<pre class="programlisting">void                nm_setting_clear_secrets            (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Resets and clears any secrets in the setting.  Secrets should be added to the
+setting only when needed, and cleared immediately after use to prevent
+leakage of information.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_need_secrets ()">
+<a name="nm-setting-need-secrets"></a><h3>nm_setting_need_secrets ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> *         nm_setting_need_secrets             (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting);</pre>
+<p>
+Returns an array of property names for each secret which may be required
+to make a successful connection.  The returned hints are only intended as a
+guide to what secrets may be required, because in some circumstances, there
+is no way to conclusively determine exactly which secrets are needed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="../glib/glib-Pointer-Arrays.html#GPtrArray"
+><span class="type">GPtrArray</span></a> containing the property names of secrets of the
+<a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a> which may be required; the caller owns the array
+and must free the each array element with <a
+href="../glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a>, as well as the array
+itself with <a
+href="../glib/glib-Pointer-Arrays.html#g-ptr-array-free"
+><code class="function">g_ptr_array_free()</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_setting_update_secrets ()">
+<a name="nm-setting-update-secrets"></a><h3>nm_setting_update_secrets ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            nm_setting_update_secrets           (<a
+href="../libnm-util/NMSetting.html"
+>NMSetting</a> *setting,
+                                                         <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *secrets,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Update the setting's secrets, given a hash table of secrets intended for that
+setting (deserialized from D-Bus for example).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td> the <a
+href="../libnm-util/NMSetting.html"
+><span class="type">NMSetting</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>secrets</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Hash-Tables.html#GHashTable"
+><span class="type">GHashTable</span></a> mapping string:<a
+href="../gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> of setting property names and
+secrets
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store error, or <code class="literal">NULL</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the secrets were successfully updated and the connection
+is valid, <code class="literal">FALSE</code> on failure or if the setting was never added to the connection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="NMSetting.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "name" property'>
+<a name="NMSetting--name"></a><h3>The <code class="literal">"name"</code> property</h3>
+<pre class="programlisting">  "name"                     <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write</pre>
+<p>
+The setting's name, which uniquely identifies the setting within the
+connection.  Each setting type has a name unique to that type, for
+example 'ppp' or 'wireless' or 'wired'.</p>
+<p>
+</p>
+<p>Default value: NULL</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>
