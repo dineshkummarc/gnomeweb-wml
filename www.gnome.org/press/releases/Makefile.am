@@ -89,6 +89,6 @@ page_SCRIPTS = \
 	2009-11-guadec2010.html \
 	2010-02-mozilla-accessibility.html \
 	2010-03-gcds-2011.html \
-	2010-03-ss12-code-for-a-cause.wml
+	2010-03-ss12-code-for-a-cause.html
 
 include $(top_srcdir)/rules.common
