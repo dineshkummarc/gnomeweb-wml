@@ -11,6 +11,7 @@ page_SCRIPTS=\
 	spec-08.html \
 	settings-spec-07.html \
 	settings-spec-08.html \
+	mm-spec-04.html \
 	$(NULL)
 
 include $(top_srcdir)/rules.common
