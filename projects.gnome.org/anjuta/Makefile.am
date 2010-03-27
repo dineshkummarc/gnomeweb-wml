@@ -1,4 +1,4 @@
-SUBDIRS=css team
+SUBDIRS=css team screenshots
 
 urlpath = /anjuta
 
