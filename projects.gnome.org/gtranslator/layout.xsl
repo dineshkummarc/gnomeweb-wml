@@ -40,7 +40,7 @@
   <xsl:template match="/">
     <html>
       <head>
-	<title>Gtranslator: Translation file editor</title>
+	<title> Gtranslator: Translation file editor</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta content="programming, best, ide, free, user friendly, gnome, linux, gtranslator, c, php, versatile, gtk, website" name="keywords"/>
         <link rel="stylesheet" type="text/css" href="http://www.gnome.org/css/layout.css" />
