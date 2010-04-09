@@ -11,6 +11,8 @@
 #                                                            #
 ##############################################################
 
+import sys
+
 def split_thousands(s):
     if s.rfind('.') > 0:
         rhs=s[s.rfind('.')+1:]
@@ -44,7 +46,7 @@ DONORS = [
 
 { 'name': 'Friends of GNOME',
   'color': 'green',
-  'donation': 31886.00,
+  'donation': 32000.00,
   'show-still-needed': 1 }]
 
 TOTAL_DONATIONS = 0
@@ -54,10 +56,57 @@ for donor in DONORS:
 
 STILL_NEED = TARGET_AMOUNT - TOTAL_DONATIONS
 
+DONE = STILL_NEED <= 0
+
 ##############################################################
 # Only change the code from now on if you want to change the #
 # generated CSS and HTML                                     #
 ##############################################################
+
+CSS_DONE ='\
+<style type="text/css"> \
+    #gnome-fog-ruler {\
+        background: #237100 url(http://www.gnome.org/friends/ruler/ruler-bg.jpg) center no-repeat;\
+        /*background: #63B412;*/\
+        padding: 0px;\
+        color: #fff;\
+        font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, sans-serif;\
+        font-size: 13px;\
+        text-shadow: 0 1px 2px #346704;\
+        z-index: 200;\
+        float: left;\
+        width: 100%;\
+        position: relative;\
+    }\
+    #gnome-fog-ruler .fog-center {\
+        background: url(http://www.gnome.org/friends/ruler/ruler-done-bg.jpg) no-repeat scroll right bottom;\
+        width: 920px;\
+        margin: 0 auto;\
+        min-height: 40px;\
+        text-align: left;\
+    }\
+    .gnome-fog-ruler-text {\
+        padding-top: 13px;\
+        padding-bottom: 13px;\
+        margin: 0px;\
+        line-height: 20px;\
+    }\
+</style>'
+
+HTML_DONE = '\
+<div id="gnome-fog-ruler">\
+    <div class="fog-center">\
+        <p class="gnome-fog-ruler-text">\
+        Thanks to our <strong>amazing community</strong>,\
+        the GNOME Foundation raised <strong>$57,000</strong> and is\
+        now able<br/>to hire a <b>Sysadmin for GNOME</b>!\
+        </p>\
+    </div>\
+</div>'
+
+if DONE:
+    print 'document.write(\'%s\')' % (CSS_DONE + HTML_DONE)
+    sys.exit()
 
 CSS = ' \
 <style type="text/css"> \
