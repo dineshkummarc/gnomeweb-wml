@@ -9,6 +9,7 @@ SUBDIRS = css \
 	desktop			\
 	devtools		\
 	dia			\
+	emerillon		\
 	eog			\
 	evolution		\
 	fantasdic		\
