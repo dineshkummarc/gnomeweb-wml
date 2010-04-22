@@ -147,8 +147,8 @@
             <li><a href="http://live.gnome.org/Anjuta">Anjuta wiki</a> is a place to scribble new ideas.<br/><br/></li>
             <li><a href="http://git.gnome.org/browse/anjuta">Anjuta git web</a> to browser source code online.<br/><br/></li>
             <li><a href="http://bugzilla.gnome.org/browse.cgi?product=anjuta">Anjuta Bugzilla</a> is the place to track bugs, obviously.<br/><br/></li>
-            <li><a href="http://bugzilla.gnome.org/reports/patch-report.cgi?product=anjuta">Pending Patches</a> are currently under review.<br/><br/></li>
-            <li><a href="http://bugzilla.gnome.org/simple-bug-guide.cgi?product=anjuta">Submit a bug</a>, if you encounter one.<br/><br/></li>
+            <li><a href="https://bugzilla.gnome.org/page.cgi?id=patchreport.html&amp;product=anjuta&amp;patch-status=none">Pending Patches</a> are currently under review.<br/><br/></li>
+            <li><a href="http://bugzilla.gnome.org/enter_bug.cgi?product=anjuta">Submit a bug</a>, if you encounter one.<br/><br/></li>
           </ul>
           <p><!--
             <A href="http://sourceforge.net">
