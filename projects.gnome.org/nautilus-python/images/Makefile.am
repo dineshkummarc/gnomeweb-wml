@@ -6,7 +6,7 @@ page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
 
-misc_images =	content-gradient-top.git    \
+misc_images =	content-gradient-top.gif    \
         logo.png                            \
         screenshot.png                      \
         screenshot-thumb.png
