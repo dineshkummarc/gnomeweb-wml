@@ -2,7 +2,11 @@ SUBDIRS=images documentation
 
 urlpath = /nautilus-python/
 
-page_SCRIPTS =	index.html	\
+page_SCRIPTS =	development.html        \
+        documentation.html              \
+        download.html                   \
+        index.html                      \
+        news.html                       \
 		default.css
 
 

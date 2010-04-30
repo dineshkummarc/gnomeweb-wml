@@ -73,7 +73,8 @@ SUBDIRS = css \
 	libchamplain	\
 	diagnome \
 	postr \
-	gnome-blog
+	gnome-blog      \
+	nautilus-python
 
 urlpath = 
 
