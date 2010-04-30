@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+       <title>Nautilus-Python: Bindings for the Nautilus Extension API</title>
+
+       <meta http-equiv="Content-Type"
+             content="text/html; charset=utf-8"/>
+       <link rel="stylesheet"
+             media="screen"
+             type="text/css"
+             title="default.css"
+             href="default.css"/>
+</head>
+
+<body>
+
+    <div id="hdr">
+        <img src="images/logo.png" style="margin-right:1em;" />
+        <h1>Nautilus-Python</h1>
+        <h2>Python bindings for the Nautilus Extension API</h2>
+    </div>
+    <ul id="hdr_menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="download.html">Download</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="development.html">Development</a></li>
+    </ul>
+    <div id="hdr_gradient"></div>
+
+    <div id="sidebar">
+        <h3>Quick Links</h3>
+        
+        <ol>
+            <li><a href="#overview">General Overview</a></li>
+            <li><a href="#extension">A Simple Extension</a></li>
+            <li><a href="#api">API Reference</a></li>
+        </ol>
+    </div>
+
+    <div id="body">
+
+        <h2>Documentation</h2>
+        
+        <a name="overview"></a>
+        <h3>General Overview</h3>
+        <p>
+        Writing a Nautilus-Python extension is a fairly straight-forward process.  One simply imports the nautilus module and creates
+        a class which is derived from a number of the nautilus module's classes.  When an extension derives a class, it becomes a "provider",
+        telling Nautilus to ask it for information.  There are several types of providers available for extensions to use: there is
+        MenuProvider, LocationWidgetProvider, ColumnProvider, PropertyPageProvider, and InfoProvider, all of which will be explained in more detail
+        below.  Your class can be derived from multiple providers.
+        </p>
+        
+        <p>
+        Running a Nautilus-Python script is fairly a straight-forward process, involving several steps.
+        <ol>
+            <li>A script is written and installed to the standard python extensions install path</li>
+            <li>Nautilus is (re)started and loads the Nautilus-Python C extension, which in turn loads all python extensions</li>
+            <li>Any python script in the standard python extensions install path that imports the nautilus module and derives the main class from a nautilus module class will be loaded</li>
+        </ol>
+        </p>
+
+<tidbit><b>A note about the standard python extensions install path</b>
+
+The install path for individual users is ~/.nautilus/python-extensions.
+
+The system-wide install path is $PREFIX/lib/nautilus/extensions-2.0/python.  However, 
+some 64 bit distributions, such as Fedora, put Nautilus-Python extensions in
+$PREFIX/lib64/nautilus/extensions-2.0/python.
+</tidbit>
+
+        <a name="extension"></a>
+        <h3>A Simple Extension</h3>
+        
+        Create an empty file with the following code (<a href="documentation/TestExtension.py">download here</a>):
+        <p>
+<code>import nautilus
+
+class SimpleMenuExtension(nautilus.MenuProvider):
+    def __init__(self):
+        pass
+    
+    def menu_activate_cb(self, menu, file):
+        print "menu_activate_cb",file
+    
+    def get_file_items(self, window, files):
+        if len(files) != 1:
+            return
+        
+        file = files[0]
+
+        item = nautilus.MenuItem(
+            "SimpleMenuExtension::Show_File_Name",
+            "Showing %s" % file.get_name(),
+            "Showing %s" % file.get_name()
+        )
+        item.connect('activate', self.menu_activate_cb, file)
+        
+        return [item]
+</code>
+        <p>
+        
+        <p>
+        Save this file as TestExtension.py in the ~/.nautilus/python-extensions folder.  You may need to create this folder.  To run, open the terminal
+        and type:
+        </p>
+        <p> 
+<code>$ nautilus -q
+$ nautilus --no-desktop
+</code>
+        </p>
+        <p>
+        One Nautilus starts, right-click on a file and you should see a new menu item, "Showing #filename#".  It is as simple as that!
+        </p>
+        <p>
+        Here is what is going on in this script.  As mentioned above, in order to get loaded by Nautilus, a python extension must 
+        import the nautilus module, create a class derived from a nautilus *Provider, then create the methods that will be called by Nautilus
+        when it requests information from its providers.  In this case, when someone right-clicks on a file, Nautilus will ask all of its MenuProviders for
+        additional menu items to show the user.  When folders or files are clicked, the get_file_items method is called and a list of nautilus.MenuItems is expected.
+        </p>
+
+        <p>
+        See more extension examples <a href="http://git.gnome.org/browse/nautilus-python/tree/examples/">here</a>.
+        </p>
+
+        <a name="api"></a>
+        <h3>API Reference</h3>
+        
+        <p>I'm working on a nicer looking and easier to follow reference, but for now, see the latest <a href="http://git.gnome.org/browse/nautilus-python/tree/examples/documentation.py">examples/documentation.py</a> file.</p>
+
+    </div>
+
+    <div style="margin-left:15px;">
+         <p>
+             <a href="http://validator.w3.org/check?uri=referer">
+                 <img src="http://www.w3.org/Icons/valid-xhtml10"
+                      alt="Valid XHTML 1.0 Strict"
+                      height="31"
+                      width="88"/>
+              </a>
+        </p>
+    </div>
+
+    <div id="bottom">
+        <div id="copyright">Copyright 2010, <a href="http://projects.gnome.org/nautilus-python">The Nautilus-python project</a>. </div>
+    </div>
+</body>
+</html>
