@@ -12,6 +12,9 @@ misc_images=				\
 	gcm-calibrate-default.png	\
 	gcm-calibrate-drawing.png	\
 	gcm-import.png			\
+	gcm-set-default.png		\
+	gcm-device-configure.png	\
+	gcm-screen-type.png		\
 	icon-arch.png			\
 	icon-debian.png			\
 	icon-forsight.png		\
