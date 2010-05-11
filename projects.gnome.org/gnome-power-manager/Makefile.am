@@ -6,7 +6,6 @@ page_SCRIPTS=		\
 	bugs.html	\
 	gpm.html	\
 	gpp.html	\
-	hal.html	\
 	index.html	\
 	packages.html	\
 	default.css
