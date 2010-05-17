@@ -6,6 +6,7 @@ HTMLFILES = \
 	index.shtml \
 	index.html  \
 	features.html \
+	development.html \
 	authors.html 
 
 page_DATA = $(HTMLFILES)
