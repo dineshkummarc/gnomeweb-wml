@@ -6,6 +6,7 @@ HTMLFILES = \
 	index.shtml \
 	index.html  \
 	features.html \
+	downloads.html \
 	development.html \
 	authors.html 
 
