@@ -28,111 +28,14 @@
     </ul>
     <div id="hdr_gradient"></div>
 
-    <div id="sidebar">
-        <h3>Quick Links</h3>
-        
-        <ol>
-            <li><a href="#overview">General Overview</a></li>
-            <li><a href="#extension">A Simple Extension</a></li>
-            <li><a href="#api">API Reference</a></li>
-        </ol>
-    </div>
-
     <div id="body">
 
         <h2>Documentation</h2>
-        
-        <a name="overview"></a>
-        <h3>General Overview</h3>
+
+        With the nautilus-python 0.7.0 release comes shiny new documentation!  I've consolidated all reference and tutorial information
+        into a standard gtk-doc enabled reference.
         <p>
-        Writing a Nautilus-Python extension is a fairly straight-forward process.  One simply imports the nautilus module and creates
-        a class which is derived from a number of the nautilus module's classes.  When an extension derives a class, it becomes a "provider",
-        telling Nautilus to ask it for information.  There are several types of providers available for extensions to use: there is
-        MenuProvider, LocationWidgetProvider, ColumnProvider, PropertyPageProvider, and InfoProvider, all of which will be explained in more detail
-        below.  Your class can be derived from multiple providers.
-        </p>
-        
-        <p>
-        Running a Nautilus-Python script is fairly a straight-forward process, involving several steps.
-        <ol>
-            <li>A script is written and installed to the standard python extensions install path</li>
-            <li>Nautilus is (re)started and loads the Nautilus-Python C extension, which in turn loads all python extensions</li>
-            <li>Any python script in the standard python extensions install path that imports the nautilus module and derives the main class from a nautilus module class will be loaded</li>
-        </ol>
-        </p>
-
-<tidbit><b>A note about the standard python extensions install path</b>
-
-The install path for individual users is ~/.nautilus/python-extensions.
-
-The system-wide install path is $PREFIX/lib/nautilus/extensions-2.0/python.  However, 
-some 64 bit distributions, such as Fedora, put Nautilus-Python extensions in
-$PREFIX/lib64/nautilus/extensions-2.0/python.
-
-As of Nautilus 2.32 (due out Fall 2010), nautilus-python will look in 
-~/.local/share/nautilus-python/extensions for local extensions and 
-$PREFIX/share/nautilus-python/extensions for global extensions.
-</tidbit>
-
-        <a name="extension"></a>
-        <h3>A Simple Extension</h3>
-        
-        Create an empty file with the following code (<a href="documentation/TestExtension.py">download here</a>):
-        <p>
-<code>import nautilus
-
-class SimpleMenuExtension(nautilus.MenuProvider):
-    def __init__(self):
-        pass
-    
-    def menu_activate_cb(self, menu, file):
-        print "menu_activate_cb",file
-    
-    def get_file_items(self, window, files):
-        if len(files) != 1:
-            return
-        
-        file = files[0]
-
-        item = nautilus.MenuItem(
-            "SimpleMenuExtension::Show_File_Name",
-            "Showing %s" % file.get_name(),
-            "Showing %s" % file.get_name()
-        )
-        item.connect('activate', self.menu_activate_cb, file)
-        
-        return [item]
-</code>
-        <p>
-        
-        <p>
-        Save this file as TestExtension.py in the ~/.nautilus/python-extensions folder.  You may need to create this folder.  To run, open the terminal
-        and type:
-        </p>
-        <p> 
-<code>$ nautilus -q
-$ nautilus --no-desktop
-</code>
-        </p>
-        <p>
-        One Nautilus starts, right-click on a file and you should see a new menu item, "Showing #filename#".  It is as simple as that!
-        </p>
-        <p>
-        Here is what is going on in this script.  As mentioned above, in order to get loaded by Nautilus, a python extension must 
-        import the nautilus module, create a class derived from a nautilus *Provider, then create the methods that will be called by Nautilus
-        when it requests information from its providers.  In this case, when someone right-clicks on a file, Nautilus will ask all of its MenuProviders for
-        additional menu items to show the user.  When folders or files are clicked, the get_file_items method is called and a list of nautilus.MenuItems is expected.
-        </p>
-
-        <p>
-        See more extension examples <a href="http://git.gnome.org/browse/nautilus-python/tree/examples/">here</a>.
-        </p>
-
-        <a name="api"></a>
-        <h3>API Reference</h3>
-        
-        <p>I'm working on a nicer looking and easier to follow reference, but for now, see the latest <a href="http://git.gnome.org/browse/nautilus-python/tree/examples/documentation.py">examples/documentation.py</a> file.</p>
-
+        <a href="documentation/html/index.html">API Reference and Tutorial</a>
     </div>
 
     <div style="margin-left:15px;">
