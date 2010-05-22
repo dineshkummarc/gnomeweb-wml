@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>libchamplain</title>
+    <link rel="stylesheet" media="all" href="data/themes/libchamplain/document.all.css" title="Gnome"/>
+    <link rel="stylesheet" media="screen" href="data/themes/libchamplain/document.screen.css" title="Gnome"/>
+
+    <meta name="description" content="libchamplain" />
+  </head>
+  <body>
+
+    <div id="header">
+      <h1>Home</h1>
+    </div>
+    <div id="menu">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="index.html">Home</a>
+          <ul>
+            <li><a href="features.html">Features</a> </li>
+            <li><a href="download.html">Download</a> </li>
+            <li class="current"><a href="reference.html">Reference</a> </li>
+            <li><a href="http://live.gnome.org/libchamplain">Wiki</a> </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div id="body">
+
+      <div id="bottom">
+        <div id="bottomLeft">
+
+            <h2>Is it Hard to Use?</h2>
+            <p>
+            Not really. Look at the following example. With this code you get a fully functional
+            application with the map widget covering the whole window. You can zoom in and out
+            with your mouse wheel and scroll the view by dragging it. The tiles are downloaded
+            automatically from the network and cached on your disk so they will be available
+            next time even if you are offline. 
+            </p>
+            <p>
+            Notice that only three lines of the code below are specific to libchamplain - the two include headers 
+            and then the call of the constructor of the widget - the rest is just the ordinary 
+            boilerplate code you would write for any clutter-based application.
+            </p>
+            <div class="code">
+<span class="S9">#include &lt;gtk/gtk.h&gt;</span>
+
+<span class="S1">/* include the necessary headers */</span>
+<span class="S9">#include &lt;champlain/champlain.h&gt;</span>
+<span class="S9">#include &lt;champlain-gtk/champlain-gtk.h&gt;</span>
+
+<span class="S9">#include &lt;clutter-gtk/clutter-gtk.h&gt;</span>
+
+<span class="S5">int</span>
+main<span class="S0"> </span><span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>argc<span class="S10">,</span><span class="S0"> </span><span class="S5">char</span><span class="S0"> </span><span class="S10">*</span>argv<span class="S10">[])</span>
+<span class="S10">{</span>
+<span class="S0">  </span>GtkWidget<span class="S0"> </span><span class="S10">*</span>window<span class="S10">,</span><span class="S0"> </span><span class="S10">*</span>widget<span class="S10">,</span><span class="S0"> </span><span class="S10">*</span>vbox<span class="S10">;</span>
+
+<span class="S0">  </span><span class="S1">/* initialize threads and clutter */</span>
+<span class="S0">  </span>g_thread_init<span class="S0"> </span><span class="S10">(</span>NULL<span class="S10">);</span>
+<span class="S0">  </span>gtk_clutter_init<span class="S0"> </span><span class="S10">(&amp;</span>argc<span class="S10">,</span><span class="S0"> </span><span class="S10">&amp;</span>argv<span class="S10">);</span>
+
+<span class="S0">  </span><span class="S1">/* create the top-level window and quit the main loop when it's closed */</span>
+<span class="S0">  </span>window<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>gtk_window_new<span class="S0"> </span><span class="S10">(</span>GTK_WINDOW_TOPLEVEL<span class="S10">);</span>
+<span class="S0">  </span>g_signal_connect<span class="S0"> </span><span class="S10">(</span>G_OBJECT<span class="S0"> </span><span class="S10">(</span>window<span class="S10">),</span><span class="S0"> </span><span class="S6">"destroy"</span><span class="S10">,</span><span class="S0"> </span>G_CALLBACK<span class="S0"> </span><span class="S10">(</span>gtk_main_quit<span class="S10">),</span>
+<span class="S0">      </span>NULL<span class="S10">);</span>
+
+<span class="S0">  </span><span class="S1">/* create the libchamplain widget and set its size */</span>
+<span class="S0">  </span>widget<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>gtk_champlain_embed_new<span class="S0"> </span><span class="S10">();</span>
+<span class="S0">  </span>gtk_widget_set_size_request<span class="S0"> </span><span class="S10">(</span>widget<span class="S10">,</span><span class="S0"> </span><span class="S4">640</span><span class="S10">,</span><span class="S0"> </span><span class="S4">480</span><span class="S10">);</span>
+
+<span class="S0">  </span><span class="S1">/* insert it into the widget you wish */</span>
+<span class="S0">  </span>vbox<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>gtk_vbox_new<span class="S10">(</span>FALSE<span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">);</span>
+<span class="S0">  </span>gtk_box_pack_start<span class="S0"> </span><span class="S10">(</span>GTK_BOX<span class="S0"> </span><span class="S10">(</span>vbox<span class="S10">),</span><span class="S0"> </span>widget<span class="S10">,</span><span class="S0"> </span>TRUE<span class="S10">,</span><span class="S0"> </span>TRUE<span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">);</span>
+<span class="S0">  </span>gtk_container_add<span class="S0"> </span><span class="S10">(</span>GTK_CONTAINER<span class="S0"> </span><span class="S10">(</span>window<span class="S10">),</span><span class="S0"> </span>vbox<span class="S10">);</span>
+
+<span class="S0">  </span><span class="S1">/* show everything */</span>
+<span class="S0">  </span>gtk_widget_show_all<span class="S0"> </span><span class="S10">(</span>window<span class="S10">);</span>
+
+<span class="S0">  </span><span class="S1">/* start the main loop */</span>
+<span class="S0">  </span>gtk_main<span class="S0"> </span><span class="S10">();</span>
+
+<span class="S0">  </span><span class="S5">return</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span>
+<span class="S10">}</span>          
+            </div>
+            <p>
+            If you save the above code to a file, say champlain.c, you can compile the application
+            (after installing libchamplain first of course) by running:
+            </p>
+            <div class="code">
+            gcc -o champlain champlain.c `pkg-config --cflags --libs champlain-gtk-0.6`
+            </div>
+            <p>
+            Now you probably want to do some more advanced things and customize the widget to your
+            needs. Check the demos in the demos directory of the source distribution
+            and read the reference manual to explore the full capabilities of the widget.
+            </p>
+
+        </div>
+
+        <div id="bottomRight">
+          <h2>Read the Manual Online</h2>
+          
+          <h3>Latest Stable Release</h3>
+          <p>
+          <a href="http://library.gnome.org/devel/libchamplain/unstable">libchamplain</a>
+          </p>
+          <p>
+          <a href="http://library.gnome.org/devel/libchamplain-gtk/unstable">libchamplain-gtk</a>
+          </p>
+          
+          <h3>Older Releases</h3>
+          <p>
+          <a href="http://library.gnome.org/devel/libchamplain">libchamplain</a>
+          </p>
+          <p>
+          <a href="http://library.gnome.org/devel/libchamplain-gtk">libchamplain-gtk</a>
+          </p>
+          
+        </div>
+      </div><!-- bottom -->
+    </div><!-- body -->
+
+    <div id="copyright">
+      <p>
+      GNOME and the foot logo are trademarks of the GNOME Foundation.
+      <br />
+      This website is based on <a href="http://projects.gnome.org/cheese/">Cheese</a>'s website by <a href="http://home.cs.tum.edu/~siegel/">Daniel G. Siegel</a>.
+      <br />
+      <a href="http://validator.w3.org/check/referer">Optimized</a> for <a href="http://www.w3.org/">standards</a>.
+      <br />
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://webstats.gnome.org/" : "http://webstats.gnome.org/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 4);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://webstats.gnome.org/piwik.php?idsite=4" style="border:0" alt=""/></p></noscript>
+<!-- End Piwik Tag --> 
+      </p>
+    </div>
+
+  </body>
+</html>

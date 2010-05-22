@@ -7,8 +7,9 @@ mrproper:
 
 page_SCRIPTS= \
 	index.html \
-	download.html \
 	features.html \
+	download.html \
+	reference.html \
 	$(NULL)
 
 themedir=$(pagedir)/data/themes/libchamplain
@@ -38,6 +39,8 @@ screenshots_DATA = \
 	data/screenshots/map-source-cyclemap_t.png \
 	data/screenshots/map-source-osm.png \
 	data/screenshots/map-source-osm_t.png \
+	data/screenshots/map-source-osmt.png \
+	data/screenshots/map-source-osmt_t.png \
 	data/screenshots/map-source-oam.png \
 	data/screenshots/map-source-oam_t.png \
 	data/screenshots/map-source-mff.png \
