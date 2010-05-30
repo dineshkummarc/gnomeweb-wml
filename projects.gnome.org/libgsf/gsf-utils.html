@@ -1,638 +1,2206 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>utils</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="misc.html" title="Miscellaneous"><link rel="previous" href="misc.html" title="Miscellaneous"><link rel="next" href="ix01.html" title="Index"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="misc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="misc.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="ix01.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-utils"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">utils</span></h2><p>utils &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>utils</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="misc.html" title="Miscellaneous">
+<link rel="prev" href="misc.html" title="Miscellaneous">
+<link rel="next" href="gsf-index.html" title="Index">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="PartÂ I.Â GSF: Introduction">
+<link rel="part" href="history.html" title="PartÂ II.Â GSF: History">
+<link rel="part" href="dependencies.html" title="PartÂ III.Â GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="PartÂ IV.Â Projects using GSF">
+<link rel="part" href="api.html" title="PartÂ V.Â API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="misc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="misc.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-index.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-utils.synopsis" class="shortcut">Top</a>
+                Â |Â 
+                <a href="#gsf-utils.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="utils">
+<a name="gsf-utils"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-utils.top_of_page"></a>utils</span></h2>
+<p>utils</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-utils.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+void                <a class="link" href="gsf-utils.html#gsf-init" title="gsf_init ()">gsf_init</a>                            (void);
+void                <a class="link" href="gsf-utils.html#gsf-shutdown" title="gsf_shutdown ()">gsf_shutdown</a>                        (void);
+void                <a class="link" href="gsf-utils.html#gsf-init-dynamic" title="gsf_init_dynamic ()">gsf_init_dynamic</a>                    (<a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a> *module);
+void                <a class="link" href="gsf-utils.html#gsf-shutdown-dynamic" title="gsf_shutdown_dynamic ()">gsf_shutdown_dynamic</a>                (<a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a> *module);
+extern              int <a class="link" href="gsf-utils.html#libgsf-major-version" title="libgsf_major_version">libgsf_major_version</a>;
+extern              int <a class="link" href="gsf-utils.html#libgsf-minor-version" title="libgsf_minor_version">libgsf_minor_version</a>;
+extern              int <a class="link" href="gsf-utils.html#libgsf-micro-version" title="libgsf_micro_version">libgsf_micro_version</a>;
+
+#define             <a class="link" href="gsf-utils.html#GSF-CLASS--CAPS" title="GSF_CLASS()">GSF_CLASS</a>                           (name, prefix, class_init, instance_init, parent)
+#define             <a class="link" href="gsf-utils.html#GSF-CLASS-FULL--CAPS" title="GSF_CLASS_FULL()">GSF_CLASS_FULL</a>                      (name, prefix, base_init, base_finalize,
+                                                         		       class_init, class_finalize, instance_init, parent_type,
+                                                         		       abstract, interface_decl)
+#define             <a class="link" href="gsf-utils.html#GSF-CLASS-ABSTRACT--CAPS" title="GSF_CLASS_ABSTRACT()">GSF_CLASS_ABSTRACT</a>                  (name, prefix, class_init, instance_init, parent)
+#define             <a class="link" href="gsf-utils.html#GSF-INTERFACE--CAPS" title="GSF_INTERFACE()">GSF_INTERFACE</a>                       (init_func, iface_type)
+#define             <a class="link" href="gsf-utils.html#GSF-INTERFACE-FULL--CAPS" title="GSF_INTERFACE_FULL()">GSF_INTERFACE_FULL</a>                  (type, init_func, iface_type)
+#define             <a class="link" href="gsf-utils.html#GSF-DYNAMIC-CLASS--CAPS" title="GSF_DYNAMIC_CLASS()">GSF_DYNAMIC_CLASS</a>                   (name, prefix, class_init, instance_init, parent)
+#define             <a class="link" href="gsf-utils.html#GSF-DYNAMIC-CLASS-FULL--CAPS" title="GSF_DYNAMIC_CLASS_FULL()">GSF_DYNAMIC_CLASS_FULL</a>              (name, prefix, base_init, base_finalize,
+                                                         				   class_init,  class_finalize, instance_init, parent_type,
+                                                         			       abstract, interface_decl)
+#define             <a class="link" href="gsf-utils.html#GSF-DYNAMIC-CLASS-ABSTRACT--CAPS" title="GSF_DYNAMIC_CLASS_ABSTRACT()">GSF_DYNAMIC_CLASS_ABSTRACT</a>          (name, prefix, class_init, instance_init, parent)
+#define             <a class="link" href="gsf-utils.html#GSF-DYNAMIC-INTERFACE--CAPS" title="GSF_DYNAMIC_INTERFACE()">GSF_DYNAMIC_INTERFACE</a>               (init_func, iface_type, module)
+#define             <a class="link" href="gsf-utils.html#GSF-DYNAMIC-INTERFACE-FULL--CAPS" title="GSF_DYNAMIC_INTERFACE_FULL()">GSF_DYNAMIC_INTERFACE_FULL</a>          (type, init_func, iface_type, module)
+#define             <a class="link" href="gsf-utils.html#GSF-PARAM-STATIC--CAPS" title="GSF_PARAM_STATIC">GSF_PARAM_STATIC</a>
+
+#define             <a class="link" href="gsf-utils.html#GSF-ERROR--CAPS" title="GSF_ERROR">GSF_ERROR</a>
+enum                <a class="link" href="gsf-utils.html#GsfError" title="enum GsfError">GsfError</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+>GQuark</a>              <a class="link" href="gsf-utils.html#gsf-error-quark" title="gsf_error_quark ()">gsf_error_quark</a>                     (void);
+
+void                <a class="link" href="gsf-utils.html#gsf-mem-dump" title="gsf_mem_dump ()">gsf_mem_dump</a>                        (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *ptr,
+                                                         size_t len);
+void                <a class="link" href="gsf-utils.html#gsf-input-dump" title="gsf_input_dump ()">gsf_input_dump</a>                      (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> dump_as_hex);
+
+#define             <a class="link" href="gsf-utils.html#GSF-OFF-T-FORMAT--CAPS" title="GSF_OFF_T_FORMAT">GSF_OFF_T_FORMAT</a>
+typedef             <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a>;
+char *              <a class="link" href="gsf-utils.html#gsf-filename-to-utf8" title="gsf_filename_to_utf8 ()">gsf_filename_to_utf8</a>                (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> quoted);
+void                <a class="link" href="gsf-utils.html#gsf-iconv-close" title="gsf_iconv_close ()">gsf_iconv_close</a>                     (<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a> handle);
+char const *        <a class="link" href="gsf-utils.html#gsf-extension-pointer" title="gsf_extension_pointer ()">gsf_extension_pointer</a>               (char const *path);
+
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *            <a class="link" href="gsf-utils.html#gsf-base64-encode-simple" title="gsf_base64_encode_simple ()">gsf_base64_encode_simple</a>            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *data,
+                                                         size_t len);
+size_t              <a class="link" href="gsf-utils.html#gsf-base64-encode-close" title="gsf_base64_encode_close ()">gsf_base64_encode_close</a>             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t inlen,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> break_lines,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);
+size_t              <a class="link" href="gsf-utils.html#gsf-base64-encode-step" title="gsf_base64_encode_step ()">gsf_base64_encode_step</a>              (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t len,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> break_lines,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);
+size_t              <a class="link" href="gsf-utils.html#gsf-base64-decode-simple" title="gsf_base64_decode_simple ()">gsf_base64_decode_simple</a>            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *data,
+                                                         size_t len);
+size_t              <a class="link" href="gsf-utils.html#gsf-base64-decode-step" title="gsf_base64_decode_step ()">gsf_base64_decode_step</a>              (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t len,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GINT8--CAPS" title="GSF_LE_GET_GINT8()">GSF_LE_GET_GINT8</a>                    (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GUINT64--CAPS" title="GSF_LE_GET_GUINT64()">GSF_LE_GET_GUINT64</a>                  (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GINT16--CAPS" title="GSF_LE_GET_GINT16()">GSF_LE_GET_GINT16</a>                   (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GUINT8--CAPS" title="GSF_LE_GET_GUINT8()">GSF_LE_GET_GUINT8</a>                   (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GINT32--CAPS" title="GSF_LE_GET_GINT32()">GSF_LE_GET_GINT32</a>                   (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GUINT16--CAPS" title="GSF_LE_GET_GUINT16()">GSF_LE_GET_GUINT16</a>                  (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GUINT32--CAPS" title="GSF_LE_GET_GUINT32()">GSF_LE_GET_GUINT32</a>                  (p)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-GINT64--CAPS" title="GSF_LE_GET_GINT64()">GSF_LE_GET_GINT64</a>                   (p)
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"
+>guint64</a>             <a class="link" href="gsf-utils.html#gsf-le-get-guint64" title="gsf_le_get_guint64 ()">gsf_le_get_guint64</a>                  (void const *p);
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-FLOAT--CAPS" title="GSF_LE_GET_FLOAT()">GSF_LE_GET_FLOAT</a>                    (p)
+float               <a class="link" href="gsf-utils.html#gsf-le-get-float" title="gsf_le_get_float ()">gsf_le_get_float</a>                    (void const *p);
+#define             <a class="link" href="gsf-utils.html#GSF-LE-GET-DOUBLE--CAPS" title="GSF_LE_GET_DOUBLE()">GSF_LE_GET_DOUBLE</a>                   (p)
+double              <a class="link" href="gsf-utils.html#gsf-le-get-double" title="gsf_le_get_double ()">gsf_le_get_double</a>                   (void const *p);
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GUINT8--CAPS" title="GSF_LE_SET_GUINT8()">GSF_LE_SET_GUINT8</a>                   (p, dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GUINT16--CAPS" title="GSF_LE_SET_GUINT16()">GSF_LE_SET_GUINT16</a>                  (p, dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GUINT32--CAPS" title="GSF_LE_SET_GUINT32()">GSF_LE_SET_GUINT32</a>                  (p, dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GINT8--CAPS" title="GSF_LE_SET_GINT8()">GSF_LE_SET_GINT8</a>                    (p,dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GINT16--CAPS" title="GSF_LE_SET_GINT16()">GSF_LE_SET_GINT16</a>                   (p,dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GINT32--CAPS" title="GSF_LE_SET_GINT32()">GSF_LE_SET_GINT32</a>                   (p,dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GINT64--CAPS" title="GSF_LE_SET_GINT64()">GSF_LE_SET_GINT64</a>                   (p,dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-GUINT64--CAPS" title="GSF_LE_SET_GUINT64()">GSF_LE_SET_GUINT64</a>                  (p, dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-FLOAT--CAPS" title="GSF_LE_SET_FLOAT()">GSF_LE_SET_FLOAT</a>                    (p,dat)
+#define             <a class="link" href="gsf-utils.html#GSF-LE-SET-DOUBLE--CAPS" title="GSF_LE_SET_DOUBLE()">GSF_LE_SET_DOUBLE</a>                   (p,dat)
+void                <a class="link" href="gsf-utils.html#gsf-le-set-float" title="gsf_le_set_float ()">gsf_le_set_float</a>                    (void *p,
+                                                         float f);
+void                <a class="link" href="gsf-utils.html#gsf-le-set-double" title="gsf_le_set_double ()">gsf_le_set_double</a>                   (void *p,
+                                                         double d);
+
+                    <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a>;
+<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *      <a class="link" href="gsf-utils.html#gsf-timestamp-copy" title="gsf_timestamp_copy ()">gsf_timestamp_copy</a>                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);
+void                <a class="link" href="gsf-utils.html#gsf-timestamp-free" title="gsf_timestamp_free ()">gsf_timestamp_free</a>                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);
+char *              <a class="link" href="gsf-utils.html#gsf-timestamp-as-string" title="gsf_timestamp_as_string ()">gsf_timestamp_as_string</a>             (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);
+int                 <a class="link" href="gsf-utils.html#gsf-timestamp-from-string" title="gsf_timestamp_from_string ()">gsf_timestamp_from_string</a>           (char const *spec,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="gsf-utils.html#gsf-timestamp-hash" title="gsf_timestamp_hash ()">gsf_timestamp_hash</a>                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="gsf-utils.html#gsf-timestamp-equal" title="gsf_timestamp_equal ()">gsf_timestamp_equal</a>                 (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *a,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *b);
+void                <a class="link" href="gsf-utils.html#gsf-value-set-timestamp" title="gsf_value_set_timestamp ()">gsf_value_set_timestamp</a>             (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);
+#define             <a class="link" href="gsf-utils.html#VAL-IS-GSF-TIMESTAMP--CAPS" title="VAL_IS_GSF_TIMESTAMP()">VAL_IS_GSF_TIMESTAMP</a>                (v)
 
 
+int                 <a class="link" href="gsf-utils.html#gsf-timestamp-parse" title="gsf_timestamp_parse ()">gsf_timestamp_parse</a>                 (char const *spec,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);
 
-
-void        <a href="gsf-utils.html#gsf-init">gsf_init</a>                        (void);
-void        <a href="gsf-utils.html#gsf-shutdown">gsf_shutdown</a>                    (void);
-extern      int <a href="gsf-utils.html#libgsf-major-version">libgsf_major_version</a>;
-extern      int <a href="gsf-utils.html#libgsf-minor-version">libgsf_minor_version</a>;
-extern      int <a href="gsf-utils.html#libgsf-micro-version">libgsf_micro_version</a>;
-
-#define     <a href="gsf-utils.html#GSF-CLASS-CAPS">GSF_CLASS</a>                       (name, prefix, class_init, instance_init, parent)
-#define     <a href="gsf-utils.html#GSF-CLASS-FULL-CAPS">GSF_CLASS_FULL</a>                  (name, prefix, class_init, instance_init, parent_type, \
-		       abstract, interface_decl)
-#define     <a href="gsf-utils.html#GSF-CLASS-ABSTRACT-CAPS">GSF_CLASS_ABSTRACT</a>              (name, prefix, class_init, instance_init, parent)
-#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-CAPS">GSF_DYNAMIC_CLASS</a>               (name, prefix, class_init, instance_init, parent, plugin, type)
-#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-FULL-CAPS">GSF_DYNAMIC_CLASS_FULL</a>          (name, prefix, class_init, instance_init, parent_type, \
-			       abstract, interface_decl, plugin, type)
-#define     <a href="gsf-utils.html#GSF-DYNAMIC-CLASS-ABSTRACT-CAPS">GSF_DYNAMIC_CLASS_ABSTRACT</a>      (name, prefix, class_init, instance_init, parent, plugin, type)
-#define     <a href="gsf-utils.html#GSF-INTERFACE-CAPS">GSF_INTERFACE</a>                   (init_func, iface_type)
-#define     <a href="gsf-utils.html#GSF-INTERFACE-FULL-CAPS">GSF_INTERFACE_FULL</a>              (type, init_func, iface_type)
-
-void        <a href="gsf-utils.html#gsf-mem-dump">gsf_mem_dump</a>                    (guint8 const *ptr,
-                                             size_t len);
-void        <a href="gsf-utils.html#gsf-input-dump">gsf_input_dump</a>                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
-                                             gboolean dump_as_hex);
-
-#define     <a href="gsf-utils.html#GSF-OFF-T-FORMAT-CAPS">GSF_OFF_T_FORMAT</a>
-typedef     <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a>;
-char*       <a href="gsf-utils.html#gsf-filename-to-utf8">gsf_filename_to_utf8</a>            (const char *filename,
-                                             gboolean quoted);
-void        <a href="gsf-utils.html#gsf-iconv-close">gsf_iconv_close</a>                 (GIConv handle);
-
-guint8*     <a href="gsf-utils.html#gsf-base64-encode-simple">gsf_base64_encode_simple</a>        (guint8 const *data,
-                                             size_t len);
-size_t      <a href="gsf-utils.html#gsf-base64-encode-close">gsf_base64_encode_close</a>         (guint8 const *in,
-                                             size_t inlen,
-                                             gboolean break_lines,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned int *save);
-size_t      <a href="gsf-utils.html#gsf-base64-encode-step">gsf_base64_encode_step</a>          (guint8 const *in,
-                                             size_t len,
-                                             gboolean break_lines,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned int *save);
-size_t      <a href="gsf-utils.html#gsf-base64-decode-simple">gsf_base64_decode_simple</a>        (guint8 *data,
-                                             size_t len);
-size_t      <a href="gsf-utils.html#gsf-base64-decode-step">gsf_base64_decode_step</a>          (guint8 const *in,
-                                             size_t len,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned *save);
-#define     <a href="gsf-utils.html#GSF-LE-GET-GINT8-CAPS">GSF_LE_GET_GINT8</a>                (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT64-CAPS">GSF_LE_GET_GUINT64</a>              (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GINT16-CAPS">GSF_LE_GET_GINT16</a>               (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT8-CAPS">GSF_LE_GET_GUINT8</a>               (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GINT32-CAPS">GSF_LE_GET_GINT32</a>               (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT16-CAPS">GSF_LE_GET_GUINT16</a>              (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-GUINT32-CAPS">GSF_LE_GET_GUINT32</a>              (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-FLOAT-CAPS">GSF_LE_GET_FLOAT</a>                (p)
-#define     <a href="gsf-utils.html#GSF-LE-GET-DOUBLE-CAPS">GSF_LE_GET_DOUBLE</a>               (p)
-guint64     <a href="gsf-utils.html#gsf-le-get-guint64">gsf_le_get_guint64</a>              (void const *p);
-float       <a href="gsf-utils.html#gsf-le-get-float">gsf_le_get_float</a>                (void const *p);
-double      <a href="gsf-utils.html#gsf-le-get-double">gsf_le_get_double</a>               (void const *p);
-#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT8-CAPS">GSF_LE_SET_GUINT8</a>               (p, dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT16-CAPS">GSF_LE_SET_GUINT16</a>              (p, dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-GUINT32-CAPS">GSF_LE_SET_GUINT32</a>              (p, dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-GINT8-CAPS">GSF_LE_SET_GINT8</a>                (p,dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-GINT16-CAPS">GSF_LE_SET_GINT16</a>               (p,dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-GINT32-CAPS">GSF_LE_SET_GINT32</a>               (p,dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-FLOAT-CAPS">GSF_LE_SET_FLOAT</a>                (p,dat)
-#define     <a href="gsf-utils.html#GSF-LE-SET-DOUBLE-CAPS">GSF_LE_SET_DOUBLE</a>               (p,dat)
-void        <a href="gsf-utils.html#gsf-le-set-float">gsf_le_set_float</a>                (void *p,
-                                             float f);
-void        <a href="gsf-utils.html#gsf-le-set-double">gsf_le_set_double</a>               (void *p,
-                                             double d);
-
-<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-copy">gsf_timestamp_copy</a>            (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
-void        <a href="gsf-utils.html#gsf-timestamp-free">gsf_timestamp_free</a>              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);
-<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-new-now">gsf_timestamp_new_now</a>         (void);
-GType       <a href="gsf-utils.html#gsf-timestamp-get-type">gsf_timestamp_get_type</a>          (void);
-char*       <a href="gsf-utils.html#gsf-timestamp-as-string">gsf_timestamp_as_string</a>         (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
-int         <a href="gsf-utils.html#gsf-timestamp-parse">gsf_timestamp_parse</a>             (char const *spec,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);
-guint       <a href="gsf-utils.html#gsf-timestamp-hash">gsf_timestamp_hash</a>              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
-gboolean    <a href="gsf-utils.html#gsf-timestamp-equal">gsf_timestamp_equal</a>             (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *a,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *b);
-#define     <a href="gsf-utils.html#GSF-TIMESTAMP-TYPE-CAPS">GSF_TIMESTAMP_TYPE</a>
-struct      <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>;
-<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* <a href="gsf-utils.html#gsf-timestamp-new">gsf_timestamp_new</a>             (GDate const *date,
-                                             glong seconds,
-                                             char const *tz);
-void        <a href="gsf-utils.html#g-value-set-timestamp">g_value_set_timestamp</a>           (GValue *value,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);
-</pre></div><div class="refsect1" lang="en"><a name="id2553199"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2553209"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2553215"></a><h3><a name="gsf-init"></a>gsf_init ()</h3><a class="indexterm" name="id2553225"></a><pre class="programlisting">void        gsf_init                        (void);</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2553246"></a><h3><a name="gsf-shutdown"></a>gsf_shutdown ()</h3><a class="indexterm" name="id2553257"></a><pre class="programlisting">void        gsf_shutdown                    (void);</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2553279"></a><h3><a name="libgsf-major-version"></a>libgsf_major_version</h3><a class="indexterm" name="id2553290"></a><pre class="programlisting">extern int libgsf_major_version;
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2553305"></a><h3><a name="libgsf-minor-version"></a>libgsf_minor_version</h3><a class="indexterm" name="id2553317"></a><pre class="programlisting">extern int libgsf_minor_version;
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2553332"></a><h3><a name="libgsf-micro-version"></a>libgsf_micro_version</h3><a class="indexterm" name="id2553343"></a><pre class="programlisting">extern int libgsf_micro_version;
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2553359"></a><h3><a name="GSF-CLASS-CAPS"></a>GSF_CLASS()</h3><a class="indexterm" name="id2553370"></a><pre class="programlisting">#define     GSF_CLASS(name, prefix, class_init, instance_init, parent)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553457"></a><h3><a name="GSF-CLASS-FULL-CAPS"></a>GSF_CLASS_FULL()</h3><a class="indexterm" name="id2553468"></a><pre class="programlisting">#define     GSF_CLASS_FULL(name, prefix, class_init, instance_init, parent_type, \
-		       abstract, interface_decl)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent_type</tt></i> :</span></td><td>
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract:
-@\
-		       abstract: 
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>interface_decl</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553584"></a><h3><a name="GSF-CLASS-ABSTRACT-CAPS"></a>GSF_CLASS_ABSTRACT()</h3><a class="indexterm" name="id2553595"></a><pre class="programlisting">#define     GSF_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553683"></a><h3><a name="GSF-DYNAMIC-CLASS-CAPS"></a>GSF_DYNAMIC_CLASS()</h3><a class="indexterm" name="id2553695"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS(name, prefix, class_init, instance_init, parent, plugin, type)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553811"></a><h3><a name="GSF-DYNAMIC-CLASS-FULL-CAPS"></a>GSF_DYNAMIC_CLASS_FULL()</h3><a class="indexterm" name="id2553822"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS_FULL(name, prefix, class_init, instance_init, parent_type, \
-			       abstract, interface_decl, plugin, type)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent_type</tt></i> :</span></td><td>
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract:
-@\
-			       abstract: 
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>interface_decl</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2553965"></a><h3><a name="GSF-DYNAMIC-CLASS-ABSTRACT-CAPS"></a>GSF_DYNAMIC_CLASS_ABSTRACT()</h3><a class="indexterm" name="id2553977"></a><pre class="programlisting">#define     GSF_DYNAMIC_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent, plugin, type)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prefix</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>class_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>instance_init</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>parent</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>plugin</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554093"></a><h3><a name="GSF-INTERFACE-CAPS"></a>GSF_INTERFACE()</h3><a class="indexterm" name="id2554104"></a><pre class="programlisting">#define     GSF_INTERFACE(init_func, iface_type)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>init_func</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>iface_type</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554151"></a><h3><a name="GSF-INTERFACE-FULL-CAPS"></a>GSF_INTERFACE_FULL()</h3><a class="indexterm" name="id2554162"></a><pre class="programlisting">#define     GSF_INTERFACE_FULL(type, init_func, iface_type)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>type</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>init_func</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>iface_type</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554223"></a><h3><a name="gsf-mem-dump"></a>gsf_mem_dump ()</h3><a class="indexterm" name="id2554234"></a><pre class="programlisting">void        gsf_mem_dump                    (guint8 const *ptr,
-                                             size_t len);</pre><p>
-Dump <i class="parameter"><tt>len</tt></i> bytes from the memory location given by <i class="parameter"><tt>ptr</tt></i>.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ptr</tt></i> :</span></td><td> memory area to be dumped.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td> how many bytes will be dumped.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554317"></a><h3><a name="gsf-input-dump"></a>gsf_input_dump ()</h3><a class="indexterm" name="id2554328"></a><pre class="programlisting">void        gsf_input_dump                  (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
-                                             gboolean dump_as_hex);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dump_as_hex</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554395"></a><h3><a name="GSF-OFF-T-FORMAT-CAPS"></a>GSF_OFF_T_FORMAT</h3><a class="indexterm" name="id2554407"></a><pre class="programlisting">#define GSF_OFF_T_FORMAT	G_GINT64_FORMAT
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2554423"></a><h3><a name="gsf-off-t"></a>gsf_off_t</h3><a class="indexterm" name="id2554433"></a><pre class="programlisting">typedef gint64 gsf_off_t;
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2554448"></a><h3><a name="gsf-filename-to-utf8"></a>gsf_filename_to_utf8 ()</h3><a class="indexterm" name="id2554460"></a><pre class="programlisting">char*       gsf_filename_to_utf8            (const char *filename,
-                                             gboolean quoted);</pre><p>
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *            <a class="link" href="gsf-utils.html#gsf-doc-prop-swap-val" title="gsf_doc_prop_swap_val ()">gsf_doc_prop_swap_val</a>               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);
+void                <a class="link" href="gsf-utils.html#gsf-property-settings-collect" title="gsf_property_settings_collect ()">gsf_property_settings_collect</a>       (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> object_type,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> **p_params,
+                                                         size_t *p_n_params,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *first_property_name,
+                                                         ...);
+void                <a class="link" href="gsf-utils.html#gsf-property-settings-collect-valist" title="gsf_property_settings_collect_valist ()">gsf_property_settings_collect_valist</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> object_type,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> **p_params,
+                                                         size_t *p_n_params,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *first_property_name,
+                                                         va_list var_args);
+void                <a class="link" href="gsf-utils.html#gsf-property-settings-free" title="gsf_property_settings_free ()">gsf_property_settings_free</a>          (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> *params,
+                                                         size_t n_params);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-utils.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-utils.details"></a><h2>Details</h2>
+<div class="refsect2" title="gsf_init ()">
+<a name="gsf-init"></a><h3>gsf_init ()</h3>
+<pre class="programlisting">void                gsf_init                            (void);</pre>
+<p>
+Initializes the GSF library</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_shutdown ()">
+<a name="gsf-shutdown"></a><h3>gsf_shutdown ()</h3>
+<pre class="programlisting">void                gsf_shutdown                        (void);</pre>
+<p>
+De-intializes the GSF library from a type module.
+Currently does nothing.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_init_dynamic ()">
+<a name="gsf-init-dynamic"></a><h3>gsf_init_dynamic ()</h3>
+<pre class="programlisting">void                gsf_init_dynamic                    (<a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a> *module);</pre>
+<p>
+Initializes the GSF library and associates it with a type module <em class="parameter"><code>mod</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>module</code></em>Â :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+><span class="type">GTypeModule</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_shutdown_dynamic ()">
+<a name="gsf-shutdown-dynamic"></a><h3>gsf_shutdown_dynamic ()</h3>
+<pre class="programlisting">void                gsf_shutdown_dynamic                (<a
+href="/usr/share/gtk-doc/html/gobject/GTypeModule.html"
+>GTypeModule</a> *module);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>module</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="libgsf_major_version">
+<a name="libgsf-major-version"></a><h3>libgsf_major_version</h3>
+<pre class="programlisting">extern int libgsf_major_version;
+</pre>
+<p>
+Major version number of libgsf, indicating the ABI version.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="libgsf_minor_version">
+<a name="libgsf-minor-version"></a><h3>libgsf_minor_version</h3>
+<pre class="programlisting">extern int libgsf_minor_version;
+</pre>
+<p>
+Minor (secondary) version number of libgsf, indicating the API version.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="libgsf_micro_version">
+<a name="libgsf-micro-version"></a><h3>libgsf_micro_version</h3>
+<pre class="programlisting">extern int libgsf_micro_version;
+</pre>
+<p>
+Micro (tertiary) version number of libgsf, indicating bug fixes.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_CLASS()">
+<a name="GSF-CLASS--CAPS"></a><h3>GSF_CLASS()</h3>
+<pre class="programlisting">#define             GSF_CLASS(name, prefix, class_init, instance_init, parent)</pre>
+<p>
+Set up a GSF class.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td> (string) Name of the class.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td> (string) Prefix designating the namespace to be used for
+implementing the class.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td> (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GClassInitFunc"
+><span class="type">GClassInitFunc</span></a>) Initialisation function for the class.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td> (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GInstanceInitFunc"
+><span class="type">GInstanceInitFunc</span></a>) Initialisation (constructor) function
+for an instance of the class.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em>Â :</span></p></td>
+<td> Parent class to this class.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_CLASS_FULL()">
+<a name="GSF-CLASS-FULL--CAPS"></a><h3>GSF_CLASS_FULL()</h3>
+<pre class="programlisting">#define             GSF_CLASS_FULL(name, prefix, base_init, base_finalize, \
+            		       class_init, class_finalize, instance_init, parent_type, \
+            		       abstract, interface_decl)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>base_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>base_finalize</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_finalize</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>abstract</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interface_decl</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_CLASS_ABSTRACT()">
+<a name="GSF-CLASS-ABSTRACT--CAPS"></a><h3>GSF_CLASS_ABSTRACT()</h3>
+<pre class="programlisting">#define             GSF_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_INTERFACE()">
+<a name="GSF-INTERFACE--CAPS"></a><h3>GSF_INTERFACE()</h3>
+<pre class="programlisting">#define             GSF_INTERFACE(init_func, iface_type)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>init_func</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_INTERFACE_FULL()">
+<a name="GSF-INTERFACE-FULL--CAPS"></a><h3>GSF_INTERFACE_FULL()</h3>
+<pre class="programlisting">#define             GSF_INTERFACE_FULL(type, init_func, iface_type)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>init_func</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_DYNAMIC_CLASS()">
+<a name="GSF-DYNAMIC-CLASS--CAPS"></a><h3>GSF_DYNAMIC_CLASS()</h3>
+<pre class="programlisting">#define             GSF_DYNAMIC_CLASS(name, prefix, class_init, instance_init, parent)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_DYNAMIC_CLASS_FULL()">
+<a name="GSF-DYNAMIC-CLASS-FULL--CAPS"></a><h3>GSF_DYNAMIC_CLASS_FULL()</h3>
+<pre class="programlisting">#define             GSF_DYNAMIC_CLASS_FULL(name, prefix, base_init, base_finalize, \
+            				   class_init,  class_finalize, instance_init, parent_type, \
+            			       abstract, interface_decl)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>base_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>base_finalize</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_finalize</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>abstract</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interface_decl</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_DYNAMIC_CLASS_ABSTRACT()">
+<a name="GSF-DYNAMIC-CLASS-ABSTRACT--CAPS"></a><h3>GSF_DYNAMIC_CLASS_ABSTRACT()</h3>
+<pre class="programlisting">#define             GSF_DYNAMIC_CLASS_ABSTRACT(name, prefix, class_init, instance_init, parent)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_DYNAMIC_INTERFACE()">
+<a name="GSF-DYNAMIC-INTERFACE--CAPS"></a><h3>GSF_DYNAMIC_INTERFACE()</h3>
+<pre class="programlisting">#define             GSF_DYNAMIC_INTERFACE(init_func, iface_type, module)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>init_func</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>module</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_DYNAMIC_INTERFACE_FULL()">
+<a name="GSF-DYNAMIC-INTERFACE-FULL--CAPS"></a><h3>GSF_DYNAMIC_INTERFACE_FULL()</h3>
+<pre class="programlisting">#define             GSF_DYNAMIC_INTERFACE_FULL(type, init_func, iface_type, module)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>init_func</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>module</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_PARAM_STATIC">
+<a name="GSF-PARAM-STATIC--CAPS"></a><h3>GSF_PARAM_STATIC</h3>
+<pre class="programlisting">#define             GSF_PARAM_STATIC</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_ERROR">
+<a name="GSF-ERROR--CAPS"></a><h3>GSF_ERROR</h3>
+<pre class="programlisting">#define GSF_ERROR (gsf_error_quark ())
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum GsfError">
+<a name="GsfError"></a><h3>enum GsfError</h3>
+<pre class="programlisting">typedef enum {
+	GSF_ERROR_OUT_OF_MEMORY,
+	GSF_ERROR_INVALID_DATA
+} GsfError;
+</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="GSF-ERROR-OUT-OF-MEMORY--CAPS"></a><span class="term"><code class="literal">GSF_ERROR_OUT_OF_MEMORY</code></span></p></td>
+<td> Memory allocation failed
+</td>
+</tr>
+<tr>
+<td><p><a name="GSF-ERROR-INVALID-DATA--CAPS"></a><span class="term"><code class="literal">GSF_ERROR_INVALID_DATA</code></span></p></td>
+<td> Invalid data encountered (e.g. not enough data)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_error_quark ()">
+<a name="gsf-error-quark"></a><h3>gsf_error_quark ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+>GQuark</a>              gsf_error_quark                     (void);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td>  the <a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+><span class="type">GQuark</span></a> used to identify libgsf errors in <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> structures.
+	Specific error codes come from the <a class="link" href="gsf-utils.html#GsfError" title="enum GsfError"><span class="type">GsfError</span></a> enumeration.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_mem_dump ()">
+<a name="gsf-mem-dump"></a><h3>gsf_mem_dump ()</h3>
+<pre class="programlisting">void                gsf_mem_dump                        (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *ptr,
+                                                         size_t len);</pre>
+<p>
+Dump <em class="parameter"><code>len</code></em> bytes from the memory location given by <em class="parameter"><code>ptr</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ptr</code></em>Â :</span></p></td>
+<td> memory area to be dumped.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em>Â :</span></p></td>
+<td> how many bytes will be dumped.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_dump ()">
+<a name="gsf-input-dump"></a><h3>gsf_input_dump ()</h3>
+<pre class="programlisting">void                gsf_input_dump                      (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> dump_as_hex);</pre>
+<p>
+Dumps <em class="parameter"><code>input</code></em>'s contents to STDOUT, optionally in hex format.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>input</code></em>Â :</span></p></td>
+<td> a <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dump_as_hex</code></em>Â :</span></p></td>
+<td> If <code class="literal">TRUE</code>, dump in hexidecmal format
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_OFF_T_FORMAT">
+<a name="GSF-OFF-T-FORMAT--CAPS"></a><h3>GSF_OFF_T_FORMAT</h3>
+<pre class="programlisting">#define GSF_OFF_T_FORMAT	G_GINT64_FORMAT
+</pre>
+<p>
+The printf(3) conversion specifier to be used for printing values of type
+<a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t"><span class="type">gsf_off_t</span></a>.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_off_t">
+<a name="gsf-off-t"></a><h3>gsf_off_t</h3>
+<pre class="programlisting">typedef gint64 gsf_off_t;
+</pre>
+<p>
+Data type to represent offsets (positions) within a data stream.
+</p>
+<p>
+FIXME:
+gsf_off_t is really supposed to be the widest type off_t can be configured
+to on the platform</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_filename_to_utf8 ()">
+<a name="gsf-filename-to-utf8"></a><h3>gsf_filename_to_utf8 ()</h3>
+<pre class="programlisting">char *              gsf_filename_to_utf8                (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> quoted);</pre>
+<p>
 A utility wrapper to make sure filenames are valid utf8.
-Caller must g_free the result.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i> :</span></td><td> file name suitable for open(2).
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>quoted</tt></i> :</span></td><td> if TRUE, the resulting utf8 file name will be quoted
+Caller must g_free the result.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em>Â :</span></p></td>
+<td> file name suitable for open(2).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>quoted</code></em>Â :</span></p></td>
+<td> if <code class="literal">TRUE</code>, the resulting utf8 file name will be quoted
    (unless it is invalid).
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td><i class="parameter"><tt>filename</tt></i> using utf-8 encoding for display
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554549"></a><h3><a name="gsf-iconv-close"></a>gsf_iconv_close ()</h3><a class="indexterm" name="id2554560"></a><pre class="programlisting">void        gsf_iconv_close                 (GIConv handle);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>handle</tt></i> :</span></td><td>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554609"></a><h3><a name="gsf-base64-encode-simple"></a>gsf_base64_encode_simple ()</h3><a class="indexterm" name="id2554621"></a><pre class="programlisting">guint8*     gsf_base64_encode_simple        (guint8 const *data,
-                                             size_t len);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554698"></a><h3><a name="gsf-base64-encode-close"></a>gsf_base64_encode_close ()</h3><a class="indexterm" name="id2554709"></a><pre class="programlisting">size_t      gsf_base64_encode_close         (guint8 const *in,
-                                             size_t inlen,
-                                             gboolean break_lines,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned int *save);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>inlen</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>break_lines</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2554870"></a><h3><a name="gsf-base64-encode-step"></a>gsf_base64_encode_step ()</h3><a class="indexterm" name="id2554881"></a><pre class="programlisting">size_t      gsf_base64_encode_step          (guint8 const *in,
-                                             size_t len,
-                                             gboolean break_lines,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned int *save);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>break_lines</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555041"></a><h3><a name="gsf-base64-decode-simple"></a>gsf_base64_decode_simple ()</h3><a class="indexterm" name="id2555052"></a><pre class="programlisting">size_t      gsf_base64_decode_simple        (guint8 *data,
-                                             size_t len);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>data</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555129"></a><h3><a name="gsf-base64-decode-step"></a>gsf_base64_decode_step ()</h3><a class="indexterm" name="id2555141"></a><pre class="programlisting">size_t      gsf_base64_decode_step          (guint8 const *in,
-                                             size_t len,
-                                             guint8 *out,
-                                             int *state,
-                                             unsigned *save);</pre><p>
-Decodes a chunk of base64 encoded data</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i> :</span></td><td> input stream
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>len</tt></i> :</span></td><td> max length of data to decode
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>out</tt></i> :</span></td><td> output stream
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>state</tt></i> :</span></td><td> holds the number of bits that are stored in <i class="parameter"><tt>save</tt></i>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>save</tt></i> :</span></td><td> leftover bits that have not yet been decoded
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the number of bytes converted
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555294"></a><h3><a name="GSF-LE-GET-GINT8-CAPS"></a>GSF_LE_GET_GINT8()</h3><a class="indexterm" name="id2555306"></a><pre class="programlisting">#define GSF_LE_GET_GINT8(p) ((gint8)GSF_LE_GET_GUINT8(p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555339"></a><h3><a name="GSF-LE-GET-GUINT64-CAPS"></a>GSF_LE_GET_GUINT64()</h3><a class="indexterm" name="id2555350"></a><pre class="programlisting">#define GSF_LE_GET_GUINT64(p) (gsf_le_get_guint64 (p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555383"></a><h3><a name="GSF-LE-GET-GINT16-CAPS"></a>GSF_LE_GET_GINT16()</h3><a class="indexterm" name="id2555395"></a><pre class="programlisting">#define GSF_LE_GET_GINT16(p) ((gint16)GSF_LE_GET_GUINT16(p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555429"></a><h3><a name="GSF-LE-GET-GUINT8-CAPS"></a>GSF_LE_GET_GUINT8()</h3><a class="indexterm" name="id2555440"></a><pre class="programlisting">#define GSF_LE_GET_GUINT8(p) (*(guint8 const *)(p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555474"></a><h3><a name="GSF-LE-GET-GINT32-CAPS"></a>GSF_LE_GET_GINT32()</h3><a class="indexterm" name="id2555485"></a><pre class="programlisting">#define GSF_LE_GET_GINT32(p) ((gint32)GSF_LE_GET_GUINT32(p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555518"></a><h3><a name="GSF-LE-GET-GUINT16-CAPS"></a>GSF_LE_GET_GUINT16()</h3><a class="indexterm" name="id2555530"></a><pre class="programlisting">#define     GSF_LE_GET_GUINT16(p)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555562"></a><h3><a name="GSF-LE-GET-GUINT32-CAPS"></a>GSF_LE_GET_GUINT32()</h3><a class="indexterm" name="id2555574"></a><pre class="programlisting">#define     GSF_LE_GET_GUINT32(p)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555607"></a><h3><a name="GSF-LE-GET-FLOAT-CAPS"></a>GSF_LE_GET_FLOAT()</h3><a class="indexterm" name="id2555619"></a><pre class="programlisting">#define GSF_LE_GET_FLOAT(p) (gsf_le_get_float (p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555652"></a><h3><a name="GSF-LE-GET-DOUBLE-CAPS"></a>GSF_LE_GET_DOUBLE()</h3><a class="indexterm" name="id2555663"></a><pre class="programlisting">#define GSF_LE_GET_DOUBLE(p) (gsf_le_get_double (p))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555696"></a><h3><a name="gsf-le-get-guint64"></a>gsf_le_get_guint64 ()</h3><a class="indexterm" name="id2555707"></a><pre class="programlisting">guint64     gsf_le_get_guint64              (void const *p);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555762"></a><h3><a name="gsf-le-get-float"></a>gsf_le_get_float ()</h3><a class="indexterm" name="id2555773"></a><pre class="programlisting">float       gsf_le_get_float                (void const *p);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555829"></a><h3><a name="gsf-le-get-double"></a>gsf_le_get_double ()</h3><a class="indexterm" name="id2555840"></a><pre class="programlisting">double      gsf_le_get_double               (void const *p);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555895"></a><h3><a name="GSF-LE-SET-GUINT8-CAPS"></a>GSF_LE_SET_GUINT8()</h3><a class="indexterm" name="id2555907"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT8(p, dat)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2555953"></a><h3><a name="GSF-LE-SET-GUINT16-CAPS"></a>GSF_LE_SET_GUINT16()</h3><a class="indexterm" name="id2555964"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT16(p, dat)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556010"></a><h3><a name="GSF-LE-SET-GUINT32-CAPS"></a>GSF_LE_SET_GUINT32()</h3><a class="indexterm" name="id2556021"></a><pre class="programlisting">#define     GSF_LE_SET_GUINT32(p, dat)</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556068"></a><h3><a name="GSF-LE-SET-GINT8-CAPS"></a>GSF_LE_SET_GINT8()</h3><a class="indexterm" name="id2556080"></a><pre class="programlisting">#define GSF_LE_SET_GINT8(p,dat) GSF_LE_SET_GUINT8((p),(dat))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556126"></a><h3><a name="GSF-LE-SET-GINT16-CAPS"></a>GSF_LE_SET_GINT16()</h3><a class="indexterm" name="id2556138"></a><pre class="programlisting">#define GSF_LE_SET_GINT16(p,dat) GSF_LE_SET_GUINT16((p),(dat))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556184"></a><h3><a name="GSF-LE-SET-GINT32-CAPS"></a>GSF_LE_SET_GINT32()</h3><a class="indexterm" name="id2556196"></a><pre class="programlisting">#define GSF_LE_SET_GINT32(p,dat) GSF_LE_SET_GUINT32((p),(dat))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556243"></a><h3><a name="GSF-LE-SET-FLOAT-CAPS"></a>GSF_LE_SET_FLOAT()</h3><a class="indexterm" name="id2556254"></a><pre class="programlisting">#define GSF_LE_SET_FLOAT(p,dat) gsf_le_set_float((p),(dat))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556301"></a><h3><a name="GSF-LE-SET-DOUBLE-CAPS"></a>GSF_LE_SET_DOUBLE()</h3><a class="indexterm" name="id2556312"></a><pre class="programlisting">#define GSF_LE_SET_DOUBLE(p,dat) gsf_le_set_double((p),(dat))
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dat</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556359"></a><h3><a name="gsf-le-set-float"></a>gsf_le_set_float ()</h3><a class="indexterm" name="id2556369"></a><pre class="programlisting">void        gsf_le_set_float                (void *p,
-                                             float f);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>f</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556436"></a><h3><a name="gsf-le-set-double"></a>gsf_le_set_double ()</h3><a class="indexterm" name="id2556447"></a><pre class="programlisting">void        gsf_le_set_double               (void *p,
-                                             double d);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>d</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556513"></a><h3><a name="gsf-timestamp-copy"></a>gsf_timestamp_copy ()</h3><a class="indexterm" name="id2556525"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_copy            (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556581"></a><h3><a name="gsf-timestamp-free"></a>gsf_timestamp_free ()</h3><a class="indexterm" name="id2556592"></a><pre class="programlisting">void        gsf_timestamp_free              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556638"></a><h3><a name="gsf-timestamp-new-now"></a>gsf_timestamp_new_now ()</h3><a class="indexterm" name="id2556650"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_new_now         (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556686"></a><h3><a name="gsf-timestamp-get-type"></a>gsf_timestamp_get_type ()</h3><a class="indexterm" name="id2556697"></a><pre class="programlisting">GType       gsf_timestamp_get_type          (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556732"></a><h3><a name="gsf-timestamp-as-string"></a>gsf_timestamp_as_string ()</h3><a class="indexterm" name="id2556744"></a><pre class="programlisting">char*       gsf_timestamp_as_string         (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556800"></a><h3><a name="gsf-timestamp-parse"></a>gsf_timestamp_parse ()</h3><a class="indexterm" name="id2556812"></a><pre class="programlisting">int         gsf_timestamp_parse             (char const *spec,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>spec</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556888"></a><h3><a name="gsf-timestamp-hash"></a>gsf_timestamp_hash ()</h3><a class="indexterm" name="id2556900"></a><pre class="programlisting">guint       gsf_timestamp_hash              (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2556956"></a><h3><a name="gsf-timestamp-equal"></a>gsf_timestamp_equal ()</h3><a class="indexterm" name="id2556967"></a><pre class="programlisting">gboolean    gsf_timestamp_equal             (<a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *a,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *b);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>a</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>b</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2557044"></a><h3><a name="GSF-TIMESTAMP-TYPE-CAPS"></a>GSF_TIMESTAMP_TYPE</h3><a class="indexterm" name="id2557056"></a><pre class="programlisting">#define GSF_TIMESTAMP_TYPE        (gsf_timestamp_get_type ())
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2557072"></a><h3><a name="GsfTimestamp"></a>struct GsfTimestamp</h3><a class="indexterm" name="id2557082"></a><pre class="programlisting">struct GsfTimestamp {
-
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> <em class="parameter"><code>filename</code></em> using utf-8 encoding for display
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_iconv_close ()">
+<a name="gsf-iconv-close"></a><h3>gsf_iconv_close ()</h3>
+<pre class="programlisting">void                gsf_iconv_close                     (<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a> handle);</pre>
+<p>
+A utility wrapper to safely close an iconv handle.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>handle</code></em>Â :</span></p></td>
+<td> handle to be closed.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_extension_pointer ()">
+<a name="gsf-extension-pointer"></a><h3>gsf_extension_pointer ()</h3>
+<pre class="programlisting">char const *        gsf_extension_pointer               (char const *path);</pre>
+<p>
+Extracts the extension from the end of a filename (the part after the final
+'.' in the filename).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em>Â :</span></p></td>
+<td> A filename or file path.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> A pointer to the extension part of the filename, or a
+pointer to the end of the string if the filename does not
+have an extension.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_base64_encode_simple ()">
+<a name="gsf-base64-encode-simple"></a><h3>gsf_base64_encode_simple ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *            gsf_base64_encode_simple            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *data,
+                                                         size_t len);</pre>
+<p>
+Encodes data from <em class="parameter"><code>data</code></em> back into <em class="parameter"><code>data</code></em> using base64 encoding.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em>Â :</span></p></td>
+<td> data stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em>Â :</span></p></td>
+<td> max length of data to encode
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the number of bytes encoded
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_base64_encode_close ()">
+<a name="gsf-base64-encode-close"></a><h3>gsf_base64_encode_close ()</h3>
+<pre class="programlisting">size_t              gsf_base64_encode_close             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t inlen,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> break_lines,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);</pre>
+<p>
+This funcion should be called to when finished encoding everything, to
+flush off the last little bit.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>in</code></em>Â :</span></p></td>
+<td> Data to be encoded
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>inlen</code></em>Â :</span></p></td>
+<td> Length of data to be encoded
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>break_lines</code></em>Â :</span></p></td>
+<td> Whether to use line breaks
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>out</code></em>Â :</span></p></td>
+<td> Encoded data.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>state</code></em>Â :</span></p></td>
+<td> holds the number of bits that are stored in <em class="parameter"><code>save</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>save</code></em>Â :</span></p></td>
+<td> leftover bits that have not yet been decoded
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> a count of the number of bytes in the final block.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_base64_encode_step ()">
+<a name="gsf-base64-encode-step"></a><h3>gsf_base64_encode_step ()</h3>
+<pre class="programlisting">size_t              gsf_base64_encode_step              (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t len,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> break_lines,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);</pre>
+<p>
+Performs an 'encode step', only encodes blocks of 3 characters from <em class="parameter"><code>in</code></em> into
+the output <em class="parameter"><code>out</code></em> at a time, saves left-over state in <em class="parameter"><code>state</code></em> and <em class="parameter"><code>save</code></em>
+(initialise to 0 on first invocation).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>in</code></em>Â :</span></p></td>
+<td> input stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em>Â :</span></p></td>
+<td> max length of data to decode
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>break_lines</code></em>Â :</span></p></td>
+<td> Whether to use line breaks
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>out</code></em>Â :</span></p></td>
+<td> output stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>state</code></em>Â :</span></p></td>
+<td> holds the number of bits that are stored in <em class="parameter"><code>save</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>save</code></em>Â :</span></p></td>
+<td> leftover bits that have not yet been decoded
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the number of bytes encoded
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_base64_decode_simple ()">
+<a name="gsf-base64-decode-simple"></a><h3>gsf_base64_decode_simple ()</h3>
+<pre class="programlisting">size_t              gsf_base64_decode_simple            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *data,
+                                                         size_t len);</pre>
+<p>
+Decodes a chunk of base64 encoded data from <em class="parameter"><code>data</code></em> back into <em class="parameter"><code>data</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em>Â :</span></p></td>
+<td> data stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em>Â :</span></p></td>
+<td> max length of data to decode
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the number of bytes converted
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_base64_decode_step ()">
+<a name="gsf-base64-decode-step"></a><h3>gsf_base64_decode_step ()</h3>
+<pre class="programlisting">size_t              gsf_base64_decode_step              (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *in,
+                                                         size_t len,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *out,
+                                                         int *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *save);</pre>
+<p>
+Decodes a chunk of base64 encoded data</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>in</code></em>Â :</span></p></td>
+<td> input stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em>Â :</span></p></td>
+<td> max length of data to decode
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>out</code></em>Â :</span></p></td>
+<td> output stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>state</code></em>Â :</span></p></td>
+<td> holds the number of bits that are stored in <em class="parameter"><code>save</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>save</code></em>Â :</span></p></td>
+<td> leftover bits that have not yet been decoded
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the number of bytes converted
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GINT8()">
+<a name="GSF-LE-GET-GINT8--CAPS"></a><h3>GSF_LE_GET_GINT8()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GINT8(p) ((gint8)GSF_LE_GET_GUINT8(p))
+</pre>
+<p>
+Interpret binary data as a signed 8-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GUINT64()">
+<a name="GSF-LE-GET-GUINT64--CAPS"></a><h3>GSF_LE_GET_GUINT64()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GUINT64(p) (gsf_le_get_guint64 (p))
+</pre>
+<p>
+Interpret binary data as an unsigned 64-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GINT16()">
+<a name="GSF-LE-GET-GINT16--CAPS"></a><h3>GSF_LE_GET_GINT16()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GINT16(p) ((gint16)GSF_LE_GET_GUINT16(p))
+</pre>
+<p>
+Interpret binary data as a signed 16-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GUINT8()">
+<a name="GSF-LE-GET-GUINT8--CAPS"></a><h3>GSF_LE_GET_GUINT8()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GUINT8(p) (*(guint8 const *)(p))
+</pre>
+<p>
+Interpret binary data as an unsigned 8-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GINT32()">
+<a name="GSF-LE-GET-GINT32--CAPS"></a><h3>GSF_LE_GET_GINT32()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GINT32(p) ((gint32)GSF_LE_GET_GUINT32(p))
+</pre>
+<p>
+Interpret binary data as a signed 32-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GUINT16()">
+<a name="GSF-LE-GET-GUINT16--CAPS"></a><h3>GSF_LE_GET_GUINT16()</h3>
+<pre class="programlisting">#define             GSF_LE_GET_GUINT16(p)</pre>
+<p>
+Interpret binary data as an unsigned 16-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GUINT32()">
+<a name="GSF-LE-GET-GUINT32--CAPS"></a><h3>GSF_LE_GET_GUINT32()</h3>
+<pre class="programlisting">#define             GSF_LE_GET_GUINT32(p)</pre>
+<p>
+Interpret binary data as an unsigned 32-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_GINT64()">
+<a name="GSF-LE-GET-GINT64--CAPS"></a><h3>GSF_LE_GET_GINT64()</h3>
+<pre class="programlisting">#define GSF_LE_GET_GINT64(p) ((gint64)GSF_LE_GET_GUINT64(p))
+</pre>
+<p>
+Interpret binary data as a signed 64-bit integer in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_le_get_guint64 ()">
+<a name="gsf-le-get-guint64"></a><h3>gsf_le_get_guint64 ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"
+>guint64</a>             gsf_le_get_guint64                  (void const *p);</pre>
+<p>
+Interpret binary data as a guint64 (8 byte unsigned integer type) in little
+endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> interpreted data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_FLOAT()">
+<a name="GSF-LE-GET-FLOAT--CAPS"></a><h3>GSF_LE_GET_FLOAT()</h3>
+<pre class="programlisting">#define GSF_LE_GET_FLOAT(p) (gsf_le_get_float (p))
+</pre>
+<p>
+Interpret binary data as a float in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_le_get_float ()">
+<a name="gsf-le-get-float"></a><h3>gsf_le_get_float ()</h3>
+<pre class="programlisting">float               gsf_le_get_float                    (void const *p);</pre>
+<p>
+Interpret binary data as a float in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> interpreted data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_GET_DOUBLE()">
+<a name="GSF-LE-GET-DOUBLE--CAPS"></a><h3>GSF_LE_GET_DOUBLE()</h3>
+<pre class="programlisting">#define GSF_LE_GET_DOUBLE(p) (gsf_le_get_double (p))
+</pre>
+<p>
+Interpret binary data as a double in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_le_get_double ()">
+<a name="gsf-le-get-double"></a><h3>gsf_le_get_double ()</h3>
+<pre class="programlisting">double              gsf_le_get_double                   (void const *p);</pre>
+<p>
+Interpret binary data as a double in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> interpreted data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GUINT8()">
+<a name="GSF-LE-SET-GUINT8--CAPS"></a><h3>GSF_LE_SET_GUINT8()</h3>
+<pre class="programlisting">#define             GSF_LE_SET_GUINT8(p, dat)</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 8-bit unsigned integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GUINT16()">
+<a name="GSF-LE-SET-GUINT16--CAPS"></a><h3>GSF_LE_SET_GUINT16()</h3>
+<pre class="programlisting">#define             GSF_LE_SET_GUINT16(p, dat)</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 16-bit unsigned integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GUINT32()">
+<a name="GSF-LE-SET-GUINT32--CAPS"></a><h3>GSF_LE_SET_GUINT32()</h3>
+<pre class="programlisting">#define             GSF_LE_SET_GUINT32(p, dat)</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 32-bit unsigned integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GINT8()">
+<a name="GSF-LE-SET-GINT8--CAPS"></a><h3>GSF_LE_SET_GINT8()</h3>
+<pre class="programlisting">#define GSF_LE_SET_GINT8(p,dat) GSF_LE_SET_GUINT8((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 8-bit signed integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GINT16()">
+<a name="GSF-LE-SET-GINT16--CAPS"></a><h3>GSF_LE_SET_GINT16()</h3>
+<pre class="programlisting">#define GSF_LE_SET_GINT16(p,dat) GSF_LE_SET_GUINT16((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 16-bit signed integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GINT32()">
+<a name="GSF-LE-SET-GINT32--CAPS"></a><h3>GSF_LE_SET_GINT32()</h3>
+<pre class="programlisting">#define GSF_LE_SET_GINT32(p,dat) GSF_LE_SET_GUINT32((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 32-bit signed integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GINT64()">
+<a name="GSF-LE-SET-GINT64--CAPS"></a><h3>GSF_LE_SET_GINT64()</h3>
+<pre class="programlisting">#define GSF_LE_SET_GINT64(p,dat) GSF_LE_SET_GUINT64((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 64-bit signed integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_GUINT64()">
+<a name="GSF-LE-SET-GUINT64--CAPS"></a><h3>GSF_LE_SET_GUINT64()</h3>
+<pre class="programlisting">#define             GSF_LE_SET_GUINT64(p, dat)</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> 64-bit unsigned integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_FLOAT()">
+<a name="GSF-LE-SET-FLOAT--CAPS"></a><h3>GSF_LE_SET_FLOAT()</h3>
+<pre class="programlisting">#define GSF_LE_SET_FLOAT(p,dat) gsf_le_set_float((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> float to be stored
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_LE_SET_DOUBLE()">
+<a name="GSF-LE-SET-DOUBLE--CAPS"></a><h3>GSF_LE_SET_DOUBLE()</h3>
+<pre class="programlisting">#define GSF_LE_SET_DOUBLE(p,dat) gsf_le_set_double((p),(dat))
+</pre>
+<p>
+Store <em class="parameter"><code>dat</code></em> in little endian order in memory pointed to by <em class="parameter"><code>p</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dat</code></em>Â :</span></p></td>
+<td> double to be stored
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_le_set_float ()">
+<a name="gsf-le-set-float"></a><h3>gsf_le_set_float ()</h3>
+<pre class="programlisting">void                gsf_le_set_float                    (void *p,
+                                                         float f);</pre>
+<p>
+Store a value of type float in memory in little endian order.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em>Â :</span></p></td>
+<td> float to be stored
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_le_set_double ()">
+<a name="gsf-le-set-double"></a><h3>gsf_le_set_double ()</h3>
+<pre class="programlisting">void                gsf_le_set_double                   (void *p,
+                                                         double d);</pre>
+<p>
+Store a value of type double in memory in little endian order</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em>Â :</span></p></td>
+<td> pointer to storage
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>d</code></em>Â :</span></p></td>
+<td> double to be stored
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfTimestamp">
+<a name="GsfTimestamp"></a><h3>GsfTimestamp</h3>
+<pre class="programlisting">typedef struct {
 	GDate	  date;			/* In local timezone */
 	glong     seconds;		/* time of day */
 	GString	  time_zone;		/* possibly blank */
 
 	guint32	  timet;
-};
-</pre><p>
+} GsfTimestamp;
+</pre>
+<p>
+A point in time.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Date-and-Time-Functions.html#GDate"
+>GDate</a>Â <em class="structfield"><code>date</code></em>;</span></p></td>
+<td>	<a
+href="/usr/share/gtk-doc/html/glib/glib-Date-and-Time-Functions.html#GDate"
+><span class="type">GDate</span></a> in local timezone
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#glong"
+>glong</a>Â <em class="structfield"><code>seconds</code></em>;</span></p></td>
+<td>	<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#glong"
+><span class="type">glong</span></a> number of seconds since <em class="parameter"><code>date</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Strings.html#GString"
+>GString</a>Â <em class="structfield"><code>time_zone</code></em>;</span></p></td>
+<td>	possibly blank <a
+href="/usr/share/gtk-doc/html/glib/glib-Strings.html#GString"
+><span class="type">GString</span></a> of the timezone
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a>Â <em class="structfield"><code>timet</code></em>;</span></p></td>
+<td> as from mktime.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_copy ()">
+<a name="gsf-timestamp-copy"></a><h3>gsf_timestamp_copy ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *      gsf_timestamp_copy                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);</pre>
+<p>
+Copies a timestamp.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td> timestamp to be copied
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> a separate copy of <em class="parameter"><code>stamp</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_free ()">
+<a name="gsf-timestamp-free"></a><h3>gsf_timestamp_free ()</h3>
+<pre class="programlisting">void                gsf_timestamp_free                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);</pre>
+<p>
+Releases the memory in use for <em class="parameter"><code>stamp</code></em> (if any).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td> timestamp to be freed
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_as_string ()">
+<a name="gsf-timestamp-as-string"></a><h3>gsf_timestamp_as_string ()</h3>
+<pre class="programlisting">char *              gsf_timestamp_as_string             (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);</pre>
+<p>
+Produce a string representation (ISO 8601 format) of <em class="parameter"><code>stamp</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td> timestamp to be converted.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> a string representation of <em class="parameter"><code>stamp</code></em>. When <em class="parameter"><code>stamp</code></em> is <code class="literal">NULL</code>, the
+representation is "&lt;invalid&gt;".
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_from_string ()">
+<a name="gsf-timestamp-from-string"></a><h3>gsf_timestamp_from_string ()</h3>
+<pre class="programlisting">int                 gsf_timestamp_from_string           (char const *spec,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);</pre>
+<p>
+Very simple parser for time stamps.  Currently requires a format of
+	'YYYY-MM-DDThh:mm:ss'
+and does no bounds checking.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>spec</code></em>Â :</span></p></td>
+<td> The string to parse
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td> <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp"><span class="type">GsfTimestamp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> <code class="literal">TRUE</code> on success
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 1.14.12</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_hash ()">
+<a name="gsf-timestamp-hash"></a><h3>gsf_timestamp_hash ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gsf_timestamp_hash                  (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_equal ()">
+<a name="gsf-timestamp-equal"></a><h3>gsf_timestamp_equal ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gsf_timestamp_equal                 (<a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *a,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *b);</pre>
+<p>
+Compare timestamps <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a</code></em>Â :</span></p></td>
+<td> a timestamp
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>b</code></em>Â :</span></p></td>
+<td> another timestamp
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> true if <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em> represent the same point in time; false otherwise.
 
-</p></div><hr><div class="refsect2" lang="en"><a name="id2557100"></a><h3><a name="gsf-timestamp-new"></a>gsf_timestamp_new ()</h3><a class="indexterm" name="id2557111"></a><pre class="programlisting"><a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a>* gsf_timestamp_new             (GDate const *date,
-                                             glong seconds,
-                                             char const *tz);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>date</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>seconds</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>tz</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2557209"></a><h3><a name="g-value-set-timestamp"></a>g_value_set_timestamp ()</h3><a class="indexterm" name="id2557221"></a><pre class="programlisting">void        g_value_set_timestamp           (GValue *value,
-                                             <a href="gsf-utils.html#GsfTimestamp">GsfTimestamp</a> const *stamp);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>value</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>stamp</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="misc.html"><b>&lt;&lt; Miscellaneous</b></a></td><td align="right"><a accesskey="n" href="ix01.html"><b>Index &gt;&gt;</b></a></td></tr></table></body></html>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_value_set_timestamp ()">
+<a name="gsf-value-set-timestamp"></a><h3>gsf_value_set_timestamp ()</h3>
+<pre class="programlisting">void                gsf_value_set_timestamp             (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> const *stamp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="VAL_IS_GSF_TIMESTAMP()">
+<a name="VAL-IS-GSF-TIMESTAMP--CAPS"></a><h3>VAL_IS_GSF_TIMESTAMP()</h3>
+<pre class="programlisting">#define VAL_IS_GSF_TIMESTAMP(v) (G_TYPE_CHECK_VALUE_TYPE((v), GSF_TIMESTAMP_TYPE))
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>v</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_timestamp_parse ()">
+<a name="gsf-timestamp-parse"></a><h3>gsf_timestamp_parse ()</h3>
+<pre class="programlisting">int                 gsf_timestamp_parse                 (char const *spec,
+                                                         <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp">GsfTimestamp</a> *stamp);</pre>
+<p>
+Very simple parser for time stamps.  Currently requires a format of
+	'YYYY-MM-DDThh:mm:ss'
+and does no bounds checking.
+</p>
+<p>
+Deprecated : Use gsf_timestamp_from_string</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>spec</code></em>Â :</span></p></td>
+<td> The string to parse
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>stamp</code></em>Â :</span></p></td>
+<td> <a class="link" href="gsf-utils.html#GsfTimestamp" title="GsfTimestamp"><span class="type">GsfTimestamp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> <code class="literal">TRUE</code> on success
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_swap_val ()">
+<a name="gsf-doc-prop-swap-val"></a><h3>gsf_doc_prop_swap_val ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *            gsf_doc_prop_swap_val               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em>Â :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em>Â :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the current value of <em class="parameter"><code>prop</code></em>, and replaces it with <em class="parameter"><code>val</code></em>
+	Caller is responsible for unsetting and freeing the result.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_property_settings_collect ()">
+<a name="gsf-property-settings-collect"></a><h3>gsf_property_settings_collect ()</h3>
+<pre class="programlisting">void                gsf_property_settings_collect       (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> object_type,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> **p_params,
+                                                         size_t *p_n_params,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *first_property_name,
+                                                         ...);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object_type</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p_params</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p_n_params</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_property_settings_collect_valist ()">
+<a name="gsf-property-settings-collect-valist"></a><h3>gsf_property_settings_collect_valist ()</h3>
+<pre class="programlisting">void                gsf_property_settings_collect_valist
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> object_type,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> **p_params,
+                                                         size_t *p_n_params,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *first_property_name,
+                                                         va_list var_args);</pre>
+<p>
+This function builds a GParameter array suitable for g_object_newv.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object_type</code></em>Â :</span></p></td>
+<td> the GType for which the properties are being set.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p_params</code></em>Â :</span></p></td>
+<td> a pointer to the GParameter array that holds the properties.
+  (Used for both input and output.  This may point to a <code class="literal">NULL</code> pointer if
+  there are no properties collected yet.)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p_n_params</code></em>Â :</span></p></td>
+<td> a pointer to the number of properties collected.  (Used for
+  both input and output.)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em>Â :</span></p></td>
+<td> the name of the first property being set, or NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>var_args</code></em>Â :</span></p></td>
+<td> a va_list holding the remainder of the property names and
+  values, terminated by a <code class="literal">NULL</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_property_settings_free ()">
+<a name="gsf-property-settings-free"></a><h3>gsf_property_settings_free ()</h3>
+<pre class="programlisting">void                gsf_property_settings_free          (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GParameter"
+>GParameter</a> *params,
+                                                         size_t n_params);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>params</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_params</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

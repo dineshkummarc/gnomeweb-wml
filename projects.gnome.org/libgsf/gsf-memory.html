@@ -1,114 +1,312 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>memory</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="sources.html" title="Stream Sources"><link rel="previous" href="gsf-Reading-and-Writing-from-local-files-and-directories.html" title="Reading and Writing from local files and directories"><link rel="next" href="gsf-GIOChannel.html" title="GIOChannel"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-Reading-and-Writing-from-local-files-and-directories.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="sources.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-GIOChannel.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-memory"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">memory</span></h2><p>memory &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfInputMemory"></a><a name="GsfOutputMemory"></a><a name="GsfSharedMemory"></a><pre class="synopsis">
-
-
-
-struct      <a href="gsf-memory.html#GsfInputMemory-struct">GsfInputMemory</a>;
-<a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* <a href="gsf-memory.html#gsf-input-mmap-new">gsf_input_mmap_new</a>          (char const *filename,
-                                             GError **err);
-<a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* <a href="gsf-memory.html#gsf-input-memory-new">gsf_input_memory_new</a>        (guint8 const *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> length,
-                                             gboolean needs_free);
-<a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* <a href="gsf-memory.html#gsf-input-memory-new-clone">gsf_input_memory_new_clone</a>  (guint8 const *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> length);
-<a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* <a href="gsf-memory.html#gsf-input-memory-new-from-iochannel">gsf_input_memory_new_from_iochannel</a>
-                                            (GIOChannel *channel,
-                                             GError **error);
-struct      <a href="gsf-memory.html#GsfOutputMemory-struct">GsfOutputMemory</a>;
-const guint8* <a href="gsf-memory.html#gsf-output-memory-get-bytes">gsf_output_memory_get_bytes</a>   (<a href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a> *mem);
-GType       <a href="gsf-memory.html#gsf-output-memory-get-type">gsf_output_memory_get_type</a>      (void);
-<a href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a>* <a href="gsf-memory.html#gsf-output-memory-new">gsf_output_memory_new</a>      (void);
-struct      <a href="gsf-memory.html#GsfSharedMemory-struct">GsfSharedMemory</a>;
-<a href="gsf-memory.html#GsfSharedMemory">GsfSharedMemory</a>* <a href="gsf-memory.html#gsf-shared-memory-new">gsf_shared_memory_new</a>      (void *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size,
-                                             gboolean needs_free);
-<a href="gsf-memory.html#GsfSharedMemory">GsfSharedMemory</a>* <a href="gsf-memory.html#gsf-shared-memory-mmapped-new">gsf_shared_memory_mmapped_new</a>
-                                            (void *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size);
-
-</pre></div><div class="refsect1" lang="en"><a name="id2518436"></a><h2>Object Hierarchy</h2><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>memory</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="sources.html" title="Stream Sources">
+<link rel="prev" href="gsf-Reading-and-Writing-from-local-files-and-directories.html" title="Reading and Writing from local files and directories">
+<link rel="next" href="gsf-GIOChannel.html" title="GIOChannel">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="PartÂ I.Â GSF: Introduction">
+<link rel="part" href="history.html" title="PartÂ II.Â GSF: History">
+<link rel="part" href="dependencies.html" title="PartÂ III.Â GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="PartÂ IV.Â Projects using GSF">
+<link rel="part" href="api.html" title="PartÂ V.Â API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gsf-Reading-and-Writing-from-local-files-and-directories.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="sources.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-GIOChannel.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-memory.synopsis" class="shortcut">Top</a>
+                Â |Â 
+                <a href="#gsf-memory.description" class="shortcut">Description</a>
+                Â |Â 
+                <a href="#gsf-memory.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="memory">
+<a name="gsf-memory"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-memory.top_of_page"></a>memory</span></h2>
+<p>memory</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-memory.synopsis"></a><h2>Synopsis</h2>
+<a name="GsfInputMemory"></a><a name="GsfOutputMemory"></a><pre class="synopsis">
+                    <a class="link" href="gsf-memory.html#GsfInputMemory-struct" title="GsfInputMemory">GsfInputMemory</a>;
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-memory.html#gsf-input-mmap-new" title="gsf_input_mmap_new ()">gsf_input_mmap_new</a>                  (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-memory.html#gsf-input-memory-new" title="gsf_input_memory_new ()">gsf_input_memory_new</a>                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *buf,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> length,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> needs_free);
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-memory.html#gsf-input-memory-new-clone" title="gsf_input_memory_new_clone ()">gsf_input_memory_new_clone</a>          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *buf,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> length);
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-memory.html#gsf-input-memory-new-from-iochannel" title="gsf_input_memory_new_from_iochannel ()">gsf_input_memory_new_from_iochannel</a> (<a
+href="/usr/share/gtk-doc/html/glib/glib-IO-Channels.html#GIOChannel"
+>GIOChannel</a> *channel,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+                    <a class="link" href="gsf-memory.html#GsfOutputMemory-struct" title="GsfOutputMemory">GsfOutputMemory</a>;
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a>*       <a class="link" href="gsf-memory.html#gsf-output-memory-get-bytes" title="gsf_output_memory_get_bytes ()">gsf_output_memory_get_bytes</a>         (<a class="link" href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a> *mem);
+<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         <a class="link" href="gsf-memory.html#gsf-output-memory-new" title="gsf_output_memory_new ()">gsf_output_memory_new</a>               (void);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="gsf-memory.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
          +----GsfInputMemory
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
          +----GsfOutputMemory
-</pre><pre class="synopsis">
-
-  GObject
-   +----GsfSharedMemory
-</pre></div><div class="refsect1" lang="en"><a name="id2518495"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2518505"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2518511"></a><h3><a name="GsfInputMemory-struct"></a>struct GsfInputMemory</h3><a class="indexterm" name="id2518522"></a><pre class="programlisting">struct GsfInputMemory;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2518538"></a><h3><a name="gsf-input-mmap-new"></a>gsf_input_mmap_new ()</h3><a class="indexterm" name="id2518549"></a><pre class="programlisting"><a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* gsf_input_mmap_new          (char const *filename,
-                                             GError **err);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i> :</span></td><td> The file on disk that you want to mmap
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i> :</span></td><td> A <span class="type">GError</span>, or optionally <tt class="literal">null</tt>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A new <a href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2518652"></a><h3><a name="gsf-input-memory-new"></a>gsf_input_memory_new ()</h3><a class="indexterm" name="id2518663"></a><pre class="programlisting"><a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* gsf_input_memory_new        (guint8 const *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> length,
-                                             gboolean needs_free);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>buf</tt></i> :</span></td><td> The input bytes
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>length</tt></i> :</span></td><td> The length of <i class="parameter"><tt>buf</tt></i>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>needs_free</tt></i> :</span></td><td> Whether you want this memory to be free'd at object destruction
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A new <a href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2518780"></a><h3><a name="gsf-input-memory-new-clone"></a>gsf_input_memory_new_clone ()</h3><a class="indexterm" name="id2518792"></a><pre class="programlisting"><a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* gsf_input_memory_new_clone  (guint8 const *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> length);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>buf</tt></i> :</span></td><td> The input bytes
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>length</tt></i> :</span></td><td> The length of <i class="parameter"><tt>buf</tt></i>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A new <a href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2518887"></a><h3><a name="gsf-input-memory-new-from-iochannel"></a>gsf_input_memory_new_from_iochannel ()</h3><a class="indexterm" name="id2518899"></a><pre class="programlisting"><a href="gsf-memory.html#GsfInputMemory">GsfInputMemory</a>* gsf_input_memory_new_from_iochannel
-                                            (GIOChannel *channel,
-                                             GError **error);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>channel</tt></i> :</span></td><td> a <span class="type">GIOChannel</span>.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>error</tt></i> :</span></td><td> a <span class="type">GError</span>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new <a href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a> or NULL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2519004"></a><h3><a name="GsfOutputMemory-struct"></a>struct GsfOutputMemory</h3><a class="indexterm" name="id2519015"></a><pre class="programlisting">struct GsfOutputMemory;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2519030"></a><h3><a name="gsf-output-memory-get-bytes"></a>gsf_output_memory_get_bytes ()</h3><a class="indexterm" name="id2519042"></a><pre class="programlisting">const guint8* gsf_output_memory_get_bytes   (<a href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a> *mem);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>mem</tt></i> :</span></td><td> the output device.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> The data that has been written to <i class="parameter"><tt>mem</tt></i>, or <tt class="literal">null</tt>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2519115"></a><h3><a name="gsf-output-memory-get-type"></a>gsf_output_memory_get_type ()</h3><a class="indexterm" name="id2519127"></a><pre class="programlisting">GType       gsf_output_memory_get_type      (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2519162"></a><h3><a name="gsf-output-memory-new"></a>gsf_output_memory_new ()</h3><a class="indexterm" name="id2519173"></a><pre class="programlisting"><a href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a>* gsf_output_memory_new      (void);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new file or NULL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2519213"></a><h3><a name="GsfSharedMemory-struct"></a>struct GsfSharedMemory</h3><a class="indexterm" name="id2519224"></a><pre class="programlisting">struct GsfSharedMemory;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2519239"></a><h3><a name="gsf-shared-memory-new"></a>gsf_shared_memory_new ()</h3><a class="indexterm" name="id2519251"></a><pre class="programlisting"><a href="gsf-memory.html#GsfSharedMemory">GsfSharedMemory</a>* gsf_shared_memory_new      (void *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size,
-                                             gboolean needs_free);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>buf</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>size</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>needs_free</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2519349"></a><h3><a name="gsf-shared-memory-mmapped-new"></a>gsf_shared_memory_mmapped_new ()</h3><a class="indexterm" name="id2519361"></a><pre class="programlisting"><a href="gsf-memory.html#GsfSharedMemory">GsfSharedMemory</a>* gsf_shared_memory_mmapped_new
-                                            (void *buf,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> size);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>buf</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>size</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-Reading-and-Writing-from-local-files-and-directories.html"><b>&lt;&lt; Reading and Writing from local files and directories</b></a></td><td align="right"><a accesskey="n" href="gsf-GIOChannel.html"><b>GIOChannel &gt;&gt;</b></a></td></tr></table></body></html>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-memory.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-memory.details"></a><h2>Details</h2>
+<div class="refsect2" title="GsfInputMemory">
+<a name="GsfInputMemory-struct"></a><h3>GsfInputMemory</h3>
+<pre class="programlisting">typedef struct _GsfInputMemory GsfInputMemory;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_mmap_new ()">
+<a name="gsf-input-mmap-new"></a><h3>gsf_input_mmap_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_mmap_new                  (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em>Â :</span></p></td>
+<td> The file on disk that you want to mmap
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em>Â :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a>, or optionally <code class="literal">null</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> A new <a class="link" href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_memory_new ()">
+<a name="gsf-input-memory-new"></a><h3>gsf_input_memory_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_memory_new                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *buf,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> length,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> needs_free);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em>Â :</span></p></td>
+<td> The input bytes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em>Â :</span></p></td>
+<td> The length of <em class="parameter"><code>buf</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>needs_free</code></em>Â :</span></p></td>
+<td> Whether you want this memory to be free'd at object destruction
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> A new <a class="link" href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_memory_new_clone ()">
+<a name="gsf-input-memory-new-clone"></a><h3>gsf_input_memory_new_clone ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_memory_new_clone          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *buf,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> length);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em>Â :</span></p></td>
+<td> The input bytes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em>Â :</span></p></td>
+<td> The length of <em class="parameter"><code>buf</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> A new <a class="link" href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_memory_new_from_iochannel ()">
+<a name="gsf-input-memory-new-from-iochannel"></a><h3>gsf_input_memory_new_from_iochannel ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_memory_new_from_iochannel (<a
+href="/usr/share/gtk-doc/html/glib/glib-IO-Channels.html#GIOChannel"
+>GIOChannel</a> *channel,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>channel</code></em>Â :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-IO-Channels.html#GIOChannel"
+><span class="type">GIOChannel</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em>Â :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> a new <a class="link" href="gsf-memory.html#GsfInputMemory"><span class="type">GsfInputMemory</span></a> or NULL.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfOutputMemory">
+<a name="GsfOutputMemory-struct"></a><h3>GsfOutputMemory</h3>
+<pre class="programlisting">typedef struct _GsfOutputMemory GsfOutputMemory;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_memory_get_bytes ()">
+<a name="gsf-output-memory-get-bytes"></a><h3>gsf_output_memory_get_bytes ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a>*       gsf_output_memory_get_bytes         (<a class="link" href="gsf-memory.html#GsfOutputMemory">GsfOutputMemory</a> *mem);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mem</code></em>Â :</span></p></td>
+<td> the output device.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> The data that has been written to <em class="parameter"><code>mem</code></em>, or <code class="literal">null</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_memory_new ()">
+<a name="gsf-output-memory-new"></a><h3>gsf_output_memory_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         gsf_output_memory_new               (void);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> a new file or <code class="literal">NULL</code>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

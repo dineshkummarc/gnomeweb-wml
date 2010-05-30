@@ -1,357 +1,291 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Zip</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="parsers.html" title="Stream Parsers"><link rel="previous" href="gsf-XML-and-libxml.html" title="XML and libxml"><link rel="next" href="gsf-Compression.html" title="Compression"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-XML-and-libxml.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-Compression.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-Zip"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">Zip</span></h2><p>Zip &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfInfileZip"></a><a name="GsfOutfileZip"></a><pre class="synopsis">
-
-
-
-struct      <a href="gsf-Zip.html#GsfInfileZip-struct">GsfInfileZip</a>;
-<a href="gsf-Zip.html#GsfInfileZip">GsfInfileZip</a>* <a href="gsf-Zip.html#gsf-infile-zip-new">gsf_infile_zip_new</a>            (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
-                                             GError **err);
-struct      <a href="gsf-Zip.html#GsfOutfileZip-struct">GsfOutfileZip</a>;
-<a href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a>* <a href="gsf-Zip.html#gsf-outfile-zip-new">gsf_outfile_zip_new</a>          (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
-                                             GError **err);
-gboolean    <a href="gsf-Zip.html#gsf-outfile-zip-set-compression-method">gsf_outfile_zip_set_compression_method</a>
-                                            (<a href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a> *zip,
-                                             <a href="gsf-Zip.html#GsfZipCompressionMethod">GsfZipCompressionMethod</a> method);
-
-
-struct      <a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a>;
-<a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a>* <a href="gsf-Zip.html#gsf-zip-dirent-new">gsf_zip_dirent_new</a>            (void);
-void        <a href="gsf-Zip.html#gsf-zip-dirent-free">gsf_zip_dirent_free</a>             (<a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a> *dirent);
-struct      <a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a>;
-void        <a href="gsf-Zip.html#gsf-vdir-free">gsf_vdir_free</a>                   (<a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *vdir,
-                                             gboolean free_dirent);
-<a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a>* <a href="gsf-Zip.html#gsf-vdir-new">gsf_vdir_new</a>                    (char const *name,
-                                             gboolean is_directory,
-                                             <a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a> *dirent);
-void        <a href="gsf-Zip.html#gsf-vdir-add-child">gsf_vdir_add_child</a>              (<a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *vdir,
-                                             <a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *child);
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-USIZE-CAPS">ZIP_DIRENT_USIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-OFFSET-CAPS">ZIP_DIRENT_OFFSET</a>
-enum        <a href="gsf-Zip.html#GsfZipCompressionMethod">GsfZipCompressionMethod</a>;
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-NAME-SIZE-CAPS">ZIP_FILE_HEADER_NAME_SIZE</a>
-#define     <a href="gsf-Zip.html#ZZIP-IS-STREAMED-CAPS">ZZIP_IS_STREAMED</a>                (p)
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-EXTRACT-CAPS">ZIP_FILE_HEADER_EXTRACT</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-SIZE-CAPS">ZIP_TRAILER_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-TIME-CAPS">ZIP_HEADER_TIME</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-SIZE-CAPS">ZIP_FILE_HEADER_SIZE</a>
-#define     <a href="gsf-Zip.html#ZZIP-IS-ENCRYPTED-CAPS">ZZIP_IS_ENCRYPTED</a>               (p)
-#define     <a href="gsf-Zip.html#ZIP-HEADER-VERSION-CAPS">ZIP_HEADER_VERSION</a>
-#define     <a href="gsf-Zip.html#ZIP-BUF-SIZE-CAPS">ZIP_BUF_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-CRC32-CAPS">ZIP_DIRENT_CRC32</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-COMP-SIZE-CAPS">ZIP_HEADER_COMP_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-COMPR-METHOD-CAPS">ZIP_DIRENT_COMPR_METHOD</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-FILE-TYPE-CAPS">ZIP_DIRENT_FILE_TYPE</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-EXTRAS-SIZE-CAPS">ZIP_FILE_HEADER_EXTRAS_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-EXTRACT-CAPS">ZIP_DIRENT_EXTRACT</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-FILE-MODE-CAPS">ZIP_DIRENT_FILE_MODE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-FLAGS-CAPS">ZIP_DIRENT_FLAGS</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-CSIZE-CAPS">ZIP_FILE_HEADER_CSIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-DIR-SIZE-CAPS">ZIP_TRAILER_DIR_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-COMMENT-SIZE-CAPS">ZIP_TRAILER_COMMENT_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-ENTRIES-CAPS">ZIP_TRAILER_ENTRIES</a>
-#define     <a href="gsf-Zip.html#ZIP-NAME-SEPARATOR-CAPS">ZIP_NAME_SEPARATOR</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-SIZE-CAPS">ZIP_HEADER_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-CRC-CAPS">ZIP_HEADER_CRC</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-FLAGS-CAPS">ZIP_FILE_HEADER_FLAGS</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-EXTRAS-SIZE-CAPS">ZIP_DIRENT_EXTRAS_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-COMP-METHOD-CAPS">ZIP_HEADER_COMP_METHOD</a>
-#define     <a href="gsf-Zip.html#ZZIP-IS-COMPRLEVEL-CAPS">ZZIP_IS_COMPRLEVEL</a>              (p)
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-DOSTIME-CAPS">ZIP_DIRENT_DOSTIME</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-ENCODER-CAPS">ZIP_DIRENT_ENCODER</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-OS-CAPS">ZIP_HEADER_OS</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-COMMENT-SIZE-CAPS">ZIP_DIRENT_COMMENT_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-CRC32-CAPS">ZIP_FILE_HEADER_CRC32</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-FLAGS-CAPS">ZIP_HEADER_FLAGS</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-DISK-CAPS">ZIP_TRAILER_DISK</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-USIZE-CAPS">ZIP_FILE_HEADER_USIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-TOTAL-ENTRIES-CAPS">ZIP_TRAILER_TOTAL_ENTRIES</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-NAME-LEN-CAPS">ZIP_HEADER_NAME_LEN</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-UNCOMP-SIZE-CAPS">ZIP_HEADER_UNCOMP_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-DIR-DISK-CAPS">ZIP_TRAILER_DIR_DISK</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-CSIZE-CAPS">ZIP_DIRENT_CSIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-TRAILER-DIR-POS-CAPS">ZIP_TRAILER_DIR_POS</a>
-#define     <a href="gsf-Zip.html#ZIP-BLOCK-SIZE-CAPS">ZIP_BLOCK_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-NAME-SIZE-CAPS">ZIP_DIRENT_NAME_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-SIZE-CAPS">ZIP_DIRENT_SIZE</a>
-#define     <a href="gsf-Zip.html#ZIP-DIRENT-DISKSTART-CAPS">ZIP_DIRENT_DISKSTART</a>
-#define     <a href="gsf-Zip.html#ZIP-HEADER-EXTRA-LEN-CAPS">ZIP_HEADER_EXTRA_LEN</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-COMPR-METHOD-CAPS">ZIP_FILE_HEADER_COMPR_METHOD</a>
-#define     <a href="gsf-Zip.html#ZIP-FILE-HEADER-DOSTIME-CAPS">ZIP_FILE_HEADER_DOSTIME</a>
-</pre></div><div class="refsect1" lang="en"><a name="id2533325"></a><h2>Object Hierarchy</h2><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
-         +----<a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Zip files</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="parsers.html" title="Stream Parsers">
+<link rel="prev" href="gsf-XML-and-libxml.html" title="XML and libxml">
+<link rel="next" href="gsf-Compression.html" title="Compression">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="PartÂ I.Â GSF: Introduction">
+<link rel="part" href="history.html" title="PartÂ II.Â GSF: History">
+<link rel="part" href="dependencies.html" title="PartÂ III.Â GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="PartÂ IV.Â Projects using GSF">
+<link rel="part" href="api.html" title="PartÂ V.Â API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gsf-XML-and-libxml.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-Compression.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-Zip.synopsis" class="shortcut">Top</a>
+                Â |Â 
+                <a href="#gsf-Zip.description" class="shortcut">Description</a>
+                Â |Â 
+                <a href="#gsf-Zip.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                Â |Â 
+                <a href="#gsf-Zip.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry" title="Zip files">
+<a name="gsf-Zip"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-Zip.top_of_page"></a>Zip files</span></h2>
+<p>Zip files â€” Utilities for reading and writing ZIP/JAR files</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-Zip.synopsis"></a><h2>Synopsis</h2>
+<a name="GsfInfileZip"></a><a name="GsfOutfileZip"></a><pre class="synopsis">
+                    <a class="link" href="gsf-Zip.html#GsfInfileZip-struct" title="GsfInfileZip">GsfInfileZip</a>;
+<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         <a class="link" href="gsf-Zip.html#gsf-infile-zip-new" title="gsf_infile_zip_new ()">gsf_infile_zip_new</a>                  (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+                    <a class="link" href="gsf-Zip.html#GsfOutfileZip-struct" title="GsfOutfileZip">GsfOutfileZip</a>;
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-Zip.html#gsf-outfile-zip-new" title="gsf_outfile_zip_new ()">gsf_outfile_zip_new</a>                 (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="gsf-Zip.html#gsf-outfile-zip-set-compression-method" title="gsf_outfile_zip_set_compression_method ()">gsf_outfile_zip_set_compression_method</a>
+                                                        (<a class="link" href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a> *zip,
+                                                         GsfZipCompressionMethod method);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="gsf-Zip.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
+         +----<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
                +----GsfInfileZip
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
-         +----<a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
+         +----<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
                +----GsfOutfileZip
-</pre></div><div class="refsect1" lang="en"><a name="id2533385"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2533395"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2533400"></a><h3><a name="GsfInfileZip-struct"></a>struct GsfInfileZip</h3><a class="indexterm" name="id2533411"></a><pre class="programlisting">struct GsfInfileZip;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2533426"></a><h3><a name="gsf-infile-zip-new"></a>gsf_infile_zip_new ()</h3><a class="indexterm" name="id2533438"></a><pre class="programlisting"><a href="gsf-Zip.html#GsfInfileZip">GsfInfileZip</a>* gsf_infile_zip_new            (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
-                                             GError **err);</pre><p>
+</pre>
+</div>
+<div class="refsect1" title="Properties">
+<a name="gsf-Zip.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="gsf-Zip.html#GsfInfileZip--compression-level" title='The "compression-level" property'>compression-level</a>"        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read
+  "<a class="link" href="gsf-Zip.html#GsfInfileZip--internal-parent" title='The "internal-parent" property'>internal-parent</a>"          <a class="link" href="gsf-Zip.html#GsfInfileZip">GsfInfileZip</a>*         : Write / Construct Only
+  "<a class="link" href="gsf-Zip.html#GsfInfileZip--source" title='The "source" property'>source</a>"                   <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*             : Read / Write / Construct Only
+  "<a class="link" href="gsf-Zip.html#GsfOutfileZip--compression-level" title='The "compression-level" property'>compression-level</a>"        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write / Construct Only
+  "<a class="link" href="gsf-Zip.html#GsfOutfileZip--entry-name" title='The "entry-name" property'>entry-name</a>"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct Only
+  "<a class="link" href="gsf-Zip.html#GsfOutfileZip--sink" title='The "sink" property'>sink</a>"                     <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>*            : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-Zip.description"></a><h2>Description</h2>
+<p>
+<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile"><span class="type">GsfInfile</span></a> and <a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile"><span class="type">GsfOutfile</span></a> support for zip files.</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-Zip.details"></a><h2>Details</h2>
+<div class="refsect2" title="GsfInfileZip">
+<a name="GsfInfileZip-struct"></a><h3>GsfInfileZip</h3>
+<pre class="programlisting">typedef struct _GsfInfileZip GsfInfileZip;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_infile_zip_new ()">
+<a name="gsf-infile-zip-new"></a><h3>gsf_infile_zip_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         gsf_infile_zip_new                  (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
 Opens the root directory of a Zip file.
-NOTE : adds a reference to <i class="parameter"><tt>source</tt></i></p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>source</tt></i> :</span></td><td> A base <a href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i> :</span></td><td> A <span class="type">GError</span>, optionally <tt class="literal">null</tt>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: the new zip file handler
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2533546"></a><h3><a name="GsfOutfileZip-struct"></a>struct GsfOutfileZip</h3><a class="indexterm" name="id2533557"></a><pre class="programlisting">struct GsfOutfileZip;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2533572"></a><h3><a name="gsf-outfile-zip-new"></a>gsf_outfile_zip_new ()</h3><a class="indexterm" name="id2533583"></a><pre class="programlisting"><a href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a>* gsf_outfile_zip_new          (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
-                                             GError **err);</pre><p>
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>This adds a reference to <em class="parameter"><code>source</code></em>.</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em>Â :</span></p></td>
+<td> A base <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em>Â :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a>, optionally <code class="literal">null</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the new zip file handler
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfOutfileZip">
+<a name="GsfOutfileZip-struct"></a><h3>GsfOutfileZip</h3>
+<pre class="programlisting">typedef struct _GsfOutfileZip GsfOutfileZip;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_zip_new ()">
+<a name="gsf-outfile-zip-new"></a><h3>gsf_outfile_zip_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_zip_new                 (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
 Creates the root directory of a Zip file and manages the addition of
 children.
-</p><p>
-NOTE : adds a reference to <i class="parameter"><tt>sink</tt></i></p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>sink</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: the new zip file handler
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2533673"></a><h3><a name="gsf-outfile-zip-set-compression-method"></a>gsf_outfile_zip_set_compression_method ()</h3><a class="indexterm" name="id2533686"></a><pre class="programlisting">gboolean    gsf_outfile_zip_set_compression_method
-                                            (<a href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a> *zip,
-                                             <a href="gsf-Zip.html#GsfZipCompressionMethod">GsfZipCompressionMethod</a> method);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>zip</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>method</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2533765"></a><h3><a name="GsfZipDirent"></a>struct GsfZipDirent</h3><a class="indexterm" name="id2533776"></a><pre class="programlisting">struct GsfZipDirent {
-	
-	char                 *name;
-	GsfZipCompressionMethod  compr_method;
-	guint32               crc32;
-	size_t                csize;
-	size_t                usize;
-	gsf_off_t                 offset;
-	gsf_off_t                 data_offset;
-	guint32               dostime;
-};
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2533795"></a><h3><a name="gsf-zip-dirent-new"></a>gsf_zip_dirent_new ()</h3><a class="indexterm" name="id2533806"></a><pre class="programlisting"><a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a>* gsf_zip_dirent_new            (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2533842"></a><h3><a name="gsf-zip-dirent-free"></a>gsf_zip_dirent_free ()</h3><a class="indexterm" name="id2533853"></a><pre class="programlisting">void        gsf_zip_dirent_free             (<a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a> *dirent);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>dirent</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2533899"></a><h3><a name="GsfZipVDir"></a>struct GsfZipVDir</h3><a class="indexterm" name="id2533910"></a><pre class="programlisting">struct GsfZipVDir {
-
-	char *name;
-	gboolean is_directory;
-	GsfZipDirent *dirent;
-	GSList *children;
-};
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2533926"></a><h3><a name="gsf-vdir-free"></a>gsf_vdir_free ()</h3><a class="indexterm" name="id2533937"></a><pre class="programlisting">void        gsf_vdir_free                   (<a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *vdir,
-                                             gboolean free_dirent);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>vdir</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>free_dirent</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2534004"></a><h3><a name="gsf-vdir-new"></a>gsf_vdir_new ()</h3><a class="indexterm" name="id2534014"></a><pre class="programlisting"><a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a>* gsf_vdir_new                    (char const *name,
-                                             gboolean is_directory,
-                                             <a href="gsf-Zip.html#GsfZipDirent">GsfZipDirent</a> *dirent);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>name</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>is_directory</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>dirent</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2534113"></a><h3><a name="gsf-vdir-add-child"></a>gsf_vdir_add_child ()</h3><a class="indexterm" name="id2534125"></a><pre class="programlisting">void        gsf_vdir_add_child              (<a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *vdir,
-                                             <a href="gsf-Zip.html#GsfZipVDir">GsfZipVDir</a> *child);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>vdir</tt></i> :</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>child</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2534191"></a><h3><a name="ZIP-DIRENT-USIZE-CAPS"></a>ZIP_DIRENT_USIZE</h3><a class="indexterm" name="id2534203"></a><pre class="programlisting">#define ZIP_DIRENT_USIZE                24
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534218"></a><h3><a name="ZIP-DIRENT-OFFSET-CAPS"></a>ZIP_DIRENT_OFFSET</h3><a class="indexterm" name="id2534230"></a><pre class="programlisting">#define ZIP_DIRENT_OFFSET               42
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534245"></a><h3><a name="GsfZipCompressionMethod"></a>enum GsfZipCompressionMethod</h3><a class="indexterm" name="id2534256"></a><pre class="programlisting">typedef enum {
-	GSF_ZIP_STORED =          0,		/* supported for export */
-	GSF_ZIP_SHRUNK =          1,
-	GSF_ZIP_REDUCEDx1 =       2,
-	GSF_ZIP_REDUCEDx2 =       3,
-	GSF_ZIP_REDUCEDx3 =       4,
-	GSF_ZIP_REDUCEDx4 =       5,
-	GSF_ZIP_IMPLODED  =       6,
-	GSF_ZIP_TOKENIZED =       7,
-	GSF_ZIP_DEFLATED =        8,		/* supported for export */
-	GSF_ZIP_DEFLATED_BETTER = 9,
-	GSF_ZIP_IMPLODED_BETTER = 10
-} GsfZipCompressionMethod;
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534278"></a><h3><a name="ZIP-FILE-HEADER-NAME-SIZE-CAPS"></a>ZIP_FILE_HEADER_NAME_SIZE</h3><a class="indexterm" name="id2534291"></a><pre class="programlisting">#define ZIP_FILE_HEADER_NAME_SIZE       26
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534306"></a><h3><a name="ZZIP-IS-STREAMED-CAPS"></a>ZZIP_IS_STREAMED()</h3><a class="indexterm" name="id2534318"></a><pre class="programlisting">#define ZZIP_IS_STREAMED(p)    (((*(unsigned char*)p)&gt;&gt;3)&amp;1)
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2534353"></a><h3><a name="ZIP-FILE-HEADER-EXTRACT-CAPS"></a>ZIP_FILE_HEADER_EXTRACT</h3><a class="indexterm" name="id2534364"></a><pre class="programlisting">#define ZIP_FILE_HEADER_EXTRACT          4
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534380"></a><h3><a name="ZIP-TRAILER-SIZE-CAPS"></a>ZIP_TRAILER_SIZE</h3><a class="indexterm" name="id2534391"></a><pre class="programlisting">#define ZIP_TRAILER_SIZE 		22
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534406"></a><h3><a name="ZIP-HEADER-TIME-CAPS"></a>ZIP_HEADER_TIME</h3><a class="indexterm" name="id2534417"></a><pre class="programlisting">#define ZIP_HEADER_TIME                 10
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534433"></a><h3><a name="ZIP-FILE-HEADER-SIZE-CAPS"></a>ZIP_FILE_HEADER_SIZE</h3><a class="indexterm" name="id2534444"></a><pre class="programlisting">#define ZIP_FILE_HEADER_SIZE            30
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534459"></a><h3><a name="ZZIP-IS-ENCRYPTED-CAPS"></a>ZZIP_IS_ENCRYPTED()</h3><a class="indexterm" name="id2534471"></a><pre class="programlisting">#define ZZIP_IS_ENCRYPTED(p)    ((*(unsigned char*)p)&amp;1)
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2534506"></a><h3><a name="ZIP-HEADER-VERSION-CAPS"></a>ZIP_HEADER_VERSION</h3><a class="indexterm" name="id2534517"></a><pre class="programlisting">#define ZIP_HEADER_VERSION 		 4
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534532"></a><h3><a name="ZIP-BUF-SIZE-CAPS"></a>ZIP_BUF_SIZE</h3><a class="indexterm" name="id2534542"></a><pre class="programlisting">#define ZIP_BUF_SIZE 512
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534558"></a><h3><a name="ZIP-DIRENT-CRC32-CAPS"></a>ZIP_DIRENT_CRC32</h3><a class="indexterm" name="id2534569"></a><pre class="programlisting">#define ZIP_DIRENT_CRC32                16
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534585"></a><h3><a name="ZIP-HEADER-COMP-SIZE-CAPS"></a>ZIP_HEADER_COMP_SIZE</h3><a class="indexterm" name="id2534596"></a><pre class="programlisting">#define ZIP_HEADER_COMP_SIZE		18
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534611"></a><h3><a name="ZIP-DIRENT-COMPR-METHOD-CAPS"></a>ZIP_DIRENT_COMPR_METHOD</h3><a class="indexterm" name="id2534624"></a><pre class="programlisting">#define ZIP_DIRENT_COMPR_METHOD         10
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534639"></a><h3><a name="ZIP-DIRENT-FILE-TYPE-CAPS"></a>ZIP_DIRENT_FILE_TYPE</h3><a class="indexterm" name="id2534650"></a><pre class="programlisting">#define ZIP_DIRENT_FILE_TYPE            36
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534666"></a><h3><a name="ZIP-FILE-HEADER-EXTRAS-SIZE-CAPS"></a>ZIP_FILE_HEADER_EXTRAS_SIZE</h3><a class="indexterm" name="id2534678"></a><pre class="programlisting">#define ZIP_FILE_HEADER_EXTRAS_SIZE     28
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534693"></a><h3><a name="ZIP-DIRENT-EXTRACT-CAPS"></a>ZIP_DIRENT_EXTRACT</h3><a class="indexterm" name="id2534705"></a><pre class="programlisting">#define ZIP_DIRENT_EXTRACT              6
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534720"></a><h3><a name="ZIP-DIRENT-FILE-MODE-CAPS"></a>ZIP_DIRENT_FILE_MODE</h3><a class="indexterm" name="id2534731"></a><pre class="programlisting">#define ZIP_DIRENT_FILE_MODE            38
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534747"></a><h3><a name="ZIP-DIRENT-FLAGS-CAPS"></a>ZIP_DIRENT_FLAGS</h3><a class="indexterm" name="id2534758"></a><pre class="programlisting">#define ZIP_DIRENT_FLAGS                8
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534774"></a><h3><a name="ZIP-FILE-HEADER-CSIZE-CAPS"></a>ZIP_FILE_HEADER_CSIZE</h3><a class="indexterm" name="id2534785"></a><pre class="programlisting">#define ZIP_FILE_HEADER_CSIZE           18
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534800"></a><h3><a name="ZIP-TRAILER-DIR-SIZE-CAPS"></a>ZIP_TRAILER_DIR_SIZE</h3><a class="indexterm" name="id2534812"></a><pre class="programlisting">#define ZIP_TRAILER_DIR_SIZE 		12
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534827"></a><h3><a name="ZIP-TRAILER-COMMENT-SIZE-CAPS"></a>ZIP_TRAILER_COMMENT_SIZE</h3><a class="indexterm" name="id2534839"></a><pre class="programlisting">#define ZIP_TRAILER_COMMENT_SIZE	20
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534855"></a><h3><a name="ZIP-TRAILER-ENTRIES-CAPS"></a>ZIP_TRAILER_ENTRIES</h3><a class="indexterm" name="id2534866"></a><pre class="programlisting">#define ZIP_TRAILER_ENTRIES 		8
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534881"></a><h3><a name="ZIP-NAME-SEPARATOR-CAPS"></a>ZIP_NAME_SEPARATOR</h3><a class="indexterm" name="id2534892"></a><pre class="programlisting">#define ZIP_NAME_SEPARATOR    '/'
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534907"></a><h3><a name="ZIP-HEADER-SIZE-CAPS"></a>ZIP_HEADER_SIZE</h3><a class="indexterm" name="id2534919"></a><pre class="programlisting">#define ZIP_HEADER_SIZE 		30
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534934"></a><h3><a name="ZIP-HEADER-CRC-CAPS"></a>ZIP_HEADER_CRC</h3><a class="indexterm" name="id2534945"></a><pre class="programlisting">#define ZIP_HEADER_CRC 			14
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534960"></a><h3><a name="ZIP-FILE-HEADER-FLAGS-CAPS"></a>ZIP_FILE_HEADER_FLAGS</h3><a class="indexterm" name="id2534971"></a><pre class="programlisting">#define ZIP_FILE_HEADER_FLAGS            6
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2534987"></a><h3><a name="ZIP-DIRENT-EXTRAS-SIZE-CAPS"></a>ZIP_DIRENT_EXTRAS_SIZE</h3><a class="indexterm" name="id2534998"></a><pre class="programlisting">#define ZIP_DIRENT_EXTRAS_SIZE          30
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535014"></a><h3><a name="ZIP-HEADER-COMP-METHOD-CAPS"></a>ZIP_HEADER_COMP_METHOD</h3><a class="indexterm" name="id2535025"></a><pre class="programlisting">#define ZIP_HEADER_COMP_METHOD           8
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535041"></a><h3><a name="ZZIP-IS-COMPRLEVEL-CAPS"></a>ZZIP_IS_COMPRLEVEL()</h3><a class="indexterm" name="id2535052"></a><pre class="programlisting">#define ZZIP_IS_COMPRLEVEL(p)  (((*(unsigned char*)p)&gt;&gt;1)&amp;3)
-</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>p</tt></i> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2535086"></a><h3><a name="ZIP-DIRENT-DOSTIME-CAPS"></a>ZIP_DIRENT_DOSTIME</h3><a class="indexterm" name="id2535098"></a><pre class="programlisting">#define ZIP_DIRENT_DOSTIME              12
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535114"></a><h3><a name="ZIP-DIRENT-ENCODER-CAPS"></a>ZIP_DIRENT_ENCODER</h3><a class="indexterm" name="id2535125"></a><pre class="programlisting">#define ZIP_DIRENT_ENCODER              4
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535141"></a><h3><a name="ZIP-HEADER-OS-CAPS"></a>ZIP_HEADER_OS</h3><a class="indexterm" name="id2535151"></a><pre class="programlisting">#define ZIP_HEADER_OS	 		 5
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535167"></a><h3><a name="ZIP-DIRENT-COMMENT-SIZE-CAPS"></a>ZIP_DIRENT_COMMENT_SIZE</h3><a class="indexterm" name="id2535179"></a><pre class="programlisting">#define ZIP_DIRENT_COMMENT_SIZE         32
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535195"></a><h3><a name="ZIP-FILE-HEADER-CRC32-CAPS"></a>ZIP_FILE_HEADER_CRC32</h3><a class="indexterm" name="id2535206"></a><pre class="programlisting">#define ZIP_FILE_HEADER_CRC32           14
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535222"></a><h3><a name="ZIP-HEADER-FLAGS-CAPS"></a>ZIP_HEADER_FLAGS</h3><a class="indexterm" name="id2535234"></a><pre class="programlisting">#define ZIP_HEADER_FLAGS 	         6
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535249"></a><h3><a name="ZIP-TRAILER-DISK-CAPS"></a>ZIP_TRAILER_DISK</h3><a class="indexterm" name="id2535261"></a><pre class="programlisting">#define ZIP_TRAILER_DISK 		4
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535275"></a><h3><a name="ZIP-FILE-HEADER-USIZE-CAPS"></a>ZIP_FILE_HEADER_USIZE</h3><a class="indexterm" name="id2535286"></a><pre class="programlisting">#define ZIP_FILE_HEADER_USIZE           22
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535302"></a><h3><a name="ZIP-TRAILER-TOTAL-ENTRIES-CAPS"></a>ZIP_TRAILER_TOTAL_ENTRIES</h3><a class="indexterm" name="id2535314"></a><pre class="programlisting">#define ZIP_TRAILER_TOTAL_ENTRIES 	10
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535330"></a><h3><a name="ZIP-HEADER-NAME-LEN-CAPS"></a>ZIP_HEADER_NAME_LEN</h3><a class="indexterm" name="id2535341"></a><pre class="programlisting">#define ZIP_HEADER_NAME_LEN		26
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535356"></a><h3><a name="ZIP-HEADER-UNCOMP-SIZE-CAPS"></a>ZIP_HEADER_UNCOMP_SIZE</h3><a class="indexterm" name="id2535367"></a><pre class="programlisting">#define ZIP_HEADER_UNCOMP_SIZE          22
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535382"></a><h3><a name="ZIP-TRAILER-DIR-DISK-CAPS"></a>ZIP_TRAILER_DIR_DISK</h3><a class="indexterm" name="id2535394"></a><pre class="programlisting">#define ZIP_TRAILER_DIR_DISK 		6
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535410"></a><h3><a name="ZIP-DIRENT-CSIZE-CAPS"></a>ZIP_DIRENT_CSIZE</h3><a class="indexterm" name="id2535422"></a><pre class="programlisting">#define ZIP_DIRENT_CSIZE                20
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535437"></a><h3><a name="ZIP-TRAILER-DIR-POS-CAPS"></a>ZIP_TRAILER_DIR_POS</h3><a class="indexterm" name="id2535448"></a><pre class="programlisting">#define ZIP_TRAILER_DIR_POS 		16
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535464"></a><h3><a name="ZIP-BLOCK-SIZE-CAPS"></a>ZIP_BLOCK_SIZE</h3><a class="indexterm" name="id2535474"></a><pre class="programlisting">#define ZIP_BLOCK_SIZE 32768
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535490"></a><h3><a name="ZIP-DIRENT-NAME-SIZE-CAPS"></a>ZIP_DIRENT_NAME_SIZE</h3><a class="indexterm" name="id2535501"></a><pre class="programlisting">#define ZIP_DIRENT_NAME_SIZE            28
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535517"></a><h3><a name="ZIP-DIRENT-SIZE-CAPS"></a>ZIP_DIRENT_SIZE</h3><a class="indexterm" name="id2535529"></a><pre class="programlisting">#define ZIP_DIRENT_SIZE                 46
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535544"></a><h3><a name="ZIP-DIRENT-DISKSTART-CAPS"></a>ZIP_DIRENT_DISKSTART</h3><a class="indexterm" name="id2535555"></a><pre class="programlisting">#define ZIP_DIRENT_DISKSTART            34
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535571"></a><h3><a name="ZIP-HEADER-EXTRA-LEN-CAPS"></a>ZIP_HEADER_EXTRA_LEN</h3><a class="indexterm" name="id2535583"></a><pre class="programlisting">#define ZIP_HEADER_EXTRA_LEN		28
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535598"></a><h3><a name="ZIP-FILE-HEADER-COMPR-METHOD-CAPS"></a>ZIP_FILE_HEADER_COMPR_METHOD</h3><a class="indexterm" name="id2535610"></a><pre class="programlisting">#define ZIP_FILE_HEADER_COMPR_METHOD     8
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2535625"></a><h3><a name="ZIP-FILE-HEADER-DOSTIME-CAPS"></a>ZIP_FILE_HEADER_DOSTIME</h3><a class="indexterm" name="id2535638"></a><pre class="programlisting">#define ZIP_FILE_HEADER_DOSTIME         10
-</pre><p>
-
-</p></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-XML-and-libxml.html"><b>&lt;&lt; XML and libxml</b></a></td><td align="right"><a accesskey="n" href="gsf-Compression.html"><b>Compression &gt;&gt;</b></a></td></tr></table></body></html>
+</p>
+<p>
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>This adds a reference to <em class="parameter"><code>sink</code></em>.</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sink</code></em>Â :</span></p></td>
+<td> a <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a> to hold the ZIP file
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em>Â :</span></p></td>
+<td> Location to store error, or <code class="literal">NULL</code>; currently unused.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td> the new zip file handler
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_zip_set_compression_method ()">
+<a name="gsf-outfile-zip-set-compression-method"></a><h3>gsf_outfile_zip_set_compression_method ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gsf_outfile_zip_set_compression_method
+                                                        (<a class="link" href="gsf-Zip.html#GsfOutfileZip">GsfOutfileZip</a> *zip,
+                                                         GsfZipCompressionMethod method);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>zip</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>method</code></em>Â :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span>Â :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="gsf-Zip.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "compression-level" property'>
+<a name="GsfInfileZip--compression-level"></a><h3>The <code class="literal">"compression-level"</code> property</h3>
+<pre class="programlisting">  "compression-level"        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read</pre>
+<p>The level of compression used, zero meaning none.</p>
+<p>Allowed values: [0,10]</p>
+<p>Default value: 0</p>
+</div>
+<hr>
+<div class="refsect2" title='The "internal-parent" property'>
+<a name="GsfInfileZip--internal-parent"></a><h3>The <code class="literal">"internal-parent"</code> property</h3>
+<pre class="programlisting">  "internal-parent"          <a class="link" href="gsf-Zip.html#GsfInfileZip">GsfInfileZip</a>*         : Write / Construct Only</pre>
+<p>Internal use only.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "source" property'>
+<a name="GsfInfileZip--source"></a><h3>The <code class="literal">"source"</code> property</h3>
+<pre class="programlisting">  "source"                   <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>*             : Read / Write / Construct Only</pre>
+<p>The archive being interpreted.</p>
+</div>
+<hr>
+<div class="refsect2" title='The "compression-level" property'>
+<a name="GsfOutfileZip--compression-level"></a><h3>The <code class="literal">"compression-level"</code> property</h3>
+<pre class="programlisting">  "compression-level"        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write / Construct Only</pre>
+<p>The level of compression used, zero meaning none.</p>
+<p>Allowed values: [0,10]</p>
+<p>Default value: 8</p>
+</div>
+<hr>
+<div class="refsect2" title='The "entry-name" property'>
+<a name="GsfOutfileZip--entry-name"></a><h3>The <code class="literal">"entry-name"</code> property</h3>
+<pre class="programlisting">  "entry-name"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write / Construct Only</pre>
+<p>The filename of this member in the archive without path.</p>
+<p>Default value: NULL</p>
+</div>
+<hr>
+<div class="refsect2" title='The "sink" property'>
+<a name="GsfOutfileZip--sink"></a><h3>The <code class="literal">"sink"</code> property</h3>
+<pre class="programlisting">  "sink"                     <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>*            : Read / Write / Construct Only</pre>
+<p>Where the archive is written.</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,360 +1,761 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MS OLE2</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="parsers.html" title="Stream Parsers"><link rel="previous" href="gsf-Compression.html" title="Compression"><link rel="next" href="gsf-metadata.html" title="metadata"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-Compression.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-metadata.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-MS-OLE2"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">MS OLE2</span></h2><p>MS OLE2 &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfInfileMSOle"></a><a name="GsfOutfileMSOle"></a><pre class="synopsis">
-
-
-
-struct      <a href="gsf-MS-OLE2.html#GsfInfileMSOle-struct">GsfInfileMSOle</a>;
-<a href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a>* <a href="gsf-MS-OLE2.html#gsf-infile-msole-new">gsf_infile_msole_new</a>        (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
-                                             GError **err);
-gboolean    <a href="gsf-MS-OLE2.html#gsf-infile-msole-get-class-id">gsf_infile_msole_get_class_id</a>   (<a href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a> const *ole,
-                                             guint8 *res);
-struct      <a href="gsf-MS-OLE2.html#GsfOutfileMSOle-struct">GsfOutfileMSOle</a>;
-<a href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a>* <a href="gsf-MS-OLE2.html#gsf-outfile-msole-new">gsf_outfile_msole_new</a>      (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink);
-gboolean    <a href="gsf-MS-OLE2.html#gsf-outfile-msole-set-class-id">gsf_outfile_msole_set_class_id</a>  (<a href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a> *ole,
-                                             guint8 const *clsid);
-gboolean    <a href="gsf-MS-OLE2.html#gsf-msole-metadata-read">gsf_msole_metadata_read</a>         (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *in,
-                                             GError **err);
-gboolean    <a href="gsf-MS-OLE2.html#gsf-msole-metadata-write">gsf_msole_metadata_write</a>        (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *out,
-                                             gboolean doc_not_component,
-                                             GError **err);
-GIConv      <a href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepages-for-export">gsf_msole_iconv_open_codepages_for_export</a>
-                                            (guint codepage_to,
-                                             char const *from);
-GIConv      <a href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepage-for-import">gsf_msole_iconv_open_codepage_for_import</a>
-                                            (char const *to,
-                                             int codepage);
-GIConv      <a href="gsf-MS-OLE2.html#gsf-msole-iconv-open-for-export">gsf_msole_iconv_open_for_export</a> (void);
-GIConv      <a href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepage-for-export">gsf_msole_iconv_open_codepage_for_export</a>
-                                            (guint codepage_to);
-GIConv      <a href="gsf-MS-OLE2.html#gsf-msole-iconv-open-for-import">gsf_msole_iconv_open_for_import</a> (int codepage);
-guint       <a href="gsf-MS-OLE2.html#gsf-msole-iconv-win-codepage">gsf_msole_iconv_win_codepage</a>    (void);
-guint       <a href="gsf-MS-OLE2.html#gsf-msole-codepage-to-lid">gsf_msole_codepage_to_lid</a>       (int codepage);
-guint       <a href="gsf-MS-OLE2.html#gsf-msole-lid-to-codepage">gsf_msole_lid_to_codepage</a>       (guint lid);
-gchar*      <a href="gsf-MS-OLE2.html#gsf-msole-lid-to-codepage-str">gsf_msole_lid_to_codepage_str</a>   (guint lid);
-guint       <a href="gsf-MS-OLE2.html#gsf-msole-lid-for-language">gsf_msole_lid_for_language</a>      (char const *lang);
-GByteArray* <a href="gsf-MS-OLE2.html#gsf-msole-inflate">gsf_msole_inflate</a>               (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset);
-
-
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-START-BAT-CAPS">OLE_HEADER_START_BAT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-MAJOR-VER-CAPS">OLE_HEADER_MAJOR_VER</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-METABAT-SIZE-CAPS">OLE_HEADER_METABAT_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-DIRENT-START-CAPS">OLE_HEADER_DIRENT_START</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-NUM-SBAT-CAPS">OLE_HEADER_NUM_SBAT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-BB-SHIFT-CAPS">OLE_HEADER_BB_SHIFT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-NUM-BAT-CAPS">OLE_HEADER_NUM_BAT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-THRESHOLD-CAPS">OLE_HEADER_THRESHOLD</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-METABAT-BLOCK-CAPS">OLE_HEADER_METABAT_BLOCK</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-SBAT-START-CAPS">OLE_HEADER_SBAT_START</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-SIGNATURE-CAPS">OLE_HEADER_SIGNATURE</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-BYTE-ORDER-CAPS">OLE_HEADER_BYTE_ORDER</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-SB-SHIFT-CAPS">OLE_HEADER_SB_SHIFT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-NUM-METABAT-CAPS">OLE_HEADER_NUM_METABAT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-SIZE-CAPS">OLE_HEADER_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-CLSID-CAPS">OLE_HEADER_CLSID</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-HEADER-MINOR-VER-CAPS">OLE_HEADER_MINOR_VER</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-DEFAULT-BB-SHIFT-CAPS">OLE_DEFAULT_BB_SHIFT</a>
-#define     <a href="gsf-MS-OLE2.html#OLE-DEFAULT-SB-SHIFT-CAPS">OLE_DEFAULT_SB_SHIFT</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-DETAILS-SIZE-CAPS">DIRENT_DETAILS_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-SIZE-CAPS">DIRENT_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-NAME-LEN-CAPS">DIRENT_NAME_LEN</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-PROPERTY-CAPS">DIRENT_TYPE_PROPERTY</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-FILE-CAPS">DIRENT_TYPE_FILE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-MAGIC-END-CAPS">DIRENT_MAGIC_END</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-DIR-CAPS">DIRENT_TYPE_DIR</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-MAX-NAME-SIZE-CAPS">DIRENT_MAX_NAME_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-FILE-SIZE-CAPS">DIRENT_FILE_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-FIRSTBLOCK-CAPS">DIRENT_FIRSTBLOCK</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-INVALID-CAPS">DIRENT_TYPE_INVALID</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-USERFLAGS-CAPS">DIRENT_USERFLAGS</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-COLOUR-CAPS">DIRENT_COLOUR</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-MODIFY-TIME-CAPS">DIRENT_MODIFY_TIME</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-LOCKBYTES-CAPS">DIRENT_TYPE_LOCKBYTES</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-CREATE-TIME-CAPS">DIRENT_CREATE_TIME</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-PREV-CAPS">DIRENT_PREV</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-NEXT-CAPS">DIRENT_NEXT</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-CHILD-CAPS">DIRENT_CHILD</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-CAPS">DIRENT_TYPE</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-CLSID-CAPS">DIRENT_CLSID</a>
-#define     <a href="gsf-MS-OLE2.html#DIRENT-TYPE-ROOTDIR-CAPS">DIRENT_TYPE_ROOTDIR</a>
-#define     <a href="gsf-MS-OLE2.html#BAT-MAGIC-METABAT-CAPS">BAT_MAGIC_METABAT</a>
-#define     <a href="gsf-MS-OLE2.html#BAT-MAGIC-BAT-CAPS">BAT_MAGIC_BAT</a>
-#define     <a href="gsf-MS-OLE2.html#BAT-INDEX-SIZE-CAPS">BAT_INDEX_SIZE</a>
-#define     <a href="gsf-MS-OLE2.html#BAT-MAGIC-END-OF-CHAIN-CAPS">BAT_MAGIC_END_OF_CHAIN</a>
-#define     <a href="gsf-MS-OLE2.html#BAT-MAGIC-UNUSED-CAPS">BAT_MAGIC_UNUSED</a>
-</pre></div><div class="refsect1" lang="en"><a name="id2541357"></a><h2>Object Hierarchy</h2><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
-         +----<a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MS OLE2</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="parsers.html" title="Stream Parsers">
+<link rel="prev" href="gsf-Compression.html" title="Compression">
+<link rel="next" href="gsf-metadata.html" title="metadata">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="Part I. GSF: Introduction">
+<link rel="part" href="history.html" title="Part II. GSF: History">
+<link rel="part" href="dependencies.html" title="Part III. GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="Part IV. Projects using GSF">
+<link rel="part" href="api.html" title="Part V. API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gsf-Compression.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-metadata.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-MS-OLE2.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gsf-MS-OLE2.description" class="shortcut">Description</a>
+                 | 
+                <a href="#gsf-MS-OLE2.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="MS OLE2">
+<a name="gsf-MS-OLE2"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-MS-OLE2.top_of_page"></a>MS OLE2</span></h2>
+<p>MS OLE2</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-MS-OLE2.synopsis"></a><h2>Synopsis</h2>
+<a name="GsfInfileMSOle"></a><a name="GsfOutfileMSOle"></a><pre class="synopsis">
+                    <a class="link" href="gsf-MS-OLE2.html#GsfInfileMSOle-struct" title="GsfInfileMSOle">GsfInfileMSOle</a>;
+<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         <a class="link" href="gsf-MS-OLE2.html#gsf-infile-msole-new" title="gsf_infile_msole_new ()">gsf_infile_msole_new</a>                (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="gsf-MS-OLE2.html#gsf-infile-msole-get-class-id" title="gsf_infile_msole_get_class_id ()">gsf_infile_msole_get_class_id</a>       (<a class="link" href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a> const *ole,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *res);
+                    <a class="link" href="gsf-MS-OLE2.html#GsfOutfileMSOle-struct" title="GsfOutfileMSOle">GsfOutfileMSOle</a>;
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-MS-OLE2.html#gsf-outfile-msole-new" title="gsf_outfile_msole_new ()">gsf_outfile_msole_new</a>               (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink);
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-MS-OLE2.html#gsf-outfile-msole-new-full" title="gsf_outfile_msole_new_full ()">gsf_outfile_msole_new_full</a>          (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> bb_size,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> sb_size);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="gsf-MS-OLE2.html#gsf-outfile-msole-set-class-id" title="gsf_outfile_msole_set_class_id ()">gsf_outfile_msole_set_class_id</a>      (<a class="link" href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a> *ole,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *clsid);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> *            <a class="link" href="gsf-MS-OLE2.html#gsf-msole-metadata-read" title="gsf_msole_metadata_read ()">gsf_msole_metadata_read</a>             (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *in,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *accum);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="gsf-MS-OLE2.html#gsf-msole-metadata-write" title="gsf_msole_metadata_write ()">gsf_msole_metadata_write</a>            (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *out,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> doc_not_component);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepages-for-export" title="gsf_msole_iconv_open_codepages_for_export ()">gsf_msole_iconv_open_codepages_for_export</a>
+                                                        (int codepage_to,
+                                                         char const *from);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepage-for-import" title="gsf_msole_iconv_open_codepage_for_import ()">gsf_msole_iconv_open_codepage_for_import</a>
+                                                        (char const *to,
+                                                         int codepage);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-open-for-export" title="gsf_msole_iconv_open_for_export ()">gsf_msole_iconv_open_for_export</a>     (void);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-open-codepage-for-export" title="gsf_msole_iconv_open_codepage_for_export ()">gsf_msole_iconv_open_codepage_for_export</a>
+                                                        (int codepage_to);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-open-for-import" title="gsf_msole_iconv_open_for_import ()">gsf_msole_iconv_open_for_import</a>     (int codepage);
+int                 <a class="link" href="gsf-MS-OLE2.html#gsf-msole-iconv-win-codepage" title="gsf_msole_iconv_win_codepage ()">gsf_msole_iconv_win_codepage</a>        (void);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="gsf-MS-OLE2.html#gsf-msole-codepage-to-lid" title="gsf_msole_codepage_to_lid ()">gsf_msole_codepage_to_lid</a>           (int codepage);
+int                 <a class="link" href="gsf-MS-OLE2.html#gsf-msole-lid-to-codepage" title="gsf_msole_lid_to_codepage ()">gsf_msole_lid_to_codepage</a>           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="gsf-MS-OLE2.html#gsf-msole-lid-to-codepage-str" title="gsf_msole_lid_to_codepage_str ()">gsf_msole_lid_to_codepage_str</a>       (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="gsf-MS-OLE2.html#gsf-msole-lid-for-language" title="gsf_msole_lid_for_language ()">gsf_msole_lid_for_language</a>          (char const *lang);
+char const *        <a class="link" href="gsf-MS-OLE2.html#gsf-msole-language-for-lid" title="gsf_msole_language_for_lid ()">gsf_msole_language_for_lid</a>          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Byte-Arrays.html#GByteArray"
+>GByteArray</a> *        <a class="link" href="gsf-MS-OLE2.html#gsf-msole-inflate" title="gsf_msole_inflate ()">gsf_msole_inflate</a>                   (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> offset);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="gsf-MS-OLE2.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
+         +----<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
                +----GsfInfileMSOle
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
-         +----<a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
+         +----<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
                +----GsfOutfileMSOle
-</pre></div><div class="refsect1" lang="en"><a name="id2541418"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2541428"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2541433"></a><h3><a name="GsfInfileMSOle-struct"></a>struct GsfInfileMSOle</h3><a class="indexterm" name="id2541444"></a><pre class="programlisting">struct GsfInfileMSOle;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2541460"></a><h3><a name="gsf-infile-msole-new"></a>gsf_infile_msole_new ()</h3><a class="indexterm" name="id2541471"></a><pre class="programlisting"><a href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a>* gsf_infile_msole_new        (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
-                                             GError **err);</pre><p>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-MS-OLE2.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-MS-OLE2.details"></a><h2>Details</h2>
+<div class="refsect2" title="GsfInfileMSOle">
+<a name="GsfInfileMSOle-struct"></a><h3>GsfInfileMSOle</h3>
+<pre class="programlisting">typedef struct _GsfInfileMSOle GsfInfileMSOle;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_infile_msole_new ()">
+<a name="gsf-infile-msole-new"></a><h3>gsf_infile_msole_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         gsf_infile_msole_new                (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *source,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
 Opens the root directory of an MS OLE file.
-NOTE : adds a reference to <i class="parameter"><tt>source</tt></i></p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>source</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: the new ole file handler
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2541557"></a><h3><a name="gsf-infile-msole-get-class-id"></a>gsf_infile_msole_get_class_id ()</h3><a class="indexterm" name="id2541569"></a><pre class="programlisting">gboolean    gsf_infile_msole_get_class_id   (<a href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a> const *ole,
-                                             guint8 *res);</pre><p>
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>This adds a reference to <em class="parameter"><code>source</code></em>.</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optional place to store an error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new ole file handler
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_infile_msole_get_class_id ()">
+<a name="gsf-infile-msole-get-class-id"></a><h3>gsf_infile_msole_get_class_id ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gsf_infile_msole_get_class_id       (<a class="link" href="gsf-MS-OLE2.html#GsfInfileMSOle">GsfInfileMSOle</a> const *ole,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> *res);</pre>
+<p>
 Retrieves the 16 byte indentifier (often a GUID in MS Windows apps)
-stored within the directory associated with <i class="parameter"><tt>ole</tt></i> and stores it in <i class="parameter"><tt>res</tt></i>.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ole</tt></i>�:</span></td><td> a <a href="gsf-MS-OLE2.html#GsfInfileMSOle"><span class="type">GsfInfileMSOle</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>res</tt></i>�:</span></td><td> 16 byte identifier (often a GUID in MS Windows apps)
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE on success
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2541673"></a><h3><a name="GsfOutfileMSOle-struct"></a>struct GsfOutfileMSOle</h3><a class="indexterm" name="id2541684"></a><pre class="programlisting">struct GsfOutfileMSOle;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2541699"></a><h3><a name="gsf-outfile-msole-new"></a>gsf_outfile_msole_new ()</h3><a class="indexterm" name="id2541711"></a><pre class="programlisting"><a href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a>* gsf_outfile_msole_new      (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink);</pre><p>
+stored within the directory associated with <em class="parameter"><code>ole</code></em> and stores it in <em class="parameter"><code>res</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ole</code></em> :</span></p></td>
+<td> a <a class="link" href="gsf-MS-OLE2.html#GsfInfileMSOle"><span class="type">GsfInfileMSOle</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
+<td> 16 byte identifier (often a GUID in MS Windows apps)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE on success
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfOutfileMSOle">
+<a name="GsfOutfileMSOle-struct"></a><h3>GsfOutfileMSOle</h3>
+<pre class="programlisting">typedef struct _GsfOutfileMSOle GsfOutfileMSOle;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_msole_new ()">
+<a name="gsf-outfile-msole-new"></a><h3>gsf_outfile_msole_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_msole_new               (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink);</pre>
+<p>
 Creates the root directory of an MS OLE file and manages the addition of
 children.
-</p><p>
-NOTE : adds a reference to <i class="parameter"><tt>sink</tt></i></p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>sink</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>: the new ole file handler
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2541781"></a><h3><a name="gsf-outfile-msole-set-class-id"></a>gsf_outfile_msole_set_class_id ()</h3><a class="indexterm" name="id2541793"></a><pre class="programlisting">gboolean    gsf_outfile_msole_set_class_id  (<a href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a> *ole,
-                                             guint8 const *clsid);</pre><p>
-Write <i class="parameter"><tt>clsid</tt></i> to the directory associated with <i class="parameter"><tt>ole</tt></i>.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>ole</tt></i>�:</span></td><td> a <a href="gsf-MS-OLE2.html#GsfOutfileMSOle"><span class="type">GsfOutfileMSOle</span></a>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>clsid</tt></i>�:</span></td><td> 16 byte identifier (often a GUID in MS Windows apps)
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>TRUE on success.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2541896"></a><h3><a name="gsf-msole-metadata-read"></a>gsf_msole_metadata_read ()</h3><a class="indexterm" name="id2541907"></a><pre class="programlisting">gboolean    gsf_msole_metadata_read         (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *in,
-                                             GError **err);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>in</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2541984"></a><h3><a name="gsf-msole-metadata-write"></a>gsf_msole_metadata_write ()</h3><a class="indexterm" name="id2541995"></a><pre class="programlisting">gboolean    gsf_msole_metadata_write        (<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *out,
-                                             gboolean doc_not_component,
-                                             GError **err);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>out</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>doc_not_component</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542093"></a><h3><a name="gsf-msole-iconv-open-codepages-for-export"></a>gsf_msole_iconv_open_codepages_for_export ()</h3><a class="indexterm" name="id2542107"></a><pre class="programlisting">GIConv      gsf_msole_iconv_open_codepages_for_export
-                                            (guint codepage_to,
-                                             char const *from);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>codepage_to</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>from</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+</p>
+<p>
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>This adds a reference to <em class="parameter"><code>sink</code></em>.</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sink</code></em> :</span></p></td>
+<td> a <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a> to hold the OLE2 file
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new ole file handler.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_msole_new_full ()">
+<a name="gsf-outfile-msole-new-full"></a><h3>gsf_outfile_msole_new_full ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_msole_new_full          (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *sink,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> bb_size,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> sb_size);</pre>
+<p>
+Creates the root directory of an MS OLE file and manages the addition of
+children.
+</p>
+<p>
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>This adds a reference to <em class="parameter"><code>sink</code></em>.</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sink</code></em> :</span></p></td>
+<td> a <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a> to hold the OLE2 file.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bb_size</code></em> :</span></p></td>
+<td> size of large blocks.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sb_size</code></em> :</span></p></td>
+<td> size of small blocks.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new ole file handler.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_msole_set_class_id ()">
+<a name="gsf-outfile-msole-set-class-id"></a><h3>gsf_outfile_msole_set_class_id ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gsf_outfile_msole_set_class_id      (<a class="link" href="gsf-MS-OLE2.html#GsfOutfileMSOle">GsfOutfileMSOle</a> *ole,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint8"
+>guint8</a> const *clsid);</pre>
+<p>
+Write <em class="parameter"><code>clsid</code></em> to the directory associated with <em class="parameter"><code>ole</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ole</code></em> :</span></p></td>
+<td> a <a class="link" href="gsf-MS-OLE2.html#GsfOutfileMSOle"><span class="type">GsfOutfileMSOle</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>clsid</code></em> :</span></p></td>
+<td> 16 byte identifier (often a GUID in MS Windows apps)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE on success.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_metadata_read ()">
+<a name="gsf-msole-metadata-read"></a><h3>gsf_msole_metadata_read ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> *            gsf_msole_metadata_read             (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *in,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *accum);</pre>
+<p>
+Read a stream formated as a set of MS OLE properties from <em class="parameter"><code>in</code></em> and store the
+results in <em class="parameter"><code>accum</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>in</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput"><span class="type">GsfInput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>accum</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> GError which the caller must free on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_metadata_write ()">
+<a name="gsf-msole-metadata-write"></a><h3>gsf_msole_metadata_write ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gsf_msole_metadata_write            (<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *out,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> doc_not_component);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>out</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput"><span class="type">GsfOutput</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta_data</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>doc_not_component</code></em> :</span></p></td>
+<td> a kludge to differentiate DocumentSummary from Summary
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> on success;
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_open_codepages_for_export ()">
+<a name="gsf-msole-iconv-open-codepages-for-export"></a><h3>gsf_msole_iconv_open_codepages_for_export ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              gsf_msole_iconv_open_codepages_for_export
+                                                        (int codepage_to,
+                                                         char const *from);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codepage_to</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>from</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an iconv converter to go from utf8 -&gt; to our best guess at a useful
 	windows codepage.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542189"></a><h3><a name="gsf-msole-iconv-open-codepage-for-import"></a>gsf_msole_iconv_open_codepage_for_import ()</h3><a class="indexterm" name="id2542202"></a><pre class="programlisting">GIConv      gsf_msole_iconv_open_codepage_for_import
-                                            (char const *to,
-                                             int codepage);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>to</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>codepage</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>an iconv converter for <i class="parameter"><tt>codepage</tt></i> -&gt; utf8.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542289"></a><h3><a name="gsf-msole-iconv-open-for-export"></a>gsf_msole_iconv_open_for_export ()</h3><a class="indexterm" name="id2542301"></a><pre class="programlisting">GIConv      gsf_msole_iconv_open_for_export (void);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>an iconv convert to go from utf8 -&gt; to our best guess at a useful
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_open_codepage_for_import ()">
+<a name="gsf-msole-iconv-open-codepage-for-import"></a><h3>gsf_msole_iconv_open_codepage_for_import ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              gsf_msole_iconv_open_codepage_for_import
+                                                        (char const *to,
+                                                         int codepage);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>to</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codepage</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an iconv converter for <em class="parameter"><code>codepage</code></em> -&gt; utf8.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_open_for_export ()">
+<a name="gsf-msole-iconv-open-for-export"></a><h3>gsf_msole_iconv_open_for_export ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              gsf_msole_iconv_open_for_export     (void);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an iconv convert to go from utf8 -&gt; to our best guess at a useful
 	windows codepage.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542342"></a><h3><a name="gsf-msole-iconv-open-codepage-for-export"></a>gsf_msole_iconv_open_codepage_for_export ()</h3><a class="indexterm" name="id2542354"></a><pre class="programlisting">GIConv      gsf_msole_iconv_open_codepage_for_export
-                                            (guint codepage_to);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>codepage_to</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>an iconv converter to go from utf8 -&gt; to our best guess at a useful
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_open_codepage_for_export ()">
+<a name="gsf-msole-iconv-open-codepage-for-export"></a><h3>gsf_msole_iconv_open_codepage_for_export ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              gsf_msole_iconv_open_codepage_for_export
+                                                        (int codepage_to);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codepage_to</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an iconv converter to go from utf8 -&gt; to our best guess at a useful
 	windows codepage.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542416"></a><h3><a name="gsf-msole-iconv-open-for-import"></a>gsf_msole_iconv_open_for_import ()</h3><a class="indexterm" name="id2542428"></a><pre class="programlisting">GIConv      gsf_msole_iconv_open_for_import (int codepage);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>codepage</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>an iconv converter for single byte encodings <i class="parameter"><tt>codepage</tt></i> -&gt; utf8.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_open_for_import ()">
+<a name="gsf-msole-iconv-open-for-import"></a><h3>gsf_msole_iconv_open_for_import ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Character-Set-Conversion.html#GIConv"
+>GIConv</a>              gsf_msole_iconv_open_for_import     (int codepage);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codepage</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an iconv converter for single byte encodings <em class="parameter"><code>codepage</code></em> -&gt; utf8.
 	Attempt to handle the semantics of a specification for multibyte encodings
 	since this is only supposed to be used for single bytes.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542496"></a><h3><a name="gsf-msole-iconv-win-codepage"></a>gsf_msole_iconv_win_codepage ()</h3><a class="indexterm" name="id2542508"></a><pre class="programlisting">guint       gsf_msole_iconv_win_codepage    (void);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>our best guess at the applicable windows code page based on an
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_iconv_win_codepage ()">
+<a name="gsf-msole-iconv-win-codepage"></a><h3>gsf_msole_iconv_win_codepage ()</h3>
+<pre class="programlisting">int                 gsf_msole_iconv_win_codepage        (void);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> our best guess at the applicable windows code page based on an
 	environment variable or the current locale.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542549"></a><h3><a name="gsf-msole-codepage-to-lid"></a>gsf_msole_codepage_to_lid ()</h3><a class="indexterm" name="id2542561"></a><pre class="programlisting">guint       gsf_msole_codepage_to_lid       (int codepage);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>codepage</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542616"></a><h3><a name="gsf-msole-lid-to-codepage"></a>gsf_msole_lid_to_codepage ()</h3><a class="indexterm" name="id2542628"></a><pre class="programlisting">guint       gsf_msole_lid_to_codepage       (guint lid);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>lid</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>our best guess at the codepage for the given language id
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542687"></a><h3><a name="gsf-msole-lid-to-codepage-str"></a>gsf_msole_lid_to_codepage_str ()</h3><a class="indexterm" name="id2542699"></a><pre class="programlisting">gchar*      gsf_msole_lid_to_codepage_str   (guint lid);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>lid</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the Iconv codepage string for the given LID.
-Return value must be <tt class="function">g_free()</tt>'d
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542770"></a><h3><a name="gsf-msole-lid-for-language"></a>gsf_msole_lid_for_language ()</h3><a class="indexterm" name="id2542783"></a><pre class="programlisting">guint       gsf_msole_lid_for_language      (char const *lang);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>lang</tt></i>�:</span></td><td>
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the LID (Language Identifier) for the input language.
-If lang is <tt class="literal">null</tt>, return 0x0400 ("-none-"), and not 0x0000 ("no proofing")
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542849"></a><h3><a name="gsf-msole-inflate"></a>gsf_msole_inflate ()</h3><a class="indexterm" name="id2542861"></a><pre class="programlisting">GByteArray* gsf_msole_inflate               (<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
-                                             <a href="gsf-utils.html#gsf-off-t">gsf_off_t</a> offset);</pre><p>
-Decompresses an LZ compressed stream.</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>input</tt></i>�:</span></td><td> stream to read from
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>offset</tt></i>�:</span></td><td> offset into it for start byte of compresse stream
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td> A GByteArray that the caller is responsible for freeing
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2542944"></a><h3><a name="OLE-HEADER-START-BAT-CAPS"></a>OLE_HEADER_START_BAT</h3><a class="indexterm" name="id2542955"></a><pre class="programlisting">#define OLE_HEADER_START_BAT	 0x4c
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2542971"></a><h3><a name="OLE-HEADER-MAJOR-VER-CAPS"></a>OLE_HEADER_MAJOR_VER</h3><a class="indexterm" name="id2542982"></a><pre class="programlisting">#define OLE_HEADER_MAJOR_VER	 0x1a	/* 0x3 been seen in wild */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2542998"></a><h3><a name="OLE-HEADER-METABAT-SIZE-CAPS"></a>OLE_HEADER_METABAT_SIZE</h3><a class="indexterm" name="id2543010"></a><pre class="programlisting">#define OLE_HEADER_METABAT_SIZE	 ((OLE_HEADER_SIZE - OLE_HEADER_START_BAT) / BAT_INDEX_SIZE)
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543027"></a><h3><a name="OLE-HEADER-DIRENT-START-CAPS"></a>OLE_HEADER_DIRENT_START</h3><a class="indexterm" name="id2543039"></a><pre class="programlisting">#define OLE_HEADER_DIRENT_START  0x30
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543054"></a><h3><a name="OLE-HEADER-NUM-SBAT-CAPS"></a>OLE_HEADER_NUM_SBAT</h3><a class="indexterm" name="id2543066"></a><pre class="programlisting">#define OLE_HEADER_NUM_SBAT      0x40
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543081"></a><h3><a name="OLE-HEADER-BB-SHIFT-CAPS"></a>OLE_HEADER_BB_SHIFT</h3><a class="indexterm" name="id2543093"></a><pre class="programlisting">#define OLE_HEADER_BB_SHIFT      0x1e
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543108"></a><h3><a name="OLE-HEADER-NUM-BAT-CAPS"></a>OLE_HEADER_NUM_BAT</h3><a class="indexterm" name="id2543120"></a><pre class="programlisting">#define OLE_HEADER_NUM_BAT	 0x2c
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543134"></a><h3><a name="OLE-HEADER-THRESHOLD-CAPS"></a>OLE_HEADER_THRESHOLD</h3><a class="indexterm" name="id2543145"></a><pre class="programlisting">#define OLE_HEADER_THRESHOLD	 0x38
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543161"></a><h3><a name="OLE-HEADER-METABAT-BLOCK-CAPS"></a>OLE_HEADER_METABAT_BLOCK</h3><a class="indexterm" name="id2543173"></a><pre class="programlisting">#define OLE_HEADER_METABAT_BLOCK 0x44
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543188"></a><h3><a name="OLE-HEADER-SBAT-START-CAPS"></a>OLE_HEADER_SBAT_START</h3><a class="indexterm" name="id2543200"></a><pre class="programlisting">#define OLE_HEADER_SBAT_START    0x3c
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543215"></a><h3><a name="OLE-HEADER-SIGNATURE-CAPS"></a>OLE_HEADER_SIGNATURE</h3><a class="indexterm" name="id2543226"></a><pre class="programlisting">#define OLE_HEADER_SIGNATURE	 0x00
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543241"></a><h3><a name="OLE-HEADER-BYTE-ORDER-CAPS"></a>OLE_HEADER_BYTE_ORDER</h3><a class="indexterm" name="id2543253"></a><pre class="programlisting">#define OLE_HEADER_BYTE_ORDER	 0x1c	/* 0xfe 0xff == Intel Little Endian */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543269"></a><h3><a name="OLE-HEADER-SB-SHIFT-CAPS"></a>OLE_HEADER_SB_SHIFT</h3><a class="indexterm" name="id2543281"></a><pre class="programlisting">#define OLE_HEADER_SB_SHIFT      0x20
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543296"></a><h3><a name="OLE-HEADER-NUM-METABAT-CAPS"></a>OLE_HEADER_NUM_METABAT</h3><a class="indexterm" name="id2543307"></a><pre class="programlisting">#define OLE_HEADER_NUM_METABAT   0x48
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543323"></a><h3><a name="OLE-HEADER-SIZE-CAPS"></a>OLE_HEADER_SIZE</h3><a class="indexterm" name="id2543334"></a><pre class="programlisting">#define OLE_HEADER_SIZE		 0x200	/* independent of big block size size */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543350"></a><h3><a name="OLE-HEADER-CLSID-CAPS"></a>OLE_HEADER_CLSID</h3><a class="indexterm" name="id2543361"></a><pre class="programlisting">#define OLE_HEADER_CLSID	 0x08	/* See ReadClassStg */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543377"></a><h3><a name="OLE-HEADER-MINOR-VER-CAPS"></a>OLE_HEADER_MINOR_VER</h3><a class="indexterm" name="id2543388"></a><pre class="programlisting">#define OLE_HEADER_MINOR_VER	 0x18	/* 0x33 and 0x3e have been seen */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543404"></a><h3><a name="OLE-DEFAULT-BB-SHIFT-CAPS"></a>OLE_DEFAULT_BB_SHIFT</h3><a class="indexterm" name="id2543415"></a><pre class="programlisting">#define OLE_DEFAULT_BB_SHIFT	 9
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543430"></a><h3><a name="OLE-DEFAULT-SB-SHIFT-CAPS"></a>OLE_DEFAULT_SB_SHIFT</h3><a class="indexterm" name="id2543442"></a><pre class="programlisting">#define OLE_DEFAULT_SB_SHIFT	 6
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543457"></a><h3><a name="DIRENT-DETAILS-SIZE-CAPS"></a>DIRENT_DETAILS_SIZE</h3><a class="indexterm" name="id2543469"></a><pre class="programlisting">#define DIRENT_DETAILS_SIZE	0x40
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543484"></a><h3><a name="DIRENT-SIZE-CAPS"></a>DIRENT_SIZE</h3><a class="indexterm" name="id2543494"></a><pre class="programlisting">#define DIRENT_SIZE		(DIRENT_MAX_NAME_SIZE + DIRENT_DETAILS_SIZE)
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543510"></a><h3><a name="DIRENT-NAME-LEN-CAPS"></a>DIRENT_NAME_LEN</h3><a class="indexterm" name="id2543522"></a><pre class="programlisting">#define DIRENT_NAME_LEN		0x40	/* length in bytes incl 0 terminator */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543538"></a><h3><a name="DIRENT-TYPE-PROPERTY-CAPS"></a>DIRENT_TYPE_PROPERTY</h3><a class="indexterm" name="id2543548"></a><pre class="programlisting">#define DIRENT_TYPE_PROPERTY	4	/* ? */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543564"></a><h3><a name="DIRENT-TYPE-FILE-CAPS"></a>DIRENT_TYPE_FILE</h3><a class="indexterm" name="id2543576"></a><pre class="programlisting">#define DIRENT_TYPE_FILE	2
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543590"></a><h3><a name="DIRENT-MAGIC-END-CAPS"></a>DIRENT_MAGIC_END</h3><a class="indexterm" name="id2543602"></a><pre class="programlisting">#define DIRENT_MAGIC_END	0xffffffff
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543618"></a><h3><a name="DIRENT-TYPE-DIR-CAPS"></a>DIRENT_TYPE_DIR</h3><a class="indexterm" name="id2543629"></a><pre class="programlisting">#define DIRENT_TYPE_DIR		1
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543644"></a><h3><a name="DIRENT-MAX-NAME-SIZE-CAPS"></a>DIRENT_MAX_NAME_SIZE</h3><a class="indexterm" name="id2543655"></a><pre class="programlisting">#define DIRENT_MAX_NAME_SIZE	0x40
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543671"></a><h3><a name="DIRENT-FILE-SIZE-CAPS"></a>DIRENT_FILE_SIZE</h3><a class="indexterm" name="id2543683"></a><pre class="programlisting">#define DIRENT_FILE_SIZE	0x78
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543698"></a><h3><a name="DIRENT-FIRSTBLOCK-CAPS"></a>DIRENT_FIRSTBLOCK</h3><a class="indexterm" name="id2543709"></a><pre class="programlisting">#define DIRENT_FIRSTBLOCK	0x74
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543725"></a><h3><a name="DIRENT-TYPE-INVALID-CAPS"></a>DIRENT_TYPE_INVALID</h3><a class="indexterm" name="id2543736"></a><pre class="programlisting">#define DIRENT_TYPE_INVALID	0
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543751"></a><h3><a name="DIRENT-USERFLAGS-CAPS"></a>DIRENT_USERFLAGS</h3><a class="indexterm" name="id2543762"></a><pre class="programlisting">#define DIRENT_USERFLAGS	0x60	/* only for dirs */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543778"></a><h3><a name="DIRENT-COLOUR-CAPS"></a>DIRENT_COLOUR</h3><a class="indexterm" name="id2543788"></a><pre class="programlisting">#define DIRENT_COLOUR		0x43
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543803"></a><h3><a name="DIRENT-MODIFY-TIME-CAPS"></a>DIRENT_MODIFY_TIME</h3><a class="indexterm" name="id2543814"></a><pre class="programlisting">#define DIRENT_MODIFY_TIME	0x6c	/* for files */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543830"></a><h3><a name="DIRENT-TYPE-LOCKBYTES-CAPS"></a>DIRENT_TYPE_LOCKBYTES</h3><a class="indexterm" name="id2543841"></a><pre class="programlisting">#define DIRENT_TYPE_LOCKBYTES	3	/* ? */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543857"></a><h3><a name="DIRENT-CREATE-TIME-CAPS"></a>DIRENT_CREATE_TIME</h3><a class="indexterm" name="id2543868"></a><pre class="programlisting">#define DIRENT_CREATE_TIME	0x64	/* for files */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543884"></a><h3><a name="DIRENT-PREV-CAPS"></a>DIRENT_PREV</h3><a class="indexterm" name="id2543894"></a><pre class="programlisting">#define DIRENT_PREV		0x44
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543909"></a><h3><a name="DIRENT-NEXT-CAPS"></a>DIRENT_NEXT</h3><a class="indexterm" name="id2543920"></a><pre class="programlisting">#define DIRENT_NEXT		0x48
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543935"></a><h3><a name="DIRENT-CHILD-CAPS"></a>DIRENT_CHILD</h3><a class="indexterm" name="id2543946"></a><pre class="programlisting">#define DIRENT_CHILD		0x4c
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543961"></a><h3><a name="DIRENT-TYPE-CAPS"></a>DIRENT_TYPE</h3><a class="indexterm" name="id2543973"></a><pre class="programlisting">#define DIRENT_TYPE		0x42
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2543987"></a><h3><a name="DIRENT-CLSID-CAPS"></a>DIRENT_CLSID</h3><a class="indexterm" name="id2543998"></a><pre class="programlisting">#define DIRENT_CLSID		0x50	/* only for dirs */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544014"></a><h3><a name="DIRENT-TYPE-ROOTDIR-CAPS"></a>DIRENT_TYPE_ROOTDIR</h3><a class="indexterm" name="id2544026"></a><pre class="programlisting">#define DIRENT_TYPE_ROOTDIR	5
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544041"></a><h3><a name="BAT-MAGIC-METABAT-CAPS"></a>BAT_MAGIC_METABAT</h3><a class="indexterm" name="id2544052"></a><pre class="programlisting">#define BAT_MAGIC_METABAT	0xfffffffc	/* a metabat block -4 */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544068"></a><h3><a name="BAT-MAGIC-BAT-CAPS"></a>BAT_MAGIC_BAT</h3><a class="indexterm" name="id2544079"></a><pre class="programlisting">#define BAT_MAGIC_BAT		0xfffffffd	/* a bat block,    -3 */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544094"></a><h3><a name="BAT-INDEX-SIZE-CAPS"></a>BAT_INDEX_SIZE</h3><a class="indexterm" name="id2544106"></a><pre class="programlisting">#define BAT_INDEX_SIZE		 4
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544121"></a><h3><a name="BAT-MAGIC-END-OF-CHAIN-CAPS"></a>BAT_MAGIC_END_OF_CHAIN</h3><a class="indexterm" name="id2544132"></a><pre class="programlisting">#define BAT_MAGIC_END_OF_CHAIN	0xfffffffe	/*		   -2 */
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2544148"></a><h3><a name="BAT-MAGIC-UNUSED-CAPS"></a>BAT_MAGIC_UNUSED</h3><a class="indexterm" name="id2544160"></a><pre class="programlisting">#define BAT_MAGIC_UNUSED	0xffffffff	/*		   -1 */
-</pre><p>
-
-</p></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-Compression.html"><b>&lt;&lt;�Compression</b></a></td><td align="right"><a accesskey="n" href="gsf-metadata.html"><b>metadata�&gt;&gt;</b></a></td></tr></table></body></html>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_codepage_to_lid ()">
+<a name="gsf-msole-codepage-to-lid"></a><h3>gsf_msole_codepage_to_lid ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gsf_msole_codepage_to_lid           (int codepage);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>codepage</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_lid_to_codepage ()">
+<a name="gsf-msole-lid-to-codepage"></a><h3>gsf_msole_lid_to_codepage ()</h3>
+<pre class="programlisting">int                 gsf_msole_lid_to_codepage           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> our best guess at the codepage for the given language id
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_lid_to_codepage_str ()">
+<a name="gsf-msole-lid-to-codepage-str"></a><h3>gsf_msole_lid_to_codepage_str ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gsf_msole_lid_to_codepage_str       (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the Iconv codepage string for the given LID.
+	Return value must be <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a>'d
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_lid_for_language ()">
+<a name="gsf-msole-lid-for-language"></a><h3>gsf_msole_lid_for_language ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gsf_msole_lid_for_language          (char const *lang);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lang</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the LID (Language Identifier) for the input language.
+	If lang is <code class="literal">null</code>, return 0x0400 ("-none-"), and not 0x0000 ("no proofing")
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_language_for_lid ()">
+<a name="gsf-msole-language-for-lid"></a><h3>gsf_msole_language_for_lid ()</h3>
+<pre class="programlisting">char const *        gsf_msole_language_for_lid          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> lid);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>lid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the xx_YY style string (can be just xx or xxx) for the given LID.
+	Return value must not be freed. If the LID is not found, is set to
+	0x0400, or is set to 0x0000, will return "-none-"
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_msole_inflate ()">
+<a name="gsf-msole-inflate"></a><h3>gsf_msole_inflate ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Byte-Arrays.html#GByteArray"
+>GByteArray</a> *        gsf_msole_inflate                   (<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *input,
+                                                         <a class="link" href="gsf-utils.html#gsf-off-t" title="gsf_off_t">gsf_off_t</a> offset);</pre>
+<p>
+Decompresses an LZ compressed stream.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>input</code></em> :</span></p></td>
+<td> stream to read from
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>offset</code></em> :</span></p></td>
+<td> offset into it for start byte of compresse stream
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A GByteArray that the caller is responsible for freeing
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

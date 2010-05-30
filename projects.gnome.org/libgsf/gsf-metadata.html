@@ -1,158 +1,1403 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>metadata</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="parsers.html" title="Stream Parsers"><link rel="previous" href="gsf-MS-OLE2.html" title="MS OLE2"><link rel="next" href="gsf-Structured-Blobs.html" title="Structured Blobs"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-MS-OLE2.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-Structured-Blobs.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-metadata"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">metadata</span></h2><p>metadata &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="synopsis">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>metadata</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="parsers.html" title="Stream Parsers">
+<link rel="prev" href="gsf-MS-OLE2.html" title="MS OLE2">
+<link rel="next" href="gsf-OASIS-Open-Document.html" title="OASIS Open Document">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="Part I. GSF: Introduction">
+<link rel="part" href="history.html" title="Part II. GSF: History">
+<link rel="part" href="dependencies.html" title="Part III. GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="Part IV. Projects using GSF">
+<link rel="part" href="api.html" title="Part V. API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gsf-MS-OLE2.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="parsers.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-OASIS-Open-Document.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-metadata.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gsf-metadata.description" class="shortcut">Description</a>
+                 | 
+                <a href="#gsf-metadata.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="metadata">
+<a name="gsf-metadata"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-metadata.top_of_page"></a>metadata</span></h2>
+<p>metadata</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-metadata.synopsis"></a><h2>Synopsis</h2>
+<a name="GsfDocMetaData"></a><a name="GsfDocPropVector"></a><pre class="synopsis">
+                    <a class="link" href="gsf-metadata.html#GsfDocMetaData-struct" title="GsfDocMetaData">GsfDocMetaData</a>;
+<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *    <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-new" title="gsf_doc_meta_data_new ()">gsf_doc_meta_data_new</a>               (void);
+<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-lookup" title="gsf_doc_meta_data_lookup ()">gsf_doc_meta_data_lookup</a>            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
+                                                         char const *name);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-insert" title="gsf_doc_meta_data_insert ()">gsf_doc_meta_data_insert</a>            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-remove" title="gsf_doc_meta_data_remove ()">gsf_doc_meta_data_remove</a>            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char const *name);
+<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-steal" title="gsf_doc_meta_data_steal ()">gsf_doc_meta_data_steal</a>             (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char const *name);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-store" title="gsf_doc_meta_data_store ()">gsf_doc_meta_data_store</a>             (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-foreach" title="gsf_doc_meta_data_foreach ()">gsf_doc_meta_data_foreach</a>           (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHFunc"
+>GHFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a>               <a class="link" href="gsf-metadata.html#gsf-doc-meta-data-size" title="gsf_doc_meta_data_size ()">gsf_doc_meta_data_size</a>              (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-meta-dump" title="gsf_doc_meta_dump ()">gsf_doc_meta_dump</a>                   (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);
+                    <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a>;
+<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        <a class="link" href="gsf-metadata.html#gsf-doc-prop-new" title="gsf_doc_prop_new ()">gsf_doc_prop_new</a>                    (char *name);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-prop-free" title="gsf_doc_prop_free ()">gsf_doc_prop_free</a>                   (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop);
+char const   *      <a class="link" href="gsf-metadata.html#gsf-doc-prop-get-name" title="gsf_doc_prop_get_name ()">gsf_doc_prop_get_name</a>               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *      <a class="link" href="gsf-metadata.html#gsf-doc-prop-get-val" title="gsf_doc_prop_get_val ()">gsf_doc_prop_get_val</a>                (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-prop-set-val" title="gsf_doc_prop_set_val ()">gsf_doc_prop_set_val</a>                (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);
+char const   *      <a class="link" href="gsf-metadata.html#gsf-doc-prop-get-link" title="gsf_doc_prop_get_link ()">gsf_doc_prop_get_link</a>               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-prop-set-link" title="gsf_doc_prop_set_link ()">gsf_doc_prop_set_link</a>               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         char *link);
+void                <a class="link" href="gsf-metadata.html#gsf-doc-prop-dump" title="gsf_doc_prop_dump ()">gsf_doc_prop_dump</a>                   (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);
+                    <a class="link" href="gsf-metadata.html#GsfDocPropVector-struct" title="GsfDocPropVector">GsfDocPropVector</a>;
+<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *  <a class="link" href="gsf-metadata.html#gsf-docprop-vector-new" title="gsf_docprop_vector_new ()">gsf_docprop_vector_new</a>              (void);
+void                <a class="link" href="gsf-metadata.html#gsf-docprop-vector-append" title="gsf_docprop_vector_append ()">gsf_docprop_vector_append</a>           (<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *vector,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="gsf-metadata.html#gsf-docprop-vector-as-string" title="gsf_docprop_vector_as_string ()">gsf_docprop_vector_as_string</a>        (<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> const *vector);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Value-arrays.html#GValueArray"
+>GValueArray</a> *       <a class="link" href="gsf-metadata.html#gsf-value-get-docprop-varray" title="gsf_value_get_docprop_varray ()">gsf_value_get_docprop_varray</a>        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *value);
+<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *  <a class="link" href="gsf-metadata.html#gsf-value-get-docprop-vector" title="gsf_value_get_docprop_vector ()">gsf_value_get_docprop_vector</a>        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *value);
 
-
-
-struct      <a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a>;
-struct      <a href="gsf-metadata.html#GsfDocProp">GsfDocProp</a>;
-<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a>* <a href="gsf-metadata.html#gsf-doc-meta-data-new">gsf_doc_meta_data_new</a>       (void);
-void        <a href="gsf-metadata.html#gsf-doc-meta-data-foreach">gsf_doc_meta_data_foreach</a>       (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
-                                             GHFunc func,
-                                             gpointer user_data);
-gsize       <a href="gsf-metadata.html#gsf-doc-meta-data-size">gsf_doc_meta_data_size</a>          (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);
-GQuark      <a href="gsf-metadata.html#gsf-doc-meta-data-error">gsf_doc_meta_data_error</a>         (void);
-void        <a href="gsf-metadata.html#gsf-doc-meta-data-remove-prop">gsf_doc_meta_data_remove_prop</a>   (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
-                                             char const *prop);
-void        <a href="gsf-metadata.html#gsf-doc-meta-data-set-prop">gsf_doc_meta_data_set_prop</a>      (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
-                                             char const *prop,
-                                             GValue const *value);
-
-#define     <a href="gsf-metadata.html#GSF-META-KEY-COUNT-PAGES-CAPS">GSF_META_KEY_COUNT_PAGES</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-RIGHTS-CAPS">GSF_META_KEY_RIGHTS</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-DATE-LAST-PRINTED-CAPS">GSF_META_KEY_DATE_LAST_PRINTED</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-LANGUAGE-CAPS">GSF_META_KEY_LANGUAGE</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-SOURCE-CAPS">GSF_META_KEY_SOURCE</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-COVERAGE-CAPS">GSF_META_KEY_COVERAGE</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-CONTRIBUTOR-CAPS">GSF_META_KEY_CONTRIBUTOR</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-DESCRIPTION-CAPS">GSF_META_KEY_DESCRIPTION</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-RELATION-CAPS">GSF_META_KEY_RELATION</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-GENERATOR-CAPS">GSF_META_KEY_GENERATOR</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-KEYWORDS-CAPS">GSF_META_KEY_KEYWORDS</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-TYPE-CAPS">GSF_META_KEY_TYPE</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-DATE-LAST-MODIFIED-CAPS">GSF_META_KEY_DATE_LAST_MODIFIED</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-FORMAT-CAPS">GSF_META_KEY_FORMAT</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-TITLE-CAPS">GSF_META_KEY_TITLE</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-SUBJECT-CAPS">GSF_META_KEY_SUBJECT</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-COUNT-WORDS-CAPS">GSF_META_KEY_COUNT_WORDS</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-PUBLISHER-CAPS">GSF_META_KEY_PUBLISHER</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-COUNT-CHARACTERS-CAPS">GSF_META_KEY_COUNT_CHARACTERS</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-REVISION-TAG-CAPS">GSF_META_KEY_REVISION_TAG</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-DATE-CREATED-CAPS">GSF_META_KEY_DATE_CREATED</a>
-#define     <a href="gsf-metadata.html#GSF-META-KEY-CREATOR-CAPS">GSF_META_KEY_CREATOR</a>
-
-</pre></div><div class="refsect1" lang="en"><a name="id2548496"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2548505"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2548511"></a><h3><a name="GsfDocMetaData"></a>struct GsfDocMetaData</h3><a class="indexterm" name="id2548522"></a><pre class="programlisting">struct GsfDocMetaData;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2548537"></a><h3><a name="GsfDocProp"></a>struct GsfDocProp</h3><a class="indexterm" name="id2548547"></a><pre class="programlisting">struct GsfDocProp {
-
-	char const *name;
-	GValue *val;
-	char const *linked_to; /* optionally NULL */
-};
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2548563"></a><h3><a name="gsf-doc-meta-data-new"></a>gsf_doc_meta_data_new ()</h3><a class="indexterm" name="id2548574"></a><pre class="programlisting"><a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a>* gsf_doc_meta_data_new       (void);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new metadata property collection
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2548613"></a><h3><a name="gsf-doc-meta-data-foreach"></a>gsf_doc_meta_data_foreach ()</h3><a class="indexterm" name="id2548625"></a><pre class="programlisting">void        gsf_doc_meta_data_foreach       (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
-                                             GHFunc func,
-                                             gpointer user_data);</pre><p>
-Iterate through each (key, value) pair in this collection</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>meta</tt></i>�:</span></td><td> the collection
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>func</tt></i>�:</span></td><td> the function called once for each element in the collection
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>user_data</tt></i>�:</span></td><td> any supplied user data or NULL
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2548720"></a><h3><a name="gsf-doc-meta-data-size"></a>gsf_doc_meta_data_size ()</h3><a class="indexterm" name="id2548731"></a><pre class="programlisting">gsize       gsf_doc_meta_data_size          (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>meta</tt></i>�:</span></td><td> the collection
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>the number of items in this collection
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2548791"></a><h3><a name="gsf-doc-meta-data-error"></a>gsf_doc_meta_data_error ()</h3><a class="indexterm" name="id2548803"></a><pre class="programlisting">GQuark      gsf_doc_meta_data_error         (void);</pre><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>
-
-
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2548839"></a><h3><a name="gsf-doc-meta-data-remove-prop"></a>gsf_doc_meta_data_remove_prop ()</h3><a class="indexterm" name="id2548851"></a><pre class="programlisting">void        gsf_doc_meta_data_remove_prop   (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
-                                             char const *prop);</pre><p>
-If <i class="parameter"><tt>prop</tt></i> does not exist in the collection, do nothing. If <i class="parameter"><tt>prop</tt></i> does exist,
-remove it and its value from the collection</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>meta</tt></i>�:</span></td><td> the collection
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prop</tt></i>�:</span></td><td> the non-null string name of the property
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2548937"></a><h3><a name="gsf-doc-meta-data-set-prop"></a>gsf_doc_meta_data_set_prop ()</h3><a class="indexterm" name="id2548949"></a><pre class="programlisting">void        gsf_doc_meta_data_set_prop      (<a href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
-                                             char const *prop,
-                                             GValue const *value);</pre><p>
-If <i class="parameter"><tt>prop</tt></i> does not exist in the collection, add it to the collection. If
-<i class="parameter"><tt>prop</tt></i> does exist in the collection, replace the old value with this new one</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>meta</tt></i>�:</span></td><td> the collection
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>prop</tt></i>�:</span></td><td> the non-null string name of the property.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>value</tt></i>�:</span></td><td> the non-null value associated with <i class="parameter"><tt>prop</tt></i>
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2549063"></a><h3><a name="GSF-META-KEY-COUNT-PAGES-CAPS"></a>GSF_META_KEY_COUNT_PAGES</h3><a class="indexterm" name="id2549075"></a><pre class="programlisting">#define GSF_META_KEY_COUNT_PAGES        "urn:GSF:1.0:CountPages"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549091"></a><h3><a name="GSF-META-KEY-RIGHTS-CAPS"></a>GSF_META_KEY_RIGHTS</h3><a class="indexterm" name="id2549103"></a><pre class="programlisting">#define GSF_META_KEY_RIGHTS             "urn:DublinCore:1.0:Rights"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549119"></a><h3><a name="GSF-META-KEY-DATE-LAST-PRINTED-CAPS"></a>GSF_META_KEY_DATE_LAST_PRINTED</h3><a class="indexterm" name="id2549130"></a><pre class="programlisting">#define GSF_META_KEY_DATE_LAST_PRINTED  "urn:GSF:1.0:DateLastPrinted"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549146"></a><h3><a name="GSF-META-KEY-LANGUAGE-CAPS"></a>GSF_META_KEY_LANGUAGE</h3><a class="indexterm" name="id2549158"></a><pre class="programlisting">#define GSF_META_KEY_LANGUAGE           "urn:DublinCore:1.0:Language"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549174"></a><h3><a name="GSF-META-KEY-SOURCE-CAPS"></a>GSF_META_KEY_SOURCE</h3><a class="indexterm" name="id2549186"></a><pre class="programlisting">#define GSF_META_KEY_SOURCE             "urn:DublinCore:1.0:Source"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549202"></a><h3><a name="GSF-META-KEY-COVERAGE-CAPS"></a>GSF_META_KEY_COVERAGE</h3><a class="indexterm" name="id2549213"></a><pre class="programlisting">#define GSF_META_KEY_COVERAGE           "urn:DublinCore:1.0:Coverage"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549229"></a><h3><a name="GSF-META-KEY-CONTRIBUTOR-CAPS"></a>GSF_META_KEY_CONTRIBUTOR</h3><a class="indexterm" name="id2549242"></a><pre class="programlisting">#define GSF_META_KEY_CONTRIBUTOR        "urn:DublinCore:1.0:Contributor"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549258"></a><h3><a name="GSF-META-KEY-DESCRIPTION-CAPS"></a>GSF_META_KEY_DESCRIPTION</h3><a class="indexterm" name="id2549269"></a><pre class="programlisting">#define GSF_META_KEY_DESCRIPTION        "urn:DublinCore:1.0:Description"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549285"></a><h3><a name="GSF-META-KEY-RELATION-CAPS"></a>GSF_META_KEY_RELATION</h3><a class="indexterm" name="id2549297"></a><pre class="programlisting">#define GSF_META_KEY_RELATION           "urn:DublinCore:1.0:Relation"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549313"></a><h3><a name="GSF-META-KEY-GENERATOR-CAPS"></a>GSF_META_KEY_GENERATOR</h3><a class="indexterm" name="id2549324"></a><pre class="programlisting">#define GSF_META_KEY_GENERATOR          "urn:GSF:1.0:Generator"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549340"></a><h3><a name="GSF-META-KEY-KEYWORDS-CAPS"></a>GSF_META_KEY_KEYWORDS</h3><a class="indexterm" name="id2549351"></a><pre class="programlisting">#define GSF_META_KEY_KEYWORDS           "urn:GSF:1.0:Keywords"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549367"></a><h3><a name="GSF-META-KEY-TYPE-CAPS"></a>GSF_META_KEY_TYPE</h3><a class="indexterm" name="id2549379"></a><pre class="programlisting">#define GSF_META_KEY_TYPE               "urn:DublinCore:1.0:Type"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549395"></a><h3><a name="GSF-META-KEY-DATE-LAST-MODIFIED-CAPS"></a>GSF_META_KEY_DATE_LAST_MODIFIED</h3><a class="indexterm" name="id2549407"></a><pre class="programlisting">#define GSF_META_KEY_DATE_LAST_MODIFIED "urn:GSF:1.0:DateLastModified"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549423"></a><h3><a name="GSF-META-KEY-FORMAT-CAPS"></a>GSF_META_KEY_FORMAT</h3><a class="indexterm" name="id2549435"></a><pre class="programlisting">#define GSF_META_KEY_FORMAT             "urn:DublinCore:1.0:Format"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549451"></a><h3><a name="GSF-META-KEY-TITLE-CAPS"></a>GSF_META_KEY_TITLE</h3><a class="indexterm" name="id2549463"></a><pre class="programlisting">#define GSF_META_KEY_TITLE              "urn:DublinCore:1.0:Title"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549479"></a><h3><a name="GSF-META-KEY-SUBJECT-CAPS"></a>GSF_META_KEY_SUBJECT</h3><a class="indexterm" name="id2549490"></a><pre class="programlisting">#define GSF_META_KEY_SUBJECT            "urn:DublinCore:1.0:Subject"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549506"></a><h3><a name="GSF-META-KEY-COUNT-WORDS-CAPS"></a>GSF_META_KEY_COUNT_WORDS</h3><a class="indexterm" name="id2549518"></a><pre class="programlisting">#define GSF_META_KEY_COUNT_WORDS        "urn:GSF:1.0:CountWords"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549534"></a><h3><a name="GSF-META-KEY-PUBLISHER-CAPS"></a>GSF_META_KEY_PUBLISHER</h3><a class="indexterm" name="id2549545"></a><pre class="programlisting">#define GSF_META_KEY_PUBLISHER          "urn:DublinCore:1.0:Publisher"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549561"></a><h3><a name="GSF-META-KEY-COUNT-CHARACTERS-CAPS"></a>GSF_META_KEY_COUNT_CHARACTERS</h3><a class="indexterm" name="id2549573"></a><pre class="programlisting">#define GSF_META_KEY_COUNT_CHARACTERS   "urn:GSF:1.0:CountCharacters"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549589"></a><h3><a name="GSF-META-KEY-REVISION-TAG-CAPS"></a>GSF_META_KEY_REVISION_TAG</h3><a class="indexterm" name="id2549601"></a><pre class="programlisting">#define GSF_META_KEY_REVISION_TAG       "urn:GSF:1.0:RevisionTag"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549617"></a><h3><a name="GSF-META-KEY-DATE-CREATED-CAPS"></a>GSF_META_KEY_DATE_CREATED</h3><a class="indexterm" name="id2549629"></a><pre class="programlisting">#define GSF_META_KEY_DATE_CREATED       "urn:DublinCore:1.0:DateCreated"
-</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2549645"></a><h3><a name="GSF-META-KEY-CREATOR-CAPS"></a>GSF_META_KEY_CREATOR</h3><a class="indexterm" name="id2549657"></a><pre class="programlisting">#define GSF_META_KEY_CREATOR            "urn:DublinCore:1.0:Creator"
-</pre><p>
-
-</p></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-MS-OLE2.html"><b>&lt;&lt;�MS OLE2</b></a></td><td align="right"><a accesskey="n" href="gsf-Structured-Blobs.html"><b>Structured Blobs�&gt;&gt;</b></a></td></tr></table></body></html>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-TITLE--CAPS" title="GSF_META_NAME_TITLE">GSF_META_NAME_TITLE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-DESCRIPTION--CAPS" title="GSF_META_NAME_DESCRIPTION">GSF_META_NAME_DESCRIPTION</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-SUBJECT--CAPS" title="GSF_META_NAME_SUBJECT">GSF_META_NAME_SUBJECT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-DATE-MODIFIED--CAPS" title="GSF_META_NAME_DATE_MODIFIED">GSF_META_NAME_DATE_MODIFIED</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-DATE-CREATED--CAPS" title="GSF_META_NAME_DATE_CREATED">GSF_META_NAME_DATE_CREATED</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-KEYWORDS--CAPS" title="GSF_META_NAME_KEYWORDS">GSF_META_NAME_KEYWORDS</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LANGUAGE--CAPS" title="GSF_META_NAME_LANGUAGE">GSF_META_NAME_LANGUAGE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CODEPAGE--CAPS" title="GSF_META_NAME_CODEPAGE">GSF_META_NAME_CODEPAGE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-REVISION-COUNT--CAPS" title="GSF_META_NAME_REVISION_COUNT">GSF_META_NAME_REVISION_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-EDITING-DURATION--CAPS" title="GSF_META_NAME_EDITING_DURATION">GSF_META_NAME_EDITING_DURATION</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-TABLE-COUNT--CAPS" title="GSF_META_NAME_TABLE_COUNT">GSF_META_NAME_TABLE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-IMAGE-COUNT--CAPS" title="GSF_META_NAME_IMAGE_COUNT">GSF_META_NAME_IMAGE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-OBJECT-COUNT--CAPS" title="GSF_META_NAME_OBJECT_COUNT">GSF_META_NAME_OBJECT_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-PAGE-COUNT--CAPS" title="GSF_META_NAME_PAGE_COUNT">GSF_META_NAME_PAGE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-PARAGRAPH-COUNT--CAPS" title="GSF_META_NAME_PARAGRAPH_COUNT">GSF_META_NAME_PARAGRAPH_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-WORD-COUNT--CAPS" title="GSF_META_NAME_WORD_COUNT">GSF_META_NAME_WORD_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CHARACTER-COUNT--CAPS" title="GSF_META_NAME_CHARACTER_COUNT">GSF_META_NAME_CHARACTER_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CELL-COUNT--CAPS" title="GSF_META_NAME_CELL_COUNT">GSF_META_NAME_CELL_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-SPREADSHEET-COUNT--CAPS" title="GSF_META_NAME_SPREADSHEET_COUNT">GSF_META_NAME_SPREADSHEET_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CREATOR--CAPS" title="GSF_META_NAME_CREATOR">GSF_META_NAME_CREATOR</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-TEMPLATE--CAPS" title="GSF_META_NAME_TEMPLATE">GSF_META_NAME_TEMPLATE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LAST-SAVED-BY--CAPS" title="GSF_META_NAME_LAST_SAVED_BY">GSF_META_NAME_LAST_SAVED_BY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LAST-PRINTED--CAPS" title="GSF_META_NAME_LAST_PRINTED">GSF_META_NAME_LAST_PRINTED</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-PRINT-DATE--CAPS" title="GSF_META_NAME_PRINT_DATE">GSF_META_NAME_PRINT_DATE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-PRINTED-BY--CAPS" title="GSF_META_NAME_PRINTED_BY">GSF_META_NAME_PRINTED_BY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-KEYWORD--CAPS" title="GSF_META_NAME_KEYWORD">GSF_META_NAME_KEYWORD</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-SECURITY--CAPS" title="GSF_META_NAME_SECURITY">GSF_META_NAME_SECURITY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CATEGORY--CAPS" title="GSF_META_NAME_CATEGORY">GSF_META_NAME_CATEGORY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-PRESENTATION-FORMAT--CAPS" title="GSF_META_NAME_PRESENTATION_FORMAT">GSF_META_NAME_PRESENTATION_FORMAT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-THUMBNAIL--CAPS" title="GSF_META_NAME_THUMBNAIL">GSF_META_NAME_THUMBNAIL</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-GENERATOR--CAPS" title="GSF_META_NAME_GENERATOR">GSF_META_NAME_GENERATOR</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LINE-COUNT--CAPS" title="GSF_META_NAME_LINE_COUNT">GSF_META_NAME_LINE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-SLIDE-COUNT--CAPS" title="GSF_META_NAME_SLIDE_COUNT">GSF_META_NAME_SLIDE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-NOTE-COUNT--CAPS" title="GSF_META_NAME_NOTE_COUNT">GSF_META_NAME_NOTE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-HIDDEN-SLIDE-COUNT--CAPS" title="GSF_META_NAME_HIDDEN_SLIDE_COUNT">GSF_META_NAME_HIDDEN_SLIDE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MM-CLIP-COUNT--CAPS" title="GSF_META_NAME_MM_CLIP_COUNT">GSF_META_NAME_MM_CLIP_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-BYTE-COUNT--CAPS" title="GSF_META_NAME_BYTE_COUNT">GSF_META_NAME_BYTE_COUNT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-SCALE--CAPS" title="GSF_META_NAME_SCALE">GSF_META_NAME_SCALE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-HEADING-PAIRS--CAPS" title="GSF_META_NAME_HEADING_PAIRS">GSF_META_NAME_HEADING_PAIRS</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-DOCUMENT-PARTS--CAPS" title="GSF_META_NAME_DOCUMENT_PARTS">GSF_META_NAME_DOCUMENT_PARTS</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MANAGER--CAPS" title="GSF_META_NAME_MANAGER">GSF_META_NAME_MANAGER</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-COMPANY--CAPS" title="GSF_META_NAME_COMPANY">GSF_META_NAME_COMPANY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LINKS-DIRTY--CAPS" title="GSF_META_NAME_LINKS_DIRTY">GSF_META_NAME_LINKS_DIRTY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-DICTIONARY--CAPS" title="GSF_META_NAME_DICTIONARY">GSF_META_NAME_DICTIONARY</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-17--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_17">GSF_META_NAME_MSOLE_UNKNOWN_17</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-18--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_18">GSF_META_NAME_MSOLE_UNKNOWN_18</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-19--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_19">GSF_META_NAME_MSOLE_UNKNOWN_19</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-20--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_20">GSF_META_NAME_MSOLE_UNKNOWN_20</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-21--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_21">GSF_META_NAME_MSOLE_UNKNOWN_21</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-22--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_22">GSF_META_NAME_MSOLE_UNKNOWN_22</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-MSOLE-UNKNOWN-23--CAPS" title="GSF_META_NAME_MSOLE_UNKNOWN_23">GSF_META_NAME_MSOLE_UNKNOWN_23</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-LOCALE-SYSTEM-DEFAULT--CAPS" title="GSF_META_NAME_LOCALE_SYSTEM_DEFAULT">GSF_META_NAME_LOCALE_SYSTEM_DEFAULT</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-CASE-SENSITIVE--CAPS" title="GSF_META_NAME_CASE_SENSITIVE">GSF_META_NAME_CASE_SENSITIVE</a>
+#define             <a class="link" href="gsf-metadata.html#GSF-META-NAME-INITIAL-CREATOR--CAPS" title="GSF_META_NAME_INITIAL_CREATOR">GSF_META_NAME_INITIAL_CREATOR</a>
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="gsf-metadata.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----GsfDocMetaData
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----GsfDocPropVector
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-metadata.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-metadata.details"></a><h2>Details</h2>
+<div class="refsect2" title="GsfDocMetaData">
+<a name="GsfDocMetaData-struct"></a><h3>GsfDocMetaData</h3>
+<pre class="programlisting">typedef struct _GsfDocMetaData GsfDocMetaData;</pre>
+<p>
+Class representing information about a document, such as creator and time of
+last modification.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_new ()">
+<a name="gsf-doc-meta-data-new"></a><h3>gsf_doc_meta_data_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *    gsf_doc_meta_data_new               (void);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new metadata property collection
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_lookup ()">
+<a name="gsf-doc-meta-data-lookup"></a><h3>gsf_doc_meta_data_lookup ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        gsf_doc_meta_data_lookup            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
+                                                         char const *name);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the property with name <em class="parameter"><code>id</code></em> in <em class="parameter"><code>meta</code></em>.  The caller can modify the
+property value and link but not the name.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_insert ()">
+<a name="gsf-doc-meta-data-insert"></a><h3>gsf_doc_meta_data_insert ()</h3>
+<pre class="programlisting">void                gsf_doc_meta_data_insert            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value);</pre>
+<p>
+Take ownership of <em class="parameter"><code>name</code></em> and <em class="parameter"><code>value</code></em> and insert a property into <em class="parameter"><code>meta</code></em>.
+If a property exists with <em class="parameter"><code>name</code></em>, it is replaced (The link is lost)</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> the id.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_remove ()">
+<a name="gsf-doc-meta-data-remove"></a><h3>gsf_doc_meta_data_remove ()</h3>
+<pre class="programlisting">void                gsf_doc_meta_data_remove            (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char const *name);</pre>
+<p>
+If <em class="parameter"><code>name</code></em> does not exist in the collection, do nothing. If <em class="parameter"><code>name</code></em> does exist,
+remove it and its value from the collection</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> the collection
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> the non-null string name of the property
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_steal ()">
+<a name="gsf-doc-meta-data-steal"></a><h3>gsf_doc_meta_data_steal ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        gsf_doc_meta_data_steal             (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         char const *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_store ()">
+<a name="gsf-doc-meta-data-store"></a><h3>gsf_doc_meta_data_store ()</h3>
+<pre class="programlisting">void                gsf_doc_meta_data_store             (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> *meta,
+                                                         <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_foreach ()">
+<a name="gsf-doc-meta-data-foreach"></a><h3>gsf_doc_meta_data_foreach ()</h3>
+<pre class="programlisting">void                gsf_doc_meta_data_foreach           (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHFunc"
+>GHFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Iterate through each (key, value) pair in this collection</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> the collection
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> the function called once for each element in the collection
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> any supplied user data or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_data_size ()">
+<a name="gsf-doc-meta-data-size"></a><h3>gsf_doc_meta_data_size ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a>               gsf_doc_meta_data_size              (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> the collection
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the number of items in this collection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_meta_dump ()">
+<a name="gsf-doc-meta-dump"></a><h3>gsf_doc_meta_dump ()</h3>
+<pre class="programlisting">void                gsf_doc_meta_dump                   (<a class="link" href="gsf-metadata.html#GsfDocMetaData">GsfDocMetaData</a> const *meta);</pre>
+<p>
+A debugging utility to dump the content of <em class="parameter"><code>meta</code></em> via g_print</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>meta</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocMetaData"><span class="type">GsfDocMetaData</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfDocProp">
+<a name="GsfDocProp"></a><h3>GsfDocProp</h3>
+<pre class="programlisting">typedef struct _GsfDocProp GsfDocProp;</pre>
+<p>
+Class representing a properties of a document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_new ()">
+<a name="gsf-doc-prop-new"></a><h3>gsf_doc_prop_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *        gsf_doc_prop_new                    (char *name);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a> which the caller is responsible for freeing.
+Takes ownership of <em class="parameter"><code>name</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_free ()">
+<a name="gsf-doc-prop-free"></a><h3>gsf_doc_prop_free ()</h3>
+<pre class="programlisting">void                gsf_doc_prop_free                   (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop);</pre>
+<p>
+If <em class="parameter"><code>prop</code></em> is non <code class="literal">NULL</code> free the memory associated with it</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_get_name ()">
+<a name="gsf-doc-prop-get-name"></a><h3>gsf_doc_prop_get_name ()</h3>
+<pre class="programlisting">char const   *      gsf_doc_prop_get_name               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the name of the property, the caller should not modify the result.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_get_val ()">
+<a name="gsf-doc-prop-get-val"></a><h3>gsf_doc_prop_get_val ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *      gsf_doc_prop_get_val                (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> the property
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the value of the property, the caller should not modify the result.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_set_val ()">
+<a name="gsf-doc-prop-set-val"></a><h3>gsf_doc_prop_set_val ()</h3>
+<pre class="programlisting">void                gsf_doc_prop_set_val                (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);</pre>
+<p>
+Assigns <em class="parameter"><code>val</code></em> to <em class="parameter"><code>prop</code></em>, and unsets and frees the current value.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_get_link ()">
+<a name="gsf-doc-prop-get-link"></a><h3>gsf_doc_prop_get_link ()</h3>
+<pre class="programlisting">char const   *      gsf_doc_prop_get_link               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the current link descriptor of <em class="parameter"><code>prop</code></em>.  The result should not be
+	freed or modified.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_set_link ()">
+<a name="gsf-doc-prop-set-link"></a><h3>gsf_doc_prop_set_link ()</h3>
+<pre class="programlisting">void                gsf_doc_prop_set_link               (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> *prop,
+                                                         char *link);</pre>
+<p>
+Sets <em class="parameter"><code>prop</code></em>'s link to <em class="parameter"><code>link</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link</code></em> :</span></p></td>
+<td> optionally <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_doc_prop_dump ()">
+<a name="gsf-doc-prop-dump"></a><h3>gsf_doc_prop_dump ()</h3>
+<pre class="programlisting">void                gsf_doc_prop_dump                   (<a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp">GsfDocProp</a> const *prop);</pre>
+<p>
+A debugging utility to dump <em class="parameter"><code>prop</code></em> as text via g_print
+New in 1.14.2</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> <a class="link" href="gsf-metadata.html#GsfDocProp" title="GsfDocProp"><span class="type">GsfDocProp</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfDocPropVector">
+<a name="GsfDocPropVector-struct"></a><h3>GsfDocPropVector</h3>
+<pre class="programlisting">typedef struct _GsfDocPropVector GsfDocPropVector;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_docprop_vector_new ()">
+<a name="gsf-docprop-vector-new"></a><h3>gsf_docprop_vector_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *  gsf_docprop_vector_new              (void);</pre>
+<p>
+This function creates a new gsf_docprop_vector object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> GsfDocPropVector*
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_docprop_vector_append ()">
+<a name="gsf-docprop-vector-append"></a><h3>gsf_docprop_vector_append ()</h3>
+<pre class="programlisting">void                gsf_docprop_vector_append           (<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *vector,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value);</pre>
+<p>
+Insert a copy of <em class="parameter"><code>value</code></em> as the last element of <em class="parameter"><code>vector</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vector</code></em> :</span></p></td>
+<td> The vector to which the GValue will be added
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>  The GValue to add to <em class="parameter"><code>vector</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_docprop_vector_as_string ()">
+<a name="gsf-docprop-vector-as-string"></a><h3>gsf_docprop_vector_as_string ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gsf_docprop_vector_as_string        (<a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> const *vector);</pre>
+<p>
+This function returns a string which represents all the GValues in <em class="parameter"><code>vector</code></em>.
+The caller is responsible for freeing the result.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vector</code></em> :</span></p></td>
+<td> The <a class="link" href="gsf-metadata.html#GsfDocPropVector"><span class="type">GsfDocPropVector</span></a> from which GValues will be extracted.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a string of comma-separated values
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_value_get_docprop_varray ()">
+<a name="gsf-value-get-docprop-varray"></a><h3>gsf_value_get_docprop_varray ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Value-arrays.html#GValueArray"
+>GValueArray</a> *       gsf_value_get_docprop_varray        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_value_get_docprop_vector ()">
+<a name="gsf-value-get-docprop-vector"></a><h3>gsf_value_get_docprop_vector ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-metadata.html#GsfDocPropVector">GsfDocPropVector</a> *  gsf_value_get_docprop_vector        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> const *value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_TITLE">
+<a name="GSF-META-NAME-TITLE--CAPS"></a><h3>GSF_META_NAME_TITLE</h3>
+<pre class="programlisting">#define GSF_META_NAME_TITLE				"dc:title"
+</pre>
+<p>
+(String) A formal name given to the resource.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_DESCRIPTION">
+<a name="GSF-META-NAME-DESCRIPTION--CAPS"></a><h3>GSF_META_NAME_DESCRIPTION</h3>
+<pre class="programlisting">#define GSF_META_NAME_DESCRIPTION			"dc:description"
+</pre>
+<p>
+(String) An account of the content of the resource.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_SUBJECT">
+<a name="GSF-META-NAME-SUBJECT--CAPS"></a><h3>GSF_META_NAME_SUBJECT</h3>
+<pre class="programlisting">#define GSF_META_NAME_SUBJECT				"dc:subject"
+</pre>
+<p>
+(String) The topic of the content of the resource,
+<span class="emphasis"><em>typically</em></span> including keywords.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_DATE_MODIFIED">
+<a name="GSF-META-NAME-DATE-MODIFIED--CAPS"></a><h3>GSF_META_NAME_DATE_MODIFIED</h3>
+<pre class="programlisting">#define GSF_META_NAME_DATE_MODIFIED			"dc:date"
+</pre>
+<p>
+(GsfTimestamp) The last time this document was saved.
+</p>
+<p>
+1.14.0	Moved from dc:date-modified to dc:date.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_DATE_CREATED">
+<a name="GSF-META-NAME-DATE-CREATED--CAPS"></a><h3>GSF_META_NAME_DATE_CREATED</h3>
+<pre class="programlisting">#define GSF_META_NAME_DATE_CREATED			"meta:creation-date"
+</pre>
+<p>
+(Date as ISO String) A date associated with an event in the life cycle of
+the resource (creation/publication date).
+Moved from gsf:date-created to meta:creation-date. This way can be used correctly
+by OpenDocument and Gnumeric.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_KEYWORDS">
+<a name="GSF-META-NAME-KEYWORDS--CAPS"></a><h3>GSF_META_NAME_KEYWORDS</h3>
+<pre class="programlisting">#define GSF_META_NAME_KEYWORDS				"dc:keywords"
+</pre>
+<p>
+(GsfDocPropVector of String) Searchable, indexable keywords. Similar to PDF
+keywords or HTML's meta block.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LANGUAGE">
+<a name="GSF-META-NAME-LANGUAGE--CAPS"></a><h3>GSF_META_NAME_LANGUAGE</h3>
+<pre class="programlisting">#define GSF_META_NAME_LANGUAGE				"dc:language"
+</pre>
+<p>
+(String) The locale language of the intellectual content of the resource
+	(basically xx_YY form for us).
+1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CODEPAGE">
+<a name="GSF-META-NAME-CODEPAGE--CAPS"></a><h3>GSF_META_NAME_CODEPAGE</h3>
+<pre class="programlisting">#define	GSF_META_NAME_CODEPAGE				"msole:codepage"
+</pre>
+<p>
+(UnsignedShort) The MS codepage to encode strings for metadata
+1.14.0	Clarified that this is unique from _NAME_CODEPAGE in msole</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_REVISION_COUNT">
+<a name="GSF-META-NAME-REVISION-COUNT--CAPS"></a><h3>GSF_META_NAME_REVISION_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_REVISION_COUNT			"meta:editing-cycles"
+</pre>
+<p>
+(Integer) Count of revision on the document, if appropriate.
+Moved from gsf:revision-count to meta:editing-cycles. This way can be used
+correctly by OpenDocument and Gnumeric.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_EDITING_DURATION">
+<a name="GSF-META-NAME-EDITING-DURATION--CAPS"></a><h3>GSF_META_NAME_EDITING_DURATION</h3>
+<pre class="programlisting">#define GSF_META_NAME_EDITING_DURATION			"meta:editing-duration"
+</pre>
+<p>
+(Date as ISO String) The total-time taken until the last modification.
+Moved from "gsf" to "meta". This way can be used correctly by OpenDocument 
+and Gnumeric.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_TABLE_COUNT">
+<a name="GSF-META-NAME-TABLE-COUNT--CAPS"></a><h3>GSF_META_NAME_TABLE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_TABLE_COUNT			"gsf:table-count"
+</pre>
+<p>
+(Integer) Count of tables in the document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_IMAGE_COUNT">
+<a name="GSF-META-NAME-IMAGE-COUNT--CAPS"></a><h3>GSF_META_NAME_IMAGE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_IMAGE_COUNT           		"gsf:image-count"
+</pre>
+<p>
+(Integer) Count of images in the document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_OBJECT_COUNT">
+<a name="GSF-META-NAME-OBJECT-COUNT--CAPS"></a><h3>GSF_META_NAME_OBJECT_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_OBJECT_COUNT			"gsf:object-count"
+</pre>
+<p>
+(Integer) Count of objects (OLE and other graphics) in the document, if
+appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_PAGE_COUNT">
+<a name="GSF-META-NAME-PAGE-COUNT--CAPS"></a><h3>GSF_META_NAME_PAGE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_PAGE_COUNT			"gsf:page-count"
+</pre>
+<p>
+(Integer) Count of pages in the document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_PARAGRAPH_COUNT">
+<a name="GSF-META-NAME-PARAGRAPH-COUNT--CAPS"></a><h3>GSF_META_NAME_PARAGRAPH_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_PARAGRAPH_COUNT			"gsf:paragraph-count"
+</pre>
+<p>
+(Integer) Count of paragraphs in the document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_WORD_COUNT">
+<a name="GSF-META-NAME-WORD-COUNT--CAPS"></a><h3>GSF_META_NAME_WORD_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_WORD_COUNT			"gsf:word-count"
+</pre>
+<p>
+(Integer) Count of words in the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CHARACTER_COUNT">
+<a name="GSF-META-NAME-CHARACTER-COUNT--CAPS"></a><h3>GSF_META_NAME_CHARACTER_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_CHARACTER_COUNT			"gsf:character-count"
+</pre>
+<p>
+(Integer) Count of characters in the document.
+</p>
+<p>
+TODO See how to sync this with ODF's document-statistic</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CELL_COUNT">
+<a name="GSF-META-NAME-CELL-COUNT--CAPS"></a><h3>GSF_META_NAME_CELL_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_CELL_COUNT			"gsf:cell-count"
+</pre>
+<p>
+(Integer) Count of cells in the spread-sheet document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_SPREADSHEET_COUNT">
+<a name="GSF-META-NAME-SPREADSHEET-COUNT--CAPS"></a><h3>GSF_META_NAME_SPREADSHEET_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_SPREADSHEET_COUNT			"gsf:spreadsheet-count"
+</pre>
+<p>
+(Integer) Count of pages in the document, if appropriate.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CREATOR">
+<a name="GSF-META-NAME-CREATOR--CAPS"></a><h3>GSF_META_NAME_CREATOR</h3>
+<pre class="programlisting">#define GSF_META_NAME_CREATOR				"dc:creator"
+</pre>
+<p>
+(String) An entity primarily responsible for making the content of the
+resource typically a person, organization, or service.
+</p>
+<p>
+1.14.0	Moved from "gsf" to "dc".</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_TEMPLATE">
+<a name="GSF-META-NAME-TEMPLATE--CAPS"></a><h3>GSF_META_NAME_TEMPLATE</h3>
+<pre class="programlisting">#define GSF_META_NAME_TEMPLATE				"meta:template"
+</pre>
+<p>
+(String) The template file that is been used to generate this document.
+</p>
+<p>
+1.14.0 Moved from "gsf" to "meta"</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LAST_SAVED_BY">
+<a name="GSF-META-NAME-LAST-SAVED-BY--CAPS"></a><h3>GSF_META_NAME_LAST_SAVED_BY</h3>
+<pre class="programlisting">#define GSF_META_NAME_LAST_SAVED_BY         		"gsf:last-saved-by"
+</pre>
+<p>
+(String) The entity that made the last change to the document, typically a
+person, organization, or service.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LAST_PRINTED">
+<a name="GSF-META-NAME-LAST-PRINTED--CAPS"></a><h3>GSF_META_NAME_LAST_PRINTED</h3>
+<pre class="programlisting">#define GSF_META_NAME_LAST_PRINTED			"gsf:last-printed"
+</pre>
+<p>
+(GSF_META_NAME_HEADING_PAIRS) The last time this document was printed.
+</p>
+<p>
+1.14.0	Moved from "gsf" to "dc".
+1.14.1	Moved back to "gsf" from "dc".</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_PRINT_DATE">
+<a name="GSF-META-NAME-PRINT-DATE--CAPS"></a><h3>GSF_META_NAME_PRINT_DATE</h3>
+<pre class="programlisting">#define GSF_META_NAME_PRINT_DATE			"meta:print-date"
+</pre>
+<p>
+(GsfTimestamp) Specifies the date and time when the document was last
+printed.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_PRINTED_BY">
+<a name="GSF-META-NAME-PRINTED-BY--CAPS"></a><h3>GSF_META_NAME_PRINTED_BY</h3>
+<pre class="programlisting">#define GSF_META_NAME_PRINTED_BY			"meta:printed-by"
+</pre>
+<p>
+(String) Specifies the name of the last person who printed the document.
+</p>
+<p>
+1.14.0	Moved from "gsf" to "meta".</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_KEYWORD">
+<a name="GSF-META-NAME-KEYWORD--CAPS"></a><h3>GSF_META_NAME_KEYWORD</h3>
+<pre class="programlisting">#define GSF_META_NAME_KEYWORD				"meta:keyword"
+</pre>
+<p>
+(String) Searchable, indexable keywords. Similar to PDF keywords or HTML's
+meta block.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_SECURITY">
+<a name="GSF-META-NAME-SECURITY--CAPS"></a><h3>GSF_META_NAME_SECURITY</h3>
+<pre class="programlisting">#define GSF_META_NAME_SECURITY				"gsf:security"
+</pre>
+<p>
+(Integer) Level of security.
+</p>
+<p>
+</p>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead><tr>
+<th align="left">Level</th>
+<th>Value</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Password protected</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Read-only recommended</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Read-only enforced</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Locked for annotations</td>
+<td>4</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CATEGORY">
+<a name="GSF-META-NAME-CATEGORY--CAPS"></a><h3>GSF_META_NAME_CATEGORY</h3>
+<pre class="programlisting">#define GSF_META_NAME_CATEGORY				"gsf:category"
+</pre>
+<p>
+(String) Category of the document. </p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>example???</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_PRESENTATION_FORMAT">
+<a name="GSF-META-NAME-PRESENTATION-FORMAT--CAPS"></a><h3>GSF_META_NAME_PRESENTATION_FORMAT</h3>
+<pre class="programlisting">#define GSF_META_NAME_PRESENTATION_FORMAT		"gsf:presentation-format"
+</pre>
+<p>
+(String) Type of presentation, like "On-screen Show", "SlideView" etc.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_THUMBNAIL">
+<a name="GSF-META-NAME-THUMBNAIL--CAPS"></a><h3>GSF_META_NAME_THUMBNAIL</h3>
+<pre class="programlisting">#define GSF_META_NAME_THUMBNAIL				"gsf:thumbnail"
+</pre>
+<p>
+(GsfClipData) Thumbnail data of the document, typically a
+preview image of the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_GENERATOR">
+<a name="GSF-META-NAME-GENERATOR--CAPS"></a><h3>GSF_META_NAME_GENERATOR</h3>
+<pre class="programlisting">#define GSF_META_NAME_GENERATOR				"meta:generator"
+</pre>
+<p>
+(String) The application that generated this document. AbiWord, Gnumeric,
+etc...
+</p>
+<p>
+1.14.0 Moved from "gsf" to "meta".</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LINE_COUNT">
+<a name="GSF-META-NAME-LINE-COUNT--CAPS"></a><h3>GSF_META_NAME_LINE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_LINE_COUNT			"gsf:line-count"
+</pre>
+<p>
+(Integer) Count of liness in the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_SLIDE_COUNT">
+<a name="GSF-META-NAME-SLIDE-COUNT--CAPS"></a><h3>GSF_META_NAME_SLIDE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_SLIDE_COUNT			"gsf:slide-count"
+</pre>
+<p>
+(Integer) Count of slides in the presentation document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_NOTE_COUNT">
+<a name="GSF-META-NAME-NOTE-COUNT--CAPS"></a><h3>GSF_META_NAME_NOTE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_NOTE_COUNT			"gsf:note-count"
+</pre>
+<p>
+(Integer) Count of "notes" in the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_HIDDEN_SLIDE_COUNT">
+<a name="GSF-META-NAME-HIDDEN-SLIDE-COUNT--CAPS"></a><h3>GSF_META_NAME_HIDDEN_SLIDE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_HIDDEN_SLIDE_COUNT		"gsf:hidden-slide-count"
+</pre>
+<p>
+(Integer) Count of hidden-slides in the presentation document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MM_CLIP_COUNT">
+<a name="GSF-META-NAME-MM-CLIP-COUNT--CAPS"></a><h3>GSF_META_NAME_MM_CLIP_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_MM_CLIP_COUNT			"gsf:MM-clip-count"
+</pre>
+<p>
+(Integer) Count of "multi-media" clips in the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_BYTE_COUNT">
+<a name="GSF-META-NAME-BYTE-COUNT--CAPS"></a><h3>GSF_META_NAME_BYTE_COUNT</h3>
+<pre class="programlisting">#define GSF_META_NAME_BYTE_COUNT			"gsf:byte-count"
+</pre>
+<p>
+(Integer) Count of bytes in the document.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_SCALE">
+<a name="GSF-META-NAME-SCALE--CAPS"></a><h3>GSF_META_NAME_SCALE</h3>
+<pre class="programlisting">#define GSF_META_NAME_SCALE				"gsf:scale"
+</pre>
+<p>
+(Boolean) ?????</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_HEADING_PAIRS">
+<a name="GSF-META-NAME-HEADING-PAIRS--CAPS"></a><h3>GSF_META_NAME_HEADING_PAIRS</h3>
+<pre class="programlisting">#define GSF_META_NAME_HEADING_PAIRS			"gsf:heading-pairs"
+</pre>
+<p>
+(Vector of string value pairs stored in alternating elements) Store the
+counts of objects in the document as names 'worksheet' and count '4'
+From MSOLE</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_DOCUMENT_PARTS">
+<a name="GSF-META-NAME-DOCUMENT-PARTS--CAPS"></a><h3>GSF_META_NAME_DOCUMENT_PARTS</h3>
+<pre class="programlisting">#define GSF_META_NAME_DOCUMENT_PARTS			"gsf:document-parts"
+</pre>
+<p>
+(Vector of strings) Names of the 'interesting' parts of the document.  In
+spreadsheets this is a list of the sheet names, and the named expressions.
+From MSOLE</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MANAGER">
+<a name="GSF-META-NAME-MANAGER--CAPS"></a><h3>GSF_META_NAME_MANAGER</h3>
+<pre class="programlisting">#define GSF_META_NAME_MANAGER				"gsf:manager"
+</pre>
+<p>
+(String) Name of the manager of "CREATOR" entity.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_COMPANY">
+<a name="GSF-META-NAME-COMPANY--CAPS"></a><h3>GSF_META_NAME_COMPANY</h3>
+<pre class="programlisting">#define GSF_META_NAME_COMPANY				"dc:publisher"
+</pre>
+<p>
+(String) Name of the company/organization that the "CREATOR" entity is
+associated with.
+</p>
+<p>
+1.14.1	Moved from "gsf:company" to "dc:publisher".</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LINKS_DIRTY">
+<a name="GSF-META-NAME-LINKS-DIRTY--CAPS"></a><h3>GSF_META_NAME_LINKS_DIRTY</h3>
+<pre class="programlisting">#define GSF_META_NAME_LINKS_DIRTY			"gsf:links-dirty"
+</pre>
+<p>
+(Boolean) ???????</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_DICTIONARY">
+<a name="GSF-META-NAME-DICTIONARY--CAPS"></a><h3>GSF_META_NAME_DICTIONARY</h3>
+<pre class="programlisting">#define GSF_META_NAME_DICTIONARY			"gsf:dictionary"
+</pre>
+<p>
+(None) Reserved name (PID) for Dictionary</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_17">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-17--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_17</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_17			"msole:unknown-doc-17"
+</pre>
+<p>
+(Unknown) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_18">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-18--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_18</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_18			"msole:unknown-doc-18"
+</pre>
+<p>
+(Unknown) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_19">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-19--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_19</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_19			"msole:unknown-doc-19"
+</pre>
+<p>
+(Boolean) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_20">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-20--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_20</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_20			"msole:unknown-doc-20"
+</pre>
+<p>
+(Unknown) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_21">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-21--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_21</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_21			"msole:unknown-doc-21"
+</pre>
+<p>
+(Unknown) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_22">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-22--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_22</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_22			"msole:unknown-doc-22"
+</pre>
+<p>
+(Boolean) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_MSOLE_UNKNOWN_23">
+<a name="GSF-META-NAME-MSOLE-UNKNOWN-23--CAPS"></a><h3>GSF_META_NAME_MSOLE_UNKNOWN_23</h3>
+<pre class="programlisting">#define GSF_META_NAME_MSOLE_UNKNOWN_23			"msole:unknown-doc-23"
+</pre>
+<p>
+(i4) User-defined name</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_LOCALE_SYSTEM_DEFAULT">
+<a name="GSF-META-NAME-LOCALE-SYSTEM-DEFAULT--CAPS"></a><h3>GSF_META_NAME_LOCALE_SYSTEM_DEFAULT</h3>
+<pre class="programlisting">#define GSF_META_NAME_LOCALE_SYSTEM_DEFAULT		"gsf:default-locale"
+</pre>
+<p>
+(Unsigned Integer) Identifier representing the default system locale.</p>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_CASE_SENSITIVE">
+<a name="GSF-META-NAME-CASE-SENSITIVE--CAPS"></a><h3>GSF_META_NAME_CASE_SENSITIVE</h3>
+<pre class="programlisting">#define GSF_META_NAME_CASE_SENSITIVE			"gsf:case-sensitivity"
+</pre>
+<p>
+(Unsigned Integer) Identifier representing the case-sensitiveness.
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>of what ?? why is it an integer ??</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GSF_META_NAME_INITIAL_CREATOR">
+<a name="GSF-META-NAME-INITIAL-CREATOR--CAPS"></a><h3>GSF_META_NAME_INITIAL_CREATOR</h3>
+<pre class="programlisting">#define GSF_META_NAME_INITIAL_CREATOR			"meta:initial-creator"
+</pre>
+<p>
+(String) Specifies the name of the person who created the document
+initially.
+1.14.0 Moved from "gsf" to "meta".</p>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

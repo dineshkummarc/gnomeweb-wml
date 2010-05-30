@@ -1,79 +1,567 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Reading and Writing from local files and directories</title><meta name="generator" content="DocBook XSL Stylesheets V1.64.1"><link rel="home" href="index.html" title="GSF Reference Manual"><link rel="up" href="sources.html" title="Stream Sources"><link rel="previous" href="gsf-Outfile-writing-structed-files.html" title="Outfile writing structed files"><link rel="next" href="gsf-memory.html" title="memory"><meta name="generator" content="GTK-Doc V1.2 (XML mode)"><link rel="stylesheet" href="style.css" type="text/css"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle"><td><a accesskey="p" href="gsf-Outfile-writing-structed-files.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td><td><a accesskey="u" href="sources.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td><td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td><th width="100%" align="center">GSF Reference Manual</th><td><a accesskey="n" href="gsf-memory.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td></tr></table><div class="refentry" lang="en"><a name="gsf-Reading-and-Writing-from-local-files-and-directories"></a><div class="titlepage"><div></div><div></div></div><div class="refnamediv"><h2><span class="refentrytitle">Reading and Writing from local files and directories</span></h2><p>Reading and Writing from local files and directories &#8212; </p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><a name="GsfInputStdio"></a><a name="GsfOutputStdio"></a><a name="GsfOutfileStdio"></a><a name="GsfInfileStdio"></a><pre class="synopsis">
-
-
-
-struct      <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInputStdio-struct">GsfInputStdio</a>;
-<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInputStdio">GsfInputStdio</a>* <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-input-stdio-new">gsf_input_stdio_new</a>          (char const *filename,
-                                             GError **err);
-struct      <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutputStdio-struct">GsfOutputStdio</a>;
-<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutputStdio">GsfOutputStdio</a>* <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-output-stdio-new">gsf_output_stdio_new</a>        (char const *filename,
-                                             GError **err);
-struct      <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutfileStdio-struct">GsfOutfileStdio</a>;
-<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutfileStdio">GsfOutfileStdio</a>* <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-outfile-stdio-new">gsf_outfile_stdio_new</a>      (char const *root,
-                                             GError **err);
-struct      <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInfileStdio-struct">GsfInfileStdio</a>;
-<a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInfileStdio">GsfInfileStdio</a>* <a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-infile-stdio-new">gsf_infile_stdio_new</a>        (char const *root,
-                                             GError **err);
-
-
-</pre></div><div class="refsect1" lang="en"><a name="id2516646"></a><h2>Object Hierarchy</h2><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Reading and Writing from local files and directories</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GSF Reference Manual">
+<link rel="up" href="sources.html" title="Stream Sources">
+<link rel="prev" href="gsf-Outfile-writing-structed-files.html" title="Outfile writing structed files">
+<link rel="next" href="gsf-memory.html" title="memory">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="intro.html" title="Part I. GSF: Introduction">
+<link rel="part" href="history.html" title="Part II. GSF: History">
+<link rel="part" href="dependencies.html" title="Part III. GSF: Dependencies">
+<link rel="part" href="gsf-users.html" title="Part IV. Projects using GSF">
+<link rel="part" href="api.html" title="Part V. API Reference">
+<link rel="chapter" href="io.html" title="Basic Input/Output">
+<link rel="chapter" href="sources.html" title="Stream Sources">
+<link rel="chapter" href="parsers.html" title="Stream Parsers">
+<link rel="chapter" href="misc.html" title="Miscellaneous">
+<link rel="index" href="gsf-index.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="gsf-Outfile-writing-structed-files.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="sources.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GSF Reference Manual</th>
+<td><a accesskey="n" href="gsf-memory.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gsf-Reading-and-Writing-from-local-files-and-directories.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gsf-Reading-and-Writing-from-local-files-and-directories.description" class="shortcut">Description</a>
+                 | 
+                <a href="#gsf-Reading-and-Writing-from-local-files-and-directories.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="Reading and Writing from local files and directories">
+<a name="gsf-Reading-and-Writing-from-local-files-and-directories"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gsf-Reading-and-Writing-from-local-files-and-directories.top_of_page"></a>Reading and Writing from local files and directories</span></h2>
+<p>Reading and Writing from local files and directories</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gsf-Reading-and-Writing-from-local-files-and-directories.synopsis"></a><h2>Synopsis</h2>
+<a name="GsfInputStdio"></a><a name="GsfOutputStdio"></a><a name="GsfOutfileStdio"></a><a name="GsfInfileStdio"></a><pre class="synopsis">
+                    <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInputStdio-struct" title="GsfInputStdio">GsfInputStdio</a>;
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-input-stdio-new" title="gsf_input_stdio_new ()">gsf_input_stdio_new</a>                 (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-input-stdio-new-FILE" title="gsf_input_stdio_new_FILE ()">gsf_input_stdio_new_FILE</a>            (char const *filename,
+                                                         FILE *file,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> keep_open);
+                    <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutputStdio-struct" title="GsfOutputStdio">GsfOutputStdio</a>;
+<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-output-stdio-new" title="gsf_output_stdio_new ()">gsf_output_stdio_new</a>                (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-output-stdio-new-full" title="gsf_output_stdio_new_full ()">gsf_output_stdio_new_full</a>           (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         ...);
+<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-output-stdio-new-valist" title="gsf_output_stdio_new_valist ()">gsf_output_stdio_new_valist</a>         (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         va_list var_args);
+<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-output-stdio-new-FILE" title="gsf_output_stdio_new_FILE ()">gsf_output_stdio_new_FILE</a>           (char const *filename,
+                                                         FILE *file,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> keep_open);
+                    <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutfileStdio-struct" title="GsfOutfileStdio">GsfOutfileStdio</a>;
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-outfile-stdio-new" title="gsf_outfile_stdio_new ()">gsf_outfile_stdio_new</a>               (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-outfile-stdio-new-full" title="gsf_outfile_stdio_new_full ()">gsf_outfile_stdio_new_full</a>          (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         ...);
+<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-outfile-stdio-new-valist" title="gsf_outfile_stdio_new_valist ()">gsf_outfile_stdio_new_valist</a>        (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         va_list var_args);
+                    <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInfileStdio-struct" title="GsfInfileStdio">GsfInfileStdio</a>;
+<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         <a class="link" href="gsf-Reading-and-Writing-from-local-files-and-directories.html#gsf-infile-stdio-new" title="gsf_infile_stdio_new ()">gsf_infile_stdio_new</a>                (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="gsf-Reading-and-Writing-from-local-files-and-directories.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
          +----GsfInputStdio
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
          +----GsfOutputStdio
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
-         +----<a href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a>
+         +----<a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a>
                +----GsfOutfileStdio
-</pre><pre class="synopsis">
-
-  GObject
-   +----<a href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
-         +----<a href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
+</pre>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a>
+         +----<a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a>
                +----GsfInfileStdio
-</pre></div><div class="refsect1" lang="en"><a name="id2516747"></a><h2>Description</h2><p>
-
-</p></div><div class="refsect1" lang="en"><a name="id2516756"></a><h2>Details</h2><div class="refsect2" lang="en"><a name="id2516762"></a><h3><a name="GsfInputStdio-struct"></a>struct GsfInputStdio</h3><a class="indexterm" name="id2516773"></a><pre class="programlisting">struct GsfInputStdio;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2516788"></a><h3><a name="gsf-input-stdio-new"></a>gsf_input_stdio_new ()</h3><a class="indexterm" name="id2516800"></a><pre class="programlisting"><a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInputStdio">GsfInputStdio</a>* gsf_input_stdio_new          (char const *filename,
-                                             GError **err);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i>�:</span></td><td> in utf8.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td> optionally NULL.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new file or NULL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2516881"></a><h3><a name="GsfOutputStdio-struct"></a>struct GsfOutputStdio</h3><a class="indexterm" name="id2516893"></a><pre class="programlisting">struct GsfOutputStdio;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2516908"></a><h3><a name="gsf-output-stdio-new"></a>gsf_output_stdio_new ()</h3><a class="indexterm" name="id2516919"></a><pre class="programlisting"><a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutputStdio">GsfOutputStdio</a>* gsf_output_stdio_new        (char const *filename,
-                                             GError **err);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>filename</tt></i>�:</span></td><td> in utf8.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td> optionally NULL.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new file or NULL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2517000"></a><h3><a name="GsfOutfileStdio-struct"></a>struct GsfOutfileStdio</h3><a class="indexterm" name="id2517012"></a><pre class="programlisting">struct GsfOutfileStdio;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2517027"></a><h3><a name="gsf-outfile-stdio-new"></a>gsf_outfile_stdio_new ()</h3><a class="indexterm" name="id2517038"></a><pre class="programlisting"><a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfOutfileStdio">GsfOutfileStdio</a>* gsf_outfile_stdio_new      (char const *root,
-                                             GError **err);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>root</tt></i>�:</span></td><td> root directory in utf8.
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td> optionally NULL.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new outfile or NULL.
-</td></tr></tbody></table></div></div><hr><div class="refsect2" lang="en"><a name="id2517120"></a><h3><a name="GsfInfileStdio-struct"></a>struct GsfInfileStdio</h3><a class="indexterm" name="id2517131"></a><pre class="programlisting">struct GsfInfileStdio;</pre><p>
-
-</p></div><hr><div class="refsect2" lang="en"><a name="id2517146"></a><h3><a name="gsf-infile-stdio-new"></a>gsf_infile_stdio_new ()</h3><a class="indexterm" name="id2517157"></a><pre class="programlisting"><a href="gsf-Reading-and-Writing-from-local-files-and-directories.html#GsfInfileStdio">GsfInfileStdio</a>* gsf_infile_stdio_new        (char const *root,
-                                             GError **err);</pre><p>
-</p><p>
-
-</p><div class="variablelist"><table border="0"><col align="left" valign="top"><tbody><tr><td><span class="term"><i class="parameter"><tt>root</tt></i>�:</span></td><td> in locale dependent encoding
-</td></tr><tr><td><span class="term"><i class="parameter"><tt>err</tt></i>�:</span></td><td> optionally NULL.
-</td></tr><tr><td><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></td><td>a new file or NULL.
-</td></tr></tbody></table></div></div></div></div><table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle"><td align="left"><a accesskey="p" href="gsf-Outfile-writing-structed-files.html"><b>&lt;&lt;�Outfile writing structed files</b></a></td><td align="right"><a accesskey="n" href="gsf-memory.html"><b>memory�&gt;&gt;</b></a></td></tr></table></body></html>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gsf-Reading-and-Writing-from-local-files-and-directories.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gsf-Reading-and-Writing-from-local-files-and-directories.details"></a><h2>Details</h2>
+<div class="refsect2" title="GsfInputStdio">
+<a name="GsfInputStdio-struct"></a><h3>GsfInputStdio</h3>
+<pre class="programlisting">typedef struct _GsfInputStdio GsfInputStdio;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_stdio_new ()">
+<a name="gsf-input-stdio-new"></a><h3>gsf_input_stdio_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_stdio_new                 (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> in utf8.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new file or NULL.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_input_stdio_new_FILE ()">
+<a name="gsf-input-stdio-new-FILE"></a><h3>gsf_input_stdio_new_FILE ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Input-from-unstructured-files.html#GsfInput">GsfInput</a> *          gsf_input_stdio_new_FILE            (char const *filename,
+                                                         FILE *file,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> keep_open);</pre>
+<p>
+Assumes ownership of <em class="parameter"><code>file</code></em> when succeeding.  If <em class="parameter"><code>keep_open</code></em> is true,
+ownership reverts to caller when the GsfObject is closed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> The filename corresponding to <em class="parameter"><code>file</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
+<td> an existing stdio FILE *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keep_open</code></em> :</span></p></td>
+<td> Should <em class="parameter"><code>file</code></em> be closed when the wrapper is closed
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new GsfInput wrapper for <em class="parameter"><code>file</code></em>.  Note that if the file is not
+	seekable, this function will make a local copy of the entire file.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfOutputStdio">
+<a name="GsfOutputStdio-struct"></a><h3>GsfOutputStdio</h3>
+<pre class="programlisting">typedef struct _GsfOutputStdio GsfOutputStdio;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_stdio_new ()">
+<a name="gsf-output-stdio-new"></a><h3>gsf_output_stdio_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         gsf_output_stdio_new                (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> name of file to create or replace.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally <code class="literal">NULL</code>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new file or <code class="literal">NULL</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_stdio_new_full ()">
+<a name="gsf-output-stdio-new-full"></a><h3>gsf_output_stdio_new_full ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         gsf_output_stdio_new_full           (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         ...);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> name of file to create or replace.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally <code class="literal">NULL</code>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td> <code class="literal">NULL</code> terminated list of properties
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new file or <code class="literal">NULL</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_stdio_new_valist ()">
+<a name="gsf-output-stdio-new-valist"></a><h3>gsf_output_stdio_new_valist ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         gsf_output_stdio_new_valist         (char const *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         va_list var_args);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>var_args</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_output_stdio_new_FILE ()">
+<a name="gsf-output-stdio-new-FILE"></a><h3>gsf_output_stdio_new_FILE ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Output-to-unstructured-files.html#GsfOutput">GsfOutput</a> *         gsf_output_stdio_new_FILE           (char const *filename,
+                                                         FILE *file,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> keep_open);</pre>
+<p>
+Assumes ownership of <em class="parameter"><code>file</code></em>.  If <em class="parameter"><code>keep_open</code></em> is true, ownership reverts
+to caller when the GsfObject is closed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> The filename corresponding to <em class="parameter"><code>file</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
+<td> an existing stdio FILE *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keep_open</code></em> :</span></p></td>
+<td> Should <em class="parameter"><code>file</code></em> be closed when the wrapper is closed
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new GsfOutput wrapper for <em class="parameter"><code>file</code></em>.  Warning: the result will be
+seekable only if <em class="parameter"><code>file</code></em> is seekable.  If it is seekable, the resulting
+GsfOutput object will seek relative to <em class="parameter"><code>file</code></em>'s beginning, not its
+current location at the time the GsfOutput object is created.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfOutfileStdio">
+<a name="GsfOutfileStdio-struct"></a><h3>GsfOutfileStdio</h3>
+<pre class="programlisting">typedef struct _GsfOutfileStdio GsfOutfileStdio;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_stdio_new ()">
+<a name="gsf-outfile-stdio-new"></a><h3>gsf_outfile_stdio_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_stdio_new               (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td> root directory in utf8.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new outfile or NULL.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_stdio_new_full ()">
+<a name="gsf-outfile-stdio-new-full"></a><h3>gsf_outfile_stdio_new_full ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_stdio_new_full          (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         ...);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td> root directory in utf8.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td> name of first property to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> value of first property, followed by more properties,
+		<code class="literal">NULL</code>-terminated
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new outfile or NULL.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gsf_outfile_stdio_new_valist ()">
+<a name="gsf-outfile-stdio-new-valist"></a><h3>gsf_outfile_stdio_new_valist ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Outfile-writing-structed-files.html#GsfOutfile">GsfOutfile</a> *        gsf_outfile_stdio_new_valist        (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err,
+                                                         char const *first_property_name,
+                                                         va_list var_args);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td> root directory in utf8.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td> name of first property to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>var_args</code></em> :</span></p></td>
+<td> a <code class="literal">NULL</code>-terminated <span class="type">va_list</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new outfile or NULL.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GsfInfileStdio">
+<a name="GsfInfileStdio-struct"></a><h3>GsfInfileStdio</h3>
+<pre class="programlisting">typedef struct _GsfInfileStdio GsfInfileStdio;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gsf_infile_stdio_new ()">
+<a name="gsf-infile-stdio-new"></a><h3>gsf_infile_stdio_new ()</h3>
+<pre class="programlisting"><a class="link" href="gsf-Infile-reading-structed-files.html#GsfInfile">GsfInfile</a> *         gsf_infile_stdio_new                (char const *root,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **err);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td> in locale dependent encoding
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
+<td> optionally <code class="literal">NULL</code>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new file or <code class="literal">NULL</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>
