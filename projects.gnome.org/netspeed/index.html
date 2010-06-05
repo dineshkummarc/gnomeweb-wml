@@ -51,15 +51,6 @@ The manual is available via the GNOME Help Browser or via the context menu of th
 I gathered some FAQ. Please read them before contacting me:
 </p>
 
-<h4>I installed the applet, but after starting it from the commandline, nothing happens or I get an error.</h4>
-It's not possible to start the applet from the commandline - you have to use the entry in the panel
-menu to start the applet.
-
-<h4>I don't have a entry for the applet in the panelmenu.</h4>
-First of all, you have to restart the panel before the entry will appear. Second, you have
-to install the applet at the same location as the rest of gnome2. (The applet-<tt>.server</tt>-file has to be located
-at the same place where all the other .server-files are - usually <tt>/GNOME2_PATH/lib/bonobo/servers/</tt>).
-
 <h4>Why doesn't the applet have a (dis-)connect feature?</h4>
 Well, actually it has (since version 0.10). However the setup is currently not
 visible in the UI. To set it up, fire up gconf-editor (the applet must be running), and navigate to <tt>/apps/panel/profiles/default/applets/</tt>.
@@ -73,40 +64,22 @@ I originally didn't want to include this feature in the applet at all, because I
 However it has now been requested so frequently, that I thought it's almost a "must-have". But it's still a hack IMHO, so
 that's why it's only available via gconf ATM. If you think you know a (rather simple,) clean, distro independant way (with little ui) to implement this, I'll of course change my mind (patches are wellcome :-)).
 
-<!--
-<h4>Why don't you use the official <a href="http://www.romulus2.com/articles/guides/misc/bitsbytes.shtml">IEC</a>
-abreviations for kilobyte, megabyte, etc.? (KiB, MiB, etc.)</h4>
-I think they look stupid. However, most import the applet would take more space in the panel ;)
--->
-
-
-<!--<h4>I use FreeBSD, and recent versions of netspeed doesn't work anymore</h4>
-Configure netspeed with <tt>./configure enable-libgtop</tt>. Netspeed now uses
-it's own (linux specific) code to read the transfered bytes from <tt>/proc/dev/net</tt>.
-This is because libgtop has/had a bug which made netspeed crash with ppp0 devices.<br />
-If you want to create a patch for FreeBSD, take a look at <tt>src/backend.c</tt>.-->
-
 <!-- Download -->
 <a name="download"></a>
 <h1>How do I get it?</h1>
-<p>
-The latest version of Netspeed requires GNOME (&gt;=2.15.x) and GTK (&gt;=2.6).
-</p>
-<p>
-The latest release is version 0.15.2. Packages available are:
-</p>
-<ul>
-<li>Source Tarball: <a href="http://www.wh-hms.uni-ulm.de/~mfcn/netspeed/packages/netspeed_applet-0.15.2.tar.gz">netspeed_applet-0.15.2.tar.gz</a></li>
-<li>Debian: use <tt>apt-get install netspeed</tt></li> 
-<li>Ubuntu: you need <tt>universe</tt> in your sources.list, to apt-get it</li>
-<li>Gentoo: simply emerge it</li>
-<li>Fedora Core 3 &amp; 4: netspeed is part of Fedoras Extras (<tt>gnome-applet-netspeed</tt>).</li>
-<li>Redhat &amp; older versions of FC: Dag Wieers provides <a href="http://dag.wieers.com/packages/netspeed_applet/">some RPMs</a></li>
-<li>FreeBSD: Fresh Ports provides <a href="http://www.freshports.org/net/netspeed_applet/">netspeed ports</a></li>
-</ul>
 
 <p>
-Previous releases are available <a href="http://www.wh-hms.uni-ulm.de/~mfcn/netspeed/packages/">here</a>.
+Tarballs are available from the <a href="http://launchpad.net/netspeed/">netspeed launchpad site</a>.<br/>
+Many distributions (Ubuntu, Fedora, etc.) provide packaged versions of netspeed.
+</p>
+
+<p>
+Netspeed applet 0.16 requires GNOME (&gt;=2.15.x) and GTK (&gt;=2.6).
+</p>
+
+<p>
+Furthermore you can try out the cutting edge development version.
+The module is <a href="http://git.gnome.org/browse/netspeed/">netspeed</a> in <a href="http://git.gnome.org/">GNOME git</a>.
 </p>
 
 
@@ -114,6 +87,18 @@ Previous releases are available <a href="http://www.wh-hms.uni-ulm.de/~mfcn/nets
 <!-- Changes -->
 <a name="changes"></a>
 <h1>Changes</h1>
+
+<h4>0.16</h4>
+<ul>
+    <li>Take maximum quality into account of quality calculation, if this can be queried from the driver; Fixes #590561</li>
+    <li>Fix out-of-bounds access; Fixes #580683</li>
+    <li>Disconnect "changed" on icon theme upon destruction; Fixes #600579</li>
+    <li>Fix quality calculation and failed assertion; Fixes #567079</li>
+    <li>Only update icon quality for wireless; Fixes #580683</li>
+    <li>Fix off-by-one bug; Fixes #557477</li>
+    <li>New translations: Indonesian, Danish translation, Galician, Ukrainian and Punjabi</li>
+    <li>Various translation updates</li>
+</ul>
 
 <h4>0.15.2</h4>
 <ul>
@@ -190,7 +175,7 @@ Please report bugs to <a href="http://bugzilla.gnome.org/browse.cgi?product=nets
 </div>
 
 <div id="copyright">
-<p>Copyright &copy; 2002-2008, <a href="http://www.wh-hms.uni-ulm.de/~mfcn/">Joergen Scheibengruber</a> and <a href="http://www.gnome.org">The GNOME Project</a>.
+<p>Copyright &copy; 2002-2010, <a href="http://mfcn.ilo.de">Joergen Scheibengruber</a> and <a href="http://www.gnome.org">The GNOME Project</a>.
 <br />
 GNOME and the foot logo are trademarks of the GNOME Foundation.
 <br />
