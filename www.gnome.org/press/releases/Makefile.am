@@ -91,6 +91,7 @@ page_SCRIPTS = \
 	2010-03-gcds-2011.html \
 	2010-03-ss12-code-for-a-cause.html \
 	2010-03-gnome230.html \
-	2010-05-collabora-joins.html
+	2010-05-collabora-joins.html \
+	2010-06-olpc-xo-1.5.html
 
 include $(top_srcdir)/rules.common
