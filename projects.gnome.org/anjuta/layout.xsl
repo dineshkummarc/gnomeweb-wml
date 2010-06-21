@@ -73,7 +73,7 @@
 	      </li>
 	      
 	      <li id="siteaction-gnome_support">
-		<a href="http://sourceforge.net/mail/?group_id=14222"
+		<a href="http://mail.gnome.org/mailman/listinfo"
 		   title="Mailing lists">Mailing lists</a>
 	      </li>
 	    </ul>
