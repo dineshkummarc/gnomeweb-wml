@@ -76,10 +76,6 @@
 		<a href="http://sourceforge.net/mail/?group_id=14222"
 		   title="Mailing lists">Mailing lists</a>
 	      </li>
-	      <li id="siteaction-gnome_development">
-		<a href="http://sourceforge.net/forum/?group_id=14222"
-		   title="Forums">Forums</a>
-	      </li>
 	    </ul>
             <div id="header" style="text-align:left;">
 	      <div id="header-wrap">
