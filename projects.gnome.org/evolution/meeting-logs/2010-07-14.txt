@@ -1,0 +1,187 @@
+Jul 14 11:32:07 <chen>	ok lets get started..
+Jul 14 11:32:17 <chen>	starting with project updates,
+Jul 14 11:32:38 <chen>	we have two unstable dot releases 2.31.4 and .5 during the last month
+Jul 14 11:32:54 <chen>	A summary of significant changes and we would also hear more specifically during individual updates,
+Jul 14 11:33:17 <chen>	+ loads of imapx fixes from dwmw2 who is truely awesome!!
+Jul 14 11:33:26 <chen>	+ gtk3 compat fixes
+Jul 14 11:33:35 <chen>	+ eds backend api changes for GError and similar pruning with CamelException
+Jul 14 11:33:52 <chen>	+ imapx multiple connections
+Jul 14 11:34:09 <chen>	and now the freezes are getting started :)
+Jul 14 11:34:27 <chen>	string/UI change announcement period has started from July 12th,
+Jul 14 11:34:44 <chen>	any addition of strings or change in UI should be announced to doc and translation teams
+Jul 14 11:35:06 <chen>	and other freezes which come next month and dates to be noted,
+Jul 14 11:35:30 <chen>	Aug 02 - Feature, API/ABI freeze updates
+Jul 14 11:35:48 <chen>	Aug 16 - UI freeze
+Jul 14 11:35:53 <chen>	Aug 30 - String freeze
+Jul 14 11:36:19 <chen>	abharath, do you want to summarize mapi updates ? :)
+Jul 14 11:36:57 <abharath>	chen: well Milan has been fixing most of the bugs. I have been working on exchange2ical
+Jul 14 11:37:11 <abharath>	 just changed it to a shared library for Evolution to use.
+Jul 14 11:37:11 <abharath>	Evolution can now fetch the ical directly using the library,
+Jul 14 11:37:35 <abharath>	Also had a chat with the openchange developers. They were kind enough, and agreed to make 0.9.x releases for openchange till 0.10 is out
+Jul 14 11:37:48 <abharath>	So I and mcrha would be working to provide them with a list of patches to backport
+Jul 14 11:37:50 <chen>	abharath, thats a welcome relief 
+Jul 14 11:38:09 <chen>	abharath, and would be good if you provide some info on,
+Jul 14 11:38:23 <chen>	significance of exchange2ical and issues that it would solve..
+Jul 14 11:38:30 <dwmw2>	can I use exchange2ical standalone?
+Jul 14 11:38:32 <abharath>	and in 0.31.4 we committed Public calendar/task/address book support in mapi by jpunit
+Jul 14 11:38:41 <abharath>	dwmw2: yes very much
+Jul 14 11:38:53 <dwmw2>	cool. I have calendar files from ews I need to convert :)
+Jul 14 11:39:00 <abharath>	dwmw2: :)
+Jul 14 11:39:15 <chen>	abharath, thanks!!
+Jul 14 11:39:31 <chen>	we would be makng another stable dot  release, but we haven't yet decides on the dates. It will,
+Jul 14 11:39:41 <chen>	be announced in e-h list once its decided..
+Jul 14 11:40:06 <chen>	we were having a discussion on having a package such as,
+Jul 14 11:40:25 <chen>	evolution-collab-backends which can hold all the collab backends such as,
+Jul 14 11:40:36 <chen>	groupwise, exchange, mapi etc.
+Jul 14 11:40:47 <chen>	any views on that ?
+Jul 14 11:41:00 <dwmw2>	why have them in evolution-collab instead of evolution-data-server?
+Jul 14 11:41:30 <chen>	dwmw2, evolution-data-server has too many dependencies and to push frequent updates,
+Jul 14 11:41:45 <chen>	it troubles with triggerring compilation for all those packages
+Jul 14 11:42:03 <dwmw2>	so putting them into a combined evo-collab package only makes it a *little* bit nastier, and not as *much* nastier as if it was all in e-d-s? :)
+Jul 14 11:42:20 <dwmw2>	having them separate, you can do separate releases (and build) as you like
+Jul 14 11:42:47 <chen>	dwmw2, the release cycles would be the same as far as GNOME releases are considered
+Jul 14 11:42:58 <chen>	just helps with packaging in distros and,
+Jul 14 11:43:10 <dwmw2>	does it really?
+Jul 14 11:43:12 <chen>	another aspect is that eds will look more like just the library
+Jul 14 11:43:31 <dwmw2>	I would have thought the distro would rather have them separate... at least in separate *binary* packages so t he users can choose which to install.
+Jul 14 11:43:36 <chen>	dwmw2, yup at-least with suse, but not sure on other distros
+Jul 14 11:44:08 <chen>	dwmw2, you mean split up as evo-groupwise, evo-exchange etc. ?
+Jul 14 11:44:12 <dwmw2>	yeah
+Jul 14 11:44:19 <abharath>	right that is better
+Jul 14 11:44:28 <chen>	dwmw2, and btw do you recommend moving all the backends into eds back?
+Jul 14 11:44:44 <abharath>	splitting them up separately, it might be easier for the packagers and users that way
+Jul 14 11:44:50 <chen>	dwmw2, exchange, groupwise (has not moved out), mapi etc.
+Jul 14 11:45:02 *	Muelli has quit (Read error: 104 (Connection reset by peer))
+Jul 14 11:45:07 <abharath>	but packagers can still split it up with writing better spec files maybe :)
+Jul 14 11:45:13 <chen>	abharath, dwmw2 is speaking about splitting while packaging,
+Jul 14 11:45:22 <chen>	not maintaining as separate packages
+Jul 14 11:45:28 <dwmw2>	chen: I have no particular preference either way. I'm just confused that anyone would argue for a half-way-house
+Jul 14 11:45:30 <chen>	abharath, so the code resides in eds iiuc
+Jul 14 11:45:34 <dwmw2>	I see the attraction of splitting them up
+Jul 14 11:45:44 <dwmw2>	and I see some (perhaps less) in putting it all back into e-d-s
+Jul 14 11:46:33 <chen>	dwmw2, so,
+Jul 14 11:46:38 <chen>	am a bit confused :)
+Jul 14 11:47:00 <chen>	dwmw2, iiuc your saying having all the code in eds would be better ?
+Jul 14 11:47:21 <chen>	and leave it for packagers to split them up while packaging in the distros ?
+Jul 14 11:47:34 <dwmw2>	chen: I'm saying I don't really care if it's all in e-d-s, or if it's all separate; I just don't see the point in an evo-collab collection
+Jul 14 11:47:51 <abharath>	+1
+Jul 14 11:48:06 <dwmw2>	given that we're doing time-based releases in sync with gnome, the biggest advantage to separation is gone. So yeah, on balance I suppose we might as well keep it all in e-d-s
+Jul 14 11:48:07 <chen>	dwmw2, the problem with separate is that they might become un-maintained over a period of time..
+Jul 14 11:48:23 <dwmw2>	it's not as if it's hard for packagers to make a single source package  spit out multiple binary packages
+Jul 14 11:48:27 <dwmw2>	chen: indeed.
+Jul 14 11:48:51 <dwmw2>	on balance, I think merging them into eds is the better option.
+Jul 14 11:49:06 <dwmw2>	if I change something, I'll grep for the callers that are affected
+Jul 14 11:49:12 <dwmw2>	if they're not in the same git tree, I'll ignore them
+Jul 14 11:49:27 <chen>	dwmw2, absolutely
+Jul 14 11:49:50 <chen>	dwmw2, i just have a packaging question though, prolly i will clear it later
+Jul 14 11:50:08 <chen>	dwmw2, but atm i feel its better in eds ignoring my packaging thing
+Jul 14 11:50:36 <chen>	Fridrich, do you have any opinions here?
+Jul 14 11:51:22 <chen>	dwmw2, maybe we will discuss out on the mailing list as well and bring it to a conclusion with action..
+Jul 14 11:51:41 <dwmw2>	yeah
+Jul 14 11:51:42 <chen>	thats the one item i had for discussion here..
+Jul 14 11:51:54 <chen>	anything else from anyone before we move on with individual updates?
+Jul 14 11:52:19 <chen>	abharath, so finalized on the mapi versioning ? :)
+Jul 14 11:52:52 <chen>	abharath, +updates?
+Jul 14 11:53:02 <chen>	updates from my side,
+Jul 14 11:53:15 <chen>	some bug fixes, imapx connection manager, need to get started on maildir stuff, some cool demos/talks to our md (evo propoganda) :)
+Jul 14 11:53:43 <abharath>	chen: nothing much to add
+Jul 14 11:53:43 <chen>	Let me now paste the updates from mbarnes|away 
+Jul 14 11:54:02 <chen>	I've been causing lots of trouble in Camel lately:
+Jul 14 11:54:02 <chen>	I replaced CamelException with GError,
+Jul 14 11:54:02 <chen>	and added a bunch of runtime checks to make sure return values and GErrors agree,
+Jul 14 11:54:02 <chen>	there's also the issue of how Camel indicates success or failure,
+Jul 14 11:54:02 <chen>	in that half the API returns 0/-1, the other half returns TRUE/FALSE,
+Jul 14 11:54:02 <chen>	I'd like to more entirely to TRUE/FALSE, but that's a pretty devious API change,
+Jul 14 11:54:04 <chen>	it will have to be done very carefully, and with lots of fanfare on evo-hackers,
+Jul 14 11:54:06 <chen>	my next projects are:
+Jul 14 11:54:08 <chen>	dismantle ~/.evolution and migrate data to relocatable XDG base dirs,
+Jul 14 11:54:10 <chen>	then, start on GSettings migration + keyfile-based account storage,
+Jul 14 11:54:12 <chen>	and after 3.0: get serious about WebKit.
+Jul 14 11:54:23 <chen>	so webkit is going to be after 3.0
+Jul 14 11:54:44 <abharath>	ok I was about to ask about webkit :)
+Jul 14 11:54:46 <chen>	vibha - on vacation for this week. Moved the groupwise code out of evo+eds.. (chen - now i wonder if its required)..
+Jul 14 11:54:58 <chen>	Corsac, anything to share?
+Jul 14 11:55:28 *	chen would be reviewing vibha's thunderbird filter migration patch and patches from jpunit this week..
+Jul 14 11:55:34 <chen>	dwmw2, updates?
+Jul 14 11:56:14 <chen>	Fridrich, updateS?
+Jul 14 11:56:23 <chen>	sorry for the 's'
+Jul 14 11:56:29 <dwmw2>	nothing exciting.
+Jul 14 11:56:44 <chen>	dwmw2, oh no thats the last thing i expected :)
+Jul 14 11:56:46 <dwmw2>	going to crawl back under my rock and play with ews stuff for a while, as soon as I'm done with the reply bits I've been looking at
+Jul 14 11:57:02 <chen>	dwmw2, nice :)
+Jul 14 11:57:08 <chen>	jpunit, updates?
+Jul 14 11:57:12 <dwmw2>	well, I have my Exchange calendar synced to local files using the EWS protocol. You can be excited by that if you like
+Jul 14 11:57:32 <dwmw2>	But I'm not suggesting that we ditch evolution-mapi *quite* yet :)
+Jul 14 11:57:34 <chen>	dwmw2, definetly exited :)
+Jul 14 11:57:43 <chen>	dwmw2, you have made abharath happy now :)
+Jul 14 11:58:03 <jpunit>	Merged and worked on Slusny's EDS optmization patches and it is working fine now
+Jul 14 11:58:13 <chen>	dwmw2, btw your going to convert that script in to C lib.  ?
+Jul 14 11:58:30 <abharath>	whatever is fast and working great, I am fine with it :)
+Jul 14 11:58:36 <chen>	jpunit, nice, will get those stuff reviewed this week and we can get that in..
+Jul 14 11:58:48 <chen>	kov, anything to share?
+Jul 14 11:58:53 <chen>	lakhil, updates?
+Jul 14 11:58:54 <jpunit>	chen: yes .. 
+Jul 14 11:58:59 <dwmw2>	chen: nah, I was going to do shell language bindings for evo...
+Jul 14 11:59:14 <lakhil>	chen, bug triaging, sanity and tarball testing of dot releases, tested public calendar / address book support in MAPI,  tested Gerror changes
+Jul 14 11:59:19 <chen>	dwmw2, more interesting :)
+Jul 14 11:59:29 *	chen exited to see that :)
+Jul 14 11:59:48 <chen>	lakhil, thanks and imapx con_man is added to ur list now i guess :)
+Jul 14 12:00:13 *	jpunit is now known as jpunit|away
+Jul 14 12:00:16 <lakhil>	after guadec :)
+Jul 14 12:00:17 <chen>	anything else from anyone?
+Jul 14 12:00:18 *	dave_largo (~drichard@207.22.154.8) has joined #evolution-meet
+Jul 14 12:00:22 <chen>	hey dave_largo 
+Jul 14 12:00:26 <abharath>	Its definitely added to dwmw2's list ;)
+Jul 14 12:00:35 <chen>	this is the last meeting before GUADEC :)
+Jul 14 12:00:44 <chen>	dwmw2, will you be there for GUADEC?
+Jul 14 12:00:48 <dwmw2>	wasn't planning to be
+Jul 14 12:01:01 <chen>	dave_largo, we were just going through individual updates..
+Jul 14 12:01:33 *	chen gets reminded of the pdf drag+drop patch
+Jul 14 12:01:43 *	chen adds it to the review list
+Jul 14 12:01:51 <dave_largo>	I would like to get that merged please, while the code will go in
+Jul 14 12:01:58 <chen>	dwmw2, would be great if you join, even for a day :)
+Jul 14 12:02:02 <dave_largo>	chen, don't forget to merge the second patch which eliminated the deadlock
+Jul 14 12:02:13 <chen>	dave_largo, sure
+Jul 14 12:02:23 <dave_largo>	pdf drop and drag is amazing and works great
+Jul 14 12:02:24 <chen>	dave_largo, anything else?
+Jul 14 12:02:29 <dwmw2>	in Den Haag? 
+Jul 14 12:02:33 <chen>	yeah
+Jul 14 12:02:35 <dwmw2>	hm, I may manage that
+Jul 14 12:02:44 <chen>	dwmw2, would be great!!
+Jul 14 12:02:53 *	dwmw2 checks his calendar... by grepping the XML files in the directory
+Jul 14 12:02:56 <dave_largo>	Just a flow of crashers, hopefully we can hit those soon and get some patches upstream
+Jul 14 12:02:56 <dwmw2>	some work required on this :)
+Jul 14 12:03:03 <chen>	dwmw2, will send you the schedule of our evo talks as well
+Jul 14 12:03:28 <chen>	dave_largo, will be working on those after some patch reviews
+Jul 14 12:03:52 <chen>	dave_largo, primarily the crashers first
+Jul 14 12:04:05 <dave_largo>	chen, you are so talented, I know you could knock these out quickly.  
+Jul 14 12:04:30 <chen>	dave_largo, lol your are great manager :)
+Jul 14 12:04:41 <abharath>	dave_largo: that's the magic of beer, not the talent :)
+Jul 14 12:04:43 <lakhil>	:D
+Jul 14 12:05:00 <dave_largo>	LOL....crashers and the deadlock
+Jul 14 12:05:03 <chen>	oh oh /me becomes silent :)
+Jul 14 12:05:09 <dave_largo>	and then re-merge the ics code please
+Jul 14 12:05:12 <lakhil>	abharath, dave_largo would be happy to send a beer tanker if he gets all crashes fixed :)
+Jul 14 12:05:13 <chen>	sure
+Jul 14 12:05:22 <abharath>	lol
+Jul 14 12:05:32 <dave_largo>	Deadlocks are about 85% always when re-saving changes to a meeting or appointment
+Jul 14 12:05:32 <chen>	anything else from anyone apart from beers :D
+Jul 14 12:05:57 <chen>	dave_largo, please send the gdb traces when the dead-lock happens..
+Jul 14 12:06:08 <dave_largo>	It's already submitted to the bug report
+Jul 14 12:06:12 <dave_largo>	this one is happening a lot:
+Jul 14 12:06:15 <dave_largo>	#12 0x00007fe00a779797 in attendee_editing_canceled_cb (
+Jul 14 12:06:16 <dave_largo>	    renderer=<value optimized out>, view=0x19f1030)
+Jul 14 12:06:16 <dave_largo>	    at e-meeting-list-view.c:473
+Jul 14 12:06:16 <chen>	dave_largo, ah ok, i will check it out
+Jul 14 12:06:43 <chen>	dave_largo, i have not yet gone through all the bugs, will be starting on Friday or next week..
+Jul 14 12:06:55 <dave_largo>	chen, I'll send the beer for real, or take you guys on roller coasters.
+Jul 14 12:06:59 <dave_largo>	Busch Gardens on me
+Jul 14 12:07:05 <chen>	lol :)
+Jul 14 12:07:10 <dave_largo>	Busch Gardens has a beer garden
+Jul 14 12:07:36 <chen>	dave_largo, i can answer here due to COBE but definetly lets have it as a secret :)
+Jul 14 12:07:42 <chen>	*cant
+Jul 14 12:08:13 <dave_largo>	so crashers + ics + deadlocks and we will be in much better shape.
+Jul 14 12:08:13 <chen>	Thats it for this meeting and lets have more fun after GUADEC :)
+Jul 14 12:08:18 <dave_largo>	later
+Jul 14 12:08:31 <chen>	Thanks everyone!!
+
