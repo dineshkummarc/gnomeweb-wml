@@ -94,6 +94,7 @@ page_SCRIPTS = \
 	2010-05-collabora-joins.html \
 	2010-06-olpc-xo-1.5.html \
 	2010-07-guadec-extra-sessions.html \
-	2010-07-guadec-webm-flumotion.html
+	2010-07-guadec-webm-flumotion.html \
+	2010-07-gnome-3.0-rescheduled.html
 
 include $(top_srcdir)/rules.common
