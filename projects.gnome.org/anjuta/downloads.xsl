@@ -92,16 +92,6 @@
     <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/">here</a>
   </p>
   
-  <h2>Ubuntu prebuild binary packages</h2>
-  <p>
-    Ubuntu prebuilt binary packages for the latest stable version
-    are available at this
-    <a href="https://launchpad.net/~jhs.schmid/+archive/ppa">PPA</a>.
-    Follow the instructions to add the repository and you will get
-    regular updates. For other distrubutions, you will have to wait
-    until packages are available in their repositories.
-  </p>
-
   <a name="anjuta-dependencies"></a>
   <h2>Anjuta Dependencies</h2>
   <p> You must have these to install Anjuta 2.x. In case, you are installing binary package,
