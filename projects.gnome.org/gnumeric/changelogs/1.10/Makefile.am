@@ -1,6 +1,7 @@
 urlpath = /gnumeric/changelogs/1.10
 
 page_SCRIPTS= 			\
+	changelog-1.10.9.txt	\
 	changelog-1.10.8.txt	\
 	changelog-1.10.7.txt	\
 	changelog-1.10.6.txt	\
