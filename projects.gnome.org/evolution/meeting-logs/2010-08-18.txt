@@ -1,0 +1,213 @@
+Aug 18 11:34:27 <chen_>	Lets get started right away :)
+Aug 18 11:34:36 <abharath>	everyone here except Akhil and mcrha (on vacation)
+Aug 18 11:34:43 <chen_>	This is the frist meeting after the wonderful GUADEC!!!
+Aug 18 11:34:55 <chen_>	ah yeah akhil, he might be on the way..
+Aug 18 11:35:05 <chen_>	we thoroughly enjoyed GUADEC :)
+Aug 18 11:35:20 <chen_>	it was very nice to see dwmw2, mmeeks  and all there..
+Aug 18 11:35:42 <abharath>	the best being andre as usual :)
+Aug 18 11:35:45 <chen_>	we had a lot of interesting talks and also  discussed future work in evolution,
+Aug 18 11:36:11 <chen_>	though most of the areas are already known there was more emphasis on the following features,
+Aug 18 11:36:26 <chen_>	+ Exchange ews support
+Aug 18 11:36:31 <mmeeks>	dwmw2: the memory blow-out is odd; we should run under valgrind with --leak-check=full I guess ;-)
+Aug 18 11:36:45 <chen_>	+ Search optimization analysing the xapian engine - not-much-mail.
+Aug 18 11:37:01 <chen_>	+ Integration with libfolks (presence integration)
+Aug 18 11:37:14 <chen_>	+ webkit (which mbarnes is already on to)
+Aug 18 11:37:28 <andre>	I can't remember anything from GUADEC. :-P
+Aug 18 11:37:41 <abharath>	andre: and we know why :P
+Aug 18 11:37:43 <chen_>	apart from that we had a lot of interesting talks :)
+Aug 18 11:37:43 <mmeeks>	dwmw2: and gdbus has only just got EAGAIN support (in glib master) - which is quite critical for evo's use-case ;-) [ I can believe it may leak closures somewhere too ]
+Aug 18 11:38:09 <mmeeks>	chen_: who is going to hack on ews with dwmw2 ? :-)
+Aug 18 11:38:11 <chen_>	there was someone from igalia developing a library for word prediction which might be interesting for evolution as well..
+Aug 18 11:38:24 <chen_>	mmeeks, abharath and myself
+Aug 18 11:38:28 <chen_>	mmeeks, punit may also join.. :)
+Aug 18 11:38:36 <dwmw2>	mmeeks: since guadec it's been *without* dwmw2, but I should get back to it this week with a bit of luck
+Aug 18 11:39:03 <chen_>	with more updates from guadec,
+Aug 18 11:39:22 <chen_>	we also had discussions with Brian cameroon and Li Yuan on accessibility issues in evolution requesting help regarding the same,
+Aug 18 11:39:37 <chen_>	we are yet to follow-up on those..We would be discussing and moving forward with those in the coming week..
+Aug 18 11:39:42 <abharath>	mmeeks: that's the repo http://git.infradead.org/evolution-ews.git
+Aug 18 11:39:59 <chen_>	thats about the GUADEC updates.. abharath anything more to add ?
+Aug 18 11:40:00 <abharath>	and http://git.infradead.org/users/dwmw2/ews-sync.git for calendar sync
+Aug 18 11:40:12 <chen_>	ah mmeeks jony is also contributing there :)
+Aug 18 11:40:21 <dwmw2>	ews-sync is just my proof-of-concept hacks that suck the calendar down into local .ics files
+Aug 18 11:40:22 <abharath>	naah. I think that should be it :)
+Aug 18 11:40:25 <mmeeks>	neato :-) it all sounds fun.
+Aug 18 11:40:37 <abharath>	mmeeks: :)
+Aug 18 11:40:46 *	mmeeks naturally has no exchange server anywhere nearby ... but ;-)
+Aug 18 11:40:56 <chen_>	dwmw2, we are now discussing on having the ews-sync design in eds as well
+Aug 18 11:41:00 <mmeeks>	mbarnes: we missed you at GUADEC - too sad etc.
+Aug 18 11:41:04 <abharath>	mmeeks: need a test account on an awesome server? ;)
+Aug 18 11:41:14 <dwmw2>	chen_: in what way?
+Aug 18 11:41:18 <chen_>	we just need to add some more apis and offline class for the same
+Aug 18 11:41:29 <chen_>	dwmw2, syncing the changes from offline to online
+Aug 18 11:41:46 <chen_>	so basically maintaining all the operations offline and later syncing it with the server
+Aug 18 11:41:47 <mbarnes>	mmeeks: next year -- 6th time's a charm  :)
+Aug 18 11:41:57 <abharath>	mbarnes: :)
+Aug 18 11:41:59 <chen_>	mbarnes, :)
+Aug 18 11:42:04 <dwmw2>	well, we only have server->local sync right now
+Aug 18 11:42:11 <dwmw2>	but yes, I figured it would be similar
+Aug 18 11:42:30 <chen_>	dwmw2, we can have both ways in eds
+Aug 18 11:42:33 <dwmw2>	we'll need to figure out local->server stuff. 
+Aug 18 11:42:43 <dwmw2>	and ical->xml conversion etc. 
+Aug 18 11:42:49 <chen_>	dwmw2, error reporting on failures cases needs to be thought about though
+Aug 18 11:42:54 <abharath>	right
+Aug 18 11:43:10 <abharath>	and also some things need to be synced on the server right away
+Aug 18 11:43:27 <mmeeks>	mbarnes: I'm mostly worried about this memory leak that dwmw2 reports, and Petr Mladek can reproduce, which (might) be down to the CamelFolder leakage (or something else of course ;-)
+Aug 18 11:43:27 <chen_>	will be discussing more with abharath tomorrow and will send an update on apis to be added
+Aug 18 11:43:30 <dwmw2>	I was going to get the basic connection support in place and read-only support, then worry about writes
+Aug 18 11:43:44 <dwmw2>	mmeeks: it's not clear that it's a leak. It doesn't grow over time; it's just a hog
+Aug 18 11:44:02 <mmeeks>	dwmw2: what does pmap say - is it heap, or sqlite database ? :-)
+Aug 18 11:44:36 <mmeeks>	dwmw2: and how many folders do you have ? the CamelFolder ref leak may be just that: that as you switch folders tons of data is stored and not released on them.
+Aug 18 11:44:40 <dwmw2>	hm, never heard of pmap before
+Aug 18 11:44:52 <dwmw2>	I have a metric fuckload of folders
+Aug 18 11:45:04 <mmeeks>	pmap `pidof evolution`
+Aug 18 11:45:16 *	mmeeks suspects dwmw2 is perhaps another CamelFolder leak victim.
+Aug 18 11:45:17 <dwmw2>	I think that requires that I'm not running it in gdb
+Aug 18 11:45:32 <Corsac>	(note that sqlite has a bug which makes certain queries quite slow and I'm not sure if evolution is affected)
+Aug 18 11:45:45 <mmeeks>	dwmw2: nah - it uses /proc - I'm running under gdb just fine.
+Aug 18 11:46:09 <dwmw2>	oh, it requires me to type 6906 not 6096
+Aug 18 11:47:04 <dwmw2>	http://david.woodhou.se/evo-pmap.txt
+Aug 18 11:47:11 <chen_>	while dwmw2 + mmeeks continue on exploring the memory leak issue, let me quickly go through freezes and releases..
+Aug 18 11:47:22 <mbarnes>	heh
+Aug 18 11:47:40 <abharath>	:D
+Aug 18 11:47:44 <chen_>	Reminder on current freezes - UI/API,ABI/Feature freeze are active - so beware :)
+Aug 18 11:47:56 <dwmw2>	oh, wrong machine
+Aug 18 11:48:00 <dwmw2>	still over 3G though
+Aug 18 11:48:03 <dwmw2>	that one's 2.30
+Aug 18 11:48:05 <chen_>	upcoming freezes, string freeze - Aug 30, hard code freeze - Sep 13.
+Aug 18 11:48:05 *	mmeeks is just complaining about the memory leak - not actually doing anything about it ;-)
+Aug 18 11:48:29 <mmeeks>	chen_: feature freeze ?
+Aug 18 11:48:30 <dwmw2>	http://david.woodhou.se/evo-head-pmap.txt
+Aug 18 11:48:34 <andre>	go to #evolution for memory leaks ;-)
+Aug 18 11:48:38 *	mmeeks is really worried about the state of master ...
+Aug 18 11:48:40 <chen_>	mmeeks, am sure you might, once dwmw2 provides some data :)
+Aug 18 11:48:44 <andre>	this is a proper meeting! hell yeah!
+Aug 18 11:48:48 <abharath>	mmeeks: the fun thing is your complaints end up having pointers and fixes too ;)
+Aug 18 11:48:56 <chen_>	mmeeks, yup no more features can be added which requires documentation update for 2.32
+Aug 18 11:49:23 <mmeeks>	soo ... my evolution calendar takes 20 seconds to open, and the UI is wedged all the time on start ... ;-)
+Aug 18 11:49:33 <zyx>	chen_: so your proposal for api changes is for 2.33?
+Aug 18 11:49:33 *	mmeeks also wonders if we got the account autoconfig stuff enabled at all ...
+Aug 18 11:49:38 <mbarnes>	... as if our documentation writers are that responsive, but anyway ...
+Aug 18 11:49:46 <chen_>	zyx, yes, for 3.0
+Aug 18 11:49:52 <zyx>	ok
+Aug 18 11:50:04 <abharath>	mbarnes: and the documentation writers are?? ;)
+Aug 18 11:50:06 <chen_>	mbarnes, just some rules already laid :)
+Aug 18 11:50:18 <mbarnes>	abharath: exactly  ;)
+Aug 18 11:50:25 <abharath>	hehe :)
+Aug 18 11:50:38 <abharath>	mmeeks: so this all after the gdbus merge I assume?
+Aug 18 11:50:38 <chen_>	and we had a stable release 2.30.3 and unstable release 2.31.90 during this week.
+Aug 18 11:50:56 <mmeeks>	abharath: I suppose so, after the gdbus merge, but may pre-date that ;-)
+Aug 18 11:51:12 <abharath>	I'll be onto those GDBus issues first and then look at other random stuff
+Aug 18 11:51:19 <abharath>	a small break from EWS :P
+Aug 18 11:51:26 <zyx>	abharath:  are there many of them?
+Aug 18 11:51:32 <chen_>	mmeeks, are running evo through a  ssh session ?
+Aug 18 11:51:35 <mmeeks>	abharath: neato ...
+Aug 18 11:51:51 <mmeeks>	chen_: nope - from the console - straight up; I suspect it is the GWise backend (as ever)
+Aug 18 11:51:55 *	chen_ remembers abharath saying that it used to work fine if it was not an ssh session..
+Aug 18 11:52:12 <mmeeks>	chen_: I also get some dbus errors of the form "no method doQuery with signature ss found"
+Aug 18 11:52:19 <mmeeks>	and some evil dbus timeouts [ this may be the 20 seconds ]
+Aug 18 11:52:20 <abharath>	chen_: right. must be exporting some sessions that's all, but yes easily reproducible
+Aug 18 11:52:23 <mmeeks>	better - they are intermittent.
+Aug 18 11:52:31 <chen_>	mmeeks, iirc that was fixed by mcrha
+Aug 18 11:52:42 *	abharath plans to steal out mmeeks account :)
+Aug 18 11:52:42 <chen_>	mmeeks, maybe updating the code might help i guess
+Aug 18 11:52:58 *	mmeeks updates e-d-s and evo again
+Aug 18 11:53:35 <abharath>	https://bugzilla.gnome.org/show_bug.cgi?id=625514
+Aug 18 11:53:41 <chen_>	am currently reviewing the eds optimization patch, it needs some more work, will provide the comments tonight to punit
+Aug 18 11:53:48 <chen_>	jpunit, ^
+Aug 18 11:53:53 <abharath>	that's the only bug not committed yet. but other fixes pretty much all there on master
+Aug 18 11:53:56 <chen_>	and the code should be merged in a week
+Aug 18 11:54:16 <abharath>	yes get that in first :) should be pretty neat stuff
+Aug 18 11:54:36 <chen_>	groupwise code will be moved out of evolution past 2.32 release to accomodate translation updates. we still need to decide on having a single module which can hold backends, but thats going to be past 2.32 anyways..
+Aug 18 11:55:01 <chen_>	moving on to individual updates,
+Aug 18 11:55:04 <abharath>	vibs: finally some good news for you :)
+Aug 18 11:55:23 <vibs>	abharath: yeah 
+Aug 18 11:55:28 <chen_>	mostly was on travel and rewamped the development machine with some build fixes.. reviewing couple of patches at the moment..
+Aug 18 11:55:45 <chen_>	looked at the ews code updates from abharath and from david's repo and some discussion with abharath ..
+Aug 18 11:56:08 <chen_>	wIll be working on maildir migration, presence integration and look into xapian engine over the coming weeks..
+Aug 18 11:56:22 <chen_>	thats it from my side..
+Aug 18 11:56:31 <chen_>	andre, anything to share?
+Aug 18 11:56:34 <andre>	---
+Aug 18 11:56:40 <chen_>	;)
+Aug 18 11:56:45 <chen_>	Corsac, anything to share?
+Aug 18 11:56:54 <abharath>	am I invisible :'(
+Aug 18 11:57:03 <chen_>	ah sorry sorry 
+Aug 18 11:57:07 <chen_>	abharath, go on :)
+Aug 18 11:57:09 <abharath>	hehe :) just kidding
+Aug 18 11:57:24 <abharath>	Couple of patch reviews. 0.31.90 release on Monday. Apart from that mainly EWS.
+Aug 18 11:57:27 <Corsac>	chen_: nop
+Aug 18 11:57:38 <chen_>	abharath, nice :)
+Aug 18 11:57:39 <abharath>	Some pretty cool stuff in there now. Please try it out
+Aug 18 11:57:44 <Corsac>	(we'll try to ship 2.30.3 in squeeze if there's no regression from 2.30.2)
+Aug 18 11:57:49 <chen_>	dwmw2, updates?
+Aug 18 11:57:58 <chen_>	Corsac, fine
+Aug 18 11:58:14 <dwmw2>	been fairly busy on non-evo stuff; lots of other things around a MeeGo "Enterprise" build
+Aug 18 11:58:29 <Corsac>	(handset or netbook?)
+Aug 18 11:58:34 <chen_>	fine
+Aug 18 11:59:00 *	chen_ should see other stuffs which dwmw2 does for inspiration :)
+Aug 18 11:59:06 <chen_>	jpunit, updates?
+Aug 18 11:59:17 <jpunit>	I am working on few mapi bugs and one crash
+Aug 18 11:59:23 <chen_>	thanks
+Aug 18 11:59:27 <chen_>	kov, updates?
+Aug 18 11:59:42 <chen_>	jpunit, and will send the comments for eds optimization thing tonight
+Aug 18 11:59:51 <chen_>	mbarnes, updates?
+Aug 18 11:59:55 <mbarnes>	I started a planning page for 2.34 (a.k.a. 3.0)
+Aug 18 11:59:55 <mbarnes>	http://live.gnome.org/Evolution/Planning234
+Aug 18 11:59:55 <mbarnes>	already filled my own plate with ambitious projects
+Aug 18 11:59:55 <mbarnes>	I'd ask everyone to update the 2.32 page with your status
+Aug 18 11:59:55 <mbarnes>	as this is our primary release notes material
+Aug 18 11:59:55 <mbarnes>	and the 2.34 page with your plans
+Aug 18 11:59:55 <mbarnes>	...
+Aug 18 11:59:55 <mbarnes>	right now I'm finishing up a last-minute libedataserverui API break
+Aug 18 11:59:55 <mbarnes>	as described recently on evo-hackers
+Aug 18 11:59:55 <mbarnes>	the new e_load_book_source_async() function seems to be working quite well
+Aug 18 11:59:55 <mbarnes>	if it holds up, I may write a similar e_cal_load_book_source_async()
+Aug 18 12:00:02 <jpunit>	chen_: sure thanks .. time to go home bye 
+Aug 18 12:00:38 *	dave_largo (~drichard@207.22.154.8) has joined #evolution-meet
+Aug 18 12:00:42 <chen_>	mbarnes, will update the planning page ..
+Aug 18 12:00:44 <chen_>	hey dave_largo 
+Aug 18 12:00:52 <dave_largo>	Hey guys
+Aug 18 12:01:00 <chen_>	dave_largo, we are right now going through individual updates..
+Aug 18 12:01:12 <chen_>	dave_largo, do you have anthing to share with everyone..
+Aug 18 12:01:38 <chen_>	mbarnes, haven read it yet, but is it a break or an api addition ?
+Aug 18 12:01:52 <dave_largo>	Just waiting for the channel updates so I can test them for you.  Hopefully that will knock out a few of the crashers
+Aug 18 12:02:20 <abharath>	dave_largo: yup. and some more in the loop. as soon as the bucket is full, you'll have another one :)
+Aug 18 12:02:26 <chen_>	mbarnes, is it used only by evolution or any chance other apps are using them ?
+Aug 18 12:02:30 <dave_largo>	We are probably going to have Pepp work on a few Evo projects.
+Aug 18 12:02:46 <mbarnes>	chen_: it's a rewrite of e_load_book_source_async(), which I think only the name selector widgets use
+Aug 18 12:02:53 <chen_>	dave_largo, nice
+Aug 18 12:03:07 <chen_>	mbarnes, ok
+Aug 18 12:03:11 <dave_largo>	The biggest UI issue that I'm hearing about is running a free/busy on a recurring meeting
+Aug 18 12:03:40 <chen_>	dave_largo, have you raised any bug ?
+Aug 18 12:04:07 <dave_largo>	I have not, the current UI does not accommodate such a search, but I have ideas in my head.
+Aug 18 12:04:15 <dave_largo>	Right now they have to send out the recurring meetings blindly
+Aug 18 12:04:28 <chen_>	mmeeks, anything to share (i know you already have, but if anything more.. ) ? :)
+Aug 18 12:04:48 <mmeeks>	chen_: oh - not much really; just been forced to dogfood master for a long time - due to the lack of ability to go back ...
+Aug 18 12:04:54 <chen_>	dave_largo, ah ok. i get the issue
+Aug 18 12:05:14 <chen_>	mmeeks, ok :)
+Aug 18 12:05:15 <mmeeks>	chen_: if the dbus / calendar issues get fixed - it looks in reasonable shape (to me)
+Aug 18 12:05:16 <chen_>	vibs, updates?
+Aug 18 12:05:25 <vibs>	I was on vacation ... so just fixed up one bug and now looking into some crash issues
+Aug 18 12:05:30 <chen_>	mmeeks, agree
+Aug 18 12:06:07 *	chen_ suddenly wonders if he knows the real meaning of dogfood - though slightly remembers its related to testing :) -
+Aug 18 12:06:12 <chen_>	ok later for google :)
+Aug 18 12:06:26 <chen_>	vibs, thanks
+Aug 18 12:06:31 <chen_>	zyx, anything to share?
+Aug 18 12:06:33 <zyx>	finishing vacation, passed too quickly. but before vacation did  that GDBus migration, as you noticed and mentioned above. I didn't open company mails yet, so I've no idea how much of eds I broke with GDBus work.
+Aug 18 12:06:45 <chen_>	aha
+Aug 18 12:06:54 <chen_>	its mcrha :)
+Aug 18 12:07:04 <zyx>	yup, it is ;)
+Aug 18 12:07:09 <chen_>	zyx, that was a nice deception :)
+Aug 18 12:07:15 <dave_largo>	chen_: Maybe before you go, you can ping me with a quick update?
+Aug 18 12:07:16 <chen_>	{srinidhi}, anything to share?
+Aug 18 12:07:24 <chen_>	dave_largo, sure
+Aug 18 12:07:45 <abharath>	lol
+Aug 18 12:07:54 <abharath>	zyx: you fooled us all ;)
+Aug 18 12:07:59 <chen_>	anything else to be discussed ?
+Aug 18 12:08:02 <abharath>	and thanks for all the GDBus work :)
+Aug 18 12:08:08 <chen_>	+1
+Aug 18 12:08:22 <zyx>	nono, not fooled, not at all
+Aug 18 12:08:43 <{srinidhi}>	chen_: nope
+Aug 18 12:08:44 <chen_>	Lets meet next month at the same time while zyx might change to mcrha ;)
+Aug 18 12:08:48 <abharath>	hehe you were not even the alarm today for the meeting, that was the biggest deception :D
+Aug 18 12:08:50 <chen_>	thanks everyone!
+
