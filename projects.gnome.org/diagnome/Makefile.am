@@ -2,8 +2,8 @@ SUBDIRS=images
 
 urlpath = /diagnome/
 
-page_SCRIPTS= diagnome.css \
-	grid.css \
+page_SCRIPTS= menu.css \
+	general.css \
 	facebook.png \
 	header.png \
 	presentation.png \
@@ -11,6 +11,8 @@ page_SCRIPTS= diagnome.css \
 	expositores.html \
 	index.html \
 	programa.html	\
-	charlas.html
+	charlas.html \
+	como-llegar.html \
+	llamado-trabajos.html
 
 include $(top_srcdir)/rules.common
