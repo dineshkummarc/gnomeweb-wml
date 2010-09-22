@@ -96,6 +96,7 @@ page_SCRIPTS = \
 	2010-07-guadec-extra-sessions.html \
 	2010-07-guadec-webm-flumotion.html \
 	2010-07-gnome-3.0-rescheduled.html \
-	2010-07-desktop-summit-2011-berlin.html
+	2010-07-desktop-summit-2011-berlin.html \
+	2010-09-tomboy-online-alpha.html
 
 include $(top_srcdir)/rules.common
