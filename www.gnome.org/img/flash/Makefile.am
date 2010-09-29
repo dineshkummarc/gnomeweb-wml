@@ -52,6 +52,7 @@ page_DATA = \
 	new-friends-of-gnome.png \
 	two-twenty-six.png \
 	two-twenty-eight.png \
-	two-thirty.png
+	two-thirty.png \
+	two-thirty-two.png
 
 include $(top_srcdir)/rules.common
