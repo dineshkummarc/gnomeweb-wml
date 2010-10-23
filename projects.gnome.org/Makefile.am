@@ -74,7 +74,8 @@ SUBDIRS = css \
 	diagnome \
 	postr \
 	gnome-blog      \
-	nautilus-python
+        nautilus-python \
+        nautilus-sound-converter
 
 urlpath = 
 
