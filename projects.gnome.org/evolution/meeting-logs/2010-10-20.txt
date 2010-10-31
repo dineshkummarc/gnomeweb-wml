@@ -1,0 +1,253 @@
+Oct 20 11:28:04 <chen>	the house is full. Lets get started!!
+Oct 20 11:28:24 <chen>	Starting with EWS update,
+Oct 20 11:28:27 <mcrha>	nono, wait for 3 minutes
+Oct 20 11:28:39 <mcrha>	or two and a bit
+Oct 20 11:28:41 <dwmw2>	there's an EWS update? :)
+Oct 20 11:28:43 <chen>	mcrha, ok
+Oct 20 11:28:55 <chen>	dwmw2, u would have to wait :)
+Oct 20 11:28:59 <dwmw2>	:)
+Oct 20 11:29:03 <abharath>	dwmw2: ;)
+Oct 20 11:29:12 <andre>	what is EWS?
+Oct 20 11:29:17 <dwmw2>	exchange web services
+Oct 20 11:29:19 <abharath>	nothing much, but more to come in the future
+Oct 20 11:29:21 <dwmw2>	SOAP-based replacement for MAPI
+Oct 20 11:30:02 *	chen will wait for mcrha to give a green signal :)
+Oct 20 11:30:46 <mbarnes>	g_signal_emit(mcrha, "green", 0);
+Oct 20 11:30:52 <mbarnes>	GLib humor  ;)
+Oct 20 11:30:53 <mcrha>	here you are
+Oct 20 11:31:07 <chen>	ok got a go!! :)
+Oct 20 11:31:19 <abharath>	mbarnes: :D
+Oct 20 11:31:34 <chen>	so myself and abharath sat together and made a small plan to have a direction..
+Oct 20 11:31:53 <chen>	we are currently working on a prototype test and the plan is here,
+Oct 20 11:32:00 <chen>	EWS plan - https://spreadsheets.google.com/ccc?key=0Amkr7ZXVxElKdG9FTWZFajlqTkVXRkNJNTVhNWxLVGc&hl=en
+Oct 20 11:32:31 <chen>	so if things go well, we should be able to get some base pieces ready by Dec begining
+Oct 20 11:33:01 <chen>	made in spread-sheet to satisfy some managers internally :)
+Oct 20 11:33:18 <chen>	The repo as already mentioned,
+Oct 20 11:33:19 <chen>	Repo - http://git.infradead.org/evolution-ews.git
+Oct 20 11:33:38 <EvaSDK>	so, is it yet another exchange connector ?
+Oct 20 11:33:52 <dwmw2>	you'll note that the ssh keys on git.infradead.org have changed, btw -- the machine blew up and it's been reinstalled.
+Oct 20 11:33:53 <chen>	EvaSDK, yes a needed one
+Oct 20 11:34:00 <dwmw2>	different arch so I didn't just use the old disks
+Oct 20 11:34:12 <abharath>	dwmw2: yes thanks for bringing it back from the dead
+Oct 20 11:34:34 <mcrha>	infra-dead :)
+Oct 20 11:34:38 <chen>	dwmw2, ah ok. i did not face any issues though while pushing patches..
+Oct 20 11:34:46 <EvaSDK>	I'm fine if you say it's needed, just saying it's the third in a rather short timeframe and we (gentoo) didn't even package evo-mapi due to it's samba4 dependencies, so I hope this time it won't be that hard to package :)
+Oct 20 11:34:52 <abharath>	mcrha: :D
+Oct 20 11:35:08 <dwmw2>	EvaSDK: MAPI was deprecated by Microsoft in Exchange 2007
+Oct 20 11:35:14 <dwmw2>	although Outlook still used it until Outlook 2010
+Oct 20 11:35:15 <chen>	right
+Oct 20 11:35:29 <dwmw2>	EWS is just SOAP so the external deps are much simpler
+Oct 20 11:35:40 <abharath>	EvaSDK: well the dependencies are very basic libraries, so should be good
+Oct 20 11:35:41 <dwmw2>	we do need proper NTLM and Kerberos support in libsoup, which it lacks at the moment though
+Oct 20 11:36:00 <EvaSDK>	nice, happy to hear it :)
+Oct 20 11:36:02 <abharath>	EvaSDK: and also might be much easier to port on Windows
+Oct 20 11:36:15 <chen>	dwmw2, have not looked at that yet.., abharath ?
+Oct 20 11:36:50 <dwmw2>	https://bugzilla.gnome.org/show_bug.cgi?id=624613
+Oct 20 11:37:01 *	abharath looks
+Oct 20 11:37:03 *	chen looks at hte bug
+Oct 20 11:37:08 <mcrha>	chen, will is be developed on dwmw2's machine, or you have approval from gnome for its git already/awaiting/not needed (joining eex)?
+Oct 20 11:37:31 <chen>	mcrha, so i was about to come there :)
+Oct 20 11:37:37 <dwmw2>	and https://bugzilla.gnome.org/show_bug.cgi?id=587145
+Oct 20 11:37:42 <chen>	mcrha, shall we finalize some solution today here in the meeting ?
+Oct 20 11:37:51 <chen>	while some discussions already went on e-h list ?
+Oct 20 11:37:58 <mbarnes>	dwmw2: when did MS introduce EWS?  wondering how much overlap there is in terms of supported exchange versions for mapi vs ews
+Oct 20 11:38:06 <mcrha>	chen, up to you, just do not make quick decisions :)
+Oct 20 11:38:11 <dwmw2>	mbarnes: in Exchange 2007 I believe
+Oct 20 11:38:21 <dwmw2>	theoretically, I don't think MAPI is needed anywhere.
+Oct 20 11:38:32 <dwmw2>	although EWS in Exchange 2007 lacks certain features perhaps
+Oct 20 11:38:34 <chen>	mcrha, oh no, we can move on to a solution with everyone's agreement :)
+Oct 20 11:38:55 <abharath>	dwmw2: like? I did not find anything missing apart from GAL for now
+Oct 20 11:38:56 <mbarnes>	dwmw2: was just wondering if evo-exchange can die yet
+Oct 20 11:38:59 <chen>	dwmw2, what are they ?
+Oct 20 11:39:14 <dwmw2>	some sane handling of timezones is the only one I can remember offhand
+Oct 20 11:39:30 <chen>	mbarnes, it wont at-least imho :)
+Oct 20 11:39:32 <dwmw2>	half-sane, at least. This is Microsoft, after all.
+Oct 20 11:39:36 <mcrha>	mbarnes, 2k3 is too low, I believe
+Oct 20 11:39:47 <dwmw2>	evo-exchange is for exchange 2003 and earlier, right?
+Oct 20 11:39:48 <chen>	dwmw2, ah ok
+Oct 20 11:39:50 <mcrha>	too low for EWS, I meant
+Oct 20 11:39:54 <dwmw2>	yeah
+Oct 20 11:40:03 <mcrha>	dwmw2, 2k3 only
+Oct 20 11:40:16 <abharath>	mcrha: 2k3 and less :)
+Oct 20 11:40:25 <mcrha>	abharath, really?
+Oct 20 11:40:36 <abharath>	mcrha: hehe yeah :)
+Oct 20 11:40:42 <chen>	mbarnes, shall we discuss and get to a conclusion on packaging now or wait for some more discussions in e-h list ?
+Oct 20 11:40:46 <mcrha>	abharath, aha, good :)
+Oct 20 11:41:02 <chen>	mcrha, ^
+Oct 20 11:41:27 <abharath>	mcrha: http://git.gnome.org/browse/evolution-exchange/tree/README
+Oct 20 11:41:28 <mbarnes>	chen: I have nothing more to say about it, but I'd be interested in getting e.g. cooly's take (for evo-rss)
+Oct 20 11:41:57 <mcrha>	chen, yeah, let's wait for a week, the mail is out only shortly
+Oct 20 11:42:12 <chen>	mbarnes, mcrha ok lets wait for a week then
+Oct 20 11:42:41 <mcrha>	abharath, seems there was no exchange before 2000, then :)
+Oct 20 11:42:59 <chen>	do we have anything else to discuss before moving on to individual updates ?
+Oct 20 11:43:03 <abharath>	mcrha: it was :D
+Oct 20 11:43:32 <mcrha>	chen, gtk3 work/gnome3 preparations?
+Oct 20 11:43:33 <chen>	dwmw2, will keep watching those bugs while we get the other stuff done in ews..
+Oct 20 11:43:41 <mbarnes>	mcrha: ugh
+Oct 20 11:43:47 <dwmw2>	yeah, we can use basic auth for now although it sucks
+Oct 20 11:44:03 <mcrha>	mbarnes, exactly. though rather take it sooner than later, no?
+Oct 20 11:44:12 <dwmw2>	I ought to get a test account on an Exchange 2010 server some time soon, too
+Oct 20 11:44:20 <abharath>	dwmw2: me too :)
+Oct 20 11:44:24 <chen>	dwmw2, fine
+Oct 20 11:44:37 <dwmw2>	I mean I expect to -- it's been discussed and promised
+Oct 20 11:44:41 <dwmw2>	not just that I think I should
+Oct 20 11:44:52 <chen>	mcrha, anything specific there u would like to discuss ?
+Oct 20 11:45:15 <chen>	mcrha, it would be good if we could see what we could share
+Oct 20 11:45:22 <mcrha>	chen, I do not know. How much is evo & co. ready? Not much?
+Oct 20 11:45:47 <chen>	mcrha, not much testing and not much usage
+Oct 20 11:45:54 *	mcrha is just looking for some info
+Oct 20 11:46:01 <chen>	mcrha, at-least while releasing this time,
+Oct 20 11:46:06 <chen>	i just compiled and testing with gtk2
+Oct 20 11:46:13 <mbarnes>	Company has been porting gnome-canvas, ETable, and co. to cairo
+Oct 20 11:46:26 <mbarnes>	he posted a rendering-cleanup branch the other day, but I assume it only builds with gtk3
+Oct 20 11:46:46 <mbarnes>	mccann posted a patch for gtkhtml, but it has serious rendering regressions that need fixed
+Oct 20 11:46:48 <chen>	mcrha, to be frank, i had not been tracking it well. mbarnes  would be the best person there..
+Oct 20 11:47:29 <mcrha>	mbarnes, so say we can have this done in a month, and then the team will move from gtk2 to gtk3 with evo & co.?
+Oct 20 11:47:47 <mcrha>	well, 'we', it's rather 'they for us' :)
+Oct 20 11:48:09 <mbarnes>	my recommendation is to continue requiring only gtk2 with an option to build against gtk3 until we see a stable GTK+ 3.0 release
+Oct 20 11:48:22 <mbarnes>	trying to jump on the current merry-go-round that is gtk3 right now would be insane
+Oct 20 11:48:33 <lakhil>	+1
+Oct 20 11:48:48 <mcrha>	mbarnes, ah, right. is it planned around Christmas?
+Oct 20 11:48:49 *	chen agrees
+Oct 20 11:48:57 <mbarnes>	last I heard, around the end of the year
+Oct 20 11:49:09 <mcrha>	ok
+Oct 20 11:49:24 <chen>	mbarnes, wouldn that be too late?
+Oct 20 11:49:49 <mbarnes>	as far as I'm concerned, that's the release team's problem
+Oct 20 11:50:06 <abharath>	ok 6 more months then :D
+Oct 20 11:50:11 <chen>	hmm ok
+Oct 20 11:50:24 *	xtian (~chris@port-217-146-132-69.static.qsc.de) has joined #evolution-meet
+Oct 20 11:50:36 <chen>	mcrha, anything else before we move on individual updates?
+Oct 20 11:50:54 <mcrha>	yeah, a month before API freeze and in string announce period already in January, hmm, it'll be tight
+Oct 20 11:51:18 <mcrha>	chen, from my? hehe, I'm quiet like a fish
+Oct 20 11:51:22 <mcrha>	*me
+Oct 20 11:51:33 <chen>	mcrha, hehe 
+Oct 20 11:51:44 <chen>	updates from my side,
+Oct 20 11:52:12 <chen>	nothing great. Just been in discussions with abharath on ews, with vibs and jpunit  on some,
+Oct 20 11:52:14 <chen>	customer issues
+Oct 20 11:52:30 <chen>	got to just get moving on this month..
+Oct 20 11:52:33 <chen>	abharath, updates?
+Oct 20 11:53:11 <chen>	andre, anything to share?
+Oct 20 11:53:20 <abharath>	chen: well on EWS now. First we added the whole GW chunk, then the full Evo-exch chunk :D now all code removed and cleaned, so I'll push some connection things by this week
+Oct 20 11:53:28 <abharath>	updating the test suites
+Oct 20 11:53:45 <chen>	abharath, hehe thanks
+Oct 20 11:53:54 <chen>	didrocks, anything to share?
+Oct 20 11:53:57 <andre>	nope
+Oct 20 11:54:11 <chen>	dwmw2, updates?
+Oct 20 11:54:38 <chen>	EvaSDK, hggdh anything to share?
+Oct 20 11:54:54 <chen>	jpunit, updates?
+Oct 20 11:55:10 <hggdh>	not on my side, didrocks is getting heavey on Evo ;-)
+Oct 20 11:55:10 <jpunit>	Hi all, I am working on some evo crashers and GW issues and as chen said customer issues as well
+Oct 20 11:55:20 <chen>	jpunit, thanks
+Oct 20 11:55:24 <chen>	kov, anything to share?
+Oct 20 11:55:30 <chen>	lakhil, updates?
+Oct 20 11:55:40 <lakhil>	chen, in general updates : sanity of dot releases releases, some patch testing and bug triaging as usual
+Oct 20 11:55:49 <lakhil>	i would like to give brief update about bug day which was on Sept 30 and Oct 1
+Oct 20 11:55:56 <chen>	lakhil, go on
+Oct 20 11:56:07 <lakhil>	as per plan, we targeted Evolution 2.28.x and 2.30.x bugs but we also did some triaging against 2.32.x and 2.26.x.
+Oct 20 11:56:23 <abharath>	lakhil: you have those awesome graphs plotted as usual? :D
+Oct 20 11:56:25 <lakhil>	In total, we were able to triage close to 250 bugs and out of those bugs, we were able to close near about 95 bugs.
+Oct 20 11:56:39 <lakhil>	thanks to all for participation
+Oct 20 11:56:41 <mcrha>	oh, it's almost three weeks ago now, the time passes here soooo quickly...
+Oct 20 11:56:49 <lakhil>	abharath, :)
+Oct 20 11:56:50 <chen>	:)
+Oct 20 11:56:51 <abharath>	mcrha: +1 :D
+Oct 20 11:57:15 <vibs>	mcrha: +2
+Oct 20 11:57:20 <chen>	lakhil, nice job and thanks for co-ordination well. sorry for myself being on leave..
+Oct 20 11:57:29 <EvaSDK>	chen: finally finished bumping evo, eds & co in gentoo for gnome 2.32, it's been a bit hard because of a couple of build issues that where reported but not taken care of long before the release
+Oct 20 11:57:35 <lakhil>	chen, no problem
+Oct 20 11:58:08 <chen>	EvaSDK, ok
+Oct 20 11:58:28 <EvaSDK>	chen: also, how many 2.32 releases do you guys plan on doing so I can see if I should bother reporting issues from our users to you or not
+Oct 20 11:58:29 <chen>	EvaSDK, let us know how the users feel using 2.32
+Oct 20 11:58:52 <chen>	EvaSDK, 3 i guess
+Oct 20 11:59:03 <chen>	EvaSDK, it would go as per the gnome schedule but,
+Oct 20 11:59:18 <EvaSDK>	so far, I've been very pleased with the release once I managed to build it. Somehow it feels better than 2.30
+Oct 20 11:59:29 <chen>	if we have good amount of fixes later too, we would be ready to make additional release..
+Oct 20 11:59:33 <jpunit>	mcrha: yeah .. well said
+Oct 20 11:59:42 <EvaSDK>	yeah, the gnome schedule doesn't say much to 2.32 support, that's why I ask :)
+Oct 20 11:59:52 <EvaSDK>	ok, noted :)
+Oct 20 11:59:55 <chen>	EvaSDK, its definetly better than 2.30 in calendaring/address-book areas
+Oct 20 12:00:14 <chen>	thanks to mcrha and abharath for taking care of the dbus issues!!
+Oct 20 12:00:23 <chen>	mbarnes, updates?
+Oct 20 12:00:26 <lakhil>	chen, this time only 2.32.1 is planned as per gnome plan but we can release .2 / .3 as well
+Oct 20 12:00:27 <abharath>	chen: mcrha only please :)
+Oct 20 12:00:29 <mbarnes>	I've been busy...
+Oct 20 12:00:29 <mbarnes>	over the weekend I removed non-intrusive error dialogs from the mailer
+Oct 20 12:00:29 <mbarnes>	and replaced them with a GtkInfoBar in the main window
+Oct 20 12:00:29 <mbarnes>	similar to my recent changes with the composer
+Oct 20 12:00:29 <mbarnes>	I'm also starting now on the GSettings work
+Oct 20 12:00:29 <mbarnes>	but so far have only been pecking around the edges
+Oct 20 12:00:29 <mbarnes>	trying to consolidate our GConf usage behind EShellSettings
+Oct 20 12:00:29 <mbarnes>	I'm still pondering how I want to attack the accounts/sources problem
+Oct 20 12:00:37 *	mcrha is missing mbarnes's patch for icaltimezone and e_cal_set_default_timezone
+Oct 20 12:00:47 <mbarnes>	mcrha: oh right, I owe you that
+Oct 20 12:00:58 <abharath>	ok mbarnes pasting MBs of lines, just like his initials :P
+Oct 20 12:01:05 <mcrha>	:)
+Oct 20 12:01:09 <chen>	mbarnes, something in the lines of unified account management ?
+Oct 20 12:01:26 <EvaSDK>	chen: oh, I remember one thing though, the dialog "mark all mail as read" became much more annoying some 2.30, I guess I should file a report about that
+Oct 20 12:01:40 <mbarnes>	chen: well, we'll see.  for now I'm mainly concerned with killing off the XML blobs
+Oct 20 12:01:58 <chen>	mbarnes, ok
+Oct 20 12:02:02 <chen>	mcrha, updates?
+Oct 20 12:02:06 <lakhil>	EvaSDK, you mean you see dialog even if there are no sub folders ?
+Oct 20 12:02:41 <mcrha>	nothing specila, Im afraid, just trying to cut evo bugs, sometimes I add new. Intentionally and unintentionally.
+Oct 20 12:02:49 *	mcrha filled a blocker today
+Oct 20 12:02:53 <chen>	mcrha, :)
+Oct 20 12:03:14 <chen>	mcrha, w.r.t ?
+Oct 20 12:03:20 <chen>	pohly, anything to share?
+Oct 20 12:03:20 <lakhil>	all rounder mcrha :)
+Oct 20 12:03:24 *	abharath passes mcrha a toffee
+Oct 20 12:03:36 <chen>	vibs, updates?
+Oct 20 12:03:49 *	jpunit is now known as jpunit|afk
+Oct 20 12:03:52 <vibs>	yeah as chen mentioned i was mostly onto customer issues ... worked on a couple of bugs only like accepting meeting for groupwise, issues in autocompletion of names, mini calendar crasher.
+Oct 20 12:04:07 <lakhil>	chen, https://bugzilla.gnome.org/show_bug.cgi?id=632676
+Oct 20 12:04:07 <chen>	vibs, thanks
+Oct 20 12:04:13 <chen>	xtian, anything to share?
+Oct 20 12:04:21 <abharath>	vibs: nice one with that long-standing autocompletion bug
+Oct 20 12:04:35 <mcrha>	EvaSDK, please do not file a bug about "is shows if in subfolders when no subfolders", I marked couple as duplicates and I never got what irritates people on it so much
+Oct 20 12:04:55 <abharath>	mcrha: hehe
+Oct 20 12:05:19 <vibs>	abharath: ;) I should be thanking chen for review and guidance
+Oct 20 12:05:23 <EvaSDK>	mcrha: it just pops when you don't actually care about it ? :)
+Oct 20 12:05:30 <vibs>	and to you too
+Oct 20 12:05:38 *	dave_largo (~drichard@207.22.154.88) has joined #evolution-meet
+Oct 20 12:05:39 <chen>	mcrha, i wonder if its a blocker ? :)
+Oct 20 12:05:42 <chen>	hey dave_largo 
+Oct 20 12:05:50 <dave_largo>	I made it!  just back from Pizza :D
+Oct 20 12:05:53 <EvaSDK>	mcrha: the most annoying thing in fact is that it pops way too late we you are doing things in bit too fast for evo
+Oct 20 12:06:06 <EvaSDK>	mcrha: and I say that on a core i7 @2.8Ghz
+Oct 20 12:06:06 <mcrha>	chen, the new bug from today? for me it is :)
+Oct 20 12:06:09 <chen>	dave_largo, we just moving around updates :)
+Oct 20 12:06:21 <xtian>	chen: hum. currently i'm on extending (my local copy of) imapx for imap annotations/metadata
+Oct 20 12:06:22 *	chen has still some todo's pending from dave_largo, sorry :(
+Oct 20 12:06:34 <abharath>	chen: If you see it, you'll realize how bad it is :D
+Oct 20 12:06:37 <abharath>	or was :D
+Oct 20 12:06:53 <chen>	xtian, thanks, i hope its going well 
+Oct 20 12:06:55 <dave_largo>	chen: keep the patches going, the stuff you promised in that email is excellent
+Oct 20 12:06:59 <xtian>	chen: then, trying to figure out what the implications of running three imapx instances simultaneously will be
+Oct 20 12:07:05 <mbarnes>	dave_largo: there's a Pizza, FL?  I'm so moving there.
+Oct 20 12:07:16 <mcrha>	EvaSDK, as long as it is not about subfolders in the dialog text then you can file a bug and someone (who knows who) will look on it one day :)
+Oct 20 12:07:26 <chen>	abharath, i see it, its bad, still i can use evo. so not worth calling a blocker
+Oct 20 12:07:52 <EvaSDK>	mcrha: :)
+Oct 20 12:08:02 <mcrha>	dave_largo reminded me, chen, what is with the maildir thing? I recall seeing abharath telling one IRC user "in a day or two". But when it was...
+Oct 20 12:08:12 <chen>	dave_largo, we are on it :)
+Oct 20 12:08:32 <abharath>	mcrha: he is using it for himself hehe :D
+Oct 20 12:08:36 <chen>	mcrha, sad on me, haven made it yet
+Oct 20 12:08:52 <chen>	mcrha, last month was little bit bad, will get it in asap
+Oct 20 12:09:05 <mcrha>	okok, that should be your update, chen, not a public secret :)
+Oct 20 12:09:11 <abharath>	:D
+Oct 20 12:09:13 <chen>	hehe
+Oct 20 12:09:40 <chen>	anything else from anyone ?
+Oct 20 12:09:42 <xtian>	chen: i've done some little refactoring of imapx_untagged, creating a function for each untagged response and changing imapx_untagged to use a ghashtable of function pointers
+Oct 20 12:10:08 <xtian>	chen: the results are there in the evolution-kolab git repo, dev_kc_imapx branch
+Oct 20 12:10:23 <chen>	xtian, nice, will have a look into it
+Oct 20 12:10:31 <xtian>	chen: dwmw2 had a look and he did not cry out loud
+Oct 20 12:10:43 <lakhil>	:)
+Oct 20 12:10:44 <xtian>	chen: seems it's not too much broken what i did ;-)
+Oct 20 12:10:46 <dave_largo>	chen, are you going to be able to take in the work week printing into SLED?
+Oct 20 12:10:52 <chen>	then it means it can be upstreamed  :)
+Oct 20 12:11:34 <chen>	dave_largo, not here :)
+Oct 20 12:11:49 <chen>	dave_largo, we can discuss after the meeting
+Oct 20 12:12:19 <dave_largo>	i gotta jump offline , chen you can find me later or soon, connecting a new 50Mb circuit :D
+Oct 20 12:12:22 <dave_largo>	back later
+Oct 20 12:12:23 *	dave_largo has quit (Client exiting)
+Oct 20 12:13:10 <chen>	Lets then meet next month 3rd wednesday..
+Oct 20 12:13:15 <chen>	Thanks everyone!!
+
