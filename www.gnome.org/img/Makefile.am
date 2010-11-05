@@ -16,7 +16,6 @@ page_DATA = \
 	hammer.gif \
 	hammer.png \
 	bg4.png \
-	make-a-donation.png \
-	gnome-woman-logo.png
+	make-a-donation.png
 
 include $(top_srcdir)/rules.common
