@@ -11,7 +11,7 @@ HTMLFILES = \
 	projects.html \
 	team.html 
 
-page_DATA = $(HTMLFILES)
+page_DATA = $(HTMLFILES) anjuta.jhbuildrc
 
 %.page: %.xsl Makefile current-release.xml
 	xsltproc --nonet --stringparam date "$$(date -R)" -o $@ $< current-release.xml
