@@ -101,40 +101,22 @@
     <table>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtk/">GTK+</a></td>
-        <td nowrap="">2.17.10 or later</td>
+        <td nowrap="">2.91.1 or later</td>
         <td>GTK+ toolkit UI development library</td></tr>
-
-      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/GConf/">GConf</a></td>
-        <td nowrap="">2.12.0 or later</td>
-        <td>GConf settings library</td></tr>
-
-
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gdl/">GDL</a></td>
-        <td nowrap="">2.28 or later</td>
+        <td nowrap="">2.91.1 or later</td>
         <td>Docking library</td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/">gtksourceview</a></td>
-        <td nowrap="">2.9.3 or later</td>
+        <td nowrap="">2.91.x or later</td>
         <td>GTK+ sourceview editor widget (required for Anjuta editor)</td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/libgda/3.99/">libgda</a></td>
-        <td nowrap="">4.0 or later</td>
+        <td nowrap="">4.2 or later</td>
         <td>GNOME DB library</td></tr>
-      
-      <tr><td nowrap=""><a href="http://sourceforge.net/project/showfiles.php?group_id=3593">libopts</a></td>
-        <td nowrap="">23.0.0 or later</td>
-        <td>Command options processing (required by autogen)</td></tr>
-      
-      <tr><td nowrap=""><a href="ftp://ftp.gnu.org/gnu/guile/">guile</a></td>
-        <td nowrap="">1.6.7 or later</td>
-        <td>Scripting engine (required by autogen)</td></tr>
-      
-      <tr><td nowrap=""><a href="http://sourceforge.net/project/showfiles.php?group_id=3593">autogen</a></td>
-        <td nowrap="">5.6.5 or later</td>
-        <td>Template processing engine</td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/vte/">vte</a></td>
-        <td nowrap="">0.13.1 or later</td>
+        <td nowrap="">0.27.2 or later</td>
         <td>GNOME vte terminal widget (required for embedded terminal plugin)</td></tr>
 
       <tr><td nowrap=""><a href="http://www.xmlsoft.org/">libxml</a></td>
@@ -158,7 +140,7 @@
 	  You need this for developing GTK/GNOME applications in Anjuta</td></tr>
       
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/devhelp/">devhelp</a></td>
-        <td nowrap="">0.22 or later</td>
+        <td nowrap="">2.91.1 or later</td>
         <td>Developer's help system. Required for context sensitive API help and search.</td></tr>
       
       <tr><td nowrap=""><a href="http://www.graphviz.org/Download.php">graphviz</a></td>
@@ -170,7 +152,7 @@
         <td>Subversion version control (required for subversion plugin)</td></tr>
 
       <tr><td nowrap=""><a href="http://live.gnome.org/Vala">Vala</a></td>
-        <td nowrap="">0.7.8 or later</td>
+        <td nowrap="">0.10.x or later</td>
         <td>Vala is a new C# like programming language that aims to bring modern programming language features to GNOME developers (required for vala symbols support)</td></tr>
 
     </table>
@@ -183,6 +165,10 @@
     packages). Anjuta does not have any restriction on versions of these
     packages, so choose the versions which your application require. Make sure
     to install their corresponding *-devel packages also.
+  </p>
+  <p>
+  	Note: Anjuta will be able to install those automatically on distributions
+    that support <a href="http://www.packagekit.org/">PackageKit</a>.
   </p>
   <p>
     <table border="1" cellspacing="1" cellpadding="4">
