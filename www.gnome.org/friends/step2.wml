@@ -42,7 +42,9 @@ improve GNOME products.</li>
 		switch($_POST['aidtype']) {
 			case 'adopt':
 				echo 'You have chosen to <strong>adopt a hacker</strong> <a href="index.html">(change)</a><br />'; 
-				echo '<strong>Monthly amount:</strong> $<input type="text" id="amount" name="a3" value="10" size=5><br />';
+                echo '<input type="radio" value="Monthly" name="payment_option" checked />';
+                echo '<input type="radio" value="Annually" name="payment_option" /><br />';
+				echo ' $<input type="text" id="amount" name="a3" value="10" size=5><br />';
 				echo 'Please increase the amount above if you want to make a larger difference.';
 
 	                        echo '<h3>Pick a hacker from whom you will receive a post card:</h3>
@@ -168,14 +170,6 @@ improve GNOME products.</li>
 				<img alt="" border="0" width="1" height="1" src="https://www.paypal.com/en_US/i/scr/pixel.gif" />';
 			break;
 
-			case 'annual':
-				echo '<input type="hidden" value="friends@gnome.org" name="business"/>
-				<input type="hidden" value="http://www.gnome.org/friends/thank-you.php" name="return"/>
-				<input type="hidden" value="_xclick" name="cmd"/>
-				<input type="hidden" name="item_name" value="Friends of GNOME - Adopt a hacker annually subscription"/> 
-				<input type="image" alt="Donate" name="submit" src="images/donate-button.png"/>';
-			break;
-
 			case 'associate':
 				echo '<input type="hidden" value="friends@gnome.org" name="business"/>
 				<input type="hidden" value="http://www.gnome.org/friends/thank-you.php" name="return"/>
@@ -239,6 +233,19 @@ improve GNOME products.</li>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
   $.cookie("aidtype", "<?php echo $_POST['aidtype'] ?>");
+  $(function () {
+        $('input[name= payment_option').click(function () {
+        var value = $(this).attr('value');
+        var $amount = $('#amount');
+
+        if (value === 'Monthly') {
+            $amount.val('10');
+        }
+        else {
+            $amount.val('100');
+        }
+    });
+  });
 </script>
 
 <!-- Google Code for Step 2 Conversion Page -->
