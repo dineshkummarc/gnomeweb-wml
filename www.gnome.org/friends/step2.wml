@@ -42,8 +42,8 @@ improve GNOME products.</li>
 		switch($_POST['aidtype']) {
 			case 'adopt':
 				echo 'You have chosen to <strong>adopt a hacker</strong> <a href="index.html">(change)</a><br />'; 
-                echo '<input type="radio" value="Monthly" name="payment_option" checked />';
-                echo '<input type="radio" value="Annually" name="payment_option" /><br />';
+                echo '<label><input type="radio" value="Monthly" name="payment_option" checked="checked" />Monthly</label>';
+                echo '<label><input type="radio" value="Annual" name="payment_option" />Annually</label>';
 				echo ' $<input type="text" id="amount" name="a3" value="10" size=5><br />';
 				echo 'Please increase the amount above if you want to make a larger difference.';
 
@@ -150,16 +150,16 @@ improve GNOME products.</li>
 				<!-- Identify your business so that you can collect the payments. --> 
 				<input type="hidden" name="business" value="friends@gnome.org"/> 
 				<!-- Specify a Subscribe button. --> 
-                                <!-- <input type="hidden" name="cmd" value="_s-xclick"> -->
-                                <input type="hidden" name="cmd" value="_xclick-subscriptions">
-                                <input type="hidden" name="hosted_button_id" value="2854082">
+                <!-- <input type="hidden" name="cmd" value="_s-xclick"> -->
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input id="hosted_button_id" type="hidden" name="hosted_button_id" value="2854082">
 				<!-- Identify the subscription. -->
-				<input type="hidden" name="item_name" value="Friends of GNOME - Adopt a hacker monthly subscription"/> 
+				<input id="item_name" type="hidden" name="item_name" value="Friends of GNOME - Adopt a hacker monthly subscription"/> 
 				<input type="hidden" value="http://www.gnome.org/friends/thank-you.php" name="return"/>
 				<!-- Define the intervals between payments. "1" means every period. -->
 				<input type="hidden" name="p3" value="1">
 				<!-- "t3" defines the period duration (D=days; W=weeks; M=months and Y=Years). --> 
-				<input type="hidden" name="t3" value="M">
+				<input id="t3" type="hidden" name="t3" value="M">
 				<!-- "src" with a value of "1" causes it to repeat for every interval. -->
 				<input type="hidden" name="src" value="1">
 				<!-- Not sure what "sra" does. Does not seem to harm the form (part of sample). -->
@@ -234,15 +234,21 @@ improve GNOME products.</li>
 <script type="text/javascript">
   $.cookie("aidtype", "<?php echo $_POST['aidtype'] ?>");
   $(function () {
-        $('input[name= payment_option').click(function () {
+        $("input[name='payment_option']").click(function () {
         var value = $(this).attr('value');
         var $amount = $('#amount');
 
-        if (value === 'Monthly') {
+        if (value == 'Monthly') {
             $amount.val('10');
+            $('#item_name').val("Friends of GNOME - Adopt a hacker monthly subscription");
+            $('#hosted_button_id').val('2854082');
+            $('#t3').val('M');
         }
         else {
             $amount.val('100');
+            $('#item_name').val("Friends of GNOME - Adopt a hacker annually subscription");
+            $('#hosted_button_id').val('EKNAYM7XBGGQE');
+            $('#t3').val('Y');
         }
     });
   });
