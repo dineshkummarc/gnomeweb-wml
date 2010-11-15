@@ -5,7 +5,7 @@ urlpath = /contest
 page_SCRIPTS = \
 	faq.html \
 	index.html \
-	rules.html \
+	rules.html 
 
 include $(top_srcdir)/rules.common
 
