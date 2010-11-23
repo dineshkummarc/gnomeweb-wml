@@ -1,4 +1,4 @@
-SUBDIRS = css font img upload
+SUBDIRS = css font img
 
 urlpath = /contest
 
