@@ -53,6 +53,7 @@ page_DATA = \
 	two-twenty-six.png \
 	two-twenty-eight.png \
 	two-thirty.png \
-	two-thirty-two.png
+	two-thirty-two.png \
+	tshirtcontestbanner.png
 
 include $(top_srcdir)/rules.common
