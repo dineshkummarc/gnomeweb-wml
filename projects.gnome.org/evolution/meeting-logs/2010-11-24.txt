@@ -1,0 +1,147 @@
+Nov 24 16:35:37 <chen>	Lets get started..
+Nov 24 16:35:47 <chen>	To start with project updates,
+Nov 24 16:36:03 <chen>	We had two releases 2.91.2 and 2.32.1 over the month,
+Nov 24 16:36:15 <chen>	thanks to abharath for taking up the 2.32.1 release while I was on leave.
+Nov 24 16:36:43 <abharath>	no problems chen. As long as there were no issues :D
+Nov 24 16:36:44 <chen>	gtk3 issues are filed with evolution[gtk3] status whiteboard and the development,
+Nov 24 16:36:54 <chen>	is going on in the gtk3 branch
+Nov 24 16:37:16 <chen>	i had a discussion with matt and it became clear that we cant support both,
+Nov 24 16:37:26 <chen>	gtk3 and gtk2
+Nov 24 16:38:05 <chen>	so once a specific gtk version is announced for gnome3, we would be merging the gtk3 branch into master
+Nov 24 16:38:18 *	Corsac (~yap@pyr75-3-78-192-68-46.fbxo.proxad.net) has joined #evolution-meet
+Nov 24 16:38:20 <Corsac>	hey there
+Nov 24 16:38:20 <chen>	vibha and matt are working on the branch to make sure,
+Nov 24 16:38:24 <chen>	we are gtk3-ready
+Nov 24 16:38:26 <chen>	hey Corsac 
+Nov 24 16:38:50 <chen>	http://tinyurl.com/3xk33fn  - has the list of gtk3 bugs in evo
+Nov 24 16:39:04 <chen>	once we get through the compilation issues and crashers,
+Nov 24 16:40:02 <chen>	akhil would be testing and filing bugs over the same..
+Nov 24 16:40:14 <chen>	thats with the project updates, is there anything else that anyone wants to discuss before moving on to individual updates?
+Nov 24 16:40:59 <chen>	updates from my side,
+Nov 24 16:41:48 <chen>	upstreamed the maildir migration patches,
+Nov 24 16:41:48 <chen>	maildir now follows the maildir++ folder hierarchy structure supporting all the features that mbox hierarchy provided along with,
+Nov 24 16:42:01 <chen>	fixing some limitations which existed
+Nov 24 16:42:44 <chen>	am currently working on new async apis for free/busy and default offline calendar
+Nov 24 16:42:56 <chen>	abharath, updates?
+Nov 24 16:43:20 <chen>	ping chen
+Nov 24 16:43:25 <abharath>	chen: mostly on EWS. Been off for a week, on and off, but now back again.
+Nov 24 16:43:39 <abharath>	http://git.infradead.org/evolution-ews.git has all the updates
+Nov 24 16:43:47 <chen>	abharath, cool
+Nov 24 16:43:50 <abharath>	I am currently working on canceling requests
+Nov 24 16:43:58 <mcrha>	chen, default offline calendar?
+Nov 24 16:44:03 <abharath>	and also on defining interfaces
+Nov 24 16:44:22 <chen>	mcrha, yes, so am writing some interfaces to,
+Nov 24 16:44:38 <chen>	perform all the operations in offline and later resync online
+Nov 24 16:44:45 <chen>	mcrha, similar to how mailer functions
+Nov 24 16:45:04 <chen>	mcrha, except for free-busy
+Nov 24 16:45:13 <mcrha>	something between backend and local cache?
+Nov 24 16:45:17 <abharath>	chen: and mcrha informed me about some patches missing upstream. I or vibs will look into committed them sometime this week
+Nov 24 16:45:27 <chen>	mcrha, yes
+Nov 24 16:45:34 <mcrha>	not me, that was dave_largo ;)
+Nov 24 16:45:36 <chen>	mcrha, the difference is,
+Nov 24 16:45:38 <dave_largo>	Ha
+Nov 24 16:45:56 <dave_largo>	the mini-calendar navigation patch should be merged, it's working in the PTF
+Nov 24 16:45:58 <abharath>	mcrha: ah yes :)
+Nov 24 16:46:10 <dave_largo>	No more crashes in that area.
+Nov 24 16:46:12 <chen>	the user experience in performing online operations will be fast
+Nov 24 16:46:17 <chen>	as they do in local calendars
+Nov 24 16:46:22 *	mcrha only passed information forward
+Nov 24 16:46:40 <abharath>	and I hold mcrha responsible as my contact :D
+Nov 24 16:46:42 <chen>	vibs, would be nice if you can upstream the patches..
+Nov 24 16:46:42 <mcrha>	chen, ok, you probably do not want to discuss it here, so maybe later
+Nov 24 16:47:04 <dave_largo>	hopefully intrusive dialogs too can be merged
+Nov 24 16:47:05 *	EvaSDK (~eva@nsg93-9-78-225-4-220.fbx.proxad.net) has joined #evolution-meet
+Nov 24 16:47:10 <mcrha>	(discuss the offline calendar)
+Nov 24 16:47:15 <chen>	mcrha, i will prolly send out a mail to e-h with the interfaces..
+Nov 24 16:47:23 <vibs>	chen: sure .... will do it 
+Nov 24 16:47:29 <mcrha>	ok chen 
+Nov 24 16:47:32 <chen>	dave_largo, thats already there in upstream afaik
+Nov 24 16:47:48 <chen>	Corsac, anything to share?
+Nov 24 16:48:20 <chen>	dave_largo, anything to share ?
+Nov 24 16:48:26 <dave_largo>	yes...
+Nov 24 16:48:32 <chen>	go on :)
+Nov 24 16:48:46 <dave_largo>	I wanted to make sure that PDF DnD gets merged while it still can be.... :)
+Nov 24 16:48:56 <dave_largo>	Also, maybe someone can look at the Gallery patch sometime and merge that?
+Nov 24 16:49:09 <chen>	hmm yeah the first is my plate for too long time :(
+Nov 24 16:49:27 <dave_largo>	PDF Dnd is so popular now, I hate to lose it in an upgrade.
+Nov 24 16:49:34 <chen>	mcrha, do you want to take a look at the gallery patch ?
+Nov 24 16:49:41 <chen>	dave_largo, bug id for the gallery patch?
+Nov 24 16:49:48 <dave_largo>	I can get it.
+Nov 24 16:50:02 <dave_largo>	My last item was to ensure that all of our auto-complete issues are merged upstream
+Nov 24 16:50:07 <mcrha>	chen, not now, I'm on other stuff, or better I'm trying to be
+Nov 24 16:50:08 <dave_largo>	including the patch coming next week
+Nov 24 16:50:28 <chen>	mcrha, ok maybe later
+Nov 24 16:50:49 <chen>	dave_largo, sure, we would be upstreaming those patches..
+Nov 24 16:51:00 *	punitj (~nikunj@122.172.177.36) has joined #evolution-meet
+Nov 24 16:51:02 <chen>	dwmw2, anything to share?
+Nov 24 16:51:05 <chen>	hey punitj 
+Nov 24 16:51:13 <dave_largo>	https://bugzilla.gnome.org/show_bug.cgi?id=567879
+Nov 24 16:51:14 <dwmw2>	um
+Nov 24 16:51:17 <punitj>	chen: sorry for being late
+Nov 24 16:51:19 <dwmw2>	not really.
+Nov 24 16:51:20 <dave_largo>	Gallery patch is hanging on that issue
+Nov 24 16:51:30 <chen>	ok
+Nov 24 16:51:33 <chen>	dave_largo, ok
+Nov 24 16:51:38 <chen>	EvaSDK, anything to share?
+Nov 24 16:51:59 <chen>	mcrha, updates?
+Nov 24 16:52:09 *	Fridrich (~fridrich@166-249.198-178.cust.bluewin.ch) has joined #evolution-meet
+Nov 24 16:52:14 <chen>	hey Fridrich 
+Nov 24 16:52:23 <dave_largo>	hey fridrich!
+Nov 24 16:52:30 <Fridrich>	hey, was out picking son from football
+Nov 24 16:52:50 <Corsac>	chen: nothing, I've been using 2.32 since a bit and it works fine, though no upload to Debian for now (since we're at freeze time)
+Nov 24 16:52:51 <mcrha>	just tried to keep evo running, with some recent crashers and so on, moving downstream crasher bugs upstream
+Nov 24 16:53:00 <Corsac>	so I didn't have a chance to test 2.9 branch
+Nov 24 16:53:05 <chen>	Fridrich, was he playing or watching the match ? :)
+Nov 24 16:53:14 <Fridrich>	chen: he plays
+Nov 24 16:53:24 <Fridrich>	but his little people thing
+Nov 24 16:53:32 <Fridrich>	he even runs cross-country :)
+Nov 24 16:53:37 <chen>	ah ok :) i was just hearing about some league which was going on.., did not follow it much though :)
+Nov 24 16:53:59 <chen>	Corsac, fine
+Nov 24 16:54:12 <chen>	Fridrich, nice :)
+Nov 24 16:54:17 <chen>	punitj, updates ?
+Nov 24 16:54:46 <Fridrich>	chen: http://picasaweb.google.com/photostranso/Transo2010#5542042591280088194
+Nov 24 16:55:20 <chen>	vibs, updates?
+Nov 24 16:55:36 <vibs>	Yeah chen .... I had fixed up couple of issues on calendar-gui, deadlock issue on groupwise backend,  issue in name selector entry, accessing text/pdf attachments and then was mostly onto gtk3 branch 
+Nov 24 16:55:57 *	chen checks the link
+Nov 24 16:55:58 <dave_largo>	those all sounds like my patches :)
+Nov 24 16:56:05 <vibs>	and requested for git commit rights
+Nov 24 16:56:10 *	punitj has quit (Leaving.)
+Nov 24 16:56:11 <chen>	Fridrich, nice!
+Nov 24 16:56:25 *	punitj (~nikunj@122.172.177.36) has joined #evolution-meet
+Nov 24 16:56:27 <punitj>	hi all .. back from home .. started looking for migration of express features to evolution
+Nov 24 16:56:38 <chen>	vibs, nice!!, will get those gtk3 patches reviewed..
+Nov 24 16:56:57 <abharath>	Fridrich: I don't see you after half the race :D Your kid is there till the end of the race :)
+Nov 24 16:56:58 <vibs>	chen: :)
+Nov 24 16:56:59 <chen>	vibs, please upstream those patches :)
+Nov 24 16:57:15 <chen>	abharath, +1
+Nov 24 16:57:26 <abharath>	dave_largo: they all are ;)
+Nov 24 16:57:39 <chen>	anything else from anyone?
+Nov 24 16:57:48 <chen>	vibs, btw have u requested again ?
+Nov 24 16:57:49 <Fridrich>	abharath: I came back some minutes after him with my daughter. He was drinking tea and saying "daddy, it is ok, there are still some people behind you"
+Nov 24 16:58:07 <chen>	or is the request which was made a week back or so..
+Nov 24 16:58:10 <vibs>	chen: nope ... i have to provide my public key again
+Nov 24 16:58:33 <abharath>	Fridrich: :D nice one :)
+Nov 24 16:58:51 <chen>	*is it
+Nov 24 16:58:51 <chen>	vibs, ^
+Nov 24 16:58:52 <vibs>	so got the rights this weekend
+Nov 24 16:59:09 <chen>	vibs, ah ok
+Nov 24 16:59:16 <chen>	punitj, how about you ?
+Nov 24 17:00:01 <chen>	ok will catch up there offline
+Nov 24 17:00:14 <chen>	anything else from anyone ?
+Nov 24 17:00:24 *	punitj has quit (Read error: 131 (Connection reset by peer))
+Nov 24 17:00:57 *	dave_largo wants vibs Groupwise deadlock patch! :)
+Nov 24 17:00:57 *	punitj (~nikunj@122.172.177.36) has joined #evolution-meet
+Nov 24 17:01:02 <chen>	Lets then meet next month and hopefully we might have a evolution-ews demo :)
+Nov 24 17:01:15 <dwmw2>	heh
+Nov 24 17:01:16 <chen>	abharath, ^^ :)
+Nov 24 17:01:24 <dwmw2>	do we have real progress on that?
+Nov 24 17:01:42 *	dwmw2 looks
+Nov 24 17:01:51 <dwmw2>	OMG yet another NTLM implementation
+Nov 24 17:01:55 <chen>	dwmw2, yes, we do, you can see some apis getting ready
+Nov 24 17:01:58 <abharath>	chen: hehe sure :D
+Nov 24 17:02:07 <dwmw2>	abharath: *please* make sure it talks to samba/winbind for authentication
+Nov 24 17:02:12 *	dave_largo is now known as dave_lunch_brb
+Nov 24 17:02:18 <dwmw2>	see http://code.google.com/p/chromium/issues/detail?id=53186
+Nov 24 17:02:20 <chen>	once the cancelling and one async api gets complete, its going to be just following the path
+Nov 24 17:03:14 <abharath>	dwmw2: sure will check it out
+Nov 24 17:03:51 <dwmw2>	ta
