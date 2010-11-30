@@ -1,4 +1,5 @@
-SUBDIRS=images 
+SUBDIRS= images \
+	 descargas
 
 urlpath = /diagnome/
 
