@@ -9,6 +9,7 @@ include $(top_srcdir)/rules.common
 misc_download=\
 	bugsquad.pdf \
 	gnome.pdf \
-	gnomeHig.pdf
+	gnomeHig.pdf \
+	pygtk.pdf
 
 page_DATA=$(misc_download)
