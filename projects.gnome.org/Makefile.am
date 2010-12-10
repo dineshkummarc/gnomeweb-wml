@@ -75,7 +75,8 @@ SUBDIRS = css \
 	postr \
 	gnome-blog      \
         nautilus-python \
-        nautilus-sound-converter
+        nautilus-sound-converter	\
+	yelp
 
 urlpath = 
 
