@@ -25,6 +25,7 @@ themeimg_DATA = \
 imagesdir = $(pagedir)/data/images
 images_DATA =\
 	data/images/yelp-favicon.png \
+	data/images/yelp-big.png \
 	$(NULL)
 
 shadowboximagesdir = $(pagedir)/data/shadowbox/images
