@@ -11,15 +11,15 @@ page_SCRIPTS= \
 
 themedir=$(pagedir)/data/themes/yelp
 theme_DATA = \
-	data/themes/cheese/document.all.css \
-	data/themes/cheese/document.screen.css \
+	data/themes/yelp/document.all.css \
+	data/themes/yelp/document.screen.css \
 	$(NULL)
 
 themeimgdir = $(themedir)/images
 themeimg_DATA = \
-	data/themes/cheese/images/title.png \
-	data/themes/cheese/images/gnome.png \
-	data/themes/cheese/images/top-bg.png \
+	data/themes/yelp/images/title.png \
+	data/themes/yelp/images/gnome.png \
+	data/themes/yelp/images/top-bg.png \
 	$(NULL)
 
 imagesdir = $(pagedir)/data/images
