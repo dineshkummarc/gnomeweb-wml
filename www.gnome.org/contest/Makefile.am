@@ -7,12 +7,12 @@ page_SCRIPTS = \
 	index.html \
 	rules.html \
 	error.html.php \
-	formsubmit.php \
 	thank-you.html.php 
 	
 
 include $(top_srcdir)/rules.common
 
-page_DATA =
+page_DATA = \
+	formsubmit.php
 
 EXTRA_DIST=$(page_DATA)
