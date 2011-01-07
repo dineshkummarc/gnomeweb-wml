@@ -23,31 +23,16 @@ def split_thousands(s):
         if len(s) <= 3: return s
         return split_thousands(s[:-3]) + ',' + s[-3:]
 
-TARGET_AMOUNT = 57000.00;
+TARGET_AMOUNT = 400;
 
 # Colors should have a matching CSS style
 
 DONORS = [
-{ 'name': 'Canonical',
-  'color': 'orange',
-  'donation': 10000.00 },
-
-{ 'name': 'Google',
-  'color': 'blue',
-  'donation': 5000.00 },
-
-{ 'name': 'Nokia',
-  'color': 'yellow',
-  'donation': 5000.00 },
-
-{ 'name': 'Collabora',
-  'color': 'purple',
-  'donation': 5000.00 },
-
 { 'name': 'Friends of GNOME',
-  'color': 'green',
-  'donation': 32000.00,
-  'show-still-needed': 1 }]
+  'color': 'orange',
+  'donation': 13.0,
+  'show-still-needed': 1 }
+]
 
 TOTAL_DONATIONS = 0
 
@@ -134,9 +119,9 @@ CSS = ' \
         color: #fff;\
     }\
     #gnome-fog-ruler .fog-intro {\
-        width: 300px;\
+        width: 570px;\
         float: left;\
-        margin-right: 12px;\
+        margin-right: 25px;\
     }\
     #gnome-fog-ruler .fog-intro h4 {\
         margin-bottom: 6px;\
@@ -213,7 +198,7 @@ CSS = ' \
     }\
     #gnome-fog-ruler .fog-donate {\
         float: right;\
-        margin-top: 11px;\
+        margin-top: 8px;\
     }\
     #gnome-fog-ruler .fog-donate a {\
         display: block;\
@@ -239,8 +224,8 @@ HTML = '\
     <div class="fog-center">\
         <div class="fog-intro">\
             <h4>Become a Friend of GNOME!</h4>\
-            <p>Help the GNOME Foundation by donating today and becoming a Friend of GNOME.  GNOME is looking to grow to
-            400 subcribers - join today for only $10 per motnh and get a free LWN subscription, t-shirt and more!.</p>\
+            <p>Help the GNOME Foundation by donating today. GNOME is looking to grow to\
+            400 subcribers. Join for only $10 per month and get a free LWN subscription, t-shirt and more!</p>\
         </div>\
         <div class="fog-data">\
             <div class="fog-ruler">'
@@ -266,7 +251,7 @@ for donor in DONORS:
     if 'show-still-needed' in donor:
         still_needed_str = "%.0f" % STILL_NEED
         still_needed = split_thousands(still_needed_str)
-        HTML += '<div class="fog-item"><span class="fog-box %s">&nbsp;</span><strong>%s</strong><span class="fog-details">$%s. $%s to go!</span></div>' % (color, donor_name, donation, still_needed)
+        HTML += '<div class="fog-item"><span class="fog-box %s">&nbsp;</span><strong>%s</strong><span class="fog-details">%s subscribers. %s to go!</span></div>' % (color, donor_name, donation, still_needed)
     else:
         HTML += '<div class="fog-item"><span class="fog-box %s">&nbsp;</span><strong>%s</strong><span class="fog-details">$%s</span></div>' % (color, donor_name, donation)
 
