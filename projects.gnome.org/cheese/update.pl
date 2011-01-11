@@ -83,7 +83,7 @@ for (@maindir) {
         $mdtm = $gnomeftp->mdtm($current_file)
             or die "Cannot retrieve mtime ", $ftp->message;
         $packages{$filename}{"epoch"} = $mdtm;
-        $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm);
+        $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm, "GMT");
         if ($filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.gz/) {
             $packages{$filename}{"release"} = "$1" . ($2 or "");
         }
