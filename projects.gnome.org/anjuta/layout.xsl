@@ -130,7 +130,7 @@
           <p class="section">Documentations</p>
           <ul>
             <li><a href="http://library.gnome.org/devel/anjuta-manual/stable">Anjuta Manual</a> is a book on how to use Anjuta.<br/><br/></li>
-            <li><a href="http://library.gnome.org/devel/anjuta-faqs/stable">Anjuta FAQ</a> answers some common questions.<br/><br/></li>
+            <li><a href="http://library.gnome.org/devel/anjuta-faqs/unstable">Anjuta FAQ</a> answers some common questions.<br/><br/></li>
             <li><a href="http://library.gnome.org/users/anjuta-build-tutorial/2.26">Project Build Tutorial</a> describes how project management in Anjuta works.<br/><br/></li> 
             <li><a href="http://library.gnome.org/devel/libanjuta/stable">Anjuta API docs</a> is developers documentation for core Anjuta and interfaces.<br/><br/></li>
             <li><a href="http://library.gnome.org/devel/libanjuta/stable/anjuta-architecture.html">Anjuta Architecture</a> gives an overview of Anjuta architecture.<br/><br/></li>
