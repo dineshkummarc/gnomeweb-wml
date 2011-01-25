@@ -57,6 +57,8 @@ page_SCRIPTS= \
 	data-entry.shtml		\
 	Data-Menu.shtml		\
 	data-selections-advanced.shtml		\
+	dependent_observations.shtml		\
+	descriptive_statistics.shtml		\
 	descriptive-statistics-tool.shtml		\
 	Edit-Menu.shtml		\
 	exp-smoothing-tool.shtml		\
@@ -116,6 +118,7 @@ page_SCRIPTS= \
 	gnumeric-AND.shtml		\
 	gnumeric-ARABIC.shtml	\
 	gnumeric-AREAS.shtml		\
+	gnumeric-ARRAY.shtml		\
 	gnumeric-ASCENSIONTHURSDAY.shtml	\
 	gnumeric-ASC.shtml		\
 	gnumeric-ASHWEDNESDAY.shtml	\
@@ -197,6 +200,9 @@ page_SCRIPTS= \
 	gnumeric-DATE2UNIX.shtml		\
 	gnumeric-DATEDIF.shtml		\
 	gnumeric-DATE.shtml		\
+	gnumeric-DATE2HDATE.shtml	\
+	gnumeric-DATE2HDATE_HEB.shtml	\
+	gnumeric-DATE2JULIAN.shtml	\
 	gnumeric-DATEVALUE.shtml		\
 	gnumeric-DAVERAGE.shtml		\
 	gnumeric-DAYS360.shtml		\
@@ -619,6 +625,7 @@ page_SCRIPTS= \
 	gnumeric-SLN.shtml		\
 	gnumeric-SLOPE.shtml		\
 	gnumeric-SMALL.shtml		\
+	gnumeric-SORT.shtml		\
 	gnumeric-SQRTPI.shtml		\
 	gnumeric-SQRT.shtml		\
 	gnumeric-SSMEDIAN.shtml		\
@@ -705,11 +712,14 @@ page_SCRIPTS= \
 	menu-context-object.shtml		\
 	menu-context-tabs.shtml		\
 	moving-average-tool.shtml		\
+	multiple_sample_tests.shtml		\
 	normality-tool.shtml	\
 	note-file-textExport-druid.shtml		\
 	note-file-textImport-druid.shtml		\
 	number-formatting-overview.shtml		\
 	obj-toolbar.shtml		\
+	one-median-tool.shtml			\
+	one_sample_tests.shtml			\
 	principal-component-tool.shtml	\
 	print-advanced.shtml		\
 	print-finishing.shtml		\
@@ -998,6 +1008,7 @@ page_SCRIPTS= \
 	t-test-tool.shtml	\
 	t-test-two-sample-equal-variances-tool.shtml	\
 	t-test-two-samples-unequal-variances.shtml	\
+	two_sample_tests.shtml			\
 	View-Menu.shtml	\
 	ztest-two-samples-for-means-tool.shtml
 
