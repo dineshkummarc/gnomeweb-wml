@@ -9,6 +9,21 @@ page_SCRIPTS= 				\
 	align-center.png		\
 	align-left.png		\
 	align-right.png		\
+	analysis-simulation-confidence-interval-equation.png	\
+	analysis-simulation-demand-ex1.png	\
+	analysis-simulation-demand-ex2.png	\
+	analysis-simulation-interations-equation1.png	\
+	analysis-simulation-interations-equation2.png	\
+	analysis-simulation-maximumtime-dialog.png	\
+	analysis-simulation-options-dialog.png	\
+	analysis-simulation-output-dialog.png	\
+	analysis-simulation-profit-ex1.png	\
+	analysis-simulation-profit-ex2.png	\
+	analysis-simulation-report-screen.png	\
+	analysis-simulation-simtable-screen.png	\
+	analysis-simulation-summary-dialog.png	\
+	analysis-simulation-variables-dialog.png	\
+	analysis-tools.png		\
 	analysistools-ANOVA1-ex1.png		\
 	analysistools-ANOVA1-ex2.png		\
 	analysistools-ANOVA2w-ex1.png		\
@@ -26,21 +41,49 @@ page_SCRIPTS= 				\
 	analysistools-descstats-ex1.png		\
 	analysistools-descstats-ex2.png		\
 	analysistools-descstats.png		\
+	analysistools-exp-smoothing-a-holt-winters-formula.png	\
+	analysistools-exp-smoothing-a-holt-winters-stderr.png	\
+	analysistools-exp-smoothing-holt-formula.png	\
+	analysistools-exp-smoothing-holt-stderr.png	\
+	analysistools-exp-smoothing-hunter-formula.png	\
+	analysistools-exp-smoothing-hunter-stderr.png	\
+	analysistools-exp-smoothing-m-holt-winters-formula.png	\
+	analysistools-exp-smoothing-m-holt-winters-stderr.png	\
+	analysistools-exp-smoothing-roberts-formula.png	\
+	analysistools-exp-smoothing-roberts-stderr.png	\
 	analysistools-fourier-formula.png		\
 	analysistools-fourier.png		\
+	analysistools-frequency-cats.png	\
+	analysistools-frequency-graphs.png	\
+	analysistools-frequency-results.png	\
+	analysistools-frequency.png	\
 	analysistools-ftest-ex1.png		\
 	analysistools-ftest-ex2.png		\
 	analysistools-ftest.png		\
 	analysistools-histogram-bins.png		\
+	analysistools-histogram-cutoffs.png	\
 	analysistools-histogram-ex1.png		\
 	analysistools-histogram-ex2.png		\
 	analysistools-histogram-ex3.png		\
+	analysistools-histogram-ex4.png	\
+	analysistools-histogram-ex5.png	\
+	analysistools-histogram-graphs.png	\
 	analysistools-histogram.png		\
+	analysistools-kaplan-ex1.png	\
+	analysistools-kaplan-ex2.png	\
+	analysistools-kaplan-ex3.png	\
+	analysistools-kaplan-groups.png	\
+	analysistools-kaplan-options.png	\
+	analysistools-kaplan.png	\
 	analysistools-moving-average-ex1.png		\
 	analysistools-moving-average-ex2.png		\
+	analysistools-moving-average-ex3.png	\
+	analysistools-moving-average-formula-central.png	\
+	analysistools-moving-average-formula-spencer.png	\
+	analysistools-moving-average-formula-weighted.png	\
+	analysistools-moving-average-options.png	\
 	analysistools-moving-average.png		\
 	analysistools-outputoptions.png		\
-	analysis-tools.png		\
 	analysistools-random-ex1.png		\
 	analysistools-random-ex2.png		\
 	analysistools-random.png		\
@@ -57,6 +100,12 @@ page_SCRIPTS= 				\
 	analysistools-sampling.png		\
 	analysistools-smoothing-ex1.png		\
 	analysistools-smoothing-ex2.png		\
+	analysistools-smoothing-ex3.png	\
+	analysistools-smoothing-ex4.png	\
+	analysistools-smoothing-ex5.png	\
+	analysistools-smoothing-ex6.png	\
+	analysistools-smoothing-ex7.png	\
+	analysistools-smoothing-ex8.png	\
 	analysistools-smoothing.png		\
 	analysistools-tools.png		\
 	analysistools-ttest-equal-ex1.png		\
@@ -65,19 +114,21 @@ page_SCRIPTS= 				\
 	analysistools-ttest-paired-ex1.png		\
 	analysistools-ttest-paired-ex2.png		\
 	analysistools-ttest-paired.png		\
-	analysistools-ttest.png		\
 	analysistools-ttest-unequal-ex1.png		\
 	analysistools-ttest-unequal-ex2.png		\
 	analysistools-ttest-unequal.png		\
+	analysistools-ttest.png		\
 	analysistools-ztest-ex1.png		\
 	analysistools-ztest-ex2.png		\
 	analysistools-ztest.png		\
-	arrowhead-dimensions.png		\
 	arrow.png		\
+	arrowhead-dimensions.png		\
 	auto-correct.png		\
+	auto-save.png		\
+	auto-sum.png		\
 	autocorrect.png		\
-	autofill-10.png		\
 	autofill-1.png		\
+	autofill-10.png		\
 	autofill-2.png		\
 	autofill-3.png		\
 	autofill-4.png		\
@@ -86,9 +137,7 @@ page_SCRIPTS= 				\
 	autofill-7.png		\
 	autofill-8.png		\
 	autofill-9.png		\
-	auto-save.png		\
 	autosave.png		\
-	auto-sum.png		\
 	bold.png		\
 	border.png		\
 	button-align-center.png		\
@@ -111,11 +160,8 @@ page_SCRIPTS= 				\
 	button-frame.png		\
 	button-function.png		\
 	button-fx.png		\
-	button-graphEditor-add.png		\
 	button-graph.png		\
-	buttonGroup-bonobo.png		\
-	buttonGroup-filesystem.png		\
-	buttonGroup-printing.png		\
+	button-graphEditor-add.png		\
 	button-increase-indent.png		\
 	button-increase-precision.png		\
 	button-insert-component.png		\
@@ -149,11 +195,14 @@ page_SCRIPTS= 				\
 	button-underline.png		\
 	button-undo-and-history.png		\
 	button-zoom.png		\
+	buttonGroup-bonobo.png		\
+	buttonGroup-filesystem.png		\
+	buttonGroup-printing.png		\
 	cell-grid.png		\
-	cells-1.png		\
-	cells-2.png		\
 	cell-selected.png		\
 	cell-with-text.png		\
+	cells-1.png		\
+	cells-2.png		\
 	chart_area_1_1.png		\
 	chart_area_1_2.png		\
 	chart_area_1_3.png		\
@@ -180,6 +229,8 @@ page_SCRIPTS= 				\
 	chart_scatter_1_1.png		\
 	chart_scatter_3_1.png		\
 	chart_scatter_3_2.png		\
+	chart_surface_1.png	\
+	chart_surface_2.png	\
 	define-name.png		\
 	dialog-auto-correct.png		\
 	dialog-autosave.png		\
@@ -223,14 +274,14 @@ page_SCRIPTS= 				\
 	files-csv-import-ex5.png		\
 	files-dvi-example.png		\
 	files-formats-list.png		\
+	files-html-example.png		\
 	files-html32-example.png		\
 	files-html40-example.png		\
-	files-html-example.png		\
 	files-latex-example.png		\
 	files-xml-example.png		\
 	filter.png		\
-	function.png		\
 	function-wizard.png		\
+	function.png		\
 	gnumeric-empty.510.png		\
 	gnumeric-empty.png		\
 	gnumeric-icon-24.png		\
@@ -247,7 +298,10 @@ page_SCRIPTS= 				\
 	graph-example-pie.png		\
 	graph-example-radar.png		\
 	graph-example-ring.png		\
+	graph-example-surface-t1.png	\
+	graph-example-surface-t2.png	\
 	graph-example-xyplot.png		\
+	graph-hierarchy.png		\
 	graphguru-axes-category-bounds.png		\
 	graphguru-axes-category-details.png		\
 	graphguru-axes-category-style.png		\
@@ -270,10 +324,9 @@ page_SCRIPTS= 				\
 	graphguru-series-style-filled.png		\
 	graphguru-series-style-line.png		\
 	graphguru-title-font.png		\
-	graph-hierarchy.png		\
-	graphical-elements.png		\
 	graphical-elements-selected.png		\
 	graphical-elements-stacked.png		\
+	graphical-elements.png		\
 	graphing.png		\
 	graphs-types-area.png		\
 	graphs-types-bar.png		\
@@ -298,7 +351,6 @@ page_SCRIPTS= 				\
 	label-transparent.png		\
 	label-two.png		\
 	line.png		\
-	menubar.png		\
 	menu-context-col-row-header.png		\
 	menu-context-graph-order.png		\
 	menu-context-graph.png		\
@@ -308,9 +360,15 @@ page_SCRIPTS= 				\
 	menu-context-tabs.png		\
 	menu-context-toolbars.png		\
 	menu-data-labelled.png		\
+	menu-edit-delete-cells.png	\
 	menu-edit-labelled.png		\
+	menu-edit-paste-special.png	\
+	menu-edit-select.png	\
 	menu-file-labelled.png		\
+	menu-file-printarea.png	\
+	menu-format-column.png	\
 	menu-format-labelled.png		\
+	menu-format-sheet.png	\
 	menu-format-torn-off.png		\
 	menu-help-labelled.png		\
 	menu-help-torn-off.png		\
@@ -318,6 +376,8 @@ page_SCRIPTS= 				\
 	menu-tools-labelled.png		\
 	menu-torn-off.png		\
 	menu-view-labelled.png		\
+	menu-view-properties-dialog.png	\
+	menubar.png		\
 	modify-comment.png		\
 	money.png		\
 	number-format-border-dialog.png		\
@@ -328,15 +388,15 @@ page_SCRIPTS= 				\
 	number-format-justification-dialog-2.png		\
 	number-format-justification.png		\
 	number-format-protection.png		\
-	number-format-validation.png		\
 	number-format-validation-warning.png		\
+	number-format-validation.png		\
 	oval.png		\
 	percentage.png		\
 	plug-ins.png		\
 	plugins.png		\
 	pointer_arrow_left_std.png		\
-	pointer_cross_hair.png		\
 	pointer_cross.png		\
+	pointer_cross_hair.png		\
 	pointer_cross_wide.png		\
 	pointer_diagonal_resize.png		\
 	pointer_double_horizontal_arrow.png		\
@@ -361,6 +421,32 @@ page_SCRIPTS= 				\
 	preferences-tools.png		\
 	preferences-undo.png		\
 	preferences-windows.png		\
+	print-large.png		\
+	print-preview-back.png		\
+	print-preview-first.png		\
+	print-preview-fit.png		\
+	print-preview-fitonetoone.png		\
+	print-preview-fittall.png		\
+	print-preview-fitwide.png		\
+	print-preview-last.png		\
+	print-preview-next.png		\
+	print-preview-toolbar.png		\
+	print-preview-zoomin.png		\
+	print-preview-zoomout.png		\
+	print-preview.png		\
+	print-worksheet-file-general.png		\
+	print-worksheet-job.png		\
+	print-worksheet-page_setup.png		\
+	print-worksheet-paper.png		\
+	print-worksheet-print_range.png		\
+	print-worksheet-printer-advanced.png		\
+	print-worksheet-printer-finishing.png		\
+	print-worksheet-printer-general.png		\
+	print-worksheet-printer-image_quality.png		\
+	print-worksheet-printer-job.png		\
+	print-worksheet-printer.png		\
+	print-worksheet.png		\
+	print.png		\
 	printing-preview.png		\
 	printing-setup-header-config.png		\
 	printing-setup-header.png		\
@@ -370,38 +456,12 @@ page_SCRIPTS= 				\
 	printing-setup-page.png		\
 	printing-setup-scale.png		\
 	printing-setup-sheet.png		\
-	print-large.png		\
-	print.png		\
-	print-preview-back.png		\
-	print-preview-first.png		\
-	print-preview-fitonetoone.png		\
-	print-preview-fit.png		\
-	print-preview-fittall.png		\
-	print-preview-fitwide.png		\
-	print-preview-last.png		\
-	print-preview-next.png		\
-	print-preview.png		\
-	print-preview-toolbar.png		\
-	print-preview-zoomin.png		\
-	print-preview-zoomout.png		\
-	print-worksheet-file-general.png		\
-	print-worksheet-job.png		\
-	print-worksheet-page_setup.png		\
-	print-worksheet-paper.png		\
-	print-worksheet.png		\
-	print-worksheet-printer-advanced.png		\
-	print-worksheet-printer-finishing.png		\
-	print-worksheet-printer-general.png		\
-	print-worksheet-printer-image_quality.png		\
-	print-worksheet-printer-job.png		\
-	print-worksheet-printer.png		\
-	print-worksheet-print_range.png		\
 	rect.png		\
 	redo.png		\
 	remove-decimals.png		\
 	sample_gnumeric.png		\
-	selection-10.png		\
 	selection-1.png		\
+	selection-10.png		\
 	selection-2.png		\
 	selection-3.png		\
 	selection-4.png		\
@@ -437,11 +497,11 @@ page_SCRIPTS= 				\
 	toolbar-format.510.png		\
 	toolbar-format.png		\
 	toolbar-object.png		\
+	toolbar-standard.510.png		\
+	toolbar-standard.png		\
 	toolbar.png		\
 	toolbars.510.png		\
 	toolbars.png		\
-	toolbar-standard.510.png		\
-	toolbar-standard.png		\
 	underline.png		\
 	undo.png		\
 	widget-checkbox.png		\
