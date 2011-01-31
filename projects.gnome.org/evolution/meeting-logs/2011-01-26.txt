@@ -1,0 +1,163 @@
+Jan 26 10:29:40 <chen>	Lets get started..
+Jan 26 10:30:14 <chen>	small reminder on API/ABI, Feature freeze  and 2.91.6 release coming up on Jan 31
+Jan 26 10:30:54 <chen>	mbarnes, it would be nice if you can take over on discussing gtk3 front..
+Jan 26 10:31:44 <mbarnes>	sure.  basically with mcrha and lakhil's consent, I'd like to merge the gtk3 branches today
+Jan 26 10:32:20 <mbarnes>	so they get wider testing before we get too close to code freeze
+Jan 26 10:32:38 <mbarnes>	this of course means we'll be dropping support for gtk2
+Jan 26 10:33:24 *	chen waits for mcrha and lakhil to pitch in :)
+Jan 26 10:33:37 *	mcrha is fine with the merge
+Jan 26 10:33:50 <lakhil>	There was some problem in gtk3 build in my system so i was getting unexpected crashes. But after building sources from scratch, it seems to be working fine
+Jan 26 10:33:58 *	jpunit (~punit@122.179.93.239) has joined #evolution-meet
+Jan 26 10:34:08 <chen>	hey jpunit 
+Jan 26 10:34:09 <lakhil>	but i haven't got enough time to execute all sanity test cases. At present i don't see any blocker bug which will be blocking us to merge the branch in master
+Jan 26 10:34:31 <jpunit>	hey chen.. was having dinner 
+Jan 26 10:34:44 <chen>	mbarnes, both have give a green :)
+Jan 26 10:34:59 <mbarnes>	okay, I'll go ahead with it then after the meeting
+Jan 26 10:35:03 <chen>	jpunit, u had just made it in time :)
+Jan 26 10:35:11 <chen>	mbarnes, fine
+Jan 26 10:35:13 <mbarnes>	the commits that get merged will look a bit different than what's on the branch now
+Jan 26 10:35:20 <mcrha>	mbarnes, will be the gtk3 branches dropped immediately after the merge?
+Jan 26 10:35:32 <mbarnes>	I've cleaned them up and reorganized them so it's easier to see what changed
+Jan 26 10:35:40 <jpunit>	chen .. good thanks vibs for reminding ..
+Jan 26 10:35:45 <mbarnes>	especially wrt to cairo drawing
+Jan 26 10:35:58 <chen>	ok
+Jan 26 10:36:18 <mbarnes>	mcrha: I was gonna wait a day just to be safe
+Jan 26 10:36:23 <mcrha>	mbarnes, it reminded me, I reverted my 'save_matrix' patch today, or at least part I found and which left. Please remove it, when you have patches ready
+Jan 26 10:36:33 <vibs>	jpunit: anytime ;)
+Jan 26 10:36:36 <mcrha>	ok, a day sounds good
+Jan 26 10:36:52 <mcrha>	or safely on monday release
+Jan 26 10:37:22 <chen>	to update on the ews front in which mostly myself and abharath had been focusing on,
+Jan 26 10:37:33 <chen>	mail fetching is complete
+Jan 26 10:37:57 <chen>	the summaries are getting updated on all folders and mail fetching is possible. 
+Jan 26 10:38:16 <chen>	The readonly support for calendar will be ready by end of this week
+Jan 26 10:38:37 <chen>	and then we would be moving on with write support along with working in upstream bugs..
+Jan 26 10:38:46 <chen>	http://git.infradead.org/evolution-ews.git  - has the updates..
+Jan 26 10:39:00 <chen>	there might a person named,
+Jan 26 10:39:20 <chen>	Pavel Ocheretny who would be working on ews front soon
+Jan 26 10:39:33 <lakhil>	chen, so are we targeting ews for Evolution 3.2 ?
+Jan 26 10:39:54 <chen>	he is from intel and i heard that dwmw2_gone is guiding him through evolution builds..
+Jan 26 10:40:01 <chen>	lakhil, yes
+Jan 26 10:40:16 <chen>	lakhil, for 3.0, it would be readonly support
+Jan 26 10:40:41 <lakhil>	chen, i meant will we be merging code in master ?
+Jan 26 10:40:59 <chen>	lakhil, yes
+Jan 26 10:41:03 <lakhil>	ok
+Jan 26 10:41:10 <chen>	lakhil, its anyway a plugin
+Jan 26 10:41:53 <abharath>	chen: I think he meant more from mcrha's concern about how we would merge it, as a separate package etc, because to have a new module you need 2 official releases done
+Jan 26 10:41:57 <chen>	its hackweek in Novell and jpunit/vibs are working out some ideas. I was asked to continue with ews and so continuing the same :)
+Jan 26 10:42:17 <chen>	abharath, vibs is working on it with evolution-groupwise package
+Jan 26 10:42:26 <chen>	and we would be merging the ews there..
+Jan 26 10:42:49 <chen>	that includes updates from my side as well..
+Jan 26 10:42:52 <mcrha>	into groupwise?
+Jan 26 10:42:56 <jpunit>	chen: evolution-groupware :)
+Jan 26 10:43:08 <chen>	mcrha, yes, groupwise will be removed from evolution/eds
+Jan 26 10:43:24 <chen>	i hope vibs has already removed it ?
+Jan 26 10:43:37 *	mcrha thought there were more people against one package, the groupware one
+Jan 26 10:43:38 <chen>	mcrha, its more of re-organization of the code..
+Jan 26 10:43:49 <vibs>	chen: I haven't removed it yet .... but created evolution-groupware
+Jan 26 10:44:14 <chen>	mcrha, it was otherwise :)
+Jan 26 10:44:24 <abharath>	ok sorry :) but we are going ahead with evolution-groupware, and all providers as part of it?
+Jan 26 10:44:34 <chen>	abharath, yup
+Jan 26 10:44:35 <abharath>	I missed a few discussions sorry
+Jan 26 10:44:37 <abharath>	chen: ok
+Jan 26 10:44:40 <mcrha>	I do not think you can add new package/product into gnome in this stage, can you?
+Jan 26 10:45:07 <chen>	mcrha, i think we can, let me check again though
+Jan 26 10:45:44 <chen>	mcrha, and its not a new package anyway as its just a code re-org
+Jan 26 10:45:55 *	mcrha makes a note to check meeting archives to ensure the polling ended with a green for the one product for all.
+Jan 26 10:46:18 <mcrha>	well, it depends. what will be the bugzilla product?
+Jan 26 10:46:36 <chen>	the package name - evolution-groupware
+Jan 26 10:46:57 <chen>	and the providers specific bugs can be tagged
+Jan 26 10:47:17 <mcrha>	and you want to move under it all ema and eex bugs, together with gw bugs? it'll be a very nice mess, isn't it?
+Jan 26 10:47:51 <mbarnes>	the bugzilla components should be the provider names
+Jan 26 10:48:04 <mbarnes>	and I guess you can kiss mail/calendar/etc divisions goodbye
+Jan 26 10:48:41 <chen>	mcrha, anyways its kind of having imap/caldav bugs in a single component
+Jan 26 10:48:44 <chen>	such as eds
+Jan 26 10:48:45 <mcrha>	yeah, kind of pity, though should work too
+Jan 26 10:49:14 <chen>	mcrha, so we already have it that way, we can have specific components,
+Jan 26 10:49:24 <chen>	groupwise, ews etc. prolly
+Jan 26 10:49:33 <chen>	under once product name
+Jan 26 10:49:38 <mcrha>	chen, yup, but those are minor, one part centric, not involving all the parts of evo
+Jan 26 10:49:58 <mcrha>	nonetheless, let's get use to it :)
+Jan 26 10:50:10 <chen>	:)
+Jan 26 10:50:31 <chen>	anything else before we move on to individual updates?
+Jan 26 10:50:34 *	mbarnes floats the suggestion of a 2.32.2 release on Feb 7 (the Monday after 2.91.6 release)
+Jan 26 10:51:10 <chen>	mbarnes, am fine with it 
+Jan 26 10:51:20 <chen>	abharath, updates?
+Jan 26 10:51:23 <lakhil>	that will be last supported version with gtk2 :)
+Jan 26 10:51:47 <chen>	yeah :)
+Jan 26 10:51:55 <chen>	dwmw2_gone, anything to share?
+Jan 26 10:52:02 <chen>	hggdh, anything to share?
+Jan 26 10:52:03 <mcrha>	mbarnes, yup, sounds good
+Jan 26 10:52:06 <abharath>	chen: first half on EWS, now mostly on internal work. Will be back to EWS and gtk3 bugs next
+Jan 26 10:52:22 <chen>	abharath, thanks
+Jan 26 10:52:25 <chen>	jpunit, updates?
+Jan 26 10:53:03 <chen>	kov, anything to share?
+Jan 26 10:53:07 <chen>	lakhil, updates?
+Jan 26 10:53:24 <hggdh>	chen: on my side, no, except there is not yet a position if we will go Gnome3 or not
+Jan 26 10:53:36 <jpunit>	Hi all .. i worked on express like one step account setup merge into evolution
+Jan 26 10:53:37 <hggdh>	(chances are not)
+Jan 26 10:53:42 <lakhil>	chen, master and gtk3 testing and bug triaging, usual work
+Jan 26 10:53:54 <chen>	hggdh, lets see :)
+Jan 26 10:54:03 <hggdh>	:-)
+Jan 26 10:54:05 <chen>	lakhil, thanks
+Jan 26 10:54:33 <chen>	jpunit, thanks, hope you are on hackweek with some idea :)
+Jan 26 10:54:35 <jpunit>	and also working on twitter support in evolution during this heckweek
+Jan 26 10:54:42 <chen>	mbarnes, updates?
+Jan 26 10:54:45 <mbarnes>	I've been logging my status to evo-hackers, not much more to add
+Jan 26 10:54:45 <mbarnes>	recap: keyfile-based ESources coming along, address books done, starting on calendars
+Jan 26 10:54:50 <chen>	jpunit, nice :)
+Jan 26 10:55:03 <chen>	mbarnes, thanks!!
+Jan 26 10:55:05 <chen>	mcrha, updates?
+Jan 26 10:55:41 <chen>	Muelli, anything to share?
+Jan 26 10:55:46 <chen>	vibs, updates?
+Jan 26 10:55:47 <mcrha>	playing with bugs on gtk3 branches, somehow, then couple other bugs from all around the ... world...
+Jan 26 10:56:34 <chen>	mcrha, thanks, will join you guys from next week once i get the read-only thing in ews working
+Jan 26 10:56:37 <chen>	vibs, updateS?
+Jan 26 10:56:50 <chen>	xtian, updates?
+Jan 26 10:56:56 <xtian>	regarding evolution-kolab, the evo<->kolab data conversion is almost complete. the modified imapx provider (kolab2) is working (excludes kolab pim folder from the view using annotatemore-imap-extension)
+Jan 26 10:56:59 <vibs>	chen: yuppp ... was onto gtk3 branch and then moved into evolution-groupware 
+Jan 26 10:57:30 <vibs>	and mostly was on leave
+Jan 26 10:57:40 <chen>	xtian, nice to hear that :)
+Jan 26 10:57:45 <xtian>	we're now raising evolution-kolab backend infrastructure. funstuff, running kolab2 imap provider in the backends... :-)
+Jan 26 10:57:48 <chen>	vibs, thanks
+Jan 26 10:58:03 <chen>	xtian, :)
+Jan 26 10:58:27 <chen>	xtian, if you give a test account and i would give it a try too :)
+Jan 26 10:58:34 <xtian>	mimicking evo frontend in the backend, that's fun. :-) we should be able to run the calendar backend by the end of the month
+Jan 26 10:58:56 <chen>	calendar backend would be interesting :)
+Jan 26 10:59:22 <chen>	anything else from anyone?
+Jan 26 10:59:26 <xtian>	chen: right now, there's  no package, you'll have to build and move the parts into right places manually. the autotools env is still somewhat messy
+Jan 26 10:59:46 <chen>	xtian, oh ok
+Jan 26 11:00:03 <xtian>	(i.e. it still installs stuff which does not need to be installed, cleanup & love needed :)
+Jan 26 11:00:18 <mcrha>	xtian, end of this month? ;)
+Jan 26 11:00:34 <chen>	:)
+Jan 26 11:00:36 <xtian>	we should have packages available by mid of march (roughly)
+Jan 26 11:00:47 <chen>	mcrha, that was nice question :)
+Jan 26 11:00:51 *	lakhil has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	Muelli has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	vibs has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	xtian has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	kov has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	chen has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	mcrha has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:00:51 *	dwmw2_gone has quit (irc.gimp.ca irc.acc.umu.se)
+Jan 26 11:01:03 *	mcrha (~mcrha@212.80.64.66) has joined #evolution-meet
+Jan 26 11:01:19 <abharath>	Am I logged in?
+Jan 26 11:01:35 *	chen (~chen@117.192.246.62) has joined #evolution-meet
+Jan 26 11:01:41 <jpunit>	abharath: no ;)
+Jan 26 11:01:48 <abharath>	jpunit: good :P
+Jan 26 11:01:55 <chen>	sorry got disconnected
+Jan 26 11:02:03 <mbarnes>	alright, who tripped over the cord?
+Jan 26 11:02:30 <chen>	was everyone disconnected? ;)
+Jan 26 11:02:46 <abharath>	most of them yes
+Jan 26 11:02:50 <mbarnes>	everyone but me it seems
+Jan 26 11:03:02 *	xtian (~chris@port-217-146-132-69.static.qsc.de) has joined #evolution-meet
+Jan 26 11:03:02 *	lakhil (~lakhil@117.192.9.147) has joined #evolution-meet
+Jan 26 11:03:02 *	Muelli (~muelli@port-18357.pppoe.wtnet.de) has joined #evolution-meet
+Jan 26 11:03:02 *	vibs (~yvibha@122.167.47.203) has joined #evolution-meet
+Jan 26 11:03:02 *	kov (~kov@cafe.minaslivre.org) has joined #evolution-meet
+Jan 26 11:03:04 <chen>	might be the spammer ;)
+Jan 26 11:03:06 <abharath>	the brave ones like me and mbarnes stayed logged on
+Jan 26 11:03:50 <chen>	abharath, ;)
+Jan 26 11:03:54 *	dwmw2_gone (~ctrlproxy@twosheds.infradead.org) has joined #evolution-meet
+Jan 26 11:04:25 <chen>	Lets then meet in feb :)
+Jan 26 11:04:30 <chen>	Thanks everyone!!
+
