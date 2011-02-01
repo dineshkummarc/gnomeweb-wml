@@ -82,7 +82,7 @@ for (@maindir) {
         $packages{$filename}{"sum"} = $sum;
         $mdtm = $gnomeftp->mdtm($current_file)
             or die "Cannot retrieve mtime ", $ftp->message;
-        $packages{$filename}{"epoch"} = $mdtm;
+        $packages{$filename}{"epoch"} = $mdtm - 3600;
         $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm, "GMT");
         if ($filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.gz/) {
             $packages{$filename}{"release"} = "$1" . ($2 or "");
@@ -159,7 +159,7 @@ print NEWS "          <h2>News</h2>\n";
 
 for (@sorted_keys) {
     $item = $_;
-    $date = time2str ("%Y-%B", $packages{$item}{"epoch"});
+    $date = time2str ("%Y-%B", $packages{$item}{"epoch"}, "GMT");
     $release = $packages{$item}{"release"};
     print "-- release: $release\n";
     $stable = $packages{$item}{"minor"} % 2 ? "Unstable" : "Stable";
