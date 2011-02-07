@@ -54,6 +54,7 @@ page_DATA = \
 	two-twenty-eight.png \
 	two-thirty.png \
 	two-thirty-two.png \
-	tshirtcontestbanner.png
+	tshirtcontestbanner.png \
+	gnome3-teaser.png
 
 include $(top_srcdir)/rules.common
