@@ -11,7 +11,9 @@ page_DATA = \
 	grass.png \
 	tshirt.png \
 	waterbrush-body-bg.jpg \
-	gnome_head.png
+	gnome_head.png \
+	octopus.png \
+	tentacles.png
 
 EXTRA_DIST=$(page_DATA)
 
