@@ -11,6 +11,7 @@ page_SCRIPTS = \
 	olpc-xo.jpg \
 	products.css \
 	vernier-labquest.jpg \
-	gmae-icons.jpg
+	gmae-icons.jpg \
+	gnome-16.png
 
 include $(top_srcdir)/rules.common
