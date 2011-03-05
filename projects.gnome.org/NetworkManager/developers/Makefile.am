@@ -1,6 +1,6 @@
 NULL=
 
-SUBDIRS= libnm-glib libnm-util
+SUBDIRS= libnm-glib libnm-util migrating-to-09
 
 urlpath = /NetworkManager/developers
 
