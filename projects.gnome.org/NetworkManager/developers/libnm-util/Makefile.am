@@ -1,6 +1,6 @@
 NULL=
 
-SUBDIRS=08
+SUBDIRS=08 09
 
 urlpath = /NetworkManager/developers/libnm-util
 
