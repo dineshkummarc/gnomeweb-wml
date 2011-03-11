@@ -5,9 +5,10 @@
 <title>NMVPNConnection</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libnm-glib Reference Manual">
-<link rel="up" href="ch01.html" title="libnm-glib Objects">
+<link rel="up" href="ch01.html" title="libnm-glib API Reference">
 <link rel="prev" href="NMSecretAgent.html" title="NMSecretAgent">
-<meta name="generator" content="GTK-Doc V1.16 (XML mode)">
+<link rel="next" href="libnm-glib-NMVPNPlugin.html" title="NMVPNPlugin">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -17,6 +18,7 @@
 <td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libnm-glib Reference Manual</th>
+<td><a accesskey="n" href="libnm-glib-NMVPNPlugin.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#NMVPNConnection.synopsis" class="shortcut">Top</a>
@@ -45,7 +47,7 @@
 #define             <a class="link" href="NMVPNConnection.html#NM-VPN-CONNECTION-BANNER:CAPS" title="NM_VPN_CONNECTION_BANNER">NM_VPN_CONNECTION_BANNER</a>
                     <a class="link" href="NMVPNConnection.html#NMVPNConnection-struct" title="NMVPNConnection">NMVPNConnection</a>;
                     <a class="link" href="NMVPNConnection.html#NMVPNConnectionClass" title="NMVPNConnectionClass">NMVPNConnectionClass</a>;
-<a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="returnvalue">GObject</span></a> *           <a class="link" href="NMVPNConnection.html#nm-vpn-connection-new" title="nm_vpn_connection_new ()">nm_vpn_connection_new</a>               (<em class="parameter"><code><a href="../dbus-glib/dbus-glib-DBusGConnection.html#DBusGConnection"><span class="type">DBusGConnection</span></a> *dbus_connection</code></em>,
+<a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="returnvalue">GObject</span></a> *           <a class="link" href="NMVPNConnection.html#nm-vpn-connection-new" title="nm_vpn_connection_new ()">nm_vpn_connection_new</a>               (<em class="parameter"><code><a href="../dbus-glib/dbus-glib-DBusGConnection.html#DBusGConnection"><span class="type">DBusGConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);
 <span class="returnvalue">NMVPNConnectionState</span>  <a class="link" href="NMVPNConnection.html#nm-vpn-connection-get-vpn-state" title="nm_vpn_connection_get_vpn_state ()">nm_vpn_connection_get_vpn_state</a>   (<em class="parameter"><code><a class="link" href="NMVPNConnection.html" title="NMVPNConnection"><span class="type">NMVPNConnection</span></a> *vpn</code></em>);
 const <span class="returnvalue">char</span> *           <a class="link" href="NMVPNConnection.html#nm-vpn-connection-get-banner" title="nm_vpn_connection_get_banner ()">nm_vpn_connection_get_banner</a>     (<em class="parameter"><code><a class="link" href="NMVPNConnection.html" title="NMVPNConnection"><span class="type">NMVPNConnection</span></a> *vpn</code></em>);
@@ -128,10 +130,30 @@ const <span class="returnvalue">char</span> *           <a class="link" href="NM
 <hr>
 <div class="refsect2">
 <a name="nm-vpn-connection-new"></a><h3>nm_vpn_connection_new ()</h3>
-<pre class="programlisting"><a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="returnvalue">GObject</span></a> *           nm_vpn_connection_new               (<em class="parameter"><code><a href="../dbus-glib/dbus-glib-DBusGConnection.html#DBusGConnection"><span class="type">DBusGConnection</span></a> *dbus_connection</code></em>,
+<pre class="programlisting"><a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="returnvalue">GObject</span></a> *           nm_vpn_connection_new               (<em class="parameter"><code><a href="../dbus-glib/dbus-glib-DBusGConnection.html#DBusGConnection"><span class="type">DBusGConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);</pre>
 <p>
+Creates a new <a class="link" href="NMVPNConnection.html" title="NMVPNConnection"><span class="type">NMVPNConnection</span></a>.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the <a href="../dbus-glib/dbus-glib-DBusGConnection.html#DBusGConnection"><span class="type">DBusGConnection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>the DBus object path of the new connection</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new connection object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -197,6 +219,6 @@ The VPN state of the active VPN connection.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.16</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

@@ -5,6 +5,9 @@ SUBDIRS=
 urlpath = /NetworkManager/developers/libnm-glib/09
 
 page_SCRIPTS=\
+	annotation-glossary.html \
+	api-index-full.html \
+	object-tree.html \
 	ch01.html \
 	home.png \
 	index.html \
@@ -19,6 +22,9 @@ page_SCRIPTS=\
 	NMDeviceModem.html \
 	NMDeviceWifi.html \
 	NMDeviceWimax.html \
+	NMWimaxNsp.html \
+	NMDHCP4Config.html \
+	NMDHCP6Config.html \
 	NMIP4Config.html \
 	NMIP6Config.html \
 	NMObject.html \
