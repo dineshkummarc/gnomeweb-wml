@@ -4,7 +4,6 @@ urlpath = /accessibility/
 
 page_SCRIPTS= \
 	about.html \
-	goals.html \
 	index.html \
 	participate.html \
 	related.html \
