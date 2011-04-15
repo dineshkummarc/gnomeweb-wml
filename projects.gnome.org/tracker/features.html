@@ -1,13 +1,13 @@
-<!DOCTYPE html 
+<!DOCTYPE html
 	  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    
+
     <meta name="Description" content="Tracker Project" />
     <meta name="Keywords" content="Tracker, Metadata, SPARQL, Nepomuk, Semantic, Search, FTS, RDF" />
-    
+
     <meta name="allow-search" content="yes" />
     <meta name="revisit-after" content="10 Days" />
 
@@ -16,7 +16,7 @@
     <script type="text/javascript">google.load("jquery", "1.2.6")</script>
     <script type="text/javascript" src="scripts/jquery.corners.js"></script>
     <script type="text/javascript" src="scripts/tracker.js"></script>
-    
+
     <link href="style/tracker.css" rel="stylesheet" type="text/css" />
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -27,7 +27,7 @@
       <div id="header">
         <img src="images/header.png" alt="Tracker"/>
       </div>
-      
+
       <div id="menu">
 	<table>
 	  <tr>
@@ -39,7 +39,7 @@
 	  </tr>
 	</table>
       </div>
-      
+
       <div id="content">
 	<h2>Ontologies</h2>
 	<p>Ontologies describe how data is related to each other. We use this method to store data intelligently. These are some of the ontologies we support:</p>
@@ -63,7 +63,7 @@
 	  <li>Multimedia Transfer Protocol (mtp)</li>
 	  <li>Tracker specific annotations (tracker)</li>
 	  <li>Maemo specific annotations (maemo)</li>
-	</ul> 
+	</ul>
 
 	<h2>Standards</h2>
 	<p>Tracker complies with many cross desktop and technology
@@ -82,20 +82,25 @@
 	<h2>Technologies</h2>
 	<ul>
 	  <li><a href="http://en.wikipedia.org/wiki/Full_text_search"
-	  alt="">Full Text Search</a> (FTS). Below are the features
-	  which are available with FTS (which can be disabled as part
+	  alt="">Full Text Search</a> (FTS). Below are the FTS features
+	  which are available in Tracker (please note that FTS can be disabled as part
 	  of the build):</li>
 	  <ul>
-	    <li><a href="http://en.wikipedia.org/wiki/Acute_accent"
+	    <li><a href="http://en.wikipedia.org/wiki/Combining_diacritical_mark"
 	    alt="">Unaccenting</a> is used to strip characters of their
-	    accents to allow comparisons between examples
+	    accents (and all combining diacritical marks in general) to allow comparisons between examples
 	    like <q>Idea</q> and <q>Idéa</q> to be as fast as possible.</li>
 	    <li><a href="http://en.wikipedia.org/wiki/Unicode_normalization"
 	    alt="">Unicode Normalization</a> is used to match
-	    examples like <q>Straße</q> and <q>Strasse</q> or the
-	    other way round.</li>
+	    words in either NFC, NFD, NFKD or NFKC normalizations. For example,
+	    looking for <q>école</q> (NFC normalized, 0xc3 0xa9 0x63 0x6f 0x6c 0x65)
+	    will find files with the word <q>école</q> (NFD normalized, 0x65 0xcc 0x81 0x63 0x6f 0x6c 0x65).</li>
+	    <li><a href="http://en.wikipedia.org/wiki/Case_folding"
+	    alt="">Case folding</a> is used to perform case-insensitive searches,
+	    to match for example <q>TITLE</q> with <q>title</q> or
+	    <q>Straße</q> with <q>Strasse</q>.</li>
 	    <li><a href="http://en.wikipedia.org/wiki/Stemming"
-	    alt="">Stemming</a> is used to find more relevant results.
+	    alt="">Stemming</a> (disabled by default) is used to find more relevant results.
 	    For example a search for <q>motorbikes</q> (plural) will
 	    also return results relevant to <q>motorbike</q>
 	    (singular). This operates on a multi-lingual basis.
