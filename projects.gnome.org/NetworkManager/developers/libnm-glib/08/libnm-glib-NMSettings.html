@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NMSettings</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="libnm-glib Reference Manual">
+<link rel="up" href="ch01.html" title="libnm-glib Objects">
+<link rel="prev" href="libnm-glib-NMSettingsConnection.html" title="NMSettingsConnection">
+<link rel="next" href="libnm-glib-NMSettingsService.html" title="NMSettingsService">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libnm-glib-NMSettingsConnection.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libnm-glib Reference Manual</th>
+<td><a accesskey="n" href="libnm-glib-NMSettingsService.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libnm-glib-NMSettings.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libnm-glib-NMSettings.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#libnm-glib-NMSettings.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#libnm-glib-NMSettings.prerequisites" class="shortcut">Prerequisites</a>
+                   | 
+                  <a href="#libnm-glib-NMSettings.implementations" class="shortcut">Known Implementations</a>
+</td></tr>
+</table>
+<div class="refentry" title="NMSettings">
+<a name="libnm-glib-NMSettings"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libnm-glib-NMSettings.top_of_page"></a>NMSettings</span></h2>
+<p>NMSettings</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libnm-glib-NMSettings.synopsis"></a><h2>Synopsis</h2>
+<a name="NMSettingsInterface"></a><pre class="synopsis">enum                <a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterfaceError" title="enum NMSettingsInterfaceError">NMSettingsInterfaceError</a>;
+#define             <a class="link" href="libnm-glib-NMSettings.html#NM-SETTINGS-INTERFACE-ERROR:CAPS" title="NM_SETTINGS_INTERFACE_ERROR">NM_SETTINGS_INTERFACE_ERROR</a>
+<a href="../glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              <a class="link" href="libnm-glib-NMSettings.html#nm-settings-interface-error-quark" title="nm_settings_interface_error_quark ()">nm_settings_interface_error_quark</a>   (<em class="parameter"><code><span class="type">void</span></code></em>);
+#define             <a class="link" href="libnm-glib-NMSettings.html#NM-TYPE-SETTINGS-INTERFACE-ERROR:CAPS" title="NM_TYPE_SETTINGS_INTERFACE_ERROR">NM_TYPE_SETTINGS_INTERFACE_ERROR</a>
+#define             <a class="link" href="libnm-glib-NMSettings.html#NM-SETTINGS-INTERFACE-NEW-CONNECTION:CAPS" title="NM_SETTINGS_INTERFACE_NEW_CONNECTION">NM_SETTINGS_INTERFACE_NEW_CONNECTION</a>
+#define             <a class="link" href="libnm-glib-NMSettings.html#NM-SETTINGS-INTERFACE-CONNECTIONS-READ:CAPS" title="NM_SETTINGS_INTERFACE_CONNECTIONS_READ">NM_SETTINGS_INTERFACE_CONNECTIONS_READ</a>
+                    <a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface-struct" title="NMSettingsInterface">NMSettingsInterface</a>;
+<span class="returnvalue">void</span>                (<a class="link" href="libnm-glib-NMSettings.html#NMSettingsAddConnectionFunc" title="NMSettingsAddConnectionFunc ()">*NMSettingsAddConnectionFunc</a>)      (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="../gobject/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               <a class="link" href="libnm-glib-NMSettings.html#nm-settings-interface-get-type" title="nm_settings_interface_get_type ()">nm_settings_interface_get_type</a>      (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-glib-NMSettings.html#nm-settings-interface-list-connections" title="nm_settings_interface_list_connections ()">nm_settings_interface_list_connections</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>);
+<a class="link" href="libnm-glib-NMSettingsConnection.html#NMSettingsConnectionInterface"><span class="returnvalue">NMSettingsConnectionInterface</span></a> * <a class="link" href="libnm-glib-NMSettings.html#nm-settings-interface-get-connection-by-path" title="nm_settings_interface_get_connection_by_path ()">nm_settings_interface_get_connection_by_path</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-glib-NMSettings.html#nm-settings-interface-add-connection" title="nm_settings_interface_add_connection ()">nm_settings_interface_add_connection</a>
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsAddConnectionFunc" title="NMSettingsAddConnectionFunc ()"><span class="type">NMSettingsAddConnectionFunc</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="libnm-glib-NMSettings.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GInterface
+   +----NMSettingsInterface
+</pre>
+</div>
+<div class="refsect1" title="Prerequisites">
+<a name="libnm-glib-NMSettings.prerequisites"></a><h2>Prerequisites</h2>
+<p>
+NMSettingsInterface requires
+ <a href="../gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
+</div>
+<div class="refsect1" title="Known Implementations">
+<a name="libnm-glib-NMSettings.implementations"></a><h2>Known Implementations</h2>
+<p>
+NMSettingsInterface is implemented by
+ <a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings">NMRemoteSettings</a>.</p>
+</div>
+<div class="refsect1" title="Description">
+<a name="libnm-glib-NMSettings.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libnm-glib-NMSettings.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum NMSettingsInterfaceError">
+<a name="NMSettingsInterfaceError"></a><h3>enum NMSettingsInterfaceError</h3>
+<pre class="programlisting">typedef enum {
+	NM_SETTINGS_INTERFACE_ERROR_INVALID_CONNECTION = 0,
+	NM_SETTINGS_INTERFACE_ERROR_READ_ONLY_CONNECTION,
+	NM_SETTINGS_INTERFACE_ERROR_INTERNAL_ERROR,
+	NM_SETTINGS_INTERFACE_ERROR_SECRETS_UNAVAILABLE,
+	NM_SETTINGS_INTERFACE_ERROR_SECRETS_REQUEST_CANCELED,
+	NM_SETTINGS_INTERFACE_ERROR_PERMISSION_DENIED,
+	NM_SETTINGS_INTERFACE_ERROR_INVALID_SETTING,
+} NMSettingsInterfaceError;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTINGS_INTERFACE_ERROR">
+<a name="NM-SETTINGS-INTERFACE-ERROR:CAPS"></a><h3>NM_SETTINGS_INTERFACE_ERROR</h3>
+<pre class="programlisting">#define NM_SETTINGS_INTERFACE_ERROR (nm_settings_interface_error_quark ())
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nm_settings_interface_error_quark ()">
+<a name="nm-settings-interface-error-quark"></a><h3>nm_settings_interface_error_quark ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              nm_settings_interface_error_quark   (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Setting error quark.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the setting error quark
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="NM_TYPE_SETTINGS_INTERFACE_ERROR">
+<a name="NM-TYPE-SETTINGS-INTERFACE-ERROR:CAPS"></a><h3>NM_TYPE_SETTINGS_INTERFACE_ERROR</h3>
+<pre class="programlisting">#define NM_TYPE_SETTINGS_INTERFACE_ERROR (nm_settings_interface_error_get_type ()) 
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTINGS_INTERFACE_NEW_CONNECTION">
+<a name="NM-SETTINGS-INTERFACE-NEW-CONNECTION:CAPS"></a><h3>NM_SETTINGS_INTERFACE_NEW_CONNECTION</h3>
+<pre class="programlisting">#define NM_SETTINGS_INTERFACE_NEW_CONNECTION   "new-connection"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NM_SETTINGS_INTERFACE_CONNECTIONS_READ">
+<a name="NM-SETTINGS-INTERFACE-CONNECTIONS-READ:CAPS"></a><h3>NM_SETTINGS_INTERFACE_CONNECTIONS_READ</h3>
+<pre class="programlisting">#define NM_SETTINGS_INTERFACE_CONNECTIONS_READ "connections-read"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMSettingsInterface">
+<a name="NMSettingsInterface-struct"></a><h3>NMSettingsInterface</h3>
+<pre class="programlisting">typedef struct _NMSettingsInterface NMSettingsInterface;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMSettingsAddConnectionFunc ()">
+<a name="NMSettingsAddConnectionFunc"></a><h3>NMSettingsAddConnectionFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*NMSettingsAddConnectionFunc)      (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_settings_interface_get_type ()">
+<a name="nm-settings-interface-get-type"></a><h3>nm_settings_interface_get_type ()</h3>
+<pre class="programlisting"><a href="../gobject/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               nm_settings_interface_get_type      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_settings_interface_list_connections ()">
+<a name="nm-settings-interface-list-connections"></a><h3>nm_settings_interface_list_connections ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_settings_interface_list_connections
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_settings_interface_get_connection_by_path ()">
+<a name="nm-settings-interface-get-connection-by-path"></a><h3>nm_settings_interface_get_connection_by_path ()</h3>
+<pre class="programlisting"><a class="link" href="libnm-glib-NMSettingsConnection.html#NMSettingsConnectionInterface"><span class="returnvalue">NMSettingsConnectionInterface</span></a> * nm_settings_interface_get_connection_by_path
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="nm_settings_interface_add_connection ()">
+<a name="nm-settings-interface-add-connection"></a><h3>nm_settings_interface_add_connection ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_settings_interface_add_connection
+                                                        (<em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><span class="type">NMSettingsInterface</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libnm-glib-NMSettings.html#NMSettingsAddConnectionFunc" title="NMSettingsAddConnectionFunc ()"><span class="type">NMSettingsAddConnectionFunc</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Requests that the settings service add the given settings to a new connection.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
+<td>a object implementing <a class="link" href="libnm-glib-NMSettings.html#NMSettingsInterface"><code class="literal">NMSettingsInterface</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>the settings to add; note that this object's settings will be
+ added, not the object itself
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
+<td>callback to be called when the add operation completes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>caller-specific data passed to <em class="parameter"><code>callback</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if the request was successful, FALSE if it failed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.15</div>
+</body>
+</html>

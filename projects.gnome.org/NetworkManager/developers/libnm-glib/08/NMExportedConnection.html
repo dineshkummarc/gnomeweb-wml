@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NMExportedConnection</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<link rel="home" href="index.html" title="libnm-glib Reference Manual">
+<link rel="up" href="ch01.html" title="libnm-glib Objects">
+<link rel="prev" href="NMDHCP6Config.html" title="NMDHCP6Config">
+<link rel="next" href="NMObject.html" title="NMObject">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="NMDHCP6Config.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libnm-glib Reference Manual</th>
+<td><a accesskey="n" href="NMObject.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#NMExportedConnection.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#NMExportedConnection.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#NMExportedConnection.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#NMExportedConnection.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
+</table>
+<div class="refentry" title="NMExportedConnection">
+<a name="NMExportedConnection"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="NMExportedConnection.top_of_page"></a>NMExportedConnection</span></h2>
+<p>NMExportedConnection</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="NMExportedConnection.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="NMExportedConnection.html#NMExportedConnection-struct" title="NMExportedConnection">NMExportedConnection</a>;
+                    <a class="link" href="NMExportedConnection.html#NMExportedConnectionClass" title="NMExportedConnectionClass">NMExportedConnectionClass</a>;
+<a class="link" href="NMExportedConnection.html" title="NMExportedConnection"><span class="returnvalue">NMExportedConnection</span></a> * <a class="link" href="NMExportedConnection.html#nm-exported-connection-new" title="nm_exported_connection_new ()">nm_exported_connection_new</a>       (<em class="parameter"><code><a href="../libnm-util/NMConnection.html#NMConnectionScope"><span class="type">NMConnectionScope</span></a> scope</code></em>);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="NMExportedConnection.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="../gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----<a href="../libnm-util/NMConnection.html">NMConnection</a>
+         +----NMExportedConnection
+</pre>
+</div>
+<div class="refsect1" title="Implemented Interfaces">
+<a name="NMExportedConnection.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+NMExportedConnection implements
+ <a class="link" href="libnm-glib-NMSettingsConnection.html#NMSettingsConnectionInterface">NMSettingsConnectionInterface</a>.</p>
+</div>
+<div class="refsect1" title="Description">
+<a name="NMExportedConnection.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="NMExportedConnection.details"></a><h2>Details</h2>
+<div class="refsect2" title="NMExportedConnection">
+<a name="NMExportedConnection-struct"></a><h3>NMExportedConnection</h3>
+<pre class="programlisting">typedef struct _NMExportedConnection NMExportedConnection;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="NMExportedConnectionClass">
+<a name="NMExportedConnectionClass"></a><h3>NMExportedConnectionClass</h3>
+<pre class="programlisting">typedef struct {
+	NMConnectionClass parent;
+
+	GHashTable * (*get_settings) (NMExportedConnection *self,
+	                              GError **error);
+
+	void (*update) (NMExportedConnection *self,
+	                GHashTable *new_settings,
+	                DBusGMethodInvocation *context);
+
+	void (*delete) (NMExportedConnection *self,
+	                DBusGMethodInvocation *context);
+
+	void (*get_secrets) (NMExportedConnection *self,
+	                     const gchar *setting_name,
+	                     const gchar **hints,
+	                     gboolean request_new,
+	                     DBusGMethodInvocation *context);
+
+	/* Padding for future expansion */
+	void (*_reserved1) (void);
+	void (*_reserved2) (void);
+	void (*_reserved3) (void);
+	void (*_reserved4) (void);
+	void (*_reserved5) (void);
+	void (*_reserved6) (void);
+} NMExportedConnectionClass;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="nm_exported_connection_new ()">
+<a name="nm-exported-connection-new"></a><h3>nm_exported_connection_new ()</h3>
+<pre class="programlisting"><a class="link" href="NMExportedConnection.html" title="NMExportedConnection"><span class="returnvalue">NMExportedConnection</span></a> * nm_exported_connection_new       (<em class="parameter"><code><a href="../libnm-util/NMConnection.html#NMConnectionScope"><span class="type">NMConnectionScope</span></a> scope</code></em>);</pre>
+<p>
+Creates a new object representing the remote connection.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>the Connection scope (either user or system)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the new exported connection object on success, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on failure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.15</div>
+</body>
+</html>

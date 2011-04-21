@@ -5,7 +5,8 @@ SUBDIRS=
 urlpath = /NetworkManager/developers/libnm-util/08
 
 page_SCRIPTS=\
-	api-index-full.html\
+	api-index-full.html \
+	annotation-glossary.html \
 	ch01.html \
 	home.png \
 	index.html \
