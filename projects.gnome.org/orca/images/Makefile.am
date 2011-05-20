@@ -1,5 +1,12 @@
+SUBDIRS=
+
 urlpath = /orca/images
 
-page_DATA = orca2-lg.jpg orca2-sm.jpg
+page_SCRIPTS=
 
 include $(top_srcdir)/rules.common
+
+misc_images=\
+	logo.png
+
+page_DATA=$(misc_images)
