@@ -1,0 +1,191 @@
+Apr 20 11:34:16 <chen>	looks like we have a house full, lets get started :)
+Apr 20 11:34:25 <chen>	To start with project updates,
+Apr 20 11:34:47 <chen>	we have a upcoming stable release coming Monday Apr 27, 3.0.1 release,
+Apr 20 11:35:14 <chen>	please commit the patches which apply to the stable branch
+Apr 20 11:35:36 <chen>	http://live.gnome.org/Evolution/Planning32 - has been populated with our planned items for 3.2 release,
+Apr 20 11:36:01 <chen>	please feel free to add/modify if there is anything more left out..
+Apr 20 11:36:35 <chen>	feel happy to have the aplha release of evolution-ews which David announced recently,
+Apr 20 11:36:50 <chen>	http://mail.gnome.org/archives/evolution-hackers/2011-April/msg00060.html
+Apr 20 11:36:55 *	mcrha is wondering which year is it? Monday is Apr 25th in his private calendar ;)
+Apr 20 11:37:13 <chen>	mcrha, oops yup its 25th :)
+Apr 20 11:37:16 <abharath>	:)
+Apr 20 11:37:22 <chen>	bad note of mine ;)
+Apr 20 11:37:39 <mcrha>	the release is no wednesday, where the date probably comes from
+Apr 20 11:37:50 <chen>	mcrha, right!
+Apr 20 11:37:51 *	Macfiron (~silvan@port-217-146-132-69.static.qsc.de) has joined #evolution-meet
+Apr 20 11:37:57 <chen>	selected papers for GUADEC will be notified today
+Apr 20 11:38:15 *	verwilst has quit (Ex-Chat)
+Apr 20 11:38:15 <chen>	hope there would be couple of evolution related talks there..
+Apr 20 11:38:42 <chen>	And watch out for mcrha's libebook/libecal overhauling and discussions are on at,
+Apr 20 11:38:48 <chen>	http://mail.gnome.org/archives/evolution-hackers/2011-April/msg00065.html
+Apr 20 11:39:17 <chen>	update on sqlitedb for address-book,
+Apr 20 11:39:27 <chen>	have just made a initial commit for the same at,
+Apr 20 11:39:32 <chen>	http://git.infradead.org/evolution-ews.git/commit/4821f61203adfb7ec361ab84545e9334ba36b7d3
+Apr 20 11:40:02 <chen>	had added it in evolution-ews to start with as it is being targetted against evo 2.32 atm
+Apr 20 11:40:04 <abharath>	nice one that :)
+Apr 20 11:40:22 <chen>	will put it into eds master once i complete it, possibly by next week
+Apr 20 11:40:37 <chen>	still some more work left out there
+Apr 20 11:41:12 <chen>	evolution-groupware tarball is with me and on my plate,
+Apr 20 11:41:24 <chen>	will be getting sometime for it during the next week..
+Apr 20 11:41:48 <mcrha>	chen, the cache, would you mind to make it reusable for calendar too?
+Apr 20 11:42:08 <chen>	mcrha, sqlite cache for calendar?
+Apr 20 11:42:30 <mcrha>	yup, I guess it'll be better than the "all in memory" cache whihc is there right now
+Apr 20 11:42:46 <chen>	mcrha, i have separated the code which could be used in common at utils in evolution-ews,
+Apr 20 11:42:58 <chen>	i guess the rest will have to written separately for calendar
+Apr 20 11:43:13 <mcrha>	and as you'll have UID files, then it'll be doable for interval trees as well
+Apr 20 11:43:23 <chen>	mcrha, we need to check if a db is needed for calendar
+Apr 20 11:43:50 <mcrha>	files backend  is using icalcomponent :)
+Apr 20 11:44:08 <chen>	mcrha, yup it needs to be ported to use BackendStore
+Apr 20 11:44:22 <chen>	mcrha, which also follows the same pattern anyways :)
+Apr 20 11:44:25 <mcrha>	chen, you support custom keys in the cache too, right?
+Apr 20 11:44:32 <chen>	mcrha, yup
+Apr 20 11:44:36 <mcrha>	good good
+Apr 20 11:44:54 *	EvaSDK (~eva@nsg93-9-78-225-4-220.fbx.proxad.net) has joined #evolution-meet
+Apr 20 11:44:59 <chen>	Anything else to discuss before we move on to individual updates?
+Apr 20 11:45:21 <chen>	updates from my side,
+Apr 20 11:45:46 <chen>	mostly on evolution-exchange customer issues and sneaking sometime for ews as well..
+Apr 20 11:45:55 <rodrigo>	just so you know the discussion about contacts that is taking place in d-d-l
+Apr 20 11:45:57 <chen>	kov, anything to share?
+Apr 20 11:45:59 <chen>	abharath, updates?
+Apr 20 11:46:25 <abharath>	chen: been a dull month for me. Mostly on customer issues
+Apr 20 11:46:43 <chen>	rodrigo, haven read it yet, though had noticed it
+Apr 20 11:47:03 <chen>	dvratil, anything to share?
+Apr 20 11:47:08 <jpunit>	abharath: and gnome-asia too :)
+Apr 20 11:47:19 <lakhil>	:)
+Apr 20 11:47:24 <chen>	yeah :)
+Apr 20 11:47:44 <chen>	EvaSDK, anything to share?
+Apr 20 11:47:48 <chen>	jpunit, updates?
+Apr 20 11:48:26 <chen>	lakhil, updates?
+Apr 20 11:48:46 <lakhil>	business as usual (sanity, bug triaging), nothing great :-)
+Apr 20 11:48:54 <jpunit>	Hi all ..last month I worked on customer issues mainly, mostly exchange related..
+Apr 20 11:48:59 <chen>	lakhil, hehe
+Apr 20 11:49:00 <lakhil>	and some efforts on automation
+Apr 20 11:49:26 <chen>	lakhil, it would be nice if you provide a screen-cast on the automation stuff :)
+Apr 20 11:49:30 <chen>	jpunit, thanks
+Apr 20 11:49:35 <chen>	levu, anything to share?
+Apr 20 11:49:47 <chen>	Macfiron, anything to share?
+Apr 20 11:49:48 <Macfiron>	-
+Apr 20 11:49:54 <EvaSDK>	chen: nope
+Apr 20 11:49:57 <levu>	chen: nope, just watching
+Apr 20 11:49:58 <lakhil>	chen, sure, will try to get soon
+Apr 20 11:49:59 <chen>	thanks
+Apr 20 11:50:18 <chen>	mauricelynch, any feedback from the alpha release of evolution-ews 
+Apr 20 11:50:20 <abharath>	yeah we like magic :D so videos please
+Apr 20 11:50:33 <chen>	:)
+Apr 20 11:50:36 <chen>	mbarnes, updates?
+Apr 20 11:51:02 <mbarnes>	just slogging my way through the account-mgmt branch.  nothing significant to report just yet.
+Apr 20 11:51:12 <mauricelynch>	chen: Hi Guys, sorry I got pulled into other meetings
+Apr 20 11:51:14 <chen>	mbarnes, thanks
+Apr 20 11:51:24 <chen>	mauricelynch, np
+Apr 20 11:51:45 <mauricelynch>	This morning I built a MeeGo box with the latest EWS, and it works great
+Apr 20 11:52:00 <chen>	mauricelynch, nice to hear that :)
+Apr 20 11:52:09 <chen>	mcrha, updates?
+Apr 20 11:52:11 <mcrha>	basically on EClient stuff. I'll wait till Monday and do those clear changes in the branch at the beginning of the next week
+Apr 20 11:52:13 *	abharath whistles
+Apr 20 11:52:31 <mauricelynch>	I need to play wiht Evolution a little to match my preferences, but working as expected :)
+Apr 20 11:52:36 <chen>	mcrha, nice thanks!!
+Apr 20 11:52:41 <abharath>	mauricelynch: :)
+Apr 20 11:53:19 <chen>	mauricelynch, great :), we will look forward for more feedback from you  :)
+Apr 20 11:53:26 <chen>	rodrigo, anything to share?
+Apr 20 11:53:35 <mauricelynch>	For sure :)
+Apr 20 11:53:36 <rodrigo>	chen, no, nothing :)
+Apr 20 11:53:51 <chen>	rodrigo, :)
+Apr 20 11:53:54 <chen>	xtian, updates?
+Apr 20 11:53:59 <xtian>	evolution-kolab development goes on
+Apr 20 11:54:10 <xtian>	all pim types working in online mode
+Apr 20 11:54:11 <chen>	xtian, nice :)
+Apr 20 11:54:24 <xtian>	most bits configurable via frontend
+Apr 20 11:54:34 <chen>	xtian, wonderful :)
+Apr 20 11:54:42 <xtian>	pim data collision detection is underway
+Apr 20 11:55:06 <xtian>	offline mode will follow right after that
+Apr 20 11:55:22 <chen>	xtian, am very happy to hear particularly since it was new try with using mail backend in calendar/contacts :)
+Apr 20 11:55:25 <xtian>	current plans are that by end of may we will be feature complete
+Apr 20 11:55:44 <chen>	xtian, nice :)
+Apr 20 11:56:01 <chen>	Anything else from anyone ?
+Apr 20 11:56:27 <xtian>	chen: yes, i need to beat CamelSession and CamelIMAPX a little further (some heisenbugs there which in rare cases corrupt camel objects - cause yet unknown)
+Apr 20 11:57:11 <chen>	xtian, any crashers ?
+Apr 20 11:57:41 <xtian>	yup, assertion failure... CAMEL_IS_OBJECT chokes on junk data :)
+Apr 20 11:58:17 <xtian>	but that is (almost sure of that) my mistake someplace while using all these funny camel bits :)
+Apr 20 11:58:41 <mcrha>	xtian, try valgrind with G_SLICE=always-malloc being set
+Apr 20 11:59:06 <xtian>	mcrha: yep, already doing that
+Apr 20 11:59:09 <mcrha>	xtian, and use --num-callers=50 too
+Apr 20 11:59:12 <mcrha>	xtian, ah, good
+Apr 20 11:59:18 *	abharath (~abharath@ecoprobe-dmz.gns.novell.com) has left #evolution-meet
+Apr 20 11:59:30 <xtian>	mcrha: regularly, as part of quality assurance
+Apr 20 11:59:36 *	jpunit has quit (Leaving.)
+Apr 20 11:59:54 <xtian>	mcrha: bug has not yet shown when running under valgrind, but if it does, i'll squish it :)
+Apr 20 12:00:05 <chen>	:)
+Apr 20 12:00:07 *	mcrha did too with EClient tests, found couple leaks which were backported to stable
+Apr 20 12:00:36 <mcrha>	good luck, xtian 
+Apr 20 12:00:36 <xtian>	some more good news: we're funded and set up for porting evolution-kolab to a then-current dev version of evo/eds by mid.year
+Apr 20 12:00:44 <xtian>	mcrha: thanks mcrha :)
+Apr 20 12:01:05 <chen>	xtian, wow, happy to hear that :)
+Apr 20 12:01:12 <xtian>	(porting just in case anyone would actually like to *use* the stuff ;-)
+Apr 20 12:01:35 <chen>	xtian, it would be nice to have the code in upstream anyways :)
+Apr 20 12:02:01 <xtian>	chen: yep, we'll work on that as soon as we have the things running
+Apr 20 12:02:16 <chen>	cool
+Apr 20 12:02:23 <xtian>	presently, things are *slow* and show much potential for improvement :)
+Apr 20 12:02:46 <chen>	ok
+Apr 20 12:03:00 <xtian>	when comparing with kontact, it seems they got *something* done in the past 7 years or so performance-wise... :)
+Apr 20 12:03:34 <xtian>	but, it's nice to see that things are starting to work.
+Apr 20 12:03:41 <chen>	xtian, oh i thought slow in the kolab backend, do you mean some operations are slow in evolution as a whole ?
+Apr 20 12:03:55 <xtian>	chen: no, evolution-kolab
+Apr 20 12:04:02 <chen>	xtian, ah ok
+Apr 20 12:04:40 <chen>	Lets then meet next month more updates :)
+Apr 20 12:04:44 <xtian>	chen: kontact has been a reference client for kolab from very early kolab days on, so they have an advantage of a few working hours on their stuff
+Apr 20 12:04:48 <chen>	Thanks everyone!
+Apr 20 12:04:54 <xtian>	cu all
+Apr 20 12:04:58 *	chen continues with xtian  :)
+Apr 20 12:05:37 <chen>	xtian, oh ok. how are you profiling with evolution-kolab ?
+Apr 20 12:06:52 *	lakhil has quit (Leaving)
+Apr 20 12:07:03 <xtian>	chen: no hard numbers as yet ... just by working with a few objects it shows that i have many suboptimal approaches in there
+Apr 20 12:07:25 <chen>	ok
+Apr 20 12:07:47 <xtian>	i know that in some situations, i can drop one or the other operation
+Apr 20 12:08:13 <xtian>	what especially slows things down is that i need to sync imap folders before most operations
+Apr 20 12:08:47 <chen>	xtian, most operations ?
+Apr 20 12:09:17 <xtian>	chen: reading/storing of objects, that is
+Apr 20 12:09:30 <xtian>	chen: storing is the most interesting part
+Apr 20 12:09:41 <xtian>	then, online/offline switching
+Apr 20 12:11:06 <xtian>	and it does not suffice to look at the emails (or even imap uids) alone ... i need to fetch the messages, unpack them and do the data conversion to decide what to do about them
+Apr 20 12:11:35 <xtian>	this is an inherent p.i.t.a. with the idea of storing pim data as emails
+Apr 20 12:11:39 <chen>	xtian, it maybe good if you can use the timers to check where your going wrong
+Apr 20 12:12:05 <xtian>	yeah
+Apr 20 12:12:47 <chen>	xtian, valgrind has a tool for checking on performance too, i remember having used it long time back..
+Apr 20 12:12:51 <xtian>	before that, i'll need to get the functionality right -- then, i can work on getting it fast
+Apr 20 12:13:08 <chen>	xtian, fine
+Apr 20 12:13:35 <xtian>	problem: we had to deal with such a lot of issues and trouble within this project, that we're running out of time
+Apr 20 12:13:52 *	levu has quit (Leaving.)
+Apr 20 12:14:21 <xtian>	the 2.30 version in it's first version will mostly serve as a demonstrator so our customer will see that everything works (though it may be slow)
+Apr 20 12:15:04 <xtian>	then, when porting to 3.2 (i assume) we will have (i assume) a chance of focussing on better usability
+Apr 20 12:15:28 <chen>	xtian, makes sense
+Apr 20 12:15:33 <xtian>	since (i assume ;-) 2.30 may not really be used by anyone out there :)
+Apr 20 12:16:00 <chen>	xtian, yeah and it now looks so far behind :)
+Apr 20 12:16:06 <xtian>	yup
+Apr 20 12:16:40 <xtian>	2.30 has served us well as a stable bed for initial development, since most of the code we will be able to just port-over to new versions
+Apr 20 12:17:11 <xtian>	adjustments will be needed in EPlugin area (and we kept code small there) as well as in Camel area
+Apr 20 12:18:16 <mcrha>	and backends, if my changes to EClient will land before you'll start upporting (which I hope it will)
+Apr 20 12:18:30 <xtian>	the pim data converision stuff was *hard*, but this part will most probably not need more love than a little tweaking, if there should be any changes to ECalComponent or EContact
+Apr 20 12:18:41 <chen>	xtian, yeah thats quite a lot, but mostly straight forward changes..
+Apr 20 12:18:53 <xtian>	chen: hope so
+Apr 20 12:19:23 <xtian>	chen: when porting to >= 3.x, i'd like to get rid of the local IMAPX copy i keep around
+Apr 20 12:19:59 <xtian>	chen: maybe we can tweak IMAPX in a way that it can be exported from Camel so i can subclass it right away
+Apr 20 12:20:37 <xtian>	mcrha: yes, we're trying to keep ourselves updated reading the account management postings and the EClient stuff as well
+Apr 20 12:20:42 <chen>	xtian, yup that needs some work as we discussed long time back. we can summarize them and i can share some part of it to get it done..
+Apr 20 12:21:22 <mcrha>	xtian, good :)
+Apr 20 12:22:13 <chen>	xtian, leaving out for dinner, catch you later..
+Apr 20 12:22:22 <xtian>	chen: i've been running without vacation since may 2010, so expect me to be off for a couple of days this summer, once we're done with the initial project by the end of june
+Apr 20 12:22:45 <xtian>	chen: yup, have a nice meal (it's always nice over there... :)
+Apr 20 12:22:59 <chen>	xtian, :)
+Apr 20 12:23:24 <xtian>	mcrha: porting will show whether or not we did an appropriate job modularizing our stuff :)
+Apr 20 12:23:51 *	chen is now known as chen|dinner
+Apr 20 12:24:41 <mcrha>	xtian, not with backends, I did change quite much there, in both. Especially adding GCancellable to each async function, and changes authentication process in calendar
+Apr 20 12:26:50 <xtian>	mcrha: we'll see ... i'm not sure whether we will be able to convert to async backend within the porting project's timespan
+Apr 20 12:27:16 *	Macfiron (~silvan@port-217-146-132-69.static.qsc.de) has left #evolution-meet
+Apr 20 12:27:20 <xtian>	mcrha: it's a shame that we are so much limited that we need to fight to at least get the functionality right
+Apr 20 12:27:35 <mcrha>	xtian, the backand is mostly as is, with respect of asynchronicity, the main async part changes are on the client side, not much visible for you
+Apr 20 12:28:01 <xtian>	mcrha: yes, i think i got that from the e-h postings
+Apr 20 12:28:17 <mcrha>	xtian, yeah, but I believe it'll be fine for you
+Apr 20 12:28:57 <xtian>	mcrha: but seeing the nature of the kolab server, it would make sense to move to async backend (which we were not able to pursue right from the start due to the time constraints we are facing)
+Apr 20 12:29:46 <xtian>	if anyone who looks into our backend will tell "well, this is not crappy in *all* of it's aspects", then we will be happy. :)
+Apr 20 12:29:56 <mcrha>	:))
+

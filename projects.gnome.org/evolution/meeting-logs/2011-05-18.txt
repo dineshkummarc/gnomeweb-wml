@@ -1,0 +1,203 @@
+May 18 11:33:50 <chen>	time up. lets get started!
+May 18 11:34:01 <chen>	starting with project updates,
+May 18 11:34:26 <chen>	we had the evolution-3.1.1 unstable release on may 9 and,
+May 18 11:34:43 <chen>	evolution-groupwise was released as a separate package on the same day..
+May 18 11:34:58 <chen>	all the groupwise code has been removed from evo+eds
+May 18 11:35:24 <chen>	Please ensure that the patches which apply to the stable releases are committed back to evo+eds gnome-3.0 branch.
+May 18 11:35:57 <chen>	We also have a stable release 3.0.2 coming up this monday (and thats on my birthday ;) ),
+May 18 11:36:21 <chen>	please commit the patches that apply to the stable branch by this week so that it can get into the stable release..
+May 18 11:36:48 <chen>	sqlitedb for address-book is almost complete with one or two apis left,
+May 18 11:36:55 <chen>	http://git.gnome.org/browse/evolution-ews/tree/src/addressbook/e-book-backend-sqlitedb.h
+May 18 11:37:20 <chen>	has the apis list and it be added into eds for 3.1.2..
+May 18 11:37:59 <chen>	mcrha has been going fast on re-factoring the libebook and libecal apis and all the discussions are active on
+May 18 11:38:02 <chen>	e-h list
+May 18 11:38:39 <chen>	more info. would be available in individual updates..
+May 18 11:39:04 *	mcrha is finishing it, with a bit of luck it'll land in the master by the very beginning of the next week (even more luckily by the end of this week)
+May 18 11:39:19 <chen>	mcrha, nice :)
+May 18 11:39:25 <abharath>	sweetness
+May 18 11:39:50 <chen>	we have left the evolution-ews to stay on with 2.32 and 3.0,
+May 18 11:40:08 *	Fridrich (~fridrich@166-249.198-178.cust.bluewin.ch) has joined #evolution-meet
+May 18 11:40:09 <chen>	it will be made to work with 3.2 once the api changes get slowed down a bit..
+May 18 11:40:41 <abharath>	Fridrich: o/
+May 18 11:40:42 <chen>	thats it with general project updates..
+May 18 11:40:48 <Fridrich>	abharath: :)
+May 18 11:41:12 <chen>	does anyone have anything to discuss before we move on to individual updates ?
+May 18 11:41:54 <chen>	updates from my side,
+May 18 11:42:13 <chen>	just got the sqlitedb for address-book almost completed,
+May 18 11:42:26 <chen>	it has all the support that we had discussed on e-h list,
+May 18 11:42:39 <chen>	but i have not been able to do the performance testing between,
+May 18 11:42:55 <chen>	having the vcards in db vs having them as separate files yet.
+May 18 11:43:19 <chen>	did some work on evolution-groupware (pruned) and with evolution-groupwise (gone in) :),
+May 18 11:43:43 <mbarnes>	it's nice to have that split out, finally
+May 18 11:43:48 <chen>	going personal address-book for ews,
+May 18 11:43:50 <abharath>	mbarnes: :)
+May 18 11:43:54 <chen>	and gal offline support
+May 18 11:43:58 <chen>	mbarnes, :)
+May 18 11:44:17 <abharath>	GAL offline support is gonna be huge work :)
+May 18 11:44:50 <chen>	am going through the differences between lzx and lzx delta compression,
+May 18 11:44:55 *	vibs (~yvibha@122.167.211.112) has joined #evolution-meet
+May 18 11:45:10 <chen>	formats and trying to re-use lzx decompression code at places where it could be
+May 18 11:45:40 <mcrha>	chen, I see there is missing some kind of "only_fields" API, but that might be one of those missing you talked about at the beginning
+May 18 11:45:44 <chen>	starting to look in a bit of imapx usage on mobile devices as well..
+May 18 11:46:07 <chen>	mcrha, nope, i don have that in the list..
+May 18 11:46:14 <chen>	mcrha, only_fields ?
+May 18 11:46:31 <chen>	mcrha, u mean to be able to get only selected fields ?
+May 18 11:47:00 <mcrha>	chen, as you, I believe it was you, mentioned on e-h list, when, for example, autocompleting, then you are not interested in the complete contact, but only email, name, and maybe few others, So restrict it
+May 18 11:47:28 <mcrha>	yeah, that's it, only selected fields
+May 18 11:47:33 <chen>	mcrha, i have added options to cache the contacts partially
+May 18 11:47:50 <chen>	mcrha, but not to get the selective contents from the cache
+May 18 11:48:17 <chen>	mcrha, its better to leave that to the backend to choose isn it ?
+May 18 11:48:23 <mcrha>	backend may not know much/anything about this, only the "summary" part of the case should know few common fields, and the cache may benefit from its content
+May 18 11:48:40 <mcrha>	s/case/cache/
+May 18 11:49:07 <chen>	mcrha, if the contacts are cached for auto-completion,
+May 18 11:49:19 *	mcrha imagined it as CamelFolderSummary and message info-s
+May 18 11:49:34 <chen>	ah ok, i can understand..
+May 18 11:49:54 <chen>	mcrha, will add  a api to suit the auto-completion aspect
+May 18 11:50:09 <mcrha>	it's just one usecase ;)
+May 18 11:50:14 <chen>	mcrha, will form vcards with just,
+May 18 11:50:27 <chen>	data necessary for auto-completion 
+May 18 11:50:50 <mcrha>	without parsing actual vcards, that's the point
+May 18 11:50:53 <chen>	mcrha, i cannot think of any other case,
+May 18 11:51:02 <chen>	where the client would need partial data..
+May 18 11:51:17 <chen>	mcrha, yes right, but anyways a vcard would be formed
+May 18 11:51:24 *	mcrha believes in pohly being abble to invent few more
+May 18 11:51:51 <chen>	mcrha, as we have to pass the data only via vcards at-least according to the api's
+May 18 11:52:01 <mcrha>	chen, sure for output, not using them, those complete contacts, as input
+May 18 11:52:39 <chen>	mcrha, cant get u
+May 18 11:52:45 <pohly>	mcrha: correct :-) My main use case is to have contacts delivered with and without PHOTO data.
+May 18 11:53:10 <chen>	pohly, ah, the photos are any way stored as uri,
+May 18 11:53:24 <chen>	in vcards so it wont matter much i guess ?
+May 18 11:53:49 <mcrha>	chen, ask cache for certain values, and cache will not parse stored vCards, but will produce new restricted vCards from its summary information only
+May 18 11:54:09 <pohly>	That's a new feature of the sqlite based backend, right? The traditional file backend stores them inline.
+May 18 11:54:37 <chen>	mcrha, yup we have them as columns and not in memory as the earlier one..
+May 18 11:54:38 <pohly>	chen: how does an app decide whether it wants the data inline or as uri?
+May 18 11:54:56 <pohly>	SyncEvolution wants it inline, so that it can send the data to a peer.
+May 18 11:55:02 <mcrha>	chen, good
+May 18 11:55:13 <chen>	pohly, will check it up, i had been thinking,
+May 18 11:55:21 <chen>	we always have it as a uri
+May 18 11:55:47 <mcrha>	pohly, I guess chen misplaced it with attachments, which are as local uri, but photos are always inline
+May 18 11:56:01 <chen>	pohly, hmm but it can form the vcard after its gets the data from eds isn it ?
+May 18 11:56:37 <mcrha>	attachments in calendar, photos in contacts, it is
+May 18 11:56:38 <pohly>	chen: for that it has to know about this feature. Right now it takes the PHOTO property as it is, without translating between files and inline data.
+May 18 11:56:57 <pohly>	My own thoughts on photo are here: http://wiki.meego.com/Architecture/planning/evolution-data-server/eds-improvements#contacts:_store_PHOTO_data_as_plain_files
+May 18 11:57:25 <chen>	pohly, will read through it
+May 18 11:57:47 <chen>	calendar am sure stores all the attachments as uri;s
+May 18 11:57:53 <pohly>	We hope that Openismus will be able to work on this soon. Expect them to show up evo-hackers with a more specific proposal.
+May 18 11:57:55 <chen>	need to check on contacts
+May 18 11:58:08 <chen>	pohly, cool
+May 18 11:58:24 <chen>	pohly, so would the need be that photo,
+May 18 11:58:31 <chen>	be stored in the vcard itself ?
+May 18 11:58:32 <pohly>	chen: trust me, PHOTOs are traditionally stored inline.
+May 18 11:58:42 <chen>	ok
+May 18 11:59:01 *	dave_largo (~drichard@rrcs-24-73-120-180.se.biz.rr.com) has joined #evolution-meet
+May 18 11:59:09 <chen>	mcrha, looks like we have a requirement :)
+May 18 11:59:10 <dave_largo>	jpunit: ! :)
+May 18 11:59:15 <pohly>	The goal is to not have PHOTO data inside the vCard. That way only the link to a file needs to go through D-Bus and into the vCard.
+May 18 11:59:17 <chen>	hey dave_largo 
+May 18 11:59:28 <dave_largo>	hey guys, back from lunch
+May 18 11:59:56 <mcrha>	chen, pohly, yup, makes sense
+May 18 11:59:57 <pohly>	Obviously this is again an optimization which only makes sense if the backend is really local...
+May 18 11:59:57 <chen>	pohly, ah ok, thats the way i assumed it would work, if it does not work that way, will make changes,
+May 18 12:00:03 <chen>	fine ?
+May 18 12:00:32 <chen>	prolly we could discuss on e-h and make a call..
+May 18 12:00:36 *	vibs has quit (Read error: 131 (Connection reset by peer))
+May 18 12:00:48 <chen>	will inititate a thread on the same after reading through,
+May 18 12:00:52 <chen>	pohly's link
+May 18 12:01:33 <chen>	moving on with individual updates,
+May 18 12:01:37 <chen>	abharath, updates..
+May 18 12:01:42 <jpunit>	Hi dave_largo
+May 18 12:02:05 <chen>	mcrha, thanks for bringing this up :), i would have surely missed it..
+May 18 12:02:37 <abharath>	hey chen, mostly on downstream issues for now. Most of them Exchange 2003 related. I and jpunit would be upstreaming the pending patches soon
+May 18 12:02:39 *	mcrha is happy to be useful
+May 18 12:02:44 <chen>	mcrha, :)
+May 18 12:02:54 <chen>	abharath, thanks!
+May 18 12:03:12 <chen>	kov, andre_ dave_largo anything to share ?
+May 18 12:03:30 <dave_largo>	nothing here, except that jpunit is my new best friend :)
+May 18 12:03:36 <abharath>	:)
+May 18 12:03:37 <chen>	hehe
+May 18 12:03:48 <andre_>	nothing new here - I want to work on the user docs rewrite but not much time
+May 18 12:03:49 <andre_>	Progress on relicensing of the old manual would be welcome though, dear Novell. :-P
+May 18 12:03:58 <jpunit>	hehe.. 
+May 18 12:04:03 <chen>	oops i forgot to update
+May 18 12:04:14 <chen>	andre_, have got the approval from the team
+May 18 12:04:24 <chen>	andre_, we can go ahead with re-licencing
+May 18 12:04:37 <chen>	andre_, do you want me to do it ?
+May 18 12:04:49 *	vibs (~yvibha@122.178.201.130) has joined #evolution-meet
+May 18 12:04:55 <chen>	Fridrich, anything to share?
+May 18 12:05:01 <andre_>	chen, go, go, go! :-*
+May 18 12:05:12 <chen>	andre_, ok :)
+May 18 12:05:19 <chen>	jpunit, updates?
+May 18 12:05:49 <chen>	knirav, anything to share?
+May 18 12:05:55 <knirav>	Chen, Nothing from my side
+May 18 12:06:05 <chen>	lakhil, updates?
+May 18 12:06:06 <jpunit>	Hi, I was working mostly on customer issues. Mostly on exchange and dave_largo's issue also..
+May 18 12:06:12 <lakhil>	andre_, will you merge new manual in master just after licensing ?
+May 18 12:06:28 <lakhil>	chen, besides downstream customer issues and testing, did some testing on master for evolution-groupwise changes, moved respective bugs out of evolution and eds to new product.
+May 18 12:06:30 <Fridrich>	chen: I don't share anything, but you can share with me
+May 18 12:06:34 <andre_>	lakhil, no
+May 18 12:06:45 <chen>	Fridrich, :)
+May 18 12:06:52 <andre_>	it will be merged when it is in an acceptable state. and that will take a few more weeks/months
+May 18 12:06:56 <andre_>	maybe around August
+May 18 12:07:02 <chen>	jpunit, lakhil thanks!
+May 18 12:07:11 <lakhil>	andre_, okies
+May 18 12:07:16 <chen>	mbarnes, updates?
+May 18 12:07:19 <mbarnes>	past month:
+May 18 12:07:19 <mbarnes>	talked with davidz about evo integration with gnome online accounts
+May 18 12:07:19 <mbarnes>	talked with alexl about the new libfolks-based contacts app for gnome3
+May 18 12:07:19 <mbarnes>	(will post more concrete info about these projects when I know more)
+May 18 12:07:19 <mbarnes>	simplified mail folder URI handling in evo
+May 18 12:07:19 <mbarnes>	and picking at the account-mgmt branch in the background.  still targeting 3.2.
+May 18 12:07:48 <chen>	mbarnes, thanks!!
+May 18 12:08:21 <chen>	mbarnes, anything related to presence indication with evo ?
+May 18 12:08:44 <chen>	w.r.t libfolks..
+May 18 12:08:48 <chen>	mcrha, updates?
+May 18 12:08:57 <mbarnes>	yes, alex has quite a few mockups of libfolks integration
+May 18 12:09:05 <mcrha>	as mentioned earlier, finishing changes in eclient branch before merging. Otherwise touched few bugs, but really only few
+May 18 12:09:08 <chen>	nice!
+May 18 12:09:19 <chen>	mcrha, thanks!
+May 18 12:09:25 <chen>	pohly, updates?
+May 18 12:10:05 <chen>	rgs, anything to share?
+May 18 12:10:44 <chen>	seanius, updates ?
+May 18 12:11:14 <chen>	vibs, updates?
+May 18 12:11:30 <dave_largo>	chen, any progress on getting EDS to dump to bug-buddy?
+May 18 12:11:35 <rgs>	chen: a couple of updates coming through to improve introspection support!
+May 18 12:11:45 <chen>	rgs, thanks!
+May 18 12:11:56 <rgs>	chen: i am working right now on rebasing libfolks e-d-s backend, that should hit the light soon 
+May 18 12:12:14 <chen>	dave_largo, no idea..
+May 18 12:12:36 <chen>	dave_largo, maybe knirav might know..
+May 18 12:13:10 <dave_largo>	If someone figures out how to make that happen, that should go back into the community project for sure.
+May 18 12:13:15 <dave_largo>	we are losing tons of information when it crashes
+May 18 12:13:17 <knirav>	dave_largo, we will need to look into it.That would be our focus once the meeting appearing in task is resolved
+May 18 12:13:18 <chen>	rgs, ah nice, sharing contacts between empathy and eds ?
+May 18 12:13:27 <dave_largo>	fair enough
+May 18 12:13:37 <rgs>	chen: yes, contact aggregation 
+May 18 12:13:41 <chen>	nice!
+May 18 12:13:42 <seanius>	chen: not beuond what we discussed earlier
+May 18 12:14:09 <chen>	seanius, will get the patches in tomorrow..
+May 18 12:14:20 <rgs>	chen: hopefully i'll have something useful for Alex by the end of this week so he can integrate with the work he is doing 
+May 18 12:14:34 <chen>	rgs, cool
+May 18 12:14:38 <jpunit>	chen: vibs's internet connection got disconnected, she said me to update here.. last week she worked on evolution-groupwise, some customer bugs and some upstream bugs as well.
+May 18 12:14:55 <chen>	jpunit, thanks!
+May 18 12:14:57 *	vibs has quit (Ping timeout: 600 seconds)
+May 18 12:15:02 <mcrha>	dave_largo, if I recall correctly then bug-buddy is working automatically for gtk+ application, thus initializing gtk+ in eds main() may do the trick. The problem is that the server should be able to run withouth X too.
+May 18 12:15:24 <dave_largo>	knirav: ^^
+May 18 12:15:25 <chen>	vibs will also be working on write support for ews personal address-book..
+May 18 12:15:48 *	vibs (~yvibha@122.178.234.76) has joined #evolution-meet
+May 18 12:16:09 <dave_largo>	So it needs to check if it's headless and then only initialize gtk+ if there is an Xserver
+May 18 12:16:13 <chen>	vibs, punit has provided updates on ur behalf (if ur still connected) :)
+May 18 12:16:23 <vibs>	hey hiii, yupp
+May 18 12:16:31 <vibs>	now m connected
+May 18 12:16:35 <chen>	:)
+May 18 12:16:37 <mcrha>	dave_largo, I would try gtk_init_check() and just ignore the result, (or print on console) in the main() just after g_type_init() call or near that place
+May 18 12:17:22 <vibs>	yes for past few weeks, I have worked on certain customer issues, and a few upstream bugs, and focused on evolution-groupwise package. 
+May 18 12:17:52 <chen>	vibs, thanks and i just updated that u will also be working on write support for ews personal address-book..
+May 18 12:18:09 <chen>	dave_largo, jpunit can prolly make that patch for u..
+May 18 12:18:12 <vibs>	yes :)
+May 18 12:18:23 <chen>	knirav, ^^
+May 18 12:18:37 <dave_largo>	If we can get crash dumps from EDS, that will be a HUGE issue for stability
+May 18 12:18:49 <dave_largo>	I believe that it's just a few nagging crashers
+May 18 12:18:55 <knirav>	dave_largo,point taken
+May 18 12:19:21 <chen>	anything else from anyone before we wind up?
+May 18 12:20:34 <chen>	Lets then meet next month with more excitement awaited in master :)
+May 18 12:20:38 <chen>	thanks everyone!
+
