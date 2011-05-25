@@ -76,8 +76,18 @@
   </div>
   
   <p class="clear-me">
-    Anjuta follows GNOME
-    <a href="http://live.gnome.org/TwoPointTwentyseven">release planning</a>
+  <h2>Install binary package</h2>
+  <p>In general it is recommended that you install the binary package your 
+  distribution provides, at least as long as those are up-to-date. Instructions for
+  various distributions can be found in the 
+  <a href="https://live.gnome.org/DeveloperTools/Installation">wiki</a>.</p>
+  
+  <p>If the packages in your distribution are old and you use the latest version
+  of the distribution, please file a bug against the package in the bug tracking
+  system of your distribution.</p>
+  
+  <p class="clear-me">
+    Anjuta follows GNOME release planning
     and version numbering scheme. Unstable
     versions have a odd minor version number while stable version
     have a even minor version number.
@@ -101,23 +111,24 @@
     <table>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtk/">GTK+</a></td>
-        <td nowrap="">2.91.1 or later</td>
+        <td nowrap="">3.0 or later</td>
         <td>GTK+ toolkit UI development library</td></tr>
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gdl/">GDL</a></td>
-        <td nowrap="">2.91.1 or later</td>
+        <td nowrap="">3.0 or later</td>
         <td>Docking library</td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/gtksourceview/">gtksourceview</a></td>
-        <td nowrap="">2.91.x or later</td>
+        <td nowrap="">3.0 or later</td>
         <td>GTK+ sourceview editor widget (required for Anjuta editor)</td></tr>
 
-      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/libgda/3.99/">libgda</a></td>
+      <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/libgda">libgda</a></td>
         <td nowrap="">4.2 or later</td>
         <td>GNOME DB library</td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/vte/">vte</a></td>
-        <td nowrap="">0.27.2 or later</td>
-        <td>GNOME vte terminal widget (required for embedded terminal plugin)</td></tr>
+        <td nowrap="">0.28.0 or later</td>
+        <td>GNOME vte terminal widget (required for embedded terminal plugin). You have
+        to use the --with-gtk=3.0 switch at configure time.</td></tr>
 
       <tr><td nowrap=""><a href="http://www.xmlsoft.org/">libxml</a></td>
         <td nowrap="">2.4.23 or later</td>
@@ -127,20 +138,16 @@
         <td nowrap="">Any</td>
         <td>XSLT transformation library</td></tr>
 
-      <tr><td nowrap=""><a href="http://live.gnome.org/LibUnique">libunique</a></td>
-        <td nowrap="">2.4.23 or later</td>
-        <td>Unique is a library for writing single instance application.</td></tr>
-
         <tr><td colspan="3" nowrap=""><h3>You can optionally have these to build some essential plugins.</h3></td></tr>
 
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/glade3/">glade3</a></td>
-        <td nowrap="">3.1.3 or later</td>
+        <td nowrap="">3.10 or later</td>
         <td>Next generation glade UI designer.
 	  GTK/GNOME Graphical User Interface Editor.
 	  You need this for developing GTK/GNOME applications in Anjuta</td></tr>
       
       <tr><td nowrap=""><a href="http://ftp.gnome.org/pub/GNOME/sources/devhelp/">devhelp</a></td>
-        <td nowrap="">2.91.1 or later</td>
+        <td nowrap="">3.0 or later</td>
         <td>Developer's help system. Required for context sensitive API help and search.</td></tr>
       
       <tr><td nowrap=""><a href="http://www.graphviz.org/Download.php">graphviz</a></td>
@@ -172,7 +179,7 @@
   </p>
   <p>
     <table border="1" cellspacing="1" cellpadding="4">
-      <tr><td><a href="http://gtkmm.sourceforge.net/">gtkmm</a></td>
+      <tr><td><a href="http://www.gtkmm.org">gtkmm</a></td>
 	<td>C++ wrapper for GTK. You need this for developing C++ GTK applications.</td></tr>
       <tr><td><a href="http://www.wxwindows.org">WxWindows</a></td>
 	<td>Cross platform GUI toolkit. It uses
