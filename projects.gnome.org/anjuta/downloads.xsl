@@ -74,18 +74,7 @@
       </center>
     </div>
   </div>
-  
-  <p class="clear-me">
-  <h2>Install binary package</h2>
-  <p>In general it is recommended that you install the binary package your 
-  distribution provides, at least as long as those are up-to-date. Instructions for
-  various distributions can be found in the 
-  <a href="https://live.gnome.org/DeveloperTools/Installation">wiki</a>.</p>
-  
-  <p>If the packages in your distribution are old and you use the latest version
-  of the distribution, please file a bug against the package in the bug tracking
-  system of your distribution.</p>
-  
+    
   <p class="clear-me">
     Anjuta follows GNOME release planning
     and version numbering scheme. Unstable
@@ -101,7 +90,17 @@
     Older releases are available
     <a href="http://ftp.gnome.org/pub/GNOME/sources/anjuta/">here</a>
   </p>
+ 
+   <h2>Install binary package</h2>
+  <p>In general it is recommended that you install the binary package your 
+  distribution provides, at least as long as those are up-to-date. Instructions for
+  various distributions can be found in the 
+  <a href="https://live.gnome.org/DeveloperTools/Installation">wiki</a>.</p>
   
+  <p>If the packages in your distribution are old and you use the latest version
+  of the distribution, please file a bug against the package in the bug tracking
+  system of your distribution.</p>
+ 
   <a name="anjuta-dependencies"></a>
   <h2>Anjuta Dependencies</h2>
   <p> You must have these to install Anjuta 2.x. In case, you are installing binary package,
