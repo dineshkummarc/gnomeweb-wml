@@ -38,7 +38,6 @@ SUBDIRS = css \
 	nemiver			\
 	netspeed                \
 	NetworkManager		\
-	ooo			\
 	ORBit2			\
 	gnome-power-manager	\
 	gnome-color-manager	\
