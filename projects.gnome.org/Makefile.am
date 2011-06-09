@@ -24,7 +24,7 @@ SUBDIRS = css \
 	gnomeradio		\
 	gnumeric		\
 	guppi			\
-	gtkglext        \
+	gtkglext        	\
 	gtksourceview		\
 	gtksourceviewmm		\
 	gtranslator		\
@@ -65,17 +65,18 @@ SUBDIRS = css \
 	hipo			\
 	brasero			\
 	gnome-scan		\
-	vinagre		\
+	vinagre			\
 	billreminder		\
-	cheese \
+	cheese 			\
 	latour			\
-	libchamplain	\
-	diagnome \
-	postr \
-	gnome-blog      \
-        nautilus-python \
-        nautilus-sound-converter	\
-	yelp
+	libchamplain		\
+	diagnome 		\
+	postr 			\
+	gnome-blog      	\
+        nautilus-python 	\
+        nautilus-sound-converter\
+	yelp			\
+	latexila
 
 urlpath = 
 
