@@ -1,6 +1,7 @@
 urlpath = /gnumeric/announcements/1.10
 
 page_SCRIPTS= \
+	gnumeric-1.10.16.shtml \
 	gnumeric-1.10.15.shtml \
 	gnumeric-1.10.14.shtml \
 	gnumeric-1.10.13.shtml \
