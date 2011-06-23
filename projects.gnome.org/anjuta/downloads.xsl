@@ -30,7 +30,7 @@
     <h3>Stable core release</h3>
     <div class="download-button">
       <center>
-	<a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.gz"><strong>Download Stable</strong>
+	<a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.bz2"><strong>Download Stable</strong>
 	</a><br/>
 	Anjuta <xsl:value-of select="$release/anjuta/stable/version"/>
       </center>
@@ -38,7 +38,7 @@
     <h3>Latest Unstable core release</h3>
     <div class="download-button">
       <center>
-	<a href="{$release/anjuta/unstable/download}/anjuta-{$release/anjuta/unstable/version}.tar.gz"><strong>Download Unstable</strong>
+	<a href="{$release/anjuta/unstable/download}/anjuta-{$release/anjuta/unstable/version}.tar.bz2"><strong>Download Unstable</strong>
 	</a><br/>
 	Anjuta <xsl:value-of select="$release/anjuta/unstable/version"/>
       </center>
@@ -60,7 +60,7 @@
     <h3>Stable extras release</h3>
     <div class="download-button">
       <center>
-	<a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.tar.gz"><strong>Download Stable</strong>
+	<a href="{$release/anjuta-extras/stable/download}/anjuta-extras-{$release/anjuta-extras/stable/version}.tar.bz2"><strong>Download Stable</strong>
 	</a><br/>
 	Anjuta Extras <xsl:value-of select="$release/anjuta-extras/stable/version"/>
       </center>
@@ -68,7 +68,7 @@
     <h3>Latest unstable extras release</h3>
     <div class="download-button">
       <center>
-	<a href="{$release/anjuta-extras/unstable/download}/anjuta-extras-{$release/anjuta-extras/unstable/version}.tar.gz"><strong>Download Unstable</strong>
+	<a href="{$release/anjuta-extras/unstable/download}/anjuta-extras-{$release/anjuta-extras/unstable/version}.tar.bz2"><strong>Download Unstable</strong>
 	</a><br/>
 	Anjuta Extras <xsl:value-of select="$release/anjuta-extras/unstable/version"/>
       </center>
