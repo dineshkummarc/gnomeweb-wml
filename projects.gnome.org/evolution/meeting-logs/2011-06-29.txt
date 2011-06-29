@@ -1,0 +1,189 @@
+Jun 29 11:35:17 <chen>	Lets get started...
+Jun 29 11:35:33 <chen>	starting with project updates,
+Jun 29 11:36:14 <chen>	we had evolution 3.1.2 released on jun 13 and these some notable changes that have gone in,
+Jun 29 11:36:23 <chen>	+ New ECalClient/EBookClient async apis to replace ECal/EBook
+Jun 29 11:36:38 <chen>	+  sqlitedb for address-book
+Jun 29 11:37:02 <chen>	+ help file has been re-licensed from GFDL 1.2 to GFDL 1.3 and CC-BY-SA 3.0
+Jun 29 11:37:44 <chen>	evolution 3.1.3 is due coming Monday - July 4, please ensure the patches are committed ahead so that they can get into the release..
+Jun 29 11:38:25 <mbarnes>	any idea how the mallard rewrite is progressing for user docs?
+Jun 29 11:38:43 <seb128>	is 3.1.3 going to be fixed to have a working wizard on gtk 3.1?
+Jun 29 11:38:59 <chen>	mbarnes, abharath and lakhil were following it  up?
+Jun 29 11:39:01 <seb128>	you can't add accounts on GNOME 3.1 with the current version
+Jun 29 11:39:19 *	hggdh (~hggdh@83.141.95.158) has joined #evolution-meet
+Jun 29 11:39:25 <mcrha>	hi seb128, (gnome) bug link?
+Jun 29 11:39:28 <chen>	seb128, bug id ?
+Jun 29 11:39:35 <lakhil>	chen, i think only andre was active but he couldn't spend much due to other commitments
+Jun 29 11:40:04 <seb128>	https://bugzilla.gnome.org/show_bug.cgi?id=652958
+Jun 29 11:40:10 <seb128>	chen, mcrha: ^
+Jun 29 11:40:10 <abharath>	http://gitorious.org/evolution-docs/evolution-docs
+Jun 29 11:40:14 <mcrha>	thanks seb128 
+Jun 29 11:40:22 <seb128>	yw
+Jun 29 11:40:23 <abharath>	that's the repo I guess
+Jun 29 11:40:24 <mbarnes>	EConfig needs retooled for the new GtkAssistant design, I suspect
+Jun 29 11:40:59 <chen>	abharath, thanks
+Jun 29 11:41:45 <chen>	moving on..
+Jun 29 11:41:59 <abharath>	A lot of pages have been committed, http://gitorious.org/evolution-docs/evolution-docs/trees/master
+Jun 29 11:42:17 <chen>	ews work is going steadily. calendar pieces are getting near completion..
+Jun 29 11:42:17 <abharath>	I'll check on all the pages. Andre seems to have done a lot of it
+Jun 29 11:42:33 <mbarnes>	abharath: thanks!
+Jun 29 11:42:47 <chen>	personal address-book caching works fine, while gal caching is almost near completion..
+Jun 29 11:43:16 <chen>	thats with the general project updates..
+Jun 29 11:43:33 <chen>	abharath, would be nice if you can keep an eye on it :)
+Jun 29 11:43:57 <chen>	anything to discuss before we move on to individual updates ?
+Jun 29 11:44:02 <abharath>	chen: okie :)
+Jun 29 11:44:39 <lakhil>	Can we have some method where we can collect Evolution usage data  from users to get better idea about our user base like what type of server they use primarily, how many folders/calendars they have, which version they use similar to what was done in Banshee a year back, though i haven't asked banshee developers where they are saving the data. I hope statistics can help to plan development better. 
+Jun 29 11:45:11 *	rgs (~rgs@pasanda.collabora.co.uk) has joined #evolution-meet
+Jun 29 11:45:34 <lakhil>	just a thought came to mind :)
+Jun 29 11:46:01 <rodrigo>	lakhil, but how do you want to collect them? by making users enable it in evolution?
+Jun 29 11:46:07 <chen>	it can be done as a plugin, is it a successful method of collecting data ?
+Jun 29 11:46:51 *	mcrha has a little query on a different topic too, thus when the statistic discussing is over...
+Jun 29 11:46:56 <lakhil>	rodrigo, we can have option where it will completely depend on user's choice whether he wants to share or not
+Jun 29 11:47:38 <lakhil>	rodrigo, many users have shared their usage related to banshee which helped developers to understand the usage better
+Jun 29 11:47:47 <rodrigo>	yeah, right
+Jun 29 11:48:17 <chen>	a menu item under help, maybe a good option..
+Jun 29 11:48:29 <lakhil>	yep
+Jun 29 11:48:38 <chen>	lakhil, how about initiating a discussion on the users-list ?
+Jun 29 11:49:33 *	chen waits for lakhil to come back
+Jun 29 11:49:34 <lakhil>	chen, sure, i can initiate if people (present here in meeting) think that it's a useful thing to do
+Jun 29 11:49:42 <mbarnes>	more importantly, where will the data be sent to?  and how do we compile statistics from it?
+Jun 29 11:50:15 <lakhil>	first i will try to collect more information about how banshee is handing
+Jun 29 11:50:19 <lakhil>	*handling
+Jun 29 11:51:02 <mbarnes>	if we could set up something operating on gnome.org, that might help give the appearance of legitimacy
+Jun 29 11:51:59 <chen>	ai on lakhil to inquire the options :)
+Jun 29 11:52:15 *	lakhil will contact gnome admin if it's possible
+Jun 29 11:52:16 *	chen leaves the floor for mcrha 
+Jun 29 11:52:38 <mcrha>	I noticed recently some changes in the code, around white space cleanups, and it made me wonder why doing such changes. I'm not against it completely, but making line wrapping seems to me like a very bad idea, because of couple reasons: a) this kind of changes breaks 'git blame', which is a pita; b) why to wrap on 80 letters? are we at 1980? Screen resolution is wider than taller these days, so by wrapping you are loosing information; c) grepping
+Jun 29 11:52:38 <mcrha>	 for certain text, which is wrapped, forces you to open the file and check surrounding lines, which takes time
+Jun 29 11:52:59 <mcrha>	and finally d) as an example: http://git.gnome.org/browse/evolution/diff/em-format/em-format.c?id=f014ab82c8107
+Jun 29 11:53:15 <mcrha>	I do not know how for you, bot for me is the previous version much easier to read
+Jun 29 11:53:31 <rodrigo>	yeah
+Jun 29 11:53:34 <mcrha>	so, basically, my question is what the team thinks about it.
+Jun 29 11:54:05 <mcrha>	I do not want quick decisions, so we can let this opened for the next meeting and think about that
+Jun 29 11:54:17 <mcrha>	...meanwhile
+Jun 29 11:54:51 <chen>	mcrha, i just started wrapping the code, since it looked good tbh :)
+Jun 29 11:55:08 <mcrha>	I wrap lines too, but not always
+Jun 29 11:55:23 <chen>	mcrha, did not think much on those lines on what you have mentioned..
+Jun 29 11:55:24 <mcrha>	I'm fine with longer lines, than with shorter
+Jun 29 11:55:57 <chen>	mcrha, will think about it and come back, while do any others have any preference ?
+Jun 29 11:56:26 *	chen needs to definetly give some thinking due to a lack of preference actually ;)
+Jun 29 11:56:30 <abharath>	I agree with mcrha. Use it wherever possible, but don't mandate it to the extent that it seems difficult/ugly to read
+Jun 29 11:56:39 <mcrha>	imagine you are looking for a signal or property name by grep. it's usage is usually: binding_statement (\n"prop-name", "..."\n...); so the grep misses where it's used. Though not the best example, I agree.
+Jun 29 11:57:27 <chen>	mcrha, got it
+Jun 29 11:57:28 <mcrha>	just do not make evo code 80 letters long-line code, please. this is really 21st century :)
+Jun 29 11:57:38 <chen>	lol
+Jun 29 11:58:01 <mcrha>	and to answer chen, I do not know why other project still forces 80 line length
+Jun 29 11:58:16 <mcrha>	mine terminal has about 180-letter lines
+Jun 29 11:58:24 <mcrha>	err, 160
+Jun 29 11:58:24 <xtian>	hysterical raisins mostly, i would suspect
+Jun 29 11:58:35 <chen>	yeah
+Jun 29 11:58:55 <mcrha>	xtian, hysterical or historical? ;)
+Jun 29 11:59:19 <chen>	and reasons :)
+Jun 29 11:59:53 <chen>	mcrha, we could think over a bit and make some suggestions on these lines and follow the same across..
+Jun 29 12:00:16 <chen>	anything else before we go for individual updates?
+Jun 29 12:00:16 <mcrha>	yup, I agree. Feel free to move on with the meeting
+Jun 29 12:00:20 <chen>	mcrha, sure
+Jun 29 12:00:51 <chen>	completed the sqlitedb for address-book. caching for personal address-book + gal (in progress),
+Jun 29 12:00:52 *	xtian , not being much of an evo coder, tries to keep the lines (a) short and (b) logically cohesive, with (b) slightly superseeding (a)
+Jun 29 12:01:16 <chen>	just got the code in for create/delete contacts, while create for some reason does not get any response from server..
+Jun 29 12:02:03 <chen>	gal caching, decompression is done while i have to parse the contents and store it inside db to complete the stuff..
+Jun 29 12:02:09 <chen>	thats it from my side..
+Jun 29 12:02:16 <chen>	abharath, updates?
+Jun 29 12:02:28 <chen>	kov, hggdh anything to share?
+Jun 29 12:02:42 <hggdh>	chen: not from here, been away for a while
+Jun 29 12:02:57 <chen>	hggdh, np
+Jun 29 12:03:04 <chen>	jpunit, updates?
+Jun 29 12:03:15 <abharath>	chen: mostly downstream. Just busy with some Desktop Summit work. Nothing else
+Jun 29 12:03:25 <chen>	abharath, thanks
+Jun 29 12:03:32 <chen>	lakhil, updates?
+Jun 29 12:04:02 <chen>	mbarnes, updates?
+Jun 29 12:04:21 <lakhil>	chen, random testing on master, bug triaging and today have started testing evolution-ews
+Jun 29 12:04:35 <mbarnes>	I'm 2/3 done with GNOME Online Accounts integration for Google accounts
+Jun 29 12:04:35 <mbarnes>	should finish OAuth support for Google Calendars today or tomorrow
+Jun 29 12:04:35 <mbarnes>	I'll blog about it once it works as well as it's gonna for 3.2
+Jun 29 12:04:35 <mbarnes>	then I'll be getting back to my account-mgmt branch
+Jun 29 12:04:35 <mbarnes>	which is increasingly looking like 3.3 material
+Jun 29 12:04:35 <chen>	lakhil, thanks
+Jun 29 12:05:09 <jpunit>	chen: worked mostly on downstream bugs
+Jun 29 12:05:10 <chen>	mbarnes, thanks
+Jun 29 12:05:19 <chen>	jpunit, thanks
+Jun 29 12:05:22 <chen>	mcrha, updates?
+Jun 29 12:05:47 <mcrha>	Hmm, what did I do, in the past month+a bit, hmm, oh, I know, I broke evo with the EClient changes, it's using EClient and does not use EBook/ECal anymore. If you feel the calendar is significantly slower, then you've the right feeling. Pity, it's all mostly sync calls, and that the calendar is extensively fetching backend properties, more than once. It'll need more thinking, I'm afraid, some client-side caching
+Jun 29 12:05:48 <chen>	mbarnes, sounds reasonable on account-mgmt-stuff..
+Jun 29 12:06:16 <chen>	mcrha, :)
+Jun 29 12:06:16 <mcrha>	the slowness is because the waiting to done signal from the server, if you are  wondering.
+Jun 29 12:06:32 <lakhil>	mbarnes, so will webkit migration be moved to 3.3 too ?
+Jun 29 12:06:37 <chen>	mcrha, server = eds ?
+Jun 29 12:06:45 <mcrha>	yup, from eds
+Jun 29 12:07:27 <rodrigo>	and, what's the status of the gsettings migration? I see the code jsut uses gsettings for desktop-wide settings
+Jun 29 12:07:28 <mbarnes>	lakhil: always was 3.3, haven't touched that branch for a year, unfortunately
+Jun 29 12:07:46 <chen>	mcrha, caching and maybe the backend could signal on changes ?
+Jun 29 12:07:48 <mcrha>	the process is: client asks to do something, server receives it and confirms "I'm on it", then client waits for a "done" signal, which server sends when the operation is really over.
+Jun 29 12:08:06 <mcrha>	chen, yup, something along those lines
+Jun 29 12:08:11 <lakhil>	mbarnes, ok, thanks for the information
+Jun 29 12:08:21 <chen>	mcrha, fine
+Jun 29 12:08:37 <mbarnes>	rodrigo: I had hoped to migrate everything at once, but we could probably migrate simple keys over now.  we'll still be relying on GConf for 3.2 regardless.
+Jun 29 12:08:38 <mcrha>	at least for backend properties, as they are called
+Jun 29 12:09:00 <rodrigo>	mbarnes, relying on gconf for what? the accounts?
+Jun 29 12:09:07 <mbarnes>	rodrigo: yes
+Jun 29 12:09:12 <chen>	mcrha, cool
+Jun 29 12:09:23 <rodrigo>	mbarnes, ok, so my branch to migrate the schemas was never merged, right?
+Jun 29 12:09:29 <mcrha>	lakhil, mbarnes, dvratil is on the webkit, his summer job
+Jun 29 12:09:53 <mbarnes>	rodrigo: right, needs rebased now.  sorry it's taken so long.
+Jun 29 12:10:17 <rodrigo>	mbarnes, no problem, it doesn't make sense to merge it if it's not used
+Jun 29 12:10:36 <rodrigo>	so I'll rebase it and maybe I can get some time to start migrating to gsettings some simple keys
+Jun 29 12:10:48 <lakhil>	mcrha, is he extending the work started by mbarnes ?
+Jun 29 12:10:57 <mcrha>	lakhil, yup, he is
+Jun 29 12:11:01 <rodrigo>	well, iirc, most keys could be migrated, except the acocunts and some other stuff I don't remember right now
+Jun 29 12:11:29 <chen>	rgs, anything to share?
+Jun 29 12:11:40 <mcrha>	lakhil, he's supposed to ask for commit rights to git, to have a central place and a possibility to update the webkit branch
+Jun 29 12:11:49 <rgs>	chen: folks' e-d-s backend to be released on Aug/1st :)
+Jun 29 12:12:01 <rgs>	hope to see some of you guys at the DesktopSummit maybe? :)
+Jun 29 12:12:13 <mbarnes>	rodrigo: I got all the XML blobs covered, including signatures.  some string lists might still be nasty.
+Jun 29 12:12:18 <chen>	rgs, nice :)
+Jun 29 12:12:29 *	chen may not be there this time..
+Jun 29 12:12:43 <mcrha>	ouch, chen, I forgot of one thing, I'll be away fo rthe next three weeks. I'll try to do evo-mapi release on Friday, but in case I would forget, I would like to ask abharath to make a release instead of me. it'll be clear on Monday whether I did it or not.
+Jun 29 12:13:19 <chen>	mcrha, cool np
+Jun 29 12:13:29 <rodrigo>	mbarnes, ok, I'll start with the simpler ones, on those same branches, ok?
+Jun 29 12:13:30 <mcrha>	and along evo-mapi, there is samba4 alpha16 release since the last Friday, and as soon as openchange will have its 0.11 release then I'll make evo-mapi depend on it. It'll be The Thing. Finally.
+Jun 29 12:13:39 <mbarnes>	mcrha: I just approved dvratil's account request
+Jun 29 12:13:45 <mbarnes>	rodrigo: sounds good
+Jun 29 12:13:50 <mcrha>	mbarnes, great, thanks
+Jun 29 12:14:22 <chen>	rodrigo, updates?
+Jun 29 12:14:44 <rodrigo>	chen, nothing, maybe next week if I get some time to work on the gsettings migration :)
+Jun 29 12:15:01 <chen>	rodrigo, thanks :)
+Jun 29 12:15:09 <chen>	seb128, anything to share?
+Jun 29 12:15:20 <chen>	xtian, updates?
+Jun 29 12:15:28 <seb128>	not really, we are just catching up on using the current version
+Jun 29 12:15:29 <xtian>	http://evolution-kolab.sourceforge.net/ is open for business now (finally replaced the standard sf thing with some true stuff)
+Jun 29 12:15:39 <chen>	seb128, cool
+Jun 29 12:15:50 <seb128>	which is bitting us since 3.1 is not able to create accounts :p
+Jun 29 12:15:52 <chen>	xtian, congrats :)
+Jun 29 12:16:23 <chen>	seb128, we will get it fixed :) maybe mcrha already has a patch ? ;)
+Jun 29 12:16:40 <seb128>	thanks ;-)
+Jun 29 12:16:47 <chen>	:)
+Jun 29 12:16:56 <xtian>	evolution-kolab has drawn some attention from major german it sites already, including heise.de, golem.de and pro-linux.de
+Jun 29 12:17:01 <mcrha>	chen, hehe, not so quickly, I asked for an information in the bug, maybe seb128 can answer it
+Jun 29 12:17:10 <chen>	mcrha, hehe
+Jun 29 12:17:29 <chen>	xtian, nice :)
+Jun 29 12:17:55 <mcrha>	xtian, good, real users means real testers
+Jun 29 12:18:02 <chen>	xtian, eagerly waiting to see the feed-back's from users :)
+Jun 29 12:18:22 <xtian>	package repo for ubuntu 10.04 is there, currently polishing user manual and stuff. compilation for debian/squeeze was successful, now testing
+Jun 29 12:18:49 <xtian>	we'll try to get it packaged for squeeze, too ... it may have more users than lucid, even
+Jun 29 12:19:08 <chen>	cool
+Jun 29 12:19:37 *	mcrha is trying to decipher 'fedora' from those strange distro names
+Jun 29 12:19:55 <xtian>	mcrha: good luck ;-)
+Jun 29 12:20:02 <chen>	hehe
+Jun 29 12:20:14 <mcrha>	xtian, yeah, seems like a real challenger :)
+Jun 29 12:20:19 <xtian>	mcrha: ubuntu 10.04 'lucid' was the target selected by our customer
+Jun 29 12:20:24 <mcrha>	*challenge
+Jun 29 12:20:39 <mcrha>	xtian, ah, then it makes sense
+Jun 29 12:20:48 <xtian>	mcrha: debian 6.0 'squeeze' has almost identical software versions
+Jun 29 12:21:10 <mbarnes>	dpkg is superior to rpm anyway  :P
+Jun 29 12:21:29 <mcrha>	how much can be hidden behind 'almost' word ;)
+Jun 29 12:21:36 <xtian>	mcrha: our resources were (and are) very much limited, hence the decision for an old (but stable) development ground
+Jun 29 12:22:01 <mcrha>	yup, as I said, it makes sense
+Jun 29 12:22:13 <xtian>	yet, we would like to creep'n'crawl towards gnome git ...
+Jun 29 12:22:21 <chen>	:)
+Jun 29 12:23:23 <chen>	Lets then meet next month with more fun :) let xtian and mcrha continue the fun discussion :)
+Jun 29 12:23:27 <chen>	thanks everyone!!
+
