@@ -5,7 +5,7 @@
 <title>NMRemoteSettings</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libnm-glib Reference Manual">
-<link rel="up" href="ch01.html" title="libnm-glib API Reference">
+<link rel="up" href="ch02.html" title="libnm-glib API Reference">
 <link rel="prev" href="NMRemoteConnection.html" title="NMRemoteConnection">
 <link rel="next" href="libnm-glib-nm-types.html" title="nm-types">
 <meta name="generator" content="GTK-Doc V1.17 (XML mode)">
@@ -15,7 +15,7 @@
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
 <td><a accesskey="p" href="NMRemoteConnection.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libnm-glib Reference Manual</th>
 <td><a accesskey="n" href="libnm-glib-nm-types.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
@@ -69,8 +69,11 @@ struct              <a class="link" href="NMRemoteSettings.html#NMRemoteSettings
 <a class="link" href="NMRemoteConnection.html" title="NMRemoteConnection"><span class="returnvalue">NMRemoteConnection</span></a> *  <a class="link" href="NMRemoteSettings.html#nm-remote-settings-get-connection-by-path" title="nm_remote_settings_get_connection_by_path ()">nm_remote_settings_get_connection_by_path</a>
                                                         (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);
+<a class="link" href="NMRemoteConnection.html" title="NMRemoteConnection"><span class="returnvalue">NMRemoteConnection</span></a> * <a class="link" href="NMRemoteSettings.html#nm-remote-settings-get-connection-by-uuid" title="nm_remote_settings_get_connection_by_uuid ()">nm_remote_settings_get_connection_by_uuid</a>
+                                                        (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMRemoteSettings.html#nm-remote-settings-add-connection" title="nm_remote_settings_add_connection ()">nm_remote_settings_add_connection</a>   (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
-                                                         <em class="parameter"><code><span class="type">NMConnection</span> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMRemoteSettings.html#NMRemoteSettingsAddConnectionFunc" title="NMRemoteSettingsAddConnectionFunc ()"><span class="type">NMRemoteSettingsAddConnectionFunc</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMRemoteSettings.html#nm-remote-settings-save-hostname" title="nm_remote_settings_save_hostname ()">nm_remote_settings_save_hostname</a>    (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
@@ -297,7 +300,7 @@ Creates a new object representing the remote settings service.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the new remote settings object on success, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on failure</td>
+<td>the new remote settings object on success, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> on failure</td>
 </tr>
 </tbody>
 </table></div>
@@ -359,9 +362,39 @@ not known. <span class="annotation">[<acronym title="Don't free data after the c
 </div>
 <hr>
 <div class="refsect2">
+<a name="nm-remote-settings-get-connection-by-uuid"></a><h3>nm_remote_settings_get_connection_by_uuid ()</h3>
+<pre class="programlisting"><a class="link" href="NMRemoteConnection.html" title="NMRemoteConnection"><span class="returnvalue">NMRemoteConnection</span></a> * nm_remote_settings_get_connection_by_uuid
+                                                        (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);</pre>
+<p>
+Returns the <a class="link" href="NMRemoteConnection.html" title="NMRemoteConnection"><code class="literal">NMRemoteConnection</code></a> identified by <em class="parameter"><code>uuid</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
+<td>the <a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><code class="literal">NMRemoteSettings</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uuid</code></em> :</span></p></td>
+<td>the UUID of the remote connection</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the remote connection object on success, or NULL if the object was
+not known. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
 <a name="nm-remote-settings-add-connection"></a><h3>nm_remote_settings_add_connection ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_remote_settings_add_connection   (<em class="parameter"><code><a class="link" href="NMRemoteSettings.html" title="NMRemoteSettings"><span class="type">NMRemoteSettings</span></a> *settings</code></em>,
-                                                         <em class="parameter"><code><span class="type">NMConnection</span> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMRemoteSettings.html#NMRemoteSettingsAddConnectionFunc" title="NMRemoteSettingsAddConnectionFunc ()"><span class="type">NMRemoteSettingsAddConnectionFunc</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>

@@ -5,8 +5,8 @@
 <title>NMClient</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libnm-glib Reference Manual">
-<link rel="up" href="ch01.html" title="libnm-glib API Reference">
-<link rel="prev" href="ch01.html" title="libnm-glib API Reference">
+<link rel="up" href="ch02.html" title="libnm-glib API Reference">
+<link rel="prev" href="ch02.html" title="libnm-glib API Reference">
 <link rel="next" href="NMActiveConnection.html" title="NMActiveConnection">
 <meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -14,8 +14,8 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch02.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libnm-glib Reference Manual</th>
 <td><a accesskey="n" href="NMActiveConnection.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
@@ -62,24 +62,26 @@ enum                <a class="link" href="NMClient.html#NMClientPermissionResult
 const <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="returnvalue">GPtrArray</span></a> *   <a class="link" href="NMClient.html#nm-client-get-devices" title="nm_client_get_devices ()">nm_client_get_devices</a>               (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>);
 <a class="link" href="NMDevice.html" title="NMDevice"><span class="returnvalue">NMDevice</span></a> *          <a class="link" href="NMClient.html#nm-client-get-device-by-path" title="nm_client_get_device_by_path ()">nm_client_get_device_by_path</a>        (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *object_path</code></em>);
-<span class="returnvalue">void</span>                (<a class="link" href="NMClient.html#NMClientActivateDeviceFn" title="NMClientActivateDeviceFn ()">*NMClientActivateDeviceFn</a>)         (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *object_path</code></em>,
+<a class="link" href="NMDevice.html" title="NMDevice"><span class="returnvalue">NMDevice</span></a> *          <a class="link" href="NMClient.html#nm-client-get-device-by-iface" title="nm_client_get_device_by_iface ()">nm_client_get_device_by_iface</a>       (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *iface</code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="NMClient.html#NMClientActivateFn" title="NMClientActivateFn ()">*NMClientActivateFn</a>)               (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMActiveConnection.html" title="NMActiveConnection"><span class="type">NMActiveConnection</span></a> *active_connection</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="NMClient.html#nm-client-activate-connection" title="nm_client_activate_connection ()">nm_client_activate_connection</a>       (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *connection_path</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> *device</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *specific_object</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="NMClient.html#NMClientActivateDeviceFn" title="NMClientActivateDeviceFn ()"><span class="type">NMClientActivateDeviceFn</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMClient.html#NMClientActivateFn" title="NMClientActivateFn ()"><span class="type">NMClientActivateFn</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                (<a class="link" href="NMClient.html#NMClientAddActivateFn" title="NMClientAddActivateFn ()">*NMClientAddActivateFn</a>)            (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *connection_path</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *active_path</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMActiveConnection.html" title="NMActiveConnection"><span class="type">NMActiveConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *new_connection_path</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="NMClient.html#nm-client-add-and-activate-connection" title="nm_client_add_and_activate_connection ()">nm_client_add_and_activate_connection</a>
                                                         (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><span class="type">NMConnection</span> *partial</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *partial</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> *device</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *specific_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMClient.html#NMClientAddActivateFn" title="NMClientAddActivateFn ()"><span class="type">NMClientAddActivateFn</span></a> callback</code></em>,
@@ -127,15 +129,15 @@ const <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="returnva
 <pre class="synopsis">
   "<a class="link" href="NMClient.html#NMClient--active-connections" title='The "active-connections" property'>active-connections</a>"       <span class="type">NMObjectArray</span>*        : Read
   "<a class="link" href="NMClient.html#NMClient--manager-running" title='The "manager-running" property'>manager-running</a>"          <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read
-  "<a class="link" href="NMClient.html#NMClient--networking-enabled" title='The "networking-enabled" property'>networking-enabled</a>"       <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read
+  "<a class="link" href="NMClient.html#NMClient--networking-enabled" title='The "networking-enabled" property'>networking-enabled</a>"       <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
   "<a class="link" href="NMClient.html#NMClient--state" title='The "state" property'>state</a>"                    <a href="../glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read
   "<a class="link" href="NMClient.html#NMClient--version" title='The "version" property'>version</a>"                  <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read
-  "<a class="link" href="NMClient.html#NMClient--wimax-enabled" title='The "wimax-enabled" property'>wimax-enabled</a>"            <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct
-  "<a class="link" href="NMClient.html#NMClient--wimax-hardware-enabled" title='The "wimax-hardware-enabled" property'>wimax-hardware-enabled</a>"   <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only
+  "<a class="link" href="NMClient.html#NMClient--wimax-enabled" title='The "wimax-enabled" property'>wimax-enabled</a>"            <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="NMClient.html#NMClient--wimax-hardware-enabled" title='The "wimax-hardware-enabled" property'>wimax-hardware-enabled</a>"   <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read
   "<a class="link" href="NMClient.html#NMClient--wireless-enabled" title='The "wireless-enabled" property'>wireless-enabled</a>"         <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
   "<a class="link" href="NMClient.html#NMClient--wireless-hardware-enabled" title='The "wireless-hardware-enabled" property'>wireless-hardware-enabled</a>" <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read
-  "<a class="link" href="NMClient.html#NMClient--wwan-enabled" title='The "wwan-enabled" property'>wwan-enabled</a>"             <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct
-  "<a class="link" href="NMClient.html#NMClient--wwan-hardware-enabled" title='The "wwan-hardware-enabled" property'>wwan-hardware-enabled</a>"    <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only
+  "<a class="link" href="NMClient.html#NMClient--wwan-enabled" title='The "wwan-enabled" property'>wwan-enabled</a>"             <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="NMClient.html#NMClient--wwan-hardware-enabled" title='The "wwan-hardware-enabled" property'>wwan-hardware-enabled</a>"    <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read
 </pre>
 </div>
 <div class="refsect1">
@@ -370,7 +372,7 @@ Gets a <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> for the given <em class="parameter"><code>object_path</code></em> or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if none is found. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<td>the <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> for the given <em class="parameter"><code>object_path</code></em> or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> if none is found. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -378,25 +380,11 @@ Gets a <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">
 </div>
 <hr>
 <div class="refsect2">
-<a name="NMClientActivateDeviceFn"></a><h3>NMClientActivateDeviceFn ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*NMClientActivateDeviceFn)         (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *object_path</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<a name="nm-client-get-device-by-iface"></a><h3>nm_client_get_device_by_iface ()</h3>
+<pre class="programlisting"><a class="link" href="NMDevice.html" title="NMDevice"><span class="returnvalue">NMDevice</span></a> *          nm_client_get_device_by_iface       (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *iface</code></em>);</pre>
 <p>
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-client-activate-connection"></a><h3>nm_client_activate_connection ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_client_activate_connection       (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *connection_path</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> *device</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *specific_object</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="NMClient.html#NMClientActivateDeviceFn" title="NMClientActivateDeviceFn ()"><span class="type">NMClientActivateDeviceFn</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
-<p>
-Activates a connection with the given <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a>.
+Gets a <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> from a <a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -407,19 +395,72 @@ Activates a connection with the given <a class="link" href="NMDevice.html" title
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>connection_path</code></em> :</span></p></td>
-<td>the connection's DBus path</td>
+<td><p><span class="term"><em class="parameter"><code>iface</code></em> :</span></p></td>
+<td>the interface name to search for</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> for the given <em class="parameter"><code>iface</code></em> or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> if none is found. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="NMClientActivateFn"></a><h3>NMClientActivateFn ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*NMClientActivateFn)               (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMActiveConnection.html" title="NMActiveConnection"><span class="type">NMActiveConnection</span></a> *active_connection</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-client-activate-connection"></a><h3>nm_client_activate_connection ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_client_activate_connection       (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> *device</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *specific_object</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMClient.html#NMClientActivateFn" title="NMClientActivateFn ()"><span class="type">NMClientActivateFn</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Starts a connection to a particular network using the configuration settings
+from <em class="parameter"><code>connection</code></em> and the network device <em class="parameter"><code>device</code></em>.  Certain connection types
+also take a "specific object" which is the object path of a connection-
+specific object, like an <a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> for WiFi connections, or an
+<a class="link" href="NMWimaxNsp.html" title="NMWimaxNsp"><span class="type">NMWimaxNsp</span></a> for WiMAX connections, to which you wish to connect.  If the
+specific object is not given, NetworkManager can, in some cases, automatically
+determine which network to connect to given the settings in <em class="parameter"><code>connection</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td>a <a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
+<td>an <a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>device</code></em> :</span></p></td>
-<td>the <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a>
+<td>the <a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>specific_object</code></em> :</span></p></td>
-<td>the device specific object (currently
-used only for activating wireless devices and should be the
-<a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a>'s path). <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>the object path of a connection-type-specific
+object this activation should use. This parameter is currently ignored for
+wired and mobile broadband connections, and the value of NULL should be used
+(ie, no specific object).  For WiFi or WiMAX connections, pass the object
+path of a <a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> or <a class="link" href="NMWimaxNsp.html" title="NMWimaxNsp"><span class="type">NMWimaxNsp</span></a> owned by <em class="parameter"><code>device</code></em>, which you can
+get using <a class="link" href="NMObject.html#nm-object-get-path" title="nm_object_get_path ()"><code class="function">nm_object_get_path()</code></a>, and which will be used to complete the
+details of the newly added connection. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -439,8 +480,8 @@ used only for activating wireless devices and should be the
 <div class="refsect2">
 <a name="NMClientAddActivateFn"></a><h3>NMClientAddActivateFn ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                (*NMClientAddActivateFn)            (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *connection_path</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *active_path</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="NMActiveConnection.html" title="NMActiveConnection"><span class="type">NMActiveConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *new_connection_path</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
@@ -451,15 +492,15 @@ used only for activating wireless devices and should be the
 <a name="nm-client-add-and-activate-connection"></a><h3>nm_client_add_and_activate_connection ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_client_add_and_activate_connection
                                                         (<em class="parameter"><code><a class="link" href="NMClient.html" title="NMClient"><span class="type">NMClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><span class="type">NMConnection</span> *partial</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *partial</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMDevice.html" title="NMDevice"><span class="type">NMDevice</span></a> *device</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *specific_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMClient.html#NMClientAddActivateFn" title="NMClientAddActivateFn ()"><span class="type">NMClientAddActivateFn</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
-Adds a new connection using the given details (if any) as a template
-(automatically filling in missing settings with the capabilities of the
-given device and specific object), then activate the new connection.
+Adds a new connection using the given details (if any) as a template,
+automatically filling in missing settings with the capabilities of the
+given device and specific object.  The new connection is then activated.
 Cannot be used for VPN connections at this time.
 </p>
 <div class="variablelist"><table border="0">
@@ -472,9 +513,10 @@ Cannot be used for VPN connections at this time.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>partial</code></em> :</span></p></td>
-<td>an <span class="type">NMConnection</span> to add; the connection may be partially filled
-and will be completed by NetworkManager using the given <em class="parameter"><code>device</code></em> and
-<em class="parameter"><code>specific_object</code></em> before being added</td>
+<td>an <a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> to add; the connection may be
+partially filled (or even NULL) and will be completed by NetworkManager
+using the given <em class="parameter"><code>device</code></em> and <em class="parameter"><code>specific_object</code></em> before being added. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>device</code></em> :</span></p></td>
@@ -486,8 +528,9 @@ and will be completed by NetworkManager using the given <em class="parameter"><c
 <td>the object path of a connection-type-specific
 object this activation should use. This parameter is currently ignored for
 wired and mobile broadband connections, and the value of NULL should be used
-(ie, no specific object).  For WiFi connections, pass the object path of a
-specific AP from the card's scan list, which will be used to complete the
+(ie, no specific object).  For WiFi or WiMAX connections, pass the object
+path of a <a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> or <a class="link" href="NMWimaxNsp.html" title="NMWimaxNsp"><span class="type">NMWimaxNsp</span></a> owned by <em class="parameter"><code>device</code></em>, which you can
+get using <a class="link" href="NMObject.html#nm-object-get-path" title="nm_object_get_path ()"><code class="function">nm_object_get_path()</code></a>, and which will be used to complete the
 details of the newly added connection. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
@@ -954,7 +997,7 @@ client can or cannot perform the action the permission represents
 <hr>
 <div class="refsect2">
 <a name="NMClient--networking-enabled"></a><h3>The <code class="literal">"networking-enabled"</code> property</h3>
-<pre class="programlisting">  "networking-enabled"       <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read</pre>
+<pre class="programlisting">  "networking-enabled"       <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Is networking enabled.</p>
 <p>Default value: TRUE</p>
 </div>
@@ -980,23 +1023,23 @@ The NetworkManager version.
 <hr>
 <div class="refsect2">
 <a name="NMClient--wimax-enabled"></a><h3>The <code class="literal">"wimax-enabled"</code> property</h3>
-<pre class="programlisting">  "wimax-enabled"            <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct</pre>
+<pre class="programlisting">  "wimax-enabled"            <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Is WiMAX enabled.</p>
-<p>Default value: TRUE</p>
+<p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="NMClient--wimax-hardware-enabled"></a><h3>The <code class="literal">"wimax-hardware-enabled"</code> property</h3>
-<pre class="programlisting">  "wimax-hardware-enabled"   <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "wimax-hardware-enabled"   <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read</pre>
 <p>Is WiMAX hardware enabled.</p>
-<p>Default value: TRUE</p>
+<p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="NMClient--wireless-enabled"></a><h3>The <code class="literal">"wireless-enabled"</code> property</h3>
 <pre class="programlisting">  "wireless-enabled"         <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Is wireless enabled.</p>
-<p>Default value: TRUE</p>
+<p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1008,16 +1051,16 @@ The NetworkManager version.
 <hr>
 <div class="refsect2">
 <a name="NMClient--wwan-enabled"></a><h3>The <code class="literal">"wwan-enabled"</code> property</h3>
-<pre class="programlisting">  "wwan-enabled"             <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct</pre>
+<pre class="programlisting">  "wwan-enabled"             <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Is WWAN enabled.</p>
-<p>Default value: TRUE</p>
+<p>Default value: FALSE</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="NMClient--wwan-hardware-enabled"></a><h3>The <code class="literal">"wwan-hardware-enabled"</code> property</h3>
-<pre class="programlisting">  "wwan-hardware-enabled"    <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "wwan-hardware-enabled"    <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read</pre>
 <p>Is WWAN hardware enabled.</p>
-<p>Default value: TRUE</p>
+<p>Default value: FALSE</p>
 </div>
 </div>
 <div class="refsect1">

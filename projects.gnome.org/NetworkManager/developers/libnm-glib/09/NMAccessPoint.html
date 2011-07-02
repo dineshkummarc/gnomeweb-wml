@@ -5,7 +5,7 @@
 <title>NMAccessPoint</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libnm-glib Reference Manual">
-<link rel="up" href="ch01.html" title="libnm-glib API Reference">
+<link rel="up" href="ch02.html" title="libnm-glib API Reference">
 <link rel="prev" href="NMWimaxNsp.html" title="NMWimaxNsp">
 <link rel="next" href="NMIP4Config.html" title="NMIP4Config">
 <meta name="generator" content="GTK-Doc V1.17 (XML mode)">
@@ -15,7 +15,7 @@
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
 <td><a accesskey="p" href="NMWimaxNsp.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libnm-glib Reference Manual</th>
 <td><a accesskey="n" href="NMIP4Config.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
@@ -67,6 +67,8 @@ const <span class="returnvalue">char</span> *            <a class="link" href="N
 <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *                <a class="link" href="NMAccessPoint.html#nm-access-point-filter-connections" title="nm_access_point_filter_connections ()">nm_access_point_filter_connections</a>
                                                         (<em class="parameter"><code><a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> *ap</code></em>,
                                                          <em class="parameter"><code>const <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *connections</code></em>);
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMAccessPoint.html#nm-access-point-connection-valid" title="nm_access_point_connection_valid ()">nm_access_point_connection_valid</a>    (<em class="parameter"><code><a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> *ap</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>);
 const <span class="returnvalue">char</span> *            <a class="link" href="NMAccessPoint.html#nm-access-point-get-hw-address" title="nm_access_point_get_hw_address ()">nm_access_point_get_hw_address</a>  (<em class="parameter"><code><a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> *ap</code></em>);
 </pre>
 </div>
@@ -454,12 +456,14 @@ other attributes like security settings, channel, etc.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connections</code></em> :</span></p></td>
-<td>a list of <span class="type">NMConnection</span> objects to filter</td>
+<td>a list of
+<a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> objects to filter. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.Connection]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a
-list of <span class="type">NMConnection</span> objects that could be activated with the given <em class="parameter"><code>ap</code></em>.
+list of <a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> objects that could be activated with the given <em class="parameter"><code>ap</code></em>.
 The elements of the list are owned by their creator and should not be freed
 by the caller, but the returned list itself is owned by the caller and should
 be freed with <a href="../glib/glib-Singly-Linked-Lists.html#g-slist-free"><code class="function">g_slist_free()</code></a> when it is no longer required. <span class="annotation">[<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.Connection]</span>
@@ -467,6 +471,14 @@ be freed with <a href="../glib/glib-Singly-Linked-Lists.html#g-slist-free"><code
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-access-point-connection-valid"></a><h3>nm_access_point_connection_valid ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_access_point_connection_valid    (<em class="parameter"><code><a class="link" href="NMAccessPoint.html" title="NMAccessPoint"><span class="type">NMAccessPoint</span></a> *ap</code></em>,
+                                                         <em class="parameter"><code><a href="../libnm-util/NMConnection.html"><span class="type">NMConnection</span></a> *connection</code></em>);</pre>
+<p>
+</p>
 </div>
 <hr>
 <div class="refsect2">

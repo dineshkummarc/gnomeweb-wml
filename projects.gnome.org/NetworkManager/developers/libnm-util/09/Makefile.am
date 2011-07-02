@@ -12,6 +12,7 @@ page_SCRIPTS=\
 	index.html \
 	left.png \
 	libnm-util-nm-utils.html \
+	NMConnection.html \
 	NMSetting8021x.html \
 	NMSettingBluetooth.html \
 	NMSettingCdma.html \
@@ -25,6 +26,7 @@ page_SCRIPTS=\
 	NMSettingPPPOE.html \
 	NMSettingSerial.html \
 	NMSettingVPN.html \
+	NMSettingWimax.html \
 	NMSettingWired.html \
 	NMSettingWireless.html \
 	NMSettingWirelessSecurity.html \

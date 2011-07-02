@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="libnm-util Reference Manual">
 <link rel="up" href="ch01.html" title="libnm-util API Reference">
-<link rel="prev" href="ch01.html" title="libnm-util API Reference">
+<link rel="prev" href="NMConnection.html" title="NMConnection">
 <link rel="next" href="NMSettingConnection.html" title="NMSettingConnection">
 <meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -14,7 +14,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="NMConnection.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libnm-util Reference Manual</th>
@@ -54,6 +54,7 @@ enum                <a class="link" href="NMSetting.html#NMSettingError">NMSetti
 #define             <a class="link" href="NMSetting.html#NM-SETTING-PARAM-FUZZY-IGNORE:CAPS" title="NM_SETTING_PARAM_FUZZY_IGNORE">NM_SETTING_PARAM_FUZZY_IGNORE</a>
 #define             <a class="link" href="NMSetting.html#NM-SETTING-NAME:CAPS" title="NM_SETTING_NAME">NM_SETTING_NAME</a>
 enum                <a class="link" href="NMSetting.html#NMSettingSecretFlags" title="enum NMSettingSecretFlags">NMSettingSecretFlags</a>;
+enum                <a class="link" href="NMSetting.html#NMSettingCompareFlags" title="enum NMSettingCompareFlags">NMSettingCompareFlags</a>;
                     <a class="link" href="NMSetting.html#NMSetting-struct" title="NMSetting">NMSetting</a>;
                     <a class="link" href="NMSetting.html#NMSettingClass" title="NMSettingClass">NMSettingClass</a>;
 <span class="returnvalue">void</span>                (<a class="link" href="NMSetting.html#NMSettingValueIterFn" title="NMSettingValueIterFn ()">*NMSettingValueIterFn</a>)             (<em class="parameter"><code><a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> *setting</code></em>,
@@ -72,7 +73,6 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMSetting.html#nm-setting-verify" title="nm_setting_verify ()">nm_setting_verify</a>                   (<em class="parameter"><code><a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *all_settings</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-enum                <a class="link" href="NMSetting.html#NMSettingCompareFlags" title="enum NMSettingCompareFlags">NMSettingCompareFlags</a>;
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMSetting.html#nm-setting-compare" title="nm_setting_compare ()">nm_setting_compare</a>                  (<em class="parameter"><code><a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> *a</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> *b</code></em>,
                                                          <em class="parameter"><code><a class="link" href="NMSetting.html#NMSettingCompareFlags" title="enum NMSettingCompareFlags"><span class="type">NMSettingCompareFlags</span></a> flags</code></em>);
@@ -122,7 +122,7 @@ enum                <a class="link" href="NMSetting.html#NMSettingDiffResult" ti
          +----<a class="link" href="NMSettingPPPOE.html" title="NMSettingPPPOE">NMSettingPPPOE</a>
          +----<a class="link" href="NMSettingSerial.html" title="NMSettingSerial">NMSettingSerial</a>
          +----<a class="link" href="NMSettingVPN.html" title="NMSettingVPN">NMSettingVPN</a>
-         +----NMSettingWimax
+         +----<a class="link" href="NMSettingWimax.html" title="NMSettingWimax">NMSettingWimax</a>
          +----<a class="link" href="NMSettingWired.html" title="NMSettingWired">NMSettingWired</a>
          +----<a class="link" href="NMSettingWireless.html" title="NMSettingWireless">NMSettingWireless</a>
          +----<a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity">NMSettingWirelessSecurity</a>
@@ -140,7 +140,7 @@ enum                <a class="link" href="NMSetting.html#NMSettingDiffResult" ti
 Each <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> contains properties that describe configuration that applies
 to a specific network layer (like IPv4 or IPv6 configuration) or device type
 (like Ethernet, or WiFi).  A collection of individual settings together
-make up an <span class="type">NMConnection</span>. Each property is strongly typed and usually has
+make up an <a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a>. Each property is strongly typed and usually has
 a number of allowed values.  See each <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> subclass for a description
 of properties and allowed values.
 </p>
@@ -313,6 +313,64 @@ secret is not required
 </div>
 <hr>
 <div class="refsect2">
+<a name="NMSettingCompareFlags"></a><h3>enum NMSettingCompareFlags</h3>
+<pre class="programlisting">typedef enum {
+	NM_SETTING_COMPARE_FLAG_EXACT = 0x00000000,
+	NM_SETTING_COMPARE_FLAG_FUZZY = 0x00000001,
+	NM_SETTING_COMPARE_FLAG_IGNORE_ID = 0x00000002,
+	NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS = 0x00000004,
+	NM_SETTING_COMPARE_FLAG_IGNORE_AGENT_OWNED_SECRETS = 0x00000008,
+	NM_SETTING_COMPARE_FLAG_IGNORE_NOT_SAVED_SECRETS = 0x00000010
+} NMSettingCompareFlags;
+</pre>
+<p>
+These flags modify the comparison behavior when comparing two settings or
+two connections.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-EXACT:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_EXACT</code></span></p></td>
+<td>match all properties exactly
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-FUZZY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_FUZZY</code></span></p></td>
+<td>match only important attributes, like SSID,
+  type, security settings, etc.  Does not match, for example, connection ID
+  or UUID.
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-ID:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_ID</code></span></p></td>
+<td>ignore the connection's ID
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-SECRETS:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS</code></span></p></td>
+<td>ignore all secrets
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-AGENT-OWNED-SECRETS:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_AGENT_OWNED_SECRETS</code></span></p></td>
+<td>ignore secrets for which
+the secret's flags indicate the secret is owned by a user secret agent
+(ie, the secret's flag includes <em class="parameter"><code>NM_SETTING_SECRET_FLAG_AGENT_OWNED</code></em>)
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-NOT-SAVED-SECRETS:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_NOT_SAVED_SECRETS</code></span></p></td>
+<td>ignore secrets for which
+the secret's flags indicate the secret should not be saved to persistent
+storage (ie, the secret's flag includes <em class="parameter"><code>NM_SETTING_SECRET_FLAG_NOT_SAVED</code></em>)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
 <a name="NMSetting-struct"></a><h3>NMSetting</h3>
 <pre class="programlisting">typedef struct _NMSetting NMSetting;</pre>
 <p>
@@ -350,11 +408,16 @@ It should only be accessed through the functions described below.
 	                                  NMSettingSecretFlags flags,
 	                                  GError **error);
 
+	/* Returns TRUE if the given property contains the same value in both settings */
+	gboolean    (*compare_property)  (NMSetting *setting,
+	                                  NMSetting *other,
+	                                  const GParamSpec *prop_spec,
+	                                  NMSettingCompareFlags flags);
+
 	/* Padding for future expansion */
 	void (*_reserved1) (void);
 	void (*_reserved2) (void);
 	void (*_reserved3) (void);
-	void (*_reserved4) (void);
 } NMSettingClass;
 </pre>
 <p>
@@ -420,7 +483,7 @@ when calling <a class="link" href="NMSetting.html#nm-setting-to-hash" title="nm_
 <p>
 Converts the <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> into a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping each setting property
 name to a GValue describing that property, suitable for marshalling over
-D-Bus or serializing.  The mapping is string:GValue.
+D-Bus or serializing.  The mapping is string to GValue.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -437,7 +500,8 @@ D-Bus or serializing.  The mapping is string:GValue.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> describing the setting's properties. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
+<td>a new <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a>
+describing the setting's properties. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
 </td>
 </tr>
 </tbody>
@@ -465,8 +529,9 @@ property names and value types.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
-<td>the <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> containing a string:GValue mapping of properties
-that apply to the setting</td>
+<td>the <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> containing a
+string to GValue mapping of properties that apply to the setting. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -548,55 +613,13 @@ came</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store error, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the setting is valid, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it is not</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="NMSettingCompareFlags"></a><h3>enum NMSettingCompareFlags</h3>
-<pre class="programlisting">typedef enum {
-	NM_SETTING_COMPARE_FLAG_EXACT = 0x00000000,
-	NM_SETTING_COMPARE_FLAG_FUZZY = 0x00000001,
-	NM_SETTING_COMPARE_FLAG_IGNORE_ID = 0x00000002,
-	NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS = 0x00000004
-} NMSettingCompareFlags;
-</pre>
-<p>
-These flags modify the comparison behavior when comparing two settings or
-two connections.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><a name="NM-SETTING-COMPARE-FLAG-EXACT:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_EXACT</code></span></p></td>
-<td>match all properties exactly
-</td>
-</tr>
-<tr>
-<td><p><a name="NM-SETTING-COMPARE-FLAG-FUZZY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_FUZZY</code></span></p></td>
-<td>match only important attributes, like SSID,
-  type, security settings, etc.  Does not match, for example, connection ID
-  or UUID.
-</td>
-</tr>
-<tr>
-<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-ID:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_ID</code></span></p></td>
-<td>ignore the connection's ID
-</td>
-</tr>
-<tr>
-<td><p><a name="NM-SETTING-COMPARE-FLAG-IGNORE-SECRETS:CAPS"></a><span class="term"><code class="literal">NM_SETTING_COMPARE_FLAG_IGNORE_SECRETS</code></span></p></td>
-<td>ignore secrets
-</td>
 </tr>
 </tbody>
 </table></div>
@@ -709,10 +732,11 @@ be set to <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="li
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>results</code></em> :</span></p></td>
-<td>if the settings differ, on return a
-hash table mapping the differing keys to one or more <a class="link" href="NMSetting.html#NMSettingDiffResult" title="enum NMSettingDiffResult"><span class="type">NMSettingDiffResult</span></a>
-values OR-ed together.  If the settings do not differ, any hash table passed
-in is unmodified.  If no hash table is passed in, a new one is created. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 guint32]</span>
+<td>if the
+settings differ, on return a hash table mapping the differing keys to one or
+more <a class="link" href="NMSetting.html#NMSettingDiffResult" title="enum NMSettingDiffResult"><code class="literal">NMSettingDiffResult</code></a> values OR-ed together.  If the settings do not
+differ, any hash table passed in is unmodified.  If no hash table is passed
+in and the settings differ, a new one is created and returned. <span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 guint32]</span>
 </td>
 </tr>
 <tr>
@@ -847,12 +871,13 @@ setting (deserialized from D-Bus for example).
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>secrets</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping string:<a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> of setting property names and
-secrets</td>
+<td>a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping
+string to <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> of setting property names and secrets. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store error, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -893,7 +918,7 @@ handle that secret.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store error, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -933,7 +958,7 @@ handle that secret.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store error, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>

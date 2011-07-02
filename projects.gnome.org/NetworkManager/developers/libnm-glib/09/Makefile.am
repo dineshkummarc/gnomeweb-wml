@@ -9,9 +9,12 @@ page_SCRIPTS=\
 	api-index-full.html \
 	object-tree.html \
 	ch01.html \
+	ch02.html \
+	ref-overview.html \
 	home.png \
 	index.html \
 	left.png \
+	libnm-glib.png
 	libnm-glib-nm-types.html \
 	NMAccessPoint.html \
 	NMActiveConnection.html \
