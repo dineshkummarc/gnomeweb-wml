@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>NetworkManager 0.8.4.0 Settings Specification</title></head>
+<title>NetworkManager 0.8.5.91 Settings Specification</title></head>
 <body>
 <p><h2>Setting name: '802-1x'</h2></p>
 <table cellspacing=10 border=0 cellpadding=2>
@@ -96,7 +96,7 @@
 <td><strong>phase2-client-cert</strong></td>
 <td>byte array</td>
 <td>[]</td>
-<td>Contains the 'phase 2' client certificate if used by the EAP method specified in the 'phase2-eap' or 'phase2-autheap' properties. Certificate data is specified using a 'scheme'; two are currently supported: blob and path.  When using the blob scheme (which is backwards compatible with NM 0.7.x) this property should be set to the certificate's DER encoded data.  When using the path scheme, this property should be set to the full UTF-8 encoded path of the certificate, prefixed with the string 'file://' and ending with a terminating NULL byte.</td>
+<td>Contains the 'phase 2' client certificate if used by the EAP method specified in the 'phase2-auth' or 'phase2-autheap' properties. Certificate data is specified using a 'scheme'; two are currently supported: blob and path.  When using the blob scheme (which is backwards compatible with NM 0.7.x) this property should be set to the certificate's DER encoded data.  When using the path scheme, this property should be set to the full UTF-8 encoded path of the certificate, prefixed with the string 'file://' and ending with a terminating NULL byte.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>password</strong></td>
@@ -120,7 +120,7 @@
 <td><strong>phase2-private-key</strong></td>
 <td>byte array</td>
 <td>[]</td>
-<td>Contains the 'phase 2' inner private key when the 'phase2-eap' or 'phase2-autheap' property is set to 'tls'.  Key data is specified using a 'scheme'; two are currently supported: blob and path. When using the blob scheme and X.509 private keys, this property should be set to the keys's decrypted DER encoded data.  When using X.509 private keys with the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte.  When using PKCS#12 format private keys and the blob scheme, this property should be set to the PKCS#12 data (which is encrypted) and the 'private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.  When using PKCS#12 files and the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte, and as with the blob scheme the 'private-key-password' property must be set to the password used to decode the PKCS#12 private key and certificate.</td>
+<td>Contains the 'phase 2' inner private key when the 'phase2-auth' or 'phase2-autheap' property is set to 'tls'.  Key data is specified using a 'scheme'; two are currently supported: blob and path. When using the blob scheme and X.509 private keys, this property should be set to the keys's decrypted DER encoded data.  When using X.509 private keys with the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte.  When using PKCS#12 format private keys and the blob scheme, this property should be set to the PKCS#12 data (which is encrypted) and the 'private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.  When using PKCS#12 files and the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte, and as with the blob scheme the 'private-key-password' property must be set to the password used to decode the PKCS#12 private key and certificate.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>phase2-private-key-password</strong></td>
@@ -256,7 +256,7 @@
 <td><strong>number</strong></td>
 <td>string</td>
 <td></td>
-<td>Number to dial when establishing a PPP data session with the GSM-based mobile broadband network.  In most cases, leave the number blank and a number selecting the APN specified in the 'apn' property will be used automatically when required.</td>
+<td>Number to dial when establishing a PPP data session with the GSM-based mobile broadband network.  Many modems do not require PPP for connections to the mobile network and thus this property should be left blank, which allows NetworkManager to select the appropriate settings automatically.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>username</strong></td>
@@ -783,6 +783,12 @@
 <td>If specified, request that the device use this MAC address instead of its permanent MAC address.  This is known as MAC cloning or spoofing.</td>
 </tr>
 <tr align=left valign=top>
+<td><strong>mac-address-blacklist</strong></td>
+<td>array of string</td>
+<td>[]</td>
+<td>If specified, this connection will never apply to the ethernet device whose permanent MAC address matches an address in the list.  Each MAC address is in the standard hex-digits-and-colons notation (00:11:22:33:44:55).</td>
+</tr>
+<tr align=left valign=top>
 <td><strong>mtu</strong></td>
 <td>uint32</td>
 <td>0</td>
@@ -874,6 +880,12 @@
 <td>If specified, request that the WiFi device use this MAC address instead of its permanent MAC address.  This is known as MAC cloning or spoofing.</td>
 </tr>
 <tr align=left valign=top>
+<td><strong>mac-address-blacklist</strong></td>
+<td>array of string</td>
+<td>[]</td>
+<td>If specified, this connection will never apply to the WiFi device whose permanent MAC address matches an address in the list.  Each MAC address is in the standard hex-digits-and-colons notation (00:11:22:33:44:55).</td>
+</tr>
+<tr align=left valign=top>
 <td><strong>mtu</strong></td>
 <td>uint32</td>
 <td>0</td>
@@ -883,7 +895,7 @@
 <td><strong>seen-bssids</strong></td>
 <td>array of string</td>
 <td>[]</td>
-<td>A list of BSSIDs (each BSSID formatted as a MAC address like '00:11:22:33:44:55') that have been detected as part of the WiFI network.  The settings service will usually populate this property by periodically asking NetworkManager what the device's current AP is while connected to the network (or monitoring the device's 'active-ap' property) and adding the current AP's BSSID to this list.  This list helps NetworkManager find hidden APs by matching up scan results with the BSSIDs in this list.</td>
+<td>A list of BSSIDs (each BSSID formatted as a MAC address like 00:11:22:33:44:55') that have been detected as part of the WiFI network. NetworkManager internally tracks previously seen BSSIDs so this property is no longer of much use.</td>
 </tr>
 <tr align=left valign=top>
 <td><strong>security</strong></td>
