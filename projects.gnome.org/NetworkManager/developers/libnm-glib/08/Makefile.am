@@ -9,6 +9,8 @@ page_SCRIPTS=\
 	home.png \
 	index.html \
 	left.png \
+	api-index-full.html \
+	object-tree.html \
 	libnm-glib-nm-types.html \
 	libnm-glib-NMVPNConnection.html \
 	libnm-glib-NMVPNPlugin.html \
