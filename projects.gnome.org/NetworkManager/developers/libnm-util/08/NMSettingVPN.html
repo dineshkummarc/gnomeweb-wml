@@ -35,13 +35,16 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="NMSettingVPN.top_of_page"></a>NMSettingVPN</span></h2>
-<p>NMSettingVPN</p>
+<p>NMSettingVPN — Describes connection properties for Virtual Private Networks</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="NMSettingVPN.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">#define             <a class="link" href="NMSettingVPN.html#NM-SETTING-VPN-SETTING-NAME:CAPS" title="NM_SETTING_VPN_SETTING_NAME">NM_SETTING_VPN_SETTING_NAME</a>
+<pre class="synopsis">
+#include &lt;nm-setting-vpn.h&gt;
+
+#define             <a class="link" href="NMSettingVPN.html#NM-SETTING-VPN-SETTING-NAME:CAPS" title="NM_SETTING_VPN_SETTING_NAME">NM_SETTING_VPN_SETTING_NAME</a>
 enum                <a class="link" href="NMSettingVPN.html#NMSettingVpnError" title="enum NMSettingVpnError">NMSettingVpnError</a>;
 #define             <a class="link" href="NMSettingVPN.html#NM-TYPE-SETTING-VPN-ERROR:CAPS" title="NM_TYPE_SETTING_VPN_ERROR">NM_TYPE_SETTING_VPN_ERROR</a>
 #define             <a class="link" href="NMSettingVPN.html#NM-SETTING-VPN-ERROR:CAPS" title="NM_SETTING_VPN_ERROR">NM_SETTING_VPN_ERROR</a>
@@ -101,6 +104,13 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <div class="refsect1" title="Description">
 <a name="NMSettingVPN.description"></a><h2>Description</h2>
 <p>
+The <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> object is a <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> subclass that describes properties
+necessary for connection to Virtual Private Networks.  NetworkManager uses
+a plugin architecture to allow easier use of new VPN types, and this
+setting abstracts the configuration for those plugins.  Since the configuration
+options are only known to the VPN plugins themselves, the VPN configuration
+options are stored as key/value pairs of strings rather than GObject
+properties.
 </p>
 </div>
 <div class="refsect1" title="Details">
@@ -115,15 +125,33 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <hr>
 <div class="refsect2" title="enum NMSettingVpnError">
 <a name="NMSettingVpnError"></a><h3>enum NMSettingVpnError</h3>
-<pre class="programlisting">typedef enum
-{
+<pre class="programlisting">typedef enum {
 	NM_SETTING_VPN_ERROR_UNKNOWN = 0,
 	NM_SETTING_VPN_ERROR_INVALID_PROPERTY,
 	NM_SETTING_VPN_ERROR_MISSING_PROPERTY,
 } NMSettingVpnError;
 </pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-VPN-ERROR-UNKNOWN:CAPS"></a><span class="term"><code class="literal">NM_SETTING_VPN_ERROR_UNKNOWN</code></span></p></td>
+<td>unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-VPN-ERROR-INVALID-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_VPN_ERROR_INVALID_PROPERTY</code></span></p></td>
+<td>the property was invalid
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-VPN-ERROR-MISSING-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_VPN_ERROR_MISSING_PROPERTY</code></span></p></td>
+<td>the property was missing and is
+required
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2" title="NM_TYPE_SETTING_VPN_ERROR">
@@ -146,12 +174,13 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-vpn-error-quark"></a><h3>nm_setting_vpn_error_quark ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              nm_setting_vpn_error_quark          (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Registers an error quark for <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> if necessary.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the error quark used for <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> errors.
 </td>
 </tr></tbody>
 </table></div>
@@ -217,24 +246,23 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                (*VPNIterFunc)                      (<em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *value</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
-<p>
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>the name of the data or secret item
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>
+<td>the value of the data or secret item
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>
+<td>User data passed to <a class="link" href="NMSettingVPN.html#nm-setting-vpn-foreach-data-item" title="nm_setting_vpn_foreach_data_item ()"><code class="function">nm_setting_vpn_foreach_data_item()</code></a> or
+<a class="link" href="NMSettingVPN.html#nm-setting-vpn-foreach-secret" title="nm_setting_vpn_foreach_secret ()"><code class="function">nm_setting_vpn_foreach_secret()</code></a>
 </td>
 </tr>
 </tbody>
@@ -260,12 +288,13 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-vpn-new"></a><h3>nm_setting_vpn_new ()</h3>
 <pre class="programlisting"><a class="link" href="NMSetting.html" title="NMSetting"><span class="returnvalue">NMSetting</span></a> *         nm_setting_vpn_new                  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Creates a new <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> object with default values.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the new empty <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> object
 </td>
 </tr></tbody>
 </table></div>
@@ -275,18 +304,20 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-vpn-get-service-type"></a><h3>nm_setting_vpn_get_service_type ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_vpn_get_service_type     (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>);</pre>
 <p>
+Returns the service name of the VPN, which identifies the specific VPN
+plugin that should be used to connect to this VPN.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the VPN plugin's service name
 </td>
 </tr>
 </tbody>
@@ -296,19 +327,17 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <div class="refsect2" title="nm_setting_vpn_get_user_name ()">
 <a name="nm-setting-vpn-get-user-name"></a><h3>nm_setting_vpn_get_user_name ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_vpn_get_user_name        (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>);</pre>
-<p>
-</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the <a class="link" href="NMSettingVPN.html#NMSettingVPN--user-name" title='The "user-name" property'><span class="type">"user-name"</span></a> property of the setting
 </td>
 </tr>
 </tbody>
@@ -321,23 +350,26 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *item</code></em>);</pre>
 <p>
+Establishes a relationship between <em class="parameter"><code>key</code></em> and <em class="parameter"><code>item</code></em> internally in the
+setting which may be retrieved later.  Should not be used to store passwords
+or other secrets, which is what <a class="link" href="NMSettingVPN.html#nm-setting-vpn-add-secret" title="nm_setting_vpn_add_secret ()"><code class="function">nm_setting_vpn_add_secret()</code></a> is for.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>a name that uniquely identifies the given value <em class="parameter"><code>item</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>item</code></em> :</span></p></td>
-<td>
+<td>the value to be referenced by <em class="parameter"><code>key</code></em>
 </td>
 </tr>
 </tbody>
@@ -349,23 +381,25 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_vpn_get_data_item        (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>);</pre>
 <p>
+Retrieves the data item of a key/value relationship previously established
+by <a class="link" href="NMSettingVPN.html#nm-setting-vpn-add-data-item" title="nm_setting_vpn_add_data_item ()"><code class="function">nm_setting_vpn_add_data_item()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>the name of the data item to retrieve
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the data item, if any
 </td>
 </tr>
 </tbody>
@@ -377,18 +411,20 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_setting_vpn_remove_data_item     (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>);</pre>
 <p>
+Deletes a key/value relationship previously established by
+<a class="link" href="NMSettingVPN.html#nm-setting-vpn-add-data-item" title="nm_setting_vpn_add_data_item ()"><code class="function">nm_setting_vpn_add_data_item()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>the name of the data item to remove
 </td>
 </tr>
 </tbody>
@@ -430,23 +466,25 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *secret</code></em>);</pre>
 <p>
+Establishes a relationship between <em class="parameter"><code>key</code></em> and <em class="parameter"><code>secret</code></em> internally in the
+setting which may be retrieved later.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>a name that uniquely identifies the given secret <em class="parameter"><code>secret</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>secret</code></em> :</span></p></td>
-<td>
+<td>the secret to be referenced by <em class="parameter"><code>key</code></em>
 </td>
 </tr>
 </tbody>
@@ -458,23 +496,25 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_vpn_get_secret           (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>);</pre>
 <p>
+Retrieves the secret of a key/value relationship previously established
+by <a class="link" href="NMSettingVPN.html#nm-setting-vpn-add-secret" title="nm_setting_vpn_add_secret ()"><code class="function">nm_setting_vpn_add_secret()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>the name of the secret to retrieve
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
+<td> the secret, if any
 </td>
 </tr>
 </tbody>
@@ -486,18 +526,20 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_setting_vpn_remove_secret        (<em class="parameter"><code><a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>);</pre>
 <p>
+Deletes a key/value relationship previously established by
+<a class="link" href="NMSettingVPN.html#nm-setting-vpn-add-secret" title="nm_setting_vpn_add_secret ()"><code class="function">nm_setting_vpn_add_secret()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
-<td>
+<td>the <a class="link" href="NMSettingVPN.html" title="NMSettingVPN"><span class="type">NMSettingVPN</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>
+<td>the name of the secret to remove
 </td>
 </tr>
 </tbody>
