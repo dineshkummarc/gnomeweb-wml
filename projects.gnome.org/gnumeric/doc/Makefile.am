@@ -350,7 +350,7 @@ page_SCRIPTS= \
 	gnumeric-function-IMTAN.shtml		\
 	gnumeric-function-INDEX.shtml		\
 	gnumeric-function-INDIRECT.shtml		\
-	gnumeric-function-info.shtml		\
+	gnumeric-info.shtml		\
 	gnumeric-function-INFO.shtml		\
 	gnumeric-function-INTERCEPT.shtml		\
 	gnumeric-function-INTERPOLATION.shtml	\
