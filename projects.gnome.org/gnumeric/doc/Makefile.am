@@ -1017,5 +1017,5 @@ page_SCRIPTS= \
 
 include $(top_srcdir)/rules.common
 
-install-exec-hook:
-	-rm -f $(pagedir)/gnumeric-[A-Z]*.shtml
+# install-exec-hook:
+#	-rm -f $(pagedir)/gnumeric-[A-Z]*.shtml
