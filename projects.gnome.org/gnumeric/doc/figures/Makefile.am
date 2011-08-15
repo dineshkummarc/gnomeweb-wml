@@ -83,7 +83,16 @@ page_SCRIPTS= 				\
 	analysistools-moving-average-formula-weighted.png	\
 	analysistools-moving-average-options.png	\
 	analysistools-moving-average.png		\
+	analysistools-normality-ex1.png		\
+	analysistools-normality-ex2.png		\
+	analysistools-normality-ex3.png		\
+	analysistools-normality-ex4.png		\
+	analysistools-normality-testspec.png	\
+	analysistools-normality.png		\
 	analysistools-outputoptions.png		\
+	analysistools-pcanalysis-ex1.png	\
+	analysistools-pcanalysis-ex2.png	\
+	analysistools-pcanalysis.png		\
 	analysistools-random-ex1.png		\
 	analysistools-random-ex2.png		\
 	analysistools-random.png		\
@@ -98,6 +107,10 @@ page_SCRIPTS= 				\
 	analysistools-sampling-ex1.png		\
 	analysistools-sampling-ex2.png		\
 	analysistools-sampling.png		\
+	analysistools-signtest-ex1.png		\
+	analysistools-signtest-ex2.png		\
+	analysistools-signtest-ex3.png		\
+	analysistools-signtest.png		\
 	analysistools-smoothing-ex1.png		\
 	analysistools-smoothing-ex2.png		\
 	analysistools-smoothing-ex3.png	\
@@ -372,7 +385,9 @@ page_SCRIPTS= 				\
 	menu-format-torn-off.png		\
 	menu-help-labelled.png		\
 	menu-help-torn-off.png		\
+	menu-insert-fw.png		\
 	menu-insert-labelled.png		\
+	menu-insert-names.png		\
 	menu-tools-labelled.png		\
 	menu-torn-off.png		\
 	menu-view-labelled.png		\
@@ -454,6 +469,7 @@ page_SCRIPTS= 				\
 	printing-setup-page-1.png		\
 	printing-setup-page-paper-type.png		\
 	printing-setup-page.png		\
+	printing-setup-printarea.png		\
 	printing-setup-scale.png		\
 	printing-setup-sheet.png		\
 	rect.png		\
