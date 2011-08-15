@@ -730,6 +730,7 @@ page_SCRIPTS= \
 	print-preview-customizing.shtml		\
 	print-print-range.shtml		\
 	print-setup-dialog-header.shtml		\
+	print-setup-dialog-printarea.shtml	\
 	print-setup-dialog-sheet.shtml		\
 	print-setup-page.shtml		\
 	print-setup-scale.shtml		\
@@ -832,6 +833,7 @@ page_SCRIPTS= \
 	sect-data-filter-advanced.shtml		\
 	sect-data-filter-auto.shtml		\
 	sect-data-filter.shtml		\
+	sect-data-format-conditional.shtml	\
 	sect-data-format-protectionandvalidation.shtml		\
 	sect-data-format.shtml		\
 	sect-data-formulas.shtml		\
@@ -1008,6 +1010,7 @@ page_SCRIPTS= \
 	t-test-tool.shtml	\
 	t-test-two-sample-equal-variances-tool.shtml	\
 	t-test-two-samples-unequal-variances.shtml	\
+	two-medians-tool.shtml		\
 	two_sample_tests.shtml			\
 	View-Menu.shtml	\
 	ztest-two-samples-for-means-tool.shtml
