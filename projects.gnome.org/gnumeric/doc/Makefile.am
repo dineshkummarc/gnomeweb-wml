@@ -224,7 +224,7 @@ page_SCRIPTS= \
 	gnumeric-function-DISC.shtml		\
 	gnumeric-function-DMAX.shtml		\
 	gnumeric-function-DMIN.shtml		\
-	gnumeric-function-doc.css		\
+	gnumeric-doc.css		\
 	gnumeric-function-DOLLARDE.shtml		\
 	gnumeric-function-DOLLARFR.shtml		\
 	gnumeric-function-DOLLAR.shtml		\
