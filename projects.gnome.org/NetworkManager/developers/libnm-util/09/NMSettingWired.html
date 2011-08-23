@@ -35,13 +35,16 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="NMSettingWired.top_of_page"></a>NMSettingWired</span></h2>
-<p>NMSettingWired</p>
+<p>NMSettingWired — Describes connection properties for Ethernet-based networks</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="NMSettingWired.synopsis"></a><h2>Synopsis</h2>
-<a name="NMSettingWiredError"></a><pre class="synopsis">#define             <a class="link" href="NMSettingWired.html#NM-SETTING-WIRED-SETTING-NAME:CAPS" title="NM_SETTING_WIRED_SETTING_NAME">NM_SETTING_WIRED_SETTING_NAME</a>
+<a name="NMSettingWiredError"></a><pre class="synopsis">
+#include &lt;nm-setting-wired.h&gt;
+
+#define             <a class="link" href="NMSettingWired.html#NM-SETTING-WIRED-SETTING-NAME:CAPS" title="NM_SETTING_WIRED_SETTING_NAME">NM_SETTING_WIRED_SETTING_NAME</a>
 enum                <a class="link" href="NMSettingWired.html#NMSettingWiredError">NMSettingWiredError</a>;
 #define             <a class="link" href="NMSettingWired.html#NM-TYPE-SETTING-WIRED-ERROR:CAPS" title="NM_TYPE_SETTING_WIRED_ERROR">NM_TYPE_SETTING_WIRED_ERROR</a>
 #define             <a class="link" href="NMSettingWired.html#NM-SETTING-WIRED-ERROR:CAPS" title="NM_SETTING_WIRED_ERROR">NM_SETTING_WIRED_ERROR</a>
@@ -121,6 +124,8 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <div class="refsect1">
 <a name="NMSettingWired.description"></a><h2>Description</h2>
 <p>
+The <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> object is a <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> subclass that describes properties
+necessary for connection to Ethernet networks.
 </p>
 </div>
 <div class="refsect1">
@@ -135,15 +140,33 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <hr>
 <div class="refsect2">
 <a name="NMSettingWiredError"></a><h3>enum NMSettingWiredError</h3>
-<pre class="programlisting">typedef enum
-{
+<pre class="programlisting">typedef enum {
 	NM_SETTING_WIRED_ERROR_UNKNOWN = 0,
 	NM_SETTING_WIRED_ERROR_INVALID_PROPERTY,
 	NM_SETTING_WIRED_ERROR_MISSING_PROPERTY
 } NMSettingWiredError;
 </pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-WIRED-ERROR-UNKNOWN:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRED_ERROR_UNKNOWN</code></span></p></td>
+<td>unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRED-ERROR-INVALID-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRED_ERROR_INVALID_PROPERTY</code></span></p></td>
+<td>the property was invalid
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRED-ERROR-MISSING-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRED_ERROR_MISSING_PROPERTY</code></span></p></td>
+<td>the property was missing and is
+required
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -166,7 +189,15 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-wired-error-quark"></a><h3>nm_setting_wired_error_quark ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              nm_setting_wired_error_quark        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Registers an error quark for <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> if necessary.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the error quark used for <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> errors.</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -291,65 +322,172 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-wired-new"></a><h3>nm_setting_wired_new ()</h3>
 <pre class="programlisting"><a class="link" href="NMSetting.html" title="NMSetting"><span class="returnvalue">NMSetting</span></a> *         nm_setting_wired_new                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Creates a new <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> object with default values.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new empty <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-port"></a><h3>nm_setting_wired_get_port ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wired_get_port           (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--port" title='The "port" property'><span class="type">"port"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-speed"></a><h3>nm_setting_wired_get_speed ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wired_get_speed          (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--speed" title='The "speed" property'><span class="type">"speed"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-duplex"></a><h3>nm_setting_wired_get_duplex ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wired_get_duplex         (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--duplex" title='The "duplex" property'><span class="type">"duplex"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-auto-negotiate"></a><h3>nm_setting_wired_get_auto_negotiate ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_setting_wired_get_auto_negotiate (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--auto-negotiate" title='The "auto-negotiate" property'><span class="type">"auto-negotiate"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-mac-address"></a><h3>nm_setting_wired_get_mac_address ()</h3>
 <pre class="programlisting">const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *  nm_setting_wired_get_mac_address    (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--mac-address" title='The "mac-address" property'><span class="type">"mac-address"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-cloned-mac-address"></a><h3>nm_setting_wired_get_cloned_mac_address ()</h3>
 <pre class="programlisting">const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *  nm_setting_wired_get_cloned_mac_address
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--cloned-mac-address" title='The "cloned-mac-address" property'><span class="type">"cloned-mac-address"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-mac-address-blacklist"></a><h3>nm_setting_wired_get_mac_address_blacklist ()</h3>
 <pre class="programlisting">const <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *      nm_setting_wired_get_mac_address_blacklist
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--mac-address-blacklist" title='The "mac-address-blacklist" property'><span class="type">"mac-address-blacklist"</span></a>
+property of the setting. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GLib.ByteArray]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wired-get-mtu"></a><h3>nm_setting_wired_get_mtu ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wired_get_mtu            (<em class="parameter"><code><a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWired.html#NMSettingWired--mtu" title='The "mtu" property'><span class="type">"mtu"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -371,8 +509,10 @@ conjunction with that device.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of strings, each specifying one subchannel the
-s390 device uses to communicate to the host.</td>
+<td>
+<a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of strings, each specifying one
+subchannel the s390 device uses to communicate to the host. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -454,13 +594,15 @@ such as during option iteration.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>out_key</code></em> :</span></p></td>
-<td>on return, the key name of the s390 specific option; this value is
-owned by the setting and should not be modified</td>
+<td>on return, the key name of the s390 specific option; this
+value is owned by the setting and should not be modified. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>out_value</code></em> :</span></p></td>
-<td>on return, the value of the key of the s390 specific option; this
-value is owned by the setting and should not be modified</td>
+<td>on return, the value of the key of the s390 specific
+option; this value is owned by the setting and should not be modified. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>

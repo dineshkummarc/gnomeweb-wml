@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ascii" /><title>NetworkManager D-Bus Interface Specification version 0.9</title><style type="text/css">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ascii" /><title>NetworkManager D-Bus Interface Specification version 0.9.0</title><style type="text/css">
 
           body {
             font-family: sans-serif;
@@ -98,7 +98,7 @@
             margin-right: 4em;
           }
 
-        </style></head><body><h1 class="topbox">NetworkManager D-Bus Interface Specification</h1><h2>Version 0.9</h2><div>Copyright (C) 2008 - 2011 Red Hat, Inc.</div><div>Copyright (C) 2008 - 2009 Novell, Inc.</div><div class="license">
+        </style></head><body><h1 class="topbox">NetworkManager D-Bus Interface Specification</h1><h2>Version 0.9.0</h2><div>Copyright (C) 2008 - 2011 Red Hat, Inc.</div><div>Copyright (C) 2008 - 2009 Novell, Inc.</div><div class="license">
 <p>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -121,6 +121,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       </div><div><h4>Returns</h4><dl><dt><code>devices</code> -
       <code>ao</code></dt><dd>
           List of object paths of network devices known to the system.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.NetworkManager.GetDeviceByIpIface" id="org.freedesktop.NetworkManager.GetDeviceByIpIface">GetDeviceByIpIface</a> (
+        s: iface
+        ) &#8594;
+        o</h3><div class="docstring">
+        Return the object path of the network device referenced by its IP
+        interface name.  Note that some devices (usually modems) only have an
+        IP interface name when they are connected.
+      </div><div><h4>Parameters</h4><dl><dt><code>iface</code> -
+      <code>s</code></dt><dd>
+          Interface name of the device to find.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>device</code> -
+      <code>o</code></dt><dd>
+          Object path of the network device.
         </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.NetworkManager.ActivateConnection" id="org.freedesktop.NetworkManager.ActivateConnection">ActivateConnection</a> (
         o: connection, o: device, o: specific_object
         ) &#8594;
@@ -245,7 +258,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
           related to that domain.  Available domains are: [NONE, HW, RFKILL,
           ETHER, WIFI, BT, MB, DHCP4, DHCP6, PPP, WIFI_SCAN, IP4, IP6, AUTOIP4,
           DNS, VPN, SHARING, SUPPLICANT, USER_SET, SYS_SET, SUSPEND, CORE,
-          DEVICE, OLPC]
+          DEVICE, OLPC].  If an empty string is given, the log level is changed
+          but the current set of log domains remains unchanged.
         </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.NetworkManager.state" id="org.freedesktop.NetworkManager.state">state</a> (
         
         ) &#8594;
@@ -420,7 +434,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
         </dd></dl></div></div><h2>Properties:</h2><dl><dt><code>Udi</code> -
       <code>s</code> -
       <code>(read)</code></dt><dd>
-        Unique Device Identifier.
+        Operating-system specific transient device hardware identifier.  This
+        is an opaque string representing the underlying hardware for the device,
+        and shouldn't be used to keep track of individual devices.  For some
+        device types (Bluetooth, Modems) it is an identifier used by the
+        hardware service (ie bluez or ModemManager) to refer to that device,
+        and client programs use it get additional information from those
+        services which NM does not provide.  The Udi is not guaranteed to be
+        consistent across reboots or hotplugs of the hardware. If you're looking
+        for a way to uniquely track each device in your application, use the
+        object path.  If you're looking for a way to track a specific piece of
+        hardware across reboot or hotplug, use a MAC address or USB serial
+        number.
       </dd><dt><code>Interface</code> -
       <code>s</code> -
       <code>(read)</code></dt><dd>
@@ -452,6 +477,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       (<a xmlns="" href="#type-NM_DEVICE_STATE">NM_DEVICE_STATE</a>)
     </dt><dd>
         The current state of the device.
+      </dd><dt><code>ActiveConnection</code> -
+      <code>o</code> -
+      <code>(read)</code></dt><dd>
+        Object path of an ActiveConnection object that "owns" this device during
+        activation.  The ActiveConnection object tracks the life-cycle of a
+        connection to a specific network and implements the
+        org.freedesktop.NetworkManager.Connection.Active D-Bus interface.
       </dd><dt><code>Ip4Config</code> -
       <code>o</code> -
       <code>(read)</code></dt><dd>
@@ -949,6 +981,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       </div><div><h4>Returns</h4><dl><dt><code>connections</code> -
       <code>ao</code></dt><dd>
           List of connections.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.NetworkManager.Settings.GetConnectionByUuid" id="org.freedesktop.NetworkManager.Settings.GetConnectionByUuid">GetConnectionByUuid</a> (
+        s: uuid
+        ) &#8594;
+        o</h3><div class="docstring">
+        Retrieve the object path of a connection, given that connection's UUID.
+      </div><div><h4>Parameters</h4><dl><dt><code>uuid</code> -
+      <code>s</code></dt><dd>
+          The UUID to find the connection object path for.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>connection</code> -
+      <code>o</code></dt><dd>
+          The connection's object path.
         </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.NetworkManager.Settings.AddConnection" id="org.freedesktop.NetworkManager.Settings.AddConnection">AddConnection</a> (
         a{sa{sv}}: connection
         ) &#8594;
@@ -1058,7 +1101,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
             </div></div><p>Interface has no properties.</p>
 
 
-  <h1><a name="org.freedesktop.NetworkManager.Connection.Active" id="org.freedesktop.NetworkManager.Connection.Active"></a>org.freedesktop.NetworkManager.Connection.Active</h1><p>Interface has no methods.</p><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged" id="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged">PropertiesChanged</a> (
+  <h1><a name="org.freedesktop.NetworkManager.Connection.Active" id="org.freedesktop.NetworkManager.Connection.Active"></a>org.freedesktop.NetworkManager.Connection.Active</h1>
+      Objects that implement the Connection.Active interface represent an attempt
+      to connect to a network using the details provided by a Connection object.
+      The Connection.Active object tracks the life-cycle of the connection
+      attempt and if successful indicates whether the connected network is the
+      "default" or preferred network for access.
+    <p>Interface has no methods.</p><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged" id="org.freedesktop.NetworkManager.Connection.Active.PropertiesChanged">PropertiesChanged</a> (
         a{sv}: properties
         )</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
       <code>a{sv}</code>
@@ -1069,7 +1118,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
       <code>o</code> -
       <code>(read)</code></dt><dd>The path of the connection.</dd><dt><code>SpecificObject</code> -
       <code>o</code> -
-      <code>(read)</code></dt><dd>A specific object associated with the active connection.</dd><dt><code>Devices</code> -
+      <code>(read)</code></dt><dd>A specific object associated with the active connection.</dd><dt><code>Uuid</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The UUID of the connection, provided as a convenience so that clients
+        do not have to retrieve all connection details.
+      </dd><dt><code>Devices</code> -
       <code>ao</code> -
       <code>(read)</code></dt><dd>Array of object paths representing devices which are part of this active connection.</dd><dt><code>State</code> -
       <code>u</code> -
@@ -1087,6 +1141,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</
           The connection is activating.
         </dd><dt><code>NM_ACTIVE_CONNECTION_STATE_ACTIVATED = 2</code></dt><dd>
           The connection is activated.
+        </dd><dt><code>NM_ACTIVE_CONNECTION_STATE_DEACTIVATING = 3</code></dt><dd>
+          The connection is being torn down and cleaned up.
         </dd></dl>
 
   <h1><a name="org.freedesktop.NetworkManager.AgentManager" id="org.freedesktop.NetworkManager.AgentManager"></a>org.freedesktop.NetworkManager.AgentManager</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.NetworkManager.AgentManager.Register" id="org.freedesktop.NetworkManager.AgentManager.Register">Register</a> (

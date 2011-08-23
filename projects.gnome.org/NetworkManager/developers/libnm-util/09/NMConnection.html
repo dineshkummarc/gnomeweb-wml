@@ -84,7 +84,7 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMCon
 <span class="returnvalue">void</span>                <a class="link" href="NMConnection.html#nm-connection-clear-secrets" title="nm_connection_clear_secrets ()">nm_connection_clear_secrets</a>         (<em class="parameter"><code><a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> *connection</code></em>);
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="NMConnection.html#nm-connection-update-secrets" title="nm_connection_update_secrets ()">nm_connection_update_secrets</a>        (<em class="parameter"><code><a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *setting_name</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *setting_secrets</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *secrets</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="NMConnection.html#nm-connection-set-path" title="nm_connection_set_path ()">nm_connection_set_path</a>              (<em class="parameter"><code><a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *path</code></em>);
@@ -182,7 +182,8 @@ parameters (MTU, SSID, APN, channel, rate, etc) and IP-level parameters
 {
 	NM_CONNECTION_ERROR_UNKNOWN = 0,
 	NM_CONNECTION_ERROR_CONNECTION_SETTING_NOT_FOUND,
-	NM_CONNECTION_ERROR_CONNECTION_TYPE_INVALID
+	NM_CONNECTION_ERROR_CONNECTION_TYPE_INVALID,
+	NM_CONNECTION_ERROR_SETTING_NOT_FOUND
 } NMConnectionError;
 </pre>
 <p>
@@ -209,6 +210,12 @@ Describes errors that may result from operations involving a <a class="link" hre
   'connection' setting did not point to a valid connection base type; ie
   it was not a hardware-related setting like <a class="link" href="NMSettingWired.html" title="NMSettingWired"><span class="type">NMSettingWired</span></a> or
   <a class="link" href="NMSettingWireless.html" title="NMSettingWireless"><span class="type">NMSettingWireless</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-CONNECTION-ERROR-SETTING-NOT-FOUND:CAPS"></a><span class="term"><code class="literal">NM_CONNECTION_ERROR_SETTING_NOT_FOUND</code></span></p></td>
+<td>the <a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> object
+  did not contain the specified <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> object
 </td>
 </tr>
 </tbody>
@@ -696,13 +703,15 @@ keeping secret data in memory when not needed.
 <a name="nm-connection-update-secrets"></a><h3>nm_connection_update_secrets ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_connection_update_secrets        (<em class="parameter"><code><a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> *connection</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *setting_name</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *setting_secrets</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *secrets</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Update the specified setting's secrets, given a hash table of secrets
 intended for that setting (deserialized from D-Bus for example).  Will also
 extract the given setting's secrets hash if given a hash of hashes, as would
-be returned from <a class="link" href="NMConnection.html#nm-connection-to-hash" title="nm_connection_to_hash ()"><code class="function">nm_connection_to_hash()</code></a>.
+be returned from <a class="link" href="NMConnection.html#nm-connection-to-hash" title="nm_connection_to_hash ()"><code class="function">nm_connection_to_hash()</code></a>.  If <em class="parameter"><code>setting_name</code></em> is <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>, expects
+a fully serialized <a class="link" href="NMConnection.html" title="NMConnection"><span class="type">NMConnection</span></a> as returned by <a class="link" href="NMConnection.html#nm-connection-to-hash" title="nm_connection_to_hash ()"><code class="function">nm_connection_to_hash()</code></a> and
+will update all secrets from all settings contained in <em class="parameter"><code>secrets</code></em>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -717,7 +726,7 @@ be returned from <a class="link" href="NMConnection.html#nm-connection-to-hash" 
 <td>the setting object name to which the secrets apply</td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>setting_secrets</code></em> :</span></p></td>
+<td><p><span class="term"><em class="parameter"><code>secrets</code></em> :</span></p></td>
 <td>a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping
 string:<a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> of setting property names and secrets of the given <em class="parameter"><code>setting_name</code></em>. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
 </td>
@@ -730,8 +739,8 @@ string:<a href="../gobject/gobject-Generic-values.html#GValue"><span class="type
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the secrets were successfully updated and the connection
-is valid, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on failure or if the setting was never added to the connection</td>
+<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the secrets were successfully updated, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the update
+failed (tried to update secrets for a setting that doesn't exist, etc)</td>
 </tr>
 </tbody>
 </table></div>

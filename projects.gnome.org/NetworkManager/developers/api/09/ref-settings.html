@@ -23,7 +23,7 @@
 <div class="titlepage"><div><div><h2 class="title">
 <a name="ref-settings"></a>Network Configuration Setting Specification</h2></div></div></div>
 <div class="toc"><dl>
-<dt><span class="section"><a href="ref-settings.html#id587285">Configuration Settings</a></span></dt>
+<dt><span class="section"><a href="ref-settings.html#id574007">Configuration Settings</a></span></dt>
 <dt><span class="section"><a href="secrets-flags.html">Secret flag types</a></span></dt>
 </dl></div>
 <p>
@@ -35,11 +35,11 @@
     </p>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="id587285"></a>Configuration Settings</h2></div></div></div>
+<a name="id574007"></a>Configuration Settings</h2></div></div></div>
 <p>
 </p>
 <div class="table">
-<a name="id587293"></a><p class="title"><b>Table 1. 802-1x setting</b></p>
+<a name="id577236"></a><p class="title"><b>Table 1. 802-1x setting</b></p>
 <div class="table-contents"><table summary="802-1x setting" border="1">
 <colgroup>
 <col>
@@ -91,6 +91,18 @@
 <td>UTF-8 encoded path to a directory containing PEM or DER formatted certificates to be added to the verification chain in addition to the certificate specified in the 'ca-cert' property.</td>
 </tr>
 <tr>
+<td><pre class="screen">subject-match</pre></td>
+<td><pre class="screen">string</pre></td>
+<td><pre class="screen"></pre></td>
+<td>Substring to be matched against the subject of the certificate presented by the authentication server. When unset, no verification of the authentication server certificate's subject is performed.</td>
+</tr>
+<tr>
+<td><pre class="screen">altsubject-matches</pre></td>
+<td><pre class="screen">array of string</pre></td>
+<td><pre class="screen">[]</pre></td>
+<td>List of strings to be matched against the altSubjectName of the certificate presented by the authentication server. If the list is empty, no verification of the server certificate's altSubjectName is performed.</td>
+</tr>
+<tr>
 <td><pre class="screen">client-cert</pre></td>
 <td><pre class="screen">byte array</pre></td>
 <td><pre class="screen">[]</pre></td>
@@ -139,10 +151,22 @@
 <td>UTF-8 encoded path to a directory containing PEM or DER formatted certificates to be added to the verification chain in addition to the certificate specified in the 'phase2-ca-cert' property.</td>
 </tr>
 <tr>
+<td><pre class="screen">phase2-subject-match</pre></td>
+<td><pre class="screen">string</pre></td>
+<td><pre class="screen"></pre></td>
+<td>Substring to be matched against the subject of the certificate presented by the authentication server during the inner 'phase2' authentication. When unset, no verification of the authentication server certificate's subject is performed.</td>
+</tr>
+<tr>
+<td><pre class="screen">phase2-altsubject-matches</pre></td>
+<td><pre class="screen">array of string</pre></td>
+<td><pre class="screen">[]</pre></td>
+<td>List of strings to be matched against List of strings to be matched against the altSubjectName of the certificate presented by the authentication server during the inner 'phase 2' authentication. If the list is empty, no verification of the server certificate's altSubjectName is performed.</td>
+</tr>
+<tr>
 <td><pre class="screen">phase2-client-cert</pre></td>
 <td><pre class="screen">byte array</pre></td>
 <td><pre class="screen">[]</pre></td>
-<td>Contains the 'phase 2' client certificate if used by the EAP method specified in the 'phase2-eap' or 'phase2-autheap' properties. Certificate data is specified using a 'scheme'; two are currently supported: blob and path.  When using the blob scheme (which is backwards compatible with NM 0.7.x) this property should be set to the certificate's DER encoded data.  When using the path scheme, this property should be set to the full UTF-8 encoded path of the certificate, prefixed with the string 'file://' and ending with a terminating NULL byte.</td>
+<td>Contains the 'phase 2' client certificate if used by the EAP method specified in the 'phase2-auth' or 'phase2-autheap' properties. Certificate data is specified using a 'scheme'; two are currently supported: blob and path.  When using the blob scheme (which is backwards compatible with NM 0.7.x) this property should be set to the certificate's DER encoded data.  When using the path scheme, this property should be set to the full UTF-8 encoded path of the certificate, prefixed with the string 'file://' and ending with a terminating NULL byte.</td>
 </tr>
 <tr>
 <td><pre class="screen">password</pre></td>
@@ -178,7 +202,7 @@
 <td><pre class="screen">phase2-private-key</pre></td>
 <td><pre class="screen">byte array</pre></td>
 <td><pre class="screen">[]</pre></td>
-<td>Contains the 'phase 2' inner private key when the 'phase2-eap' or 'phase2-autheap' property is set to 'tls'.  Key data is specified using a 'scheme'; two are currently supported: blob and path. When using the blob scheme and private keys, this property should be set to the key's encrypted PEM encoded data. When using private keys with the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and ending with a terminating NULL byte.  When using PKCS#12 format private keys and the blob scheme, this property should be set to the PKCS#12 data and the 'phase2-private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.  When using PKCS#12 files and the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte, and as with the blob scheme the 'phase2-private-key-password' property must be set to the password used to decode the PKCS#12 private key and certificate.</td>
+<td>Contains the 'phase 2' inner private key when the 'phase2-auth' or 'phase2-autheap' property is set to 'tls'.  Key data is specified using a 'scheme'; two are currently supported: blob and path. When using the blob scheme and private keys, this property should be set to the key's encrypted PEM encoded data. When using private keys with the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and ending with a terminating NULL byte.  When using PKCS#12 format private keys and the blob scheme, this property should be set to the PKCS#12 data and the 'phase2-private-key-password' property must be set to password used to decrypt the PKCS#12 certificate and key.  When using PKCS#12 files and the path scheme, this property should be set to the full UTF-8 encoded path of the key, prefixed with the string 'file://' and and ending with a terminating NULL byte, and as with the blob scheme the 'phase2-private-key-password' property must be set to the password used to decode the PKCS#12 private key and certificate.</td>
 </tr>
 <tr>
 <td><pre class="screen">phase2-private-key-password</pre></td>
@@ -204,7 +228,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id574308"></a><p class="title"><b>Table 2. bluetooth setting</b></p>
+<a name="id561228"></a><p class="title"><b>Table 2. bluetooth setting</b></p>
 <div class="table-contents"><table summary="bluetooth setting" border="1">
 <colgroup>
 <col>
@@ -243,7 +267,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id574440"></a><p class="title"><b>Table 3. cdma setting</b></p>
+<a name="id561361"></a><p class="title"><b>Table 3. cdma setting</b></p>
 <div class="table-contents"><table summary="cdma setting" border="1">
 <colgroup>
 <col>
@@ -294,7 +318,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id574639"></a><p class="title"><b>Table 4. connection setting</b></p>
+<a name="id561559"></a><p class="title"><b>Table 4. connection setting</b></p>
 <div class="table-contents"><table summary="connection setting" border="1">
 <colgroup>
 <col>
@@ -363,7 +387,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id574940"></a><p class="title"><b>Table 5. gsm setting</b></p>
+<a name="id561860"></a><p class="title"><b>Table 5. gsm setting</b></p>
 <div class="table-contents"><table summary="gsm setting" border="1">
 <colgroup>
 <col>
@@ -388,7 +412,7 @@
 <td><pre class="screen">number</pre></td>
 <td><pre class="screen">string</pre></td>
 <td><pre class="screen"></pre></td>
-<td>Number to dial when establishing a PPP data session with the GSM-based mobile broadband network.  In most cases, leave the number blank and a number selecting the APN specified in the 'apn' property will be used automatically when required.</td>
+<td>Number to dial when establishing a PPP data session with the GSM-based mobile broadband network.  Many modems do not require PPP for connections to the mobile network and thus this property should be left blank, which allows NetworkManager to select the appropriate settings automatically.</td>
 </tr>
 <tr>
 <td><pre class="screen">username</pre></td>
@@ -456,7 +480,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id575364"></a><p class="title"><b>Table 6. ipv4 setting</b></p>
+<a name="id562285"></a><p class="title"><b>Table 6. ipv4 setting</b></p>
 <div class="table-contents"><table summary="ipv4 setting" border="1">
 <colgroup>
 <col>
@@ -555,7 +579,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id604266"></a><p class="title"><b>Table 7. ipv6 setting</b></p>
+<a name="id591243"></a><p class="title"><b>Table 7. ipv6 setting</b></p>
 <div class="table-contents"><table summary="ipv6 setting" border="1">
 <colgroup>
 <col>
@@ -627,7 +651,7 @@
 <tr>
 <td><pre class="screen">may-fail</pre></td>
 <td><pre class="screen">boolean</pre></td>
-<td><pre class="screen">FALSE</pre></td>
+<td><pre class="screen">TRUE</pre></td>
 <td>If TRUE, allow overall network configuration to proceed even if IPv6 configuration times out. Note that at least one IP configuration must succeed or overall network configuration will still fail.  For example, in IPv4-only networks, setting this property to TRUE allows the overall network configuration to succeed if IPv6 configuration fails but IPv4 configuration completes successfully.</td>
 </tr>
 </tbody>
@@ -636,7 +660,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id604584"></a><p class="title"><b>Table 8. 802-11-olpc-mesh setting</b></p>
+<a name="id591562"></a><p class="title"><b>Table 8. 802-11-olpc-mesh setting</b></p>
 <div class="table-contents"><table summary="802-11-olpc-mesh setting" border="1">
 <colgroup>
 <col>
@@ -681,7 +705,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id604722"></a><p class="title"><b>Table 9. ppp setting</b></p>
+<a name="id591700"></a><p class="title"><b>Table 9. ppp setting</b></p>
 <div class="table-contents"><table summary="ppp setting" border="1">
 <colgroup>
 <col>
@@ -816,7 +840,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id605252"></a><p class="title"><b>Table 10. pppoe setting</b></p>
+<a name="id592230"></a><p class="title"><b>Table 10. pppoe setting</b></p>
 <div class="table-contents"><table summary="pppoe setting" border="1">
 <colgroup>
 <col>
@@ -867,7 +891,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id605418"></a><p class="title"><b>Table 11. serial setting</b></p>
+<a name="id592395"></a><p class="title"><b>Table 11. serial setting</b></p>
 <div class="table-contents"><table summary="serial setting" border="1">
 <colgroup>
 <col>
@@ -924,7 +948,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id605609"></a><p class="title"><b>Table 12. vpn setting</b></p>
+<a name="id592607"></a><p class="title"><b>Table 12. vpn setting</b></p>
 <div class="table-contents"><table summary="vpn setting" border="1">
 <colgroup>
 <col>
@@ -955,7 +979,7 @@
 <td><pre class="screen">user-name</pre></td>
 <td><pre class="screen">string</pre></td>
 <td><pre class="screen"></pre></td>
-<td>User name of the currently logged in user for connections provided by the user settings service.  This name is provided to the VPN plugin to use in lieu of a custom username provided by that VPN plugins specific configuration.  The VPN plugin itself decides which user name to use.</td>
+<td>If the VPN connection requires a user name for authentication, that name should be provided here.  If the connection is available to more than one user, and the VPN requires each user to supply a different name, then leave this property empty.  If this property is empty, NetworkManager will automatically supply the username of the user which requested the VPN connection.</td>
 </tr>
 <tr>
 <td><pre class="screen">data</pre></td>
@@ -975,7 +999,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id605774"></a><p class="title"><b>Table 13. wimax setting</b></p>
+<a name="id592813"></a><p class="title"><b>Table 13. wimax setting</b></p>
 <div class="table-contents"><table summary="wimax setting" border="1">
 <colgroup>
 <col>
@@ -1014,7 +1038,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id605899"></a><p class="title"><b>Table 14. 802-3-ethernet setting</b></p>
+<a name="id592952"></a><p class="title"><b>Table 14. 802-3-ethernet setting</b></p>
 <div class="table-contents"><table summary="802-3-ethernet setting" border="1">
 <colgroup>
 <col>
@@ -1072,6 +1096,12 @@
 <td>If specified, request that the device use this MAC address instead of its permanent MAC address.  This is known as MAC cloning or spoofing.</td>
 </tr>
 <tr>
+<td><pre class="screen">mac-address-blacklist</pre></td>
+<td><pre class="screen">array of string</pre></td>
+<td><pre class="screen">[]</pre></td>
+<td>If specified, this connection will never apply to the ethernet device whose permanent MAC address matches an address in the list.  Each MAC address is in the standard hex-digits-and-colons notation (00:11:22:33:44:55).</td>
+</tr>
+<tr>
 <td><pre class="screen">mtu</pre></td>
 <td><pre class="screen">uint32</pre></td>
 <td><pre class="screen">0</pre></td>
@@ -1079,7 +1109,7 @@
 </tr>
 <tr>
 <td><pre class="screen">s390-subchannels</pre></td>
-<td><pre class="screen">GPtrArray_gchararray_</pre></td>
+<td><pre class="screen">array of string</pre></td>
 <td><pre class="screen">[]</pre></td>
 <td>Identifies specific subchannels that this network device uses for communcation with z/VM or s390 host.  Like the 'mac-address' property for non-z/VM devices, this property can be used to ensure this connection only applies to the network device that uses these subchannels. The list should contain exactly 3 strings, and each string may only be composed of hexadecimal characters and the period (.) character.</td>
 </tr>
@@ -1101,7 +1131,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id606305"></a><p class="title"><b>Table 15. 802-11-wireless setting</b></p>
+<a name="id593392"></a><p class="title"><b>Table 15. 802-11-wireless setting</b></p>
 <div class="table-contents"><table summary="802-11-wireless setting" border="1">
 <colgroup>
 <col>
@@ -1177,6 +1207,12 @@
 <td>If specified, request that the WiFi device use this MAC address instead of its permanent MAC address.  This is known as MAC cloning or spoofing.</td>
 </tr>
 <tr>
+<td><pre class="screen">mac-address-blacklist</pre></td>
+<td><pre class="screen">array of string</pre></td>
+<td><pre class="screen">[]</pre></td>
+<td>If specified, this connection will never apply to the WiFi device whose permanent MAC address matches an address in the list.  Each MAC address is in the standard hex-digits-and-colons notation (00:11:22:33:44:55).</td>
+</tr>
+<tr>
 <td><pre class="screen">mtu</pre></td>
 <td><pre class="screen">uint32</pre></td>
 <td><pre class="screen">0</pre></td>
@@ -1186,7 +1222,7 @@
 <td><pre class="screen">seen-bssids</pre></td>
 <td><pre class="screen">array of string</pre></td>
 <td><pre class="screen">[]</pre></td>
-<td>A list of BSSIDs (each BSSID formatted as a MAC address like '00:11:22:33:44:55') that have been detected as part of the WiFI network.  The settings service will usually populate this property by periodically asking NetworkManager what the device's current AP is while connected to the network (or monitoring the device's 'active-ap' property) and adding the current AP's BSSID to this list.  This list helps NetworkManager find hidden APs by matching up scan results with the BSSIDs in this list.</td>
+<td>A list of BSSIDs (each BSSID formatted as a MAC address like 00:11:22:33:44:55') that have been detected as part of the WiFI network. NetworkManager internally tracks previously seen BSSIDs so this property is no longer of much use.</td>
 </tr>
 <tr>
 <td><pre class="screen">security</pre></td>
@@ -1200,7 +1236,7 @@
 <p><br class="table-break">
 </p>
 <div class="table">
-<a name="id606782"></a><p class="title"><b>Table 16. 802-11-wireless-security setting</b></p>
+<a name="id593901"></a><p class="title"><b>Table 16. 802-11-wireless-security setting</b></p>
 <div class="table-contents"><table summary="802-11-wireless-security setting" border="1">
 <colgroup>
 <col>

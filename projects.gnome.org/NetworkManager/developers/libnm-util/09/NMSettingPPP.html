@@ -35,13 +35,17 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="NMSettingPPP.top_of_page"></a>NMSettingPPP</span></h2>
-<p>NMSettingPPP</p>
+<p>NMSettingPPP — Describes connection properties for devices/networks
+that require PPP to deliver IP capability</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="NMSettingPPP.synopsis"></a><h2>Synopsis</h2>
-<a name="NMSettingPPPError"></a><pre class="synopsis">#define             <a class="link" href="NMSettingPPP.html#NM-SETTING-PPP-SETTING-NAME:CAPS" title="NM_SETTING_PPP_SETTING_NAME">NM_SETTING_PPP_SETTING_NAME</a>
+<a name="NMSettingPPPError"></a><pre class="synopsis">
+#include &lt;nm-setting-ppp.h&gt;
+
+#define             <a class="link" href="NMSettingPPP.html#NM-SETTING-PPP-SETTING-NAME:CAPS" title="NM_SETTING_PPP_SETTING_NAME">NM_SETTING_PPP_SETTING_NAME</a>
 enum                <a class="link" href="NMSettingPPP.html#NMSettingPPPError">NMSettingPPPError</a>;
 #define             <a class="link" href="NMSettingPPP.html#NM-TYPE-SETTING-PPP-ERROR:CAPS" title="NM_TYPE_SETTING_PPP_ERROR">NM_TYPE_SETTING_PPP_ERROR</a>
 #define             <a class="link" href="NMSettingPPP.html#NM-SETTING-PPP-ERROR:CAPS" title="NM_SETTING_PPP_ERROR">NM_SETTING_PPP_ERROR</a>
@@ -127,6 +131,9 @@ enum                <a class="link" href="NMSettingPPP.html#NMSettingPPPError">N
 <div class="refsect1">
 <a name="NMSettingPPP.description"></a><h2>Description</h2>
 <p>
+The <a class="link" href="NMSettingPPP.html" title="NMSettingPPP"><span class="type">NMSettingPPP</span></a> object is a <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> subclass that describes properties
+necessary for connection to networks that require PPP transport, like PPPoE
+cable and DSL modems and some mobile broadband devices.
 </p>
 </div>
 <div class="refsect1">
@@ -141,16 +148,40 @@ enum                <a class="link" href="NMSettingPPP.html#NMSettingPPPError">N
 <hr>
 <div class="refsect2">
 <a name="NMSettingPPPError"></a><h3>enum NMSettingPPPError</h3>
-<pre class="programlisting">typedef enum
-{
+<pre class="programlisting">typedef enum {
 	NM_SETTING_PPP_ERROR_UNKNOWN = 0,
 	NM_SETTING_PPP_ERROR_INVALID_PROPERTY,
 	NM_SETTING_PPP_ERROR_MISSING_PROPERTY,
 	NM_SETTING_PPP_ERROR_REQUIRE_MPPE_NOT_ALLOWED
 } NMSettingPPPError;
 </pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-PPP-ERROR-UNKNOWN:CAPS"></a><span class="term"><code class="literal">NM_SETTING_PPP_ERROR_UNKNOWN</code></span></p></td>
+<td>unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-PPP-ERROR-INVALID-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_PPP_ERROR_INVALID_PROPERTY</code></span></p></td>
+<td>the property was invalid
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-PPP-ERROR-MISSING-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_PPP_ERROR_MISSING_PROPERTY</code></span></p></td>
+<td>the property was missing and is
+required
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-PPP-ERROR-REQUIRE-MPPE-NOT-ALLOWED:CAPS"></a><span class="term"><code class="literal">NM_SETTING_PPP_ERROR_REQUIRE_MPPE_NOT_ALLOWED</code></span></p></td>
+<td>requiring MPPE is not compatible
+with other setting configuration parameters
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -173,7 +204,15 @@ enum                <a class="link" href="NMSettingPPP.html#NMSettingPPPError">N
 <a name="nm-setting-ppp-error-quark"></a><h3>nm_setting_ppp_error_quark ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              nm_setting_ppp_error_quark          (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Registers an error quark for <a class="link" href="NMSettingPPP.html" title="NMSettingPPP"><span class="type">NMSettingPPP</span></a> if necessary.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the error quark used for <a class="link" href="NMSettingPPP.html" title="NMSettingPPP"><span class="type">NMSettingPPP</span></a> errors.</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -354,7 +393,16 @@ enum                <a class="link" href="NMSettingPPP.html#NMSettingPPPError">N
 <a name="nm-setting-ppp-new"></a><h3>nm_setting_ppp_new ()</h3>
 <pre class="programlisting"><a class="link" href="NMSetting.html" title="NMSetting"><span class="returnvalue">NMSetting</span></a> *         nm_setting_ppp_new                  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Creates a new <a class="link" href="NMSettingPPP.html" title="NMSettingPPP"><span class="type">NMSettingPPP</span></a> object with default values.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new empty <a class="link" href="NMSettingPPP.html" title="NMSettingPPP"><span class="type">NMSettingPPP</span></a> object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">

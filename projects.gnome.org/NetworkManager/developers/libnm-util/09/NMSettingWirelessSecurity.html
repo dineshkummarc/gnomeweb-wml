@@ -35,13 +35,17 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="NMSettingWirelessSecurity.top_of_page"></a>NMSettingWirelessSecurity</span></h2>
-<p>NMSettingWirelessSecurity</p>
+<p>NMSettingWirelessSecurity — Describes connection properties for WiFi networks that
+use WEP, LEAP, WPA or WPA2/RSN security</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="NMSettingWirelessSecurity.synopsis"></a><h2>Synopsis</h2>
-<a name="NMSettingWirelessSecurityError"></a><pre class="synopsis">#define             <a class="link" href="NMSettingWirelessSecurity.html#NM-SETTING-WIRELESS-SECURITY-SETTING-NAME:CAPS" title="NM_SETTING_WIRELESS_SECURITY_SETTING_NAME">NM_SETTING_WIRELESS_SECURITY_SETTING_NAME</a>
+<a name="NMSettingWirelessSecurityError"></a><pre class="synopsis">
+#include &lt;nm-setting-wireless-security.h&gt;
+
+#define             <a class="link" href="NMSettingWirelessSecurity.html#NM-SETTING-WIRELESS-SECURITY-SETTING-NAME:CAPS" title="NM_SETTING_WIRELESS_SECURITY_SETTING_NAME">NM_SETTING_WIRELESS_SECURITY_SETTING_NAME</a>
 enum                <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurityError">NMSettingWirelessSecurityError</a>;
 #define             <a class="link" href="NMSettingWirelessSecurity.html#NM-TYPE-SETTING-WIRELESS-SECURITY-ERROR:CAPS" title="NM_TYPE_SETTING_WIRELESS_SECURITY_ERROR">NM_TYPE_SETTING_WIRELESS_SECURITY_ERROR</a>
 #define             <a class="link" href="NMSettingWirelessSecurity.html#NM-SETTING-WIRELESS-SECURITY-ERROR:CAPS" title="NM_SETTING_WIRELESS_SECURITY_ERROR">NM_SETTING_WIRELESS_SECURITY_ERROR</a>
@@ -175,6 +179,24 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <div class="refsect1">
 <a name="NMSettingWirelessSecurity.description"></a><h2>Description</h2>
 <p>
+The <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> object is a <a class="link" href="NMSetting.html" title="NMSetting"><span class="type">NMSetting</span></a> subclass that describes
+properties necessary for connection to encrypted WiFi networks.
+</p>
+<p>
+It's a good idea to read up on wpa_supplicant configuration before using this
+setting extensively, since most of the options here correspond closely with
+the relevant wpa_supplicant configuration options.  To get a better overview
+of how WiFi security works, you may want to get copies of the following books.
+</p>
+<p>
+ 802.11 Wireless Networks: The Definitive Guide, Second Edition
+      Author: Matthew Gast
+      ISBN: 978-0596100520
+</p>
+<p>
+ Cisco Wireless LAN Security
+      Authors: Krishna Sankar, Sri Sundaralingam, Darrin Miller, and Andrew Balinsky
+      ISBN: 978-1587051548
 </p>
 </div>
 <div class="refsect1">
@@ -189,8 +211,7 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <hr>
 <div class="refsect2">
 <a name="NMSettingWirelessSecurityError"></a><h3>enum NMSettingWirelessSecurityError</h3>
-<pre class="programlisting">typedef enum
-{
+<pre class="programlisting">typedef enum {
 	NM_SETTING_WIRELESS_SECURITY_ERROR_UNKNOWN = 0,
 	NM_SETTING_WIRELESS_SECURITY_ERROR_INVALID_PROPERTY,
 	NM_SETTING_WIRELESS_SECURITY_ERROR_MISSING_PROPERTY,
@@ -200,8 +221,52 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 	NM_SETTING_WIRELESS_SECURITY_ERROR_SHARED_KEY_REQUIRES_WEP
 } NMSettingWirelessSecurityError;
 </pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-UNKNOWN:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_UNKNOWN</code></span></p></td>
+<td>unknown or unclassified error
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-INVALID-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_INVALID_PROPERTY</code></span></p></td>
+<td>the property was invalid
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-MISSING-PROPERTY:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_MISSING_PROPERTY</code></span></p></td>
+<td>the property was
+missing and is required
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-MISSING-802-1X-SETTING:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_MISSING_802_1X_SETTING</code></span></p></td>
+<td>a property contained
+a value that requires the connection to contain a <a class="link" href="NMSetting8021x.html" title="NMSetting8021x"><span class="type">NMSetting8021x</span></a> setting
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-LEAP-REQUIRES-802-1X:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_LEAP_REQUIRES_802_1X</code></span></p></td>
+<td>LEAP authentication
+was specified but key management was not set to "8021x"
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-LEAP-REQUIRES-USERNAME:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_LEAP_REQUIRES_USERNAME</code></span></p></td>
+<td>LEAP authentication
+was specified but no LEAP username was given
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-SETTING-WIRELESS-SECURITY-ERROR-SHARED-KEY-REQUIRES-WEP:CAPS"></a><span class="term"><code class="literal">NM_SETTING_WIRELESS_SECURITY_ERROR_SHARED_KEY_REQUIRES_WEP</code></span></p></td>
+<td>Shared Key
+authentication was specified but the setting did not specify WEP as the
+encryption protocol
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -239,7 +304,47 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 } NMWepKeyType;
 </pre>
 <p>
+The <a class="link" href="NMSettingWirelessSecurity.html#NMWepKeyType" title="enum NMWepKeyType"><span class="type">NMWepKeyType</span></a> values specify how any WEP keys present in the setting
+are intepreted.  There are no standards governing how to hash the various WEP
+key/passphrase formats into the actual WEP key.  Unfortunately some WEP keys
+can be interpreted in multiple ways, requring the setting to specify how to
+interpret the any WEP keys.  For example, the key "732f2d712e4a394a375d366931"
+is both a valid Hexadecimal WEP key and a WEP passphrase.  Further, many
+ASCII keys are also valid WEP passphrases, but since passphrases and ASCII
+keys are hashed differently to determine the actual WEP key the type must be
+specified.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="NM-WEP-KEY-TYPE-UNKNOWN:CAPS"></a><span class="term"><code class="literal">NM_WEP_KEY_TYPE_UNKNOWN</code></span></p></td>
+<td>unknown WEP key type
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-WEP-KEY-TYPE-KEY:CAPS"></a><span class="term"><code class="literal">NM_WEP_KEY_TYPE_KEY</code></span></p></td>
+<td>indicates a hexadecimal or ASCII formatted WEP key.
+Hex keys are either 10 or 26 hexadecimal characters (ie "5f782f2f5f" or
+"732f2d712e4a394a375d366931"), while ASCII keys are either 5 or 13 ASCII
+characters (ie "abcde" or "blahblah99$*1").
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-WEP-KEY-TYPE-PASSPHRASE:CAPS"></a><span class="term"><code class="literal">NM_WEP_KEY_TYPE_PASSPHRASE</code></span></p></td>
+<td>indicates a WEP passphrase (ex "I bought a duck
+on my way back from the market 235Q&amp;^%^*%") instead of a hexadecimal or ASCII
+key.  Passphrases are between 8 and 64 characters inclusive and are hashed
+the actual WEP key using the MD5 hash algorithm.
+</td>
+</tr>
+<tr>
+<td><p><a name="NM-WEP-KEY-TYPE-LAST:CAPS"></a><span class="term"><code class="literal">NM_WEP_KEY_TYPE_LAST</code></span></p></td>
+<td>placeholder value for bounds-checking
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -413,23 +518,57 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-wireless-security-new"></a><h3>nm_setting_wireless_security_new ()</h3>
 <pre class="programlisting"><a class="link" href="NMSetting.html" title="NMSetting"><span class="returnvalue">NMSetting</span></a> *         nm_setting_wireless_security_new    (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Creates a new <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> object with default values.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new empty <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-key-mgmt"></a><h3>nm_setting_wireless_security_get_key_mgmt ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_key_mgmt
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--key-mgmt" title='The "key-mgmt" property'><span class="type">"key-mgmt"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-num-protos"></a><h3>nm_setting_wireless_security_get_num_protos ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wireless_security_get_num_protos
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the number of security protocols this connection allows when
+connecting to secure WiFi networks</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -437,8 +576,25 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_proto
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>an index into the protocol list</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the protocol at index <em class="parameter"><code>i</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -447,7 +603,33 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *proto</code></em>);</pre>
 <p>
+Adds a WiFi security protocol (one of "wpa" or "rsn") to the allowed list;
+only protocols in this list will be used when finding and connecting to
+the WiFi network specified by this connection.  For example, if the
+protocol list contains only "wpa" but the access point for the SSID specified
+by this connection only supports WPA2/RSN, the connection cannot be used
+with the access point.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>proto</code></em> :</span></p></td>
+<td>the protocol to add, one of "wpa" or "rsn"</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the protocol was new and and was added to the allowed
+protocol list, or <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it was already in the list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -456,7 +638,22 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
 <p>
+Removes a protocol from the allowed protocol list.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>index of the protocol to remove</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -464,15 +661,37 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_setting_wireless_security_clear_protos
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
 <p>
+Removes all protocols from the allowed list.  If there are no protocols
+specified then all protocols are allowed.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-num-pairwise"></a><h3>nm_setting_wireless_security_get_num_pairwise ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wireless_security_get_num_pairwise
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the number of pairwise encryption algorithms in the allowed list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -481,7 +700,28 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
 <p>
+Returns the allowed pairwise encryption algorithm from allowed algorithm
+list.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>index of an item in the allowed pairwise encryption algorithm list</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the pairwise encryption algorithm at index <em class="parameter"><code>i</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -490,7 +730,32 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *pairwise</code></em>);</pre>
 <p>
+Adds an encryption algorithm to the list of allowed pairwise encryption
+algorithms.  If the list is not empty, then only access points that support
+one or more of the encryption algorithms in the list will be considered
+compatible with this connection.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pairwise</code></em> :</span></p></td>
+<td>the encryption algorithm to add, one of "wep40", "wep104",
+"tkip", or "ccmp"</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the algorithm was added to the list, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it was
+already in the list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -499,7 +764,23 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
 <p>
+Removes an encryption algorithm from the allowed pairwise encryption
+algorithm list.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>the index of an item in the allowed pairwise encryption algorithm list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -507,15 +788,37 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_setting_wireless_security_clear_pairwise
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
 <p>
+Removes all algorithms from the allowed list.  If there are no algorithms
+specified then all pairwise encryption algorithms are allowed.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-num-groups"></a><h3>nm_setting_wireless_security_get_num_groups ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wireless_security_get_num_groups
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the number of groupwise encryption algorithms in the allowed list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -524,7 +827,28 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
 <p>
+Returns the allowed groupwise encryption algorithm from allowed algorithm
+list.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>index of an item in the allowed groupwise encryption algorithm list</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the groupwise encryption algorithm at index <em class="parameter"><code>i</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -533,7 +857,32 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *group</code></em>);</pre>
 <p>
+Adds an encryption algorithm to the list of allowed groupwise encryption
+algorithms.  If the list is not empty, then only access points that support
+one or more of the encryption algorithms in the list will be considered
+compatible with this connection.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>the encryption algorithm to add, one of "wep40", "wep104",
+"tkip", or "ccmp"</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the algorithm was added to the list, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it was
+already in the list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -542,7 +891,23 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> i</code></em>);</pre>
 <p>
+Removes an encryption algorithm from the allowed groupwise encryption
+algorithm list.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td>the index of an item in the allowed groupwise encryption algorithm list</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -550,15 +915,37 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting"><span class="returnvalue">void</span>                nm_setting_wireless_security_clear_groups
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
 <p>
+Removes all algorithms from the allowed list.  If there are no algorithms
+specified then all groupwise encryption algorithms are allowed.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-psk"></a><h3>nm_setting_wireless_security_get_psk ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_psk
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--psk" title='The "psk" property'><span class="type">"psk"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -587,16 +974,40 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-wireless-security-get-leap-username"></a><h3>nm_setting_wireless_security_get_leap_username ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_leap_username
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--leap-username" title='The "leap-username" property'><span class="type">"leap-username"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-leap-password"></a><h3>nm_setting_wireless_security_get_leap_password ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_leap_password
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--leap-password" title='The "leap-password" property'><span class="type">"leap-password"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -626,8 +1037,24 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_wep_key
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> idx</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>the WEP key index (0..3 inclusive)</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the WEP key at the given index</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -637,23 +1064,68 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> idx</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *key</code></em>);</pre>
 <p>
+Sets a WEP key in the given index.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>the index of the key (0..3 inclusive)</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>the WEP key as a string, in either hexadecimal, ASCII, or passphrase
+form as determiend by the value of the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--wep-key-type" title='The "wep-key-type" property'><span class="type">"wep-key-type"</span></a>
+property.</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-wep-tx-keyidx"></a><h3>nm_setting_wireless_security_get_wep_tx_keyidx ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_setting_wireless_security_get_wep_tx_keyidx
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--wep-tx-keyidx" title='The "wep-tx-keyidx" property'><span class="type">"wep-tx-keyidx"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="nm-setting-wireless-security-get-auth-alg"></a><h3>nm_setting_wireless_security_get_auth_alg ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        nm_setting_wireless_security_get_auth_alg
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--auth-alg" title='The "auth-alg" property'><span class="type">"auth-alg"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2">
@@ -680,8 +1152,20 @@ const <span class="returnvalue">char</span> *        <a class="link" href="NMSet
 <a name="nm-setting-wireless-security-get-wep-key-type"></a><h3>nm_setting_wireless_security_get_wep_key_type ()</h3>
 <pre class="programlisting"><a class="link" href="NMSettingWirelessSecurity.html#NMWepKeyType" title="enum NMWepKeyType"><span class="returnvalue">NMWepKeyType</span></a>        nm_setting_wireless_security_get_wep_key_type
                                                         (<em class="parameter"><code><a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a> *setting</code></em>);</pre>
-<p>
-</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>setting</code></em> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html" title="NMSettingWirelessSecurity"><span class="type">NMSettingWirelessSecurity</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the <a class="link" href="NMSettingWirelessSecurity.html#NMSettingWirelessSecurity--wep-key-type" title='The "wep-key-type" property'><span class="type">"wep-key-type"</span></a> property of the setting</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 </div>
 <div class="refsect1">
@@ -809,9 +1293,8 @@ Flags indicating how to handle <a class="link" href="NMSettingWirelessSecurity.h
 <a name="NMSettingWirelessSecurity--wep-key-type"></a><h3>The <code class="literal">"wep-key-type"</code> property</h3>
 <pre class="programlisting">  "wep-key-type"             <a href="../glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct</pre>
 <p>
-Controls the interpretation of WEP keys.  Allowed values are 1 (interpret
-WEP keys as hexadecimal or ASCII keys) or 2 (interpret WEP keys as WEP
-Passphrases).  If set to 1 and the keys are hexadecimal, they must be
+Controls the interpretation of WEP keys.  Allowed values are those given
+by <a class="link" href="NMSettingWirelessSecurity.html#NMWepKeyType" title="enum NMWepKeyType"><code class="literal">NMWepKeyType</code></a>.  If set to 1 and the keys are hexadecimal, they must be
 either 10 or 26 characters in length.  If set to 1 and the keys are
 ASCII keys, they must be either 5 or 13 characters in length.  If set to
 2, the passphrase is hashed using the de-facto MD5 method to derive the
