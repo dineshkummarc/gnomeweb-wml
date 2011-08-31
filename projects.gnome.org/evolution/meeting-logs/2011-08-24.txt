@@ -1,0 +1,335 @@
+Aug 24 11:31:21 <chen>	Lets get started,
+Aug 24 11:32:04 *	jpunit (~punit@122.167.83.182) has joined #evolution-meet
+Aug 24 11:32:12 <chen>	I would like to start this meeting by mentioning a important phenomenon happening in India, there are very peaceful protests happening at the moment,
+Aug 24 11:32:43 <chen>	by a person named Anna hazzare who is sitting on his 9th day fast against corruption drinking just water
+Aug 24 11:33:08 <chen>	I was there the whole last week and was amazed to see the rising consciouness..
+Aug 24 11:33:12 *	adborden1 (~aaborden@c-67-188-34-106.hsd1.ca.comcast.net) has joined #evolution-meet
+Aug 24 11:33:20 <chen>	Getting started with the project updates,
+Aug 24 11:33:28 *	mauricelynch (~mauricely@jfdmzpr06-ext.jf.intel.com) has joined #evolution-meet
+Aug 24 11:34:04 <chen>	we had the 3.1.5 release last week and would be having another release coming monday which 3.1.90
+Aug 24 11:34:16 <chen>	the freezes which are alive at the moment are,
+Aug 24 11:34:23 <chen>	API, ABI, Feature freezes,
+Aug 24 11:34:34 <chen>	and we are on String, UI announcement period
+Aug 24 11:34:43 <chen>	Some freezes dates to keep in mind,
+Aug 24 11:34:43 *	vibs has quit (Connection reset by peer)
+Aug 24 11:34:52 <chen>	Aug 29 UI freeze
+Aug 24 11:34:53 <chen>	Sep 05 String freeze
+Aug 24 11:34:53 <chen>	Sep 19 Hard code freeze
+Aug 24 11:35:14 <chen>	We had to finalize on the release date for 3.0.3
+Aug 24 11:35:27 <chen>	i would like to propose the date aug 31 for the same,
+Aug 24 11:35:43 *	vibs (~yvibha@122.167.69.220) has joined #evolution-meet
+Aug 24 11:35:47 <chen>	i would like fix the following bug for the same,
+Aug 24 11:35:53 <chen>	https://bugzilla.gnome.org/show_bug.cgi?id=655248 - gtkhtml consuming high cpu
+Aug 24 11:36:08 *	mcrha is fine with the date for 3.0.3
+Aug 24 11:36:24 <chen>	mbarnes, ?
+Aug 24 11:36:49 <chen>	andre_, i hope ur fine with it?
+Aug 24 11:37:14 <andre_>	oh sure :)
+Aug 24 11:37:23 <mbarnes>	chen: worksforme.  I shall update the release assignments on the wiki
+Aug 24 11:37:33 <chen>	mbarnes, cool, thanks!
+Aug 24 11:38:38 <chen>	mbarnes anounced another crucial update for evolution landing soon during this release - CamelSettings,
+Aug 24 11:38:44 <chen>	http://mail.gnome.org/archives/evolution-hackers/2011-August/msg00012.html
+Aug 24 11:38:52 <chen>	mbarnes, i hope it wouldn break any freezes?
+Aug 24 11:39:43 <chen>	lakhil, any updates on the idea you had proposed on the collecting the usage statistics iirc ?
+Aug 24 11:40:23 <mbarnes>	chen: well, no one but us really consumes Camel and the platform API freeze doesn't really apply
+Aug 24 11:40:39 <chen>	mbarnes, cool
+Aug 24 11:40:42 <lakhil>	nope, i haven't got any response from banshee developer, will ping him again
+Aug 24 11:40:50 <chen>	lakhil, thanks
+Aug 24 11:41:40 <chen>	Evolution ews is also supported now for 2.28 with a branch gnome-2-28
+Aug 24 11:42:02 <chen>	it was specially done for sled, but if there are any others interested, they can consume the same
+Aug 24 11:42:22 <mbarnes>	hmm...
+Aug 24 11:42:25 <chen>	am yet to start to port it to Evolution 3.2 though
+Aug 24 11:42:56 <chen>	i made an effort to form a single compatibility patch for all versions,
+Aug 24 11:43:20 <chen>	but due the camel-object -> gobject changes which happened in 2.30 wasn able to,
+Aug 24 11:43:28 <chen>	as the code started to look ugly
+Aug 24 11:43:39 <mbarnes>	eek, that sounds incredibly painful
+Aug 24 11:43:56 <chen>	yeah, lots of typing to do :)
+Aug 24 11:44:03 <mbarnes>	I don't know how cooly does it...
+Aug 24 11:44:26 <chen>	will try to get a single clean compatibility patch for other versions
+Aug 24 11:44:46 <chen>	Anything to be discussed before we move on to individual updates?
+Aug 24 11:45:13 <chen>	updates from my side,
+Aug 24 11:45:18 <mcrha>	line wrapping discussion?
+Aug 24 11:45:27 <chen>	yup,
+Aug 24 11:45:34 <chen>	mcrha, had a chance to go through http://stackoverflow.com/questions/2151836/c-coding-style-line-length-wrapping-lines ?
+Aug 24 11:45:48 <chen>	my observation from that is,
+Aug 24 11:45:49 <mcrha>	yup, I didn't find any special argument for shorter lines there, they also said there that it's mostly per-person preference, thus the best to make a consensus between us and update the coding style page, as chen suggested the last time. Only do not take me wrong, I'm also wrapping some long lines, that's only I do not wrap on 80 letters anymore, even my laptop LCD is showing large enough screens to have wrapping on 80 letters just waste of space.
+Aug 24 11:45:59 *	chen reads the long sentence :)
+Aug 24 11:46:39 <chen>	mcrha, i felt 120 max should be reasonable ?
+Aug 24 11:46:48 *	vibs has quit (Read error: 131 (Connection reset by peer))
+Aug 24 11:46:51 <mcrha>	count in that also 8 letters per tab, which limits line length quite quickly
+Aug 24 11:47:15 <mcrha>	hmm, mine console has 174 at the moment
+Aug 24 11:47:15 *	vibs (~yvibha@122.167.116.34) has joined #evolution-meet
+Aug 24 11:47:45 <chen>	mcrha, same as mine :)
+Aug 24 11:47:55 *	vibs has quit (Remote closed the connection)
+Aug 24 11:48:01 <chen>	mcrha, but shouldn we consider viewing multiple files in the same page ?
+Aug 24 11:48:03 *	vibs (~yvibha@122.167.116.34) has joined #evolution-meet
+Aug 24 11:48:23 *	mbarnes still strongly prefers 80 chars
+Aug 24 11:48:23 <mcrha>	it's not like "full stop on max line length", is it? because sometimes it's really better readable when it's long line
+Aug 24 11:48:28 <mbarnes>	short, simple lines are easier to read
+Aug 24 11:48:44 <chen>	mbarnes, i agree
+Aug 24 11:48:53 <mcrha>	mbarnes, do you remember the change I gave a link to, where was shown just the opposite?
+Aug 24 11:49:14 <mcrha>	short lines, actually harder to read?
+Aug 24 11:49:30 <chen>	mcrha, i actually tried writing a patch with longer lines and it really looked bad
+Aug 24 11:49:39 *	mcrha votes for 140 soft-max
+Aug 24 11:49:50 <chen>	i had to commit a incremental patch later to make it look good :)
+Aug 24 11:50:14 <mbarnes>	so you're suggesting this is readable?
+Aug 24 11:50:14 <mbarnes>	http://git.gnome.org/browse/evolution-data-server/tree/libedataserver/e-client.c#n2297
+Aug 24 11:50:15 <mcrha>	yeah, it depends, both cases on both sides, I agree.
+Aug 24 11:50:43 <chen>	hehe
+Aug 24 11:50:56 <rgs>	haha - thats insane
+Aug 24 11:51:03 <chen>	mbarnes, i guess the function declarations look nice with one argument per line
+Aug 24 11:51:10 <mcrha>	reason for that is that it doesn't bring in any extra information being on multiple lines, because half of the page would be just arguments of the function ;)
+Aug 24 11:51:30 <mbarnes>	chen: yes, and my cleanup script can now automate that so we're consistent everywhere
+Aug 24 11:51:57 <chen>	mcrha, but it looks good :)
+Aug 24 11:52:10 <chen>	mbarnes, i just wonder how devhelp would show it ?
+Aug 24 11:52:27 <chen>	oh sorry
+Aug 24 11:52:29 *	vibs1 (~yvibha@122.167.68.198) has joined #evolution-meet
+Aug 24 11:52:31 <chen>	bad question
+Aug 24 11:52:45 *	vibs has quit (Read error: 131 (Connection reset by peer))
+Aug 24 11:52:46 <mbarnes>	chen: not relevant to devhelp, it does its own formatting regardless of ours
+Aug 24 11:52:59 <chen>	mbarnes, yup
+Aug 24 11:53:27 <chen>	mcrha, maybe for function declaration and definition which are exposed
+Aug 24 11:53:37 <chen>	we could have one line per argument 
+Aug 24 11:53:38 <chen>	?
+Aug 24 11:53:52 <mcrha>	chen, mbarnes, that example you gave is that way for easier eye-catching, as that was just a monkey work to write those stubs. At least for me.
+Aug 24 11:53:55 <chen>	for the rest we could have a longer limit?
+Aug 24 11:54:31 <mcrha>	can be. I'll format ema myself, once I get to it ;)
+Aug 24 11:54:49 <chen>	good, seems like we are getting a concensus :)
+Aug 24 11:55:44 <chen>	mcrha, we could have 120 as a mid-ground and leave it to people for the rest, but make sure code looks nice :)
+Aug 24 11:55:47 <chen>	for others too :)
+Aug 24 11:56:05 <mcrha>	ok, so mbarnes will run his script and that's it, right? will mbarnes increase line length for function calls?
+Aug 24 11:56:34 <chen>	mcrha, oh increase the line length, i wonder if its possible through script?
+Aug 24 11:56:44 <chen>	mbarnes, ?
+Aug 24 11:57:28 <mcrha>	chen, just the limit, not joining back already wrapped lines
+Aug 24 11:57:30 <mbarnes>	the script can enforce one-param-per-line in declarations.  it doesn't touch function calls.
+Aug 24 11:58:00 <mcrha>	mbarnes, do you line-wrap them manually?
+Aug 24 11:58:18 *	Corsac (~yap@pyr75-3-78-192-68-46.fbxo.proxad.net) has joined #evolution-meet
+Aug 24 11:58:23 <Corsac>	hey
+Aug 24 11:58:25 <mbarnes>	usually, yes
+Aug 24 11:58:27 <chen>	hey Corsac 
+Aug 24 11:58:36 <mcrha>	mbarnes, oh
+Aug 24 11:58:51 *	dave_largo (~drichard@rrcs-24-73-120-180.se.biz.rr.com) has joined #evolution-meet
+Aug 24 11:58:55 <chen>	hey dave_largo 
+Aug 24 11:59:02 <dave_largo>	Hey guys,just back from lunch
+Aug 24 11:59:07 <mcrha>	anyway, let's move on, when talking about mbarnes' script, though I wanted to speak about this anyway: white space and coding style cleanups
+Aug 24 11:59:19 <chen>	cool
+Aug 24 11:59:34 <chen>	anything else before we move to individual updates?
+Aug 24 11:59:34 <mcrha>	I would like to suggest to do that only once per cycle, the best around .91/.92, to have less work with modifying patches for stable release when done on development version
+Aug 24 12:00:05 <mbarnes>	that's fair
+Aug 24 12:00:09 <chen>	yup
+Aug 24 12:00:30 <chen>	updates from my side,
+Aug 24 12:00:35 <mcrha>	personally, I thought it'll be a one time change, though such changes are more and more ;)
+Aug 24 12:00:46 <chen>	:)
+Aug 24 12:01:06 <chen>	mostly fixing bugs and porting ews to 2.28 branch,
+Aug 24 12:01:22 <chen>	and now fixing some bugs specific to 2.28 
+Aug 24 12:01:58 *	mcrha is getting hands off for 2.32 and chen is divin into 2.28. Interesting
+Aug 24 12:01:59 <chen>	andre_, am yet to test ur patch, will get it done by tomorrow, was held up in meetings today..
+Aug 24 12:02:08 <andre_>	np
+Aug 24 12:02:14 <chen>	hehe /me envies mcrha :D
+Aug 24 12:02:32 <chen>	adborden1, anything to share?
+Aug 24 12:02:42 <dave_largo>	2.28 is of interest to the corporate customers :)
+Aug 24 12:02:42 <adborden1>	nope, just listening :)
+Aug 24 12:02:53 <chen>	adborden1, ok :)
+Aug 24 12:02:58 <chen>	andre_, anything to share ?
+Aug 24 12:03:05 <andre_>	Only thing that comes to my mind: If anybody wants to browse the new user docs online, you can do that now: http://library.gnome.org/users/evolution/3.1/
+Aug 24 12:03:05 <andre_>	I assume I'm de-facto now Evo docs maintainer and would like to introduce myself to the Evo team but I didn't prepare anything. Maybe next time. :-P
+Aug 24 12:03:05 <andre_>	There's still enough TODOs in the files (some need developer input) and I welcome any bug reports against Evo's "User documentation" component in bugzilla.gnome.org
+Aug 24 12:03:05 <andre_>	And lakhil has already pointed out about 20 mistakes he found - thanks a bunch!
+Aug 24 12:03:29 <lakhil>	welcome andre_ , hard work was done by you :)
+Aug 24 12:03:37 <chen>	lakhil, +1
+Aug 24 12:03:54 <chen>	andre_, thanks :)
+Aug 24 12:04:04 <andre_>	it was interesting. :-P
+Aug 24 12:04:04 <chen>	Corsac, anything to share?
+Aug 24 12:04:26 <chen>	andre_, i should now inform this update to radhika to get back at you :D
+Aug 24 12:04:34 <chen>	dave_largo, anything to share?
+Aug 24 12:04:56 <andre_>	chen, :-D we had a quick talk when I was in Bangalore
+Aug 24 12:05:02 <dave_largo>	The only thing that comes to mind is that I'd like to explore some ideas for a stronger UI roadmap.
+Aug 24 12:05:03 <chen>	dvratil, updates?
+Aug 24 12:05:06 <chen>	andre_, :)
+Aug 24 12:05:13 <dvratil>	yeah, regarding the webkit port
+Aug 24 12:05:15 <dave_largo>	Whereby we kick around ideas and do mockups
+Aug 24 12:05:39 <chen>	dave_largo, looks like ur back to form :)
+Aug 24 12:06:00 <dave_largo>	I was always in form, but we haven't developed anything new for a while now :)
+Aug 24 12:06:11 <dvratil>	embeding GtkWidget into WebKit is totally broken in webkit and nobody know how to fix it and I was told that the API for this will be dropped anyways sooner or later
+Aug 24 12:06:23 <lakhil>	chen, you dared to wake up sleeping tiger ;-)
+Aug 24 12:06:28 <chen>	hehe
+Aug 24 12:06:35 <mbarnes>	dvratil: well shit.  that's kinda important...
+Aug 24 12:06:41 *	vibs (~yvibha@122.167.89.25) has joined #evolution-meet
+Aug 24 12:06:56 <dvratil>	yop, I'm rewriting the EMFormat & co. so that it split into multiple webviews
+Aug 24 12:06:56 <dave_largo>	We had someone log on the other day mentioning that highlighting was not supported in email, which is a part of the webkit thing
+Aug 24 12:07:23 <mbarnes>	dvratil: urg.  srag strongly recommended against that after trying it with Anjal...
+Aug 24 12:07:37 <mbarnes>	but I don't know what else to suggest if embedded widgets aren't supported
+Aug 24 12:07:39 <dave_largo>	Outlook is sending email now with sections highlighted, an attribute similar to bold or italic
+Aug 24 12:08:28 <dvratil>	mbarnes, well I'm a web developer as well, so eventually I should be able to create a HTML/CSS/JavaScript code that would be able to replace the GtkWidgets
+Aug 24 12:09:14 <dvratil>	mbarnes, but the split-webview thing works already a little bit, I think I'm on the right track
+Aug 24 12:09:17 <dave_largo>	chen, lahkil, let's have a short Largo meeting after we are done.
+Aug 24 12:09:27 <chen>	dave_largo, ok
+Aug 24 12:10:03 <dvratil>	I'll clean up the code and fix some ugly crashes, push the recent code to git and send a mail with full description of all the evil things I've done to EMFormat on Friday
+Aug 24 12:10:20 <mbarnes>	dvratil: printing may be an issue with split-webview
+Aug 24 12:10:55 <chen>	would it be good to discuss with srag as well maybe to check if there are any other issues he faced?
+Aug 24 12:11:07 <dvratil>	for printing I'd create a separate single-webview generator, we don't need to print the EAttachmentBar and similar widgets, do we?
+Aug 24 12:11:41 <Corsac>	chen: Debian recently switch from 2.32 to 3.0.2 so we expect various bug reports which we'll try to forward
+Aug 24 12:11:50 <Corsac>	nothing new other than that :)
+Aug 24 12:12:07 <lakhil>	Corsac, you will get 3.0.3 with some fixes soon :)
+Aug 24 12:12:12 <mbarnes>	dvratil: I'll wait for your mail before commenting further.  don't want to derail the meeting  :)
+Aug 24 12:12:13 <chen>	Corsac, i just mentioned during the start of the meet,
+Aug 24 12:12:28 <dvratil>	mbarnes, sure :)
+Aug 24 12:12:30 *	vibs1 has quit (Ping timeout: 600 seconds)
+Aug 24 12:12:38 <chen>	that we would be making the 3.0.3 release on aug 31
+Aug 24 12:12:43 <chen>	if u have missed
+Aug 24 12:13:10 <chen>	Corsac, plz let me know if u have any critical issues that needs to be fixed for 3.0.3..
+Aug 24 12:13:18 <chen>	and we can add it to the same
+Aug 24 12:13:43 <chen>	dwmw2, updates?
+Aug 24 12:13:56 <chen>	jpunit, updates?
+Aug 24 12:14:26 <jpunit>	chen: worked on downstream mostly on submission of sp2  and some bugs..
+Aug 24 12:14:26 <chen>	kov, anything to share?
+Aug 24 12:14:32 <chen>	jpunit, thanks
+Aug 24 12:14:36 <chen>	lakhil, updates?
+Aug 24 12:14:46 <lakhil>	ews testing in master and downstream, random testing on master, evolution user doc review and bug triaging
+Aug 24 12:14:55 <chen>	lakhil, thanks!
+Aug 24 12:15:02 <chen>	mauricelynch, anything to share?
+Aug 24 12:15:10 <chen>	mbarnes, updates?
+Aug 24 12:15:25 <mbarnes>	chen mentioned the new settings API for Camel
+Aug 24 12:15:25 <mbarnes>	that was a strategic move to remove some roadblocks in my account-mgmt branch
+Aug 24 12:15:25 <mbarnes>	which I'm now dusting off and trying to get running again after several months of neglect
+Aug 24 12:15:25 <mbarnes>	I'm at the point where I'm trying to merge mail accounts into the new ESource API
+Aug 24 12:15:25 <mbarnes>	(http://mbarnes.fedorapeople.org/account-mgmt/docs/libedataserver/index.html)
+Aug 24 12:15:25 <mbarnes>	so that's my only real focus now, as I'm trying to finish it in time for 3.3.1 or .2
+Aug 24 12:15:57 <chen>	mbarnes, thats awesome :)
+Aug 24 12:16:12 <chen>	mbarnes, unified account management on the way :)
+Aug 24 12:16:18 <chen>	mcrha, updates?
+Aug 24 12:16:27 <mcrha>	only simple work-through more-or-less recent bugs, catching things before 3.1.90 release. 
+Aug 24 12:16:32 <Corsac>	chen: I myself had issues with the sidebar size (not critical, already reported) and few times evo wouldn't close or switch to offline mode
+Aug 24 12:16:36 <mauricelynch>	Sorry in another mtg with my managers, and trying to debug something with David
+Aug 24 12:16:41 <chen>	mcrha, thanks1
+Aug 24 12:16:41 <Corsac>	maybe related to network changes while suspended
+Aug 24 12:17:21 <chen>	Corsac, ok, let me know the bug id for the second issue.. i will try to make a fix
+Aug 24 12:17:31 <chen>	mauricelynch, np
+Aug 24 12:17:39 <chen>	rgs, anything to share?
+Aug 24 12:17:41 <rgs>	Folks 0.6 was finally released - with a shiny e-d-s backend which is being used from Gnome Contacts, on the way to this release e-d-s' introspection support received some attention, so i hope to see new and wonderful projects using e-d-s' introspected binding 
+Aug 24 12:17:42 <mauricelynch>	We are close to a EWS Beta release, just as an update
+Aug 24 12:17:57 <chen>	mauricelynch, nice :)
+Aug 24 12:18:25 <chen>	rgs, nice :)
+Aug 24 12:18:27 <Corsac>	ok, in fact I just closed two evo on two different boxes, and it freezes at quitting
+Aug 24 12:18:33 <chen>	rodrigo, anything to share?
+Aug 24 12:18:34 <Corsac>	so there's definitely something fishy :)
+Aug 24 12:18:47 <mcrha>	Corsac, imapx in use?
+Aug 24 12:18:49 <Corsac>	yes
+Aug 24 12:19:05 <chen>	vibs, updates?
+Aug 24 12:19:08 <mcrha>	maybe here https://bugzilla.gnome.org/show_bug.cgi?id=655272
+Aug 24 12:19:23 <Corsac>	ha, first one finally closed
+Aug 24 12:19:27 <Corsac>	and second too
+Aug 24 12:19:31 <Corsac>	so it's just really slow
+Aug 24 12:19:48 <chen>	mcrha, is it available in stable branch as well ?
+Aug 24 12:19:59 <chen>	s/it/the patch
+Aug 24 12:20:11 <mcrha>	Corsac, should get to your nearest hardware store and give them some money for better machine ;)
+Aug 24 12:20:15 *	vibs was mostly on downstream
+Aug 24 12:20:30 <chen>	vibs, thanks
+Aug 24 12:20:34 <mcrha>	chen, nope, 3.1.90+ says the last comment there
+Aug 24 12:20:40 <vibs>	and was on leave
+Aug 24 12:21:07 <Corsac>	mcrha: http://paste.debian.net/127251/
+Aug 24 12:21:14 <chen>	mcrha, can you commit to stable as well?
+Aug 24 12:21:36 <mcrha>	by the way, when I was chasing these pointers, I extended e_pointer_tracker routines from e-data-server-util.c, it can show backtraces where the pointer was added to the tracker, which is kinda useful
+Aug 24 12:21:39 *	vibs has quit (Read error: 104 (Connection reset by peer))
+Aug 24 12:21:44 <andre_>	dvratil: I know I asked this before, but hearing about your issues I assume that WebKit is now targetted for evo 3.4 instead of 3.2 as we'd expect too many rough edges?
+Aug 24 12:21:51 <mcrha>	chen, I'm not sure, it didn't get enough testing, neither proper review
+Aug 24 12:22:12 <mbarnes>	andre_: no chance in hell we'd merge that for 3.2 at this late date
+Aug 24 12:22:16 <dvratil>	andre_, definitely not making it to 3.2 :) 
+Aug 24 12:22:16 *	mauricelynch has quit (Remote closed the connection)
+Aug 24 12:22:32 *	mauricelynch (~mauricely@jfdmzpr06-ext.jf.intel.com) has joined #evolution-meet
+Aug 24 12:22:35 <andre_>	thanks. just need it for my planning :-P
+Aug 24 12:22:36 *	vibs (~yvibha@122.178.249.137) has joined #evolution-meet
+Aug 24 12:22:38 <chen>	mcrha, ok, will have a look at it and port it to gnome-3.0 branch
+Aug 24 12:22:51 <mcrha>	good chen 
+Aug 24 12:22:52 <dvratil>	andre_, after three weeks of work I managed to display single plaintext email two days ago :)
+Aug 24 12:22:53 <andre_>	everybody feel free to update https://live.gnome.org/Evolution/Planning32 - I'll create https://live.gnome.org/Evolution/Planning34 in a few minutes
+Aug 24 12:22:58 <andre_>	dvratil, heh
+Aug 24 12:23:20 <chen>	andre_, sure!
+Aug 24 12:23:24 <vibs>	hi chen, my connection is getting disconnected often
+Aug 24 12:23:26 <vibs>	last month I tried hands on EWS addressbook and downstream bugs
+Aug 24 12:23:37 <chen>	vibs, cool
+Aug 24 12:24:06 <mbarnes>	chen: have you heard anything from srag about how this email-factory branch of his is progressing?
+Aug 24 12:24:34 *	mcrha noticed rumors of abandoning the work on it
+Aug 24 12:24:35 <chen>	mbarnes, i had a discussion with him couple of weeks back and he said,
+Aug 24 12:24:44 <chen>	he wanted to push it for 3.4 release
+Aug 24 12:24:56 <Corsac>	mcrha: hmhm, it takes ages to quit even just after starting
+Aug 24 12:25:07 <chen>	he said he wanted the api changes to slow down and he could merge the changes for 3.4
+Aug 24 12:25:31 <mcrha>	Corsac, if there is anything in the status bar, then it'll "never" quit
+Aug 24 12:25:31 <chen>	mcrha, hmm, let me check with him tomorrow morning
+Aug 24 12:25:32 <chen>	to be sure
+Aug 24 12:25:46 <mbarnes>	chen: hmm.  my branch and his branch aren't gonna get along well.  we'll need to coordinate
+Aug 24 12:26:07 <mcrha>	chen, might be I mixed up with someone else, do not listen this insane guy writing insanely long lines ;)
+Aug 24 12:26:12 <Corsac>	nop, here the status bar is empty
+Aug 24 12:26:17 <chen>	mbarnes, i can understand :)
+Aug 24 12:26:43 <Corsac>	all in all I find imapx operations slower in 3.0
+Aug 24 12:26:49 <chen>	mbarnes, he had the concern as well, but would it have a clash even with 3.3 proceeding ?
+Aug 24 12:27:20 <mcrha>	ok Corsac, let's talk after the meeting
+Aug 24 12:28:12 <chen>	mbarnes, maybe you can discuss with him tomorrow on it and keep track of things..
+Aug 24 12:28:24 <chen>	anything else before we wrap up the meeting ?
+Aug 24 12:28:58 *	mcrha has nothing more
+Aug 24 12:29:01 <mbarnes>	chen: he's working against the 2.32 branch, so he's got some adaptations to make regardless
+Aug 24 12:29:52 <chen>	mbarnes, its better he gets the code merged once we branch for 3.3
+Aug 24 12:30:03 *	dwmw2 returns; sorry
+Aug 24 12:30:14 <mbarnes>	agreed
+Aug 24 12:30:15 <chen>	lets check with him and i hope he has the same plan
+Aug 24 12:30:25 <dwmw2>	update: I've mostly been ignoring EWS for the last few weeks and concentrating on the ActiveSync back end
+Aug 24 12:30:38 <dwmw2>	which is working well for mail; I've been using it in anger on my company mail for the last couple of months in fact.
+Aug 24 12:30:42 <chen>	dwmw2, thanks!
+Aug 24 12:30:56 <chen>	dwmw2, anger ;)
+Aug 24 12:30:57 <dwmw2>	I haven't done calendar/addressbook back ends; we're doing that through SyncEvolution atm although it would be nice to get an evo backend for htem.
+Aug 24 12:31:19 <dwmw2>	I *really* want to fix the config ui stuff for camel providers. Having to do an evolution ui plugin just to configure the basic account settings is a PITA
+Aug 24 12:31:43 <dwmw2>	and if we fix that, all the groupware stuff could actually move into e-d-s where it belongs. Because it wouldn't need to link against evo itself.
+Aug 24 12:31:52 <chen>	dwmw2, agree
+Aug 24 12:32:18 <dwmw2>	I reckon we can get away with putting the ActiveSync code into eds too; the patents don't bother us.
+Aug 24 12:32:37 <dwmw2>	the allegedly patented stuff is in the separate ActiveSyncd dÃ¦mon, which the camel provider talks to by dbus
+Aug 24 12:33:00 <dwmw2>	(and anyone clainming to have a patent on that should be jailed for fraud anyway, but that's a different issue)
+Aug 24 12:33:17 <chen>	dwmw2, i wonder what evolution-ews backend and activesync backends are targetted for, the question is
+Aug 24 12:33:36 <chen>	were does active sync find the use ?
+Aug 24 12:33:43 <mbarnes>	dwmw2: I'm convinced the whole CamelProviderConf crap needs to die.  we need a better framework.
+Aug 24 12:33:54 <dwmw2>	ews has more features, is generally better and faster. But you have to be on the VPN
+Aug 24 12:34:01 <dwmw2>	ActiveSync is available anywhere
+Aug 24 12:34:08 <dwmw2>	mbarnes: makes sense.
+Aug 24 12:34:35 <dwmw2>	I am still seeing Evolution build up to 5GiB or so
+Aug 24 12:34:45 <dwmw2>	I found some gobject leaks that valgrind wasn't complaining about
+Aug 24 12:34:59 <dwmw2>	the biggest in EWS, which I fixed. Others in the composer I think.
+Aug 24 12:35:07 <dwmw2>	but I can't actually find the main offenders
+Aug 24 12:35:16 *	dave_largo hates leaks on multi-user servers! 
+Aug 24 12:35:21 <dwmw2>	doesn't seem to be objects, doesn't seem to be shown by valgrind even when I run with --show-reachable.
+Aug 24 12:35:30 <dwmw2>	perhaps we mmap() some space that isn't accounted for by what I've been using?
+Aug 24 12:35:31 <chen>	maybe memprof would help ?
+Aug 24 12:35:47 <dwmw2>	I will keep poking at it
+Aug 24 12:36:01 <chen>	cool
+Aug 24 12:36:05 <dwmw2>	16478 dwmw2     20   0 4177m 1.8g  19m S  0.0 47.9   6:25.78 evolution          
+Aug 24 12:36:15 <dwmw2>	starts up at 2Â½G, grows until I kill it.
+Aug 24 12:36:33 <chen>	dwmw2, bad
+Aug 24 12:36:56 <dwmw2>	yes
+Aug 24 12:37:09 <dwmw2>	I want something like the kernel's /proc/slabtop where I can see how many objects of various sizes are allocated
+Aug 24 12:37:17 <dwmw2>	will memprof do that? Or do I need to hack the gslice allocator?
+Aug 24 12:37:32 <dwmw2>	valgrind should have done it, I suppose, but didn't seem to.
+Aug 24 12:37:48 <chen>	dwmw2, it would show which objects are holding all the space
+Aug 24 12:38:06 <chen>	dwmw2, i used it long time back to figure out a memory buildup in libical
+Aug 24 12:38:06 <mcrha>	dwmw2, do you have suspicion on a concrete object?
+Aug 24 12:38:41 <dwmw2>	mcrha: only for the leak in the composer, as described in https://bugzilla.gnome.org/show_bug.cgi?id=656525
+Aug 24 12:38:59 <dwmw2>	374 new GtkButtons every time I open a compose window and close it :)
+Aug 24 12:39:07 <dwmw2>	but I don't think that accounts for the huge sizes I'm seeing.
+Aug 24 12:39:11 <dwmw2>	it grows even when I'm not in front of it.
+Aug 24 12:39:43 <mcrha>	dwmw2, hmm, for those from eds/evo I used e_pointer_tracker from e-data-server-utils.h to track where they were allocated (it can show backtraces too)
+Aug 24 12:41:57 <dwmw2>	cool, thanks. I'll play
+Aug 24 12:42:04 <dwmw2>	see what I can find
+Aug 24 12:42:28 <chen>	cool
+Aug 24 12:42:32 <dwmw2>	would like to use talloc-like allocations
+Aug 24 12:42:48 <dwmw2>	belong to an object
+Aug 24 12:42:48 <mcrha>	dwmw2, ./configure --enable-backtraces
+Aug 24 12:42:48 <dwmw2>	go away when obj destroyed
+Aug 24 12:42:51 *	mcrha hates talloc
+Aug 24 12:42:57 <dwmw2>	ok, thanks
+Aug 24 12:43:19 <dwmw2>	I'm dubious about it, but if it helps reduce ;leaksa... :)
+Aug 24 12:43:28 <mcrha>	talloc is too transparent, one can access already freed memory even not knowing that
+Aug 24 12:44:16 *	lakhil has quit (Leaving)
+Aug 24 12:44:20 *	mcrha gotta go
+Aug 24 12:44:30 <mcrha>	chen, is meeting over?
+Aug 24 12:44:34 <mcrha>	;)
+Aug 24 12:44:37 <chen>	Yup :)
+Aug 24 12:44:49 <chen>	lets then meet next month same time :)
+Aug 24 12:44:50 <mcrha>	good, see you another day. bye bye
+Aug 24 12:44:58 <chen>	have fun :) thanks everyone :)
+
