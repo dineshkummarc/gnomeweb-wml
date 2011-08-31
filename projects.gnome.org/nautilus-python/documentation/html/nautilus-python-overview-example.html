@@ -1,34 +1,33 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A Simple Extension</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="nautilus-python Reference Manual"><link rel="up" href="nautilus-python-overview.html" title="Overview"><link rel="prev" href="nautilus-python-overview.html" title="Overview"><link rel="next" href="nautilus-python-overview-methods.html" title="Explanation of Passive/Active Methods"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A Simple Extension</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="nautilus-python-overview.html">Prev</a> </td><th width="60%" align="center">Overview</th><td width="20%" align="right"> <a accesskey="n" href="nautilus-python-overview-methods.html">Next</a></td></tr></table><hr></div><div class="chapter" title="A Simple Extension"><div class="titlepage"><div><div><h2 class="title"><a name="nautilus-python-overview-example"></a>A Simple Extension</h2></div></div></div><p>Create an empty file with the following code:</p><div class="example"><a name="id2620480"></a><p class="title"><b>Example 1. A Simple Extension</b></p><div class="example-contents"><pre class="programlisting">
-import nautilus
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A Simple Extension</title><link rel="stylesheet" type="text/css" href="style.css"><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="nautilus-python Reference Manual"><link rel="up" href="nautilus-python-overview.html" title="Overview"><link rel="prev" href="nautilus-python-overview.html" title="Overview"><link rel="next" href="nautilus-python-overview-methods.html" title="Explanation of Passive/Active Methods"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A Simple Extension</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="nautilus-python-overview.html">Prev</a> </td><th width="60%" align="center">Overview</th><td width="20%" align="right"> <a accesskey="n" href="nautilus-python-overview-methods.html">Next</a></td></tr></table><hr></div><div class="chapter" title="A Simple Extension"><div class="titlepage"><div><div><h2 class="title"><a name="nautilus-python-overview-example"></a>A Simple Extension</h2></div></div></div><p>Create an empty file with the following code:</p><div class="example"><a name="id3054758"></a><p class="title"><b>Example 1. A Simple Extension</b></p><div class="example-contents"><pre class="programlisting">
+import gobject
+from gi.repository import Nautilus
 
-class SimpleMenuExtension(nautilus.MenuProvider):
-def __init__(self):
-    pass
+class SimpleMenuExtension(gobject.GObject, Nautilus.MenuProvider):
+    def __init__(self):
+        pass
 
-def menu_activate_cb(self, menu, file):
-    print "menu_activate_cb",file
+    def menu_activate_cb(self, menu, file):
+        print "menu_activate_cb",file
 
-def get_file_items(self, window, files):
-    if len(files) != 1:
-        return
-    
-    file = files[0]
+    def get_file_items(self, window, files):
+        if len(files) != 1:
+            return
+        
+        file = files[0]
 
-    item = nautilus.MenuItem(
-        "SimpleMenuExtension::Show_File_Name",
-        "Showing %s" % file.get_name(),
-        "Showing %s" % file.get_name()
-    )
-    item.connect('activate', self.menu_activate_cb, file)
-    
-    return [item]</pre></div></div><br class="example-break"><p>Save this file as TestExtension.py in the ~/.nautilus/python-extensions folder. 
-    You may need to create this folder. To run, open the terminal and type:</p><div class="informalexample"><pre class="programlisting">
-$ nautilus -q
-$ nautilus --no-desktop</pre></div><p>Once Nautilus starts, right-click on a file and you should see a new menu item, 
+        item = Nautilus.MenuItem(
+            name="SimpleMenuExtension::Show_File_Name",
+            label="Showing %s" % file.get_name(),
+            tip="Showing %s" % file.get_name()
+        )
+        item.connect('activate', self.menu_activate_cb, file)
+        
+        return [item]</pre></div></div><br class="example-break"><p>Save this file as TestExtension.py in the ~/.local/share/nautilus-python/extensions folder. 
+    You may need to create this folder. To run, simply restart Nautilus.</p><p>Once Nautilus restarts, right-click on a file and you should see a new menu item, 
     "Showing #filename#". It is as simple as that!</p><p>As mentioned above, in order to 
-    get loaded by Nautilus, a python extension must import the nautilus module, 
-    create a class derived from a nautilus *Provider, then create the methods that 
+    get loaded by Nautilus, a python extension must import the Nautilus module from gi.repository, 
+    create a class derived from a nautilus *Provider and a gobject.GObject, and create the methods that 
     will be called by Nautilus when it requests information from its providers. 
     In this case, when someone right-clicks on a file, Nautilus will ask all of its 
     MenuProviders for additional menu items to show the user. When folders or files are clicked, 
-    the get_file_items method is called and a list of nautilus.MenuItems is expected.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="nautilus-python-overview.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="nautilus-python-overview.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="nautilus-python-overview-methods.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Overview </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Explanation of Passive/Active Methods</td></tr></table></div></body></html>
+    the get_file_items method is called and a list of Nautilus.MenuItems is expected.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="nautilus-python-overview.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="nautilus-python-overview.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="nautilus-python-overview-methods.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Overview </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Explanation of Passive/Active Methods</td></tr></table></div></body></html>

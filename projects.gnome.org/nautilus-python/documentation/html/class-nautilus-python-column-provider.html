@@ -1,27 +1,28 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>nautilus.ColumnProvider</title><link rel="stylesheet" href="style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="nautilus-python Reference Manual"><link rel="up" href="nautilus-python-provider-reference.html" title="Provider Interfaces"><link rel="prev" href="nautilus-python-provider-reference.html" title="Provider Interfaces"><link rel="next" href="class-nautilus-python-info-provider.html" title="nautilus.InfoProvider"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">nautilus.ColumnProvider</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="nautilus-python-provider-reference.html">Prev</a> </td><th width="60%" align="center">Provider Interfaces</th><td width="20%" align="right"> <a accesskey="n" href="class-nautilus-python-info-provider.html">Next</a></td></tr></table><hr></div><div class="refentry" title="nautilus.ColumnProvider"><a name="class-nautilus-python-column-provider"></a><div class="titlepage"></div><div class="refnamediv"><h2>nautilus.ColumnProvider</h2><p>nautilus.ColumnProvider — nautilus.ColumnProvider Reference</p></div><div class="refsect1" title="Synopsis"><a name="id2609685"></a><h2>Synopsis</h2><table bgcolor="#D0E0F0" width="100%"><tr><td><pre class="classsynopsis">class <span class="ooclass"><span class="classname">nautilus.ColumnProvider</span></span>:
-<code class="methodsynopsis">    def <span class="methodname"><a class="link" href="class-nautilus-python-column-provider.html#method-nautilus-column-provider--get-columns" title="nautilus.ColumnProvider.get_columns">get_columns</a></span>(<span class="methodparam"></span>)</code><br></pre></td></tr></table></div><div class="refsect1" title="Description"><a name="description-column-provider"></a><h2>Description</h2><p>
-        If subclassed, Nautilus will request a list of <a class="link" href="class-nautilus-python-column.html" title="nautilus.Column"><code class="classname">nautilus.Column</code></a> 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Nautilus.ColumnProvider</title><link rel="stylesheet" type="text/css" href="style.css"><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="index.html" title="nautilus-python Reference Manual"><link rel="up" href="nautilus-python-provider-reference.html" title="Provider Interfaces"><link rel="prev" href="nautilus-python-provider-reference.html" title="Provider Interfaces"><link rel="next" href="class-nautilus-python-info-provider.html" title="Nautilus.InfoProvider"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Nautilus.ColumnProvider</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="nautilus-python-provider-reference.html">Prev</a> </td><th width="60%" align="center">Provider Interfaces</th><td width="20%" align="right"> <a accesskey="n" href="class-nautilus-python-info-provider.html">Next</a></td></tr></table><hr></div><div class="refentry" title="Nautilus.ColumnProvider"><a name="class-nautilus-python-column-provider"></a><div class="titlepage"></div><div class="refnamediv"><h2>Nautilus.ColumnProvider</h2><p>Nautilus.ColumnProvider — Nautilus.ColumnProvider Reference</p></div><div class="refsect1" title="Synopsis"><a name="id3142399"></a><h2>Synopsis</h2><table bgcolor="#D0E0F0" width="100%"><tr><td><pre class="classsynopsis">class <span class="ooclass"><span class="classname">Nautilus.ColumnProvider</span></span>:
+<code class="methodsynopsis">    def <span class="methodname"><a class="link" href="class-nautilus-python-column-provider.html#method-nautilus-column-provider--get-columns" title="Nautilus.ColumnProvider.get_columns">get_columns</a></span>(<span class="methodparam"></span>)</code><br></pre></td></tr></table></div><div class="refsect1" title="Description"><a name="description-column-provider"></a><h2>Description</h2><p>
+        If subclassed, Nautilus will request a list of <a class="link" href="class-nautilus-python-column.html" title="Nautilus.Column"><code class="classname">Nautilus.Column</code></a> 
         objects, which are then displayed when the user is in <code class="literal">List</code> mode.
         
-        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>An extension sub-classing <a class="link" href="class-nautilus-python-column-provider.html" title="nautilus.ColumnProvider"><code class="classname">nautilus.ColumnProvider</code></a> 
-        will almost always want to sub-class <code class="classname">nautilus.InfoProvider</code> 
+        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>An extension sub-classing <a class="link" href="class-nautilus-python-column-provider.html" title="Nautilus.ColumnProvider"><code class="classname">Nautilus.ColumnProvider</code></a> 
+        will almost always want to sub-class <code class="classname">Nautilus.InfoProvider</code> 
         as well, since that is how an extension provides information for each item in a directory listing.
         </div><p>
-        </p><div class="example"><a name="id2627056"></a><p class="title"><b>Example 2. nautilus.ColumnProvider Example</b></p><div class="example-contents"><pre class="programlisting">
+        </p><div class="example"><a name="id3020075"></a><p class="title"><b>Example 2. Nautilus.ColumnProvider Example</b></p><div class="example-contents"><pre class="programlisting">
 import os
 import urllib
 
-import nautilus
+import gobject
+from gi.repository import Nautilus
 
-class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
+class ColumnExtension(gobject.GObject, Nautilus.ColumnProvider, Nautilus.InfoProvider):
     def __init__(self):
         pass
     
     def get_columns(self):
-        return nautilus.Column("NautilusPython::block_size_column",
-                               "block_size",
-                               "Block size",
-                               "Get the block size"),
+        return Nautilus.Column(name="NautilusPython::block_size_column",
+                               attribute="block_size",
+                               label="Block size",
+                               description="Get the block size"),
 
     def update_file_info(self, file):
         if file.get_uri_scheme() != 'file':
@@ -30,7 +31,7 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
         filename = urllib.unquote(file.get_uri()[7:])
         
         file.add_string_attribute('block_size', str(os.stat(filename).st_blksize))
-    </pre></div></div><br class="example-break"></div><div class="refsect1" title="Passive Methods"><a name="id2599516"></a><h2>Passive Methods</h2><div class="refsect2" title="nautilus.ColumnProvider.get_columns"><a name="method-nautilus-column-provider--get-columns"></a><h3>nautilus.ColumnProvider.get_columns</h3><pre class="programlisting"><code class="methodsynopsis">    def <span class="methodname">get_columns</span>(<span class="methodparam"></span>)</code></pre><table border="0" width="100%" bgcolor="#FFECCE"><col align="left" valign="top" width="0*"><tbody><tr><td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td><td>a list of <code class="literal">nautilus.Column</code></td></tr></tbody></table><p>
+    </pre></div></div><br class="example-break"></div><div class="refsect1" title="Passive Methods"><a name="id3151401"></a><h2>Passive Methods</h2><div class="refsect2" title="Nautilus.ColumnProvider.get_columns"><a name="method-nautilus-column-provider--get-columns"></a><h3>Nautilus.ColumnProvider.get_columns</h3><pre class="programlisting"><code class="methodsynopsis">    def <span class="methodname">get_columns</span>(<span class="methodparam"></span>)</code></pre><table border="0" width="100%" bgcolor="#FFECCE"><col align="left" valign="top" width="0*"><tbody><tr><td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td><td>a list of <code class="literal">Nautilus.Column</code></td></tr></tbody></table><p>
             The <code class="methodname">get_columns</code>() method returns a list of
-            <a class="link" href="class-nautilus-python-column.html" title="nautilus.Column"><code class="classname">nautilus.Column</code></a>.
-          </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="nautilus-python-provider-reference.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="nautilus-python-provider-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="class-nautilus-python-info-provider.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Provider Interfaces </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> nautilus.InfoProvider</td></tr></table></div></body></html>
+            <a class="link" href="class-nautilus-python-column.html" title="Nautilus.Column"><code class="classname">Nautilus.Column</code></a>.
+          </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="nautilus-python-provider-reference.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="nautilus-python-provider-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="class-nautilus-python-info-provider.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Provider Interfaces </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Nautilus.InfoProvider</td></tr></table></div></body></html>
