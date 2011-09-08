@@ -61,8 +61,11 @@ for (@maindir) {
     @dir = $gnomeftp->ls("$_");
     for (@dir) {
         $current_file = $_;
-        m/^(.*)\.(.*)\/(.*)\.tar\.gz/g or next;
-        $filename = "$3.tar.gz";
+        if (m/^(.*)\.(.*)\/(.*)(\.[\d\.]+)?\.tar\.gz/g) {
+            $filename = "$3.tar.gz";
+        } elsif (m/^(.*)\.(.*)\/(.*)(\.[\d\.]+)?\.tar\.xz/g) {
+            $filename = "$3.tar.xz";
+        } else { next; }
         $packages{$filename}{"news"} = "$3\.changes";
         $packages{$filename}{"url"} =
             "http://ftp.gnome.org/pub/GNOME/sources/cheese/$current_file";
@@ -84,7 +87,7 @@ for (@maindir) {
             or die "Cannot retrieve mtime ", $ftp->message;
         $packages{$filename}{"epoch"} = $mdtm - 3600;
         $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm, "GMT");
-        if ($filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.gz/) {
+        if ($filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.gz/ or $filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.xz/) {
             $packages{$filename}{"release"} = "$1" . ($2 or "");
         }
     }
