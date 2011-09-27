@@ -122,7 +122,7 @@
         <div id="sidebar">
 	  <div class="download-button">
 	    <center>
-	      <a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.bz2"><strong>Download Now!</strong>
+	      <a href="{$release/anjuta/stable/download}/anjuta-{$release/anjuta/stable/version}.tar.xz"><strong>Download Now!</strong>
 	      </a><br/>
 	      Anjuta <xsl:value-of select="$release/anjuta/stable/version"/>
 	    </center>
