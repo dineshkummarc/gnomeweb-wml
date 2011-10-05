@@ -25,6 +25,7 @@ SUBDIRS = css \
 	gnumeric		\
 	guppi			\
 	gtkglext        	\
+	gtkimageview		\
 	gtksourceview		\
 	gtksourceviewmm		\
 	gtranslator		\
