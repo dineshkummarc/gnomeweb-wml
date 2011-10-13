@@ -10,6 +10,8 @@ page_SCRIPTS= 	index.html \
 		charlas.html \
 		como-llegar.html \
 		llamado-trabajos.html \
-		general.css
+		general.css  \
+		expositores.css \
+		programa.css
 
 include $(top_srcdir)/rules.common
