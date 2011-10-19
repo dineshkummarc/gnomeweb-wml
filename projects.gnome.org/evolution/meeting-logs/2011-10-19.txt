@@ -1,0 +1,153 @@
+Oct 19 11:20:59 <mbarnes>	chen told me he's stuck in traffic and asked me to lead the meeting
+Oct 19 11:29:43 <mbarnes>	I'm completely unprepared for this, btw, so it'll be a short meeting...
+Oct 19 11:30:11 *	mcrha|afk is now known as mcrha
+Oct 19 11:30:16 <mbarnes>	first, thanks to all who responded to my request for blog post material
+Oct 19 11:30:37 <mbarnes>	I published it last week and got some positive feedback about it
+Oct 19 11:30:42 <mbarnes>	http://mbarnes.livejournal.com/4590.html
+Oct 19 11:30:53 <lakhil>	it was a nice initiative :)
+Oct 19 11:31:08 <mbarnes>	I probably should do a post like that every 6 months, but no promises :)
+Oct 19 11:31:38 <mbarnes>	also, evolution-ews is blossoming nicely... it works now with versions 2.28, 2.32, 3.0
+Oct 19 11:31:50 <mbarnes>	and a 3.2 release is imminent
+Oct 19 11:32:43 <mbarnes>	lastly, the 3.3.1 release is upon us already.  tarballs due this coming Monday.
+Oct 19 11:33:10 <mbarnes>	anyone else with news items?
+Oct 19 11:33:33 *	prahal (~prahal@prahal.homelinux.net) has joined #evolution-meet
+Oct 19 11:33:45 <mbarnes>	all quiet  :)
+Oct 19 11:33:48 <dwmw2>	it does work with 3.2
+Oct 19 11:33:49 <dwmw2>	just not 3.3 yet
+Oct 19 11:33:49 <dwmw2>	mcrha has been working on that.
+Oct 19 11:33:49 <dwmw2>	hm, irc meeting works better if Idon't turn off the ups that feeds the Ethernet, with my foot
+Oct 19 11:34:28 <mcrha>	yup, will post a patch to bugzilla later today
+Oct 19 11:34:30 <dwmw2>	I'm still preparing for merging ActiveSync into GNOME.
+Oct 19 11:35:16 <mbarnes>	sweet.  and I promised dwmw2 a 3.2 tarball release later today
+Oct 19 11:35:47 <rodrigo_>	oh, there's a comment in mbarnes' post about separating the components in separate apps
+Oct 19 11:36:09 <rodrigo_>	is there any plan?
+Oct 19 11:36:35 <rodrigo_>	I remember several years ago, when I worked on evolution, it was planned, but we never got to it
+Oct 19 11:36:48 <mbarnes>	not at present that I'm aware of
+Oct 19 11:37:13 <mbarnes>	it's always the same knee-jerk responses everytime evolution gets mentioned
+Oct 19 11:37:23 <dwmw2>	I'd actually like to merge rather than split things out. :)
+Oct 19 11:37:53 <dwmw2>	evo-{mapi,ews,activesync,groupware} etc all into eds.
+Oct 19 11:37:53 <rodrigo_>	with gnome-contacts and (possibly) the new calendar UI in design works, it might make sense to remove those UIs
+Oct 19 11:38:15 <rodrigo_>	and yes, merge that functionality in evo itself, but not as separate components?
+Oct 19 11:38:37 <dwmw2>	I don't care so much about evo; mostly eds :)
+Oct 19 11:38:45 <rodrigo_>	dwmw2, right, that makes sense
+Oct 19 11:39:18 <mbarnes>	I'm waiting to see how that all plays out
+Oct 19 11:39:37 <mbarnes>	it's a little premature I think to start ripping components out just yet
+Oct 19 11:39:40 <rodrigo_>	yeah, maybe too early to commit to it yet
+Oct 19 11:40:17 <mbarnes>	but we definitely should look toward tighter libfolks integration in other parts of evo
+Oct 19 11:40:24 <rodrigo_>	yeah
+Oct 19 11:40:24 <mbarnes>	composer fields, for example
+Oct 19 11:40:41 <mbarnes>	meeting attendees, etc.
+Oct 19 11:41:27 <mbarnes>	okay... on to status updates
+Oct 19 11:41:30 *	mbarnes passes the baton to dvratil... how's webkit coming along?
+Oct 19 11:41:51 <dvratil>	mbarnes: quite good :)
+Oct 19 11:42:15 <dvratil>	I was joined by jdapena, he did some great work fixing problem with scrolling and promised some more help
+Oct 19 11:42:19 <dvratil>	so I moved to working on printing
+Oct 19 11:42:47 <mbarnes>	jdapena is a webkit guy or someone new?
+Oct 19 11:43:29 <dvratil>	he has some experience with using webkit
+Oct 19 11:44:31 <dvratil>	but judging from from his email (@igalia.com), they might have something to do with webkit
+Oct 19 11:44:47 <rodrigo_>	yes, he does afaik
+Oct 19 11:45:14 <mbarnes>	awesome, I think we're all looking forward to seeing webkit in action
+Oct 19 11:45:22 <mbarnes>	dwmw2: any additional updates?
+Oct 19 11:45:32 *	dvratil most of all :)
+Oct 19 11:46:24 <dwmw2>	mbarnes: not really. I'm still (slowly) working on moving the ActiveSync back end to GDbus instead of dbus-glib, which should fix the periodic deadlock I've been seeing (and just make me happier, too).
+Oct 19 11:46:40 <dwmw2>	should be ready to do a proper release of that some time soon too.
+Oct 19 11:47:12 <dwmw2>	if anyone feels like doing an evo cal/ebook back end for it directly, rather than going via syncevo for those as we do now, tha would be cool :)
+Oct 19 11:47:33 <dwmw2>	much of it would lift from ews fairly easily; the protocols are fairly similar.
+Oct 19 11:48:11 <mbarnes>	does it have its own d-bus interface or something?
+Oct 19 11:48:17 <dwmw2>	yes
+Oct 19 11:49:04 <dwmw2>	the actual ActiveSync trafic is handled by a dÃ¦mon which stands alone (and is dual-licensed under Apachev2 + GPL just in case someone needs a patent licence, although Ireally can't see anything in here that ews doesn't already do)
+Oct 19 11:49:18 <dwmw2>	then there's a client library which makes calls to the dÃ¦mon
+Oct 19 11:49:36 *	mbarnes recommends the gdbus-codegen tool in GLib 2.30
+Oct 19 11:49:48 <mbarnes>	makes short work of all the messy d-bus details
+Oct 19 11:49:54 <dwmw2>	the dÃ¦mon makes technical sense too, since it has to centrally manage the list of folders, do push operations on all folders, etc.
+Oct 19 11:50:10 <dwmw2>	so the cal/contacts/mail side all need to go through it
+Oct 19 11:50:19 <dwmw2>	I looked at it
+Oct 19 11:50:25 <dwmw2>	using it as inspiration
+Oct 19 11:50:28 <dwmw2>	but want abit more
+Oct 19 11:50:38 <mbarnes>	ah, okay
+Oct 19 11:50:39 <dwmw2>	progress updates on long-runig dbus cals for example
+Oct 19 11:51:05 <dwmw2>	with asignal back to the caller giving the dbus serial# of the request, and a progress percentage
+Oct 19 11:51:15 <dwmw2>	works nicely, gives progres inevo as stuff hapens
+Oct 19 11:51:19 <dwmw2>	cancelation to
+Oct 19 11:51:24 <dwmw2>	damn this keyboard bug :)
+Oct 19 11:51:42 <mbarnes>	jpunit: anything to share?
+Oct 19 11:52:10 <jpunit>	Hi.. Working on merging express account setup feature into evolution, going fine.. submitted evolution-ews(3.2) to openSUSE 12.1. 
+Oct 19 11:52:36 <mbarnes>	oh that's right, I still owe you a patch review, don't I?
+Oct 19 11:52:41 <mbarnes>	sorry about that  :)
+Oct 19 11:53:05 <jpunit>	mbarnes: that's fine.. I will come up with subsequent patch soon..
+Oct 19 11:53:29 <mbarnes>	cool
+Oct 19 11:53:34 <mbarnes>	kov: anything to share?
+Oct 19 11:54:39 <mbarnes>	lakhil: how's our big pile of bug reports looking these days?
+Oct 19 11:54:47 <jpunit>	mbarnes: I also asked chen to review that.. I thought you might be busy. he said he will do it.
+Oct 19 11:54:57 <dwmw2>	jpunit: di we talk about ading 'probe' or 'autodiscover' type method to each probider, so it's not all done centraly for each type of acount?
+Oct 19 11:55:23 <mbarnes>	jpunit: I am but I'll still try to look at it.  I'm engrossed in account stuff anyway...
+Oct 19 11:55:26 <lakhil>	mbarnes, usual progress :)
+Oct 19 11:55:36 <jpunit>	mbarnes: aha..
+Oct 19 11:55:41 <lakhil>	in updates, bug triaging on old evolution versions in bgo, ews testing with compatibility patches specially for evolution 2.28.x and 3.2.x, random testing on 3.2.x and will be moving to master branch by this week end :)
+Oct 19 11:56:31 <jpunit>	dwmw2: yes we do .. we try to fetch server details from gnome api..
+Oct 19 11:56:44 <dwmw2>	cool
+Oct 19 11:57:29 <mbarnes>	lakhil: thanks.  you're gonna have a fun time with all the branches landing this cycle  :)
+Oct 19 11:57:46 <lakhil>	mbarnes, true
+Oct 19 11:57:58 <mbarnes>	mcrha: what you got cooking?
+Oct 19 11:58:09 <mcrha>	Just that I approved couple patches in eds book and cal, which are changing API - they are in already, as I preferred it to have in 3.3.1. There might not been so many changes after that release, I can think of the "photo as uri" patch, though that might not touch public API much/at all, it will probably add a function only. Apart of reviews also tried to fix couple bugs, and changed CamelFolderSummary API myself slightly.
+Oct 19 11:59:00 <mcrha>	mbarnes, dwmw2, by the way, the ews 3.2 is missing CamelSettings, seems to me, thus the newly created accounts will claim on console for sure. I'm on it for 3.3.1, but that change would be easy to "backport"
+Oct 19 11:59:07 <mbarnes>	yeah the folder summary changes were nice, thanks for the write up on that
+Oct 19 11:59:28 <mbarnes>	I think I filed a bug about that the other day...
+Oct 19 11:59:53 <mbarnes>	er, saw a bug
+Oct 19 12:00:06 <dwmw2>	mcrha: ah, thanks
+Oct 19 12:00:17 <mbarnes>	NonaSuomy: welcome, anything to share with the team?
+Oct 19 12:01:30 <mbarnes>	prahal: anything to share?  sounds like you're working on Camel introspection?
+Oct 19 12:02:14 <prahal>	I ended up on camel introspection issues . But in fact I am cooking a version of the tracker miner for evo in vala
+Oct 19 12:02:41 <prahal>	thus I had to do vapi/gir and pkgconfig for most components under evolution-mail stack
+Oct 19 12:02:55 <prahal>	as it uses emailsession
+Oct 19 12:03:01 <mbarnes>	ouch
+Oct 19 12:03:31 <prahal>	work done . Needs heavy cleanups (the tracker plugin end up depending on clutter :/
+Oct 19 12:04:08 <mbarnes>	prahal: I'll try and throw some patches your way when all the account API changes start landing
+Oct 19 12:04:16 <prahal>	and as shown by my questions camel hold most of the tricks that gi scanner does nto like
+Oct 19 12:04:50 <mbarnes>	camel is a bag of tricks, no doubt
+Oct 19 12:05:13 <mbarnes>	rgs: anything to share?
+Oct 19 12:06:22 <mbarnes>	rodrigo_: how's the gsettings branch coming along?
+Oct 19 12:07:42 <mbarnes>	vibs: anything to share?
+Oct 19 12:07:43 <rodrigo_>	mbarnes, going well, I think I'll have most of the simple keys migrated next week
+Oct 19 12:08:10 <rodrigo_>	then there are some things that would need to be solved, like the wndow geometry keys we have in GConf
+Oct 19 12:08:23 <rodrigo_>	(already read your mail, just didn't have to time to write patch/reply)
+Oct 19 12:08:25 <vibs>	Hey all, past 4 weeks i was focussed on evolution-ews. I tried my hands on Adding up new addressbook and managing delegation. 
+Oct 19 12:08:25 <vibs>	/me will try to complete it after diwali leaves.
+Oct 19 12:08:25 <vibs>	Also fixed up a few bugs on groupwise and ews.
+Oct 19 12:08:29 <rodrigo_>	will do so in the next few days
+Oct 19 12:08:48 <rodrigo_>	and then, there are some biggest stuff, like removing EShellSettings, etc
+Oct 19 12:08:58 <rodrigo_>	which I'll leave for phase2 for now
+Oct 19 12:09:42 <mbarnes>	rodrigo_: cool, thanks.  hoping we can start merging some of that soon.
+Oct 19 12:10:03 <rodrigo_>	mbarnes, I think once all the simple keys are done, it could be merged with your accounts branch?
+Oct 19 12:10:46 <mbarnes>	vibs: thanks.  so are you kinda looking after the groupwise backend these days?
+Oct 19 12:11:05 <dwmw2>	mcrha: actually 'backporting' to ews gnome-3-2 branch is trivial; it's identical to master now.
+Oct 19 12:11:09 <mbarnes>	rodrigo_: I hadn't thought of that, but sounds sensible
+Oct 19 12:11:09 <vibs>	mbarnes: yes, it going into bad shape
+Oct 19 12:11:13 <dwmw2>	with nocompatibility cruft
+Oct 19 12:11:37 <dwmw2>	there's a gnome-3-0 branch which still builds for 3.0 and 2.32, which we can mostly ignore I think
+Oct 19 12:11:47 <vibs>	with so many developments going into evo
+Oct 19 12:12:16 <mcrha>	dwmw2, yup, more or less, as you do not want to compile camelsettings on anything before 3.2
+Oct 19 12:12:18 <rodrigo_>	mbarnes, well, or master, as you prefer
+Oct 19 12:12:22 <mbarnes>	vibs: okay, just want to make sure we still have a caretaker for groupwise
+Oct 19 12:12:42 <vibs>	mbarnes: we will do :)
+Oct 19 12:12:43 <dwmw2>	mcrha: I meant ignore more completely than just for camelsettings :)
+Oct 19 12:12:49 <dwmw2>	serious bug fixes only, no new features, etc.
+Oct 19 12:12:57 <rodrigo_>	mbarnes, I don't want to start doing big changes (EShellSettings, etc) on an "isolated" branch
+Oct 19 12:14:24 <mbarnes>	rodrigo_: we could retain EShellSettings just for now and bind its properties to GSettings, just to get this over with quickly
+Oct 19 12:14:37 <rodrigo_>	mbarnes, yes, also good idea
+Oct 19 12:14:54 <mbarnes>	vibs: anything to share?
+Oct 19 12:15:21 <mbarnes>	xtian: what's the word in kolab-land?
+Oct 19 12:15:23 <vibs>	mbarnes: nothing more
+Oct 19 12:15:34 <xtian>	mbarnes: in the plannings for porting evo-kolab from 2.30 to master. may be using 3.2 as a stepping stone.after porting: display for extended free/busy (maybe tooltip) in evo. free/busy conflict notification when scheduling meetings. better user experience (groupware folder autodetect (already done, but can't propagate the info from eds to evo in 2.30), re-use of config data, ...) 
+Oct 19 12:16:01 <xtian>	mbarnes: though i'm stuck with writing up the specs for that for $customer since 2 weeks
+Oct 19 12:16:24 <xtian>	(openoffice... you cannot conceive the pain *sigh*)
+Oct 19 12:17:44 <mbarnes>	xtian: godspeed to you on the $customer nonsense...
+Oct 19 12:17:51 <xtian>	the pure porting part (with no extended functionality yet) should be in time for 3.4, the rest will miss 3.4 i guess
+Oct 19 12:17:53 <mbarnes>	I'll try to answer as many porting questions as I can
+Oct 19 12:18:08 <xtian>	mbarnes: thanks.
+Oct 19 12:18:45 <mbarnes>	cool, I guess that about wraps it
+Oct 19 12:18:50 <xtian>	mbarnes: will be on it at least up to june 12
+Oct 19 12:19:43 <mbarnes>	xtian: good, that should be plenty of time to sync with 3.4, I think
+Oct 19 12:20:00 <mbarnes>	okay, thanks everyone for bearing with me
+Oct 19 12:20:14 <xtian>	mbarnes: my condolences. ;)
+
