@@ -7,11 +7,13 @@ page_SCRIPTS=
 include $(top_srcdir)/rules.common
 
 misc_images=\
-        screenshot-main.png     \
-        thumb-screenshot.png    \
-        screenshot-main2.png     \
-        thumb-screenshot2.png    \
-        gevice-banner.png
+				diagram.png  \
+				gevice-banner.png  \
+				main.png  \
+				ndbase.png  \
+				thumb-diagram.png  \
+				thumb-main.png  \
+				thumb-ndbase.png
 
 page_DATA=$(misc_images)
 
