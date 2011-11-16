@@ -1,0 +1,142 @@
+Nov 16 10:31:36 <chen>	Lets get started.. akhil and punit would join us in sometime..
+Nov 16 10:31:41 <chen>	hey jpunit 
+Nov 16 10:31:49 <chen>	Starting with the project updates..
+Nov 16 10:32:00 <jpunit>	Hi all
+Nov 16 10:32:25 <chen>	we had the stable release 3.2.2 on Nov 14, this monday.. this is the last of the planned stable releases i guess
+Nov 16 10:32:51 <chen>	we have the unstable release 3.3.2 coming monday, Nov 21
+Nov 16 10:32:55 *	vibs (~yvibha@122.172.194.147) has joined #evolution-meet
+Nov 16 10:33:06 <chen>	please get ur patches in asap if your targetting that release..
+Nov 16 10:33:16 <chen>	thats with the project updates..
+Nov 16 10:33:19 *	srag (~sragavan@61.8.152.210) has joined #evolution-meet
+Nov 16 10:33:24 <srag>	hello guys
+Nov 16 10:33:32 *	lakhil (~lakhil@117.192.0.162) has joined #evolution-meet
+Nov 16 10:33:32 <chen>	hey srag!
+Nov 16 10:33:36 <chen>	hi lakhil 
+Nov 16 10:34:02 <chen>	mbarnes, have a question for you on libcamel, any advantages of splitting libcamel outside eds ?
+Nov 16 10:34:07 <lakhil>	hey chen 
+Nov 16 10:34:27 *	mcrha doesn't understand the need for "camel out of eds" too
+Nov 16 10:34:46 <mbarnes>	chen: yes, but not til I'm happy with the API
+Nov 16 10:35:41 <chen>	mbarnes, it would be nice if you explain it, i dont understand the need as well..
+Nov 16 10:35:48 <dwmw2>	libcamel outside *eve* (i.e. e-mail-factory) yes. But outside eds?
+Nov 16 10:36:41 <srag>	mbarnes, not useful/helpful if we are on the otherside working to get mail stuffs into eds
+Nov 16 10:37:26 <mbarnes>	it's not ready to be split off yet, but eventually I'd like it to be a real honest-to-goodness standalone mail library
+Nov 16 10:37:30 <mbarnes>	like it was meant to be
+Nov 16 10:38:10 <mbarnes>	it doesn't depend on e-d-s anymore, so the question isn't "why split it off" but rather "why keep it bundled"
+Nov 16 10:38:24 <dwmw2>	it does make a certain amount of sense in theory. In practice, I worry about the incestuous stuff we currently have with folder 'detection' in camel causing automatic addition of cal/ebook sources.
+Nov 16 10:38:29 <dwmw2>	we'd want a clean way to handle that.
+Nov 16 10:38:47 <srag>	afair I dont think it was meant to be a out of eds, except that pvanhoof was looking for it during the tinymail days
+Nov 16 10:39:18 <chen>	dwmw2, i was proposing to having something like camel-store for calendar and address-book as well
+Nov 16 10:39:31 <chen>	which can work on a folder tree
+Nov 16 10:39:37 <dwmw2>	makes sense
+Nov 16 10:39:52 <dwmw2>	and might lead to more code-sharing between camel and the rest of eds
+Nov 16 10:40:02 <srag>	chen, infact a very nice idea
+Nov 16 10:40:22 <chen>	dwmw2, yup, would help us solve the issue of creating new cal/add through plugins
+Nov 16 10:40:31 <xtian>	carving camel out from e-d-s *could* help with stabilizing camel apis (there would be some pressure then... =)
+Nov 16 10:40:47 <chen>	dwmw2, will make a proposal for the api and send it over e-h
+Nov 16 10:41:11 *	dwmw2 still really really wants to fix the config stuff so we can move ews/activesync/mapi/kolab/ etc *into* eds
+Nov 16 10:41:18 <mbarnes>	xtian: exactly, and help make it not so evo-centric
+Nov 16 10:41:41 <chen>	mbarnes, but the same reason might hold good for calendar/address-book ?
+Nov 16 10:41:51 <chen>	i mean libecal and libebook 
+Nov 16 10:42:03 <rodrigo_>	yes, that's what I was going to say :)
+Nov 16 10:42:48 *	jpunit has quit (Read error: 131 (Connection reset by peer))
+Nov 16 10:42:49 <mbarnes>	chen: libcamel is to mail as, say, libsoup is to calendars and address books
+Nov 16 10:42:55 <mbarnes>	libecal and libebook should stay put
+Nov 16 10:43:16 <mbarnes>	and eventually be joined by libemail, or whatever srag's got cookin
+Nov 16 10:43:45 <dwmw2>	mbarnes: s/libsoup/libical/? 
+Nov 16 10:43:56 <mbarnes>	yeah, both
+Nov 16 10:44:01 *	xkahn (~xkahn@pool-96-237-117-79.bstnma.fios.verizon.net) has joined #evolution-meet
+Nov 16 10:44:05 <mbarnes>	it's a base library - is my point
+Nov 16 10:44:35 <chen>	mbarnes, am starting to understand a bit now..
+Nov 16 10:44:52 <srag>	mbarnes, libsoup to libcamel may not be a equal comparison. You put away backends too with it where as the rest of the cal/ab backends stays inside.. or am I understanding it differently ?
+Nov 16 10:45:30 <dwmw2>	well, libcamel actually provides more than the *basics*. It's a full infrastructure with protocol plugins and stuff. It's libical *and* libecal/libebook. 
+Nov 16 10:45:42 <dwmw2>	otherwise we'd have a libemail already.
+Nov 16 10:45:51 <chen>	srag, the backends would stay in eds, but the core camel apis which you could compare with libical would move out
+Nov 16 10:45:55 <dwmw2>	what srag is doing is just the bit which exports it over DBus
+Nov 16 10:46:36 <dwmw2>	chen: hm, that might make some sense technically... but how useful is it to export *part* of what libcamel does?
+Nov 16 10:46:37 <chen>	mbarnes, i guess camelfolder/camelstore will still remain in libemail ?
+Nov 16 10:47:15 <mbarnes>	that's not what I had in mind, no
+Nov 16 10:47:25 <chen>	dwmw2, i dont know atm, maybe if some application needs just the mime parsing ?
+Nov 16 10:47:25 <srag>	mbarnes, its not very clear, may be you should speak out your plan first :-)
+Nov 16 10:47:30 *	jpunit (~punit@122.179.110.5) has joined #evolution-meet
+Nov 16 10:47:52 <chen>	mbarnes, maybe it might be good if you can summarize in e-h later ?
+Nov 16 10:48:08 <mbarnes>	it's a bit premature to get all worked up about this...
+Nov 16 10:48:09 <chen>	i guess everyone of us have put the doubts now..
+Nov 16 10:48:21 <chen>	mbarnes, ok later
+Nov 16 10:48:38 <chen>	anything else to be discussed before we move on the project updates ?
+Nov 16 10:49:05 <chen>	s/project/individual
+Nov 16 10:49:24 <chen>	starting with mbarnes as he might have to move out for another meeting..
+Nov 16 10:49:29 <chen>	mbarnes, updates?
+Nov 16 10:49:54 <mbarnes>	been making good progress on the account-mgmt branch
+Nov 16 10:49:54 <mbarnes>	it's ALMOST to the point where I can use it for daily email
+Nov 16 10:49:54 <mbarnes>	finishing up GConf migration, and about to tear into the account editor
+Nov 16 10:49:54 <mbarnes>	sadly, still no ETA yet - I haven't even started on the groupware backends
+Nov 16 10:49:54 <mbarnes>	(hoping to fly through those as quick as possible, merge the branch, then go back and fix them up nicer in late 3.3 / early 3.5)
+Nov 16 10:49:54 <mbarnes>	also - reviewing rodrigo_'s wip/gsettings branch and hoping to merge by Fri
+Nov 16 10:50:23 <chen>	mbarnes, thanks!!
+Nov 16 10:51:15 <srag>	mbarnes, lemme rebase my library by friday for you to take it up next week ;-)
+Nov 16 10:51:16 <chen>	updates from my side, mostly with sled bugs and more time shifting to new home. thanks to mbarnes for handling release which i had to make..  it helped me a lot!
+Nov 16 10:51:18 *	dwmw2 really should put activesync into gnome git before mbarnes does that :)
+Nov 16 10:51:30 <chen>	dvratil, updates?
+Nov 16 10:51:54 <chen>	dwmw2, updates?
+Nov 16 10:52:07 <dvratil>	I moved to work on printing, solved some more webkit issues, it looks nice
+Nov 16 10:52:23 <chen>	dvratil, thanks!
+Nov 16 10:52:28 <chen>	jpunit, updates?
+Nov 16 10:52:29 <dwmw2>	we've done some work to clean up the ews code into sensible gnome-3-2 and master branches, so it looks like a proper GNOME project
+Nov 16 10:52:35 <dwmw2>	the gnome-3-0 branch contains all the horrid ifdefs and still builds back to 2.32 
+Nov 16 10:52:59 <dwmw2>	but gnome-3-2 and master should be clean, although I think master breaks with the latest glib API breakage.
+Nov 16 10:53:06 <chen>	dwmw2, that was nice :)
+Nov 16 10:53:38 <dwmw2>	I'm working on converting the activesync client to use GDbus instead of dbus-glib, after seeing deadlocks where a thread exits while holding an internal dbus-glib lock
+Nov 16 10:53:39 <chen>	dwmw2, only warnings isn it ?
+Nov 16 10:53:51 <dwmw2>	chen: not sure
+Nov 16 10:53:53 <jpunit>	I worked on account editor merging express like account setup to evolution .. still need some more work
+Nov 16 10:53:53 <jpunit>	currently working on finditem api implementation in ews
+Nov 16 10:54:09 <chen>	dwmw2, i am able to compile it
+Nov 16 10:54:13 <chen>	jpunit, thanks!
+Nov 16 10:54:18 <dwmw2>	chen: mutex stuff went away / changed incompatibly. 
+Nov 16 10:54:53 <chen>	dwmw2, yeah, it would show deprecated warnings
+Nov 16 10:55:03 <chen>	kov, anything to share?
+Nov 16 10:55:07 <chen>	lakhil, updates?
+Nov 16 10:55:13 <dwmw2>	I hope to finish the ActiveSync conversion to GDBus soon and do a release, at which point we can import into GNOME Git
+Nov 16 10:55:21 <lakhil>	chen, mostly spent time testing master code base and ews changes and did bug triaging on old bugs (Evolution 2.22.x, 2.26.x, 2.28.x)
+Nov 16 10:55:35 <chen>	lakhil, thanks!!
+Nov 16 10:55:40 <chen>	mcrha, updates?
+Nov 16 10:55:57 <mcrha>	mostly playing with evo mapi and fast-transfer
+Nov 16 10:56:06 <chen>	mcrha, thanks!
+Nov 16 10:56:12 <chen>	NonaSuomy, anything to share?
+Nov 16 10:56:16 <chen>	pohly, updates?
+Nov 16 10:56:44 <chen>	rgs, anything to share?
+Nov 16 10:56:49 <pohly>	Same as dwmw2: focusing on stabilizing the ActiveSync support.
+Nov 16 10:56:57 <chen>	pohly, thanks!
+Nov 16 10:57:03 <chen>	rodrigo_, updates?
+Nov 16 10:57:26 <chen>	srag, updates?
+Nov 16 10:57:33 <srag>	I have prepared a library that splits mailer into its core engine and other is the actual UI operations, core engine will be later moved to eds in the next cycle. for now. it will be exported as a library and I'm building my email-factory against that library. I have a complete camel store/folder/session api, but some apis need to be worked on like using fds and optimizing. you can grab the e-mail-factory code at https://github.com/sragavan/e-mail-fa
+Nov 16 10:57:33 <srag>	ctory and has a test suite which runs through the apis. I'm looking forward to mbarnes to merge the library split for this cycle and lemme prepare rest for the further releases
+Nov 16 10:57:54 <srag>	code is at https://github.com/sragavan/e-mail-factory for the daemon
+Nov 16 10:58:07 <rodrigo_>	chen, not much apart from what mbarnes said
+Nov 16 10:58:17 <chen>	srag, nice!!
+Nov 16 10:58:31 <rodrigo_>	my branch is ready for review, but it's missing some more gconf porting, of some special XML-lists in GConf
+Nov 16 10:58:32 <chen>	srag, its going to make a lot of difference to mailer :)
+Nov 16 10:58:56 <chen>	rodrigo_, thanks!!
+Nov 16 10:59:06 <chen>	vibs, updates?
+Nov 16 10:59:33 <vibs>	Nothing much just fixed up few bugs upstream and  working on downstream Bugs. 
+Nov 16 10:59:48 <chen>	vibs, thanks!
+Nov 16 10:59:50 <chen>	xkahn, anything to share?
+Nov 16 10:59:52 <vibs>	majorly on groupwise issues
+Nov 16 10:59:57 <chen>	xtian, updates?
+Nov 16 11:00:18 <xtian>	evolution-kolab moved to gnome.org. wiki page and git repo are there
+Nov 16 11:00:29 <chen>	xtian, nice!!
+Nov 16 11:00:35 <xtian>	rest is to follow (still sits on sourceforge)
+Nov 16 11:00:37 <xkahn>	chen: I'm just lurking for now.  :)
+Nov 16 11:00:45 <chen>	xkahn, ok :)
+Nov 16 11:00:54 <chen>	xtian, cool
+Nov 16 11:01:04 <xtian>	now doing cleanup work on evolution-kolab, soon to start porting to git master(s)
+Nov 16 11:01:30 <chen>	xtian, you could use evolution-ews as a reference :)
+Nov 16 11:01:55 <chen>	anything else from anyone before we wrap up ?
+Nov 16 11:02:01 <xtian>	chen: i'll have a look around, thanks :_)
+Nov 16 11:02:39 *	mbarnes needs to depart... will continue logging
+Nov 16 11:02:43 *	You are now known as mbarnes|away
+Nov 16 11:02:53 <chen>	thanks everyone and lets meet next month and stay tuned for e-mail-factory from srag :)
+Nov 16 11:02:57 <xtian>	chen: oh, i forgot the evolution-kolab bugzilla! andre dropped two bugs already. :)
+Nov 16 11:03:14 <chen>	xtian, lol :)
+Nov 16 11:04:34 *	chen starts for dinner
+
