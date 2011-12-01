@@ -293,7 +293,7 @@ page_SCRIPTS= 				\
 	files-latex-example.png		\
 	files-xml-example.png		\
 	filter.png		\
-	formula-debian.png		\
+	formula-dmedian.png		\
 	function-wizard.png		\
 	function.png		\
 	gnumeric-empty.510.png		\
