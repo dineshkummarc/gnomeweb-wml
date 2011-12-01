@@ -108,6 +108,9 @@
 <li>
 <span class="label">5.2.4.5. </span><a class="xref" href="sect-data-formulas.shtml#sect-data-formulas-array" title="Array Formulas">Array Formulas</a>
 </li>
+<li>
+<span class="label">5.2.4.6. </span><a class="xref" href="sect-data-formulas.shtml#sect-data-formulas-database" title="Database Formulas">Database Formulas</a>
+</li>
 </ul></div>
 <div class="division sect3">
 <a name="sect-data-formulas-syntax"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">5.2.4.1. </span>Syntax</span></h2></div>
@@ -581,6 +584,102 @@
       <div dir="ltr" class=" block programlisting block-indent"><pre class="programlisting">={FUNCTION(ARGUMENTS)}(num_rows, num_cols)[row][column]
       </pre></div>
     </div>
+</div>
+</div>
+<div class="division sect3">
+<a name="sect-data-formulas-database"></a><div class="header"><h2 class="sect3 title"><span class="title"><span class="label">5.2.4.6. </span>Database Formulas</span></h2></div>
+<p class="para block block-first">
+    Solely for compatibility with Excel and ODF files, <span class="application">Gnumeric</span> supports various database functions:
+    <a class="xref" href="gnumeric-function-DAVERAGE.shtml" title="
+          DAVERAGE
+        ">
+          <span class="function">DAVERAGE</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DCOUNT.shtml" title="
+          DCOUNT
+        ">
+          <span class="function">DCOUNT</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DCOUNTA.shtml" title="
+          DCOUNTA
+        ">
+          <span class="function">DCOUNTA</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DGET.shtml" title="
+          DGET
+        ">
+          <span class="function">DGET</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DMAX.shtml" title="
+          DMAX
+        ">
+          <span class="function">DMAX</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DMIN.shtml" title="
+          DMIN
+        ">
+          <span class="function">DMIN</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DPRODUCT.shtml" title="
+          DPRODUCT
+        ">
+          <span class="function">DPRODUCT</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DSTDEV.shtml" title="
+          DSTDEV
+        ">
+          <span class="function">DSTDEV</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DSTDEVP.shtml" title="
+          DSTDEVP
+        ">
+          <span class="function">DSTDEVP</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DSUM.shtml" title="
+          DSUM
+        ">
+          <span class="function">DSUM</span>
+        </a>,
+    <a class="xref" href="gnumeric-function-DVAR.shtml" title="
+          DVAR
+        ">
+          <span class="function">DVAR</span>
+        </a> and
+    <a class="xref" href="gnumeric-function-DVARP.shtml" title="
+          DVARP
+        ">
+          <span class="function">DVARP</span>
+        </a>.
+  </p>
+<p class="para block">
+    Since these functions are quite restrictive on the criteria that can be used, it is often
+    easier to use array functions as described in <a class="xref" href="sect-data-formulas.shtml#sect-data-formulas-array" title="Array Formulas">Section 5.2.4.5 ― Array Formulas</a>.
+    Array functions are also useful in the case that a specific database function does not exist:
+  </p>
+<div class=" block example block-indent">
+<a name="dmedian"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Example 5-14</span> </span>Simulating <span class="code" dir="ltr">DMEDIAN</span> with an Array Function</span></div>
+<div class="example-inner">
+   
+   <p class="para block block-first">
+     As shown in  <a class="xref" href="sect-data-formulas.shtml#dmedian-example-1" title="Calculating the MEDIAN of Some Data Values">Figure 5-2</a>, instead of using (the non-existing) 
+     function <span class="code" dir="ltr">DMEDIAN</span> one can use the alternative expression 
+     <span class="code" dir="ltr">median(if(A1:A20="AA",B1:B2))</span> entered as an array function as described in 
+     <a class="xref" href="sect-data-formulas.shtml#sect-data-formulas-array" title="Array Formulas">Section 5.2.4.5 ― Array Formulas</a>. Multiple conditions can be combined using
+     the <span class="code" dir="ltr">AND</span> or <span class="code" dir="ltr">OR</span> functions as in 
+     <span class="code" dir="ltr">median(if(OR(A1:A20="AA",A1:A20="BB"),B1:B20))</span>.
+     Using defined names as introduced in <a class="xref" href="sect-data-formulas.shtml#sect-data-formulas-names" title="Names">Section 5.2.4.4 ― Names</a> for 
+     <span class="code" dir="ltr">A1:A20</span> and <span class="code" dir="ltr">B1:B20</span> can make this code very flexible and readable.
+   </p> 
+ </div>
+</div>
+<div class=" block figure block-indent">
+<a name="dmedian-example-1"></a><div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 5-2</span> </span>Calculating the MEDIAN of Some Data Values</span></div>
+<div class="figure-inner">
+    
+    <div class=" block screenshot block-first">
+	<div class="mediaobject"><img src="figures/formula-dmedian.png"></div>
+    </div>
+  </div>
 </div>
 </div>
 </div></div>
