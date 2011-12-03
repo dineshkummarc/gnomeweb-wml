@@ -68,7 +68,7 @@ for (@maindir) {
         } else { next; }
         $packages{$filename}{"news"} = "$3\.changes";
         $packages{$filename}{"url"} =
-            "http://ftp.gnome.org/pub/GNOME/sources/cheese/$current_file";
+            "http://download.gnome.org/sources/cheese/$current_file";
         $packages{$filename}{"major"} = $1;
         $packages{$filename}{"minor"} = $2;
         print "++ $filename\n";
