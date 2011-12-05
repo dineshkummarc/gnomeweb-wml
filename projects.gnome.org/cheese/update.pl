@@ -19,13 +19,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Little script that updates download page in Cheese website
-# retrieving data from GNOME Ftp.
+# retrieving data from ftp.gnome.org and mail.gnome.org.
 # Just run it in the main website directory and commit the changes.
 # Use at your own risk!
 
-use Net::FTP;
+use strict;
+
 use Date::Format;
+use File::Basename;
+use JSON;
 use LWP::Simple;
+use Net::FTP; # Must use FTP in order to get the modification time.
 
 # directory where the include files lurk around
 my $includes_dir = "includes/";
@@ -37,106 +41,146 @@ my $max_unstables = 5;
 my $max_news = 7;
 # other useful vars, probably not enough if you want to use the script
 # elsewhere, feel free to readapt to your needs, fwiw
-my $gnomeurl = "ftp.gnome.org";
-my $directory = "pub/GNOME/sources/cheese/";
+my $ftpserver = "ftp.gnome.org";
+my $gnomeurl = "http://download.gnome.org/";
+my $sources = "sources/";
+my $projectname = "cheese";
+my $ftpdir = "pub/GNOME/$sources$projectname/";
+my $downloaddir = "$gnomeurl$sources$projectname/";
+my $cachename = "cache.json";
 
-my $gnomeftp = Net::FTP->new($gnomeurl, Debug => 0)
-    or die "Cannot connect to $gnomeurl: $@";
+print "Fetching JSON cache from server\n";
+my $gnomeftp = Net::FTP->new($ftpserver, Debug => 0)
+    or die "Cannot connect to $ftpserver: $@";
 
-$gnomeftp->login("anonymous",'-anonymous@')
-    or die "Cannot login ", $ftp->message;
+$gnomeftp->login
+    or die "Cannot login ", $gnomeftp->message;
 
-$gnomeftp->cwd($directory)
-    or die "Cannot set working directory ", $ftp->message;
+$gnomeftp->cwd($ftpdir)
+    or die "Cannot set working directory ", $gnomeftp->message;
 
-my @maindir = $gnomeftp->ls()
-    or die "Cannot list directory ", $ftp->message;
+my $jsoncache = $gnomeftp->get("$cachename")
+    or die "Cannot download JSON cache ", $gnomeftp->message;
 
+my $json = JSON->new;
+open(CACHE, $jsoncache);
+my $jsondecoded = $json->decode(<CACHE>);
+close(CACHE);
+unlink $jsoncache;
 
+# Hash of all releases.
 my %packages;
 
-print "-- Retrieving packages informations from ftp.gnome.org\n";
+print "Parsing JSON cache, checking release dates and fetching checksums\n";
 
-for (@maindir) {
-    @dir = $gnomeftp->ls("$_");
-    for (@dir) {
-        $current_file = $_;
-        if (m/^(.*)\.(.*)\/(.*)(\.[\d\.]+)?\.tar\.gz/g) {
-            $filename = "$3.tar.gz";
-        } elsif (m/^(.*)\.(.*)\/(.*)(\.[\d\.]+)?\.tar\.xz/g) {
-            $filename = "$3.tar.xz";
-        } else { next; }
-        $packages{$filename}{"news"} = "$3\.changes";
-        $packages{$filename}{"url"} =
-            "http://download.gnome.org/sources/cheese/$current_file";
-        $packages{$filename}{"major"} = $1;
-        $packages{$filename}{"minor"} = $2;
-        print "++ $filename\n";
-        $sumfile = $gnomeftp->get("$1.$2/$3.sha256sum") or
-          $sumfile = $gnomeftp->get("$1.$2/$3.md5sum");
-        open (SUM, "<$sumfile");
-        my $sum = "";
-        while (<SUM>) {
-            m/^(\w+)\s+$filename/ and $sum = $1;
-        }
-        close (SUM);
-        unlink $sumfile;
-        if ($sum eq "") { print "** WARNING: no hash found for $filename\n"; }
-        $packages{$filename}{"sum"} = $sum;
-        $mdtm = $gnomeftp->mdtm($current_file)
-            or die "Cannot retrieve mtime ", $ftp->message;
-        $packages{$filename}{"epoch"} = $mdtm - 3600;
-        $packages{$filename}{"mdtm"} = time2str ("%B %o %Y", $mdtm, "GMT");
-        if ($filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.gz/ or $filename =~ m/.*-(\d+\.\d+.\d+)(\.[\d\.]+)?\.tar\.xz/) {
-            $packages{$filename}{"release"} = "$1" . ($2 or "");
+foreach my $tarballversion(@{@{$jsondecoded}[2]->{"$projectname"}}) {
+    # Build the tarball version to use as the key in the hash table.
+    my $tarball = @{$jsondecoded}[1]->{"$projectname"}->{"$tarballversion"};
+
+    # Filename, including the leading version-specific directory.
+    my $filename;
+    # Prefer xz over bz2 over gz.
+    for my $compression ("tar.xz", "tar.bz2", "tar.gz") {
+        if (exists $tarball->{"$compression"}) {
+            $filename = $tarball->{"$compression"};
+            last;
         }
     }
+
+    # Prefer sha256sum over md5sum.
+    my $sumfile;
+    for my $sumtype ("sha256sum", "md5sum") {
+        if (exists $tarball->{"$sumtype"}) {
+            $sumfile = $tarball->{"$sumtype"};
+            last;
+        }
+    }
+
+    my $sumfilename = $gnomeftp->get("$sumfile")
+        or die "Cannot download sumfile $sumfile ", $gnomeftp->message;
+
+    open (SUM, "<$sumfilename");
+    my $tarballbasename = basename($filename);
+    my $sum = "";
+    while (<SUM>) {
+        m/^(\w+)\s+$tarballbasename/ and $sum = $1;
+    }
+    close (SUM);
+    unlink $sumfilename;
+    if ($sum eq "") { print "** WARNING: no hash found for $filename\n"; }
+
+    $packages{$tarballversion}{"sum"} = $sum;
+
+    # Prefer ChangeLog over NEWS.
+    for my $changestype ("changes", "news") {
+        if (exists $tarball->{"$changestype"}) {
+            $packages{$tarballversion}{"news"} = $tarball->{"$changestype"};
+            last;
+        }
+    }
+
+    # Check the modification time, as it is not in the JSON cache.
+    my $mdtm = $gnomeftp->mdtm($filename)
+        or die "Cannot retrieve mtime ", $gnomeftp->message;
+
+    $packages{$tarballversion}{"filename"} = $filename;
+    $packages{$tarballversion}{"url"} = "$downloaddir$filename";
+    $packages{$tarballversion}{"epoch"} = $mdtm - 3600;
+    $packages{$tarballversion}{"mdtm"} = time2str ("%B %o %Y", $mdtm, "GMT");
 }
 
 $gnomeftp->quit;
 
-# sort by mtime
+# Sort by mtime.
 my @sorted_keys =
     sort { $packages{$b}{"epoch"} <=> $packages{$a}{"epoch"} } keys %packages;
 
-open (STABLE, ">${includes_dir}stable.shtml");
-open (UNSTABLE, ">${includes_dir}unstable.shtml");
-open (STABLE_ARCHIVE, ">${includes_dir}stable_archive.shtml");
-open (UNSTABLE_ARCHIVE, ">${includes_dir}unstable_archive.shtml");
+# Delete the includes before appending to them.
+foreach my $includefiles ("stable.shtml", "stable_archive.shtml", "unstable.shtml",
+    "unstable_archive.shtml") {
+    unlink ("$includes_dir/$includefiles");
+}
 
-$i = 0;
-$j = 0;
+my $includefile = FileHandle->new;
 
+# Create download page includes.
 for (@sorted_keys) {
-    print "==========================\n";
-    print "filename: $_\n";
-    print "news: " . $packages{$_}{"news"} . "\n";
-    print "release: " . $packages{$_}{"release"} . "\n";
-    print "hash: " . $packages{$_}{"sum"} . "\n";
-    print "epoch: " . $packages{$_}{"epoch"} . "\n";
-    print "release date: " . $packages{$_}{"mdtm"} . "\n";
+    print "release: $_\n";
+    print "  news: " . $packages{$_}{"news"} . "\n"
+        if exists $packages{$_}{"news"};
+    print "  filename: " . $packages{$_}{"filename"} . "\n";
+    print "  hash: " . $packages{$_}{"sum"} . "\n";
+    print "  epoch: " . $packages{$_}{"epoch"} . "\n";
+    print "  release date: " . $packages{$_}{"mdtm"} . "\n";
+
     # GNOME release cycle: minor odd number is unstable, except the 0.x releases
-    if ($packages{$_}{"minor"} % 2 && $packages{$_}{"major"} != 0) {
-        if ($i < $max_unstables) {
-            $i++;
-            $fh = UNSTABLE;
-        } else { $fh = UNSTABLE_ARCHIVE; }
+    my @components = split(/\./, $_);
+    my $major = $components[0];
+    my $minor = $components[1];
+    if ($minor % 2 && $major != 0) {
+        $packages{$_}{"stable"} = 0;
+        if ($max_unstables > 0) {
+            $max_unstables--;
+            $includefile->open(">>${includes_dir}unstable.shtml");
+        } else { $includefile->open(">>${includes_dir}unstable_archive.shtml"); }
     } else {
-        if ($j < $max_stables) {
-            $j++;
-            $fh = STABLE;
-        } else { $fh = STABLE_ARCHIVE; }
+        $packages{$_}{"stable"} = 1;
+        if ($max_stables > 0) {
+            $max_stables--;
+            $includefile->open(">>${includes_dir}stable.shtml");
+        } else { $includefile->open(">>${includes_dir}stable_archive.shtml"); }
     }
-    $hashtype = "md5sum";
+
+    my $hashtype = "md5sum";
     if (length($packages{$_}{"sum"}) > 32) {
       $hashtype = "sha256";
     }
-    print $fh <<EOF;
+    my $htmlsnippet = <<EOF;
 <div class="download">
   <a href="$packages{$_}{"url"}"
-     title="Download $packages{$_}{"release"} tarball">
+     title="Download $_ tarball">
     <img src="data/images/package-x-generic.png" alt="source package" />
-      Cheese $packages{$_}{"release"}
+      Cheese $_
   </a>
   <p>
     released on $packages{$_}{"mdtm"} <br />
@@ -145,37 +189,33 @@ for (@sorted_keys) {
 </div>
 
 EOF
+
+    $includefile->print($htmlsnippet);
 }
 
-close (STABLE);
-close (UNSTABLE);
-close (STABLE_ARCHIVE);
-close (UNSTABLE_ARCHIVE);
-
+# Fetch release announcements from gnome-announce-list.
 # WARNING: poor error checking, check results before commit
 
-print "\n";
-print "++ Retrieving release announcements from mail.gnome.org\n";
+print "\nRetrieving release announcements from mail.gnome.org\n";
 
 open (NEWS, ">${includes_dir}news.shtml");
 print NEWS "          <h2>News</h2>\n";
 
 for (@sorted_keys) {
-    $item = $_;
-    $date = time2str ("%Y-%B", $packages{$item}{"epoch"}, "GMT");
-    $release = $packages{$item}{"release"};
-    print "-- release: $release\n";
-    $stable = $packages{$item}{"minor"} % 2 ? "Unstable" : "Stable";
-    print "-- retrieving $date archive\n";
-    $thread = get("http://mail.gnome.org/archives/gnome-announce-list/$date/thread.html");
-    die "Couldn't get $date thread!" unless defined $thread;
-    @lines = split (/\n/, $thread);
+    my $release = $_;
+    my $date = time2str ("%Y-%B", $packages{$release}{"epoch"}, "GMT");
+    print "release: $release\n";
+    my $stable = $packages{$release}{"stable"} ? "Stable" : "Unstable";
+    print "  retrieving $date archive\n";
+    my $thread = get("http://mail.gnome.org/archives/gnome-announce-list/$date/thread.html");
+    die "  Could not get $date thread!" unless defined $thread;
+    my @lines = split (/\n/, $thread);
     for (@lines) {
-        m/href=\"(\w+\.html)\">.*cheese.*$release.*<\/a>/i and do {
-            print "++ great, found release message $1\n";
+        m/href=\"(\w+\.html)\">.*$projectname.*$release.*<\/a>/i and do {
+            print "  found release message $1\n";
             print NEWS <<EOF;
 
-          <h3>$packages{$item}{"mdtm"}</h3>
+          <h3>$packages{$release}{"mdtm"}</h3>
           <p>
           <b>$stable</b>
           version $release was released!<br/>
@@ -191,4 +231,3 @@ EOF
 }
 
 close (NEWS);
-
