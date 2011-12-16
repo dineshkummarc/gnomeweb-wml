@@ -9,6 +9,8 @@ page_SCRIPTS = \
 	step2.php \
 	promote.html \
 	thank-you.php \
+        a11y-testimonial.html \
+	a11y-banner.php \
 	.htaccess
 
 include $(top_srcdir)/rules.common
