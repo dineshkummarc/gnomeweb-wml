@@ -7,7 +7,7 @@ page_SCRIPTS= index.html	\
 		development.html \
 		screenshots.html \
 		rhythmbox.css	\
-		rhythmbox-0.13.3.changes \
-		rhythmbox-0.13.3.news
+		rhythmbox-2.95.changes \
+		rhythmbox-2.95.news
 
 include $(top_srcdir)/rules.common
