@@ -90,10 +90,6 @@
           (<a href="{$release/news}">what's new</a>).</p>
           <p>The latest windows binary can be found at <a href="{$release/win32}">gedit win32 binary</a>.</p>
 
-          <xsl:variable name="osx_tiger"><xsl:value-of select="$release/osx[@platform='Tiger']"/></xsl:variable>
-          <xsl:variable name="osx_tiger"><xsl:value-of select="$release/osx[@platform='Tiger']"/></xsl:variable>
-          <xsl:variable name="osx_tiger"><xsl:value-of select="$release/osx[@platform='Tiger']"/></xsl:variable>
-
           <p>The latest mac osx package can be found at <a href="{$release/osx}">gedit mac osx</a> (<xsl:for-each select="$release/osx[string-length(@platform) &gt; 0]">
             <xsl:choose>
               <xsl:when test="(position() != 1) and (position() = last())">
