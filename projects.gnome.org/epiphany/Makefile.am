@@ -1,21 +1,11 @@
 SUBDIRS=\
-	development	\
-	documentation	\
-	images		\
-	screenshots
+	images
 
 urlpath = /epiphany
 
 page_DATA=\
-	default.css		\
-	epiphany.css		\
-	epiphany-old.css	\
 	index.html		\
-	resources.html		\
-	extensions.html		\
-	extensions.xhtml	\
-	smartbookmarks.html	\
-	bugreports.xhtml
+	get-involved.html
 
 page_SCRIPTS=\
 	.htaccess
