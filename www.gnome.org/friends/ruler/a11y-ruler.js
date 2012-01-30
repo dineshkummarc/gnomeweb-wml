@@ -1,5 +1,5 @@
 document.write('<style type=\"text/css\">');
-document.write('body { margin: 0; } #gnome-fog-ruler { background: #57AD06; padding: 16px; color: #fff; font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, sans-serif; font-size: 12px; z-index: 200; position: relative; }');
+document.write('body { margin: 0; } #gnome-fog-ruler { background: #57AD06; padding: 16px; color: #fff; font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, sans-serif; font-size: 12px; z-index: 200; position: relative; margin-bottom: 0px;}');
 document.write('#gnome-fog-ruler * { margin: 0; padding: 0; }');
 document.write('#gnome-fog-ruler .fog-center { width: 960px; margin: 0 auto; text-align: left; }');
 document.write('#gnome-fog-ruler a { color: #fff; }');
