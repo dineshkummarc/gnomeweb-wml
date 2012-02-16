@@ -1,0 +1,119 @@
+<chen> mcrha, meeting in another 5 minutes..
+<mcrha> hi chen, ok, let's call people
+* lakhil (~lakhil@117.192.26.28) has joined #evolution-meet
+<chen> hey lakhil 
+<lakhil> hi chen
+* dvratil (~dvratil@nat-pool-brq-t.redhat.com) has joined #evolution-meet
+<chen> lets get started in a couple of minutes..
+* chen waits for punit to join..
+* jpunit (~punit@122.179.40.71) has joined #evolution-meet
+<chen> Lets get started..
+<chen> starting with project updates,
+<chen> we have 3.3.90 release coming up on Feb 20 (coming Monday)
+<chen> with that UI and API/ABI freezes would be effective..
+<chen> please commit all the patches that require UI changes asap
+<chen> String change announcement period also will be on
+<chen> which means all string changes should be announced to gnome-i18n@gnome.org and gnome-doc-list@gnome.org hence forth..
+<chen> Some important dates to keep in mind,
+<chen> String freeze commences on March 5th
+<chen> and Hard code freeze on March 19 th..
+<chen> We have a good news from dvratil on webkit - http://mail.gnome.org/archives/evolution-hackers/2012-February/msg00020.html
+<chen> dvratil, nice work!1
+<dvratil> mcrha's, mostly :)
+<chen> mcrha, !1
+<chen> mcrha, !!
+<lakhil> our heroes :)
+<chen> There is also another important update which I have to make,
+<chen> its a hard one though,
+<chen> lakhil has opted to move to some other team inside Novell and would be moving there starting march 1st
+<vibs> :(
+<chen> he has been Evolution bug master for more than 5 years now and this blog,
+<chen> http://lakhil.wordpress.com/2012/01/04/and-its-a-hat-trick/ - summarizes akhil's contributions over the years w.r.t Evolution and GNOME...
+* jpunit1 (~punit@122.179.31.107) has joined #evolution-meet
+<chen> I hope lakhil will be actively contributing to GNOME after getting settled in his new team..
+<mcrha> ouch, lakhil will be missed
+<chen> thank you for all the consistent work and wish you a great success in ur new team as well..
+<lakhil> hard decision for me but hopefully will get opportunity to contribute and go ahead with my passion
+<chen> mcrha, yes and it will be very much noticable..
+<lakhil> thanks to all for their support
+<mcrha> good luck, lakhil 
+<chen> one good news would be that the new manager for lakhil was also a x-manager for evolution team long back :)
+* jpunit has quit (Read error: 104 (Connection reset by peer))
+<chen> so i guess he would encourage lakhil in contributing to evo and GNOME :)
+<lakhil> :)
+<chen> thats with the project updates..
+<chen> anything else to be discussed before we move to individual updates ?
+<chen> updates from my side,
+<chen> have been mostly with sled issues and hardly started on the EClientStore thingy,
+<chen> have targetted it for 3.5.1 ..
+<chen> i hope srag will also merge the e-mail-factory for 3.5.1
+<chen> dvratil, updates?
+<dvratil> I've ported the branch back to single webview, now I'm fighting attachments a bit, but essentially everything is in place and ready.
+<chen> dvratil, nice :)
+<dvratil> Now we must wait for the webkit guys to make a release with the Milan's patch and we can merge
+<chen> dvratil, cool, so 3.5.1 would be right time for webkit stuff to get in ?
+<dvratil> really depends on the webkit release - they don't have stable release cycle so no idea yet - will need to push on them
+<chen> dvratil, ok
+<dvratil> but 3.5.1 looks very promising
+<chen> dvratil, that would be awesome!!
+<chen> dwmw2, updates?
+<chen> jpunit1, updates?
+<chen> kov, anything to share?
+<dvratil> chen, btw any estimation about when 3.5.1 would be released? Just to have some timeframe to give to the webkit guys
+<jpunit1> from my side .. some ews bug fixes, some downstream and internal work
+<chen> dvratil, maybe between a month or two after 3.4 release..
+<chen> dvratil, u can check the difference between 3.2 release and 3.3.1 release..
+<chen> that can be projected..
+<dvratil> thanks
+<chen> jpunit1, thanks
+<chen> lakhil, updates/
+<lakhil> did testing of mapi features and in general sanity run on evo, most of the mapi bugs have been fixed by mcrha already :)
+<chen> lakhil, thanks :)
+<chen> mcrha, updates?
+<dwmw2> nothing here. I've done absolutely nothing recently. Which, since I'm using ActiveSync for my everyday work email, would tend to imply that I ought to ship a tarball and call it a release :)
+<dwmw2> it has stopped offending me :)
+<mcrha> I've been mostly on MAPI, with lakhil's help, whom caught issues which I failed to see
+<chen> dwmw2, nice :)
+<chen> mcrha, thanks!!
+<chen> vibs, updates?
+<dwmw2> doing a proper calendar and addressbook backend for ActiveSync would be cute; at the moment we only have syncevolution for that. Evo only does mail directly
+<dwmw2> but first I should ship a tarball, then I can import it into GNOME
+<chen> dwmw2, cool
+<vibs> Hii All, 
+<vibs> past month I was as on downstream issues and maintaining groupwise upstream.
+<chen> dwmw2, btw jpunit1 got freebusy working with ews recently..
+<dwmw2> cool
+<chen> vibs, thanks!!
+<chen> dwmw2, there are plans to get smart card authentication for ews
+<chen> i hope it will get done once we get a working setup for the same..
+<dwmw2> using ssl certificates?
+<dwmw2> so requiring ssl client cert support in libsoup?
+<dwmw2> we were looking at that; ActiveSync wants it too.
+<dwmw2> Mandy had patches I think
+<chen> dwmw2, i guess we already have a patch for libsoup downstream
+<chen> in sled
+<dwmw2> hm, really?
+<dwmw2> would be interesting to see that.
+<chen> it needs to be merged to libsoup and evolution-exchange. then ported for ews as well..
+<dwmw2> https://bugzilla.gnome.org/show_bug.cgi?id=334021
+<chen> dwmw2, varadhan has the exact details and might start working soon..
+* chen checks the bug..
+<chen> dwmw2, will point this to varadhan,
+<chen> he could use this bug to upstream the patch..
+<dwmw2> cool
+<lakhil> https://bugzilla.gnome.org/show_bug.cgi?id=253574 , https://bugzilla.gnome.org/show_bug.cgi?id=334021 bugs which chen was referring with respect to smart card
+<lakhil> ah, one bug is already out :P
+<dwmw2> we should presumably be using gnome-keyring for the key management, including the smart cards
+<chen> oh interesting to see my update there :D
+<dwmw2> chen: :)
+<chen> dwmw2, that's actually varadhan's patch :)
+<dwmw2> hah
+<dwmw2> at https://bugzilla.gnome.org/show_bug.cgi?id=334021#c20 ?
+<chen> need to see if he has updated it, will check it and get it upstreamed
+<chen> dwmw2, have no idea about that..
+<chen> dwmw2, will point them to varadhan later and get it going :)
+<chen> anything else from anyone before we wind up the meeting ?
+<chen> Lets then meet next month with Evolution 3.4 on the way!!
+<chen> thanks everyone!!
+<lakhil> solid 3.4 :)
+<lakhil> bye
