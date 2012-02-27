@@ -5,10 +5,7 @@ URLPATH=$3
 
 case "$ROOT" in
 	http://www.gnome.org)
-		PIWIK_SITE_ID=1
-	;;
-	http://news.gnome.org)
-		PIWIK_SITE_ID=3
+		PIWIK_SITE_ID=3 # This refers to http://www-old.gnome.org.
 	;;
 	http://projects.gnome.org)
 		PIWIK_SITE_ID=4
@@ -136,11 +133,11 @@ var pkBaseURL = (("https:" == document.location.protocol) ? "https://webstats.gn
 document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 </script><script type="text/javascript">
 try {
-var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", $PIWIK_SITE_ID);
 piwikTracker.trackPageView();
 piwikTracker.enableLinkTracking();
 } catch( err ) {}
-</script><noscript><p><img src="http://webstats.gnome.org/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+</script><noscript><p><img src="http://webstats.gnome.org/piwik.php?idsite=$PIWIK_SITE_ID" style="border:0" alt="" /></p></noscript>
 <!-- End Piwik Tracking Code -->
 </body>
 </html>
