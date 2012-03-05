@@ -15,7 +15,8 @@ page_DATA = \
 	sidebar-background.png \
 	t-shirt.png \
 	gnome-amazon.png \
-	a11y-testomonial.png
+	a11y-testomonial.png \
+	a11y-testimonial2-diego.png
 	
 EXTRA_DIST=$(page_DATA)
 
