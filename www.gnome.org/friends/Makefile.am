@@ -11,8 +11,8 @@ page_SCRIPTS = \
 	thank-you.php \
         a11y-testomonial.html \
 	a11y-banner.php \
-	a11y-testimonial-2.php \
-	a11y-testimonial-2-es.php \
+	a11y-testimonial-2.html \
+	a11y-testimonial-2-es.html \
 	.htaccess
 
 include $(top_srcdir)/rules.common
