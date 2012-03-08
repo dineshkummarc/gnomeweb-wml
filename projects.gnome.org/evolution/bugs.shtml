@@ -25,18 +25,60 @@
 <p>The following is a list of variables and what each one tells Evolution to do:</p>
 
 <ul>
-	<li><kbd>CAMEL_DEBUG=all</kbd> &mdash; used for debugging Email (Camel is the name of Evolution's Mail Access Library)</li>
-	<li><kbd>CAMEL_DEBUG=gpg</kbd> &mdash; used for debugging problems with GPG encryption</li>
-	<li><kbd>CAMEL_VERBOSE_DEBUG=1</kbd> &mdash; also for debugging Email (not as	featureful as above)</li>
-	<li><kbd>CALDAV_DEBUG=all</kbd> &mdash; For CalDav calendars</li>
-	<li><kbd>LDAP_DEBUG=1</kbd> &mdash; For LDAP addressbooks combined with running e-addressbook-factory on a console</li>
-	<li><kbd>GROUPWISE_DEBUG=1</kbd> &mdash; used for debugging GroupWise support</li>
-	<li><kbd>E2K_DEBUG=1</kbd> &mdash; used for debugging Exchange support: Print each request and response</li>
+  <li>Mail
+    <ul>
+	<li><kbd>CAMEL_DEBUG=all</kbd> &mdash; for debugging email problems</li>
+	<li><kbd>CAMEL_DEBUG=gpg</kbd> &mdash; for debugging email problems with GPG encryption</li>
+<!--	<li><kbd>CAMEL_VERBOSE_DEBUG=1</kbd> &mdash; also for debugging Email (not as featureful as above)</li> -->
+    </ul>
+  </li>
+  <li>Calendars
+    <ul>
+	<li><kbd>CALDAV_DEBUG=all</kbd> &mdash; for debugging problems with CalDav calendars</li>
+	<li><kbd>ALARMS_DEBUG=1</kbd> &mdash; for debugging problems with Calendar reminders/alarms</li>
+    </ul>
+  </li>
+  <li>Address books
+    <ul>
+	<li><kbd>LDAP_DEBUG=1</kbd> &mdash; for LDAP addressbooks (but combined with running ${install_prefix}/libexec/e-addressbook-factory on a console instead of Evolution itself)</li>
+<!-- found in http://mail.gnome.org/archives/evolution-list/2011-August/msg00127.html -->
+	<li><kbd>GOOGLE_BACKEND_DEBUG=1</kbd> &mdash; for debugging problems with Google Contacts addressbooks (but combined with running ${install_prefix}/libexec/e-addressbook-factory on a console instead of Evolution itself)</li>
+    </ul>
+  </li>
+  <li>Microsoft Exchange accounts
+    <ul>
+      <li>Exchange MAPI account type
+       <ul>
+<!-- found in http://mail.gnome.org/archives/evolution-list/2010-December/msg00168.html and 
+     changed by http://git.gnome.org/browse/evolution-mapi/commit/src/libexchangemapi/e-mapi-debug.c?id=dd30f433bfbdb25cecf3002193d2f9f5f951f41e -->
+	<li><kbd>MAPI_DEBUG=1</kbd> &mdash; used for basic debugging of Exchange MAPI support inside of the evolution-mapi package</li>
+<!-- found in http://git.gnome.org/browse/evolution-mapi/commit/src/libexchangemapi/e-mapi-debug.c?id=dd30f433bfbdb25cecf3002193d2f9f5f951f41e and explained by mcrha on IRC -->
+	<li><kbd>LIBMAPI_DEBUG=15</kbd> &mdash; also used for debugging Exchange MAPI support but way more powerful. Debugs the raw communication by passing the variable also to underlying libmapi and samba4 libraries</li>
+       </ul>
+      </li>
+      <li>Exchange EWS account type
+       <ul>
+<!-- found in http://mail.gnome.org/archives/evolution-list/2011-April/msg00245.html -->
+	<li><kbd>EWS_DEBUG=1</kbd> &mdash; used for debugging Exchange EWS support</li>
+	<li><kbd>EWS_DEBUG=2</kbd> &mdash; Same as #1 but more powerful</li>
+       </ul>
+      </li>
+      <li>Microsoft Exchange account type
+       <ul>
+	<li><kbd>E2K_DEBUG=1</kbd> &mdash; used for debugging classical Exchange support: Print each request and response</li>
 	<li><kbd>E2K_DEBUG=2</kbd> &mdash; Same as #1 plus all request and response headers</li>
 	<li><kbd>E2K_DEBUG=3</kbd> &mdash; Same as #2 plus bodies (except text/html)</li>
 	<li><kbd>E2K_DEBUG=4</kbd> &mdash; Same as #3 plus global catalog debug</li>
 	<li><kbd>E2K_DEBUG=5</kbd> &mdash; Same as #4 plus text/html bodies too</li>
-  <!--<li><em>put more env vars here</em></li>-->
+       </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Novell GroupWise accounts
+    <ul>
+	<li><kbd>GROUPWISE_DEBUG=1</kbd> &mdash; used for debugging GroupWise support</li>
+    </ul>
+  </li>
 </ul>
 
 <p>It's easy to start Evolution with custom variables. One would simply run something like the following:</p>
@@ -46,11 +88,11 @@ CAMEL_DEBUG=all evolution &gt;&amp; evo.log
 
 <h3>How to Report Bugs</h3>
 
-<p>Using <a href="http://bugzilla.gnome.org/">Bugzilla</a> is the best way to report bugs. An alternative method is to join the IRC chanel #evolution (on irc.gnome.org) and ask someone there. After talking to the person on IRC, you'll typically want to open a bug in Bugzilla anyway so that the issue can be tracked. (It's most likely that the people on IRC will tell you to report the bug in Bugzilla too.)</p>
+<p>Using <a href="http://bugzilla.gnome.org/">GNOME Bugzilla</a> is the best way to report bugs. An alternative method is to join the IRC chanel #evolution (on irc.gnome.org) and ask someone there. After talking to the person on IRC, you'll typically want to open a bug in Bugzilla anyway so that the issue can be tracked. (It's most likely that the people on IRC will tell you to report the bug in Bugzilla too.)</p>
 
 <h3><a name="backtrace">Debugging Evolution's Crashes (Getting a backtrace)</a></h3>
 
-<p>If Evolution crashes, and you can reproduce it, than start Evolution in a debuger, like so:</p>
+<p>If Evolution crashes, and you can reproduce it, than start Evolution in a debugger like gdb:</p>
 <pre class="screen">
 gdb evolution
 </pre>
@@ -66,11 +108,6 @@ gdb evolution
 </ol>
 
 <p>Including the debugging info acquired through the above method in a bug report in Bugzilla will enable the developers pinpoint where something is going wrong, hopefully making it easier to fix the bug in Evolution.</p>
-
-<h3>Related Links</h3>
-
-<p>If you would like to find more about memory usage, or how to speed up Evolution, please view <a href="http://valgrind.kde.org/">Valgrind's website</a>.</p>
-
 
 <h2>Extended Information About Evolution Bugs</h2>
 
@@ -108,7 +145,7 @@ gdb evolution
 <h4>To attach gdb to a running process</h4>
 
 <ol>
-  <li>Get the process id of the process</li>
+  <li>Get the process id of the process (you can find out by 'ps ax')</li>
 
   <li>Run the command 'gdb -p &lt;process id&gt;'</li>
 
@@ -116,22 +153,6 @@ gdb evolution
 </ol>
 
 <p>You could also type 'continue' at the gdb prompt and proceed as usual and then press ctrl+c, to get the gdb prompt again.</p>
-
-<h3>Camel verbose debug</h3>
-
-<p>You can debug the communications with your mail server with environment variable CAMEL_VERBOSE_DEBUG.</p>
-
-<ol>
-  <li>Exit evolution and run the command 'evolution --force-shutdown'</li>
-
-  <li>Run the command 'env CAMEL_VERBOSE_DEBUG=1 evolution &gt;&amp; /tmp/camel.out'</li>
-
-  <li>Use evolution like usual</li>
-</ol>
-
-<p>The server traffic will be logged to /tmp/camel.out file delimited by the words "sending:" and "receiving:". Certain information such as usernames and passwords, and most message content will be hidden or not printed.</p>
-
-<p>From evolution 1.5.5 onwards, a simpler debug variable with more features has been added, CAMEL_DEBUG. For most cases, simply use CAMEL_DEBUG=all instead of CAMEL_VERBOSE_DEBUG=1.</p>
 
 <h3>GroupWise Debug</h3>
 
@@ -147,9 +168,9 @@ gdb evolution
 
 <p>Evolution process also communicates with GroupWise server during Novell GroupWise account setup. One can run evolution after setting the GROUPWISE_DEBUG in the same manner described above to debug any Novell GroupWise account setup related problems.</p>
 
-<h3>Exchange Connector Debug</h3>
+<h3>Evolution Exchange Connector Debug</h3>
 
-<p>You can debug the communications with Exchange server using the E2K_DEBUG environment variable. Exchange connector runs as a separate process [evolution-exchange-storage]. You can run evolution-exchange-storage with E2K_DEBUG set to a value from 1 to 5:</p>
+<p>You can debug the communications with a Microsoft Exchange server 2000 or 2003 using the E2K_DEBUG environment variable. Exchange connector runs as a separate process [evolution-exchange-storage]. You can run evolution-exchange-storage with E2K_DEBUG set to a value from 1 to 5:</p>
 
 <div style="margin-left: 2em">
   E2K_DEBUG=1 =&gt; Print each request and response<br>
