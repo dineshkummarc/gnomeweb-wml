@@ -15,16 +15,19 @@ page_SCRIPTS=\
 	NMConnection.html \
 	NMSetting8021x.html \
 	NMSettingBluetooth.html \
+	NMSettingBond.html \
 	NMSettingCdma.html \
 	NMSettingConnection.html \
 	NMSettingGsm.html \
 	NMSetting.html \
+	NMSettingInfiniband.html \
 	NMSettingIP4Config.html \
 	NMSettingIP6Config.html \
 	NMSettingOlpcMesh.html \
 	NMSettingPPP.html \
 	NMSettingPPPOE.html \
 	NMSettingSerial.html \
+	NMSettingVlan.html \
 	NMSettingVPN.html \
 	NMSettingWimax.html \
 	NMSettingWired.html \

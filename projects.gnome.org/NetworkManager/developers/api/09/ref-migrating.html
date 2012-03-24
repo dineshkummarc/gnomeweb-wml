@@ -8,7 +8,7 @@
 <link rel="up" href="index.html" title="NetworkManager D-Bus Reference Manual">
 <link rel="prev" href="secrets-flags.html" title="Secret flag types">
 <link rel="next" href="ix01.html" title="Index">
-<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -23,20 +23,20 @@
 <div class="titlepage"><div><div><h2 class="title">
 <a name="ref-migrating"></a>Migrating from NetworkManager 0.8 to NetworkManager 0.9</h2></div></div></div>
 <div class="toc"><dl>
-<dt><span class="section"><a href="ref-migrating.html#id436498">Architecture and D-Bus API Changes in 0.9</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id527298">Architecture and D-Bus API Changes in 0.9</a></span></dt>
 <dd><dl>
-<dt><span class="section"><a href="ref-migrating.html#id428142">Elimination of the User Settings Service</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id412195">User Secret Agents</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id400191">Settings Service Interface Changes</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id417408">Connection Object Interface Changes</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id390759">Permissions Methods Consolidation</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id406711">AddConnection Returns Object Path of New Connection</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id411295">Support for WiMAX Devices</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id428973">New Device States</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id436519">New Active Connection State</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id436648">Consolidated Modem Devices</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id401128">Secret Property Flags</a></span></dt>
-<dt><span class="section"><a href="ref-migrating.html#id395720">Deprecated Methods Removed</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id601910">Elimination of the User Settings Service</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id583540">User Secret Agents</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id579356">Settings Service Interface Changes</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id611016">Connection Object Interface Changes</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id608892">Permissions Methods Consolidation</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id600315">AddConnection Returns Object Path of New Connection</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id571977">Support for WiMAX Devices</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id607658">New Device States</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id567159">New Active Connection State</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id615036">Consolidated Modem Devices</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id582230">Secret Property Flags</a></span></dt>
+<dt><span class="section"><a href="ref-migrating.html#id578718">Deprecated Methods Removed</a></span></dt>
 </dl></dd>
 </dl></div>
 <p>
@@ -50,14 +50,14 @@
   </p>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="id436498"></a>Architecture and D-Bus API Changes in 0.9</h2></div></div></div>
+<a name="id527298"></a>Architecture and D-Bus API Changes in 0.9</h2></div></div></div>
 <p>
       This section details the architectural and D-Bus API changes in
       NetworkManager 0.9.
     </p>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id428142"></a>Elimination of the User Settings Service</h3></div></div></div>
+<a name="id601910"></a>Elimination of the User Settings Service</h3></div></div></div>
 <p>
       Previously there were two "settings services", or D-Bus services that
       provided and saved network configuration information.  NetworkManager
@@ -103,7 +103,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id412195"></a>User Secret Agents</h3></div></div></div>
+<a name="id583540"></a>User Secret Agents</h3></div></div></div>
 <p>
       Even with the elimination of the user settings service, in some cases it
       is still desirable to store secrets in the user's session and not in
@@ -152,7 +152,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id400191"></a>Settings Service Interface Changes</h3></div></div></div>
+<a name="id579356"></a>Settings Service Interface Changes</h3></div></div></div>
 <p>
       With the elimination of the user settings service, the old
       <code class="literal">org.freedesktop.NetworkManagerUserSettings</code> and
@@ -160,7 +160,8 @@
       service names are no longer used.  Instead NetworkManager provides the
       settings service using its own D-Bus service name,
       <code class="literal">org.freedesktop.NetworkManager</code>.  The object path of
-      the settings service remains unchanged.
+      the settings service has also changed to
+      <code class="literal">/org/freedesktop/NetworkManager/Settings</code>.
     </p>
 <p>
       Additionally, the D-Bus interface of the settings service has changed
@@ -177,18 +178,19 @@
       and <code class="literal">CanModify</code> properties.
     </p>
 <p>
-      <span class="strong"><strong>Action:</strong></span> change the service name that
-      your application uses to request system network settings to
-      <code class="literal">org.freedesktop.NetworkManager</code>, and update the D-Bus
-      interface that codes uses to talk to the settings service to
-      <a class="ulink" href="spec.html#org.freedesktop.NetworkManager.Settings" target="_top">
+      <span class="strong"><strong>Action:</strong></span> change the service name and
+      object path that your application uses to request system network settings
+      to <code class="literal">org.freedesktop.NetworkManager</code> and
+      <code class="literal">/org/freedesktop/NetworkManager/Settings</code> respectively,
+      and update the D-Bus interface that codes uses to talk to the settings
+      service to <a class="ulink" href="spec.html#org.freedesktop.NetworkManager.Settings" target="_top">
       <code class="literal">org.freedesktop.NetworkManager.Settings</code></a>.
       Listen for hostname changes using the new interface name as well.
     </p>
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id417408"></a>Connection Object Interface Changes</h3></div></div></div>
+<a name="id611016"></a>Connection Object Interface Changes</h3></div></div></div>
 <p>
       Consistent with the interface changes to the Settings object, the
       Connection object's D-Bus interface has changed to
@@ -222,7 +224,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id390759"></a>Permissions Methods Consolidation</h3></div></div></div>
+<a name="id608892"></a>Permissions Methods Consolidation</h3></div></div></div>
 <p>
       Previously there were two D-Bus method calls to retrieve the list of
       operations that a user client could perform, and two signals notifying
@@ -254,7 +256,7 @@
       are now string-based permissions.  The mapping is as follows:
       </p>
 <div class="table">
-<a name="id423537"></a><p class="title"><b>Table 17. </b></p>
+<a name="id596847"></a><p class="title"><b>Table 20. </b></p>
 <div class="table-contents"><table border="1">
 <colgroup>
 <col>
@@ -305,7 +307,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id406711"></a>AddConnection Returns Object Path of New Connection</h3></div></div></div>
+<a name="id600315"></a>AddConnection Returns Object Path of New Connection</h3></div></div></div>
 <p>
       The <a class="ulink" href="spec.html#org.freedesktop.NetworkManager.Settings" target="_top">
       <code class="literal">org.freedesktop.NetworkManager.Settings.AddConnection</code>
@@ -323,7 +325,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id411295"></a>Support for WiMAX Devices</h3></div></div></div>
+<a name="id571977"></a>Support for WiMAX Devices</h3></div></div></div>
 <p>
       NetworkManager now supports Intel WiMAX mobile broadband devices.  A
       corresponding device type (<code class="literal">NM_DEVICE_TYPE_WIMAX</code>) and
@@ -346,7 +348,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id428973"></a>New Device States</h3></div></div></div>
+<a name="id607658"></a>New Device States</h3></div></div></div>
 <p>
       A few <a class="ulink" href="spec.html#type-NM_DEVICE_STATE" target="_top">new device states</a>
       have been added, and all device states have been renumbered for flexibility.
@@ -361,7 +363,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id436519"></a>New Active Connection State</h3></div></div></div>
+<a name="id567159"></a>New Active Connection State</h3></div></div></div>
 <p>
       Along with the new device states, an
       <a class="ulink" href="spec.html#type-NM_ACTIVE_CONNECTION_STATE" target="_top">additional
@@ -377,7 +379,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id436648"></a>Consolidated Modem Devices</h3></div></div></div>
+<a name="id615036"></a>Consolidated Modem Devices</h3></div></div></div>
 <p>
       Many new mobile broadband devices support multiple access families, like
       Qualcomm Gobi cards (CDMA/EVDO and GSM/UMTS), or multi-mode EVDO/LTE
@@ -413,7 +415,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id401128"></a>Secret Property Flags</h3></div></div></div>
+<a name="id582230"></a>Secret Property Flags</h3></div></div></div>
 <p>
       In the Connection object's configuration properties, each setting's secret
       properties (like WiFi passphrases, or public key passwords, etc) now has
@@ -422,7 +424,7 @@
       following values:
       </p>
 <div class="table">
-<a name="id401137"></a><p class="title"><b>Table 18. </b></p>
+<a name="id582238"></a><p class="title"><b>Table 21. </b></p>
 <div class="table-contents"><table border="1">
 <colgroup>
 <col>
@@ -484,7 +486,7 @@
 </div>
 <div class="section">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id395720"></a>Deprecated Methods Removed</h3></div></div></div>
+<a name="id578718"></a>Deprecated Methods Removed</h3></div></div></div>
 <p>
       A few methods and signals of the <code class="literal">org.freedesktop.NetworkManager</code>
       interface deprecated in version 0.7 have been removed.  All the
@@ -494,7 +496,7 @@
       their replacements:
       </p>
 <div class="table">
-<a name="id395734"></a><p class="title"><b>Table 19. </b></p>
+<a name="id578732"></a><p class="title"><b>Table 22. </b></p>
 <div class="table-contents"><table border="1">
 <colgroup>
 <col>
@@ -534,6 +536,6 @@
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.17</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="libnm-util API Reference">
 <link rel="prev" href="NMSettingVPN.html" title="NMSettingVPN">
 <link rel="next" href="object-tree.html" title="Object Hierarchy">
-<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -24,6 +24,8 @@
 <a href="#libnm-util-nm-utils.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#libnm-util-nm-utils.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#libnm-util-nm-utils.object-hierarchy" class="shortcut">Object Hierarchy</a>
 </td></tr>
 </table>
 <div class="refentry">
@@ -37,62 +39,79 @@
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="libnm-util-nm-utils.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="NMUtilsSecurityType"></a><pre class="synopsis">
 #include &lt;nm-utils.h&gt;
 
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()">nm_utils_init</a>                       (<em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+enum                <a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType-enum" title="enum NMUtilsSecurityType">NMUtilsSecurityType</a>;
+#define             <a class="link" href="libnm-util-nm-utils.html#NM-UTILS-HWADDR-LEN-MAX:CAPS" title="NM_UTILS_HWADDR_LEN_MAX">NM_UTILS_HWADDR_LEN_MAX</a>
 <span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-deinit" title="nm_utils_deinit ()">nm_utils_deinit</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-is-empty-ssid" title="nm_utils_is_empty_ssid ()">nm_utils_is_empty_ssid</a>              (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
-                                                         <em class="parameter"><code><span class="type">int</span> len</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-escape-ssid" title="nm_utils_escape_ssid ()">nm_utils_escape_ssid</a>                (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> len</code></em>);
+<a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-gvalue-hash-dup" title="nm_utils_gvalue_hash_dup ()">nm_utils_gvalue_hash_dup</a>            (<em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *hash</code></em>);
+<a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-atoba" title="nm_utils_hwaddr_atoba ()">nm_utils_hwaddr_atoba</a>               (<em class="parameter"><code>const <span class="type">char</span> *asc</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>);
+<a href="../glib/glib-Basic-Types.html#guint8"><span class="returnvalue">guint8</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-aton" title="nm_utils_hwaddr_aton ()">nm_utils_hwaddr_aton</a>                (<em class="parameter"><code>const <span class="type">char</span> *asc</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> buffer</code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-len" title="nm_utils_hwaddr_len ()">nm_utils_hwaddr_len</a>                 (<em class="parameter"><code><span class="type">int</span> type</code></em>);
+<span class="returnvalue">char</span> *              <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-ntoa" title="nm_utils_hwaddr_ntoa ()">nm_utils_hwaddr_ntoa</a>                (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gconstpointer"><span class="type">gconstpointer</span></a> addr</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>);
+<span class="returnvalue">int</span>                 <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-type" title="nm_utils_hwaddr_type ()">nm_utils_hwaddr_type</a>                (<em class="parameter"><code><span class="type">int</span> len</code></em>);
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()">nm_utils_init</a>                       (<em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-addresses-from-gvalue" title="nm_utils_ip4_addresses_from_gvalue ()">nm_utils_ip4_addresses_from_gvalue</a>  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-addresses-to-gvalue" title="nm_utils_ip4_addresses_to_gvalue ()">nm_utils_ip4_addresses_to_gvalue</a>    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-get-default-prefix" title="nm_utils_ip4_get_default_prefix ()">nm_utils_ip4_get_default_prefix</a>     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> ip</code></em>);
+<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-netmask-to-prefix" title="nm_utils_ip4_netmask_to_prefix ()">nm_utils_ip4_netmask_to_prefix</a>      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> netmask</code></em>);
+<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-prefix-to-netmask" title="nm_utils_ip4_prefix_to_netmask ()">nm_utils_ip4_prefix_to_netmask</a>      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> prefix</code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-routes-from-gvalue" title="nm_utils_ip4_routes_from_gvalue ()">nm_utils_ip4_routes_from_gvalue</a>     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-routes-to-gvalue" title="nm_utils_ip4_routes_to_gvalue ()">nm_utils_ip4_routes_to_gvalue</a>       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-addresses-from-gvalue" title="nm_utils_ip6_addresses_from_gvalue ()">nm_utils_ip6_addresses_from_gvalue</a>  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-addresses-to-gvalue" title="nm_utils_ip6_addresses_to_gvalue ()">nm_utils_ip6_addresses_to_gvalue</a>    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-dns-from-gvalue" title="nm_utils_ip6_dns_from_gvalue ()">nm_utils_ip6_dns_from_gvalue</a>        (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-dns-to-gvalue" title="nm_utils_ip6_dns_to_gvalue ()">nm_utils_ip6_dns_to_gvalue</a>          (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-routes-from-gvalue" title="nm_utils_ip6_routes_from_gvalue ()">nm_utils_ip6_routes_from_gvalue</a>     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-routes-to-gvalue" title="nm_utils_ip6_routes_to_gvalue ()">nm_utils_ip6_routes_to_gvalue</a>       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-is-empty-ssid" title="nm_utils_is_empty_ssid ()">nm_utils_is_empty_ssid</a>              (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> len</code></em>);
+<a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-rsa-key-encrypt" title="nm_utils_rsa_key_encrypt ()">nm_utils_rsa_key_encrypt</a>            (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *data</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *in_password</code></em>,
+                                                         <em class="parameter"><code><span class="type">char</span> **out_password</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-same-ssid" title="nm_utils_same_ssid ()">nm_utils_same_ssid</a>                  (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid1</code></em>,
                                                          <em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid2</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> ignore_trailing_null</code></em>);
-<span class="returnvalue">char</span> *              <a class="link" href="libnm-util-nm-utils.html#nm-utils-ssid-to-utf8" title="nm_utils_ssid_to_utf8 ()">nm_utils_ssid_to_utf8</a>               (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid</code></em>);
-<a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-gvalue-hash-dup" title="nm_utils_gvalue_hash_dup ()">nm_utils_gvalue_hash_dup</a>            (<em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *hash</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-slist-free" title="nm_utils_slist_free ()">nm_utils_slist_free</a>                 (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> elem_destroy_fn</code></em>);
-enum                <a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType" title="enum NMUtilsSecurityType">NMUtilsSecurityType</a>;
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-security-valid" title="nm_utils_security_valid ()">nm_utils_security_valid</a>             (<em class="parameter"><code><a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType" title="enum NMUtilsSecurityType"><span class="type">NMUtilsSecurityType</span></a> type</code></em>,
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-security-valid" title="nm_utils_security_valid ()">nm_utils_security_valid</a>             (<em class="parameter"><code><a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType"><span class="type">NMUtilsSecurityType</span></a> type</code></em>,
                                                          <em class="parameter"><code><span class="type">NMDeviceWifiCapabilities</span> wifi_caps</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> have_ap</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> adhoc</code></em>,
                                                          <em class="parameter"><code><span class="type">NM80211ApFlags</span> ap_flags</code></em>,
                                                          <em class="parameter"><code><span class="type">NM80211ApSecurityFlags</span> ap_wpa</code></em>,
                                                          <em class="parameter"><code><span class="type">NM80211ApSecurityFlags</span> ap_rsn</code></em>);
-<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-addresses-from-gvalue" title="nm_utils_ip4_addresses_from_gvalue ()">nm_utils_ip4_addresses_from_gvalue</a>  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-addresses-to-gvalue" title="nm_utils_ip4_addresses_to_gvalue ()">nm_utils_ip4_addresses_to_gvalue</a>    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-routes-from-gvalue" title="nm_utils_ip4_routes_from_gvalue ()">nm_utils_ip4_routes_from_gvalue</a>     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-routes-to-gvalue" title="nm_utils_ip4_routes_to_gvalue ()">nm_utils_ip4_routes_to_gvalue</a>       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-netmask-to-prefix" title="nm_utils_ip4_netmask_to_prefix ()">nm_utils_ip4_netmask_to_prefix</a>      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> netmask</code></em>);
-<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-prefix-to-netmask" title="nm_utils_ip4_prefix_to_netmask ()">nm_utils_ip4_prefix_to_netmask</a>      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> prefix</code></em>);
-<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip4-get-default-prefix" title="nm_utils_ip4_get_default_prefix ()">nm_utils_ip4_get_default_prefix</a>     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> ip</code></em>);
-<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-addresses-from-gvalue" title="nm_utils_ip6_addresses_from_gvalue ()">nm_utils_ip6_addresses_from_gvalue</a>  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-addresses-to-gvalue" title="nm_utils_ip6_addresses_to_gvalue ()">nm_utils_ip6_addresses_to_gvalue</a>    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-routes-from-gvalue" title="nm_utils_ip6_routes_from_gvalue ()">nm_utils_ip6_routes_from_gvalue</a>     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-routes-to-gvalue" title="nm_utils_ip6_routes_to_gvalue ()">nm_utils_ip6_routes_to_gvalue</a>       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-dns-from-gvalue" title="nm_utils_ip6_dns_from_gvalue ()">nm_utils_ip6_dns_from_gvalue</a>        (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-ip6-dns-to-gvalue" title="nm_utils_ip6_dns_to_gvalue ()">nm_utils_ip6_dns_to_gvalue</a>          (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libnm-util-nm-utils.html#nm-utils-slist-free" title="nm_utils_slist_free ()">nm_utils_slist_free</a>                 (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> elem_destroy_fn</code></em>);
+<span class="returnvalue">char</span> *              <a class="link" href="libnm-util-nm-utils.html#nm-utils-ssid-to-utf8" title="nm_utils_ssid_to_utf8 ()">nm_utils_ssid_to_utf8</a>               (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid</code></em>);
 <span class="returnvalue">char</span> *              <a class="link" href="libnm-util-nm-utils.html#nm-utils-uuid-generate" title="nm_utils_uuid_generate ()">nm_utils_uuid_generate</a>              (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">char</span> *              <a class="link" href="libnm-util-nm-utils.html#nm-utils-uuid-generate-from-string" title="nm_utils_uuid_generate_from_string ()">nm_utils_uuid_generate_from_string</a>  (<em class="parameter"><code>const <span class="type">char</span> *s</code></em>);
-<a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        <a class="link" href="libnm-util-nm-utils.html#nm-utils-rsa-key-encrypt" title="nm_utils_rsa_key_encrypt ()">nm_utils_rsa_key_encrypt</a>            (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *data</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *in_password</code></em>,
-                                                         <em class="parameter"><code><span class="type">char</span> **out_password</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-wifi-freq-to-channel" title="nm_utils_wifi_freq_to_channel ()">nm_utils_wifi_freq_to_channel</a>       (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> freq</code></em>);
 <a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-wifi-channel-to-freq" title="nm_utils_wifi_channel_to_freq ()">nm_utils_wifi_channel_to_freq</a>       (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> channel</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *band</code></em>);
 <a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-wifi-find-next-channel" title="nm_utils_wifi_find_next_channel ()">nm_utils_wifi_find_next_channel</a>     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> channel</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> direction</code></em>,
                                                          <em class="parameter"><code><span class="type">char</span> *band</code></em>);
+<a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             <a class="link" href="libnm-util-nm-utils.html#nm-utils-wifi-freq-to-channel" title="nm_utils_wifi_freq_to_channel ()">nm_utils_wifi_freq_to_channel</a>       (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> freq</code></em>);
 <a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libnm-util-nm-utils.html#nm-utils-wifi-is-channel-valid" title="nm_utils_wifi_is_channel_valid ()">nm_utils_wifi_is_channel_valid</a>      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> channel</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *band</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="libnm-util-nm-utils.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GEnum
+   +----NMUtilsSecurityType
 </pre>
 </div>
 <div class="refsect1">
@@ -105,234 +124,7 @@ access points and devices, among other things.
 <div class="refsect1">
 <a name="libnm-util-nm-utils.details"></a><h2>Details</h2>
 <div class="refsect2">
-<a name="nm-utils-init"></a><h3>nm_utils_init ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_init                       (<em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
-<p>
-Initializes libnm-util; should be called when starting and program that
-uses libnm-util.  Sets up an <code class="function">atexit()</code> handler to ensure de-initialization
-is performed, but calling <a class="link" href="libnm-util-nm-utils.html#nm-utils-deinit" title="nm_utils_deinit ()"><code class="function">nm_utils_deinit()</code></a> to explicitly deinitialize
-libnm-util can also be done.  This function can be called more than once.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>TRUE if the initialization was successful, FALSE on failure.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-deinit"></a><h3>nm_utils_deinit ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_deinit                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
-<p>
-Frees all resources used internally by libnm-util.  This function is called
-from an <code class="function">atexit()</code> handler, set up by <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()"><code class="function">nm_utils_init()</code></a>, but is safe to be called
-more than once.  Subsequent calls have no effect until <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()"><code class="function">nm_utils_init()</code></a> is
-called again.
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-is-empty-ssid"></a><h3>nm_utils_is_empty_ssid ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_is_empty_ssid              (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
-                                                         <em class="parameter"><code><span class="type">int</span> len</code></em>);</pre>
-<p>
-Different manufacturers use different mechanisms for not broadcasting the
-AP's SSID.  This function attempts to detect blank/empty SSIDs using a
-number of known SSID-cloaking methods.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
-<td>pointer to a buffer containing the SSID data</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td>length of the SSID data in <em class="parameter"><code>ssid</code></em>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>TRUE if the SSID is "empty", FALSE if it is not</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-escape-ssid"></a><h3>nm_utils_escape_ssid ()</h3>
-<pre class="programlisting">const <span class="returnvalue">char</span> *        nm_utils_escape_ssid                (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> len</code></em>);</pre>
-<p>
-This function does a quick printable character conversion of the SSID, simply
-replacing embedded NULLs and non-printable characters with the hexadecimal
-representation of that character.  Intended for debugging only, should not
-be used for display of SSIDs.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
-<td>pointer to a buffer containing the SSID data</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td>length of the SSID data in <em class="parameter"><code>ssid</code></em>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>pointer to the escaped SSID, which uses an internal static buffer
-and will be overwritten by subsequent calls to this function</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-same-ssid"></a><h3>nm_utils_same_ssid ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_same_ssid                  (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid1</code></em>,
-                                                         <em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid2</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> ignore_trailing_null</code></em>);</pre>
-<p>
-Earlier versions of the Linux kernel added a NULL byte to the end of the
-SSID to enable easy printing of the SSID on the console or in a terminal,
-but this behavior was problematic (SSIDs are simply byte arrays, not strings)
-and thus was changed.  This function compensates for that behavior at the
-cost of some compatibility with odd SSIDs that may legitimately have trailing
-NULLs, even though that is functionally pointless.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ssid1</code></em> :</span></p></td>
-<td>first SSID data to compare</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ssid2</code></em> :</span></p></td>
-<td>second SSID data to compare</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ignore_trailing_null</code></em> :</span></p></td>
-<td>TRUE to ignore one trailing NULL byte</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>TRUE if the SSIDs are the same, FALSE if they are not</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ssid-to-utf8"></a><h3>nm_utils_ssid_to_utf8 ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              nm_utils_ssid_to_utf8               (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid</code></em>);</pre>
-<p>
-WiFi SSIDs are byte arrays, they are _not_ strings.  Thus, an SSID may
-contain embedded NULLs and other unprintable characters.  Often it is
-useful to print the SSID out for debugging purposes, but that should be the
-_only_ use of this function.  Do not use this function for any persistent
-storage of the SSID, since the printable SSID returned from this function
-cannot be converted back into the real SSID of the access point.
-</p>
-<p>
-This function does almost everything humanly possible to convert the input
-into a printable UTF-8 string, using roughly the following procedure:
-</p>
-<p>
-1) if the input data is already UTF-8 safe, no conversion is performed
-2) attempts to get the current system language from the LANG environment
-   variable, and depending on the language, uses a table of alternative
-   encodings to try.  For example, if LANG=hu_HU, the table may first try
-   the ISO-8859-2 encoding, and if that fails, try the Windows-1250 encoding.
-   If all fallback encodings fail, replaces non-UTF-8 characters with '?'.
-3) If the system language was unable to be determined, falls back to the
-   ISO-8859-1 encoding, then to the Windows-1251 encoding.
-4) If step 3 fails, replaces non-UTF-8 characters with '?'.
-</p>
-<p>
-Again, this function should be used for debugging and display purposes
-_only_.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
-<td>a byte array containing the SSID data</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>an allocated string containing a UTF-8
-representation of the SSID, which must be freed by the caller using <a href="../glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
-Returns NULL on errors. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-gvalue-hash-dup"></a><h3>nm_utils_gvalue_hash_dup ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        nm_utils_gvalue_hash_dup            (<em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *hash</code></em>);</pre>
-<p>
-Utility function to duplicate a hash table of GValues.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping string:GValue</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated duplicated <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a>, caller must free the
-returned hash with <a href="../glib/glib-Hash-Tables.html#g-hash-table-unref"><code class="function">g_hash_table_unref()</code></a> or <a href="../glib/glib-Hash-Tables.html#g-hash-table-destroy"><code class="function">g_hash_table_destroy()</code></a>. <span class="annotation">[<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-slist-free"></a><h3>nm_utils_slist_free ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_slist_free                 (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> elem_destroy_fn</code></em>);</pre>
-<p>
-Utility function to free a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a>.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>elem_destroy_fn</code></em> :</span></p></td>
-<td>user function called for each element in <em class="parameter"><code>list</code></em>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="NMUtilsSecurityType"></a><h3>enum NMUtilsSecurityType</h3>
+<a name="NMUtilsSecurityType-enum"></a><h3>enum NMUtilsSecurityType</h3>
 <pre class="programlisting">typedef enum {
 	NMU_SEC_INVALID = 0,
 	NMU_SEC_NONE,
@@ -405,8 +197,651 @@ generating the dynamic WEP keys automatically
 </div>
 <hr>
 <div class="refsect2">
+<a name="NM-UTILS-HWADDR-LEN-MAX:CAPS"></a><h3>NM_UTILS_HWADDR_LEN_MAX</h3>
+<pre class="programlisting">#define NM_UTILS_HWADDR_LEN_MAX 20 /* INFINIBAND_ALEN */
+</pre>
+<p>
+The maximum length of a hardware address of a type known by
+<a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-len" title="nm_utils_hwaddr_len ()"><code class="function">nm_utils_hwaddr_len()</code></a> or <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-aton" title="nm_utils_hwaddr_aton ()"><code class="function">nm_utils_hwaddr_aton()</code></a>. This can be used
+as the size of the buffer passed to <a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-aton" title="nm_utils_hwaddr_aton ()"><code class="function">nm_utils_hwaddr_aton()</code></a>.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-deinit"></a><h3>nm_utils_deinit ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_deinit                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Frees all resources used internally by libnm-util.  This function is called
+from an <code class="function">atexit()</code> handler, set up by <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()"><code class="function">nm_utils_init()</code></a>, but is safe to be called
+more than once.  Subsequent calls have no effect until <a class="link" href="libnm-util-nm-utils.html#nm-utils-init" title="nm_utils_init ()"><code class="function">nm_utils_init()</code></a> is
+called again.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-escape-ssid"></a><h3>nm_utils_escape_ssid ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *        nm_utils_escape_ssid                (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> len</code></em>);</pre>
+<p>
+This function does a quick printable character conversion of the SSID, simply
+replacing embedded NULLs and non-printable characters with the hexadecimal
+representation of that character.  Intended for debugging only, should not
+be used for display of SSIDs.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
+<td>pointer to a buffer containing the SSID data</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>length of the SSID data in <em class="parameter"><code>ssid</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>pointer to the escaped SSID, which uses an internal static buffer
+and will be overwritten by subsequent calls to this function</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-gvalue-hash-dup"></a><h3>nm_utils_gvalue_hash_dup ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="returnvalue">GHashTable</span></a> *        nm_utils_gvalue_hash_dup            (<em class="parameter"><code><a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> *hash</code></em>);</pre>
+<p>
+Utility function to duplicate a hash table of GValues.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
+<td>a <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> mapping string:GValue</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated duplicated <a href="../glib/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a>, caller must free the
+returned hash with <a href="../glib/glib-Hash-Tables.html#g-hash-table-unref"><code class="function">g_hash_table_unref()</code></a> or <a href="../glib/glib-Hash-Tables.html#g-hash-table-destroy"><code class="function">g_hash_table_destroy()</code></a>. <span class="annotation">[<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8 GObject.Value]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-hwaddr-atoba"></a><h3>nm_utils_hwaddr_atoba ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        nm_utils_hwaddr_atoba               (<em class="parameter"><code>const <span class="type">char</span> *asc</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>);</pre>
+<p>
+Parses <em class="parameter"><code>asc</code></em> and converts it to binary form in a <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>. See
+<a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-aton" title="nm_utils_hwaddr_aton ()"><code class="function">nm_utils_hwaddr_aton()</code></a> if you don't want a <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>asc</code></em> :</span></p></td>
+<td>the ASCII representation of a hardware address</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>the type of address; either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>asc</code></em> couldn't
+be parsed. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-hwaddr-aton"></a><h3>nm_utils_hwaddr_aton ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint8"><span class="returnvalue">guint8</span></a> *            nm_utils_hwaddr_aton                (<em class="parameter"><code>const <span class="type">char</span> *asc</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> buffer</code></em>);</pre>
+<p>
+Parses <em class="parameter"><code>asc</code></em> and converts it to binary form in <em class="parameter"><code>buffer</code></em>. See
+<a class="link" href="libnm-util-nm-utils.html#nm-utils-hwaddr-atoba" title="nm_utils_hwaddr_atoba ()"><code class="function">nm_utils_hwaddr_atoba()</code></a> if you'd rather have the result in a
+<a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>asc</code></em> :</span></p></td>
+<td>the ASCII representation of a hardware address</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>the type of address; either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
+<td>buffer to store the result into</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<em class="parameter"><code>buffer</code></em>, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>asc</code></em> couldn't be parsed</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-hwaddr-len"></a><h3>nm_utils_hwaddr_len ()</h3>
+<pre class="programlisting"><span class="returnvalue">int</span>                 nm_utils_hwaddr_len                 (<em class="parameter"><code><span class="type">int</span> type</code></em>);</pre>
+<p>
+Returns the length in octets of a hardware address of type <em class="parameter"><code>type</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>the type of address; either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the length</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-hwaddr-ntoa"></a><h3>nm_utils_hwaddr_ntoa ()</h3>
+<pre class="programlisting"><span class="returnvalue">char</span> *              nm_utils_hwaddr_ntoa                (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gconstpointer"><span class="type">gconstpointer</span></a> addr</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> type</code></em>);</pre>
+<p>
+Converts <em class="parameter"><code>addr</code></em> to textual form.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>addr</code></em> :</span></p></td>
+<td>a binary hardware address</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>the type of address; either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the textual form of <em class="parameter"><code>addr</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-hwaddr-type"></a><h3>nm_utils_hwaddr_type ()</h3>
+<pre class="programlisting"><span class="returnvalue">int</span>                 nm_utils_hwaddr_type                (<em class="parameter"><code><span class="type">int</span> len</code></em>);</pre>
+<p>
+Returns the type (either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>) of the raw
+address given its length.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>the length of hardware address in bytes</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the type, either <code class="literal">ARPHRD_ETHER</code> or <code class="literal">ARPHRD_INFINIBAND</code>, or -1 if
+the address length was not recognized</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-init"></a><h3>nm_utils_init ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_init                       (<em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Initializes libnm-util; should be called when starting and program that
+uses libnm-util.  Sets up an <code class="function">atexit()</code> handler to ensure de-initialization
+is performed, but calling <a class="link" href="libnm-util-nm-utils.html#nm-utils-deinit" title="nm_utils_deinit ()"><code class="function">nm_utils_deinit()</code></a> to explicitly deinitialize
+libnm-util can also be done.  This function can be called more than once.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>location to store error, or <a href="../liboil/liboil-liboiljunk.html#NULL:CAPS"><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the initialization was successful, FALSE on failure.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-addresses-from-gvalue"></a><h3>nm_utils_ip4_addresses_from_gvalue ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip4_addresses_from_gvalue  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of <a href="../glib/glib-Arrays.html#GArray"><span class="type">GArrays</span></a> of guint32s representing
+a list of NetworkManager IPv4 addresses (which is a tuple of address, gateway,
+and prefix) into a GSList of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects.  The specific format of
+this serialization is not guaranteed to be stable and the <a href="../glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> may be
+extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>gvalue containing a GPtrArray of GArrays of guint32s</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP4Address]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-addresses-to-gvalue"></a><h3>nm_utils_ip4_addresses_to_gvalue ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip4_addresses_to_gvalue    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects into a
+GPtrArray of GArrays of guint32s representing a list of NetworkManager IPv4
+addresses (which is a tuple of address, gateway, and prefix).   The specific
+format of this serialization is not guaranteed to be stable and may be
+extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a list of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NMIP4Address]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted addresses,
+which should be unset by the caller (when no longer needed) with
+<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-get-default-prefix"></a><h3>nm_utils_ip4_get_default_prefix ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_get_default_prefix     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> ip</code></em>);</pre>
+<p>
+When the Internet was originally set up, various ranges of IP addresses were
+segmented into three network classes: A, B, and C.  This function will return
+a prefix that is associated with the IP address specified defining where it
+falls in the predefined classes.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ip</code></em> :</span></p></td>
+<td>an IPv4 address (in network byte order)</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the default class prefix for the given IP</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-netmask-to-prefix"></a><h3>nm_utils_ip4_netmask_to_prefix ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_netmask_to_prefix      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> netmask</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>netmask</code></em> :</span></p></td>
+<td>an IPv4 netmask in network byte order</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the CIDR prefix represented by the netmask</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-prefix-to-netmask"></a><h3>nm_utils_ip4_prefix_to_netmask ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_prefix_to_netmask      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> prefix</code></em>);</pre>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em> :</span></p></td>
+<td>a CIDR prefix</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the netmask represented by the prefix</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-routes-from-gvalue"></a><h3>nm_utils_ip4_routes_from_gvalue ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip4_routes_from_gvalue     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a GPtrArray of GArrays of guint32s representing
+a list of NetworkManager IPv4 routes (which is a tuple of route, next hop,
+prefix, and metric) into a GSList of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects.  The specific
+format of this serialization is not guaranteed to be stable and may be
+extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>gvalue containing a GPtrArray of GArrays of guint32s</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP4Route]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip4-routes-to-gvalue"></a><h3>nm_utils_ip4_routes_to_gvalue ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip4_routes_to_gvalue       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects into a
+GPtrArray of GArrays of guint32s representing a list of NetworkManager IPv4
+routes (which is a tuple of route, next hop, prefix, and metric).   The
+specific format of this serialization is not guaranteed to be stable and may
+be extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a list of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NMIP4Route]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted routes,
+which should be unset by the caller (when no longer needed) with
+<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-addresses-from-gvalue"></a><h3>nm_utils_ip6_addresses_from_gvalue ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_addresses_from_gvalue  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of <a href="../gobject/gobject-Value-arrays.html#GValueArray"><span class="type">GValueArrays</span></a> of (<a href="../glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> of guchars) and guint32
+representing a list of NetworkManager IPv6 addresses (which is a tuple of address,
+prefix, and gateway), into a GSList of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects.  The specific format of
+this serialization is not guaranteed to be stable and the <a href="../gobject/gobject-Value-arrays.html#GValueArray"><span class="type">GValueArray</span></a> may be
+extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>gvalue containing a GPtrArray of GValueArrays of (GArray of guchars) and guint32</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP6Address]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-addresses-to-gvalue"></a><h3>nm_utils_ip6_addresses_to_gvalue ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_addresses_to_gvalue    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects into a
+GPtrArray of GValueArrays representing a list of NetworkManager IPv6 addresses
+(which is a tuple of address, prefix, and gateway). The specific format of
+this serialization is not guaranteed to be stable and may be extended in the
+future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a list of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NMIP6Address]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted addresses,
+which should be unset by the caller (when no longer needed) with
+<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-dns-from-gvalue"></a><h3>nm_utils_ip6_dns_from_gvalue ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_dns_from_gvalue        (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-dns-to-gvalue"></a><h3>nm_utils_ip6_dns_to_gvalue ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_dns_to_gvalue          (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-routes-from-gvalue"></a><h3>nm_utils_ip6_routes_from_gvalue ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_routes_from_gvalue     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function GPtrArray of GValueArrays of (GArray or guchars), guint32,
+(GArray of guchars), and guint32 representing a list of NetworkManager IPv6
+routes (which is a tuple of destination, prefix, next hop, and metric)
+into a GSList of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects.  The specific format of this serialization
+is not guaranteed to be stable and may be extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>gvalue containing a GPtrArray of GValueArrays of (GArray or guchars), guint32,
+(GArray of guchars), and guint32</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP6Route]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-ip6-routes-to-gvalue"></a><h3>nm_utils_ip6_routes_to_gvalue ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_routes_to_gvalue       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects into a GPtrArray of
+GValueArrays of (GArray or guchars), guint32, (GArray of guchars), and guint32
+representing a list of NetworkManager IPv6 routes (which is a tuple of destination,
+prefix, next hop, and metric).  The specific format of this serialization is not 
+guaranteed to be stable and may be extended in the future.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a list of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NMIP6Route]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted routes,
+which should be unset by the caller (when no longer needed) with
+<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-is-empty-ssid"></a><h3>nm_utils_is_empty_ssid ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_is_empty_ssid              (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#guint8"><span class="type">guint8</span></a> *ssid</code></em>,
+                                                         <em class="parameter"><code><span class="type">int</span> len</code></em>);</pre>
+<p>
+Different manufacturers use different mechanisms for not broadcasting the
+AP's SSID.  This function attempts to detect blank/empty SSIDs using a
+number of known SSID-cloaking methods.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
+<td>pointer to a buffer containing the SSID data</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>length of the SSID data in <em class="parameter"><code>ssid</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the SSID is "empty", FALSE if it is not</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-rsa-key-encrypt"></a><h3>nm_utils_rsa_key_encrypt ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        nm_utils_rsa_key_encrypt            (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *data</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *in_password</code></em>,
+                                                         <em class="parameter"><code><span class="type">char</span> **out_password</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Encrypts the given RSA private key data with the given password (or generates
+a password if no password was given) and converts the data to PEM format
+suitable for writing to a file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>RSA private key data to be encrypted</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>in_password</code></em> :</span></p></td>
+<td>existing password to use, if any. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>out_password</code></em> :</span></p></td>
+<td>if <em class="parameter"><code>in_password</code></em> was NULL, a random password will be generated
+and returned in this argument. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>detailed error information on return, if an error occurred</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>on success, PEM-formatted data suitable for writing to a PEM-formatted
+certificate/private key file. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="nm-utils-same-ssid"></a><h3>nm_utils_same_ssid ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_same_ssid                  (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid1</code></em>,
+                                                         <em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid2</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> ignore_trailing_null</code></em>);</pre>
+<p>
+Earlier versions of the Linux kernel added a NULL byte to the end of the
+SSID to enable easy printing of the SSID on the console or in a terminal,
+but this behavior was problematic (SSIDs are simply byte arrays, not strings)
+and thus was changed.  This function compensates for that behavior at the
+cost of some compatibility with odd SSIDs that may legitimately have trailing
+NULLs, even though that is functionally pointless.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ssid1</code></em> :</span></p></td>
+<td>first SSID data to compare</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ssid2</code></em> :</span></p></td>
+<td>second SSID data to compare</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ignore_trailing_null</code></em> :</span></p></td>
+<td>TRUE to ignore one trailing NULL byte</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>TRUE if the SSIDs are the same, FALSE if they are not</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
 <a name="nm-utils-security-valid"></a><h3>nm_utils_security_valid ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_security_valid             (<em class="parameter"><code><a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType" title="enum NMUtilsSecurityType"><span class="type">NMUtilsSecurityType</span></a> type</code></em>,
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_security_valid             (<em class="parameter"><code><a class="link" href="libnm-util-nm-utils.html#NMUtilsSecurityType"><span class="type">NMUtilsSecurityType</span></a> type</code></em>,
                                                          <em class="parameter"><code><span class="type">NMDeviceWifiCapabilities</span> wifi_caps</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> have_ap</code></em>,
                                                          <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> adhoc</code></em>,
@@ -466,25 +901,23 @@ compatible with the desired <em class="parameter"><code>type</code></em>, FALSE 
 </div>
 <hr>
 <div class="refsect2">
-<a name="nm-utils-ip4-addresses-from-gvalue"></a><h3>nm_utils_ip4_addresses_from_gvalue ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip4_addresses_from_gvalue  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<a name="nm-utils-slist-free"></a><h3>nm_utils_slist_free ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_slist_free                 (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> elem_destroy_fn</code></em>);</pre>
 <p>
-Utility function to convert a <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of <a href="../glib/glib-Arrays.html#GArray"><span class="type">GArrays</span></a> of guint32s representing
-a list of NetworkManager IPv4 addresses (which is a tuple of address, gateway,
-and prefix) into a GSList of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects.  The specific format of
-this serialization is not guaranteed to be stable and the <a href="../glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> may be
-extended in the future.
+Utility function to free a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>gvalue containing a GPtrArray of GArrays of guint32s</td>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a>
+</td>
 </tr>
 <tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP4Address]</span>
+<td><p><span class="term"><em class="parameter"><code>elem_destroy_fn</code></em> :</span></p></td>
+<td>user function called for each element in <em class="parameter"><code>list</code></em>
 </td>
 </tr>
 </tbody>
@@ -492,269 +925,51 @@ extended in the future.
 </div>
 <hr>
 <div class="refsect2">
-<a name="nm-utils-ip4-addresses-to-gvalue"></a><h3>nm_utils_ip4_addresses_to_gvalue ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip4_addresses_to_gvalue    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<a name="nm-utils-ssid-to-utf8"></a><h3>nm_utils_ssid_to_utf8 ()</h3>
+<pre class="programlisting"><span class="returnvalue">char</span> *              nm_utils_ssid_to_utf8               (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *ssid</code></em>);</pre>
 <p>
-Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects into a
-GPtrArray of GArrays of guint32s representing a list of NetworkManager IPv4
-addresses (which is a tuple of address, gateway, and prefix).   The specific
-format of this serialization is not guaranteed to be stable and may be
-extended in the future.
+WiFi SSIDs are byte arrays, they are _not_ strings.  Thus, an SSID may
+contain embedded NULLs and other unprintable characters.  Often it is
+useful to print the SSID out for debugging purposes, but that should be the
+_only_ use of this function.  Do not use this function for any persistent
+storage of the SSID, since the printable SSID returned from this function
+cannot be converted back into the real SSID of the access point.
+</p>
+<p>
+This function does almost everything humanly possible to convert the input
+into a printable UTF-8 string, using roughly the following procedure:
+</p>
+<p>
+1) if the input data is already UTF-8 safe, no conversion is performed
+2) attempts to get the current system language from the LANG environment
+   variable, and depending on the language, uses a table of alternative
+   encodings to try.  For example, if LANG=hu_HU, the table may first try
+   the ISO-8859-2 encoding, and if that fails, try the Windows-1250 encoding.
+   If all fallback encodings fail, replaces non-UTF-8 characters with '?'.
+3) If the system language was unable to be determined, falls back to the
+   ISO-8859-1 encoding, then to the Windows-1251 encoding.
+4) If step 3 fails, replaces non-UTF-8 characters with '?'.
+</p>
+<p>
+Again, this function should be used for debugging and display purposes
+_only_.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a list of <a class="link" href="NMSettingIP4Config.html#NMIP4Address"><span class="type">NMIP4Address</span></a> objects</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted addresses,
-which should be unset by the caller (when no longer needed) with
-<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip4-routes-from-gvalue"></a><h3>nm_utils_ip4_routes_from_gvalue ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip4_routes_from_gvalue     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function to convert a GPtrArray of GArrays of guint32s representing
-a list of NetworkManager IPv4 routes (which is a tuple of route, next hop,
-prefix, and metric) into a GSList of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects.  The specific
-format of this serialization is not guaranteed to be stable and may be
-extended in the future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>gvalue containing a GPtrArray of GArrays of guint32s</td>
+<td><p><span class="term"><em class="parameter"><code>ssid</code></em> :</span></p></td>
+<td>a byte array containing the SSID data</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP4Route]</span>
+<td>an allocated string containing a UTF-8
+representation of the SSID, which must be freed by the caller using <a href="../glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
+Returns NULL on errors. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip4-routes-to-gvalue"></a><h3>nm_utils_ip4_routes_to_gvalue ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip4_routes_to_gvalue       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects into a
-GPtrArray of GArrays of guint32s representing a list of NetworkManager IPv4
-routes (which is a tuple of route, next hop, prefix, and metric).   The
-specific format of this serialization is not guaranteed to be stable and may
-be extended in the future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a list of <a class="link" href="NMSettingIP4Config.html#NMIP4Route"><span class="type">NMIP4Route</span></a> objects</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted routes,
-which should be unset by the caller (when no longer needed) with
-<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip4-netmask-to-prefix"></a><h3>nm_utils_ip4_netmask_to_prefix ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_netmask_to_prefix      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> netmask</code></em>);</pre>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>netmask</code></em> :</span></p></td>
-<td>an IPv4 netmask in network byte order</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the CIDR prefix represented by the netmask</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip4-prefix-to-netmask"></a><h3>nm_utils_ip4_prefix_to_netmask ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_prefix_to_netmask      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> prefix</code></em>);</pre>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>prefix</code></em> :</span></p></td>
-<td>a CIDR prefix</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the netmask represented by the prefix</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip4-get-default-prefix"></a><h3>nm_utils_ip4_get_default_prefix ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_ip4_get_default_prefix     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> ip</code></em>);</pre>
-<p>
-When the Internet was originally set up, various ranges of IP addresses were
-segmented into three network classes: A, B, and C.  This function will return
-a prefix that is associated with the IP address specified defining where it
-falls in the predefined classes.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>ip</code></em> :</span></p></td>
-<td>an IPv4 address (in network byte order)</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the default class prefix for the given IP</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-addresses-from-gvalue"></a><h3>nm_utils_ip6_addresses_from_gvalue ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_addresses_from_gvalue  (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function to convert a <a href="../glib/glib-Pointer-Arrays.html#GPtrArray"><span class="type">GPtrArray</span></a> of <a href="../gobject/gobject-Value-arrays.html#GValueArray"><span class="type">GValueArrays</span></a> of (<a href="../glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> of guchars) and guint32
-representing a list of NetworkManager IPv6 addresses (which is a tuple of address,
-prefix, and gateway), into a GSList of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects.  The specific format of
-this serialization is not guaranteed to be stable and the <a href="../gobject/gobject-Value-arrays.html#GValueArray"><span class="type">GValueArray</span></a> may be
-extended in the future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>gvalue containing a GPtrArray of GValueArrays of (GArray of guchars) and guint32</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP6Address]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-addresses-to-gvalue"></a><h3>nm_utils_ip6_addresses_to_gvalue ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_addresses_to_gvalue    (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects into a
-GPtrArray of GValueArrays representing a list of NetworkManager IPv6 addresses
-(which is a tuple of address, prefix, and gateway). The specific format of
-this serialization is not guaranteed to be stable and may be extended in the
-future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a list of <a class="link" href="NMSettingIP6Config.html#NMIP6Address"><span class="type">NMIP6Address</span></a> objects</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted addresses,
-which should be unset by the caller (when no longer needed) with
-<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-routes-from-gvalue"></a><h3>nm_utils_ip6_routes_from_gvalue ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_routes_from_gvalue     (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function GPtrArray of GValueArrays of (GArray or guchars), guint32,
-(GArray of guchars), and guint32 representing a list of NetworkManager IPv6
-routes (which is a tuple of destination, prefix, next hop, and metric)
-into a GSList of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects.  The specific format of this serialization
-is not guaranteed to be stable and may be extended in the future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>gvalue containing a GPtrArray of GValueArrays of (GArray or guchars), guint32,
-(GArray of guchars), and guint32</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> NetworkManager.IP6Route]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-routes-to-gvalue"></a><h3>nm_utils_ip6_routes_to_gvalue ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_routes_to_gvalue       (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-Utility function to convert a <a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects into a GPtrArray of
-GValueArrays of (GArray or guchars), guint32, (GArray of guchars), and guint32
-representing a list of NetworkManager IPv6 routes (which is a tuple of destination,
-prefix, next hop, and metric).  The specific format of this serialization is not 
-guaranteed to be stable and may be extended in the future.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a list of <a class="link" href="NMSettingIP6Config.html#NMIP6Route"><span class="type">NMIP6Route</span></a> objects</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a pointer to a <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> into which to place the converted routes,
-which should be unset by the caller (when no longer needed) with
-<a href="../gobject/gobject-Generic-values.html#g-value-unset"><code class="function">g_value_unset()</code></a>.</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-dns-from-gvalue"></a><h3>nm_utils_ip6_dns_from_gvalue ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            nm_utils_ip6_dns_from_gvalue        (<em class="parameter"><code>const <a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-</p>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-ip6-dns-to-gvalue"></a><h3>nm_utils_ip6_dns_to_gvalue ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                nm_utils_ip6_dns_to_gvalue          (<em class="parameter"><code><a href="../glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> *list</code></em>,
-                                                         <em class="parameter"><code><a href="../gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
-<p>
-</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -788,70 +1003,6 @@ For a given <em class="parameter"><code>s</code></em>, this function will always
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a newly allocated UUID suitable for use as the <a class="link" href="NMSettingConnection.html" title="NMSettingConnection"><span class="type">NMSettingConnection</span></a>
 object's <a class="link" href="NMSettingConnection.html#NMSettingConnection--id" title='The "id" property'><span class="type">"id"</span></a>: property</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-rsa-key-encrypt"></a><h3>nm_utils_rsa_key_encrypt ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="returnvalue">GByteArray</span></a> *        nm_utils_rsa_key_encrypt            (<em class="parameter"><code>const <a href="../glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a> *data</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *in_password</code></em>,
-                                                         <em class="parameter"><code><span class="type">char</span> **out_password</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
-<p>
-Encrypts the given RSA private key data with the given password (or generates
-a password if no password was given) and converts the data to PEM format
-suitable for writing to a file.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>RSA private key data to be encrypted</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>in_password</code></em> :</span></p></td>
-<td>existing password to use, if any. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>out_password</code></em> :</span></p></td>
-<td>if <em class="parameter"><code>in_password</code></em> was NULL, a random password will be generated
-and returned in this argument. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>detailed error information on return, if an error occurred</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>on success, PEM-formatted data suitable for writing to a PEM-formatted
-certificate/private key file. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="nm-utils-wifi-freq-to-channel"></a><h3>nm_utils_wifi_freq_to_channel ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_wifi_freq_to_channel       (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> freq</code></em>);</pre>
-<p>
-Utility function to translate a WiFi frequency to its corresponding channel.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>freq</code></em> :</span></p></td>
-<td>frequency</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the channel represented by the frequency or 0</td>
 </tr>
 </tbody>
 </table></div>
@@ -917,6 +1068,27 @@ Utility function to find out next/previous WiFi channel for a channel.
 </div>
 <hr>
 <div class="refsect2">
+<a name="nm-utils-wifi-freq-to-channel"></a><h3>nm_utils_wifi_freq_to_channel ()</h3>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#guint32"><span class="returnvalue">guint32</span></a>             nm_utils_wifi_freq_to_channel       (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> freq</code></em>);</pre>
+<p>
+Utility function to translate a WiFi frequency to its corresponding channel.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>freq</code></em> :</span></p></td>
+<td>frequency</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the channel represented by the frequency or 0</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
 <a name="nm-utils-wifi-is-channel-valid"></a><h3>nm_utils_wifi_is_channel_valid ()</h3>
 <pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            nm_utils_wifi_is_channel_valid      (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#guint32"><span class="type">guint32</span></a> channel</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *band</code></em>);</pre>
@@ -945,6 +1117,6 @@ Utility function to verify WiFi channel validity.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.17</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>

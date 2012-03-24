@@ -19,10 +19,14 @@ page_SCRIPTS=\
 	NMAccessPoint.html \
 	NMActiveConnection.html \
 	NMClient.html \
+	NMDeviceBond.html \
 	NMDeviceBt.html \
 	NMDeviceEthernet.html \
 	NMDevice.html \
+	NMDeviceInfiniband.html \
 	NMDeviceModem.html \
+	NMDeviceOlpcMesh.html \
+	NMDeviceVlan.html \
 	NMDeviceWifi.html \
 	NMDeviceWimax.html \
 	NMWimaxNsp.html \
