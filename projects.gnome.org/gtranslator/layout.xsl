@@ -130,8 +130,7 @@
           <p class="section">Feedback</p>
           <p>Bugs should be reported to the <a href="http://bugzilla.gnome.org">GNOME Bug Tracking System</a>.</p>
           <p>You can get in touch with developers and other users by <a href="mailto:gtranslator-list@gnome.org">sending a mail</a>
-             to the gtranslator <a href="http://mail.gnome.org/mailman/listinfo/gtranslator-list">mailing list</a> [<a href="http://mail.gnome.org/arc\
-hives/gedit-list">Archives</a>]
+             to the gtranslator <a href="http://mail.gnome.org/mailman/listinfo/gtranslator-list">mailing list</a> [<a href="http://mail.gnome.org/archives/gtranslator-list/">Archives</a>]
              or by joining the #gtranslator channel on irc.gnome.org.</p>                                                                        
           <br />
         </div>
