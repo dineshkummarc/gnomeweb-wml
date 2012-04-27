@@ -8,7 +8,7 @@ web_includes_DATA = includes/stable.shtml includes/unstable_archive.shtml includ
 
 
 web_data_imagesdir = $(pagedir)/data/images
-web_data_images_DATA = data/images/nanny.png data/images/application-x-executable.png data/images/applications-development.png data/images/internet-group-chat.png
+web_data_images_DATA = data/images/nanny.png data/images/application-x-executable.png data/images/applications-development.png data/images/internet-group-chat.png data/images/package-x-generic.png
 
 
 web_data_themes_nannydir = $(pagedir)/data/themes/nanny

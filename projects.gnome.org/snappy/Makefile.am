@@ -17,7 +17,7 @@ web_data_themes_snappy_images_DATA = data/themes/snappy/images/gnome.png data/th
 
 
 web_data_imagesdir = $(pagedir)/data/images
-web_data_images_DATA = data/images/internet-group-chat.png data/images/application-x-executable.png data/images/snappy_0.2.png data/images/applications-development.png
+web_data_images_DATA = data/images/internet-group-chat.png data/images/application-x-executable.png data/images/snappy_0.2.png data/images/applications-development.png data/images/package-x-generic.png
 
 
 include $(top_srcdir)/rules.common
