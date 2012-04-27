@@ -77,7 +77,8 @@ SUBDIRS = css \
         nautilus-python 	\
         nautilus-sound-converter\
 	yelp			\
-	latexila
+	latexila		\
+	snappy
 
 urlpath = 
 
