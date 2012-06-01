@@ -1,4 +1,4 @@
-SUBDIRS=admins developers images styles users
+SUBDIRS=admins developers images styles users support
 
 urlpath = /NetworkManager/
 
