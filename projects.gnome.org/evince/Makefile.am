@@ -6,6 +6,6 @@ urlpath = /evince
 
 page_SCRIPTS=			\
 	evince.css		\
-	index.html		\
+	index.html		
 
 include $(top_srcdir)/rules.common
